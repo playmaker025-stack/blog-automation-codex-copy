@@ -9,6 +9,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test:harness": "node --test tests/harness/*.test.mjs",
+    "test:railway": "playwright test tests/e2e/railway-smoke.spec.ts --project=chromium",
     "verify": "node scripts/verify.mjs",
     "verify:fast": "node scripts/verify.mjs --skip-build --skip-test",
     "gc": "knip",
