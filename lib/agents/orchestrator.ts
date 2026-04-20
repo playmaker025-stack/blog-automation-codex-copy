@@ -88,6 +88,71 @@ function makeEvent(
   return { type, stage, data, timestamp: new Date().toISOString() };
 }
 
+function uniqueNonEmpty(values: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const value of values) {
+    const normalized = value.trim().replace(/\s+/g, " ");
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key)) continue;
+    seen.add(key);
+    out.push(normalized);
+  }
+  return out;
+}
+
+function makeHashtagText(value: string): string {
+  return `#${value.replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, "")}`;
+}
+
+function makeFileSlug(value: string): string {
+  const slug = value
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .toLowerCase();
+  return slug.slice(0, 48) || "blog-draft";
+}
+
+function buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
+  hashtags: string[];
+  imageFileNames: string[];
+} {
+  const titleWords = title
+    .split(/[\s,/|·:()[\]{}"'“”‘’!?]+/u)
+    .map((word) => word.trim())
+    .filter((word) => word.length >= 2);
+
+  const hashtagSeeds = uniqueNonEmpty([
+    ...strategy.keywords,
+    ...titleWords,
+    "네이버블로그",
+    "블로그초안",
+    "정보글",
+  ]);
+
+  const hashtags = uniqueNonEmpty(hashtagSeeds.map(makeHashtagText))
+    .filter((tag) => tag.length > 1)
+    .slice(0, 10);
+
+  while (hashtags.length < 10) {
+    hashtags.push(`#추천태그${hashtags.length + 1}`);
+  }
+
+  const slug = makeFileSlug(title);
+  const imageFileNames = [
+    `${slug}-01-cover.jpg`,
+    `${slug}-02-main-subject.jpg`,
+    `${slug}-03-detail-cut.jpg`,
+    `${slug}-04-comparison.jpg`,
+    `${slug}-05-checklist.jpg`,
+    `${slug}-06-closing.jpg`,
+  ];
+
+  return { hashtags, imageFileNames };
+}
+
 // ============================================================
 // ?곹깭 ?낅뜲?댄듃 ?ы띁
 // ============================================================
@@ -166,7 +231,7 @@ export async function runPipeline(params: {
     await upsertLedgerEntry({ pipelineId, topicId: request.topicId, userId: request.userId, stage: "strategy-planning", error: null, approvalGranted: false, postingListUpdated: false, indexUpdated: false, createdAt: now });
     emit(controller, makeEvent("stage_change", "strategy-planning", {
       pipelineId,
-      message: "?꾨왂 ?섎┰???쒖옉?⑸땲??",
+      message: "전략 수립을 시작합니다.",
     }));
 
     const strategy = await runStrategyPlanner({
@@ -342,7 +407,7 @@ export async function runPipeline(params: {
     });
 
     // ?? 4.5. corpus summary 以鍮?+ pre-write gate ????????????
-    emit(controller, makeEvent("progress", "writing", { message: "肄뷀띁??遺꾩꽍 以?.." }));
+    emit(controller, makeEvent("progress", "writing", { message: "코퍼스 분석 중..." }));
     const corpusSummary = await getCorpusSummary({
       userId: request.userId,
       category: await loadTopicCategory(request.topicId),
@@ -367,7 +432,7 @@ export async function runPipeline(params: {
 
     if (corpusSummary.staleWarnings.length > 0) {
       emit(controller, makeEvent("progress", "writing", {
-        message: `??stale exemplar 寃쎄퀬: ${corpusSummary.staleWarnings.join("; ")}`,
+        message: `오래된 예시 글 경고: ${corpusSummary.staleWarnings.join("; ")}`,
       }));
     }
 
@@ -422,16 +487,16 @@ export async function runPipeline(params: {
           canRetry: true,
         }),
       ]);
-      throw new Error(`pre-write gate 李⑤떒: ${preGateResult.reason}`);
+      throw new Error(`pre-write gate 차단: ${preGateResult.reason}`);
     }
-    emit(controller, makeEvent("progress", "writing", { message: "pre-write gate ?듦낵" }));
+    emit(controller, makeEvent("progress", "writing", { message: "pre-write gate 통과" }));
 
     // ?? 5. 蹂몃Ц ?묒꽦 ??????????????????????????????????????????
     state = updateState(state, { stage: "writing" });
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "writing", {
       pipelineId,
-      message: "Master Writer媛 蹂몃Ц???묒꽦?⑸땲??",
+      message: "Master Writer가 본문을 작성합니다.",
     }));
 
     const writerResult = await runMasterWriter({
@@ -472,7 +537,7 @@ export async function runPipeline(params: {
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "evaluating", {
       pipelineId,
-      message: "Harness Evaluator媛 ?덉쭏???됯??⑸땲??",
+      message: "Harness Evaluator가 초안을 평가합니다.",
     }));
 
     const evalResult = await runHarnessEvaluator({
@@ -526,6 +591,8 @@ export async function runPipeline(params: {
       evalScore: evalResult.aggregateScore,
     });
 
+    const completionSupport = buildCompletionSupport(strategy, writerResult.title);
+
     if (!postGateResult.passed) {
       await updatePostRecord(postRecord.postId, {
         evalScore: evalResult.aggregateScore,
@@ -558,6 +625,7 @@ export async function runPipeline(params: {
         baselineDelta,
         pass: false,
         recommendations: evalResult.recommendations,
+        ...completionSupport,
       }));
       emit(controller, makeEvent("stage_change", "complete", {
         pipelineId,
@@ -567,7 +635,7 @@ export async function runPipeline(params: {
     }
 
     // ?? POST-AUDIT GATE PASS ??理쒖쥌 ?곹깭 ?꾩씠 (李⑤떒 ????덉슜) ?
-    emit(controller, makeEvent("progress", "evaluating", { message: "post-audit gate ?듦낵" }));
+    emit(controller, makeEvent("progress", "evaluating", { message: "post-audit gate 통과" }));
 
     // candidate ?깅줉 (gate ?듦낵 ?쒖뿉留?
     const candidateResult = await registerBaselineCandidate({
@@ -628,14 +696,15 @@ export async function runPipeline(params: {
       postId: postRecord.postId,
       title: writerResult.title,
       wordCount: writerResult.wordCount,
-      evalScore: evalResult.aggregateScore,
-      baselineDelta,
-      pass: evalResult.pass,
-      recommendations: evalResult.recommendations,
-    }));
+        evalScore: evalResult.aggregateScore,
+        baselineDelta,
+        pass: evalResult.pass,
+        recommendations: evalResult.recommendations,
+        ...completionSupport,
+      }));
     emit(controller, makeEvent("stage_change", "complete", {
       pipelineId,
-      message: "?뚯씠?꾨씪?몄씠 ?꾨즺?섏뿀?듬땲??",
+      message: "파이프라인이 완료되었습니다.",
     }));
   } catch (err) {
     let message = err instanceof Error ? err.message : "?????녿뒗 ?ㅻ쪟";
@@ -1013,7 +1082,7 @@ export async function runStrategyPhase(params: {
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "strategy-planning", {
       pipelineId,
-      message: "?꾨왂 ?섎┰???쒖옉?⑸땲??",
+      message: "전략 수립을 시작합니다.",
     }));
 
     const strategy = await runStrategyPlanner({
@@ -1149,7 +1218,7 @@ export async function runWritePhase(params: {
     }).catch(() => {});
 
     // ?? 4.5. corpus + pre-write gate
-    emit(controller, makeEvent("progress", "writing", { message: "肄뷀띁??遺꾩꽍 以?.." }));
+    emit(controller, makeEvent("progress", "writing", { message: "코퍼스 분석 중..." }));
     const corpusSummary = await getCorpusSummary({
       userId,
       category: await loadTopicCategory(topicId),
@@ -1167,16 +1236,16 @@ export async function runWritePhase(params: {
     });
 
     if (!preGateResult.passed) {
-      throw new Error(`pre-write gate 李⑤떒: ${preGateResult.reason}`);
+      throw new Error(`pre-write gate 차단: ${preGateResult.reason}`);
     }
-    emit(controller, makeEvent("progress", "writing", { message: "pre-write gate ?듦낵" }));
+    emit(controller, makeEvent("progress", "writing", { message: "pre-write gate 통과" }));
 
     // ?? 5. 蹂몃Ц ?묒꽦
     state = updateState(state, { stage: "writing" });
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "writing", {
       pipelineId,
-      message: "Master Writer媛 蹂몃Ц???묒꽦?⑸땲??",
+      message: "Master Writer가 본문을 작성합니다.",
     }));
 
     const writerResult = await runMasterWriter({
@@ -1213,7 +1282,7 @@ export async function runWritePhase(params: {
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "evaluating", {
       pipelineId,
-      message: "Harness Evaluator媛 ?덉쭏???됯??⑸땲??",
+      message: "Harness Evaluator가 초안을 평가합니다.",
     }));
 
     const evalResult = await runHarnessEvaluator({
@@ -1248,6 +1317,8 @@ export async function runWritePhase(params: {
       baselineDelta,
     }).catch(() => {});
 
+    const completionSupport = buildCompletionSupport(strategy, writerResult.title);
+
     if (!postGateResult.passed) {
       await updatePostRecord(postRecord.postId, {
         evalScore: evalResult.aggregateScore,
@@ -1270,6 +1341,7 @@ export async function runWritePhase(params: {
         baselineDelta,
         pass: false,
         recommendations: evalResult.recommendations,
+        ...completionSupport,
       }));
       emit(controller, makeEvent("stage_change", "complete", {
         pipelineId,
@@ -1327,14 +1399,15 @@ export async function runWritePhase(params: {
       postId: postRecord.postId,
       title: writerResult.title,
       wordCount: writerResult.wordCount,
-      evalScore: evalResult.aggregateScore,
-      baselineDelta,
-      pass: evalResult.pass,
-      recommendations: evalResult.recommendations,
-    }));
+        evalScore: evalResult.aggregateScore,
+        baselineDelta,
+        pass: evalResult.pass,
+        recommendations: evalResult.recommendations,
+        ...completionSupport,
+      }));
     emit(controller, makeEvent("stage_change", "complete", {
       pipelineId,
-      message: "?뚯씠?꾨씪?몄씠 ?꾨즺?섏뿀?듬땲??",
+      message: "파이프라인이 완료되었습니다.",
     }));
 
   } catch (err) {

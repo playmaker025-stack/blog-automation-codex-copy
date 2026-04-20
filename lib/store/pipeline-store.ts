@@ -16,6 +16,8 @@ interface ResultData {
   evalScore: number;
   pass: boolean;
   recommendations: string[];
+  hashtags?: string[];
+  imageFileNames?: string[];
 }
 
 type TopicMode = "list" | "direct";

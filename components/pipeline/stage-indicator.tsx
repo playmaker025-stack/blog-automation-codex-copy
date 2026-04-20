@@ -33,47 +33,46 @@ export function StageIndicator({ currentStage }: Props) {
   const isGateBlocked = currentStage === "gate_blocked";
 
   return (
-    <div className="flex items-center gap-0">
-      {STAGES.map((s, i) => {
-        const sIdx = stageIndex(s.key);
-        const done = !isFailed && currentIdx > sIdx;
-        const active = !isFailed && !isGateBlocked && currentIdx === sIdx;
-        // gate_blocked 시 "품질 평가" 단계를 경고(앰버) 스타일로 표시
-        const gateFailedHere = isGateBlocked && s.key === "evaluating";
+    <div className="flex items-center gap-0 overflow-x-auto pb-1">
+      {STAGES.map((stage, index) => {
+        const itemIdx = stageIndex(stage.key);
+        const done = !isFailed && currentIdx > itemIdx;
+        const active = !isFailed && !isGateBlocked && currentIdx === itemIdx;
+        const gateFailedHere = isGateBlocked && stage.key === "evaluating";
 
         return (
-          <div key={s.key} className="flex items-center">
+          <div key={stage.key} className="flex items-center shrink-0">
             <div className="flex flex-col items-center">
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-colors ${
-                  isFailed && active
-                    ? "border-red-500 bg-red-50 text-red-600"
-                    : gateFailedHere
+                  gateFailedHere
                     ? "border-amber-500 bg-amber-50 text-amber-600"
                     : done
-                    ? "border-emerald-500 bg-emerald-500 text-white"
-                    : active
-                    ? "border-blue-500 bg-blue-50 text-blue-600"
-                    : "border-zinc-300 bg-white text-zinc-400"
+                      ? "border-emerald-500 bg-emerald-500 text-white"
+                      : active
+                        ? "border-blue-500 bg-blue-50 text-blue-600"
+                        : isFailed && stage.key === currentStage
+                          ? "border-red-500 bg-red-50 text-red-600"
+                          : "border-zinc-300 bg-white text-zinc-400"
                 }`}
               >
-                {gateFailedHere ? "⚠" : done ? "✓" : i + 1}
+                {gateFailedHere ? "!" : done ? "✓" : index + 1}
               </div>
               <span
                 className={`mt-1 text-xs whitespace-nowrap ${
                   gateFailedHere
                     ? "text-amber-600 font-medium"
                     : done
-                    ? "text-emerald-600"
-                    : active
-                    ? "text-blue-600 font-medium"
-                    : "text-zinc-400"
+                      ? "text-emerald-600"
+                      : active
+                        ? "text-blue-600 font-medium"
+                        : "text-zinc-400"
                 }`}
               >
-                {s.label}
+                {stage.label}
               </span>
             </div>
-            {i < STAGES.length - 1 && (
+            {index < STAGES.length - 1 && (
               <div
                 className={`w-12 h-0.5 mb-4 transition-colors ${
                   done || gateFailedHere ? "bg-emerald-400" : "bg-zinc-200"
@@ -88,7 +87,7 @@ export function StageIndicator({ currentStage }: Props) {
         <div className="ml-4 text-sm text-red-500 font-medium">실패</div>
       )}
       {isGateBlocked && (
-        <div className="ml-4 text-sm text-amber-600 font-medium">품질 미달</div>
+        <div className="ml-4 text-sm text-amber-600 font-medium">평가 미달</div>
       )}
     </div>
   );

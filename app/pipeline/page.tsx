@@ -27,6 +27,8 @@ interface ResultData {
   evalScore: number;
   pass: boolean;
   recommendations: string[];
+  hashtags?: string[];
+  imageFileNames?: string[];
 }
 
 export default function PipelinePage() {
@@ -70,6 +72,10 @@ export default function PipelinePage() {
   const [stuckCount, setStuckCount] = useState(0);
   const [recovering, setRecovering] = useState(false);
   const [pipelineError, setPipelineError] = useState<string | null>(null);
+  const [reviewTitle, setReviewTitle] = useState("");
+  const [reviewBody, setReviewBody] = useState("");
+  const [reviewIssues, setReviewIssues] = useState<string[]>([]);
+  const [reviewSaving, setReviewSaving] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -161,6 +167,9 @@ export default function PipelinePage() {
     if (event.type === "result") {
       const d = event.data as ResultData;
       setResult(d);
+      setReviewTitle(d.title ?? "");
+      setReviewBody("");
+      setReviewIssues([]);
       setRunning(false);
       setRunningTitle(null);
       if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
@@ -181,6 +190,9 @@ export default function PipelinePage() {
         pass: false,
         recommendations: d.recommendations ?? [],
       });
+      setReviewTitle(d.draft?.title ?? "");
+      setReviewBody("");
+      setReviewIssues([]);
       setRunning(false);
       setRunningTitle(null);
       if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
@@ -270,6 +282,9 @@ export default function PipelinePage() {
     setEvents([]);
     setStreamingBody("");
     setResult(null);
+    setReviewTitle("");
+    setReviewBody("");
+    setReviewIssues([]);
     setStage("idle");
     setApproval(null);
 setPipelineError(null);
@@ -379,6 +394,51 @@ setPipelineError(null);
       }
     } finally {
       setRecovering(false);
+    }
+  };
+
+  const runDraftReview = async () => {
+    if (!result) return;
+
+    const title = reviewTitle.trim();
+    const body = reviewBody.trim();
+    const issues: string[] = [];
+
+    if (!title) issues.push("제목이 비어 있습니다.");
+    if (title.length > 45) issues.push("제목이 길어 모바일 검색 결과에서 잘릴 수 있습니다.");
+    if (body.length < 600) issues.push("본문이 짧습니다. 경험 설명, 선택 기준, 마무리 문단을 보강해 주세요.");
+    if (/[?？!！]{2,}/.test(title + body)) issues.push("물음표/느낌표가 연속된 부분은 광고성으로 보일 수 있습니다.");
+    if (/(무조건|100%|최고|완벽|보장|최저가|무료)/.test(body)) {
+      issues.push("단정적 표현이나 과장 표현이 있습니다. 실제 근거가 없다면 완화 표현으로 바꾸는 편이 안전합니다.");
+    }
+    if (/(담배|니코틴|전자담배|액상)/.test(body) && !/(성인|미성년|청소년|법적|주의)/.test(body)) {
+      issues.push("전자담배 관련 글에는 성인 대상 안내나 주의 문구를 넣는 편이 안전합니다.");
+    }
+    if (/(ㅜ|ㅠ|ㅋㅋ|ㅎㅎ){3,}/.test(body)) issues.push("반복 이모티콘/구어체가 많으면 정보글 신뢰도가 낮아질 수 있습니다.");
+    if (body.includes("  ")) issues.push("본문에 연속 공백이 있습니다.");
+    if (!/(마무리|정리|결론|요약)/.test(body)) issues.push("마무리 문단이 약해 보입니다. 마지막에 선택 기준을 다시 정리해 주세요.");
+
+    if (issues.length === 0) {
+      issues.push("큰 위험 요소는 보이지 않습니다. 제목과 본문 흐름을 유지해도 좋습니다.");
+    }
+
+    setReviewIssues(issues);
+
+    if (title && title !== result.title) {
+      setReviewSaving(true);
+      try {
+        const res = await fetch("/api/github/posts", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ postId: result.postId, title }),
+        });
+        if (!res.ok) throw new Error("title update failed");
+        setResult({ ...result, title });
+      } catch {
+        setReviewIssues((prev) => ["변경한 제목을 글목록에 반영하지 못했습니다.", ...prev]);
+      } finally {
+        setReviewSaving(false);
+      }
     }
   };
 
@@ -656,6 +716,72 @@ setPipelineError(null);
               </ul>
             </div>
           )}
+
+          {result.hashtags && result.hashtags.length > 0 && (
+            <div className="bg-white border border-zinc-200 rounded-xl p-4">
+              <p className="text-xs font-semibold text-zinc-600 mb-2">권장 해시태그 10개</p>
+              <div className="flex flex-wrap gap-2">
+                {result.hashtags.map((tag) => (
+                  <span key={tag} className="px-2.5 py-1 rounded-full bg-zinc-100 text-xs text-zinc-700">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {result.imageFileNames && result.imageFileNames.length > 0 && (
+            <div className="bg-white border border-zinc-200 rounded-xl p-4">
+              <p className="text-xs font-semibold text-zinc-600 mb-2">추천 이미지 파일명</p>
+              <ul className="space-y-1">
+                {result.imageFileNames.map((name) => (
+                  <li key={name} className="font-mono text-xs text-zinc-700 bg-zinc-50 border border-zinc-100 rounded px-2 py-1">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div className="bg-white border border-zinc-200 rounded-xl p-4 space-y-3">
+            <div>
+              <p className="text-xs font-semibold text-zinc-600">실제 작성본 검토</p>
+              <p className="text-xs text-zinc-400 mt-1">수정한 제목은 검토 시 글목록 제목에 반영됩니다.</p>
+            </div>
+            <input
+              value={reviewTitle}
+              onChange={(event) => setReviewTitle(event.target.value)}
+              className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              placeholder="실제 발행할 제목"
+            />
+            <textarea
+              value={reviewBody}
+              onChange={(event) => setReviewBody(event.target.value)}
+              className="w-full min-h-40 border border-zinc-200 rounded-lg px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              placeholder="실제 작성한 본문을 붙여넣으면 위험 요소와 오탈자 후보를 점검합니다."
+            />
+            <button
+              type="button"
+              onClick={runDraftReview}
+              disabled={reviewSaving || !reviewTitle.trim()}
+              className="w-full px-4 py-2 bg-zinc-900 text-white text-sm font-medium rounded-lg disabled:opacity-40"
+            >
+              {reviewSaving ? "제목 반영 중..." : "검토하고 제목 반영"}
+            </button>
+            {reviewIssues.length > 0 && (
+              <div className="border border-zinc-200 rounded-lg p-3">
+                <p className="text-xs font-semibold text-zinc-600 mb-2">검토 결과</p>
+                <ul className="space-y-1">
+                  {reviewIssues.map((issue, index) => (
+                    <li key={`${issue}-${index}`} className="text-sm text-zinc-700 flex gap-2">
+                      <span className="text-zinc-400">•</span>
+                      <span>{issue}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       )}
         </aside>
