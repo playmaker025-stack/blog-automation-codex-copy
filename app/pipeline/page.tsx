@@ -389,7 +389,7 @@ setPipelineError(null);
   const { remaining: availableTopics } = resolveRemainingTopics(userTopics, posts);
 
   return (
-    <div className="p-8 max-w-3xl">
+    <div className="p-6 lg:p-8 max-w-none">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-zinc-900">글쓰기 실행</h1>
         <p className="text-zinc-500 mt-1 text-sm">승인 후 본문 작성 시작</p>
@@ -428,6 +428,8 @@ setPipelineError(null);
       )}
 
       {/* ── 실행 설정 ─────────────────────────────────────── */}
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(420px,520px)_minmax(0,1fr)] gap-6 items-start">
+        <section className="min-w-0">
       <div className="bg-white border border-zinc-200 rounded-xl p-5 mb-6 space-y-5">
 
         {/* 사용자 선택 */}
@@ -596,6 +598,17 @@ setPipelineError(null);
       <div className="mb-6">
         <PipelineStateInspector state={inspector} />
       </div>
+        </section>
+
+        <aside className="min-w-0 xl:sticky xl:top-8">
+          {!events.length && !streamingBody && !result && !approval && (
+            <div className="bg-white border border-dashed border-zinc-300 rounded-xl p-6 min-h-[24rem] flex flex-col justify-center">
+              <p className="text-sm font-semibold text-zinc-700">본문 미리보기</p>
+              <p className="text-sm text-zinc-500 mt-2 leading-6">
+                글쓰기를 시작하면 생성되는 본문이 이 오른쪽 영역에 표시됩니다.
+              </p>
+            </div>
+          )}
 
       {/* 스트리밍 로그 */}
       {(events.length > 0 || streamingBody) && (
@@ -645,6 +658,8 @@ setPipelineError(null);
           )}
         </div>
       )}
+        </aside>
+      </div>
     </div>
   );
 }

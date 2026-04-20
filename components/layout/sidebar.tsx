@@ -15,20 +15,20 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-56 min-h-screen bg-zinc-900 text-zinc-100 flex flex-col">
-      <div className="px-5 py-6 border-b border-zinc-800">
+    <aside className="w-full lg:w-56 lg:min-h-screen bg-zinc-900 text-zinc-100 flex flex-col shrink-0">
+      <div className="px-5 py-4 lg:py-6 border-b border-zinc-800">
         <p className="text-xs text-zinc-500 uppercase tracking-widest">Blog Automation</p>
         <p className="text-sm font-semibold mt-1 text-white">네이버 블로그</p>
       </div>
 
-      <nav className="flex-1 py-4">
+      <nav className="flex-1 py-2 lg:py-4 flex lg:block overflow-x-auto">
         {NAV_ITEMS.map((item) => {
           const active = pathname === item.href || pathname.startsWith(item.href + "/");
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-5 py-2.5 text-sm transition-colors ${
+              className={`flex items-center gap-3 px-5 py-2.5 text-sm transition-colors whitespace-nowrap ${
                 active
                   ? "bg-zinc-800 text-white font-medium"
                   : "text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
@@ -44,7 +44,7 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="px-5 py-4 border-t border-zinc-800 text-xs text-zinc-600">
+      <div className="hidden lg:block px-5 py-4 border-t border-zinc-800 text-xs text-zinc-600">
         v1.0 — 운영 중
       </div>
     </aside>
