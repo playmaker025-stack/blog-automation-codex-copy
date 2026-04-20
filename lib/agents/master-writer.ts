@@ -150,12 +150,13 @@ export async function runMasterWriter(params: {
   strategy: StrategyPlanResult;
   userId: string;
   topicId: string;
+  postId?: string;
   corpusSummary?: CorpusSummaryArtifact;
   onToken?: (token: string) => void;
   onProgress?: (message: string) => void;
   signal?: AbortSignal;
 }): Promise<WriterResult> {
-  const { strategy, userId, topicId, corpusSummary, onToken, onProgress, signal } = params;
+  const { strategy, userId, topicId, postId, corpusSummary, onToken, onProgress, signal } = params;
 
   onProgress?.(corpusSummary ? "Master Writer 시작 — corpus summary 적용 중..." : "Master Writer 시작 — 코퍼스 로드 중...");
 
@@ -302,7 +303,7 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
       // 본문 생성 완료
       const bodyText = wrapTo25Chars(rawText);
       onProgress?.("본문 생성 완료 — GitHub에 저장 중...");
-      return await saveWriterResult({ topicId, title: strategy.title, content: bodyText });
+      return await saveWriterResult({ topicId, postId, title: strategy.title, content: bodyText });
     }
 
     if (toolUseBlocks.length > 0) {
@@ -339,10 +340,11 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
 
 async function saveWriterResult(params: {
   topicId: string;
+  postId?: string;
   title: string;
   content: string;
 }): Promise<WriterResult> {
-  const postId = `post-${randomUUID().slice(0, 8)}`;
+  const postId = params.postId ?? `post-${randomUUID().slice(0, 8)}`;
   const contentPath = Paths.postContent(postId);
   const wordCount = params.content.replace(/\s+/g, "").length;
   const generatedAt = new Date().toISOString();

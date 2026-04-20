@@ -438,6 +438,7 @@ export async function runPipeline(params: {
       strategy,
       userId: request.userId,
       topicId: request.topicId,
+      postId: postRecord.postId,
       corpusSummary,
       onToken: (token) =>
         emit(controller, makeEvent("token", "writing", { token })),
@@ -455,7 +456,7 @@ export async function runPipeline(params: {
       title: writerResult.title,
       wordCount: writerResult.wordCount,
       generatedAt: writerResult.generatedAt,
-      contentPath: Paths.postContent(writerResult.postId),
+      contentPath: Paths.postContent(postRecord.postId),
       corpusSummaryUsed: true,
     });
 
@@ -525,80 +526,44 @@ export async function runPipeline(params: {
       evalScore: evalResult.aggregateScore,
     });
 
-    // ?? POST-AUDIT GATE FAIL ??李⑤떒 ????꾨? 留됯린 ??????????
     if (!postGateResult.passed) {
-      // ?덉슜: draft 蹂댁〈, 濡쒓렇 ??? ?ъ슜???섏젙 ?붿껌
       await updatePostRecord(postRecord.postId, {
         evalScore: evalResult.aggregateScore,
-        status: "audit_failed" as Parameters<typeof updatePostRecord>[1]["status"],
+        status: "ready",
       });
-
       await transitionApprovalState({
         pipelineId,
-        to: "audit_failed",
-        reason: postGateResult.reason,
-        gateInfo: { blockedBy: postGateResult.blockedBy ?? undefined, reason: postGateResult.reason },
-      });
+        to: "released",
+        reason: `Draft saved with eval warning: ${postGateResult.reason}`,
+      }).catch(() => {});
+      try { await updateTopicStatus(request.topicId, "draft"); } catch { /* ignore */ }
 
-      state = updateState(state, { stage: "gate_blocked" });
+      state = updateState(state, { stage: "complete" });
       activePipelines.set(pipelineId, state);
       await upsertLedgerEntry({
         pipelineId, topicId: request.topicId, userId: request.userId,
-        stage: "gate_blocked", error: postGateResult.reason,
+        stage: "complete", error: null,
         approvalGranted: true, postingListUpdated: true, indexUpdated: true, createdAt: now,
       });
 
-      // ?ㅽ뙣 異붿쟻 ?꾪떚?⑺듃 ???(3醫? ??李⑤떒 ?쒖뿉??諛섎뱶??蹂댁〈
-      const gateBlockedAt = new Date().toISOString();
-      await Promise.allSettled([
-        saveArtifact<GateFailureReportData>(pipelineId, "gate_failure_report", {
-          gate: "post-audit",
-          blockedBy: postGateResult.blockedBy ?? "eval_score_below_threshold",
-          reason: postGateResult.reason,
-          evalScore: evalResult.aggregateScore,
-          evalScores: evalResult.scores,
-          recommendations: evalResult.recommendations,
-          baselineDelta,
-          blockedAt: gateBlockedAt,
-        }),
-        saveArtifact<RunStateSnapshotData>(pipelineId, "run_state_snapshot", {
-          pipelineId,
-          topicId: request.topicId,
-          userId: request.userId,
-          stage: "gate_blocked",
-          approvalState: "audit_failed",
-          postId: postRecord.postId,
-          strategyTitle: strategy.title,
-          wordCount: writerResult.wordCount,
-          evalScore: evalResult.aggregateScore,
-          postingListUpdated: true,
-          indexUpdated: true,
-          snapshotAt: gateBlockedAt,
-        }),
-        saveArtifact<BlockingReasonData>(pipelineId, "blocking_reason", {
-          gate: "post-audit",
-          code: postGateResult.blockedBy ?? "eval_score_below_threshold",
-          summary: `?됯? ?먯닔 誘몃떖 (${evalResult.aggregateScore}??: ${postGateResult.reason}`,
-          actionRequired: "蹂몃Ц???섏젙?섍굅???됯? 湲곗????ш??좏븳 ???ㅼ떆 ?ㅽ뻾??二쇱꽭??",
-          canRetry: true,
-        }),
-      ]);
-
-      // 李⑤떒?? index update X, posting-list final update X, publish X, baseline promotion X, release pass X
-      emit(controller, makeEvent("gate_blocked", "gate_blocked", {
+      emit(controller, makeEvent("progress", "evaluating", {
+        message: `평가 점수는 ${evalResult.aggregateScore}점으로 기준보다 낮지만, 본문 초안은 저장했습니다.`,
+      }));
+      emit(controller, makeEvent("result", "complete", {
         pipelineId,
         postId: postRecord.postId,
-        blockedBy: postGateResult.blockedBy,
-        reason: postGateResult.reason,
+        title: writerResult.title,
+        wordCount: writerResult.wordCount,
         evalScore: evalResult.aggregateScore,
+        baselineDelta,
+        pass: false,
         recommendations: evalResult.recommendations,
-        draft: {
-          title: writerResult.title,
-          wordCount: writerResult.wordCount,
-          contentPath: Paths.postContent(writerResult.postId),
-        },
       }));
-      return; // ???ш린??以묐떒 ???꾨옒 final update 肄붾뱶 ?ㅽ뻾 ?놁쓬
+      emit(controller, makeEvent("stage_change", "complete", {
+        pipelineId,
+        message: "본문 초안 저장 완료. 평가 점수는 개선 권고로 표시됩니다.",
+      }));
+      return;
     }
 
     // ?? POST-AUDIT GATE PASS ??理쒖쥌 ?곹깭 ?꾩씠 (李⑤떒 ????덉슜) ?
@@ -608,11 +573,11 @@ export async function runPipeline(params: {
     const candidateResult = await registerBaselineCandidate({
       scenarioId,
       runId: evalResult.runId,
-      postId: writerResult.postId,
+      postId: postRecord.postId,
       pipelineId,
       scores: evalResult.scores,
       aggregateScore: evalResult.aggregateScore,
-      notes: `pipeline ${pipelineId} / post ${writerResult.postId}`,
+      notes: `pipeline ${pipelineId} / post ${postRecord.postId}`,
     });
     await appendLog(pipelineId, {
       type: "baseline_candidate",
@@ -1218,6 +1183,7 @@ export async function runWritePhase(params: {
       strategy,
       userId,
       topicId,
+      postId: postRecord.postId,
       corpusSummary,
       onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
       onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
@@ -1232,7 +1198,7 @@ export async function runWritePhase(params: {
       title: writerResult.title,
       wordCount: writerResult.wordCount,
       generatedAt: writerResult.generatedAt,
-      contentPath: Paths.postContent(writerResult.postId),
+      contentPath: Paths.postContent(postRecord.postId),
       corpusSummaryUsed: true,
     }).catch(() => {});
 
@@ -1285,25 +1251,29 @@ export async function runWritePhase(params: {
     if (!postGateResult.passed) {
       await updatePostRecord(postRecord.postId, {
         evalScore: evalResult.aggregateScore,
-        status: "audit_failed" as Parameters<typeof updatePostRecord>[1]["status"],
+        status: "ready",
       });
-      state = updateState(state, { stage: "gate_blocked" });
-      activePipelines.set(pipelineId, state);
-      // gate_blocked?먯꽌??topic??draft濡?蹂듦뎄 ???ъ떆??媛?ν븯?꾨줉
-      try { await updateTopicStatus(topicId, "draft"); } catch { /* 臾댁떆 */ }
+      try { await updateTopicStatus(topicId, "draft"); } catch { /* ignore */ }
 
-      emit(controller, makeEvent("gate_blocked", "gate_blocked", {
+      state = updateState(state, { stage: "complete" });
+      activePipelines.set(pipelineId, state);
+
+      emit(controller, makeEvent("progress", "evaluating", {
+        message: `평가 점수는 ${evalResult.aggregateScore}점으로 기준보다 낮지만, 본문 초안은 저장했습니다.`,
+      }));
+      emit(controller, makeEvent("result", "complete", {
         pipelineId,
         postId: postRecord.postId,
-        blockedBy: postGateResult.blockedBy,
-        reason: postGateResult.reason,
+        title: writerResult.title,
+        wordCount: writerResult.wordCount,
         evalScore: evalResult.aggregateScore,
+        baselineDelta,
+        pass: false,
         recommendations: evalResult.recommendations,
-        draft: {
-          title: writerResult.title,
-          wordCount: writerResult.wordCount,
-          contentPath: Paths.postContent(writerResult.postId),
-        },
+      }));
+      emit(controller, makeEvent("stage_change", "complete", {
+        pipelineId,
+        message: "본문 초안 저장 완료. 평가 점수는 개선 권고로 표시됩니다.",
       }));
       return;
     }
@@ -1312,11 +1282,11 @@ export async function runWritePhase(params: {
     const candidateResult = await registerBaselineCandidate({
       scenarioId,
       runId: evalResult.runId,
-      postId: writerResult.postId,
+      postId: postRecord.postId,
       pipelineId,
       scores: evalResult.scores,
       aggregateScore: evalResult.aggregateScore,
-      notes: `pipeline ${pipelineId} / post ${writerResult.postId}`,
+      notes: `pipeline ${pipelineId} / post ${postRecord.postId}`,
     });
 
     if (baselineDiff?.overallRegression) {
