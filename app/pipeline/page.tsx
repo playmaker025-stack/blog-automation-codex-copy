@@ -55,6 +55,9 @@ function compactTitle(value: string): string {
     .trim();
 }
 
+const PIPELINE_SOFT_WARNING_SECONDS = 480;
+const PIPELINE_TIMEOUT_SECONDS = 570;
+
 export default function PipelinePage() {
   const userId = usePipelineStore((state) => state.userId);
   const topicMode = usePipelineStore((state) => state.topicMode);
@@ -764,18 +767,20 @@ export default function PipelinePage() {
           </div>
 
           {running && (
-            <div className={`rounded-xl p-4 flex items-center justify-between ${elapsed > 240 ? "bg-red-50 border border-red-200" : "bg-blue-50 border border-blue-200"}`}>
+            <div className={`rounded-xl p-4 flex items-center justify-between ${elapsed > PIPELINE_SOFT_WARNING_SECONDS ? "bg-red-50 border border-red-200" : "bg-blue-50 border border-blue-200"}`}>
               <div className="flex items-center gap-2 min-w-0">
                 <span className="w-2 h-2 rounded-full bg-current animate-pulse" />
-                <span className={`text-sm font-medium truncate ${elapsed > 240 ? "text-red-700" : "text-blue-700"}`}>
+                <span className={`text-sm font-medium truncate ${elapsed > PIPELINE_SOFT_WARNING_SECONDS ? "text-red-700" : "text-blue-700"}`}>
                   {runningTitle ?? "글쓰기 진행 중"}
                 </span>
               </div>
               <div className="ml-4 shrink-0 text-right">
-                <span className={`text-lg font-mono font-bold ${elapsed > 240 ? "text-red-600" : "text-blue-600"}`}>
+                <span className={`text-lg font-mono font-bold ${elapsed > PIPELINE_SOFT_WARNING_SECONDS ? "text-red-600" : "text-blue-600"}`}>
                   {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, "0")}
                 </span>
-                <span className={`text-xs ml-1 ${elapsed > 240 ? "text-red-400" : "text-blue-400"}`}>/ 5:00</span>
+                <span className={`text-xs ml-1 ${elapsed > PIPELINE_SOFT_WARNING_SECONDS ? "text-red-400" : "text-blue-400"}`}>
+                  / {Math.floor(PIPELINE_TIMEOUT_SECONDS / 60)}:{String(PIPELINE_TIMEOUT_SECONDS % 60).padStart(2, "0")}
+                </span>
               </div>
             </div>
           )}

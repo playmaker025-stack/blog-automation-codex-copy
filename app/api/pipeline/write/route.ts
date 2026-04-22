@@ -5,7 +5,7 @@ import type { StrategyPlanResult } from "@/lib/agents/types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 320;
+export const maxDuration = 600;
 
 export async function POST(request: NextRequest) {
   let body: {
@@ -42,17 +42,17 @@ export async function POST(request: NextRequest) {
       let closed = false;
       const timeout = setTimeout(() => {
         if (closed) return;
-        abortController.abort(new Error("글쓰기 타임아웃 (300초)"));
+        abortController.abort(new Error("글쓰기 타임아웃 (570초)"));
         const event = JSON.stringify({
           type: "error",
           stage: "failed",
-          data: { message: "글쓰기 타임아웃 (300초). 자동 종료되었습니다." },
+          data: { message: "글쓰기 타임아웃 (570초). 자동 종료되었습니다." },
           timestamp: new Date().toISOString(),
         });
         try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }
         try { controller.close(); } catch { /* ignore */ }
         closed = true;
-      }, 300_000);
+      }, 570_000);
 
       runWritePhase({
         topicId: body.topicId,

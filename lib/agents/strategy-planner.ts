@@ -203,6 +203,71 @@ function parseStrategyFromText(text: string): StrategyPlanResult {
   throw new Error(`strategy-planner JSON 파싱 실패. 응답 미리보기: ${preview}`);
 }
 
+function uniq(values: string[]): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const value of values) {
+    const normalized = value.trim().replace(/\s+/g, " ");
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key)) continue;
+    seen.add(key);
+    result.push(normalized);
+  }
+  return result;
+}
+
+function extractFallbackKeywords(topic: Topic): string[] {
+  const titleWords = topic.title
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .filter((word) => word.length >= 2);
+  return uniq([...topic.tags, ...titleWords, topic.category]).slice(0, 8);
+}
+
+function buildLocalFallbackStrategy(topic: Topic): StrategyPlanResult {
+  const keywords = extractFallbackKeywords(topic);
+  const mainKeyword = keywords[0] ?? topic.title;
+  return {
+    title: topic.title,
+    outline: [
+      {
+        heading: `${mainKeyword}를 찾는 이유`,
+        subPoints: ["검색자가 궁금해하는 상황 정리", "처음 확인해야 할 기준"],
+        contentDirection: "도입부에서 독자의 검색 의도와 현재 상황을 자연스럽게 연결합니다.",
+        estimatedParagraphs: 2,
+      },
+      {
+        heading: "선택 전에 볼 핵심 기준",
+        subPoints: ["사용 목적", "관리 편의성", "비교할 때 놓치기 쉬운 부분"],
+        contentDirection: "가격이나 과장 표현 없이 실제 판단 기준을 목록형으로 풀어냅니다.",
+        estimatedParagraphs: 3,
+      },
+      {
+        heading: "실제로 비교해볼 포인트",
+        subPoints: ["방문 전 확인 사항", "상담 시 물어볼 질문", "초보자가 헷갈리는 차이"],
+        contentDirection: "구체적인 예시와 체크리스트로 체류 시간을 늘리는 구조를 만듭니다.",
+        estimatedParagraphs: 3,
+      },
+      {
+        heading: "정리와 다음 확인 사항",
+        subPoints: ["핵심 요약", "다음에 보면 좋은 관련 주제", "방문 전 준비할 내용"],
+        contentDirection: "허브/리프 구조에 맞춰 관련 주제로 이어지는 마무리를 작성합니다.",
+        estimatedParagraphs: 2,
+      },
+    ],
+    keyPoints: [
+      "검색 의도에 바로 답한다",
+      "과장 없이 실제 선택 기준을 제시한다",
+      "허브/리프 구조에 맞춰 다음 글 흐름을 만든다",
+    ],
+    estimatedLength: 1800,
+    tone: "friendly",
+    keywords,
+    suggestedSources: topic.relatedSources,
+    rationale: "AI 전략 수립이 지연되어 토픽 제목, 카테고리, 태그 기반의 안전 폴백 전략을 사용했습니다.",
+  };
+}
+
 export async function runStrategyPlanner(params: {
   topicId: string;
   userId: string;
@@ -272,18 +337,10 @@ export async function runStrategyPlanner(params: {
     if (signal?.aborted) {
       throw new Error("파이프라인 취소 — 전략 수립 중단");
     }
-    // tool-use 루프 오류 또는 파싱 실패 → 직접 호출 폴백
+    // tool-use 루프 오류 또는 파싱 실패 → 추가 AI 호출 없이 즉시 안전 폴백
     console.warn("[strategy-planner] tool-use 루프/파싱 실패, simple 폴백 시도:", String(loopOrParseErr));
-    onProgress?.("전략 파싱 재시도 중 (direct 모드)...");
-    plan = await runStrategyPlannerSimple({
-      topicTitle: topic.title,
-      topicDescription: topic.description,
-      userId,
-      signal,
-    });
-    if (!plan.title || typeof plan.title !== "string") {
-      throw new Error(`전략 수립 최종 실패: 폴백 응답에도 title 없음 (topicId=${topicId})`);
-    }
+    onProgress?.("전략 파싱 재시도 대신 안전 폴백 전략을 적용합니다.");
+    plan = buildLocalFallbackStrategy(topic);
   }
 
   const contentTopology = await buildContentTopologyPlan({ topic, strategy: plan, userId });

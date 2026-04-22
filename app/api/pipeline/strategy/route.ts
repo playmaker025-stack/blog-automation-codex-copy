@@ -5,7 +5,7 @@ import { runStrategyPhase } from "@/lib/agents/orchestrator";
 import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 180;
+export const maxDuration = 300;
 
 export async function POST(request: NextRequest) {
   let body: { topicId: string; userId: string };
@@ -37,17 +37,17 @@ export async function POST(request: NextRequest) {
       let closed = false;
       const timeout = setTimeout(() => {
         if (closed) return;
-        abortController.abort(new Error("전략 수립 타임아웃 (160초)"));
+        abortController.abort(new Error("전략 수립 타임아웃 (270초)"));
         const event = JSON.stringify({
           type: "error",
           stage: "failed",
-          data: { message: "전략 수립 타임아웃 (160초). 자동 종료되었습니다." },
+          data: { message: "전략 수립 타임아웃 (270초). 자동 종료되었습니다." },
           timestamp: new Date().toISOString(),
         });
         try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }
         try { controller.close(); } catch { /* ignore */ }
         closed = true;
-      }, 160_000);
+      }, 270_000);
 
       runStrategyPhase({
         topicId: body.topicId,
