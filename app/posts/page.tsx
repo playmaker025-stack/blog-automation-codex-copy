@@ -26,12 +26,7 @@ const STATUS_COLORS: Record<PostingRecord["status"], string> = {
 
 const FILTERS: { value: StatusFilter; label: string }[] = [
   { value: "all", label: "전체" },
-  { value: "draft", label: "초안" },
-  { value: "ready", label: "검토 중" },
-  { value: "approved", label: "승인됨" },
   { value: "published", label: "발행 완료" },
-  { value: "audit_failed", label: "평가 미달" },
-  { value: "failed", label: "실패" },
 ];
 
 interface EditState {
@@ -79,7 +74,7 @@ export default function PostsPage() {
 
   const load = () => {
     setLoading(true);
-    fetch(`/api/github/posts?limit=1000&_t=${Date.now()}`)
+    fetch(`/api/github/posts?status=published&limit=1000&_t=${Date.now()}`)
       .then((r) => r.json())
       .then((d: { posts: PostingRecord[] }) => setPosts(d.posts ?? []))
       .catch(() => setNotice({ type: "err", msg: "목록 로드 실패" }))

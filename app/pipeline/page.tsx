@@ -90,6 +90,9 @@ export default function PipelinePage() {
   const [reviewBody, setReviewBody] = useState("");
   const [reviewIssues, setReviewIssues] = useState<DraftReviewIssue[]>([]);
   const [reviewSaving, setReviewSaving] = useState(false);
+  const [publishUrl, setPublishUrl] = useState("");
+  const [publishingToIndex, setPublishingToIndex] = useState(false);
+  const [publishNotice, setPublishNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const currentUid = normalizeUserId(userId);
@@ -197,6 +200,8 @@ export default function PipelinePage() {
       setReviewTitle(data.title ?? "");
       setReviewBody("");
       setReviewIssues([]);
+      setPublishUrl("");
+      setPublishNotice(null);
       setRunning(false);
       setRunningTitle(null);
       stopTimer();
@@ -303,6 +308,8 @@ export default function PipelinePage() {
     setReviewTitle("");
     setReviewBody("");
     setReviewIssues([]);
+    setPublishUrl("");
+    setPublishNotice(null);
     setStage("idle");
     setApproval(null);
     setPipelineError(null);
@@ -434,6 +441,53 @@ export default function PipelinePage() {
       ]);
     } finally {
       setReviewSaving(false);
+    }
+  };
+
+  const publishToIndex = async () => {
+    if (!result) return;
+
+    const url = publishUrl.trim();
+    const review = reviewActualDraft({
+      originalTitle: result.title,
+      title: reviewTitle,
+      body: reviewBody,
+    });
+    setReviewIssues(review.issues);
+    setPublishNotice(null);
+
+    if (!review.passed) {
+      setPublishNotice({ type: "err", msg: "차단 항목을 먼저 수정한 뒤 인덱스에 추가해 주세요." });
+      return;
+    }
+
+    if (!url || !/^https?:\/\/blog\.naver\.com\//i.test(url)) {
+      setPublishNotice({ type: "err", msg: "발행 완료된 네이버 블로그 URL을 입력해 주세요." });
+      return;
+    }
+
+    setPublishingToIndex(true);
+    try {
+      const res = await fetch("/api/github/posts", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postId: result.postId,
+          title: review.normalizedTitle,
+          status: "published",
+          naverPostUrl: url,
+          publishedAt: new Date().toISOString(),
+        }),
+      });
+      if (!res.ok) throw new Error("publish update failed");
+      setResult({ ...result, title: review.normalizedTitle, pass: true });
+      setReviewTitle(review.normalizedTitle);
+      setPublishNotice({ type: "ok", msg: "발행 인덱스 목록에 추가했습니다." });
+      reloadTopics();
+    } catch {
+      setPublishNotice({ type: "err", msg: "인덱스 추가에 실패했습니다. 잠시 후 다시 시도해 주세요." });
+    } finally {
+      setPublishingToIndex(false);
     }
   };
 
@@ -760,6 +814,31 @@ export default function PipelinePage() {
                 >
                   {reviewSaving ? "제목 반영 중" : "검토하고 제목 반영"}
                 </button>
+                <div className="border-t border-zinc-100 pt-3 space-y-2">
+                  <p className="text-xs font-semibold text-zinc-600">발행 완료 후 인덱스 추가</p>
+                  <input
+                    value={publishUrl}
+                    onChange={(event) => {
+                      setPublishUrl(event.target.value);
+                      setPublishNotice(null);
+                    }}
+                    className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    placeholder="https://blog.naver.com/..."
+                  />
+                  <button
+                    type="button"
+                    onClick={publishToIndex}
+                    disabled={publishingToIndex || !reviewTitle.trim() || !publishUrl.trim()}
+                    className="w-full px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 disabled:opacity-40"
+                  >
+                    {publishingToIndex ? "인덱스 추가 중" : "검수 후 인덱스 목록에 추가"}
+                  </button>
+                  {publishNotice && (
+                    <p className={`text-xs ${publishNotice.type === "ok" ? "text-emerald-600" : "text-red-500"}`}>
+                      {publishNotice.msg}
+                    </p>
+                  )}
+                </div>
                 {reviewIssues.length > 0 && (
                   <div className="border border-zinc-200 rounded-lg p-3">
                     <p className="text-xs font-semibold text-zinc-600 mb-2">검토 결과</p>

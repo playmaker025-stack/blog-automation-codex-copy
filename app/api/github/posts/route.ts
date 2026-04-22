@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
-import type { PostingIndex, PostingRecord } from "@/lib/types/github-data";
+import type { PostingIndex, PostingRecord, TopicIndex } from "@/lib/types/github-data";
 
 const EMPTY_INDEX: PostingIndex = { posts: [], lastUpdated: "" };
 
@@ -56,9 +56,17 @@ export async function PATCH(request: NextRequest) {
 
     const now = new Date().toISOString();
     const { postId, ...patch } = body;
+    const publishing = patch.status === "published";
     const updated: PostingIndex = {
       posts: index.posts.map((p) =>
-        p.postId === postId ? { ...p, ...patch, updatedAt: now } : p
+        p.postId === postId
+          ? {
+              ...p,
+              ...patch,
+              publishedAt: publishing ? (patch.publishedAt ?? p.publishedAt ?? now) : (patch.publishedAt ?? p.publishedAt),
+              updatedAt: now,
+            }
+          : p
       ),
       lastUpdated: now,
     };
@@ -70,11 +78,33 @@ export async function PATCH(request: NextRequest) {
       sha
     );
 
+    if (publishing && exists.topicId) {
+      await markTopicPublished(exists.topicId).catch((err: unknown) => {
+        console.warn("[PATCH /api/github/posts] topic publish update failed", err);
+      });
+    }
+
     return NextResponse.json({ updated: true });
   } catch (err) {
     console.error("[PATCH /api/github/posts]", err);
     return NextResponse.json({ error: "포스팅 수정 실패" }, { status: 500 });
   }
+}
+
+async function markTopicPublished(topicId: string): Promise<void> {
+  const path = Paths.topicsIndex();
+  if (!(await fileExists(path))) return;
+
+  const { data: index, sha } = await readJsonFile<TopicIndex>(path);
+  const now = new Date().toISOString();
+  const updated: TopicIndex = {
+    topics: index.topics.map((topic) =>
+      topic.topicId === topicId ? { ...topic, status: "published", updatedAt: now } : topic
+    ),
+    lastUpdated: now,
+  };
+
+  await writeJsonFile(path, updated, `chore: topic ${topicId} -> published`, sha);
 }
 
 // 인덱스 항목 삭제
@@ -235,7 +265,7 @@ export async function POST(request: NextRequest) {
       wordCount: body.wordCount ?? 0,
       compositionSessionId: body.compositionSessionId ?? null,
       pendingApproval: body.pendingApproval ?? null,
-      publishedAt: body.publishedAt ?? null,
+      publishedAt: body.publishedAt ?? (body.status === "published" ? now : null),
       createdAt: now,
       updatedAt: now,
     };
