@@ -13,6 +13,7 @@ import { Paths } from "@/lib/github/paths";
 import type { Topic } from "@/lib/types/github-data";
 import type { TopicIndex } from "@/lib/types/github-data";
 import type { StrategyPlanResult } from "./types";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 const SYSTEM_PROMPT = `당신은 네이버 블로그 포스팅 전략 전문가입니다.
 주어진 토픽을 분석하여 사용자의 글쓰기 스타일과 타깃 독자에 맞는 포스팅 전략을 수립합니다.
@@ -207,7 +208,8 @@ export async function runStrategyPlanner(params: {
   onProgress?: (message: string) => void;
   signal?: AbortSignal;
 }): Promise<StrategyPlanResult> {
-  const { topicId, userId, onProgress, signal } = params;
+  const { topicId, onProgress, signal } = params;
+  const userId = normalizeUserId(params.userId);
 
   onProgress?.(`토픽 "${topicId}" 전략 수립 시작`);
 

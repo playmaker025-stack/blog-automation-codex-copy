@@ -2,9 +2,10 @@ import "@anthropic-ai/sdk/shims/node";
 import { NextRequest, NextResponse } from "next/server";
 import { runWritePhase } from "@/lib/agents/orchestrator";
 import type { StrategyPlanResult } from "@/lib/agents/types";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 250;
+export const maxDuration = 320;
 
 export async function POST(request: NextRequest) {
   let body: {
@@ -28,6 +29,7 @@ export async function POST(request: NextRequest) {
   }
 
   const abortController = new AbortController();
+  const userId = normalizeUserId(body.userId);
 
   const stream = new ReadableStream({
     start(controller) {
@@ -40,21 +42,21 @@ export async function POST(request: NextRequest) {
       let closed = false;
       const timeout = setTimeout(() => {
         if (closed) return;
-        abortController.abort(new Error("글쓰기 타임아웃 (240초)"));
+        abortController.abort(new Error("글쓰기 타임아웃 (300초)"));
         const event = JSON.stringify({
           type: "error",
           stage: "failed",
-          data: { message: "글쓰기 타임아웃 (240초). 자동 종료되었습니다." },
+          data: { message: "글쓰기 타임아웃 (300초). 자동 종료되었습니다." },
           timestamp: new Date().toISOString(),
         });
         try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }
         try { controller.close(); } catch { /* ignore */ }
         closed = true;
-      }, 240_000);
+      }, 300_000);
 
       runWritePhase({
         topicId: body.topicId,
-        userId: body.userId,
+        userId,
         pipelineId: body.pipelineId,
         strategy: body.strategy,
         controller,

@@ -15,8 +15,15 @@ import {
   getApprovalState,
 } from "./approval-state-machine";
 import { appendLog } from "./operation-logger";
+import {
+  appendWritingFailure,
+  buildPreWriteHarnessBriefing,
+  buildRevisionInstruction,
+  getRecentHarnessFailureGuidance,
+} from "./harness-guidance";
 import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
+import { normalizeUserId } from "@/lib/utils/normalize";
 import {
   createApprovalRecord,
   resolveApprovalRecord,
@@ -30,6 +37,8 @@ import type {
   ApprovalRequest,
   SSEEvent,
   StrategyPlanResult,
+  WriterResult,
+  EvalResult,
 } from "./types";
 import type {
   SourceReportData,
@@ -153,6 +162,129 @@ function buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
   return { hashtags, imageFileNames };
 }
 
+async function prepareHarnessBriefing(params: {
+  userId: string;
+  strategy: StrategyPlanResult;
+  corpusSummary: import("./corpus-selector").CorpusSummaryArtifact;
+}): Promise<string> {
+  const recentFailures = await getRecentHarnessFailureGuidance({
+    userId: params.userId,
+    limit: 5,
+  });
+  return buildPreWriteHarnessBriefing({
+    strategy: params.strategy,
+    corpusSummary: params.corpusSummary,
+    recentFailures,
+  });
+}
+
+async function evaluateAndMaybeReviseDraft(params: {
+  pipelineId: string;
+  topicId: string;
+  userId: string;
+  postId: string;
+  strategy: StrategyPlanResult;
+  corpusSummary: import("./corpus-selector").CorpusSummaryArtifact;
+  harnessBriefing: string;
+  writerResult: WriterResult;
+  controller: ReadableStreamDefaultController;
+  signal?: AbortSignal;
+}): Promise<{ writerResult: WriterResult; evalResult: EvalResult }> {
+  const {
+    pipelineId,
+    topicId,
+    userId,
+    postId,
+    strategy,
+    corpusSummary,
+    harnessBriefing,
+    controller,
+    signal,
+  } = params;
+
+  let writerResult = params.writerResult;
+  let evalResult = await runHarnessEvaluator({
+    writerResult,
+    strategy,
+    userId,
+    onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
+    signal,
+  });
+
+  if (evalResult.pass) {
+    return { writerResult, evalResult };
+  }
+
+  await appendWritingFailure({
+    pipelineId,
+    topicId,
+    userId,
+    title: writerResult.title,
+    evalResult,
+    phase: "preliminary",
+  });
+
+  emit(controller, makeEvent("progress", "evaluating", {
+    message: `초안 예상 점수 ${evalResult.aggregateScore}점으로 자동 보강을 1회 진행합니다.`,
+  }));
+  emit(controller, makeEvent("token", "writing", {
+    token: "\n\n---\n\n[자동 보강본]\n",
+  }));
+
+  writerResult = await runMasterWriter({
+    strategy,
+    userId,
+    topicId,
+    postId,
+    corpusSummary,
+    harnessBriefing,
+    revisionInstructions: buildRevisionInstruction({ evalResult, briefing: harnessBriefing }),
+    onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
+    onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
+    signal,
+  });
+
+  await saveArtifact<DraftOutputData>(pipelineId, "draft_output", {
+    postId: writerResult.postId,
+    title: writerResult.title,
+    wordCount: writerResult.wordCount,
+    generatedAt: writerResult.generatedAt,
+    contentPath: Paths.postContent(postId),
+    corpusSummaryUsed: true,
+  }).catch(() => {});
+
+  await updatePostRecord(postId, {
+    status: "ready",
+    wordCount: writerResult.wordCount,
+    compositionSessionId: pipelineId,
+  });
+
+  emit(controller, makeEvent("progress", "evaluating", {
+    message: "자동 보강본 최종 하네스 평가 중...",
+  }));
+
+  evalResult = await runHarnessEvaluator({
+    writerResult,
+    strategy,
+    userId,
+    onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
+    signal,
+  });
+
+  if (!evalResult.pass) {
+    await appendWritingFailure({
+      pipelineId,
+      topicId,
+      userId,
+      title: writerResult.title,
+      evalResult,
+      phase: "final",
+    });
+  }
+
+  return { writerResult, evalResult };
+}
+
 // ============================================================
 // ?곹깭 ?낅뜲?댄듃 ?ы띁
 // ============================================================
@@ -173,7 +305,8 @@ export async function runPipeline(params: {
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<void> {
-  const { request, controller, signal } = params;
+  const { controller, signal } = params;
+  const request = { ...params.request, userId: normalizeUserId(params.request.userId) };
   const pipelineId = `pipe-${randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
 
@@ -490,6 +623,12 @@ export async function runPipeline(params: {
       throw new Error(`pre-write gate 차단: ${preGateResult.reason}`);
     }
     emit(controller, makeEvent("progress", "writing", { message: "pre-write gate 통과" }));
+    const harnessBriefing = await prepareHarnessBriefing({
+      userId: request.userId,
+      strategy,
+      corpusSummary,
+    });
+    emit(controller, makeEvent("progress", "writing", { message: "하네스 기준을 반영한 작성 브리핑 준비 완료" }));
 
     // ?? 5. 蹂몃Ц ?묒꽦 ??????????????????????????????????????????
     state = updateState(state, { stage: "writing" });
@@ -499,12 +638,13 @@ export async function runPipeline(params: {
       message: "Master Writer가 본문을 작성합니다.",
     }));
 
-    const writerResult = await runMasterWriter({
+    let writerResult = await runMasterWriter({
       strategy,
       userId: request.userId,
       topicId: request.topicId,
       postId: postRecord.postId,
       corpusSummary,
+      harnessBriefing,
       onToken: (token) =>
         emit(controller, makeEvent("token", "writing", { token })),
       onProgress: (msg) =>
@@ -540,15 +680,22 @@ export async function runPipeline(params: {
       message: "Harness Evaluator가 초안을 평가합니다.",
     }));
 
-    const evalResult = await runHarnessEvaluator({
-      writerResult,
-      strategy,
+    const revised = await evaluateAndMaybeReviseDraft({
+      pipelineId,
+      topicId: request.topicId,
       userId: request.userId,
-      onProgress: (msg) =>
-        emit(controller, makeEvent("progress", "evaluating", { message: msg })),
+      postId: postRecord.postId,
+      strategy,
+      corpusSummary,
+      harnessBriefing,
+      writerResult,
+      controller,
+      signal,
     });
+    writerResult = revised.writerResult;
+    const evalResult = revised.evalResult;
 
-    state = updateState(state, { evalResult });
+    state = updateState(state, { writerResult, evalResult });
     activePipelines.set(pipelineId, state);
 
     // post-audit gate 寃??(議곌굔 4)
@@ -903,6 +1050,7 @@ async function createPostingRecord(params: {
   title: string;
   pipelineId: string;
 }): Promise<{ postId: string }> {
+  const userId = normalizeUserId(params.userId);
   const postId = `post-${randomUUID().slice(0, 8)}`;
 
   await withConflictRetry(async () => {
@@ -924,7 +1072,7 @@ async function createPostingRecord(params: {
         {
           postId,
           topicId: params.topicId,
-          userId: params.userId,
+          userId,
           title: params.title,
           status: "draft",
           naverPostUrl: null,
@@ -1071,7 +1219,8 @@ export async function runStrategyPhase(params: {
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<void> {
-  const { topicId, userId, pipelineId, controller, signal } = params;
+  const { topicId, pipelineId, controller, signal } = params;
+  const userId = normalizeUserId(params.userId);
   const now = new Date().toISOString();
 
   let state: PipelineState = {
@@ -1190,7 +1339,8 @@ export async function runWritePhase(params: {
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<void> {
-  const { topicId, userId, pipelineId, strategy, controller, signal } = params;
+  const { topicId, pipelineId, strategy, controller, signal } = params;
+  const userId = normalizeUserId(params.userId);
   const now = new Date().toISOString();
   const gate = new ApprovalGate(pipelineId);
   gate.grant(); // ?대씪?댁뼵?몄뿉???대? ?뱀씤??
@@ -1266,6 +1416,12 @@ export async function runWritePhase(params: {
       throw new Error(`pre-write gate 차단: ${preGateResult.reason}`);
     }
     emit(controller, makeEvent("progress", "writing", { message: "pre-write gate 통과" }));
+    const harnessBriefing = await prepareHarnessBriefing({
+      userId,
+      strategy,
+      corpusSummary,
+    });
+    emit(controller, makeEvent("progress", "writing", { message: "하네스 기준을 반영한 작성 브리핑 준비 완료" }));
 
     // ?? 5. 蹂몃Ц ?묒꽦
     state = updateState(state, { stage: "writing" });
@@ -1275,12 +1431,13 @@ export async function runWritePhase(params: {
       message: "Master Writer가 본문을 작성합니다.",
     }));
 
-    const writerResult = await runMasterWriter({
+    let writerResult = await runMasterWriter({
       strategy,
       userId,
       topicId,
       postId: postRecord.postId,
       corpusSummary,
+      harnessBriefing,
       onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
       onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
       signal,
@@ -1312,15 +1469,22 @@ export async function runWritePhase(params: {
       message: "Harness Evaluator가 초안을 평가합니다.",
     }));
 
-    const evalResult = await runHarnessEvaluator({
-      writerResult,
-      strategy,
+    const revised = await evaluateAndMaybeReviseDraft({
+      pipelineId,
+      topicId,
       userId,
-      onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
+      postId: postRecord.postId,
+      strategy,
+      corpusSummary,
+      harnessBriefing,
+      writerResult,
+      controller,
       signal,
     });
+    writerResult = revised.writerResult;
+    const evalResult = revised.evalResult;
 
-    state = updateState(state, { evalResult });
+    state = updateState(state, { writerResult, evalResult });
     activePipelines.set(pipelineId, state);
 
     const postGateResult = runPostAuditGate({

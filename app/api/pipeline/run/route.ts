@@ -2,6 +2,7 @@ import "@anthropic-ai/sdk/shims/node";
 import { NextRequest, NextResponse } from "next/server";
 import { runPipeline } from "@/lib/agents/orchestrator";
 import type { PipelineRunRequest } from "@/lib/agents/types";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 320; // 5분 20초 — Railway 300s + 여유
@@ -20,6 +21,7 @@ export async function POST(request: NextRequest) {
       { status: 400 }
     );
   }
+  body = { ...body, userId: normalizeUserId(body.userId) };
 
   const stream = new ReadableStream({
     start(controller) {

@@ -5,6 +5,7 @@ import type {
   UserProfileLoaderInput,
   UserProfileLoaderOutput,
 } from "@/lib/types/skill";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 const DEFAULT_FORBIDDEN: ForbiddenExpressions = {
   userId: "",
@@ -15,7 +16,7 @@ const DEFAULT_FORBIDDEN: ForbiddenExpressions = {
 export async function userProfileLoader(
   input: UserProfileLoaderInput
 ): Promise<UserProfileLoaderOutput> {
-  const { userId } = input;
+  const userId = normalizeUserId(input.userId);
 
   const profilePath = Paths.userProfile(userId);
   const forbiddenPath = Paths.forbiddenExpressions(userId);

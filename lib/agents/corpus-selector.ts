@@ -14,6 +14,7 @@
 import { readJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { CorpusSampleMeta } from "@/lib/types/github-data";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 // ============================================================
 // exemplar index 타입
@@ -204,7 +205,8 @@ export async function selectExemplars(params: {
   staleWarnings: string[];
   scoringBreakdown: ScoredExemplar[];
 }> {
-  const { userId, category, tags, targetCount = MAX_EXEMPLARS, topicTitle } = params;
+  const { category, tags, targetCount = MAX_EXEMPLARS, topicTitle } = params;
+  const userId = normalizeUserId(params.userId);
   const count = Math.min(Math.max(targetCount, MIN_EXEMPLARS), MAX_EXEMPLARS);
   const targetIntent = topicTitle ? classifyIntent(topicTitle) : "unknown";
 
@@ -321,7 +323,8 @@ export function buildSummaryArtifact(params: {
   staleWarnings?: string[];
   scoringBreakdown?: ScoredExemplar[];
 }): CorpusSummaryArtifact {
-  const { userId, exemplars, strategy, userTone, staleWarnings = [], scoringBreakdown = [] } = params;
+  const userId = normalizeUserId(params.userId);
+  const { exemplars, strategy, userTone, staleWarnings = [], scoringBreakdown = [] } = params;
 
   const excerpts = exemplars.map((e) => e.excerpt).filter(Boolean);
   const avgWordCount =
@@ -371,15 +374,16 @@ export async function getCorpusSummary(params: {
   userTone?: string;
   topicTitle?: string;
 }): Promise<CorpusSummaryArtifact> {
+  const userId = normalizeUserId(params.userId);
   const { exemplars, strategy, staleWarnings, scoringBreakdown } = await selectExemplars({
-    userId: params.userId,
+    userId,
     category: params.category,
     tags: params.tags,
     topicTitle: params.topicTitle,
   });
 
   return buildSummaryArtifact({
-    userId: params.userId,
+    userId,
     exemplars,
     strategy,
     userTone: params.userTone,

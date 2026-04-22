@@ -5,11 +5,13 @@ import type {
   UserCorpusRetrieverInput,
   UserCorpusRetrieverOutput,
 } from "@/lib/types/skill";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 export async function userCorpusRetriever(
   input: UserCorpusRetrieverInput
 ): Promise<UserCorpusRetrieverOutput> {
-  const { userId, limit = 2, category, tags } = input;
+  const { limit = 2, category, tags } = input;
+  const userId = normalizeUserId(input.userId);
 
   const indexPath = Paths.corpusIndex(userId);
   const indexExists = await fileExists(indexPath);

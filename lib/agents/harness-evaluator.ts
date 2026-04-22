@@ -7,8 +7,7 @@ import { writeJsonFile, fileExists, readJsonFile } from "@/lib/github/repository
 import { Paths } from "@/lib/github/paths";
 import { randomUUID } from "crypto";
 import type { EvalResult, StrategyPlanResult, WriterResult } from "./types";
-
-const PASS_THRESHOLD = 70;
+import { HARNESS_PASS_THRESHOLD } from "./harness-guidance";
 
 const SYSTEM_PROMPT = `당신은 네이버 블로그 콘텐츠 품질 평가 전문가입니다.
 
@@ -176,7 +175,7 @@ user_corpus_retriever로 코퍼스를 로드하고, review_record_audit으로 �
     aggregateScore,
     reasoning: parsed.reasoning,
     recommendations: parsed.recommendations,
-    pass: aggregateScore >= PASS_THRESHOLD,
+    pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
   };
 
   // GitHub에 eval run 저장

@@ -5,11 +5,13 @@ import type {
   ReviewRecordAuditInput,
   ReviewRecordAuditOutput,
 } from "@/lib/types/skill";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 export async function reviewRecordAudit(
   input: ReviewRecordAuditInput
 ): Promise<ReviewRecordAuditOutput> {
-  const { userId, limit = 10 } = input;
+  const { limit = 10 } = input;
+  const userId = normalizeUserId(input.userId);
 
   const indexExists = await fileExists(Paths.postingListIndex());
   if (!indexExists) {

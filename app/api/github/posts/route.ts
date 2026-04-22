@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex, PostingRecord, TopicIndex } from "@/lib/types/github-data";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 const EMPTY_INDEX: PostingIndex = { posts: [], lastUpdated: "" };
 
@@ -22,7 +23,10 @@ export async function GET(request: NextRequest) {
   try {
     const { data: index } = await loadIndex();
     let posts = index.posts;
-    if (userId) posts = posts.filter((p) => p.userId === userId);
+    if (userId) {
+      const uid = normalizeUserId(userId);
+      posts = posts.filter((p) => normalizeUserId(p.userId) === uid);
+    }
     if (status) posts = posts.filter((p) => p.status === status);
 
     // 최신 순 정렬
@@ -199,7 +203,7 @@ export async function PUT(request: NextRequest) {
         duplicates++;
         continue;
       }
-      const resolvedUserId = r.userId ?? await resolveBlogUserId(r.blog, r.url);
+      const resolvedUserId = normalizeUserId(r.userId ?? await resolveBlogUserId(r.blog, r.url));
       newPosts.push({
         postId: `post-import-${randomUUID().slice(0, 8)}`,
         topicId: "",
@@ -259,6 +263,7 @@ export async function POST(request: NextRequest) {
     const now = new Date().toISOString();
     const newRecord: PostingRecord = {
       ...body,
+      userId: normalizeUserId(body.userId),
       status: body.status ?? "draft",
       naverPostUrl: body.naverPostUrl ?? null,
       evalScore: body.evalScore ?? null,

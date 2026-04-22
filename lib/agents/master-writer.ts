@@ -3,7 +3,7 @@ import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { userCorpusRetriever } from "@/lib/skills/user-corpus-retriever";
 import { expansionPlanner } from "@/lib/skills/expansion-planner";
 import { sourceResolver } from "@/lib/skills/source-resolver";
-import { writeFile, fileExists } from "@/lib/github/repository";
+import { writeFile, readFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { randomUUID } from "crypto";
 import type { StrategyPlanResult, WriterResult } from "./types";
@@ -72,7 +72,11 @@ ${exemplarExcerpts
   .join("\n\n")}`;
 }
 
-const buildSystemPrompt = (userId: string, corpus: CorpusSummaryArtifact | null) => {
+const buildSystemPrompt = (
+  userId: string,
+  corpus: CorpusSummaryArtifact | null,
+  harnessBriefing?: string
+) => {
   const corpusSection =
     corpus
       ? buildCorpusSummarySection(corpus)
@@ -101,7 +105,9 @@ ${step1}
 ## 출력 형식
 전략에 따른 마크다운 본문 전체를 출력한다. 설명·메타 정보 없이 본문만 출력한다.
 
-${corpusSection}`;
+${corpusSection}
+
+${harnessBriefing ?? ""}`;
 };
 
 const CORPUS_TOOL: Tool = {
@@ -152,11 +158,24 @@ export async function runMasterWriter(params: {
   topicId: string;
   postId?: string;
   corpusSummary?: CorpusSummaryArtifact;
+  harnessBriefing?: string;
+  revisionInstructions?: string;
   onToken?: (token: string) => void;
   onProgress?: (message: string) => void;
   signal?: AbortSignal;
 }): Promise<WriterResult> {
-  const { strategy, userId, topicId, postId, corpusSummary, onToken, onProgress, signal } = params;
+  const {
+    strategy,
+    userId,
+    topicId,
+    postId,
+    corpusSummary,
+    harnessBriefing,
+    revisionInstructions,
+    onToken,
+    onProgress,
+    signal,
+  } = params;
 
   onProgress?.(corpusSummary ? "Master Writer 시작 — corpus summary 적용 중..." : "Master Writer 시작 — 코퍼스 로드 중...");
 
@@ -172,6 +191,10 @@ export async function runMasterWriter(params: {
     source_resolver: (input: unknown) =>
       sourceResolver(input as Parameters<typeof sourceResolver>[0]),
   };
+
+  const revisionSection = revisionInstructions
+    ? `\n\n${revisionInstructions}\n\n위 자동 보강 지시를 최우선으로 반영해 전체 본문을 다시 작성해주세요.`
+    : "";
 
   const userMessage = `다음 전략에 따라 네이버 블로그 본문을 작성해주세요.
 
@@ -194,7 +217,7 @@ ${
       ? "시스템 프롬프트의 코퍼스 summary를 바탕으로 스타일을 분석한 후,"
       : `먼저 user_corpus_retriever로 사용자 "${userId}"의 예시 글을 로드하여 스타일을 분석한 후,`
   }
-expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 작성해주세요.`;
+expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 작성해주세요.${revisionSection}`;
 
   // 1단계: tool-use loop (corpus retrieval + expansion planning)
   const messages: import("@anthropic-ai/sdk/resources/messages").MessageParam[] = [
@@ -255,7 +278,7 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
         (async () => {
           const stream = client.messages.stream({
             model: MODELS.sonnet,
-            system: buildSystemPrompt(userId, corpusSummary ?? null),
+            system: buildSystemPrompt(userId, corpusSummary ?? null, harnessBriefing),
             messages,
             tools: TOOLS,
             max_tokens: 4096,
@@ -303,7 +326,13 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
       // 본문 생성 완료
       const bodyText = wrapTo25Chars(rawText);
       onProgress?.("본문 생성 완료 — GitHub에 저장 중...");
-      return await saveWriterResult({ topicId, postId, title: strategy.title, content: bodyText });
+      return await saveWriterResult({
+        topicId,
+        postId,
+        title: strategy.title,
+        content: bodyText,
+        overwrite: Boolean(revisionInstructions),
+      });
     }
 
     if (toolUseBlocks.length > 0) {
@@ -343,6 +372,7 @@ async function saveWriterResult(params: {
   postId?: string;
   title: string;
   content: string;
+  overwrite?: boolean;
 }): Promise<WriterResult> {
   const postId = params.postId ?? `post-${randomUUID().slice(0, 8)}`;
   const contentPath = Paths.postContent(postId);
@@ -351,12 +381,13 @@ async function saveWriterResult(params: {
 
   // GitHub에 본문 저장 (파일이 없을 때만 — sha null)
   const exists = await fileExists(contentPath);
-  if (!exists) {
+  if (!exists || params.overwrite) {
+    const sha = exists ? (await readFile(contentPath)).sha : null;
     await writeFile(
       contentPath,
       params.content,
       `feat: master-writer generated post ${postId}`,
-      null
+      sha
     );
   }
 

@@ -131,7 +131,7 @@ export default function PipelinePage() {
   }, [reloadTopics]);
 
   useEffect(() => {
-    const uid = userId.trim();
+    const uid = normalizeUserId(userId.trim());
     if (!uid) {
       setProfile(null);
       setProfileError(null);
@@ -273,7 +273,7 @@ export default function PipelinePage() {
 
   useEffect(() => {
     if (!approval || !autoApproveRef.current) return;
-    const uid = userId.trim();
+    const uid = normalizeUserId(userId.trim());
     setApproval(null);
     setInspector((prev) => ({ ...prev, approval_received: true }));
     startWritePhase(approval, uid);
@@ -288,7 +288,7 @@ export default function PipelinePage() {
     const res = await fetch("/api/github/topics", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, assignedUserId: userId.trim() }),
+      body: JSON.stringify({ title, assignedUserId: normalizeUserId(userId.trim()) }),
     });
     if (!res.ok) return null;
     const json = await res.json() as { topic: Topic };
@@ -296,7 +296,7 @@ export default function PipelinePage() {
   };
 
   const startPipeline = async () => {
-    const uid = userId.trim();
+    const uid = normalizeUserId(userId.trim());
     if (!uid) return;
     if (topicMode === "list" && !selectedTopicId) return;
     if (topicMode === "direct" && !directTitle.trim()) return;
@@ -384,7 +384,7 @@ export default function PipelinePage() {
   };
 
   const handleApprove = async (request: ApprovalRequest) => {
-    const uid = userId.trim();
+    const uid = normalizeUserId(userId.trim());
     if (!request.approved) {
       setApproval(null);
       setRunning(false);

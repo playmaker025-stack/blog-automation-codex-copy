@@ -2,6 +2,7 @@ import "@anthropic-ai/sdk/shims/node";
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { runStrategyPhase } from "@/lib/agents/orchestrator";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 180;
@@ -21,6 +22,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const userId = normalizeUserId(body.userId);
   const pipelineId = `pipe-${randomUUID().slice(0, 8)}`;
   const abortController = new AbortController();
 
@@ -49,7 +51,7 @@ export async function POST(request: NextRequest) {
 
       runStrategyPhase({
         topicId: body.topicId,
-        userId: body.userId,
+        userId,
         pipelineId,
         controller,
         signal: abortController.signal,
