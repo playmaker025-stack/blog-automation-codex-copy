@@ -14,6 +14,7 @@ import type { Topic } from "@/lib/types/github-data";
 import type { TopicIndex } from "@/lib/types/github-data";
 import type { StrategyPlanResult } from "./types";
 import { normalizeUserId } from "@/lib/utils/normalize";
+import { buildContentTopologyPlan } from "./content-topology";
 
 const SYSTEM_PROMPT = `당신은 네이버 블로그 포스팅 전략 전문가입니다.
 주어진 토픽을 분석하여 사용자의 글쓰기 스타일과 타깃 독자에 맞는 포스팅 전략을 수립합니다.
@@ -285,7 +286,13 @@ export async function runStrategyPlanner(params: {
     }
   }
 
-  onProgress?.(`전략 수립 완료: "${plan.title}"`);
+  const contentTopology = await buildContentTopologyPlan({ topic, strategy: plan, userId });
+  plan = {
+    ...plan,
+    contentTopology,
+  };
+
+  onProgress?.(`전략 수립 완료: "${plan.title}" (${contentTopology.kind === "hub" ? "허브글" : "리프글"})`);
   return plan;
 }
 

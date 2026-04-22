@@ -6,7 +6,7 @@ import { sourceResolver } from "@/lib/skills/source-resolver";
 import { writeFile, readFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { randomUUID } from "crypto";
-import type { StrategyPlanResult, WriterResult } from "./types";
+import type { ContentTopologyPlan, StrategyPlanResult, WriterResult } from "./types";
 import type { CorpusSummaryArtifact } from "./corpus-selector";
 
 // ============================================================
@@ -72,6 +72,47 @@ ${exemplarExcerpts
   .join("\n\n")}`;
 }
 
+function buildContentTopologySection(topology: ContentTopologyPlan | undefined): string {
+  if (!topology) {
+    return `
+콘텐츠 구조 판단: 미지정
+- 본문 작성 전에 주제가 넓은 허브글인지, 좁은 리프글인지 판단한 뒤 구조에 반영하세요.
+- 허브글이면 전체 기준과 하위 주제 안내를 넣고, 리프글이면 상위 주제와의 관계와 구체 사례를 넣으세요.`;
+  }
+
+  const kindLabel = topology.kind === "hub" ? "허브글" : "리프글";
+  const requiredSections = topology.requiredSections
+    .map((section) => `- ${section}`)
+    .join("\n");
+  const linkTargets = topology.internalLinkTargets.length
+    ? topology.internalLinkTargets
+        .map((target) => {
+          const url = target.url ? ` (${target.url})` : "";
+          return `- ${target.title}${url}: ${target.reason}`;
+        })
+        .join("\n")
+    : "- 아직 확정된 내부 링크 후보가 없으므로, 실제 URL을 지어내지 말고 관련 주제 안내 문장만 자연스럽게 넣으세요.";
+
+  return `
+콘텐츠 구조 판단: ${kindLabel}
+- 판단 근거: ${topology.reason}
+- 검색 의도: ${topology.searchIntent}
+- 본문 반영 위치: ${topology.bodyPlacement}
+
+본문에 반드시 반영할 구조 요소:
+${requiredSections}
+
+내부 연결 후보:
+${linkTargets}
+
+작성 규칙:
+- 본문 안에서 허브/리프 역할이 독자가 느낄 수 있게 구성하세요.
+- 단, "이 글은 허브글입니다", "이 글은 리프글입니다" 같은 메타 문장은 쓰지 마세요.
+- 허브글은 넓은 기준 정리, 하위 주제 안내, 다음에 볼 글 흐름을 넣으세요.
+- 리프글은 상위 주제와의 관계를 짧게 짚고, 구체 상황/선택 기준/사례 중심으로 깊게 쓰세요.
+- 내부 링크 URL이 있으면 마무리 근처에 자연스럽게 넣고, URL이 없으면 제목만 지어내지 말고 관련 주제 안내로 처리하세요.`;
+}
+
 const buildSystemPrompt = (
   userId: string,
   corpus: CorpusSummaryArtifact | null,
@@ -101,6 +142,7 @@ ${step1}
 - 금지 표현 절대 사용 금지
 - 자연스러운 키워드 삽입 (억지 삽입 금지)
 - 독자 관점에서 실제 유용한 내용 중심
+- 전략에 포함된 콘텐츠 구조 판단이 허브글인지 리프글인지 확인하고 본문 구조에 반드시 반영
 
 ## 출력 형식
 전략에 따른 마크다운 본문 전체를 출력한다. 설명·메타 정보 없이 본문만 출력한다.
@@ -203,6 +245,8 @@ export async function runMasterWriter(params: {
 톤: ${strategy.tone}
 키워드: ${strategy.keywords.join(", ")}
 핵심 포인트: ${strategy.keyPoints.join(" / ")}
+
+${buildContentTopologySection(strategy.contentTopology)}
 
 아웃라인:
 ${strategy.outline

@@ -48,6 +48,22 @@ export interface StrategyPlanResult {
   keywords: string[];
   suggestedSources: string[];
   rationale: string;
+  contentTopology?: ContentTopologyPlan;
+}
+
+export type ContentTopologyKind = "hub" | "leaf";
+
+export interface ContentTopologyPlan {
+  kind: ContentTopologyKind;
+  reason: string;
+  searchIntent: string;
+  bodyPlacement: string;
+  requiredSections: string[];
+  internalLinkTargets: Array<{
+    title: string;
+    url?: string | null;
+    reason: string;
+  }>;
 }
 
 export interface WriterResult {

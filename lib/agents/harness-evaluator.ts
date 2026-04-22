@@ -14,7 +14,7 @@ const SYSTEM_PROMPT = `당신은 네이버 블로그 콘텐츠 품질 평가 전
 ## 평가 차원 (각 0-100점)
 - originality (0.25): 독창적 관점, 표절 없음, 고유한 인사이트
 - style_match (0.30): 사용자 코퍼스 글쓰기 스타일 일치도
-- structure (0.20): 논리적 흐름, 섹션 구성, 가독성
+- structure (0.20): 논리적 흐름, 섹션 구성, 가독성, 전략의 허브글/리프글 역할 반영
 - engagement (0.15): 독자 관심 유도, 유용성
 - forbidden_check (0.10): 금지 표현 미포함 여부 (포함 시 0점)
 
@@ -135,6 +135,17 @@ export async function runHarnessEvaluator(params: {
       reviewRecordAudit(input as Parameters<typeof reviewRecordAudit>[0]),
   };
 
+  const topology = strategy.contentTopology;
+  const topologySection = topology
+    ? `
+콘텐츠 구조 판단:
+- 유형: ${topology.kind === "hub" ? "허브글" : "리프글"}
+- 판단 근거: ${topology.reason}
+- 검색 의도: ${topology.searchIntent}
+- 본문 반영 요구: ${topology.requiredSections.join(" / ")}
+`
+    : "";
+
   const userMessage = `다음 블로그 본문을 평가해주세요.
 
 제목: ${writerResult.title}
@@ -142,12 +153,14 @@ export async function runHarnessEvaluator(params: {
 전략 톤: ${strategy.tone}
 목표 키워드: ${strategy.keywords.join(", ")}
 담당 사용자 ID: ${userId}
+${topologySection}
 
 --- 본문 시작 ---
 ${writerResult.content.slice(0, 1500)}${writerResult.content.length > 1500 ? "\n...(이하 생략)..." : ""}
 --- 본문 끝 ---
 
-user_corpus_retriever로 코퍼스를 로드하고, review_record_audit으로 패턴을 확인한 후 평가 JSON을 출력해주세요.`;
+user_corpus_retriever로 코퍼스를 로드하고, review_record_audit으로 패턴을 확인한 후 평가 JSON을 출력해주세요.
+structure 점수에는 콘텐츠 구조 판단의 허브글/리프글 역할이 본문에 자연스럽게 반영됐는지 반드시 포함하세요.`;
 
   onProgress?.("평가 에이전트 실행 중...");
 
