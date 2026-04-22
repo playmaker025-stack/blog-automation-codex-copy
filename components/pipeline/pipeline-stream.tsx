@@ -31,7 +31,7 @@ export function PipelineStream({ events, streamingBody }: Props) {
           <div className="px-4 py-2 border-b border-zinc-100 flex items-center justify-between gap-3">
             <div className="flex items-center gap-2 min-w-0">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-              <p className="text-xs text-zinc-500 font-medium">본문 생성 중...</p>
+              <p className="text-xs text-zinc-500 font-medium">본문 생성 중</p>
             </div>
             <span className="text-[11px] text-zinc-400 shrink-0">
               {streamingBody.length.toLocaleString()}자
@@ -50,7 +50,7 @@ export function PipelineStream({ events, streamingBody }: Props) {
         className="bg-zinc-950 rounded-lg p-4 h-32 overflow-y-auto font-mono text-xs"
       >
         {progressEvents.length === 0 ? (
-          <p className="text-zinc-600">파이프라인 실행 대기 중...</p>
+          <p className="text-zinc-600">파이프라인 실행 대기 중</p>
         ) : (
           progressEvents.map((event, index) => {
             const data = event.data as Record<string, unknown>;
@@ -63,7 +63,7 @@ export function PipelineStream({ events, streamingBody }: Props) {
                   : "text-zinc-400";
 
             return (
-              <p key={index} className={color}>
+              <p key={`${event.timestamp}-${index}`} className={color}>
                 <span className="text-zinc-600">
                   {new Date(event.timestamp).toLocaleTimeString("ko-KR")}
                 </span>{" "}

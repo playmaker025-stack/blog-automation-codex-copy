@@ -4,7 +4,7 @@ import { randomUUID } from "crypto";
 import { runStrategyPhase } from "@/lib/agents/orchestrator";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 180; // 전략 수립 — 합성 호출이 70s까지 걸릴 수 있음
+export const maxDuration = 180;
 
 export async function POST(request: NextRequest) {
   let body: { topicId: string; userId: string };
@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json({ error: "요청 본문 파싱 실패" }, { status: 400 });
   }
+
   if (!body.topicId || !body.userId) {
     return NextResponse.json(
       { error: "topicId와 userId가 필요합니다." },
@@ -38,7 +39,7 @@ export async function POST(request: NextRequest) {
         const event = JSON.stringify({
           type: "error",
           stage: "failed",
-          data: { message: "전략 수립 타임아웃 (160초) — 자동 종료" },
+          data: { message: "전략 수립 타임아웃 (160초). 자동 종료되었습니다." },
           timestamp: new Date().toISOString(),
         });
         try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }

@@ -1,1 +1,1 @@
-node scripts/verify.mjs --skip-build
+node scripts/verify.mjs

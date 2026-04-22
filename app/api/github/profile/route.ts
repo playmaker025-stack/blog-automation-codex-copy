@@ -34,7 +34,8 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "userId가 포함된 profile 객체가 필요합니다." }, { status: 400 });
     }
 
-    const path = Paths.userProfile(profile.userId);
+    const normalizedUserId = normalizeUserId(profile.userId);
+    const path = Paths.userProfile(normalizedUserId);
     const exists = await fileExists(path);
     let sha: string | null = null;
     if (exists) {
@@ -44,13 +45,14 @@ export async function PUT(request: NextRequest) {
 
     const updated: UserProfile = {
       ...profile,
+      userId: normalizedUserId,
       updatedAt: new Date().toISOString(),
     };
 
     await writeJsonFile(
       path,
       updated,
-      `chore: update profile for ${profile.userId}`,
+      `chore: update profile for ${updated.userId}`,
       sha
     );
 

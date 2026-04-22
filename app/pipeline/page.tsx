@@ -6,9 +6,11 @@ import { PipelineStream } from "@/components/pipeline/pipeline-stream";
 import { ApprovalDialog } from "@/components/pipeline/approval-dialog";
 import { PipelineStateInspector, applyEventToInspector } from "@/components/pipeline/state-inspector";
 import { usePipelineStore } from "@/lib/store/pipeline-store";
+import { reviewActualDraft, type DraftReviewIssue } from "@/lib/agents/draft-review";
 import type { SSEEvent, ApprovalRequest, StrategyPlanResult } from "@/lib/agents/types";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 interface ApprovalData {
   pipelineId: string;
@@ -17,7 +19,7 @@ interface ApprovalData {
   proposedTitle: string;
   rationale: string;
   outline: string[];
-  strategy: StrategyPlanResult; // write phase에서 사용
+  strategy: StrategyPlanResult;
 }
 
 interface ResultData {
@@ -31,36 +33,48 @@ interface ResultData {
   imageFileNames?: string[];
 }
 
+function parseSseChunk(buffer: string, onEvent: (event: SSEEvent) => void): string {
+  const lines = buffer.split("\n\n");
+  const rest = lines.pop() ?? "";
+  for (const line of lines) {
+    if (!line.startsWith("data: ")) continue;
+    try {
+      onEvent(JSON.parse(line.slice(6)) as SSEEvent);
+    } catch {
+      // Ignore malformed keepalive fragments.
+    }
+  }
+  return rest;
+}
+
 export default function PipelinePage() {
-  // ── Zustand store (페이지 이탈 후 복원) ──────────────────────
-  const userId = usePipelineStore((s) => s.userId);
-  const topicMode = usePipelineStore((s) => s.topicMode);
-  const selectedTopicId = usePipelineStore((s) => s.selectedTopicId);
-  const directTitle = usePipelineStore((s) => s.directTitle);
-  const autoApprove = usePipelineStore((s) => s.autoApprove);
-  const stage = usePipelineStore((s) => s.stage);
-  const events = usePipelineStore((s) => s.events);
-  const streamingBody = usePipelineStore((s) => s.streamingBody);
-  const result = usePipelineStore((s) => s.result);
-  const inspector = usePipelineStore((s) => s.inspector);
-  const runningTitle = usePipelineStore((s) => s.runningTitle);
+  const userId = usePipelineStore((state) => state.userId);
+  const topicMode = usePipelineStore((state) => state.topicMode);
+  const selectedTopicId = usePipelineStore((state) => state.selectedTopicId);
+  const directTitle = usePipelineStore((state) => state.directTitle);
+  const autoApprove = usePipelineStore((state) => state.autoApprove);
+  const stage = usePipelineStore((state) => state.stage);
+  const events = usePipelineStore((state) => state.events);
+  const streamingBody = usePipelineStore((state) => state.streamingBody);
+  const result = usePipelineStore((state) => state.result);
+  const inspector = usePipelineStore((state) => state.inspector);
+  const runningTitle = usePipelineStore((state) => state.runningTitle);
 
-  const setUserId = usePipelineStore((s) => s.setUserId);
-  const setTopicMode = usePipelineStore((s) => s.setTopicMode);
-  const setSelectedTopicId = usePipelineStore((s) => s.setSelectedTopicId);
-  const setDirectTitle = usePipelineStore((s) => s.setDirectTitle);
-  const setAutoApprove = usePipelineStore((s) => s.setAutoApprove);
-  const setStage = usePipelineStore((s) => s.setStage);
-  const appendEvent = usePipelineStore((s) => s.appendEvent);
-  const setEvents = usePipelineStore((s) => s.setEvents);
-  const appendStreamingToken = usePipelineStore((s) => s.appendStreamingToken);
-  const setStreamingBody = usePipelineStore((s) => s.setStreamingBody);
-  const setResult = usePipelineStore((s) => s.setResult);
-  const setInspector = usePipelineStore((s) => s.setInspector);
-  const setRunningTitle = usePipelineStore((s) => s.setRunningTitle);
-  const resetRun = usePipelineStore((s) => s.resetRun);
+  const setUserId = usePipelineStore((state) => state.setUserId);
+  const setTopicMode = usePipelineStore((state) => state.setTopicMode);
+  const setSelectedTopicId = usePipelineStore((state) => state.setSelectedTopicId);
+  const setDirectTitle = usePipelineStore((state) => state.setDirectTitle);
+  const setAutoApprove = usePipelineStore((state) => state.setAutoApprove);
+  const setStage = usePipelineStore((state) => state.setStage);
+  const appendEvent = usePipelineStore((state) => state.appendEvent);
+  const setEvents = usePipelineStore((state) => state.setEvents);
+  const appendStreamingToken = usePipelineStore((state) => state.appendStreamingToken);
+  const setStreamingBody = usePipelineStore((state) => state.setStreamingBody);
+  const setResult = usePipelineStore((state) => state.setResult);
+  const setInspector = usePipelineStore((state) => state.setInspector);
+  const setRunningTitle = usePipelineStore((state) => state.setRunningTitle);
+  const resetRun = usePipelineStore((state) => state.resetRun);
 
-  // ── 로컬 상태 (이탈 시 초기화해도 무방) ─────────────────────
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [profileLoading, setProfileLoading] = useState(false);
   const [profileError, setProfileError] = useState<string | null>(null);
@@ -74,60 +88,73 @@ export default function PipelinePage() {
   const [pipelineError, setPipelineError] = useState<string | null>(null);
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewBody, setReviewBody] = useState("");
-  const [reviewIssues, setReviewIssues] = useState<string[]>([]);
+  const [reviewIssues, setReviewIssues] = useState<DraftReviewIssue[]>([]);
   const [reviewSaving, setReviewSaving] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // 컴포넌트 언마운트 시 타이머 정리
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-      if (pollRef.current) clearInterval(pollRef.current);
-    };
+  const currentUid = normalizeUserId(userId);
+  const userTopics = currentUid
+    ? topics.filter((topic) => normalizeUserId(topic.assignedUserId ?? "") === currentUid)
+    : topics;
+  const { remaining: availableTopics } = resolveRemainingTopics(userTopics, posts);
+
+  const stopTimer = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
   }, []);
 
-  // pollRef는 더 이상 사용하지 않음 — 2단계 파이프라인에서 승인은 클라이언트에서 처리
-  // (제거하면 기존 refs 참조 오류 발생하므로 useEffect만 비워둠)
-  useEffect(() => {
-    return () => { if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; } };
-  }, []);
+  useEffect(() => stopTimer, [stopTimer]);
 
-  // 토픽 목록 + 발행 인덱스 + stuck count 동시 로드
-  const reloadTopics = () => {
-    const t = Date.now();
+  const reloadTopics = useCallback(() => {
+    const timestamp = Date.now();
     Promise.allSettled([
-      fetch(`/api/github/topics?_t=${t}`).then((r) => r.json()) as Promise<{ topics: Topic[] }>,
-      fetch(`/api/github/posts?limit=1000&_t=${t}`).then((r) => r.json()) as Promise<{ posts: PostingRecord[] }>,
-      fetch(`/api/github/topics/recover-stuck?_t=${t}`).then((r) => r.json()) as Promise<{ count: number }>,
+      fetch(`/api/github/topics?_t=${timestamp}`).then((res) => res.json()) as Promise<{ topics: Topic[] }>,
+      fetch(`/api/github/posts?limit=1000&_t=${timestamp}`).then((res) => res.json()) as Promise<{ posts: PostingRecord[] }>,
+      fetch(`/api/github/topics/recover-stuck?_t=${timestamp}`).then((res) => res.json()) as Promise<{ count: number }>,
     ]).then(([topicResult, postResult, stuckResult]) => {
-      const postData = postResult.status === "fulfilled" ? postResult.value : { posts: [] };
       const topicData = topicResult.status === "fulfilled" ? topicResult.value : { topics: [] };
+      const postData = postResult.status === "fulfilled" ? postResult.value : { posts: [] };
       const stuckData = stuckResult.status === "fulfilled" ? stuckResult.value : { count: 0 };
-      // draft만 허용 — in-progress/published/archived 모두 제외
-      setTopics((topicData.topics ?? []).filter((t) => t.status === "draft"));
+      setTopics((topicData.topics ?? []).filter((topic) => topic.status === "draft"));
       setPosts(postData.posts ?? []);
       setStuckCount(stuckData.count ?? 0);
     });
-  };
+  }, []);
 
-  useEffect(() => { reloadTopics(); }, []);
-
-  // 사용자 프로필 로드 (userId 입력 후 딜레이)
   useEffect(() => {
-    if (!userId.trim()) { setProfile(null); setProfileError(null); return; }
+    reloadTopics();
+  }, [reloadTopics]);
+
+  useEffect(() => {
+    const uid = userId.trim();
+    if (!uid) {
+      setProfile(null);
+      setProfileError(null);
+      return;
+    }
+
     const timer = setTimeout(() => {
       setProfileLoading(true);
       setProfileError(null);
-      fetch(`/api/github/profile?userId=${encodeURIComponent(userId.trim())}`)
-        .then(async (r) => {
-          const json = await r.json() as { profile?: UserProfile; error?: string };
-          if (r.ok) { setProfile(json.profile ?? null); }
-          else { setProfile(null); setProfileError(json.error ?? "프로필 조회 실패"); }
+      fetch(`/api/github/profile?userId=${encodeURIComponent(uid)}`)
+        .then(async (res) => {
+          const json = await res.json() as { profile?: UserProfile; error?: string };
+          if (res.ok) {
+            setProfile(json.profile ?? null);
+            return;
+          }
+          setProfile(null);
+          setProfileError(json.error ?? "프로필 조회 실패");
         })
-        .catch((e) => { setProfile(null); setProfileError(e instanceof Error ? e.message : "네트워크 오류"); })
+        .catch((error) => {
+          setProfile(null);
+          setProfileError(error instanceof Error ? error.message : "네트워크 오류");
+        })
         .finally(() => setProfileLoading(false));
-    }, 600);
+    }, 500);
+
     return () => clearTimeout(timer);
   }, [userId]);
 
@@ -136,78 +163,117 @@ export default function PipelinePage() {
     setInspector((prev) => applyEventToInspector(prev, event));
 
     if (event.type === "stage_change") {
-      setStage((event.data as { stage?: import("@/lib/types/agent").PipelineStage })?.stage ?? event.stage);
-      // pipelineId는 approval 데이터를 통해 전달됨 — 여기선 추적 불필요
+      setStage(event.stage);
     }
+
     if (event.type === "token") {
       appendStreamingToken((event.data as { token?: string })?.token ?? "");
     }
+
     if (event.type === "approval_required") {
-      // strategy phase 완료 — approval 데이터에 strategy 포함
-      const d = event.data as {
+      const data = event.data as {
         pipelineId: string;
         previousTitle: string;
         proposedTitle: string;
         rationale: string;
         outline: string[];
         strategy: StrategyPlanResult;
+        __topicId?: string;
       };
-      const approvalData: ApprovalData = {
-        pipelineId: d.pipelineId,
-        topicId: (event.data as Record<string, unknown>).__topicId as string ?? "",
-        previousTitle: d.previousTitle,
-        proposedTitle: d.proposedTitle,
-        rationale: d.rationale,
-        outline: d.outline,
-        strategy: d.strategy,
-      };
-      // autoApprove 여부는 위 useEffect가 처리 — 여기선 항상 setApproval만
-      setApproval(approvalData);
-    }
-    if (event.type === "result") {
-      const d = event.data as ResultData;
-      setResult(d);
-      setReviewTitle(d.title ?? "");
-      setReviewBody("");
-      setReviewIssues([]);
-      setRunning(false);
-      setRunningTitle(null);
-      if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
-    }
-    if (event.type === "gate_blocked") {
-      const d = event.data as {
-        postId: string;
-        evalScore: number;
-        recommendations: string[];
-        draft?: { title: string; wordCount: number };
-      };
-      setStage("gate_blocked");
-      setResult({
-        postId: d.postId,
-        title: d.draft?.title ?? "",
-        wordCount: d.draft?.wordCount ?? 0,
-        evalScore: d.evalScore,
-        pass: false,
-        recommendations: d.recommendations ?? [],
+      setApproval({
+        pipelineId: data.pipelineId,
+        topicId: data.__topicId ?? "",
+        previousTitle: data.previousTitle,
+        proposedTitle: data.proposedTitle,
+        rationale: data.rationale,
+        outline: data.outline,
+        strategy: data.strategy,
       });
-      setReviewTitle(d.draft?.title ?? "");
+    }
+
+    if (event.type === "result") {
+      const data = event.data as ResultData;
+      setResult(data);
+      setReviewTitle(data.title ?? "");
       setReviewBody("");
       setReviewIssues([]);
       setRunning(false);
       setRunningTitle(null);
-      if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+      stopTimer();
+      reloadTopics();
     }
+
     if (event.type === "error") {
-      const msg = (event.data as { message?: string })?.message ?? "파이프라인 오류가 발생했습니다.";
-      setPipelineError(msg);
+      const message = (event.data as { message?: string })?.message ?? "파이프라인 오류가 발생했습니다.";
+      setPipelineError(message);
       setStage("idle");
       setRunning(false);
       setRunningTitle(null);
-      if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+      stopTimer();
+      reloadTopics();
     }
-  }, [appendEvent, setInspector, setStage, appendStreamingToken, setResult, setRunningTitle]);
+  }, [
+    appendEvent,
+    appendStreamingToken,
+    reloadTopics,
+    setInspector,
+    setResult,
+    setRunningTitle,
+    setStage,
+    stopTimer,
+  ]);
 
-  // "직접 주제 입력" 모드: 먼저 draft 토픽을 생성하고 그 ID를 사용
+  const startWritePhase = useCallback((approvalData: ApprovalData, uid: string) => {
+    fetch("/api/pipeline/write", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        pipelineId: approvalData.pipelineId,
+        topicId: approvalData.topicId,
+        userId: uid,
+        strategy: approvalData.strategy,
+      }),
+    })
+      .then((res) => {
+        if (!res.body) {
+          setRunning(false);
+          return;
+        }
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+
+        const read = () => {
+          reader.read()
+            .then(({ done, value }) => {
+              if (done) {
+                setRunning(false);
+                return;
+              }
+              buffer += decoder.decode(value, { stream: true });
+              buffer = parseSseChunk(buffer, handleEvent);
+              read();
+            })
+            .catch(() => setRunning(false));
+        };
+        read();
+      })
+      .catch(() => setRunning(false));
+  }, [handleEvent]);
+
+  const autoApproveRef = useRef(autoApprove);
+  useEffect(() => {
+    autoApproveRef.current = autoApprove;
+  }, [autoApprove]);
+
+  useEffect(() => {
+    if (!approval || !autoApproveRef.current) return;
+    const uid = userId.trim();
+    setApproval(null);
+    setInspector((prev) => ({ ...prev, approval_received: true }));
+    startWritePhase(approval, uid);
+  }, [approval, setInspector, startWritePhase, userId]);
+
   const resolveTopicId = async (): Promise<string | null> => {
     if (topicMode === "list") return selectedTopicId || null;
 
@@ -224,54 +290,6 @@ export default function PipelinePage() {
     return json.topic.topicId;
   };
 
-  // write phase 시작 — 승인 후 호출
-  const startWritePhase = useCallback((approvalData: ApprovalData, uid: string) => {
-    fetch("/api/pipeline/write", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        pipelineId: approvalData.pipelineId,
-        topicId: approvalData.topicId,
-        userId: uid,
-        strategy: approvalData.strategy,
-      }),
-    }).then((res) => {
-      if (!res.body) { setRunning(false); return; }
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      const read = () => {
-        reader.read().then(({ done, value }) => {
-          if (done) { setRunning(false); return; }
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split("\n\n");
-          buffer = lines.pop() ?? "";
-          for (const line of lines) {
-            if (line.startsWith("data: ")) {
-              try { handleEvent(JSON.parse(line.slice(6)) as SSEEvent); } catch { /* ignore */ }
-            }
-          }
-          read();
-        }).catch(() => setRunning(false));
-      };
-      read();
-    }).catch(() => setRunning(false));
-  }, [handleEvent]);
-
-  // 자동 승인 처리 — approval 상태가 설정되고 autoApprove이면 즉시 write phase 시작
-  const autoApproveRef = useRef(autoApprove);
-  useEffect(() => { autoApproveRef.current = autoApprove; }, [autoApprove]);
-
-  useEffect(() => {
-    if (!approval || !autoApproveRef.current) return;
-    const uid = userId.trim();
-    setApproval(null);
-    setInspector((prev) => ({ ...prev, approval_received: true }));
-    startWritePhase(approval, uid);
-  // approval 변경 시에만 실행 — startWritePhase/userId는 stable refs
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [approval]);
-
   const startPipeline = async () => {
     const uid = userId.trim();
     if (!uid) return;
@@ -287,12 +305,13 @@ export default function PipelinePage() {
     setReviewIssues([]);
     setStage("idle");
     setApproval(null);
-setPipelineError(null);
+    setPipelineError(null);
     setRunning(true);
+    setElapsed(0);
 
     const selectedTitle =
       topicMode === "list"
-        ? topics.find((t) => t.topicId === selectedTopicId)?.title ?? selectedTopicId
+        ? topics.find((topic) => topic.topicId === selectedTopicId)?.title ?? selectedTopicId
         : directTitle.trim();
 
     setRunningTitle(selectedTitle);
@@ -303,74 +322,71 @@ setPipelineError(null);
     });
 
     const topicId = await resolveTopicId();
-    if (!topicId) { setRunning(false); return; }
+    if (!topicId) {
+      setRunning(false);
+      setPipelineError("주제를 준비하지 못했습니다.");
+      return;
+    }
 
-    setElapsed(0);
-    timerRef.current = setInterval(() => setElapsed((s) => s + 1), 1000);
+    timerRef.current = setInterval(() => setElapsed((seconds) => seconds + 1), 1000);
 
-    // Phase 1: 전략 수립 (approval_required 이벤트까지만)
-    // approval_required를 받으면 setApproval()이 호출되고 스트림은 자동으로 닫힘
-    // Phase 2는 handleApprove에서 시작
     fetch("/api/pipeline/strategy", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ topicId, userId: uid }),
-    }).then((res) => {
-      if (!res.body) { setRunning(false); return; }
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      let topicIdInjected = false;
-      const read = () => {
-        reader.read().then(({ done, value }) => {
-          if (done) {
-            // 스트림 종료 — approval 다이얼로그가 열려 있으면 running 유지 (write phase 대기)
-            // approval 없이 종료(에러/타임아웃) → running 해제
-            setApproval((current) => {
-              if (!current) {
-                // approval이 없으면 에러로 종료된 것 — running 해제
-                setRunning(false);
-                if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+    })
+      .then((res) => {
+        if (!res.body) {
+          setRunning(false);
+          return;
+        }
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        let topicIdInjected = false;
+
+        const read = () => {
+          reader.read()
+            .then(({ done, value }) => {
+              if (done) {
+                setApproval((current) => {
+                  if (!current) {
+                    setRunning(false);
+                    stopTimer();
+                  }
+                  return current;
+                });
+                return;
               }
-              return current;
-            });
-            return;
-          }
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split("\n\n");
-          buffer = lines.pop() ?? "";
-          for (const line of lines) {
-            if (line.startsWith("data: ")) {
-              try {
-                const event = JSON.parse(line.slice(6)) as SSEEvent;
-                // approval_required 이벤트에 topicId 주입 (handleApprove에서 필요)
+
+              buffer += decoder.decode(value, { stream: true });
+              buffer = parseSseChunk(buffer, (event) => {
                 if (event.type === "approval_required" && !topicIdInjected) {
                   topicIdInjected = true;
                   (event.data as Record<string, unknown>).__topicId = topicId;
                 }
                 handleEvent(event);
-              } catch { /* ignore */ }
-            }
-          }
-          read();
-        }).catch(() => setRunning(false));
-      };
-      read();
-    }).catch(() => setRunning(false));
+              });
+              read();
+            })
+            .catch(() => setRunning(false));
+        };
+        read();
+      })
+      .catch(() => setRunning(false));
   };
 
-  const handleApprove = async (req: ApprovalRequest) => {
+  const handleApprove = async (request: ApprovalRequest) => {
     const uid = userId.trim();
-    if (!req.approved) {
+    if (!request.approved) {
       setApproval(null);
       setRunning(false);
       setRunningTitle(null);
       setStage("idle");
-      if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+      stopTimer();
       return;
     }
 
-    // 승인 — approval 상태에서 strategy와 topicId 꺼내서 write phase 시작
     const currentApproval = approval;
     setApproval(null);
     setInspector((prev) => ({ ...prev, approval_received: true }));
@@ -379,19 +395,11 @@ setPipelineError(null);
     startWritePhase(currentApproval, uid);
   };
 
-  const canStart = (() => {
-    if (!userId.trim() || running) return false;
-    if (topicMode === "list") return !!selectedTopicId;
-    return !!directTitle.trim();
-  })();
-
   const handleRecoverStuck = async () => {
     setRecovering(true);
     try {
       const res = await fetch("/api/github/topics/recover-stuck", { method: "POST" });
-      if (res.ok) {
-        reloadTopics();
-      }
+      if (res.ok) reloadTopics();
     } finally {
       setRecovering(false);
     }
@@ -400,78 +408,64 @@ setPipelineError(null);
   const runDraftReview = async () => {
     if (!result) return;
 
-    const title = reviewTitle.trim();
-    const body = reviewBody.trim();
-    const issues: string[] = [];
+    const review = reviewActualDraft({
+      originalTitle: result.title,
+      title: reviewTitle,
+      body: reviewBody,
+    });
+    setReviewIssues(review.issues);
 
-    if (!title) issues.push("제목이 비어 있습니다.");
-    if (title.length > 45) issues.push("제목이 길어 모바일 검색 결과에서 잘릴 수 있습니다.");
-    if (body.length < 600) issues.push("본문이 짧습니다. 경험 설명, 선택 기준, 마무리 문단을 보강해 주세요.");
-    if (/[?？!！]{2,}/.test(title + body)) issues.push("물음표/느낌표가 연속된 부분은 광고성으로 보일 수 있습니다.");
-    if (/(무조건|100%|최고|완벽|보장|최저가|무료)/.test(body)) {
-      issues.push("단정적 표현이나 과장 표현이 있습니다. 실제 근거가 없다면 완화 표현으로 바꾸는 편이 안전합니다.");
-    }
-    if (/(담배|니코틴|전자담배|액상)/.test(body) && !/(성인|미성년|청소년|법적|주의)/.test(body)) {
-      issues.push("전자담배 관련 글에는 성인 대상 안내나 주의 문구를 넣는 편이 안전합니다.");
-    }
-    if (/(ㅜ|ㅠ|ㅋㅋ|ㅎㅎ){3,}/.test(body)) issues.push("반복 이모티콘/구어체가 많으면 정보글 신뢰도가 낮아질 수 있습니다.");
-    if (body.includes("  ")) issues.push("본문에 연속 공백이 있습니다.");
-    if (!/(마무리|정리|결론|요약)/.test(body)) issues.push("마무리 문단이 약해 보입니다. 마지막에 선택 기준을 다시 정리해 주세요.");
+    if (!review.normalizedTitle || review.normalizedTitle === result.title) return;
 
-    if (issues.length === 0) {
-      issues.push("큰 위험 요소는 보이지 않습니다. 제목과 본문 흐름을 유지해도 좋습니다.");
-    }
-
-    setReviewIssues(issues);
-
-    if (title && title !== result.title) {
-      setReviewSaving(true);
-      try {
-        const res = await fetch("/api/github/posts", {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ postId: result.postId, title }),
-        });
-        if (!res.ok) throw new Error("title update failed");
-        setResult({ ...result, title });
-      } catch {
-        setReviewIssues((prev) => ["변경한 제목을 글목록에 반영하지 못했습니다.", ...prev]);
-      } finally {
-        setReviewSaving(false);
-      }
+    setReviewSaving(true);
+    try {
+      const res = await fetch("/api/github/posts", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ postId: result.postId, title: review.normalizedTitle }),
+      });
+      if (!res.ok) throw new Error("title update failed");
+      setResult({ ...result, title: review.normalizedTitle });
+      setReviewTitle(review.normalizedTitle);
+    } catch {
+      setReviewIssues((prev) => [
+        { severity: "blocker", message: "변경한 제목을 글 목록에 반영하지 못했습니다." },
+        ...prev,
+      ]);
+    } finally {
+      setReviewSaving(false);
     }
   };
 
-  const currentUid = userId.trim().toLowerCase();
-  const userTopics = currentUid
-    ? topics.filter((t) => t.assignedUserId?.toLowerCase() === currentUid)
-    : topics;
-  const { remaining: availableTopics } = resolveRemainingTopics(userTopics, posts);
+  const canStart = (() => {
+    if (!userId.trim() || running) return false;
+    if (topicMode === "list") return !!selectedTopicId;
+    return !!directTitle.trim();
+  })();
 
   return (
     <div className="p-6 lg:p-8 max-w-none">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-zinc-900">글쓰기 실행</h1>
-        <p className="text-zinc-500 mt-1 text-sm">승인 후 본문 작성 시작</p>
+        <p className="text-zinc-500 mt-1 text-sm">전략 수립부터 본문 작성, 평가, 실제 작성본 검토까지 한 화면에서 진행합니다.</p>
       </div>
 
-      {/* ── 멈춤 토픽 복구 경고 ────────────────────────────── */}
       {stuckCount > 0 && (
         <div className="mb-4 flex items-center justify-between bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
           <p className="text-sm text-amber-800">
-            <span className="font-semibold">{stuckCount}개 토픽</span>이 이전 파이프라인 실패로 진행 중 상태에 멈춰 있습니다.
+            <span className="font-semibold">{stuckCount}개 주제</span>가 이전 실패로 진행 중 상태에 머물러 있습니다.
           </p>
           <button
+            type="button"
             onClick={handleRecoverStuck}
             disabled={recovering}
             className="ml-4 px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded hover:bg-amber-700 disabled:opacity-50 transition-colors whitespace-nowrap"
           >
-            {recovering ? "복구 중..." : "일괄 복구"}
+            {recovering ? "복구 중" : "일괄 복구"}
           </button>
         </div>
       )}
 
-      {/* ── 파이프라인 에러 배너 ──────────────────────────── */}
       {pipelineError && (
         <div className="mb-4 flex items-start justify-between bg-red-50 border border-red-200 rounded-lg px-4 py-3">
           <div className="flex-1 min-w-0">
@@ -479,6 +473,8 @@ setPipelineError(null);
             <p className="text-xs text-red-600 mt-0.5 break-words">{pipelineError}</p>
           </div>
           <button
+            type="button"
+            aria-label="오류 닫기"
             onClick={() => setPipelineError(null)}
             className="ml-3 text-red-400 hover:text-red-600 shrink-0 text-lg leading-none"
           >
@@ -487,303 +483,307 @@ setPipelineError(null);
         </div>
       )}
 
-      {/* ── 실행 설정 ─────────────────────────────────────── */}
-      <div className="grid grid-cols-1 xl:grid-cols-[minmax(420px,520px)_minmax(0,1fr)] gap-6 items-start">
-        <section className="min-w-0">
-      <div className="bg-white border border-zinc-200 rounded-xl p-5 mb-6 space-y-5">
-
-        {/* 사용자 선택 */}
-        <div>
-          <label className="block text-xs font-semibold text-zinc-600 mb-1">사용자 선택</label>
-          <div className="flex items-center gap-3">
-            <input
-              value={userId}
-              onChange={(e) => setUserId(e.target.value)}
-              placeholder="사용자 ID 입력"
-              disabled={running}
-              className="flex-1 border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-            />
-            {profileLoading && <span className="text-xs text-zinc-400">확인 중...</span>}
-            {!profileLoading && profile && (
-              <span className="text-xs text-emerald-600 font-medium">{profile.displayName}</span>
-            )}
-            {!profileLoading && userId.trim() && !profile && profileError && (
-              <span className="text-xs text-red-500" title={profileError}>오류: {profileError}</span>
-            )}
-            {!profileLoading && userId.trim() && !profile && !profileError && (
-              <span className="text-xs text-zinc-400">프로필 없음</span>
-            )}
-          </div>
-        </div>
-
-        {/* 블로그 선택 */}
-        <div>
-          <label className="block text-xs font-semibold text-zinc-600 mb-1">블로그</label>
-          {profile?.naverBlogUrl ? (
-            <div className="flex items-center gap-2 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2">
-              <span className="text-xs text-zinc-500">네이버 블로그</span>
-              <a
-                href={profile.naverBlogUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-blue-600 hover:underline truncate"
-              >
-                {profile.naverBlogUrl}
-              </a>
-            </div>
-          ) : (
-            <div className="bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-400">
-              사용자 ID를 입력하면 블로그 정보가 표시됩니다.
-            </div>
-          )}
-        </div>
-
-        {/* 주제 선택 방식 */}
-        <div>
-          <label className="block text-xs font-semibold text-zinc-600 mb-2">주제 선택 방식</label>
-          <div className="flex gap-2 mb-3">
-            <button
-              onClick={() => setTopicMode("list")}
-              disabled={running}
-              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors disabled:opacity-50 ${
-                topicMode === "list"
-                  ? "bg-zinc-900 text-white"
-                  : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
-              }`}
-            >
-              글목록에서 선택
-            </button>
-            <button
-              onClick={() => setTopicMode("direct")}
-              disabled={running}
-              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors disabled:opacity-50 ${
-                topicMode === "direct"
-                  ? "bg-zinc-900 text-white"
-                  : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
-              }`}
-            >
-              직접 주제 입력
-            </button>
-          </div>
-
-          {topicMode === "list" ? (
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(390px,520px)_minmax(0,1fr)] gap-6 items-start">
+        <section className="min-w-0 space-y-6">
+          <div className="bg-white border border-zinc-200 rounded-xl p-5 space-y-5">
             <div>
-              <select
-                value={selectedTopicId}
-                onChange={(e) => setSelectedTopicId(e.target.value)}
-                disabled={running}
-                className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-              >
-                <option value="">글목록에서 주제를 선택하세요</option>
-                {availableTopics.map((t) => (
-                  <option key={t.topicId} value={t.topicId} className="text-zinc-900">
-                    {t.title}
-                  </option>
-                ))}
-              </select>
-              {availableTopics.length === 0 && (
-                <p className="text-xs text-zinc-400 mt-1.5">
-                  {userId.trim()
-                    ? `'${userId.trim()}' 사용자에게 배정된 주제가 없습니다.`
-                    : <>글목록이 비어 있습니다. 먼저 <a href="/topics" className="text-blue-500 hover:underline">글목록</a>에서 주제를 등록해 주세요.</>
-                  }
-                </p>
+              <label htmlFor="pipeline-user" className="block text-xs font-semibold text-zinc-600 mb-1">사용자 선택</label>
+              <div className="flex items-center gap-3">
+                <input
+                  id="pipeline-user"
+                  value={userId}
+                  onChange={(event) => setUserId(event.target.value)}
+                  placeholder="사용자 ID 입력"
+                  disabled={running}
+                  className="flex-1 border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                />
+                {profileLoading && <span className="text-xs text-zinc-400">확인 중</span>}
+                {!profileLoading && profile && (
+                  <span className="text-xs text-emerald-600 font-medium">{profile.displayName}</span>
+                )}
+                {!profileLoading && userId.trim() && !profile && profileError && (
+                  <span className="text-xs text-red-500" title={profileError}>오류: {profileError}</span>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <p className="block text-xs font-semibold text-zinc-600 mb-1">블로그</p>
+              {profile?.naverBlogUrl ? (
+                <div className="flex items-center gap-2 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2">
+                  <span className="text-xs text-zinc-500">네이버 블로그</span>
+                  <a
+                    href={profile.naverBlogUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-blue-600 hover:underline truncate"
+                  >
+                    {profile.naverBlogUrl}
+                  </a>
+                </div>
+              ) : (
+                <div className="bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-400">
+                  사용자 ID를 입력하면 블로그 정보가 표시됩니다.
+                </div>
               )}
             </div>
-          ) : (
+
             <div>
+              <p className="block text-xs font-semibold text-zinc-600 mb-2">주제 선택 방식</p>
+              <div className="flex gap-2 mb-3">
+                <button
+                  type="button"
+                  onClick={() => setTopicMode("list")}
+                  disabled={running}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors disabled:opacity-50 ${
+                    topicMode === "list"
+                      ? "bg-zinc-900 text-white"
+                      : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+                  }`}
+                >
+                  글 목록에서 선택
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTopicMode("direct")}
+                  disabled={running}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors disabled:opacity-50 ${
+                    topicMode === "direct"
+                      ? "bg-zinc-900 text-white"
+                      : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+                  }`}
+                >
+                  직접 주제 입력
+                </button>
+              </div>
+
+              {topicMode === "list" ? (
+                <div>
+                  <label htmlFor="pipeline-topic" className="sr-only">글 목록에서 주제 선택</label>
+                  <select
+                    id="pipeline-topic"
+                    value={selectedTopicId}
+                    onChange={(event) => setSelectedTopicId(event.target.value)}
+                    disabled={running}
+                    className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                  >
+                    <option value="">글 목록에서 주제를 선택하세요</option>
+                    {availableTopics.map((topic) => (
+                      <option key={topic.topicId} value={topic.topicId}>
+                        {topic.title}
+                      </option>
+                    ))}
+                  </select>
+                  {availableTopics.length === 0 && (
+                    <p className="text-xs text-zinc-400 mt-1.5">
+                      {userId.trim()
+                        ? `'${userId.trim()}' 사용자에게 배정된 주제가 없습니다.`
+                        : "글 목록이 비어 있습니다. 먼저 주제를 등록해 주세요."}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <label htmlFor="pipeline-direct-title" className="sr-only">직접 주제 입력</label>
+                  <input
+                    id="pipeline-direct-title"
+                    value={directTitle}
+                    onChange={(event) => setDirectTitle(event.target.value)}
+                    placeholder="예: 부평 전자담배 입문 기기 추천"
+                    disabled={running}
+                    className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                  />
+                  <p className="text-xs text-zinc-400 mt-1.5">
+                    입력한 주제는 글 목록에 draft 주제로 등록한 뒤 글쓰기를 시작합니다.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <label className="flex items-center gap-2 text-xs text-zinc-500 cursor-pointer select-none">
               <input
-                value={directTitle}
-                onChange={(e) => setDirectTitle(e.target.value)}
-                placeholder="예: 서울 카페 베스트 10 — 2024 최신판"
+                type="checkbox"
+                checked={autoApprove}
+                onChange={(event) => setAutoApprove(event.target.checked)}
                 disabled={running}
-                className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                className="rounded"
               />
-              <p className="text-xs text-zinc-400 mt-1.5">
-                입력한 주제로 즉시 글쓰기를 시작합니다. 글목록에 새 항목으로 자동 등록됩니다.
-              </p>
+              <span>자동 승인 모드 <span className="text-zinc-400">테스트용으로 전략 확인 없이 이어서 작성합니다.</span></span>
+            </label>
+
+            <button
+              type="button"
+              onClick={startPipeline}
+              disabled={!canStart}
+              className="w-full py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              {running ? "글쓰기 진행 중" : "글쓰기 시작"}
+            </button>
+          </div>
+
+          {running && (
+            <div className={`rounded-xl p-4 flex items-center justify-between ${elapsed > 240 ? "bg-red-50 border border-red-200" : "bg-blue-50 border border-blue-200"}`}>
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="w-2 h-2 rounded-full bg-current animate-pulse" />
+                <span className={`text-sm font-medium truncate ${elapsed > 240 ? "text-red-700" : "text-blue-700"}`}>
+                  {runningTitle ?? "글쓰기 진행 중"}
+                </span>
+              </div>
+              <div className="ml-4 shrink-0 text-right">
+                <span className={`text-lg font-mono font-bold ${elapsed > 240 ? "text-red-600" : "text-blue-600"}`}>
+                  {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, "0")}
+                </span>
+                <span className={`text-xs ml-1 ${elapsed > 240 ? "text-red-400" : "text-blue-400"}`}>/ 5:00</span>
+              </div>
             </div>
           )}
-        </div>
 
-        {/* 자동 승인 토글 */}
-        <label className="flex items-center gap-2 text-xs text-zinc-500 cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={autoApprove}
-            onChange={(e) => setAutoApprove(e.target.checked)}
-            disabled={running}
-            className="rounded"
-          />
-          <span>자동 승인 모드 <span className="text-zinc-400">(테스트용 — 전략 검토 없이 즉시 진행)</span></span>
-        </label>
+          {stage !== "idle" && (
+            <div className="bg-white border border-zinc-200 rounded-xl p-5 overflow-x-auto">
+              <StageIndicator currentStage={stage} />
+            </div>
+          )}
 
-        {/* 실행 버튼 */}
-        <button
-          onClick={startPipeline}
-          disabled={!canStart}
-          className="w-full py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-        >
-          {running ? "글쓰기 진행 중..." : "글쓰기 시작"}
-        </button>
-
-      </div>
-
-      {/* 타임아웃 카운트다운 — 실행 중 항상 표시 */}
-      {running && (
-        <div className={`rounded-xl p-4 mb-6 flex items-center justify-between ${elapsed > 240 ? "bg-red-50 border border-red-200" : "bg-blue-50 border border-blue-200"}`}>
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="text-base animate-pulse">⏱</span>
-            <span className={`text-sm font-medium truncate ${elapsed > 240 ? "text-red-700" : "text-blue-700"}`}>
-              {runningTitle ?? "글쓰기 진행 중..."}
-            </span>
-          </div>
-          <div className="ml-4 shrink-0 text-right">
-            <span className={`text-lg font-mono font-bold ${elapsed > 240 ? "text-red-600" : "text-blue-600"}`}>
-              {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, "0")}
-            </span>
-            <span className={`text-xs ml-1 ${elapsed > 240 ? "text-red-400" : "text-blue-400"}`}>/ 5:00</span>
-          </div>
-        </div>
-      )}
-
-      {/* 단계 표시 */}
-      {stage !== "idle" && (
-        <div className="bg-white border border-zinc-200 rounded-xl p-5 mb-6 overflow-x-auto">
-          <StageIndicator currentStage={stage} />
-        </div>
-      )}
-
-      {/* 파이프라인 상태 인스펙터 */}
-      <div className="mb-6">
-        <PipelineStateInspector state={inspector} />
-      </div>
+          <PipelineStateInspector state={inspector} />
         </section>
 
-        <aside className="min-w-0 xl:sticky xl:top-8">
+        <aside className="min-w-0 xl:sticky xl:top-8 space-y-6">
           {!events.length && !streamingBody && !result && !approval && (
             <div className="bg-white border border-dashed border-zinc-300 rounded-xl p-6 min-h-[24rem] flex flex-col justify-center">
               <p className="text-sm font-semibold text-zinc-700">본문 미리보기</p>
               <p className="text-sm text-zinc-500 mt-2 leading-6">
-                글쓰기를 시작하면 생성되는 본문이 이 오른쪽 영역에 표시됩니다.
+                글쓰기를 시작하면 생성되는 본문과 진행 로그가 이 영역에 표시됩니다.
               </p>
             </div>
           )}
 
-      {/* 스트리밍 로그 */}
-      {(events.length > 0 || streamingBody) && (
-        <div className="mb-6">
-          <PipelineStream events={events} streamingBody={streamingBody} />
-        </div>
-      )}
-
-      {/* 승인 다이얼로그 */}
-      {approval && (
-        <ApprovalDialog
-          pipelineId={approval.pipelineId}
-          previousTitle={approval.previousTitle}
-          proposedTitle={approval.proposedTitle}
-          rationale={approval.rationale}
-          outline={approval.outline}
-          onApprove={handleApprove}
-          onReject={() => handleApprove({ pipelineId: approval.pipelineId, approved: false })}
-        />
-      )}
-
-      {/* 결과 */}
-      {result && (
-        <div className="space-y-4">
-          <div className={`border rounded-xl p-5 ${result.pass ? "bg-emerald-50 border-emerald-200" : "bg-amber-50 border-amber-200"}`}>
-            <p className={`font-semibold text-sm mb-1 ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
-              {result.pass ? "✓ 글쓰기 완료" : "⚠ 완료 — 평가 점수 미달"}
-            </p>
-            <p className="text-zinc-800 font-medium">{result.title}</p>
-            <p className="text-xs text-zinc-500 mt-0.5">
-              {result.wordCount.toLocaleString()}자 · 평가 점수 {result.evalScore}점
-            </p>
-          </div>
-
-
-          {result.recommendations.length > 0 && (
-            <div className="bg-white border border-zinc-200 rounded-xl p-4">
-              <p className="text-xs font-semibold text-zinc-600 mb-2">개선 권고사항</p>
-              <ul className="space-y-1">
-                {result.recommendations.map((r, i) => (
-                  <li key={i} className="text-sm text-zinc-700 flex gap-2">
-                    <span className="text-zinc-400">•</span> {r}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {(events.length > 0 || streamingBody) && (
+            <PipelineStream events={events} streamingBody={streamingBody} />
           )}
 
-          {result.hashtags && result.hashtags.length > 0 && (
-            <div className="bg-white border border-zinc-200 rounded-xl p-4">
-              <p className="text-xs font-semibold text-zinc-600 mb-2">권장 해시태그 10개</p>
-              <div className="flex flex-wrap gap-2">
-                {result.hashtags.map((tag) => (
-                  <span key={tag} className="px-2.5 py-1 rounded-full bg-zinc-100 text-xs text-zinc-700">
-                    {tag}
-                  </span>
-                ))}
+          {approval && (
+            <ApprovalDialog
+              pipelineId={approval.pipelineId}
+              previousTitle={approval.previousTitle}
+              proposedTitle={approval.proposedTitle}
+              rationale={approval.rationale}
+              outline={approval.outline}
+              onApprove={handleApprove}
+              onReject={() => handleApprove({ pipelineId: approval.pipelineId, approved: false })}
+            />
+          )}
+
+          {result && (
+            <div className="space-y-4">
+              <div className={`border rounded-xl p-5 ${result.pass ? "bg-emerald-50 border-emerald-200" : "bg-amber-50 border-amber-200"}`}>
+                <p className={`font-semibold text-sm mb-1 ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
+                  {result.pass ? "글쓰기 완료" : "초안 저장 완료 · 평가 점수 개선 필요"}
+                </p>
+                <p className="text-zinc-800 font-medium">{result.title}</p>
+                <p className="text-xs text-zinc-500 mt-0.5">
+                  {result.wordCount.toLocaleString()}자 · 평가 점수 {result.evalScore}점
+                </p>
+              </div>
+
+              {result.recommendations.length > 0 && (
+                <div className="bg-white border border-zinc-200 rounded-xl p-4">
+                  <p className="text-xs font-semibold text-zinc-600 mb-2">개선 권고사항</p>
+                  <ul className="space-y-1">
+                    {result.recommendations.map((recommendation, index) => (
+                      <li key={`${recommendation}-${index}`} className="text-sm text-zinc-700 flex gap-2">
+                        <span className="text-zinc-400">•</span>
+                        <span>{recommendation}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {result.hashtags && result.hashtags.length > 0 && (
+                <div className="bg-white border border-zinc-200 rounded-xl p-4">
+                  <p className="text-xs font-semibold text-zinc-600 mb-2">권장 해시태그 10개</p>
+                  <div className="flex flex-wrap gap-2">
+                    {result.hashtags.map((tag) => (
+                      <span key={tag} className="px-2.5 py-1 rounded-full bg-zinc-100 text-xs text-zinc-700">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {result.imageFileNames && result.imageFileNames.length > 0 && (
+                <div className="bg-white border border-zinc-200 rounded-xl p-4">
+                  <p className="text-xs font-semibold text-zinc-600 mb-2">추천 이미지 파일명</p>
+                  <ul className="space-y-1">
+                    {result.imageFileNames.map((name) => (
+                      <li key={name} className="font-mono text-xs text-zinc-700 bg-zinc-50 border border-zinc-100 rounded px-2 py-1">
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="bg-white border border-zinc-200 rounded-xl p-4 space-y-3">
+                <div>
+                  <p className="text-xs font-semibold text-zinc-600">실제 작성본 검토</p>
+                  <p className="text-xs text-zinc-400 mt-1">
+                    사용자가 확정한 제목은 글 목록에 반영하고, 본문은 위험 표현과 오탈자성 문제를 점검합니다.
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="actual-title" className="sr-only">실제 발행 제목</label>
+                  <input
+                    id="actual-title"
+                    value={reviewTitle}
+                    onChange={(event) => setReviewTitle(event.target.value)}
+                    className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    placeholder="실제 발행 제목"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="actual-body" className="sr-only">실제 작성 본문</label>
+                  <textarea
+                    id="actual-body"
+                    value={reviewBody}
+                    onChange={(event) => setReviewBody(event.target.value)}
+                    className="w-full min-h-40 border border-zinc-200 rounded-lg px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    placeholder="실제로 작성한 본문을 붙여 넣으면 위험 요소와 수정 권고를 확인합니다."
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={runDraftReview}
+                  disabled={reviewSaving || !reviewTitle.trim()}
+                  className="w-full px-4 py-2 bg-zinc-900 text-white text-sm font-medium rounded-lg disabled:opacity-40"
+                >
+                  {reviewSaving ? "제목 반영 중" : "검토하고 제목 반영"}
+                </button>
+                {reviewIssues.length > 0 && (
+                  <div className="border border-zinc-200 rounded-lg p-3">
+                    <p className="text-xs font-semibold text-zinc-600 mb-2">검토 결과</p>
+                    <ul className="space-y-1">
+                      {reviewIssues.map((issue, index) => (
+                        <li key={`${issue.message}-${index}`} className="text-sm text-zinc-700 flex gap-2">
+                          <span className={
+                            issue.severity === "blocker"
+                              ? "text-red-500"
+                              : issue.severity === "warning"
+                                ? "text-amber-500"
+                                : "text-zinc-400"
+                          }>
+                            •
+                          </span>
+                          <span>{issue.message}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           )}
-
-          {result.imageFileNames && result.imageFileNames.length > 0 && (
-            <div className="bg-white border border-zinc-200 rounded-xl p-4">
-              <p className="text-xs font-semibold text-zinc-600 mb-2">추천 이미지 파일명</p>
-              <ul className="space-y-1">
-                {result.imageFileNames.map((name) => (
-                  <li key={name} className="font-mono text-xs text-zinc-700 bg-zinc-50 border border-zinc-100 rounded px-2 py-1">
-                    {name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="bg-white border border-zinc-200 rounded-xl p-4 space-y-3">
-            <div>
-              <p className="text-xs font-semibold text-zinc-600">실제 작성본 검토</p>
-              <p className="text-xs text-zinc-400 mt-1">수정한 제목은 검토 시 글목록 제목에 반영됩니다.</p>
-            </div>
-            <input
-              value={reviewTitle}
-              onChange={(event) => setReviewTitle(event.target.value)}
-              className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-              placeholder="실제 발행할 제목"
-            />
-            <textarea
-              value={reviewBody}
-              onChange={(event) => setReviewBody(event.target.value)}
-              className="w-full min-h-40 border border-zinc-200 rounded-lg px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-              placeholder="실제 작성한 본문을 붙여넣으면 위험 요소와 오탈자 후보를 점검합니다."
-            />
-            <button
-              type="button"
-              onClick={runDraftReview}
-              disabled={reviewSaving || !reviewTitle.trim()}
-              className="w-full px-4 py-2 bg-zinc-900 text-white text-sm font-medium rounded-lg disabled:opacity-40"
-            >
-              {reviewSaving ? "제목 반영 중..." : "검토하고 제목 반영"}
-            </button>
-            {reviewIssues.length > 0 && (
-              <div className="border border-zinc-200 rounded-lg p-3">
-                <p className="text-xs font-semibold text-zinc-600 mb-2">검토 결과</p>
-                <ul className="space-y-1">
-                  {reviewIssues.map((issue, index) => (
-                    <li key={`${issue}-${index}`} className="text-sm text-zinc-700 flex gap-2">
-                      <span className="text-zinc-400">•</span>
-                      <span>{issue}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
         </aside>
       </div>
     </div>

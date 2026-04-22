@@ -38,29 +38,27 @@ export function StageIndicator({ currentStage }: Props) {
         const itemIdx = stageIndex(stage.key);
         const done = !isFailed && currentIdx > itemIdx;
         const active = !isFailed && !isGateBlocked && currentIdx === itemIdx;
-        const gateFailedHere = isGateBlocked && stage.key === "evaluating";
+        const gateWarning = isGateBlocked && stage.key === "evaluating";
 
         return (
           <div key={stage.key} className="flex items-center shrink-0">
             <div className="flex flex-col items-center">
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-colors ${
-                  gateFailedHere
+                  gateWarning
                     ? "border-amber-500 bg-amber-50 text-amber-600"
                     : done
                       ? "border-emerald-500 bg-emerald-500 text-white"
                       : active
                         ? "border-blue-500 bg-blue-50 text-blue-600"
-                        : isFailed && stage.key === currentStage
-                          ? "border-red-500 bg-red-50 text-red-600"
-                          : "border-zinc-300 bg-white text-zinc-400"
+                        : "border-zinc-300 bg-white text-zinc-400"
                 }`}
               >
-                {gateFailedHere ? "!" : done ? "✓" : index + 1}
+                {gateWarning ? "!" : done ? "✓" : index + 1}
               </div>
               <span
                 className={`mt-1 text-xs whitespace-nowrap ${
-                  gateFailedHere
+                  gateWarning
                     ? "text-amber-600 font-medium"
                     : done
                       ? "text-emerald-600"
@@ -73,22 +71,14 @@ export function StageIndicator({ currentStage }: Props) {
               </span>
             </div>
             {index < STAGES.length - 1 && (
-              <div
-                className={`w-12 h-0.5 mb-4 transition-colors ${
-                  done || gateFailedHere ? "bg-emerald-400" : "bg-zinc-200"
-                }`}
-              />
+              <div className={`w-12 h-0.5 mb-4 transition-colors ${done ? "bg-emerald-400" : "bg-zinc-200"}`} />
             )}
           </div>
         );
       })}
 
-      {isFailed && (
-        <div className="ml-4 text-sm text-red-500 font-medium">실패</div>
-      )}
-      {isGateBlocked && (
-        <div className="ml-4 text-sm text-amber-600 font-medium">평가 미달</div>
-      )}
+      {isFailed && <div className="ml-4 text-sm text-red-500 font-medium">실패</div>}
+      {isGateBlocked && <div className="ml-4 text-sm text-amber-600 font-medium">평가 주의</div>}
     </div>
   );
 }

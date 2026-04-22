@@ -19,5 +19,7 @@ export function normalize(s: string): string {
  * normalizeUserId — userId 정규화 (trim + toLowerCase)
  */
 export function normalizeUserId(userId: string): string {
-  return userId.trim().toLowerCase();
+  const normalized = userId.trim().toLowerCase();
+  const alias = normalized.match(/^user-([a-z0-9]+)$/);
+  return alias?.[1] ?? normalized;
 }

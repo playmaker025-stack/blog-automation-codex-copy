@@ -25,7 +25,9 @@ export type LogEntryType =
   | "material_change"
   | "gate_result"
   | "approval_ux"
-  | "baseline_candidate";
+  | "baseline_candidate"
+  | "pipeline_failure"
+  | "draft_review";
 
 export interface CorpusRetrievalLog {
   type: "corpus_retrieval";
@@ -77,13 +79,35 @@ export interface BaselineCandidateLog {
   reason: string;
 }
 
+export interface PipelineFailureLog {
+  type: "pipeline_failure";
+  stage: string;
+  topicId: string;
+  userId: string;
+  message: string;
+  recoveredTopicToDraft: boolean;
+  errorName?: string;
+}
+
+export interface DraftReviewLog {
+  type: "draft_review";
+  postId: string;
+  passed: boolean;
+  issueCount: number;
+  blockerCount: number;
+  warningCount: number;
+  titleChanged: boolean;
+}
+
 // pipelineId + at 는 appendLog에서 주입 — 개별 타입에서 제외
 type LogPayload =
   | CorpusRetrievalLog
   | MaterialChangeLog
   | GateResultLog
   | ApprovalUxLog
-  | BaselineCandidateLog;
+  | BaselineCandidateLog
+  | PipelineFailureLog
+  | DraftReviewLog;
 
 export type LogEntry = LogPayload & { pipelineId: string; at: string };
 

@@ -285,7 +285,7 @@ export async function runPipeline(params: {
     await transitionApprovalState({
       pipelineId,
       to: "waiting_for_user_approval",
-      reason: "?뱀씤 ?붿껌 諛쒖넚",
+      reason: "승인 요청 발송",
     }).catch((e: unknown) => {
       console.warn("[orchestrator] transitionApprovalState(waiting) ?ㅽ뙣 (臾댁떆):", e instanceof Error ? e.message : e);
     });
@@ -305,7 +305,7 @@ export async function runPipeline(params: {
     const approval = await Promise.race([
       waitForApproval(pipelineId, strategy),
       new Promise<never>((_, reject) =>
-        setTimeout(() => { timedOut = true; reject(new Error("?뱀씤 ?湲??쒓컙 珥덇낵 (30遺?")); }, 30 * 60 * 1000)
+        setTimeout(() => { timedOut = true; reject(new Error("승인 대기 시간이 초과되었습니다. (30분)")); }, 30 * 60 * 1000)
       ),
     ]);
 
@@ -325,7 +325,7 @@ export async function runPipeline(params: {
       await transitionApprovalState({
         pipelineId,
         to: "draft_ready",
-        reason: `?ъ슜??嫄곗젅${approval.modifications ? `: ${approval.modifications}` : ""}`,
+        reason: `사용자 거절${approval.modifications ? `: ${approval.modifications}` : ""}`,
         actor: request.userId,
       });
       state = updateState(state, { stage: "idle" });
@@ -339,7 +339,7 @@ export async function runPipeline(params: {
       } catch { /* 蹂듦뎄 ?ㅽ뙣??臾댁떆 */ }
       emit(controller, makeEvent("rejected", "idle", {
         pipelineId,
-        message: "?꾨왂??嫄곗젅?섏뿀?듬땲?? ?섏젙 ???ㅼ떆 ?쒕룄??二쇱꽭??",
+        message: "전략이 거절되었습니다. 수정 후 다시 시도해 주세요.",
         modifications: approval.modifications ?? null,
       }));
       return;
@@ -365,7 +365,7 @@ export async function runPipeline(params: {
     await transitionApprovalState({
       pipelineId,
       to: "approved_pending_record_update",
-      reason: "?ъ슜???뱀씤 ?꾨즺",
+      reason: "사용자 승인 완료",
       actor: request.userId,
     });
 
@@ -403,7 +403,7 @@ export async function runPipeline(params: {
     await transitionApprovalState({
       pipelineId,
       to: "records_updated",
-      reason: "posting-list + index 諛섏쁺 ?꾨즺",
+      reason: "posting-list와 topic index 반영 완료",
     });
 
     // ?? 4.5. corpus summary 以鍮?+ pre-write gate ????????????
@@ -483,7 +483,7 @@ export async function runPipeline(params: {
           gate: "pre-write",
           code: preGateResult.blockedBy ?? "unknown",
           summary: preGateResult.reason,
-          actionRequired: "?꾨왂 ?ш??????ㅼ떆 ?ㅽ뻾??二쇱꽭??",
+          actionRequired: "전략 승인 상태와 기록 갱신 여부를 확인한 뒤 다시 실행해 주세요.",
           canRetry: true,
         }),
       ]);
@@ -566,7 +566,7 @@ export async function runPipeline(params: {
 
     if (baselineDiff?.overallRegression) {
       emit(controller, makeEvent("progress", "evaluating", {
-        message: `??baseline ?뚭?: ${baselineDiff.summary}`,
+        message: `baseline 경고: ${baselineDiff.summary}`,
       }));
     }
 
@@ -683,7 +683,7 @@ export async function runPipeline(params: {
     await transitionApprovalState({
       pipelineId,
       to: "released",
-      reason: "紐⑤뱺 gate ?듦낵 ??諛고룷 ?꾨즺",
+      reason: "모든 gate 통과 및 배포 준비 완료",
     });
 
     // ?? 7. ?꾨즺 ???????????????????????????????????????????????
@@ -707,18 +707,18 @@ export async function runPipeline(params: {
       message: "파이프라인이 완료되었습니다.",
     }));
   } catch (err) {
-    let message = err instanceof Error ? err.message : "?????녿뒗 ?ㅻ쪟";
+    let message = err instanceof Error ? err.message : "알 수 없는 오류";
 
     // APIConnectionError: ?쒕쾭 濡쒓렇???곸꽭 ?뺣낫 湲곕줉 + ?ъ슜??硫붿떆吏 蹂닿컯
     if (err instanceof Error && err.constructor.name === "APIConnectionError") {
       const cause = (err as { cause?: unknown }).cause;
-      const causeMsg = cause instanceof Error ? ` (?먯씤: ${cause.message})` : "";
+      const causeMsg = cause instanceof Error ? ` (원인: ${cause.message})` : "";
       console.error("[orchestrator] Anthropic ?곌껐 ?ㅻ쪟:", {
         message: err.message,
         cause,
         code: (err as { code?: string }).code,
       });
-      message = `Anthropic API ?곌껐 ?ㅽ뙣${causeMsg} ??Railway ?섍꼍 蹂??ANTHROPIC_API_KEY ?뺤씤 諛?/api/anthropic/ping ?붾뱶?ъ씤?몃줈 吏꾨떒?섏꽭??`;
+      message = `Anthropic API 연결 실패${causeMsg}. Railway 환경 변수 ANTHROPIC_API_KEY와 /api/anthropic/ping 진단을 확인해 주세요.`;
     }
 
     state = updateState(state, { stage: "failed", error: message });
@@ -727,6 +727,15 @@ export async function runPipeline(params: {
     await upsertLedgerEntry({ pipelineId, topicId: request.topicId, userId: request.userId, stage: "failed", error: message, approvalGranted: gate.approved, postingListUpdated: false, indexUpdated: false, createdAt: now }).catch((e) => {
       console.error(`[orchestrator] ledger failed-write error (ignored):`, e instanceof Error ? e.message : e);
     });
+    await appendLog(pipelineId, {
+      type: "pipeline_failure",
+      stage: state.stage,
+      topicId: request.topicId,
+      userId: request.userId,
+      message,
+      recoveredTopicToDraft: false,
+      errorName: err instanceof Error ? err.constructor.name : undefined,
+    }).catch(() => {});
     emit(controller, makeEvent("error", "failed", { pipelineId, message }));
 
     // ?뚯씠?꾨씪???ㅽ뙣 ??topic??in-progress ?곹깭濡?stuck?섎뒗 寃?諛⑹? ??draft濡?蹂듦뎄
@@ -737,7 +746,16 @@ export async function runPipeline(params: {
         const currentStatus = await loadTopicStatus(request.topicId);
         if (currentStatus === "in-progress") {
           await updateTopicStatus(request.topicId, "draft");
-          emit(controller, makeEvent("progress", "failed", { message: "?좏뵿 ?곹깭瑜?draft濡?蹂듦뎄?덉뒿?덈떎." }));
+          await appendLog(pipelineId, {
+            type: "pipeline_failure",
+            stage: "failed",
+            topicId: request.topicId,
+            userId: request.userId,
+            message,
+            recoveredTopicToDraft: true,
+            errorName: err instanceof Error ? err.constructor.name : undefined,
+          }).catch(() => {});
+          emit(controller, makeEvent("progress", "failed", { message: "주제 상태를 draft로 복구했습니다." }));
         }
       } catch (recoveryErr) {
         console.error(`[orchestrator] topic recovery failed (ignored):`, recoveryErr instanceof Error ? recoveryErr.message : recoveryErr);
@@ -967,21 +985,21 @@ async function atomicSetTopicInProgress(
   await withConflictRetry(async () => {
     const path = Paths.topicsIndex();
     if (!(await fileExists(path))) {
-      result = { success: false, reason: "topics index ?놁쓬" };
+      result = { success: false, reason: "topics index 파일이 없습니다." };
       return;
     }
     const { data: index, sha } = await readJsonFile<TopicIndex>(path);
     const topic = index.topics.find((t) => t.topicId === topicId);
     if (!topic) {
-      result = { success: false, reason: `topicId "${topicId}"瑜?李얠쓣 ???놁쓬` };
+      result = { success: false, reason: `topicId "${topicId}"를 찾을 수 없습니다.` };
       return;
     }
     if (topic.status === "in-progress") {
-      result = { success: false, reason: "?대? ?ㅻⅨ ?뚯씠?꾨씪?몄씠 ???좏뵿???묒꽦 以묒엯?덈떎." };
+      result = { success: false, reason: "이미 다른 파이프라인이 이 주제를 작성 중입니다." };
       return;
     }
     if (topic.status !== "draft") {
-      result = { success: false, reason: `?좏뵿 ?곹깭媛 draft媛 ?꾨떃?덈떎 (?꾩옱: ${topic.status})` };
+      result = { success: false, reason: `주제 상태가 draft가 아닙니다. (현재: ${topic.status})` };
       return;
     }
     const now = new Date().toISOString();
@@ -991,8 +1009,8 @@ async function atomicSetTopicInProgress(
       ),
       lastUpdated: now,
     };
-    await writeJsonFile(path, updated, `chore: topic ${topicId} ??in-progress [atomic]`, sha);
-    result = { success: true, reason: "in-progress ?ㅼ젙 ?꾨즺" };
+    await writeJsonFile(path, updated, `chore: topic ${topicId} -> in-progress [atomic]`, sha);
+    result = { success: true, reason: "in-progress 설정 완료" };
   });
 
   return result;
@@ -1141,10 +1159,19 @@ export async function runStrategyPhase(params: {
     }));
 
   } catch (err) {
-    const message = err instanceof Error ? err.message : "?????녿뒗 ?ㅻ쪟";
+    const message = err instanceof Error ? err.message : "알 수 없는 오류";
     state = updateState(state, { stage: "failed", error: message });
     activePipelines.set(pipelineId, state);
     console.error(`[orchestrator] strategy phase ${pipelineId} FAILED:`, message);
+    await appendLog(pipelineId, {
+      type: "pipeline_failure",
+      stage: "strategy-planning",
+      topicId,
+      userId,
+      message,
+      recoveredTopicToDraft: false,
+      errorName: err instanceof Error ? err.constructor.name : undefined,
+    }).catch(() => {});
     emit(controller, makeEvent("error", "failed", { pipelineId, message }));
   } finally {
     controller.close();
@@ -1363,7 +1390,7 @@ export async function runWritePhase(params: {
 
     if (baselineDiff?.overallRegression) {
       emit(controller, makeEvent("progress", "evaluating", {
-        message: `??baseline ?뚭?: ${baselineDiff.summary}`,
+        message: `baseline 경고: ${baselineDiff.summary}`,
       }));
     }
     emit(controller, makeEvent("progress", "evaluating", {
@@ -1411,10 +1438,19 @@ export async function runWritePhase(params: {
     }));
 
   } catch (err) {
-    const message = err instanceof Error ? err.message : "?????녿뒗 ?ㅻ쪟";
+    const message = err instanceof Error ? err.message : "알 수 없는 오류";
     state = updateState(state, { stage: "failed", error: message });
     activePipelines.set(pipelineId, state);
     console.error(`[orchestrator] write phase ${pipelineId} FAILED:`, message);
+    await appendLog(pipelineId, {
+      type: "pipeline_failure",
+      stage: state.stage,
+      topicId,
+      userId,
+      message,
+      recoveredTopicToDraft: false,
+      errorName: err instanceof Error ? err.constructor.name : undefined,
+    }).catch(() => {});
     emit(controller, makeEvent("error", "failed", { pipelineId, message }));
 
     if (thisSetTopicInProgress) {
@@ -1422,6 +1458,15 @@ export async function runWritePhase(params: {
         const currentStatus = await loadTopicStatus(topicId);
         if (currentStatus === "in-progress") {
           await updateTopicStatus(topicId, "draft");
+          await appendLog(pipelineId, {
+            type: "pipeline_failure",
+            stage: "failed",
+            topicId,
+            userId,
+            message,
+            recoveredTopicToDraft: true,
+            errorName: err instanceof Error ? err.constructor.name : undefined,
+          }).catch(() => {});
         }
       } catch { /* ignore */ }
     }

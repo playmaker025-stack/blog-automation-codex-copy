@@ -1,15 +1,3 @@
-/**
- * 패턴 검사 — CLAUDE.md "알려진 실패 패턴" 자동 집행
- *
- * 과거 실제 장애에서 도출된 규칙을 코드에서 직접 검사한다.
- * verify.mjs의 [patterns] 단계에서 실행된다.
- *
- * RULE-001  client.messages.create/stream 호출에 AbortSignal 필수
- * RULE-002  orchestrator.ts catch 블록에 topic draft 복구 로직 필수
- * RULE-003  "in-progress" 직접 할당은 atomicSetTopicInProgress 전용
- * RULE-004  posting-list/topics writeJsonFile은 withConflictRetry 안에서만 허용
- */
-
 import { readFileSync, readdirSync } from 'fs'
 import { join, relative } from 'path'
 
@@ -36,143 +24,150 @@ function content(filePath) {
 
 function agentFiles() {
   return readdirSync(AGENTS_DIR)
-    .filter((f) => f.endsWith('.ts'))
-    .map((f) => join(AGENTS_DIR, f))
+    .filter((file) => file.endsWith('.ts'))
+    .map((file) => join(AGENTS_DIR, file))
 }
 
-// ─────────────────────────────────────────────────────────────
-// RULE-001
-// client.messages.create / client.messages.stream 호출이 있는 모든 파일에서
-// 해당 호출 이후 60줄 이내에 AbortSignal 또는 signal: 이 반드시 있어야 한다.
-//
-// 근거: [2026-04-07] 타임아웃 없는 API 호출로 Railway 300초 제한 도달 시
-//       SSE 스트림이 끊어지고 topic이 in-progress로 stuck됨.
-// ─────────────────────────────────────────────────────────────
+function lineOf(fileContent, needle) {
+  const index = fileContent.indexOf(needle)
+  if (index < 0) return 0
+  return fileContent.slice(0, index).split('\n').length
+}
+
+function extractStringLiterals(source) {
+  const strings = []
+  for (const match of source.matchAll(/"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'/g)) {
+    strings.push(match[1] ?? match[2] ?? '')
+  }
+  return strings
+}
+
+const orchFile = join(AGENTS_DIR, 'orchestrator.ts')
+const orchContent = content(orchFile)
+
+// RULE-001: Anthropic calls must be cancelable to avoid Railway timeouts and stuck SSE streams.
 for (const file of agentFiles()) {
-  const ls = lines(file)
-  for (let i = 0; i < ls.length; i++) {
-    const line = ls[i]
-    if (
-      line.includes('client.messages.create') ||
-      line.includes('client.messages.stream')
-    ) {
-      const window = ls.slice(i, i + 60).join('\n')
+  const fileLines = lines(file)
+  for (let index = 0; index < fileLines.length; index++) {
+    const line = fileLines[index]
+    if (line.includes('client.messages.create') || line.includes('client.messages.stream')) {
+      const window = fileLines.slice(index, index + 60).join('\n')
       if (!window.includes('AbortSignal') && !window.includes('signal:')) {
-        fail(
-          'RULE-001',
-          file,
-          i + 1,
-          `client.messages API 호출에 AbortSignal.timeout 없음 — ` +
-            `Railway 300초 제한 도달 시 무한 대기 발생`
-        )
+        fail('RULE-001', file, index + 1, 'Anthropic messages call does not pass an AbortSignal.')
       }
     }
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-// RULE-002
-// orchestrator.ts 메인 catch 블록에 다음 3가지가 모두 있어야 한다:
-//   1. thisSetTopicInProgress 플래그 확인
-//   2. updateTopicStatus(..., "draft") 호출
-//   3. 복구 실패 처리 catch
-//
-// 근거: [2026-04-07] catch 블록 누락으로 실패 시 topic이 in-progress로
-//       stuck되어 14건 수동 복구 필요.
-// ─────────────────────────────────────────────────────────────
-const orchFile = join(AGENTS_DIR, 'orchestrator.ts')
-const orchContent = content(orchFile)
-
-const hasThisSetFlag = orchContent.includes('thisSetTopicInProgress')
-const hasDraftRecovery = /updateTopicStatus\s*\([^)]*,\s*"draft"\)/.test(orchContent)
-const hasRecoveryCatch = orchContent.includes('topic recovery failed')
-
-if (!hasThisSetFlag) {
-  fail('RULE-002', orchFile, 0, 'thisSetTopicInProgress 플래그가 없음 — 동시 복구 충돌 방지 로직 누락')
+// RULE-002: Failed pipeline runs must recover only topics locked by the same run.
+if (!orchContent.includes('thisSetTopicInProgress')) {
+  fail('RULE-002', orchFile, 0, 'Missing thisSetTopicInProgress guard.')
 }
-if (!hasDraftRecovery) {
-  fail('RULE-002', orchFile, 0, 'updateTopicStatus(..., "draft") 호출 없음 — in-progress stuck 복구 로직 누락')
+if (!/updateTopicStatus\s*\([^)]*,\s*"draft"\)/.test(orchContent)) {
+  fail('RULE-002', orchFile, 0, 'Missing draft recovery for stuck in-progress topics.')
 }
-if (!hasRecoveryCatch) {
-  fail('RULE-002', orchFile, 0, 'topic recovery failed 로그 없음 — 복구 실패 무시 처리 누락')
+if (!orchContent.includes('topic recovery failed')) {
+  fail('RULE-002', orchFile, 0, 'Missing recovery failure log.')
 }
 
-// ─────────────────────────────────────────────────────────────
-// RULE-003
-// status: "in-progress" 직접 할당은 orchestrator.ts의
-// atomicSetTopicInProgress 함수 내부에서만 허용된다.
-// 다른 모든 파일·위치에서 이 패턴이 발견되면 위반.
-//
-// 근거: [2026-04-14] 비원자적 in-progress 설정으로 두 파이프라인이
-//       같은 topic을 동시 처리하는 경쟁 조건 발생.
-// ─────────────────────────────────────────────────────────────
+// RULE-003: in-progress writes must go through the atomic topic lock.
 for (const file of agentFiles()) {
-  const ls = lines(file)
+  const fileLines = lines(file)
   const isOrchestrator = file.endsWith('orchestrator.ts')
 
-  for (let i = 0; i < ls.length; i++) {
-    const line = ls[i]
-    // 주석 제외, status 할당 패턴 탐지
+  for (let index = 0; index < fileLines.length; index++) {
+    const line = fileLines[index]
     if (/status:\s*["']in-progress["']/.test(line) && !line.trimStart().startsWith('//')) {
       if (!isOrchestrator) {
-        fail('RULE-003', file, i + 1, `"in-progress" 직접 할당 — atomicSetTopicInProgress(orchestrator.ts)만 허용`)
+        fail('RULE-003', file, index + 1, 'Direct in-progress assignment outside orchestrator.')
       } else {
-        // orchestrator 내부라도 atomicSetTopicInProgress 함수 바깥이면 위반
-        const surroundingBack = ls.slice(Math.max(0, i - 40), i + 1).join('\n')
-        if (
-          !surroundingBack.includes('atomicSetTopicInProgress') &&
-          !surroundingBack.includes('statusAtReject')
-        ) {
-          fail(
-            'RULE-003',
-            file,
-            i + 1,
-            `orchestrator.ts 내 "in-progress" 직접 할당 — atomicSetTopicInProgress 함수 외부`
-          )
+        const lookback = fileLines.slice(Math.max(0, index - 40), index + 1).join('\n')
+        if (!lookback.includes('atomicSetTopicInProgress') && !lookback.includes('statusAtReject')) {
+          fail('RULE-003', file, index + 1, 'Direct in-progress assignment is outside atomicSetTopicInProgress.')
         }
       }
     }
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-// RULE-004
-// orchestrator.ts에서 writeJsonFile 직접 호출은 반드시
-// withConflictRetry 블록 안에 있어야 한다.
-//
-// 근거: [2026-04-14] 다중 파이프라인 동시 실행 시 SHA 충돌로
-//       posting-list/topics 데이터 손실 발생.
-// ─────────────────────────────────────────────────────────────
+// RULE-004: GitHub writes in orchestrator must be conflict-retried.
 {
-  const ls = lines(orchFile)
-  for (let i = 0; i < ls.length; i++) {
-    if (ls[i].includes('writeJsonFile(')) {
-      // 앞 80줄 안에 withConflictRetry 또는 atomicSetTopicInProgress 가 있어야 함
-      // (실제 콜백이 35~40줄에 달하는 경우가 있어 넉넉하게 설정)
-      const lookback = ls.slice(Math.max(0, i - 80), i + 1).join('\n')
-      if (
-        !lookback.includes('withConflictRetry') &&
-        !lookback.includes('atomicSetTopicInProgress')
-      ) {
-        fail(
-          'RULE-004',
-          orchFile,
-          i + 1,
-          `writeJsonFile 호출이 withConflictRetry 없이 직접 실행됨 — SHA 충돌 재시도 불가`
-        )
+  const fileLines = lines(orchFile)
+  for (let index = 0; index < fileLines.length; index++) {
+    if (fileLines[index].includes('writeJsonFile(')) {
+      const lookback = fileLines.slice(Math.max(0, index - 80), index + 1).join('\n')
+      if (!lookback.includes('withConflictRetry') && !lookback.includes('atomicSetTopicInProgress')) {
+        fail('RULE-004', orchFile, index + 1, 'writeJsonFile is not guarded by withConflictRetry.')
       }
     }
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-// 결과 출력
-// ─────────────────────────────────────────────────────────────
+// RULE-005: Low eval scores save a usable draft instead of blocking the completed write.
+if (!orchContent.includes('평가 점수는 ${evalResult.aggregateScore}점으로 기준보다 낮지만, 본문 초안은 저장했습니다.')) {
+  fail('RULE-005', orchFile, lineOf(orchContent, 'postGateResult.passed'), 'Low-score draft warning message is missing.')
+}
+if (!/status:\s*"ready"[\s\S]{0,1200}pass:\s*false/.test(orchContent)) {
+  fail('RULE-005', orchFile, lineOf(orchContent, 'status: "ready"'), 'Low-score branch must keep the post ready and emit pass=false.')
+}
+
+// RULE-006: Completion payload must include operational next steps.
+for (const needle of ['buildCompletionSupport', 'hashtags', 'imageFileNames']) {
+  if (!orchContent.includes(needle)) {
+    fail('RULE-006', orchFile, lineOf(orchContent, needle), `Missing completion support field: ${needle}.`)
+  }
+}
+
+const pipelinePage = join(ROOT, 'app', 'pipeline', 'page.tsx')
+const pageContent = content(pipelinePage)
+if (!pageContent.includes('reviewActualDraft')) {
+  fail('RULE-006', pipelinePage, 0, 'Pipeline page must use the shared actual-draft review helper.')
+}
+if (!pageContent.includes('method: "PATCH"') || !pageContent.includes('postId: result.postId')) {
+  fail('RULE-006', pipelinePage, 0, 'Actual-draft title updates must patch the post index.')
+}
+
+const normalizeFile = join(ROOT, 'lib', 'utils', 'normalize.ts')
+const normalizeContent = content(normalizeFile)
+if (!normalizeContent.includes('user-([a-z0-9]+)')) {
+  fail('RULE-006', normalizeFile, 0, 'normalizeUserId must keep user-a style aliases working.')
+}
+
+// RULE-007: New user-facing strings must not reintroduce common mojibake fragments.
+const badTextPattern = /�|[?][꾀-힣]|[肄蹂湲諛嫄吏媛濡踰]/u
+const fullTextFiles = [
+  pipelinePage,
+  join(ROOT, 'components', 'pipeline', 'approval-dialog.tsx'),
+  join(ROOT, 'components', 'pipeline', 'pipeline-stream.tsx'),
+  join(ROOT, 'components', 'pipeline', 'stage-indicator.tsx'),
+  join(ROOT, 'components', 'pipeline', 'state-inspector.tsx'),
+]
+
+for (const file of fullTextFiles) {
+  const src = content(file)
+  if (badTextPattern.test(src)) {
+    fail('RULE-007', file, 0, 'Visible pipeline UI contains mojibake fragments.')
+  }
+}
+
+const stringOnlyFiles = [
+  join(ROOT, 'app', 'api', 'pipeline', 'strategy', 'route.ts'),
+  join(ROOT, 'app', 'api', 'pipeline', 'write', 'route.ts'),
+  join(ROOT, 'app', 'api', 'github', 'profile', 'route.ts'),
+]
+
+for (const file of stringOnlyFiles) {
+  const literals = extractStringLiterals(content(file))
+  if (literals.some((literal) => badTextPattern.test(literal))) {
+    fail('RULE-007', file, 0, 'User-facing string literal contains mojibake fragments.')
+  }
+}
+
 if (violations.length === 0) {
   process.exit(0)
 }
 
-for (const v of violations) {
-  console.error(`  [${v.rule}] ${v.loc} — ${v.message}`)
+for (const violation of violations) {
+  console.error(`[${violation.rule}] ${violation.loc} - ${violation.message}`)
 }
 process.exit(1)

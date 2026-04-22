@@ -1,19 +1,7 @@
-/**
- * 자동 교정 루프용 검증 스크립트
- *
- * 실행: node scripts/verify.mjs
- * 옵션:
- *   --skip-build   빌드 건너뜀 (빠른 검증)
- *   --skip-test    harness 테스트 건너뜀
- *
- * 종료 코드:
- *   0 = 모든 검증 통과
- *   1 = 하나 이상 실패 (실패 로그: data/verify-failures/YYYY-MM-DD_HH-mm-ss.json)
- */
-
 import { execSync } from 'child_process'
 import { mkdirSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { appendFailureLedger } from './failure-ledger.mjs'
 
 const FAILURES_DIR = join(process.cwd(), 'data', 'verify-failures')
 
@@ -24,25 +12,24 @@ const steps = [
   {
     name: 'typecheck',
     cmd: 'npx tsc --noEmit --skipLibCheck',
-    description: 'TypeScript 타입 검사',
+    description: 'TypeScript type check',
   },
   {
     name: 'lint',
     cmd: 'npx eslint . --max-warnings=0 --quiet',
-    description: 'ESLint 코드 품질 검사',
-    skip: false,
+    description: 'ESLint check',
   },
   {
     name: 'patterns',
     cmd: 'node scripts/check-patterns.mjs',
-    description: '알려진 실패 패턴 재발 방지 검사 (RULE-001~004)',
+    description: 'Known failure pattern guard',
   },
   ...(!skipBuild
     ? [
         {
           name: 'build',
           cmd: 'npx next build',
-          description: 'Next.js 프로덕션 빌드',
+          description: 'Next.js production build',
         },
       ]
     : []),
@@ -51,7 +38,7 @@ const steps = [
         {
           name: 'harness',
           cmd: 'node --test tests/harness/*.test.mjs',
-          description: 'Harness 통합 테스트 (회귀 포함)',
+          description: 'Harness tests',
         },
       ]
     : []),
@@ -90,48 +77,58 @@ function saveFailureLog(failures) {
 const results = []
 let hasFailure = false
 
-console.log('\n=== 검증 시작 ===\n')
+console.log('\n=== Verification started ===\n')
 
 for (const step of steps) {
   process.stdout.write(`[${step.name}] ${step.description} ... `)
 
   try {
     run(step.cmd)
-    console.log('✅ 통과')
+    console.log('pass')
     results.push({ step: step.name, status: 'pass' })
   } catch (err) {
     const stderr = err.stderr || ''
     const stdout = err.stdout || ''
     const output = (stdout + '\n' + stderr).trim()
 
-    console.log('❌ 실패')
-    console.log('\n--- 오류 내용 ---')
+    console.log('fail')
+    console.log('\n--- Failure output ---')
     console.log(output)
     console.log('---\n')
 
-    results.push({
+    const failure = {
       step: step.name,
       status: 'fail',
+      command: step.cmd,
       error: output,
       exitCode: err.status,
+    }
+    results.push(failure)
+    appendFailureLedger({
+      source: 'verify',
+      command: step.cmd,
+      step: step.name,
+      reason: `${step.name} failed`,
+      exitCode: err.status,
+      evidence: output,
+      guardrail: 'Read this failure entry before changing related pipeline, harness, or hook code.',
     })
     hasFailure = true
   }
 }
 
-console.log('\n=== 검증 결과 ===')
-for (const r of results) {
-  const icon = r.status === 'pass' ? '✅' : '❌'
-  console.log(`${icon} ${r.step}`)
+console.log('\n=== Verification result ===')
+for (const result of results) {
+  console.log(`${result.status === 'pass' ? 'PASS' : 'FAIL'} ${result.step}`)
 }
 
 if (hasFailure) {
-  const failures = results.filter((r) => r.status === 'fail')
+  const failures = results.filter((result) => result.status === 'fail')
   const logPath = saveFailureLog(failures)
-  console.log(`\n실패 로그 저장: ${logPath}`)
-  console.log('\n[자동 교정 루프] 위 오류를 수정한 후 다시 실행하세요.')
+  console.log(`\nFailure log saved: ${logPath}`)
+  console.log('Cumulative failure ledger updated: data/harness-engineering/failure-ledger.json')
   process.exit(1)
-} else {
-  console.log('\n모든 검증 통과 ✅ — 배포 준비 완료')
-  process.exit(0)
 }
+
+console.log('\nAll verification steps passed.')
+process.exit(0)

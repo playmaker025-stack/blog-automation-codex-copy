@@ -4,7 +4,7 @@ import { runWritePhase } from "@/lib/agents/orchestrator";
 import type { StrategyPlanResult } from "@/lib/agents/types";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 250; // 글쓰기 + 평가 — Railway 300s 이내
+export const maxDuration = 250;
 
 export async function POST(request: NextRequest) {
   let body: {
@@ -13,11 +13,13 @@ export async function POST(request: NextRequest) {
     userId: string;
     strategy: StrategyPlanResult;
   };
+
   try {
     body = (await request.json()) as typeof body;
   } catch {
     return NextResponse.json({ error: "요청 본문 파싱 실패" }, { status: 400 });
   }
+
   if (!body.topicId || !body.userId || !body.pipelineId || !body.strategy) {
     return NextResponse.json(
       { error: "topicId, userId, pipelineId, strategy가 필요합니다." },
@@ -42,7 +44,7 @@ export async function POST(request: NextRequest) {
         const event = JSON.stringify({
           type: "error",
           stage: "failed",
-          data: { message: "글쓰기 타임아웃 (240초) — 자동 종료" },
+          data: { message: "글쓰기 타임아웃 (240초). 자동 종료되었습니다." },
           timestamp: new Date().toISOString(),
         });
         try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }
