@@ -5,6 +5,7 @@ import { expansionPlanner } from "@/lib/skills/expansion-planner";
 import { sourceResolver } from "@/lib/skills/source-resolver";
 import { writeFile, readFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
+import { hasOpenAIKey, requestOpenAIText } from "@/lib/openai/responses";
 import { randomUUID } from "crypto";
 import type { ContentTopologyPlan, StrategyPlanResult, WriterResult } from "./types";
 import type { CorpusSummaryArtifact } from "./corpus-selector";
@@ -194,6 +195,215 @@ const BASE_TOOLS: Tool[] = [
   },
 ];
 
+function formatOpenAICorpus(corpus: CorpusSummaryArtifact | undefined): string {
+  if (!corpus) {
+    return [
+      "Corpus summary is unavailable.",
+      "Do not state that the profile could not be loaded in the draft.",
+      "Use a warm, practical Korean Naver Blog tone and keep the content specific.",
+    ].join("\n");
+  }
+
+  return [
+    `Dominant tone: ${corpus.styleProfile.dominantTone}`,
+    `Average length reference: ${corpus.styleProfile.avgWordCount}`,
+    `Opening pattern: ${corpus.styleProfile.openingPattern}`,
+    `Structure pattern: ${corpus.styleProfile.structurePattern}`,
+    `Signature expressions: ${corpus.styleProfile.signatureExpressions.join(", ") || "none"}`,
+    "",
+    "Reference excerpts:",
+    ...corpus.exemplarExcerpts.slice(0, 4).map((item, index) =>
+      `${index + 1}. ${item.title}\nStyle notes: ${item.styleNotes}\nExcerpt: ${item.excerpt}`
+    ),
+  ].join("\n");
+}
+
+function formatOpenAITopology(topology: ContentTopologyPlan | undefined): string {
+  if (!topology) {
+    return [
+      "Content topology: unknown.",
+      "Decide whether this should behave as a broad hub post or a concrete leaf post.",
+      "If it is hub-like, organize criteria and lead readers toward related subtopics.",
+      "If it is leaf-like, make the situation, choice criteria, and examples concrete.",
+    ].join("\n");
+  }
+
+  const links = topology.internalLinkTargets.length
+    ? topology.internalLinkTargets
+        .map((target) => `- ${target.title}${target.url ? ` (${target.url})` : ""}: ${target.reason}`)
+        .join("\n")
+    : "- No confirmed internal links. Mention related topic directions naturally, without fake URLs.";
+
+  return [
+    `Content topology: ${topology.kind}`,
+    `Reason: ${topology.reason}`,
+    `Search intent: ${topology.searchIntent}`,
+    `Body placement: ${topology.bodyPlacement}`,
+    "Required sections:",
+    ...topology.requiredSections.map((section) => `- ${section}`),
+    "Internal link candidates:",
+    links,
+  ].join("\n");
+}
+
+function formatOpenAIExpandedOutline(strategy: StrategyPlanResult): string {
+  const expanded = expansionPlanner({
+    outline: strategy.outline,
+    targetLength: strategy.estimatedLength,
+    tone: strategy.tone,
+    keywords: strategy.keywords,
+  });
+
+  return expanded.expandedOutline.map((section, index) => [
+    `${index + 1}. ${section.heading}`,
+    `Direction: ${section.contentDirection}`,
+    `Sub-points: ${section.subPoints.join(" / ") || "none"}`,
+    `Paragraph target: ${section.estimatedParagraphs}`,
+    `Keywords: ${section.keywordsToInclude.join(", ") || "none"}`,
+    `Notes: ${section.expandedNotes.join(" / ")}`,
+  ].join("\n")).join("\n\n");
+}
+
+function buildOpenAIWriterSystemPrompt(): string {
+  return [
+    "You are a senior Korean Naver Blog writer and SEO editor.",
+    "Write only the publishable Korean markdown body. Do not include meta notes, score explanations, or placeholders.",
+    "Target an internal harness score of at least 78 before returning the final draft.",
+    "The harness weights are: style_match 30%, originality 25%, structure 20%, engagement 15%, forbidden_check 10%.",
+    "Before finalizing, silently revise the draft if any dimension would score below 75.",
+    "Never say that the user profile, corpus, or examples could not be loaded.",
+    "Avoid keyword stuffing, exaggerated guarantees, unsupported best/only claims, and generic filler.",
+    "For Naver Blog, prioritize clear search intent, short readable paragraphs, concrete selection criteria, natural keyword placement, and a closing that helps the reader decide.",
+  ].join("\n");
+}
+
+function buildOpenAIWriterUserPrompt(params: {
+  strategy: StrategyPlanResult;
+  userId: string;
+  corpusSummary?: CorpusSummaryArtifact;
+  harnessBriefing?: string;
+  revisionInstructions?: string;
+}): string {
+  const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
+  return [
+    `User id: ${userId.trim().toLowerCase()}`,
+    `Title: ${strategy.title}`,
+    `Target length: ${strategy.estimatedLength} Korean characters`,
+    `Tone: ${strategy.tone}`,
+    `Keywords: ${strategy.keywords.join(", ") || "none"}`,
+    `Key points: ${strategy.keyPoints.join(" / ") || "none"}`,
+    `Suggested sources: ${strategy.suggestedSources.join(", ") || "none"}`,
+    "",
+    "Content topology:",
+    formatOpenAITopology(strategy.contentTopology),
+    "",
+    "Expanded outline:",
+    formatOpenAIExpandedOutline(strategy),
+    "",
+    "Corpus/style reference:",
+    formatOpenAICorpus(corpusSummary),
+    "",
+    "Pre-write harness briefing:",
+    harnessBriefing || "No extra harness briefing.",
+    "",
+    revisionInstructions
+      ? `Revision instructions from the failed evaluator:\n${revisionInstructions}`
+      : "First draft instructions: write a strong first draft that should pass the evaluator without needing repair.",
+    "",
+    "Required writing behavior:",
+    "- Start with the reader's likely situation or question, not a generic definition.",
+    "- Put the main keyword naturally in the first 2 paragraphs.",
+    "- Make the hub/leaf role visible through structure, not by announcing the words hub or leaf.",
+    "- Include practical criteria, examples, and decision points instead of broad advice.",
+    "- Keep paragraph rhythm suitable for Naver Blog mobile reading.",
+    "- Use markdown headings, but do not over-fragment into tiny bullet lists.",
+    "- End with a useful summary or next-step guide that matches the search intent.",
+    "- Output only the final body markdown.",
+  ].join("\n");
+}
+
+async function runOpenAIMasterWriter(params: {
+  strategy: StrategyPlanResult;
+  userId: string;
+  topicId: string;
+  postId?: string;
+  corpusSummary?: CorpusSummaryArtifact;
+  harnessBriefing?: string;
+  revisionInstructions?: string;
+  onToken?: (token: string) => void;
+  onProgress?: (message: string) => void;
+  signal?: AbortSignal;
+}): Promise<WriterResult> {
+  const {
+    strategy,
+    userId,
+    topicId,
+    postId,
+    corpusSummary,
+    harnessBriefing,
+    revisionInstructions,
+    onToken,
+    onProgress,
+    signal,
+  } = params;
+
+  const model = process.env.OPENAI_WRITER_MODEL ?? "gpt-4.1";
+  const callSignal = signal
+    ? AbortSignal.any([signal, AbortSignal.timeout(420_000)])
+    : AbortSignal.timeout(420_000);
+
+  onProgress?.("Master Writer가 OpenAI로 하네스 기준 초안을 작성합니다.");
+  const firstDraft = await requestOpenAIText({
+    model,
+    input: [
+      { role: "system", content: buildOpenAIWriterSystemPrompt() },
+      { role: "user", content: buildOpenAIWriterUserPrompt({ strategy, userId, corpusSummary, harnessBriefing, revisionInstructions }) },
+    ],
+    maxOutputTokens: 6500,
+    temperature: 0.55,
+    signal: callSignal,
+  });
+
+  onProgress?.("초안 내부 검수 및 SEO 보강 중...");
+  const finalDraft = await requestOpenAIText({
+    model,
+    input: [
+      { role: "system", content: buildOpenAIWriterSystemPrompt() },
+      {
+        role: "user",
+        content: [
+          "Revise the draft below into the final version.",
+          "Silently check it against the harness rubric and Naver Blog SEO.",
+          "If style_match, originality, structure, or engagement would be below 75, rewrite the weak parts.",
+          "Keep the user's facts and intent. Do not add disclaimers or meta commentary.",
+          "Output only the final Korean markdown body.",
+          "",
+          "Strategy and constraints:",
+          buildOpenAIWriterUserPrompt({ strategy, userId, corpusSummary, harnessBriefing, revisionInstructions }),
+          "",
+          "Draft to improve:",
+          firstDraft,
+        ].join("\n"),
+      },
+    ],
+    maxOutputTokens: 6500,
+    temperature: 0.35,
+    signal: callSignal,
+  });
+
+  const bodyText = wrapTo25Chars(finalDraft);
+  onToken?.(bodyText);
+  onProgress?.("본문 생성 완료 - GitHub에 저장 중...");
+
+  return saveWriterResult({
+    topicId,
+    postId,
+    title: strategy.title,
+    content: bodyText,
+    overwrite: Boolean(revisionInstructions),
+  });
+}
+
 export async function runMasterWriter(params: {
   strategy: StrategyPlanResult;
   userId: string;
@@ -220,6 +430,10 @@ export async function runMasterWriter(params: {
   } = params;
 
   onProgress?.(corpusSummary ? "Master Writer 시작 — corpus summary 적용 중..." : "Master Writer 시작 — 코퍼스 로드 중...");
+
+  if (hasOpenAIKey()) {
+    return runOpenAIMasterWriter(params);
+  }
 
   const client = getAnthropicClient();
   const TOOLS = corpusSummary ? BASE_TOOLS : [CORPUS_TOOL, ...BASE_TOOLS];

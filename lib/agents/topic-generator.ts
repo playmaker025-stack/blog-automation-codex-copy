@@ -7,6 +7,7 @@
 
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { naverKeywordResearch } from "@/lib/skills/naver-keyword-research";
+import { hasOpenAIKey, requestOpenAIJson } from "@/lib/openai/responses";
 import type { PostingRecord, Topic } from "@/lib/types/github-data";
 
 export interface TopicGeneratorInput {
@@ -96,6 +97,32 @@ function normalizeGeneratedTopic(topic: GeneratedTopic, fallbackCategory: string
   };
 }
 
+const OPENAI_TOPIC_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    topics: {
+      type: "array",
+      minItems: 5,
+      maxItems: 5,
+      items: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          title: { type: "string" },
+          description: { type: "string" },
+          category: { type: "string" },
+          tags: { type: "array", items: { type: "string" } },
+          contentKind: { type: "string", enum: ["hub", "leaf"] },
+          rationale: { type: "string" },
+        },
+        required: ["title", "description", "category", "tags", "contentKind", "rationale"],
+      },
+    },
+  },
+  required: ["topics"],
+} as const;
+
 export async function runTopicGenerator(input: TopicGeneratorInput): Promise<TopicGeneratorOutput> {
   const { userId, onProgress } = input;
   const publishedTopics = input.publishedTopics.length > 0
@@ -124,6 +151,57 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     .slice(0, 8)
     .map((item) => item.word)
     .join(", ");
+
+  if (hasOpenAIKey()) {
+    const model = process.env.OPENAI_TOPIC_MODEL ?? "gpt-4.1-mini";
+    const result = await requestOpenAIJson<{ topics: GeneratedTopic[] }>({
+      model,
+      input: [
+        {
+          role: "system",
+          content: [
+            "You generate Korean Naver Blog posting plans.",
+            "Return Korean topics only.",
+            "Avoid duplicate titles and avoid topics already covered.",
+            "Balance hub and leaf topics based on gaps in the published list.",
+            "Use Naver search-intent friendly longtail wording.",
+          ].join("\n"),
+        },
+        {
+          role: "user",
+          content: [
+            `User id: ${userId.trim().toLowerCase()}`,
+            "Published posts:",
+            publishedTitles || "- none",
+            "",
+            `Main category: ${mainCategory}`,
+            `Research keyword: ${representativeKeyword}`,
+            `Competition: ${research.blog.competition}`,
+            `Related keywords: ${relatedWords || "none"}`,
+            `Longtail hints: ${longtailHints || "none"}`,
+            "",
+            "Generate exactly 5 next posting topics.",
+            "Each topic must include contentKind hub or leaf.",
+            "Prefer missing hub/leaf coverage over small keyword variations.",
+            "Title length should be within 50 Korean characters.",
+          ].join("\n"),
+        },
+      ],
+      schemaName: "next_posting_topics",
+      schema: OPENAI_TOPIC_SCHEMA,
+      maxOutputTokens: 2200,
+      temperature: 0.45,
+      signal: AbortSignal.timeout(90_000),
+    });
+
+    const generatedTopics = result.topics
+      .map((topic) => normalizeGeneratedTopic(topic, mainCategory))
+      .filter((topic) => topic.title)
+      .slice(0, 5);
+
+    onProgress?.(`신규 토픽 ${generatedTopics.length}개 생성 완료`);
+    return { generatedTopics, researchKeyword: representativeKeyword, competitionInfo };
+  }
 
   const client = getAnthropicClient();
   const response = await client.messages.create(

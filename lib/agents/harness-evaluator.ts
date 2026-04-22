@@ -5,6 +5,7 @@ import { userCorpusRetriever } from "@/lib/skills/user-corpus-retriever";
 import { reviewRecordAudit } from "@/lib/skills/review-record-audit";
 import { writeJsonFile, fileExists, readJsonFile } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
+import { hasOpenAIKey, requestOpenAIJson } from "@/lib/openai/responses";
 import { randomUUID } from "crypto";
 import type { EvalResult, StrategyPlanResult, WriterResult } from "./types";
 import { HARNESS_PASS_THRESHOLD } from "./harness-guidance";
@@ -117,6 +118,146 @@ function computeAggregate(scores: EvalResult["scores"]): number {
   );
 }
 
+const OPENAI_EVAL_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    scores: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        originality: { type: "number" },
+        style_match: { type: "number" },
+        structure: { type: "number" },
+        engagement: { type: "number" },
+        forbidden_check: { type: "number" },
+      },
+      required: ["originality", "style_match", "structure", "engagement", "forbidden_check"],
+    },
+    reasoning: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        originality: { type: "string" },
+        style_match: { type: "string" },
+        structure: { type: "string" },
+        engagement: { type: "string" },
+        forbidden_check: { type: "string" },
+      },
+      required: ["originality", "style_match", "structure", "engagement", "forbidden_check"],
+    },
+    recommendations: {
+      type: "array",
+      items: { type: "string" },
+    },
+  },
+  required: ["scores", "reasoning", "recommendations"],
+} as const;
+
+function clampScore(value: number): number {
+  if (!Number.isFinite(value)) return 0;
+  return Math.max(0, Math.min(100, Math.round(value)));
+}
+
+async function runOpenAIHarnessEvaluator(params: {
+  writerResult: WriterResult;
+  strategy: StrategyPlanResult;
+  userId: string;
+  onProgress?: (message: string) => void;
+  signal?: AbortSignal;
+}): Promise<EvalResult> {
+  const { writerResult, strategy, userId, onProgress, signal } = params;
+  const model = process.env.OPENAI_EVAL_MODEL ?? "gpt-4.1-mini";
+  const callSignal = signal
+    ? AbortSignal.any([signal, AbortSignal.timeout(180_000)])
+    : AbortSignal.timeout(180_000);
+
+  onProgress?.("Harness Evaluator가 OpenAI로 코퍼스와 실패 패턴을 확인합니다.");
+  const [corpus, audit] = await Promise.all([
+    userCorpusRetriever({ userId: userId.trim().toLowerCase(), limit: 5 }),
+    reviewRecordAudit({ userId: userId.trim().toLowerCase(), limit: 8 }),
+  ]);
+
+  const topology = strategy.contentTopology;
+  const topologyText = topology
+    ? [
+        `kind: ${topology.kind}`,
+        `reason: ${topology.reason}`,
+        `searchIntent: ${topology.searchIntent}`,
+        `requiredSections: ${topology.requiredSections.join(" / ")}`,
+      ].join("\n")
+    : "No topology plan.";
+
+  onProgress?.("평가 기준에 따라 점수 산정 중...");
+  const parsed = await requestOpenAIJson<Omit<EvalResult, "runId" | "aggregateScore" | "pass">>({
+    model,
+    input: [
+      {
+        role: "system",
+        content: [
+          "You are a strict Korean Naver Blog content harness evaluator.",
+          "Return Korean reasoning and recommendations.",
+          "Score realistically. A publishable but generic draft should not exceed 70.",
+          "Use this rubric: originality 25, style_match 30, structure 20, engagement 15, forbidden_check 10.",
+          "Give credit for concrete search-intent fit, corpus style match, hub/leaf structure, mobile readability, and practical decision criteria.",
+          "Penalize generic advice, missing user style, weak opening, vague examples, keyword stuffing, unsupported absolute claims, and missing topology role.",
+        ].join("\n"),
+      },
+      {
+        role: "user",
+        content: [
+          `Title: ${writerResult.title}`,
+          `User id: ${userId.trim().toLowerCase()}`,
+          `Target tone: ${strategy.tone}`,
+          `Keywords: ${strategy.keywords.join(", ") || "none"}`,
+          `Key points: ${strategy.keyPoints.join(" / ") || "none"}`,
+          "",
+          "Content topology:",
+          topologyText,
+          "",
+          "Corpus/style evidence:",
+          JSON.stringify(corpus).slice(0, 5000),
+          "",
+          "Past review/failure evidence:",
+          JSON.stringify(audit).slice(0, 3000),
+          "",
+          "Draft body:",
+          writerResult.content.slice(0, 9000),
+          "",
+          "Return scores, reasoning, and 1-4 concrete recommendations.",
+        ].join("\n"),
+      },
+    ],
+    schemaName: "naver_blog_harness_eval",
+    schema: OPENAI_EVAL_SCHEMA,
+    maxOutputTokens: 2200,
+    temperature: 0.1,
+    signal: callSignal,
+  });
+
+  const scores: EvalResult["scores"] = {
+    originality: clampScore(parsed.scores.originality),
+    style_match: clampScore(parsed.scores.style_match),
+    structure: clampScore(parsed.scores.structure),
+    engagement: clampScore(parsed.scores.engagement),
+    forbidden_check: clampScore(parsed.scores.forbidden_check),
+  };
+  const aggregateScore = computeAggregate(scores);
+  const runId = `eval-${randomUUID().slice(0, 8)}`;
+  const evalResult: EvalResult = {
+    runId,
+    scores,
+    aggregateScore,
+    reasoning: parsed.reasoning,
+    recommendations: parsed.recommendations,
+    pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
+  };
+
+  await saveEvalRun(evalResult, writerResult.postId);
+  onProgress?.(`평가 완료: ${aggregateScore}점 (${evalResult.pass ? "통과" : "미달"})`);
+  return evalResult;
+}
+
 export async function runHarnessEvaluator(params: {
   writerResult: WriterResult;
   strategy: StrategyPlanResult;
@@ -127,6 +268,10 @@ export async function runHarnessEvaluator(params: {
   const { writerResult, strategy, userId, onProgress, signal } = params;
 
   onProgress?.("Harness Evaluator 시작...");
+
+  if (hasOpenAIKey()) {
+    return runOpenAIHarnessEvaluator(params);
+  }
 
   const toolRegistry = {
     user_corpus_retriever: (input: unknown) =>
