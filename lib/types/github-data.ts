@@ -73,6 +73,8 @@ export interface Topic {
   description: string;
   category: string;
   tags: string[];
+  source?: "imported" | "generated" | "manual" | "direct";
+  contentKind?: "hub" | "leaf";
   feasibility: TopicFeasibility | null;
   relatedSources: string[]; // 참조 URL 목록
   status: "draft" | "planned" | "in-progress" | "published" | "archived";

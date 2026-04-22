@@ -73,6 +73,7 @@ function matchScore(topicText: string, postTitle: string): number {
 }
 
 function inferKind(topic: Topic, strategy?: StrategyPlanResult): ContentTopologyPlan["kind"] {
+  if (topic.contentKind === "hub" || topic.contentKind === "leaf") return topic.contentKind;
   const value = textOf(topic, strategy);
   const hubScore = scorePatterns(value, HUB_PATTERNS);
   const leafScore = scorePatterns(value, LEAF_PATTERNS);

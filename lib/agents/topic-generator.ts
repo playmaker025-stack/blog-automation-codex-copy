@@ -1,19 +1,18 @@
 /**
- * AI 글목록 자동 생성 에이전트
+ * AI 글목록 자동 생성 에이전트.
  *
- * 사용자의 기존 발행 글 목록을 분석하고,
- * 연관성 있는 신규 토픽 5개를 생성해 GitHub posting-list에 추가한다.
- *
- * 트리거 조건: 해당 사용자의 모든 토픽이 published 상태일 때
+ * 발행 완료 글을 분석해 다음 계획 토픽 5개를 만든다.
+ * 생성 주제는 기존 발행 글과 중복되지 않아야 하며, 허브/리프 구조의 빈틈을 메운다.
  */
 
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { naverKeywordResearch } from "@/lib/skills/naver-keyword-research";
-import type { Topic } from "@/lib/types/github-data";
+import type { PostingRecord, Topic } from "@/lib/types/github-data";
 
 export interface TopicGeneratorInput {
   userId: string;
   publishedTopics: Topic[];
+  publishedPosts?: PostingRecord[];
   onProgress?: (msg: string) => void;
 }
 
@@ -22,7 +21,8 @@ export interface GeneratedTopic {
   description: string;
   category: string;
   tags: string[];
-  rationale: string; // 왜 이 토픽을 추천했는지
+  contentKind?: "hub" | "leaf";
+  rationale: string;
 }
 
 export interface TopicGeneratorOutput {
@@ -31,25 +31,38 @@ export interface TopicGeneratorOutput {
   competitionInfo: string;
 }
 
-// 기존 토픽에서 대표 카테고리 추출
+function postToTopic(post: PostingRecord): Topic {
+  return {
+    topicId: post.topicId || post.postId,
+    title: post.title,
+    description: "",
+    category: post.userId,
+    tags: [],
+    feasibility: null,
+    relatedSources: post.naverPostUrl ? [post.naverPostUrl] : [],
+    status: "published",
+    assignedUserId: post.userId,
+    createdAt: post.createdAt,
+    updatedAt: post.updatedAt,
+  };
+}
+
 function extractMainCategory(topics: Topic[]): string {
   const counts = new Map<string, number>();
-  for (const t of topics) {
-    if (t.category) counts.set(t.category, (counts.get(t.category) ?? 0) + 1);
+  for (const topic of topics) {
+    if (topic.category) counts.set(topic.category, (counts.get(topic.category) ?? 0) + 1);
   }
-  if (counts.size === 0) return "일반";
+  if (counts.size === 0) return "general";
   return [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0];
 }
 
-// 기존 토픽에서 대표 키워드 추출 (가장 빈출 태그)
 function extractRepresentativeKeyword(topics: Topic[]): string {
   const counts = new Map<string, number>();
-  for (const t of topics) {
-    for (const tag of t.tags ?? []) {
+  for (const topic of topics) {
+    for (const tag of topic.tags ?? []) {
       counts.set(tag, (counts.get(tag) ?? 0) + 1);
     }
-    // 제목 첫 단어도 후보로
-    const firstWord = t.title.split(/\s+/)[0];
+    const firstWord = topic.title.split(/\s+/)[0];
     if (firstWord.length >= 2) {
       counts.set(firstWord, (counts.get(firstWord) ?? 0) + 1);
     }
@@ -65,39 +78,51 @@ function parseGeneratedTopics(text: string): GeneratedTopic[] {
     const parsed = JSON.parse(raw.trim()) as unknown;
     if (Array.isArray(parsed)) return parsed as GeneratedTopic[];
     const obj = parsed as { topics?: GeneratedTopic[] };
-    if (obj.topics && Array.isArray(obj.topics)) return obj.topics;
+    if (Array.isArray(obj.topics)) return obj.topics;
   } catch {
-    // JSON 파싱 실패 시 빈 배열
+    // Return an empty list; the caller decides how to surface generation failure.
   }
   return [];
 }
 
-export async function runTopicGenerator(
-  input: TopicGeneratorInput
-): Promise<TopicGeneratorOutput> {
-  const { userId, publishedTopics, onProgress } = input;
+function normalizeGeneratedTopic(topic: GeneratedTopic, fallbackCategory: string): GeneratedTopic {
+  return {
+    title: topic.title?.trim() ?? "",
+    description: topic.description?.trim() ?? "",
+    category: topic.category?.trim() || fallbackCategory,
+    tags: Array.isArray(topic.tags) ? topic.tags.map((tag) => tag.trim()).filter(Boolean).slice(0, 6) : [],
+    contentKind: topic.contentKind === "hub" || topic.contentKind === "leaf" ? topic.contentKind : undefined,
+    rationale: topic.rationale?.trim() ?? "",
+  };
+}
 
-  onProgress?.(`${publishedTopics.length}개 기존 글 분석 중...`);
+export async function runTopicGenerator(input: TopicGeneratorInput): Promise<TopicGeneratorOutput> {
+  const { userId, onProgress } = input;
+  const publishedTopics = input.publishedTopics.length > 0
+    ? input.publishedTopics
+    : (input.publishedPosts ?? []).map(postToTopic);
 
-  // 대표 키워드로 네이버 리서치
+  onProgress?.(`${publishedTopics.length}개 기존 발행 글 분석 중...`);
+
   const representativeKeyword = extractRepresentativeKeyword(publishedTopics);
   const mainCategory = extractMainCategory(publishedTopics);
 
   onProgress?.(`네이버 키워드 리서치: "${representativeKeyword}"`);
-
   const research = await naverKeywordResearch({ keyword: representativeKeyword, display: 20 });
 
   const competitionInfo = research.error
-    ? "네이버 리서치 불가 (API 오류)"
-    : `경쟁도: ${research.blog.competition} (${research.blog.total.toLocaleString()}건) / 롱테일 제안: ${research.longtailSuggestions.slice(0, 3).join(", ")}`;
+    ? "네이버 리서치 불가"
+    : `경쟁도 ${research.blog.competition} (${research.blog.total.toLocaleString()}건 / 롱테일: ${research.longtailSuggestions.slice(0, 3).join(", ")})`;
 
   onProgress?.("신규 토픽 5개 생성 중...");
 
-  const publishedTitles = publishedTopics.map((t) => `- ${t.title}`).join("\n");
+  const publishedTitles = publishedTopics
+    .map((topic) => `- ${topic.title}${topic.contentKind ? ` [${topic.contentKind}]` : ""}`)
+    .join("\n");
   const longtailHints = research.longtailSuggestions.slice(0, 5).join(", ");
   const relatedWords = research.relatedKeywords
     .slice(0, 8)
-    .map((r) => r.word)
+    .map((item) => item.word)
     .join(", ");
 
   const client = getAnthropicClient();
@@ -108,10 +133,10 @@ export async function runTopicGenerator(
       messages: [
         {
           role: "user",
-          content: `사용자(${userId})의 블로그 글 목록입니다.
-이 목록을 참고해 다음에 쓸 신규 토픽 5개를 추천해주세요.
+          content: `사용자(${userId})의 발행 완료 글 목록입니다.
+아래 목록과 네이버 리서치 결과를 참고해서 다음에 쓸 신규 글목록 5개를 추천해주세요.
 
-## 기존 글 목록
+## 기존 발행 글 목록
 ${publishedTitles}
 
 ## 주력 카테고리
@@ -123,11 +148,12 @@ ${mainCategory}
 - 롱테일 제안: ${longtailHints}
 
 ## 요구사항
-1. 기존 글과 **겹치지 않으면서** 연관성 있는 주제
-2. 기존 글의 독자가 자연스럽게 관심 가질 방향
-3. 네이버 검색 유입을 노릴 수 있는 키워드 포함
-4. 카테고리는 "${mainCategory}" 계열 유지
-5. 시리즈 확장(기존 글의 심화·후속·비교), 계절성 토픽, 독자 질문형 토픽 등 다양하게 혼합
+1. 기존 발행 글과 겹치지 않으면서 자연스럽게 이어지는 주제
+2. 이미 발행한 허브글이 있으면 세부 리프글을 보강하고, 리프글만 많으면 상위 허브글을 제안
+3. 5개 안에 hub와 leaf를 균형 있게 섞되, 현재 목록의 빈틈을 우선
+4. 네이버 검색 유입을 노릴 수 있는 롱테일 키워드 포함
+5. category는 "${mainCategory}" 계열 유지
+6. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
 
 ## 출력 형식 (JSON 코드블록)
 \`\`\`json
@@ -137,7 +163,8 @@ ${mainCategory}
     "description": "이 글에서 다룰 핵심 내용 (2~3문장)",
     "category": "${mainCategory}",
     "tags": ["태그1", "태그2", "태그3"],
-    "rationale": "왜 이 토픽을 추천하는지 (기존 글과의 연관성, 검색 수요 등)"
+    "contentKind": "hub",
+    "rationale": "왜 이 주제를 추천하는지와 기존 글/허브·리프 구조상 필요한 이유"
   }
 ]
 \`\`\`
@@ -149,9 +176,12 @@ ${mainCategory}
     { signal: AbortSignal.timeout(60_000) }
   );
 
-  const text = response.content.find((b) => b.type === "text");
+  const text = response.content.find((block) => block.type === "text");
   const rawText = text?.type === "text" ? text.text : "";
-  const generatedTopics = parseGeneratedTopics(rawText);
+  const generatedTopics = parseGeneratedTopics(rawText)
+    .map((topic) => normalizeGeneratedTopic(topic, mainCategory))
+    .filter((topic) => topic.title)
+    .slice(0, 5);
 
   onProgress?.(`신규 토픽 ${generatedTopics.length}개 생성 완료`);
 

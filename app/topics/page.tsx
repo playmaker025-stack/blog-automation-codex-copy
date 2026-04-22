@@ -91,7 +91,8 @@ export default function TopicsPage() {
   useEffect(() => { loadTopics(); }, []);
 
   // RemainingTopicResolver: 교차체크
-  const { remaining, matched } = resolveRemainingTopics(topics, posts);
+  const planningTopics = topics.filter((topic) => topic.source !== "direct");
+  const { remaining, matched } = resolveRemainingTopics(planningTopics, posts);
   const remainingIds = new Set(remaining.map((t) => t.topicId));
 
   // ── 파일/텍스트 처리 ────────────────────────────────────
@@ -226,6 +227,11 @@ export default function TopicsPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             title: topic.title,
+            description: topic.description,
+            category: topic.category,
+            tags: topic.tags,
+            source: "generated",
+            contentKind: topic.contentKind,
             assignedUserId: generateUserId.trim().toLowerCase(),
           }),
         });
@@ -261,8 +267,8 @@ export default function TopicsPage() {
   const filtered = (() => {
     if (filter === "remaining") return remaining;
     if (filter === "matched") return matched;
-    if (filter === "all") return topics;
-    return topics.filter((t) => t.status === filter);
+    if (filter === "all") return planningTopics;
+    return planningTopics.filter((t) => t.status === filter);
   })();
 
   return (
@@ -271,7 +277,7 @@ export default function TopicsPage() {
         <div>
           <h1 className="text-2xl font-bold text-zinc-900">글목록</h1>
           <p className="text-zinc-500 mt-1 text-sm">
-            총 {topics.length}개 · 남은 항목 {remaining.length}개 · 발행완료 {matched.length}개
+            총 {planningTopics.length}개 · 남은 항목 {remaining.length}개 · 발행완료 {matched.length}개
           </p>
         </div>
         <button
@@ -414,6 +420,11 @@ export default function TopicsPage() {
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-zinc-900">{topic.title}</p>
                       <p className="text-xs text-zinc-500 mt-0.5">{topic.description}</p>
+                      {topic.contentKind && (
+                        <span className="inline-flex mt-1 text-[10px] px-1.5 py-0.5 rounded bg-blue-100 text-blue-700">
+                          {topic.contentKind === "hub" ? "허브글" : "리프글"}
+                        </span>
+                      )}
                       <p className="text-[10px] text-blue-500 mt-1 italic">{topic.rationale}</p>
                       <div className="flex flex-wrap gap-1 mt-1.5">
                         {topic.tags.map((tag: string) => (
@@ -452,10 +463,10 @@ export default function TopicsPage() {
       {/* ── 필터 ─────────────────────────────────────── */}
       <div className="flex gap-2 mb-4 flex-wrap">
         {([
-          { value: "all", label: `전체 (${topics.length})` },
+          { value: "all", label: `전체 (${planningTopics.length})` },
           { value: "remaining", label: `남은 항목 (${remaining.length})` },
           { value: "matched", label: `발행완료 (${matched.length})` },
-          { value: "in-progress", label: `진행 중 (${topics.filter((t) => t.status === "in-progress").length})` },
+          { value: "in-progress", label: `진행 중 (${planningTopics.filter((t) => t.status === "in-progress").length})` },
         ] as const).map(({ value, label }) => (
           <button key={value} onClick={() => setFilter(value)}
             className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${filter === value ? "bg-zinc-900 text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"}`}>
@@ -525,6 +536,11 @@ export default function TopicsPage() {
                     </p>
                     {topic.assignedUserId && (
                       <p className="text-xs text-zinc-400 mt-0.5">담당: {topic.assignedUserId}</p>
+                    )}
+                    {topic.contentKind && (
+                      <p className="text-xs text-blue-500 mt-0.5">
+                        {topic.contentKind === "hub" ? "허브글" : "리프글"}
+                      </p>
                     )}
                   </div>
                   <div className="flex items-center gap-2 shrink-0">

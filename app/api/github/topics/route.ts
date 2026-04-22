@@ -36,6 +36,14 @@ async function withRetry<T>(fn: () => Promise<T>, maxAttempts = 8): Promise<T> {
   throw new Error("withRetry: unreachable");
 }
 
+function compactTitle(value: string): string {
+  return value
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, "")
+    .trim();
+}
+
 export async function GET(request: NextRequest) {
   const status = request.nextUrl.searchParams.get("status");
   const userId = request.nextUrl.searchParams.get("userId");
@@ -93,6 +101,7 @@ export async function PUT(request: NextRequest) {
           description: "",
           category: item.blog ? `${item.blog} blog` : "general",
           tags: [],
+          source: "imported",
           feasibility: null,
           relatedSources: [],
           status: "draft" as const,
@@ -222,6 +231,8 @@ export async function POST(request: NextRequest) {
       description: body.description ?? "",
       category: body.category ?? "?쇰컲",
       tags: body.tags ?? [],
+      source: body.source ?? "manual",
+      contentKind: body.contentKind,
       feasibility: null,
       relatedSources: body.relatedSources ?? [],
       status: "draft",
@@ -232,6 +243,16 @@ export async function POST(request: NextRequest) {
 
     await withRetry(async () => {
       const { data: index, sha } = await loadIndex();
+      const duplicate = index.topics.find(
+        (topic) =>
+          compactTitle(topic.title) === compactTitle(newTopic.title) &&
+          normalizeUserId(topic.assignedUserId ?? "") === normalizeUserId(newTopic.assignedUserId ?? "") &&
+          topic.status !== "archived"
+      );
+      if (duplicate) {
+        Object.assign(newTopic, duplicate);
+        return;
+      }
       const updated: TopicIndex = {
         topics: [...index.topics, newTopic],
         lastUpdated: now,
