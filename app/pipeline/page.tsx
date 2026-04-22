@@ -883,8 +883,24 @@ export default function PipelinePage() {
                         아래 수정본을 확인하고 필요한 부분을 직접 고친 뒤 저장본에 반영하세요.
                       </p>
                     </div>
-                    {(reviewResult.changes.length > 0 || reviewResult.seoNotes.length > 0 || reviewResult.naverLogicNotes.length > 0) && (
+                    {((reviewResult.changeDetails?.length ?? 0) > 0 || reviewResult.changes.length > 0 || reviewResult.seoNotes.length > 0 || reviewResult.naverLogicNotes.length > 0) && (
                       <div className="grid grid-cols-1 gap-2">
+                        {(reviewResult.changeDetails?.length ?? 0) > 0 && (
+                          <div className="bg-white/70 border border-blue-100 rounded-lg px-3 py-2">
+                            <p className="text-xs font-semibold text-blue-700 mb-1">수정 전후 비교</p>
+                            <div className="space-y-2">
+                              {reviewResult.changeDetails.map((item, index) => (
+                                <div key={`change-detail-${index}`} className="rounded-md border border-blue-50 bg-white px-2 py-2">
+                                  <p className="text-[11px] font-semibold text-zinc-500">수정 전</p>
+                                  <p className="text-xs text-zinc-600 whitespace-pre-wrap">{item.before}</p>
+                                  <p className="text-[11px] font-semibold text-blue-600 mt-1">수정 후</p>
+                                  <p className="text-xs text-zinc-800 whitespace-pre-wrap">{item.after}</p>
+                                  <p className="text-[11px] text-zinc-500 mt-1">이유: {item.reason}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                         {reviewResult.changes.length > 0 && (
                           <div className="bg-white/70 border border-blue-100 rounded-lg px-3 py-2">
                             <p className="text-xs font-semibold text-blue-700 mb-1">수정된 내용</p>
@@ -984,7 +1000,7 @@ export default function PipelinePage() {
                         {reviewResult.checks.map((check) => (
                           <div key={check.label} className="bg-zinc-50 border border-zinc-100 rounded px-2 py-1.5">
                             <p className={`text-xs font-semibold ${check.passed ? "text-emerald-600" : "text-amber-600"}`}>
-                              {check.passed ? "통과" : "보강"} · {check.label}
+                              {check.passed ? "통과" : "확인"} · {check.label}
                             </p>
                             <p className="text-[11px] text-zinc-500 mt-0.5">{check.detail}</p>
                           </div>

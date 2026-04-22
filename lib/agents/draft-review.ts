@@ -11,6 +11,12 @@ export interface DraftReviewCheck {
   detail: string;
 }
 
+export interface DraftReviewChange {
+  before: string;
+  after: string;
+  reason: string;
+}
+
 export interface DraftReviewInput {
   originalTitle?: string;
   title: string;
@@ -25,6 +31,7 @@ export interface DraftReviewResult {
   revisedTitle: string;
   revisedBody: string;
   changes: string[];
+  changeDetails: DraftReviewChange[];
   seoNotes: string[];
   naverLogicNotes: string[];
 }
@@ -163,7 +170,7 @@ export function reviewActualDraft(input: DraftReviewInput): DraftReviewResult {
   }
 
   if (body.replace(/\s+/g, "").length < 600) {
-    addIssue(issues, "warning", "본문이 짧습니다. 실제 경험, 선택 기준, 주의사항, 마무리 문단을 보강해 주세요.");
+    addIssue(issues, "warning", "본문이 짧습니다. 실제 경험, 선택 기준, 구체 예시, 마무리 문단을 보강해 주세요.");
   }
 
   if (/[!?]{3,}|[~]{3,}/.test(combined)) {
@@ -206,6 +213,7 @@ export function reviewActualDraft(input: DraftReviewInput): DraftReviewResult {
     revisedTitle,
     revisedBody,
     changes: [],
+    changeDetails: [],
     seoNotes: [],
     naverLogicNotes: [],
   };

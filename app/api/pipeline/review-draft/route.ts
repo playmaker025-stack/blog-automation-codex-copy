@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { reviewActualDraft } from "@/lib/agents/draft-review";
+import { reviewActualDraft, type DraftReviewChange } from "@/lib/agents/draft-review";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -14,6 +14,7 @@ interface OpenAIReviewResult {
   revisedTitle: string;
   revisedBody: string;
   changes: string[];
+  changeDetails: DraftReviewChange[];
   seoNotes: string[];
   naverLogicNotes: string[];
 }
@@ -28,6 +29,19 @@ const REVIEW_SCHEMA = {
       type: "array",
       items: { type: "string" },
     },
+    changeDetails: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          before: { type: "string" },
+          after: { type: "string" },
+          reason: { type: "string" },
+        },
+        required: ["before", "after", "reason"],
+      },
+    },
     seoNotes: {
       type: "array",
       items: { type: "string" },
@@ -37,7 +51,7 @@ const REVIEW_SCHEMA = {
       items: { type: "string" },
     },
   },
-  required: ["revisedTitle", "revisedBody", "changes", "seoNotes", "naverLogicNotes"],
+  required: ["revisedTitle", "revisedBody", "changes", "changeDetails", "seoNotes", "naverLogicNotes"],
 } as const;
 
 function extractOutputText(response: unknown): string {
@@ -54,14 +68,98 @@ function extractOutputText(response: unknown): string {
     .trim();
 }
 
-async function requestOpenAIReview(input: ReviewDraftRequest): Promise<OpenAIReviewResult> {
+const FORBIDDEN_SAFETY_PATTERN =
+  /(성인|미성년|청소년|19세|니코틴\s*주의|안전\s*(문구|안내|주의)|주의\s*(문구|안내)|건강\s*(경고|주의)|법적\s*(고지|주의)|흡연은|금연|유해|위험성)/;
+
+function compact(value: string): string {
+  return value.replace(/\s+/g, " ").trim();
+}
+
+function normalizeForSimilarity(value: string): string {
+  return value.replace(/\s+/g, "").replace(/[^\p{L}\p{N}]/gu, "").toLowerCase();
+}
+
+function similarity(a: string, b: string): number {
+  const left = normalizeForSimilarity(a);
+  const right = normalizeForSimilarity(b);
+  if (!left && !right) return 1;
+  if (!left || !right) return 0;
+  const grams = (value: string) => {
+    const set = new Set<string>();
+    for (let index = 0; index < value.length - 1; index += 1) set.add(value.slice(index, index + 2));
+    return set;
+  };
+  const leftGrams = grams(left);
+  const rightGrams = grams(right);
+  if (leftGrams.size === 0 || rightGrams.size === 0) return left === right ? 1 : 0;
+  let overlap = 0;
+  leftGrams.forEach((gram) => {
+    if (rightGrams.has(gram)) overlap += 1;
+  });
+  return overlap / Math.max(leftGrams.size, rightGrams.size);
+}
+
+function removeForbiddenAddedParagraphs(originalBody: string, revisedBody: string): string {
+  const originalHasForbidden = FORBIDDEN_SAFETY_PATTERN.test(originalBody);
+  if (originalHasForbidden) return revisedBody;
+
+  return revisedBody
+    .split(/\n{2,}/)
+    .filter((paragraph) => !FORBIDDEN_SAFETY_PATTERN.test(paragraph))
+    .join("\n\n")
+    .trim();
+}
+
+function sanitizeReview(input: ReviewDraftRequest, review: OpenAIReviewResult): OpenAIReviewResult {
+  const revisedBody = removeForbiddenAddedParagraphs(input.body, review.revisedBody);
+  const safeText = (value: string) => !FORBIDDEN_SAFETY_PATTERN.test(value);
+  const changeDetails = (review.changeDetails ?? []).filter(
+    (item) => safeText(`${item.before} ${item.after} ${item.reason}`) && compact(item.before) !== compact(item.after)
+  );
+
+  return {
+    revisedTitle: compact(review.revisedTitle),
+    revisedBody,
+    changes: (review.changes ?? []).filter(safeText),
+    changeDetails,
+    seoNotes: (review.seoNotes ?? []).filter(safeText),
+    naverLogicNotes: (review.naverLogicNotes ?? []).filter(safeText),
+  };
+}
+
+function validateReview(input: ReviewDraftRequest, review: OpenAIReviewResult): string | null {
+  if (!review.revisedTitle.trim() || !review.revisedBody.trim()) {
+    return "OpenAI가 수정본 제목 또는 본문을 비워서 반환했습니다.";
+  }
+  if (review.revisedTitle.length > 45) {
+    return "OpenAI가 모바일 검색 결과에 너무 긴 제목을 반환했습니다.";
+  }
+  if (similarity(input.body, review.revisedBody) > 0.985 && compact(input.title) === compact(review.revisedTitle)) {
+    return "OpenAI가 원문을 거의 그대로 반환했습니다.";
+  }
+  if (review.changeDetails.length === 0) {
+    return "OpenAI가 수정 전/후 변경 근거를 반환하지 않았습니다.";
+  }
+  if (!review.seoNotes.length || !review.naverLogicNotes.length) {
+    return "OpenAI가 SEO 또는 네이버 로직 검수 내용을 충분히 반환하지 않았습니다.";
+  }
+  if (!input.body.match(FORBIDDEN_SAFETY_PATTERN) && FORBIDDEN_SAFETY_PATTERN.test(review.revisedBody)) {
+    return "OpenAI가 요청하지 않은 안전/성인/주의 문구를 추가했습니다.";
+  }
+  return null;
+}
+
+async function requestOpenAIReview(input: ReviewDraftRequest, repairReason?: string): Promise<OpenAIReviewResult> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    throw new Error("OPENAI_API_KEY 환경 변수가 설정되어 있지 않습니다.");
+    throw new Error("OPENAI_API_KEY is not configured.");
   }
 
   const model = process.env.OPENAI_REVIEW_MODEL ?? "gpt-4.1-mini";
   const localReview = reviewActualDraft(input);
+  const repairInstruction = repairReason
+    ? `\nPrevious attempt was rejected because: ${repairReason}\nFix that issue in this attempt.`
+    : "";
 
   const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
@@ -75,31 +173,43 @@ async function requestOpenAIReview(input: ReviewDraftRequest): Promise<OpenAIRev
         {
           role: "system",
           content:
-            "너는 네이버 블로그 SEO 편집자다. 사용자의 실제 작성본 전체를 검사하고, 발행 가능한 수정본을 작성한다. " +
-            "성인 안내나 미성년자 주의 문구는 새로 추가하지 않는다. " +
-            "제목 SEO를 개선하되 과장 표현, 보장 표현, 낚시성 표현은 피한다. " +
-            "본문은 원문의 의도와 사실관계를 유지하면서 오탈자, 어색한 문장, 문단 흐름, 네이버 블로그 가독성, 키워드 자연 삽입을 개선한다. " +
-            "출력은 반드시 JSON 스키마를 따른다.",
+            "You are a Korean Naver Blog SEO editor. Return every user-facing field in Korean. " +
+            "Revise the user's actual final draft, not a placeholder and not a mere review memo. " +
+            "Improve the SEO title, typo/spacing, sentence flow, paragraph structure, search intent fit, " +
+            "keyword placement, readability, and Naver Blog retention flow while preserving the user's facts and intent. " +
+            "Keep the revisedTitle concise: 28 to 45 Korean characters, with the main keyword near the front. " +
+            "Do not add adult guidance, minor warnings, legal disclaimers, health warnings, safety notices, " +
+            "nicotine cautions, or e-cigarette safety copy unless that exact idea already exists in the source text. " +
+            "Do not recommend adding those notices in changes, seoNotes, or naverLogicNotes. " +
+            "The revisedBody must be a complete publishable full draft and must contain concrete edits from the original. " +
+            "For changeDetails, include exact before/after snippets and the reason for each meaningful edit. " +
+            "Avoid exaggerated, guaranteed, clickbait, or absolute claims. Follow the JSON schema exactly.",
         },
         {
           role: "user",
-          content: `원래 초안 제목: ${input.originalTitle ?? ""}
-실제 발행 제목: ${input.title}
+          content: `Original app draft title: ${input.originalTitle ?? ""}
+User's final title to improve: ${input.title}
 
-로컬 검토 결과:
+Local pre-checks:
 ${localReview.issues.map((issue) => `- [${issue.severity}] ${issue.message}`).join("\n")}
 
-검토 기준:
-- 제목은 검색 의도와 핵심 키워드가 앞쪽에 오도록 다듬는다.
-- 네이버 블로그 본문은 도입, 문제/상황 설명, 선택 기준, 구체 예시, 마무리 흐름이 자연스러워야 한다.
-- 키워드는 반복 삽입이 아니라 문맥상 자연스럽게 배치한다.
-- 과장/단정/보장/최고 표현은 완화한다.
-- 성인 안내 또는 미성년자 주의 문구는 추가하지 않는다.
-- 수정한 내용을 changes에 구체적으로 요약한다.
-- seoNotes에는 제목/키워드/검색 의도 관련 검수 내용을 적는다.
-- naverLogicNotes에는 문단, 체류시간, 가독성, 정보 흐름 관점의 검수 내용을 적는다.
+Required work:
+- Create a better Korean SEO title. Put the main search keyword and place/product intent near the front.
+- Keep revisedTitle within 28 to 45 Korean characters.
+- Rewrite the full body in Korean as a polished Naver Blog publish draft.
+- Keep the user's meaning, order of facts, shop/location/product claims, and personal intent.
+- Improve paragraph rhythm: short intro, problem/situation, selection criteria, practical examples, and closing.
+- Use keywords naturally. Do not stuff repeated keywords.
+- Remove or soften exaggerated claims, unsupported guarantees, and clickbait.
+- Fix Korean spacing, typo, and awkward phrasing.
+- Do not add adult/minor/legal/health/safety/e-cigarette warning copy unless it already appears in the source.
+- Provide at least 3 concrete changeDetails with before, after, and reason.
+- changes must summarize actual edits, not generic advice.
+- seoNotes must explain title/search-intent/keyword decisions.
+- naverLogicNotes must explain paragraph flow, readability, retention, and information order.
+${repairInstruction}
 
-실제 작성 본문:
+Actual body:
 ${input.body}`,
         },
       ],
@@ -147,7 +257,17 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const aiReview = await requestOpenAIReview(body);
+    let aiReview = sanitizeReview(body, await requestOpenAIReview(body));
+    const rejection = validateReview(body, aiReview);
+    if (rejection) {
+      aiReview = sanitizeReview(body, await requestOpenAIReview(body, rejection));
+    }
+
+    const finalRejection = validateReview(body, aiReview);
+    if (finalRejection) {
+      throw new Error(`OpenAI 수정본 검증 실패: ${finalRejection}`);
+    }
+
     const finalReview = reviewActualDraft({
       originalTitle: body.originalTitle,
       title: aiReview.revisedTitle,
@@ -159,6 +279,7 @@ export async function POST(request: NextRequest) {
       revisedTitle: aiReview.revisedTitle,
       revisedBody: aiReview.revisedBody,
       changes: aiReview.changes,
+      changeDetails: aiReview.changeDetails,
       seoNotes: aiReview.seoNotes,
       naverLogicNotes: aiReview.naverLogicNotes,
     });
