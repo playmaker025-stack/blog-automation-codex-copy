@@ -1,58 +1,87 @@
-/**
- * RemainingTopicResolver
- *
- * topicId 비교 금지 — 임포트된 posts는 topicId=""이므로 구조적으로 불가
- *
- * 3-key 매칭:
- *   1. normalize(userId)
- *   2. normalize(blog)   — Topic: blogCode(category), Post: userId.toUpperCase()
- *   3. normalize(title)
- */
-
-import { normalize } from "@/lib/utils/normalize";
-import { blogCode, userIdToBlogCode } from "@/lib/utils/blog-code";
+import { normalizeUserId } from "@/lib/utils/normalize";
+import { blogCode } from "@/lib/utils/blog-code";
 import type { Topic, PostingRecord } from "@/lib/types/github-data";
 
 export interface ResolveResult {
-  remaining: Topic[];    // 아직 작성되지 않은 topics
-  matched: Topic[];      // 인덱스에 이미 존재하는 topics
+  remaining: Topic[];
+  matched: Topic[];
   remaining_count: number;
   matched_count: number;
 }
 
-/** posts 목록에서 매칭 키 집합 생성 (3-key) */
-function buildPostKeySet(posts: PostingRecord[]): Set<string> {
-  const keys = new Set<string>();
-  for (const p of posts) {
-    const blog = userIdToBlogCode(p.userId);
-    keys.add(normalize(p.userId) + "||" + normalize(blog) + "||" + normalize(p.title));
-  }
-  return keys;
+function normalizeTitle(value: string): string {
+  return value
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-/** Topic → 3-key */
-function topicKey(t: Topic): string {
-  const uid = t.assignedUserId ?? "";
-  const blog = blogCode(t.category) ?? userIdToBlogCode(uid);
-  return normalize(uid) + "||" + normalize(blog) + "||" + normalize(t.title);
+function compactTitle(value: string): string {
+  return normalizeTitle(value).replace(/\s+/g, "");
 }
 
-/**
- * 주어진 topics 중 posts에 이미 존재하는 항목을 분리해 반환
- */
+function titleTokens(value: string): string[] {
+  return normalizeTitle(value)
+    .split(" ")
+    .filter((token) => token.length >= 2);
+}
+
+function titleLooksMatched(topicTitle: string, postTitle: string): boolean {
+  const topicCompact = compactTitle(topicTitle);
+  const postCompact = compactTitle(postTitle);
+  if (!topicCompact || !postCompact) return false;
+  if (topicCompact === postCompact) return true;
+
+  const shorter = topicCompact.length <= postCompact.length ? topicCompact : postCompact;
+  const longer = topicCompact.length > postCompact.length ? topicCompact : postCompact;
+  if (shorter.length >= 10 && longer.includes(shorter)) return true;
+
+  const topicTokens = titleTokens(topicTitle);
+  const postTokens = titleTokens(postTitle);
+  if (topicTokens.length === 0 || postTokens.length === 0) return false;
+
+  const postSet = new Set(postTokens);
+  const shared = topicTokens.filter((token) => postSet.has(token)).length;
+  const coverage = shared / Math.min(topicTokens.length, postTokens.length);
+  return shared >= 3 && coverage >= 0.75;
+}
+
+function topicUserId(topic: Topic): string {
+  const assigned = normalizeUserId(topic.assignedUserId ?? "");
+  if (assigned) return assigned;
+
+  const categoryBlog = /^([a-e])(?:\s*(?:blog|블로그))?$/i.exec(topic.category.trim())?.[1];
+  const inferredBlog = categoryBlog ?? blogCode(topic.category);
+  return inferredBlog ? normalizeUserId(inferredBlog.toLowerCase()) : "";
+}
+
+function sameUserOrUnknown(topic: Topic, post: PostingRecord): boolean {
+  const topicUid = topicUserId(topic);
+  const postUid = normalizeUserId(post.userId);
+  return !topicUid || !postUid || topicUid === postUid;
+}
+
+function matchesPublishedIndex(topic: Topic, post: PostingRecord): boolean {
+  if (post.status !== "published") return false;
+  if (post.topicId && post.topicId === topic.topicId) return true;
+  return sameUserOrUnknown(topic, post) && titleLooksMatched(topic.title, post.title);
+}
+
 export function resolveRemainingTopics(
   topics: Topic[],
   posts: PostingRecord[]
 ): ResolveResult {
-  const postKeys = buildPostKeySet(posts);
+  const publishedPosts = posts.filter((post) => post.status === "published");
   const remaining: Topic[] = [];
   const matched: Topic[] = [];
 
-  for (const t of topics) {
-    if (postKeys.has(topicKey(t))) {
-      matched.push(t);
+  for (const topic of topics) {
+    if (publishedPosts.some((post) => matchesPublishedIndex(topic, post))) {
+      matched.push(topic);
     } else {
-      remaining.push(t);
+      remaining.push(topic);
     }
   }
 

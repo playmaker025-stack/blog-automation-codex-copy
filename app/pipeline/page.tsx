@@ -114,7 +114,7 @@ export default function PipelinePage() {
     const timestamp = Date.now();
     Promise.allSettled([
       fetch(`/api/github/topics?_t=${timestamp}`).then((res) => res.json()) as Promise<{ topics: Topic[] }>,
-      fetch(`/api/github/posts?limit=1000&_t=${timestamp}`).then((res) => res.json()) as Promise<{ posts: PostingRecord[] }>,
+      fetch(`/api/github/posts?status=published&limit=1000&_t=${timestamp}`).then((res) => res.json()) as Promise<{ posts: PostingRecord[] }>,
       fetch(`/api/github/topics/recover-stuck?_t=${timestamp}`).then((res) => res.json()) as Promise<{ count: number }>,
     ]).then(([topicResult, postResult, stuckResult]) => {
       const topicData = topicResult.status === "fulfilled" ? topicResult.value : { topics: [] };
