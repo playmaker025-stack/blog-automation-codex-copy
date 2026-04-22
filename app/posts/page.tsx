@@ -79,7 +79,7 @@ export default function PostsPage() {
 
   const load = () => {
     setLoading(true);
-    fetch(`/api/github/posts?limit=100&_t=${Date.now()}`)
+    fetch(`/api/github/posts?limit=1000&_t=${Date.now()}`)
       .then((r) => r.json())
       .then((d: { posts: PostingRecord[] }) => setPosts(d.posts ?? []))
       .catch(() => setNotice({ type: "err", msg: "목록 로드 실패" }))
