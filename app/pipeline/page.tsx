@@ -6,7 +6,7 @@ import { PipelineStream } from "@/components/pipeline/pipeline-stream";
 import { ApprovalDialog } from "@/components/pipeline/approval-dialog";
 import { PipelineStateInspector, applyEventToInspector } from "@/components/pipeline/state-inspector";
 import { usePipelineStore } from "@/lib/store/pipeline-store";
-import { reviewActualDraft, type DraftReviewIssue } from "@/lib/agents/draft-review";
+import { reviewActualDraft, type DraftReviewIssue, type DraftReviewResult } from "@/lib/agents/draft-review";
 import type { SSEEvent, ApprovalRequest, StrategyPlanResult } from "@/lib/agents/types";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
@@ -89,6 +89,10 @@ export default function PipelinePage() {
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewBody, setReviewBody] = useState("");
   const [reviewIssues, setReviewIssues] = useState<DraftReviewIssue[]>([]);
+  const [reviewResult, setReviewResult] = useState<DraftReviewResult | null>(null);
+  const [reviewedTitle, setReviewedTitle] = useState("");
+  const [reviewedBody, setReviewedBody] = useState("");
+  const [reviewApplied, setReviewApplied] = useState(false);
   const [reviewSaving, setReviewSaving] = useState(false);
   const [publishUrl, setPublishUrl] = useState("");
   const [publishingToIndex, setPublishingToIndex] = useState(false);
@@ -200,6 +204,10 @@ export default function PipelinePage() {
       setReviewTitle(data.title ?? "");
       setReviewBody("");
       setReviewIssues([]);
+      setReviewResult(null);
+      setReviewedTitle("");
+      setReviewedBody("");
+      setReviewApplied(false);
       setPublishUrl("");
       setPublishNotice(null);
       setRunning(false);
@@ -308,6 +316,10 @@ export default function PipelinePage() {
     setReviewTitle("");
     setReviewBody("");
     setReviewIssues([]);
+    setReviewResult(null);
+    setReviewedTitle("");
+    setReviewedBody("");
+    setReviewApplied(false);
     setPublishUrl("");
     setPublishNotice(null);
     setStage("idle");
@@ -414,6 +426,7 @@ export default function PipelinePage() {
 
   const runDraftReview = async () => {
     if (!result) return;
+    setReviewSaving(true);
 
     const review = reviewActualDraft({
       originalTitle: result.title,
@@ -421,22 +434,36 @@ export default function PipelinePage() {
       body: reviewBody,
     });
     setReviewIssues(review.issues);
+    setReviewResult(review);
+    setReviewedTitle(review.revisedTitle);
+    setReviewedBody(review.revisedBody);
+    setReviewApplied(false);
+    setReviewSaving(false);
+  };
 
-    if (!review.normalizedTitle || review.normalizedTitle === result.title) return;
+  const applyReviewedDraft = async () => {
+    if (!result || !reviewResult) return;
 
     setReviewSaving(true);
     try {
       const res = await fetch("/api/github/posts", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ postId: result.postId, title: review.normalizedTitle }),
+        body: JSON.stringify({
+          postId: result.postId,
+          title: reviewedTitle.trim(),
+          content: reviewedBody.trim(),
+        }),
       });
-      if (!res.ok) throw new Error("title update failed");
-      setResult({ ...result, title: review.normalizedTitle });
-      setReviewTitle(review.normalizedTitle);
+      if (!res.ok) throw new Error("reviewed draft update failed");
+      setResult({ ...result, title: reviewedTitle.trim() });
+      setReviewTitle(reviewedTitle.trim());
+      setReviewBody(reviewedBody.trim());
+      setReviewApplied(true);
+      setPublishNotice({ type: "ok", msg: "수정본을 저장본에 반영했습니다. 이제 네이버에 반영한 뒤 URL을 입력해 인덱스에 추가하세요." });
     } catch {
       setReviewIssues((prev) => [
-        { severity: "blocker", message: "변경한 제목을 글 목록에 반영하지 못했습니다." },
+        { severity: "blocker", message: "수정본을 저장본에 반영하지 못했습니다. 잠시 후 다시 시도해 주세요." },
         ...prev,
       ]);
     } finally {
@@ -448,12 +475,19 @@ export default function PipelinePage() {
     if (!result) return;
 
     const url = publishUrl.trim();
+    const finalTitle = (reviewedTitle || reviewTitle).trim();
+    const finalBody = (reviewedBody || reviewBody).trim();
+    if (!reviewApplied) {
+      setPublishNotice({ type: "err", msg: "검토 수정본을 먼저 저장본에 반영해 주세요." });
+      return;
+    }
     const review = reviewActualDraft({
       originalTitle: result.title,
-      title: reviewTitle,
-      body: reviewBody,
+      title: finalTitle,
+      body: finalBody,
     });
     setReviewIssues(review.issues);
+    setReviewResult(review);
     setPublishNotice(null);
 
     if (!review.passed) {
@@ -474,6 +508,7 @@ export default function PipelinePage() {
         body: JSON.stringify({
           postId: result.postId,
           title: review.normalizedTitle,
+          content: finalBody,
           status: "published",
           naverPostUrl: url,
           publishedAt: new Date().toISOString(),
@@ -482,6 +517,8 @@ export default function PipelinePage() {
       if (!res.ok) throw new Error("publish update failed");
       setResult({ ...result, title: review.normalizedTitle, pass: true });
       setReviewTitle(review.normalizedTitle);
+      setReviewBody(finalBody);
+      setReviewApplied(true);
       setPublishNotice({ type: "ok", msg: "발행 인덱스 목록에 추가했습니다." });
       reloadTopics();
     } catch {
@@ -783,7 +820,7 @@ export default function PipelinePage() {
                 <div>
                   <p className="text-xs font-semibold text-zinc-600">실제 작성본 검토</p>
                   <p className="text-xs text-zinc-400 mt-1">
-                    사용자가 확정한 제목은 글 목록에 반영하고, 본문은 위험 표현과 오탈자성 문제를 점검합니다.
+                    실제 발행 전 본문을 검토한 뒤 오탈자, SEO 흐름, 네이버 블로그 가독성을 반영한 수정본을 작성합니다.
                   </p>
                 </div>
                 <div>
@@ -791,7 +828,10 @@ export default function PipelinePage() {
                   <input
                     id="actual-title"
                     value={reviewTitle}
-                    onChange={(event) => setReviewTitle(event.target.value)}
+                    onChange={(event) => {
+                      setReviewTitle(event.target.value);
+                      setReviewApplied(false);
+                    }}
                     className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                     placeholder="실제 발행 제목"
                   />
@@ -801,9 +841,12 @@ export default function PipelinePage() {
                   <textarea
                     id="actual-body"
                     value={reviewBody}
-                    onChange={(event) => setReviewBody(event.target.value)}
+                    onChange={(event) => {
+                      setReviewBody(event.target.value);
+                      setReviewApplied(false);
+                    }}
                     className="w-full min-h-40 border border-zinc-200 rounded-lg px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    placeholder="실제로 작성한 본문을 붙여 넣으면 위험 요소와 수정 권고를 확인합니다."
+                    placeholder="실제로 작성한 본문을 붙여 넣으면 오탈자, SEO, 네이버 블로그 가독성을 검토하고 수정본을 작성합니다."
                   />
                 </div>
                 <button
@@ -812,10 +855,52 @@ export default function PipelinePage() {
                   disabled={reviewSaving || !reviewTitle.trim()}
                   className="w-full px-4 py-2 bg-zinc-900 text-white text-sm font-medium rounded-lg disabled:opacity-40"
                 >
-                  {reviewSaving ? "제목 반영 중" : "검토하고 제목 반영"}
+                  {reviewSaving ? "검토 중" : "검토 후 수정본 작성"}
                 </button>
+                {reviewResult && (
+                  <div className="border border-blue-100 bg-blue-50 rounded-lg p-3 space-y-3">
+                    <div>
+                      <p className="text-xs font-semibold text-blue-700">수정본</p>
+                      <p className="text-xs text-blue-600 mt-1">
+                        아래 수정본을 확인하고 필요한 부분을 직접 고친 뒤 저장본에 반영하세요.
+                      </p>
+                    </div>
+                    <input
+                      value={reviewedTitle}
+                      onChange={(event) => {
+                        setReviewedTitle(event.target.value);
+                        setReviewApplied(false);
+                      }}
+                      className="w-full border border-blue-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    />
+                    <textarea
+                      value={reviewedBody}
+                      onChange={(event) => {
+                        setReviewedBody(event.target.value);
+                        setReviewApplied(false);
+                      }}
+                      className="w-full min-h-64 border border-blue-200 rounded-lg px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    />
+                    <button
+                      type="button"
+                      onClick={applyReviewedDraft}
+                      disabled={reviewSaving || !reviewedTitle.trim() || !reviewedBody.trim()}
+                      className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40"
+                    >
+                      {reviewSaving ? "수정본 반영 중" : "수정본 저장본에 반영"}
+                    </button>
+                    {reviewApplied && (
+                      <p className="text-xs text-emerald-600">수정본이 저장본에 반영됐습니다.</p>
+                    )}
+                  </div>
+                )}
                 <div className="border-t border-zinc-100 pt-3 space-y-2">
                   <p className="text-xs font-semibold text-zinc-600">발행 완료 후 인덱스 추가</p>
+                  {!reviewApplied && (
+                    <p className="text-xs text-amber-600">
+                      먼저 검토 후 수정본을 작성하고, 수정본을 저장본에 반영해야 인덱스에 추가할 수 있습니다.
+                    </p>
+                  )}
                   <input
                     value={publishUrl}
                     onChange={(event) => {
@@ -828,7 +913,7 @@ export default function PipelinePage() {
                   <button
                     type="button"
                     onClick={publishToIndex}
-                    disabled={publishingToIndex || !reviewTitle.trim() || !publishUrl.trim()}
+                    disabled={publishingToIndex || !reviewApplied || !publishUrl.trim()}
                     className="w-full px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 disabled:opacity-40"
                   >
                     {publishingToIndex ? "인덱스 추가 중" : "검수 후 인덱스 목록에 추가"}
@@ -842,6 +927,18 @@ export default function PipelinePage() {
                 {reviewIssues.length > 0 && (
                   <div className="border border-zinc-200 rounded-lg p-3">
                     <p className="text-xs font-semibold text-zinc-600 mb-2">검토 결과</p>
+                    {reviewResult?.checks && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                        {reviewResult.checks.map((check) => (
+                          <div key={check.label} className="bg-zinc-50 border border-zinc-100 rounded px-2 py-1.5">
+                            <p className={`text-xs font-semibold ${check.passed ? "text-emerald-600" : "text-amber-600"}`}>
+                              {check.passed ? "통과" : "보강"} · {check.label}
+                            </p>
+                            <p className="text-[11px] text-zinc-500 mt-0.5">{check.detail}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     <ul className="space-y-1">
                       {reviewIssues.map((issue, index) => (
                         <li key={`${issue.message}-${index}`} className="text-sm text-zinc-700 flex gap-2">

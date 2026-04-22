@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
+import { readFile, readJsonFile, writeFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex, PostingRecord, TopicIndex } from "@/lib/types/github-data";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
 // 인덱스 항목 수정
 export async function PATCH(request: NextRequest) {
   try {
-    const body = await request.json() as { postId: string } & Partial<PostingRecord>;
+    const body = await request.json() as { postId: string; content?: string } & Partial<PostingRecord>;
     if (!body.postId) {
       return NextResponse.json({ error: "postId가 필요합니다." }, { status: 400 });
     }
@@ -59,7 +59,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     const now = new Date().toISOString();
-    const { postId, ...patch } = body;
+    const { postId, content, ...patch } = body;
     const publishing = patch.status === "published";
     const updated: PostingIndex = {
       posts: index.posts.map((p) =>
@@ -81,6 +81,17 @@ export async function PATCH(request: NextRequest) {
       `chore: update post ${postId}`,
       sha
     );
+
+    if (typeof content === "string") {
+      const contentPath = Paths.postContent(postId);
+      const contentSha = (await fileExists(contentPath)) ? (await readFile(contentPath)).sha : null;
+      await writeFile(
+        contentPath,
+        content,
+        `chore: update post content ${postId}`,
+        contentSha
+      );
+    }
 
     if (publishing && exists.topicId) {
       await markTopicPublished(exists.topicId).catch((err: unknown) => {
