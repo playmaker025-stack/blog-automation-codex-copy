@@ -24,12 +24,13 @@ export interface DraftReviewResult {
   normalizedTitle: string;
   revisedTitle: string;
   revisedBody: string;
+  changes: string[];
+  seoNotes: string[];
+  naverLogicNotes: string[];
 }
 
 const MOJIBAKE_PATTERN = /[占�袁꾥퉪疫꿱쳸椰揶甕]{2,}|�/u;
 const EXCESSIVE_CLAIM_PATTERN = /(무조건|100%|최고|보장|최저가|무료|완벽|반드시)/;
-const E_CIG_PATTERN = /(전자담배|액상|팟|카트리지|니코틴|입호흡|기기|전담)/;
-const AGE_NOTICE_PATTERN = /(성인|미성년|청소년|19세|법적|주의)/;
 const CLOSING_PATTERN = /(마무리|정리|결론|요약|선택 기준|체크리스트|방문 전|확인)/;
 const SECTION_PATTERN = /(^|\n)(#{2,}|\*\*[^*\n]+\*\*|\d+[.)]\s+)/;
 
@@ -117,11 +118,6 @@ function buildChecks(title: string, body: string): DraftReviewCheck[] {
       passed: bodyLength >= 600,
       detail: `공백 제외 ${bodyLength.toLocaleString()}자`,
     },
-    {
-      label: "전자담배 안전 문구",
-      passed: !E_CIG_PATTERN.test(body) || AGE_NOTICE_PATTERN.test(body),
-      detail: "성인 대상 안내와 미성년자 주의 문구를 확인합니다.",
-    },
   ];
 }
 
@@ -131,10 +127,6 @@ function buildRevisedBody(title: string, body: string, issues: DraftReviewIssue[
 
   if (keywords.length > 0 && keywordCoverage(title, revised) < 0.5) {
     revised = `${title}\n\n${keywords.slice(0, 3).join(", ")} 기준으로 실제 선택할 때 확인할 부분을 먼저 정리해보겠습니다.\n\n${revised}`;
-  }
-
-  if (E_CIG_PATTERN.test(revised) && !AGE_NOTICE_PATTERN.test(revised)) {
-    revised += "\n\n※ 전자담배 관련 제품은 성인 사용자를 대상으로 하며, 미성년자는 사용할 수 없습니다. 구매 전 본인에게 맞는 사용 방식과 주의사항을 반드시 확인해 주세요.";
   }
 
   if (revised && !CLOSING_PATTERN.test(revised)) {
@@ -182,10 +174,6 @@ export function reviewActualDraft(input: DraftReviewInput): DraftReviewResult {
     addIssue(issues, "warning", "단정적이거나 과장된 표현이 있습니다. 근거가 없다면 완화 표현으로 바꾸는 편이 안전합니다.");
   }
 
-  if (E_CIG_PATTERN.test(body) && !AGE_NOTICE_PATTERN.test(body)) {
-    addIssue(issues, "warning", "전자담배 관련 글에는 성인 대상 안내나 미성년자 주의 문구를 넣는 편이 안전합니다.");
-  }
-
   if (keywordCoverage(normalizedTitle, body) < 0.5) {
     addIssue(issues, "warning", "제목의 핵심 키워드가 본문에 충분히 반영되지 않았습니다. 도입부와 중간 문단에 자연스럽게 보강해 주세요.");
   }
@@ -217,5 +205,8 @@ export function reviewActualDraft(input: DraftReviewInput): DraftReviewResult {
     normalizedTitle,
     revisedTitle,
     revisedBody,
+    changes: [],
+    seoNotes: [],
+    naverLogicNotes: [],
   };
 }

@@ -427,18 +427,36 @@ export default function PipelinePage() {
   const runDraftReview = async () => {
     if (!result) return;
     setReviewSaving(true);
+    setPublishNotice(null);
 
-    const review = reviewActualDraft({
-      originalTitle: result.title,
-      title: reviewTitle,
-      body: reviewBody,
-    });
-    setReviewIssues(review.issues);
-    setReviewResult(review);
-    setReviewedTitle(review.revisedTitle);
-    setReviewedBody(review.revisedBody);
-    setReviewApplied(false);
-    setReviewSaving(false);
+    try {
+      const res = await fetch("/api/pipeline/review-draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          originalTitle: result.title,
+          title: reviewTitle,
+          body: reviewBody,
+        }),
+      });
+      const review = await res.json() as DraftReviewResult & { error?: string };
+      if (!res.ok) {
+        setReviewIssues(review.issues ?? [{ severity: "blocker", message: review.error ?? "검토에 실패했습니다." }]);
+        setReviewResult(review.issues ? review : null);
+        return;
+      }
+      setReviewIssues(review.issues);
+      setReviewResult(review);
+      setReviewedTitle(review.revisedTitle);
+      setReviewedBody(review.revisedBody);
+      setReviewApplied(false);
+    } catch (error) {
+      setReviewIssues([
+        { severity: "blocker", message: error instanceof Error ? error.message : "OpenAI 검토 요청에 실패했습니다." },
+      ]);
+    } finally {
+      setReviewSaving(false);
+    }
   };
 
   const applyReviewedDraft = async () => {
@@ -820,7 +838,7 @@ export default function PipelinePage() {
                 <div>
                   <p className="text-xs font-semibold text-zinc-600">실제 작성본 검토</p>
                   <p className="text-xs text-zinc-400 mt-1">
-                    실제 발행 전 본문을 검토한 뒤 오탈자, SEO 흐름, 네이버 블로그 가독성을 반영한 수정본을 작성합니다.
+                    OpenAI로 실제 발행 전 본문 전체를 검토한 뒤 오탈자, 제목 SEO, 네이버 블로그 가독성을 반영한 수정본을 작성합니다.
                   </p>
                 </div>
                 <div>
@@ -846,7 +864,7 @@ export default function PipelinePage() {
                       setReviewApplied(false);
                     }}
                     className="w-full min-h-40 border border-zinc-200 rounded-lg px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                    placeholder="실제로 작성한 본문을 붙여 넣으면 오탈자, SEO, 네이버 블로그 가독성을 검토하고 수정본을 작성합니다."
+                    placeholder="실제로 작성한 본문을 붙여 넣으면 OpenAI가 오탈자, SEO, 네이버 블로그 가독성을 검토하고 전체 수정본을 작성합니다."
                   />
                 </div>
                 <button
@@ -855,7 +873,7 @@ export default function PipelinePage() {
                   disabled={reviewSaving || !reviewTitle.trim()}
                   className="w-full px-4 py-2 bg-zinc-900 text-white text-sm font-medium rounded-lg disabled:opacity-40"
                 >
-                  {reviewSaving ? "검토 중" : "검토 후 수정본 작성"}
+                  {reviewSaving ? "OpenAI 수정본 작성 중" : "검토 후 수정본 작성"}
                 </button>
                 {reviewResult && (
                   <div className="border border-blue-100 bg-blue-50 rounded-lg p-3 space-y-3">
@@ -865,6 +883,40 @@ export default function PipelinePage() {
                         아래 수정본을 확인하고 필요한 부분을 직접 고친 뒤 저장본에 반영하세요.
                       </p>
                     </div>
+                    {(reviewResult.changes.length > 0 || reviewResult.seoNotes.length > 0 || reviewResult.naverLogicNotes.length > 0) && (
+                      <div className="grid grid-cols-1 gap-2">
+                        {reviewResult.changes.length > 0 && (
+                          <div className="bg-white/70 border border-blue-100 rounded-lg px-3 py-2">
+                            <p className="text-xs font-semibold text-blue-700 mb-1">수정된 내용</p>
+                            <ul className="space-y-1">
+                              {reviewResult.changes.map((item, index) => (
+                                <li key={`change-${index}`} className="text-xs text-zinc-700">• {item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        {reviewResult.seoNotes.length > 0 && (
+                          <div className="bg-white/70 border border-blue-100 rounded-lg px-3 py-2">
+                            <p className="text-xs font-semibold text-blue-700 mb-1">SEO 검수</p>
+                            <ul className="space-y-1">
+                              {reviewResult.seoNotes.map((item, index) => (
+                                <li key={`seo-${index}`} className="text-xs text-zinc-700">• {item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        {reviewResult.naverLogicNotes.length > 0 && (
+                          <div className="bg-white/70 border border-blue-100 rounded-lg px-3 py-2">
+                            <p className="text-xs font-semibold text-blue-700 mb-1">네이버 로직 검수</p>
+                            <ul className="space-y-1">
+                              {reviewResult.naverLogicNotes.map((item, index) => (
+                                <li key={`naver-${index}`} className="text-xs text-zinc-700">• {item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    )}
                     <input
                       value={reviewedTitle}
                       onChange={(event) => {
