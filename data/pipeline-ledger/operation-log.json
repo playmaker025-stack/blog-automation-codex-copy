@@ -1,0 +1,2410 @@
+{
+  "entries": [
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 매장 고르는 기준 5가지, 이것만 보세요",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.6086956521739131,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-95a8b936",
+      "at": "2026-04-07T07:33:09.990Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-07T07:33:11.758Z",
+      "respondedAt": "2026-04-07T07:33:54.315Z",
+      "approved": true,
+      "elapsedMs": 42557,
+      "timedOut": false,
+      "pipelineId": "pipe-95a8b936",
+      "at": "2026-04-07T07:33:54.695Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-95a8b936",
+      "at": "2026-04-07T07:34:05.262Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천, 처음이라면 이것부터",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5454545454545454,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-b4568940",
+      "at": "2026-04-07T08:09:42.179Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 매장 고르는 기준 5가지 | 처음이라면 꼭 읽어보세요",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a22231b5",
+      "at": "2026-04-07T08:37:27.184Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-07T08:37:28.526Z",
+      "respondedAt": "2026-04-07T08:37:28.635Z",
+      "approved": true,
+      "elapsedMs": 109,
+      "timedOut": false,
+      "pipelineId": "pipe-a22231b5",
+      "at": "2026-04-07T08:37:28.996Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 매장 고르는 기준 5가지 | 처음이라면 꼭 보세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5384615384615384,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c4de1c6e",
+      "at": "2026-04-07T08:56:51.553Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-07T08:56:52.887Z",
+      "respondedAt": "2026-04-07T08:56:53.133Z",
+      "approved": true,
+      "elapsedMs": 246,
+      "timedOut": false,
+      "pipelineId": "pipe-c4de1c6e",
+      "at": "2026-04-07T08:56:53.511Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-c4de1c6e",
+      "at": "2026-04-07T08:57:03.376Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-c4de1c6e",
+      "at": "2026-04-07T08:57:05.119Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문자를 위한 기기 선택 완벽 가이드",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.47619047619047616,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-b997445a",
+      "at": "2026-04-07T09:41:03.101Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": true,
+      "requestedAt": "2026-04-07T09:41:04.429Z",
+      "respondedAt": "2026-04-07T09:41:04.849Z",
+      "approved": true,
+      "elapsedMs": 420,
+      "timedOut": false,
+      "pipelineId": "pipe-b997445a",
+      "at": "2026-04-07T09:41:05.242Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "A",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-b997445a",
+      "at": "2026-04-07T09:41:15.703Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-b997445a",
+      "at": "2026-04-07T09:41:17.477Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 처음 방문하면 받는 상담",
+      "proposedTitle": "부평 전자담배 처음 방문하면 받는 상담, 이런 내용이에요",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.6666666666666667,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-d505a653",
+      "at": "2026-04-07T10:10:49.930Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-07T10:10:51.397Z",
+      "respondedAt": "2026-04-07T10:10:51.832Z",
+      "approved": true,
+      "elapsedMs": 435,
+      "timedOut": false,
+      "pipelineId": "pipe-d505a653",
+      "at": "2026-04-07T10:10:52.240Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "A",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-d505a653",
+      "at": "2026-04-07T10:11:02.678Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-d505a653",
+      "at": "2026-04-07T10:11:04.387Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자부터 마니아까지 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7845788b",
+      "at": "2026-04-07T10:31:54.849Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-07T10:31:56.076Z",
+      "respondedAt": "2026-04-07T10:31:56.500Z",
+      "approved": true,
+      "elapsedMs": 424,
+      "timedOut": false,
+      "pipelineId": "pipe-7845788b",
+      "at": "2026-04-07T10:31:56.843Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 추천 기기 가이드 | 입문자도 바로 선택 가능",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.56,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-e0b72d32",
+      "at": "2026-04-09T09:38:42.759Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T09:38:44.544Z",
+      "respondedAt": "2026-04-09T09:38:45.448Z",
+      "approved": true,
+      "elapsedMs": 904,
+      "timedOut": false,
+      "pipelineId": "pipe-e0b72d32",
+      "at": "2026-04-09T09:38:45.970Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-e0b72d32",
+      "at": "2026-04-09T09:39:00.784Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-e0b72d32",
+      "at": "2026-04-09T09:39:03.192Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 액상 고르는 방법",
+      "proposedTitle": "인천 전자담배 액상 고르는 방법 완전 정리 (입문자 필독)",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5416666666666667,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a17c3af8",
+      "at": "2026-04-09T09:45:30.976Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T09:45:32.928Z",
+      "respondedAt": "2026-04-09T09:45:33.682Z",
+      "approved": true,
+      "elapsedMs": 754,
+      "timedOut": false,
+      "pipelineId": "pipe-a17c3af8",
+      "at": "2026-04-09T09:45:34.262Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 매장 방문 전 체크리스트",
+      "proposedTitle": "구월동 전자담배 매장 방문 전 꼭 확인해야 할 체크리스트",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.7391304347826086,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7acfd61b",
+      "at": "2026-04-09T09:49:21.002Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T09:49:23.025Z",
+      "respondedAt": "2026-04-09T09:49:23.822Z",
+      "approved": true,
+      "elapsedMs": 797,
+      "timedOut": false,
+      "pipelineId": "pipe-7acfd61b",
+      "at": "2026-04-09T09:49:24.412Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-7acfd61b",
+      "at": "2026-04-09T09:49:38.781Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-7acfd61b",
+      "at": "2026-04-09T09:49:41.226Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "post-audit gate 통과",
+      "evalScore": 74,
+      "pipelineId": "pipe-7acfd61b",
+      "at": "2026-04-09T09:51:53.369Z"
+    },
+    {
+      "type": "baseline_candidate",
+      "scenarioId": "topic-3526161f",
+      "runId": "eval-177419cc",
+      "aggregateScore": 74,
+      "registered": true,
+      "reason": "candidate 등록 완료 (74점)",
+      "pipelineId": "pipe-7acfd61b",
+      "at": "2026-04-09T09:51:55.599Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "입문용 팟 전자담배 기준, 한달 비용이 달라지는 4가지 변수",
+      "proposedTitle": "입문용 팟 전자담배 고를 때, 한 달 유지 부담이 달라지는 4가지 변수",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.75,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c8cf4565",
+      "at": "2026-04-09T09:58:35.356Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T09:58:37.169Z",
+      "respondedAt": "2026-04-09T09:58:44.371Z",
+      "approved": true,
+      "elapsedMs": 7202,
+      "timedOut": false,
+      "pipelineId": "pipe-c8cf4565",
+      "at": "2026-04-09T09:58:45.134Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "b",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "B블로그",
+      "pipelineId": "pipe-c8cf4565",
+      "at": "2026-04-09T09:58:59.347Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-c8cf4565",
+      "at": "2026-04-09T09:59:01.805Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "post-audit gate 통과",
+      "evalScore": 75,
+      "pipelineId": "pipe-c8cf4565",
+      "at": "2026-04-09T10:01:17.763Z"
+    },
+    {
+      "type": "baseline_candidate",
+      "scenarioId": "topic-9e11f8af",
+      "runId": "eval-632e8a46",
+      "aggregateScore": 75,
+      "registered": true,
+      "reason": "candidate 등록 완료 (75점)",
+      "pipelineId": "pipe-c8cf4565",
+      "at": "2026-04-09T10:01:20.378Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 입문 가이드 테스트",
+      "proposedTitle": "인천 전자담배 입문 완전 가이드 – 처음이라면 이것만 보세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.43999999999999995,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-0d88e80e",
+      "at": "2026-04-09T10:13:30.663Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T10:13:32.883Z",
+      "respondedAt": "2026-04-09T10:13:33.766Z",
+      "approved": true,
+      "elapsedMs": 883,
+      "timedOut": false,
+      "pipelineId": "pipe-0d88e80e",
+      "at": "2026-04-09T10:13:34.507Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "일반",
+      "pipelineId": "pipe-0d88e80e",
+      "at": "2026-04-09T10:13:49.275Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-0d88e80e",
+      "at": "2026-04-09T10:13:51.800Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "post-audit gate 통과",
+      "evalScore": 73,
+      "pipelineId": "pipe-0d88e80e",
+      "at": "2026-04-09T10:16:34.063Z"
+    },
+    {
+      "type": "baseline_candidate",
+      "scenarioId": "topic-32ad4b9e",
+      "runId": "eval-e91c6635",
+      "aggregateScore": 73,
+      "registered": true,
+      "reason": "candidate 등록 완료 (73점)",
+      "pipelineId": "pipe-0d88e80e",
+      "at": "2026-04-09T10:16:36.705Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3 입문 추천 – 입호흡 전자담배 차이 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5357142857142857,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-fcd4a2f1",
+      "at": "2026-04-09T10:18:51.227Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T10:18:53.077Z",
+      "respondedAt": "2026-04-09T10:18:58.713Z",
+      "approved": true,
+      "elapsedMs": 5636,
+      "timedOut": false,
+      "pipelineId": "pipe-fcd4a2f1",
+      "at": "2026-04-09T10:18:59.288Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "c",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "C블로그",
+      "pipelineId": "pipe-fcd4a2f1",
+      "at": "2026-04-09T10:19:14.970Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-fcd4a2f1",
+      "at": "2026-04-09T10:19:18.098Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "post-audit gate 통과",
+      "evalScore": 78,
+      "pipelineId": "pipe-fcd4a2f1",
+      "at": "2026-04-09T10:21:22.634Z"
+    },
+    {
+      "type": "baseline_candidate",
+      "scenarioId": "topic-6ca55bd1",
+      "runId": "eval-47ed01b0",
+      "aggregateScore": 78,
+      "registered": true,
+      "reason": "candidate 등록 완료 (78점)",
+      "pipelineId": "pipe-fcd4a2f1",
+      "at": "2026-04-09T10:21:25.042Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 입문 가이드 테스트",
+      "proposedTitle": "인천 전자담배 입문 가이드 | 처음이라면 이것만 알면 됩니다",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.43999999999999995,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-4cad2fb2",
+      "at": "2026-04-09T10:30:08.269Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T10:30:10.398Z",
+      "respondedAt": "2026-04-09T10:30:11.234Z",
+      "approved": true,
+      "elapsedMs": 836,
+      "timedOut": false,
+      "pipelineId": "pipe-4cad2fb2",
+      "at": "2026-04-09T10:30:12.017Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "일반",
+      "pipelineId": "pipe-4cad2fb2",
+      "at": "2026-04-09T10:30:27.886Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-4cad2fb2",
+      "at": "2026-04-09T10:30:30.295Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "post-audit gate 통과",
+      "evalScore": 73,
+      "pipelineId": "pipe-4cad2fb2",
+      "at": "2026-04-09T10:32:35.474Z"
+    },
+    {
+      "type": "baseline_candidate",
+      "scenarioId": "topic-d9416a48",
+      "runId": "eval-8c624a5c",
+      "aggregateScore": 73,
+      "registered": true,
+      "reason": "candidate 등록 완료 (73점)",
+      "pipelineId": "pipe-4cad2fb2",
+      "at": "2026-04-09T10:32:38.014Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "그래피티2 vs 그래피티3 차이",
+      "proposedTitle": "그래피티2 vs 그래피티3 차이 – 어떤 게 나한테 맞을까?",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.56,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-3a1675cb",
+      "at": "2026-04-09T10:34:46.685Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T10:34:48.727Z",
+      "respondedAt": "2026-04-09T10:35:14.567Z",
+      "approved": true,
+      "elapsedMs": 25840,
+      "timedOut": false,
+      "pipelineId": "pipe-3a1675cb",
+      "at": "2026-04-09T10:35:15.203Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "c",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "C블로그",
+      "pipelineId": "pipe-3a1675cb",
+      "at": "2026-04-09T10:35:29.955Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-3a1675cb",
+      "at": "2026-04-09T10:35:32.250Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "post-audit gate 통과",
+      "evalScore": 75,
+      "pipelineId": "pipe-3a1675cb",
+      "at": "2026-04-09T10:37:33.444Z"
+    },
+    {
+      "type": "baseline_candidate",
+      "scenarioId": "topic-1fa85501",
+      "runId": "eval-810caf5d",
+      "aggregateScore": 75,
+      "registered": true,
+      "reason": "candidate 등록 완료 (75점)",
+      "pipelineId": "pipe-3a1675cb",
+      "at": "2026-04-09T10:37:36.055Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "팟 전자담배 vs 일회용 전자담배 차이",
+      "proposedTitle": "팟 전자담배 vs 일회용 전자담배 차이 – 입문자라면 꼭 알아야 할 정리",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5517241379310345,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-812045a5",
+      "at": "2026-04-09T10:56:55.556Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": true,
+      "requestedAt": "2026-04-09T10:56:57.506Z",
+      "respondedAt": "2026-04-09T10:57:44.046Z",
+      "approved": true,
+      "elapsedMs": 46540,
+      "timedOut": false,
+      "pipelineId": "pipe-812045a5",
+      "at": "2026-04-09T10:57:44.830Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "c",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "C블로그",
+      "pipelineId": "pipe-812045a5",
+      "at": "2026-04-09T10:57:58.926Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-812045a5",
+      "at": "2026-04-09T10:58:01.959Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": false,
+      "blockedBy": "audit_not_approved",
+      "reason": "eval 점수 미달: 53점 (기준: 70점)",
+      "evalScore": 53,
+      "pipelineId": "pipe-812045a5",
+      "at": "2026-04-09T11:00:03.484Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "젤로맥스 vs 발라리안맥스 비교",
+      "proposedTitle": "젤로맥스 vs 발라리안맥스 비교 – 입문용 전자담배 뭐가 더 맞을까?",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.48275862068965514,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-adb6489d",
+      "at": "2026-04-09T11:08:19.760Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-09T11:08:22.065Z",
+      "respondedAt": "2026-04-09T11:12:09.242Z",
+      "approved": true,
+      "elapsedMs": 227177,
+      "timedOut": false,
+      "pipelineId": "pipe-adb6489d",
+      "at": "2026-04-09T11:12:09.857Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "c",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "C블로그",
+      "pipelineId": "pipe-adb6489d",
+      "at": "2026-04-09T11:12:24.864Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-adb6489d",
+      "at": "2026-04-09T11:12:27.426Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": false,
+      "blockedBy": "audit_not_approved",
+      "reason": "eval 점수 미달: 63점 (기준: 70점)",
+      "evalScore": 63,
+      "pipelineId": "pipe-adb6489d",
+      "at": "2026-04-09T11:14:32.479Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "입호흡 vs 폐호흡 차이",
+      "proposedTitle": "입호흡 vs 폐호흡, 뭐가 다를까? 초보자도 이해하는 완벽 정리",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.33333333333333337,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7feed85d",
+      "at": "2026-04-10T03:01:26.621Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": true,
+      "requestedAt": "2026-04-10T03:01:28.488Z",
+      "respondedAt": "2026-04-10T03:02:15.309Z",
+      "approved": true,
+      "elapsedMs": 46821,
+      "timedOut": false,
+      "pipelineId": "pipe-7feed85d",
+      "at": "2026-04-10T03:02:16.287Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "C",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "C블로그",
+      "pipelineId": "pipe-7feed85d",
+      "at": "2026-04-10T03:02:30.762Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-7feed85d",
+      "at": "2026-04-10T03:02:33.136Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": false,
+      "blockedBy": "audit_not_approved",
+      "reason": "eval 점수 미달: 62점 (기준: 70점)",
+      "evalScore": 62,
+      "pipelineId": "pipe-7feed85d",
+      "at": "2026-04-10T03:04:34.156Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "입문 전자담배 TOP5 비교",
+      "proposedTitle": "입문 전자담배 TOP5 비교 – 처음 시작하는 분들께 딱 맞는 기기는?",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4137931034482759,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-27cd3330",
+      "at": "2026-04-10T03:46:53.518Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 매장 기준 입문자가 자주 찾는 액상 3종 비교",
+      "proposedTitle": "구월동 전자담배 매장 기준, 입문자가 자주 찾는 액상 3종 비교",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.9615384615384616,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-17529a69",
+      "at": "2026-04-10T04:05:24.579Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 매장 기준 입문자가 자주 찾는 액상 3종 비교",
+      "proposedTitle": "구월동 전자담배 매장에서 입문자가 자주 찾는 액상 3종 솔직 비교",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.8518518518518519,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-141ee12f",
+      "at": "2026-04-10T04:11:17.390Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 처음 사러 온 손님들이 가장 많이 하는 질문 정리",
+      "proposedTitle": "전자담배 처음 사러 왔을 때 꼭 알아야 할 질문 TOP 7",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.34782608695652173,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-024f1209",
+      "at": "2026-04-10T04:25:19.577Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "proposedTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-b08a7320",
+      "at": "2026-04-10T04:32:35.797Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "b",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "B블로그",
+      "pipelineId": "pipe-b08a7320",
+      "at": "2026-04-10T04:32:49.060Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-b08a7320",
+      "at": "2026-04-10T04:32:50.738Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "proposedTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-b377b425",
+      "at": "2026-04-10T04:42:28.677Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "proposedTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-f97ce08d",
+      "at": "2026-04-10T04:50:37.172Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-10T04:50:38.395Z",
+      "respondedAt": "2026-04-10T04:50:42.278Z",
+      "approved": true,
+      "elapsedMs": 3883,
+      "timedOut": false,
+      "pipelineId": "pipe-f97ce08d",
+      "at": "2026-04-10T04:50:42.692Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "b",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "B블로그",
+      "pipelineId": "pipe-f97ce08d",
+      "at": "2026-04-10T04:50:53.230Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-f97ce08d",
+      "at": "2026-04-10T04:50:54.899Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "proposedTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-c91f9662",
+      "at": "2026-04-10T05:04:15.440Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-10T05:04:16.641Z",
+      "respondedAt": "2026-04-10T05:04:18.690Z",
+      "approved": true,
+      "elapsedMs": 2049,
+      "timedOut": false,
+      "pipelineId": "pipe-c91f9662",
+      "at": "2026-04-10T05:04:19.232Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "b",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "B블로그",
+      "pipelineId": "pipe-c91f9662",
+      "at": "2026-04-10T05:04:29.275Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-c91f9662",
+      "at": "2026-04-10T05:04:30.882Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "proposedTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-9d774edf",
+      "at": "2026-04-10T05:24:32.427Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-10T05:24:33.957Z",
+      "respondedAt": "2026-04-10T05:24:38.439Z",
+      "approved": true,
+      "elapsedMs": 4482,
+      "timedOut": false,
+      "pipelineId": "pipe-9d774edf",
+      "at": "2026-04-10T05:24:38.961Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "b",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "B블로그",
+      "pipelineId": "pipe-9d774edf",
+      "at": "2026-04-10T05:24:49.309Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-9d774edf",
+      "at": "2026-04-10T05:24:51.116Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "proposedTitle": "부평전자담배 매장에서 가장 많이 팔리는 기기는 무엇일까?",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-f78359b4",
+      "at": "2026-04-10T05:41:53.213Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-ad49ff40",
+      "at": "2026-04-10T06:05:15.286Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 추천 매장 고르는 기준 5가지 (처음 방문자 필독)",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.6666666666666667,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c9622fa3",
+      "at": "2026-04-10T06:15:10.807Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 매장 고르는 기준 5가지 | 처음이라면 꼭 보세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5384615384615384,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-98da1b9f",
+      "at": "2026-04-10T06:23:04.468Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-98da1b9f",
+      "at": "2026-04-10T06:23:21.453Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-98da1b9f",
+      "at": "2026-04-10T06:23:23.348Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 – 처음이라면 이것만 보세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-76aa8c1d",
+      "at": "2026-04-10T06:49:16.276Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "입문 전자담배 TOP5 비교",
+      "proposedTitle": "입문 전자담배 어떻게 고를까? 초보자를 위한 기기 특징 비교 가이드",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.2857142857142857,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-d8e92c11",
+      "at": "2026-04-10T06:49:25.904Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": true,
+      "requestedAt": "2026-04-10T06:49:27.351Z",
+      "respondedAt": "2026-04-10T06:49:34.560Z",
+      "approved": true,
+      "elapsedMs": 7209,
+      "timedOut": false,
+      "pipelineId": "pipe-d8e92c11",
+      "at": "2026-04-10T06:49:35.185Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 | 처음이라면 이것만 보세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-44c62dd6",
+      "at": "2026-04-10T07:24:13.831Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "입문 전자담배 TOP5 비교",
+      "proposedTitle": "입문자를 위한 전자담배 TOP5 완벽 비교 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.5714285714285714,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-fce28442",
+      "at": "2026-04-10T07:53:19.503Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 이 글 하나로 종결합니다",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5454545454545454,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-72b32983",
+      "at": "2026-04-10T07:53:25.074Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-10T07:53:20.899Z",
+      "respondedAt": "2026-04-10T07:53:30.308Z",
+      "approved": true,
+      "elapsedMs": 9409,
+      "timedOut": false,
+      "pipelineId": "pipe-fce28442",
+      "at": "2026-04-10T07:53:30.790Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "C",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "C블로그",
+      "pipelineId": "pipe-fce28442",
+      "at": "2026-04-10T07:53:41.671Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-fce28442",
+      "at": "2026-04-10T07:53:43.435Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 매장 고르는 기준 5가지 | 후회 없이 선택하는 법",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5384615384615384,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-646ff5ad",
+      "at": "2026-04-10T08:10:51.993Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-646ff5ad",
+      "at": "2026-04-10T08:11:07.723Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-646ff5ad",
+      "at": "2026-04-10T08:11:09.818Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 – 처음이라면 이것부터 보세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.48,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-d7ac3446",
+      "at": "2026-04-10T08:23:58.155Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-d7ac3446",
+      "at": "2026-04-10T08:24:13.306Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-d7ac3446",
+      "at": "2026-04-10T08:24:15.105Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 액상 실패 확률 높은 맛",
+      "proposedTitle": "전자담배 액상 실패 확률 높은 맛 유형 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.7222222222222222,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-f6c3fc2f",
+      "at": "2026-04-10T08:31:35.232Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-10T08:31:36.856Z",
+      "respondedAt": "2026-04-10T08:31:43.670Z",
+      "approved": true,
+      "elapsedMs": 6814,
+      "timedOut": false,
+      "pipelineId": "pipe-f6c3fc2f",
+      "at": "2026-04-10T08:31:44.218Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "D",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "D블로그",
+      "pipelineId": "pipe-f6c3fc2f",
+      "at": "2026-04-10T08:31:54.153Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-f6c3fc2f",
+      "at": "2026-04-10T08:31:56.445Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 매장 방문 전 체크리스트",
+      "proposedTitle": "구월동 전자담배 매장 방문 전 꼭 확인해야 할 체크리스트 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.6538461538461539,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-b4b2652e",
+      "at": "2026-04-10T08:54:35.543Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 매장 방문 전 체크리스트",
+      "proposedTitle": "구월동 전자담배 매장 방문 전 꼭 확인해야 할 체크리스트 7가지",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.6538461538461539,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-37a0a5e3",
+      "at": "2026-04-10T09:12:30.738Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 입문 가이드 테스트",
+      "proposedTitle": "인천 전자담배 입문 가이드 — 처음이라면 이 글 하나로 끝",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4782608695652174,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-16a3267e",
+      "at": "2026-04-14T03:45:57.684Z"
+    },
+    {
+      "type": "approval_ux",
+      "materialChange": false,
+      "requestedAt": "2026-04-14T03:45:59.237Z",
+      "respondedAt": "2026-04-14T03:46:12.091Z",
+      "approved": true,
+      "elapsedMs": 12854,
+      "timedOut": false,
+      "pipelineId": "pipe-16a3267e",
+      "at": "2026-04-14T03:46:12.767Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "일반",
+      "pipelineId": "pipe-16a3267e",
+      "at": "2026-04-14T03:46:22.278Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-16a3267e",
+      "at": "2026-04-14T03:46:24.052Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 매장 고르는 기준 5가지 | 실패 없이 찾는 법",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5833333333333333,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-af50c048",
+      "at": "2026-04-14T05:07:08.968Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 매장 고르는 기준 5가지 | 초보자 필독 체크리스트",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5185185185185186,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7759f232",
+      "at": "2026-04-14T05:07:20.706Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-af50c048",
+      "at": "2026-04-14T05:07:28.096Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-af50c048",
+      "at": "2026-04-14T05:07:31.230Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "post-audit gate 통과",
+      "evalScore": 75,
+      "pipelineId": "pipe-af50c048",
+      "at": "2026-04-14T05:09:44.324Z"
+    },
+    {
+      "type": "baseline_candidate",
+      "scenarioId": "topic-44121a2e",
+      "runId": "eval-4d90c7a2",
+      "aggregateScore": 75,
+      "registered": true,
+      "reason": "candidate 등록 완료 (75점)",
+      "pipelineId": "pipe-af50c048",
+      "at": "2026-04-14T05:09:46.957Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 추천 기기 가이드 | 유형별로 딱 맞는 기기 찾기",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5384615384615384,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-64366b3a",
+      "at": "2026-04-14T05:13:13.752Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 추천 기기 가이드 — 입문자가 꼭 알아야 할 유형별 핵심 정리",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4516129032258065,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a0df192f",
+      "at": "2026-04-14T05:13:15.470Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 추천 매장 고르는 기준 5가지",
+      "proposedTitle": "인천 전자담배 매장 고르는 기준 5가지 | 초보자 필독 체크리스트",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5185185185185186,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-d9006b7a",
+      "at": "2026-04-14T05:22:46.427Z"
+    },
+    {
+      "type": "corpus_retrieval",
+      "userId": "a",
+      "selectedCount": 0,
+      "strategy": "fallback_recent",
+      "staleCount": 0,
+      "staleWarnings": [],
+      "topScores": [],
+      "targetCategory": "A블로그",
+      "pipelineId": "pipe-d9006b7a",
+      "at": "2026-04-14T05:23:03.781Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "pre-write",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "pre-write gate 통과",
+      "pipelineId": "pipe-d9006b7a",
+      "at": "2026-04-14T05:23:06.561Z"
+    },
+    {
+      "type": "gate_result",
+      "gate": "post-audit",
+      "passed": true,
+      "blockedBy": null,
+      "reason": "post-audit gate 통과",
+      "evalScore": 76,
+      "pipelineId": "pipe-d9006b7a",
+      "at": "2026-04-14T05:25:17.630Z"
+    },
+    {
+      "type": "baseline_candidate",
+      "scenarioId": "topic-44121a2e",
+      "runId": "eval-0d698fd8",
+      "aggregateScore": 76,
+      "registered": true,
+      "reason": "candidate 등록 완료 (76점)",
+      "pipelineId": "pipe-d9006b7a",
+      "at": "2026-04-14T05:25:20.484Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자도 쉽게 고르는 선택 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.46153846153846156,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a248a4d0",
+      "at": "2026-04-14T05:27:34.873Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자도 바로 고르는 완전 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.46153846153846156,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-04e754a8",
+      "at": "2026-04-14T05:27:42.626Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 | 처음이라면 꼭 알아야 할 선택 기준",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-e17378e9",
+      "at": "2026-04-14T06:07:04.060Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 가이드 | 입문자도 바로 고르는 법",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c07824ae",
+      "at": "2026-04-14T06:40:17.745Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자도 바로 고르는 기기 선택 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a3b2f4e5",
+      "at": "2026-04-14T06:58:54.850Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자부터 중급자까지 유형별 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-defe35e6",
+      "at": "2026-04-14T07:48:48.486Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자부터 매니아까지 유형별 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4285714285714286,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-bb17bcdd",
+      "at": "2026-04-14T08:34:27.512Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 입문자도 쉽게 고르는 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.48,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-ae1b5697",
+      "at": "2026-04-14T08:57:34.892Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3, 입문자라면 뭘 골라야 할까? 차이 완벽 정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.43333333333333335,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-3a3af7c6",
+      "at": "2026-04-14T09:04:06.493Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 – 처음이라면 이 기준으로 고르세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-af11a94c",
+      "at": "2026-04-14T09:10:46.332Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3, 전담 입문자라면 어떤 기기가 맞을까?",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4642857142857143,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-fbdc7698",
+      "at": "2026-04-14T09:22:07.195Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자도 바로 고르는 유형별 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-35824d44",
+      "at": "2026-04-15T03:08:14.679Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자도 바로 고르는 타입별 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a4f94a45",
+      "at": "2026-04-15T03:24:14.243Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 — 처음 고르는 법부터 기기 유형별 특징까지",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-840046f2",
+      "at": "2026-04-15T07:12:32.881Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 | 처음 시작한다면 꼭 알아야 할 선택 기준",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4137931034482759,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-01ed998b",
+      "at": "2026-04-15T07:31:56.163Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 – 처음 시작할 때 이것만 알면 됩니다",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-bb83eb79",
+      "at": "2026-04-15T08:14:20.104Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 액상 고르는 방법",
+      "proposedTitle": "인천 전자담배 액상 고르는 법 | 입문자도 실수 없이 선택하는 5가지 기준",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.3666666666666667,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-634d137c",
+      "at": "2026-04-15T08:52:52.852Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3, 전담 입문자라면 어떤 기기가 맞을까?",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4642857142857143,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c648f838",
+      "at": "2026-04-15T09:04:12.226Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3, 전자담배 입문자라면 어떤 게 더 맞을까?",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4482758620689655,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-3032d970",
+      "at": "2026-04-15T09:05:10.300Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 고를 때 꼭 알아야 할 기준 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4347826086956522,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-beeea7ed",
+      "at": "2026-04-15T09:22:40.840Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "젤로맥스 vs 발라리안맥스 비교",
+      "proposedTitle": "젤로맥스 vs 발라리안맥스, 입문용 전자담배 뭐가 더 맞을까? 차이점 총정리",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.36363636363636365,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-f2e302e8",
+      "at": "2026-04-15T09:22:47.056Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3, 전담 입문자라면 어떤 걸 골라야 할까?",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4642857142857143,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-46db6458",
+      "at": "2026-04-15T09:29:17.613Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자를 위한 선택 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5217391304347826,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-59740991",
+      "at": "2026-04-15T09:49:56.297Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "그래피티2 vs 그래피티3 차이",
+      "proposedTitle": "버블몬 그래피티2 vs 그래피티3 차이 완벽 정리 – 어떤 게 나한테 맞을까?",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4375,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-42aaa60d",
+      "at": "2026-04-15T09:50:29.786Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 | 초보자가 꼭 알아야 할 선택 기준 완벽 정리",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-9bda3f1e",
+      "at": "2026-04-16T04:01:49.422Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 | 처음이라면 꼭 알아야 할 선택 기준",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7f47327c",
+      "at": "2026-04-16T04:11:37.229Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 이 글 하나로 종결합니다",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5454545454545454,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-b19396a2",
+      "at": "2026-04-16T09:06:47.665Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3, 입문자에게 맞는 전자담배는?",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.52,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-64566d4c",
+      "at": "2026-04-16T09:07:20.818Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3, 전담 입문자라면 어떤 기기를 골라야 할까?",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.43333333333333335,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-75fba497",
+      "at": "2026-04-16T09:15:33.152Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입문자도 바로 고르는 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.46153846153846156,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-1d6c5df9",
+      "at": "2026-04-16T09:15:35.594Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 완전 가이드 | 입문자도 바로 고르는 법",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7865b0dc",
+      "at": "2026-04-17T02:23:15.791Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3 입문 추천 — 내 흡연 스타일엔 뭐가 맞을까?",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5172413793103448,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-58769607",
+      "at": "2026-04-17T02:23:58.064Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 입문 가이드 테스트",
+      "proposedTitle": "인천 전자담배 입문, 처음이라면 이것만 알면 됩니다",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.40909090909090906,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-ec111ca0",
+      "at": "2026-04-17T06:56:42.794Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 처음 시작할 때 필요한것",
+      "proposedTitle": "전자담배 처음 시작할 때 필요한 것 총정리 | 입문자 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5384615384615384,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-ef8e6476",
+      "at": "2026-04-17T07:14:12.840Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 입문 가이드 테스트",
+      "proposedTitle": "인천 전자담배 입문 완전정복 | 처음 시작할 때 꼭 알아야 할 것들",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.3076923076923077,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-65378d0c",
+      "at": "2026-04-20T02:59:10.890Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 매장 방문 전 체크리스트",
+      "proposedTitle": "구월동 전자담배 매장 방문 전 꼭 체크해야 할 것들 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.6086956521739131,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-5df90201",
+      "at": "2026-04-20T08:10:49.909Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 유형별 완전 정리 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5454545454545454,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-8ffb0a72",
+      "at": "2026-04-20T08:20:09.059Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 매장 기준 입문자가 자주 찾는 액상 3종 비교",
+      "proposedTitle": "구월동 전자담배 매장 기준 입문자가 자주 찾는 액상 3종 비교",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-4ba18818",
+      "at": "2026-04-20T08:22:05.316Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 – 초보자가 꼭 알아야 할 선택 기준 5가지",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4137931034482759,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-0681bb99",
+      "at": "2026-04-20T08:52:09.789Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 매장에서 상담할 때 보는 기준",
+      "proposedTitle": "전자담배 매장 상담할 때 꼭 보는 기준 4가지",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.6666666666666667,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-cf23bd06",
+      "at": "2026-04-20T08:52:26.091Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "말론 vs 아스트로 MK3 입문 추천",
+      "proposedTitle": "말론 vs 아스트로 MK3, 입문용 전담 기기 어떤 게 나한테 맞을까?",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4482758620689655,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-2f14d1dd",
+      "at": "2026-04-20T08:55:16.953Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 | 처음이라면 이 기준으로 고르세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-af44dff5",
+      "at": "2026-04-20T09:14:39.498Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "구월동 전자담배 추천 기기 가이드",
+      "proposedTitle": "구월동 전자담배 기기 추천 | 입호흡·폐호흡 유형별 완전 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4444444444444444,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a81f1dd2",
+      "at": "2026-04-21T02:49:52.833Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 액상 고르는 방법",
+      "proposedTitle": "인천 전자담배 액상 고르는 방법 – 입문자도 실패 없는 선택 기준",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-9448cfde",
+      "at": "2026-04-21T03:27:00.515Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기, 내 흡연 스타일에 맞는 거 고르는 법",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-11c768a2",
+      "at": "2026-04-21T07:36:00.112Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 추천 – 처음이라면 이렇게 고르세요",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.48,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-d191c940",
+      "at": "2026-04-21T07:50:10.730Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 입문 기기 추천",
+      "proposedTitle": "부평 전자담배 입문 기기 고르는 법: 나한테 맞는 유형부터 찾자",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.3846153846153846,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-426f4b58",
+      "at": "2026-04-21T08:24:55.478Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 입문 가이드 테스트",
+      "proposedTitle": "인천에서 전자담배 처음 시작한다면? 입문자 필독 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.33333333333333337,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7aaf93a7",
+      "at": "2026-04-22T03:23:56.512Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 입문 가이드 테스트",
+      "proposedTitle": "인천 전자담배 입문 완전 가이드 | 처음 시작하는 분 필독",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4782608695652174,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-615d2283",
+      "at": "2026-04-22T03:30:09.822Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰",
+      "proposedTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 솔직 리뷰 (20000퍼프)",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.6451612903225806,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7542f705",
+      "at": "2026-04-22T04:51:16.415Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰",
+      "proposedTitle": "인천 만수르가 직접 써본 도조 오팔 일회용 전자담배 솔직 리뷰",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.43999999999999995,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-bf3d538d",
+      "at": "2026-04-22T06:24:49.224Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰",
+      "proposedTitle": "인천 전자담배 만수르 도조 오팔 20000 일회용 기기 솔직 리뷰",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.7407407407407407,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-dc225a84",
+      "at": "2026-04-22T07:01:41.151Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰",
+      "proposedTitle": "인천 만수동 전자담배 만수르 도조 오팔 20000 일회용 기기 리뷰 솔직 후기",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.625,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7a8ecbc8",
+      "at": "2026-04-22T07:35:40.785Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰",
+      "proposedTitle": "도조 오팔 20000 일회용 제대로 써봤습니다 | 인천 만수르 솔직 리뷰",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.06666666666666665,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c0331f37",
+      "at": "2026-04-22T08:28:58.150Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-21fc35df",
+      "userId": "d",
+      "message": "Request was aborted.",
+      "recoveredTopicToDraft": false,
+      "errorName": "ab",
+      "pipelineId": "pipe-d3f4db93",
+      "at": "2026-04-22T08:30:18.814Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "failed",
+      "topicId": "topic-03bea05d",
+      "userId": "a",
+      "message": "Request was aborted.",
+      "recoveredTopicToDraft": false,
+      "errorName": "ab",
+      "pipelineId": "pipe-c0331f37",
+      "at": "2026-04-22T08:34:03.924Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "failed",
+      "topicId": "topic-03bea05d",
+      "userId": "a",
+      "message": "Request was aborted.",
+      "recoveredTopicToDraft": true,
+      "errorName": "ab",
+      "pipelineId": "pipe-c0331f37",
+      "at": "2026-04-22T08:34:06.939Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰",
+      "proposedTitle": "인천 전자담배 만수르 도조 오팔 20000 일회용 기기 솔직 리뷰",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.7407407407407407,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-61f53f87",
+      "at": "2026-04-22T08:49:28.780Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "failed",
+      "topicId": "topic-03bea05d",
+      "userId": "a",
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CaJXN7HSD7wrtzPANVVsM\"}",
+      "recoveredTopicToDraft": false,
+      "errorName": "ae",
+      "pipelineId": "pipe-61f53f87",
+      "at": "2026-04-22T08:51:24.904Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "failed",
+      "topicId": "topic-03bea05d",
+      "userId": "a",
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CaJXN7HSD7wrtzPANVVsM\"}",
+      "recoveredTopicToDraft": true,
+      "errorName": "ae",
+      "pipelineId": "pipe-61f53f87",
+      "at": "2026-04-22T08:51:28.217Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "failed",
+      "topicId": "topic-21fc35df",
+      "userId": "d",
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CaJXPHTeHPkp9E5ZaZp7M\"}",
+      "recoveredTopicToDraft": false,
+      "errorName": "ae",
+      "pipelineId": "pipe-28fd2589",
+      "at": "2026-04-22T08:51:41.412Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "failed",
+      "topicId": "topic-21fc35df",
+      "userId": "d",
+      "message": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CaJXPHTeHPkp9E5ZaZp7M\"}",
+      "recoveredTopicToDraft": true,
+      "errorName": "ae",
+      "pipelineId": "pipe-28fd2589",
+      "at": "2026-04-22T08:51:44.644Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰",
+      "proposedTitle": "인천 전자담배 만수르 도조 오팔 일회용 기기 솔직 리뷰 – 맛별 사용감 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.6451612903225806,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-38628d01",
+      "at": "2026-04-22T09:02:48.210Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 기기 선택 가이드 – 입문자를 위한 기기 비교 총정리",
+      "proposedTitle": "전자담배 기기 종류와 차이점 – 입문자가 꼭 알아야 할 선택 기준",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.42307692307692313,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-8f8bc672",
+      "at": "2026-04-22T09:05:19.453Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 액상 종류와 맛 선택법 총정리",
+      "proposedTitle": "전자담배 액상 종류와 맛 선택법 총정리 – 입문자도 바로 이해하는 가이드",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.5333333333333333,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-9f14f584",
+      "at": "2026-04-22T10:19:03.312Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 액상 종류와 맛 선택법 총정리",
+      "proposedTitle": "전자담배 액상 종류 총정리 – 입문자도 바로 쓰는 맛 선택 가이드",
+      "isMaterial": true,
+      "triggeredSignals": [
+        "searchIntentChanged",
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.3846153846153846,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a0a0cda3",
+      "at": "2026-04-22T10:41:03.476Z"
+    }
+  ],
+  "lastUpdated": "2026-04-22T10:41:03.476Z"
+}

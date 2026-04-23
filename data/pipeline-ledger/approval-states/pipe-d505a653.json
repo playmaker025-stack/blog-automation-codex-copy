@@ -1,0 +1,38 @@
+{
+  "pipelineId": "pipe-d505a653",
+  "topicId": "topic-c52a44ec",
+  "userId": "A",
+  "state": "records_updated",
+  "history": [
+    {
+      "from": null,
+      "to": "draft_ready",
+      "reason": "파이프라인 시작",
+      "at": "2026-04-07T10:09:57.574Z",
+      "actor": "system"
+    },
+    {
+      "from": "draft_ready",
+      "to": "waiting_for_user_approval",
+      "reason": "승인 요청 발송",
+      "at": "2026-04-07T10:10:50.888Z",
+      "actor": "system"
+    },
+    {
+      "from": "waiting_for_user_approval",
+      "to": "approved_pending_record_update",
+      "reason": "사용자 승인 완료",
+      "at": "2026-04-07T10:10:54.060Z",
+      "actor": "A"
+    },
+    {
+      "from": "approved_pending_record_update",
+      "to": "records_updated",
+      "reason": "posting-list + index 반영 완료",
+      "at": "2026-04-07T10:11:00.958Z",
+      "actor": "system"
+    }
+  ],
+  "createdAt": "2026-04-07T10:09:57.574Z",
+  "updatedAt": "2026-04-07T10:11:00.958Z"
+}
