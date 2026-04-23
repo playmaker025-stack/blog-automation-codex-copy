@@ -283,17 +283,30 @@ export default function TopicsPage() {
 
   return (
     <div className="p-8 max-w-4xl">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-start justify-between gap-4 mb-4">
         <div>
           <h1 className="text-2xl font-bold text-zinc-900">글목록</h1>
           <p className="text-zinc-500 mt-1 text-sm">
             총 {planningTopics.length}개 · 남은 항목 {remaining.length}개 · 발행완료 {matched.length}개
           </p>
         </div>
+        <button
+          onClick={() => { setShowAdd(true); setNotice(null); }}
+          className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          + 개별 추가
+        </button>
+      </div>
+
+      <div className="mb-6 flex flex-wrap items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 py-2">
+        <label htmlFor="topic-user-filter" className="text-xs font-semibold text-zinc-600">
+          사용자별 보기
+        </label>
         <select
+          id="topic-user-filter"
           value={userFilter}
           onChange={(event) => setUserFilter(event.target.value)}
-          className="ml-auto mr-3 w-64 border border-zinc-200 rounded-lg px-3 py-2 text-sm bg-white text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="min-w-56 flex-1 rounded-md border border-zinc-200 bg-white px-3 py-1.5 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
           aria-label="담당자별 글목록 보기"
         >
           <option value="all">전체 글목록 ({planningTopics.length})</option>
@@ -306,12 +319,6 @@ export default function TopicsPage() {
             </option>
           ))}
         </select>
-        <button
-          onClick={() => { setShowAdd(true); setNotice(null); }}
-          className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          + 개별 추가
-        </button>
       </div>
 
       {notice && (

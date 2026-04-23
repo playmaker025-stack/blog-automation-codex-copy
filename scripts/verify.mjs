@@ -7,16 +7,17 @@ const FAILURES_DIR = join(process.cwd(), 'data', 'verify-failures')
 
 const skipBuild = process.argv.includes('--skip-build')
 const skipTest = process.argv.includes('--skip-test')
+const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx'
 
 const steps = [
   {
     name: 'typecheck',
-    cmd: 'npx tsc --noEmit --skipLibCheck',
+    cmd: `${npx} tsc --noEmit --skipLibCheck`,
     description: 'TypeScript type check',
   },
   {
     name: 'lint',
-    cmd: 'npx eslint . --max-warnings=0 --quiet',
+    cmd: `${npx} eslint . --max-warnings=0 --quiet`,
     description: 'ESLint check',
   },
   {
@@ -28,7 +29,7 @@ const steps = [
     ? [
         {
           name: 'build',
-          cmd: 'npx next build',
+          cmd: `${npx} next build`,
           description: 'Next.js production build',
         },
       ]
