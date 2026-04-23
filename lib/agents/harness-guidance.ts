@@ -2,7 +2,9 @@ import { fileExists, readJsonFile, writeJsonFile } from "@/lib/github/repository
 import type { EvalResult, StrategyPlanResult } from "./types";
 import type { CorpusSummaryArtifact } from "./corpus-selector";
 
-export const HARNESS_PASS_THRESHOLD = 70;
+import { SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
+
+export const HARNESS_PASS_THRESHOLD = SEO_PASS_THRESHOLD;
 
 const LEDGER_PATH = "data/harness-engineering/writing-failure-ledger.json";
 const MAX_LEDGER_ENTRIES = 300;

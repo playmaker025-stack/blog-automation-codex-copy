@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ApprovalRequest } from "@/lib/agents/types";
+import type { ApprovalRequest, NaverLogicPlan } from "@/lib/agents/types";
 
 interface Props {
   pipelineId: string;
@@ -9,6 +9,7 @@ interface Props {
   proposedTitle: string;
   rationale: string;
   outline: string[];
+  naverLogic?: NaverLogicPlan;
   onApprove: (req: ApprovalRequest) => Promise<void>;
   onReject: () => void;
 }
@@ -19,6 +20,7 @@ export function ApprovalDialog({
   proposedTitle,
   rationale,
   outline,
+  naverLogic,
   onApprove,
   onReject: _onReject,
 }: Props) {
@@ -93,6 +95,15 @@ export function ApprovalDialog({
                   <li key={`${heading}-${index}`} className="text-sm text-zinc-700">{heading}</li>
                 ))}
               </ol>
+            </div>
+          )}
+
+          {naverLogic && (
+            <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
+              <p className="text-xs text-blue-700 font-medium mb-1">네이버 로직 사전 검수</p>
+              <p className="text-sm text-zinc-900 font-semibold">{naverLogic.label}</p>
+              <p className="text-xs text-zinc-600 mt-1">{naverLogic.reason}</p>
+              <p className="text-xs text-blue-700 mt-2">목표 완성도 {naverLogic.completenessTarget}점 이상</p>
             </div>
           )}
 

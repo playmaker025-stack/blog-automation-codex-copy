@@ -9,6 +9,8 @@ import { hasOpenAIKey, requestOpenAIText } from "@/lib/openai/responses";
 import { randomUUID } from "crypto";
 import type { ContentTopologyPlan, StrategyPlanResult, WriterResult } from "./types";
 import type { CorpusSummaryArtifact } from "./corpus-selector";
+import { buildPolicyPromptSection, SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
+import { naverLogicAgent } from "./naver-logic-agent";
 
 // ============================================================
 // 발행용 본문은 이 에이전트만 작성한다 — 핵심 원칙
@@ -268,12 +270,13 @@ function buildOpenAIWriterSystemPrompt(): string {
   return [
     "You are a senior Korean Naver Blog writer and SEO editor.",
     "Write only the publishable Korean markdown body. Do not include meta notes, score explanations, or placeholders.",
-    "Target an internal harness score of at least 78 before returning the final draft.",
+    `Target an internal harness score of at least ${SEO_PASS_THRESHOLD} before returning the final draft.`,
     "The harness weights are: style_match 30%, originality 25%, structure 20%, engagement 15%, forbidden_check 10%.",
     "Before finalizing, silently revise the draft if any dimension would score below 75.",
     "Never say that the user profile, corpus, or examples could not be loaded.",
     "Avoid keyword stuffing, exaggerated guarantees, unsupported best/only claims, and generic filler.",
     "For Naver Blog, prioritize clear search intent, short readable paragraphs, concrete selection criteria, natural keyword placement, and a closing that helps the reader decide.",
+    buildPolicyPromptSection(),
   ].join("\n");
 }
 
@@ -296,6 +299,9 @@ function buildOpenAIWriterUserPrompt(params: {
     "",
     "Content topology:",
     formatOpenAITopology(strategy.contentTopology),
+    "",
+    "Naver logic pre-check:",
+    naverLogicAgent.buildWriterBrief(strategy.naverLogic),
     "",
     "Expanded outline:",
     formatOpenAIExpandedOutline(strategy),
@@ -461,6 +467,9 @@ export async function runMasterWriter(params: {
 핵심 포인트: ${strategy.keyPoints.join(" / ")}
 
 ${buildContentTopologySection(strategy.contentTopology)}
+
+Naver logic pre-check:
+${naverLogicAgent.buildWriterBrief(strategy.naverLogic)}
 
 아웃라인:
 ${strategy.outline

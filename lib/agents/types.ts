@@ -7,6 +7,7 @@ import type { PipelineStage } from "@/lib/types/agent";
 export interface PipelineRunRequest {
   topicId: string;
   userId: string;
+  forcePreflightOverride?: boolean;
 }
 
 // ============================================================
@@ -49,9 +50,30 @@ export interface StrategyPlanResult {
   suggestedSources: string[];
   rationale: string;
   contentTopology?: ContentTopologyPlan;
+  naverLogic?: NaverLogicPlan;
 }
 
 export type ContentTopologyKind = "hub" | "leaf";
+
+export type NaverLogicType = "dia" | "c-rank" | "hybrid";
+
+export interface NaverLogicPlan {
+  primary: NaverLogicType;
+  label: string;
+  reason: string;
+  writingFocus: string[];
+  checklist: string[];
+  completenessTarget: number;
+}
+
+export interface NaverLogicEvaluation {
+  primary: NaverLogicType;
+  label: string;
+  completenessScore: number;
+  reason: string;
+  evidence: string[];
+  improvements: string[];
+}
 
 export interface ContentTopologyPlan {
   kind: ContentTopologyKind;

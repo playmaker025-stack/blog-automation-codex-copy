@@ -9,6 +9,13 @@ import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { naverKeywordResearch } from "@/lib/skills/naver-keyword-research";
 import { hasOpenAIKey, requestOpenAIJson } from "@/lib/openai/responses";
 import type { PostingRecord, Topic } from "@/lib/types/github-data";
+import {
+  ALLOWED_LOCALITY_TERMS,
+  BLOCKED_OUTSIDE_LOCALITY_TERMS,
+  buildPolicyPromptSection,
+  filterBlockedTopics,
+} from "./blog-workflow-policy";
+import { PRIMARY_LOCALITY_PRIORITY, SECONDARY_LOCALITY_PRIORITY } from "./locality-keyword-agent";
 
 export interface TopicGeneratorInput {
   userId: string;
@@ -165,6 +172,13 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             "Avoid duplicate titles and avoid topics already covered.",
             "Balance hub and leaf topics based on gaps in the published list.",
             "Use Naver search-intent friendly longtail wording.",
+            "Locality rule: generate only Incheon operating-area topics when using a place name.",
+            `Allowed localities: ${ALLOWED_LOCALITY_TERMS.join(", ")}.`,
+            `Never generate outside localities: ${BLOCKED_OUTSIDE_LOCALITY_TERMS.join(", ")}.`,
+            `Locality priority first: ${PRIMARY_LOCALITY_PRIORITY.join(", ")}.`,
+            `Locality priority second: ${SECONDARY_LOCALITY_PRIORITY.join(", ")}.`,
+            "Use other Incheon-area localities only after the first and second priority pools have been covered.",
+            buildPolicyPromptSection(),
           ].join("\n"),
         },
         {
@@ -184,6 +198,11 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             "Each topic must include contentKind hub or leaf.",
             "Prefer missing hub/leaf coverage over small keyword variations.",
             "Title length should be within 50 Korean characters.",
+            "If a title needs a local modifier, use only Incheon/Bupyeong/Mansu/Guwol/Namdong/Songdo/Cheongna/Yeonsu/Juan/Ganseok/Geomdan-area wording.",
+            "Do not suggest Seoul, Busan, Daegu, Gimpo, Gyeonggi, or other outside-area topics. Bucheon/Sang-dong/Jung-dong are allowed because they are in the user's priority pool.",
+            `Priority localities first: ${PRIMARY_LOCALITY_PRIORITY.join(", ")}.`,
+            `Secondary localities next: ${SECONDARY_LOCALITY_PRIORITY.join(", ")}.`,
+            "Only after those are exhausted, recommend other Incheon localities.",
           ].join("\n"),
         },
       ],
@@ -194,8 +213,9 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
       signal: AbortSignal.timeout(90_000),
     });
 
-    const generatedTopics = result.topics
-      .map((topic) => normalizeGeneratedTopic(topic, mainCategory))
+    const generatedTopics = filterBlockedTopics(
+      result.topics.map((topic) => normalizeGeneratedTopic(topic, mainCategory))
+    )
       .filter((topic) => topic.title)
       .slice(0, 5);
 
@@ -256,8 +276,9 @@ ${mainCategory}
 
   const text = response.content.find((block) => block.type === "text");
   const rawText = text?.type === "text" ? text.text : "";
-  const generatedTopics = parseGeneratedTopics(rawText)
-    .map((topic) => normalizeGeneratedTopic(topic, mainCategory))
+  const generatedTopics = filterBlockedTopics(
+    parseGeneratedTopics(rawText).map((topic) => normalizeGeneratedTopic(topic, mainCategory))
+  )
     .filter((topic) => topic.title)
     .slice(0, 5);
 

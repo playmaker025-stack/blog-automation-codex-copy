@@ -53,6 +53,10 @@ export const Paths = {
   // 앱 설정 (토큰 등 런타임 설정값)
   appConfig: () => `data/config/app.json`,
 
+  // 지역/제품 보조 키워드 사용 기록
+  localityKeywordLedger: (userId: string) =>
+    `data/locality-keywords/${userId}/ledger.json`,
+
   // 파이프라인 승인 체크포인트 (서버 재시작 복구용)
   approvalRecord: (pipelineId: string) => `data/approvals/${pipelineId}.json`,
 } as const;

@@ -21,6 +21,9 @@ import {
   buildRevisionInstruction,
   getRecentHarnessFailureGuidance,
 } from "./harness-guidance";
+import { assertPreflightPassed } from "./preflight-checker";
+import { naverLogicAgent } from "./naver-logic-agent";
+import { localityKeywordAgent } from "./locality-keyword-agent";
 import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -114,14 +117,12 @@ function makeHashtagText(value: string): string {
   return `#${value.replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, "")}`;
 }
 
-function makeFileSlug(value: string): string {
-  const slug = value
-    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+function makeKoreanImageStem(value: string): string {
+  const stem = value
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
     .trim()
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .toLowerCase();
-  return slug.slice(0, 48) || "blog-draft";
+    .replace(/\s+/g, "_");
+  return stem.slice(0, 64) || "블로그_초안";
 }
 
 function buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
@@ -149,15 +150,24 @@ function buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
     hashtags.push(`#추천태그${hashtags.length + 1}`);
   }
 
-  const slug = makeFileSlug(title);
-  const imageFileNames = [
-    `${slug}-01-cover.jpg`,
-    `${slug}-02-main-subject.jpg`,
-    `${slug}-03-detail-cut.jpg`,
-    `${slug}-04-comparison.jpg`,
-    `${slug}-05-checklist.jpg`,
-    `${slug}-06-closing.jpg`,
+  const imageStem = makeKoreanImageStem(title);
+  const imageLabels = [
+    "대표",
+    "문제상황",
+    "정상비정상",
+    "원인분류",
+    "체크포인트",
+    "제품상세",
+    "해결방법",
+    "비교전후",
+    "주의사항",
+    "매장확인",
+    "요약",
+    "마무리",
   ];
+  const imageFileNames = imageLabels.map(
+    (label, index) => `${imageStem}_${label}_${String(index + 1).padStart(2, "0")}.jpg`
+  );
 
   return { hashtags, imageFileNames };
 }
@@ -374,6 +384,10 @@ export async function runPipeline(params: {
         emit(controller, makeEvent("progress", "strategy-planning", { message: msg })),
       signal,
     });
+    await assertPreflightPassed(
+      { topicId: request.topicId, proposedTitle: strategy.title },
+      { allowOverride: request.forcePreflightOverride }
+    );
 
     state = updateState(state, { strategy });
     activePipelines.set(pipelineId, state);
@@ -623,11 +637,17 @@ export async function runPipeline(params: {
       throw new Error(`pre-write gate 차단: ${preGateResult.reason}`);
     }
     emit(controller, makeEvent("progress", "writing", { message: "pre-write gate 통과" }));
-    const harnessBriefing = await prepareHarnessBriefing({
+    const baseHarnessBriefing = await prepareHarnessBriefing({
       userId: request.userId,
       strategy,
       corpusSummary,
     });
+    const localityKeywordPlan = await localityKeywordAgent.buildPreWritePlan({
+      userId: request.userId,
+      strategy,
+      topicId: request.topicId,
+    });
+    const harnessBriefing = [baseHarnessBriefing, localityKeywordPlan.writerBrief].join("\n\n");
     emit(controller, makeEvent("progress", "writing", { message: "하네스 기준을 반영한 작성 브리핑 준비 완료" }));
 
     // ?? 5. 蹂몃Ц ?묒꽦 ??????????????????????????????????????????
@@ -694,6 +714,14 @@ export async function runPipeline(params: {
     });
     writerResult = revised.writerResult;
     const evalResult = revised.evalResult;
+    await localityKeywordAgent.recordUsedKeywords({
+      userId: request.userId,
+      topicId: request.topicId,
+      writerResult,
+      plan: localityKeywordPlan,
+    }).catch((error) => {
+      console.warn("[orchestrator] locality keyword ledger update failed:", error instanceof Error ? error.message : error);
+    });
 
     state = updateState(state, { writerResult, evalResult });
     activePipelines.set(pipelineId, state);
@@ -739,6 +767,7 @@ export async function runPipeline(params: {
     });
 
     const completionSupport = buildCompletionSupport(strategy, writerResult.title);
+    const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy, writerResult, evalResult });
 
     if (!postGateResult.passed) {
       await updatePostRecord(postRecord.postId, {
@@ -772,6 +801,7 @@ export async function runPipeline(params: {
         baselineDelta,
         pass: false,
         recommendations: evalResult.recommendations,
+        naverLogicEvaluation,
         ...completionSupport,
       }));
       emit(controller, makeEvent("stage_change", "complete", {
@@ -847,6 +877,7 @@ export async function runPipeline(params: {
         baselineDelta,
         pass: evalResult.pass,
         recommendations: evalResult.recommendations,
+        naverLogicEvaluation,
         ...completionSupport,
       }));
     emit(controller, makeEvent("stage_change", "complete", {
@@ -1216,6 +1247,7 @@ export async function runStrategyPhase(params: {
   topicId: string;
   userId: string;
   pipelineId: string;
+  forcePreflightOverride?: boolean;
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<void> {
@@ -1258,6 +1290,10 @@ export async function runStrategyPhase(params: {
       onProgress: (msg) => emit(controller, makeEvent("progress", "strategy-planning", { message: msg })),
       signal,
     });
+    await assertPreflightPassed(
+      { topicId, proposedTitle: strategy.title },
+      { allowOverride: params.forcePreflightOverride }
+    );
 
     state = updateState(state, { strategy });
     activePipelines.set(pipelineId, state);
@@ -1336,6 +1372,7 @@ export async function runWritePhase(params: {
   userId: string;
   pipelineId: string;
   strategy: StrategyPlanResult;
+  forcePreflightOverride?: boolean;
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<void> {
@@ -1363,6 +1400,10 @@ export async function runWritePhase(params: {
   try {
     // Lock the topic before creating a post record so concurrent users cannot create orphan posts.
     gate.assertApproved();
+    await assertPreflightPassed(
+      { topicId, proposedTitle: strategy.title },
+      { allowOverride: params.forcePreflightOverride }
+    );
     const setResult = await atomicSetTopicInProgress(topicId);
     if (!setResult.success) {
       throw new Error(`Topic lock failed: ${setResult.reason}`);
@@ -1416,11 +1457,17 @@ export async function runWritePhase(params: {
       throw new Error(`pre-write gate 차단: ${preGateResult.reason}`);
     }
     emit(controller, makeEvent("progress", "writing", { message: "pre-write gate 통과" }));
-    const harnessBriefing = await prepareHarnessBriefing({
+    const baseHarnessBriefing = await prepareHarnessBriefing({
       userId,
       strategy,
       corpusSummary,
     });
+    const localityKeywordPlan = await localityKeywordAgent.buildPreWritePlan({
+      userId,
+      strategy,
+      topicId,
+    });
+    const harnessBriefing = [baseHarnessBriefing, localityKeywordPlan.writerBrief].join("\n\n");
     emit(controller, makeEvent("progress", "writing", { message: "하네스 기준을 반영한 작성 브리핑 준비 완료" }));
 
     // ?? 5. 蹂몃Ц ?묒꽦
@@ -1483,6 +1530,14 @@ export async function runWritePhase(params: {
     });
     writerResult = revised.writerResult;
     const evalResult = revised.evalResult;
+    await localityKeywordAgent.recordUsedKeywords({
+      userId,
+      topicId,
+      writerResult,
+      plan: localityKeywordPlan,
+    }).catch((error) => {
+      console.warn("[orchestrator] locality keyword ledger update failed:", error instanceof Error ? error.message : error);
+    });
 
     state = updateState(state, { writerResult, evalResult });
     activePipelines.set(pipelineId, state);
@@ -1509,6 +1564,7 @@ export async function runWritePhase(params: {
     }).catch(() => {});
 
     const completionSupport = buildCompletionSupport(strategy, writerResult.title);
+    const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy, writerResult, evalResult });
 
     if (!postGateResult.passed) {
       await updatePostRecord(postRecord.postId, {
@@ -1532,6 +1588,7 @@ export async function runWritePhase(params: {
         baselineDelta,
         pass: false,
         recommendations: evalResult.recommendations,
+        naverLogicEvaluation,
         ...completionSupport,
       }));
       emit(controller, makeEvent("stage_change", "complete", {
@@ -1594,6 +1651,7 @@ export async function runWritePhase(params: {
         baselineDelta,
         pass: evalResult.pass,
         recommendations: evalResult.recommendations,
+        naverLogicEvaluation,
         ...completionSupport,
       }));
     emit(controller, makeEvent("stage_change", "complete", {

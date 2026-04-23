@@ -7,7 +7,7 @@ import { ApprovalDialog } from "@/components/pipeline/approval-dialog";
 import { PipelineStateInspector, applyEventToInspector } from "@/components/pipeline/state-inspector";
 import { usePipelineStore } from "@/lib/store/pipeline-store";
 import { reviewActualDraft, type DraftReviewIssue, type DraftReviewResult } from "@/lib/agents/draft-review";
-import type { SSEEvent, ApprovalRequest, StrategyPlanResult } from "@/lib/agents/types";
+import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation } from "@/lib/agents/types";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -31,6 +31,7 @@ interface ResultData {
   recommendations: string[];
   hashtags?: string[];
   imageFileNames?: string[];
+  naverLogicEvaluation?: NaverLogicEvaluation;
 }
 
 function parseSseChunk(buffer: string, onEvent: (event: SSEEvent) => void): string {
@@ -97,6 +98,8 @@ export default function PipelinePage() {
   const [stuckCount, setStuckCount] = useState(0);
   const [recovering, setRecovering] = useState(false);
   const [pipelineError, setPipelineError] = useState<string | null>(null);
+  const [preflightBlocked, setPreflightBlocked] = useState(false);
+  const forcePreflightOverrideRef = useRef(false);
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewBody, setReviewBody] = useState("");
   const [reviewIssues, setReviewIssues] = useState<DraftReviewIssue[]>([]);
@@ -110,12 +113,8 @@ export default function PipelinePage() {
   const [publishNotice, setPublishNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const currentUid = normalizeUserId(userId);
   const planningTopics = topics.filter((topic) => topic.source !== "direct");
-  const userTopics = currentUid
-    ? planningTopics.filter((topic) => normalizeUserId(topic.assignedUserId ?? "") === currentUid)
-    : planningTopics;
-  const { remaining: availableTopics } = resolveRemainingTopics(userTopics, posts);
+  const { remaining: availableTopics } = resolveRemainingTopics(planningTopics, posts);
 
   useEffect(() => {
     if (topicMode !== "list" || !selectedTopicId) return;
@@ -237,7 +236,15 @@ export default function PipelinePage() {
 
     if (event.type === "error") {
       const message = (event.data as { message?: string })?.message ?? "파이프라인 오류가 발생했습니다.";
-      setPipelineError(message);
+      const isPreflight = message.includes("Preflight check blocked writing");
+      setPreflightBlocked(isPreflight);
+      setPipelineError(
+        isPreflight
+          ? "이미 이전 작성목록에 있는 내용입니다. 비슷한 주제로 유사문서가 되지 않게 다른 각도로 작성할까요?"
+          : message.includes("Request was aborted")
+            ? "요청 시간이 길어져 중단되었습니다. 잠시 후 다시 실행해 주세요."
+            : message
+      );
       setStage("idle");
       setRunning(false);
       setRunningTitle(null);
@@ -264,6 +271,7 @@ export default function PipelinePage() {
         topicId: approvalData.topicId,
         userId: uid,
         strategy: approvalData.strategy,
+        forcePreflightOverride: forcePreflightOverrideRef.current,
       }),
     })
       .then((res) => {
@@ -327,7 +335,7 @@ export default function PipelinePage() {
     return json.topic.topicId;
   };
 
-  const startPipeline = async () => {
+  const startPipeline = async (forcePreflightOverride = false) => {
     const uid = normalizeUserId(userId.trim());
     if (!uid) return;
     if (topicMode === "list" && !selectedTopicId) return;
@@ -356,8 +364,10 @@ export default function PipelinePage() {
     setStage("idle");
     setApproval(null);
     setPipelineError(null);
+    setPreflightBlocked(false);
     setRunning(true);
     setElapsed(0);
+    forcePreflightOverrideRef.current = forcePreflightOverride;
 
     const selectedTitle =
       topicMode === "list"
@@ -383,7 +393,7 @@ export default function PipelinePage() {
     fetch("/api/pipeline/strategy", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topicId, userId: uid }),
+      body: JSON.stringify({ topicId, userId: uid, forcePreflightOverride }),
     })
       .then((res) => {
         if (!res.body) {
@@ -616,6 +626,15 @@ export default function PipelinePage() {
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-red-700">글쓰기 실패</p>
             <p className="text-xs text-red-600 mt-0.5 break-words">{pipelineError}</p>
+            {preflightBlocked && (
+              <button
+                type="button"
+                onClick={() => startPipeline(true)}
+                className="mt-3 px-3 py-1.5 rounded-md bg-amber-600 text-white text-xs font-semibold hover:bg-amber-700 transition-colors"
+              >
+                다른 각도로 작성
+              </button>
+            )}
           </div>
           <button
             type="button"
@@ -758,7 +777,7 @@ export default function PipelinePage() {
 
             <button
               type="button"
-              onClick={startPipeline}
+              onClick={() => startPipeline()}
               disabled={!canStart}
               className="w-full py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
@@ -815,6 +834,7 @@ export default function PipelinePage() {
               proposedTitle={approval.proposedTitle}
               rationale={approval.rationale}
               outline={approval.outline}
+              naverLogic={approval.strategy.naverLogic}
               onApprove={handleApprove}
               onReject={() => handleApprove({ pipelineId: approval.pipelineId, approved: false })}
             />
@@ -831,6 +851,48 @@ export default function PipelinePage() {
                   {result.wordCount.toLocaleString()}자 · 평가 점수 {result.evalScore}점
                 </p>
               </div>
+
+              {result.naverLogicEvaluation && (
+                <div className="bg-white border border-zinc-200 rounded-xl p-4 space-y-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold text-zinc-600 mb-1">네이버 로직 적용</p>
+                      <p className="text-sm font-semibold text-zinc-900">{result.naverLogicEvaluation.label}</p>
+                      <p className="text-xs text-zinc-500 mt-1">{result.naverLogicEvaluation.reason}</p>
+                    </div>
+                    <div className="shrink-0 rounded-lg border border-blue-100 bg-blue-50 px-3 py-2 text-right">
+                      <p className="text-[11px] font-semibold text-blue-600">로직 완성도</p>
+                      <p className="text-lg font-bold text-blue-700">{result.naverLogicEvaluation.completenessScore}점</p>
+                    </div>
+                  </div>
+                  {result.naverLogicEvaluation.evidence.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-zinc-600 mb-1">반영 근거</p>
+                      <ul className="space-y-1">
+                        {result.naverLogicEvaluation.evidence.map((item, index) => (
+                          <li key={`${item}-${index}`} className="text-sm text-zinc-700 flex gap-2">
+                            <span className="text-zinc-400">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {result.naverLogicEvaluation.improvements.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-zinc-600 mb-1">보강 포인트</p>
+                      <ul className="space-y-1">
+                        {result.naverLogicEvaluation.improvements.map((item, index) => (
+                          <li key={`${item}-${index}`} className="text-sm text-zinc-700 flex gap-2">
+                            <span className="text-amber-500">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {result.recommendations.length > 0 && (
                 <div className="bg-white border border-zinc-200 rounded-xl p-4">

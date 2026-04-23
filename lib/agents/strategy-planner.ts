@@ -15,6 +15,17 @@ import type { TopicIndex } from "@/lib/types/github-data";
 import type { StrategyPlanResult } from "./types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import { buildContentTopologyPlan } from "./content-topology";
+import { buildPolicyPromptSection } from "./blog-workflow-policy";
+import { naverLogicAgent } from "./naver-logic-agent";
+
+const ALLOWED_VAPE_TOPIC_CLARIFICATION = [
+  "## Allowed vape topic clarification",
+  "- Electronic-cigarette/vape device recommendations, liquid selection guides, beginner guides, local shop recommendation posts, setup guides, troubleshooting posts, and product reviews are allowed.",
+  "- Do not block a topic only because it contains electronic cigarette, vape, liquid, or device.",
+  "- Block only cessation-focused angles such as how to quit vape liquid or stop using electronic cigarette liquid.",
+  "- If a topic is allowed, return only the required strategy JSON. Do not return a refusal essay.",
+].join("\n");
+
 
 const SYSTEM_PROMPT = `당신은 네이버 블로그 포스팅 전략 전문가입니다.
 주어진 토픽을 분석하여 사용자의 글쓰기 스타일과 타깃 독자에 맞는 포스팅 전략을 수립합니다.
@@ -64,6 +75,10 @@ const SYSTEM_PROMPT = `당신은 네이버 블로그 포스팅 전략 전문가�
 - 금지 표현은 절대 포함하지 않는다
 - 코퍼스 예시의 글쓰기 스타일을 반영한다
 - 타깃 독자 수준에 맞는 깊이를 유지한다`;
+
+function buildPolicySystemPrompt(): string {
+  return `${buildPolicyPromptSection()}\n\n${ALLOWED_VAPE_TOPIC_CLARIFICATION}\n\n${SYSTEM_PROMPT}`;
+}
 
 const TOOLS: Tool[] = [
   {
@@ -318,7 +333,7 @@ export async function runStrategyPlanner(params: {
   try {
     const result = await runToolUseLoop({
       model: MODELS.sonnet,
-      system: SYSTEM_PROMPT,
+      system: buildPolicySystemPrompt(),
       messages: [{ role: "user", content: userMessage }],
       tools: TOOLS,
       toolRegistry,
@@ -344,12 +359,15 @@ export async function runStrategyPlanner(params: {
   }
 
   const contentTopology = await buildContentTopologyPlan({ topic, strategy: plan, userId });
+  const naverLogic = naverLogicAgent.planBeforeWriting({ ...plan, contentTopology });
   plan = {
     ...plan,
     contentTopology,
+    naverLogic,
   };
 
   onProgress?.(`전략 수립 완료: "${plan.title}" (${contentTopology.kind === "hub" ? "허브글" : "리프글"})`);
+  onProgress?.(`네이버 작성 로직 검수 완료: ${naverLogicAgent.formatLabel(naverLogic.primary)} / 목표 완성도 ${naverLogic.completenessTarget}점`);
   return plan;
 }
 
@@ -369,7 +387,7 @@ export async function runStrategyPlannerSimple(params: {
 
   const response = await client.messages.create({
     model: MODELS.sonnet,
-    system: SYSTEM_PROMPT,
+    system: buildPolicySystemPrompt(),
     max_tokens: 4096,
     messages: [
       {

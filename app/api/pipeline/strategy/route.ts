@@ -8,9 +8,9 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
 export async function POST(request: NextRequest) {
-  let body: { topicId: string; userId: string };
+  let body: { topicId: string; userId: string; forcePreflightOverride?: boolean };
   try {
-    body = (await request.json()) as { topicId: string; userId: string };
+    body = (await request.json()) as { topicId: string; userId: string; forcePreflightOverride?: boolean };
   } catch {
     return NextResponse.json({ error: "요청 본문 파싱 실패" }, { status: 400 });
   }
@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
       runStrategyPhase({
         topicId: body.topicId,
         userId,
+        forcePreflightOverride: body.forcePreflightOverride,
         pipelineId,
         controller,
         signal: abortController.signal,

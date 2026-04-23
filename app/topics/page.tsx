@@ -8,6 +8,7 @@ import { blogCode } from "@/lib/utils/blog-code";
 import type { GeneratedTopic, TopicGeneratorOutput } from "@/lib/agents/topic-generator";
 
 type StatusFilter = "all" | "remaining" | "matched" | Topic["status"];
+type UserFilter = "all" | "unassigned" | string;
 
 const STATUS_LABELS: Record<Topic["status"], string> = {
   draft: "대기",
@@ -45,6 +46,7 @@ export default function TopicsPage() {
   const [posts, setPosts] = useState<PostingRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<StatusFilter>("all");
+  const [userFilter, setUserFilter] = useState<UserFilter>("all");
 
   // 불러오기 패널
   const [importTab, setImportTab] = useState<"text" | "file">("text");
@@ -92,7 +94,15 @@ export default function TopicsPage() {
 
   // RemainingTopicResolver: 교차체크
   const planningTopics = topics.filter((topic) => topic.source !== "direct");
-  const { remaining, matched } = resolveRemainingTopics(planningTopics, posts);
+  const userOptions = Array.from(
+    new Set(planningTopics.map((topic) => topic.assignedUserId?.trim().toLowerCase()).filter(Boolean) as string[])
+  ).sort((a, b) => a.localeCompare(b));
+  const userScopedTopics = planningTopics.filter((topic) => {
+    if (userFilter === "all") return true;
+    if (userFilter === "unassigned") return !topic.assignedUserId;
+    return topic.assignedUserId?.trim().toLowerCase() === userFilter;
+  });
+  const { remaining, matched } = resolveRemainingTopics(userScopedTopics, posts);
   const remainingIds = new Set(remaining.map((t) => t.topicId));
 
   // ── 파일/텍스트 처리 ────────────────────────────────────
@@ -267,8 +277,8 @@ export default function TopicsPage() {
   const filtered = (() => {
     if (filter === "remaining") return remaining;
     if (filter === "matched") return matched;
-    if (filter === "all") return planningTopics;
-    return planningTopics.filter((t) => t.status === filter);
+    if (filter === "all") return userScopedTopics;
+    return userScopedTopics.filter((t) => t.status === filter);
   })();
 
   return (
@@ -280,6 +290,22 @@ export default function TopicsPage() {
             총 {planningTopics.length}개 · 남은 항목 {remaining.length}개 · 발행완료 {matched.length}개
           </p>
         </div>
+        <select
+          value={userFilter}
+          onChange={(event) => setUserFilter(event.target.value)}
+          className="ml-auto mr-3 w-64 border border-zinc-200 rounded-lg px-3 py-2 text-sm bg-white text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          aria-label="담당자별 글목록 보기"
+        >
+          <option value="all">전체 글목록 ({planningTopics.length})</option>
+          <option value="unassigned">
+            미지정 ({planningTopics.filter((topic) => !topic.assignedUserId).length})
+          </option>
+          {userOptions.map((user) => (
+            <option key={user} value={user}>
+              {user} ({planningTopics.filter((topic) => topic.assignedUserId?.trim().toLowerCase() === user).length})
+            </option>
+          ))}
+        </select>
         <button
           onClick={() => { setShowAdd(true); setNotice(null); }}
           className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"

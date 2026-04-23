@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { PipelineStage } from "@/lib/types/agent";
-import type { SSEEvent } from "@/lib/agents/types";
+import type { SSEEvent, NaverLogicEvaluation } from "@/lib/agents/types";
 import { INITIAL_INSPECTOR_STATE } from "@/components/pipeline/state-inspector";
 import type { InspectorState } from "@/components/pipeline/state-inspector";
 
@@ -18,6 +18,7 @@ interface ResultData {
   recommendations: string[];
   hashtags?: string[];
   imageFileNames?: string[];
+  naverLogicEvaluation?: NaverLogicEvaluation;
 }
 
 type TopicMode = "list" | "direct";
