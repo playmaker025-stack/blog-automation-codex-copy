@@ -172,6 +172,46 @@ function buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
   return { hashtags, imageFileNames };
 }
 
+function extractApprovedTitle(modifications?: string): string | null {
+  if (!modifications) return null;
+
+  const explicitTitleLine = modifications.match(/(?:^|\n)\s*(?:제목|타이틀|수정 제목)\s*[:：]\s*(.+)\s*(?:$|\n)/i);
+  const requestedTitle = explicitTitleLine?.[1]?.trim().replace(/^["'“”‘’]+|["'“”‘’]+$/g, "");
+  return requestedTitle ? requestedTitle : null;
+}
+
+function applyApprovalModificationsToStrategy(
+  strategy: StrategyPlanResult,
+  modifications?: string
+): StrategyPlanResult {
+  const normalized = modifications?.trim();
+  if (!normalized) return strategy;
+
+  const requestedTitle = extractApprovedTitle(normalized);
+  return {
+    ...strategy,
+    title: requestedTitle ?? strategy.title,
+    rationale: `${strategy.rationale}\n\n[사용자 승인 후 추가 수정 요청]\n${normalized}`,
+    keyPoints: uniqueNonEmpty([
+      ...strategy.keyPoints,
+      `사용자 승인 후 수정 요청 반영: ${normalized}`,
+    ]),
+  };
+}
+
+function buildApprovalModificationBrief(modifications?: string): string {
+  const normalized = modifications?.trim();
+  if (!normalized) return "";
+
+  return `## 사용자 승인 후 추가 수정 요청
+${normalized}
+
+위 수정 요청을 현재 전략보다 우선 반영한다.
+- 방향 수정 요청이 있으면 도입과 핵심 설명 흐름부터 바로 반영한다.
+- 제목 수정 요청이 있으면 명시된 제목을 최종 초안 제목으로 사용한다.
+- 문체/강조점 수정 요청이 있으면 코퍼스 스타일을 유지하되 해당 요청을 우선 적용한다.`;
+}
+
 async function prepareHarnessBriefing(params: {
   userId: string;
   strategy: StrategyPlanResult;
@@ -1372,6 +1412,7 @@ export async function runWritePhase(params: {
   userId: string;
   pipelineId: string;
   strategy: StrategyPlanResult;
+  modifications?: string;
   forcePreflightOverride?: boolean;
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
@@ -1382,13 +1423,15 @@ export async function runWritePhase(params: {
   const gate = new ApprovalGate(pipelineId);
   gate.grant(); // ?대씪?댁뼵?몄뿉???대? ?뱀씤??
   let thisSetTopicInProgress = false;
+  const approvalModifications = params.modifications?.trim() || "";
+  const effectiveStrategy = applyApprovalModificationsToStrategy(strategy, approvalModifications);
 
   let state: PipelineState = {
     pipelineId,
     topicId,
     userId,
     stage: "awaiting-approval",
-    strategy,
+    strategy: effectiveStrategy,
     writerResult: null,
     evalResult: null,
     error: null,
@@ -1401,7 +1444,7 @@ export async function runWritePhase(params: {
     // Lock the topic before creating a post record so concurrent users cannot create orphan posts.
     gate.assertApproved();
     await assertPreflightPassed(
-      { topicId, proposedTitle: strategy.title },
+      { topicId, proposedTitle: effectiveStrategy.title },
       { allowOverride: params.forcePreflightOverride }
     );
     const setResult = await atomicSetTopicInProgress(topicId);
@@ -1410,18 +1453,18 @@ export async function runWritePhase(params: {
     }
     thisSetTopicInProgress = true;
 
-    const postRecord = await createPostingRecord({ topicId, userId, title: strategy.title, pipelineId });
+    const postRecord = await createPostingRecord({ topicId, userId, title: effectiveStrategy.title, pipelineId });
 
     // approval_request artifact (best-effort)
     await saveArtifact<ApprovalRequestData>(pipelineId, "approval_request", {
       pipelineId,
       previousTitle: "",
-      proposedTitle: strategy.title,
+      proposedTitle: effectiveStrategy.title,
       materialChange: false,
       materialChangeSignals: [],
-      rationale: strategy.rationale,
+      rationale: effectiveStrategy.rationale,
       requestedAt: now,
-      response: { approved: true, respondedAt: now, modifications: null },
+      response: { approved: true, respondedAt: now, modifications: approvalModifications || null },
     }).catch(() => {});
 
     // record_update artifact (best-effort)
@@ -1459,15 +1502,21 @@ export async function runWritePhase(params: {
     emit(controller, makeEvent("progress", "writing", { message: "pre-write gate 통과" }));
     const baseHarnessBriefing = await prepareHarnessBriefing({
       userId,
-      strategy,
+      strategy: effectiveStrategy,
       corpusSummary,
     });
     const localityKeywordPlan = await localityKeywordAgent.buildPreWritePlan({
       userId,
-      strategy,
+      strategy: effectiveStrategy,
       topicId,
     });
-    const harnessBriefing = [baseHarnessBriefing, localityKeywordPlan.writerBrief].join("\n\n");
+    const harnessBriefing = [
+      baseHarnessBriefing,
+      localityKeywordPlan.writerBrief,
+      buildApprovalModificationBrief(approvalModifications),
+    ]
+      .filter(Boolean)
+      .join("\n\n");
     emit(controller, makeEvent("progress", "writing", { message: "하네스 기준을 반영한 작성 브리핑 준비 완료" }));
 
     // ?? 5. 蹂몃Ц ?묒꽦
@@ -1479,7 +1528,7 @@ export async function runWritePhase(params: {
     }));
 
     let writerResult = await runMasterWriter({
-      strategy,
+      strategy: effectiveStrategy,
       userId,
       topicId,
       postId: postRecord.postId,
@@ -1521,7 +1570,7 @@ export async function runWritePhase(params: {
       topicId,
       userId,
       postId: postRecord.postId,
-      strategy,
+      strategy: effectiveStrategy,
       corpusSummary,
       harnessBriefing,
       writerResult,
@@ -1563,8 +1612,8 @@ export async function runWritePhase(params: {
       baselineDelta,
     }).catch(() => {});
 
-    const completionSupport = buildCompletionSupport(strategy, writerResult.title);
-    const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy, writerResult, evalResult });
+    const completionSupport = buildCompletionSupport(effectiveStrategy, writerResult.title);
+    const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy: effectiveStrategy, writerResult, evalResult });
 
     if (!postGateResult.passed) {
       await updatePostRecord(postRecord.postId, {

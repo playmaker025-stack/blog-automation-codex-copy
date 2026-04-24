@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
     topicId: string;
     userId: string;
     strategy: StrategyPlanResult;
+    modifications?: string;
     forcePreflightOverride?: boolean;
   };
 
@@ -60,6 +61,7 @@ export async function POST(request: NextRequest) {
         userId,
         pipelineId: body.pipelineId,
         strategy: body.strategy,
+        modifications: body.modifications?.trim() || undefined,
         forcePreflightOverride: body.forcePreflightOverride,
         controller,
         signal: abortController.signal,

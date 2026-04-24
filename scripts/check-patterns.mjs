@@ -186,6 +186,15 @@ if (!claudeDoc.includes('Railway `Apply N changes` 미적용 상태에서 GitHub
   fail('RULE-008', join(ROOT, 'CLAUDE.md'), 0, 'Known failure patterns must document Railway Apply-changes drift.')
 }
 
+if (!claudeDoc.includes('`/verify` 통과 후 커밋/푸시/배포 확인까지 완료') || !claudeDoc.includes('`git push origin main`')) {
+  fail('RULE-008', join(ROOT, 'CLAUDE.md'), 0, 'Workflow doc must require commit/push/deploy verification after verify passes.')
+}
+
+const verifyScript = content(join(ROOT, 'scripts', 'verify.mjs'))
+if (!verifyScript.includes('Next cycle: commit the verified changes, push origin/main, then confirm a fresh Railway deployment and the live screen behavior.')) {
+  fail('RULE-008', join(ROOT, 'scripts', 'verify.mjs'), 0, 'verify script must print the post-verify deployment cycle reminder.')
+}
+
 if (violations.length === 0) {
   process.exit(0)
 }

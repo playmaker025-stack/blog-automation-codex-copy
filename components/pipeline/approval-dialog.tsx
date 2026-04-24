@@ -30,7 +30,7 @@ export function ApprovalDialog({
   const handleApprove = async () => {
     setLoading(true);
     try {
-      await onApprove({ pipelineId, approved: true });
+      await onApprove({ pipelineId, approved: true, modifications });
     } finally {
       setLoading(false);
     }

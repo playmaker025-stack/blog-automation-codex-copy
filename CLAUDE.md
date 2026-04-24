@@ -205,6 +205,25 @@ node scripts/verify.mjs --skip-build --skip-test  # 빠른 검증 (typecheck + l
 
 **현재 상태**: `matched_count: 7 / 30` (30개 중 23개 미매칭).
 
+### [2026-04-24] 전략 승인 팝업의 수정 요청이 승인 경로에서 누락됨
+
+**증상**: 전략 수립 후 승인 팝업에서 수정 요청을 입력하고 승인해도, 초안이 수정 요청을 반영하지 않고 원래 전략대로 생성됨.
+
+**원인 분석**:
+1. `components/pipeline/approval-dialog.tsx`에서 승인 버튼은 `modifications` 값을 보내지 않고 `approved: true`만 전달함
+2. `app/pipeline/page.tsx`의 승인 처리 로직도 수정 요청을 `startWritePhase`로 넘기지 않음
+3. `app/api/pipeline/write/route.ts`와 `lib/agents/orchestrator.ts`의 write phase는 승인 수정 요청을 받을 수 있는 필드가 없어 글쓰기 브리핑에 반영되지 않음
+
+**수정 사항**:
+- 승인 버튼도 `modifications`를 함께 전달
+- write phase 요청 body에 `modifications` 필드 추가
+- `runWritePhase`에서 승인 수정 요청을 전략/하네스 브리핑에 합성해서 Master Writer가 우선 반영하도록 변경
+- 수정 요청에 `제목:` 또는 `타이틀:` 형식이 있으면 초안 제목에도 반영
+
+**재발 방지 규칙**:
+- 승인/거절 팝업에서 받는 자유입력 필드는 승인 경로와 거절 경로 모두에서 동일하게 전달되는지 확인할 것
+- `approval_required` 이후 추가 입력이 있으면 UI -> API route -> orchestrator -> writer prompt까지 전체 전달 경로를 한 번에 점검할 것
+
 ### [2026-04-24] Railway repo 연결 뒤에도 Active 배포가 예전 CLI 빌드로 남음
 
 **증상**: GitHub `main`에 최신 커밋을 푸시했고 Railway `Source`에도 repo/branch 연결이 보이는데, 실제 서비스 화면은 예전 UI를 계속 표시함. `Deployments`의 `Active` 항목은 새 시간이 찍혀 있어도 커밋 제목이 예전 `via CLI` 배포로 남아 있음.
@@ -234,6 +253,18 @@ node scripts/verify.mjs --skip-build --skip-test  # 빠른 검증 (typecheck + l
 - `Apply` 후 새 빌드가 생성된 시점부터 실제 배포 검증을 진행할 것
 
 ## 개발 스택
+
+## 완료 사이클 강제 규칙
+
+- `/verify` 통과 후 커밋/푸시/배포 확인까지 완료
+- 코드 수정 작업은 아래 순서를 모두 끝내야 진짜 완료로 본다.
+1. 코드 수정
+2. `node scripts/verify.mjs`
+3. 검증 통과 후 커밋
+4. `git push origin main`
+5. Railway 새 deployment 생성 확인
+6. 실제 배포 URL에서 수정 화면/동작 확인
+- `/verify`만 통과하고 푸시나 배포 확인이 빠진 상태에서는 "완료"라고 말하지 않는다.
 
 - **Framework**: Next.js 15 (App Router, TypeScript)
 - **Styling**: Tailwind CSS

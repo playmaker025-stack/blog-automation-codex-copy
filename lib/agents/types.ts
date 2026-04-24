@@ -125,7 +125,7 @@ export interface ApprovalPayload {
 export interface ApprovalRequest {
   pipelineId: string;
   approved: boolean;
-  modifications?: string; // 거절 시 수정 요청 사항
+  modifications?: string; // 승인 또는 거절 시 사용자 수정 요청 사항
 }
 
 // ============================================================

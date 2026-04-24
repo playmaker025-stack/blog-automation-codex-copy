@@ -132,4 +132,5 @@ if (hasFailure) {
 }
 
 console.log('\nAll verification steps passed.')
+console.log('Next cycle: commit the verified changes, push origin/main, then confirm a fresh Railway deployment and the live screen behavior.')
 process.exit(0)

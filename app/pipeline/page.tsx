@@ -20,6 +20,7 @@ interface ApprovalData {
   rationale: string;
   outline: string[];
   strategy: StrategyPlanResult;
+  modifications?: string;
 }
 
 interface ResultData {
@@ -217,6 +218,7 @@ export default function PipelinePage() {
         rationale: data.rationale,
         outline: data.outline,
         strategy: data.strategy,
+        modifications: "",
       });
     }
 
@@ -275,6 +277,7 @@ export default function PipelinePage() {
         topicId: approvalData.topicId,
         userId: uid,
         strategy: approvalData.strategy,
+        modifications: approvalData.modifications?.trim() || undefined,
         forcePreflightOverride: forcePreflightOverrideRef.current,
       }),
     })
@@ -456,7 +459,13 @@ export default function PipelinePage() {
     setInspector((prev) => ({ ...prev, approval_received: true }));
 
     if (!currentApproval) return;
-    startWritePhase(currentApproval, uid);
+    startWritePhase(
+      {
+        ...currentApproval,
+        modifications: request.modifications?.trim() || "",
+      },
+      uid
+    );
   };
 
   const handleRecoverStuck = async () => {
