@@ -9,6 +9,8 @@ import { hasOpenAIKey, requestOpenAIJson } from "@/lib/openai/responses";
 import { randomUUID } from "crypto";
 import type { EvalResult, StrategyPlanResult, WriterResult } from "./types";
 import { HARNESS_PASS_THRESHOLD } from "./harness-guidance";
+import { evaluateSeoCompleteness } from "./seo-metrics";
+import { naverLogicAgent } from "./naver-logic-agent";
 
 const SYSTEM_PROMPT = `당신은 네이버 블로그 콘텐츠 품질 평가 전문가입니다.
 
@@ -23,8 +25,9 @@ const SYSTEM_PROMPT = `당신은 네이버 블로그 콘텐츠 품질 평가 전
 1. user_corpus_retriever로 예시 글 로드 (style_match 기준)
 2. review_record_audit으로 과거 포스팅 패턴 확인
 3. 각 차원별 점수와 근거 작성
-4. 가중치 합산: (score * weight) 합계
-5. 개선 권고사항 1-3개 제시
+4. SEO 적합도와 네이버 로직 충실도를 가장 중요하게 평가
+5. 나머지 점수는 보조 품질 지표로만 반영
+6. 개선 권고사항 1-3개 제시
 
 ## 출력 형식 (반드시 JSON 코드블록)
 \`\`\`json
@@ -75,12 +78,12 @@ const TOOLS: Tool[] = [
   },
 ];
 
-const WEIGHTS = {
-  originality: 0.25,
-  style_match: 0.30,
-  structure: 0.20,
-  engagement: 0.15,
-  forbidden_check: 0.10,
+const SUB_WEIGHTS = {
+  originality: 0.03,
+  style_match: 0.08,
+  structure: 0.07,
+  engagement: 0.04,
+  forbidden_check: 0.03,
 } as const;
 
 function parseEvalFromText(text: string): Omit<EvalResult, "runId" | "pass"> {
@@ -111,8 +114,8 @@ function parseEvalFromText(text: string): Omit<EvalResult, "runId" | "pass"> {
 
 function computeAggregate(scores: EvalResult["scores"]): number {
   return Math.round(
-    Object.entries(WEIGHTS).reduce(
-      (sum, [dim, weight]) => sum + (scores[dim as keyof typeof WEIGHTS] ?? 0) * weight,
+    Object.entries(SUB_WEIGHTS).reduce(
+      (sum, [dim, weight]) => sum + (scores[dim as keyof typeof SUB_WEIGHTS] ?? 0) * weight,
       0
     )
   );
@@ -198,7 +201,8 @@ async function runOpenAIHarnessEvaluator(params: {
           "You are a strict Korean Naver Blog content harness evaluator.",
           "Return Korean reasoning and recommendations.",
           "Score realistically. A publishable but generic draft should not exceed 70.",
-          "Use this rubric: originality 25, style_match 30, structure 20, engagement 15, forbidden_check 10.",
+          "Use this rubric for sub scores only: originality, style_match, structure, engagement, forbidden_check.",
+          "Final evaluation must prioritize SEO fit and Naver logic completeness over the sub scores.",
           "Give credit for concrete search-intent fit, corpus style match, hub/leaf structure, mobile readability, and practical decision criteria.",
           "Penalize generic advice, missing user style, weak opening, vague examples, keyword stuffing, unsupported absolute claims, and missing topology role.",
         ].join("\n"),
@@ -242,14 +246,48 @@ async function runOpenAIHarnessEvaluator(params: {
     engagement: clampScore(parsed.scores.engagement),
     forbidden_check: clampScore(parsed.scores.forbidden_check),
   };
-  const aggregateScore = computeAggregate(scores);
+  const subScore = computeAggregate(scores);
   const runId = `eval-${randomUUID().slice(0, 8)}`;
-  const evalResult: EvalResult = {
+  const provisionalEval: EvalResult = {
     runId,
     scores,
-    aggregateScore,
+    aggregateScore: subScore,
     reasoning: parsed.reasoning,
     recommendations: parsed.recommendations,
+    pass: subScore >= HARNESS_PASS_THRESHOLD,
+  };
+  const seoEvaluation = evaluateSeoCompleteness({
+    title: writerResult.title,
+    body: writerResult.content,
+    keywords: strategy.keywords,
+  });
+  const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
+    strategy,
+    writerResult,
+    evalResult: provisionalEval,
+  });
+  const aggregateScore = Math.round(
+    seoEvaluation.score * 0.45 +
+    naverLogicEvaluation.completenessScore * 0.35 +
+    scores.style_match * 0.08 +
+    scores.structure * 0.07 +
+    scores.engagement * 0.03 +
+    scores.originality * 0.01 +
+    scores.forbidden_check * 0.01
+  );
+  const evalResult: EvalResult = {
+    ...provisionalEval,
+    aggregateScore,
+    reasoning: {
+      ...parsed.reasoning,
+      seo: `SEO 점수 ${seoEvaluation.score}점. ${seoEvaluation.evidence[0] ?? "키워드/제목/도입부 배치를 점검했습니다."}`,
+      naver_logic: `네이버 로직 점수 ${naverLogicEvaluation.completenessScore}점. ${naverLogicEvaluation.evidence[0] ?? "로직 흐름을 점검했습니다."}`,
+    },
+    recommendations: [
+      ...seoEvaluation.improvements,
+      ...naverLogicEvaluation.improvements,
+      ...parsed.recommendations,
+    ].filter((value, index, array) => value && array.indexOf(value) === index).slice(0, 6),
     pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
   };
 
@@ -323,16 +361,50 @@ structure 점수에는 콘텐츠 구조 판단의 허브글/리프글 역할이 
   onProgress?.("평가 결과 파싱 중...");
   const parsed = parseEvalFromText(resultText);
 
-  // aggregateScore 재계산 (가중치 기준)
-  const aggregateScore = computeAggregate(parsed.scores);
+  // sub score는 보조 지표이고, 최종 점수는 SEO와 네이버 로직을 우선 반영합니다.
+  const subScore = computeAggregate(parsed.scores);
 
   const runId = `eval-${randomUUID().slice(0, 8)}`;
-  const evalResult: EvalResult = {
+  const provisionalEval: EvalResult = {
     runId,
     scores: parsed.scores,
-    aggregateScore,
+    aggregateScore: subScore,
     reasoning: parsed.reasoning,
     recommendations: parsed.recommendations,
+    pass: subScore >= HARNESS_PASS_THRESHOLD,
+  };
+  const seoEvaluation = evaluateSeoCompleteness({
+    title: writerResult.title,
+    body: writerResult.content,
+    keywords: strategy.keywords,
+  });
+  const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
+    strategy,
+    writerResult,
+    evalResult: provisionalEval,
+  });
+  const aggregateScore = Math.round(
+    seoEvaluation.score * 0.45 +
+    naverLogicEvaluation.completenessScore * 0.35 +
+    parsed.scores.style_match * 0.08 +
+    parsed.scores.structure * 0.07 +
+    parsed.scores.engagement * 0.03 +
+    parsed.scores.originality * 0.01 +
+    parsed.scores.forbidden_check * 0.01
+  );
+  const evalResult: EvalResult = {
+    ...provisionalEval,
+    aggregateScore,
+    reasoning: {
+      ...parsed.reasoning,
+      seo: `SEO 점수 ${seoEvaluation.score}점. ${seoEvaluation.evidence[0] ?? "키워드/제목/도입부 배치를 점검했습니다."}`,
+      naver_logic: `네이버 로직 점수 ${naverLogicEvaluation.completenessScore}점. ${naverLogicEvaluation.evidence[0] ?? "로직 흐름을 점검했습니다."}`,
+    },
+    recommendations: [
+      ...seoEvaluation.improvements,
+      ...naverLogicEvaluation.improvements,
+      ...parsed.recommendations,
+    ].filter((value, index, array) => value && array.indexOf(value) === index).slice(0, 6),
     pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
   };
 

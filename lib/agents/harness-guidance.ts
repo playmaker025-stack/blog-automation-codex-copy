@@ -141,11 +141,11 @@ export function buildPreWriteHarnessBriefing(params: {
 목표: 최종 Harness Evaluator에서 ${HARNESS_PASS_THRESHOLD}점 이상을 목표로 초안을 작성한다.
 
 평가 루브릭:
-- originality 25%: 일반론만 쓰지 말고 주제별 구체 상황, 선택 기준, 실제 상담/방문 관점을 넣는다.
-- style_match 30%: 사용자 코퍼스의 톤, 문장 흐름, 시작 방식, 마무리 방식을 따른다.
-- structure 20%: 도입-핵심 기준-상황별 설명-정리 흐름이 분명해야 한다.
-- engagement 15%: 입문자가 실제로 궁금해할 질문과 판단 포인트를 먼저 답한다.
-- forbidden_check 10%: 100% 보장, 최고/무조건, 건강/금연 효능 단정, 미성년자 유도 표현을 피한다.
+- SEO 45%: 메인 키워드의 제목/도입부/중간 문단 반영, 검색 의도 정합성, 과다 반복 방지
+- 네이버 로직 35%: D.I.A./C-Rank 흐름, 상황-기준-해결 순서, 허브/리프 역할, 블로그 주제 연결성
+- style_match 8%: 사용자 코퍼스의 톤, 문장 흐름, 시작 방식, 마무리 방식을 따른다.
+- structure 7%: 도입-핵심 기준-상황별 설명-정리 흐름이 분명해야 한다.
+- engagement/originality/forbidden_check 5%: 보조 품질과 금지 표현 여부를 확인한다.
 
 현재 주제 감점 위험:
 - 제목: ${strategy.title}
@@ -160,7 +160,7 @@ ${failureSection}
 
 작성 지시:
 - 위 루브릭을 본문에 노골적으로 설명하지 말고, 자연스러운 글 품질 기준으로 반영한다.
-- 첫 초안부터 ${HARNESS_PASS_THRESHOLD}점 이상을 목표로 하며, 특히 style_match와 structure 감점을 피한다.`;
+- 첫 초안부터 ${HARNESS_PASS_THRESHOLD}점 이상을 목표로 하며, 특히 SEO와 네이버 로직 감점을 먼저 피한다.`;
 }
 
 export function buildRevisionInstruction(params: {

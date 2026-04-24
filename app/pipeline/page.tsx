@@ -7,7 +7,7 @@ import { ApprovalDialog } from "@/components/pipeline/approval-dialog";
 import { PipelineStateInspector, applyEventToInspector } from "@/components/pipeline/state-inspector";
 import { usePipelineStore } from "@/lib/store/pipeline-store";
 import { reviewActualDraft, type DraftReviewIssue, type DraftReviewResult } from "@/lib/agents/draft-review";
-import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation } from "@/lib/agents/types";
+import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport } from "@/lib/agents/types";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -32,7 +32,14 @@ interface ResultData {
   recommendations: string[];
   hashtags?: string[];
   imageFileNames?: string[];
+  seoEvaluation?: SeoEvaluation;
   naverLogicEvaluation?: NaverLogicEvaluation;
+}
+
+function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]): string {
+  if (status === "적정") return "text-emerald-600";
+  if (status === "과다") return "text-amber-600";
+  return "text-blue-600";
 }
 
 function parseSseChunk(buffer: string, onEvent: (event: SSEEvent) => void): string {
@@ -907,6 +914,51 @@ export default function PipelinePage() {
                 </div>
               )}
 
+              {result.seoEvaluation && (
+                <div className="bg-white border border-zinc-200 rounded-xl p-4 space-y-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold text-zinc-600 mb-1">SEO 점검</p>
+                      <p className="text-sm font-semibold text-zinc-900">키워드 반복과 검색 의도 반영</p>
+                      <p className="text-xs text-zinc-500 mt-1">
+                        제목, 도입부, 본문 내 주요 키워드 반복 횟수를 함께 봅니다.
+                      </p>
+                    </div>
+                    <div className="shrink-0 rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-right">
+                      <p className="text-[11px] font-semibold text-emerald-600">SEO 점수</p>
+                      <p className="text-lg font-bold text-emerald-700">{result.seoEvaluation.score}점</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 gap-2">
+                    {result.seoEvaluation.keywordReport.items.map((item) => (
+                      <div key={item.keyword} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-sm font-semibold text-zinc-800">{item.keyword}</p>
+                          <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
+                            {item.count}회 · {item.status}
+                          </p>
+                        </div>
+                        <p className="text-[11px] text-zinc-500 mt-1">권장 {item.targetMin}~{item.targetMax}회</p>
+                        <p className="text-xs text-zinc-600 mt-1">{item.recommendation}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {result.seoEvaluation.improvements.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-zinc-600 mb-1">SEO 보강 포인트</p>
+                      <ul className="space-y-1">
+                        {result.seoEvaluation.improvements.map((item, index) => (
+                          <li key={`${item}-${index}`} className="text-sm text-zinc-700 flex gap-2">
+                            <span className="text-amber-500">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {result.recommendations.length > 0 && (
                 <div className="bg-white border border-zinc-200 rounded-xl p-4">
                   <p className="text-xs font-semibold text-zinc-600 mb-2">개선 권고사항</p>
@@ -998,6 +1050,25 @@ export default function PipelinePage() {
                     </div>
                     {((reviewResult.changeDetails?.length ?? 0) > 0 || reviewResult.changes.length > 0 || reviewResult.seoNotes.length > 0 || reviewResult.naverLogicNotes.length > 0) && (
                       <div className="grid grid-cols-1 gap-2">
+                        {reviewResult.keywordReport.items.length > 0 && (
+                          <div className="bg-white/70 border border-blue-100 rounded-lg px-3 py-2">
+                            <p className="text-xs font-semibold text-blue-700 mb-1">주요 키워드 반복 횟수</p>
+                            <div className="space-y-2">
+                              {reviewResult.keywordReport.items.map((item) => (
+                                <div key={`keyword-${item.keyword}`} className="rounded-md border border-blue-50 bg-white px-2 py-2">
+                                  <div className="flex items-center justify-between gap-3">
+                                    <p className="text-xs font-semibold text-zinc-800">{item.keyword}</p>
+                                    <p className={`text-[11px] font-semibold ${keywordStatusTone(item.status)}`}>
+                                      {item.count}회 · {item.status}
+                                    </p>
+                                  </div>
+                                  <p className="text-[11px] text-zinc-500 mt-1">권장 {item.targetMin}~{item.targetMax}회</p>
+                                  <p className="text-xs text-zinc-700 mt-1">{item.recommendation}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                         {(reviewResult.changeDetails?.length ?? 0) > 0 && (
                           <div className="bg-white/70 border border-blue-100 rounded-lg px-3 py-2">
                             <p className="text-xs font-semibold text-blue-700 mb-1">수정 전후 비교</p>

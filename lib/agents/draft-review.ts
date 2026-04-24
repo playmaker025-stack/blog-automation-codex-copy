@@ -1,3 +1,6 @@
+import type { KeywordUsageReport, SeoEvaluation } from "./types";
+import { evaluateSeoCompleteness } from "./seo-metrics";
+
 export type DraftReviewSeverity = "info" | "warning" | "blocker";
 
 export interface DraftReviewIssue {
@@ -34,6 +37,8 @@ export interface DraftReviewResult {
   changeDetails: DraftReviewChange[];
   seoNotes: string[];
   naverLogicNotes: string[];
+  keywordReport: KeywordUsageReport;
+  seoEvaluation: SeoEvaluation;
 }
 
 const MOJIBAKE_PATTERN = /[占�袁꾥퉪疫꿱쳸椰揶甕]{2,}|�/u;
@@ -204,6 +209,10 @@ export function reviewActualDraft(input: DraftReviewInput): DraftReviewResult {
   const checks = buildChecks(normalizedTitle, body);
   const revisedTitle = normalizedTitle;
   const revisedBody = buildRevisedBody(revisedTitle, body, issues);
+  const seoEvaluation = evaluateSeoCompleteness({
+    title: normalizedTitle,
+    body,
+  });
 
   return {
     issues,
@@ -214,7 +223,9 @@ export function reviewActualDraft(input: DraftReviewInput): DraftReviewResult {
     revisedBody,
     changes: [],
     changeDetails: [],
-    seoNotes: [],
+    seoNotes: [...seoEvaluation.evidence, ...seoEvaluation.improvements].slice(0, 6),
     naverLogicNotes: [],
+    keywordReport: seoEvaluation.keywordReport,
+    seoEvaluation,
   };
 }

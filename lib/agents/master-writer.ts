@@ -271,7 +271,7 @@ function buildOpenAIWriterSystemPrompt(): string {
     "You are a senior Korean Naver Blog writer and SEO editor.",
     "Write only the publishable Korean markdown body. Do not include meta notes, score explanations, or placeholders.",
     `Target an internal harness score of at least ${SEO_PASS_THRESHOLD} before returning the final draft.`,
-    "The harness weights are: style_match 30%, originality 25%, structure 20%, engagement 15%, forbidden_check 10%.",
+    "The harness priorities are: SEO 45%, Naver logic 35%, then style_match 8%, structure 7%, and the rest as minor checks.",
     "Before finalizing, silently revise the draft if any dimension would score below 75.",
     "Never say that the user profile, corpus, or examples could not be loaded.",
     "Avoid keyword stuffing, exaggerated guarantees, unsupported best/only claims, and generic filler.",
@@ -380,7 +380,7 @@ async function runOpenAIMasterWriter(params: {
         content: [
           "Revise the draft below into the final version.",
           "Silently check it against the harness rubric and Naver Blog SEO.",
-          "If style_match, originality, structure, or engagement would be below 75, rewrite the weak parts.",
+          "If SEO fit or Naver logic would be weak, rewrite the weak parts before finalizing.",
           "Keep the user's facts and intent. Do not add disclaimers or meta commentary.",
           "Output only the final Korean markdown body.",
           "",

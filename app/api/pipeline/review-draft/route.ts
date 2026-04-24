@@ -205,8 +205,8 @@ Required work:
 - Do not add adult/minor/legal/health/safety/e-cigarette warning copy unless it already appears in the source.
 - Provide at least 3 concrete changeDetails with before, after, and reason.
 - changes must summarize actual edits, not generic advice.
-- seoNotes must explain title/search-intent/keyword decisions.
-- naverLogicNotes must explain paragraph flow, readability, retention, and information order.
+- seoNotes must explain title/search-intent/keyword decisions, including whether major keywords should be added more or reduced.
+- naverLogicNotes must explain paragraph flow, readability, retention, information order, and whether the article follows Naver blog logic naturally.
 ${repairInstruction}
 
 Actual body:
@@ -282,6 +282,8 @@ export async function POST(request: NextRequest) {
       changeDetails: aiReview.changeDetails,
       seoNotes: aiReview.seoNotes,
       naverLogicNotes: aiReview.naverLogicNotes,
+      keywordReport: finalReview.keywordReport,
+      seoEvaluation: finalReview.seoEvaluation,
     });
   } catch (error) {
     console.error("[POST /api/pipeline/review-draft]", error);

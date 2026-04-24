@@ -75,6 +75,32 @@ export interface NaverLogicEvaluation {
   improvements: string[];
 }
 
+export interface KeywordUsageItem {
+  keyword: string;
+  count: number;
+  status: "부족" | "적정" | "과다";
+  targetMin: number;
+  targetMax: number;
+  recommendation: string;
+}
+
+export interface KeywordUsageReport {
+  items: KeywordUsageItem[];
+  totalMentions: number;
+  introCoverage: boolean;
+  titleFrontLoaded: boolean;
+  bodyLength: number;
+  summary: string[];
+  recommendations: string[];
+}
+
+export interface SeoEvaluation {
+  score: number;
+  evidence: string[];
+  improvements: string[];
+  keywordReport: KeywordUsageReport;
+}
+
 export interface ContentTopologyPlan {
   kind: ContentTopologyKind;
   reason: string;

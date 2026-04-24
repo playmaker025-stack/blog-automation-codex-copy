@@ -24,6 +24,7 @@ import {
 import { assertPreflightPassed } from "./preflight-checker";
 import { naverLogicAgent } from "./naver-logic-agent";
 import { localityKeywordAgent } from "./locality-keyword-agent";
+import { evaluateSeoCompleteness } from "./seo-metrics";
 import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -1614,6 +1615,11 @@ export async function runWritePhase(params: {
 
     const completionSupport = buildCompletionSupport(effectiveStrategy, writerResult.title);
     const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy: effectiveStrategy, writerResult, evalResult });
+    const seoEvaluation = evaluateSeoCompleteness({
+      title: writerResult.title,
+      body: writerResult.content,
+      keywords: effectiveStrategy.keywords,
+    });
 
     if (!postGateResult.passed) {
       await updatePostRecord(postRecord.postId, {
@@ -1637,6 +1643,7 @@ export async function runWritePhase(params: {
         baselineDelta,
         pass: false,
         recommendations: evalResult.recommendations,
+        seoEvaluation,
         naverLogicEvaluation,
         ...completionSupport,
       }));
@@ -1700,6 +1707,7 @@ export async function runWritePhase(params: {
         baselineDelta,
         pass: evalResult.pass,
         recommendations: evalResult.recommendations,
+        seoEvaluation,
         naverLogicEvaluation,
         ...completionSupport,
       }));
