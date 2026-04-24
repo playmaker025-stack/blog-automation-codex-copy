@@ -1,72 +1,136 @@
-# 파이프라인 — 전체 실행 흐름
+# 파이프라인 운영 메모
 
-## 표준 파이프라인
+## 기본 파이프라인
 
-```
-사용자 입력 (topicId, userId)
-  ↓
-[1] topic-feasibility-judge (스킬)
-    - 금지 표현 검사
-    - 타깃 독자 적합성 확인
-    - verdict: feasible / uncertain / blocked
-  ↓ (blocked이면 중단, uncertain이면 경고 후 계속)
-[2] strategy-planner (에이전트)
-    도구: user-profile-loader, user-corpus-retriever,
-          source-resolver, review-record-audit
-    출력: StrategyPlan { outline, keyPoints, tone, keywords }
-  ↓
-[3] 제목/방향 변경 감지
-    - 원본 topicId 제목과 StrategyPlan.title 비교
-    - 실질적 변경이면 → 사용자 승인 요청 (awaiting-approval)
-    - 승인 후 posting-list 업데이트 → data/index/topics.json 반영
-  ↓
-[4] master-writer (에이전트) — 유일한 발행 주체
-    도구: user-corpus-retriever, expansion-planner, source-resolver
-    출력: 마크다운 본문 (SSE 스트리밍)
-    저장: data/posting-list/posts/{postId}/content.md
-  ↓
-[5] harness-evaluator (에이전트)
-    도구: user-corpus-retriever, review-record-audit
-    출력: EvalRun { scores, aggregateScore, reasoning }
-    저장: evals/runs/{runId}.json
-  ↓
-[6] 완료 교차확인
-    - posting-list: status = "ready" + evalScore 기록
-    - data/index/topics.json: status = "in-progress" → 그대로 유지
-    - 발행 확인 후: posting-list status = "published"
-                   index status = "published"
+```text
+주제 선택
+→ 전략 수립
+→ 승인/수정
+→ 초안 작성
+→ 평가
+→ 발행 인덱스 반영
 ```
 
-## 승인 흐름 (제목/방향 변경 시)
+## 완료 판정
 
-```
-변경 감지
-  ↓
-PendingApproval 객체 생성
-posting-list에 pendingApproval 기록 (status: "awaiting-approval")
-  ↓
-사용자 승인 (웹 UI)
-  ↓
-승인 → posting-list 업데이트 (status: "draft", pendingApproval: null)
-      → data/index/topics.json 반영
-거절 → 원본 제목/방향으로 복원, 파이프라인 재시작
-```
+완료는 아래 두 조건을 모두 만족할 때만 성립한다.
 
-## 완료 판정 기준
+1. `data/posting-list/index.json`에서 해당 post가 `published`
+2. `data/index/topics.json`에서 해당 topic이 `published`
 
-두 조건을 모두 만족해야 "완료":
-
-1. `data/posting-list/index.json` 에서 해당 postId의 `status === "published"`
-2. `data/index/topics.json` 에서 해당 topicId의 `status === "published"`
-
-둘 중 하나라도 미반영이면 완료 처리하지 않는다.
+둘 중 하나라도 빠지면 완료로 보지 않는다.
 
 ## 배포 검증 체크
 
-코드 푸시나 Railway 재배포 직후에는 아래를 함께 확인한다.
+코드 변경 후에는 아래를 순서대로 확인한다.
 
-1. Railway `Deployments`의 `Active` 커밋 제목이 방금 푸시한 GitHub 커밋과 같은지 확인한다.
-2. `via CLI` 배포가 Active이면, GitHub repo가 연결되어 있어도 예전 빌드가 살아 있을 수 있다고 간주한다.
-3. Railway 상단에 `Apply N changes`가 보이면 Source/Branch 연결 변경이 아직 미적용 상태이므로, 먼저 Apply한 뒤 새 deployment가 실제로 생성되는지 확인한다.
-4. UI 수정이 포함된 작업은 실제 배포 URL에서 대상 화면을 열어 변경 문구나 요소가 보이는지 직접 확인한다.
-5. GitHub 푸시만 확인하고 "배포 완료"라고 판단하지 않는다. `Active` 배포와 실제 화면 응답까지 일치해야 완료로 본다.
+1. `/verify` 통과
+2. 커밋
+3. `git push origin main`
+4. Railway `Deployments`에서 최신 배포 생성 확인
+5. `Active` 커밋 제목이 최신 GitHub 커밋과 일치하는지 확인
+6. `via CLI` 여부 확인
+7. `Apply N changes`가 남아 있지 않은지 확인
+8. 실제 배포 URL에서 화면/동작 확인
+
+`Deployments`만 보고 끝내지 않는다. 실제 배포 URL에서 변경 내용이 보여야 완료다.
+
+<!-- è«›ê³ ë£· å¯ƒÂ€ï§?ï§£ëŒ„ê²• -->
+<!-- GitHub ?ëª„ë–†ï§??ëº¤ì”¤?ì„í€¬ "è«›ê³ ë£· ?ê¾¨ì¦º"?ì‡¨í€¬ ?ë¨®ë–’?ì„? ?ë”…ë’—?? -->
+
+## 새 운영 규칙 — 2026-04-24
+
+### 1. 글목록 생성 시 블로그 역할 적합성 검사
+
+주제 생성 단계에서는 각 블로그의 역할과 맞는지 먼저 검사한다.
+
+- `A`: 지역/카테고리 허브형
+- `B`: 구매검토/전환형
+- `C`: 기술/구조 설명형
+- `D`: 질문/증상 중심 문제해결형
+- `E`: 실용 확장 유입형
+
+이 판정은 SEO 가능성과 별도로 필수다. 역할과 맞지 않으면 생성 후보에서 제외하거나 블로그 코드를 다시 배정한다.
+
+특히 아래는 강제한다.
+
+- `A`는 허브형이 아니면 제외
+- `D`는 문제해결 구조가 아니면 제외
+- `E`는 추상 주제가 아니라 실제 검색형 실용 주제만 허용
+
+### 2. 허브/리프 판정 강제 적용
+
+모든 새 주제는 생성 시점에 반드시 허브/리프를 결정하고 저장한다.
+
+- 허브: 지역/카테고리 기준으로 넓게 묶는 글
+- 리프: 단일 문제 해결 글
+
+리프가 누적되면 연결할 허브가 실제로 존재하는지 자동 검수한다. 없으면 다음 중 하나를 명시한다.
+
+1. 기존 허브 연결
+2. 허브 필요 상태 표시
+3. 리프 보류
+
+미분류 상태는 허용하지 않는다.
+
+### 3. 내부링크 실존 글 검증
+
+내부링크는 실존 글로만 확정한다.
+
+- 리프 → 지역 허브 우선
+- 허브 → 리프 차순위
+- 적합한 대상이 없으면 임의 생성 금지
+
+후보 검증은 실제 발행 인덱스를 기준으로 한다.
+
+### 4. 실제 발행 제목과 목록 제목 불일치
+
+실제 발행 제목은 인덱스에 반영할 수 있지만, 목록 제목 수정은 `실질 변경` 여부를 먼저 판단한다.
+
+실질 변경 기준:
+
+- 핵심 키워드 변경
+- 검색의도 변경
+- 제목 방향 변경
+- 지역/카테고리 축 변경
+
+실질 변경이면 아래 순서를 지킨다.
+
+1. 실제 발행 제목 확인
+2. 실질 변경 판정
+3. 사용자 승인
+4. `posting-list` 최신 전체본 수정
+5. `index` 반영
+
+단순 문장 다듬기면 인덱스만 실제 제목으로 반영할 수 있다.
+
+### 5. 사진 파일명 규칙
+
+추천 파일명은 아래 요소를 기준으로 구성한다.
+
+- 지역
+- 카테고리
+- 메인키워드
+- 브랜드
+- 의도
+
+실제 파일명 규칙:
+
+- 영문/숫자/언더스코어/하이픈만 사용
+- 한글, 공백, 괄호, 특수문자 금지
+- 예시: `incheon_vape_device_starter_voopoo_intro_01`
+
+## 체크리스트
+
+주제 생성 시:
+
+- 블로그 역할 적합성 확인
+- 허브/리프 판정 저장
+- 내부링크 대상 실존 여부 확인
+
+발행 후:
+
+- 실제 발행 제목 확인
+- 목록 제목과 실질 변경 여부 확인
+- 인덱스 반영
+- 사진 파일명 규칙 준수 여부 확인

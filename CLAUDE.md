@@ -1,274 +1,127 @@
-# Blog Automation — 네이버 블로그 그룹화 작성 시스템
+# Claude 작업 규칙 메모
+
+이 문서는 블로그 자동화 프로젝트에서 Claude/Codex 계열 에이전트가 따라야 할 운영 메모다. 문서가 깨진 상태로 남지 않도록 UTF-8 기준으로 유지한다.
 
 ---
 
-## 🚨 최우선 행동 강령 — 세션 시작 시 가장 먼저 읽고 반드시 준수
+## 기본 원칙
 
-> **이 섹션은 Claude의 모든 기본 동작보다 우선한다. 예외 없이 적용된다.**
+1. 모든 응답은 한국어로 작성한다.
+2. 보안 이슈와 외부 API 직접 호출을 제외하면 확인 없이 즉시 실행한다.
+3. 완료 선언은 `/verify` 통과, 커밋, 푸시, Railway 실제 배포 확인 이후에만 한다.
+4. 발행용 본문은 `Master Writer`가 작성한다.
+5. 완료 여부는 `posting-list + index` 교차확인으로만 결정한다.
 
-### 1. 모든 응답·작업은 한국어로
+## 완료 사이클
 
-- 질문, 설명, 코드 주석, 커밋 메시지, 오류 분석 — **전부 한국어**
-- 영어 응답 금지. 코드 내 변수명·API명은 영어 유지, 나머지는 모두 한국어
+아래 순서를 하나의 고정 사이클로 본다.
 
-### 2. 확인·승인 요청 절대 금지
+1. 코드 수정
+2. `node scripts/verify.mjs`
+3. 커밋
+4. `git push origin main`
+5. Railway 새 deployment 생성 확인
+6. Railway `Active` 커밋과 실제 배포 화면 확인
 
-Claude는 아래 **단 2가지 예외**를 제외하고 **모든 작업을 즉시 실행한다.**
+다음이 보이면 완료가 아니다.
 
-| 예외 | 설명 |
-|------|------|
-| 보안 이슈 | 인증 정보 노출, 권한 변경, 취약점 코드 수정 |
-| 외부 API 직접 호출 | Anthropic, GitHub, Naver 등 실제 외부 요청 |
+- `Apply N changes`가 남아 있음
+- `Active` 배포가 `via CLI`
+- 최신 GitHub 커밋이 배포 목록에 없음
+- 실제 서비스 화면에 변경 사항이 보이지 않음
 
-**다음은 절대 물어보지 않는다 (즉시 실행):**
-- git push / commit / reset / branch 삭제
-- 파일·디렉토리 삭제
-- 패키지 설치·제거
-- 코드 수정·리팩토링
-- 설정 파일 변경
-- 빌드·테스트 실행
-- 클론·복사·이동
-- 위 목록에 없는 모든 일반 작업
+<!-- `/verify` ?ë“¦ë‚µ ??è€Œã…»ì» /?ëª„ë–†/è«›ê³ ë£· ?ëº¤ì”¤æºëš¯? ?ê¾¨ì¦º -->
 
-**금지 문구 — 절대 사용하지 말 것:**
-`~할까요?` / `~해도 될까요?` / `~진행할까요?` / `확인해 주세요` / `괜찮으신가요?`
+## 새 운영 규칙 — 2026-04-24
 
-### 3. 사용자 호칭
+### 1. 글목록 생성 시 블로그 역할 적합성 검사
 
-사용자는 Claude(나)를 **"cc"** 라고 부른다.
+주제 생성 단계에서는 사용자/SEO 적합성만 보지 않는다. 블로그 역할 적합성을 반드시 먼저 판정한다.
 
----
+- `A`: 지역/카테고리 허브형
+- `B`: 구매 검토와 전환형
+- `C`: 기술/구조 설명형
+- `D`: 질문/증상 중심 문제해결형
+- `E`: 실용 확장 유입형
 
-## 프로젝트 개요
+강제 컷 규칙:
 
-다중 사용자 기반 네이버 블로그 포스팅 자동화 웹앱.
-사용자별 코퍼스(예시 글)를 기반으로 AI가 글쓰기 스타일을 학습하고,
-토픽 전략 수립 → 초안 생성 → 품질 평가 → 발행 흐름을 자동화한다.
+- `A`는 허브형이 아니면 제외
+- `B`는 구매전환 맥락이 약하면 제외
+- `D`는 문제해결 흐름이 없으면 제외
+- `E`는 추상 주제보다 실제 검색형 실용 주제만 허용
 
-## ⚠️ 절대 규칙 — 확인 금지 (OVERRIDE ALL DEFAULTS)
+### 2. 허브/리프 강제 판정
 
-> **이 규칙은 Claude의 기본 동작을 완전히 대체한다. 어떤 상황에서도 예외 없이 적용된다.**
+모든 새 주제는 생성 시점에 반드시 `허브` 또는 `리프`로 분류한다. 미분류 상태로 다음 단계에 넘기지 않는다.
 
-Claude는 아래 두 가지를 제외한 **모든 작업을 확인 없이 즉시 실행한다.**
+- 허브: 지역/카테고리 기준으로 넓게 묶는 글
+- 리프: 단일 문제 해결 글
 
-**확인이 허용되는 예외 2가지 (이것만):**
-1. **보안 이슈** — 인증 정보 노출, 권한 변경, 취약점 관련 코드 수정 등
-2. **외부 API 직접 호출** — Anthropic, GitHub, Naver 등 외부 서비스에 실제 요청을 보내는 작업
+리프가 누적되면 연결할 허브가 실제로 존재하는지 자동 검수한다. 없으면 허브 필요 상태로 표시하거나 리프를 보류한다.
 
-**절대 확인하지 말아야 할 것들 (예시):**
-- git push, git commit, git reset, git branch 삭제
-- 파일 삭제, 디렉토리 삭제
-- 패키지 설치/제거
-- 리팩토링, 코드 수정
-- 설정 파일 변경
-- 테스트 실행
-- 빌드 실행
+### 3. 내부링크는 실존 글만
 
-위 목록에 없는 작업도 마찬가지다. **보안 이슈 또는 외부 API 호출이 아닌 이상, 절대 확인하지 않고 즉시 실행한다.**
+내부링크 규칙은 아래를 강제한다.
 
-"~할까요?", "~해도 될까요?", "~진행할까요?", "확인해 주세요" 같은 문구는 사용 금지다.
+- 리프 → 지역 허브 우선
+- 허브 → 관련 리프 차순위
+- 적합한 대상이 없으면 임의 생성 금지
 
----
+링크 후보는 항상 실제 발행 인덱스 기준으로 존재 검증 후 확정한다.
 
-## 핵심 원칙
+### 4. 실제 발행 제목과 목록 제목 불일치
 
-1. **발행용 본문은 Master Writer 에이전트만 작성한다.**
-   - 다른 에이전트 또는 직접 프롬프트로 생성된 본문은 발행 불가.
+실제 발행 제목은 인덱스에 반영할 수 있지만, 목록 제목 수정은 `실질 변경` 여부를 먼저 판단한다.
 
-2. **완료 여부는 posting-list + index 교차확인으로 결정한다.**
-   - posting-list에 `status: published`이고 index에 해당 topicId가 존재해야 완료.
-   - 둘 중 하나라도 미반영이면 완료 처리하지 않는다.
+실질 변경 기준:
 
-3. **제목/방향이 실질적으로 바뀌면 사용자 승인 후 posting-list 수정, 그 다음 index 반영.**
-   - 순서: 사용자 승인 → posting-list 업데이트 → index 업데이트
-   - 역순 처리 금지.
+- 핵심 키워드 변경
+- 검색의도 변경
+- 제목 방향 변경
+- 지역/카테고리 축 변경
 
-4. **사용자 모델화는 GitHub 저장소의 corpus 기반 retrieval로 진행.**
-   - 사용자별 corpus는 `user-modeling/users/{userId}/corpus/` 에 저장.
-   - 스타일 모델링 시 항상 corpus retrieval 스킬을 먼저 호출.
+실질 변경이면 아래 순서를 강제한다.
 
-## 에이전트 구조
+1. 실제 발행 제목 확인
+2. 실질 변경 판정
+3. 사용자 승인
+4. `posting-list` 최신 전체본 수정
+5. `index` 반영
 
-```
-orchestrator
-├── strategy-planner    (토픽 분석 + 포스팅 전략 수립)
-├── master-writer       (본문 생성 — 유일한 발행 주체)
-└── harness-evaluator   (품질 평가 + eval 점수 산출)
-```
+### 5. 사진 파일명 규칙
 
-## 스킬 목록
+추천 파일명은 아래 요소를 최대한 포함한다.
 
-| 스킬 | 역할 |
-|------|------|
-| source-resolver | 참조 URL 유효성 검증 + 요약 |
-| topic-feasibility-judge | 토픽 실현 가능성 판단 |
-| user-profile-loader | 사용자 프로필 로드 |
-| user-corpus-retriever | 사용자 예시 글 코퍼스 로드 |
-| expansion-planner | 아웃라인 확장 계획 수립 |
-| review-record-audit | 과거 포스팅 패턴 분석 |
+- 지역
+- 카테고리
+- 메인키워드
+- 브랜드
+- 의도
 
-## 데이터 구조 (GitHub 리포)
+실제 파일명 규칙:
 
-```
-user-modeling/
-└── users/{userId}/
-    ├── profile.json            # 사용자 프로필
-    ├── forbidden-expressions.json  # 금지 표현 목록
-    └── corpus/
-        ├── index.json          # 코퍼스 인덱스
-        └── samples/{sampleId}.md   # 예시 글 본문
-
-data/
-├── posting-list/
-│   └── index.json              # 포스팅 목록 (완료 여부 포함)
-└── index/
-    └── topics.json             # 토픽 인덱스
-
-evals/
-├── cases/index.json            # 평가 케이스
-├── baselines/results.json      # 기준선 결과
-└── runs/                       # 실제 평가 실행 결과
-```
-
-## 환경 변수
-
-`.env.local` 파일 필요 (`.env.local.example` 참조):
-- `ANTHROPIC_API_KEY` — Claude API 키
-- `GITHUB_TOKEN` — GitHub Personal Access Token (repo scope)
-- `GITHUB_DATA_REPO` — 데이터 리포 (예: `yourname/blog-data`)
-- `GITHUB_DATA_REPO_BRANCH` — 브랜치 (기본값: `main`)
-
-## dotfile 설정
-
-이 프로젝트는 `.claude/agents/`, `.claude/commands/`, `.mcp.json`을 사용한다.
-현재 N: 드라이브(Removable NTFS)에서는 dotfile 생성이 제한된다.
-`_dotfiles/` 디렉토리에 템플릿이 있으며, 프로젝트를 C: 등으로 이동 후
-`_dotfiles/setup.ps1` 스크립트를 실행하면 dotfile이 자동 생성된다.
-
-## 코딩 자동 교정 루프 (필수)
-
-코드를 작성하거나 수정한 후에는 반드시 아래 절차를 따른다.
-
-### 규칙
-
-1. **코드 수정 후 즉시 `/verify` 실행** — 수동 판단으로 완료 선언 금지
-2. **실패 시 완료 선언 금지** — 모든 ✅ 가 나올 때까지 수정 반복
-3. **실패 로그 보존** — `data/verify-failures/` 삭제 금지, 반복 실패 패턴은 "알려진 실패 패턴" 섹션에 기록
-4. **테스트 수정 금지** — 테스트가 실패해도 구현 로직을 수정한다. 테스트 자체가 잘못됐다고 판단되면 사용자에게 확인 후 수정
-
-### 검증 명령어
-
-```bash
-node scripts/verify.mjs            # 전체 검증 (typecheck + lint + build + harness)
-node scripts/verify.mjs --skip-build --skip-test  # 빠른 검증 (typecheck + lint만)
-```
-
-### 자동 강제 시스템
-
-| 시점 | 검사 항목 |
-|------|-----------|
-| `git commit` | ESLint + TypeScript (lint-staged) |
-| `git push` | typecheck + lint + harness 테스트 |
-| GitHub PR | CI 전체 (typecheck + lint + harness) |
+- 영문/숫자/언더스코어/하이픈만 허용
+- 한글, 공백, 괄호, 특수문자 금지
+- 예시: `bupyeong_vape_device_starter_voopoo_review_01`
 
 ## 알려진 실패 패턴
 
-<!-- AI가 저질렀던 실수 목록 — 재발 방지용. 발견 시 한 줄씩 추가 -->
+### [2026-04-24] 승인 팝업 수정 요청이 초안에 반영되지 않음
 
-### [2026-04-07] 파이프라인 초안쓰기 단계에서 무한 대기 (stuck)
+- 원인: 승인 경로에서 수정 요청이 write phase로 전달되지 않음
+- 대응: `modifications`를 UI → API → orchestrator → writer prompt 전체 경로로 전달
 
-**증상**: 전략 수립 → 승인 → 초안쓰기 단계에서 Railway 서버가 응답 없이 멈춤. topic 상태가 `in-progress`로 남고 빈 draft post(`wordCount:0`)가 생성됨.
+### [2026-04-24] Railway가 최신 GitHub 커밋 대신 CLI 배포를 계속 Active로 유지
 
-**원인 분석**:
-1. `master-writer.ts`의 `client.messages.create` 호출에 타임아웃이 없어 Railway 300초 제한 도달 시 SSE 스트림이 끊어짐
-2. `tool-executor.ts`의 `runToolUseLoop`도 동일하게 타임아웃 없음
-3. 파이프라인 실패 시 catch 블록에서 topic을 `draft`로 복구하지 않아 `in-progress` stuck 발생
+- 원인: repo 연결 전 CLI 배포 잔존, 배포 확인을 GitHub push 기준으로만 판단
+- 대응: `Active` 커밋 제목, `via CLI`, 실제 URL 화면까지 검증
 
-**수정 사항**:
-- `master-writer.ts`: `AbortSignal.timeout(60_000)` 각 API 호출에 적용
-- `tool-executor.ts`: `AbortSignal.timeout(90_000)` 각 API 호출에 적용
-- `strategy-planner.ts`: `AbortSignal.timeout(60_000)` 적용
-- `orchestrator.ts` catch 블록: 실패 시 topic status를 `in-progress` → `draft`로 자동 복구
+<!-- Railway repo ?ê³Œê» ?ã…¼ë¿‰??Active è«›ê³ ë£·åª›Â€ ?ë‰ìŸ¾ CLI é®ëš®ë±¶æ¿¡??â‘¥ì“¬ -->
 
-**재발 방지 규칙**:
-- 모든 `client.messages.create` 호출에는 반드시 `AbortSignal.timeout(N)` 옵션을 추가할 것
-- 파이프라인 실패 시 topic/post 상태를 원상복구하는 로직을 catch 블록에 반드시 포함할 것
-- 수동 복구 절차: `PATCH /api/github/topics` → `{topicId, status:"draft"}`, `DELETE /api/github/posts?postId=XXX`
+### [2026-04-24] Railway `Apply N changes` 미적용으로 새 배포 미생성
 
-### [2026-04-07] 교차체크 불일치 — 임포트된 posts의 topicId 없음
+- 원인: Source/Branch 변경이 저장만 되고 적용되지 않음
+- 대응: `Apply N changes`가 남아 있으면 완료 선언 금지
 
-**증상**: 발행 인덱스(posts)에는 글이 있는데 글목록(topics)에서는 아직 미작성(draft)으로 표시됨.
-
-**원인**: 기존에 임포트된 posts는 `topicId: ""`이므로 `topicId` 기반 매칭 불가. `resolveRemainingTopics`는 3-key 매칭(userId + blogCode + title normalize) 방식 사용. 제목이 정확히 일치하지 않으면 매칭 실패.
-
-**해결 방향**: 임포트된 posts와 topics 간 제목 유사도 매칭 개선 필요 (현재 exact normalize 매칭만 지원).
-
-**현재 상태**: `matched_count: 7 / 30` (30개 중 23개 미매칭).
-
-### [2026-04-24] 전략 승인 팝업의 수정 요청이 승인 경로에서 누락됨
-
-**증상**: 전략 수립 후 승인 팝업에서 수정 요청을 입력하고 승인해도, 초안이 수정 요청을 반영하지 않고 원래 전략대로 생성됨.
-
-**원인 분석**:
-1. `components/pipeline/approval-dialog.tsx`에서 승인 버튼은 `modifications` 값을 보내지 않고 `approved: true`만 전달함
-2. `app/pipeline/page.tsx`의 승인 처리 로직도 수정 요청을 `startWritePhase`로 넘기지 않음
-3. `app/api/pipeline/write/route.ts`와 `lib/agents/orchestrator.ts`의 write phase는 승인 수정 요청을 받을 수 있는 필드가 없어 글쓰기 브리핑에 반영되지 않음
-
-**수정 사항**:
-- 승인 버튼도 `modifications`를 함께 전달
-- write phase 요청 body에 `modifications` 필드 추가
-- `runWritePhase`에서 승인 수정 요청을 전략/하네스 브리핑에 합성해서 Master Writer가 우선 반영하도록 변경
-- 수정 요청에 `제목:` 또는 `타이틀:` 형식이 있으면 초안 제목에도 반영
-
-**재발 방지 규칙**:
-- 승인/거절 팝업에서 받는 자유입력 필드는 승인 경로와 거절 경로 모두에서 동일하게 전달되는지 확인할 것
-- `approval_required` 이후 추가 입력이 있으면 UI -> API route -> orchestrator -> writer prompt까지 전체 전달 경로를 한 번에 점검할 것
-
-### [2026-04-24] Railway repo 연결 뒤에도 Active 배포가 예전 CLI 빌드로 남음
-
-**증상**: GitHub `main`에 최신 커밋을 푸시했고 Railway `Source`에도 repo/branch 연결이 보이는데, 실제 서비스 화면은 예전 UI를 계속 표시함. `Deployments`의 `Active` 항목은 새 시간이 찍혀 있어도 커밋 제목이 예전 `via CLI` 배포로 남아 있음.
-
-**원인 분석**:
-1. Railway 서비스가 처음에는 GitHub repo 미연결 상태여서 예전 CLI 배포만 Active로 유지됨.
-2. 나중에 repo를 연결해도, 실제 Active 배포가 최신 GitHub 커밋 기반으로 다시 만들어지지 않으면 예전 CLI 빌드가 계속 서빙될 수 있음.
-3. GitHub push 성공만 보고 배포 반영까지 끝났다고 판단하면, 실제 번들 확인 없이 잘못 완료 선언하게 됨.
-
-**재발 방지 규칙**:
-- Railway 배포 완료 판단 전 `Deployments`의 `Active` 커밋 제목이 방금 푸시한 GitHub 커밋과 같은지 확인할 것
-- `Active` 항목에 `via CLI`가 보이면 최신 GitHub 푸시가 live가 아닐 수 있다고 보고 실제 배포 URL 화면이나 번들을 추가 확인할 것
-- UI 수정이 포함된 작업은 실제 배포 URL에서 변경 문구/요소가 보이는지 확인한 뒤에만 "반영 완료"로 말할 것
-
-### [2026-04-24] Railway `Apply N changes` 미적용 상태에서 GitHub 자동배포가 안 생김
-
-**증상**: Railway `Settings`에서 repo/branch를 연결한 뒤에도 `Deployments`에 새 GitHub 배포가 생기지 않고, 좌상단에 `Apply 2 changes`가 계속 보임. 이 상태에서는 예전 `via CLI` 배포만 Active로 유지됨.
-
-**원인 분석**:
-1. Railway의 Source/Branch 변경이 저장만 되었고 실제 서비스 설정에 아직 적용되지 않음.
-2. `Apply N changes`가 남아 있는 동안에는 GitHub 연결이 배포 파이프라인에 완전히 반영되지 않아 새 push가 deployment를 만들지 못함.
-3. `Apply` 후에야 비로소 새 빌드(`Building`)가 생성되면서 GitHub 소스 기반 배포가 시작됨.
-
-**재발 방지 규칙**:
-- Railway에서 repo/branch를 바꾼 직후 좌상단 `Apply N changes`가 보이면 먼저 이를 적용할 것
-- `Apply` 전에는 push를 반복해도 새 deployment가 생기지 않을 수 있으니, Deployments 목록 생성 여부를 먼저 확인할 것
-- `Apply` 후 새 빌드가 생성된 시점부터 실제 배포 검증을 진행할 것
-
-## 개발 스택
-
-## 완료 사이클 강제 규칙
-
-- `/verify` 통과 후 커밋/푸시/배포 확인까지 완료
-- 코드 수정 작업은 아래 순서를 모두 끝내야 진짜 완료로 본다.
-1. 코드 수정
-2. `node scripts/verify.mjs`
-3. 검증 통과 후 커밋
-4. `git push origin main`
-5. Railway 새 deployment 생성 확인
-6. 실제 배포 URL에서 수정 화면/동작 확인
-- `/verify`만 통과하고 푸시나 배포 확인이 빠진 상태에서는 "완료"라고 말하지 않는다.
-
-- **Framework**: Next.js 15 (App Router, TypeScript)
-- **Styling**: Tailwind CSS
-- **AI**: Anthropic SDK (`@anthropic-ai/sdk`)
-- **GitHub**: Octokit REST (`@octokit/rest`)
-- **상태관리**: Zustand
-- **데이터 캐싱**: SWR
+<!-- Railway `Apply N changes` èª˜ëª„ìŸ»???ê³¹ê¹­?ë¨¯ê½Œ GitHub ?ë¨®ë£žè«›ê³ ë£·åª›Â€ ???ì•·? -->
