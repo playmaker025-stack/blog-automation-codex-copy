@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Topic, PostingRecord } from "@/lib/types/github-data";
 import { parseTopicText, readFileAutoEncoding } from "@/lib/skills/import-parser";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
-import { blogCode } from "@/lib/utils/blog-code";
+import { blogCode, userIdToBlogCode } from "@/lib/utils/blog-code";
 import type { GeneratedTopic, TopicGeneratorOutput } from "@/lib/agents/topic-generator";
 
 type StatusFilter = "all" | "remaining" | "matched" | Topic["status"];
@@ -39,6 +39,10 @@ interface EditTopicState {
   title: string;
   assignedUserId: string;
   status: Topic["status"];
+}
+
+function resolveTopicBadgeCode(topic: Topic): string | null {
+  return blogCode(topic.category) ?? (topic.assignedUserId ? userIdToBlogCode(topic.assignedUserId) : null);
 }
 
 export default function TopicsPage() {
@@ -556,7 +560,7 @@ export default function TopicsPage() {
                 <div className="bg-white border border-zinc-200 rounded-lg px-4 py-3 flex items-center gap-3">
                   <span className="text-xs text-zinc-400 w-6 text-right shrink-0">{idx + 1}</span>
                   {(() => {
-                    const code = blogCode(topic.category);
+                    const code = resolveTopicBadgeCode(topic);
                     return code ? (
                       <span className={`text-xs font-bold px-2 py-0.5 rounded shrink-0 ${BLOG_BADGE_COLORS[code] ?? "bg-zinc-100 text-zinc-600"}`}>
                         {code}
@@ -574,6 +578,9 @@ export default function TopicsPage() {
                       <p className="text-xs text-blue-500 mt-0.5">
                         {topic.contentKind === "hub" ? "허브글" : "리프글"}
                       </p>
+                    )}
+                    {!topic.contentKind && (
+                      <p className="text-xs text-zinc-400 mt-0.5">미분류</p>
                     )}
                   </div>
                   <div className="flex items-center gap-2 shrink-0">

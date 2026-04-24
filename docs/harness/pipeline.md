@@ -67,5 +67,6 @@ posting-list에 pendingApproval 기록 (status: "awaiting-approval")
 
 1. Railway `Deployments`의 `Active` 커밋 제목이 방금 푸시한 GitHub 커밋과 같은지 확인한다.
 2. `via CLI` 배포가 Active이면, GitHub repo가 연결되어 있어도 예전 빌드가 살아 있을 수 있다고 간주한다.
-3. UI 수정이 포함된 작업은 실제 배포 URL에서 대상 화면을 열어 변경 문구나 요소가 보이는지 직접 확인한다.
-4. GitHub 푸시만 확인하고 "배포 완료"라고 판단하지 않는다. `Active` 배포와 실제 화면 응답까지 일치해야 완료로 본다.
+3. Railway 상단에 `Apply N changes`가 보이면 Source/Branch 연결 변경이 아직 미적용 상태이므로, 먼저 Apply한 뒤 새 deployment가 실제로 생성되는지 확인한다.
+4. UI 수정이 포함된 작업은 실제 배포 URL에서 대상 화면을 열어 변경 문구나 요소가 보이는지 직접 확인한다.
+5. GitHub 푸시만 확인하고 "배포 완료"라고 판단하지 않는다. `Active` 배포와 실제 화면 응답까지 일치해야 완료로 본다.

@@ -219,6 +219,20 @@ node scripts/verify.mjs --skip-build --skip-test  # 빠른 검증 (typecheck + l
 - `Active` 항목에 `via CLI`가 보이면 최신 GitHub 푸시가 live가 아닐 수 있다고 보고 실제 배포 URL 화면이나 번들을 추가 확인할 것
 - UI 수정이 포함된 작업은 실제 배포 URL에서 변경 문구/요소가 보이는지 확인한 뒤에만 "반영 완료"로 말할 것
 
+### [2026-04-24] Railway `Apply N changes` 미적용 상태에서 GitHub 자동배포가 안 생김
+
+**증상**: Railway `Settings`에서 repo/branch를 연결한 뒤에도 `Deployments`에 새 GitHub 배포가 생기지 않고, 좌상단에 `Apply 2 changes`가 계속 보임. 이 상태에서는 예전 `via CLI` 배포만 Active로 유지됨.
+
+**원인 분석**:
+1. Railway의 Source/Branch 변경이 저장만 되었고 실제 서비스 설정에 아직 적용되지 않음.
+2. `Apply N changes`가 남아 있는 동안에는 GitHub 연결이 배포 파이프라인에 완전히 반영되지 않아 새 push가 deployment를 만들지 못함.
+3. `Apply` 후에야 비로소 새 빌드(`Building`)가 생성되면서 GitHub 소스 기반 배포가 시작됨.
+
+**재발 방지 규칙**:
+- Railway에서 repo/branch를 바꾼 직후 좌상단 `Apply N changes`가 보이면 먼저 이를 적용할 것
+- `Apply` 전에는 push를 반복해도 새 deployment가 생기지 않을 수 있으니, Deployments 목록 생성 여부를 먼저 확인할 것
+- `Apply` 후 새 빌드가 생성된 시점부터 실제 배포 검증을 진행할 것
+
 ## 개발 스택
 
 - **Framework**: Next.js 15 (App Router, TypeScript)

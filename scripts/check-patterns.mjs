@@ -165,18 +165,25 @@ if (literals.some((literal) => badTextPattern.test(literal))) {
 
 // RULE-008: Deployment guardrails must remind us that Railway can keep serving an old CLI deployment.
 const prePushHook = content(join(ROOT, '.husky', 'pre-push'))
-if (!prePushHook.includes('via CLI') || !prePushHook.includes('Active 커밋 제목')) {
+if (!prePushHook.includes('via CLI') || !prePushHook.includes('Active 커밋 제목') || !prePushHook.includes('Apply N changes')) {
   fail('RULE-008', join(ROOT, '.husky', 'pre-push'), 0, 'pre-push hook must remind deploy verification for old CLI active builds.')
 }
 
 const pipelineDoc = content(join(ROOT, 'docs', 'harness', 'pipeline.md'))
-if (!pipelineDoc.includes('배포 검증 체크') || !pipelineDoc.includes('GitHub 푸시만 확인하고 "배포 완료"라고 판단하지 않는다.')) {
+if (
+  !pipelineDoc.includes('배포 검증 체크') ||
+  !pipelineDoc.includes('GitHub 푸시만 확인하고 "배포 완료"라고 판단하지 않는다.') ||
+  !pipelineDoc.includes('Apply N changes')
+) {
   fail('RULE-008', join(ROOT, 'docs', 'harness', 'pipeline.md'), 0, 'Pipeline doc must include deploy verification checklist.')
 }
 
 const claudeDoc = content(join(ROOT, 'CLAUDE.md'))
 if (!claudeDoc.includes('Railway repo 연결 뒤에도 Active 배포가 예전 CLI 빌드로 남음')) {
   fail('RULE-008', join(ROOT, 'CLAUDE.md'), 0, 'Known failure patterns must document Railway CLI deploy drift.')
+}
+if (!claudeDoc.includes('Railway `Apply N changes` 미적용 상태에서 GitHub 자동배포가 안 생김')) {
+  fail('RULE-008', join(ROOT, 'CLAUDE.md'), 0, 'Known failure patterns must document Railway Apply-changes drift.')
 }
 
 if (violations.length === 0) {
