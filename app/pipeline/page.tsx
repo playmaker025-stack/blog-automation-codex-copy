@@ -112,9 +112,14 @@ export default function PipelinePage() {
   const [publishingToIndex, setPublishingToIndex] = useState(false);
   const [publishNotice, setPublishNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const normalizedUserId = normalizeUserId(userId.trim());
 
   const planningTopics = topics.filter((topic) => topic.source !== "direct");
-  const { remaining: availableTopics } = resolveRemainingTopics(planningTopics, posts);
+  const userScopedPlanningTopics = planningTopics.filter((topic) => {
+    if (!normalizedUserId) return true;
+    return normalizeUserId(topic.assignedUserId ?? "") === normalizedUserId;
+  });
+  const { remaining: availableTopics } = resolveRemainingTopics(userScopedPlanningTopics, posts);
 
   useEffect(() => {
     if (topicMode !== "list" || !selectedTopicId) return;
@@ -153,8 +158,7 @@ export default function PipelinePage() {
   }, [reloadTopics]);
 
   useEffect(() => {
-    const uid = normalizeUserId(userId.trim());
-    if (!uid) {
+    if (!normalizedUserId) {
       setProfile(null);
       setProfileError(null);
       return;
@@ -163,7 +167,7 @@ export default function PipelinePage() {
     const timer = setTimeout(() => {
       setProfileLoading(true);
       setProfileError(null);
-      fetch(`/api/github/profile?userId=${encodeURIComponent(uid)}`)
+      fetch(`/api/github/profile?userId=${encodeURIComponent(normalizedUserId)}`)
         .then(async (res) => {
           const json = await res.json() as { profile?: UserProfile; error?: string };
           if (res.ok) {
@@ -181,7 +185,7 @@ export default function PipelinePage() {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [userId]);
+  }, [normalizedUserId]);
 
   const handleEvent = useCallback((event: SSEEvent) => {
     appendEvent(event);
