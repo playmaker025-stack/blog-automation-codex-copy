@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import type { Topic, PostingRecord } from "@/lib/types/github-data";
@@ -405,7 +405,7 @@ export default function TopicsPage() {
           <span className="text-[10px] px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full font-medium">네이버 리서치 기반</span>
         </div>
         <p className="text-xs text-zinc-400 mb-4">
-          기존 발행 글을 분석해 연관된 신규 토픽 5개를 생성합니다. 생성 후 원하는 항목만 선택해 추가할 수 있습니다.
+          기존 발행 글을 분석해 연관된 신규 토픽 5개를 생성합니다. 남은 계획 글이 있어도 사용자가 원하면 추가로 생성할 수 있고, 생성 후 원하는 항목만 선택해 추가할 수 있습니다.
         </p>
         <div className="flex gap-2 mb-4">
           <input
@@ -419,7 +419,7 @@ export default function TopicsPage() {
             disabled={generating || !generateUserId.trim()}
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
           >
-            {generating ? "생성 중..." : "AI 생성"}
+            {generating ? "생성 중..." : "추가 생성"}
           </button>
         </div>
 
