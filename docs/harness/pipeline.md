@@ -60,3 +60,12 @@ posting-list에 pendingApproval 기록 (status: "awaiting-approval")
 2. `data/index/topics.json` 에서 해당 topicId의 `status === "published"`
 
 둘 중 하나라도 미반영이면 완료 처리하지 않는다.
+
+## 배포 검증 체크
+
+코드 푸시나 Railway 재배포 직후에는 아래를 함께 확인한다.
+
+1. Railway `Deployments`의 `Active` 커밋 제목이 방금 푸시한 GitHub 커밋과 같은지 확인한다.
+2. `via CLI` 배포가 Active이면, GitHub repo가 연결되어 있어도 예전 빌드가 살아 있을 수 있다고 간주한다.
+3. UI 수정이 포함된 작업은 실제 배포 URL에서 대상 화면을 열어 변경 문구나 요소가 보이는지 직접 확인한다.
+4. GitHub 푸시만 확인하고 "배포 완료"라고 판단하지 않는다. `Active` 배포와 실제 화면 응답까지 일치해야 완료로 본다.

@@ -205,6 +205,20 @@ node scripts/verify.mjs --skip-build --skip-test  # 빠른 검증 (typecheck + l
 
 **현재 상태**: `matched_count: 7 / 30` (30개 중 23개 미매칭).
 
+### [2026-04-24] Railway repo 연결 뒤에도 Active 배포가 예전 CLI 빌드로 남음
+
+**증상**: GitHub `main`에 최신 커밋을 푸시했고 Railway `Source`에도 repo/branch 연결이 보이는데, 실제 서비스 화면은 예전 UI를 계속 표시함. `Deployments`의 `Active` 항목은 새 시간이 찍혀 있어도 커밋 제목이 예전 `via CLI` 배포로 남아 있음.
+
+**원인 분석**:
+1. Railway 서비스가 처음에는 GitHub repo 미연결 상태여서 예전 CLI 배포만 Active로 유지됨.
+2. 나중에 repo를 연결해도, 실제 Active 배포가 최신 GitHub 커밋 기반으로 다시 만들어지지 않으면 예전 CLI 빌드가 계속 서빙될 수 있음.
+3. GitHub push 성공만 보고 배포 반영까지 끝났다고 판단하면, 실제 번들 확인 없이 잘못 완료 선언하게 됨.
+
+**재발 방지 규칙**:
+- Railway 배포 완료 판단 전 `Deployments`의 `Active` 커밋 제목이 방금 푸시한 GitHub 커밋과 같은지 확인할 것
+- `Active` 항목에 `via CLI`가 보이면 최신 GitHub 푸시가 live가 아닐 수 있다고 보고 실제 배포 URL 화면이나 번들을 추가 확인할 것
+- UI 수정이 포함된 작업은 실제 배포 URL에서 변경 문구/요소가 보이는지 확인한 뒤에만 "반영 완료"로 말할 것
+
 ## 개발 스택
 
 - **Framework**: Next.js 15 (App Router, TypeScript)
