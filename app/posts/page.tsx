@@ -320,6 +320,9 @@ export default function PostsPage() {
                     <p className="text-sm font-medium text-zinc-900 truncate">{post.title}</p>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="text-xs text-zinc-400">{post.userId}</span>
+                      <span className="text-xs text-zinc-400">
+                        발행일: {new Date(post.publishedAt ?? post.createdAt).toLocaleDateString("ko-KR")}
+                      </span>
                       {post.naverPostUrl && (
                         <a
                           href={post.naverPostUrl}

@@ -240,7 +240,7 @@ export async function PUT(request: NextRequest) {
         wordCount: 0,
         compositionSessionId: null,
         pendingApproval: null,
-        publishedAt: null,
+        publishedAt: now,
         createdAt: now,
         updatedAt: now,
       });
