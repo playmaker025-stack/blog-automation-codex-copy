@@ -68,6 +68,11 @@ function compactTitle(value: string): string {
     .trim();
 }
 
+function looksCorruptedText(value: string | null | undefined): boolean {
+  if (!value) return false;
+  return /[�꾩몄쓣蹂몃Ц섏젙됯?]/.test(value) && !/[가-힣]/.test(value);
+}
+
 const PIPELINE_SOFT_WARNING_SECONDS = 480;
 const PIPELINE_TIMEOUT_SECONDS = 570;
 
@@ -139,6 +144,9 @@ export default function PipelinePage() {
   const progressEvents = events.filter(
     (event) => event.type === "stage_change" || event.type === "progress" || event.type === "error"
   );
+  const profileDisplayName = !profile?.displayName || looksCorruptedText(profile.displayName)
+    ? normalizedUserId || "사용자 연결됨"
+    : profile.displayName;
 
   useEffect(() => {
     if (topicMode !== "list" || !selectedTopicId) return;
@@ -754,7 +762,7 @@ export default function PipelinePage() {
             onClick={() => setPipelineError(null)}
             className="ml-3 text-red-400 hover:text-red-600 shrink-0 text-lg leading-none"
           >
-            횞
+            ×
           </button>
         </div>
       )}
@@ -775,7 +783,7 @@ export default function PipelinePage() {
                 />
                 {profileLoading && <span className="text-xs text-zinc-400">확인 중</span>}
                 {!profileLoading && profile && (
-                  <span className="text-xs text-emerald-600 font-medium">{profile.displayName}</span>
+                  <span className="text-xs text-emerald-600 font-medium">{profileDisplayName}</span>
                 )}
                 {!profileLoading && userId.trim() && !profile && profileError && (
                   <span className="text-xs text-red-500" title={profileError}>오류: {profileError}</span>

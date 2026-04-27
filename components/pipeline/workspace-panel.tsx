@@ -94,7 +94,7 @@ export function PipelineWorkspacePanel({
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-semibold text-zinc-900">본문 작업 영역</p>
-            <p className="mt-1 text-xs text-zinc-500">초안과 수정본을 같은 자리에서 오가며 바로 검토하고 반영합니다.</p>
+            <p className="mt-1 text-xs text-zinc-500">초안과 수정본을 같은 자리에서 오가면서 확인하고 다듬습니다.</p>
           </div>
           <div className="inline-flex rounded-lg bg-zinc-100 p-1">
             <button
@@ -124,7 +124,7 @@ export function PipelineWorkspacePanel({
           <div className="flex min-h-[42rem] flex-col justify-center rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-10">
             <p className="text-sm font-semibold text-zinc-700">본문이 여기에 표시돼</p>
             <p className="mt-2 text-sm leading-6 text-zinc-500">
-              글쓰기를 시작하면 초안이 가운데에 보이고, 수정본 탭에서는 실제 작성본과 검토 결과를 이어서 확인할 수 있어.
+              글쓰기를 시작하면 초안이 가운데에 쌓이고, 수정본 탭에서는 실제 작성본과 수정본을 한 자리에서 다룰 수 있어.
             </p>
           </div>
         ) : contentTab === "draft" ? (

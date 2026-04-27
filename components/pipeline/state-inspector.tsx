@@ -56,7 +56,7 @@ export function applyEventToInspector(
     return {
       ...prev,
       pre_write_gate_result: "blocked",
-      blocking_reason: data?.reason ?? data?.blockedBy ?? "gate 차단",
+      blocking_reason: data?.reason ?? data?.blockedBy ?? "사전 검수에서 차단됨",
     };
   }
 
@@ -102,7 +102,7 @@ export function PipelineStateInspector({ state }: PipelineStateInspectorProps) {
     {
       label: "선택 주제",
       value: state.selected_topic
-        ? <span className="text-zinc-800 truncate max-w-[220px] inline-block">{state.selected_topic}</span>
+        ? <span className="inline-block max-w-[220px] truncate text-zinc-800">{state.selected_topic}</span>
         : <span className="text-zinc-400">-</span>,
     },
     {
@@ -161,16 +161,16 @@ export function PipelineStateInspector({ state }: PipelineStateInspectorProps) {
   ];
 
   return (
-    <div className="bg-zinc-50 border border-zinc-200 rounded-xl overflow-hidden">
+    <div className="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
       {awaitingApproval && (
-        <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5 flex items-center gap-2">
-          <span className="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+        <div className="flex items-center gap-2 border-b border-amber-200 bg-amber-50 px-4 py-2.5">
+          <span className="inline-block h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
           <p className="text-xs font-semibold text-amber-700">승인 대기 중입니다. 승인 창에서 전략을 확인해 주세요.</p>
         </div>
       )}
 
       <div className="p-4">
-        <p className="text-xs font-semibold text-zinc-500 mb-3 uppercase tracking-wide">파이프라인 상태</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-500">파이프라인 상태</p>
         <div className="grid grid-cols-2 gap-x-4 gap-y-2">
           {rows.map(({ label, value }) => (
             <div key={label} className="contents">
@@ -181,9 +181,9 @@ export function PipelineStateInspector({ state }: PipelineStateInspectorProps) {
         </div>
 
         {state.blocking_reason && (
-          <div className="mt-3 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
-            <p className="text-xs font-semibold text-red-600 mb-1">차단 / 오류 사유</p>
-            <p className="text-xs text-red-700 break-all">{state.blocking_reason}</p>
+          <div className="mt-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2">
+            <p className="mb-1 text-xs font-semibold text-red-600">차단 / 오류 사유</p>
+            <p className="break-all text-xs text-red-700">{state.blocking_reason}</p>
           </div>
         )}
       </div>
