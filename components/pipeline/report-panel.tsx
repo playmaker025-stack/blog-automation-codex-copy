@@ -17,6 +17,7 @@ interface ResultData {
 }
 
 interface Props {
+  contentTab: "draft" | "revision";
   approval: ReactNode;
   result: ResultData | null;
   reviewResult: DraftReviewResult | null;
@@ -30,7 +31,14 @@ interface Props {
   keywordStatusTone: (status: KeywordUsageReport["items"][number]["status"]) => string;
 }
 
+function issueTone(severity: DraftReviewIssue["severity"]): string {
+  if (severity === "blocker") return "text-red-500";
+  if (severity === "warning") return "text-amber-500";
+  return "text-zinc-400";
+}
+
 export function PipelineReportPanel({
+  contentTab,
   approval,
   result,
   reviewResult,
@@ -43,6 +51,23 @@ export function PipelineReportPanel({
   onPublishToIndex,
   keywordStatusTone,
 }: Props) {
+  const activeSeoEvaluation = contentTab === "revision" ? reviewResult?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
+  const activeKeywordReport = contentTab === "revision"
+    ? reviewResult?.keywordReport ?? null
+    : result?.seoEvaluation?.keywordReport ?? null;
+  const activeSeoNotes = contentTab === "revision"
+    ? reviewResult?.seoNotes ?? []
+    : [
+        ...(result?.seoEvaluation?.evidence ?? []),
+        ...(result?.seoEvaluation?.improvements ?? []),
+      ].slice(0, 6);
+  const activeNaverNotes = contentTab === "revision"
+    ? reviewResult?.naverLogicNotes ?? []
+    : [
+        ...(result?.naverLogicEvaluation?.evidence ?? []),
+        ...(result?.naverLogicEvaluation?.improvements ?? []),
+      ].slice(0, 6);
+
   return (
     <aside className="min-w-0 space-y-4 xl:sticky xl:top-8">
       {approval}
@@ -92,26 +117,28 @@ export function PipelineReportPanel({
                   <p className="text-lg font-bold text-blue-700">{result.naverLogicEvaluation.completenessScore}점</p>
                 </div>
               </div>
+
               {result.naverLogicEvaluation.evidence.length > 0 && (
                 <div>
                   <p className="mb-1 text-xs font-semibold text-zinc-600">반영 근거</p>
                   <ul className="space-y-1">
                     {result.naverLogicEvaluation.evidence.map((item, index) => (
                       <li key={`${item}-${index}`} className="flex gap-2 text-sm text-zinc-700">
-                        <span className="text-zinc-400">•</span>
+                        <span className="text-zinc-400">-</span>
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
+
               {result.naverLogicEvaluation.improvements.length > 0 && (
                 <div>
                   <p className="mb-1 text-xs font-semibold text-zinc-600">보강 포인트</p>
                   <ul className="space-y-1">
                     {result.naverLogicEvaluation.improvements.map((item, index) => (
                       <li key={`${item}-${index}`} className="flex gap-2 text-sm text-zinc-700">
-                        <span className="text-amber-500">•</span>
+                        <span className="text-amber-500">-</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -121,21 +148,29 @@ export function PipelineReportPanel({
             </div>
           )}
 
-          {result.seoEvaluation && (
+          {activeSeoEvaluation && activeKeywordReport && (
             <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-semibold text-zinc-600">SEO 분석</p>
-                  <p className="mt-1 text-sm font-semibold text-zinc-900">키워드 반복과 검색 의도 반영</p>
+                  <p className="mt-1 text-sm font-semibold text-zinc-900">
+                    {contentTab === "revision" ? "수정본 기준 SEO 분석" : "초안 기준 SEO 분석"}
+                  </p>
+                  <p className="mt-1 text-xs text-zinc-500">
+                    {contentTab === "revision"
+                      ? "현재 수정본 내용으로 다시 계산한 키워드 반복과 검색 적합도입니다."
+                      : "초안 작성 시 저장된 SEO 분석 결과입니다."}
+                  </p>
                 </div>
                 <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-right">
                   <p className="text-[11px] font-semibold text-emerald-600">SEO 점수</p>
-                  <p className="text-lg font-bold text-emerald-700">{result.seoEvaluation.score}점</p>
+                  <p className="text-lg font-bold text-emerald-700">{activeSeoEvaluation.score}점</p>
                 </div>
               </div>
+
               <div className="space-y-2">
-                {result.seoEvaluation.keywordReport.items.map((item) => (
-                  <div key={item.keyword} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2">
+                {activeKeywordReport.items.map((item) => (
+                  <div key={`${contentTab}-${item.keyword}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2">
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-sm font-semibold text-zinc-800">{item.keyword}</p>
                       <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
@@ -147,13 +182,16 @@ export function PipelineReportPanel({
                   </div>
                 ))}
               </div>
-              {result.seoEvaluation.improvements.length > 0 && (
+
+              {activeSeoNotes.length > 0 && (
                 <div>
-                  <p className="mb-1 text-xs font-semibold text-zinc-600">SEO 보강 포인트</p>
+                  <p className="mb-1 text-xs font-semibold text-zinc-600">
+                    {contentTab === "revision" ? "수정본 SEO 코멘트" : "SEO 보강 포인트"}
+                  </p>
                   <ul className="space-y-1">
-                    {result.seoEvaluation.improvements.map((item, index) => (
-                      <li key={`${item}-${index}`} className="flex gap-2 text-sm text-zinc-700">
-                        <span className="text-amber-500">•</span>
+                    {activeSeoNotes.map((item, index) => (
+                      <li key={`${contentTab}-seo-${index}`} className="flex gap-2 text-sm text-zinc-700">
+                        <span className="text-amber-500">-</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -163,12 +201,13 @@ export function PipelineReportPanel({
             </div>
           )}
 
-          {reviewResult && (
+          {contentTab === "revision" && reviewResult && (
             <div className="space-y-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
               <div>
                 <p className="text-xs font-semibold text-blue-700">수정본 검토 리포트</p>
-                <p className="mt-1 text-xs text-blue-600">수정본 탭에서 편집 중인 본문에 대한 검토 근거야.</p>
+                <p className="mt-1 text-xs text-blue-600">수정본 탭에서 검토한 결과만 따로 모아 보여줍니다.</p>
               </div>
+
               {reviewResult.keywordReport.items.length > 0 && (
                 <div className="space-y-2">
                   <p className="text-xs font-semibold text-blue-700">주요 키워드 반복 횟수</p>
@@ -186,22 +225,13 @@ export function PipelineReportPanel({
                   ))}
                 </div>
               )}
-              {reviewResult.seoNotes.length > 0 && (
+
+              {activeNaverNotes.length > 0 && (
                 <div>
-                  <p className="mb-1 text-xs font-semibold text-blue-700">SEO 검수</p>
+                  <p className="mb-1 text-xs font-semibold text-blue-700">네이버 로직 코멘트</p>
                   <ul className="space-y-1">
-                    {reviewResult.seoNotes.map((item, index) => (
-                      <li key={`seo-${index}`} className="text-xs text-zinc-700">• {item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {reviewResult.naverLogicNotes.length > 0 && (
-                <div>
-                  <p className="mb-1 text-xs font-semibold text-blue-700">네이버 로직 검수</p>
-                  <ul className="space-y-1">
-                    {reviewResult.naverLogicNotes.map((item, index) => (
-                      <li key={`naver-${index}`} className="text-xs text-zinc-700">• {item}</li>
+                    {activeNaverNotes.map((item, index) => (
+                      <li key={`naver-${index}`} className="text-xs text-zinc-700">- {item}</li>
                     ))}
                   </ul>
                 </div>
@@ -215,7 +245,7 @@ export function PipelineReportPanel({
               <ul className="space-y-1">
                 {result.recommendations.map((recommendation, index) => (
                   <li key={`${recommendation}-${index}`} className="flex gap-2 text-sm text-zinc-700">
-                    <span className="text-zinc-400">•</span>
+                    <span className="text-zinc-400">-</span>
                     <span>{recommendation}</span>
                   </li>
                 ))}
@@ -268,7 +298,7 @@ export function PipelineReportPanel({
               disabled={publishingToIndex || !reviewApplied || !publishUrl.trim()}
               className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-40"
             >
-              {publishingToIndex ? "인덱스 추가 중" : "검수 후 인덱스 목록에 추가"}
+              {publishingToIndex ? "인덱스 추가 중" : "검토 후 인덱스 목록에 추가"}
             </button>
             {publishNotice && (
               <p className={`text-xs ${publishNotice.type === "ok" ? "text-emerald-600" : "text-red-500"}`}>
@@ -283,17 +313,7 @@ export function PipelineReportPanel({
               <ul className="space-y-1">
                 {reviewIssues.map((issue, index) => (
                   <li key={`${issue.message}-${index}`} className="flex gap-2 text-sm text-zinc-700">
-                    <span
-                      className={
-                        issue.severity === "blocker"
-                          ? "text-red-500"
-                          : issue.severity === "warning"
-                            ? "text-amber-500"
-                            : "text-zinc-400"
-                      }
-                    >
-                      •
-                    </span>
+                    <span className={issueTone(issue.severity)}>-</span>
                     <span>{issue.message}</span>
                   </li>
                 ))}
@@ -305,7 +325,7 @@ export function PipelineReportPanel({
         <div className="rounded-xl border border-dashed border-zinc-300 bg-white p-6">
           <p className="text-sm font-semibold text-zinc-700">평가 / 보고서</p>
           <p className="mt-2 text-sm leading-6 text-zinc-500">
-            초안 생성과 평가가 끝나면 이쪽에 SEO, 네이버 로직, 해시태그, 추천 파일명이 정리돼.
+            초안 생성과 평가가 끝나면 이곳에 SEO, 네이버 로직, 해시태그, 추천 파일명이 정리됩니다.
           </p>
         </div>
       )}

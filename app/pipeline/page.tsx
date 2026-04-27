@@ -858,6 +858,7 @@ export default function PipelinePage() {
           reviewSaving={reviewSaving}
           reviewApplied={reviewApplied}
           reviewResult={reviewResult}
+          reviewIssues={reviewIssues}
           onReviewTitleChange={(value) => {
             setReviewTitle(value);
             setReviewApplied(false);
@@ -879,6 +880,7 @@ export default function PipelinePage() {
         />
 
         <PipelineReportPanel
+          contentTab={contentTab}
           approval={approval ? (
             <ApprovalDialog
               pipelineId={approval.pipelineId}
