@@ -2437,7 +2437,20 @@
       "errorName": "Error",
       "pipelineId": "pipe-76cab5bf",
       "at": "2026-04-27T09:30:40.856Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 처음 사러 온 손님들이 가장 많이 하는 질문 정리",
+      "proposedTitle": "전자담배 매장에 처음 오는 손님들이 가장 많이 묻는 질문 7가지 (판매자 기준 실전 정리)",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.4864864864864865,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-822b430d",
+      "at": "2026-04-27T09:32:50.445Z"
     }
   ],
-  "lastUpdated": "2026-04-27T09:30:40.856Z"
+  "lastUpdated": "2026-04-27T09:32:50.445Z"
 }
