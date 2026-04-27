@@ -133,6 +133,7 @@ export default function PipelinePage() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const strategyAbortRef = useRef<AbortController | null>(null);
   const writeAbortRef = useRef<AbortController | null>(null);
+  const forceManualApprovalRef = useRef(false);
   const normalizedUserId = normalizeUserId(userId.trim());
 
   const planningTopics = topics.filter((topic) => topic.source !== "direct");
@@ -374,7 +375,7 @@ export default function PipelinePage() {
   }, [autoApprove]);
 
   useEffect(() => {
-    if (!approval || !autoApproveRef.current) return;
+    if (!approval || !autoApproveRef.current || forceManualApprovalRef.current) return;
     const uid = normalizeUserId(userId.trim());
     setApproval(null);
     setInspector((prev) => ({ ...prev, approval_received: true }));
@@ -440,6 +441,7 @@ export default function PipelinePage() {
     setRunning(true);
     setElapsed(0);
     forcePreflightOverrideRef.current = forcePreflightOverride;
+    forceManualApprovalRef.current = forcePreflightOverride || forcePublishedDuplicateOverride;
 
     const selectedTitle =
       topicMode === "list"
@@ -535,6 +537,7 @@ export default function PipelinePage() {
     setApproval(null);
     setRunningTitle(null);
     setStage("idle");
+    forceManualApprovalRef.current = false;
     appendEvent({
       type: "progress",
       stage: "idle",
@@ -550,6 +553,7 @@ export default function PipelinePage() {
       setRunning(false);
       setRunningTitle(null);
       setStage("idle");
+      forceManualApprovalRef.current = false;
       stopTimer();
       return;
     }
@@ -557,6 +561,7 @@ export default function PipelinePage() {
     const currentApproval = approval;
     setApproval(null);
     setInspector((prev) => ({ ...prev, approval_received: true }));
+    forceManualApprovalRef.current = false;
 
     if (!currentApproval) return;
     startWritePhase(

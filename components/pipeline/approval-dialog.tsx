@@ -22,7 +22,6 @@ export function ApprovalDialog({
   outline,
   naverLogic,
   onApprove,
-  onReject: _onReject,
 }: Props) {
   const [modifications, setModifications] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,36 +45,36 @@ export function ApprovalDialog({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg border-2 border-amber-400">
-        <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 rounded-t-xl flex items-center gap-2">
-          <span className="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+      <div className="w-full max-w-lg rounded-xl border-2 border-amber-400 bg-white shadow-2xl">
+        <div className="flex items-center gap-2 rounded-t-xl border-b border-amber-200 bg-amber-50 px-6 py-3">
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-amber-400 animate-pulse" />
           <p className="text-sm font-semibold text-amber-700">승인 대기 중입니다. 전략을 확인한 뒤 승인해 주세요.</p>
         </div>
 
-        <div className="px-6 py-5 border-b border-zinc-100">
+        <div className="border-b border-zinc-100 px-6 py-5">
           <h2 className="text-lg font-semibold text-zinc-900">전략 승인 요청</h2>
-          <p className="text-sm text-zinc-500 mt-1">
+          <p className="mt-1 text-sm text-zinc-500">
             아래 전략을 승인하면 Master Writer가 본문 작성을 시작합니다.
           </p>
         </div>
 
-        <div className="px-6 py-5 space-y-4">
+        <div className="space-y-4 px-6 py-5">
           {previousTitle !== proposedTitle && (
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <p className="text-xs text-amber-700 font-medium mb-1">제목 변경</p>
+            <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
+              <p className="mb-1 text-xs font-medium text-amber-700">제목 변경</p>
               <p className="text-sm text-zinc-500 line-through">{previousTitle}</p>
-              <p className="text-sm text-zinc-900 font-medium mt-0.5">{proposedTitle}</p>
+              <p className="mt-0.5 text-sm font-medium text-zinc-900">{proposedTitle}</p>
             </div>
           )}
 
           <div>
-            <p className="text-xs text-zinc-500 font-medium mb-1">제안 제목</p>
+            <p className="mb-1 text-xs font-medium text-zinc-500">제안 제목</p>
             <p className="text-sm font-semibold text-zinc-900">{proposedTitle}</p>
           </div>
 
           <div>
-            <p className="text-xs text-zinc-500 font-medium mb-1">전략 근거</p>
+            <p className="mb-1 text-xs font-medium text-zinc-500">전략 근거</p>
             <ol className="space-y-1">
               {rationale
                 .split(/(?=\d+\.\s)|\n/)
@@ -89,8 +88,8 @@ export function ApprovalDialog({
 
           {outline.length > 0 && (
             <div>
-              <p className="text-xs text-zinc-500 font-medium mb-1">아웃라인</p>
-              <ol className="list-decimal list-inside space-y-1">
+              <p className="mb-1 text-xs font-medium text-zinc-500">아웃라인</p>
+              <ol className="list-inside list-decimal space-y-1">
                 {outline.map((heading, index) => (
                   <li key={`${heading}-${index}`} className="text-sm text-zinc-700">{heading}</li>
                 ))}
@@ -99,35 +98,35 @@ export function ApprovalDialog({
           )}
 
           {naverLogic && (
-            <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-              <p className="text-xs text-blue-700 font-medium mb-1">네이버 로직 사전 검수</p>
-              <p className="text-sm text-zinc-900 font-semibold">{naverLogic.label}</p>
-              <p className="text-xs text-zinc-600 mt-1">{naverLogic.reason}</p>
-              <p className="text-xs text-blue-700 mt-2">목표 완성도 {naverLogic.completenessTarget}점 이상</p>
+            <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+              <p className="mb-1 text-xs font-medium text-blue-700">네이버 로직 사전 검토</p>
+              <p className="text-sm font-semibold text-zinc-900">{naverLogic.label}</p>
+              <p className="mt-1 text-xs text-zinc-600">{naverLogic.reason}</p>
+              <p className="mt-2 text-xs text-blue-700">목표 완성도 {naverLogic.completenessTarget}점 이상</p>
             </div>
           )}
 
           <div>
-            <label htmlFor="approval-modifications" className="text-xs text-zinc-500 font-medium mb-1 block">
+            <label htmlFor="approval-modifications" className="mb-1 block text-xs font-medium text-zinc-500">
               거절 또는 수정 요청
             </label>
             <textarea
               id="approval-modifications"
               value={modifications}
               onChange={(event) => setModifications(event.target.value)}
-              placeholder="제목이나 방향에 대한 수정 요청을 입력하세요."
+              placeholder="제목이나 방향에 대한 수정 요청을 입력해 주세요."
               rows={2}
-              className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full resize-none rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
 
-        <div className="px-6 py-4 border-t border-zinc-100 flex justify-end gap-3">
+        <div className="flex justify-end gap-3 border-t border-zinc-100 px-6 py-4">
           <button
             type="button"
             onClick={handleReject}
             disabled={loading}
-            className="px-4 py-2 text-sm font-medium text-zinc-700 bg-zinc-100 rounded-lg hover:bg-zinc-200 disabled:opacity-50 transition-colors"
+            className="rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-200 disabled:opacity-50"
           >
             거절
           </button>
@@ -135,7 +134,7 @@ export function ApprovalDialog({
             type="button"
             onClick={handleApprove}
             disabled={loading}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
           >
             {loading ? "처리 중" : "승인하고 작성 시작"}
           </button>
