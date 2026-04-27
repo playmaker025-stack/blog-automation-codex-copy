@@ -2404,7 +2404,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-a0a0cda3",
       "at": "2026-04-22T10:41:03.476Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-69977072",
+      "userId": "a",
+      "message": "?좏뵿 ?좏깮 ?ㅽ뙣: topicId \"topic-69977072\"를 index에서 찾을 수 없습니다.",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-4a9b3edd",
+      "at": "2026-04-27T09:26:46.958Z"
     }
   ],
-  "lastUpdated": "2026-04-22T10:41:03.476Z"
+  "lastUpdated": "2026-04-27T09:26:46.958Z"
 }
