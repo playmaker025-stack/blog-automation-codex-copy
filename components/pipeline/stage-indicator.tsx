@@ -4,7 +4,7 @@ const STAGES: { key: PipelineStage; label: string }[] = [
   { key: "strategy-planning", label: "전략 수립" },
   { key: "awaiting-approval", label: "승인 대기" },
   { key: "writing", label: "본문 작성" },
-  { key: "evaluating", label: "품질 평가" },
+  { key: "evaluating", label: "평가 진행" },
   { key: "complete", label: "완료" },
 ];
 

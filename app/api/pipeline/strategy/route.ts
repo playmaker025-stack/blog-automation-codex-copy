@@ -16,10 +16,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (!body.topicId || !body.userId) {
-    return NextResponse.json(
-      { error: "topicId와 userId가 필요합니다." },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "topicId와 userId가 필요합니다." }, { status: 400 });
   }
 
   const userId = normalizeUserId(body.userId);
@@ -31,7 +28,11 @@ export async function POST(request: NextRequest) {
       const encoder = new TextEncoder();
 
       const keepalive = setInterval(() => {
-        try { controller.enqueue(encoder.encode(": ping\n\n")); } catch { /* closed */ }
+        try {
+          controller.enqueue(encoder.encode(": ping\n\n"));
+        } catch {
+          // already closed
+        }
       }, 15_000);
 
       let closed = false;
@@ -44,8 +45,16 @@ export async function POST(request: NextRequest) {
           data: { message: "전략 수립 타임아웃 (270초). 자동 종료되었습니다." },
           timestamp: new Date().toISOString(),
         });
-        try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }
-        try { controller.close(); } catch { /* ignore */ }
+        try {
+          controller.enqueue(encoder.encode(`data: ${event}\n\n`));
+        } catch {
+          // ignore
+        }
+        try {
+          controller.close();
+        } catch {
+          // ignore
+        }
         closed = true;
       }, 270_000);
 
@@ -57,22 +66,30 @@ export async function POST(request: NextRequest) {
         controller,
         signal: abortController.signal,
       })
-        .catch((err) => {
+        .catch((error) => {
           if (closed) return;
           const event = JSON.stringify({
             type: "error",
             stage: "failed",
-            data: { message: err instanceof Error ? err.message : "전략 수립 오류" },
+            data: { message: error instanceof Error ? error.message : "전략 수립 오류" },
             timestamp: new Date().toISOString(),
           });
-          try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }
+          try {
+            controller.enqueue(encoder.encode(`data: ${event}\n\n`));
+          } catch {
+            // ignore
+          }
         })
         .finally(() => {
           closed = true;
           clearTimeout(timeout);
           clearInterval(keepalive);
           abortController.abort();
-          try { controller.close(); } catch { /* already closed */ }
+          try {
+            controller.close();
+          } catch {
+            // already closed
+          }
         });
     },
   });
