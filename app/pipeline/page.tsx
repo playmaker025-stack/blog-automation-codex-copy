@@ -125,6 +125,8 @@ export default function PipelinePage() {
   const [publishNotice, setPublishNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const [contentTab, setContentTab] = useState<ContentTab>("draft");
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const strategyAbortRef = useRef<AbortController | null>(null);
+  const writeAbortRef = useRef<AbortController | null>(null);
   const normalizedUserId = normalizeUserId(userId.trim());
 
   const planningTopics = topics.filter((topic) => topic.source !== "direct");
@@ -151,7 +153,13 @@ export default function PipelinePage() {
     }
   }, []);
 
-  useEffect(() => stopTimer, [stopTimer]);
+  useEffect(() => {
+    return () => {
+      stopTimer();
+      strategyAbortRef.current?.abort();
+      writeAbortRef.current?.abort();
+    };
+  }, [stopTimer]);
 
   const reloadTopics = useCallback(() => {
     const timestamp = Date.now();
@@ -285,6 +293,10 @@ export default function PipelinePage() {
   ]);
 
   const startWritePhase = useCallback((approvalData: ApprovalData, uid: string) => {
+    writeAbortRef.current?.abort();
+    const abortController = new AbortController();
+    writeAbortRef.current = abortController;
+
     fetch("/api/pipeline/write", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -296,6 +308,7 @@ export default function PipelinePage() {
         modifications: approvalData.modifications?.trim() || undefined,
         forcePreflightOverride: forcePreflightOverrideRef.current,
       }),
+      signal: abortController.signal,
     })
       .then((res) => {
         if (!res.body) {
@@ -311,17 +324,31 @@ export default function PipelinePage() {
             .then(({ done, value }) => {
               if (done) {
                 setRunning(false);
+                if (writeAbortRef.current === abortController) {
+                  writeAbortRef.current = null;
+                }
                 return;
               }
               buffer += decoder.decode(value, { stream: true });
               buffer = parseSseChunk(buffer, handleEvent);
               read();
             })
-            .catch(() => setRunning(false));
+            .catch((error) => {
+              if ((error as Error).name === "AbortError") return;
+              setRunning(false);
+            });
         };
         read();
       })
-      .catch(() => setRunning(false));
+      .catch((error) => {
+        if ((error as Error).name === "AbortError") return;
+        setRunning(false);
+      })
+      .finally(() => {
+        if (writeAbortRef.current === abortController) {
+          writeAbortRef.current = null;
+        }
+      });
   }, [handleEvent]);
 
   const autoApproveRef = useRef(autoApprove);
@@ -414,10 +441,15 @@ export default function PipelinePage() {
 
     timerRef.current = setInterval(() => setElapsed((seconds) => seconds + 1), 1000);
 
+    strategyAbortRef.current?.abort();
+    const abortController = new AbortController();
+    strategyAbortRef.current = abortController;
+
     fetch("/api/pipeline/strategy", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ topicId, userId: uid, forcePreflightOverride }),
+      signal: abortController.signal,
     })
       .then((res) => {
         if (!res.body) {
@@ -453,12 +485,42 @@ export default function PipelinePage() {
               });
               read();
             })
-            .catch(() => setRunning(false));
+            .catch((error) => {
+              if ((error as Error).name === "AbortError") return;
+              setRunning(false);
+            });
         };
         read();
       })
-      .catch(() => setRunning(false));
+      .catch((error) => {
+        if ((error as Error).name === "AbortError") return;
+        setRunning(false);
+      })
+      .finally(() => {
+        if (strategyAbortRef.current === abortController) {
+          strategyAbortRef.current = null;
+        }
+      });
   };
+
+  const stopPipeline = useCallback(() => {
+    strategyAbortRef.current?.abort();
+    writeAbortRef.current?.abort();
+    strategyAbortRef.current = null;
+    writeAbortRef.current = null;
+    stopTimer();
+    setRunning(false);
+    setElapsed(0);
+    setApproval(null);
+    setRunningTitle(null);
+    setStage("idle");
+    appendEvent({
+      type: "progress",
+      stage: "idle",
+      data: { message: "사용자가 글쓰기 진행을 중단했습니다." },
+      timestamp: new Date().toISOString(),
+    });
+  }, [appendEvent, setRunningTitle, setStage, stopTimer]);
 
   const handleApprove = async (request: ApprovalRequest) => {
     const uid = normalizeUserId(userId.trim());
@@ -806,14 +868,24 @@ export default function PipelinePage() {
               <span>자동 승인 모드 <span className="text-zinc-400">테스트용으로 전략 확인 없이 이어서 작성합니다.</span></span>
             </label>
 
-            <button
-              type="button"
-              onClick={() => startPipeline()}
-              disabled={!canStart}
-              className="w-full py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            >
-              {running ? "글쓰기 진행 중" : "글쓰기 시작"}
-            </button>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => startPipeline()}
+                disabled={!canStart}
+                className="py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                {running ? "글쓰기 진행 중" : "글쓰기 시작"}
+              </button>
+              <button
+                type="button"
+                onClick={stopPipeline}
+                disabled={!running && !approval}
+                className="py-2.5 bg-zinc-200 text-zinc-800 text-sm font-semibold rounded-lg hover:bg-zinc-300 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                글쓰기 진행 멈춤
+              </button>
+            </div>
           </div>
 
           {running && (
