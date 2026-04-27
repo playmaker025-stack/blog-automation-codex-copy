@@ -111,6 +111,7 @@ export default function PipelinePage() {
   const [recovering, setRecovering] = useState(false);
   const [pipelineError, setPipelineError] = useState<string | null>(null);
   const [preflightBlocked, setPreflightBlocked] = useState(false);
+  const [publishedDuplicateBlocked, setPublishedDuplicateBlocked] = useState(false);
   const forcePreflightOverrideRef = useRef(false);
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewBody, setReviewBody] = useState("");
@@ -145,6 +146,10 @@ export default function PipelinePage() {
       setSelectedTopicId("");
     }
   }, [availableTopics, selectedTopicId, setSelectedTopicId, topicMode]);
+
+  useEffect(() => {
+    setPublishedDuplicateBlocked(false);
+  }, [directTitle, topicMode, userId]);
 
   const stopTimer = useCallback(() => {
     if (timerRef.current) {
@@ -268,6 +273,7 @@ export default function PipelinePage() {
       const message = (event.data as { message?: string })?.message ?? "파이프라인 오류가 발생했습니다.";
       const isPreflight = message.includes("Preflight check blocked writing");
       setPreflightBlocked(isPreflight);
+      setPublishedDuplicateBlocked(false);
       setPipelineError(
         isPreflight
           ? "이미 이전 작성목록에 있는 내용입니다. 비슷한 주제로 유사문서가 되지 않게 다른 각도로 작성할까요?"
@@ -385,16 +391,19 @@ export default function PipelinePage() {
     return json.topic.topicId;
   };
 
-  const startPipeline = async (forcePreflightOverride = false) => {
+  const startPipeline = async (forcePreflightOverride = false, forcePublishedDuplicateOverride = false) => {
     const uid = normalizeUserId(userId.trim());
     if (!uid) return;
     if (topicMode === "list" && !selectedTopicId) return;
     if (topicMode === "direct" && !directTitle.trim()) return;
     if (
+      !forcePublishedDuplicateOverride &&
       topicMode === "direct" &&
       posts.some((post) => post.status === "published" && compactTitle(post.title) === compactTitle(directTitle))
     ) {
-      setPipelineError("이미 발행 인덱스에 있는 제목입니다. 글목록 또는 인덱스를 확인해 주세요.");
+      setPublishedDuplicateBlocked(true);
+      setPreflightBlocked(false);
+      setPipelineError("이미 발행 인덱스에 같은 제목이 있습니다. 같은 제목으로도 다시 발행하려면 아래에서 계속 진행을 눌러 주세요.");
       return;
     }
 
@@ -416,6 +425,7 @@ export default function PipelinePage() {
     setApproval(null);
     setPipelineError(null);
     setPreflightBlocked(false);
+    setPublishedDuplicateBlocked(false);
     setRunning(true);
     setElapsed(0);
     forcePreflightOverrideRef.current = forcePreflightOverride;
@@ -726,6 +736,15 @@ export default function PipelinePage() {
                 className="mt-3 px-3 py-1.5 rounded-md bg-amber-600 text-white text-xs font-semibold hover:bg-amber-700 transition-colors"
               >
                 다른 각도로 작성
+              </button>
+            )}
+            {publishedDuplicateBlocked && (
+              <button
+                type="button"
+                onClick={() => startPipeline(false, true)}
+                className="mt-3 ml-2 px-3 py-1.5 rounded-md bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
+              >
+                그래도 발행 진행
               </button>
             )}
           </div>
