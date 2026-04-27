@@ -148,6 +148,9 @@ export default function PipelinePage() {
   const profileDisplayName = !profile?.displayName || looksCorruptedText(profile.displayName)
     ? normalizedUserId || "사용자 연결됨"
     : profile.displayName;
+  const selectedTopic = selectedTopicId
+    ? topics.find((topic) => topic.topicId === selectedTopicId) ?? null
+    : null;
 
   useEffect(() => {
     if (topicMode !== "list" || !selectedTopicId) return;
@@ -408,10 +411,18 @@ export default function PipelinePage() {
     if (!uid) return;
     if (topicMode === "list" && !selectedTopicId) return;
     if (topicMode === "direct" && !directTitle.trim()) return;
+    const selectedTitle = topicMode === "list"
+      ? selectedTopic?.title?.trim() ?? ""
+      : directTitle.trim();
+    const hasPublishedDuplicate = posts.some((post) => {
+      if (post.status !== "published") return false;
+      if (topicMode === "list" && selectedTopic && post.topicId === selectedTopic.topicId) return true;
+      return compactTitle(post.title) === compactTitle(selectedTitle);
+    });
     if (
       !forcePublishedDuplicateOverride &&
-      topicMode === "direct" &&
-      posts.some((post) => post.status === "published" && compactTitle(post.title) === compactTitle(directTitle))
+      selectedTitle &&
+      hasPublishedDuplicate
     ) {
       setPublishedDuplicateBlocked(true);
       setPreflightBlocked(false);
@@ -442,11 +453,6 @@ export default function PipelinePage() {
     setElapsed(0);
     forcePreflightOverrideRef.current = forcePreflightOverride;
     forceManualApprovalRef.current = forcePreflightOverride || forcePublishedDuplicateOverride;
-
-    const selectedTitle =
-      topicMode === "list"
-        ? topics.find((topic) => topic.topicId === selectedTopicId)?.title ?? selectedTopicId
-        : directTitle.trim();
 
     setRunningTitle(selectedTitle);
     setInspector({
@@ -757,7 +763,7 @@ export default function PipelinePage() {
             {publishedDuplicateBlocked && (
               <button
                 type="button"
-                onClick={() => startPipeline(false, true)}
+                onClick={() => startPipeline(true, true)}
                 className="mt-3 ml-2 px-3 py-1.5 rounded-md bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
               >
                 그래도 발행 진행
