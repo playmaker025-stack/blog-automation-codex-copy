@@ -2426,7 +2426,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-102e0576",
       "at": "2026-04-27T09:28:50.528Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-157a1185",
+      "userId": "a",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-103d30b5",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-76cab5bf",
+      "at": "2026-04-27T09:30:40.856Z"
     }
   ],
-  "lastUpdated": "2026-04-27T09:28:50.528Z"
+  "lastUpdated": "2026-04-27T09:30:40.856Z"
 }
