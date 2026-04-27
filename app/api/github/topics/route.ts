@@ -247,7 +247,8 @@ export async function POST(request: NextRequest) {
         (topic) =>
           compactTitle(topic.title) === compactTitle(newTopic.title) &&
           normalizeUserId(topic.assignedUserId ?? "") === normalizeUserId(newTopic.assignedUserId ?? "") &&
-          topic.status !== "archived"
+          topic.status !== "archived" &&
+          !(newTopic.source === "direct" && topic.status === "published")
       );
       if (duplicate) {
         Object.assign(newTopic, duplicate);

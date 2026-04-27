@@ -280,11 +280,14 @@ export default function PipelinePage() {
     if (event.type === "error") {
       const message = (event.data as { message?: string })?.message ?? "파이프라인 오류가 발생했습니다.";
       const isPreflight = message.includes("Preflight check blocked writing");
+      const isPublishedTopicBlock = message.includes("이미 발행된 토픽입니다");
       setPreflightBlocked(isPreflight);
-      setPublishedDuplicateBlocked(false);
+      setPublishedDuplicateBlocked(isPublishedTopicBlock);
       setPipelineError(
         isPreflight
           ? "이미 이전 작성목록에 있는 내용입니다. 비슷한 주제로 유사문서가 되지 않게 다른 각도로 작성할까요?"
+          : isPublishedTopicBlock
+            ? "이미 발행된 토픽입니다. 그래도 같은 제목/토픽으로 다시 발행하려면 계속 진행을 눌러 주세요."
           : message.includes("Request was aborted")
             ? "요청 시간이 길어져 중단되었습니다. 잠시 후 다시 실행해 주세요."
             : message

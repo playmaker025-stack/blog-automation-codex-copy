@@ -9,6 +9,7 @@ export async function GET(request: NextRequest) {
   if (!rawUserId) {
     return NextResponse.json({ error: "userId 파라미터가 필요합니다." }, { status: 400 });
   }
+
   const userId = normalizeUserId(rawUserId);
 
   try {
@@ -17,10 +18,11 @@ export async function GET(request: NextRequest) {
     if (!exists) {
       return NextResponse.json({ error: "프로필을 찾을 수 없습니다." }, { status: 404 });
     }
+
     const { data } = await readJsonFile<UserProfile>(path);
     return NextResponse.json({ profile: data });
-  } catch (err) {
-    console.error("[GET /api/github/profile]", err);
+  } catch (error) {
+    console.error("[GET /api/github/profile]", error);
     return NextResponse.json({ error: "프로필 조회 실패" }, { status: 500 });
   }
 }
@@ -37,6 +39,7 @@ export async function PUT(request: NextRequest) {
     const normalizedUserId = normalizeUserId(profile.userId);
     const path = Paths.userProfile(normalizedUserId);
     const exists = await fileExists(path);
+
     let sha: string | null = null;
     if (exists) {
       const { sha: existingSha } = await readJsonFile<UserProfile>(path);
@@ -57,8 +60,8 @@ export async function PUT(request: NextRequest) {
     );
 
     return NextResponse.json({ profile: updated });
-  } catch (err) {
-    console.error("[PUT /api/github/profile]", err);
+  } catch (error) {
+    console.error("[PUT /api/github/profile]", error);
     return NextResponse.json({ error: "프로필 저장 실패" }, { status: 500 });
   }
 }
