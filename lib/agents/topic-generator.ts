@@ -1,8 +1,8 @@
 /**
  * AI 글목록 자동 생성 에이전트.
  *
- * 발행 완료 글을 분석해 다음 계획 토픽 5개를 만든다.
- * 생성 주제는 기존 발행 글과 중복되지 않아야 하며, 허브/리프 구조의 빈틈을 메운다.
+ * 발행 완료 글을 분석해서 다음 계획 토픽 5개를 만들고
+ * 네이버 검색/질문/카페/트렌드 신호를 함께 반영한다.
  */
 
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
@@ -37,6 +37,12 @@ export interface TopicGeneratorOutput {
   generatedTopics: GeneratedTopic[];
   researchKeyword: string;
   competitionInfo: string;
+}
+
+function describeTrendLabel(trend: "rising" | "steady" | "falling"): string {
+  if (trend === "rising") return "상승";
+  if (trend === "falling") return "하락";
+  return "보합";
 }
 
 function postToTopic(post: PostingRecord): Topic {
@@ -141,12 +147,17 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   const representativeKeyword = extractRepresentativeKeyword(publishedTopics);
   const mainCategory = extractMainCategory(publishedTopics);
 
-  onProgress?.(`네이버 키워드 리서치: "${representativeKeyword}"`);
+  onProgress?.(`네이버 키워드 리서치 "${representativeKeyword}"`);
   const research = await naverKeywordResearch({ keyword: representativeKeyword, display: 20 });
 
   const competitionInfo = research.error
     ? "네이버 리서치 불가"
-    : `경쟁도 ${research.blog.competition} (${research.blog.total.toLocaleString()}건 / 롱테일: ${research.longtailSuggestions.slice(0, 3).join(", ")})`;
+    : [
+        `블로그 ${research.blog.competition} (${research.blog.total.toLocaleString()}건)`,
+        `지식인 ${research.kin.total.toLocaleString()}건`,
+        `카페 ${research.cafe.total.toLocaleString()}건`,
+        `트렌드 ${describeTrendLabel(research.datalabSearch.trend)}`,
+      ].join(" / ");
 
   onProgress?.("신규 토픽 5개 생성 중...");
 
@@ -158,6 +169,10 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     .slice(0, 8)
     .map((item) => item.word)
     .join(", ");
+  const questionIntents = research.questionIntents.slice(0, 6).join(", ");
+  const communitySignals = research.communitySignals.slice(0, 6).join(", ");
+  const intentMix = research.summary.intentMix.join(" / ");
+  const contentAngles = research.summary.contentAngles.join(", ");
 
   if (hasOpenAIKey()) {
     const model = process.env.OPENAI_TOPIC_MODEL ?? "gpt-4.1-mini";
@@ -172,6 +187,8 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             "Avoid duplicate titles and avoid topics already covered.",
             "Balance hub and leaf topics based on gaps in the published list.",
             "Use Naver search-intent friendly longtail wording.",
+            "Reflect question-style demand from KnowledgeIn and lived-experience demand from Cafe.",
+            "If the trend is rising, prioritize timely topics over generic evergreen clones.",
             "Locality rule: generate only Incheon operating-area topics when using a place name.",
             `Allowed localities: ${ALLOWED_LOCALITY_TERMS.join(", ")}.`,
             `Never generate outside localities: ${BLOCKED_OUTSIDE_LOCALITY_TERMS.join(", ")}.`,
@@ -191,8 +208,15 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             `Main category: ${mainCategory}`,
             `Research keyword: ${representativeKeyword}`,
             `Competition: ${research.blog.competition}`,
+            `KnowledgeIn total: ${research.kin.total}`,
+            `Cafe total: ${research.cafe.total}`,
+            `Trend: ${research.datalabSearch.trend} (latest ${research.datalabSearch.latestRatio}, avg ${research.datalabSearch.averageRatio})`,
             `Related keywords: ${relatedWords || "none"}`,
             `Longtail hints: ${longtailHints || "none"}`,
+            `Question intents: ${questionIntents || "none"}`,
+            `Community signals: ${communitySignals || "none"}`,
+            `Intent mix: ${intentMix || "none"}`,
+            `Content angles: ${contentAngles || "none"}`,
             "",
             "Generate exactly 5 next posting topics.",
             "Each topic must include contentKind hub or leaf.",
@@ -214,7 +238,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     });
 
     const generatedTopics = filterBlockedTopics(
-      result.topics.map((topic) => normalizeGeneratedTopic(topic, mainCategory))
+      result.topics.map((topic) => normalizeGeneratedTopic(topic, mainCategory)),
     )
       .filter((topic) => topic.title)
       .slice(0, 5);
@@ -232,7 +256,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
         {
           role: "user",
           content: `사용자(${userId})의 발행 완료 글 목록입니다.
-아래 목록과 네이버 리서치 결과를 참고해서 다음에 쓸 신규 글목록 5개를 추천해주세요.
+아래 목록과 네이버 리서치 결과를 참고해서 다음 신규 글목록 5개를 추천해 주세요.
 
 ## 기존 발행 글 목록
 ${publishedTitles}
@@ -240,29 +264,38 @@ ${publishedTitles}
 ## 주력 카테고리
 ${mainCategory}
 
-## 네이버 리서치 결과 (키워드: "${representativeKeyword}")
-- 경쟁도: ${research.blog.competition}
-- 연관 키워드: ${relatedWords}
-- 롱테일 제안: ${longtailHints}
+## 네이버 리서치 결과 (키워드 "${representativeKeyword}")
+- 블로그 경쟁도: ${research.blog.competition}
+- 지식인 결과 수: ${research.kin.total}
+- 카페 결과 수: ${research.cafe.total}
+- 데이터랩 추세: ${describeTrendLabel(research.datalabSearch.trend)} (latest ${research.datalabSearch.latestRatio}, avg ${research.datalabSearch.averageRatio})
+- 연관 키워드: ${relatedWords || "없음"}
+- 롱테일 제안: ${longtailHints || "없음"}
+- 질문 의도: ${questionIntents || "없음"}
+- 카페 신호: ${communitySignals || "없음"}
+- 의도 요약: ${intentMix || "없음"}
+- 추천 각도: ${contentAngles || "없음"}
 
 ## 요구사항
 1. 기존 발행 글과 겹치지 않으면서 자연스럽게 이어지는 주제
-2. 이미 발행한 허브글이 있으면 세부 리프글을 보강하고, 리프글만 많으면 상위 허브글을 제안
+2. 이미 발행된 허브글이 적으면 먼저 리프글을 보강하고, 리프글만 많으면 상위 허브글을 제안
 3. 5개 안에 hub와 leaf를 균형 있게 섞되, 현재 목록의 빈틈을 우선
 4. 네이버 검색 유입을 노릴 수 있는 롱테일 키워드 포함
-5. category는 "${mainCategory}" 계열 유지
-6. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
+5. 지식인 질문형 수요와 카페 후기형 수요를 제목/설명에 반영
+6. 데이터랩 상승 추세면 시의성 있는 주제를 우선
+7. category는 "${mainCategory}" 계열 유지
+8. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
 
 ## 출력 형식 (JSON 코드블록)
 \`\`\`json
 [
   {
-    "title": "포스팅 제목 (50자 이내)",
+    "title": "포스트 제목 (50자 이내)",
     "description": "이 글에서 다룰 핵심 내용 (2~3문장)",
     "category": "${mainCategory}",
     "tags": ["태그1", "태그2", "태그3"],
     "contentKind": "hub",
-    "rationale": "왜 이 주제를 추천하는지와 기존 글/허브·리프 구조상 필요한 이유"
+    "rationale": "왜 이 주제를 추천하는지와 기존 글/허브↔리프 구조상 필요한 이유"
   }
 ]
 \`\`\`
@@ -271,13 +304,13 @@ ${mainCategory}
         },
       ],
     },
-    { signal: AbortSignal.timeout(60_000) }
+    { signal: AbortSignal.timeout(60_000) },
   );
 
   const text = response.content.find((block) => block.type === "text");
   const rawText = text?.type === "text" ? text.text : "";
   const generatedTopics = filterBlockedTopics(
-    parseGeneratedTopics(rawText).map((topic) => normalizeGeneratedTopic(topic, mainCategory))
+    parseGeneratedTopics(rawText).map((topic) => normalizeGeneratedTopic(topic, mainCategory)),
   )
     .filter((topic) => topic.title)
     .slice(0, 5);
