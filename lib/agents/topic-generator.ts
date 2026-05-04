@@ -2,11 +2,12 @@
  * AI 글목록 자동 생성 에이전트.
  *
  * 발행 완료 글을 분석해서 다음 계획 토픽 5개를 만들고
- * 네이버 검색/질문/카페/트렌드 신호를 함께 반영한다.
+ * 네이버 검색, 질문, 카페, 트렌드 신호를 함께 반영한다.
  */
 
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { naverKeywordResearch } from "@/lib/skills/naver-keyword-research";
+import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-research";
 import { hasOpenAIKey, requestOpenAIJson } from "@/lib/openai/responses";
 import type { PostingRecord, Topic } from "@/lib/types/github-data";
 import {
@@ -72,30 +73,39 @@ function extractMainCategory(topics: Topic[]): string {
 
 function extractRepresentativeKeyword(topics: Topic[]): string {
   const counts = new Map<string, number>();
+
   for (const topic of topics) {
     for (const tag of topic.tags ?? []) {
       counts.set(tag, (counts.get(tag) ?? 0) + 1);
     }
+
     const firstWord = topic.title.split(/\s+/)[0];
     if (firstWord.length >= 2) {
       counts.set(firstWord, (counts.get(firstWord) ?? 0) + 1);
     }
   }
-  if (counts.size === 0) return topics[0]?.title.split(" ")[0] ?? "블로그";
+
+  if (counts.size === 0) {
+    return topics[0]?.title.split(/\s+/)[0] ?? "블로그";
+  }
+
   return [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0];
 }
 
 function parseGeneratedTopics(text: string): GeneratedTopic[] {
   const jsonMatch = text.match(/```json\s*([\s\S]*?)```/);
   const raw = jsonMatch?.[1] ?? text;
+
   try {
     const parsed = JSON.parse(raw.trim()) as unknown;
     if (Array.isArray(parsed)) return parsed as GeneratedTopic[];
+
     const obj = parsed as { topics?: GeneratedTopic[] };
     if (Array.isArray(obj.topics)) return obj.topics;
   } catch {
-    // Return an empty list; the caller decides how to surface generation failure.
+    // The caller will surface generation failure.
   }
+
   return [];
 }
 
@@ -108,6 +118,20 @@ function normalizeGeneratedTopic(topic: GeneratedTopic, fallbackCategory: string
     contentKind: topic.contentKind === "hub" || topic.contentKind === "leaf" ? topic.contentKind : undefined,
     rationale: topic.rationale?.trim() ?? "",
   };
+}
+
+function formatDirectCommunitySignals(params: {
+  cafeSummary?: string;
+  kinSummary?: string;
+  cafeTitles?: string[];
+  kinTitles?: string[];
+}): string {
+  return [
+    `Cafe demand summary: ${params.cafeSummary || "none"}`,
+    `KnowledgeIn problem summary: ${params.kinSummary || "none"}`,
+    `Cafe examples: ${params.cafeTitles?.join(" / ") || "none"}`,
+    `KnowledgeIn examples: ${params.kinTitles?.join(" / ") || "none"}`,
+  ].join("\n");
 }
 
 const OPENAI_TOPIC_SCHEMA = {
@@ -148,7 +172,11 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   const mainCategory = extractMainCategory(publishedTopics);
 
   onProgress?.(`네이버 키워드 리서치 "${representativeKeyword}"`);
-  const research = await naverKeywordResearch({ keyword: representativeKeyword, display: 20 });
+  const [research, cafeResearch, kinResearch] = await Promise.all([
+    naverKeywordResearch({ keyword: representativeKeyword, display: 20 }),
+    naverCafeSearch({ keyword: representativeKeyword, display: 15 }),
+    naverKinSearch({ keyword: representativeKeyword, display: 15 }),
+  ]);
 
   const competitionInfo = research.error
     ? "네이버 리서치 불가"
@@ -157,9 +185,11 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
         `지식인 ${research.kin.total.toLocaleString()}건`,
         `카페 ${research.cafe.total.toLocaleString()}건`,
         `트렌드 ${describeTrendLabel(research.datalabSearch.trend)}`,
+        `직접카페 ${cafeResearch.demandSummary}`,
+        `직접지식인 ${kinResearch.problemSummary}`,
       ].join(" / ");
 
-  onProgress?.("신규 토픽 5개 생성 중...");
+  onProgress?.("다음 토픽 5개 생성 중...");
 
   const publishedTitles = publishedTopics
     .map((topic) => `- ${topic.title}${topic.contentKind ? ` [${topic.contentKind}]` : ""}`)
@@ -173,6 +203,12 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   const communitySignals = research.communitySignals.slice(0, 6).join(", ");
   const intentMix = research.summary.intentMix.join(" / ");
   const contentAngles = research.summary.contentAngles.join(", ");
+  const directCommunitySignals = formatDirectCommunitySignals({
+    cafeSummary: cafeResearch.demandSummary,
+    kinSummary: kinResearch.problemSummary,
+    cafeTitles: cafeResearch.items.slice(0, 3).map((item) => item.title),
+    kinTitles: kinResearch.items.slice(0, 3).map((item) => item.title),
+  });
 
   if (hasOpenAIKey()) {
     const model = process.env.OPENAI_TOPIC_MODEL ?? "gpt-4.1-mini";
@@ -188,6 +224,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             "Balance hub and leaf topics based on gaps in the published list.",
             "Use Naver search-intent friendly longtail wording.",
             "Reflect question-style demand from KnowledgeIn and lived-experience demand from Cafe.",
+            "When direct cafe and KnowledgeIn signals are provided, use them to make topics concrete and practical.",
             "If the trend is rising, prioritize timely topics over generic evergreen clones.",
             "Locality rule: generate only Incheon operating-area topics when using a place name.",
             `Allowed localities: ${ALLOWED_LOCALITY_TERMS.join(", ")}.`,
@@ -218,9 +255,13 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             `Intent mix: ${intentMix || "none"}`,
             `Content angles: ${contentAngles || "none"}`,
             "",
+            "Direct Naver community signals:",
+            directCommunitySignals,
+            "",
             "Generate exactly 5 next posting topics.",
             "Each topic must include contentKind hub or leaf.",
             "Prefer missing hub/leaf coverage over small keyword variations.",
+            "Prefer topics that answer repeated community demand and repeated KnowledgeIn questions over generic keyword-only titles.",
             "Title length should be within 50 Korean characters.",
             "If a title needs a local modifier, use only Incheon/Bupyeong/Mansu/Guwol/Namdong/Songdo/Cheongna/Yeonsu/Juan/Ganseok/Geomdan-area wording.",
             "Do not suggest Seoul, Busan, Daegu, Gimpo, Gyeonggi, or other outside-area topics. Bucheon/Sang-dong/Jung-dong are allowed because they are in the user's priority pool.",
@@ -243,7 +284,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
       .filter((topic) => topic.title)
       .slice(0, 5);
 
-    onProgress?.(`신규 토픽 ${generatedTopics.length}개 생성 완료`);
+    onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
     return { generatedTopics, researchKeyword: representativeKeyword, competitionInfo };
   }
 
@@ -276,12 +317,15 @@ ${mainCategory}
 - 의도 요약: ${intentMix || "없음"}
 - 추천 각도: ${contentAngles || "없음"}
 
+## 직접 네이버 커뮤니티 신호
+${directCommunitySignals}
+
 ## 요구사항
 1. 기존 발행 글과 겹치지 않으면서 자연스럽게 이어지는 주제
 2. 이미 발행된 허브글이 적으면 먼저 리프글을 보강하고, 리프글만 많으면 상위 허브글을 제안
 3. 5개 안에 hub와 leaf를 균형 있게 섞되, 현재 목록의 빈틈을 우선
-4. 네이버 검색 유입을 노릴 수 있는 롱테일 키워드 포함
-5. 지식인 질문형 수요와 카페 후기형 수요를 제목/설명에 반영
+4. 네이버 검색 의도가 드러나는 롱테일 키워드를 포함
+5. 지식인 질문 수요와 카페 실수요를 제목/설명에 반영
 6. 데이터랩 상승 추세면 시의성 있는 주제를 우선
 7. category는 "${mainCategory}" 계열 유지
 8. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
@@ -290,17 +334,17 @@ ${mainCategory}
 \`\`\`json
 [
   {
-    "title": "포스트 제목 (50자 이내)",
+    "title": "포스팅 제목 (50자 이내)",
     "description": "이 글에서 다룰 핵심 내용 (2~3문장)",
     "category": "${mainCategory}",
     "tags": ["태그1", "태그2", "태그3"],
     "contentKind": "hub",
-    "rationale": "왜 이 주제를 추천하는지와 기존 글/허브↔리프 구조상 필요한 이유"
+    "rationale": "왜 이 주제를 추천하는지와 기존 글/허브-리프 구조상 필요한 이유"
   }
 ]
 \`\`\`
 
-반드시 5개를 출력하세요.`,
+반드시 5개를 출력해 주세요.`,
         },
       ],
     },
@@ -315,7 +359,7 @@ ${mainCategory}
     .filter((topic) => topic.title)
     .slice(0, 5);
 
-  onProgress?.(`신규 토픽 ${generatedTopics.length}개 생성 완료`);
+  onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
 
   return { generatedTopics, researchKeyword: representativeKeyword, competitionInfo };
 }

@@ -190,6 +190,13 @@ async function runOpenAIHarnessEvaluator(params: {
         `requiredSections: ${topology.requiredSections.join(" / ")}`,
       ].join("\n")
     : "No topology plan.";
+  const naverSignalsText = strategy.naverSignals
+    ? [
+        `keyword: ${strategy.naverSignals.keyword}`,
+        `cafeDemand: ${strategy.naverSignals.cafeDemandSummary || "none"}`,
+        `kinProblems: ${strategy.naverSignals.kinProblemSummary || "none"}`,
+      ].join("\n")
+    : "No Naver community signals.";
 
   onProgress?.("평가 기준에 따라 점수 산정 중...");
   const parsed = await requestOpenAIJson<Omit<EvalResult, "runId" | "aggregateScore" | "pass">>({
@@ -205,6 +212,7 @@ async function runOpenAIHarnessEvaluator(params: {
           "Final evaluation must prioritize SEO fit and Naver logic completeness over the sub scores.",
           "Give credit for concrete search-intent fit, corpus style match, hub/leaf structure, mobile readability, and practical decision criteria.",
           "Penalize generic advice, missing user style, weak opening, vague examples, keyword stuffing, unsupported absolute claims, and missing topology role.",
+          "When Naver community demand or KnowledgeIn problem signals are provided, penalize drafts that ignore those repeated demand and question patterns.",
         ].join("\n"),
       },
       {
@@ -218,6 +226,9 @@ async function runOpenAIHarnessEvaluator(params: {
           "",
           "Content topology:",
           topologyText,
+          "",
+          "Naver research signals:",
+          naverSignalsText,
           "",
           "Corpus/style evidence:",
           JSON.stringify(corpus).slice(0, 5000),

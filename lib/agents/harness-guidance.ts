@@ -137,6 +137,13 @@ export function buildPreWriteHarnessBriefing(params: {
     ? recentFailures.map((item) => `- ${item}`).join("\n")
     : "- 최근 반복 실패 사유 없음. 기본 루브릭을 우선 적용.";
 
+  const naverSignalsSection = strategy.naverSignals
+    ? [
+        `- 카페 수요 신호: ${strategy.naverSignals.cafeDemandSummary || "없음"}`,
+        `- 지식인 질문 신호: ${strategy.naverSignals.kinProblemSummary || "없음"}`,
+      ].join("\n")
+    : "- 네이버 커뮤니티 신호 없음";
+
   return `## Pre-write Harness Briefing
 목표: 최종 Harness Evaluator에서 ${HARNESS_PASS_THRESHOLD}점 이상을 목표로 초안을 작성한다.
 
@@ -156,6 +163,9 @@ export function buildPreWriteHarnessBriefing(params: {
 - 시작 패턴: ${corpusSummary.styleProfile.openingPattern}
 
 최근 실패 사유 재발 방지:
+네이버 실제 수요/질문 신호:
+${naverSignalsSection}
+
 ${failureSection}
 
 작성 지시:

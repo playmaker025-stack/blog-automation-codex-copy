@@ -51,6 +51,21 @@ export interface StrategyPlanResult {
   rationale: string;
   contentTopology?: ContentTopologyPlan;
   naverLogic?: NaverLogicPlan;
+  naverSignals?: NaverSignals;
+}
+
+export interface NaverSignalItem {
+  title: string;
+  link: string;
+  description: string;
+}
+
+export interface NaverSignals {
+  keyword: string;
+  cafeDemandSummary?: string;
+  kinProblemSummary?: string;
+  cafeTopItems?: NaverSignalItem[];
+  kinTopItems?: NaverSignalItem[];
 }
 
 export type ContentTopologyKind = "hub" | "leaf";

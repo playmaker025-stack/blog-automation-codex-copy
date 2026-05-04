@@ -8,6 +8,7 @@ import { sourceResolver } from "@/lib/skills/source-resolver";
 import { reviewRecordAudit } from "@/lib/skills/review-record-audit";
 import { naverKeywordResearch } from "@/lib/skills/naver-keyword-research";
 import { naverContentFetcher } from "@/lib/skills/naver-content-fetcher";
+import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-research";
 import { readJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { Topic, TopicIndex } from "@/lib/types/github-data";
@@ -164,6 +165,32 @@ const TOOLS: Tool[] = [
       required: ["urls", "keyword"],
     },
   },
+  {
+    name: "naver_cafe_search",
+    description:
+      "Search recent Naver cafe articles to detect live demand, repeated comparison language, and community interest around the topic.",
+    input_schema: {
+      type: "object" as const,
+      properties: {
+        keyword: { type: "string", description: "Keyword or product phrase to inspect in cafe communities" },
+        display: { type: "number", description: "Number of cafe articles to inspect (default 20)" },
+      },
+      required: ["keyword"],
+    },
+  },
+  {
+    name: "naver_kin_search",
+    description:
+      "Search Naver KnowledgeIn to detect recurring user questions, confusion, and pain points before writing.",
+    input_schema: {
+      type: "object" as const,
+      properties: {
+        keyword: { type: "string", description: "Keyword or product phrase to inspect in KnowledgeIn" },
+        display: { type: "number", description: "Number of questions to inspect (default 20)" },
+      },
+      required: ["keyword"],
+    },
+  },
 ];
 
 async function loadTopic(topicId: string): Promise<Topic> {
@@ -248,6 +275,17 @@ function extractFallbackKeywords(topic: Topic): string[] {
   return uniq([...topic.tags, ...titleWords, topic.category]).slice(0, 8);
 }
 
+function buildCommunityResearchBrief(params: {
+  cafeSummary?: string;
+  kinSummary?: string;
+}): string {
+  return [
+    "Naver community research signals:",
+    `- Cafe demand: ${params.cafeSummary || "unavailable"}`,
+    `- KnowledgeIn problems: ${params.kinSummary || "unavailable"}`,
+  ].join("\n");
+}
+
 function buildLocalFallbackStrategy(topic: Topic): StrategyPlanResult {
   const keywords = extractFallbackKeywords(topic);
   const mainKeyword = keywords[0] ?? topic.title;
@@ -321,6 +359,18 @@ export async function runStrategyPlanner(params: {
 
   onProgress?.(`토픽 "${topicId}" 전략 수립 시작`);
 
+  const researchKeyword = topic.title;
+
+  onProgress?.("네이버 카페 수요 신호 확인 중...");
+  const [cafeResearch, kinResearch] = await Promise.all([
+    naverCafeSearch({ keyword: researchKeyword, display: 15 }),
+    naverKinSearch({ keyword: researchKeyword, display: 15 }),
+  ]);
+  const communityResearchBrief = buildCommunityResearchBrief({
+    cafeSummary: cafeResearch.demandSummary,
+    kinSummary: kinResearch.problemSummary,
+  });
+
   const toolRegistry = {
     user_profile_loader: (input: unknown) =>
       userProfileLoader(input as Parameters<typeof userProfileLoader>[0]),
@@ -338,6 +388,10 @@ export async function runStrategyPlanner(params: {
       naverKeywordResearch(input as Parameters<typeof naverKeywordResearch>[0]),
     naver_content_fetcher: (input: unknown) =>
       naverContentFetcher(input as Parameters<typeof naverContentFetcher>[0]),
+    naver_cafe_search: (input: unknown) =>
+      naverCafeSearch(input as Parameters<typeof naverCafeSearch>[0]),
+    naver_kin_search: (input: unknown) =>
+      naverKinSearch(input as Parameters<typeof naverKinSearch>[0]),
   };
 
   const localTimeoutSignal = AbortSignal.timeout(STRATEGY_LOOP_TIMEOUT_MS);
@@ -351,10 +405,19 @@ export async function runStrategyPlanner(params: {
     const result = await runToolUseLoop({
       model: MODELS.sonnet,
       system: buildPolicySystemPrompt(),
-      messages: [{ role: "user", content: buildUserMessage(topic, topicId, userId) }],
+      messages: [{
+        role: "user",
+        content:
+          buildUserMessage(topic, topicId, userId) +
+          `\n\n${communityResearchBrief}` +
+          `\n\nRequired research focus before final JSON:\n` +
+          `- Use naver_cafe_search to identify current product demand, repeated comparison language, and real community interest.\n` +
+          `- Use naver_kin_search to identify repeated questions, confusion, and pain points users ask about.\n` +
+          `- Reflect those findings in the strategy so the draft answers real demand instead of only generic keyword intent.`,
+      }],
       tools: TOOLS,
       toolRegistry,
-      maxIterations: 6,
+      maxIterations: 8,
       onProgress,
       signal: plannerSignal,
     });
@@ -379,6 +442,21 @@ export async function runStrategyPlanner(params: {
   plan = {
     ...plan,
     contentTopology,
+    naverSignals: {
+      keyword: researchKeyword,
+      cafeDemandSummary: cafeResearch.demandSummary,
+      kinProblemSummary: kinResearch.problemSummary,
+      cafeTopItems: cafeResearch.items.map((item) => ({
+        title: item.title,
+        link: item.link,
+        description: item.description,
+      })),
+      kinTopItems: kinResearch.items.map((item) => ({
+        title: item.title,
+        link: item.link,
+        description: item.description,
+      })),
+    },
     naverLogic,
   };
 

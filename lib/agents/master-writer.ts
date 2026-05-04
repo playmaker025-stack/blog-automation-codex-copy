@@ -248,6 +248,27 @@ function formatOpenAITopology(topology: ContentTopologyPlan | undefined): string
   ].join("\n");
 }
 
+function formatOpenAINaverSignals(strategy: StrategyPlanResult): string {
+  const signals = strategy.naverSignals;
+  if (!signals) {
+    return [
+      "Naver research signals: unavailable.",
+      "Do not invent market demand or repeated questions without support.",
+    ].join("\n");
+  }
+
+  const cafeTitles = signals.cafeTopItems?.slice(0, 3).map((item) => item.title).filter(Boolean) ?? [];
+  const kinTitles = signals.kinTopItems?.slice(0, 3).map((item) => item.title).filter(Boolean) ?? [];
+
+  return [
+    `Research keyword: ${signals.keyword}`,
+    `Cafe demand summary: ${signals.cafeDemandSummary || "none"}`,
+    `KnowledgeIn problem summary: ${signals.kinProblemSummary || "none"}`,
+    `Cafe examples: ${cafeTitles.join(" / ") || "none"}`,
+    `KnowledgeIn examples: ${kinTitles.join(" / ") || "none"}`,
+  ].join("\n");
+}
+
 function formatOpenAIExpandedOutline(strategy: StrategyPlanResult): string {
   const expanded = expansionPlanner({
     outline: strategy.outline,
@@ -277,6 +298,7 @@ function buildOpenAIWriterSystemPrompt(): string {
     "Avoid keyword stuffing, exaggerated guarantees, unsupported best/only claims, and generic filler.",
     "For Naver Blog, prioritize clear search intent, short readable paragraphs, concrete selection criteria, natural keyword placement, and a closing that helps the reader decide.",
     buildPolicyPromptSection(),
+    "When Naver community demand or KnowledgeIn problem signals are provided, make them visible through the article's angle, subheadings, examples, and decision criteria.",
   ].join("\n");
 }
 
@@ -302,6 +324,8 @@ function buildOpenAIWriterUserPrompt(params: {
     "",
     "Naver logic pre-check:",
     naverLogicAgent.buildWriterBrief(strategy.naverLogic),
+    "Naver research signals:",
+    formatOpenAINaverSignals(strategy),
     "",
     "Expanded outline:",
     formatOpenAIExpandedOutline(strategy),
@@ -319,6 +343,7 @@ function buildOpenAIWriterUserPrompt(params: {
     "Required writing behavior:",
     "- Start with the reader's likely situation or question, not a generic definition.",
     "- Put the main keyword naturally in the first 2 paragraphs.",
+    "- If Naver signals are present, answer the repeated community questions and demand patterns directly in the body.",
     "- Make the hub/leaf role visible through structure, not by announcing the words hub or leaf.",
     "- Include practical criteria, examples, and decision points instead of broad advice.",
     "- Keep paragraph rhythm suitable for Naver Blog mobile reading.",
