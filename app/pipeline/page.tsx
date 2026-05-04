@@ -68,6 +68,10 @@ function compactTitle(value: string): string {
     .trim();
 }
 
+function buildDirectTopicTitle(mainKeyword: string, subKeyword: string): string {
+  return [mainKeyword.trim(), subKeyword.trim()].filter(Boolean).join(" ");
+}
+
 function looksCorruptedText(value: string | null | undefined): boolean {
   if (!value) return false;
   return /[�꾩몄쓣蹂몃Ц섏젙됯?]/.test(value) && !/[가-힣]/.test(value);
@@ -80,7 +84,8 @@ export default function PipelinePage() {
   const userId = usePipelineStore((state) => state.userId);
   const topicMode = usePipelineStore((state) => state.topicMode);
   const selectedTopicId = usePipelineStore((state) => state.selectedTopicId);
-  const directTitle = usePipelineStore((state) => state.directTitle);
+  const directMainKeyword = usePipelineStore((state) => state.directMainKeyword);
+  const directSubKeyword = usePipelineStore((state) => state.directSubKeyword);
   const autoApprove = usePipelineStore((state) => state.autoApprove);
   const stage = usePipelineStore((state) => state.stage);
   const events = usePipelineStore((state) => state.events);
@@ -92,7 +97,8 @@ export default function PipelinePage() {
   const setUserId = usePipelineStore((state) => state.setUserId);
   const setTopicMode = usePipelineStore((state) => state.setTopicMode);
   const setSelectedTopicId = usePipelineStore((state) => state.setSelectedTopicId);
-  const setDirectTitle = usePipelineStore((state) => state.setDirectTitle);
+  const setDirectMainKeyword = usePipelineStore((state) => state.setDirectMainKeyword);
+  const setDirectSubKeyword = usePipelineStore((state) => state.setDirectSubKeyword);
   const setAutoApprove = usePipelineStore((state) => state.setAutoApprove);
   const setStage = usePipelineStore((state) => state.setStage);
   const appendEvent = usePipelineStore((state) => state.appendEvent);
@@ -161,7 +167,7 @@ export default function PipelinePage() {
 
   useEffect(() => {
     setPublishedDuplicateBlocked(false);
-  }, [directTitle, topicMode, userId]);
+  }, [directMainKeyword, directSubKeyword, topicMode, userId]);
 
   const stopTimer = useCallback(() => {
     if (timerRef.current) {
@@ -388,14 +394,20 @@ export default function PipelinePage() {
   const resolveTopicId = async (): Promise<string | null> => {
     if (topicMode === "list") return selectedTopicId || null;
 
-    const title = directTitle.trim();
-    if (!title) return null;
+    const mainKeyword = directMainKeyword.trim();
+    const subKeyword = directSubKeyword.trim();
+    const title = buildDirectTopicTitle(mainKeyword, subKeyword);
+    if (!mainKeyword || !title) return null;
 
     const res = await fetch("/api/github/topics", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title,
+        description: subKeyword
+          ? `메인키워드: ${mainKeyword} / 서브 키워드: ${subKeyword}`
+          : `메인키워드: ${mainKeyword}`,
+        tags: [mainKeyword, subKeyword].filter(Boolean),
         assignedUserId: normalizeUserId(userId.trim()),
         category: "direct-run",
         source: "direct",
@@ -408,12 +420,13 @@ export default function PipelinePage() {
 
   const startPipeline = async (forcePreflightOverride = false, forcePublishedDuplicateOverride = false) => {
     const uid = normalizeUserId(userId.trim());
+    const directComposedTitle = buildDirectTopicTitle(directMainKeyword, directSubKeyword);
     if (!uid) return;
     if (topicMode === "list" && !selectedTopicId) return;
-    if (topicMode === "direct" && !directTitle.trim()) return;
+    if (topicMode === "direct" && !directMainKeyword.trim()) return;
     const selectedTitle = topicMode === "list"
       ? selectedTopic?.title?.trim() ?? ""
-      : directTitle.trim();
+      : directComposedTitle;
     const hasPublishedDuplicate = posts.some((post) => {
       if (post.status !== "published") return false;
       if (topicMode === "list" && selectedTopic && post.topicId === selectedTopic.topicId) return true;
@@ -720,7 +733,7 @@ export default function PipelinePage() {
   const canStart = (() => {
     if (!userId.trim() || running) return false;
     if (topicMode === "list") return !!selectedTopicId;
-    return !!directTitle.trim();
+    return !!directMainKeyword.trim();
   })();
 
   return (
@@ -881,18 +894,41 @@ export default function PipelinePage() {
                   )}
                 </div>
               ) : (
-                <div>
-                  <label htmlFor="pipeline-direct-title" className="sr-only">직접 주제 입력</label>
-                  <input
-                    id="pipeline-direct-title"
-                    value={directTitle}
-                    onChange={(event) => setDirectTitle(event.target.value)}
-                    placeholder="예: 부평 전자담배 입문 기기 추천"
-                    disabled={running}
-                    className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-                  />
+                <div className="space-y-3">
+                  <div>
+                    <label htmlFor="pipeline-direct-main-keyword" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
+                      메인 키워드
+                    </label>
+                    <input
+                      id="pipeline-direct-main-keyword"
+                      value={directMainKeyword}
+                      onChange={(event) => setDirectMainKeyword(event.target.value)}
+                      placeholder="예: 부평 전자담배"
+                      disabled={running}
+                      className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="pipeline-direct-sub-keyword" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
+                      서브 키워드
+                    </label>
+                    <input
+                      id="pipeline-direct-sub-keyword"
+                      value={directSubKeyword}
+                      onChange={(event) => setDirectSubKeyword(event.target.value)}
+                      placeholder="예: 입문 기기 추천"
+                      disabled={running}
+                      className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                    />
+                  </div>
+                  <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2">
+                    <p className="text-[11px] font-semibold text-zinc-500">조합 제목 미리보기</p>
+                    <p className="mt-1 text-sm text-zinc-800">
+                      {buildDirectTopicTitle(directMainKeyword, directSubKeyword) || "메인 키워드를 입력해 주세요."}
+                    </p>
+                  </div>
                   <p className="text-xs text-zinc-400 mt-1.5">
-                    입력한 주제는 글 목록의 draft 주제로 등록되고 바로 글쓰기를 시작합니다.
+                    메인 키워드는 필수이고, 서브 키워드는 선택입니다. 입력한 값은 draft 주제로 등록된 뒤 바로 글쓰기를 시작합니다.
                   </p>
                 </div>
               )}

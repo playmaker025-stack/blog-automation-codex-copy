@@ -28,7 +28,8 @@ interface PipelineStore {
   userId: string;
   topicMode: TopicMode;
   selectedTopicId: string;
-  directTitle: string;
+  directMainKeyword: string;
+  directSubKeyword: string;
   autoApprove: boolean;
 
   stage: PipelineStage;
@@ -41,7 +42,8 @@ interface PipelineStore {
   setUserId: (id: string) => void;
   setTopicMode: (mode: TopicMode) => void;
   setSelectedTopicId: (id: string) => void;
-  setDirectTitle: (title: string) => void;
+  setDirectMainKeyword: (keyword: string) => void;
+  setDirectSubKeyword: (keyword: string) => void;
   setAutoApprove: (v: boolean) => void;
   setStage: (stage: PipelineStage) => void;
   appendEvent: (event: SSEEvent) => void;
@@ -58,7 +60,8 @@ export const usePipelineStore = create<PipelineStore>()((set) => ({
   userId: "",
   topicMode: "list",
   selectedTopicId: "",
-  directTitle: "",
+  directMainKeyword: "",
+  directSubKeyword: "",
   autoApprove: false,
 
   stage: "idle",
@@ -75,7 +78,8 @@ export const usePipelineStore = create<PipelineStore>()((set) => ({
       return {
         userId: id,
         selectedTopicId: "",
-        directTitle: "",
+        directMainKeyword: "",
+        directSubKeyword: "",
         stage: "idle",
         events: [],
         streamingBody: "",
@@ -86,7 +90,8 @@ export const usePipelineStore = create<PipelineStore>()((set) => ({
     }),
   setTopicMode: (mode) => set({ topicMode: mode }),
   setSelectedTopicId: (id) => set({ selectedTopicId: id }),
-  setDirectTitle: (title) => set({ directTitle: title }),
+  setDirectMainKeyword: (keyword) => set({ directMainKeyword: keyword }),
+  setDirectSubKeyword: (keyword) => set({ directSubKeyword: keyword }),
   setAutoApprove: (v) => set({ autoApprove: v }),
   setStage: (stage) => set({ stage }),
   appendEvent: (event) => set((s) => ({ events: [...s.events, event] })),
