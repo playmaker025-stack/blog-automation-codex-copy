@@ -1,4 +1,4 @@
-import type { KeywordUsageItem, KeywordUsageReport, SeoEvaluation } from "./types";
+import type { KeywordFocusMetric, KeywordUsageItem, KeywordUsageReport, SeoEvaluation } from "./types";
 
 function clampScore(value: number): number {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -26,6 +26,123 @@ function splitParagraphs(body: string): string[] {
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
+}
+
+function includesKeyword(text: string, keyword: string): boolean {
+  return countKeywordOccurrences(text, keyword) > 0;
+}
+
+function buildKeywordFocusMetrics(params: {
+  title: string;
+  body: string;
+  keywordReport: KeywordUsageReport;
+}): KeywordFocusMetric[] {
+  const paragraphs = splitParagraphs(params.body);
+  const introText = paragraphs.slice(0, 2).join("\n\n");
+  const earlyText = paragraphs.slice(0, 4).join("\n\n");
+  const compactTitle = params.title.toLowerCase();
+  const bodyLength = params.keywordReport.bodyLength;
+
+  return params.keywordReport.items.map((item, index) => {
+    const role: KeywordFocusMetric["role"] = index === 0 ? "main" : "sub";
+    const titleIncluded = compactTitle.includes(item.keyword.toLowerCase());
+    const titleFrontLoaded = titleIncluded && params.title.indexOf(item.keyword) >= 0 && params.title.indexOf(item.keyword) <= 12;
+    const introIncluded = includesKeyword(introText, item.keyword);
+    const earlyCoverage = includesKeyword(earlyText, item.keyword);
+
+    let completenessScore = role === "main" ? 76 : 72;
+    let exposurePotentialScore = role === "main" ? 74 : 70;
+
+    if (titleIncluded) {
+      completenessScore += role === "main" ? 8 : 6;
+      exposurePotentialScore += role === "main" ? 10 : 8;
+    } else {
+      completenessScore -= role === "main" ? 14 : 10;
+      exposurePotentialScore -= role === "main" ? 16 : 12;
+    }
+
+    if (role === "main") {
+      if (titleFrontLoaded) {
+        completenessScore += 6;
+        exposurePotentialScore += 6;
+      } else {
+        completenessScore -= 6;
+        exposurePotentialScore -= 8;
+      }
+    }
+
+    if (introIncluded) {
+      completenessScore += role === "main" ? 8 : 5;
+      exposurePotentialScore += role === "main" ? 8 : 5;
+    } else {
+      completenessScore -= role === "main" ? 12 : 7;
+      exposurePotentialScore -= role === "main" ? 12 : 8;
+    }
+
+    if (earlyCoverage) {
+      completenessScore += 4;
+      exposurePotentialScore += 4;
+    } else {
+      completenessScore -= 4;
+      exposurePotentialScore -= 5;
+    }
+
+    if (item.status === "적정") {
+      completenessScore += 10;
+      exposurePotentialScore += 10;
+    } else if (item.status === "부족") {
+      completenessScore -= role === "main" ? 10 : 7;
+      exposurePotentialScore -= role === "main" ? 12 : 8;
+    } else {
+      completenessScore -= role === "main" ? 8 : 6;
+      exposurePotentialScore -= role === "main" ? 10 : 7;
+    }
+
+    if (bodyLength >= 1200) {
+      completenessScore += 4;
+      exposurePotentialScore += 5;
+    } else {
+      completenessScore -= 4;
+      exposurePotentialScore -= 5;
+    }
+
+    const summaryParts: string[] = [];
+    if (titleIncluded) {
+      summaryParts.push(role === "main" && titleFrontLoaded ? "제목 앞부분 반영" : "제목 반영");
+    } else {
+      summaryParts.push("제목 미반영");
+    }
+    summaryParts.push(introIncluded ? "도입부 반영" : "도입부 약함");
+    summaryParts.push(`${item.count}회 사용`);
+
+    let action = "현재 흐름을 유지해도 괜찮습니다.";
+    if (!titleIncluded) {
+      action = `'${item.keyword}'를 제목에 더 직접적으로 넣는 편이 좋습니다.`;
+    } else if (!introIncluded) {
+      action = `첫 두 문단 안에 '${item.keyword}'를 자연스럽게 보강해 주세요.`;
+    } else if (item.status !== "적정") {
+      action = item.recommendation;
+    } else if (bodyLength < 1200) {
+      action = "본문 분량을 조금 더 보강하면 검색 체류 신호에 유리합니다.";
+    }
+
+    return {
+      keyword: item.keyword,
+      role,
+      label: role === "main" ? "메인 키워드" : `서브 키워드 ${index}`,
+      completenessScore: clampScore(completenessScore),
+      exposurePotentialScore: clampScore(exposurePotentialScore),
+      count: item.count,
+      targetMin: item.targetMin,
+      targetMax: item.targetMax,
+      titleIncluded,
+      titleFrontLoaded,
+      introIncluded,
+      earlyCoverage,
+      summary: summaryParts.join(" · "),
+      action,
+    };
+  });
 }
 
 export function selectFocusKeywords(title: string, keywords: string[] = [], limit = 5): string[] {
@@ -117,6 +234,11 @@ export function evaluateSeoCompleteness(params: {
   keywords?: string[];
 }): SeoEvaluation {
   const keywordReport = analyzeKeywordUsage(params);
+  const keywordMetrics = buildKeywordFocusMetrics({
+    title: params.title,
+    body: params.body,
+    keywordReport,
+  });
   let score = 88;
   const evidence: string[] = [];
   const improvements: string[] = [];
@@ -171,5 +293,6 @@ export function evaluateSeoCompleteness(params: {
     evidence: evidence.slice(0, 5),
     improvements: uniqueKeywords(improvements).slice(0, 5),
     keywordReport,
+    keywordMetrics,
   };
 }

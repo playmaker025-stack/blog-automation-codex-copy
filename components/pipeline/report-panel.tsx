@@ -37,6 +37,12 @@ function issueTone(severity: DraftReviewIssue["severity"]): string {
   return "text-zinc-400";
 }
 
+function scoreTone(score: number): string {
+  if (score >= 80) return "text-emerald-600";
+  if (score >= 65) return "text-amber-600";
+  return "text-red-500";
+}
+
 export function PipelineReportPanel({
   contentTab,
   approval,
@@ -182,6 +188,51 @@ export function PipelineReportPanel({
                   </div>
                 ))}
               </div>
+
+              {(activeSeoEvaluation.keywordMetrics?.length ?? 0) > 0 && (
+                <div className="space-y-2">
+                  <div>
+                    <p className="text-xs font-semibold text-zinc-600">키워드별 완성도 / 상위 노출 가능성 지표</p>
+                    <p className="mt-1 text-[11px] leading-5 text-zinc-500">
+                      실제 검색 순위를 예측하는 값이 아니라, 제목/도입부/반복 밀도 기준의 내부 SEO 지표입니다.
+                    </p>
+                  </div>
+                  {activeSeoEvaluation.keywordMetrics.map((metric) => (
+                    <div key={`${contentTab}-metric-${metric.keyword}`} className="rounded-lg border border-zinc-100 bg-white px-3 py-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-semibold text-zinc-800">{metric.keyword}</p>
+                          <p className="mt-1 text-[11px] text-zinc-500">{metric.label}</p>
+                        </div>
+                        <p className={`text-xs font-semibold ${metric.role === "main" ? "text-blue-600" : "text-zinc-500"}`}>
+                          {metric.role === "main" ? "핵심 축" : "보조 축"}
+                        </p>
+                      </div>
+
+                      <div className="mt-3 grid grid-cols-2 gap-2">
+                        <div className="rounded-md bg-zinc-50 px-3 py-2">
+                          <p className="text-[11px] font-semibold text-zinc-500">완성도</p>
+                          <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.completenessScore)}`}>
+                            {metric.completenessScore}점
+                          </p>
+                        </div>
+                        <div className="rounded-md bg-zinc-50 px-3 py-2">
+                          <p className="text-[11px] font-semibold text-zinc-500">상위 노출 가능성 지표</p>
+                          <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.exposurePotentialScore)}`}>
+                            {metric.exposurePotentialScore}점
+                          </p>
+                        </div>
+                      </div>
+
+                      <p className="mt-3 text-xs text-zinc-600">{metric.summary}</p>
+                      <p className="mt-1 text-[11px] text-zinc-500">
+                        제목 {metric.titleIncluded ? "반영" : "미반영"} · 도입부 {metric.introIncluded ? "반영" : "미반영"} · 권장 {metric.targetMin}~{metric.targetMax}회 / 현재 {metric.count}회
+                      </p>
+                      <p className="mt-2 text-xs text-zinc-700">{metric.action}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {activeSeoNotes.length > 0 && (
                 <div>

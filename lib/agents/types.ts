@@ -109,11 +109,29 @@ export interface KeywordUsageReport {
   recommendations: string[];
 }
 
+export interface KeywordFocusMetric {
+  keyword: string;
+  role: "main" | "sub";
+  label: string;
+  completenessScore: number;
+  exposurePotentialScore: number;
+  count: number;
+  targetMin: number;
+  targetMax: number;
+  titleIncluded: boolean;
+  titleFrontLoaded: boolean;
+  introIncluded: boolean;
+  earlyCoverage: boolean;
+  summary: string;
+  action: string;
+}
+
 export interface SeoEvaluation {
   score: number;
   evidence: string[];
   improvements: string[];
   keywordReport: KeywordUsageReport;
+  keywordMetrics: KeywordFocusMetric[];
 }
 
 export interface ContentTopologyPlan {

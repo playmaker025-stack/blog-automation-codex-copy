@@ -275,6 +275,51 @@ function extractFallbackKeywords(topic: Topic): string[] {
   return uniq([...topic.tags, ...titleWords, topic.category]).slice(0, 8);
 }
 
+function extractDirectKeywordIntent(topic: Topic): { mainKeyword: string; subKeyword: string } | null {
+  if (topic.source !== "direct") return null;
+
+  const description = topic.description ?? "";
+  const mainMatch = description.match(/메인키워드:\s*([^/\n]+?)(?:\s*\/|\s*$)/);
+  const subMatch = description.match(/서브 키워드:\s*([^\n]+?)\s*$/);
+  const mainKeyword = mainMatch?.[1]?.trim() || topic.tags[0]?.trim() || "";
+  const subKeyword = subMatch?.[1]?.trim() || topic.tags[1]?.trim() || "";
+
+  if (!mainKeyword) return null;
+  return { mainKeyword, subKeyword };
+}
+
+function applyDirectKeywordPriority(
+  plan: StrategyPlanResult,
+  directIntent: { mainKeyword: string; subKeyword: string } | null
+): StrategyPlanResult {
+  if (!directIntent) return plan;
+
+  const orderedKeywords = uniq([
+    directIntent.mainKeyword,
+    directIntent.subKeyword,
+    ...plan.keywords,
+  ]).filter(Boolean);
+
+  const keyPoints = uniq([
+    `${directIntent.mainKeyword}를 글의 중심 검색축으로 유지한다.`,
+    directIntent.subKeyword
+      ? `${directIntent.subKeyword}는 보조 맥락으로 활용하되 메인 키워드를 대체하지 않는다.`
+      : "",
+    ...plan.keyPoints,
+  ]).filter(Boolean);
+
+  const rationalePrefix = directIntent.subKeyword
+    ? `직접 입력 토픽이므로 메인 키워드 '${directIntent.mainKeyword}'를 중심축으로 두고, 서브 키워드 '${directIntent.subKeyword}'는 보조 맥락으로 반영했습니다.`
+    : `직접 입력 토픽이므로 메인 키워드 '${directIntent.mainKeyword}'를 중심축으로 반영했습니다.`;
+
+  return {
+    ...plan,
+    keywords: orderedKeywords,
+    keyPoints,
+    rationale: `${rationalePrefix} ${plan.rationale}`.trim(),
+  };
+}
+
 function buildCommunityResearchBrief(params: {
   cafeSummary?: string;
   kinSummary?: string;
@@ -331,7 +376,12 @@ function buildLocalFallbackStrategy(topic: Topic): StrategyPlanResult {
   };
 }
 
-function buildUserMessage(topic: Topic, topicId: string, userId: string): string {
+function buildUserMessage(
+  topic: Topic,
+  topicId: string,
+  userId: string,
+  directIntent: { mainKeyword: string; subKeyword: string } | null
+): string {
   return [
     "다음 토픽으로 네이버 블로그 전략을 수립해 주세요.",
     "",
@@ -340,11 +390,16 @@ function buildUserMessage(topic: Topic, topicId: string, userId: string): string
     `설명: ${topic.description}`,
     `카테고리: ${topic.category}`,
     `태그: ${topic.tags.join(", ") || "없음"}`,
+    directIntent ? `직접입력 메인 키워드: ${directIntent.mainKeyword}` : "",
+    directIntent?.subKeyword ? `직접입력 서브 키워드: ${directIntent.subKeyword}` : "",
+    directIntent
+      ? "직접 입력 모드 규칙: 메인 키워드를 글의 중심 검색축으로 유지하고, 제목/도입부/핵심 문단의 판단 기준이 메인 키워드와 일치해야 합니다. 서브 키워드는 메인 키워드를 보조하는 맥락으로만 사용하세요."
+      : "",
     `사용자 ID: ${userId}`,
     `참조 URL: ${topic.relatedSources.join(", ") || "없음"}`,
     "",
     "반드시 도구를 순서대로 사용한 뒤, 최종 전략 JSON만 출력해 주세요.",
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 }
 
 export async function runStrategyPlanner(params: {
@@ -356,10 +411,11 @@ export async function runStrategyPlanner(params: {
   const { topicId, onProgress, signal } = params;
   const userId = normalizeUserId(params.userId);
   const topic = await loadTopic(topicId);
+  const directIntent = extractDirectKeywordIntent(topic);
 
   onProgress?.(`토픽 "${topicId}" 전략 수립 시작`);
 
-  const researchKeyword = topic.title;
+  const researchKeyword = directIntent?.mainKeyword ?? topic.title;
 
   onProgress?.("네이버 카페 수요 신호 확인 중...");
   const [cafeResearch, kinResearch] = await Promise.all([
@@ -408,7 +464,7 @@ export async function runStrategyPlanner(params: {
       messages: [{
         role: "user",
         content:
-          buildUserMessage(topic, topicId, userId) +
+          buildUserMessage(topic, topicId, userId, directIntent) +
           `\n\n${communityResearchBrief}` +
           `\n\nRequired research focus before final JSON:\n` +
           `- Use naver_cafe_search to identify current product demand, repeated comparison language, and real community interest.\n` +
@@ -436,6 +492,8 @@ export async function runStrategyPlanner(params: {
     onProgress?.("AI 전략 응답이 지연되어 안전 폴백 전략으로 이어갑니다.");
     plan = buildLocalFallbackStrategy(topic);
   }
+
+  plan = applyDirectKeywordPriority(plan, directIntent);
 
   const contentTopology = await buildContentTopologyPlan({ topic, strategy: plan, userId });
   const naverLogic = naverLogicAgent.planBeforeWriting({ ...plan, contentTopology });
