@@ -241,6 +241,7 @@ async function evaluateAndMaybeReviseDraft(params: {
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<{ writerResult: WriterResult; evalResult: EvalResult }> {
+  const MAX_AUTO_REVISION_ROUNDS = 2;
   const {
     pipelineId,
     topicId,
@@ -275,52 +276,60 @@ async function evaluateAndMaybeReviseDraft(params: {
     phase: "preliminary",
   });
 
-  emit(controller, makeEvent("progress", "evaluating", {
-    message: `초안 예상 점수 ${evalResult.aggregateScore}점으로 자동 보강을 1회 진행합니다.`,
-  }));
-  emit(controller, makeEvent("token", "writing", {
-    token: "\n\n---\n\n[자동 보강본]\n",
-  }));
+  for (let round = 1; round <= MAX_AUTO_REVISION_ROUNDS; round += 1) {
+    emit(controller, makeEvent("progress", "evaluating", {
+      message: `초안 예상 점수 ${evalResult.aggregateScore}점으로 자동 보강을 ${round}/${MAX_AUTO_REVISION_ROUNDS}회 진행합니다.`,
+    }));
+    emit(controller, makeEvent("token", "writing", {
+      token: round === 1 ? "\n\n---\n\n[자동 보강본]\n" : `\n\n---\n\n[자동 보강본 ${round}차]\n`,
+    }));
 
-  writerResult = await runMasterWriter({
-    strategy,
-    userId,
-    topicId,
-    postId,
-    corpusSummary,
-    harnessBriefing,
-    revisionInstructions: buildRevisionInstruction({ evalResult, briefing: harnessBriefing }),
-    onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
-    onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
-    signal,
-  });
+    writerResult = await runMasterWriter({
+      strategy,
+      userId,
+      topicId,
+      postId,
+      corpusSummary,
+      harnessBriefing,
+      revisionInstructions: buildRevisionInstruction({ evalResult, briefing: harnessBriefing }),
+      onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
+      onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
+      signal,
+    });
 
-  await saveArtifact<DraftOutputData>(pipelineId, "draft_output", {
-    postId: writerResult.postId,
-    title: writerResult.title,
-    wordCount: writerResult.wordCount,
-    generatedAt: writerResult.generatedAt,
-    contentPath: Paths.postContent(postId),
-    corpusSummaryUsed: true,
-  }).catch(() => {});
+    await saveArtifact<DraftOutputData>(pipelineId, "draft_output", {
+      postId: writerResult.postId,
+      title: writerResult.title,
+      wordCount: writerResult.wordCount,
+      generatedAt: writerResult.generatedAt,
+      contentPath: Paths.postContent(postId),
+      corpusSummaryUsed: true,
+    }).catch(() => {});
 
-  await updatePostRecord(postId, {
-    status: "ready",
-    wordCount: writerResult.wordCount,
-    compositionSessionId: pipelineId,
-  });
+    await updatePostRecord(postId, {
+      status: "ready",
+      wordCount: writerResult.wordCount,
+      compositionSessionId: pipelineId,
+    });
 
-  emit(controller, makeEvent("progress", "evaluating", {
-    message: "자동 보강본 최종 하네스 평가 중...",
-  }));
+    emit(controller, makeEvent("progress", "evaluating", {
+      message: round === MAX_AUTO_REVISION_ROUNDS
+        ? "자동 보강본 최종 하네스 평가 중..."
+        : `자동 보강본 ${round}차 하네스 평가 중...`,
+    }));
 
-  evalResult = await runHarnessEvaluator({
-    writerResult,
-    strategy,
-    userId,
-    onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
-    signal,
-  });
+    evalResult = await runHarnessEvaluator({
+      writerResult,
+      strategy,
+      userId,
+      onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
+      signal,
+    });
+
+    if (evalResult.pass) {
+      return { writerResult, evalResult };
+    }
+  }
 
   if (!evalResult.pass) {
     await appendWritingFailure({
