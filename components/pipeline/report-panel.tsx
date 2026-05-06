@@ -234,6 +234,48 @@ export function PipelineReportPanel({
                 </div>
               )}
 
+              {(activeSeoEvaluation.combinationMetrics?.length ?? 0) > 0 && (
+                <div className="space-y-2">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold text-zinc-600">검색 조합 커버 지표</p>
+                      <p className="mt-1 text-[11px] leading-5 text-zinc-500">
+                        메인 키워드와 지역/상황/매장 조합이 제목, 도입부, 소제목, 본문에서 얼마나 자연스럽게 묶였는지 보는 내부 지표입니다.
+                      </p>
+                    </div>
+                    <div className="rounded-md bg-zinc-50 px-3 py-2 text-right">
+                      <p className="text-[11px] font-semibold text-zinc-500">조합 커버 점수</p>
+                      <p className={`mt-1 text-sm font-semibold ${scoreTone(activeSeoEvaluation.combinationCoverageScore)}`}>
+                        {activeSeoEvaluation.combinationCoverageScore}점
+                      </p>
+                    </div>
+                  </div>
+
+                  {activeSeoEvaluation.combinationMetrics.map((metric) => (
+                    <div key={`${contentTab}-combo-${metric.phrase}`} className="rounded-lg border border-zinc-100 bg-white px-3 py-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-semibold text-zinc-800">{metric.phrase}</p>
+                          <p className="mt-1 text-[11px] text-zinc-500">
+                            {metric.priority === "core" ? "핵심 조합" : "보조 조합"} · {metric.role}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className={`text-sm font-semibold ${scoreTone(metric.coverageScore)}`}>{metric.coverageScore}점</p>
+                          <p className="text-[11px] text-zinc-500">노출 가능성 {metric.exposurePotentialScore}점</p>
+                        </div>
+                      </div>
+
+                      <p className="mt-2 text-xs text-zinc-600">{metric.summary}</p>
+                      <p className="mt-1 text-[11px] text-zinc-500">
+                        제목 {metric.titleIncluded ? "연결" : "약함"} · 도입부 {metric.introIncluded ? "연결" : "약함"} · 소제목 {metric.headingIncluded ? "연결" : "보강 가능"} · 직접 표현 {metric.exactMatches}회
+                      </p>
+                      <p className="mt-2 text-xs text-zinc-700">{metric.action}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {activeSeoNotes.length > 0 && (
                 <div>
                   <p className="mb-1 text-xs font-semibold text-zinc-600">

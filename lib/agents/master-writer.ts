@@ -91,7 +91,7 @@ function buildContentTopologySection(topology: ContentTopologyPlan | undefined):
     ? topology.internalLinkTargets
         .map((target) => {
           const url = target.url ? ` (${target.url})` : "";
-          return `- ${target.title}${url}: ${target.reason}`;
+          return `- [${target.role.toUpperCase()}] ${target.title}${url}: ${target.reason}`;
         })
         .join("\n")
     : "- 아직 확정된 내부 링크 후보가 없으므로, 실제 URL을 지어내지 말고 관련 주제 안내 문장만 자연스럽게 넣으세요.";
@@ -232,7 +232,7 @@ function formatOpenAITopology(topology: ContentTopologyPlan | undefined): string
 
   const links = topology.internalLinkTargets.length
     ? topology.internalLinkTargets
-        .map((target) => `- ${target.title}${target.url ? ` (${target.url})` : ""}: ${target.reason}`)
+        .map((target) => `- [${target.role}] ${target.title}${target.url ? ` (${target.url})` : ""}: ${target.reason}`)
         .join("\n")
     : "- No confirmed internal links. Mention related topic directions naturally, without fake URLs.";
 
@@ -245,6 +245,10 @@ function formatOpenAITopology(topology: ContentTopologyPlan | undefined): string
     ...topology.requiredSections.map((section) => `- ${section}`),
     "Internal link candidates:",
     links,
+    "Exact anchor rule:",
+    "- If a reference has both a title and URL, use that exact title with that exact URL.",
+    "- Never paraphrase a saved linked title into a different title while keeping the old URL.",
+    "- Never attach a hub title to a leaf URL or a leaf title to a hub URL.",
   ].join("\n");
 }
 
@@ -302,6 +306,23 @@ function buildOpenAIWriterSystemPrompt(): string {
   ].join("\n");
 }
 
+function formatTargetSearchCombinations(strategy: StrategyPlanResult): string {
+  const combinations = strategy.targetSearchCombinations ?? [];
+  if (combinations.length === 0) {
+    return [
+      "Target search combinations: unavailable.",
+      "Cover the main keyword and the strongest supporting contexts naturally across the article.",
+    ].join("\n");
+  }
+
+  return [
+    "Target search combinations:",
+    ...combinations.map((item, index) =>
+      `${index + 1}. ${item.phrase} [${item.priority}/${item.role}] - ${item.suggestedPlacement} - ${item.rationale}`
+    ),
+  ].join("\n");
+}
+
 function buildOpenAIWriterUserPrompt(params: {
   strategy: StrategyPlanResult;
   userId: string;
@@ -326,6 +347,8 @@ function buildOpenAIWriterUserPrompt(params: {
     "",
     "Naver logic pre-check:",
     naverLogicAgent.buildWriterBrief(strategy.naverLogic),
+    "",
+    formatTargetSearchCombinations(strategy),
     "Naver research signals:",
     formatOpenAINaverSignals(strategy),
     "",
@@ -347,6 +370,10 @@ function buildOpenAIWriterUserPrompt(params: {
     "- Put the main keyword naturally in the first 2 paragraphs.",
     "- Treat the primary keyword as the non-negotiable center of the article. Do not let a secondary keyword replace the article's main angle.",
     "- Use the secondary keyword only to sharpen context, comparison intent, or the practical scenario around the primary keyword.",
+    "- Make the target search combinations visible across the article. Cover every core combination at least once naturally through the title, intro, subheadings, or key body paragraphs.",
+    "- Spread combinations by section role: use local combinations in location/proof paragraphs, use use-case combinations in selection/comparison paragraphs, and keep the main keyword as the repeated anchor.",
+    "- Do not awkwardly list combinations back-to-back. Each combination should appear because the paragraph genuinely answers that search intent.",
+    "- If content topology provides internal link references with URLs, keep each title-URL pair exact. Do not rewrite, shorten, merge, or swap linked titles.",
     "- If Naver signals are present, answer the repeated community questions and demand patterns directly in the body.",
     "- Make the hub/leaf role visible through structure, not by announcing the words hub or leaf.",
     "- Include practical criteria, examples, and decision points instead of broad advice.",
@@ -499,6 +526,8 @@ ${buildContentTopologySection(strategy.contentTopology)}
 
 Naver logic pre-check:
 ${naverLogicAgent.buildWriterBrief(strategy.naverLogic)}
+
+${formatTargetSearchCombinations(strategy)}
 
 아웃라인:
 ${strategy.outline

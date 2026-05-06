@@ -2,7 +2,7 @@ import { fileExists, readJsonFile } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import type { PostingIndex, Topic } from "@/lib/types/github-data";
-import type { ContentTopologyPlan, StrategyPlanResult } from "./types";
+import type { ContentTopologyPlan, InternalLinkTarget, StrategyPlanResult } from "./types";
 
 const HUB_PATTERNS = [
   /가이드/u,
@@ -84,12 +84,36 @@ function inferKind(topic: Topic, strategy?: StrategyPlanResult): ContentTopology
   return broadOutline ? "hub" : "leaf";
 }
 
+function inferPostKindFromTitle(title: string): "hub" | "leaf" {
+  const hubScore = scorePatterns(title, HUB_PATTERNS);
+  const leafScore = scorePatterns(title, LEAF_PATTERNS);
+  return hubScore >= leafScore ? "hub" : "leaf";
+}
+
+function buildTarget(post: { title: string; naverPostUrl: string | null }, role: "hub" | "leaf"): InternalLinkTarget {
+  return {
+    title: post.title,
+    url: post.naverPostUrl,
+    role,
+    anchorTextMustMatchTitle: true,
+    reason:
+      role === "hub"
+        ? "본문에서 더 큰 개념을 받쳐주는 허브 글 참조입니다."
+        : "본문에서 더 구체적인 사례나 하위 주제를 받쳐주는 리프 글 참조입니다.",
+  };
+}
+
 async function findInternalTargets(params: {
   topic: Topic;
   userId: string;
-  kind: ContentTopologyPlan["kind"];
-}): Promise<ContentTopologyPlan["internalLinkTargets"]> {
-  if (!(await fileExists(Paths.postingListIndex()))) return [];
+}): Promise<{
+  hubReference: InternalLinkTarget | null;
+  leafReference: InternalLinkTarget | null;
+  internalLinkTargets: InternalLinkTarget[];
+}> {
+  if (!(await fileExists(Paths.postingListIndex()))) {
+    return { hubReference: null, leafReference: null, internalLinkTargets: [] };
+  }
 
   const { data } = await readJsonFile<PostingIndex>(Paths.postingListIndex());
   const userId = normalizeUserId(params.userId);
@@ -97,19 +121,28 @@ async function findInternalTargets(params: {
   const published = data.posts
     .filter((post) => post.status === "published")
     .filter((post) => !userId || normalizeUserId(post.userId) === userId)
-    .map((post) => ({ post, score: matchScore(topicText, post.title) }))
+    .map((post) => ({
+      post,
+      score: matchScore(topicText, post.title),
+      inferredKind: inferPostKindFromTitle(post.title),
+    }))
     .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3);
+    .sort((a, b) => b.score - a.score);
 
-  return published.map(({ post }) => ({
-    title: post.title,
-    url: post.naverPostUrl,
-    reason:
-      params.kind === "hub"
-        ? "허브글에서 이어서 볼 세부 리프글 후보"
-        : "리프글에서 되돌아갈 상위/관련 허브글 후보",
-  }));
+  const hubCandidate = published.find((item) => item.inferredKind === "hub") ?? published[0] ?? null;
+  const leafCandidate =
+    published.find((item) =>
+      item.inferredKind === "leaf" &&
+      item.post.postId !== hubCandidate?.post.postId
+    ) ??
+    published.find((item) => item.post.postId !== hubCandidate?.post.postId) ??
+    null;
+
+  const hubReference = hubCandidate ? buildTarget(hubCandidate.post, "hub") : null;
+  const leafReference = leafCandidate ? buildTarget(leafCandidate.post, "leaf") : null;
+  const internalLinkTargets = [hubReference, leafReference].filter((item): item is InternalLinkTarget => Boolean(item));
+
+  return { hubReference, leafReference, internalLinkTargets };
 }
 
 export async function buildContentTopologyPlan(params: {
@@ -118,24 +151,25 @@ export async function buildContentTopologyPlan(params: {
   userId: string;
 }): Promise<ContentTopologyPlan> {
   const kind = params.strategy.contentTopology?.kind ?? inferKind(params.topic, params.strategy);
-  const internalLinkTargets = await findInternalTargets({
+  const { hubReference, leafReference, internalLinkTargets } = await findInternalTargets({
     topic: params.topic,
     userId: params.userId,
-    kind,
-  }).catch(() => []);
+  }).catch(() => ({ hubReference: null, leafReference: null, internalLinkTargets: [] }));
 
   if (kind === "hub") {
     return {
       kind,
-      reason: "검색 의도가 넓고 선택 기준/비교/입문 정보를 한 번에 정리해야 하는 주제입니다.",
-      searchIntent: "처음 방문한 독자가 전체 기준을 빠르게 이해하고 세부 글로 이동할 수 있게 합니다.",
-      bodyPlacement: "도입부에서 전체 가이드 성격을 잡고, 중후반에 세부 주제 안내 문단을 넣습니다.",
+      reason: "검색 의도가 넓고 선택 기준, 비교, 입문 정보를 한 번에 정리해야 하는 주제입니다.",
+      searchIntent: "처음 방문한 독자가 전체 기준을 빠르게 이해하고 다음 글로 이동하기 쉽게 구성해야 합니다.",
+      bodyPlacement: "도입부에서 전체 가이드 성격을 잡고, 중후반에 관련 하위 주제 안내 문단을 넣습니다.",
       requiredSections: [
         "전체 선택 기준을 정리하는 허브형 도입",
-        "세부 리프글로 확장 가능한 하위 주제 목록",
+        "관련 리프 글로 확장 가능한 하위 주제 목록",
         "방문/상담 전에 확인할 체크리스트",
         "다음에 이어서 볼 만한 관련 글 안내",
       ],
+      hubReference,
+      leafReference,
       internalLinkTargets,
     };
   }
@@ -143,14 +177,16 @@ export async function buildContentTopologyPlan(params: {
   return {
     kind,
     reason: "검색 의도가 좁고 구체적인 문제, 제품, 상황, 비교 포인트를 깊게 설명해야 하는 주제입니다.",
-    searchIntent: "이미 관심사가 좁혀진 독자에게 구체적인 판단 근거와 실행 기준을 제공합니다.",
-    bodyPlacement: "도입부에서 상위 주제와의 관계를 짧게 밝히고, 본문은 구체 사례와 판단 기준에 집중합니다.",
+    searchIntent: "이미 관심사가 좁혀진 독자에게 구체적인 판단 근거와 실행 기준을 제공해야 합니다.",
+    bodyPlacement: "도입부에서 상위 주제와의 관계를 짚고, 본문은 구체 사례와 판단 기준으로 직진합니다.",
     requiredSections: [
       "상위 허브 주제와 연결되는 짧은 도입",
-      "구체 상황/문제에 대한 세부 설명",
+      "구체 상황/문제에 대한 핵심 설명",
       "실제 선택 또는 확인 기준",
-      "관련 상위 글이나 다음 리프글로 이어지는 마무리",
+      "관련 상위 글이나 다음 리프 글로 이어지는 마무리",
     ],
+    hubReference,
+    leafReference,
     internalLinkTargets,
   };
 }

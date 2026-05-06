@@ -1628,6 +1628,7 @@ export async function runWritePhase(params: {
       title: writerResult.title,
       body: writerResult.content,
       keywords: effectiveStrategy.keywords,
+      targetSearchCombinations: effectiveStrategy.targetSearchCombinations,
     });
 
     if (!postGateResult.passed) {

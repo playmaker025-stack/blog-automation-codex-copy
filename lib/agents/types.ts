@@ -49,9 +49,18 @@ export interface StrategyPlanResult {
   keywords: string[];
   suggestedSources: string[];
   rationale: string;
+  targetSearchCombinations?: SearchCombinationTarget[];
   contentTopology?: ContentTopologyPlan;
   naverLogic?: NaverLogicPlan;
   naverSignals?: NaverSignals;
+}
+
+export interface SearchCombinationTarget {
+  phrase: string;
+  role: "main" | "support" | "local" | "brand" | "mixed";
+  priority: "core" | "support";
+  rationale: string;
+  suggestedPlacement: string;
 }
 
 export interface NaverSignalItem {
@@ -126,12 +135,38 @@ export interface KeywordFocusMetric {
   action: string;
 }
 
+export interface SearchCombinationMetric {
+  phrase: string;
+  role: SearchCombinationTarget["role"];
+  priority: SearchCombinationTarget["priority"];
+  exactMatches: number;
+  tokenCoverage: number;
+  titleIncluded: boolean;
+  headingIncluded: boolean;
+  introIncluded: boolean;
+  earlyCoverage: boolean;
+  coverageScore: number;
+  exposurePotentialScore: number;
+  summary: string;
+  action: string;
+}
+
 export interface SeoEvaluation {
   score: number;
   evidence: string[];
   improvements: string[];
   keywordReport: KeywordUsageReport;
   keywordMetrics: KeywordFocusMetric[];
+  combinationCoverageScore: number;
+  combinationMetrics: SearchCombinationMetric[];
+}
+
+export interface InternalLinkTarget {
+  title: string;
+  url?: string | null;
+  reason: string;
+  role: "hub" | "leaf";
+  anchorTextMustMatchTitle?: boolean;
 }
 
 export interface ContentTopologyPlan {
@@ -140,11 +175,9 @@ export interface ContentTopologyPlan {
   searchIntent: string;
   bodyPlacement: string;
   requiredSections: string[];
-  internalLinkTargets: Array<{
-    title: string;
-    url?: string | null;
-    reason: string;
-  }>;
+  hubReference?: InternalLinkTarget | null;
+  leafReference?: InternalLinkTarget | null;
+  internalLinkTargets: InternalLinkTarget[];
 }
 
 export interface WriterResult {

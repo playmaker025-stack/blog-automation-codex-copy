@@ -1,4 +1,11 @@
-import type { KeywordFocusMetric, KeywordUsageItem, KeywordUsageReport, SeoEvaluation } from "./types";
+import type {
+  KeywordFocusMetric,
+  KeywordUsageItem,
+  KeywordUsageReport,
+  SearchCombinationMetric,
+  SearchCombinationTarget,
+  SeoEvaluation,
+} from "./types";
 
 function clampScore(value: number): number {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -28,8 +35,29 @@ function splitParagraphs(body: string): string[] {
     .filter(Boolean);
 }
 
+function splitCombinationTokens(value: string): string[] {
+  return value
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 2);
+}
+
 function includesKeyword(text: string, keyword: string): boolean {
   return countKeywordOccurrences(text, keyword) > 0;
+}
+
+function includesAllTokens(text: string, phrase: string): boolean {
+  const normalized = text.toLowerCase();
+  const tokens = splitCombinationTokens(phrase);
+  return tokens.length > 0 && tokens.every((token) => normalized.includes(token.toLowerCase()));
+}
+
+function findHeadingLines(body: string): string[] {
+  return body
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith("#") || /^\d+[.)]\s+/.test(line) || /^\*\*.+\*\*$/.test(line));
 }
 
 function buildKeywordFocusMetrics(params: {
@@ -46,7 +74,8 @@ function buildKeywordFocusMetrics(params: {
   return params.keywordReport.items.map((item, index) => {
     const role: KeywordFocusMetric["role"] = index === 0 ? "main" : "sub";
     const titleIncluded = compactTitle.includes(item.keyword.toLowerCase());
-    const titleFrontLoaded = titleIncluded && params.title.indexOf(item.keyword) >= 0 && params.title.indexOf(item.keyword) <= 12;
+    const titleFrontLoaded =
+      titleIncluded && params.title.indexOf(item.keyword) >= 0 && params.title.indexOf(item.keyword) <= 12;
     const introIncluded = includesKeyword(introText, item.keyword);
     const earlyCoverage = includesKeyword(earlyText, item.keyword);
 
@@ -145,6 +174,151 @@ function buildKeywordFocusMetrics(params: {
   });
 }
 
+function buildFallbackSearchCombinations(keywords: string[]): SearchCombinationTarget[] {
+  const mainKeyword = keywords[0]?.trim();
+  if (!mainKeyword) return [];
+
+  const combinations: SearchCombinationTarget[] = [
+    {
+      phrase: mainKeyword,
+      role: "main",
+      priority: "core",
+      rationale: "메인 키워드 자체의 검색 의도입니다.",
+      suggestedPlacement: "제목, 도입부, 결론",
+    },
+  ];
+
+  for (const keyword of keywords.slice(1, 4)) {
+    const phrase = uniqueKeywords([`${keyword} ${mainKeyword}`])[0];
+    if (!phrase) continue;
+    combinations.push({
+      phrase,
+      role: "support",
+      priority: "support",
+      rationale: "서브 키워드를 메인 키워드와 연결한 기본 조합입니다.",
+      suggestedPlacement: "중간 문단",
+    });
+  }
+
+  return combinations;
+}
+
+function buildSearchCombinationMetrics(params: {
+  title: string;
+  body: string;
+  combinations: SearchCombinationTarget[];
+}): SearchCombinationMetric[] {
+  const paragraphs = splitParagraphs(params.body);
+  const introText = paragraphs.slice(0, 2).join("\n\n");
+  const earlyText = paragraphs.slice(0, 4).join("\n\n");
+  const headingText = findHeadingLines(params.body).join("\n");
+
+  return params.combinations.map((combination) => {
+    const tokens = splitCombinationTokens(combination.phrase);
+    const exactMatches = countKeywordOccurrences(params.body, combination.phrase);
+    const titleIncluded = includesAllTokens(params.title, combination.phrase);
+    const headingIncluded = includesAllTokens(headingText, combination.phrase);
+    const introIncluded = includesAllTokens(introText, combination.phrase);
+    const earlyCoverage = includesAllTokens(earlyText, combination.phrase);
+    const coveredTokens = tokens.filter((token) => includesKeyword(params.body, token)).length;
+    const tokenCoverage = tokens.length > 0 ? coveredTokens / tokens.length : 0;
+
+    let coverageScore = combination.priority === "core" ? 72 : 66;
+    let exposurePotentialScore = combination.priority === "core" ? 70 : 64;
+
+    if (titleIncluded) {
+      coverageScore += 10;
+      exposurePotentialScore += 12;
+    } else {
+      coverageScore -= combination.priority === "core" ? 10 : 6;
+      exposurePotentialScore -= combination.priority === "core" ? 12 : 7;
+    }
+
+    if (introIncluded) {
+      coverageScore += 10;
+      exposurePotentialScore += 10;
+    } else {
+      coverageScore -= combination.priority === "core" ? 8 : 5;
+      exposurePotentialScore -= combination.priority === "core" ? 10 : 6;
+    }
+
+    if (headingIncluded) {
+      coverageScore += 8;
+      exposurePotentialScore += 8;
+    }
+
+    if (earlyCoverage) {
+      coverageScore += 6;
+      exposurePotentialScore += 6;
+    } else {
+      coverageScore -= 4;
+      exposurePotentialScore -= 5;
+    }
+
+    if (exactMatches > 0) {
+      coverageScore += combination.priority === "core" ? 10 : 7;
+      exposurePotentialScore += combination.priority === "core" ? 9 : 6;
+    } else if (tokenCoverage >= 1) {
+      coverageScore += 4;
+      exposurePotentialScore += 2;
+    } else if (tokenCoverage < 0.6) {
+      coverageScore -= combination.priority === "core" ? 12 : 8;
+      exposurePotentialScore -= combination.priority === "core" ? 12 : 8;
+    }
+
+    if (exactMatches >= 4) {
+      coverageScore -= 6;
+      exposurePotentialScore -= 8;
+    }
+
+    const summaryParts = [
+      titleIncluded ? "제목 연결" : "제목 약함",
+      introIncluded ? "도입부 연결" : "도입부 약함",
+      headingIncluded ? "소제목 연결" : "소제목 보강 가능",
+      `${exactMatches}회 직접 표현`,
+    ];
+
+    let action = "현재 조합 흐름을 유지해도 괜찮습니다.";
+    if (!titleIncluded && combination.priority === "core") {
+      action = `'${combination.phrase}' 조합을 제목이나 제목 가까운 소제목에 더 직접적으로 드러내는 편이 좋습니다.`;
+    } else if (!introIncluded) {
+      action = `첫 두 문단 안에서 '${combination.phrase}' 검색 의도를 더 직접적으로 받아 주세요.`;
+    } else if (exactMatches === 0 && tokenCoverage >= 1) {
+      action = `토큰은 모두 들어가 있으니 '${combination.phrase}' 조합을 한 문장 안에서 한 번 더 자연스럽게 묶어 주세요.`;
+    } else if (tokenCoverage < 0.6) {
+      action = `이 글에서 '${combination.phrase}' 조합을 실제로 다루는 문단이 부족합니다. ${combination.suggestedPlacement} 쪽을 보강해 주세요.`;
+    } else if (exactMatches >= 4) {
+      action = `'${combination.phrase}' 직접 반복이 많아 보여 일부는 동의어/설명형 문장으로 풀어 주는 편이 좋습니다.`;
+    }
+
+    return {
+      phrase: combination.phrase,
+      role: combination.role,
+      priority: combination.priority,
+      exactMatches,
+      tokenCoverage: Number(tokenCoverage.toFixed(2)),
+      titleIncluded,
+      headingIncluded,
+      introIncluded,
+      earlyCoverage,
+      coverageScore: clampScore(coverageScore),
+      exposurePotentialScore: clampScore(exposurePotentialScore),
+      summary: summaryParts.join(" · "),
+      action,
+    };
+  });
+}
+
+function computeCombinationCoverageScore(metrics: SearchCombinationMetric[]): number {
+  if (metrics.length === 0) return 0;
+  const weightedTotal = metrics.reduce((sum, metric) => {
+    const weight = metric.priority === "core" ? 1.4 : 1;
+    return sum + metric.coverageScore * weight;
+  }, 0);
+  const totalWeight = metrics.reduce((sum, metric) => sum + (metric.priority === "core" ? 1.4 : 1), 0);
+  return clampScore(weightedTotal / totalWeight);
+}
+
 export function selectFocusKeywords(title: string, keywords: string[] = [], limit = 5): string[] {
   const titleTokens = title
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
@@ -198,7 +372,8 @@ export function analyzeKeywordUsage(params: {
 
   const mainKeyword = items[0]?.keyword ?? "";
   const introCoverage = mainKeyword ? countKeywordOccurrences(introText, mainKeyword) > 0 : true;
-  const titleFrontLoaded = mainKeyword ? params.title.indexOf(mainKeyword) >= 0 && params.title.indexOf(mainKeyword) <= 12 : true;
+  const titleFrontLoaded =
+    mainKeyword ? params.title.indexOf(mainKeyword) >= 0 && params.title.indexOf(mainKeyword) <= 12 : true;
   const bodyLength = params.body.replace(/\s+/g, "").length;
   const totalMentions = items.reduce((sum, item) => sum + item.count, 0);
 
@@ -213,9 +388,7 @@ export function analyzeKeywordUsage(params: {
     summary.push("제목 앞부분에 메인 키워드가 더 빨리 보이면 SEO에 유리합니다.");
   }
 
-  const recommendations = items
-    .filter((item) => item.status !== "적정")
-    .map((item) => item.recommendation);
+  const recommendations = items.filter((item) => item.status !== "적정").map((item) => item.recommendation);
 
   return {
     items,
@@ -232,6 +405,7 @@ export function evaluateSeoCompleteness(params: {
   title: string;
   body: string;
   keywords?: string[];
+  targetSearchCombinations?: SearchCombinationTarget[];
 }): SeoEvaluation {
   const keywordReport = analyzeKeywordUsage(params);
   const keywordMetrics = buildKeywordFocusMetrics({
@@ -239,6 +413,17 @@ export function evaluateSeoCompleteness(params: {
     body: params.body,
     keywordReport,
   });
+  const combinations =
+    (params.targetSearchCombinations ?? []).length > 0
+      ? params.targetSearchCombinations ?? []
+      : buildFallbackSearchCombinations(params.keywords ?? keywordReport.items.map((item) => item.keyword));
+  const combinationMetrics = buildSearchCombinationMetrics({
+    title: params.title,
+    body: params.body,
+    combinations,
+  });
+  const combinationCoverageScore = computeCombinationCoverageScore(combinationMetrics);
+
   let score = 88;
   const evidence: string[] = [];
   const improvements: string[] = [];
@@ -288,11 +473,32 @@ export function evaluateSeoCompleteness(params: {
     improvements.push("본문 분량이 짧아서 검색 체류 신호가 약할 수 있습니다.");
   }
 
+  if (combinationMetrics.length > 0) {
+    if (combinationCoverageScore >= 78) {
+      score += 4;
+      evidence.push(`목표 검색 조합 커버력이 ${combinationCoverageScore}점으로 비교적 안정적입니다.`);
+    } else if (combinationCoverageScore >= 68) {
+      evidence.push(`목표 검색 조합 커버력이 ${combinationCoverageScore}점으로 보통 수준입니다.`);
+    } else {
+      score -= 6;
+      improvements.push(`목표 검색 조합 커버력이 ${combinationCoverageScore}점으로 낮습니다. 핵심 조합을 제목/도입부/소제목에 더 직접적으로 연결해 주세요.`);
+    }
+
+    const missingCoreCombination = combinationMetrics.find(
+      (metric) => metric.priority === "core" && metric.coverageScore < 65
+    );
+    if (missingCoreCombination) {
+      improvements.push(missingCoreCombination.action);
+    }
+  }
+
   return {
     score: clampScore(score),
-    evidence: evidence.slice(0, 5),
-    improvements: uniqueKeywords(improvements).slice(0, 5),
+    evidence: uniqueKeywords(evidence).slice(0, 6),
+    improvements: uniqueKeywords(improvements).slice(0, 6),
     keywordReport,
     keywordMetrics,
+    combinationCoverageScore,
+    combinationMetrics,
   };
 }

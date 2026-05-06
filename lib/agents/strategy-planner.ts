@@ -12,7 +12,7 @@ import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-re
 import { readJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { Topic, TopicIndex } from "@/lib/types/github-data";
-import type { StrategyPlanResult } from "./types";
+import type { SearchCombinationTarget, StrategyPlanResult } from "./types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import { buildContentTopologyPlan } from "./content-topology";
 import { buildPolicyPromptSection } from "./blog-workflow-policy";
@@ -267,6 +267,135 @@ function uniq(values: string[]): string[] {
   return result;
 }
 
+interface DirectKeywordIntent {
+  mainKeyword: string;
+  subKeywords: string[];
+}
+
+function parseKeywordList(value: string): string[] {
+  return uniq(
+    value
+      .split(/[,/\n|]+/g)
+      .map((item) => item.trim())
+      .filter(Boolean)
+  );
+}
+
+function decomposeMainKeyword(mainKeyword: string): { baseTopic: string; suffixKeyword: string | null } {
+  const normalized = mainKeyword.trim().replace(/\s+/g, " ");
+  if (!normalized) {
+    return { baseTopic: "", suffixKeyword: null };
+  }
+
+  if (normalized.endsWith(" 추천")) {
+    return { baseTopic: normalized.slice(0, -3).trim(), suffixKeyword: "추천" };
+  }
+
+  return { baseTopic: normalized, suffixKeyword: null };
+}
+
+function buildSearchCombinationPhrase(mainKeyword: string, modifiers: string[]): string {
+  const { baseTopic, suffixKeyword } = decomposeMainKeyword(mainKeyword);
+  const parts = [...modifiers.filter(Boolean), baseTopic, suffixKeyword].filter(Boolean);
+  return uniq([parts.join(" ")]).at(0) ?? mainKeyword.trim();
+}
+
+function classifyCombinationRole(keyword: string): SearchCombinationTarget["role"] {
+  if (/(시|도|구|군|동|읍|면|역)$/.test(keyword) || /(서울|인천|부천|부평|만수|구월|남동|계산)/.test(keyword)) {
+    return "local";
+  }
+  if (/(만수르|매장|지점|스토어|샵|shop)/i.test(keyword)) {
+    return "brand";
+  }
+  if (/(입호흡|폐호흡|액상|기기|초보|가성비|추천|비교|후기|리뷰)/.test(keyword)) {
+    return "support";
+  }
+  return "mixed";
+}
+
+function buildTargetSearchCombinations(params: {
+  topic: Topic;
+  plan: StrategyPlanResult;
+  directIntent: DirectKeywordIntent | null;
+}): SearchCombinationTarget[] {
+  const mainKeyword = params.directIntent?.mainKeyword ?? params.plan.keywords[0] ?? params.topic.title;
+  const fallbackSupports = uniq(params.plan.keywords.slice(1, 5));
+  const subKeywords = uniq([
+    ...(params.directIntent?.subKeywords ?? []),
+    ...fallbackSupports,
+  ]).filter((keyword) => keyword.toLowerCase() !== mainKeyword.toLowerCase());
+
+  const combinations: SearchCombinationTarget[] = [];
+  const pushCombination = (
+    phrase: string,
+    role: SearchCombinationTarget["role"],
+    priority: SearchCombinationTarget["priority"],
+    rationale: string,
+    suggestedPlacement: string
+  ) => {
+    const normalized = phrase.trim().replace(/\s+/g, " ");
+    if (!normalized) return;
+    if (combinations.some((item) => item.phrase.toLowerCase() === normalized.toLowerCase())) return;
+    combinations.push({ phrase: normalized, role, priority, rationale, suggestedPlacement });
+  };
+
+  pushCombination(
+    mainKeyword,
+    "main",
+    "core",
+    "메인 키워드는 글 전체의 중심 검색축입니다.",
+    "제목, 도입부, 결론"
+  );
+
+  for (const keyword of subKeywords) {
+    pushCombination(
+      buildSearchCombinationPhrase(mainKeyword, [keyword]),
+      classifyCombinationRole(keyword),
+      "core",
+      `'${keyword}' 문맥을 메인 키워드와 직접 연결한 롱테일 조합입니다.`,
+      /(시|도|구|군|동|읍|면|역)$/.test(keyword) || /(서울|인천|부천|부평|만수|구월|남동|계산)/.test(keyword)
+        ? "도입부 또는 지역 체감 문단"
+        : "선택 기준 또는 비교 문단"
+    );
+  }
+
+  const localKeyword = subKeywords.find((keyword) => classifyCombinationRole(keyword) === "local");
+  const supportKeyword = subKeywords.find((keyword) => classifyCombinationRole(keyword) === "support");
+  const brandKeyword = subKeywords.find((keyword) => classifyCombinationRole(keyword) === "brand");
+
+  if (localKeyword && supportKeyword) {
+    pushCombination(
+      buildSearchCombinationPhrase(mainKeyword, [localKeyword, supportKeyword]),
+      "mixed",
+      "core",
+      "지역성과 사용상황을 함께 묶어 더 구체적인 검색 의도를 받는 조합입니다.",
+      "도입부 이후 핵심 비교 문단"
+    );
+  }
+
+  if (brandKeyword) {
+    pushCombination(
+      buildSearchCombinationPhrase(mainKeyword, [brandKeyword]),
+      "brand",
+      "support",
+      "매장명/브랜드 경험을 신뢰 신호로 연결하는 조합입니다.",
+      "실사용 경험 또는 방문 팁 문단"
+    );
+  }
+
+  if (brandKeyword && supportKeyword) {
+    pushCombination(
+      buildSearchCombinationPhrase(mainKeyword, [brandKeyword, supportKeyword]),
+      "mixed",
+      "support",
+      "매장/브랜드 경험과 사용상황을 결합한 신뢰형 롱테일 조합입니다.",
+      "후반 실사용 정리 문단"
+    );
+  }
+
+  return combinations.slice(0, 8);
+}
+
 function extractFallbackKeywords(topic: Topic): string[] {
   const titleWords = topic.title
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
@@ -275,41 +404,41 @@ function extractFallbackKeywords(topic: Topic): string[] {
   return uniq([...topic.tags, ...titleWords, topic.category]).slice(0, 8);
 }
 
-function extractDirectKeywordIntent(topic: Topic): { mainKeyword: string; subKeyword: string } | null {
+function extractDirectKeywordIntent(topic: Topic): DirectKeywordIntent | null {
   if (topic.source !== "direct") return null;
 
   const description = topic.description ?? "";
   const mainMatch = description.match(/메인키워드:\s*([^/\n]+?)(?:\s*\/|\s*$)/);
   const subMatch = description.match(/서브 키워드:\s*([^\n]+?)\s*$/);
   const mainKeyword = mainMatch?.[1]?.trim() || topic.tags[0]?.trim() || "";
-  const subKeyword = subMatch?.[1]?.trim() || topic.tags[1]?.trim() || "";
+  const subKeywords = parseKeywordList(subMatch?.[1]?.trim() || topic.tags.slice(1).join(", "));
 
   if (!mainKeyword) return null;
-  return { mainKeyword, subKeyword };
+  return { mainKeyword, subKeywords };
 }
 
 function applyDirectKeywordPriority(
   plan: StrategyPlanResult,
-  directIntent: { mainKeyword: string; subKeyword: string } | null
+  directIntent: DirectKeywordIntent | null
 ): StrategyPlanResult {
   if (!directIntent) return plan;
 
   const orderedKeywords = uniq([
     directIntent.mainKeyword,
-    directIntent.subKeyword,
+    ...directIntent.subKeywords,
     ...plan.keywords,
   ]).filter(Boolean);
 
   const keyPoints = uniq([
     `${directIntent.mainKeyword}를 글의 중심 검색축으로 유지한다.`,
-    directIntent.subKeyword
-      ? `${directIntent.subKeyword}는 보조 맥락으로 활용하되 메인 키워드를 대체하지 않는다.`
+    directIntent.subKeywords.length > 0
+      ? `${directIntent.subKeywords.join(", ")}는 보조 맥락으로 활용하되 메인 키워드를 대체하지 않는다.`
       : "",
     ...plan.keyPoints,
   ]).filter(Boolean);
 
-  const rationalePrefix = directIntent.subKeyword
-    ? `직접 입력 토픽이므로 메인 키워드 '${directIntent.mainKeyword}'를 중심축으로 두고, 서브 키워드 '${directIntent.subKeyword}'는 보조 맥락으로 반영했습니다.`
+  const rationalePrefix = directIntent.subKeywords.length > 0
+    ? `직접 입력 토픽이므로 메인 키워드 '${directIntent.mainKeyword}'를 중심축으로 두고, 서브 키워드 '${directIntent.subKeywords.join(", ")}'는 보조 맥락으로 반영했습니다.`
     : `직접 입력 토픽이므로 메인 키워드 '${directIntent.mainKeyword}'를 중심축으로 반영했습니다.`;
 
   return {
@@ -380,7 +509,7 @@ function buildUserMessage(
   topic: Topic,
   topicId: string,
   userId: string,
-  directIntent: { mainKeyword: string; subKeyword: string } | null
+  directIntent: DirectKeywordIntent | null
 ): string {
   return [
     "다음 토픽으로 네이버 블로그 전략을 수립해 주세요.",
@@ -391,7 +520,7 @@ function buildUserMessage(
     `카테고리: ${topic.category}`,
     `태그: ${topic.tags.join(", ") || "없음"}`,
     directIntent ? `직접입력 메인 키워드: ${directIntent.mainKeyword}` : "",
-    directIntent?.subKeyword ? `직접입력 서브 키워드: ${directIntent.subKeyword}` : "",
+    directIntent && directIntent.subKeywords.length > 0 ? `직접입력 서브 키워드: ${directIntent.subKeywords.join(", ")}` : "",
     directIntent
       ? "직접 입력 모드 규칙: 메인 키워드를 글의 중심 검색축으로 유지하고, 제목/도입부/핵심 문단의 판단 기준이 메인 키워드와 일치해야 합니다. 서브 키워드는 메인 키워드를 보조하는 맥락으로만 사용하세요."
       : "",
@@ -496,9 +625,11 @@ export async function runStrategyPlanner(params: {
   plan = applyDirectKeywordPriority(plan, directIntent);
 
   const contentTopology = await buildContentTopologyPlan({ topic, strategy: plan, userId });
+  const targetSearchCombinations = buildTargetSearchCombinations({ topic, plan, directIntent });
   const naverLogic = naverLogicAgent.planBeforeWriting({ ...plan, contentTopology });
   plan = {
     ...plan,
+    targetSearchCombinations,
     contentTopology,
     naverSignals: {
       keyword: researchKeyword,
