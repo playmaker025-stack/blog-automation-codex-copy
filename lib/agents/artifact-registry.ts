@@ -74,6 +74,7 @@ export interface StrategyPlanData {
   keywords: string[];
   rationale: string;
   corpusSummary: unknown; // CorpusSummaryArtifact
+  publicationLearning?: unknown;
 }
 
 export interface DraftOutputData {

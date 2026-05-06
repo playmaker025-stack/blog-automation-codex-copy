@@ -17,6 +17,7 @@ import { normalizeUserId } from "@/lib/utils/normalize";
 import { buildContentTopologyPlan } from "./content-topology";
 import { buildPolicyPromptSection } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
+import { getPublicationLearningSummary } from "./user-learning";
 
 const STRATEGY_LOOP_TIMEOUT_MS = 120_000;
 const SIMPLE_STRATEGY_TIMEOUT_MS = 45_000;
@@ -404,6 +405,24 @@ function extractFallbackKeywords(topic: Topic): string[] {
   return uniq([...topic.tags, ...titleWords, topic.category]).slice(0, 8);
 }
 
+function formatPublicationLearningBrief(summary: StrategyPlanResult["publicationLearning"]): string {
+  if (!summary) {
+    return "발행 학습 요약: 아직 누적 데이터가 충분하지 않습니다.";
+  }
+
+  return [
+    `발행 학습 요약 출처: ${summary.source}`,
+    `누적 발행 수: ${summary.totalEntries}`,
+    `평균 평가 점수: ${summary.avgEvalScore ?? "없음"}`,
+    `평균 분량: ${summary.avgWordCount ?? "없음"}`,
+    `반복 제목 키워드: ${summary.topKeywords.join(", ") || "없음"}`,
+    `자주 발행된 글 구조: ${summary.dominantContentKinds.join(", ") || "없음"}`,
+    `최근 발행 제목 예시: ${summary.recentTitles.join(" / ") || "없음"}`,
+    `최고 성과 제목: ${summary.bestPerformingTitle ?? "없음"}`,
+    ...summary.guidance.map((item) => `- ${item}`),
+  ].join("\n");
+}
+
 function extractDirectKeywordIntent(topic: Topic): DirectKeywordIntent | null {
   if (topic.source !== "direct") return null;
 
@@ -509,7 +528,8 @@ function buildUserMessage(
   topic: Topic,
   topicId: string,
   userId: string,
-  directIntent: DirectKeywordIntent | null
+  directIntent: DirectKeywordIntent | null,
+  publicationLearning: StrategyPlanResult["publicationLearning"]
 ): string {
   return [
     "다음 토픽으로 네이버 블로그 전략을 수립해 주세요.",
@@ -527,6 +547,8 @@ function buildUserMessage(
     `사용자 ID: ${userId}`,
     `참조 URL: ${topic.relatedSources.join(", ") || "없음"}`,
     "",
+    formatPublicationLearningBrief(publicationLearning),
+    "",
     "반드시 도구를 순서대로 사용한 뒤, 최종 전략 JSON만 출력해 주세요.",
   ].filter(Boolean).join("\n");
 }
@@ -541,6 +563,7 @@ export async function runStrategyPlanner(params: {
   const userId = normalizeUserId(params.userId);
   const topic = await loadTopic(topicId);
   const directIntent = extractDirectKeywordIntent(topic);
+  const publicationLearning = await getPublicationLearningSummary(userId);
 
   onProgress?.(`토픽 "${topicId}" 전략 수립 시작`);
 
@@ -593,7 +616,7 @@ export async function runStrategyPlanner(params: {
       messages: [{
         role: "user",
         content:
-          buildUserMessage(topic, topicId, userId, directIntent) +
+          buildUserMessage(topic, topicId, userId, directIntent, publicationLearning) +
           `\n\n${communityResearchBrief}` +
           `\n\nRequired research focus before final JSON:\n` +
           `- Use naver_cafe_search to identify current product demand, repeated comparison language, and real community interest.\n` +
@@ -631,6 +654,7 @@ export async function runStrategyPlanner(params: {
     ...plan,
     targetSearchCombinations,
     contentTopology,
+    publicationLearning,
     naverSignals: {
       keyword: researchKeyword,
       cafeDemandSummary: cafeResearch.demandSummary,

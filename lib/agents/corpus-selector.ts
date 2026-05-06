@@ -15,6 +15,7 @@ import { readJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { CorpusSampleMeta } from "@/lib/types/github-data";
 import { normalizeUserId } from "@/lib/utils/normalize";
+import { ensureUserCorpusSeeded } from "./user-learning";
 
 // ============================================================
 // exemplar index 타입
@@ -209,6 +210,8 @@ export async function selectExemplars(params: {
   const userId = normalizeUserId(params.userId);
   const count = Math.min(Math.max(targetCount, MIN_EXEMPLARS), MAX_EXEMPLARS);
   const targetIntent = topicTitle ? classifyIntent(topicTitle) : "unknown";
+
+  await ensureUserCorpusSeeded(userId).catch(() => {});
 
   const exemplarPath = Paths.exemplarIndex(userId);
 

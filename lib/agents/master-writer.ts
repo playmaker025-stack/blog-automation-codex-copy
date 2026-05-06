@@ -252,6 +252,28 @@ function formatOpenAITopology(topology: ContentTopologyPlan | undefined): string
   ].join("\n");
 }
 
+function formatOpenAIPublicationLearning(strategy: StrategyPlanResult): string {
+  const summary = strategy.publicationLearning;
+  if (!summary) {
+    return [
+      "Publication learning signals: unavailable.",
+      "Use the strategy, corpus summary, and current search intent as the main guide.",
+    ].join("\n");
+  }
+
+  return [
+    `Publication learning source: ${summary.source}`,
+    `Total published samples: ${summary.totalEntries}`,
+    `Average eval score: ${summary.avgEvalScore ?? "none"}`,
+    `Average word count: ${summary.avgWordCount ?? "none"}`,
+    `Frequent title keywords: ${summary.topKeywords.join(", ") || "none"}`,
+    `Dominant content kinds: ${summary.dominantContentKinds.join(", ") || "none"}`,
+    `Recent published titles: ${summary.recentTitles.join(" / ") || "none"}`,
+    `Best performing title: ${summary.bestPerformingTitle ?? "none"}`,
+    ...summary.guidance.map((item) => `- ${item}`),
+  ].join("\n");
+}
+
 function formatOpenAINaverSignals(strategy: StrategyPlanResult): string {
   const signals = strategy.naverSignals;
   if (!signals) {
@@ -351,6 +373,9 @@ function buildOpenAIWriterUserPrompt(params: {
     formatTargetSearchCombinations(strategy),
     "Naver research signals:",
     formatOpenAINaverSignals(strategy),
+    "",
+    "Publication learning signals:",
+    formatOpenAIPublicationLearning(strategy),
     "",
     "Expanded outline:",
     formatOpenAIExpandedOutline(strategy),

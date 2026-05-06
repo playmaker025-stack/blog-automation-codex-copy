@@ -452,6 +452,7 @@ export async function runPipeline(params: {
       keywords: strategy.keywords,
       rationale: strategy.rationale,
       corpusSummary: null,
+      publicationLearning: strategy.publicationLearning ?? null,
     }).catch((e: unknown) => {
       console.warn("[orchestrator] saveArtifact(strategy_plan) ?ㅽ뙣 (臾댁떆):", e instanceof Error ? e.message : e);
     });
@@ -611,6 +612,17 @@ export async function runPipeline(params: {
       userTone: strategy.tone,
       topicTitle: strategy.title,
     });
+    await saveArtifact<StrategyPlanData>(pipelineId, "strategy_plan", {
+      title: strategy.title,
+      outline: strategy.outline,
+      keyPoints: strategy.keyPoints,
+      estimatedLength: strategy.estimatedLength,
+      tone: strategy.tone,
+      keywords: strategy.keywords,
+      rationale: strategy.rationale,
+      corpusSummary,
+      publicationLearning: strategy.publicationLearning ?? null,
+    }).catch(() => {});
 
     // corpus_retrieval 濡쒓렇
     await appendLog(pipelineId, {
@@ -1358,6 +1370,7 @@ export async function runStrategyPhase(params: {
       keywords: strategy.keywords,
       rationale: strategy.rationale,
       corpusSummary: null,
+      publicationLearning: strategy.publicationLearning ?? null,
     }).catch((e: unknown) => {
       console.warn("[orchestrator] saveArtifact(strategy_plan) ?ㅽ뙣 (臾댁떆):", e instanceof Error ? e.message : e);
     });
@@ -1496,6 +1509,17 @@ export async function runWritePhase(params: {
       userTone: strategy.tone,
       topicTitle: strategy.title,
     });
+    await saveArtifact<StrategyPlanData>(pipelineId, "strategy_plan", {
+      title: strategy.title,
+      outline: strategy.outline,
+      keyPoints: strategy.keyPoints,
+      estimatedLength: strategy.estimatedLength,
+      tone: strategy.tone,
+      keywords: strategy.keywords,
+      rationale: strategy.rationale,
+      corpusSummary,
+      publicationLearning: strategy.publicationLearning ?? null,
+    }).catch(() => {});
 
     const { getArtifact: _getArtifact } = await import("./artifact-registry");
     const approvalArtifact = await _getArtifact<ApprovalRequestData>(pipelineId, "approval_request");

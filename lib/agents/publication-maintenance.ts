@@ -5,6 +5,7 @@ import { normalizeUserId } from "@/lib/utils/normalize";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import type { PostingIndex, PostingRecord, Topic, TopicIndex } from "@/lib/types/github-data";
 import { runTopicGenerator, type GeneratedTopic } from "./topic-generator";
+import { syncPublishedPostToUserCorpus } from "./user-learning";
 
 interface PublicationLearningEntry {
   postId: string;
@@ -106,6 +107,7 @@ export async function runAfterPublishMaintenance(params: {
   const { data: topicsIndex } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
   const topic = topicsIndex.topics.find((item) => item.topicId === params.post.topicId) ?? null;
   await appendPublicationLearning({ post: params.post, topic });
+  await syncPublishedPostToUserCorpus({ post: params.post, topic }).catch(() => false);
 
   const userTopics = topicsIndex.topics
     .filter(isPlanningTopic)

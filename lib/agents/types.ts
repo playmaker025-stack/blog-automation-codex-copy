@@ -53,6 +53,7 @@ export interface StrategyPlanResult {
   contentTopology?: ContentTopologyPlan;
   naverLogic?: NaverLogicPlan;
   naverSignals?: NaverSignals;
+  publicationLearning?: PublicationLearningSummary | null;
 }
 
 export interface SearchCombinationTarget {
@@ -61,6 +62,19 @@ export interface SearchCombinationTarget {
   priority: "core" | "support";
   rationale: string;
   suggestedPlacement: string;
+}
+
+export interface PublicationLearningSummary {
+  source: "content-learning" | "published-posts-fallback";
+  totalEntries: number;
+  avgEvalScore: number | null;
+  avgWordCount: number | null;
+  recentTitles: string[];
+  topKeywords: string[];
+  dominantContentKinds: string[];
+  bestPerformingTitle: string | null;
+  lastPublishedAt: string | null;
+  guidance: string[];
 }
 
 export interface NaverSignalItem {
