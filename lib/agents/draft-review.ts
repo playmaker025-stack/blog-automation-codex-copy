@@ -24,6 +24,7 @@ export interface DraftReviewInput {
   originalTitle?: string;
   title: string;
   body: string;
+  revisionRequest?: string;
 }
 
 export interface DraftReviewResult {

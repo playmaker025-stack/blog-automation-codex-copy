@@ -16,6 +16,7 @@ interface Props {
   } | null;
   reviewTitle: string;
   reviewBody: string;
+  revisionRequest: string;
   reviewedTitle: string;
   reviewedBody: string;
   reviewSaving: boolean;
@@ -24,9 +25,11 @@ interface Props {
   reviewIssues: DraftReviewIssue[];
   onReviewTitleChange: (value: string) => void;
   onReviewBodyChange: (value: string) => void;
+  onRevisionRequestChange: (value: string) => void;
   onReviewedTitleChange: (value: string) => void;
   onReviewedBodyChange: (value: string) => void;
   onRunDraftReview: () => void;
+  onRunDraftPolish: () => void;
   onApplyReviewedDraft: () => void;
 }
 
@@ -69,6 +72,7 @@ export function PipelineWorkspacePanel({
   result,
   reviewTitle,
   reviewBody,
+  revisionRequest,
   reviewedTitle,
   reviewedBody,
   reviewSaving,
@@ -77,9 +81,11 @@ export function PipelineWorkspacePanel({
   reviewIssues,
   onReviewTitleChange,
   onReviewBodyChange,
+  onRevisionRequestChange,
   onReviewedTitleChange,
   onReviewedBodyChange,
   onRunDraftReview,
+  onRunDraftPolish,
   onApplyReviewedDraft,
 }: Props) {
   const hasCenterContent = Boolean(streamingBody || result || reviewResult || events.length);
@@ -87,6 +93,7 @@ export function PipelineWorkspacePanel({
   const reviewEditorTitle = reviewedTitle || reviewTitle;
   const reviewEditorBody = reviewedBody || reviewBody;
   const revisionGuides = buildRevisionGuides(reviewResult, reviewIssues);
+  const hasDraftToPolish = Boolean(result?.title && draftPreviewBody);
 
   return (
     <div className="overflow-hidden rounded-xl border border-zinc-200 bg-white">
@@ -137,7 +144,35 @@ export function PipelineWorkspacePanel({
             )}
 
             {draftPreviewBody ? (
-              <PipelineStream events={events} streamingBody={streamingBody} showLogs={false} />
+              <div className="space-y-4">
+                <PipelineStream events={events} streamingBody={streamingBody} showLogs={false} />
+                {hasDraftToPolish && (
+                  <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4">
+                    <div>
+                      <p className="text-sm font-semibold text-zinc-900">내용 수정 및 보완 요청</p>
+                      <p className="mt-1 text-xs leading-5 text-zinc-500">
+                        SEO 점수나 키워드 반복이 아쉬울 때, 원하는 보완 방향을 적어 수정본 생성을 다시 요청할 수 있어요.
+                      </p>
+                    </div>
+                    <div className="mt-3 space-y-3">
+                      <textarea
+                        value={revisionRequest}
+                        onChange={(event) => onRevisionRequestChange(event.target.value)}
+                        className="min-h-28 w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                        placeholder="예: 키워드 반복을 줄이고, 초보자 선택 기준과 실제 사용 예시를 더 자연스럽게 넣어줘."
+                      />
+                      <button
+                        type="button"
+                        onClick={onRunDraftPolish}
+                        disabled={reviewSaving}
+                        className="w-full rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
+                      >
+                        {reviewSaving ? "수정 요청 반영 중..." : "요청 반영해 수정본 생성"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             ) : result ? (
               <div className="space-y-4">
                 <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3">
@@ -186,6 +221,20 @@ export function PipelineWorkspacePanel({
                 className="min-h-48 w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 placeholder="실제로 수정한 본문을 붙여 넣으면 검토 결과와 수정본 제안이 생성됩니다."
               />
+            </div>
+
+            <div>
+              <label htmlFor="revision-request" className="mb-1 block text-xs font-semibold text-zinc-600">내용 수정 및 보완 요청</label>
+              <textarea
+                id="revision-request"
+                value={revisionRequest}
+                onChange={(event) => onRevisionRequestChange(event.target.value)}
+                className="min-h-28 w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                placeholder="예: 키워드 과다는 줄이고, 비교 기준과 추천 이유를 더 선명하게 정리해줘."
+              />
+              <p className="mt-1 text-xs text-zinc-500">
+                선택 사항이에요. 원하는 보완 방향이 있으면 함께 반영해서 수정본을 생성합니다.
+              </p>
             </div>
 
             <button

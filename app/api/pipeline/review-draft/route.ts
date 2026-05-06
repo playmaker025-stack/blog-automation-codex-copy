@@ -8,6 +8,7 @@ interface ReviewDraftRequest {
   originalTitle?: string;
   title: string;
   body: string;
+  revisionRequest?: string;
 }
 
 interface OpenAIReviewResult {
@@ -189,6 +190,7 @@ async function requestOpenAIReview(input: ReviewDraftRequest, repairReason?: str
           role: "user",
           content: `Original app draft title: ${input.originalTitle ?? ""}
 User's final title to improve: ${input.title}
+Additional user revision request: ${input.revisionRequest?.trim() || "없음"}
 
 Local pre-checks:
 ${localReview.issues.map((issue) => `- [${issue.severity}] ${issue.message}`).join("\n")}
@@ -202,6 +204,7 @@ Required work:
 - Use keywords naturally. Do not stuff repeated keywords.
 - Remove or soften exaggerated claims, unsupported guarantees, and clickbait.
 - Fix Korean spacing, typo, and awkward phrasing.
+- If the user included an additional revision request, reflect it unless it conflicts with facts, safety rules, or SEO readability.
 - Do not add adult/minor/legal/health/safety/e-cigarette warning copy unless it already appears in the source.
 - Provide at least 3 concrete changeDetails with before, after, and reason.
 - changes must summarize actual edits, not generic advice.

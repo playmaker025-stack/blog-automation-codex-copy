@@ -126,6 +126,7 @@ export default function PipelinePage() {
   const forcePreflightOverrideRef = useRef(false);
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewBody, setReviewBody] = useState("");
+  const [revisionRequest, setRevisionRequest] = useState("");
   const [reviewIssues, setReviewIssues] = useState<DraftReviewIssue[]>([]);
   const [reviewResult, setReviewResult] = useState<DraftReviewResult | null>(null);
   const [reviewedTitle, setReviewedTitle] = useState("");
@@ -602,8 +603,11 @@ export default function PipelinePage() {
     }
   };
 
-  const runDraftReview = async () => {
-    if (!result) return;
+  const requestDraftReview = async (payload: {
+    originalTitle?: string;
+    title: string;
+    body: string;
+  }) => {
     setReviewSaving(true);
     setPublishNotice(null);
 
@@ -612,9 +616,10 @@ export default function PipelinePage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          originalTitle: result.title,
-          title: reviewTitle,
-          body: reviewBody,
+          originalTitle: payload.originalTitle,
+          title: payload.title,
+          body: payload.body,
+          revisionRequest,
         }),
       });
       const review = await res.json() as DraftReviewResult & { error?: string };
@@ -623,6 +628,8 @@ export default function PipelinePage() {
         setReviewResult(review.issues ? review : null);
         return;
       }
+      setReviewTitle(payload.title);
+      setReviewBody(payload.body);
       setReviewIssues(review.issues);
       setReviewResult(review);
       setReviewedTitle(review.revisedTitle);
@@ -636,6 +643,24 @@ export default function PipelinePage() {
     } finally {
       setReviewSaving(false);
     }
+  };
+
+  const runDraftReview = async () => {
+    if (!result) return;
+    await requestDraftReview({
+      originalTitle: result.title,
+      title: reviewTitle,
+      body: reviewBody,
+    });
+  };
+
+  const runDraftPolish = async () => {
+    if (!result || !streamingBody.trim()) return;
+    await requestDraftReview({
+      originalTitle: result.title,
+      title: result.title,
+      body: streamingBody.trim(),
+    });
   };
 
   const applyReviewedDraft = async () => {
@@ -1002,6 +1027,7 @@ export default function PipelinePage() {
           result={result ? { title: result.title, wordCount: result.wordCount } : null}
           reviewTitle={reviewTitle}
           reviewBody={reviewBody}
+          revisionRequest={revisionRequest}
           reviewedTitle={reviewedTitle}
           reviewedBody={reviewedBody}
           reviewSaving={reviewSaving}
@@ -1016,6 +1042,7 @@ export default function PipelinePage() {
             setReviewBody(value);
             setReviewApplied(false);
           }}
+          onRevisionRequestChange={setRevisionRequest}
           onReviewedTitleChange={(value) => {
             setReviewedTitle(value);
             setReviewApplied(false);
@@ -1025,6 +1052,7 @@ export default function PipelinePage() {
             setReviewApplied(false);
           }}
           onRunDraftReview={runDraftReview}
+          onRunDraftPolish={runDraftPolish}
           onApplyReviewedDraft={applyReviewedDraft}
         />
 
