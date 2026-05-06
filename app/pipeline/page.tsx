@@ -25,6 +25,12 @@ interface ApprovalData {
   modifications?: string;
 }
 
+interface DraftRewriteContext {
+  topicId: string;
+  strategy: StrategyPlanResult;
+  modifications?: string;
+}
+
 interface ResultData {
   postId: string;
   title: string;
@@ -133,6 +139,7 @@ export default function PipelinePage() {
   const [reviewedBody, setReviewedBody] = useState("");
   const [reviewApplied, setReviewApplied] = useState(false);
   const [reviewSaving, setReviewSaving] = useState(false);
+  const [draftRewriteContext, setDraftRewriteContext] = useState<DraftRewriteContext | null>(null);
   const [publishUrl, setPublishUrl] = useState("");
   const [publishingToIndex, setPublishingToIndex] = useState(false);
   const [publishNotice, setPublishNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
@@ -389,6 +396,11 @@ export default function PipelinePage() {
     const uid = normalizeUserId(userId.trim());
     setApproval(null);
     setInspector((prev) => ({ ...prev, approval_received: true }));
+    setDraftRewriteContext({
+      topicId: approval.topicId,
+      strategy: approval.strategy,
+      modifications: approval.modifications,
+    });
     startWritePhase(approval, uid);
   }, [approval, setInspector, startWritePhase, userId]);
 
@@ -448,6 +460,7 @@ export default function PipelinePage() {
     setEvents([]);
     setStreamingBody("");
     setResult(null);
+    setDraftRewriteContext(null);
     setReviewTitle("");
     setReviewBody("");
     setReviewIssues([]);
@@ -584,11 +597,17 @@ export default function PipelinePage() {
     forceManualApprovalRef.current = false;
 
     if (!currentApproval) return;
+    const approvalPayload = {
+      ...currentApproval,
+      modifications: request.modifications?.trim() || "",
+    };
+    setDraftRewriteContext({
+      topicId: approvalPayload.topicId,
+      strategy: approvalPayload.strategy,
+      modifications: approvalPayload.modifications,
+    });
     startWritePhase(
-      {
-        ...currentApproval,
-        modifications: request.modifications?.trim() || "",
-      },
+      approvalPayload,
       uid
     );
   };
@@ -654,13 +673,63 @@ export default function PipelinePage() {
     });
   };
 
+  const buildDraftRewriteRequest = (): string | undefined => {
+    const stored = draftRewriteContext?.modifications?.trim();
+    const requested = revisionRequest.trim();
+
+    if (stored && requested) {
+      if (stored === requested) return stored;
+      return `${stored}\n\n추가 초안 보완 요청:\n${requested}`;
+    }
+
+    return stored || requested || undefined;
+  };
+
   const runDraftPolish = async () => {
-    if (!result || !streamingBody.trim()) return;
-    await requestDraftReview({
-      originalTitle: result.title,
-      title: result.title,
-      body: streamingBody.trim(),
-    });
+    const uid = normalizeUserId(userId.trim());
+    if (!uid || !draftRewriteContext || !streamingBody.trim() || !revisionRequest.trim()) return;
+
+    const pipelineId = `pipe-${crypto.randomUUID().slice(0, 8)}`;
+    const rewriteRequest = buildDraftRewriteRequest();
+
+    resetRun();
+    setEvents([]);
+    setStreamingBody("");
+    setResult(null);
+    setReviewTitle("");
+    setReviewBody("");
+    setReviewIssues([]);
+    setReviewResult(null);
+    setReviewedTitle("");
+    setReviewedBody("");
+    setReviewApplied(false);
+    setPublishUrl("");
+    setPublishNotice(null);
+    setContentTab("draft");
+    setStage("idle");
+    setApproval(null);
+    setPipelineError(null);
+    setPreflightBlocked(false);
+    setPublishedDuplicateBlocked(false);
+    setRunning(true);
+    setElapsed(0);
+    setRunningTitle(draftRewriteContext.strategy.title);
+    stopTimer();
+    timerRef.current = setInterval(() => setElapsed((seconds) => seconds + 1), 1000);
+
+    startWritePhase(
+      {
+        pipelineId,
+        topicId: draftRewriteContext.topicId,
+        previousTitle: result?.title ?? "",
+        proposedTitle: draftRewriteContext.strategy.title,
+        rationale: draftRewriteContext.strategy.rationale,
+        outline: draftRewriteContext.strategy.outline.map((section) => section.heading),
+        strategy: draftRewriteContext.strategy,
+        modifications: rewriteRequest,
+      },
+      uid
+    );
   };
 
   const applyReviewedDraft = async () => {

@@ -151,7 +151,7 @@ export function PipelineWorkspacePanel({
                     <div>
                       <p className="text-sm font-semibold text-zinc-900">내용 수정 및 보완 요청</p>
                       <p className="mt-1 text-xs leading-5 text-zinc-500">
-                        SEO 점수나 키워드 반복이 아쉬울 때, 원하는 보완 방향을 적어 수정본 생성을 다시 요청할 수 있어요.
+                        SEO 점수나 키워드 반복이 아쉬울 때, 원하는 보완 방향을 적어 초안을 다시 생성할 수 있어요.
                       </p>
                     </div>
                     <div className="mt-3 space-y-3">
@@ -164,10 +164,10 @@ export function PipelineWorkspacePanel({
                       <button
                         type="button"
                         onClick={onRunDraftPolish}
-                        disabled={reviewSaving}
+                        disabled={reviewSaving || !revisionRequest.trim()}
                         className="w-full rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
                       >
-                        {reviewSaving ? "수정 요청 반영 중..." : "요청 반영해 수정본 생성"}
+                        {reviewSaving ? "초안 다시 생성 중..." : "요청 반영해 초안 다시 생성"}
                       </button>
                     </div>
                   </div>
