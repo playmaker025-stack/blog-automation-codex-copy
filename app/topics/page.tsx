@@ -70,6 +70,41 @@ function resolveTopicBadgeCode(topic: Topic): string | null {
   return blogCode(topic.category) ?? (topic.assignedUserId ? userIdToBlogCode(topic.assignedUserId) : null);
 }
 
+function getGeneratePanelCopy(mode: "topics" | "preposting-series" | "series-detail"): {
+  title: string;
+  badge: string;
+  description: string;
+  actionLabel: string;
+} {
+  if (mode === "preposting-series") {
+    return {
+      title: "선행 포스팅 설계",
+      badge: "시리즈 토픽 설계",
+      description:
+        "메인 키워드를 넣으면 선행 글 2~3개와 메인 글 1개를 시리즈로 설계합니다. 이 단계에서는 제목, 순서, 역할, 선행 조건을 먼저 잡습니다.",
+      actionLabel: "시리즈 설계",
+    };
+  }
+
+  if (mode === "series-detail") {
+    return {
+      title: "시리즈 상세 설계",
+      badge: "편별 상세 전략",
+      description:
+        "이미 만든 시리즈 토픽을 불러와 각 편의 목표, 검색 의도, 핵심 키워드, 섹션 구조, 내부링크 계획까지 저장합니다. 이후 전략 수립과 초안 생성이 이 설계를 우선 참고합니다.",
+      actionLabel: "상세 설계 생성",
+    };
+  }
+
+  return {
+    title: "AI 새 글목록 생성",
+    badge: "네이버 리서치 기반",
+    description:
+      "기존 발행 글을 분석해 연관된 신규 토픽 5개를 생성합니다. 남은 계획 글이 있어도 사용자가 원하면 추가로 생성할 수 있고, 생성 후 원하는 항목만 선택해 추가할 수 있습니다.",
+    actionLabel: "추가 생성",
+  };
+}
+
 export default function TopicsPage() {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [posts, setPosts] = useState<PostingRecord[]>([]);
@@ -108,6 +143,7 @@ export default function TopicsPage() {
   const [savingGenerated, setSavingGenerated] = useState(false);
 
   const fileRef = useRef<HTMLInputElement>(null);
+  const panelCopy = getGeneratePanelCopy(generateMode);
 
   const loadTopics = () => {
     setLoading(true);
@@ -488,12 +524,10 @@ export default function TopicsPage() {
       {/* ── AI 새 글목록 생성 ───────────────────────────── */}
       <div className="bg-white border border-zinc-200 rounded-xl p-5 mb-6">
         <div className="flex items-start justify-between mb-1">
-          <h2 className="text-sm font-semibold text-zinc-800">AI 새 글목록 생성</h2>
-          <span className="text-[10px] px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full font-medium">네이버 리서치 기반</span>
+          <h2 className="text-sm font-semibold text-zinc-800">{panelCopy.title}</h2>
+          <span className="text-[10px] px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full font-medium">{panelCopy.badge}</span>
         </div>
-        <p className="text-xs text-zinc-400 mb-4">
-          기존 발행 글을 분석해 연관된 신규 토픽 5개를 생성합니다. 남은 계획 글이 있어도 사용자가 원하면 추가로 생성할 수 있고, 생성 후 원하는 항목만 선택해 추가할 수 있습니다.
-        </p>
+        <p className="text-xs text-zinc-400 mb-4">{panelCopy.description}</p>
         <div className="flex gap-1.5 mb-4">
           {([
             { value: "topics", label: "AI 글목록 생성" },
@@ -518,11 +552,17 @@ export default function TopicsPage() {
             </button>
           ))}
         </div>
-        <div className="flex gap-2 mb-4">
+        <div className="flex gap-2 mb-2">
           <input
             value={generateUserId}
             onChange={(e) => setGenerateUserId(e.target.value)}
-            placeholder="사용자 ID (예: user-a)"
+            placeholder={
+              generateMode === "topics"
+                ? "사용자 ID (예: user-a)"
+                : generateMode === "preposting-series"
+                  ? "시리즈를 만들 사용자 ID"
+                  : "상세 설계를 저장할 사용자 ID"
+            }
             className="flex-1 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {generateMode !== "topics" && (
@@ -530,18 +570,20 @@ export default function TopicsPage() {
               <input
                 value={seriesMainKeyword}
                 onChange={(e) => setSeriesMainKeyword(e.target.value)}
-                placeholder="메인 키워드"
+                placeholder={generateMode === "preposting-series" ? "시리즈 메인 키워드" : "상세 설계를 불러올 메인 키워드"}
                 className="flex-1 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <select
-                value={seriesPreludeCount}
-                onChange={(e) => setSeriesPreludeCount(Number(e.target.value))}
-                className="w-28 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="선행 포스팅 개수"
-              >
-                <option value={2}>선행 2개</option>
-                <option value={3}>선행 3개</option>
-              </select>
+              {generateMode === "preposting-series" && (
+                <select
+                  value={seriesPreludeCount}
+                  onChange={(e) => setSeriesPreludeCount(Number(e.target.value))}
+                  className="w-28 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  aria-label="선행 포스팅 개수"
+                >
+                  <option value={2}>선행 2개</option>
+                  <option value={3}>선행 3개</option>
+                </select>
+              )}
             </>
           )}
           <button
@@ -549,9 +591,16 @@ export default function TopicsPage() {
             disabled={generating || !generateUserId.trim() || (generateMode !== "topics" && !seriesMainKeyword.trim())}
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
           >
-            {generating ? "생성 중..." : generateMode === "preposting-series" ? "시리즈 설계" : generateMode === "series-detail" ? "상세 설계 생성" : "추가 생성"}
+            {generating ? "생성 중..." : panelCopy.actionLabel}
           </button>
         </div>
+        <p className="text-[11px] text-zinc-400 mb-4">
+          {generateMode === "topics"
+            ? "사용자 ID만 입력하면 기존 발행 흐름을 바탕으로 새 글목록 후보를 생성합니다."
+            : generateMode === "preposting-series"
+              ? "메인 키워드와 선행 개수를 정하면 선행 글과 메인 글의 순서를 가진 시리즈 토픽을 먼저 만듭니다."
+              : "이미 만든 시리즈 토픽을 기준으로 편별 목표, 키워드, 섹션, 내부링크 계획을 저장합니다."}
+        </p>
 
         {generateResult && (
           <div className="space-y-3">
