@@ -242,6 +242,48 @@ for (const docFile of [
   }
 }
 
+// RULE-010: Main-keyword pre-posting series must keep series metadata and block main posts.
+const topicGeneratorFile = join(ROOT, 'lib', 'agents', 'topic-generator.ts')
+const topicGeneratorContent = content(topicGeneratorFile)
+const githubTypesFile = join(ROOT, 'lib', 'types', 'github-data.ts')
+const githubTypesContent = content(githubTypesFile)
+const githubTopicsRoute = join(ROOT, 'app', 'api', 'github', 'topics', 'route.ts')
+const githubTopicsContent = content(githubTopicsRoute)
+const topicGenerateRoute = join(ROOT, 'app', 'api', 'topics', 'generate', 'route.ts')
+const topicGenerateContent = content(topicGenerateRoute)
+
+for (const needle of ['seriesId', 'seriesRole', 'targetMainKeyword', 'sequenceOrder', 'prerequisiteTopicIds']) {
+  if (!githubTypesContent.includes(needle)) {
+    fail('RULE-010', githubTypesFile, lineOf(githubTypesContent, needle), `Topic type must preserve series metadata: ${needle}.`)
+  }
+  if (!githubTopicsContent.includes(needle)) {
+    fail('RULE-010', githubTopicsRoute, lineOf(githubTopicsContent, needle), `Topic POST route must persist series metadata: ${needle}.`)
+  }
+}
+
+for (const needle of [
+  'runPrePostingSeriesPlanner',
+  'preposting-series',
+  'seriesRole: "prelude"',
+  'seriesRole: "main"',
+  'prerequisiteTopicIds: plannedTopicIds.slice',
+]) {
+  if (!topicGeneratorContent.includes(needle) && !topicGenerateContent.includes(needle)) {
+    fail('RULE-010', topicGeneratorFile, lineOf(topicGeneratorContent, needle), `Pre-posting series planner contract missing: ${needle}.`)
+  }
+}
+
+const topicsPageContent = content(join(ROOT, 'app', 'topics', 'page.tsx'))
+if (!topicsPageContent.includes('선행 포스팅 설계') || !topicsPageContent.includes('seriesMainKeyword')) {
+  fail('RULE-010', join(ROOT, 'app', 'topics', 'page.tsx'), 0, 'Topics page must expose the pre-posting series planner UI.')
+}
+if (!orchContent.includes('assertSeriesPrerequisitesPublished') || !orchContent.includes('선행 포스팅 미발행')) {
+  fail('RULE-010', orchFile, 0, 'Orchestrator must block main series posts until prelude topics are published.')
+}
+if (!content(join(ROOT, 'AGENTS.md')).includes('메인 키워드 선행 포스팅 설계 규칙')) {
+  fail('RULE-010', join(ROOT, 'AGENTS.md'), 0, 'AGENTS.md must document the main-keyword pre-posting series rule.')
+}
+
 if (violations.length === 0) {
   process.exit(0)
 }

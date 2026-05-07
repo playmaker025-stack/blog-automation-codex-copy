@@ -1,5 +1,5 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
-import { runTopicGenerator } from "@/lib/agents/topic-generator";
+import { runPrePostingSeriesPlanner, runTopicGenerator } from "@/lib/agents/topic-generator";
 import { readJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex, Topic, TopicIndex } from "@/lib/types/github-data";
@@ -10,11 +10,34 @@ function isPlanningTopic(topic: Topic): boolean {
 }
 
 export async function POST(request: NextRequest) {
-  const body = (await request.json()) as { userId?: string };
+  const body = (await request.json()) as {
+    userId?: string;
+    mode?: "topics" | "preposting-series";
+    mainKeyword?: string;
+    preludeCount?: number;
+  };
   const userId = body.userId?.trim();
 
   if (!userId) {
     return NextResponse.json({ error: "userId가 필요합니다." }, { status: 400 });
+  }
+
+  const uid = normalizeUserId(userId);
+
+  if (body.mode === "preposting-series") {
+    try {
+      const result = runPrePostingSeriesPlanner({
+        userId: uid,
+        mainKeyword: body.mainKeyword?.trim() ?? "",
+        preludeCount: body.preludeCount,
+      });
+      return NextResponse.json(result);
+    } catch (err) {
+      return NextResponse.json(
+        { error: err instanceof Error ? err.message : "선행 포스팅 설계 실패" },
+        { status: 400 }
+      );
+    }
   }
 
   // 해당 사용자의 계획 토픽과 발행 인덱스 로드
@@ -24,7 +47,6 @@ export async function POST(request: NextRequest) {
   }
 
   const { data: index } = await readJsonFile<TopicIndex>(path);
-  const uid = normalizeUserId(userId);
   const userTopics = index.topics.filter(
     (t) => isPlanningTopic(t) && normalizeUserId(t.assignedUserId ?? "") === uid
   );

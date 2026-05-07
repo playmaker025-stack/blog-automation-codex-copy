@@ -31,6 +31,18 @@
 
 이 규칙은 `scripts/check-patterns.mjs`의 `RULE-009`로 검사한다.
 
+## 메인 키워드 선행 포스팅 설계 규칙
+
+`글목록` 화면의 `선행 포스팅 설계`는 메인 키워드 상위노출을 위해 선행 글 2~3개와 메인 글 1개를 시리즈로 만든다.
+
+1. 선행 글은 `seriesRole: prelude`로 저장한다.
+2. 메인 글은 `seriesRole: main`으로 저장한다.
+3. 모든 글은 `seriesId`, `targetMainKeyword`, `sequenceOrder`를 보존한다.
+4. 메인 글은 `prerequisiteTopicIds`에 선행 글 topicId를 저장한다.
+5. 파이프라인은 메인 글 작성 전 선행 글이 모두 `published`인지 검사한다.
+
+이 규칙은 `scripts/check-patterns.mjs`의 `RULE-010`으로 검사한다.
+
 ## 완료 판정
 
 완료는 아래 두 조건을 모두 만족할 때만 성립한다.

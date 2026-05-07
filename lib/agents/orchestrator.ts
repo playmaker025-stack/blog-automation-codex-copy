@@ -34,7 +34,7 @@ import {
   readApprovalRecord,
   markApprovalConsumed,
 } from "@/lib/github/approval-store";
-import type { PostingIndex, TopicIndex } from "@/lib/types/github-data";
+import type { PostingIndex, Topic, TopicIndex } from "@/lib/types/github-data";
 import type {
   PipelineRunRequest,
   PipelineState,
@@ -417,6 +417,7 @@ export async function runPipeline(params: {
     if (!topicValidation.valid) {
       throw new Error(`?좏뵿 ?좏깮 ?ㅽ뙣: ${topicValidation.reason}`);
     }
+    await assertSeriesPrerequisitesPublished(request.topicId);
 
     // ?? 1. ?꾨왂 ?섎┰ ??????????????????????????????????????????
     state = updateState(state, { stage: "strategy-planning" });
@@ -1110,6 +1111,39 @@ async function validateTopicSelectionFromGitHub(
   }
 }
 
+async function loadTopic(topicId: string): Promise<Topic | null> {
+  try {
+    const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
+    return data.topics.find((t) => t.topicId === topicId) ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function assertSeriesPrerequisitesPublished(topicId: string): Promise<void> {
+  const topic = await loadTopic(topicId);
+  if (!topic || topic.seriesRole !== "main" || !topic.seriesId) return;
+
+  const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
+  const prerequisites = topic.prerequisiteTopicIds?.length
+    ? data.topics.filter((candidate) => topic.prerequisiteTopicIds?.includes(candidate.topicId))
+    : data.topics.filter(
+        (candidate) =>
+          candidate.seriesId === topic.seriesId &&
+          candidate.seriesRole === "prelude" &&
+          (candidate.sequenceOrder ?? 0) < (topic.sequenceOrder ?? Number.MAX_SAFE_INTEGER)
+      );
+  const missing = prerequisites.filter((candidate) => candidate.status !== "published");
+
+  if (missing.length > 0) {
+    throw new Error(
+      `선행 포스팅 미발행: 메인 글 "${topic.title}" 작성 전 ${missing
+        .map((candidate) => `"${candidate.title}"`)
+        .join(", ")} 발행이 필요합니다.`
+    );
+  }
+}
+
 async function loadTopicTitle(topicId: string): Promise<string | null> {
   try {
     const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
@@ -1337,6 +1371,7 @@ export async function runStrategyPhase(params: {
     if (!topicValidation.valid) {
       throw new Error(`?좏뵿 ?좏깮 ?ㅽ뙣: ${topicValidation.reason}`);
     }
+    await assertSeriesPrerequisitesPublished(topicId);
 
     // ?? 1. ?꾨왂 ?섎┰
     state = updateState(state, { stage: "strategy-planning" });
@@ -1470,6 +1505,7 @@ export async function runWritePhase(params: {
       { topicId, proposedTitle: effectiveStrategy.title },
       { allowOverride: params.forcePreflightOverride }
     );
+    await assertSeriesPrerequisitesPublished(topicId);
     const setResult = await atomicSetTopicInProgress(topicId);
     if (!setResult.success) {
       throw new Error(`Topic lock failed: ${setResult.reason}`);

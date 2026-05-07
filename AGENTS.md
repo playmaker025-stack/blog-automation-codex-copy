@@ -288,3 +288,24 @@ node scripts/verify.mjs --skip-build --skip-test
 
 - `scripts/check-patterns.mjs`의 `RULE-009`가 위 경로와 함수, 문서 규칙을 검사한다.
 - 이 워크플로우를 우회하거나 `writing-profile.json` 갱신을 제거하면 `/verify`가 실패해야 한다.
+
+### 메인 키워드 선행 포스팅 설계 규칙
+
+상위노출을 노리는 메인 키워드는 바로 메인 글부터 쓰지 않고, 필요 시 `글목록 > 선행 포스팅 설계`로 시리즈를 만든다.
+
+1. 메인 키워드 1개와 사용자 ID를 입력한다.
+2. 선행 포스팅 2~3개와 메인 포스팅 1개를 하나의 `seriesId`로 생성한다.
+3. 선행 글은 `seriesRole: "prelude"`로 저장하고, 메인 키워드를 본문 맥락에서 1~3회 자연 노출하는 하위 의도로 설계한다.
+4. 메인 글은 `seriesRole: "main"`으로 저장하고, `prerequisiteTopicIds`에 선행 글 topicId를 모두 기록한다.
+5. 메인 글은 선행 글이 모두 `published` 상태가 되기 전 작성 단계로 넘어갈 수 없다.
+6. 각 토픽은 `targetMainKeyword`, `sequenceOrder`, `seriesId`를 반드시 보존한다.
+
+금지 사항:
+
+- 선행 글 제목을 메인 키워드와 거의 같은 반복 제목으로 만들지 않는다.
+- 메인 글을 선행 글 발행 전에 작성하지 않는다.
+- 시리즈 메타 없이 일반 generated topic처럼 저장하지 않는다.
+
+검증 강제:
+
+- `scripts/check-patterns.mjs`의 `RULE-010`이 선행 포스팅 설계 UI, 토픽 메타, 저장 경로, 메인 글 선행 발행 게이트를 검사한다.

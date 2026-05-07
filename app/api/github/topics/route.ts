@@ -226,13 +226,18 @@ export async function POST(request: NextRequest) {
   try {
     const now = new Date().toISOString();
     const newTopic: Topic = {
-      topicId: `topic-${randomUUID().slice(0, 8)}`,
+      topicId: body.topicId?.trim() || `topic-${randomUUID().slice(0, 8)}`,
       title: body.title,
       description: body.description ?? "",
       category: body.category ?? "?쇰컲",
       tags: body.tags ?? [],
       source: body.source ?? "manual",
       contentKind: body.contentKind,
+      seriesId: body.seriesId,
+      seriesRole: body.seriesRole,
+      targetMainKeyword: body.targetMainKeyword,
+      sequenceOrder: body.sequenceOrder,
+      prerequisiteTopicIds: body.prerequisiteTopicIds,
       feasibility: null,
       relatedSources: body.relatedSources ?? [],
       status: "draft",

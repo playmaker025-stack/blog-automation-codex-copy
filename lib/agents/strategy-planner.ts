@@ -531,6 +531,18 @@ function buildUserMessage(
   directIntent: DirectKeywordIntent | null,
   publicationLearning: StrategyPlanResult["publicationLearning"]
 ): string {
+  const seriesBrief = topic.seriesId
+    ? [
+        "선행 포스팅 설계 메타:",
+        `- 시리즈 ID: ${topic.seriesId}`,
+        `- 역할: ${topic.seriesRole === "main" ? "메인 글" : "선행 글"}`,
+        `- 메인 키워드: ${topic.targetMainKeyword ?? "없음"}`,
+        `- 순서: ${topic.sequenceOrder ?? "미지정"}`,
+        topic.seriesRole === "prelude"
+          ? "- 선행 글 규칙: 메인 키워드를 정면 제목으로 반복하지 말고, 본문 맥락에서 1~3회 자연스럽게 노출하세요."
+          : "- 메인 글 규칙: 선행 포스팅에서 다룬 개념/기준/질문을 묶어 메인 키워드를 정면으로 공략하세요.",
+      ].join("\n")
+    : "";
   return [
     "다음 토픽으로 네이버 블로그 전략을 수립해 주세요.",
     "",
@@ -544,6 +556,7 @@ function buildUserMessage(
     directIntent
       ? "직접 입력 모드 규칙: 메인 키워드를 글의 중심 검색축으로 유지하고, 제목/도입부/핵심 문단의 판단 기준이 메인 키워드와 일치해야 합니다. 서브 키워드는 메인 키워드를 보조하는 맥락으로만 사용하세요."
       : "",
+    seriesBrief,
     `사용자 ID: ${userId}`,
     `참조 URL: ${topic.relatedSources.join(", ") || "없음"}`,
     "",

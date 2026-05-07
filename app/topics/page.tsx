@@ -71,7 +71,10 @@ export default function TopicsPage() {
   const [addUserId, setAddUserId] = useState("");
 
   // AI 글목록 생성
+  const [generateMode, setGenerateMode] = useState<"topics" | "preposting-series">("topics");
   const [generateUserId, setGenerateUserId] = useState("");
+  const [seriesMainKeyword, setSeriesMainKeyword] = useState("");
+  const [seriesPreludeCount, setSeriesPreludeCount] = useState(3);
   const [generating, setGenerating] = useState(false);
   const [generateResult, setGenerateResult] = useState<TopicGeneratorOutput | null>(null);
   const [selectedGenerated, setSelectedGenerated] = useState<Set<number>>(new Set());
@@ -203,6 +206,7 @@ export default function TopicsPage() {
   // ── AI 글목록 생성 ─────────────────────────────────────
   const handleGenerate = async () => {
     if (!generateUserId.trim()) return;
+    if (generateMode === "preposting-series" && !seriesMainKeyword.trim()) return;
     setGenerating(true);
     setGenerateResult(null);
     setSelectedGenerated(new Set());
@@ -211,7 +215,12 @@ export default function TopicsPage() {
       const res = await fetch("/api/topics/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: generateUserId.trim() }),
+        body: JSON.stringify({
+          userId: generateUserId.trim(),
+          mode: generateMode,
+          mainKeyword: seriesMainKeyword.trim(),
+          preludeCount: seriesPreludeCount,
+        }),
       });
       let json: TopicGeneratorOutput & { error?: string };
       try {
@@ -240,12 +249,18 @@ export default function TopicsPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            topicId: topic.topicId,
             title: topic.title,
             description: topic.description,
             category: topic.category,
             tags: topic.tags,
             source: "generated",
             contentKind: topic.contentKind,
+            seriesId: topic.seriesId,
+            seriesRole: topic.seriesRole,
+            targetMainKeyword: topic.targetMainKeyword,
+            sequenceOrder: topic.sequenceOrder,
+            prerequisiteTopicIds: topic.prerequisiteTopicIds,
             assignedUserId: generateUserId.trim().toLowerCase(),
           }),
         });
@@ -407,6 +422,27 @@ export default function TopicsPage() {
         <p className="text-xs text-zinc-400 mb-4">
           기존 발행 글을 분석해 연관된 신규 토픽 5개를 생성합니다. 남은 계획 글이 있어도 사용자가 원하면 추가로 생성할 수 있고, 생성 후 원하는 항목만 선택해 추가할 수 있습니다.
         </p>
+        <div className="flex gap-1.5 mb-4">
+          {([
+            { value: "topics", label: "AI 글목록 생성" },
+            { value: "preposting-series", label: "선행 포스팅 설계" },
+          ] as const).map((mode) => (
+            <button
+              key={mode.value}
+              onClick={() => {
+                setGenerateMode(mode.value);
+                setGenerateResult(null);
+                setSelectedGenerated(new Set());
+                setNotice(null);
+              }}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+                generateMode === mode.value ? "bg-zinc-900 text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+              }`}
+            >
+              {mode.label}
+            </button>
+          ))}
+        </div>
         <div className="flex gap-2 mb-4">
           <input
             value={generateUserId}
@@ -414,12 +450,31 @@ export default function TopicsPage() {
             placeholder="사용자 ID (예: user-a)"
             className="flex-1 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+          {generateMode === "preposting-series" && (
+            <>
+              <input
+                value={seriesMainKeyword}
+                onChange={(e) => setSeriesMainKeyword(e.target.value)}
+                placeholder="메인 키워드"
+                className="flex-1 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <select
+                value={seriesPreludeCount}
+                onChange={(e) => setSeriesPreludeCount(Number(e.target.value))}
+                className="w-28 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="선행 포스팅 개수"
+              >
+                <option value={2}>선행 2개</option>
+                <option value={3}>선행 3개</option>
+              </select>
+            </>
+          )}
           <button
             onClick={handleGenerate}
-            disabled={generating || !generateUserId.trim()}
+            disabled={generating || !generateUserId.trim() || (generateMode === "preposting-series" && !seriesMainKeyword.trim())}
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
           >
-            {generating ? "생성 중..." : "추가 생성"}
+            {generating ? "생성 중..." : generateMode === "preposting-series" ? "시리즈 설계" : "추가 생성"}
           </button>
         </div>
 
@@ -457,6 +512,11 @@ export default function TopicsPage() {
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-zinc-900">{topic.title}</p>
                       <p className="text-xs text-zinc-500 mt-0.5">{topic.description}</p>
+                      {topic.seriesId && (
+                        <span className="inline-flex mt-1 mr-1 text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">
+                          {topic.seriesRole === "main" ? "메인 글" : `선행 ${topic.sequenceOrder ?? ""}`}
+                        </span>
+                      )}
                       {topic.contentKind && (
                         <span className="inline-flex mt-1 text-[10px] px-1.5 py-0.5 rounded bg-blue-100 text-blue-700">
                           {topic.contentKind === "hub" ? "허브글" : "리프글"}
@@ -577,6 +637,11 @@ export default function TopicsPage() {
                     {topic.contentKind && (
                       <p className="text-xs text-blue-500 mt-0.5">
                         {topic.contentKind === "hub" ? "허브글" : "리프글"}
+                      </p>
+                    )}
+                    {topic.seriesId && (
+                      <p className="text-xs text-amber-600 mt-0.5">
+                        선행 설계 · {topic.seriesRole === "main" ? "메인 글" : `선행 ${topic.sequenceOrder ?? ""}`} · {topic.targetMainKeyword}
                       </p>
                     )}
                     {!topic.contentKind && (

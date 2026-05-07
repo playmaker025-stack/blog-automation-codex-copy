@@ -25,12 +25,24 @@ export interface TopicGeneratorInput {
   onProgress?: (msg: string) => void;
 }
 
+export interface PrePostingSeriesInput {
+  userId: string;
+  mainKeyword: string;
+  preludeCount?: number;
+}
+
 export interface GeneratedTopic {
+  topicId?: string;
   title: string;
   description: string;
   category: string;
   tags: string[];
   contentKind?: "hub" | "leaf";
+  seriesId?: string;
+  seriesRole?: "prelude" | "main";
+  targetMainKeyword?: string;
+  sequenceOrder?: number;
+  prerequisiteTopicIds?: string[];
   rationale: string;
 }
 
@@ -38,6 +50,81 @@ export interface TopicGeneratorOutput {
   generatedTopics: GeneratedTopic[];
   researchKeyword: string;
   competitionInfo: string;
+}
+
+function slugifyKeyword(value: string): string {
+  return value
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 48) || "keyword";
+}
+
+function buildPreludeTitles(mainKeyword: string, count: number): string[] {
+  const keyword = mainKeyword.trim().replace(/\s+/g, " ");
+  const templates = [
+    `${keyword} 찾기 전 입호흡과 폐호흡 차이부터 정리`,
+    `${keyword} 고르기 전에 보는 액상과 기기 기준`,
+    `초보자가 ${keyword} 볼 때 자주 놓치는 부분`,
+  ];
+  return templates.slice(0, count);
+}
+
+export function runPrePostingSeriesPlanner(input: PrePostingSeriesInput): TopicGeneratorOutput {
+  const mainKeyword = input.mainKeyword.trim().replace(/\s+/g, " ");
+  if (!mainKeyword) {
+    throw new Error("메인 키워드가 필요합니다.");
+  }
+
+  const preludeCount = Math.max(2, Math.min(3, input.preludeCount ?? 3));
+  const seriesStamp = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+  const seriesId = `series-${slugifyKeyword(input.userId)}-${slugifyKeyword(mainKeyword)}-${seriesStamp}`;
+  const plannedTopicIds = Array.from({ length: preludeCount + 1 }, (_, index) =>
+    `topic-series-${seriesStamp}-${index + 1}`
+  );
+  const preludeTitles = buildPreludeTitles(mainKeyword, preludeCount);
+  const preludeTopics: GeneratedTopic[] = preludeTitles.map((title, index) => ({
+    topicId: plannedTopicIds[index],
+    title,
+    description: [
+      `메인 키워드 "${mainKeyword}"를 바로 정면으로 쓰기 전에 검색자가 먼저 궁금해하는 하위 의도를 다룹니다.`,
+      "본문에서는 메인 키워드를 억지 반복하지 않고 1~3회 자연스럽게 노출합니다.",
+    ].join(" "),
+    category: input.userId,
+    tags: [mainKeyword, "선행포스팅", "키워드빌드업", index === 0 ? "개념정리" : index === 1 ? "선택기준" : "초보자가이드"],
+    contentKind: "leaf",
+    seriesId,
+    seriesRole: "prelude",
+    targetMainKeyword: mainKeyword,
+    sequenceOrder: index + 1,
+    prerequisiteTopicIds: [],
+    rationale: "메인 추천 글의 주제권을 먼저 쌓기 위한 선행 포스팅입니다.",
+  }));
+
+  const mainTopic: GeneratedTopic = {
+    topicId: plannedTopicIds[preludeCount],
+    title: mainKeyword,
+    description: [
+      "선행 포스팅에서 쌓은 개념, 선택 기준, 초보자 질문을 묶어 메인 키워드를 정면으로 다루는 추천/정리 글입니다.",
+      "메인 글 발행 전 같은 시리즈의 선행 포스팅이 먼저 발행되어야 합니다.",
+    ].join(" "),
+    category: input.userId,
+    tags: [mainKeyword, "추천", "메인포스팅", "키워드시리즈"],
+    contentKind: "hub",
+    seriesId,
+    seriesRole: "main",
+    targetMainKeyword: mainKeyword,
+    sequenceOrder: preludeCount + 1,
+    prerequisiteTopicIds: plannedTopicIds.slice(0, preludeCount),
+    rationale: "선행 포스팅 이후 메인 키워드를 정면으로 공략하는 최종 글입니다.",
+  };
+
+  return {
+    generatedTopics: [...preludeTopics, mainTopic],
+    researchKeyword: mainKeyword,
+    competitionInfo: `선행 ${preludeCount}개 + 메인 1개 시리즈 설계`,
+  };
 }
 
 function describeTrendLabel(trend: "rising" | "steady" | "falling"): string {
@@ -111,11 +198,17 @@ function parseGeneratedTopics(text: string): GeneratedTopic[] {
 
 function normalizeGeneratedTopic(topic: GeneratedTopic, fallbackCategory: string): GeneratedTopic {
   return {
+    topicId: topic.topicId,
     title: topic.title?.trim() ?? "",
     description: topic.description?.trim() ?? "",
     category: topic.category?.trim() || fallbackCategory,
     tags: Array.isArray(topic.tags) ? topic.tags.map((tag) => tag.trim()).filter(Boolean).slice(0, 6) : [],
     contentKind: topic.contentKind === "hub" || topic.contentKind === "leaf" ? topic.contentKind : undefined,
+    seriesId: topic.seriesId,
+    seriesRole: topic.seriesRole === "prelude" || topic.seriesRole === "main" ? topic.seriesRole : undefined,
+    targetMainKeyword: topic.targetMainKeyword,
+    sequenceOrder: topic.sequenceOrder,
+    prerequisiteTopicIds: Array.isArray(topic.prerequisiteTopicIds) ? topic.prerequisiteTopicIds : undefined,
     rationale: topic.rationale?.trim() ?? "",
   };
 }
