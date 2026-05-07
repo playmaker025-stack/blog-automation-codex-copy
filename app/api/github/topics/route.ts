@@ -180,19 +180,42 @@ export async function PATCH(request: NextRequest) {
 // ?⑥씪 ?좏뵿 ??젣
 export async function DELETE(request: NextRequest) {
   const topicId = request.nextUrl.searchParams.get("topicId");
-  if (!topicId) {
-    return NextResponse.json({ error: "topicId媛 ?꾩슂?⑸땲??" }, { status: 400 });
+  const seriesId = request.nextUrl.searchParams.get("seriesId");
+  if (!topicId && !seriesId) {
+    return NextResponse.json({ error: "topicId 또는 seriesId가 필요합니다." }, { status: 400 });
   }
 
   try {
     let notFound = false;
     let inProgress = false;
+    let published = false;
+    let deletedCount = 0;
 
     await withRetry(async () => {
       const { data: index, sha } = await loadIndex();
+
+      if (seriesId) {
+        const targets = index.topics.filter((t) => t.seriesId === seriesId);
+        if (targets.length === 0) { notFound = true; return; }
+        if (targets.some((target) => target.status === "in-progress")) { inProgress = true; return; }
+        if (targets.some((target) => target.status === "published")) { published = true; return; }
+
+        deletedCount = targets.length;
+        const updated: TopicIndex = {
+          topics: index.topics.filter((t) => t.seriesId !== seriesId),
+          lastUpdated: new Date().toISOString(),
+        };
+
+        await writeJsonFile(Paths.topicsIndex(), updated, `chore: delete topic series ${seriesId}`, sha);
+        return;
+      }
+
       const target = index.topics.find((t) => t.topicId === topicId);
       if (!target) { notFound = true; return; }
       if (target.status === "in-progress") { inProgress = true; return; }
+      if (target.status === "published") { published = true; return; }
+
+      deletedCount = 1;
 
       const updated: TopicIndex = {
         topics: index.topics.filter((t) => t.topicId !== topicId),
@@ -204,7 +227,10 @@ export async function DELETE(request: NextRequest) {
 
     if (notFound) return NextResponse.json({ error: "?좏뵿??李얠쓣 ???놁뒿?덈떎." }, { status: 404 });
     if (inProgress) return NextResponse.json({ error: "吏꾪뻾 以묒씤 ?좏뵿? ??젣?????놁뒿?덈떎." }, { status: 400 });
-    return NextResponse.json({ deleted: true });
+    if (published) {
+      return NextResponse.json({ error: "발행된 토픽이 포함되어 있어 삭제할 수 없습니다." }, { status: 400 });
+    }
+    return NextResponse.json({ deleted: true, deletedCount });
   } catch (err) {
     console.error("[DELETE /api/github/topics]", err);
     return NextResponse.json({ error: "?좏뵿 ??젣 ?ㅽ뙣" }, { status: 500 });

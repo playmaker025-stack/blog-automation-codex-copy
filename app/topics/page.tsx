@@ -458,6 +458,25 @@ export default function TopicsPage() {
     }
   };
 
+  const handleDeleteSeries = async (seriesId: string, mainKeyword?: string | null) => {
+    const label = mainKeyword?.trim() || seriesId;
+    if (!confirm(`"${label}" 시리즈 전체를 삭제하시겠습니까?`)) return;
+    try {
+      const res = await fetch(`/api/github/topics?seriesId=${encodeURIComponent(seriesId)}`, { method: "DELETE" });
+      const json = await res.json() as { error?: string; deletedCount?: number };
+      if (!res.ok) {
+        throw new Error(json.error ?? "시리즈 삭제 실패");
+      }
+      setNotice({
+        type: "ok",
+        msg: `${json.deletedCount ?? 0}개 시리즈 토픽이 삭제되었습니다.`,
+      });
+      loadTopics();
+    } catch (e) {
+      setNotice({ type: "err", msg: e instanceof Error ? e.message : "시리즈 삭제 실패" });
+    }
+  };
+
   // 필터 적용
   const filtered = (() => {
     if (filter === "remaining") return remaining;
@@ -919,6 +938,15 @@ export default function TopicsPage() {
                     <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${STATUS_COLORS[topic.status]}`}>
                       {STATUS_LABELS[topic.status]}
                     </span>
+                    {topic.seriesId && (
+                      <button
+                        onClick={() => handleDeleteSeries(topic.seriesId!, topic.targetMainKeyword ?? topic.title)}
+                        className="text-xs text-zinc-400 hover:text-red-500 px-1"
+                        disabled={topic.status === "in-progress" || topic.status === "published"}
+                      >
+                        시리즈 삭제
+                      </button>
+                    )}
                     <button onClick={() => { startEdit(topic); setNotice(null); }}
                       className="text-xs text-zinc-400 hover:text-zinc-700 px-1">수정</button>
                     <button onClick={() => handleDelete(topic.topicId, topic.title)}
