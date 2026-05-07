@@ -9,7 +9,7 @@ import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { naverKeywordResearch } from "@/lib/skills/naver-keyword-research";
 import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-research";
 import { hasOpenAIKey, requestOpenAIJson } from "@/lib/openai/responses";
-import type { PostingRecord, Topic } from "@/lib/types/github-data";
+import type { PostingRecord, Topic, TopicSeriesDetailPlan } from "@/lib/types/github-data";
 import {
   ALLOWED_LOCALITY_TERMS,
   BLOCKED_OUTSIDE_LOCALITY_TERMS,
@@ -31,6 +31,12 @@ export interface PrePostingSeriesInput {
   preludeCount?: number;
 }
 
+export interface SeriesDetailPlannerInput {
+  userId: string;
+  mainKeyword: string;
+  seriesTopics: Topic[];
+}
+
 export interface GeneratedTopic {
   topicId?: string;
   title: string;
@@ -50,6 +56,18 @@ export interface TopicGeneratorOutput {
   generatedTopics: GeneratedTopic[];
   researchKeyword: string;
   competitionInfo: string;
+}
+
+export interface SeriesDetailPlannerOutput {
+  seriesId: string;
+  mainKeyword: string;
+  plannedTopics: Array<{
+    topicId: string;
+    title: string;
+    seriesRole: "prelude" | "main";
+    sequenceOrder: number;
+    detailPlan: TopicSeriesDetailPlan;
+  }>;
 }
 
 function slugifyKeyword(value: string): string {
@@ -124,6 +142,124 @@ export function runPrePostingSeriesPlanner(input: PrePostingSeriesInput): TopicG
     generatedTopics: [...preludeTopics, mainTopic],
     researchKeyword: mainKeyword,
     competitionInfo: `선행 ${preludeCount}개 + 메인 1개 시리즈 설계`,
+  };
+}
+
+function buildPreludeDetailPlan(params: {
+  title: string;
+  mainKeyword: string;
+  sequenceOrder: number;
+  internalLinkTitles: string[];
+}): TopicSeriesDetailPlan {
+  const stageLabel =
+    params.sequenceOrder === 1
+      ? "기본 개념과 차이를 먼저 잡아주는 글"
+      : params.sequenceOrder === 2
+        ? "선택 기준과 실사용 판단 포인트를 잡아주는 글"
+        : "초보자가 실제로 헷갈리는 상황을 정리해 주는 글";
+
+  return {
+    articleGoal: `${params.mainKeyword}를 바로 추천하기 전에 ${stageLabel}`,
+    searchIntent:
+      params.sequenceOrder === 1
+        ? "비교형/기초이해형"
+        : params.sequenceOrder === 2
+          ? "선택기준형"
+          : "문제해결형/초보자가이드형",
+    readerQuestion:
+      params.sequenceOrder === 1
+        ? `${params.mainKeyword}를 보기 전에 입호흡/폐호흡이나 기초 개념부터 정리해야 하나?`
+        : params.sequenceOrder === 2
+          ? `${params.mainKeyword}를 보기 전에 어떤 기준으로 기기와 액상을 골라야 하나?`
+          : `${params.mainKeyword}를 볼 때 초보자가 실제로 많이 놓치는 부분은 무엇인가?`,
+    primaryKeyword: params.title,
+    secondaryKeywords: [params.mainKeyword, "입문", "선택 기준"].filter((item, index, array) => array.indexOf(item) === index),
+    recommendedSections: [
+      "검색자가 먼저 헷갈리는 상황 정리",
+      "비교 또는 선택 기준 제시",
+      "실수하기 쉬운 포인트 정리",
+      "메인 글로 이어지는 마무리",
+    ],
+    keywordPlacementRules: [
+      `${params.mainKeyword}는 제목 반복용이 아니라 본문 맥락에서 1~3회 자연스럽게 노출한다.`,
+      "첫 문단에는 현재 고민 상황을 먼저 쓰고, 메인 키워드는 그 다음에 연결한다.",
+      "결론에서는 메인 추천 글로 이어질 수 있게 다음 읽을 글을 제안한다.",
+    ],
+    internalLinkTitles: params.internalLinkTitles,
+    callToAction: "비교 기준을 정리한 뒤 다음 글에서 실제 추천 모델을 확인하도록 연결한다.",
+    draftAngle: "선행 포스팅 역할에 맞게 과장 없이 이해와 판단 기준을 먼저 제공한다.",
+  };
+}
+
+function buildMainDetailPlan(params: {
+  title: string;
+  mainKeyword: string;
+  internalLinkTitles: string[];
+}): TopicSeriesDetailPlan {
+  return {
+    articleGoal: `${params.mainKeyword}를 정면으로 다루면서 선행 포스팅에서 쌓은 개념과 기준을 하나로 묶는다.`,
+    searchIntent: "추천형/전환형",
+    readerQuestion: `${params.mainKeyword}를 지금 고른다면 어떤 기준으로 어떤 옵션을 먼저 봐야 하나?`,
+    primaryKeyword: params.mainKeyword,
+    secondaryKeywords: ["입문", "추천", "선택 기준", "비교"].filter((item, index, array) => array.indexOf(item) === index),
+    recommendedSections: [
+      "추천 글을 찾는 현재 상황과 전제 정리",
+      "선행 글에서 다룬 기준 요약",
+      "사용자 상황별 추천 구간 정리",
+      "내부링크로 선행 글과 연결되는 비교/보충 섹션",
+      "상담 또는 다음 행동으로 이어지는 마무리",
+    ],
+    keywordPlacementRules: [
+      `${params.mainKeyword}는 제목, 도입부, 핵심 비교 섹션, 결론에 일관되게 유지한다.`,
+      "선행 글과 중복 설명은 요약으로 줄이고, 추천 판단과 전환 요소에 분량을 더 쓴다.",
+      "내부링크는 실제 선행 글 제목 기준으로 연결한다.",
+    ],
+    internalLinkTitles: params.internalLinkTitles,
+    callToAction: "상황별로 무엇을 먼저 봐야 하는지 정리한 뒤 방문/상담/추가 비교로 자연스럽게 연결한다.",
+    draftAngle: "메인 키워드를 중심으로 실제 선택을 도와주는 추천 글답게 판단 기준과 상황별 분기를 분명히 한다.",
+  };
+}
+
+export function runSeriesDetailPlanner(input: SeriesDetailPlannerInput): SeriesDetailPlannerOutput {
+  const sortedTopics = input.seriesTopics
+    .slice()
+    .sort((left, right) => (left.sequenceOrder ?? 0) - (right.sequenceOrder ?? 0));
+  const seriesId = sortedTopics[0]?.seriesId;
+  if (!seriesId || sortedTopics.length === 0) {
+    throw new Error("상세 설계를 만들 시리즈 토픽을 찾지 못했습니다.");
+  }
+
+  const plannedTopics = sortedTopics.map((topic) => {
+    const internalLinkTitles = sortedTopics
+      .filter((candidate) => candidate.topicId !== topic.topicId)
+      .map((candidate) => candidate.title);
+    const detailPlan =
+      topic.seriesRole === "main"
+        ? buildMainDetailPlan({
+            title: topic.title,
+            mainKeyword: input.mainKeyword,
+            internalLinkTitles,
+          })
+        : buildPreludeDetailPlan({
+            title: topic.title,
+            mainKeyword: input.mainKeyword,
+            sequenceOrder: topic.sequenceOrder ?? 0,
+            internalLinkTitles,
+          });
+
+    return {
+      topicId: topic.topicId,
+      title: topic.title,
+      seriesRole: topic.seriesRole ?? "prelude",
+      sequenceOrder: topic.sequenceOrder ?? 0,
+      detailPlan,
+    };
+  });
+
+  return {
+    seriesId,
+    mainKeyword: input.mainKeyword,
+    plannedTopics,
   };
 }
 

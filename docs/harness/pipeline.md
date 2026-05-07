@@ -40,6 +40,7 @@
 3. 모든 글은 `seriesId`, `targetMainKeyword`, `sequenceOrder`를 보존한다.
 4. 메인 글은 `prerequisiteTopicIds`에 선행 글 topicId를 저장한다.
 5. 파이프라인은 메인 글 작성 전 선행 글이 모두 `published`인지 검사한다.
+6. `시리즈 상세 설계` 단계에서 각 토픽에 `seriesDetailPlan`을 저장하고, 전략 수립과 초안 생성은 그 설계를 우선 참고한다.
 
 이 규칙은 `scripts/check-patterns.mjs`의 `RULE-010`으로 검사한다.
 

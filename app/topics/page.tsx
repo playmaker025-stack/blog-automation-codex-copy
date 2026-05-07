@@ -7,6 +7,31 @@ import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import { blogCode, userIdToBlogCode } from "@/lib/utils/blog-code";
 import type { GeneratedTopic, TopicGeneratorOutput } from "@/lib/agents/topic-generator";
 
+interface SeriesDetailPreviewItem {
+  topicId: string;
+  title: string;
+  seriesRole: "prelude" | "main";
+  sequenceOrder: number;
+  detailPlan: {
+    articleGoal: string;
+    searchIntent: string;
+    readerQuestion: string;
+    primaryKeyword: string;
+    secondaryKeywords: string[];
+    recommendedSections: string[];
+    keywordPlacementRules: string[];
+    internalLinkTitles: string[];
+    callToAction: string;
+    draftAngle: string;
+  };
+}
+
+interface SeriesDetailPreviewResult {
+  seriesId: string;
+  mainKeyword: string;
+  plannedTopics: SeriesDetailPreviewItem[];
+}
+
 type StatusFilter = "all" | "remaining" | "matched" | Topic["status"];
 type UserFilter = "all" | "unassigned" | string;
 
@@ -71,13 +96,15 @@ export default function TopicsPage() {
   const [addUserId, setAddUserId] = useState("");
 
   // AI 글목록 생성
-  const [generateMode, setGenerateMode] = useState<"topics" | "preposting-series">("topics");
+  const [generateMode, setGenerateMode] = useState<"topics" | "preposting-series" | "series-detail">("topics");
   const [generateUserId, setGenerateUserId] = useState("");
   const [seriesMainKeyword, setSeriesMainKeyword] = useState("");
   const [seriesPreludeCount, setSeriesPreludeCount] = useState(3);
   const [generating, setGenerating] = useState(false);
   const [generateResult, setGenerateResult] = useState<TopicGeneratorOutput | null>(null);
+  const [seriesDetailResult, setSeriesDetailResult] = useState<SeriesDetailPreviewResult | null>(null);
   const [selectedGenerated, setSelectedGenerated] = useState<Set<number>>(new Set());
+  const [selectedSeriesDetails, setSelectedSeriesDetails] = useState<Set<number>>(new Set());
   const [savingGenerated, setSavingGenerated] = useState(false);
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -206,35 +233,80 @@ export default function TopicsPage() {
   // ── AI 글목록 생성 ─────────────────────────────────────
   const handleGenerate = async () => {
     if (!generateUserId.trim()) return;
-    if (generateMode === "preposting-series" && !seriesMainKeyword.trim()) return;
+    if (generateMode !== "topics" && !seriesMainKeyword.trim()) return;
     setGenerating(true);
     setGenerateResult(null);
+    setSeriesDetailResult(null);
     setSelectedGenerated(new Set());
+    setSelectedSeriesDetails(new Set());
     setNotice(null);
     try {
-      const res = await fetch("/api/topics/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: generateUserId.trim(),
-          mode: generateMode,
-          mainKeyword: seriesMainKeyword.trim(),
-          preludeCount: seriesPreludeCount,
-        }),
-      });
-      let json: TopicGeneratorOutput & { error?: string };
-      try {
-        json = await res.json() as TopicGeneratorOutput & { error?: string };
-      } catch {
-        throw new Error("서버 응답 파싱 실패 — 잠시 후 다시 시도해주세요.");
+      if (generateMode === "series-detail") {
+        const res = await fetch("/api/topics/series-detail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: generateUserId.trim(),
+            mainKeyword: seriesMainKeyword.trim(),
+          }),
+        });
+        const json = await res.json() as SeriesDetailPreviewResult & { error?: string };
+        if (!res.ok) throw new Error(json.error ?? "상세 설계 생성 실패");
+        setSeriesDetailResult(json);
+        setSelectedSeriesDetails(new Set(json.plannedTopics.map((_, i) => i)));
+      } else {
+        const res = await fetch("/api/topics/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: generateUserId.trim(),
+            mode: generateMode,
+            mainKeyword: seriesMainKeyword.trim(),
+            preludeCount: seriesPreludeCount,
+          }),
+        });
+        let json: TopicGeneratorOutput & { error?: string };
+        try {
+          json = await res.json() as TopicGeneratorOutput & { error?: string };
+        } catch {
+          throw new Error("서버 응답 파싱 실패 — 잠시 후 다시 시도해주세요.");
+        }
+        if (!res.ok) throw new Error(json.error ?? "생성 실패");
+        setGenerateResult(json);
+        setSelectedGenerated(new Set(json.generatedTopics.map((_, i) => i)));
       }
-      if (!res.ok) throw new Error(json.error ?? "생성 실패");
-      setGenerateResult(json);
-      setSelectedGenerated(new Set(json.generatedTopics.map((_, i) => i)));
     } catch (e) {
       setNotice({ type: "err", msg: e instanceof Error ? e.message : "생성 실패" });
     } finally {
       setGenerating(false);
+    }
+  };
+
+  const handleSaveSeriesDetails = async () => {
+    if (!seriesDetailResult || selectedSeriesDetails.size === 0) return;
+    setSavingGenerated(true);
+    setNotice(null);
+    try {
+      const selected = seriesDetailResult.plannedTopics.filter((_, i) => selectedSeriesDetails.has(i));
+      for (const item of selected) {
+        await fetch("/api/github/topics", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            topicId: item.topicId,
+            seriesDetailPlan: item.detailPlan,
+            seriesDetailReadyAt: new Date().toISOString(),
+          }),
+        });
+      }
+      setNotice({ type: "ok", msg: `${selected.length}개 토픽에 상세 설계가 저장되었습니다.` });
+      setSeriesDetailResult(null);
+      setSelectedSeriesDetails(new Set());
+      loadTopics();
+    } catch {
+      setNotice({ type: "err", msg: "상세 설계 저장 실패" });
+    } finally {
+      setSavingGenerated(false);
     }
   };
 
@@ -426,13 +498,16 @@ export default function TopicsPage() {
           {([
             { value: "topics", label: "AI 글목록 생성" },
             { value: "preposting-series", label: "선행 포스팅 설계" },
+            { value: "series-detail", label: "시리즈 상세 설계" },
           ] as const).map((mode) => (
             <button
               key={mode.value}
               onClick={() => {
                 setGenerateMode(mode.value);
                 setGenerateResult(null);
+                setSeriesDetailResult(null);
                 setSelectedGenerated(new Set());
+                setSelectedSeriesDetails(new Set());
                 setNotice(null);
               }}
               className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
@@ -450,7 +525,7 @@ export default function TopicsPage() {
             placeholder="사용자 ID (예: user-a)"
             className="flex-1 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          {generateMode === "preposting-series" && (
+          {generateMode !== "topics" && (
             <>
               <input
                 value={seriesMainKeyword}
@@ -471,10 +546,10 @@ export default function TopicsPage() {
           )}
           <button
             onClick={handleGenerate}
-            disabled={generating || !generateUserId.trim() || (generateMode === "preposting-series" && !seriesMainKeyword.trim())}
+            disabled={generating || !generateUserId.trim() || (generateMode !== "topics" && !seriesMainKeyword.trim())}
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
           >
-            {generating ? "생성 중..." : generateMode === "preposting-series" ? "시리즈 설계" : "추가 생성"}
+            {generating ? "생성 중..." : generateMode === "preposting-series" ? "시리즈 설계" : generateMode === "series-detail" ? "상세 설계 생성" : "추가 생성"}
           </button>
         </div>
 
@@ -550,6 +625,72 @@ export default function TopicsPage() {
                   className="px-4 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {savingGenerated ? "저장 중..." : `선택한 ${selectedGenerated.size}개 추가`}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {seriesDetailResult && (
+          <div className="space-y-3">
+            <div className="text-xs text-zinc-500 bg-zinc-50 rounded-lg px-3 py-2">
+              <span className="font-medium">메인 키워드:</span> {seriesDetailResult.mainKeyword} &nbsp;·&nbsp;
+              <span className="font-medium">시리즈:</span> {seriesDetailResult.seriesId}
+            </div>
+            <div className="space-y-2">
+              {seriesDetailResult.plannedTopics.map((item, i) => (
+                <div
+                  key={item.topicId}
+                  onClick={() => {
+                    const next = new Set(selectedSeriesDetails);
+                    if (next.has(i)) next.delete(i); else next.add(i);
+                    setSelectedSeriesDetails(next);
+                  }}
+                  className={`border rounded-lg px-4 py-3 cursor-pointer transition-colors ${
+                    selectedSeriesDetails.has(i)
+                      ? "border-amber-400 bg-amber-50/50"
+                      : "border-zinc-200 hover:border-zinc-300"
+                  }`}
+                >
+                  <div className="flex items-start gap-2">
+                    <div className={`mt-0.5 w-4 h-4 rounded border shrink-0 flex items-center justify-center ${
+                      selectedSeriesDetails.has(i) ? "border-amber-500 bg-amber-500" : "border-zinc-300"
+                    }`}>
+                      {selectedSeriesDetails.has(i) && (
+                        <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-zinc-900">{item.title}</p>
+                      <p className="text-[10px] text-amber-700 mt-0.5">
+                        {item.seriesRole === "main" ? "메인 글" : `선행 ${item.sequenceOrder}`} · {item.detailPlan.searchIntent}
+                      </p>
+                      <p className="text-xs text-zinc-500 mt-1">{item.detailPlan.articleGoal}</p>
+                      <p className="text-xs text-zinc-500 mt-1">질문: {item.detailPlan.readerQuestion}</p>
+                      <p className="text-xs text-zinc-500 mt-1">섹션: {item.detailPlan.recommendedSections.join(" / ")}</p>
+                      <p className="text-xs text-zinc-500 mt-1">내부링크: {item.detailPlan.internalLinkTitles.join(" / ") || "없음"}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-between items-center pt-1">
+              <p className="text-xs text-zinc-400">{selectedSeriesDetails.size}개 선택됨</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => { setSeriesDetailResult(null); setSelectedSeriesDetails(new Set()); }}
+                  className="px-3 py-1.5 text-xs text-zinc-600 hover:text-zinc-900"
+                >
+                  취소
+                </button>
+                <button
+                  onClick={handleSaveSeriesDetails}
+                  disabled={savingGenerated || selectedSeriesDetails.size === 0}
+                  className="px-4 py-1.5 bg-amber-600 text-white text-xs font-medium rounded-lg hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  {savingGenerated ? "저장 중..." : `선택한 ${selectedSeriesDetails.size}개 상세 설계 저장`}
                 </button>
               </div>
             </div>
@@ -642,6 +783,11 @@ export default function TopicsPage() {
                     {topic.seriesId && (
                       <p className="text-xs text-amber-600 mt-0.5">
                         선행 설계 · {topic.seriesRole === "main" ? "메인 글" : `선행 ${topic.sequenceOrder ?? ""}`} · {topic.targetMainKeyword}
+                      </p>
+                    )}
+                    {topic.seriesDetailPlan && (
+                      <p className="text-xs text-emerald-600 mt-0.5">
+                        상세 설계 완료 · {topic.seriesDetailPlan.searchIntent} · 핵심키워드 {topic.seriesDetailPlan.primaryKeyword}
                       </p>
                     )}
                     {!topic.contentKind && (

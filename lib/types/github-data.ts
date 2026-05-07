@@ -80,12 +80,27 @@ export interface Topic {
   targetMainKeyword?: string;
   sequenceOrder?: number;
   prerequisiteTopicIds?: string[];
+  seriesDetailPlan?: TopicSeriesDetailPlan;
+  seriesDetailReadyAt?: string | null;
   feasibility: TopicFeasibility | null;
   relatedSources: string[]; // 참조 URL 목록
   status: "draft" | "planned" | "in-progress" | "published" | "archived";
   assignedUserId: string | null; // 담당 사용자
   createdAt: string;
   updatedAt: string;
+}
+
+export interface TopicSeriesDetailPlan {
+  articleGoal: string;
+  searchIntent: string;
+  readerQuestion: string;
+  primaryKeyword: string;
+  secondaryKeywords: string[];
+  recommendedSections: string[];
+  keywordPlacementRules: string[];
+  internalLinkTitles: string[];
+  callToAction: string;
+  draftAngle: string;
 }
 
 export interface TopicFeasibility {

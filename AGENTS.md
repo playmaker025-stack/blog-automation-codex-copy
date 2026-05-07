@@ -299,6 +299,7 @@ node scripts/verify.mjs --skip-build --skip-test
 4. 메인 글은 `seriesRole: "main"`으로 저장하고, `prerequisiteTopicIds`에 선행 글 topicId를 모두 기록한다.
 5. 메인 글은 선행 글이 모두 `published` 상태가 되기 전 작성 단계로 넘어갈 수 없다.
 6. 각 토픽은 `targetMainKeyword`, `sequenceOrder`, `seriesId`를 반드시 보존한다.
+7. `시리즈 상세 설계` 단계에서 각 토픽에 `seriesDetailPlan`을 저장하고, 이후 전략/초안 생성은 이 설계를 우선 참고한다.
 
 금지 사항:
 
@@ -309,3 +310,4 @@ node scripts/verify.mjs --skip-build --skip-test
 검증 강제:
 
 - `scripts/check-patterns.mjs`의 `RULE-010`이 선행 포스팅 설계 UI, 토픽 메타, 저장 경로, 메인 글 선행 발행 게이트를 검사한다.
+- `scripts/check-patterns.mjs`의 `RULE-011`이 시리즈 상세 설계 API, 저장 필드, 전략 플래너 반영을 검사한다.

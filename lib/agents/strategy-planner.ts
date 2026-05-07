@@ -543,6 +543,21 @@ function buildUserMessage(
           : "- 메인 글 규칙: 선행 포스팅에서 다룬 개념/기준/질문을 묶어 메인 키워드를 정면으로 공략하세요.",
       ].join("\n")
     : "";
+  const seriesDetailBrief = topic.seriesDetailPlan
+    ? [
+        "시리즈 상세 설계:",
+        `- 글 목표: ${topic.seriesDetailPlan.articleGoal}`,
+        `- 검색 의도: ${topic.seriesDetailPlan.searchIntent}`,
+        `- 독자 질문: ${topic.seriesDetailPlan.readerQuestion}`,
+        `- 핵심 키워드: ${topic.seriesDetailPlan.primaryKeyword}`,
+        `- 보조 키워드: ${topic.seriesDetailPlan.secondaryKeywords.join(", ") || "없음"}`,
+        `- 추천 섹션: ${topic.seriesDetailPlan.recommendedSections.join(" / ")}`,
+        `- 키워드 노출 규칙: ${topic.seriesDetailPlan.keywordPlacementRules.join(" / ")}`,
+        `- 내부링크 계획: ${topic.seriesDetailPlan.internalLinkTitles.join(" / ") || "없음"}`,
+        `- CTA: ${topic.seriesDetailPlan.callToAction}`,
+        `- 초안 각도: ${topic.seriesDetailPlan.draftAngle}`,
+      ].join("\n")
+    : "";
   return [
     "다음 토픽으로 네이버 블로그 전략을 수립해 주세요.",
     "",
@@ -557,6 +572,7 @@ function buildUserMessage(
       ? "직접 입력 모드 규칙: 메인 키워드를 글의 중심 검색축으로 유지하고, 제목/도입부/핵심 문단의 판단 기준이 메인 키워드와 일치해야 합니다. 서브 키워드는 메인 키워드를 보조하는 맥락으로만 사용하세요."
       : "",
     seriesBrief,
+    seriesDetailBrief,
     `사용자 ID: ${userId}`,
     `참조 URL: ${topic.relatedSources.join(", ") || "없음"}`,
     "",

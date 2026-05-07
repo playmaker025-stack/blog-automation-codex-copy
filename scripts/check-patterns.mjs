@@ -284,6 +284,29 @@ if (!content(join(ROOT, 'AGENTS.md')).includes('메인 키워드 선행 포스�
   fail('RULE-010', join(ROOT, 'AGENTS.md'), 0, 'AGENTS.md must document the main-keyword pre-posting series rule.')
 }
 
+// RULE-011: Series detail planning must be stored and consumed by the strategy planner.
+const seriesDetailRoute = join(ROOT, 'app', 'api', 'topics', 'series-detail', 'route.ts')
+const seriesDetailContent = content(seriesDetailRoute)
+const seriesTopicsPageContent = content(join(ROOT, 'app', 'topics', 'page.tsx'))
+const strategyPlannerContent = content(join(ROOT, 'lib', 'agents', 'strategy-planner.ts'))
+
+for (const needle of ['seriesDetailPlan', 'seriesDetailReadyAt', 'TopicSeriesDetailPlan']) {
+  if (!githubTypesContent.includes(needle)) {
+    fail('RULE-011', githubTypesFile, lineOf(githubTypesContent, needle), `Topic type must preserve series detail planning fields: ${needle}.`)
+  }
+}
+for (const needle of ['runSeriesDetailPlanner', 'plannedTopics']) {
+  if (!seriesDetailContent.includes(needle) && !topicGeneratorContent.includes(needle)) {
+    fail('RULE-011', seriesDetailRoute, lineOf(seriesDetailContent, needle), `Series detail planner API contract missing: ${needle}.`)
+  }
+}
+if (!seriesTopicsPageContent.includes('시리즈 상세 설계') || !seriesTopicsPageContent.includes('handleSaveSeriesDetails')) {
+  fail('RULE-011', join(ROOT, 'app', 'topics', 'page.tsx'), 0, 'Topics page must expose series detail planning and save flow.')
+}
+if (!strategyPlannerContent.includes('seriesDetailPlan') || !strategyPlannerContent.includes('시리즈 상세 설계:')) {
+  fail('RULE-011', join(ROOT, 'lib', 'agents', 'strategy-planner.ts'), 0, 'Strategy planner must consume stored series detail planning context.')
+}
+
 if (violations.length === 0) {
   process.exit(0)
 }
