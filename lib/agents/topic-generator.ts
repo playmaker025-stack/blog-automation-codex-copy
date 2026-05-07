@@ -79,12 +79,28 @@ function slugifyKeyword(value: string): string {
     .slice(0, 48) || "keyword";
 }
 
+function derivePreludeTopicPhrase(mainKeyword: string): string {
+  const normalized = mainKeyword.trim().replace(/\s+/g, " ");
+  const suffixes = ["추천", "비교", "가격", "후기", "리뷰", "순위", "정리"];
+
+  for (const suffix of suffixes) {
+    if (normalized.endsWith(` ${suffix}`)) {
+      return normalized.slice(0, -(suffix.length + 1)).trim();
+    }
+    if (normalized.endsWith(suffix) && normalized.length > suffix.length + 1) {
+      return normalized.slice(0, -suffix.length).trim();
+    }
+  }
+
+  return normalized;
+}
+
 function buildPreludeTitles(mainKeyword: string, count: number): string[] {
-  const keyword = mainKeyword.trim().replace(/\s+/g, " ");
+  const keyword = derivePreludeTopicPhrase(mainKeyword);
   const templates = [
-    `${keyword} 찾기 전 입호흡과 폐호흡 차이부터 정리`,
+    `${keyword} 처음 볼 때 입호흡과 폐호흡 차이부터 정리`,
     `${keyword} 고르기 전에 보는 액상과 기기 기준`,
-    `초보자가 ${keyword} 볼 때 자주 놓치는 부분`,
+    `초보자가 ${keyword} 시작할 때 자주 놓치는 부분`,
   ];
   return templates.slice(0, count);
 }
