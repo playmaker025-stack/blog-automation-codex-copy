@@ -115,6 +115,10 @@ function formatPipelineTopicLabel(topic: Topic): string {
   return `[${roleLabel}${keywordLabel}] ${topic.title}`;
 }
 
+function topicIsPublishedById(topic: Topic, posts: PostingRecord[]): boolean {
+  return posts.some((post) => post.status === "published" && post.topicId === topic.topicId);
+}
+
 const PIPELINE_SOFT_WARNING_SECONDS = 480;
 const PIPELINE_TIMEOUT_SECONDS = 570;
 
@@ -189,9 +193,25 @@ export default function PipelinePage() {
     return normalizeUserId(topic.assignedUserId ?? "") === normalizedUserId;
   });
   const { remaining: availableTopics } = resolveRemainingTopics(userScopedPlanningTopics, posts);
+  const seriesTopicsHiddenByTitleMatch = userScopedPlanningTopics.filter(
+    (topic) =>
+      topic.seriesId &&
+      topic.status === "draft" &&
+      !availableTopics.some((candidate) => candidate.topicId === topic.topicId) &&
+      !topicIsPublishedById(topic, posts)
+  );
+  const pipelineSelectableTopics = useMemo(() => {
+    const merged = [...availableTopics];
+    for (const topic of seriesTopicsHiddenByTitleMatch) {
+      if (!merged.some((candidate) => candidate.topicId === topic.topicId)) {
+        merged.push(topic);
+      }
+    }
+    return merged;
+  }, [availableTopics, seriesTopicsHiddenByTitleMatch]);
   const orderedAvailableTopics = useMemo(
-    () => [...availableTopics].sort(compareTopicsForPipeline),
-    [availableTopics]
+    () => [...pipelineSelectableTopics].sort(compareTopicsForPipeline),
+    [pipelineSelectableTopics]
   );
   const progressEvents = events.filter(
     (event) => event.type === "stage_change" || event.type === "progress" || event.type === "error"
