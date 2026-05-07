@@ -1,19 +1,43 @@
 {
   "userId": "e",
-  "displayName": "E blog",
+  "displayName": "E 블로그 - 만수동 입문/기초 가이드형",
   "naverBlogUrl": "https://blog.naver.com/youfetst",
   "writingStyle": {
-    "tone": "casual",
-    "averagePostLength": 1500,
-    "preferredStructure": "listicle",
-    "signatureExpressions": []
+    "tone": "friendly",
+    "averagePostLength": 2600,
+    "preferredStructure": "how-to",
+    "signatureExpressions": [
+      "알려드릴게요",
+      "쉽게 정리해보면",
+      "초보자라면",
+      "방문 상담 받아보세요"
+    ]
   },
   "targetAudience": {
-    "ageRange": "20-30",
-    "interests": [],
+    "ageRange": "20-40",
+    "interests": [
+      "입호흡 폐호흡 차이",
+      "입문 기기",
+      "액상 누수",
+      "탄맛 원인",
+      "팟 수명"
+    ],
     "knowledgeLevel": "beginner"
   },
   "githubDataRepo": "playmaker025-stack/blog-automation",
+  "blogRole": "입문/실용 확장형",
+  "profileSummary": "E 블로그 - 만수동 입문/기초 가이드형은 입문/실용 확장형 블로그로, 실제 매장 상담과 사용 경험을 바탕으로 전자담배 기기/액상 선택을 돕는 글을 작성한다.",
+  "writingGuidelines": [
+    "검색 질문을 제목과 도입에 바로 반영한다",
+    "기초 개념을 쉬운 말로 풀고 예시를 붙인다",
+    "증상-원인-해결 순서로 실용적으로 정리한다"
+  ],
+  "referenceSource": {
+    "file": "C:/Users/부평만수르/Downloads/E 블로그.txt",
+    "sectionDelimiter": "------------------------------------------------------",
+    "importedSections": 5,
+    "importedAt": "2026-05-07T00:00:00.000Z"
+  },
   "createdAt": "2026-04-02T00:00:00Z",
-  "updatedAt": "2026-04-02T09:19:48.245Z"
+  "updatedAt": "2026-05-07T00:00:00.000Z"
 }

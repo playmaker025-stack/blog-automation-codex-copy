@@ -2,19 +2,126 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "reference-d-01",
+      "title": "포켓코리아 아머미니 전자담배 – 입문자용으로 쓰기 편한 이유 정리",
+      "category": "기술/문제해결형",
+      "tags": [
+        "기기 고장",
+        "누수/탄맛/뜨거움 원인",
+        "RDA 빌드",
+        "사용법 가이드",
+        "문제 해결",
+        "포켓코리아",
+        "아머미니",
+        "입문자용으로"
+      ],
+      "wordCount": 2077,
+      "publishedAt": "2026-05-07T00:00:00.000Z",
+      "filePath": "user-modeling/users/d/corpus/samples/reference-d-01.md"
+    },
+    {
+      "sampleId": "reference-d-02",
+      "title": "인천전자담배 젤로 크리스탈 울트라[신상] 출시 스펙 차이 비교!",
+      "category": "기술/문제해결형",
+      "tags": [
+        "기기 고장",
+        "누수/탄맛/뜨거움 원인",
+        "RDA 빌드",
+        "사용법 가이드",
+        "문제 해결",
+        "인천전자담배",
+        "젤로",
+        "크리스탈"
+      ],
+      "wordCount": 2844,
+      "publishedAt": "2026-01-04T00:00:00.000Z",
+      "filePath": "user-modeling/users/d/corpus/samples/reference-d-02.md"
+    },
+    {
+      "sampleId": "reference-d-03",
+      "title": "<필독> 주안전자담배 만수르 모든 일회용 전담 종류 총집합! 구입하기전 꼭 봐야할 정보!.",
+      "category": "기술/문제해결형",
+      "tags": [
+        "기기 고장",
+        "누수/탄맛/뜨거움 원인",
+        "RDA 빌드",
+        "사용법 가이드",
+        "문제 해결",
+        "필독",
+        "주안전자담배",
+        "모든"
+      ],
+      "wordCount": 2384,
+      "publishedAt": "2025-10-22T00:00:00.000Z",
+      "filePath": "user-modeling/users/d/corpus/samples/reference-d-03.md"
+    },
+    {
+      "sampleId": "reference-d-04",
+      "title": "친구들아 RDA 파바박 소리 나게 빌드 하는법 만수르 전자담배에서 알려준다 이말이야!",
+      "category": "기술/문제해결형",
+      "tags": [
+        "기기 고장",
+        "누수/탄맛/뜨거움 원인",
+        "RDA 빌드",
+        "사용법 가이드",
+        "문제 해결",
+        "친구들아",
+        "RDA",
+        "파바박"
+      ],
+      "wordCount": 2050,
+      "publishedAt": "2025-10-20T00:00:00.000Z",
+      "filePath": "user-modeling/users/d/corpus/samples/reference-d-04.md"
+    },
+    {
+      "sampleId": "reference-d-05",
+      "title": "방어전문가와 함께하는 전자담배 기기고장,오류 없이 잘쓰는법 배워보자!(한글날 특집)'외국어 X'",
+      "category": "기술/문제해결형",
+      "tags": [
+        "기기 고장",
+        "누수/탄맛/뜨거움 원인",
+        "RDA 빌드",
+        "사용법 가이드",
+        "문제 해결",
+        "방어전문가와",
+        "함께하는",
+        "기기고장"
+      ],
+      "wordCount": 2475,
+      "publishedAt": "2025-10-09T00:00:00.000Z",
+      "filePath": "user-modeling/users/d/corpus/samples/reference-d-05.md"
+    },
+    {
+      "sampleId": "reference-d-06",
+      "title": "전자담배 뜨거움 원인은 뭘까? 기기 핑계는 노노 사용법을 제대로 재밌게 알려드릴게!",
+      "category": "기술/문제해결형",
+      "tags": [
+        "기기 고장",
+        "누수/탄맛/뜨거움 원인",
+        "RDA 빌드",
+        "사용법 가이드",
+        "문제 해결",
+        "뜨거움",
+        "원인은",
+        "뭘까"
+      ],
+      "wordCount": 2428,
+      "publishedAt": "2025-09-04T00:00:00.000Z",
+      "filePath": "user-modeling/users/d/corpus/samples/reference-d-06.md"
+    },
+    {
       "sampleId": "published-post-21e6d9ae",
       "title": "전자담배 액상 종류별 특징과 입문자 맞춤 맛 선택법",
-      "category": "일반",
+      "category": "발행 글 샘플",
       "tags": [
-        "전자담배",
-        "액상",
-        "맛선택",
-        "입문"
+        "실제 발행 글",
+        "문체 참고",
+        "전자담배"
       ],
-      "wordCount": 2567,
-      "publishedAt": "2026-04-22T12:34:03.755Z",
+      "wordCount": 1839,
+      "publishedAt": "2026-05-07T00:00:00.000Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-21e6d9ae.md"
     }
   ],
-  "lastUpdated": "2026-05-06T10:07:16.090Z"
+  "lastUpdated": "2026-05-07T00:00:00.000Z"
 }

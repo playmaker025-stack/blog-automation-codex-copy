@@ -1,5 +1,114 @@
 {
   "userId": "c",
-  "samples": [],
-  "lastUpdated": "2026-05-06T10:07:16.083Z"
+  "samples": [
+    {
+      "sampleId": "reference-c-01",
+      "title": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "인천전자담배",
+        "말론바",
+        "일회용"
+      ],
+      "wordCount": 1657,
+      "publishedAt": "2026-03-27T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-01.md"
+    },
+    {
+      "sampleId": "reference-c-02",
+      "title": "말론 vs 아스트로 MK3 입문 추천 − 입호흡 전자담배 차이 정리",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "말론",
+        "vs",
+        "아스트로"
+      ],
+      "wordCount": 2288,
+      "publishedAt": "2026-03-09T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-02.md"
+    },
+    {
+      "sampleId": "reference-c-03",
+      "title": "부평전자담배 입호흡 전담 추천 구매하기 전에 필독",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "부평전자담배",
+        "입호흡",
+        "전담"
+      ],
+      "wordCount": 3556,
+      "publishedAt": "2025-10-17T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
+    },
+    {
+      "sampleId": "reference-c-04",
+      "title": "인천전자담배 만수르점 베놈 아스트로 MK3 입고! 스펙&사용법 정리",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "인천전자담배",
+        "만수르점",
+        "베놈"
+      ],
+      "wordCount": 2695,
+      "publishedAt": "2025-12-31T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-04.md"
+    },
+    {
+      "sampleId": "reference-c-05",
+      "title": "만수역 전자담배 기기별 사용법과 유지관리  핵심 가이드",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "만수역",
+        "기기별",
+        "사용법과"
+      ],
+      "wordCount": 2863,
+      "publishedAt": "2026-05-07T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-05.md"
+    },
+    {
+      "sampleId": "reference-c-06",
+      "title": "같은 액상인데 기기 바꾸면 맛이 달라지는 이유",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "같은",
+        "액상인데",
+        "기기"
+      ],
+      "wordCount": 1353,
+      "publishedAt": "2026-04-27T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-06.md"
+    }
+  ],
+  "lastUpdated": "2026-05-07T00:00:00.000Z"
 }

@@ -1,19 +1,43 @@
 {
   "userId": "a",
-  "displayName": "A ���α�",
+  "displayName": "A 블로그 - 만수동/구월동 전자담배 리뷰형",
   "naverBlogUrl": "https://blog.naver.com/iibodii00",
   "writingStyle": {
     "tone": "casual",
-    "averagePostLength": 1500,
-    "preferredStructure": "listicle",
-    "signatureExpressions": []
+    "averagePostLength": 2500,
+    "preferredStructure": "review",
+    "signatureExpressions": [
+      "안녕하세요",
+      "지금까지 인천 전자담배 만수르였습니다",
+      "직접 먹어보고 사용해본 기준으로 말씀드리면",
+      "개인적으로는"
+    ]
   },
   "targetAudience": {
-    "ageRange": "20-30��",
-    "interests": [],
+    "ageRange": "20-40",
+    "interests": [
+      "입호흡 액상",
+      "폐호흡 액상",
+      "전자담배 기기 후기",
+      "실사용 체감",
+      "매장 방문 상담"
+    ],
     "knowledgeLevel": "beginner"
   },
   "githubDataRepo": "playmaker025-stack/blog-automation",
+  "blogRole": "지역/제품 리뷰형",
+  "profileSummary": "A 블로그 - 만수동/구월동 전자담배 리뷰형은 지역/제품 리뷰형 블로그로, 실제 매장 상담과 사용 경험을 바탕으로 전자담배 기기/액상 선택을 돕는 글을 작성한다.",
+  "writingGuidelines": [
+    "실사용 감상과 매장 경험을 섞어 자연스럽게 설명한다",
+    "맛 표현은 단정 대신 취향 차이를 인정하며 풀어쓴다",
+    "제품 장단점을 솔직하게 말하고 방문 상담으로 마무리한다"
+  ],
+  "referenceSource": {
+    "file": "C:/Users/부평만수르/Downloads/A 블로그.txt",
+    "sectionDelimiter": "------------------------------------------------------",
+    "importedSections": 15,
+    "importedAt": "2026-05-07T00:00:00.000Z"
+  },
   "createdAt": "2026-04-02T00:00:00Z",
-  "updatedAt": "2026-04-02T09:19:25.709Z"
+  "updatedAt": "2026-05-07T00:00:00.000Z"
 }

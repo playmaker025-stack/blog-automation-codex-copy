@@ -1,19 +1,42 @@
 {
   "userId": "b",
-  "displayName": "B blog",
+  "displayName": "B 블로그 - 만수동/서창/상동 상담 후기형",
   "naverBlogUrl": "https://blog.naver.com/youferst",
   "writingStyle": {
-    "tone": "casual",
-    "averagePostLength": 1500,
-    "preferredStructure": "listicle",
-    "signatureExpressions": []
+    "tone": "friendly",
+    "averagePostLength": 2300,
+    "preferredStructure": "review",
+    "signatureExpressions": [
+      "안녕하세요",
+      "만수르 숭생입니다",
+      "방문해주시면 친절하게 설명드리겠습니다"
+    ]
   },
   "targetAudience": {
-    "ageRange": "20-30",
-    "interests": [],
+    "ageRange": "20-40",
+    "interests": [
+      "실사용 후기",
+      "기기 추천",
+      "액상 추천",
+      "관리법",
+      "지역 매장 상담"
+    ],
     "knowledgeLevel": "beginner"
   },
   "githubDataRepo": "playmaker025-stack/blog-automation",
+  "blogRole": "상담/구매전환형",
+  "profileSummary": "B 블로그 - 만수동/서창/상동 상담 후기형은 상담/구매전환형 블로그로, 실제 매장 상담과 사용 경험을 바탕으로 전자담배 기기/액상 선택을 돕는 글을 작성한다.",
+  "writingGuidelines": [
+    "도입부에 날씨나 일상 한두 문장으로 친근하게 시작한다",
+    "스펙보다 실제 사용감과 구매 판단 포인트를 먼저 설명한다",
+    "마지막은 매장 상담과 방문 유도로 정리한다"
+  ],
+  "referenceSource": {
+    "file": "C:/Users/부평만수르/Downloads/B 블로그.txt",
+    "sectionDelimiter": "------------------------------------------------------",
+    "importedSections": 6,
+    "importedAt": "2026-05-07T00:00:00.000Z"
+  },
   "createdAt": "2026-04-02T00:00:00Z",
-  "updatedAt": "2026-04-02T09:19:44.010Z"
+  "updatedAt": "2026-05-07T00:00:00.000Z"
 }

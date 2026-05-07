@@ -1,19 +1,43 @@
 {
   "userId": "c",
-  "displayName": "C blog",
+  "displayName": "C 블로그 - 부평/만수르 비교 설명형",
   "naverBlogUrl": "https://blog.naver.com/mansur_vape",
   "writingStyle": {
-    "tone": "casual",
-    "averagePostLength": 1500,
-    "preferredStructure": "listicle",
-    "signatureExpressions": []
+    "tone": "professional",
+    "averagePostLength": 2800,
+    "preferredStructure": "how-to",
+    "signatureExpressions": [
+      "안녕하세요",
+      "정리해보면",
+      "기준을 먼저 잡아보면",
+      "직접 시연해보고 선택하는 게 가장 좋습니다"
+    ]
   },
   "targetAudience": {
-    "ageRange": "20-30",
-    "interests": [],
+    "ageRange": "20-40",
+    "interests": [
+      "기기 비교",
+      "스펙 정리",
+      "사용법",
+      "문제 해결",
+      "입문 추천"
+    ],
     "knowledgeLevel": "beginner"
   },
   "githubDataRepo": "playmaker025-stack/blog-automation",
+  "blogRole": "비교/구조 설명형",
+  "profileSummary": "C 블로그 - 부평/만수르 비교 설명형은 비교/구조 설명형 블로그로, 실제 매장 상담과 사용 경험을 바탕으로 전자담배 기기/액상 선택을 돕는 글을 작성한다.",
+  "writingGuidelines": [
+    "질문을 제시한 뒤 기준을 나눠 설명한다",
+    "스펙, 사용법, 차이점, 추천 대상을 순서대로 정리한다",
+    "초보자가 오해하기 쉬운 부분을 체크리스트처럼 풀어준다"
+  ],
+  "referenceSource": {
+    "file": "C:/Users/부평만수르/Downloads/C 블로그.txt",
+    "sectionDelimiter": "------------------------------------------------------",
+    "importedSections": 6,
+    "importedAt": "2026-05-07T00:00:00.000Z"
+  },
   "createdAt": "2026-04-02T00:00:00Z",
-  "updatedAt": "2026-04-02T09:19:45.565Z"
+  "updatedAt": "2026-05-07T00:00:00.000Z"
 }

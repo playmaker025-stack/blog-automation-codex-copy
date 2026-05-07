@@ -1,5 +1,114 @@
 {
   "userId": "b",
-  "samples": [],
-  "lastUpdated": "2026-05-06T10:07:16.078Z"
+  "samples": [
+    {
+      "sampleId": "reference-b-01",
+      "title": "인천전자담배 만수동 만수르 말론 실사용 후기",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "인천전자담배",
+        "만수동",
+        "말론"
+      ],
+      "wordCount": 2612,
+      "publishedAt": "2025-04-10T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-01.md"
+    },
+    {
+      "sampleId": "reference-b-02",
+      "title": "전자담배 방치는 고장의 원인 청소와 관리하는법 소소한 팁",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "방치는",
+        "고장의",
+        "원인"
+      ],
+      "wordCount": 2160,
+      "publishedAt": "2025-02-14T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-02.md"
+    },
+    {
+      "sampleId": "reference-b-03",
+      "title": "서창동 전자담배 발라리안 팟 호환 가능한 베놈 팬텀 마크2",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "서창동",
+        "발라리안",
+        "호환"
+      ],
+      "wordCount": 2757,
+      "publishedAt": "2024-08-06T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
+    },
+    {
+      "sampleId": "reference-b-04",
+      "title": "상동전자담배 일회용 대용량 액상 전담 버블몬 그래비티",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "상동전자담배",
+        "일회용",
+        "대용량"
+      ],
+      "wordCount": 1588,
+      "publishedAt": "2025-06-21T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-04.md"
+    },
+    {
+      "sampleId": "reference-b-05",
+      "title": "만수동 전자담배 시원한 입호흡 과일 액상 추천 3종 DJ쥬스",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "만수동",
+        "시원한",
+        "입호흡"
+      ],
+      "wordCount": 1371,
+      "publishedAt": "2026-04-02T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-05.md"
+    },
+    {
+      "sampleId": "reference-b-06",
+      "title": "부개동 전자담배 시원한 입호흡 액상 델리 시리즈",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "부개동",
+        "시원한",
+        "입호흡"
+      ],
+      "wordCount": 1234,
+      "publishedAt": "2026-01-16T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-06.md"
+    }
+  ],
+  "lastUpdated": "2026-05-07T00:00:00.000Z"
 }

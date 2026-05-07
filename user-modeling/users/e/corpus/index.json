@@ -1,5 +1,96 @@
 {
   "userId": "e",
-  "samples": [],
-  "lastUpdated": "2026-05-06T10:07:16.096Z"
+  "samples": [
+    {
+      "sampleId": "reference-e-01",
+      "title": "전자담배 입호흡 폐호흡 차이점 만수동만수르에서 알려드릴게요",
+      "category": "입문/실용 확장형",
+      "tags": [
+        "입호흡 폐호흡 차이",
+        "입문 기기",
+        "액상 누수",
+        "탄맛 원인",
+        "팟 수명",
+        "입호흡",
+        "폐호흡",
+        "차이점"
+      ],
+      "wordCount": 2885,
+      "publishedAt": "2025-11-23T00:00:00.000Z",
+      "filePath": "user-modeling/users/e/corpus/samples/reference-e-01.md"
+    },
+    {
+      "sampleId": "reference-e-02",
+      "title": "폐호흡 전자담배 초보 입문자들은 보라 긱베이프 이지스 레전드5 왔다네",
+      "category": "입문/실용 확장형",
+      "tags": [
+        "입호흡 폐호흡 차이",
+        "입문 기기",
+        "액상 누수",
+        "탄맛 원인",
+        "팟 수명",
+        "폐호흡",
+        "초보",
+        "입문자들은"
+      ],
+      "wordCount": 2622,
+      "publishedAt": "2025-11-02T00:00:00.000Z",
+      "filePath": "user-modeling/users/e/corpus/samples/reference-e-02.md"
+    },
+    {
+      "sampleId": "reference-e-03",
+      "title": "전자담배 액상이 왜 자꾸 새는거지? 팟 불량인가? 이유를 알려줄게",
+      "category": "입문/실용 확장형",
+      "tags": [
+        "입호흡 폐호흡 차이",
+        "입문 기기",
+        "액상 누수",
+        "탄맛 원인",
+        "팟 수명",
+        "액상이",
+        "자꾸",
+        "새는거지"
+      ],
+      "wordCount": 2222,
+      "publishedAt": "2025-10-12T00:00:00.000Z",
+      "filePath": "user-modeling/users/e/corpus/samples/reference-e-03.md"
+    },
+    {
+      "sampleId": "reference-e-04",
+      "title": "전자담배 탄맛은 왜 나는걸까? 인천 부평 만수르에서 알려드립죠",
+      "category": "입문/실용 확장형",
+      "tags": [
+        "입호흡 폐호흡 차이",
+        "입문 기기",
+        "액상 누수",
+        "탄맛 원인",
+        "팟 수명",
+        "탄맛은",
+        "나는걸까",
+        "인천"
+      ],
+      "wordCount": 2348,
+      "publishedAt": "2025-09-03T00:00:00.000Z",
+      "filePath": "user-modeling/users/e/corpus/samples/reference-e-04.md"
+    },
+    {
+      "sampleId": "reference-e-05",
+      "title": "오마리오슬릭 메쉬 0.9옴 팟 추가와 누수 그리고 수명",
+      "category": "입문/실용 확장형",
+      "tags": [
+        "입호흡 폐호흡 차이",
+        "입문 기기",
+        "액상 누수",
+        "탄맛 원인",
+        "팟 수명",
+        "오마리오슬릭",
+        "메쉬",
+        "9옴"
+      ],
+      "wordCount": 1253,
+      "publishedAt": "2020-12-16T00:00:00.000Z",
+      "filePath": "user-modeling/users/e/corpus/samples/reference-e-05.md"
+    }
+  ],
+  "lastUpdated": "2026-05-07T00:00:00.000Z"
 }
