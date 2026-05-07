@@ -27,16 +27,18 @@ interface PublicationLearningLedger {
   updatedAt: string;
 }
 
+export interface AfterPublishMaintenanceResult {
+  generatedCount: number;
+  learned: boolean;
+  corpusSynced: boolean;
+}
+
 function isPlanningTopic(topic: Topic): boolean {
   return topic.source !== "direct";
 }
 
 function userMatches(userId: string, value: string | null | undefined): boolean {
   return normalizeUserId(value ?? "") === userId;
-}
-
-function learningPath(userId: string): string {
-  return `data/content-learning/${userId}.json`;
 }
 
 async function appendPublicationLearning(params: {
@@ -46,7 +48,7 @@ async function appendPublicationLearning(params: {
   const userId = normalizeUserId(params.post.userId);
   if (!userId) return;
 
-  const path = learningPath(userId);
+  const path = Paths.contentLearning(userId);
   const now = new Date().toISOString();
   const current = (await fileExists(path))
     ? await readJsonFile<PublicationLearningLedger>(path)
@@ -99,15 +101,22 @@ function generatedToTopic(generated: GeneratedTopic, userId: string, now: string
 
 export async function runAfterPublishMaintenance(params: {
   post: PostingRecord;
-}): Promise<{ generatedCount: number; learned: boolean }> {
+  autoGenerateTopics?: boolean;
+}): Promise<AfterPublishMaintenanceResult> {
   const userId = normalizeUserId(params.post.userId);
-  if (!userId) return { generatedCount: 0, learned: false };
-  if (!(await fileExists(Paths.topicsIndex()))) return { generatedCount: 0, learned: false };
+  if (!userId) return { generatedCount: 0, learned: false, corpusSynced: false };
 
-  const { data: topicsIndex } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
+  const hasTopicsIndex = await fileExists(Paths.topicsIndex());
+  const topicsIndex = hasTopicsIndex
+    ? (await readJsonFile<TopicIndex>(Paths.topicsIndex())).data
+    : { topics: [], lastUpdated: "" };
   const topic = topicsIndex.topics.find((item) => item.topicId === params.post.topicId) ?? null;
   await appendPublicationLearning({ post: params.post, topic });
-  await syncPublishedPostToUserCorpus({ post: params.post, topic }).catch(() => false);
+  const corpusSynced = await syncPublishedPostToUserCorpus({ post: params.post, topic }).catch(() => false);
+
+  if (!hasTopicsIndex || params.autoGenerateTopics === false) {
+    return { generatedCount: 0, learned: true, corpusSynced };
+  }
 
   const userTopics = topicsIndex.topics
     .filter(isPlanningTopic)
@@ -119,7 +128,7 @@ export async function runAfterPublishMaintenance(params: {
   );
   const remaining = resolveRemainingTopics(userTopics, userPublishedPosts).remaining;
   if (remaining.length > 0 || userPublishedPosts.length === 0) {
-    return { generatedCount: 0, learned: true };
+    return { generatedCount: 0, learned: true, corpusSynced };
   }
 
   const result = await runTopicGenerator({
@@ -128,7 +137,7 @@ export async function runAfterPublishMaintenance(params: {
     publishedPosts: userPublishedPosts,
   });
 
-  if (result.generatedTopics.length === 0) return { generatedCount: 0, learned: true };
+  if (result.generatedTopics.length === 0) return { generatedCount: 0, learned: true, corpusSynced };
 
   const now = new Date().toISOString();
   const { data: latestTopics, sha } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
@@ -136,14 +145,14 @@ export async function runAfterPublishMaintenance(params: {
     .filter(isPlanningTopic)
     .filter((item) => userMatches(userId, item.assignedUserId));
   const latestRemaining = resolveRemainingTopics(latestUserTopics, userPublishedPosts).remaining;
-  if (latestRemaining.length > 0) return { generatedCount: 0, learned: true };
+  if (latestRemaining.length > 0) return { generatedCount: 0, learned: true, corpusSynced };
 
   const existingTitles = new Set(latestTopics.topics.map((item) => item.title.trim().toLowerCase()));
   const newTopics = result.generatedTopics
     .filter((item) => !existingTitles.has(item.title.trim().toLowerCase()))
     .map((item) => generatedToTopic(item, userId, now));
 
-  if (newTopics.length === 0) return { generatedCount: 0, learned: true };
+  if (newTopics.length === 0) return { generatedCount: 0, learned: true, corpusSynced };
 
   await writeJsonFile(
     Paths.topicsIndex(),
@@ -152,5 +161,5 @@ export async function runAfterPublishMaintenance(params: {
     sha
   );
 
-  return { generatedCount: newTopics.length, learned: true };
+  return { generatedCount: newTopics.length, learned: true, corpusSynced };
 }
