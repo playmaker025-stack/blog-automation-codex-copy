@@ -40,6 +40,11 @@ interface SavedSeriesSummary {
   savedAt: string;
 }
 
+interface TopicPersistResponse {
+  topic: Topic;
+  error?: string;
+}
+
 type StatusFilter = "all" | "remaining" | "matched" | Topic["status"];
 type UserFilter = "all" | "unassigned" | string;
 
@@ -152,6 +157,7 @@ export default function TopicsPage() {
   const [savingGenerated, setSavingGenerated] = useState(false);
 
   const fileRef = useRef<HTMLInputElement>(null);
+  const savedSeriesSummaryRef = useRef<HTMLDivElement>(null);
   const panelCopy = getGeneratePanelCopy(generateMode);
 
   const loadTopics = () => {
@@ -170,6 +176,14 @@ export default function TopicsPage() {
   };
 
   useEffect(() => { loadTopics(); }, []);
+
+  useEffect(() => {
+    if (!savedSeriesSummary) return;
+    const timer = setTimeout(() => {
+      savedSeriesSummaryRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 80);
+    return () => clearTimeout(timer);
+  }, [savedSeriesSummary]);
 
   // RemainingTopicResolver: 교차체크
   const planningTopics = topics.filter((topic) => topic.source !== "direct");
@@ -332,6 +346,7 @@ export default function TopicsPage() {
     userId: string;
     mainKeyword: string;
     seriesId?: string;
+    topicIds?: string[];
   }) => {
     const res = await fetch("/api/topics/series-detail", {
       method: "POST",
@@ -340,6 +355,7 @@ export default function TopicsPage() {
         userId: params.userId,
         mainKeyword: params.mainKeyword,
         seriesId: params.seriesId,
+        topicIds: params.topicIds,
       }),
     });
     const json = await res.json() as SeriesDetailPreviewResult & { error?: string };
@@ -395,8 +411,9 @@ export default function TopicsPage() {
     let savedCount = 0;
     try {
       const selected = generateResult.generatedTopics.filter((_, i) => selectedGenerated.has(i));
+      const savedTopics: Topic[] = [];
       for (const topic of selected) {
-        await fetch("/api/github/topics", {
+        const res = await fetch("/api/github/topics", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -415,15 +432,21 @@ export default function TopicsPage() {
             assignedUserId: generateUserId.trim().toLowerCase(),
           }),
         });
+        const json = await res.json() as TopicPersistResponse;
+        if (!res.ok || !json.topic) {
+          throw new Error(json.error ?? "토픽 저장 실패");
+        }
+        savedTopics.push(json.topic);
         savedCount += 1;
       }
 
       if (generateMode === "preposting-series") {
-        const seriesId = selected.find((topic) => topic.seriesId)?.seriesId;
+        const seriesId = savedTopics.find((topic) => topic.seriesId)?.seriesId;
         const detailResult = await saveSeriesDetailsForSeries({
           userId: generateUserId.trim(),
           mainKeyword: seriesMainKeyword.trim(),
           seriesId,
+          topicIds: savedTopics.map((topic) => topic.topicId),
         });
         setNotice({
           type: "ok",
