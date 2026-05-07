@@ -95,12 +95,29 @@ function derivePreludeTopicPhrase(mainKeyword: string): string {
   return normalized;
 }
 
-function buildPreludeTitles(mainKeyword: string, count: number): string[] {
+function _buildPreludeTitles(mainKeyword: string, count: number): string[] {
   const keyword = derivePreludeTopicPhrase(mainKeyword);
   const templates = [
     `${keyword} 처음 볼 때 입호흡과 폐호흡 차이부터 정리`,
     `${keyword} 고르기 전에 보는 액상과 기기 기준`,
     `초보자가 ${keyword} 시작할 때 자주 놓치는 부분`,
+  ];
+  return templates.slice(0, count);
+}
+
+function derivePreludeAnchor(mainKeyword: string): string {
+  const phrase = derivePreludeTopicPhrase(mainKeyword);
+  const tokens = phrase.split(" ").filter(Boolean);
+  return tokens.at(-1) ?? phrase;
+}
+
+function buildDistributedPreludeTitles(mainKeyword: string, count: number): string[] {
+  const keyword = derivePreludeTopicPhrase(mainKeyword);
+  const anchor = derivePreludeAnchor(mainKeyword);
+  const templates = [
+    `${keyword} 보기 전에 핵심 개념부터 정리`,
+    `${anchor} 고르기 전에 많이 보는 선택 기준`,
+    `초보자가 시작 전에 자주 놓치는 체크포인트`,
   ];
   return templates.slice(0, count);
 }
@@ -117,7 +134,7 @@ export function runPrePostingSeriesPlanner(input: PrePostingSeriesInput): TopicG
   const plannedTopicIds = Array.from({ length: preludeCount + 1 }, (_, index) =>
     `topic-series-${seriesStamp}-${index + 1}`
   );
-  const preludeTitles = buildPreludeTitles(mainKeyword, preludeCount);
+  const preludeTitles = buildDistributedPreludeTitles(mainKeyword, preludeCount);
   const preludeTopics: GeneratedTopic[] = preludeTitles.map((title, index) => ({
     topicId: plannedTopicIds[index],
     title,
