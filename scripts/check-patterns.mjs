@@ -187,6 +187,61 @@ if (!verifyScript.includes('Next cycle: commit the verified changes, push origin
   fail('RULE-008', join(ROOT, 'scripts', 'verify.mjs'), 0, 'verify script must print the post-verify deployment cycle reminder.')
 }
 
+// RULE-009: Published-post learning must stay URL/body -> corpus -> writing-profile retrieval based.
+const userLearningFile = join(ROOT, 'lib', 'agents', 'user-learning.ts')
+const userLearningContent = content(userLearningFile)
+const pathsFile = join(ROOT, 'lib', 'github', 'paths.ts')
+const pathsContent = content(pathsFile)
+const typesFile = join(ROOT, 'lib', 'agents', 'types.ts')
+const typesContent = content(typesFile)
+
+for (const needle of [
+  'writingProfile',
+  'user-modeling/users/${userId}/writing-profile.json',
+]) {
+  if (!pathsContent.includes(needle)) {
+    fail('RULE-009', pathsFile, lineOf(pathsContent, needle), `Missing writing-profile path contract: ${needle}.`)
+  }
+}
+
+for (const needle of [
+  'fetchPublishedMarkdownFromNaver',
+  'Paths.postContent(post.postId)',
+  'Paths.corpusSample(userId, sampleId)',
+  'writeWritingProfile',
+  'loadWritingProfile',
+  'MAX_STORED_CORPUS_SAMPLES',
+  'MAX_STORED_EXEMPLARS',
+]) {
+  if (!userLearningContent.includes(needle)) {
+    fail('RULE-009', userLearningFile, lineOf(userLearningContent, needle), `Published learning workflow is missing: ${needle}.`)
+  }
+}
+
+if (!userLearningContent.includes('sourceSampleCount') || !userLearningContent.includes('representativeExcerpts')) {
+  fail('RULE-009', userLearningFile, 0, 'Writing profile must store compact sample counts and representative excerpts.')
+}
+if (!/const samples = \[\.\.\.sampleMap\.values\(\)\][\s\S]*?slice\(0,\s*MAX_STORED_CORPUS_SAMPLES\)/.test(userLearningContent)) {
+  fail('RULE-009', userLearningFile, lineOf(userLearningContent, 'const samples ='), 'Corpus index must keep the configured stored sample limit.')
+}
+if (!/const nextExemplars = \[\.\.\.exemplarMap\.values\(\)\][\s\S]*?slice\(0,\s*MAX_STORED_EXEMPLARS\)/.test(userLearningContent)) {
+  fail('RULE-009', userLearningFile, lineOf(userLearningContent, 'const nextExemplars ='), 'Exemplar index must keep the configured stored exemplar limit.')
+}
+if (!typesContent.includes('"writing-profile"')) {
+  fail('RULE-009', typesFile, 0, 'PublicationLearningSummary source must include writing-profile.')
+}
+
+const enforcedWorkflowNeedle = '발행 후 학습 강제 워크플로우'
+for (const docFile of [
+  join(ROOT, 'AGENTS.md'),
+  join(ROOT, 'CLAUDE.md'),
+  join(ROOT, 'docs', 'harness', 'pipeline.md'),
+]) {
+  if (!content(docFile).includes(enforcedWorkflowNeedle)) {
+    fail('RULE-009', docFile, 0, 'Workflow docs must document the enforced published-post learning workflow.')
+  }
+}
+
 if (violations.length === 0) {
   process.exit(0)
 }

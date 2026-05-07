@@ -32,6 +32,26 @@
 
 <!-- `/verify` ?ë“¦ë‚µ ??è€Œã…»ì» /?ëª„ë–†/è«›ê³ ë£· ?ëº¤ì”¤æºëš¯? ?ê¾¨ì¦º -->
 
+## 발행 후 학습 강제 워크플로우
+
+발행 완료 후 사용자 학습은 반드시 아래 흐름으로 처리한다.
+
+1. `posting-list`의 실제 `naverPostUrl`과 로컬 본문을 확인한다.
+2. `data/posting-list/posts/{postId}/content.md`가 있으면 그 본문을 우선 사용한다.
+3. 로컬 본문이 없으면 네이버 블로그 URL 본문을 1회 수집해 `content.md`로 캐시한다.
+4. 본문을 `user-modeling/users/{userId}/corpus/samples/published-{postId}.md`에 동기화한다.
+5. `corpus/index.json`, `corpus/exemplar_index.json`, `writing-profile.json`을 함께 갱신한다.
+6. 글쓰기와 전략 수립은 전체 원문 반복 투입이 아니라 `writing-profile.json`과 대표 샘플 retrieval만 참고한다.
+
+금지:
+
+- 글쓰기 때마다 과거 블로그 URL 전체를 반복 방문하지 않는다.
+- 저장된 코퍼스 전체를 매번 프롬프트에 넣지 않는다.
+- 발행 후 본문 수집 없이 `content-learning` 집계만 갱신하고 학습 완료로 보지 않는다.
+- 사용자 코퍼스 저장량을 임의로 5개 이하로 줄이지 않는다.
+
+`scripts/check-patterns.mjs`의 `RULE-009`가 이 구조를 검사하므로, 우회하거나 제거하면 `/verify`가 실패해야 한다.
+
 ## 새 운영 규칙 — 2026-04-24
 
 ### 1. 글목록 생성 시 블로그 역할 적합성 검사

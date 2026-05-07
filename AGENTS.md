@@ -261,3 +261,30 @@ node scripts/verify.mjs --skip-build --skip-test
 - GitHub: Octokit REST
 - 상태관리: Zustand
 - 데이터 캐싱: SWR
+
+---
+
+## 운영 규칙 추가 — 2026-05-07
+
+### 발행 후 학습 강제 워크플로우
+
+발행 완료 후 사용자 학습은 반드시 아래 순서로만 처리한다.
+
+1. `posting-list`에 입력된 실제 `naverPostUrl`과 로컬 발행 본문을 확인한다.
+2. 로컬 본문 `data/posting-list/posts/{postId}/content.md`가 있으면 그 본문을 우선 사용한다.
+3. 로컬 본문이 없고 네이버 블로그 URL이 있으면 URL 본문을 1회 수집해 `content.md`로 캐시한다.
+4. 수집/캐시된 본문을 `user-modeling/users/{userId}/corpus/samples/published-{postId}.md`에 동기화한다.
+5. `corpus/index.json`, `corpus/exemplar_index.json`, `writing-profile.json`을 함께 갱신한다.
+6. 이후 글쓰기와 전략 수립은 전체 원문을 매번 읽지 않고 `writing-profile.json`과 대표 샘플/요약 인덱스만 retrieval로 참고한다.
+
+금지 사항:
+
+- 글쓰기 때마다 과거 블로그 URL 전체를 반복 방문해 원문 전체를 프롬프트에 넣지 않는다.
+- 저장된 코퍼스 전체를 매번 프롬프트에 넣지 않는다.
+- 발행 후 본문 수집 없이 `content-learning` 집계만 갱신하고 사용자 학습이 끝난 것으로 처리하지 않는다.
+- 사용자 코퍼스 저장량을 임의로 5개 이하로 줄이지 않는다. 저장은 최대 30개 기준으로 유지하고, 프롬프트 투입만 소수 대표 샘플로 제한한다.
+
+검증 강제:
+
+- `scripts/check-patterns.mjs`의 `RULE-009`가 위 경로와 함수, 문서 규칙을 검사한다.
+- 이 워크플로우를 우회하거나 `writing-profile.json` 갱신을 제거하면 `/verify`가 실패해야 한다.

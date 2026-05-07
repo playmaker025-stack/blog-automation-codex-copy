@@ -11,6 +11,26 @@
 → 발행 인덱스 반영
 ```
 
+## 발행 후 학습 강제 워크플로우
+
+발행 완료 후 학습은 아래 단계를 반드시 따른다.
+
+1. `posting-list`의 실제 `naverPostUrl`과 로컬 본문을 확인한다.
+2. 로컬 본문 `data/posting-list/posts/{postId}/content.md`가 있으면 우선 사용한다.
+3. 로컬 본문이 없으면 네이버 블로그 URL 본문을 1회 수집해 `content.md`로 캐시한다.
+4. 본문을 `user-modeling/users/{userId}/corpus/samples/published-{postId}.md`에 동기화한다.
+5. `corpus/index.json`, `corpus/exemplar_index.json`, `writing-profile.json`을 함께 갱신한다.
+6. 다음 글쓰기와 전략 수립은 전체 원문 반복 투입이 아니라 `writing-profile.json`과 대표 샘플 retrieval만 참고한다.
+
+금지 사항:
+
+- 글쓰기 때마다 과거 블로그 URL 전체를 반복 방문하지 않는다.
+- 저장된 코퍼스 전체를 매번 프롬프트에 넣지 않는다.
+- 발행 후 본문 수집 없이 `content-learning` 집계만 갱신하고 학습 완료로 보지 않는다.
+- 사용자 코퍼스 저장량을 임의로 5개 이하로 줄이지 않는다.
+
+이 규칙은 `scripts/check-patterns.mjs`의 `RULE-009`로 검사한다.
+
 ## 완료 판정
 
 완료는 아래 두 조건을 모두 만족할 때만 성립한다.
