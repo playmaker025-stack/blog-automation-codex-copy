@@ -282,7 +282,34 @@ export async function POST(request: NextRequest) {
           !(newTopic.source === "direct" && topic.status === "published")
       );
       if (duplicate) {
-        Object.assign(newTopic, duplicate);
+        const mergedTopic: Topic = {
+          ...duplicate,
+          description: newTopic.description || duplicate.description,
+          category: newTopic.category || duplicate.category,
+          tags: newTopic.tags.length > 0 ? newTopic.tags : duplicate.tags,
+          source: newTopic.source ?? duplicate.source,
+          contentKind: newTopic.contentKind ?? duplicate.contentKind,
+          seriesId: newTopic.seriesId ?? duplicate.seriesId,
+          seriesRole: newTopic.seriesRole ?? duplicate.seriesRole,
+          targetMainKeyword: newTopic.targetMainKeyword ?? duplicate.targetMainKeyword,
+          sequenceOrder: newTopic.sequenceOrder ?? duplicate.sequenceOrder,
+          prerequisiteTopicIds: newTopic.prerequisiteTopicIds ?? duplicate.prerequisiteTopicIds,
+          assignedUserId: newTopic.assignedUserId ?? duplicate.assignedUserId,
+          updatedAt: now,
+        };
+        const updated: TopicIndex = {
+          topics: index.topics.map((topic) =>
+            topic.topicId === duplicate.topicId ? mergedTopic : topic
+          ),
+          lastUpdated: now,
+        };
+        await writeJsonFile(
+          Paths.topicsIndex(),
+          updated,
+          `chore: enrich topic "${mergedTopic.title}" with incoming metadata`,
+          sha
+        );
+        Object.assign(newTopic, mergedTopic);
         return;
       }
       const updated: TopicIndex = {
