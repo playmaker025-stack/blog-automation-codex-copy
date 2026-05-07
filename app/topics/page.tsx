@@ -32,6 +32,14 @@ interface SeriesDetailPreviewResult {
   plannedTopics: SeriesDetailPreviewItem[];
 }
 
+interface SavedSeriesSummary {
+  seriesId: string;
+  mainKeyword: string;
+  topicIds: string[];
+  titles: string[];
+  savedAt: string;
+}
+
 type StatusFilter = "all" | "remaining" | "matched" | Topic["status"];
 type UserFilter = "all" | "unassigned" | string;
 
@@ -121,6 +129,7 @@ export default function TopicsPage() {
   const [failedCount, setFailedCount] = useState(0);
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
+  const [savedSeriesSummary, setSavedSeriesSummary] = useState<SavedSeriesSummary | null>(null);
 
   // 개별 편집
   const [editing, setEditing] = useState<EditTopicState | null>(null);
@@ -184,6 +193,7 @@ export default function TopicsPage() {
     setDuplicateCount(result.duplicate_count);
     setFailedCount(result.failed_count);
     setNotice(null);
+    setSavedSeriesSummary(null);
   };
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -419,8 +429,18 @@ export default function TopicsPage() {
           type: "ok",
           msg: `${selected.length}개 시리즈 토픽과 ${detailResult.plannedTopics.length}개 상세 설계가 함께 저장되었습니다.`,
         });
+        setSavedSeriesSummary({
+          seriesId: detailResult.seriesId,
+          mainKeyword: detailResult.mainKeyword,
+          topicIds: detailResult.plannedTopics.map((item) => item.topicId),
+          titles: detailResult.plannedTopics.map((item) => item.title),
+          savedAt: new Date().toISOString(),
+        });
+        setUserFilter(generateUserId.trim().toLowerCase());
+        setFilter("all");
       } else {
         setNotice({ type: "ok", msg: `${selected.length}개 토픽이 추가되었습니다.` });
+        setSavedSeriesSummary(null);
       }
       setGenerateResult(null);
       setSeriesDetailResult(null);
@@ -428,6 +448,7 @@ export default function TopicsPage() {
       setSelectedSeriesDetails(new Set());
       loadTopics();
     } catch (error) {
+      setSavedSeriesSummary(null);
       setNotice({
         type: "err",
         msg:
@@ -484,6 +505,14 @@ export default function TopicsPage() {
     if (filter === "all") return userScopedTopics;
     return userScopedTopics.filter((t) => t.status === filter);
   })();
+  const highlightedTopicIds = new Set(savedSeriesSummary?.topicIds ?? []);
+  const visibleTopics = [...filtered].sort((left, right) => {
+    const leftHighlighted = highlightedTopicIds.has(left.topicId);
+    const rightHighlighted = highlightedTopicIds.has(right.topicId);
+    if (leftHighlighted && !rightHighlighted) return -1;
+    if (!leftHighlighted && rightHighlighted) return 1;
+    return 0;
+  });
 
   return (
     <div className="p-8 max-w-4xl">
@@ -529,6 +558,35 @@ export default function TopicsPage() {
         <p className={`text-sm mb-4 ${notice.type === "ok" ? "text-emerald-600" : "text-red-500"}`}>
           {notice.msg}
         </p>
+      )}
+
+      {savedSeriesSummary && (
+        <div className="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+          <div className="flex items-center justify-between gap-3 mb-2">
+            <div>
+              <p className="text-sm font-semibold text-emerald-800">시리즈 저장 완료</p>
+              <p className="text-xs text-emerald-700">
+                {savedSeriesSummary.mainKeyword} · {savedSeriesSummary.titles.length}개 토픽이 저장되었습니다.
+              </p>
+            </div>
+            <button
+              onClick={() => setSavedSeriesSummary(null)}
+              className="text-xs text-emerald-700 hover:text-emerald-900"
+            >
+              닫기
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {savedSeriesSummary.titles.map((title) => (
+              <span
+                key={title}
+                className="rounded-full border border-emerald-200 bg-white px-2 py-1 text-[11px] text-emerald-800"
+              >
+                {title}
+              </span>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* ── 글목록 불러오기 ─────────────────────────────── */}
@@ -849,14 +907,14 @@ export default function TopicsPage() {
 
       {loading ? (
         <p className="text-zinc-400 text-sm">로딩 중...</p>
-      ) : filtered.length === 0 ? (
+      ) : visibleTopics.length === 0 ? (
         <div className="text-center py-14 text-zinc-400">
           <p className="text-sm">글목록이 없습니다.</p>
           <p className="text-xs mt-1">위에서 글목록을 붙여넣거나 파일을 업로드해 주세요.</p>
         </div>
       ) : (
         <div className="space-y-2">
-          {filtered.map((topic, idx) => (
+          {visibleTopics.map((topic, idx) => (
             <div key={topic.topicId}>
               {editing?.topicId === topic.topicId ? (
                 <div className="bg-white border-2 border-blue-300 rounded-xl p-4">
@@ -892,7 +950,11 @@ export default function TopicsPage() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-white border border-zinc-200 rounded-lg px-4 py-3 flex items-center gap-3">
+                <div className={`bg-white border rounded-lg px-4 py-3 flex items-center gap-3 ${
+                  highlightedTopicIds.has(topic.topicId)
+                    ? "border-emerald-300 ring-2 ring-emerald-100"
+                    : "border-zinc-200"
+                }`}>
                   <span className="text-xs text-zinc-400 w-6 text-right shrink-0">{idx + 1}</span>
                   {(() => {
                     const code = resolveTopicBadgeCode(topic);
