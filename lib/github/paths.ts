@@ -11,6 +11,8 @@ export const Paths = {
     `user-modeling/users/${userId}/corpus/samples/${sampleId}.md`,
   exemplarIndex: (userId: string) =>
     `user-modeling/users/${userId}/corpus/exemplar_index.json`,
+  writingProfile: (userId: string) =>
+    `user-modeling/users/${userId}/writing-profile.json`,
 
   topicsIndex: () => "data/index/topics.json",
   postingListIndex: () => "data/posting-list/index.json",

@@ -65,7 +65,7 @@ export interface SearchCombinationTarget {
 }
 
 export interface PublicationLearningSummary {
-  source: "content-learning" | "published-posts-fallback";
+  source: "content-learning" | "published-posts-fallback" | "writing-profile";
   totalEntries: number;
   avgEvalScore: number | null;
   avgWordCount: number | null;
