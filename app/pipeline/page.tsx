@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { StageIndicator } from "@/components/pipeline/stage-indicator";
 import { PipelineProgressLog } from "@/components/pipeline/progress-log";
 import { PipelineWorkspacePanel } from "@/components/pipeline/workspace-panel";
@@ -83,6 +83,38 @@ function looksCorruptedText(value: string | null | undefined): boolean {
   return /[�꾩몄쓣蹂몃Ц섏젙됯?]/.test(value) && !/[가-힣]/.test(value);
 }
 
+function compareTopicsForPipeline(left: Topic, right: Topic): number {
+  const leftSeries = left.seriesId ?? "";
+  const rightSeries = right.seriesId ?? "";
+
+  if (leftSeries && rightSeries) {
+    if (leftSeries === rightSeries) {
+      return (left.sequenceOrder ?? 999) - (right.sequenceOrder ?? 999);
+    }
+    const keywordCompare = (left.targetMainKeyword ?? leftSeries).localeCompare(
+      right.targetMainKeyword ?? rightSeries,
+      "ko"
+    );
+    if (keywordCompare !== 0) return keywordCompare;
+  }
+
+  if (leftSeries && !rightSeries) return -1;
+  if (!leftSeries && rightSeries) return 1;
+
+  return new Date(left.createdAt).getTime() - new Date(right.createdAt).getTime();
+}
+
+function formatPipelineTopicLabel(topic: Topic): string {
+  if (!topic.seriesId || !topic.seriesRole) {
+    return topic.title;
+  }
+
+  const roleLabel = topic.seriesRole === "main" ? "메인" : `선행 ${topic.sequenceOrder ?? 0}`;
+  const keywordLabel = topic.targetMainKeyword?.trim() ? ` | ${topic.targetMainKeyword.trim()}` : "";
+
+  return `[${roleLabel}${keywordLabel}] ${topic.title}`;
+}
+
 const PIPELINE_SOFT_WARNING_SECONDS = 480;
 const PIPELINE_TIMEOUT_SECONDS = 570;
 
@@ -157,6 +189,10 @@ export default function PipelinePage() {
     return normalizeUserId(topic.assignedUserId ?? "") === normalizedUserId;
   });
   const { remaining: availableTopics } = resolveRemainingTopics(userScopedPlanningTopics, posts);
+  const orderedAvailableTopics = useMemo(
+    () => [...availableTopics].sort(compareTopicsForPipeline),
+    [availableTopics]
+  );
   const progressEvents = events.filter(
     (event) => event.type === "stage_change" || event.type === "progress" || event.type === "error"
   );
@@ -169,10 +205,10 @@ export default function PipelinePage() {
 
   useEffect(() => {
     if (topicMode !== "list" || !selectedTopicId) return;
-    if (!availableTopics.some((topic) => topic.topicId === selectedTopicId)) {
+    if (!orderedAvailableTopics.some((topic) => topic.topicId === selectedTopicId)) {
       setSelectedTopicId("");
     }
-  }, [availableTopics, selectedTopicId, setSelectedTopicId, topicMode]);
+  }, [orderedAvailableTopics, selectedTopicId, setSelectedTopicId, topicMode]);
 
   useEffect(() => {
     setPublishedDuplicateBlocked(false);
@@ -980,13 +1016,20 @@ export default function PipelinePage() {
                     className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
                   >
                     <option value="">글 목록에서 주제를 선택해 주세요.</option>
-                    {availableTopics.map((topic) => (
+                    {orderedAvailableTopics.map((topic) => (
                       <option key={topic.topicId} value={topic.topicId}>
-                        {topic.title}
+                        {formatPipelineTopicLabel(topic)}
                       </option>
                     ))}
                   </select>
-                  {availableTopics.length === 0 && (
+                  {selectedTopic?.seriesId && (
+                    <p className="text-[11px] text-zinc-500 mt-1.5">
+                      {selectedTopic.seriesRole === "main"
+                        ? `시리즈 메인 글입니다. 선행 ${selectedTopic.prerequisiteTopicIds?.length ?? 0}개가 모두 발행되어야 작성할 수 있습니다.`
+                        : `시리즈 선행 글 ${selectedTopic.sequenceOrder ?? "-"}번입니다. 메인 키워드: ${selectedTopic.targetMainKeyword ?? "-"}`}
+                    </p>
+                  )}
+                  {orderedAvailableTopics.length === 0 && (
                     <p className="text-xs text-zinc-400 mt-1.5">
                       {userId.trim()
                         ? `'${userId.trim()}' 사용자에게 배정된 주제가 없습니다.`
