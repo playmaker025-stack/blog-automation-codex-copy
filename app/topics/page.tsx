@@ -79,9 +79,9 @@ function getGeneratePanelCopy(mode: "topics" | "preposting-series" | "series-det
   if (mode === "preposting-series") {
     return {
       title: "선행 포스팅 설계",
-      badge: "시리즈 토픽 설계",
+      badge: "시리즈 일괄 설계",
       description:
-        "메인 키워드를 넣으면 선행 글 2~3개와 메인 글 1개를 시리즈로 설계합니다. 이 단계에서는 제목, 순서, 역할, 선행 조건을 먼저 잡습니다.",
+        "메인 키워드를 넣으면 선행 글 2~3개와 메인 글 1개를 시리즈로 설계하고, 저장할 때 편별 상세 전략까지 한 번에 함께 저장합니다.",
       actionLabel: "시리즈 설계",
     };
   }
@@ -318,6 +318,38 @@ export default function TopicsPage() {
     }
   };
 
+  const saveSeriesDetailsForSeries = async (params: {
+    userId: string;
+    mainKeyword: string;
+    seriesId?: string;
+  }) => {
+    const res = await fetch("/api/topics/series-detail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: params.userId,
+        mainKeyword: params.mainKeyword,
+        seriesId: params.seriesId,
+      }),
+    });
+    const json = await res.json() as SeriesDetailPreviewResult & { error?: string };
+    if (!res.ok) throw new Error(json.error ?? "상세 설계 생성 실패");
+
+    for (const item of json.plannedTopics) {
+      await fetch("/api/github/topics", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topicId: item.topicId,
+          seriesDetailPlan: item.detailPlan,
+          seriesDetailReadyAt: new Date().toISOString(),
+        }),
+      });
+    }
+
+    return json;
+  };
+
   const handleSaveSeriesDetails = async () => {
     if (!seriesDetailResult || selectedSeriesDetails.size === 0) return;
     setSavingGenerated(true);
@@ -350,6 +382,7 @@ export default function TopicsPage() {
     if (!generateResult || selectedGenerated.size === 0) return;
     setSavingGenerated(true);
     setNotice(null);
+    let savedCount = 0;
     try {
       const selected = generateResult.generatedTopics.filter((_, i) => selectedGenerated.has(i));
       for (const topic of selected) {
@@ -372,13 +405,38 @@ export default function TopicsPage() {
             assignedUserId: generateUserId.trim().toLowerCase(),
           }),
         });
+        savedCount += 1;
       }
-      setNotice({ type: "ok", msg: `${selected.length}개 토픽이 추가되었습니다.` });
+
+      if (generateMode === "preposting-series") {
+        const seriesId = selected.find((topic) => topic.seriesId)?.seriesId;
+        const detailResult = await saveSeriesDetailsForSeries({
+          userId: generateUserId.trim(),
+          mainKeyword: seriesMainKeyword.trim(),
+          seriesId,
+        });
+        setNotice({
+          type: "ok",
+          msg: `${selected.length}개 시리즈 토픽과 ${detailResult.plannedTopics.length}개 상세 설계가 함께 저장되었습니다.`,
+        });
+      } else {
+        setNotice({ type: "ok", msg: `${selected.length}개 토픽이 추가되었습니다.` });
+      }
       setGenerateResult(null);
+      setSeriesDetailResult(null);
       setSelectedGenerated(new Set());
+      setSelectedSeriesDetails(new Set());
       loadTopics();
-    } catch {
-      setNotice({ type: "err", msg: "저장 실패" });
+    } catch (error) {
+      setNotice({
+        type: "err",
+        msg:
+          savedCount > 0
+            ? `토픽 ${savedCount}개 저장 후 후속 처리 중 실패: ${error instanceof Error ? error.message : "저장 실패"}`
+            : error instanceof Error
+              ? error.message
+              : "저장 실패",
+      });
     } finally {
       setSavingGenerated(false);
     }
@@ -529,11 +587,10 @@ export default function TopicsPage() {
         </div>
         <p className="text-xs text-zinc-400 mb-4">{panelCopy.description}</p>
         <div className="flex gap-1.5 mb-4">
-          {([
-            { value: "topics", label: "AI 글목록 생성" },
-            { value: "preposting-series", label: "선행 포스팅 설계" },
-            { value: "series-detail", label: "시리즈 상세 설계" },
-          ] as const).map((mode) => (
+            {([
+              { value: "topics", label: "AI 글목록 생성" },
+              { value: "preposting-series", label: "선행 포스팅 설계" },
+            ] as const).map((mode) => (
             <button
               key={mode.value}
               onClick={() => {
@@ -598,7 +655,7 @@ export default function TopicsPage() {
           {generateMode === "topics"
             ? "사용자 ID만 입력하면 기존 발행 흐름을 바탕으로 새 글목록 후보를 생성합니다."
             : generateMode === "preposting-series"
-              ? "메인 키워드와 선행 개수를 정하면 선행 글과 메인 글의 순서를 가진 시리즈 토픽을 먼저 만듭니다."
+              ? "메인 키워드와 선행 개수를 정하면 시리즈 토픽을 만들고, 저장 시 편별 상세 설계까지 자동으로 함께 저장합니다."
               : "이미 만든 시리즈 토픽을 기준으로 편별 목표, 키워드, 섹션, 내부링크 계획을 저장합니다."}
         </p>
 
@@ -608,6 +665,11 @@ export default function TopicsPage() {
               <span className="font-medium">리서치 키워드:</span> {generateResult.researchKeyword} &nbsp;·&nbsp;
               {generateResult.competitionInfo}
             </div>
+            {generateMode === "preposting-series" && (
+              <div className="text-xs text-amber-700 bg-amber-50 rounded-lg px-3 py-2">
+                저장 버튼을 누르면 시리즈 토픽 추가와 편별 상세 설계 저장까지 한 번에 진행됩니다.
+              </div>
+            )}
             <div className="space-y-2">
               {generateResult.generatedTopics.map((topic: GeneratedTopic, i: number) => (
                 <div
@@ -673,7 +735,11 @@ export default function TopicsPage() {
                   disabled={savingGenerated || selectedGenerated.size === 0}
                   className="px-4 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  {savingGenerated ? "저장 중..." : `선택한 ${selectedGenerated.size}개 추가`}
+                  {savingGenerated
+                    ? "저장 중..."
+                    : generateMode === "preposting-series"
+                      ? `선택한 ${selectedGenerated.size}개 시리즈 저장`
+                      : `선택한 ${selectedGenerated.size}개 추가`}
                 </button>
               </div>
             </div>
