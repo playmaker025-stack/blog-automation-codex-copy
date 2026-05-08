@@ -84,7 +84,7 @@ export function PipelineReportPanel({
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className={`text-sm font-semibold ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
-                  {result.pass ? "글쓰기 완료" : "초안 저장 완료 · 개선 권고"}
+                  {result.pass ? "글쓰기 완료" : "초안 저장 완료 | 개선 권고 있음"}
                 </p>
                 <p className="mt-1 text-sm font-semibold text-zinc-900">{result.title}</p>
                 <p className="mt-1 text-xs text-zinc-500">{result.wordCount.toLocaleString()}자</p>
@@ -160,12 +160,12 @@ export function PipelineReportPanel({
                 <div>
                   <p className="text-xs font-semibold text-zinc-600">SEO 분석</p>
                   <p className="mt-1 text-sm font-semibold text-zinc-900">
-                    {contentTab === "revision" ? "수정본 기준 SEO 분석" : "초안 기준 SEO 분석"}
+                    {contentTab === "revision" ? "실제 작성 본문 기준 SEO 분석" : "초안 기준 SEO 분석"}
                   </p>
                   <p className="mt-1 text-xs text-zinc-500">
                     {contentTab === "revision"
-                      ? "현재 수정본 내용으로 다시 계산한 키워드 반복과 검색 적합도입니다."
-                      : "초안 작성 시 저장된 SEO 분석 결과입니다."}
+                      ? "지금 입력한 실제 작성 본문으로 메인/서브 키워드 발생 횟수와 적정 범위를 다시 계산합니다."
+                      : "초안 작성 직후 자동 계산된 SEO 분석 결과입니다."}
                   </p>
                 </div>
                 <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-right">
@@ -180,7 +180,7 @@ export function PipelineReportPanel({
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-sm font-semibold text-zinc-800">{item.keyword}</p>
                       <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
-                        {item.count}회 · {item.status}
+                        실제 발생 {item.count}회 | {item.status}
                       </p>
                     </div>
                     <p className="mt-1 text-[11px] text-zinc-500">권장 {item.targetMin}~{item.targetMax}회</p>
@@ -194,7 +194,7 @@ export function PipelineReportPanel({
                   <div>
                     <p className="text-xs font-semibold text-zinc-600">키워드별 완성도 / 상위 노출 가능성 지표</p>
                     <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-                      실제 검색 순위를 예측하는 값이 아니라, 제목/도입부/반복 밀도 기준의 내부 SEO 지표입니다.
+                      실제 검색 순위를 뜻하는 값은 아니고, 제목/도입부/반복 배치 기준으로 계산한 내부 SEO 지표입니다.
                     </p>
                   </div>
                   {activeSeoEvaluation.keywordMetrics.map((metric) => (
@@ -205,7 +205,7 @@ export function PipelineReportPanel({
                           <p className="mt-1 text-[11px] text-zinc-500">{metric.label}</p>
                         </div>
                         <p className={`text-xs font-semibold ${metric.role === "main" ? "text-blue-600" : "text-zinc-500"}`}>
-                          {metric.role === "main" ? "핵심 축" : "보조 축"}
+                          {metric.role === "main" ? "메인 축" : "보조 축"}
                         </p>
                       </div>
 
@@ -217,7 +217,7 @@ export function PipelineReportPanel({
                           </p>
                         </div>
                         <div className="rounded-md bg-zinc-50 px-3 py-2">
-                          <p className="text-[11px] font-semibold text-zinc-500">상위 노출 가능성 지표</p>
+                          <p className="text-[11px] font-semibold text-zinc-500">노출 가능성 지표</p>
                           <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.exposurePotentialScore)}`}>
                             {metric.exposurePotentialScore}점
                           </p>
@@ -226,7 +226,7 @@ export function PipelineReportPanel({
 
                       <p className="mt-3 text-xs text-zinc-600">{metric.summary}</p>
                       <p className="mt-1 text-[11px] text-zinc-500">
-                        제목 {metric.titleIncluded ? "반영" : "미반영"} · 도입부 {metric.introIncluded ? "반영" : "미반영"} · 권장 {metric.targetMin}~{metric.targetMax}회 / 현재 {metric.count}회
+                        제목 {metric.titleIncluded ? "반영" : "미반영"} | 도입부 {metric.introIncluded ? "반영" : "미반영"} | 권장 {metric.targetMin}~{metric.targetMax}회 / 현재 {metric.count}회
                       </p>
                       <p className="mt-2 text-xs text-zinc-700">{metric.action}</p>
                     </div>
@@ -240,7 +240,7 @@ export function PipelineReportPanel({
                     <div>
                       <p className="text-xs font-semibold text-zinc-600">검색 조합 커버 지표</p>
                       <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-                        메인 키워드와 지역/상황/매장 조합이 제목, 도입부, 소제목, 본문에서 얼마나 자연스럽게 묶였는지 보는 내부 지표입니다.
+                        메인 키워드와 상황/매장 조합이 제목, 도입부, 소제목, 본문에서 얼마나 자연스럽게 묶였는지 보는 내부 지표입니다.
                       </p>
                     </div>
                     <div className="rounded-md bg-zinc-50 px-3 py-2 text-right">
@@ -257,7 +257,7 @@ export function PipelineReportPanel({
                         <div>
                           <p className="text-sm font-semibold text-zinc-800">{metric.phrase}</p>
                           <p className="mt-1 text-[11px] text-zinc-500">
-                            {metric.priority === "core" ? "핵심 조합" : "보조 조합"} · {metric.role}
+                            {metric.priority === "core" ? "핵심 조합" : "보조 조합"} | {metric.role}
                           </p>
                         </div>
                         <div className="text-right">
@@ -268,7 +268,7 @@ export function PipelineReportPanel({
 
                       <p className="mt-2 text-xs text-zinc-600">{metric.summary}</p>
                       <p className="mt-1 text-[11px] text-zinc-500">
-                        제목 {metric.titleIncluded ? "연결" : "약함"} · 도입부 {metric.introIncluded ? "연결" : "약함"} · 소제목 {metric.headingIncluded ? "연결" : "보강 가능"} · 직접 표현 {metric.exactMatches}회
+                        제목 {metric.titleIncluded ? "연결" : "비포함"} | 도입부 {metric.introIncluded ? "연결" : "비포함"} | 소제목 {metric.headingIncluded ? "연결" : "보강 필요"} | 직접 표현 {metric.exactMatches}회
                       </p>
                       <p className="mt-2 text-xs text-zinc-700">{metric.action}</p>
                     </div>
@@ -279,7 +279,7 @@ export function PipelineReportPanel({
               {activeSeoNotes.length > 0 && (
                 <div>
                   <p className="mb-1 text-xs font-semibold text-zinc-600">
-                    {contentTab === "revision" ? "수정본 SEO 코멘트" : "SEO 보강 포인트"}
+                    {contentTab === "revision" ? "실제 본문 기준 SEO 코멘트" : "SEO 보강 포인트"}
                   </p>
                   <ul className="space-y-1">
                     {activeSeoNotes.map((item, index) => (
@@ -298,18 +298,18 @@ export function PipelineReportPanel({
             <div className="space-y-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
               <div>
                 <p className="text-xs font-semibold text-blue-700">수정본 검토 리포트</p>
-                <p className="mt-1 text-xs text-blue-600">수정본 탭에서 검토한 결과만 따로 모아 보여줍니다.</p>
+                <p className="mt-1 text-xs text-blue-600">실제 작성 본문을 기준으로 다시 계산한 결과만 따로 모아 보여줍니다.</p>
               </div>
 
               {reviewResult.keywordReport.items.length > 0 && (
                 <div className="space-y-2">
-                  <p className="text-xs font-semibold text-blue-700">주요 키워드 반복 횟수</p>
+                  <p className="text-xs font-semibold text-blue-700">메인/서브 키워드 실제 발생 횟수</p>
                   {reviewResult.keywordReport.items.map((item) => (
                     <div key={`review-${item.keyword}`} className="rounded-md border border-blue-100 bg-white px-3 py-2">
                       <div className="flex items-center justify-between gap-3">
                         <p className="text-xs font-semibold text-zinc-800">{item.keyword}</p>
                         <p className={`text-[11px] font-semibold ${keywordStatusTone(item.status)}`}>
-                          {item.count}회 · {item.status}
+                          실제 발생 {item.count}회 | {item.status}
                         </p>
                       </div>
                       <p className="mt-1 text-[11px] text-zinc-500">권장 {item.targetMin}~{item.targetMax}회</p>
@@ -376,7 +376,7 @@ export function PipelineReportPanel({
             <div>
               <p className="text-xs font-semibold text-zinc-600">발행 완료 후 인덱스 추가</p>
               {!reviewApplied && (
-                <p className="mt-1 text-xs text-amber-600">먼저 수정본을 저장본에 반영한 뒤에만 인덱스에 추가할 수 있어.</p>
+                <p className="mt-1 text-xs text-amber-600">먼저 수정본을 원본에 반영한 뒤 인덱스에 추가할 수 있습니다.</p>
               )}
             </div>
             <input
@@ -391,7 +391,7 @@ export function PipelineReportPanel({
               disabled={publishingToIndex || !reviewApplied || !publishUrl.trim()}
               className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-40"
             >
-              {publishingToIndex ? "인덱스 추가 중" : "검토 후 인덱스 목록에 추가"}
+              {publishingToIndex ? "인덱스 추가 중..." : "검토 후 인덱스 목록에 추가"}
             </button>
             {publishNotice && (
               <p className={`text-xs ${publishNotice.type === "ok" ? "text-emerald-600" : "text-red-500"}`}>

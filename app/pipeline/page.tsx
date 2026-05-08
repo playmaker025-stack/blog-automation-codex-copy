@@ -46,6 +46,52 @@ interface ResultData {
 
 type ContentTab = "draft" | "revision";
 
+interface DraftVersionSnapshot {
+  label: string;
+  body: string;
+}
+
+const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[자동 보강본]\n";
+const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[자동 보강본 2차]\n";
+
+function parseDraftVersionSnapshots(streamingBody: string): DraftVersionSnapshot[] {
+  const normalized = streamingBody.replace(/\r\n/g, "\n");
+  const secondMarkerIndex = normalized.indexOf(AUTO_DRAFT_MARKER_2);
+  const thirdMarkerIndex = normalized.indexOf(AUTO_DRAFT_MARKER_3);
+
+  const firstBody = (
+    secondMarkerIndex >= 0 ? normalized.slice(0, secondMarkerIndex) : normalized
+  ).trim();
+  const secondBody = secondMarkerIndex >= 0
+    ? normalized.slice(
+      secondMarkerIndex + AUTO_DRAFT_MARKER_2.length,
+      thirdMarkerIndex >= 0 ? thirdMarkerIndex : undefined
+    ).trim()
+    : "";
+  const thirdBody = thirdMarkerIndex >= 0
+    ? normalized.slice(thirdMarkerIndex + AUTO_DRAFT_MARKER_3.length).trim()
+    : "";
+
+  return [
+    { label: "1차 초안", body: firstBody },
+    { label: "자동 보강본 2차", body: secondBody },
+    { label: "자동 보강본 3차", body: thirdBody },
+  ];
+}
+
+function buildDraftCompletionMessage(streamingBody: string): string | null {
+  const completedCount = parseDraftVersionSnapshots(streamingBody).filter((version) => version.body).length;
+
+  if (completedCount <= 0) return null;
+  if (completedCount === 1) {
+    return "1차 초안 작성이 완료되었습니다. 추가 자동 보강 없이도 진행 가능한 상태로 판단했습니다.";
+  }
+  if (completedCount === 2) {
+    return "1차 초안과 자동 보강본 2차 작성이 완료되었습니다. 더 이상의 자동 보강 없이 초안 작성을 마칩니다.";
+  }
+  return "1차 초안부터 자동 보강본 3차까지 작성이 완료되었습니다. 각 영역을 비교한 뒤 수정본 탭에서 실제 작성 본문을 검토해 주세요.";
+}
+
 function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]): string {
   if (status === "적정") return "text-emerald-600";
   if (status === "과다") return "text-amber-600";
@@ -180,11 +226,13 @@ export default function PipelinePage() {
   const [publishingToIndex, setPublishingToIndex] = useState(false);
   const [publishNotice, setPublishNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const [publishCompletionMessage, setPublishCompletionMessage] = useState<string | null>(null);
+  const [draftCompletionMessage, setDraftCompletionMessage] = useState<string | null>(null);
   const [contentTab, setContentTab] = useState<ContentTab>("draft");
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const strategyAbortRef = useRef<AbortController | null>(null);
   const writeAbortRef = useRef<AbortController | null>(null);
   const forceManualApprovalRef = useRef(false);
+  const streamingBodyRef = useRef("");
   const normalizedUserId = normalizeUserId(userId.trim());
 
   const planningTopics = topics.filter((topic) => topic.source !== "direct");
@@ -308,7 +356,9 @@ export default function PipelinePage() {
     }
 
     if (event.type === "token") {
-      appendStreamingToken((event.data as { token?: string })?.token ?? "");
+      const token = (event.data as { token?: string })?.token ?? "";
+      streamingBodyRef.current += token;
+      appendStreamingToken(token);
     }
 
     if (event.type === "approval_required") {
@@ -346,6 +396,7 @@ export default function PipelinePage() {
       setPublishUrl("");
       setPublishNotice(null);
       setPublishCompletionMessage(null);
+      setDraftCompletionMessage(buildDraftCompletionMessage(streamingBodyRef.current));
       setContentTab("draft");
       setRunning(false);
       setRunningTitle(null);
@@ -517,6 +568,7 @@ export default function PipelinePage() {
     resetRun();
     setEvents([]);
     setStreamingBody("");
+    streamingBodyRef.current = "";
     setResult(null);
     setDraftRewriteContext(null);
     setReviewTitle("");
@@ -529,6 +581,7 @@ export default function PipelinePage() {
     setPublishUrl("");
     setPublishNotice(null);
     setPublishCompletionMessage(null);
+    setDraftCompletionMessage(null);
     setContentTab("draft");
     setStage("idle");
     setApproval(null);
@@ -754,6 +807,7 @@ export default function PipelinePage() {
     resetRun();
     setEvents([]);
     setStreamingBody("");
+    streamingBodyRef.current = "";
     setResult(null);
     setReviewTitle("");
     setReviewBody("");
@@ -765,6 +819,7 @@ export default function PipelinePage() {
     setPublishUrl("");
     setPublishNotice(null);
     setPublishCompletionMessage(null);
+    setDraftCompletionMessage(null);
     setContentTab("draft");
     setStage("idle");
     setApproval(null);
@@ -1245,6 +1300,28 @@ export default function PipelinePage() {
                 className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
               >
                 확인 후 새로고침
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {draftCompletionMessage && (
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-md rounded-xl border border-blue-200 bg-white shadow-2xl">
+            <div className="border-b border-blue-100 bg-blue-50 px-6 py-4">
+              <p className="text-sm font-semibold text-blue-700">초안 작성 완료</p>
+            </div>
+            <div className="px-6 py-5">
+              <p className="text-sm leading-6 text-zinc-700">{draftCompletionMessage}</p>
+            </div>
+            <div className="flex justify-end border-t border-zinc-100 px-6 py-4">
+              <button
+                type="button"
+                onClick={() => setDraftCompletionMessage(null)}
+                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+              >
+                확인
               </button>
             </div>
           </div>
