@@ -35,6 +35,36 @@ function splitParagraphs(body: string): string[] {
     .filter(Boolean);
 }
 
+function extractFirstSentence(body: string): string {
+  const normalized = body.replace(/\r/g, "\n").trim();
+  if (!normalized) return "";
+  const sentenceMatch = normalized.match(/^[\s\S]*?(?:[.!?\n]|$)/u);
+  return sentenceMatch?.[0]?.trim() ?? normalized;
+}
+
+function extractConclusionText(body: string): string {
+  const paragraphs = splitParagraphs(body);
+  return paragraphs.slice(-2).join("\n\n");
+}
+
+function getKeywordTargets(bodyLength: number, index: number): { targetMin: number; targetMax: number } {
+  if (index === 0) {
+    if (bodyLength >= 2200) return { targetMin: 5, targetMax: 8 };
+    if (bodyLength >= 1400) return { targetMin: 4, targetMax: 6 };
+    return { targetMin: 3, targetMax: 5 };
+  }
+
+  if (index === 1) {
+    if (bodyLength >= 2200) return { targetMin: 2, targetMax: 5 };
+    if (bodyLength >= 1400) return { targetMin: 2, targetMax: 4 };
+    return { targetMin: 1, targetMax: 3 };
+  }
+
+  if (bodyLength >= 2200) return { targetMin: 1, targetMax: 4 };
+  if (bodyLength >= 1400) return { targetMin: 1, targetMax: 3 };
+  return { targetMin: 1, targetMax: 2 };
+}
+
 function splitCombinationTokens(value: string): string[] {
   return value
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
@@ -78,6 +108,9 @@ function buildKeywordFocusMetrics(params: {
       titleIncluded && params.title.indexOf(item.keyword) >= 0 && params.title.indexOf(item.keyword) <= 12;
     const introIncluded = includesKeyword(introText, item.keyword);
     const earlyCoverage = includesKeyword(earlyText, item.keyword);
+    const firstSentenceIncluded = includesKeyword(extractFirstSentence(params.body), item.keyword);
+    const headingIncluded = includesKeyword(findHeadingLines(params.body).join("\n"), item.keyword);
+    const conclusionIncluded = includesKeyword(extractConclusionText(params.body), item.keyword);
 
     let completenessScore = role === "main" ? 76 : 72;
     let exposurePotentialScore = role === "main" ? 74 : 70;
@@ -114,6 +147,32 @@ function buildKeywordFocusMetrics(params: {
     } else {
       completenessScore -= 4;
       exposurePotentialScore -= 5;
+    }
+
+    if (role === "main") {
+      if (firstSentenceIncluded) {
+        completenessScore += 6;
+        exposurePotentialScore += 7;
+      } else {
+        completenessScore -= 6;
+        exposurePotentialScore -= 7;
+      }
+
+      if (headingIncluded) {
+        completenessScore += 6;
+        exposurePotentialScore += 7;
+      } else {
+        completenessScore -= 5;
+        exposurePotentialScore -= 6;
+      }
+
+      if (conclusionIncluded) {
+        completenessScore += 4;
+        exposurePotentialScore += 4;
+      } else {
+        completenessScore -= 3;
+        exposurePotentialScore -= 4;
+      }
     }
 
     if (item.status === "적정") {
@@ -343,11 +402,11 @@ export function analyzeKeywordUsage(params: {
   const keywords = selectFocusKeywords(params.title, params.keywords);
   const paragraphs = splitParagraphs(params.body);
   const introText = paragraphs.slice(0, 2).join("\n\n");
+  const bodyLength = params.body.replace(/\s+/g, "").length;
 
   const items: KeywordUsageItem[] = keywords.map((keyword, index) => {
     const count = countKeywordOccurrences(params.body, keyword);
-    const targetMin = index === 0 ? 2 : 1;
-    const targetMax = index <= 1 ? 6 : 4;
+    const { targetMin, targetMax } = getKeywordTargets(bodyLength, index);
 
     let status: KeywordUsageItem["status"] = "적정";
     let recommendation = "현재 밀도를 유지해도 괜찮습니다.";
@@ -374,7 +433,6 @@ export function analyzeKeywordUsage(params: {
   const introCoverage = mainKeyword ? countKeywordOccurrences(introText, mainKeyword) > 0 : true;
   const titleFrontLoaded =
     mainKeyword ? params.title.indexOf(mainKeyword) >= 0 && params.title.indexOf(mainKeyword) <= 12 : true;
-  const bodyLength = params.body.replace(/\s+/g, "").length;
   const totalMentions = items.reduce((sum, item) => sum + item.count, 0);
 
   const summary: string[] = [];
@@ -423,6 +481,13 @@ export function evaluateSeoCompleteness(params: {
     combinations,
   });
   const combinationCoverageScore = computeCombinationCoverageScore(combinationMetrics);
+  const firstSentence = extractFirstSentence(params.body);
+  const headingText = findHeadingLines(params.body).join("\n");
+  const conclusionText = extractConclusionText(params.body);
+  const mainKeyword = keywordReport.items[0]?.keyword ?? "";
+  const mainInFirstSentence = mainKeyword ? includesKeyword(firstSentence, mainKeyword) : true;
+  const mainInHeading = mainKeyword ? includesKeyword(headingText, mainKeyword) : true;
+  const mainInConclusion = mainKeyword ? includesKeyword(conclusionText, mainKeyword) : true;
 
   let score = 88;
   const evidence: string[] = [];
@@ -450,6 +515,30 @@ export function evaluateSeoCompleteness(params: {
   } else if (keywordReport.items[0]) {
     score -= 10;
     improvements.push(`첫 두 문단 안에 '${keywordReport.items[0].keyword}'를 자연스럽게 넣는 편이 좋습니다.`);
+  }
+
+  if (mainInFirstSentence) {
+    score += 3;
+    evidence.push("첫 문장에 메인 키워드가 보여 검색 의도를 바로 연결합니다.");
+  } else if (mainKeyword) {
+    score -= 7;
+    improvements.push(`첫 문장에 '${mainKeyword}'를 한 번 직접 배치해 검색 의도를 더 또렷하게 보여주세요.`);
+  }
+
+  if (mainInHeading) {
+    score += 3;
+    evidence.push("소제목에도 메인 키워드가 반영되어 문서 구조와 주제가 잘 맞물립니다.");
+  } else if (mainKeyword) {
+    score -= 6;
+    improvements.push(`핵심 소제목 1개 이상에 '${mainKeyword}'를 포함해 주제 축을 더 선명하게 잡아주세요.`);
+  }
+
+  if (mainInConclusion) {
+    score += 2;
+    evidence.push("결론부에도 메인 키워드가 다시 등장해 문서 마무리가 일관됩니다.");
+  } else if (mainKeyword) {
+    score -= 4;
+    improvements.push(`마무리 문단에서 '${mainKeyword}'를 한 번 더 정리해 글의 중심 키워드를 닫아주세요.`);
   }
 
   for (const item of keywordReport.items) {

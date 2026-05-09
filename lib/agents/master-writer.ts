@@ -197,6 +197,41 @@ const BASE_TOOLS: Tool[] = [
   },
 ];
 
+function getKeywordPlacementTargets(estimatedLength: number): {
+  mainMin: number;
+  mainMax: number;
+  secondaryMin: number;
+  secondaryMax: number;
+} {
+  if (estimatedLength >= 2200) {
+    return { mainMin: 5, mainMax: 8, secondaryMin: 2, secondaryMax: 5 };
+  }
+  if (estimatedLength >= 1400) {
+    return { mainMin: 4, mainMax: 6, secondaryMin: 2, secondaryMax: 4 };
+  }
+  return { mainMin: 3, mainMax: 5, secondaryMin: 1, secondaryMax: 3 };
+}
+
+function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
+  const primaryKeyword = strategy.keywords[0] || "none";
+  const secondaryKeyword = strategy.keywords[1] || "none";
+  const targets = getKeywordPlacementTargets(strategy.estimatedLength);
+
+  return [
+    `- Primary keyword: '${primaryKeyword}'`,
+    `- Keep the primary keyword as the article's fixed center. Recommended total usage: ${targets.mainMin}-${targets.mainMax} times for this target length.`,
+    "- Include the primary keyword in the title, preferably close to the front.",
+    "- Include the primary keyword in the first sentence or at least the first paragraph.",
+    "- Include the primary keyword again within the first 2 paragraphs.",
+    "- Include the primary keyword in at least one main subheading.",
+    "- Include the primary keyword once more in the final summary/conclusion paragraph.",
+    "- Do not place the primary keyword repeatedly in back-to-back sentences.",
+    `- Secondary keyword: '${secondaryKeyword}'. Use it only as supporting context, around ${targets.secondaryMin}-${targets.secondaryMax} times when it fits naturally.`,
+    "- A secondary keyword must not replace the article's main angle or dominate headings over the primary keyword.",
+    "- If the draft reads stuffed, reduce duplicate phrases and replace some repeats with practical criteria, examples, or decision language.",
+  ];
+}
+
 function formatOpenAICorpus(corpus: CorpusSummaryArtifact | undefined): string {
   if (!corpus) {
     return [
@@ -353,6 +388,7 @@ function buildOpenAIWriterUserPrompt(params: {
   revisionInstructions?: string;
 }): string {
   const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
+  const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy);
   return [
     `User id: ${userId.trim().toLowerCase()}`,
     `Title: ${strategy.title}`,
@@ -392,9 +428,9 @@ function buildOpenAIWriterUserPrompt(params: {
     "",
     "Required writing behavior:",
     "- Start with the reader's likely situation or question, not a generic definition.",
-    "- Put the main keyword naturally in the first 2 paragraphs.",
     "- Treat the primary keyword as the non-negotiable center of the article. Do not let a secondary keyword replace the article's main angle.",
     "- Use the secondary keyword only to sharpen context, comparison intent, or the practical scenario around the primary keyword.",
+    ...keywordPlacementGuidance,
     "- Make the target search combinations visible across the article. Cover every core combination at least once naturally through the title, intro, subheadings, or key body paragraphs.",
     "- Spread combinations by section role: use local combinations in location/proof paragraphs, use use-case combinations in selection/comparison paragraphs, and keep the main keyword as the repeated anchor.",
     "- Do not awkwardly list combinations back-to-back. Each combination should appear because the paragraph genuinely answers that search intent.",
@@ -538,6 +574,9 @@ export async function runMasterWriter(params: {
   const revisionSection = revisionInstructions
     ? `\n\n${revisionInstructions}\n\n위 자동 보강 지시를 최우선으로 반영해 전체 본문을 다시 작성해주세요.`
     : "";
+  const anthropicKeywordPlacementRules = buildKeywordPlacementGuidance(strategy)
+    .map((line) => line.replace(/^- /, "- "))
+    .join("\n");
 
   const userMessage = `다음 전략에 따라 네이버 블로그 본문을 작성해주세요.
 
@@ -553,6 +592,9 @@ Naver logic pre-check:
 ${naverLogicAgent.buildWriterBrief(strategy.naverLogic)}
 
 ${formatTargetSearchCombinations(strategy)}
+
+키워드 배치 규칙:
+${anthropicKeywordPlacementRules}
 
 아웃라인:
 ${strategy.outline
