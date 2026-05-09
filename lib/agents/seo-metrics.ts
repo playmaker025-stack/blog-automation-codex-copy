@@ -36,10 +36,10 @@ function splitParagraphs(body: string): string[] {
 }
 
 function extractFirstSentence(body: string): string {
-  const normalized = body.replace(/\r/g, "\n").trim();
-  if (!normalized) return "";
-  const sentenceMatch = normalized.match(/^[\s\S]*?(?:[.!?\n]|$)/u);
-  return sentenceMatch?.[0]?.trim() ?? normalized;
+  const firstParagraph = splitParagraphs(body)[0]?.replace(/\s*\n\s*/g, " ").trim() ?? "";
+  if (!firstParagraph) return "";
+  const sentenceMatch = firstParagraph.match(/^[\s\S]*?(?:[.!?]|$)/u);
+  return sentenceMatch?.[0]?.trim() ?? firstParagraph;
 }
 
 function extractConclusionText(body: string): string {
@@ -47,7 +47,27 @@ function extractConclusionText(body: string): string {
   return paragraphs.slice(-2).join("\n\n");
 }
 
-function getKeywordTargets(bodyLength: number, index: number): { targetMin: number; targetMax: number } {
+function getKeywordTargets(
+  bodyLength: number,
+  index: number,
+  options?: {
+    seriesRole?: "prelude" | "main";
+    targetMainKeyword?: string;
+    keyword?: string;
+  }
+): { targetMin: number; targetMax: number } {
+  const normalizedTargetMainKeyword = options?.targetMainKeyword?.trim().toLowerCase();
+  const normalizedKeyword = options?.keyword?.trim().toLowerCase();
+  const isPreludeTarget =
+    options?.seriesRole === "prelude" &&
+    !!normalizedTargetMainKeyword &&
+    !!normalizedKeyword &&
+    normalizedTargetMainKeyword === normalizedKeyword;
+
+  if (isPreludeTarget) {
+    return { targetMin: 1, targetMax: 3 };
+  }
+
   if (index === 0) {
     if (bodyLength >= 2200) return { targetMin: 5, targetMax: 8 };
     if (bodyLength >= 1400) return { targetMin: 4, targetMax: 6 };
@@ -94,6 +114,8 @@ function buildKeywordFocusMetrics(params: {
   title: string;
   body: string;
   keywordReport: KeywordUsageReport;
+  seriesRole?: "prelude" | "main";
+  targetMainKeyword?: string;
 }): KeywordFocusMetric[] {
   const paragraphs = splitParagraphs(params.body);
   const introText = paragraphs.slice(0, 2).join("\n\n");
@@ -103,6 +125,9 @@ function buildKeywordFocusMetrics(params: {
 
   return params.keywordReport.items.map((item, index) => {
     const role: KeywordFocusMetric["role"] = index === 0 ? "main" : "sub";
+    const isPreludeTarget =
+      params.seriesRole === "prelude" &&
+      item.keyword.trim().toLowerCase() === (params.targetMainKeyword?.trim().toLowerCase() ?? "");
     const titleIncluded = compactTitle.includes(item.keyword.toLowerCase());
     const titleFrontLoaded =
       titleIncluded && params.title.indexOf(item.keyword) >= 0 && params.title.indexOf(item.keyword) <= 12;
@@ -115,7 +140,10 @@ function buildKeywordFocusMetrics(params: {
     let completenessScore = role === "main" ? 76 : 72;
     let exposurePotentialScore = role === "main" ? 74 : 70;
 
-    if (titleIncluded) {
+    if (isPreludeTarget) {
+      completenessScore += 0;
+      exposurePotentialScore += 0;
+    } else if (titleIncluded) {
       completenessScore += role === "main" ? 8 : 6;
       exposurePotentialScore += role === "main" ? 10 : 8;
     } else {
@@ -123,7 +151,7 @@ function buildKeywordFocusMetrics(params: {
       exposurePotentialScore -= role === "main" ? 16 : 12;
     }
 
-    if (role === "main") {
+    if (role === "main" && !isPreludeTarget) {
       if (titleFrontLoaded) {
         completenessScore += 6;
         exposurePotentialScore += 6;
@@ -149,7 +177,7 @@ function buildKeywordFocusMetrics(params: {
       exposurePotentialScore -= 5;
     }
 
-    if (role === "main") {
+    if (role === "main" && !isPreludeTarget) {
       if (firstSentenceIncluded) {
         completenessScore += 6;
         exposurePotentialScore += 7;
@@ -398,6 +426,8 @@ export function analyzeKeywordUsage(params: {
   title: string;
   body: string;
   keywords?: string[];
+  seriesRole?: "prelude" | "main";
+  targetMainKeyword?: string;
 }): KeywordUsageReport {
   const keywords = selectFocusKeywords(params.title, params.keywords);
   const paragraphs = splitParagraphs(params.body);
@@ -406,7 +436,11 @@ export function analyzeKeywordUsage(params: {
 
   const items: KeywordUsageItem[] = keywords.map((keyword, index) => {
     const count = countKeywordOccurrences(params.body, keyword);
-    const { targetMin, targetMax } = getKeywordTargets(bodyLength, index);
+    const { targetMin, targetMax } = getKeywordTargets(bodyLength, index, {
+      seriesRole: params.seriesRole,
+      targetMainKeyword: params.targetMainKeyword,
+      keyword,
+    });
 
     let status: KeywordUsageItem["status"] = "적정";
     let recommendation = "현재 밀도를 유지해도 괜찮습니다.";
@@ -464,12 +498,16 @@ export function evaluateSeoCompleteness(params: {
   body: string;
   keywords?: string[];
   targetSearchCombinations?: SearchCombinationTarget[];
+  seriesRole?: "prelude" | "main";
+  targetMainKeyword?: string;
 }): SeoEvaluation {
   const keywordReport = analyzeKeywordUsage(params);
   const keywordMetrics = buildKeywordFocusMetrics({
     title: params.title,
     body: params.body,
     keywordReport,
+    seriesRole: params.seriesRole,
+    targetMainKeyword: params.targetMainKeyword,
   });
   const combinations =
     (params.targetSearchCombinations ?? []).length > 0
@@ -488,6 +526,10 @@ export function evaluateSeoCompleteness(params: {
   const mainInFirstSentence = mainKeyword ? includesKeyword(firstSentence, mainKeyword) : true;
   const mainInHeading = mainKeyword ? includesKeyword(headingText, mainKeyword) : true;
   const mainInConclusion = mainKeyword ? includesKeyword(conclusionText, mainKeyword) : true;
+  const isPreludeMainKeyword =
+    params.seriesRole === "prelude" &&
+    !!mainKeyword &&
+    mainKeyword.trim().toLowerCase() === (params.targetMainKeyword?.trim().toLowerCase() ?? "");
 
   let score = 88;
   const evidence: string[] = [];
@@ -501,7 +543,9 @@ export function evaluateSeoCompleteness(params: {
     improvements.push("제목 길이를 28~45자 안쪽으로 맞추는 편이 좋습니다.");
   }
 
-  if (keywordReport.titleFrontLoaded) {
+  if (isPreludeMainKeyword) {
+    evidence.push("선행 포스팅은 메인 키워드를 제목 정면에 반복하지 않는 규칙을 따릅니다.");
+  } else if (keywordReport.titleFrontLoaded) {
     score += 4;
     evidence.push("메인 키워드가 제목 앞부분에 배치되어 있습니다.");
   } else if (keywordReport.items[0]) {
@@ -517,7 +561,9 @@ export function evaluateSeoCompleteness(params: {
     improvements.push(`첫 두 문단 안에 '${keywordReport.items[0].keyword}'를 자연스럽게 넣는 편이 좋습니다.`);
   }
 
-  if (mainInFirstSentence) {
+  if (isPreludeMainKeyword) {
+    evidence.push("선행 포스팅은 메인 키워드를 본문 맥락에서 자연스럽게 노출하는 모드로 평가합니다.");
+  } else if (mainInFirstSentence) {
     score += 3;
     evidence.push("첫 문장에 메인 키워드가 보여 검색 의도를 바로 연결합니다.");
   } else if (mainKeyword) {
@@ -525,18 +571,18 @@ export function evaluateSeoCompleteness(params: {
     improvements.push(`첫 문장에 '${mainKeyword}'를 한 번 직접 배치해 검색 의도를 더 또렷하게 보여주세요.`);
   }
 
-  if (mainInHeading) {
+  if (!isPreludeMainKeyword && mainInHeading) {
     score += 3;
     evidence.push("소제목에도 메인 키워드가 반영되어 문서 구조와 주제가 잘 맞물립니다.");
-  } else if (mainKeyword) {
+  } else if (!isPreludeMainKeyword && mainKeyword) {
     score -= 6;
     improvements.push(`핵심 소제목 1개 이상에 '${mainKeyword}'를 포함해 주제 축을 더 선명하게 잡아주세요.`);
   }
 
-  if (mainInConclusion) {
+  if (!isPreludeMainKeyword && mainInConclusion) {
     score += 2;
     evidence.push("결론부에도 메인 키워드가 다시 등장해 문서 마무리가 일관됩니다.");
-  } else if (mainKeyword) {
+  } else if (!isPreludeMainKeyword && mainKeyword) {
     score -= 4;
     improvements.push(`마무리 문단에서 '${mainKeyword}'를 한 번 더 정리해 글의 중심 키워드를 닫아주세요.`);
   }

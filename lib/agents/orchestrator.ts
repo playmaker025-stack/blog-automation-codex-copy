@@ -1684,11 +1684,14 @@ export async function runWritePhase(params: {
 
     const completionSupport = buildCompletionSupport(effectiveStrategy, writerResult.title);
     const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy: effectiveStrategy, writerResult, evalResult });
+    const topic = await loadTopic(topicId);
     const seoEvaluation = evaluateSeoCompleteness({
       title: writerResult.title,
       body: writerResult.content,
       keywords: effectiveStrategy.keywords,
       targetSearchCombinations: effectiveStrategy.targetSearchCombinations,
+      seriesRole: topic?.seriesRole,
+      targetMainKeyword: topic?.targetMainKeyword,
     });
 
     if (!postGateResult.passed) {
