@@ -189,6 +189,33 @@ export function PipelineReportPanel({
                 ))}
               </div>
 
+              {(activeKeywordReport.tokenItems?.length ?? 0) > 0 && (
+                <div className="space-y-2">
+                  <div>
+                    <p className="text-xs font-semibold text-zinc-600">실제 본문 핵심 단어 분포</p>
+                    <p className="mt-1 text-[11px] leading-5 text-zinc-500">
+                      선택된 구문 키워드뿐 아니라, 실제 본문에서 반복된 핵심 단어 축까지 함께 확인합니다.
+                    </p>
+                  </div>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {activeKeywordReport.tokenItems.map((item) => (
+                      <div key={`${contentTab}-token-${item.token}`} className="rounded-lg border border-zinc-100 bg-white px-3 py-3">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-sm font-semibold text-zinc-800">{item.token}</p>
+                          <p className={`text-xs font-semibold ${item.count >= 10 ? "text-emerald-600" : item.count >= 4 ? "text-zinc-600" : "text-amber-600"}`}>
+                            실제 발생 {item.count}회
+                          </p>
+                        </div>
+                        <p className="mt-1 text-[11px] text-zinc-500">
+                          연결 구문: {item.sourceKeywords.join(" / ")}
+                        </p>
+                        <p className="mt-2 text-xs text-zinc-700">{item.note}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {(activeSeoEvaluation.keywordMetrics?.length ?? 0) > 0 && (
                 <div className="space-y-2">
                   <div>

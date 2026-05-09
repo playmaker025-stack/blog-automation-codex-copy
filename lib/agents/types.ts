@@ -126,6 +126,12 @@ export interface KeywordUsageItem {
 
 export interface KeywordUsageReport {
   items: KeywordUsageItem[];
+  tokenItems: Array<{
+    token: string;
+    count: number;
+    sourceKeywords: string[];
+    note: string;
+  }>;
   totalMentions: number;
   introCoverage: boolean;
   titleFrontLoaded: boolean;

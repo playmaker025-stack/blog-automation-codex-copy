@@ -415,6 +415,59 @@ export function selectFocusKeywords(title: string, keywords: string[] = [], limi
   return uniqueKeywords([...keywords, ...titleTokens]).slice(0, limit);
 }
 
+function collectKeywordPool(title: string, keywords: string[] = []): string[] {
+  const titleTokens = title
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .filter((token) => token.length >= 2);
+
+  return uniqueKeywords([...keywords, ...titleTokens]);
+}
+
+function buildKeywordTokenItems(keywordPool: string[], body: string): Array<{
+  token: string;
+  count: number;
+  sourceKeywords: string[];
+  note: string;
+}> {
+  const tokenSources = new Map<string, Set<string>>();
+
+  for (const phrase of keywordPool) {
+    for (const token of splitCombinationTokens(phrase)) {
+      if (token.length < 2) continue;
+      const bucket = tokenSources.get(token) ?? new Set<string>();
+      bucket.add(phrase);
+      tokenSources.set(token, bucket);
+    }
+  }
+
+  return [...tokenSources.entries()]
+    .map(([token, sourceSet]) => {
+      const count = countKeywordOccurrences(body, token);
+      let note = "등장은 있지만 중심 축으로 보기엔 약합니다.";
+      if (count >= 20) {
+        note = "본문 전반에 매우 강하게 반복됩니다. 과도한 중복인지 함께 확인하세요.";
+      } else if (count >= 10) {
+        note = "핵심 축으로 충분히 반복됩니다.";
+      } else if (count >= 4) {
+        note = "보조 축으로 무난하게 반복됩니다.";
+      }
+
+      return {
+        token,
+        count,
+        sourceKeywords: [...sourceSet].slice(0, 4),
+        note,
+      };
+    })
+    .filter((item) => item.count > 0)
+    .sort((left, right) => {
+      if (right.count !== left.count) return right.count - left.count;
+      if (right.token.length !== left.token.length) return right.token.length - left.token.length;
+      return left.token.localeCompare(right.token, "ko");
+    });
+}
+
 export function countKeywordOccurrences(body: string, keyword: string): number {
   const trimmed = keyword.trim();
   if (!trimmed) return 0;
@@ -429,7 +482,8 @@ export function analyzeKeywordUsage(params: {
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
 }): KeywordUsageReport {
-  const keywords = selectFocusKeywords(params.title, params.keywords);
+  const keywordPool = collectKeywordPool(params.title, params.keywords);
+  const keywords = keywordPool.slice(0, 5);
   const paragraphs = splitParagraphs(params.body);
   const introText = paragraphs.slice(0, 2).join("\n\n");
   const bodyLength = params.body.replace(/\s+/g, "").length;
@@ -482,8 +536,10 @@ export function analyzeKeywordUsage(params: {
 
   const recommendations = items.filter((item) => item.status !== "적정").map((item) => item.recommendation);
 
+  const tokenItems = buildKeywordTokenItems(keywordPool, params.body);
   return {
     items,
+    tokenItems,
     totalMentions,
     introCoverage,
     titleFrontLoaded,
