@@ -272,6 +272,8 @@ async function runOpenAIHarnessEvaluator(params: {
     body: writerResult.content,
     keywords: strategy.keywords,
     targetSearchCombinations: strategy.targetSearchCombinations,
+    seriesRole: strategy.seriesRole,
+    targetMainKeyword: strategy.targetMainKeyword,
   });
   const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
     strategy,
@@ -390,6 +392,8 @@ structure 점수에는 콘텐츠 구조 판단의 허브글/리프글 역할이 
     body: writerResult.content,
     keywords: strategy.keywords,
     targetSearchCombinations: strategy.targetSearchCombinations,
+    seriesRole: strategy.seriesRole,
+    targetMainKeyword: strategy.targetMainKeyword,
   });
   const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
     strategy,

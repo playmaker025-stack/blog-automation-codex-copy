@@ -117,7 +117,7 @@ function buildDistributedPreludeTitles(mainKeyword: string, count: number): stri
   const templates = [
     `${keyword} 보기 전에 핵심 개념부터 정리`,
     `${anchor} 고르기 전에 많이 보는 선택 기준`,
-    `초보자가 시작 전에 자주 놓치는 체크포인트`,
+    `초보자가 ${anchor} 시작 전에 자주 놓치는 체크포인트`,
   ];
   return templates.slice(0, count);
 }
@@ -128,7 +128,7 @@ export function runPrePostingSeriesPlanner(input: PrePostingSeriesInput): TopicG
     throw new Error("메인 키워드가 필요합니다.");
   }
 
-  const preludeCount = Math.max(2, Math.min(3, input.preludeCount ?? 3));
+  const preludeCount = Math.max(2, Math.min(4, input.preludeCount ?? 3));
   const seriesStamp = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
   const seriesId = `series-${slugifyKeyword(input.userId)}-${slugifyKeyword(mainKeyword)}-${seriesStamp}`;
   const plannedTopicIds = Array.from({ length: preludeCount + 1 }, (_, index) =>

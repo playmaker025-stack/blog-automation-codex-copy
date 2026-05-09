@@ -54,6 +54,8 @@ export interface StrategyPlanResult {
   naverLogic?: NaverLogicPlan;
   naverSignals?: NaverSignals;
   publicationLearning?: PublicationLearningSummary | null;
+  seriesRole?: "prelude" | "main";
+  targetMainKeyword?: string;
 }
 
 export interface SearchCombinationTarget {

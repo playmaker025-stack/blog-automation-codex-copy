@@ -557,8 +557,12 @@ export function evaluateSeoCompleteness(params: {
     score += 4;
     evidence.push("도입부에 메인 키워드가 보여 검색 의도 연결이 자연스럽습니다.");
   } else if (keywordReport.items[0]) {
-    score -= 10;
-    improvements.push(`첫 두 문단 안에 '${keywordReport.items[0].keyword}'를 자연스럽게 넣는 편이 좋습니다.`);
+    score -= isPreludeMainKeyword ? 3 : 10;
+    improvements.push(
+      isPreludeMainKeyword
+        ? `선행 글 본문에 '${keywordReport.items[0].keyword}'를 최소 한 번 자연스럽게 등장시켜 주세요.`
+        : `첫 두 문단 안에 '${keywordReport.items[0].keyword}'를 자연스럽게 넣는 편이 좋습니다.`
+    );
   }
 
   if (isPreludeMainKeyword) {

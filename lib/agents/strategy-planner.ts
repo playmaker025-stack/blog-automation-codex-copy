@@ -706,6 +706,13 @@ export async function runStrategyPlanner(params: {
   onProgress?.(
     `네이버 작성 로직 검토 완료: ${naverLogicAgent.formatLabel(naverLogic.primary)} / 목표 완성도 ${naverLogic.completenessTarget}%`
   );
+  if (topic.seriesRole === "prelude" || topic.seriesRole === "main") {
+    plan = {
+      ...plan,
+      seriesRole: topic.seriesRole,
+      targetMainKeyword: topic.targetMainKeyword,
+    };
+  }
   return plan;
 }
 
