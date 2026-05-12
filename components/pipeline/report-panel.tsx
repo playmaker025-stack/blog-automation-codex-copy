@@ -23,6 +23,12 @@ interface Props {
   reviewResult: DraftReviewResult | null;
   reviewIssues: DraftReviewIssue[];
   reviewApplied: boolean;
+  draftVersionReports: Array<{
+    label: string;
+    body: string;
+    seoEvaluation: SeoEvaluation;
+    keywordReport: KeywordUsageReport;
+  }>;
   publishUrl: string;
   publishingToIndex: boolean;
   publishNotice: { type: "ok" | "err"; msg: string } | null;
@@ -50,6 +56,7 @@ export function PipelineReportPanel({
   reviewResult,
   reviewIssues,
   reviewApplied,
+  draftVersionReports,
   publishUrl,
   publishingToIndex,
   publishNotice,
@@ -73,6 +80,7 @@ export function PipelineReportPanel({
         ...(result?.naverLogicEvaluation?.evidence ?? []),
         ...(result?.naverLogicEvaluation?.improvements ?? []),
       ].slice(0, 6);
+  const showVersionedDraftReports = contentTab === "draft" && draftVersionReports.length > 0;
 
   return (
     <aside className="min-w-0 space-y-4 xl:sticky xl:top-8">
@@ -154,7 +162,67 @@ export function PipelineReportPanel({
             </div>
           )}
 
-          {activeSeoEvaluation && activeKeywordReport && (
+          {showVersionedDraftReports ? (
+            <div className="space-y-3">
+              {draftVersionReports.map((report) => (
+                <div key={`draft-report-${report.label}`} className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold text-zinc-600">SEO 분석</p>
+                      <p className="mt-1 text-sm font-semibold text-zinc-900">{report.label} 기준 SEO 분석</p>
+                      <p className="mt-1 text-xs text-zinc-500">
+                        이 카드의 수치는 {report.label} 본문만 다시 계산한 결과입니다.
+                      </p>
+                    </div>
+                    <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-right">
+                      <p className="text-[11px] font-semibold text-emerald-600">SEO 점수</p>
+                      <p className="text-lg font-bold text-emerald-700">{report.seoEvaluation.score}점</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    {report.keywordReport.items.map((item) => (
+                      <div key={`${report.label}-${item.keyword}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-sm font-semibold text-zinc-800">{item.keyword}</p>
+                          <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
+                            실제 발생 {item.count}회 | {item.status}
+                          </p>
+                        </div>
+                        <p className="mt-1 text-[11px] text-zinc-500">권장 {item.targetMin}~{item.targetMax}회</p>
+                        <p className="mt-1 text-xs text-zinc-600">{item.recommendation}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {(report.keywordReport.tokenItems?.length ?? 0) > 0 && (
+                    <div className="space-y-2">
+                      <div>
+                        <p className="text-xs font-semibold text-zinc-600">실제 본문 핵심 단어 분포</p>
+                        <p className="mt-1 text-[11px] leading-5 text-zinc-500">
+                          불필요한 자연어는 제외하고, 실제 키워드성 단어와 의미 단위를 {report.label} 본문에서 다시 셉니다.
+                        </p>
+                      </div>
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {report.keywordReport.tokenItems.slice(0, 12).map((item) => (
+                          <div key={`${report.label}-token-${item.token}`} className="rounded-lg border border-zinc-100 bg-white px-3 py-3">
+                            <div className="flex items-center justify-between gap-3">
+                              <p className="text-sm font-semibold text-zinc-800">{item.token}</p>
+                              <p className={`text-xs font-semibold ${item.count >= 20 ? "text-red-500" : item.count >= 10 ? "text-amber-600" : item.count >= 4 ? "text-zinc-600" : "text-blue-600"}`}>
+                                실제 발생 {item.count}회
+                              </p>
+                            </div>
+                            <p className="mt-1 text-[11px] text-zinc-500">연결 구문: {item.sourceKeywords.join(" / ")}</p>
+                            <p className="mt-2 text-xs text-zinc-700">{item.note}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : activeSeoEvaluation && activeKeywordReport ? (
             <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -202,7 +270,7 @@ export function PipelineReportPanel({
                       <div key={`${contentTab}-token-${item.token}`} className="rounded-lg border border-zinc-100 bg-white px-3 py-3">
                         <div className="flex items-center justify-between gap-3">
                           <p className="text-sm font-semibold text-zinc-800">{item.token}</p>
-                          <p className={`text-xs font-semibold ${item.count >= 10 ? "text-emerald-600" : item.count >= 4 ? "text-zinc-600" : "text-amber-600"}`}>
+                          <p className={`text-xs font-semibold ${item.count >= 20 ? "text-red-500" : item.count >= 10 ? "text-amber-600" : item.count >= 4 ? "text-zinc-600" : "text-blue-600"}`}>
                             실제 발생 {item.count}회
                           </p>
                         </div>
@@ -319,7 +387,7 @@ export function PipelineReportPanel({
                 </div>
               )}
             </div>
-          )}
+          ) : null}
 
           {contentTab === "revision" && reviewResult && (
             <div className="space-y-3 rounded-xl border border-blue-100 bg-blue-50 p-4">

@@ -582,6 +582,27 @@ function buildUserMessage(
   ].filter(Boolean).join("\n");
 }
 
+function sanitizeOutlineHeadingLanguage(value: string): string {
+  return value
+    .replace(/(.+?(?:추천|비교|후기|리뷰))(?:을|를)\s*찾는\s*이유/gu, "$1이 필요한 이유")
+    .replace(/(.+?(?:추천|비교|후기|리뷰))(?:을|를)\s*보는\s*이유/gu, "$1이 중요한 이유")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function sanitizeStrategyLanguage(plan: StrategyPlanResult): StrategyPlanResult {
+  return {
+    ...plan,
+    outline: plan.outline.map((section) => ({
+      ...section,
+      heading: sanitizeOutlineHeadingLanguage(section.heading),
+      subPoints: section.subPoints.map((item) => sanitizeOutlineHeadingLanguage(item)),
+      contentDirection: sanitizeOutlineHeadingLanguage(section.contentDirection),
+    })),
+    keyPoints: plan.keyPoints.map((item) => sanitizeOutlineHeadingLanguage(item)),
+  };
+}
+
 export async function runStrategyPlanner(params: {
   topicId: string;
   userId: string;
@@ -674,7 +695,7 @@ export async function runStrategyPlanner(params: {
     plan = buildLocalFallbackStrategy(topic);
   }
 
-  plan = applyDirectKeywordPriority(plan, directIntent);
+  plan = sanitizeStrategyLanguage(applyDirectKeywordPriority(plan, directIntent));
 
   const contentTopology = await buildContentTopologyPlan({ topic, strategy: plan, userId });
   const targetSearchCombinations = buildTargetSearchCombinations({ topic, plan, directIntent });

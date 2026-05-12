@@ -24,6 +24,41 @@ function uniqueKeywords(values: string[]): string[] {
   return output;
 }
 
+const GENERIC_KEYWORD_TOKENS = new Set([
+  "보는",
+  "많이",
+  "고르기",
+  "선택",
+  "찾는",
+  "이유",
+  "실제",
+  "시작",
+  "전에",
+  "정리",
+  "가이드",
+  "기준",
+  "체크포인트",
+  "체크",
+  "포인트",
+  "체크리스트",
+  "방법",
+  "설명",
+  "소개",
+  "팁",
+  "선행포스팅",
+  "메인포스팅",
+  "키워드빌드업",
+  "키워드시리즈",
+]);
+
+function isMeaningfulKeywordToken(token: string): boolean {
+  const normalized = token.trim().toLowerCase();
+  if (normalized.length < 2) return false;
+  if (GENERIC_KEYWORD_TOKENS.has(normalized)) return false;
+  if (/^\d+$/u.test(normalized)) return false;
+  return true;
+}
+
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -91,6 +126,25 @@ function splitCombinationTokens(value: string): string[] {
     .split(/\s+/)
     .map((token) => token.trim())
     .filter((token) => token.length >= 2);
+}
+
+function normalizeBodyForKeywordCounting(body: string): string {
+  return body
+    .replace(/\r\n/g, "\n")
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.replace(/\s+/g, " ").trim())
+    .filter(Boolean)
+    .join("\n\n");
+}
+
+function buildFlexibleKeywordPattern(keyword: string): RegExp {
+  const normalizedKeyword = keyword
+    .trim()
+    .replace(/\s+/g, " ")
+    .split(" ")
+    .map((token) => escapeRegExp(token))
+    .join("\\s+");
+  return new RegExp(normalizedKeyword, "giu");
 }
 
 function includesKeyword(text: string, keyword: string): boolean {
@@ -410,7 +464,7 @@ export function selectFocusKeywords(title: string, keywords: string[] = [], limi
   const titleTokens = title
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
     .split(/\s+/)
-    .filter((token) => token.length >= 2);
+    .filter((token) => isMeaningfulKeywordToken(token));
 
   return uniqueKeywords([...keywords, ...titleTokens]).slice(0, limit);
 }
@@ -419,9 +473,26 @@ function collectKeywordPool(title: string, keywords: string[] = []): string[] {
   const titleTokens = title
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
     .split(/\s+/)
-    .filter((token) => token.length >= 2);
+    .filter((token) => isMeaningfulKeywordToken(token));
 
   return uniqueKeywords([...keywords, ...titleTokens]);
+}
+
+function buildMeaningfulKeywordUnits(keywordPool: string[]): string[] {
+  const units: string[] = [];
+
+  for (const phrase of keywordPool) {
+    units.push(phrase);
+    const tokens = splitCombinationTokens(phrase).filter((token) => isMeaningfulKeywordToken(token));
+    for (const token of tokens) {
+      units.push(token);
+    }
+    for (let index = 0; index < tokens.length - 1; index += 1) {
+      units.push(`${tokens[index]} ${tokens[index + 1]}`);
+    }
+  }
+
+  return uniqueKeywords(units);
 }
 
 function buildKeywordTokenItems(keywordPool: string[], body: string): Array<{
@@ -432,25 +503,30 @@ function buildKeywordTokenItems(keywordPool: string[], body: string): Array<{
 }> {
   const tokenSources = new Map<string, Set<string>>();
 
-  for (const phrase of keywordPool) {
-    for (const token of splitCombinationTokens(phrase)) {
-      if (token.length < 2) continue;
-      const bucket = tokenSources.get(token) ?? new Set<string>();
+  for (const unit of buildMeaningfulKeywordUnits(keywordPool)) {
+    const tokens = splitCombinationTokens(unit).filter((token) => isMeaningfulKeywordToken(token));
+    if (tokens.length === 0) continue;
+    const phrases = keywordPool.filter((phrase) => {
+      const phraseTokens = splitCombinationTokens(phrase);
+      return tokens.every((token) => phraseTokens.includes(token));
+    });
+    const bucket = tokenSources.get(unit) ?? new Set<string>();
+    for (const phrase of phrases) {
       bucket.add(phrase);
-      tokenSources.set(token, bucket);
     }
+    tokenSources.set(unit, bucket);
   }
 
   return [...tokenSources.entries()]
     .map(([token, sourceSet]) => {
       const count = countKeywordOccurrences(body, token);
-      let note = "등장은 있지만 중심 축으로 보기엔 약합니다.";
+      let note = "실제 본문에서 확인된 키워드 축입니다.";
       if (count >= 20) {
-        note = "본문 전반에 매우 강하게 반복됩니다. 과도한 중복인지 함께 확인하세요.";
+        note = "반복이 매우 많은 편입니다. 일부는 다른 표현이나 구체 기준으로 치환하는 편이 안전합니다.";
       } else if (count >= 10) {
-        note = "핵심 축으로 충분히 반복됩니다.";
+        note = "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다.";
       } else if (count >= 4) {
-        note = "보조 축으로 무난하게 반복됩니다.";
+        note = "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다.";
       }
 
       return {
@@ -471,7 +547,8 @@ function buildKeywordTokenItems(keywordPool: string[], body: string): Array<{
 export function countKeywordOccurrences(body: string, keyword: string): number {
   const trimmed = keyword.trim();
   if (!trimmed) return 0;
-  const matches = body.match(new RegExp(escapeRegExp(trimmed), "giu"));
+  const normalizedBody = normalizeBodyForKeywordCounting(body);
+  const matches = normalizedBody.match(buildFlexibleKeywordPattern(trimmed));
   return matches?.length ?? 0;
 }
 
@@ -659,6 +736,28 @@ export function evaluateSeoCompleteness(params: {
     }
     score -= item.keyword === keywordReport.items[0]?.keyword ? 8 : 4;
     improvements.push(item.recommendation);
+  }
+
+  const mainKeywordTokens = splitCombinationTokens(mainKeyword).filter((token) => isMeaningfulKeywordToken(token));
+  if (!isPreludeMainKeyword && mainKeywordTokens.length > 0) {
+    const componentTokenLimit = keywordReport.bodyLength >= 2200 ? 14 : keywordReport.bodyLength >= 1400 ? 10 : 8;
+    const overusedComponentTokens = keywordReport.tokenItems.filter(
+      (item) =>
+        splitCombinationTokens(item.token).length === 1 &&
+        mainKeywordTokens.includes(item.token) &&
+        item.count > componentTokenLimit
+    );
+
+    for (const item of overusedComponentTokens) {
+      score -= 4;
+      improvements.push(
+        `'${item.token}' 반복이 ${item.count}회로 많습니다. 같은 명사를 연달아 반복하지 말고 기준, 상황, 비교 포인트, 기기/액상 예시로 일부 치환해 주세요.`
+      );
+    }
+
+    if (overusedComponentTokens.length === 0) {
+      evidence.push("메인 키워드의 핵심 축 단어 반복이 과도하게 치우치지 않았습니다.");
+    }
   }
 
   if (keywordReport.bodyLength >= 1200) {

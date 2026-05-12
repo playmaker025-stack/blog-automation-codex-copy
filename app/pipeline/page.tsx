@@ -10,6 +10,7 @@ import { PipelineStateInspector, applyEventToInspector } from "@/components/pipe
 import { usePipelineStore } from "@/lib/store/pipeline-store";
 import { reviewActualDraft, type DraftReviewIssue, type DraftReviewResult } from "@/lib/agents/draft-review";
 import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport } from "@/lib/agents/types";
+import { evaluateSeoCompleteness } from "@/lib/agents/seo-metrics";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -49,6 +50,11 @@ type ContentTab = "draft" | "revision";
 interface DraftVersionSnapshot {
   label: string;
   body: string;
+}
+
+interface DraftVersionSeoReport extends DraftVersionSnapshot {
+  seoEvaluation: SeoEvaluation;
+  keywordReport: KeywordUsageReport;
 }
 
 const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[자동 보강본]\n";
@@ -264,6 +270,29 @@ export default function PipelinePage() {
   const progressEvents = events.filter(
     (event) => event.type === "stage_change" || event.type === "progress" || event.type === "error"
   );
+  const draftVersionReports = useMemo<DraftVersionSeoReport[]>(() => {
+    const strategy = draftRewriteContext?.strategy;
+    if (!strategy || !streamingBody.trim()) return [];
+
+    return parseDraftVersionSnapshots(streamingBody)
+      .filter((snapshot) => snapshot.body.trim())
+      .map((snapshot) => {
+        const seoEvaluation = evaluateSeoCompleteness({
+          title: strategy.title,
+          body: snapshot.body,
+          keywords: strategy.keywords,
+          targetSearchCombinations: strategy.targetSearchCombinations,
+          seriesRole: strategy.seriesRole,
+          targetMainKeyword: strategy.targetMainKeyword,
+        });
+
+        return {
+          ...snapshot,
+          seoEvaluation,
+          keywordReport: seoEvaluation.keywordReport,
+        };
+      });
+  }, [draftRewriteContext?.strategy, streamingBody]);
   const profileDisplayName = !profile?.displayName || looksCorruptedText(profile.displayName)
     ? normalizedUserId || "사용자 연결됨"
     : profile.displayName;
@@ -1228,6 +1257,7 @@ export default function PipelinePage() {
           reviewApplied={reviewApplied}
           reviewResult={reviewResult}
           reviewIssues={reviewIssues}
+          draftVersionReports={draftVersionReports}
           onReviewTitleChange={(value) => {
             setReviewTitle(value);
             setReviewApplied(false);
@@ -1268,6 +1298,7 @@ export default function PipelinePage() {
           reviewResult={reviewResult}
           reviewIssues={reviewIssues}
           reviewApplied={reviewApplied}
+          draftVersionReports={draftVersionReports}
           publishUrl={publishUrl}
           publishingToIndex={publishingToIndex}
           publishNotice={publishNotice}

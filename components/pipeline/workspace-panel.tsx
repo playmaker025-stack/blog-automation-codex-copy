@@ -1,7 +1,7 @@
 "use client";
 
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
-import type { SSEEvent } from "@/lib/agents/types";
+import type { KeywordUsageReport, SSEEvent, SeoEvaluation } from "@/lib/agents/types";
 
 interface Props {
   contentTab: "draft" | "revision";
@@ -22,6 +22,12 @@ interface Props {
   reviewApplied: boolean;
   reviewResult: DraftReviewResult | null;
   reviewIssues: DraftReviewIssue[];
+  draftVersionReports: Array<{
+    label: string;
+    body: string;
+    seoEvaluation: SeoEvaluation;
+    keywordReport: KeywordUsageReport;
+  }>;
   onReviewTitleChange: (value: string) => void;
   onReviewBodyChange: (value: string) => void;
   onRevisionRequestChange: (value: string) => void;
@@ -45,6 +51,12 @@ function issueTone(severity: DraftReviewIssue["severity"]): string {
   if (severity === "blocker") return "border-red-200 bg-red-50 text-red-700";
   if (severity === "warning") return "border-amber-200 bg-amber-50 text-amber-700";
   return "border-zinc-200 bg-zinc-50 text-zinc-700";
+}
+
+function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]): string {
+  if (status === "적정") return "text-emerald-600";
+  if (status === "과다") return "text-amber-600";
+  return "text-blue-600";
 }
 
 function buildRevisionGuides(reviewResult: DraftReviewResult | null, reviewIssues: DraftReviewIssue[]): string[] {
@@ -117,6 +129,7 @@ export function PipelineWorkspacePanel({
   reviewApplied,
   reviewResult,
   reviewIssues,
+  draftVersionReports,
   onReviewTitleChange,
   onReviewBodyChange,
   onRevisionRequestChange,
@@ -197,6 +210,7 @@ export function PipelineWorkspacePanel({
                 <div className="grid gap-4 xl:grid-cols-3">
                   {draftColumns.map((column, index) => {
                     const isLatest = index === lastCompletedIndex && Boolean(column.body);
+                    const versionReport = draftVersionReports.find((item) => item.label === column.label);
                     return (
                       <section
                         key={column.label}
@@ -236,6 +250,28 @@ export function PipelineWorkspacePanel({
                             </div>
                           )}
                         </div>
+
+                        {versionReport && (
+                          <div className="border-t border-zinc-100 bg-white px-4 py-3">
+                            <div className="flex items-center justify-between gap-3">
+                              <p className="text-xs font-semibold text-zinc-700">{column.label} 주요/서브 키워드</p>
+                              <p className="text-[11px] text-zinc-500">SEO {versionReport.seoEvaluation.score}점</p>
+                            </div>
+                            <div className="mt-2 space-y-2">
+                              {versionReport.keywordReport.items.map((item) => (
+                                <div key={`${column.label}-${item.keyword}`} className="rounded-md border border-zinc-100 bg-zinc-50 px-3 py-2">
+                                  <div className="flex items-center justify-between gap-3">
+                                    <p className="text-xs font-semibold text-zinc-800">{item.keyword}</p>
+                                    <p className={`text-[11px] font-semibold ${keywordStatusTone(item.status)}`}>
+                                      {item.count}회 | {item.status}
+                                    </p>
+                                  </div>
+                                  <p className="mt-1 text-[11px] text-zinc-500">권장 {item.targetMin}~{item.targetMax}회</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </section>
                     );
                   })}

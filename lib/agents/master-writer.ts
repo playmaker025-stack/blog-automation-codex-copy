@@ -216,6 +216,11 @@ function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
   const primaryKeyword = strategy.keywords[0] || "none";
   const secondaryKeyword = strategy.keywords[1] || "none";
   const targets = getKeywordPlacementTargets(strategy.estimatedLength);
+  const primaryTokens = primaryKeyword
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 2);
 
   return [
     `- Primary keyword: '${primaryKeyword}'`,
@@ -226,6 +231,12 @@ function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
     "- Include the primary keyword in at least one main subheading.",
     "- Include the primary keyword once more in the final summary/conclusion paragraph.",
     "- Do not place the primary keyword repeatedly in back-to-back sentences.",
+    primaryTokens.length >= 2
+      ? `- The primary keyword is a compound phrase (${primaryTokens.join(", ")}). Do not repeat every component token in every paragraph. Keep the exact phrase mostly to the title, intro, one key subheading, one body paragraph, and the conclusion.`
+      : "- Avoid repeating the same noun stem in consecutive paragraphs just to force keyword counts.",
+    primaryTokens.length >= 2
+      ? "- If a component token starts feeling repetitive, replace some repeats with concrete device criteria, use cases, examples, or pronouns instead of echoing the same noun again."
+      : "- If the keyword starts feeling repetitive, reduce duplicate echoes and replace them with concrete criteria, examples, or decision language.",
     `- Secondary keyword: '${secondaryKeyword}'. Use it only as supporting context, around ${targets.secondaryMin}-${targets.secondaryMax} times when it fits naturally.`,
     "- A secondary keyword must not replace the article's main angle or dominate headings over the primary keyword.",
     "- If the draft reads stuffed, reduce duplicate phrases and replace some repeats with practical criteria, examples, or decision language.",
