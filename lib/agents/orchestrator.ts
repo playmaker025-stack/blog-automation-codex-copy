@@ -1,4 +1,4 @@
-﻿import { randomUUID } from "crypto";
+import { randomUUID } from "crypto";
 import { runStrategyPlanner } from "./strategy-planner";
 import { runMasterWriter } from "./master-writer";
 import { runHarnessEvaluator } from "./harness-evaluator";
@@ -114,6 +114,49 @@ function uniqueNonEmpty(values: string[]): string[] {
   return out;
 }
 
+const HASHTAG_STOPWORDS = new Set([
+  "보는",
+  "많이",
+  "고르기",
+  "고르는",
+  "선택",
+  "선택기준",
+  "기준",
+  "전에",
+  "이유",
+  "찾는",
+  "정리",
+  "가이드",
+  "체크",
+  "체크포인트",
+  "체크리스트",
+  "실제",
+  "시작",
+  "필수",
+  "선행포스팅",
+  "키워드빌드업",
+  "메인포스팅",
+  "네이버블로그",
+  "블로그초안",
+  "정보글",
+]);
+
+function isUsefulHashtagToken(value: string): boolean {
+  const normalized = value.trim().toLowerCase();
+  if (normalized.length < 2) return false;
+  if (HASHTAG_STOPWORDS.has(normalized)) return false;
+  if (/^\d+$/u.test(normalized)) return false;
+  return true;
+}
+
+function extractHashtagTokens(value: string): string[] {
+  return value
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .map((word) => word.trim())
+    .filter((word) => isUsefulHashtagToken(word));
+}
+
 function makeHashtagText(value: string): string {
   return `#${value.replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, "")}`;
 }
@@ -130,26 +173,20 @@ function buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
   hashtags: string[];
   imageFileNames: string[];
 } {
-  const titleWords = title
-    .split(/[\s,/|·:()[\]{}"'“”‘’!?]+/u)
-    .map((word) => word.trim())
-    .filter((word) => word.length >= 2);
+  const phraseSeeds = strategy.keywords.filter((keyword) => keyword.trim().length >= 2);
+  const tokenSeeds = uniqueNonEmpty([
+    ...phraseSeeds.flatMap((keyword) => extractHashtagTokens(keyword)),
+    ...extractHashtagTokens(title),
+  ]);
 
   const hashtagSeeds = uniqueNonEmpty([
-    ...strategy.keywords,
-    ...titleWords,
-    "네이버블로그",
-    "블로그초안",
-    "정보글",
+    ...phraseSeeds,
+    ...tokenSeeds,
   ]);
 
   const hashtags = uniqueNonEmpty(hashtagSeeds.map(makeHashtagText))
     .filter((tag) => tag.length > 1)
     .slice(0, 10);
-
-  while (hashtags.length < 10) {
-    hashtags.push(`#추천태그${hashtags.length + 1}`);
-  }
 
   const imageStem = makeKoreanImageStem(title);
   const imageLabels = [
