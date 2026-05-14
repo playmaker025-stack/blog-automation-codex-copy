@@ -57,7 +57,7 @@ import type {
 } from "./artifact-registry";
 
 // ============================================================
-// ?뱀씤 ?湲?in-memory ??μ냼
+// 승인 대기 in-memory 저장소
 // ============================================================
 
 interface PendingApproval {
@@ -78,7 +78,7 @@ const activePipelines: Map<string, PipelineState> =
   globalThis._activePipelines ?? (globalThis._activePipelines = new Map());
 
 // ============================================================
-// SSE ?대깽??諛쒗뻾 ?ы띁
+// SSE 이벤트 발행 헬퍼
 // ============================================================
 
 function emit(
@@ -89,7 +89,7 @@ function emit(
     const encoder = new TextEncoder();
     controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
   } catch {
-    // stream???대? ?ロ엺 寃쎌슦 ??臾댁떆
+    // stream이 닫힌 경우는 무시
   }
 }
 
@@ -383,7 +383,7 @@ async function evaluateAndMaybeReviseDraft(params: {
 }
 
 // ============================================================
-// ?곹깭 ?낅뜲?댄듃 ?ы띁
+// 상태 업데이트 헬퍼
 // ============================================================
 
 function updateState(
@@ -394,7 +394,7 @@ function updateState(
 }
 
 // ============================================================
-// ?뚯씠?꾨씪???ㅽ뻾
+// 파이프라인 실행
 // ============================================================
 
 export async function runPipeline(params: {
@@ -425,7 +425,7 @@ export async function runPipeline(params: {
   // Approval gate prevents record writes before approval.
   const gate = new ApprovalGate(pipelineId);
 
-  // ???뚯씠?꾨씪?몄씠 吏곸젒 topic??in-progress濡??ㅼ젙??寃쎌슦?먮쭔 catch?먯꽌 蹂듦뎄
+  // 이 파이프라인이 직접 topic을 in-progress로 설정한 경우에만 catch에서 복구
   let thisSetTopicInProgress = false;
 
   // Initialize the persistent run ledger.
@@ -449,14 +449,14 @@ export async function runPipeline(params: {
   });
 
   try {
-    // ?? 0. ?좏뵿 ?좏깮 ?좏슚??寃????????????????????????????????
+    // 0. 토픽 선택 유효성 검증
     const topicValidation = await validateTopicSelectionFromGitHub(request.topicId);
     if (!topicValidation.valid) {
-      throw new Error(`?좏뵿 ?좏깮 ?ㅽ뙣: ${topicValidation.reason}`);
+      throw new Error(`토픽 선택 실패: ${topicValidation.reason}`);
     }
     await assertSeriesPrerequisitesPublished(request.topicId);
 
-    // ?? 1. ?꾨왂 ?섎┰ ??????????????????????????????????????????
+    // 1. 전략 수립
     state = updateState(state, { stage: "strategy-planning" });
     activePipelines.set(pipelineId, state);
     await upsertLedgerEntry({ pipelineId, topicId: request.topicId, userId: request.userId, stage: "strategy-planning", error: null, approvalGranted: false, postingListUpdated: false, indexUpdated: false, createdAt: now });
@@ -480,7 +480,7 @@ export async function runPipeline(params: {
     state = updateState(state, { strategy });
     activePipelines.set(pipelineId, state);
 
-    // strategy_plan artifact ???(best-effort ??GitHub ?ㅽ뙣?대룄 ?뚯씠?꾨씪??怨꾩냽)
+    // strategy_plan artifact 저장 (best-effort, GitHub 저장 실패여도 파이프라인은 계속)
     await saveArtifact<StrategyPlanData>(pipelineId, "strategy_plan", {
       title: strategy.title,
       outline: strategy.outline,
@@ -492,10 +492,10 @@ export async function runPipeline(params: {
       corpusSummary: null,
       publicationLearning: strategy.publicationLearning ?? null,
     }).catch((e: unknown) => {
-      console.warn("[orchestrator] saveArtifact(strategy_plan) ?ㅽ뙣 (臾댁떆):", e instanceof Error ? e.message : e);
+      console.warn("[orchestrator] saveArtifact(strategy_plan) 실패 (무시):", e instanceof Error ? e.message : e);
     });
 
-    // ?? 2. material_change 媛먯? + ?뱀씤 ?湲????????????????????
+    // 2. material_change 감지 + 승인 대기
     const originalTitle = (await loadTopicTitle(request.topicId)) ?? "";
     const mcResult = detectMaterialChange({
       original: { title: originalTitle },
@@ -503,7 +503,7 @@ export async function runPipeline(params: {
     });
     const materialChange = mcResult.isMaterial;
 
-    // material_change 濡쒓렇
+    // material_change 로그
     await appendLog(pipelineId, {
       type: "material_change",
       originalTitle,
@@ -517,13 +517,13 @@ export async function runPipeline(params: {
     state = updateState(state, { stage: "awaiting-approval" });
     activePipelines.set(pipelineId, state);
 
-    // ?뱀씤 ?곹깭 ?꾩씠: draft_ready ??waiting_for_user_approval (best-effort ??in-memory 寃쎈줈媛 ?듭떖)
+    // 승인 상태 전이: draft_ready -> waiting_for_user_approval (best-effort, in-memory 경로가 우선)
     await transitionApprovalState({
       pipelineId,
       to: "waiting_for_user_approval",
       reason: "승인 요청 발송",
     }).catch((e: unknown) => {
-      console.warn("[orchestrator] transitionApprovalState(waiting) ?ㅽ뙣 (臾댁떆):", e instanceof Error ? e.message : e);
+      console.warn("[orchestrator] transitionApprovalState(waiting) 실패 (무시):", e instanceof Error ? e.message : e);
     });
 
     const approvalRequestedAt = new Date().toISOString();
@@ -536,7 +536,7 @@ export async function runPipeline(params: {
       outline: strategy.outline.map((s) => s.heading),
     }));
 
-    // ?뱀씤 ?湲?(理쒕? 30遺?
+    // 승인 대기 (최대 30분)
     let timedOut = false;
     const approval = await Promise.race([
       waitForApproval(pipelineId, strategy),
@@ -545,7 +545,7 @@ export async function runPipeline(params: {
       ),
     ]);
 
-    // approval_ux 濡쒓렇
+    // approval_ux 로그
     const respondedAt = new Date().toISOString();
     await appendLog(pipelineId, {
       type: "approval_ux",
@@ -566,13 +566,13 @@ export async function runPipeline(params: {
       });
       state = updateState(state, { stage: "idle" });
       activePipelines.set(pipelineId, state);
-      // 嫄곗젅 ??topic ?곹깭媛 ?대? in-progress??寃쎌슦 draft濡?蹂듦뎄
+      // 거절 후 topic 상태가 이미 in-progress면 draft로 복구
       try {
         const statusAtReject = await loadTopicStatus(request.topicId);
         if (statusAtReject === "in-progress") {
           await updateTopicStatus(request.topicId, "draft");
         }
-      } catch { /* 蹂듦뎄 ?ㅽ뙣??臾댁떆 */ }
+      } catch { /* 복구 실패는 무시 */ }
       emit(controller, makeEvent("rejected", "idle", {
         pipelineId,
         message: "전략이 거절되었습니다. 수정 후 다시 시도해 주세요.",
@@ -597,7 +597,7 @@ export async function runPipeline(params: {
       },
     });
 
-    // ?뱀씤 ?곹깭 ?꾩씠: waiting_for_user_approval ??approved_pending_record_update
+    // 승인 상태 전이: waiting_for_user_approval -> approved_pending_record_update
     await transitionApprovalState({
       pipelineId,
       to: "approved_pending_record_update",
@@ -635,14 +635,14 @@ export async function runPipeline(params: {
       topicStatusAfter: "in-progress",
     });
 
-    // ?뱀씤 ?곹깭 ?꾩씠: approved_pending_record_update ??records_updated
+    // 승인 상태 전이: approved_pending_record_update -> records_updated
     await transitionApprovalState({
       pipelineId,
       to: "records_updated",
       reason: "posting-list와 topic index 반영 완료",
     });
 
-    // ?? 4.5. corpus summary 以鍮?+ pre-write gate ????????????
+    // 4.5. corpus summary 준비 + pre-write gate
     emit(controller, makeEvent("progress", "writing", { message: "코퍼스 분석 중..." }));
     const corpusSummary = await getCorpusSummary({
       userId: request.userId,
@@ -662,7 +662,7 @@ export async function runPipeline(params: {
       publicationLearning: strategy.publicationLearning ?? null,
     }).catch(() => {});
 
-    // corpus_retrieval 濡쒓렇
+    // corpus_retrieval 로그
     await appendLog(pipelineId, {
       type: "corpus_retrieval",
       userId: request.userId,
@@ -683,7 +683,7 @@ export async function runPipeline(params: {
       }));
     }
 
-    // pre-write gate 寃??(議곌굔 1-3)
+    // pre-write gate 검증 (조건 1-3)
     const { getArtifact: _getArtifact } = await import("./artifact-registry");
     const approvalArtifact = await _getArtifact<ApprovalRequestData>(pipelineId, "approval_request");
     const recordArtifact = await _getArtifact<RecordUpdateData>(pipelineId, "record_update");
@@ -693,7 +693,7 @@ export async function runPipeline(params: {
       approvalRequest: approvalArtifact?.data ?? null,
       recordUpdate: recordArtifact?.data ?? null,
     });
-    // pre-write gate 濡쒓렇
+    // pre-write gate 로그
     await appendLog(pipelineId, {
       type: "gate_result",
       gate: "pre-write",
@@ -750,7 +750,7 @@ export async function runPipeline(params: {
     const harnessBriefing = [baseHarnessBriefing, localityKeywordPlan.writerBrief].join("\n\n");
     emit(controller, makeEvent("progress", "writing", { message: "하네스 기준을 반영한 작성 브리핑 준비 완료" }));
 
-    // ?? 5. 蹂몃Ц ?묒꽦 ??????????????????????????????????????????
+    // 5. 본문 작성
     state = updateState(state, { stage: "writing" });
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "writing", {
@@ -785,14 +785,14 @@ export async function runPipeline(params: {
       corpusSummaryUsed: true,
     });
 
-    // posting-list wordCount ?낅뜲?댄듃
+    // posting-list wordCount 업데이트
     await updatePostRecord(postRecord.postId, {
       status: "ready",
       wordCount: writerResult.wordCount,
       compositionSessionId: pipelineId,
     });
 
-    // ?? 6. ?덉쭏 ?됯? ??????????????????????????????????????????
+    // 6. 1차 평가
     state = updateState(state, { stage: "evaluating" });
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "evaluating", {
@@ -826,12 +826,12 @@ export async function runPipeline(params: {
     state = updateState(state, { writerResult, evalResult });
     activePipelines.set(pipelineId, state);
 
-    // post-audit gate 寃??(議곌굔 4)
+    // post-audit gate 검증 (조건 4)
     const postGateResult = runPostAuditGate({
       auditReport: { pass: evalResult.pass, aggregateScore: evalResult.aggregateScore },
     });
 
-    // baseline 鍮꾧탳 (gate 寃곌낵? 臾닿??섍쾶 ??긽 ?섑뻾)
+    // baseline 비교 (gate 결과와 무관하게 항상 수행)
     const scenarioId = request.topicId;
     const baselineDiff = await compareWithCurrentBaseline({
       scenarioId,
@@ -845,7 +845,7 @@ export async function runPipeline(params: {
       }));
     }
 
-    // audit_report artifact ?????gate 寃곌낵/baseline delta ?ы븿 (??긽 ???
+    // audit_report artifact 저장: gate 결과와 baseline delta 포함
     await saveArtifact<AuditReportData>(pipelineId, "audit_report", {
       runId: evalResult.runId,
       scores: evalResult.scores,
@@ -856,7 +856,7 @@ export async function runPipeline(params: {
       baselineDelta,
     });
 
-    // post-audit gate 濡쒓렇
+    // post-audit gate 로그
     await appendLog(pipelineId, {
       type: "gate_result",
       gate: "post-audit",
@@ -911,10 +911,10 @@ export async function runPipeline(params: {
       return;
     }
 
-    // ?? POST-AUDIT GATE PASS ??理쒖쥌 ?곹깭 ?꾩씠 (李⑤떒 ????덉슜) ?
+    // POST-AUDIT GATE PASS 후 최종 상태 전이 (차단 사유 없을 때만)
     emit(controller, makeEvent("progress", "evaluating", { message: "post-audit gate 통과" }));
 
-    // candidate ?깅줉 (gate ?듦낵 ?쒖뿉留?
+    // candidate 등록 (gate 통과 시에만)
     const candidateResult = await registerBaselineCandidate({
       scenarioId,
       runId: evalResult.runId,
@@ -936,13 +936,13 @@ export async function runPipeline(params: {
       message: `baseline candidate: ${candidateResult.reason}`,
     }));
 
-    // posting-list final update (gate ?듦낵 ?쒖뿉留?
+    // posting-list final update (gate 통과 시에만)
     await updatePostRecord(postRecord.postId, {
       evalScore: evalResult.aggregateScore,
       status: "approved",
     });
 
-    // artifact contract ???(gate ?듦낵 ?쒖뿉留?
+    // artifact contract 저장 (gate 통과 시에만)
     await saveArtifactContract({
       pipelineId,
       postId: postRecord.postId,
@@ -956,14 +956,14 @@ export async function runPipeline(params: {
       evalScore: evalResult.aggregateScore,
     });
 
-    // ?뱀씤 ?곹깭 ?꾩씠: records_updated ??released (gate ?듦낵 ?쒖뿉留?
+    // 승인 상태 전이: records_updated -> released (gate 통과 시에만)
     await transitionApprovalState({
       pipelineId,
       to: "released",
       reason: "모든 gate 통과 및 배포 준비 완료",
     });
 
-    // ?? 7. ?꾨즺 ???????????????????????????????????????????????
+    // 7. 완료
     state = updateState(state, { stage: "complete" });
     activePipelines.set(pipelineId, state);
     await upsertLedgerEntry({ pipelineId, topicId: request.topicId, userId: request.userId, stage: "complete", error: null, approvalGranted: true, postingListUpdated: true, indexUpdated: true, createdAt: now });
@@ -987,11 +987,11 @@ export async function runPipeline(params: {
   } catch (err) {
     let message = err instanceof Error ? err.message : "알 수 없는 오류";
 
-    // APIConnectionError: ?쒕쾭 濡쒓렇???곸꽭 ?뺣낫 湲곕줉 + ?ъ슜??硫붿떆吏 蹂닿컯
+    // APIConnectionError: 서버 로그에 상세 정보 기록 + 사용자 메시지 보강
     if (err instanceof Error && err.constructor.name === "APIConnectionError") {
       const cause = (err as { cause?: unknown }).cause;
       const causeMsg = cause instanceof Error ? ` (원인: ${cause.message})` : "";
-      console.error("[orchestrator] Anthropic ?곌껐 ?ㅻ쪟:", {
+      console.error("[orchestrator] Anthropic 연결 오류:", {
         message: err.message,
         cause,
         code: (err as { code?: string }).code,
@@ -1016,9 +1016,9 @@ export async function runPipeline(params: {
     }).catch(() => {});
     emit(controller, makeEvent("error", "failed", { pipelineId, message }));
 
-    // ?뚯씠?꾨씪???ㅽ뙣 ??topic??in-progress ?곹깭濡?stuck?섎뒗 寃?諛⑹? ??draft濡?蹂듦뎄
-    // thisSetTopicInProgress ?뚮옒洹몃줈 ???뚯씠?꾨씪?몄씠 吏곸젒 ?ㅼ젙??寃쎌슦留?蹂듦뎄
-    // (?ㅻⅨ ?뚯씠?꾨씪?몄씠 in-progress濡??ㅼ젙??寃쎌슦 ??뼱?곗? ?딆쓬)
+    // 파이프라인 실패 시 topic이 in-progress 상태로 멈추지 않도록 draft로 복구
+    // thisSetTopicInProgress 플래그로 이 파이프라인이 직접 설정한 경우만 복구
+    // (다른 파이프라인이 in-progress로 설정한 경우는 건드리지 않음)
     if (thisSetTopicInProgress) {
       try {
         const currentStatus = await loadTopicStatus(request.topicId);
@@ -1046,47 +1046,47 @@ export async function runPipeline(params: {
 }
 
 // ============================================================
-// ?뱀씤 泥섎━
+// 승인 처리
 // ============================================================
 
 /**
- * ?뱀씤 泥섎━ ??硫붾え由??숈씪 ?몄뒪?댁뒪) + GitHub(?ъ떆???ㅼ쨷 ?몄뒪?댁뒪) 蹂묓뻾
- * approve ?붾뱶?ъ씤?몄뿉???몄텧. ??긽 ?깃났 泥섎━.
+ * 승인 처리는 메모리(동일 인스턴스) + GitHub(재시작/다중 인스턴스) 병행
+ * approve 엔드포인트에서 호출한다. 정상 승인 처리.
  */
 export async function handleApproval(approval: ApprovalRequest): Promise<boolean> {
-  // 1. 硫붾え由?寃쎈줈 (?숈씪 ?몄뒪?댁뒪 ??利됱떆 諛섏쁺)
+  // 1. 메모리 경로 (동일 인스턴스 내 즉시 반영)
   const pending = pendingApprovals.get(approval.pipelineId);
   if (pending) {
     pending.resolve(approval);
     pendingApprovals.delete(approval.pipelineId);
   }
 
-  // 2. GitHub 寃쎈줈 (?ъ떆???ㅼ쨷 ?몄뒪?댁뒪 fallback ???대쭅?쇰줈 ?섏떊)
+  // 2. GitHub 경로 (재시작/다중 인스턴스 fallback 용도로 기록)
   try {
     await resolveApprovalRecord(approval.pipelineId, approval.approved, approval.modifications);
   } catch {
-    // best-effort ??GitHub 湲곕줉 ?ㅽ뙣?대룄 硫붾え由?寃쎈줈媛 ?덉쑝硫?怨꾩냽 吏꾪뻾
+    // best-effort: GitHub 기록이 실패해도 메모리 경로가 있으면 계속 진행
   }
 
-  return true; // ??긽 ?깃났 諛섑솚 (404 ?쒓굅)
+  return true; // 정상 성공 반환 (404도 제거)
 }
 
 /**
- * ?뱀씤 ?湲???硫붾え由?利됱떆) + GitHub ?대쭅(3珥?媛꾧꺽) 蹂묐젹 ?ㅽ뻾
- * ??以?癒쇱? ?묐떟?섎뒗 履쎌쓣 ?ъ슜
+ * 승인 대기는 메모리(즉시) + GitHub 폴링(3초 간격) 병렬 실행
+ * 둘 중 먼저 응답하는 쪽을 사용
  */
 async function waitForApproval(
   pipelineId: string,
   strategy: StrategyPlanResult
 ): Promise<ApprovalRequest> {
-  // GitHub???뱀씤 ?湲??덉퐫???앹꽦 (?쒕쾭 ?ъ떆??蹂듦뎄??
+    // GitHub 승인 대기 레코드 생성 (서버 재시작 복구용)
   await createApprovalRecord(pipelineId).catch(() => {});
 
   return new Promise((resolve, reject) => {
-    // 硫붾え由?寃쎈줈 ?깅줉
+    // 메모리 경로 등록
     pendingApprovals.set(pipelineId, { resolve, strategy });
 
-    // GitHub ?대쭅 (3珥?媛꾧꺽) ???ъ떆???ㅼ쨷 ?몄뒪?댁뒪 fallback
+    // GitHub 폴링 (3초 간격) - 재시작/다중 인스턴스 fallback
     const pollInterval = setInterval(async () => {
       try {
         const record = await readApprovalRecord(pipelineId);
@@ -1101,11 +1101,11 @@ async function waitForApproval(
           });
         }
       } catch {
-        // GitHub ?쇱떆???ㅻ쪟 臾댁떆
+        // GitHub 일시 오류는 무시
       }
     }, 3000);
 
-    // ??꾩븘?????뺣━
+    // 타임아웃/정리
     const originalResolve = resolve;
     pendingApprovals.set(pipelineId, {
       resolve: (approval) => {
@@ -1115,13 +1115,13 @@ async function waitForApproval(
       strategy,
     });
 
-    // reject ???뺣━ (?몃? timeout Promise媛 reject?섎뒗 寃쎌슦)
+    // reject 후 정리 (이미 timeout Promise가 reject하는 경우)
     void reject; // suppress unused warning ??reject is handled by outer Promise.race
   });
 }
 
 // ============================================================
-// ?뚯씠?꾨씪???곹깭 議고쉶
+// 파이프라인 상태 조회
 // ============================================================
 
 export function getPipelineState(pipelineId: string): PipelineState | null {
@@ -1129,7 +1129,7 @@ export function getPipelineState(pipelineId: string): PipelineState | null {
 }
 
 // ============================================================
-// GitHub ?곗씠???ы띁
+// GitHub 데이터 헬퍼
 // ============================================================
 
 async function validateTopicSelectionFromGitHub(
@@ -1138,13 +1138,13 @@ async function validateTopicSelectionFromGitHub(
   try {
     const path = Paths.topicsIndex();
     if (!(await fileExists(path))) {
-      return { valid: false, reason: "topics index ?뚯씪???놁뒿?덈떎." };
+      return { valid: false, reason: "topics index 파일이 없습니다." };
     }
     const { data: index } = await readJsonFile<TopicIndex>(path);
     const { validateTopicSelection } = await import("./completion-checker");
     return validateTopicSelection(topicId, index.topics);
   } catch (err) {
-    return { valid: false, reason: err instanceof Error ? err.message : "?좏뵿 寃利??ㅽ뙣" };
+    return { valid: false, reason: err instanceof Error ? err.message : "토픽 검증 실패" };
   }
 }
 
@@ -1258,10 +1258,10 @@ async function createPostingRecord(params: {
   return { postId };
 }
 
-// ?? SHA 異⑸룎 ?ъ떆???섑띁 ????????????????????????????????????????
-// GitHub API??SHA 遺덉씪移???409/422瑜?諛섑솚?쒕떎.
-// 500/503? ?쒕쾭 ?쇱떆 ?ㅻ쪟, 429??rate limit ??紐⑤몢 ?ъ떆?꾪븳??
-// fn() ?대??먯꽌 理쒖떊 SHA瑜?留ㅻ쾲 ?덈줈 ?쎌쑝誘濡??⑥닚???ы샇異쒗븯硫??쒕떎.
+// SHA 충돌 재시도 헬퍼
+// GitHub API는 SHA 불일치 시 409/422를 반환한다.
+// 500/503은 서버 일시 오류, 429는 rate limit로 모두 재시도 가능하다.
+// fn() 내부에서 최신 SHA를 매번 새로 읽으므로 순수 함수처럼 호출하면 된다.
 async function withConflictRetry<T>(
   fn: () => Promise<T>,
   maxAttempts = 20
@@ -1273,7 +1273,7 @@ async function withConflictRetry<T>(
       const status = (err as { status?: number }).status;
       const retryable = status === 409 || status === 422 || status === 429 || status === 500 || status === 503;
       if (retryable && attempt < maxAttempts - 1) {
-        // jitter濡?thundering herd 諛⑹? (429??寃쎌슦 ??湲??湲?
+        // jitter로 thundering herd 방지 (429면 더 길게 대기)
         const base = status === 429 ? 2_000 : 200;
         const delay = Math.min(10_000, base * 2 ** attempt) + Math.floor(Math.random() * base);
         await new Promise((r) => setTimeout(r, delay));
@@ -1286,9 +1286,9 @@ async function withConflictRetry<T>(
   throw new Error("withConflictRetry: unreachable");
 }
 
-// ?? ?좏뵿 ?곹깭 ?먯옄??in-progress ?ㅼ젙 ??????????????????????????
-// validate ??write瑜???踰덉쓽 SHA ?몃옖??뀡 ?덉뿉???섑뻾.
-// ?숈떆 ?뚯씠?꾨씪?몄씠 媛숈? ?좏뵿???묎렐?대룄 ?뺥솗???섎굹留?in-progress濡?吏꾩엯.
+// 토픽 상태 원자적 in-progress 설정
+// validate와 write를 하나의 SHA 트랜잭션 안에서 수행한다.
+// 동시에 여러 파이프라인이 같은 토픽을 잡더라도 정확히 하나만 in-progress로 진입한다.
 async function atomicSetTopicInProgress(
   topicId: string
 ): Promise<{ success: boolean; reason: string }> {
@@ -1373,7 +1373,7 @@ async function updateTopicStatus(
 }
 
 // ============================================================
-// 2?④퀎 ?뚯씠?꾨씪????Phase 1: ?꾨왂 ?섎┰
+// 2단계 파이프라인 - Phase 1: 전략 수립
 // ============================================================
 
 export async function runStrategyPhase(params: {
@@ -1406,11 +1406,11 @@ export async function runStrategyPhase(params: {
     // Validate the selected topic before planning.
     const topicValidation = await validateTopicSelectionFromGitHub(topicId);
     if (!topicValidation.valid) {
-      throw new Error(`?좏뵿 ?좏깮 ?ㅽ뙣: ${topicValidation.reason}`);
+      throw new Error(`토픽 선택 실패: ${topicValidation.reason}`);
     }
     await assertSeriesPrerequisitesPublished(topicId);
 
-    // ?? 1. ?꾨왂 ?섎┰
+    // 1. 전략 수립
     state = updateState(state, { stage: "strategy-planning" });
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "strategy-planning", {
@@ -1432,7 +1432,7 @@ export async function runStrategyPhase(params: {
     state = updateState(state, { strategy });
     activePipelines.set(pipelineId, state);
 
-    // strategy_plan artifact ???(best-effort)
+    // strategy_plan artifact 저장 (best-effort)
     await saveArtifact<StrategyPlanData>(pipelineId, "strategy_plan", {
       title: strategy.title,
       outline: strategy.outline,
@@ -1444,10 +1444,10 @@ export async function runStrategyPhase(params: {
       corpusSummary: null,
       publicationLearning: strategy.publicationLearning ?? null,
     }).catch((e: unknown) => {
-      console.warn("[orchestrator] saveArtifact(strategy_plan) ?ㅽ뙣 (臾댁떆):", e instanceof Error ? e.message : e);
+      console.warn("[orchestrator] saveArtifact(strategy_plan) 실패 (무시):", e instanceof Error ? e.message : e);
     });
 
-    // ?? 2. material_change 媛먯?
+    // 2. material_change 감지
     const originalTitle = (await loadTopicTitle(topicId)) ?? "";
     const mcResult = detectMaterialChange({
       original: { title: originalTitle },
@@ -1467,7 +1467,7 @@ export async function runStrategyPhase(params: {
     state = updateState(state, { stage: "awaiting-approval" });
     activePipelines.set(pipelineId, state);
 
-    // ?뱀씤 ?붿껌 ?대깽??諛쒗뻾 (strategy ?꾩껜 ?ы븿 ??write phase?먯꽌 ?ъ슜)
+    // 승인 요청 이벤트 발행 (strategy 전체 포함, write phase에서 사용)
     emit(controller, makeEvent("approval_required", "awaiting-approval", {
       pipelineId,
       previousTitle: originalTitle,
@@ -1475,7 +1475,7 @@ export async function runStrategyPhase(params: {
       materialChange: mcResult.isMaterial,
       rationale: strategy.rationale,
       outline: strategy.outline.map((s) => s.heading),
-      strategy, // write phase媛 ??媛믪쓣 諛쏆븘 POST body???ы븿
+      strategy, // write phase가 이 값을 받아 POST body까지 사용
     }));
 
   } catch (err) {
@@ -1499,7 +1499,7 @@ export async function runStrategyPhase(params: {
 }
 
 // ============================================================
-// 2?④퀎 ?뚯씠?꾨씪????Phase 2: 湲?곌린 + ?됯?
+// 2단계 파이프라인 - Phase 2: 글쓰기 + 평가
 // ============================================================
 
 export async function runWritePhase(params: {
@@ -1516,7 +1516,7 @@ export async function runWritePhase(params: {
   const userId = normalizeUserId(params.userId);
   const now = new Date().toISOString();
   const gate = new ApprovalGate(pipelineId);
-  gate.grant(); // ?대씪?댁뼵?몄뿉???대? ?뱀씤??
+  gate.grant(); // 클라이언트에서 이미 승인됨
   let thisSetTopicInProgress = false;
   const approvalModifications = params.modifications?.trim() || "";
   const effectiveStrategy = applyApprovalModificationsToStrategy(strategy, approvalModifications);
@@ -1574,7 +1574,7 @@ export async function runWritePhase(params: {
       topicStatusAfter: "in-progress",
     }).catch(() => {});
 
-    // ?? 4.5. corpus + pre-write gate
+    // 4.5. corpus + pre-write gate
     emit(controller, makeEvent("progress", "writing", { message: "코퍼스 분석 중..." }));
     const corpusSummary = await getCorpusSummary({
       userId,
@@ -1626,7 +1626,7 @@ export async function runWritePhase(params: {
       .join("\n\n");
     emit(controller, makeEvent("progress", "writing", { message: "하네스 기준을 반영한 작성 브리핑 준비 완료" }));
 
-    // ?? 5. 蹂몃Ц ?묒꽦
+    // 5. 본문 작성
     state = updateState(state, { stage: "writing" });
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "writing", {
@@ -1664,7 +1664,7 @@ export async function runWritePhase(params: {
       compositionSessionId: pipelineId,
     });
 
-    // ?? 6. ?덉쭏 ?됯?
+    // 6. 1차 평가
     state = updateState(state, { stage: "evaluating" });
     activePipelines.set(pipelineId, state);
     emit(controller, makeEvent("stage_change", "evaluating", {
@@ -1763,7 +1763,7 @@ export async function runWritePhase(params: {
       return;
     }
 
-    // ?? 7. ?꾨즺
+    // 7. 완료
     const candidateResult = await registerBaselineCandidate({
       scenarioId,
       runId: evalResult.runId,
@@ -1801,8 +1801,8 @@ export async function runWritePhase(params: {
       evalScore: evalResult.aggregateScore,
     });
 
-    // ?꾨즺 ??topic??draft濡?蹂듦뎄 ??湲紐⑸줉?먯꽌 ?ㅼ떆 蹂댁씠?꾨줉 (?ㅼ쓬 ?④퀎 ?묒뾽 ?꾪빐)
-    try { await updateTopicStatus(topicId, "draft"); } catch { /* 臾댁떆 */ }
+    // 완료 후 topic을 draft로 복구해 글목록에서 다시 보이도록 함 (다음 단계 작업용)
+    try { await updateTopicStatus(topicId, "draft"); } catch { /* 무시 */ }
 
     state = updateState(state, { stage: "complete" });
     activePipelines.set(pipelineId, state);

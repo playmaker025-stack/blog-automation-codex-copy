@@ -59,22 +59,22 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ topics });
   } catch (err) {
     console.error("[GET /api/github/topics]", err);
-    return NextResponse.json({ error: "?좏뵿 紐⑸줉 議고쉶 ?ㅽ뙣" }, { status: 500 });
+    return NextResponse.json({ error: "토픽 목록 조회 실패" }, { status: 500 });
   }
 }
 
-// 湲紐⑸줉 援먯껜 ?????吏꾪뻾 以?諛쒗뻾????ぉ? ?좎??섍퀬 ?섎㉧吏瑜???紐⑸줉?쇰줈 援먯껜
+// 글목록 교체 저장: 진행 중/발행 완료 항목은 유지하고 나머지를 새 목록으로 교체
 // body: { items: Array<{ title: string; blog?: string }> }
 export async function PUT(request: NextRequest) {
   let body: { items: Array<{ title: string; blog?: string }> };
   try {
     body = await request.json() as typeof body;
   } catch {
-    return NextResponse.json({ error: "?붿껌 蹂몃Ц ?뚯떛 ?ㅽ뙣" }, { status: 400 });
+    return NextResponse.json({ error: "요청 본문 파싱 실패" }, { status: 400 });
   }
 
   if (!Array.isArray(body.items) || body.items.length === 0) {
-    return NextResponse.json({ error: "items 諛곗뿴???꾩슂?⑸땲??" }, { status: 400 });
+    return NextResponse.json({ error: "items 배열이 필요합니다." }, { status: 400 });
   }
 
   try {
@@ -130,30 +130,30 @@ export async function PUT(request: NextRequest) {
   } catch (err) {
     console.error("[PUT /api/github/topics]", err);
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "湲紐⑸줉 援먯껜 ?ㅽ뙣" },
+      { error: err instanceof Error ? err.message : "글목록 교체 실패" },
       { status: 500 }
     );
   }
 }
 
-// ?⑥씪 ?좏뵿 ?섏젙
+// 단일 토픽 수정
 export async function PATCH(request: NextRequest) {
   let body: { topicId: string } & Partial<Topic>;
   try {
     body = await request.json() as typeof body;
   } catch {
-    return NextResponse.json({ error: "?붿껌 蹂몃Ц ?뚯떛 ?ㅽ뙣" }, { status: 400 });
+    return NextResponse.json({ error: "요청 본문 파싱 실패" }, { status: 400 });
   }
 
   if (!body.topicId) {
-    return NextResponse.json({ error: "topicId媛 ?꾩슂?⑸땲??" }, { status: 400 });
+    return NextResponse.json({ error: "topicId가 필요합니다." }, { status: 400 });
   }
 
   try {
     await withRetry(async () => {
       const { data: index, sha } = await loadIndex();
       const exists = index.topics.find((t) => t.topicId === body.topicId);
-      if (!exists) throw Object.assign(new Error("?좏뵿??李얠쓣 ???놁뒿?덈떎."), { notFound: true });
+      if (!exists) throw Object.assign(new Error("토픽을 찾을 수 없습니다."), { notFound: true });
 
       const now = new Date().toISOString();
       const { topicId, ...patch } = body;
@@ -170,14 +170,14 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ updated: true });
   } catch (err) {
     if ((err as { notFound?: boolean }).notFound) {
-      return NextResponse.json({ error: "?좏뵿??李얠쓣 ???놁뒿?덈떎." }, { status: 404 });
+      return NextResponse.json({ error: "토픽을 찾을 수 없습니다." }, { status: 404 });
     }
     console.error("[PATCH /api/github/topics]", err);
-    return NextResponse.json({ error: "?좏뵿 ?섏젙 ?ㅽ뙣" }, { status: 500 });
+    return NextResponse.json({ error: "토픽 수정 실패" }, { status: 500 });
   }
 }
 
-// ?⑥씪 ?좏뵿 ??젣
+// 단일 토픽 삭제
 export async function DELETE(request: NextRequest) {
   const topicId = request.nextUrl.searchParams.get("topicId");
   const seriesId = request.nextUrl.searchParams.get("seriesId");
@@ -225,15 +225,15 @@ export async function DELETE(request: NextRequest) {
       await writeJsonFile(Paths.topicsIndex(), updated, `chore: delete topic ${topicId}`, sha);
     });
 
-    if (notFound) return NextResponse.json({ error: "?좏뵿??李얠쓣 ???놁뒿?덈떎." }, { status: 404 });
-    if (inProgress) return NextResponse.json({ error: "吏꾪뻾 以묒씤 ?좏뵿? ??젣?????놁뒿?덈떎." }, { status: 400 });
+    if (notFound) return NextResponse.json({ error: "토픽을 찾을 수 없습니다." }, { status: 404 });
+    if (inProgress) return NextResponse.json({ error: "진행 중인 토픽은 삭제할 수 없습니다." }, { status: 400 });
     if (published) {
       return NextResponse.json({ error: "발행된 토픽이 포함되어 있어 삭제할 수 없습니다." }, { status: 400 });
     }
     return NextResponse.json({ deleted: true, deletedCount });
   } catch (err) {
     console.error("[DELETE /api/github/topics]", err);
-    return NextResponse.json({ error: "?좏뵿 ??젣 ?ㅽ뙣" }, { status: 500 });
+    return NextResponse.json({ error: "토픽 삭제 실패" }, { status: 500 });
   }
 }
 
@@ -242,11 +242,11 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json() as Partial<Topic>;
   } catch {
-    return NextResponse.json({ error: "?붿껌 蹂몃Ц ?뚯떛 ?ㅽ뙣" }, { status: 400 });
+    return NextResponse.json({ error: "요청 본문 파싱 실패" }, { status: 400 });
   }
 
   if (!body.title) {
-    return NextResponse.json({ error: "title???꾩슂?⑸땲??" }, { status: 400 });
+    return NextResponse.json({ error: "title이 필요합니다." }, { status: 400 });
   }
 
   try {
@@ -255,7 +255,7 @@ export async function POST(request: NextRequest) {
       topicId: body.topicId?.trim() || `topic-${randomUUID().slice(0, 8)}`,
       title: body.title,
       description: body.description ?? "",
-      category: body.category ?? "?쇰컲",
+      category: body.category ?? "일반",
       tags: body.tags ?? [],
       source: body.source ?? "manual",
       contentKind: body.contentKind,
@@ -327,6 +327,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ topic: newTopic }, { status: 201 });
   } catch (err) {
     console.error("[POST /api/github/topics]", err);
-    return NextResponse.json({ error: "?좏뵿 ?앹꽦 ?ㅽ뙣" }, { status: 500 });
+    return NextResponse.json({ error: "토픽 생성 실패" }, { status: 500 });
   }
 }

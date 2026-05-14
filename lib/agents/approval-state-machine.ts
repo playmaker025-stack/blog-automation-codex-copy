@@ -1,26 +1,32 @@
-﻿/**
- * approval-state-machine ???뚯씠?꾨씪???뱀씤 ?먮쫫 ?곹깭 愿由? *
+/**
+ * approval-state-machine
+ * 파이프라인 승인 흐름의 상태를 관리한다.
+ *
  * States:
- *   draft_ready                  ???꾨왂 ?꾨즺, ?뱀씤 ?붿껌 ?? *   waiting_for_user_approval    ???뱀씤 ?붿껌 諛쒖넚, ?ъ슜???묐떟 ?湲? *   approved_pending_record_update ???ъ슜???뱀씤, posting-list/index 誘몃컲?? *   records_updated              ??posting-list + index 諛섏쁺 ?꾨즺
- *   audit_failed                 ??post-audit gate 李⑤떒 (draft 蹂댁〈, 諛고룷 遺덇?)
- *   released                     ??紐⑤뱺 gate ?듦낵, 理쒖쥌 諛고룷 ?꾨즺
+ *   draft_ready                    전략 완료, 승인 요청 전
+ *   waiting_for_user_approval      승인 요청 발송 후 사용자 응답 대기
+ *   approved_pending_record_update 사용자 승인 완료, posting-list/index 미반영
+ *   records_updated                posting-list + index 반영 완료
+ *   audit_failed                   post-audit gate 차단 (draft 보존, 발행 불가)
+ *   released                       모든 gate 통과, 최종 발행 완료
  *
- * ?덉슜 ?꾩씠:
- *   draft_ready                  ??waiting_for_user_approval
- *   waiting_for_user_approval    ??approved_pending_record_update (?뱀씤)
- *   waiting_for_user_approval    ??draft_ready (嫄곗젅 ???ъ떆??媛??
- *   approved_pending_record_update ??records_updated
- *   records_updated              ??audit_failed (gate 李⑤떒)
- *   records_updated              ??released (gate ?듦낵)
- *   audit_failed                 ??records_updated (愿由ъ옄 ?섎룞 蹂듦뎄)
+ * 허용 전이:
+ *   draft_ready -> waiting_for_user_approval
+ *   waiting_for_user_approval -> approved_pending_record_update (승인)
+ *   waiting_for_user_approval -> draft_ready (거절 또는 수정 후 재시도)
+ *   approved_pending_record_update -> records_updated
+ *   records_updated -> audit_failed (gate 차단)
+ *   records_updated -> released (gate 통과)
+ *   audit_failed -> records_updated (관리자 수동 복구)
  *
- * ???寃쎈줈: data/pipeline-ledger/approval-states/{pipelineId}.json
+ * 저장 경로: data/pipeline-ledger/approval-states/{pipelineId}.json
  */
 
 import { writeJsonFile, readJsonFile, fileExists } from "@/lib/github/repository";
 
 // ============================================================
-// ???// ============================================================
+// 상태 타입
+// ============================================================
 
 export type ApprovalState =
   | "draft_ready"
@@ -44,7 +50,7 @@ export interface ApprovalStateRecord {
   }>;
   createdAt: string;
   updatedAt: string;
-  // 李⑤떒 ?뺣낫 (audit_failed ?곹깭????
+  // 차단 정보 (audit_failed 상태일 때)
   gateBlockedBy?: string;
   gateBlockedReason?: string;
   gateBlockedAt?: string;
@@ -52,16 +58,16 @@ export interface ApprovalStateRecord {
 
 // Allowed state transitions.
 const ALLOWED_TRANSITIONS: Record<ApprovalState, ApprovalState[]> = {
-  draft_ready:                      ["waiting_for_user_approval"],
-  waiting_for_user_approval:        ["approved_pending_record_update", "draft_ready"],
-  approved_pending_record_update:   ["records_updated"],
-  records_updated:                  ["audit_failed", "released"],
-  audit_failed:                     ["records_updated"],   // 愿由ъ옄 蹂듦뎄
-  released:                         [],                    // 理쒖쥌 ?곹깭 ???꾩씠 ?놁쓬
+  draft_ready: ["waiting_for_user_approval"],
+  waiting_for_user_approval: ["approved_pending_record_update", "draft_ready"],
+  approved_pending_record_update: ["records_updated"],
+  records_updated: ["audit_failed", "released"],
+  audit_failed: ["records_updated"], // 관리자 복구
+  released: [], // 최종 상태, 추가 전이 없음
 };
 
 // ============================================================
-// 寃쎈줈
+// 경로
 // ============================================================
 
 function statePath(pipelineId: string): string {
@@ -69,7 +75,7 @@ function statePath(pipelineId: string): string {
 }
 
 // ============================================================
-// ?쎄린 / ?곌린
+// 읽기 / 쓰기
 // ============================================================
 
 export async function getApprovalState(
@@ -93,7 +99,7 @@ export async function initApprovalState(params: {
     topicId: params.topicId,
     userId: params.userId,
     state: "draft_ready",
-    history: [{ from: null, to: "draft_ready", reason: "?뚯씠?꾨씪???쒖옉", at: now, actor: "system" }],
+    history: [{ from: null, to: "draft_ready", reason: "파이프라인 시작", at: now, actor: "system" }],
     createdAt: now,
     updatedAt: now,
   };
@@ -111,7 +117,7 @@ export async function transitionApprovalState(params: {
   const path = statePath(params.pipelineId);
 
   if (!(await fileExists(path))) {
-    return { success: false, record: null, error: `approval state ?놁쓬: ${params.pipelineId}` };
+    return { success: false, record: null, error: `approval state 없음: ${params.pipelineId}` };
   }
 
   const { data: record, sha } = await readJsonFile<ApprovalStateRecord>(path);
@@ -121,7 +127,7 @@ export async function transitionApprovalState(params: {
     return {
       success: false,
       record,
-      error: `?꾩씠 遺덇?: ${record.state} ??${params.to} (?덉슜: ${allowed.join(", ") || "?놁쓬"})`,
+      error: `전이 불가: ${record.state} -> ${params.to} (허용: ${allowed.join(", ") || "없음"})`,
     };
   }
 
@@ -134,7 +140,7 @@ export async function transitionApprovalState(params: {
       { from: record.state, to: params.to, reason: params.reason, at: now, actor: params.actor ?? "system" },
     ],
     updatedAt: now,
-    // gate 李⑤떒 ?뺣낫
+    // gate 차단 정보
     ...(params.to === "audit_failed" && params.gateInfo
       ? {
           gateBlockedBy: params.gateInfo.blockedBy,
@@ -142,18 +148,18 @@ export async function transitionApprovalState(params: {
           gateBlockedAt: now,
         }
       : {}),
-    // Clear gate blocking info after release.
+    // release 이후 차단 정보 정리
     ...(params.to === "released"
       ? { gateBlockedBy: undefined, gateBlockedReason: undefined, gateBlockedAt: undefined }
       : {}),
   };
 
-  await writeJsonFile(path, updated, `chore: approval state ${params.pipelineId} ??${params.to}`, sha);
+  await writeJsonFile(path, updated, `chore: approval state ${params.pipelineId} -> ${params.to}`, sha);
   return { success: true, record: updated };
 }
 
 // ============================================================
-// ?곹깭 媛뺤젣 ?ㅼ젙 (愿由ъ옄 蹂듦뎄??
+// 상태 강제 설정 (관리자 복구용)
 // ============================================================
 
 export async function forceApprovalState(params: {
@@ -164,7 +170,7 @@ export async function forceApprovalState(params: {
 }): Promise<{ success: boolean; record: ApprovalStateRecord | null; error?: string }> {
   const path = statePath(params.pipelineId);
   if (!(await fileExists(path))) {
-    return { success: false, record: null, error: `approval state ?놁쓬: ${params.pipelineId}` };
+    return { success: false, record: null, error: `approval state 없음: ${params.pipelineId}` };
   }
 
   const { data: record, sha } = await readJsonFile<ApprovalStateRecord>(path);
@@ -186,6 +192,6 @@ export async function forceApprovalState(params: {
     updatedAt: now,
   };
 
-  await writeJsonFile(path, updated, `admin: force approval state ${params.pipelineId} ??${params.to}`, sha);
+  await writeJsonFile(path, updated, `admin: force approval state ${params.pipelineId} -> ${params.to}`, sha);
   return { success: true, record: updated };
 }
