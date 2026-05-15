@@ -90,12 +90,12 @@ function buildDraftCompletionMessage(streamingBody: string): string | null {
 
   if (completedCount <= 0) return null;
   if (completedCount === 1) {
-    return "1차 초안 작성이 완료되었습니다. 추가 자동 보강 없이도 진행 가능한 상태로 판단했습니다.";
+    return "1차 초안 작성이 완료되었습니다. 추가 자동 보강 없이도 다음 단계로 진행 가능한 상태입니다.";
   }
   if (completedCount === 2) {
-    return "1차 초안과 자동 보강본 2차 작성이 완료되었습니다. 더 이상의 자동 보강 없이 초안 작성을 마칩니다.";
+    return "1차 초안과 자동 보강본 2차 작성이 완료되었습니다. 추가 보강 없이 초안 작성을 마칩니다.";
   }
-  return "1차 초안부터 자동 보강본 3차까지 작성이 완료되었습니다. 각 영역을 비교한 뒤 수정본 탭에서 실제 작성 본문을 검토해 주세요.";
+  return "1차 초안부터 자동 보강본 3차까지 모두 작성되었습니다. 각 버전을 비교한 뒤 수정본 탭에서 실제 작성 본문을 검토해 주세요.";
 }
 
 function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]): string {
@@ -1035,7 +1035,7 @@ export default function PipelinePage() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 xl:grid-cols-[minmax(320px,360px)_minmax(0,1fr)_minmax(320px,380px)] gap-6 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(280px,320px)_minmax(0,1.7fr)_minmax(240px,300px)] 2xl:grid-cols-[minmax(300px,340px)_minmax(0,1.95fr)_minmax(250px,320px)] gap-5 xl:gap-6 items-start">
         <section className="min-w-0 space-y-6">
           <div className="bg-white border border-zinc-200 rounded-xl p-5 space-y-5">
             <div>

@@ -18,8 +18,8 @@ import { naverLogicAgent } from "./naver-logic-agent";
 
 // 네이버 블로그 줄바꿈 규칙: 1줄 최대 25자
 // 빈 줄, 구분선(---), 마크다운 헤더(#)만 유지, 나머지 전부 25자 래핑
-function wrapTo25Chars(text: string): string {
-  const MAX = 25;
+function wrapForNaverMobile(text: string): string {
+  const MAX = 26;
   const lines = text.split("\n");
   const result: string[] = [];
 
@@ -525,7 +525,7 @@ async function runOpenAIMasterWriter(params: {
     signal: callSignal,
   });
 
-  const bodyText = wrapTo25Chars(finalDraft);
+  const bodyText = wrapForNaverMobile(finalDraft);
   onToken?.(bodyText);
   onProgress?.("본문 생성 완료 - GitHub에 저장 중...");
 
@@ -727,7 +727,7 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
 
     if (finalStopReason === "end_turn" && toolUseBlocks.length === 0) {
       // 본문 생성 완료
-      const bodyText = wrapTo25Chars(rawText);
+      const bodyText = wrapForNaverMobile(rawText);
       onProgress?.("본문 생성 완료 — GitHub에 저장 중...");
       return await saveWriterResult({
         topicId,
