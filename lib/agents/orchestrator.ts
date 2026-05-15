@@ -15,6 +15,7 @@ import {
   getApprovalState,
 } from "./approval-state-machine";
 import { appendLog } from "./operation-logger";
+import { buildCompletionSupportFromRules } from "./completion-support";
 import {
   appendWritingFailure,
   buildPreWriteHarnessBriefing,
@@ -169,7 +170,7 @@ function makeKoreanImageStem(value: string): string {
   return stem.slice(0, 64) || "블로그_초안";
 }
 
-function buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
+function _buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
   hashtags: string[];
   imageFileNames: string[];
 } {
@@ -866,7 +867,11 @@ export async function runPipeline(params: {
       evalScore: evalResult.aggregateScore,
     });
 
-    const completionSupport = buildCompletionSupport(strategy, writerResult.title);
+    const completionSupport = buildCompletionSupportFromRules(
+      strategy,
+      writerResult.title,
+      await loadTopicCategory(request.topicId)
+    );
     const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy, writerResult, evalResult });
 
     if (!postGateResult.passed) {
@@ -1719,7 +1724,11 @@ export async function runWritePhase(params: {
       baselineDelta,
     }).catch(() => {});
 
-    const completionSupport = buildCompletionSupport(effectiveStrategy, writerResult.title);
+    const completionSupport = buildCompletionSupportFromRules(
+      effectiveStrategy,
+      writerResult.title,
+      await loadTopicCategory(topicId)
+    );
     const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy: effectiveStrategy, writerResult, evalResult });
     const seoEvaluation = evaluateSeoCompleteness({
       title: writerResult.title,
