@@ -82,7 +82,7 @@ function extractConclusionText(body: string): string {
   return paragraphs.slice(-2).join("\n\n");
 }
 
-function getKeywordTargets(
+function _getKeywordTargets(
   bodyLength: number,
   index: number,
   options?: {
@@ -164,6 +164,130 @@ function findHeadingLines(body: string): string[] {
     .filter((line) => line.startsWith("#") || /^\d+[.)]\s+/.test(line) || /^\*\*.+\*\*$/.test(line));
 }
 
+function selectMainKeyword(title: string, keywords: string[] = [], targetMainKeyword?: string): string {
+  const explicitMainKeyword = targetMainKeyword?.trim();
+  if (explicitMainKeyword) return explicitMainKeyword;
+
+  const normalizedKeywords = uniqueKeywords(keywords);
+  if (normalizedKeywords.length > 0) {
+    return normalizedKeywords[0];
+  }
+
+  return selectFocusKeywords(title, keywords, 1)[0] ?? "";
+}
+
+function selectSubKeywords(mainKeyword: string, title: string, keywords: string[] = []): string[] {
+  const keywordPool = collectKeywordPool(title, keywords);
+  return keywordPool
+    .filter((keyword) => keyword.trim().toLowerCase() !== mainKeyword.trim().toLowerCase())
+    .slice(0, 7);
+}
+
+function getMainKeywordStatus(count: number, isPreludeMainKeyword: boolean): KeywordUsageItem["status"] {
+  if (isPreludeMainKeyword) {
+    if (count <= 0) return "under";
+    if (count <= 3) return "ok";
+    if (count <= 5) return "caution";
+    return "danger";
+  }
+
+  if (count <= 3) return "under";
+  if (count <= 7) return "ok";
+  if (count <= 10) return "caution";
+  return "danger";
+}
+
+function getSubKeywordStatus(count: number): KeywordUsageItem["status"] {
+  if (count <= 0) return "under";
+  if (count <= 3) return "ok";
+  if (count === 4) return "caution";
+  return "danger";
+}
+
+function buildKeywordRecommendation(
+  keyword: string,
+  role: "main" | "sub",
+  status: KeywordUsageItem["status"],
+  isPreludeMainKeyword: boolean
+): string {
+  if (role === "main") {
+    if (status === "under") {
+      return isPreludeMainKeyword
+        ? `?? ? ??? '${keyword}'? 1~3? ??? ????? ??? ???.`
+        : `?? ??? '${keyword}'? ??? 4~7? ??? ?? ? ???? ??? ???.`;
+    }
+    if (status === "caution") {
+      return isPreludeMainKeyword
+        ? `?? ??? '${keyword}'? ?? ?? ????. ?? ?? ??? ?? ????? ??? ???.`
+        : `?? ??? '${keyword}'? ?? ????. ?? ??? ?????? ???? ?? ???.`;
+    }
+    if (status === "danger") {
+      return `'${keyword}' ??? ?? ????. ?? ??? ??? ?? ???, ?? ???? ??? ???.`;
+    }
+    return `?? ??? '${keyword}' ??? ?? ??? ??????.`;
+  }
+
+  if (status === "under") {
+    return `?? ??? '${keyword}'? ??? 1~3? ????? ??? ???.`;
+  }
+  if (status === "caution") {
+    return `?? ??? '${keyword}'? ?? ?? ????. ?? ??? ? ? ??? ???.`;
+  }
+  if (status === "danger") {
+    return `?? ??? '${keyword}'? ??? ?????. ?? ?? ??? ??? ?? ???? ?? ???.`;
+  }
+  return `?? ??? '${keyword}' ??? ?? ??? ??????.`;
+}
+
+function buildParagraphWarnings(paragraphs: string[], items: KeywordUsageItem[]): KeywordUsageReport["paragraphWarnings"] {
+  const warnings: KeywordUsageReport["paragraphWarnings"] = [];
+
+  paragraphs.forEach((paragraph, paragraphIndex) => {
+    for (const item of items) {
+      const count = countKeywordOccurrences(paragraph, item.keyword);
+      if (count < 2) continue;
+      warnings.push({
+        keyword: item.keyword,
+        paragraphIndex,
+        count,
+        message: `${paragraphIndex + 1}번째 문단에서 '${item.keyword}'가 ${count}회 반복됩니다. 문장 재배치를 검토해 주세요.`,
+      });
+    }
+  });
+
+  return warnings;
+}
+
+function evaluateOverallRisk(
+  mainKeyword: KeywordUsageItem | null,
+  subKeywords: KeywordUsageItem[],
+  paragraphWarnings: KeywordUsageReport["paragraphWarnings"]
+): Pick<KeywordUsageReport, "overallRisk" | "overallRiskSummary"> {
+  const items = [...(mainKeyword ? [mainKeyword] : []), ...subKeywords];
+  const dangerCount = items.filter((item) => item.status === "danger").length;
+  const cautionCount = items.filter((item) => item.status === "caution").length;
+  const underCount = items.filter((item) => item.status === "under").length;
+
+  if (dangerCount > 0 || paragraphWarnings.length >= 2) {
+    return {
+      overallRisk: "high",
+      overallRiskSummary: "??? ?? ?? ?? ?? ??? ??, ?? ???? ?????.",
+    };
+  }
+
+  if (cautionCount > 0 || underCount > 0 || paragraphWarnings.length > 0) {
+    return {
+      overallRisk: "medium",
+      overallRiskSummary: "?? ??? ?? ???? ???, ?? ???? ?? ?? ??? ?????.",
+    };
+  }
+
+  return {
+    overallRisk: "low",
+    overallRiskSummary: "????? ??? ??? ????? ???? ??? ????.",
+  };
+}
+
 function buildKeywordFocusMetrics(params: {
   title: string;
   body: string;
@@ -194,15 +318,14 @@ function buildKeywordFocusMetrics(params: {
     let completenessScore = role === "main" ? 76 : 72;
     let exposurePotentialScore = role === "main" ? 74 : 70;
 
-    if (isPreludeTarget) {
-      completenessScore += 0;
-      exposurePotentialScore += 0;
-    } else if (titleIncluded) {
-      completenessScore += role === "main" ? 8 : 6;
-      exposurePotentialScore += role === "main" ? 10 : 8;
-    } else {
-      completenessScore -= role === "main" ? 14 : 10;
-      exposurePotentialScore -= role === "main" ? 16 : 12;
+    if (!isPreludeTarget) {
+      if (titleIncluded) {
+        completenessScore += role === "main" ? 8 : 6;
+        exposurePotentialScore += role === "main" ? 10 : 8;
+      } else {
+        completenessScore -= role === "main" ? 14 : 10;
+        exposurePotentialScore -= role === "main" ? 16 : 12;
+      }
     }
 
     if (role === "main" && !isPreludeTarget) {
@@ -257,15 +380,18 @@ function buildKeywordFocusMetrics(params: {
       }
     }
 
-    if (item.status === "적정") {
+    if (item.status === "ok") {
       completenessScore += 10;
       exposurePotentialScore += 10;
-    } else if (item.status === "부족") {
+    } else if (item.status === "under") {
       completenessScore -= role === "main" ? 10 : 7;
       exposurePotentialScore -= role === "main" ? 12 : 8;
-    } else {
+    } else if (item.status === "caution") {
       completenessScore -= role === "main" ? 8 : 6;
       exposurePotentialScore -= role === "main" ? 10 : 7;
+    } else {
+      completenessScore -= role === "main" ? 10 : 7;
+      exposurePotentialScore -= role === "main" ? 12 : 9;
     }
 
     if (bodyLength >= 1200) {
@@ -278,28 +404,28 @@ function buildKeywordFocusMetrics(params: {
 
     const summaryParts: string[] = [];
     if (titleIncluded) {
-      summaryParts.push(role === "main" && titleFrontLoaded ? "제목 앞부분 반영" : "제목 반영");
+      summaryParts.push(role === "main" && titleFrontLoaded ? "?? ???" : "?? ??");
     } else {
-      summaryParts.push("제목 미반영");
+      summaryParts.push("?? ???");
     }
-    summaryParts.push(introIncluded ? "도입부 반영" : "도입부 약함");
-    summaryParts.push(`${item.count}회 사용`);
+    summaryParts.push(introIncluded ? "? ?? ??" : "? ?? ??");
+    summaryParts.push(`?? ${item.count}?`);
 
-    let action = "현재 흐름을 유지해도 괜찮습니다.";
-    if (!titleIncluded) {
-      action = `'${item.keyword}'를 제목에 더 직접적으로 넣는 편이 좋습니다.`;
+    let action = `?? '${item.keyword}' ??? ??? ??????.`;
+    if (!titleIncluded && !isPreludeTarget) {
+      action = `'${item.keyword}'? ???? ??? ???? ???? ?? ???.`;
     } else if (!introIncluded) {
-      action = `첫 두 문단 안에 '${item.keyword}'를 자연스럽게 보강해 주세요.`;
-    } else if (item.status !== "적정") {
+      action = `? ? ?? ?? '${item.keyword}'? ????? ??? ???.`;
+    } else if (item.status !== "ok") {
       action = item.recommendation;
     } else if (bodyLength < 1200) {
-      action = "본문 분량을 조금 더 보강하면 검색 체류 신호에 유리합니다.";
+      action = "?? ??? ?? ???, ?? ??? ?? ?? ??? ?? ? ??? ???.";
     }
 
     return {
       keyword: item.keyword,
       role,
-      label: role === "main" ? "메인 키워드" : `서브 키워드 ${index}`,
+      label: role === "main" ? "?? ???" : `?? ??? ${index}` ,
       completenessScore: clampScore(completenessScore),
       exposurePotentialScore: clampScore(exposurePotentialScore),
       count: item.count,
@@ -309,7 +435,7 @@ function buildKeywordFocusMetrics(params: {
       titleFrontLoaded,
       introIncluded,
       earlyCoverage,
-      summary: summaryParts.join(" · "),
+      summary: summaryParts.join(" ? "),
       action,
     };
   });
@@ -559,30 +685,35 @@ export function analyzeKeywordUsage(params: {
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
 }): KeywordUsageReport {
-  const keywordPool = collectKeywordPool(params.title, params.keywords);
-  const keywords = keywordPool.slice(0, 5);
   const paragraphs = splitParagraphs(params.body);
   const introText = paragraphs.slice(0, 2).join("\n\n");
   const bodyLength = params.body.replace(/\s+/g, "").length;
+  const mainKeyword = selectMainKeyword(params.title, params.keywords ?? [], params.targetMainKeyword);
+  const subKeywords = selectSubKeywords(mainKeyword, params.title, params.keywords ?? []);
+  const orderedKeywords = [mainKeyword, ...subKeywords].filter(Boolean);
+  const keywordPool = collectKeywordPool(params.title, orderedKeywords);
+  const normalizedTargetMainKeyword = params.targetMainKeyword?.trim().toLowerCase() ?? "";
 
-  const items: KeywordUsageItem[] = keywords.map((keyword, index) => {
+  const items: KeywordUsageItem[] = orderedKeywords.map((keyword, index) => {
     const count = countKeywordOccurrences(params.body, keyword);
-    const { targetMin, targetMax } = getKeywordTargets(bodyLength, index, {
-      seriesRole: params.seriesRole,
-      targetMainKeyword: params.targetMainKeyword,
+    const isPreludeMainKeyword =
+      params.seriesRole === "prelude" &&
+      index === 0 &&
+      !!normalizedTargetMainKeyword &&
+      keyword.trim().toLowerCase() === normalizedTargetMainKeyword;
+
+    const targetMin = index === 0 ? (isPreludeMainKeyword ? 1 : 4) : 1;
+    const targetMax = index === 0 ? (isPreludeMainKeyword ? 3 : 7) : 3;
+    const status =
+      index === 0
+        ? getMainKeywordStatus(count, isPreludeMainKeyword)
+        : getSubKeywordStatus(count);
+    const recommendation = buildKeywordRecommendation(
       keyword,
-    });
-
-    let status: KeywordUsageItem["status"] = "적정";
-    let recommendation = "현재 밀도를 유지해도 괜찮습니다.";
-
-    if (count < targetMin) {
-      status = "부족";
-      recommendation = `도입부나 기준 설명 문단에 '${keyword}'를 자연스럽게 1~2회 더 넣는 편이 좋습니다.`;
-    } else if (count > targetMax) {
-      status = "과다";
-      recommendation = `'${keyword}' 반복이 많아 보여서 일부는 동의어/맥락 표현으로 바꾸는 편이 좋습니다.`;
-    }
+      index === 0 ? "main" : "sub",
+      status,
+      isPreludeMainKeyword
+    );
 
     return {
       keyword,
@@ -594,35 +725,53 @@ export function analyzeKeywordUsage(params: {
     };
   });
 
-  const mainKeyword = items[0]?.keyword ?? "";
+  const mainKeywordItem = items[0] ?? null;
+  const subKeywordItems = items.slice(1, 8);
   const introCoverage = mainKeyword ? countKeywordOccurrences(introText, mainKeyword) > 0 : true;
   const titleFrontLoaded =
     mainKeyword ? params.title.indexOf(mainKeyword) >= 0 && params.title.indexOf(mainKeyword) <= 12 : true;
   const totalMentions = items.reduce((sum, item) => sum + item.count, 0);
+  const paragraphWarnings = buildParagraphWarnings(paragraphs, [
+    ...(mainKeywordItem ? [mainKeywordItem] : []),
+    ...subKeywordItems,
+  ]);
+  const { overallRisk, overallRiskSummary } = evaluateOverallRisk(
+    mainKeywordItem,
+    subKeywordItems,
+    paragraphWarnings
+  );
 
   const summary: string[] = [];
-  if (mainKeyword) {
-    summary.push(`메인 키워드 '${mainKeyword}' 반복 ${items[0]?.count ?? 0}회`);
+  if (mainKeywordItem) {
+    summary.push(`?? ??? '${mainKeywordItem.keyword}' ?? ${mainKeywordItem.count}?`);
   }
-  if (!introCoverage && mainKeyword) {
-    summary.push("도입부에 메인 키워드가 부족합니다.");
+  if (!introCoverage && mainKeywordItem) {
+    summary.push("? ? ?? ?? ?? ??? ??? ????.");
   }
-  if (!titleFrontLoaded && mainKeyword) {
-    summary.push("제목 앞부분에 메인 키워드가 더 빨리 보이면 SEO에 유리합니다.");
+  if (!titleFrontLoaded && mainKeywordItem && params.seriesRole !== "prelude") {
+    summary.push("?? ??? ?? ??? ??? ?? ??? ???.");
   }
+  summary.push(`?? ??? ?? ??? ${overallRisk}`);
 
-  const recommendations = items.filter((item) => item.status !== "적정").map((item) => item.recommendation);
+  const recommendations = [
+    ...items.filter((item) => item.status !== "ok").map((item) => item.recommendation),
+    ...paragraphWarnings.map((warning) => warning.message),
+  ];
 
-  const tokenItems = buildKeywordTokenItems(keywordPool, params.body);
   return {
     items,
-    tokenItems,
+    mainKeyword: mainKeywordItem,
+    subKeywords: subKeywordItems,
+    overallRisk,
+    overallRiskSummary,
+    paragraphWarnings,
+    tokenItems: buildKeywordTokenItems(keywordPool, params.body),
     totalMentions,
     introCoverage,
     titleFrontLoaded,
     bodyLength,
     summary,
-    recommendations,
+    recommendations: uniqueKeywords(recommendations).slice(0, 10),
   };
 }
 
@@ -725,16 +874,21 @@ export function evaluateSeoCompleteness(params: {
   }
 
   for (const item of keywordReport.items) {
-    if (item.status === "적정") {
-      evidence.push(`'${item.keyword}' 반복 ${item.count}회로 과하지 않습니다.`);
+    if (item.status === "ok") {
+      evidence.push(`'${item.keyword}' ?? ${item.count}?? ?? ?? ?? ?? ????.`);
       continue;
     }
-    if (item.status === "부족") {
+    if (item.status === "under") {
       score -= item.keyword === keywordReport.items[0]?.keyword ? 10 : 5;
       improvements.push(item.recommendation);
       continue;
     }
-    score -= item.keyword === keywordReport.items[0]?.keyword ? 8 : 4;
+    if (item.status === "caution") {
+      score -= item.keyword === keywordReport.items[0]?.keyword ? 8 : 4;
+      improvements.push(item.recommendation);
+      continue;
+    }
+    score -= item.keyword === keywordReport.items[0]?.keyword ? 10 : 6;
     improvements.push(item.recommendation);
   }
 

@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
-import type { NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport } from "@/lib/agents/types";
+import type { KeywordUsageReport, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
 
 interface ResultData {
   title: string;
@@ -56,6 +56,210 @@ function tokenTone(count: number): string {
   return "text-blue-600";
 }
 
+function keywordStatusLabel(status: KeywordUsageReport["items"][number]["status"]): string {
+  if (status === "ok") return "적정";
+  if (status === "caution") return "주의";
+  if (status === "danger") return "위험";
+  return "부족";
+}
+
+function overallRiskLabel(risk: KeywordUsageReport["overallRisk"]): string {
+  if (risk === "low") return "낮음";
+  if (risk === "medium") return "보통";
+  return "높음";
+}
+
+function KeywordRiskReport({
+  report,
+  keywordStatusTone,
+}: {
+  report: KeywordUsageReport;
+  keywordStatusTone: (status: KeywordUsageReport["items"][number]["status"]) => string;
+}) {
+  return (
+    <div className="space-y-3 rounded-lg border border-zinc-100 bg-zinc-50 p-3">
+      {report.mainKeyword && (
+        <div className="rounded-lg border border-zinc-200 bg-white px-3 py-3">
+          <p className="text-xs font-semibold text-zinc-500">메인 키워드</p>
+          <div className="mt-2 flex items-center justify-between gap-3">
+            <p className="text-sm font-semibold text-zinc-900">{report.mainKeyword.keyword}</p>
+            <p className={`text-xs font-semibold ${keywordStatusTone(report.mainKeyword.status)}`}>
+              본문 {report.mainKeyword.count}회 / {keywordStatusLabel(report.mainKeyword.status)}
+            </p>
+          </div>
+          <p className="mt-2 text-xs text-zinc-500">
+            적정 범위 {report.mainKeyword.targetMin}~{report.mainKeyword.targetMax}회
+          </p>
+          <p className="mt-1 text-xs text-zinc-700">{report.mainKeyword.recommendation}</p>
+        </div>
+      )}
+
+      {report.subKeywords.length > 0 && (
+        <div className="space-y-2 rounded-lg border border-zinc-200 bg-white px-3 py-3">
+          <p className="text-xs font-semibold text-zinc-500">서브 키워드</p>
+          {report.subKeywords.map((item) => (
+            <div
+              key={`sub-${item.keyword}`}
+              className="flex items-start justify-between gap-3 border-b border-zinc-100 py-2 last:border-b-0 last:pb-0"
+            >
+              <div className="min-w-0">
+                <p className="text-sm font-medium text-zinc-800">{item.keyword}</p>
+                <p className="mt-1 text-xs text-zinc-500">
+                  적정 범위 {item.targetMin}~{item.targetMax}회
+                </p>
+              </div>
+              <p className={`shrink-0 text-xs font-semibold ${keywordStatusTone(item.status)}`}>
+                본문 {item.count}회 / {keywordStatusLabel(item.status)}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="rounded-lg border border-zinc-200 bg-white px-3 py-3">
+        <p className="text-xs font-semibold text-zinc-500">전체 위험도</p>
+        <p className="mt-2 text-sm font-semibold text-zinc-900">{overallRiskLabel(report.overallRisk)}</p>
+        <p className="mt-1 text-xs text-zinc-600">{report.overallRiskSummary}</p>
+      </div>
+
+      {report.paragraphWarnings.length > 0 && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-3">
+          <p className="text-xs font-semibold text-amber-700">동일 문단 반복 점검</p>
+          <ul className="mt-2 space-y-1 text-xs text-amber-800">
+            {report.paragraphWarnings.map((warning) => (
+              <li key={`${warning.keyword}-${warning.paragraphIndex}`}>- {warning.message}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function KeywordTokenPanel({
+  report,
+  idPrefix,
+}: {
+  report: KeywordUsageReport;
+  idPrefix: string;
+}) {
+  if ((report.tokenItems?.length ?? 0) === 0) {
+    return null;
+  }
+
+  return (
+    <div className="space-y-2">
+      <div>
+        <p className="text-xs font-semibold text-zinc-600">실제 본문 핵심 단어 분포</p>
+        <p className="mt-1 text-[11px] leading-5 text-zinc-500">
+          선택된 구문 키워드뿐 아니라, 본문에 실제로 반복된 핵심 단어 축도 함께 집계합니다.
+        </p>
+      </div>
+      <div className="grid gap-2">
+        {report.tokenItems.slice(0, 10).map((item) => (
+          <div
+            key={`${idPrefix}-token-${item.token}`}
+            className="rounded-lg border border-zinc-100 bg-white px-3 py-3"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-sm font-semibold text-zinc-800">{item.token}</p>
+              <p className={`text-xs font-semibold ${tokenTone(item.count)}`}>실제 발생 {item.count}회</p>
+            </div>
+            <p className="mt-1 text-[11px] text-zinc-500">연결 구문: {item.sourceKeywords.join(" / ")}</p>
+            <p className="mt-2 text-xs text-zinc-700">{item.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SeoMetricPanel({
+  seoEvaluation,
+  contentTab,
+}: {
+  seoEvaluation: SeoEvaluation;
+  contentTab: "draft" | "revision";
+}) {
+  if ((seoEvaluation.keywordMetrics?.length ?? 0) === 0) {
+    return null;
+  }
+
+  return (
+    <div className="space-y-2">
+      <div>
+        <p className="text-xs font-semibold text-zinc-600">키워드 배치 상세 지표</p>
+        <p className="mt-1 text-[11px] leading-5 text-zinc-500">
+          제목, 첫 문단, 본문 길이 기준으로 메인과 서브 키워드 배치를 추가 점검한 결과입니다.
+        </p>
+      </div>
+      {seoEvaluation.keywordMetrics.map((metric) => (
+        <div
+          key={`${contentTab}-metric-${metric.keyword}`}
+          className="rounded-lg border border-zinc-100 bg-white px-3 py-3"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-zinc-800">{metric.keyword}</p>
+              <p className="mt-1 text-[11px] text-zinc-500">{metric.label}</p>
+            </div>
+            <p className={`text-xs font-semibold ${metric.role === "main" ? "text-blue-600" : "text-zinc-500"}`}>
+              {metric.role === "main" ? "메인 축" : "서브 축"}
+            </p>
+          </div>
+
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <div className="rounded-md bg-zinc-50 px-3 py-2">
+              <p className="text-[11px] font-semibold text-zinc-500">완성도</p>
+              <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.completenessScore)}`}>
+                {metric.completenessScore}점
+              </p>
+            </div>
+            <div className="rounded-md bg-zinc-50 px-3 py-2">
+              <p className="text-[11px] font-semibold text-zinc-500">노출 잠재력</p>
+              <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.exposurePotentialScore)}`}>
+                {metric.exposurePotentialScore}점
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-3 text-xs text-zinc-600">{metric.summary}</p>
+          <p className="mt-1 text-[11px] text-zinc-500">
+            제목 {metric.titleIncluded ? "포함" : "미포함"} · 첫 문단 {metric.introIncluded ? "포함" : "미포함"} ·
+            적정 범위 {metric.targetMin}~{metric.targetMax}회 / 실제 {metric.count}회
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SimpleNotePanel({
+  title,
+  notes,
+}: {
+  title: string;
+  notes: string[];
+}) {
+  if (notes.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white p-4">
+      <p className="mb-2 text-xs font-semibold text-zinc-600">{title}</p>
+      <ul className="space-y-1">
+        {notes.map((note, index) => (
+          <li key={`${title}-${index}-${note}`} className="flex gap-2 text-sm text-zinc-700">
+            <span className="text-zinc-400">-</span>
+            <span>{note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function PipelineReportPanel({
   contentTab,
   approval,
@@ -71,22 +275,23 @@ export function PipelineReportPanel({
   onPublishToIndex,
   keywordStatusTone,
 }: Props) {
-  const activeSeoEvaluation = contentTab === "revision" ? reviewResult?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
-  const activeKeywordReport = contentTab === "revision"
-    ? reviewResult?.keywordReport ?? null
-    : result?.seoEvaluation?.keywordReport ?? null;
-  const activeSeoNotes = contentTab === "revision"
-    ? reviewResult?.seoNotes ?? []
-    : [
-        ...(result?.seoEvaluation?.evidence ?? []),
-        ...(result?.seoEvaluation?.improvements ?? []),
-      ].slice(0, 6);
-  const activeNaverNotes = contentTab === "revision"
-    ? reviewResult?.naverLogicNotes ?? []
-    : [
-        ...(result?.naverLogicEvaluation?.evidence ?? []),
-        ...(result?.naverLogicEvaluation?.improvements ?? []),
-      ].slice(0, 6);
+  const activeSeoEvaluation =
+    contentTab === "revision" ? reviewResult?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
+  const activeKeywordReport =
+    contentTab === "revision"
+      ? reviewResult?.keywordReport ?? null
+      : result?.seoEvaluation?.keywordReport ?? null;
+  const activeSeoNotes =
+    contentTab === "revision"
+      ? reviewResult?.seoNotes ?? []
+      : [...(result?.seoEvaluation?.evidence ?? []), ...(result?.seoEvaluation?.improvements ?? [])].slice(0, 6);
+  const activeNaverNotes =
+    contentTab === "revision"
+      ? reviewResult?.naverLogicNotes ?? []
+      : [
+          ...(result?.naverLogicEvaluation?.evidence ?? []),
+          ...(result?.naverLogicEvaluation?.improvements ?? []),
+        ].slice(0, 6);
   const showVersionedDraftReports = contentTab === "draft" && draftVersionReports.length > 0;
 
   return (
@@ -95,11 +300,15 @@ export function PipelineReportPanel({
 
       {result ? (
         <>
-          <div className={`rounded-xl border p-5 ${result.pass ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"}`}>
+          <div
+            className={`rounded-xl border p-5 ${
+              result.pass ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"
+            }`}
+          >
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className={`text-sm font-semibold ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
-                  {result.pass ? "초안 통과" : "초안 보완 필요"}
+                  {result.pass ? "최종 평가 통과" : "최종 평가 주의"}
                 </p>
                 <p className="mt-1 text-sm font-semibold text-zinc-900">{result.title}</p>
                 <p className="mt-1 text-xs text-zinc-500">{result.wordCount.toLocaleString()}자</p>
@@ -116,11 +325,13 @@ export function PipelineReportPanel({
               </div>
               <div className="rounded-lg bg-white/70 px-3 py-2">
                 <p className="text-[11px] font-semibold text-zinc-500">네이버 로직</p>
-                <p className="mt-1 text-sm font-semibold text-zinc-900">{result.naverLogicEvaluation?.completenessScore ?? "-"}</p>
+                <p className="mt-1 text-sm font-semibold text-zinc-900">
+                  {result.naverLogicEvaluation?.completenessScore ?? "-"}
+                </p>
               </div>
               <div className="rounded-lg bg-white/70 px-3 py-2">
-                <p className="text-[11px] font-semibold text-zinc-500">판정</p>
-                <p className="mt-1 text-sm font-semibold text-zinc-900">{result.pass ? "통과" : "보완"}</p>
+                <p className="text-[11px] font-semibold text-zinc-500">결과</p>
+                <p className="mt-1 text-sm font-semibold text-zinc-900">{result.pass ? "통과" : "주의"}</p>
               </div>
             </div>
           </div>
@@ -128,13 +339,16 @@ export function PipelineReportPanel({
           {showVersionedDraftReports ? (
             <div className="space-y-3">
               {draftVersionReports.map((report) => (
-                <div key={`draft-report-${report.label}`} className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
+                <div
+                  key={`draft-report-${report.label}`}
+                  className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4"
+                >
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="text-xs font-semibold text-zinc-600">{report.label}</p>
-                      <p className="mt-1 text-sm font-semibold text-zinc-900">버전별 SEO / 키워드 분석</p>
+                      <p className="mt-1 text-sm font-semibold text-zinc-900">초안 버전별 키워드 / SEO 검수</p>
                       <p className="mt-1 text-xs text-zinc-500">
-                        이 버전 본문만 따로 다시 계산한 결과입니다.
+                        각 버전 본문만 다시 계산해서 메인, 서브, 반복 위험도를 따로 보여줍니다.
                       </p>
                     </div>
                     <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-right">
@@ -143,45 +357,8 @@ export function PipelineReportPanel({
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    {report.keywordReport.items.map((item) => (
-                      <div key={`${report.label}-${item.keyword}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2">
-                        <div className="flex items-center justify-between gap-3">
-                          <p className="text-sm font-semibold text-zinc-800">{item.keyword}</p>
-                          <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
-                            실제 발생 {item.count}회 | {item.status}
-                          </p>
-                        </div>
-                        <p className="mt-1 text-[11px] text-zinc-500">권장 {item.targetMin}~{item.targetMax}회</p>
-                        <p className="mt-1 text-xs text-zinc-600">{item.recommendation}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  {(report.keywordReport.tokenItems?.length ?? 0) > 0 && (
-                    <div className="space-y-2">
-                      <div>
-                        <p className="text-xs font-semibold text-zinc-600">실제 본문 핵심 단어 분포</p>
-                        <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-                          선택된 구문 키워드뿐 아니라 본문에서 반복된 핵심 단어 축까지 함께 보여줍니다.
-                        </p>
-                      </div>
-                      <div className="grid gap-2">
-                        {report.keywordReport.tokenItems.slice(0, 10).map((item) => (
-                          <div key={`${report.label}-token-${item.token}`} className="rounded-lg border border-zinc-100 bg-white px-3 py-3">
-                            <div className="flex items-center justify-between gap-3">
-                              <p className="text-sm font-semibold text-zinc-800">{item.token}</p>
-                              <p className={`text-xs font-semibold ${tokenTone(item.count)}`}>
-                                실제 발생 {item.count}회
-                              </p>
-                            </div>
-                            <p className="mt-1 text-[11px] text-zinc-500">연결 구문: {item.sourceKeywords.join(" / ")}</p>
-                            <p className="mt-2 text-xs text-zinc-700">{item.note}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  <KeywordRiskReport report={report.keywordReport} keywordStatusTone={keywordStatusTone} />
+                  <KeywordTokenPanel report={report.keywordReport} idPrefix={report.label} />
                 </div>
               ))}
             </div>
@@ -195,8 +372,8 @@ export function PipelineReportPanel({
                   </p>
                   <p className="mt-1 text-xs text-zinc-500">
                     {contentTab === "revision"
-                      ? "실제 작성 본문 기준으로 다시 계산한 분석 결과입니다."
-                      : "현재 초안 본문 기준 분석 결과입니다."}
+                      ? "실제 작성 본문을 기준으로 메인, 서브, 반복 위험도를 다시 계산합니다."
+                      : "현재 생성된 초안 본문을 기준으로 메인, 서브, 반복 위험도를 계산합니다."}
                   </p>
                 </div>
                 <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-right">
@@ -205,89 +382,9 @@ export function PipelineReportPanel({
                 </div>
               </div>
 
-              <div className="space-y-2">
-                {activeKeywordReport.items.map((item) => (
-                  <div key={`${contentTab}-${item.keyword}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2">
-                    <div className="flex items-center justify-between gap-3">
-                      <p className="text-sm font-semibold text-zinc-800">{item.keyword}</p>
-                      <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
-                        실제 발생 {item.count}회 | {item.status}
-                      </p>
-                    </div>
-                    <p className="mt-1 text-[11px] text-zinc-500">권장 {item.targetMin}~{item.targetMax}회</p>
-                    <p className="mt-1 text-xs text-zinc-600">{item.recommendation}</p>
-                  </div>
-                ))}
-              </div>
-
-              {(activeKeywordReport.tokenItems?.length ?? 0) > 0 && (
-                <div className="space-y-2">
-                  <div>
-                    <p className="text-xs font-semibold text-zinc-600">실제 본문 핵심 단어 분포</p>
-                    <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-                      자연어 군더더기 대신 의미 있는 핵심 단어 반복만 추려서 보여줍니다.
-                    </p>
-                  </div>
-                  <div className="grid gap-2">
-                    {activeKeywordReport.tokenItems.slice(0, 10).map((item) => (
-                      <div key={`${contentTab}-token-${item.token}`} className="rounded-lg border border-zinc-100 bg-white px-3 py-3">
-                        <div className="flex items-center justify-between gap-3">
-                          <p className="text-sm font-semibold text-zinc-800">{item.token}</p>
-                          <p className={`text-xs font-semibold ${tokenTone(item.count)}`}>
-                            실제 발생 {item.count}회
-                          </p>
-                        </div>
-                        <p className="mt-1 text-[11px] text-zinc-500">연결 구문: {item.sourceKeywords.join(" / ")}</p>
-                        <p className="mt-2 text-xs text-zinc-700">{item.note}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {(activeSeoEvaluation.keywordMetrics?.length ?? 0) > 0 && (
-                <div className="space-y-2">
-                  <div>
-                    <p className="text-xs font-semibold text-zinc-600">키워드 축별 노출 강도</p>
-                    <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-                      메인 축과 보조 축이 제목, 도입부, 본문 전체에 어떻게 분포되어 있는지 요약합니다.
-                    </p>
-                  </div>
-                  {activeSeoEvaluation.keywordMetrics.map((metric) => (
-                    <div key={`${contentTab}-metric-${metric.keyword}`} className="rounded-lg border border-zinc-100 bg-white px-3 py-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <p className="text-sm font-semibold text-zinc-800">{metric.keyword}</p>
-                          <p className="mt-1 text-[11px] text-zinc-500">{metric.label}</p>
-                        </div>
-                        <p className={`text-xs font-semibold ${metric.role === "main" ? "text-blue-600" : "text-zinc-500"}`}>
-                          {metric.role === "main" ? "메인 축" : "보조 축"}
-                        </p>
-                      </div>
-
-                      <div className="mt-3 grid grid-cols-2 gap-2">
-                        <div className="rounded-md bg-zinc-50 px-3 py-2">
-                          <p className="text-[11px] font-semibold text-zinc-500">완성도</p>
-                          <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.completenessScore)}`}>
-                            {metric.completenessScore}점
-                          </p>
-                        </div>
-                        <div className="rounded-md bg-zinc-50 px-3 py-2">
-                          <p className="text-[11px] font-semibold text-zinc-500">노출 가능성</p>
-                          <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.exposurePotentialScore)}`}>
-                            {metric.exposurePotentialScore}점
-                          </p>
-                        </div>
-                      </div>
-
-                      <p className="mt-3 text-xs text-zinc-600">{metric.summary}</p>
-                      <p className="mt-1 text-[11px] text-zinc-500">
-                        제목 {metric.titleIncluded ? "포함" : "미포함"} · 도입부 {metric.introIncluded ? "포함" : "미포함"} · 권장 {metric.targetMin}~{metric.targetMax}회 / 실제 {metric.count}회
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
+              <KeywordRiskReport report={activeKeywordReport} keywordStatusTone={keywordStatusTone} />
+              <KeywordTokenPanel report={activeKeywordReport} idPrefix={contentTab} />
+              <SeoMetricPanel seoEvaluation={activeSeoEvaluation} contentTab={contentTab} />
             </div>
           ) : null}
 
@@ -301,13 +398,15 @@ export function PipelineReportPanel({
                 </div>
                 <div className="rounded-lg border border-blue-100 bg-blue-50 px-3 py-2 text-right">
                   <p className="text-[11px] font-semibold text-blue-600">완성도</p>
-                  <p className="text-lg font-bold text-blue-700">{result.naverLogicEvaluation.completenessScore}점</p>
+                  <p className="text-lg font-bold text-blue-700">
+                    {result.naverLogicEvaluation.completenessScore}점
+                  </p>
                 </div>
               </div>
 
               {activeNaverNotes.length > 0 && (
                 <div>
-                  <p className="mb-1 text-xs font-semibold text-zinc-600">판단 근거</p>
+                  <p className="mb-1 text-xs font-semibold text-zinc-600">근거와 보완 포인트</p>
                   <ul className="space-y-1">
                     {activeNaverNotes.map((item, index) => (
                       <li key={`naver-${index}`} className="flex gap-2 text-sm text-zinc-700">
@@ -324,59 +423,20 @@ export function PipelineReportPanel({
           {contentTab === "revision" && reviewResult && (
             <div className="space-y-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
               <div>
-                <p className="text-xs font-semibold text-blue-700">수정본 검토 메모</p>
+                <p className="text-xs font-semibold text-blue-700">수정본 반영 검수</p>
                 <p className="mt-1 text-xs text-blue-600">
-                  실제 작성 본문을 기준으로 다시 계산한 키워드와 리뷰 결과입니다.
+                  수정본 본문을 기준으로 키워드 반복과 반복 위험도를 다시 확인합니다.
                 </p>
               </div>
 
               {reviewResult.keywordReport.items.length > 0 && (
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold text-blue-700">주요 / 서브 키워드 실제 반복</p>
-                  {reviewResult.keywordReport.items.map((item) => (
-                    <div key={`review-${item.keyword}`} className="rounded-md border border-blue-100 bg-white px-3 py-2">
-                      <div className="flex items-center justify-between gap-3">
-                        <p className="text-xs font-semibold text-zinc-800">{item.keyword}</p>
-                        <p className={`text-[11px] font-semibold ${keywordStatusTone(item.status)}`}>
-                          실제 발생 {item.count}회 | {item.status}
-                        </p>
-                      </div>
-                      <p className="mt-1 text-[11px] text-zinc-500">권장 {item.targetMin}~{item.targetMax}회</p>
-                      <p className="mt-1 text-xs text-zinc-700">{item.recommendation}</p>
-                    </div>
-                  ))}
-                </div>
+                <KeywordRiskReport report={reviewResult.keywordReport} keywordStatusTone={keywordStatusTone} />
               )}
             </div>
           )}
 
-          {activeSeoNotes.length > 0 && (
-            <div className="rounded-xl border border-zinc-200 bg-white p-4">
-              <p className="mb-2 text-xs font-semibold text-zinc-600">SEO 메모</p>
-              <ul className="space-y-1">
-                {activeSeoNotes.map((note, index) => (
-                  <li key={`${note}-${index}`} className="flex gap-2 text-sm text-zinc-700">
-                    <span className="text-zinc-400">-</span>
-                    <span>{note}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {result.recommendations.length > 0 && (
-            <div className="rounded-xl border border-zinc-200 bg-white p-4">
-              <p className="mb-2 text-xs font-semibold text-zinc-600">보완 권장 사항</p>
-              <ul className="space-y-1">
-                {result.recommendations.map((recommendation, index) => (
-                  <li key={`${recommendation}-${index}`} className="flex gap-2 text-sm text-zinc-700">
-                    <span className="text-zinc-400">-</span>
-                    <span>{recommendation}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <SimpleNotePanel title="SEO 메모" notes={activeSeoNotes} />
+          <SimpleNotePanel title="추가 권장 사항" notes={result.recommendations} />
 
           {(result.hashtags?.length ?? 0) > 0 && (
             <div className="rounded-xl border border-zinc-200 bg-white p-4">
@@ -393,10 +453,13 @@ export function PipelineReportPanel({
 
           {(result.imageFileNames?.length ?? 0) > 0 && (
             <div className="rounded-xl border border-zinc-200 bg-white p-4">
-              <p className="mb-2 text-xs font-semibold text-zinc-600">추천 파일명</p>
+              <p className="mb-2 text-xs font-semibold text-zinc-600">사진 파일명 예시</p>
               <ul className="space-y-1">
                 {result.imageFileNames?.map((name) => (
-                  <li key={name} className="rounded border border-zinc-100 bg-zinc-50 px-2 py-1 font-mono text-xs text-zinc-700">
+                  <li
+                    key={name}
+                    className="rounded border border-zinc-100 bg-zinc-50 px-2 py-1 font-mono text-xs text-zinc-700"
+                  >
                     {name}
                   </li>
                 ))}
@@ -406,9 +469,11 @@ export function PipelineReportPanel({
 
           <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
             <div>
-              <p className="text-xs font-semibold text-zinc-600">발행 완료 후 인덱스 추가</p>
+              <p className="text-xs font-semibold text-zinc-600">실제 발행 URL 반영</p>
               {!reviewApplied && (
-                <p className="mt-1 text-xs text-amber-600">먼저 수정본을 원본에 반영한 뒤 인덱스에 추가할 수 있습니다.</p>
+                <p className="mt-1 text-xs text-amber-600">
+                  수정본을 실제 본문으로 반영한 뒤에만 발행 URL을 인덱스에 반영할 수 있습니다.
+                </p>
               )}
             </div>
             <input
@@ -423,7 +488,7 @@ export function PipelineReportPanel({
               disabled={publishingToIndex || !reviewApplied || !publishUrl.trim()}
               className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-40"
             >
-              {publishingToIndex ? "인덱스 추가 중..." : "검토 후 인덱스 목록에 추가"}
+              {publishingToIndex ? "인덱스 반영 중..." : "실제 발행 URL을 인덱스에 반영"}
             </button>
             {publishNotice && (
               <p className={`text-xs ${publishNotice.type === "ok" ? "text-emerald-600" : "text-red-500"}`}>
@@ -434,7 +499,7 @@ export function PipelineReportPanel({
 
           {reviewIssues.length > 0 && (
             <div className="rounded-xl border border-zinc-200 bg-white p-4">
-              <p className="mb-2 text-xs font-semibold text-zinc-600">검토 결과</p>
+              <p className="mb-2 text-xs font-semibold text-zinc-600">검토 이슈</p>
               <ul className="space-y-1">
                 {reviewIssues.map((issue, index) => (
                   <li key={`${issue.message}-${index}`} className="flex gap-2 text-sm text-zinc-700">
@@ -448,9 +513,9 @@ export function PipelineReportPanel({
         </>
       ) : (
         <div className="rounded-xl border border-dashed border-zinc-300 bg-white p-6">
-          <p className="text-sm font-semibold text-zinc-700">평가 / 보고서</p>
+          <p className="text-sm font-semibold text-zinc-700">평가 / 보고서 대기 중</p>
           <p className="mt-2 text-sm leading-6 text-zinc-500">
-            초안 생성과 평가가 끝나면 이곳에 SEO, 네이버 로직, 해시태그, 추천 파일명이 정리됩니다.
+            초안 생성과 평가가 끝나면 이곳에 SEO, 네이버 로직, 해시태그, 사진 파일명, 반복 위험도 보고서가 정리됩니다.
           </p>
         </div>
       )}

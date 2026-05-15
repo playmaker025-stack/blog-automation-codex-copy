@@ -54,8 +54,9 @@ function issueTone(severity: DraftReviewIssue["severity"]): string {
 }
 
 function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]): string {
-  if (status === "적정") return "text-emerald-600";
-  if (status === "과다") return "text-amber-600";
+  if (status === "ok") return "text-emerald-600";
+  if (status === "caution") return "text-amber-600";
+  if (status === "danger") return "text-red-500";
   return "text-blue-600";
 }
 
@@ -67,7 +68,7 @@ function buildRevisionGuides(reviewResult: DraftReviewResult | null, reviewIssue
   }
 
   for (const item of reviewResult?.keywordReport.items ?? []) {
-    if (item.status !== "적정") {
+    if (item.status !== "ok") {
       guides.push(`${item.keyword}: ${item.recommendation}`);
     }
   }
