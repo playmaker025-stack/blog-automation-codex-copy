@@ -15,7 +15,7 @@ import {
   getApprovalState,
 } from "./approval-state-machine";
 import { appendLog } from "./operation-logger";
-import { buildCompletionSupportFromRules } from "./completion-support";
+import { buildCompletionSupportFromRules as buildCompletionSupport } from "./completion-support";
 import {
   appendWritingFailure,
   buildPreWriteHarnessBriefing,
@@ -113,102 +113,6 @@ function uniqueNonEmpty(values: string[]): string[] {
     out.push(normalized);
   }
   return out;
-}
-
-const HASHTAG_STOPWORDS = new Set([
-  "보는",
-  "많이",
-  "고르기",
-  "고르는",
-  "선택",
-  "선택기준",
-  "기준",
-  "전에",
-  "이유",
-  "찾는",
-  "정리",
-  "가이드",
-  "체크",
-  "체크포인트",
-  "체크리스트",
-  "실제",
-  "시작",
-  "필수",
-  "선행포스팅",
-  "키워드빌드업",
-  "메인포스팅",
-  "네이버블로그",
-  "블로그초안",
-  "정보글",
-]);
-
-function isUsefulHashtagToken(value: string): boolean {
-  const normalized = value.trim().toLowerCase();
-  if (normalized.length < 2) return false;
-  if (HASHTAG_STOPWORDS.has(normalized)) return false;
-  if (/^\d+$/u.test(normalized)) return false;
-  return true;
-}
-
-function extractHashtagTokens(value: string): string[] {
-  return value
-    .replace(/[^\p{L}\p{N}\s]/gu, " ")
-    .split(/\s+/)
-    .map((word) => word.trim())
-    .filter((word) => isUsefulHashtagToken(word));
-}
-
-function makeHashtagText(value: string): string {
-  return `#${value.replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, "")}`;
-}
-
-function makeKoreanImageStem(value: string): string {
-  const stem = value
-    .replace(/[^\p{L}\p{N}\s]/gu, " ")
-    .trim()
-    .replace(/\s+/g, "_");
-  return stem.slice(0, 64) || "블로그_초안";
-}
-
-function _buildCompletionSupport(strategy: StrategyPlanResult, title: string): {
-  hashtags: string[];
-  imageFileNames: string[];
-} {
-  const phraseSeeds = strategy.keywords.filter((keyword) => keyword.trim().length >= 2);
-  const tokenSeeds = uniqueNonEmpty([
-    ...phraseSeeds.flatMap((keyword) => extractHashtagTokens(keyword)),
-    ...extractHashtagTokens(title),
-  ]);
-
-  const hashtagSeeds = uniqueNonEmpty([
-    ...phraseSeeds,
-    ...tokenSeeds,
-  ]);
-
-  const hashtags = uniqueNonEmpty(hashtagSeeds.map(makeHashtagText))
-    .filter((tag) => tag.length > 1)
-    .slice(0, 10);
-
-  const imageStem = makeKoreanImageStem(title);
-  const imageLabels = [
-    "대표",
-    "문제상황",
-    "정상비정상",
-    "원인분류",
-    "체크포인트",
-    "제품상세",
-    "해결방법",
-    "비교전후",
-    "주의사항",
-    "매장확인",
-    "요약",
-    "마무리",
-  ];
-  const imageFileNames = imageLabels.map(
-    (label, index) => `${imageStem}_${label}_${String(index + 1).padStart(2, "0")}.jpg`
-  );
-
-  return { hashtags, imageFileNames };
 }
 
 function extractApprovedTitle(modifications?: string): string | null {
@@ -645,9 +549,10 @@ export async function runPipeline(params: {
 
     // 4.5. corpus summary 준비 + pre-write gate
     emit(controller, makeEvent("progress", "writing", { message: "코퍼스 분석 중..." }));
+    const topicCategory = await loadTopicCategory(request.topicId);
     const corpusSummary = await getCorpusSummary({
       userId: request.userId,
-      category: await loadTopicCategory(request.topicId),
+      category: topicCategory,
       userTone: strategy.tone,
       topicTitle: strategy.title,
     });
@@ -675,7 +580,7 @@ export async function runPipeline(params: {
         sampleId: s.sampleId,
         finalScore: s.finalScore,
       })),
-      targetCategory: await loadTopicCategory(request.topicId),
+      targetCategory: topicCategory,
     });
 
     if (corpusSummary.staleWarnings.length > 0) {
@@ -867,10 +772,10 @@ export async function runPipeline(params: {
       evalScore: evalResult.aggregateScore,
     });
 
-    const completionSupport = buildCompletionSupportFromRules(
+    const { hashtags, imageFileNames } = buildCompletionSupport(
       strategy,
       writerResult.title,
-      await loadTopicCategory(request.topicId)
+      topicCategory
     );
     const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy, writerResult, evalResult });
 
@@ -906,8 +811,8 @@ export async function runPipeline(params: {
         baselineDelta,
         pass: false,
         recommendations: evalResult.recommendations,
-        naverLogicEvaluation,
-        ...completionSupport,
+        naverLogicEvaluation,        hashtags,
+        imageFileNames,
       }));
       emit(controller, makeEvent("stage_change", "complete", {
         pipelineId,
@@ -982,8 +887,8 @@ export async function runPipeline(params: {
         baselineDelta,
         pass: evalResult.pass,
         recommendations: evalResult.recommendations,
-        naverLogicEvaluation,
-        ...completionSupport,
+        naverLogicEvaluation,        hashtags,
+        imageFileNames,
       }));
     emit(controller, makeEvent("stage_change", "complete", {
       pipelineId,
@@ -1153,23 +1058,34 @@ async function validateTopicSelectionFromGitHub(
   }
 }
 
-async function loadTopic(topicId: string): Promise<Topic | null> {
+async function loadTopicIndex(): Promise<TopicIndex | null> {
   try {
     const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
-    return data.topics.find((t) => t.topicId === topicId) ?? null;
+    return data;
   } catch {
     return null;
   }
 }
 
-async function assertSeriesPrerequisitesPublished(topicId: string): Promise<void> {
-  const topic = await loadTopic(topicId);
-  if (!topic || topic.seriesRole !== "main" || !topic.seriesId) return;
+async function loadTopicData(topicId: string): Promise<{ topic: Topic | null; index: TopicIndex | null }> {
+  const index = await loadTopicIndex();
+  if (!index) {
+    return { topic: null, index: null };
+  }
 
-  const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
+  return {
+    topic: index.topics.find((candidate) => candidate.topicId === topicId) ?? null,
+    index,
+  };
+}
+
+async function assertSeriesPrerequisitesPublished(topicId: string): Promise<void> {
+  const { topic, index } = await loadTopicData(topicId);
+  if (!topic || !index || topic.seriesRole !== "main" || !topic.seriesId) return;
+
   const prerequisites = topic.prerequisiteTopicIds?.length
-    ? data.topics.filter((candidate) => topic.prerequisiteTopicIds?.includes(candidate.topicId))
-    : data.topics.filter(
+    ? index.topics.filter((candidate) => topic.prerequisiteTopicIds?.includes(candidate.topicId))
+    : index.topics.filter(
         (candidate) =>
           candidate.seriesId === topic.seriesId &&
           candidate.seriesRole === "prelude" &&
@@ -1187,30 +1103,18 @@ async function assertSeriesPrerequisitesPublished(topicId: string): Promise<void
 }
 
 async function loadTopicTitle(topicId: string): Promise<string | null> {
-  try {
-    const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
-    return data.topics.find((t) => t.topicId === topicId)?.title ?? null;
-  } catch {
-    return null;
-  }
+  const { topic } = await loadTopicData(topicId);
+  return topic?.title ?? null;
 }
 
 async function loadTopicStatus(topicId: string): Promise<string | null> {
-  try {
-    const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
-    return data.topics.find((t) => t.topicId === topicId)?.status ?? null;
-  } catch {
-    return null;
-  }
+  const { topic } = await loadTopicData(topicId);
+  return topic?.status ?? null;
 }
 
 async function loadTopicCategory(topicId: string): Promise<string | undefined> {
-  try {
-    const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
-    return data.topics.find((t) => t.topicId === topicId)?.category;
-  } catch {
-    return undefined;
-  }
+  const { topic } = await loadTopicData(topicId);
+  return topic?.category;
 }
 
 async function createPostingRecord(params: {
@@ -1581,9 +1485,10 @@ export async function runWritePhase(params: {
 
     // 4.5. corpus + pre-write gate
     emit(controller, makeEvent("progress", "writing", { message: "코퍼스 분석 중..." }));
+    const topicCategory = await loadTopicCategory(topicId);
     const corpusSummary = await getCorpusSummary({
       userId,
-      category: await loadTopicCategory(topicId),
+      category: topicCategory,
       userTone: strategy.tone,
       topicTitle: strategy.title,
     });
@@ -1724,10 +1629,10 @@ export async function runWritePhase(params: {
       baselineDelta,
     }).catch(() => {});
 
-    const completionSupport = buildCompletionSupportFromRules(
+    const { hashtags, imageFileNames } = buildCompletionSupport(
       effectiveStrategy,
       writerResult.title,
-      await loadTopicCategory(topicId)
+      topicCategory
     );
     const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy: effectiveStrategy, writerResult, evalResult });
     const seoEvaluation = evaluateSeoCompleteness({
@@ -1762,8 +1667,8 @@ export async function runWritePhase(params: {
         pass: false,
         recommendations: evalResult.recommendations,
         seoEvaluation,
-        naverLogicEvaluation,
-        ...completionSupport,
+        naverLogicEvaluation,        hashtags,
+        imageFileNames,
       }));
       emit(controller, makeEvent("stage_change", "complete", {
         pipelineId,
@@ -1826,8 +1731,8 @@ export async function runWritePhase(params: {
         pass: evalResult.pass,
         recommendations: evalResult.recommendations,
         seoEvaluation,
-        naverLogicEvaluation,
-        ...completionSupport,
+        naverLogicEvaluation,        hashtags,
+        imageFileNames,
       }));
     emit(controller, makeEvent("stage_change", "complete", {
       pipelineId,
