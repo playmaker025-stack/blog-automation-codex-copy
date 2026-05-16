@@ -107,6 +107,7 @@ function KeywordRiskReport({
                 <p className="mt-1 text-xs text-zinc-500">
                   적정 범위 {item.targetMin}~{item.targetMax}회
                 </p>
+                <p className="mt-1 text-xs text-zinc-700">{item.recommendation}</p>
               </div>
               <p className={`shrink-0 text-xs font-semibold ${keywordStatusTone(item.status)}`}>
                 본문 {item.count}회 / {keywordStatusLabel(item.status)}
@@ -117,14 +118,14 @@ function KeywordRiskReport({
       )}
 
       <div className="rounded-lg border border-zinc-200 bg-white px-3 py-3">
-        <p className="text-xs font-semibold text-zinc-500">전체 위험도</p>
+        <p className="text-xs font-semibold text-zinc-500">전체 반복 위험도</p>
         <p className="mt-2 text-sm font-semibold text-zinc-900">{overallRiskLabel(report.overallRisk)}</p>
         <p className="mt-1 text-xs text-zinc-600">{report.overallRiskSummary}</p>
       </div>
 
       {report.paragraphWarnings.length > 0 && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-3">
-          <p className="text-xs font-semibold text-amber-700">동일 문단 반복 점검</p>
+          <p className="text-xs font-semibold text-amber-700">문단 내 반복 경고</p>
           <ul className="mt-2 space-y-1 text-xs text-amber-800">
             {report.paragraphWarnings.map((warning) => (
               <li key={`${warning.keyword}-${warning.paragraphIndex}`}>- {warning.message}</li>
@@ -152,7 +153,7 @@ function KeywordTokenPanel({
       <div>
         <p className="text-xs font-semibold text-zinc-600">실제 본문 핵심 단어 분포</p>
         <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-          선택된 구문 키워드뿐 아니라, 본문에 실제로 반복된 핵심 단어 축도 함께 집계합니다.
+          선택된 포커스 구문만이 아니라, 본문에서 반복된 핵심 단어 축까지 함께 확인합니다.
         </p>
       </div>
       <div className="grid gap-2">
@@ -188,9 +189,9 @@ function SeoMetricPanel({
   return (
     <div className="space-y-2">
       <div>
-        <p className="text-xs font-semibold text-zinc-600">키워드 배치 상세 지표</p>
+        <p className="text-xs font-semibold text-zinc-600">키워드 배치 품질 지표</p>
         <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-          제목, 첫 문단, 본문 길이 기준으로 메인과 서브 키워드 배치를 추가 점검한 결과입니다.
+          제목, 도입부, 소제목, 결론부 기준으로 메인과 서브 키워드의 배치 완성도를 보여줍니다.
         </p>
       </div>
       {seoEvaluation.keywordMetrics.map((metric) => (
@@ -225,8 +226,8 @@ function SeoMetricPanel({
 
           <p className="mt-3 text-xs text-zinc-600">{metric.summary}</p>
           <p className="mt-1 text-[11px] text-zinc-500">
-            제목 {metric.titleIncluded ? "포함" : "미포함"} · 첫 문단 {metric.introIncluded ? "포함" : "미포함"} ·
-            적정 범위 {metric.targetMin}~{metric.targetMax}회 / 실제 {metric.count}회
+            제목 {metric.titleIncluded ? "포함" : "미포함"} / 도입부 {metric.introIncluded ? "포함" : "미포함"} /
+            적정 범위 {metric.targetMin}~{metric.targetMax}회 / 본문 {metric.count}회
           </p>
         </div>
       ))}
@@ -308,13 +309,13 @@ export function PipelineReportPanel({
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className={`text-sm font-semibold ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
-                  {result.pass ? "최종 평가 통과" : "최종 평가 주의"}
+                  {result.pass ? "초안 평가 통과" : "초안 평가 보완 필요"}
                 </p>
                 <p className="mt-1 text-sm font-semibold text-zinc-900">{result.title}</p>
                 <p className="mt-1 text-xs text-zinc-500">{result.wordCount.toLocaleString()}자</p>
               </div>
               <div className="text-right">
-                <p className="text-[11px] font-semibold text-zinc-500">종합 점수</p>
+                <p className="text-[11px] font-semibold text-zinc-500">최종 점수</p>
                 <p className="text-2xl font-bold text-zinc-900">{result.evalScore}</p>
               </div>
             </div>
@@ -330,8 +331,8 @@ export function PipelineReportPanel({
                 </p>
               </div>
               <div className="rounded-lg bg-white/70 px-3 py-2">
-                <p className="text-[11px] font-semibold text-zinc-500">결과</p>
-                <p className="mt-1 text-sm font-semibold text-zinc-900">{result.pass ? "통과" : "주의"}</p>
+                <p className="text-[11px] font-semibold text-zinc-500">상태</p>
+                <p className="mt-1 text-sm font-semibold text-zinc-900">{result.pass ? "통과" : "보완"}</p>
               </div>
             </div>
           </div>
@@ -346,9 +347,9 @@ export function PipelineReportPanel({
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="text-xs font-semibold text-zinc-600">{report.label}</p>
-                      <p className="mt-1 text-sm font-semibold text-zinc-900">초안 버전별 키워드 / SEO 검수</p>
+                      <p className="mt-1 text-sm font-semibold text-zinc-900">버전별 키워드 / SEO 분석</p>
                       <p className="mt-1 text-xs text-zinc-500">
-                        각 버전 본문만 다시 계산해서 메인, 서브, 반복 위험도를 따로 보여줍니다.
+                        각 초안 버전의 본문만 기준으로 메인, 서브, 반복 위험도를 다시 계산합니다.
                       </p>
                     </div>
                     <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-right">
@@ -372,8 +373,8 @@ export function PipelineReportPanel({
                   </p>
                   <p className="mt-1 text-xs text-zinc-500">
                     {contentTab === "revision"
-                      ? "실제 작성 본문을 기준으로 메인, 서브, 반복 위험도를 다시 계산합니다."
-                      : "현재 생성된 초안 본문을 기준으로 메인, 서브, 반복 위험도를 계산합니다."}
+                      ? "수정된 실제 본문 기준으로 키워드와 배치 품질을 다시 점검합니다."
+                      : "생성된 초안 본문 기준으로 키워드와 배치 품질을 점검합니다."}
                   </p>
                 </div>
                 <div className="rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-2 text-right">
@@ -392,7 +393,7 @@ export function PipelineReportPanel({
             <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-xs font-semibold text-zinc-600">네이버 로직 분석</p>
+                  <p className="text-xs font-semibold text-zinc-600">네이버 로직 평가</p>
                   <p className="mt-1 text-sm font-semibold text-zinc-900">{result.naverLogicEvaluation.label}</p>
                   <p className="mt-1 text-xs text-zinc-500">{result.naverLogicEvaluation.reason}</p>
                 </div>
@@ -423,9 +424,9 @@ export function PipelineReportPanel({
           {contentTab === "revision" && reviewResult && (
             <div className="space-y-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
               <div>
-                <p className="text-xs font-semibold text-blue-700">수정본 반영 검수</p>
+                <p className="text-xs font-semibold text-blue-700">수정본 추가 검토</p>
                 <p className="mt-1 text-xs text-blue-600">
-                  수정본 본문을 기준으로 키워드 반복과 반복 위험도를 다시 확인합니다.
+                  수정 후 실제 본문을 기준으로 키워드 반복과 배치 품질을 다시 점검합니다.
                 </p>
               </div>
 
@@ -435,7 +436,7 @@ export function PipelineReportPanel({
             </div>
           )}
 
-          <SimpleNotePanel title="SEO 메모" notes={activeSeoNotes} />
+          <SimpleNotePanel title="SEO 근거" notes={activeSeoNotes} />
           <SimpleNotePanel title="추가 권장 사항" notes={result.recommendations} />
 
           {(result.hashtags?.length ?? 0) > 0 && (
@@ -472,7 +473,7 @@ export function PipelineReportPanel({
               <p className="text-xs font-semibold text-zinc-600">실제 발행 URL 반영</p>
               {!reviewApplied && (
                 <p className="mt-1 text-xs text-amber-600">
-                  수정본을 실제 본문으로 반영한 뒤에만 발행 URL을 인덱스에 반영할 수 있습니다.
+                  수정본 실제 반영을 끝낸 뒤에만 발행 URL을 입력해 인덱스에 반영해야 합니다.
                 </p>
               )}
             </div>
@@ -488,7 +489,7 @@ export function PipelineReportPanel({
               disabled={publishingToIndex || !reviewApplied || !publishUrl.trim()}
               className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-40"
             >
-              {publishingToIndex ? "인덱스 반영 중..." : "실제 발행 URL을 인덱스에 반영"}
+              {publishingToIndex ? "발행 URL 반영 중..." : "실제 발행 URL을 인덱스에 반영"}
             </button>
             {publishNotice && (
               <p className={`text-xs ${publishNotice.type === "ok" ? "text-emerald-600" : "text-red-500"}`}>
@@ -513,9 +514,10 @@ export function PipelineReportPanel({
         </>
       ) : (
         <div className="rounded-xl border border-dashed border-zinc-300 bg-white p-6">
-          <p className="text-sm font-semibold text-zinc-700">평가 / 보고서 대기 중</p>
+          <p className="text-sm font-semibold text-zinc-700">평가 / 보고서 안내</p>
           <p className="mt-2 text-sm leading-6 text-zinc-500">
-            초안 생성과 평가가 끝나면 이곳에 SEO, 네이버 로직, 해시태그, 사진 파일명, 반복 위험도 보고서가 정리됩니다.
+            초안 생성과 평가가 끝나면 이곳에 SEO, 네이버 로직, 해시태그, 사진 파일명, 키워드 반복 위험도
+            보고서가 정리됩니다.
           </p>
         </div>
       )}

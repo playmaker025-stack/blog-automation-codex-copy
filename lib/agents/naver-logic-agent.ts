@@ -9,52 +9,39 @@ import type {
 } from "./types";
 
 const DIA_SIGNALS = [
-  "해결",
-  "방법",
-  "고르는",
-  "선택",
-  "비교",
-  "추천",
-  "입문",
-  "증상",
-  "원인",
-  "체크",
-  "불편",
-  "실수",
-  "오류",
   "문제",
-  "가이드",
+  "증상",
+  "해결",
+  "해결방법",
+  "왜",
+  "원인",
+  "실수",
+  "주의",
+  "체크",
+  "체크포인트",
+  "비교",
+  "구분",
+  "선택",
+  "기준",
+  "고르는 법",
 ];
 
 const C_RANK_SIGNALS = [
+  "지역",
   "인천",
   "부평",
-  "구월",
-  "만수",
-  "송도",
+  "만수동",
+  "부천",
+  "상동",
   "청라",
-  "전자담배",
-  "액상",
-  "기기",
-  "코일",
   "매장",
-  "전문",
+  "방문",
+  "후기",
+  "실사용",
+  "브랜드",
   "허브",
   "리프",
-];
-
-const DIA_DEEP_CHECKS = [
-  "검색 의도와 첫 응답 문단이 정확히 이어지는가",
-  "작성자 경험이나 실제 상담 맥락이 보이는가",
-  "문제 해결 순서와 예외 조건이 구체적인가",
-  "독자가 다음 행동을 결정할 수 있는가",
-];
-
-const C_RANK_DEEP_CHECKS = [
-  "블로그의 기존 주제권과 이어지는가",
-  "지역/제품/전문성 신호가 자연스럽게 연결되는가",
-  "허브/리프 구조가 내부 링크와 함께 보이는가",
-  "실제 상담/방문/비교 경험이 보이는가",
+  "내부링크",
 ];
 
 function countSignals(text: string, signals: string[]): number {
@@ -110,28 +97,26 @@ export function planNaverLogicForStrategy(strategy: StrategyPlanResult): NaverLo
   const label = labelForLogic(primary);
   const reason =
     primary === "dia"
-      ? "이 주제는 검색자가 바로 해결책이나 선택 기준을 원하는 성격이 강해 D.I.A.식 문제 해결 흐름이 중요합니다."
+      ? "이 주제는 사용자의 문제 해결과 선택 기준 설명이 중심이라 D.I.A. 관점이 더 중요합니다."
       : primary === "c-rank"
-        ? "이 주제는 블로그의 지역/제품 전문성 누적과 내부 연결성이 중요해 C-Rank식 주제권 강화가 중요합니다."
-        : "이 주제는 문제 해결성과 블로그 주제권 신호가 모두 중요해 D.I.A.와 C-Rank를 함께 맞춰야 합니다.";
+        ? "이 주제는 지역성, 실사용 맥락, 내부링크 연결이 중요해서 C-Rank 관점이 더 강합니다."
+        : "이 주제는 문제 해결 흐름과 주제권 연결이 모두 중요해서 D.I.A.와 C-Rank를 함께 맞추는 편이 좋습니다.";
 
   const writingFocus = [
-    "검색자가 왜 이 글을 찾았는지 첫 두 문단 안에서 바로 받아준다.",
-    "상황, 기준, 예외, 체크포인트를 구체적으로 쓴다.",
-    "기존 주제권과 연결되는 표현과 내부 링크 흐름을 자연스럽게 보여준다.",
-    "허브/리프 역할이 구조로 드러나게 한다.",
+    "도입부에서 검색자의 상황과 고민을 바로 연결합니다.",
+    "문제, 선택 기준, 비교 포인트, 결론 순서로 흐름을 잡습니다.",
+    "내부링크 대상이 있으면 실제 제목과 URL 쌍을 정확히 맞춥니다.",
+    "지역/매장/실사용 맥락이 있으면 본문 문맥 안에서 자연스럽게 반영합니다.",
     primary === "c-rank"
-      ? "지역/제품/상담 경험 같은 전문성 신호를 제목과 본문에 분산시킨다."
-      : "독자가 실제로 선택하거나 해결할 수 있는 판단 기준을 본문 중반 전에 준다.",
+      ? "허브 글이라면 지역성과 연결 글 구조를 분명히 보여줍니다."
+      : "리프 글이라면 하나의 문제를 분명히 해결하는 방향으로 마무리합니다.",
   ];
 
   const checklist = [
-    "D.I.A.: 검색 의도, 선택 기준, 문제 해결 순서, 독자 만족 결론이 보이는가",
-    "C-Rank: 블로그 주제권, 지역/제품 전문성, 내부 링크 연결이 보이는가",
-    "유사문서 방지: 제목/목차/결론/앵글이 기존 글과 충분히 다른가",
-    "네이버 SEO: 메인 키워드가 제목/도입/소제목에 자연스럽게 분산되는가",
-    ...DIA_DEEP_CHECKS.map((item) => `D.I.A. 상세: ${item}`),
-    ...C_RANK_DEEP_CHECKS.map((item) => `C-Rank 상세: ${item}`),
+    "D.I.A.: 문제 제기, 독자 질문, 해결 흐름, 선택 기준이 본문에 드러나는지 확인",
+    "C-Rank: 지역/주제권/내부링크/실사용 신호가 실제로 살아 있는지 확인",
+    "내부링크: 실제 발행된 글만 제목-URL 쌍으로 연결",
+    "본문 구조: 제목, 도입부, 소제목, 결론 흐름이 자연스러운지 확인",
   ];
 
   return {
@@ -188,27 +173,27 @@ export function evaluateNaverLogicCompleteness(params: {
   const evidence: string[] = [];
   const improvements: string[] = [];
 
-  if (includesAny(joined, ["상황", "고민", "처음", "방문", "찾는", "상담", "실제로"])) {
+  if (includesAny(joined, ["문제", "왜", "원인", "실수", "증상", "체크포인트", "선택 기준"])) {
     score += 3;
-    evidence.push("검색자 상황을 초반에 다루는 구조가 반영되었습니다.");
+    evidence.push("문제 상황과 선택 기준이 본문에 드러나 검색 의도 연결이 자연스럽습니다.");
   } else {
     score -= 4;
-    improvements.push("도입부에서 검색자가 왜 이 글을 찾는지 더 직접적으로 받아 주세요.");
+    improvements.push("도입부나 본문 초반에 검색자가 왜 이 글을 찾는지 드러나는 문제 상황을 더 분명히 넣어주세요.");
   }
 
-  if (includesAny(joined, ["기준", "체크", "확인", "구분", "선택", "예외", "주의"])) {
+  if (includesAny(joined, ["비교", "차이", "구분", "장단점", "기준", "선택"])) {
     score += 4;
-    evidence.push("선택 기준과 체크포인트가 포함되었습니다.");
+    evidence.push("비교와 선택 기준 요소가 살아 있어 실전 검색 의도에 잘 맞습니다.");
   } else {
     score -= 5;
-    improvements.push("선택 기준, 체크포인트, 구분 기준을 더 명확하게 넣어 주세요.");
+    improvements.push("비교 포인트나 선택 기준 문장을 보강해 정보형 글의 실용성을 더 높여주세요.");
   }
 
   if (strategy.contentTopology?.internalLinkTargets.length) {
     score += 3;
-    evidence.push("기존 글과 연결 가능한 내부 링크 맥락이 설계되었습니다.");
+    evidence.push("내부링크 설계 대상이 있어 주제권 확장 관점이 살아 있습니다.");
   } else {
-    improvements.push("기존 내부 링크 후보가 부족해 C-Rank 연결성이 제한적입니다.");
+    improvements.push("연결할 실존 글이 있다면 내부링크를 함께 설계해 주제권 연결을 보강해 주세요.");
   }
 
   const hubReference = strategy.contentTopology?.hubReference ?? null;
@@ -230,36 +215,36 @@ export function evaluateNaverLogicCompleteness(params: {
     }
   }
 
-  if (includesAny(joined, ["인천", "부평", "구월", "만수", "지역", "매장"])) {
+  if (includesAny(joined, ["인천", "부평", "만수동", "부천", "상동", "청라"])) {
     score += 3;
-    evidence.push("지역/매장 맥락이 포함되어 블로그 주제권 연결에 도움이 됩니다.");
+    evidence.push("지역성과 실사용 맥락이 보여 C-Rank 관점의 주제권 연결이 자연스럽습니다.");
   }
 
-  if (includesAny(joined, ["경험", "실사용", "후기", "상담", "방문", "느낀"])) {
+  if (includesAny(joined, ["실사용", "방문", "후기", "고민", "체크", "질문"])) {
     score += 4;
-    evidence.push("작성자 경험/상담 맥락이 보여 D.I.A. 경험성 기준을 보강합니다.");
+    evidence.push("실사용 맥락과 검색자 질문이 보여 D.I.A. 관점의 설득력이 있습니다.");
   } else {
-    improvements.push("작성자 경험, 실제 상담 질문, 실사용 비교를 더 넣으면 D.I.A. 완성도가 올라갑니다.");
+    improvements.push("실사용 상황, 자주 나오는 질문, 선택 전 고민 포인트를 더 넣어 D.I.A. 신호를 보강해 주세요.");
   }
 
-  if (includesAny(joined, ["내부 링크", "관련 글", "이어서", "함께 보면", "기존 글"])) {
+  if (includesAny(joined, ["내부링크", "관련 글", "함께 보면", "참고 링크"])) {
     score += 3;
-    evidence.push("관련 글로 이어지는 소비 흐름이 있어 C-Rank 연결성을 보강합니다.");
+    evidence.push("관련 글 연결 신호가 보여 C-Rank 흐름 보강에 도움이 됩니다.");
   }
 
-  if (includesAny(joined, ["관리만 하면", "좋은 제품", "잘 고르면", "개인차"])) {
+  if (includesAny(joined, ["과도한 반복", "키워드만", "억지"])) {
     score -= 5;
-    improvements.push("일반론 표현을 구체적인 확인 방법이나 예외 조건으로 바꾸는 편이 좋습니다.");
+    improvements.push("문맥보다 키워드 반복이 먼저 보이는 구간은 표현을 풀어 자연스럽게 정리해 주세요.");
   }
 
-  if (plan.primary === "dia" && !includesAny(joined, ["해결", "방법", "원인", "체크"])) {
+  if (plan.primary === "dia" && !includesAny(joined, ["문제", "해결", "기준", "체크"])) {
     score -= 6;
-    improvements.push("D.I.A. 중심 주제인데 해결 순서나 원인 분류가 약합니다.");
+    improvements.push("D.I.A. 중심 글이라면 문제 제기와 해결 흐름이 더 또렷하게 드러나야 합니다.");
   }
 
-  if (plan.primary === "c-rank" && !includesAny(joined, ["전문", "기존", "연결", "지역", "매장"])) {
+  if (plan.primary === "c-rank" && !includesAny(joined, ["지역", "매장", "실사용", "관련 글", "내부링크"])) {
     score -= 6;
-    improvements.push("C-Rank 중심 주제인데 블로그의 전문성/연결성 신호가 약합니다.");
+    improvements.push("C-Rank 중심 글이라면 지역성, 실사용, 내부링크 흐름을 조금 더 분명히 보여주는 편이 좋습니다.");
   }
 
   if (plan.primary === "hybrid" && evidence.length >= 3) {
@@ -271,7 +256,7 @@ export function evaluateNaverLogicCompleteness(params: {
     label: plan.label,
     completenessScore: clampScore(score),
     reason: plan.reason,
-    evidence: evidence.length ? evidence : ["전략 단계에서 네이버 로직 기준은 적용했지만 본문 근거는 더 보강할 수 있습니다."],
+    evidence: evidence.length ? evidence : ["문제 해결 흐름과 주제권 연결 신호를 함께 보강할 여지가 있습니다."],
     improvements: improvements.slice(0, 4),
   };
 }

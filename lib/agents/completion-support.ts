@@ -3,41 +3,35 @@ import type { StrategyPlanResult } from "./types";
 const HASHTAG_STOPWORDS = new Set([
   "보는",
   "많이",
-  "전에",
-  "위해",
-  "대한",
+  "고르기",
+  "선택",
+  "이유",
   "정리",
   "가이드",
   "체크",
   "체크포인트",
-  "이유",
   "방법",
-  "비교",
-  "후기",
   "팁",
+  "후기",
+  "전",
+  "전에",
+  "다음",
+  "관련",
   "선행포스팅",
   "키워드빌드업",
-  "선택",
-  "기준",
-  "고르기",
-  "추천글",
-  "글",
-  "포스팅",
-  "콘텐츠",
-  "내용",
 ]);
 
 const REGION_KEYWORDS = [
   "부평",
-  "인천",
   "만수동",
+  "인천",
   "부천",
   "상동",
+  "청라",
   "구월동",
-  "주안",
   "송도",
-  "계양",
-  "검단",
+  "주안",
+  "만수",
 ] as const;
 
 function uniq(values: string[]): string[] {
@@ -79,37 +73,35 @@ function pickRegion(strategy: StrategyPlanResult, title: string, topicCategory?:
 
 function pickMainKeyword(strategy: StrategyPlanResult, title: string): string {
   return normalizePhrase(
-    strategy.targetMainKeyword
-      ?? strategy.targetSearchCombinations?.find((item) => item.role === "main")?.phrase
-      ?? strategy.keywords[0]
-      ?? title
+    strategy.targetMainKeyword ??
+      strategy.targetSearchCombinations?.find((item) => item.role === "main")?.phrase ??
+      strategy.keywords[0] ??
+      title
   );
 }
 
 function pickCategory(strategy: StrategyPlanResult, topicCategory?: string): string {
   return normalizePhrase(
-    topicCategory
-      ?? strategy.targetSearchCombinations?.find((item) => item.role === "support")?.phrase
-      ?? strategy.keywords.find((keyword) => normalizePhrase(keyword) !== normalizePhrase(strategy.targetMainKeyword ?? ""))
-      ?? "카테고리미정"
+    topicCategory ??
+      strategy.targetSearchCombinations?.find((item) => item.role === "support")?.phrase ??
+      strategy.keywords.find((keyword) => normalizePhrase(keyword) !== normalizePhrase(strategy.targetMainKeyword ?? "")) ??
+      "카테고리미정"
   );
 }
 
 function pickBrand(strategy: StrategyPlanResult): string {
   return normalizePhrase(
-    strategy.targetSearchCombinations?.find((item) => item.role === "brand")?.phrase
-      ?? "브랜드미정"
+    strategy.targetSearchCombinations?.find((item) => item.role === "brand")?.phrase ?? "브랜드미정"
   );
 }
 
 function pickIntent(strategy: StrategyPlanResult, title: string): string {
   const source = [title, strategy.rationale, ...strategy.keyPoints].join(" ");
-  if (/추천/u.test(source)) return "추천";
-  if (/비교/u.test(source)) return "비교";
-  if (/후기|리뷰/u.test(source)) return "후기";
-  if (/선택|고르기|기준/u.test(source)) return "선택기준";
-  if (/해결|증상|고장|문제/u.test(source)) return "해결방법";
-  if (/입문|처음|가이드/u.test(source)) return "입문가이드";
+  if (/해결|해결방법|해결법/u.test(source)) return "해결방법";
+  if (/비교|차이|구분/u.test(source)) return "비교";
+  if (/추천|픽|TOP|top/u.test(source)) return "추천";
+  if (/고르는|고르기|선택|기준/u.test(source)) return "선택기준";
+  if (/관리|교체|점검/u.test(source)) return "관리";
   return "정보정리";
 }
 
@@ -155,17 +147,15 @@ export function buildCompletionSupportFromRules(
     ]).map(makeHashtagText)
   ).slice(0, 10);
 
-  const imageFileNames = Array.from(
-    { length: Math.max(1, Math.min(12, imageCount)) },
-    (_, index) =>
-      [
-        sanitizeFilenamePart(region),
-        sanitizeFilenamePart(mainKeyword),
-        sanitizeFilenamePart(category),
-        sanitizeFilenamePart(brand),
-        sanitizeFilenamePart(intent),
-        String(index + 1).padStart(2, "0"),
-      ].join("_")
+  const imageFileNames = Array.from({ length: Math.max(1, Math.min(12, imageCount)) }, (_, index) =>
+    [
+      sanitizeFilenamePart(region),
+      sanitizeFilenamePart(mainKeyword),
+      sanitizeFilenamePart(category),
+      sanitizeFilenamePart(brand),
+      sanitizeFilenamePart(intent),
+      String(index + 1).padStart(2, "0"),
+    ].join("_")
   );
 
   return { hashtags, imageFileNames };
