@@ -71,64 +71,92 @@ function issueTone(severity: DraftReviewIssue["severity"]): string {
 
 function looksBroken(value: string | null | undefined): boolean {
   if (!value) return false;
-  return /[ÃÂæðïìë¿]/.test(value) && !/[가-힣]/.test(value);
+  return /[\uFFFD]|\u00C3|\u00C2|[\u00EC\u00ED\u00EF][\S\s]{0,3}[\u00EB\u00EA]|[?]{2,}/.test(value);
+}
+
+function cleanNotes(notes: string[]): string[] {
+  return notes.filter((note) => note.trim() && !looksBroken(note));
 }
 
 function keywordRecommendation(item: KeywordUsageReport["items"][number], role: "main" | "sub"): string {
+  const range = `${item.targetMin}~${item.targetMax}회`;
+
   if (role === "main") {
-    if (item.status === "under") return `메인 키워드 '${item.keyword}'가 부족합니다. 본문 기준 ${item.targetMin}~${item.targetMax}회 안으로 보강해 주세요.`;
-    if (item.status === "caution") return `메인 키워드 '${item.keyword}'가 다소 많습니다. 같은 문단 반복을 줄여 주세요.`;
-    if (item.status === "danger") return `메인 키워드 '${item.keyword}'가 과하게 반복됩니다. 일부를 기준, 상황, 예시 표현으로 분산해 주세요.`;
-    return `메인 키워드 '${item.keyword}' 반복도는 현재 적정 범위입니다.`;
+    if (item.status === "under") {
+      return `메인 키워드 '${item.keyword}'의 본문 반영이 부족합니다. 본문 기준 ${range} 안에서 핵심 문단에 자연스럽게 보강하세요.`;
+    }
+    if (item.status === "caution") {
+      return `메인 키워드 '${item.keyword}'가 다소 많습니다. 같은 문단 반복을 줄이고 일부 표현은 동의어나 설명형 문장으로 바꾸세요.`;
+    }
+    if (item.status === "danger") {
+      return `메인 키워드 '${item.keyword}'가 과하게 반복됩니다. 초안 보강 전에 반복 문장, 중복 소제목, 불필요한 재언급을 먼저 줄여야 합니다.`;
+    }
+    return `메인 키워드 '${item.keyword}'의 반복 횟수는 적정 범위입니다.`;
   }
 
-  if (item.status === "under") return `서브 키워드 '${item.keyword}'가 부족합니다. 본문에 1~3회 안으로 자연스럽게 반영해 주세요.`;
-  if (item.status === "caution") return `서브 키워드 '${item.keyword}'가 조금 많은 편입니다. 같은 표현을 한 문단에 몰지 마세요.`;
-  if (item.status === "danger") return `서브 키워드 '${item.keyword}'가 과하게 반복됩니다. 설명형 문장으로 바꿔 주세요.`;
-  return `서브 키워드 '${item.keyword}' 반복도는 현재 적정 범위입니다.`;
+  if (item.status === "under") {
+    return `서브 키워드 '${item.keyword}'가 본문에 충분히 반영되지 않았습니다. 실제 설명 문맥에 1~3회만 자연스럽게 넣으세요.`;
+  }
+  if (item.status === "caution") {
+    return `서브 키워드 '${item.keyword}'가 조금 많습니다. 같은 표현을 반복하기보다 의미를 풀어서 설명하세요.`;
+  }
+  if (item.status === "danger") {
+    return `서브 키워드 '${item.keyword}'가 과하게 반복됩니다. 일부 문장은 일반 설명으로 바꾸고 반복 문단을 정리하세요.`;
+  }
+  return `서브 키워드 '${item.keyword}'의 반복 횟수는 적정 범위입니다.`;
 }
 
 function overallRiskSummary(report: KeywordUsageReport): string {
   const warningCount = report.paragraphWarnings.length;
   if (report.overallRisk === "high") {
     return warningCount > 0
-      ? `과반복 위험이 높고 문단 내 반복 경고가 ${warningCount}건 있습니다.`
-      : "과반복 위험이 높습니다. 메인/서브 키워드 반복을 줄여 주세요.";
+      ? `과반복 위험이 큽니다. 문단 내 반복 경고가 ${warningCount}건 있어 같은 키워드가 한 문단에 몰려 있습니다.`
+      : "과반복 위험이 큽니다. 메인/서브 키워드 반복을 줄인 뒤 다시 검수해야 합니다.";
   }
   if (report.overallRisk === "medium") {
     return warningCount > 0
-      ? `반복도는 보통 수준이지만 문단 내 반복 경고가 ${warningCount}건 있습니다.`
-      : "일부 키워드가 부족하거나 다소 많습니다. 문맥을 보며 조정해 주세요.";
+      ? `반복 위험도는 보통입니다. 문단 내 반복 경고 ${warningCount}건을 먼저 정리하세요.`
+      : "일부 키워드가 부족하거나 다소 많습니다. 문맥을 해치지 않는 선에서 조정하세요.";
   }
-  return "반복 위험은 비교적 안정적입니다.";
+  return "키워드 반복 위험도는 낮습니다.";
+}
+
+function paragraphWarningText(warning: KeywordUsageReport["paragraphWarnings"][number]): string {
+  return `${warning.paragraphIndex + 1}번 문단에서 '${warning.keyword}'가 ${warning.count}회 반복됩니다. 같은 문단 안의 반복을 줄이거나 표현을 분산하세요.`;
 }
 
 function tokenNote(item: KeywordUsageReport["tokenItems"][number]): string {
-  if (item.count >= 20) return "반복이 매우 많은 편입니다. 다른 표현이나 구체 기준으로 일부 치환하는 편이 좋습니다.";
-  if (item.count >= 10) return "반복이 많은 편입니다. 문단마다 같은 단어가 이어지지 않는지 확인해 주세요.";
-  if (item.count >= 4) return "핵심 축으로 자주 등장하는 단어입니다. 다른 핵심 단어와의 균형도 같이 보세요.";
-  return "실제 본문에서 확인된 핵심 단어 축입니다.";
+  if (item.count >= 20) {
+    return "본문 전체에서 매우 자주 반복되는 단어입니다. 브랜드명이나 핵심 키워드가 아니라면 일부 표현을 바꾸는 편이 좋습니다.";
+  }
+  if (item.count >= 10) {
+    return "본문에서 반복이 많은 단어입니다. 문맥상 필요한 반복인지 확인하세요.";
+  }
+  if (item.count >= 4) {
+    return "보조 축으로 반복되는 단어입니다. 같은 문단에 몰려 있지 않은지 확인하세요.";
+  }
+  return "현재 본문에서 가볍게 반복되는 단어입니다.";
 }
 
 function metricSummary(metric: SeoEvaluation["keywordMetrics"][number]): string {
   const parts = [
-    metric.titleIncluded ? "제목 포함" : "제목 누락",
-    metric.introIncluded ? "도입부 포함" : "도입부 누락",
+    metric.titleIncluded ? "제목 포함" : "제목 미포함",
+    metric.introIncluded ? "도입부 포함" : "도입부 미포함",
     `본문 ${metric.count}회`,
   ];
   return parts.join(" / ");
 }
 
 function metricAction(metric: SeoEvaluation["keywordMetrics"][number]): string {
-  if (!metric.titleIncluded) return `제목 쪽에 '${metric.keyword}'를 더 직접적으로 드러내 주세요.`;
-  if (!metric.introIncluded) return `첫 1~2문단 안에서 '${metric.keyword}'를 더 또렷하게 연결해 주세요.`;
-  if (metric.count < metric.targetMin) return `본문에서 '${metric.keyword}'가 부족합니다. ${metric.targetMin}회 이상은 연결해 주세요.`;
-  if (metric.count > metric.targetMax) return `본문에서 '${metric.keyword}'가 많습니다. 일부는 다른 설명 문장으로 바꿔 주세요.`;
-  return `'${metric.keyword}' 배치는 현재 비교적 안정적입니다.`;
-}
-
-function sanitizeNotes(notes: string[]): string[] {
-  return notes.filter((note) => note.trim() && !looksBroken(note));
+  if (!metric.titleIncluded) return `제목에 '${metric.keyword}'를 자연스럽게 반영하는 편이 좋습니다.`;
+  if (!metric.introIncluded) return `첫 1~2문단 안에 '${metric.keyword}'를 자연스럽게 넣어 주세요.`;
+  if (metric.count < metric.targetMin) {
+    return `본문 기준 '${metric.keyword}'가 부족합니다. ${metric.targetMin}회 이상 자연스럽게 보강하세요.`;
+  }
+  if (metric.count > metric.targetMax) {
+    return `본문 기준 '${metric.keyword}'가 많습니다. 중복 문장이나 불필요한 재언급을 줄이세요.`;
+  }
+  return `'${metric.keyword}' 배치는 적정 범위입니다.`;
 }
 
 function KeywordRiskReport({
@@ -161,10 +189,7 @@ function KeywordRiskReport({
           <p className="text-xs font-semibold text-zinc-500">서브 키워드</p>
           <div className="mt-2 space-y-2">
             {report.subKeywords.map((item) => (
-              <div
-                key={`sub-${item.keyword}`}
-                className="rounded-md border border-zinc-200 bg-white px-3 py-2"
-              >
+              <div key={`sub-${item.keyword}`} className="rounded-md border border-zinc-200 bg-white px-3 py-2">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-medium text-zinc-800">{item.keyword}</p>
                   <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
@@ -192,7 +217,7 @@ function KeywordRiskReport({
           <p className="text-xs font-semibold text-amber-700">문단 내 반복 경고</p>
           <ul className="mt-2 space-y-1 text-xs text-amber-800">
             {report.paragraphWarnings.map((warning) => (
-              <li key={`${warning.keyword}-${warning.paragraphIndex}`}>- {warning.message}</li>
+              <li key={`${warning.keyword}-${warning.paragraphIndex}`}>- {paragraphWarningText(warning)}</li>
             ))}
           </ul>
         </div>
@@ -214,14 +239,11 @@ function KeywordTokenPanel({
     <div className="rounded-xl border border-zinc-200 bg-white p-4">
       <p className="text-xs font-semibold text-zinc-600">실제 본문 핵심 단어 분포</p>
       <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-        선택된 포커스 키워드뿐 아니라, 본문 안에서 실제로 자주 반복된 핵심 단어 축도 함께 확인합니다.
+        선택된 포커스 키워드뿐 아니라, 본문 안에서 실제로 자주 반복된 핵심 단어를 함께 확인합니다.
       </p>
       <div className="mt-3 grid gap-2">
         {report.tokenItems.slice(0, 10).map((item) => (
-          <div
-            key={`${idPrefix}-token-${item.token}`}
-            className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3"
-          >
+          <div key={`${idPrefix}-token-${item.token}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3">
             <div className="flex items-center justify-between gap-3">
               <p className="text-sm font-semibold text-zinc-800">{item.token}</p>
               <p className={`text-xs font-semibold ${tokenTone(item.count)}`}>본문 {item.count}회</p>
@@ -248,14 +270,11 @@ function SeoMetricPanel({
     <div className="rounded-xl border border-zinc-200 bg-white p-4">
       <p className="text-xs font-semibold text-zinc-600">키워드 배치 / SEO 분석</p>
       <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-        제목, 도입부, 소제목, 결론부를 기준으로 메인/서브 키워드 배치 완성도를 확인합니다.
+        제목, 도입부, 본문 반복 수를 기준으로 메인/서브 키워드 배치 상태를 계산합니다.
       </p>
       <div className="mt-3 space-y-3">
         {seoEvaluation.keywordMetrics.map((metric) => (
-          <div
-            key={`${contentTab}-metric-${metric.keyword}`}
-            className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3"
-          >
+          <div key={`${contentTab}-metric-${metric.keyword}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold text-zinc-800">{metric.keyword}</p>
@@ -274,7 +293,7 @@ function SeoMetricPanel({
                 </p>
               </div>
               <div className="rounded-md bg-white px-3 py-2">
-                <p className="text-[11px] font-semibold text-zinc-500">노출 잠재력</p>
+                <p className="text-[11px] font-semibold text-zinc-500">노출 가능성</p>
                 <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.exposurePotentialScore)}`}>
                   {metric.exposurePotentialScore}점
                 </p>
@@ -283,7 +302,7 @@ function SeoMetricPanel({
 
             <p className="mt-3 text-xs text-zinc-600">{metricSummary(metric)}</p>
             <p className="mt-1 text-[11px] text-zinc-500">
-              제목 {metric.titleIncluded ? "포함" : "누락"} / 도입부 {metric.introIncluded ? "포함" : "누락"} /
+              제목 {metric.titleIncluded ? "포함" : "미포함"} / 도입부 {metric.introIncluded ? "포함" : "미포함"} /
               적정 범위 {metric.targetMin}~{metric.targetMax}회 / 본문 {metric.count}회
             </p>
             <p className="mt-2 text-xs text-zinc-700">{metricAction(metric)}</p>
@@ -294,13 +313,7 @@ function SeoMetricPanel({
   );
 }
 
-function SimpleNotePanel({
-  title,
-  notes,
-}: {
-  title: string;
-  notes: string[];
-}) {
+function SimpleNotePanel({ title, notes }: { title: string; notes: string[] }) {
   if (notes.length === 0) return null;
 
   return (
@@ -337,12 +350,13 @@ export function PipelineReportPanel({
     contentTab === "revision" ? reviewResult?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
   const activeKeywordReport =
     contentTab === "revision" ? reviewResult?.keywordReport ?? null : result?.seoEvaluation?.keywordReport ?? null;
-  const activeSeoNotes = sanitizeNotes(
+  const activeSeoNotes = cleanNotes(
     contentTab === "revision" ? reviewResult?.seoNotes ?? [] : result?.seoEvaluation?.improvements ?? []
   );
-  const activeNaverNotes = sanitizeNotes(
+  const activeNaverNotes = cleanNotes(
     contentTab === "revision" ? reviewResult?.naverLogicNotes ?? [] : result?.naverLogicEvaluation?.improvements ?? []
   );
+  const visibleReviewIssues = reviewIssues.filter((issue) => !looksBroken(issue.message));
   const showVersionedDraftReports = contentTab === "draft" && draftVersionReports.length > 0;
 
   return (
@@ -359,21 +373,17 @@ export function PipelineReportPanel({
       ) : null}
 
       {result && (
-        <div
-          className={`rounded-xl border p-4 ${
-            result.pass ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"
-          }`}
-        >
+        <div className={`rounded-xl border p-4 ${result.pass ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"}`}>
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className={`text-sm font-semibold ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
-                {result.pass ? "초안 평가 완료" : "초안 평가 보완 필요"}
+                {result.pass ? "초안 평가 통과" : "초안 평가 보강 필요"}
               </p>
               <p className="mt-1 text-sm font-semibold text-zinc-900">{result.title}</p>
               <p className="mt-1 text-xs text-zinc-500">{result.wordCount.toLocaleString()}자</p>
             </div>
             <div className="text-right">
-              <p className="text-[11px] font-semibold text-zinc-500">종합 점수</p>
+              <p className="text-[11px] font-semibold text-zinc-500">최종 점수</p>
               <p className="text-2xl font-bold text-zinc-900">{result.evalScore}</p>
             </div>
           </div>
@@ -392,7 +402,7 @@ export function PipelineReportPanel({
             <div className="rounded-lg bg-white/70 px-3 py-2">
               <p className="text-[11px] font-semibold text-zinc-500">상태</p>
               <p className={`mt-1 text-sm font-semibold ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
-                {result.pass ? "통과" : "보완"}
+                {result.pass ? "통과" : "보강"}
               </p>
             </div>
           </div>
@@ -407,7 +417,7 @@ export function PipelineReportPanel({
                 <div>
                   <p className="text-sm font-semibold text-zinc-900">{report.label} 키워드 / SEO 분석</p>
                   <p className="mt-1 text-xs text-zinc-500">
-                    각 초안 버전의 본문만 기준으로 메인/서브 키워드 반복도를 다시 계산합니다.
+                    각 초안별 본문 기준 키워드 반복과 위험도를 따로 계산합니다.
                   </p>
                 </div>
                 <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-right">
@@ -437,7 +447,7 @@ export function PipelineReportPanel({
               <p className="mt-1 text-sm font-semibold text-zinc-900">{result.naverLogicEvaluation.label}</p>
               <p className="mt-1 text-xs text-zinc-500">
                 {looksBroken(result.naverLogicEvaluation.reason)
-                  ? "이 글이 네이버 검색 의도와 실제 선택 기준을 얼마나 충실하게 다루는지 평가한 결과입니다."
+                  ? "제목과 본문 구조, 키워드 분산, 정보 충실도를 기준으로 평가했습니다."
                   : result.naverLogicEvaluation.reason}
               </p>
             </div>
@@ -449,19 +459,19 @@ export function PipelineReportPanel({
             </div>
           </div>
           {result.naverLogicEvaluation.evidence.length > 0 && (
-            <SimpleNotePanel title="근거" notes={sanitizeNotes(result.naverLogicEvaluation.evidence)} />
+            <SimpleNotePanel title="근거" notes={cleanNotes(result.naverLogicEvaluation.evidence)} />
           )}
         </div>
       )}
 
-      <SimpleNotePanel title="SEO 보완 포인트" notes={activeSeoNotes} />
-      <SimpleNotePanel title="네이버 로직 보완 포인트" notes={activeNaverNotes} />
+      <SimpleNotePanel title="SEO 보강 사항" notes={activeSeoNotes} />
+      <SimpleNotePanel title="네이버 로직 보강 사항" notes={activeNaverNotes} />
 
-      {reviewIssues.length > 0 && (
+      {visibleReviewIssues.length > 0 && (
         <div className="rounded-xl border border-zinc-200 bg-white p-4">
           <p className="mb-3 text-xs font-semibold text-zinc-600">수정본 검토 이슈</p>
           <div className="space-y-2">
-            {reviewIssues.map((issue) => (
+            {visibleReviewIssues.map((issue) => (
               <div
                 key={`${issue.severity}-${issue.message}`}
                 className={`rounded-lg border px-3 py-2 text-sm ${issueTone(issue.severity)}`}
@@ -478,7 +488,7 @@ export function PipelineReportPanel({
           <div>
             <p className="text-xs font-semibold text-zinc-600">실제 발행 URL 입력</p>
             <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-              수정본을 정리한 뒤 실제 네이버 블로그 발행 URL을 입력하면 발행 인덱스 반영까지 이어집니다.
+              수정본을 네이버에 반영한 뒤 실제 발행 URL을 입력하면 발행 인덱스와 사용자 학습 데이터에 반영됩니다.
             </p>
           </div>
 
@@ -512,7 +522,7 @@ export function PipelineReportPanel({
 
           {reviewApplied && (
             <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-3 text-sm text-blue-700">
-              검토 결과가 편집기에 반영되어 있습니다. 마지막 본문과 제목을 한 번 더 확인해 주세요.
+              수정본을 저장본에 반영했습니다. 네이버에 실제 발행한 뒤 URL을 입력해 인덱스에 추가하세요.
             </div>
           )}
         </div>

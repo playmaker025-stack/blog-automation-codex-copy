@@ -105,6 +105,24 @@ function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]
   return "text-blue-600";
 }
 
+function looksBrokenKorean(value: string | null | undefined): boolean {
+  if (!value) return false;
+  return /[\uFFFD]|\u00C3|\u00C2|[\u00EC\u00ED\u00EF][\S\s]{0,3}[\u00EB\u00EA]|[?]{3,}/.test(value);
+}
+
+function formatPipelineError(message: string): string {
+  if (message.includes("data/posting-list/index.json") && message.includes("파일이 아닙니다")) {
+    return message;
+  }
+  if (message.includes("data/posting-list/index.json")) {
+    return '"data/posting-list/index.json" 파일을 읽는 중 문제가 발생했습니다. GitHub 데이터 저장소에서 해당 경로가 정상 JSON 파일인지 확인해 주세요.';
+  }
+  if (looksBrokenKorean(message)) {
+    return "글쓰기 중 오류가 발생했습니다. 잠시 후 다시 실행하거나 데이터 저장소 상태를 확인해 주세요.";
+  }
+  return message;
+}
+
 function parseSseChunk(buffer: string, onEvent: (event: SSEEvent) => void): string {
   const lines = buffer.split("\n\n");
   const rest = lines.pop() ?? "";
@@ -447,7 +465,7 @@ export default function PipelinePage() {
             ? "\uC774\uBBF8 \uBC1C\uD589\uB41C \uD1A0\uD53D\uC785\uB2C8\uB2E4. \uADF8\uB798\uB3C4 \uAC19\uC740 \uC81C\uBAA9/\uD1A0\uD53D\uC73C\uB85C \uB2E4\uC2DC \uBC1C\uD589\uD558\uB824\uBA74 \uACC4\uC18D \uC9C4\uD589\uC744 \uB20C\uB7EC \uC8FC\uC138\uC694."
           : message.includes("Request was aborted")
             ? "\uC694\uCCAD \uC2DC\uAC04\uC774 \uAE38\uC5B4\uC838 \uC911\uB2E8\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2E4\uD589\uD574 \uC8FC\uC138\uC694."
-            : message
+            : formatPipelineError(message)
       );
       setStage("idle");
       setRunning(false);

@@ -7,6 +7,12 @@ import { normalizeUserId } from "@/lib/utils/normalize";
 export const dynamic = "force-dynamic";
 export const maxDuration = 600;
 
+function errorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === "string" && error.trim()) return error;
+  return "글쓰기 처리 중 오류가 발생했습니다.";
+}
+
 export async function POST(request: NextRequest) {
   let body: {
     pipelineId: string;
@@ -20,12 +26,12 @@ export async function POST(request: NextRequest) {
   try {
     body = (await request.json()) as typeof body;
   } catch {
-    return NextResponse.json({ error: "요청 본문 파싱 실패" }, { status: 400 });
+    return NextResponse.json({ error: "요청 본문을 읽지 못했습니다." }, { status: 400 });
   }
 
   if (!body.topicId || !body.userId || !body.pipelineId || !body.strategy) {
     return NextResponse.json(
-      { error: "topicId, userId, pipelineId, strategy가 필요합니다." },
+      { error: "topicId, userId, pipelineId, strategy는 필수입니다." },
       { status: 400 }
     );
   }
@@ -38,21 +44,33 @@ export async function POST(request: NextRequest) {
       const encoder = new TextEncoder();
 
       const keepalive = setInterval(() => {
-        try { controller.enqueue(encoder.encode(": ping\n\n")); } catch { /* closed */ }
+        try {
+          controller.enqueue(encoder.encode(": ping\n\n"));
+        } catch {
+          // closed
+        }
       }, 15_000);
 
       let closed = false;
       const timeout = setTimeout(() => {
         if (closed) return;
-        abortController.abort(new Error("글쓰기 타임아웃 (570초)"));
+        abortController.abort(new Error("글쓰기 시간이 초과되었습니다."));
         const event = JSON.stringify({
           type: "error",
           stage: "failed",
-          data: { message: "글쓰기 타임아웃 (570초). 자동 종료되었습니다." },
+          data: { message: "글쓰기 시간이 초과되었습니다. 잠시 후 다시 실행해 주세요." },
           timestamp: new Date().toISOString(),
         });
-        try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }
-        try { controller.close(); } catch { /* ignore */ }
+        try {
+          controller.enqueue(encoder.encode(`data: ${event}\n\n`));
+        } catch {
+          // ignore
+        }
+        try {
+          controller.close();
+        } catch {
+          // ignore
+        }
         closed = true;
       }, 570_000);
 
@@ -71,17 +89,25 @@ export async function POST(request: NextRequest) {
           const event = JSON.stringify({
             type: "error",
             stage: "failed",
-            data: { message: err instanceof Error ? err.message : "글쓰기 오류" },
+            data: { message: errorMessage(err) },
             timestamp: new Date().toISOString(),
           });
-          try { controller.enqueue(encoder.encode(`data: ${event}\n\n`)); } catch { /* ignore */ }
+          try {
+            controller.enqueue(encoder.encode(`data: ${event}\n\n`));
+          } catch {
+            // ignore
+          }
         })
         .finally(() => {
           closed = true;
           clearTimeout(timeout);
           clearInterval(keepalive);
           abortController.abort();
-          try { controller.close(); } catch { /* already closed */ }
+          try {
+            controller.close();
+          } catch {
+            // already closed
+          }
         });
     },
   });

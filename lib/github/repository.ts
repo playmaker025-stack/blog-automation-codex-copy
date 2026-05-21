@@ -1,4 +1,4 @@
-﻿import { getGitHubClient, getRepoConfig } from "./client";
+import { getGitHubClient, getRepoConfig } from "./client";
 
 export interface FileContent {
   content: string;
@@ -12,12 +12,7 @@ export interface FileEntry {
   type: "file" | "dir";
 }
 
-// GitHub API timeout guard.
 const GITHUB_TIMEOUT_MS = 15_000;
-
-// ============================================================
-// ?뚯씪 ?쎄린
-// ============================================================
 
 export async function readFile(filePath: string): Promise<FileContent> {
   const octokit = getGitHubClient();
@@ -33,7 +28,7 @@ export async function readFile(filePath: string): Promise<FileContent> {
 
   const data = response.data;
   if (Array.isArray(data) || data.type !== "file") {
-    throw new Error(`"${filePath}"???뚯씪???꾨떃?덈떎.`);
+    throw new Error(`"${filePath}" 경로가 파일이 아닙니다. GitHub 데이터 저장소에서 같은 이름의 폴더가 있는지 확인해 주세요.`);
   }
 
   const content = Buffer.from(data.content, "base64").toString("utf-8");
@@ -45,10 +40,6 @@ export async function readJsonFile<T>(filePath: string): Promise<{ data: T; sha:
   return { data: JSON.parse(content) as T, sha };
 }
 
-// ============================================================
-// ?뚯씪 ?곌린 (?앹꽦 ?먮뒗 ?낅뜲?댄듃)
-// ============================================================
-
 export async function writeFile(
   filePath: string,
   content: string,
@@ -59,11 +50,7 @@ export async function writeFile(
   const { owner, repo, branch } = getRepoConfig();
 
   const encoded = Buffer.from(content, "utf-8").toString("base64");
-
-  // Keep data commits from triggering Railway deploys.
-  const commitMessage = message.includes("[skip ci]")
-    ? message
-    : `${message} [skip ci]`;
+  const commitMessage = message.includes("[skip ci]") ? message : `${message} [skip ci]`;
 
   const response = await octokit.repos.createOrUpdateFileContents({
     owner,
@@ -89,10 +76,6 @@ export async function writeJsonFile<T>(
   return writeFile(filePath, content, message, sha);
 }
 
-// ============================================================
-// ?뚯씪 議댁옱 ?щ? ?뺤씤
-// ============================================================
-
 export async function fileExists(filePath: string): Promise<boolean> {
   try {
     await readFile(filePath);
@@ -109,10 +92,6 @@ export async function fileExists(filePath: string): Promise<boolean> {
   }
 }
 
-// ============================================================
-// ?붾젆?좊━ ???뚯씪 紐⑸줉
-// ============================================================
-
 export async function listFiles(dirPath: string): Promise<FileEntry[]> {
   const octokit = getGitHubClient();
   const { owner, repo, branch } = getRepoConfig();
@@ -127,7 +106,7 @@ export async function listFiles(dirPath: string): Promise<FileEntry[]> {
 
   const data = response.data;
   if (!Array.isArray(data)) {
-    throw new Error(`"${dirPath}"???붾젆?좊━媛 ?꾨떃?덈떎.`);
+    throw new Error(`"${dirPath}" 경로가 디렉터리가 아닙니다.`);
   }
 
   return data.map((item) => ({
