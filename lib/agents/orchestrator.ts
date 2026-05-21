@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+﻿import { randomUUID } from "crypto";
 import { runStrategyPlanner } from "./strategy-planner";
 import { runMasterWriter } from "./master-writer";
 import { runHarnessEvaluator } from "./harness-evaluator";
@@ -171,7 +171,7 @@ async function prepareHarnessBriefing(params: {
   });
 }
 
-async function evaluateAndMaybeReviseDraft(params: {
+async function _evaluateAndMaybeReviseDraft(params: {
   pipelineId: string;
   topicId: string;
   userId: string;
@@ -269,6 +269,194 @@ async function evaluateAndMaybeReviseDraft(params: {
     });
 
     if (evalResult.pass) {
+      return { writerResult, evalResult };
+    }
+  }
+
+  if (!evalResult.pass) {
+    await appendWritingFailure({
+      pipelineId,
+      topicId,
+      userId,
+      title: writerResult.title,
+      evalResult,
+      phase: "final",
+    });
+  }
+
+  return { writerResult, evalResult };
+}
+
+function getKeywordDangerCount(evalResult: EvalResult): number {
+  return evalResult.seoEvaluation?.keywordReport.items.filter((item) => item.status === "danger").length ?? 0;
+}
+
+function getSeoScore(evalResult: EvalResult): number {
+  return evalResult.seoEvaluation?.score ?? 0;
+}
+
+function getNaverScore(evalResult: EvalResult): number {
+  return evalResult.naverLogicEvaluation?.completenessScore ?? 0;
+}
+
+function compareKeywordRiskLevel(value: "low" | "medium" | "high"): number {
+  if (value === "low") return 0;
+  if (value === "medium") return 1;
+  return 2;
+}
+
+function shouldAttemptSmartRevision(evalResult: EvalResult): boolean {
+  if (evalResult.pass) return false;
+
+  const overallRisk = evalResult.seoEvaluation?.keywordReport.overallRisk ?? "low";
+  return (
+    evalResult.aggregateScore < 70 ||
+    getSeoScore(evalResult) < 72 ||
+    getNaverScore(evalResult) < 72 ||
+    overallRisk === "high" ||
+    getKeywordDangerCount(evalResult) > 0
+  );
+}
+
+function isMaterialRevisionImprovement(previous: EvalResult, next: EvalResult): boolean {
+  if (!previous.pass && next.pass) return true;
+  if (getKeywordDangerCount(next) < getKeywordDangerCount(previous)) return true;
+
+  const previousRisk = compareKeywordRiskLevel(previous.seoEvaluation?.keywordReport.overallRisk ?? "low");
+  const nextRisk = compareKeywordRiskLevel(next.seoEvaluation?.keywordReport.overallRisk ?? "low");
+  if (nextRisk < previousRisk) return true;
+
+  if (getSeoScore(next) >= getSeoScore(previous) + 4) return true;
+  if (getNaverScore(next) >= getNaverScore(previous) + 4) return true;
+  if (next.aggregateScore >= previous.aggregateScore + 5) return true;
+
+  return false;
+}
+
+async function evaluateAndMaybeReviseDraftSmart(params: {
+  pipelineId: string;
+  topicId: string;
+  userId: string;
+  postId: string;
+  strategy: StrategyPlanResult;
+  corpusSummary: import("./corpus-selector").CorpusSummaryArtifact;
+  harnessBriefing: string;
+  writerResult: WriterResult;
+  controller: ReadableStreamDefaultController;
+  signal?: AbortSignal;
+}): Promise<{ writerResult: WriterResult; evalResult: EvalResult }> {
+  const MAX_AUTO_REVISION_ROUNDS = 2;
+  const {
+    pipelineId,
+    topicId,
+    userId,
+    postId,
+    strategy,
+    corpusSummary,
+    harnessBriefing,
+    controller,
+    signal,
+  } = params;
+
+  let writerResult = params.writerResult;
+  let evalResult = await runHarnessEvaluator({
+    writerResult,
+    strategy,
+    userId,
+    onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
+    signal,
+  });
+
+  if (evalResult.pass) {
+    return { writerResult, evalResult };
+  }
+
+  await appendWritingFailure({
+    pipelineId,
+    topicId,
+    userId,
+    title: writerResult.title,
+    evalResult,
+    phase: "preliminary",
+  });
+
+  if (!shouldAttemptSmartRevision(evalResult)) {
+    emit(controller, makeEvent("progress", "evaluating", {
+      message: `초안 점수 ${evalResult.aggregateScore}점이지만, 자동 보강으로 얻을 개선 폭이 크지 않아 현재 초안을 유지합니다.`,
+    }));
+    return { writerResult, evalResult };
+  }
+
+  for (let round = 1; round <= MAX_AUTO_REVISION_ROUNDS; round += 1) {
+    const previousWriterResult = writerResult;
+    const previousEvalResult = evalResult;
+
+    emit(controller, makeEvent("progress", "evaluating", {
+      message: `초안 점수 ${evalResult.aggregateScore}점 기준으로 실제 부족한 항목만 보강하는 자동 보강 ${round}/${MAX_AUTO_REVISION_ROUNDS}차를 진행합니다.`,
+    }));
+    emit(controller, makeEvent("token", "writing", {
+      token: `\n\n---\n\n[자동 보강본 ${round + 1}차]\n`,
+    }));
+
+    writerResult = await runMasterWriter({
+      strategy,
+      userId,
+      topicId,
+      postId,
+      corpusSummary,
+      harnessBriefing,
+      revisionInstructions: buildRevisionInstruction({ evalResult, briefing: harnessBriefing }),
+      onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
+      onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
+      signal,
+    });
+
+    await saveArtifact<DraftOutputData>(pipelineId, "draft_output", {
+      postId: writerResult.postId,
+      title: writerResult.title,
+      wordCount: writerResult.wordCount,
+      generatedAt: writerResult.generatedAt,
+      contentPath: Paths.postContent(postId),
+      corpusSummaryUsed: true,
+    }).catch(() => {});
+
+    await updatePostRecord(postId, {
+      status: "ready",
+      wordCount: writerResult.wordCount,
+      compositionSessionId: pipelineId,
+    });
+
+    emit(controller, makeEvent("progress", "evaluating", {
+      message: round === MAX_AUTO_REVISION_ROUNDS
+        ? "자동 보강본 최종 하네스 평가 중..."
+        : `자동 보강본 ${round + 1}차 하네스 평가 중...`,
+    }));
+
+    evalResult = await runHarnessEvaluator({
+      writerResult,
+      strategy,
+      userId,
+      onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
+      signal,
+    });
+
+    if (evalResult.pass) {
+      return { writerResult, evalResult };
+    }
+
+    if (!isMaterialRevisionImprovement(previousEvalResult, evalResult)) {
+      emit(controller, makeEvent("progress", "evaluating", {
+        message: "자동 보강본이 이전 초안보다 뚜렷하게 좋아지지 않아, 더 이상 억지로 보강하지 않고 직전 초안을 유지합니다.",
+      }));
+      writerResult = previousWriterResult;
+      evalResult = previousEvalResult;
+      break;
+    }
+
+    if (!shouldAttemptSmartRevision(evalResult)) {
+      emit(controller, makeEvent("progress", "evaluating", {
+        message: "보강으로 핵심 위험도가 충분히 낮아져 여기서 자동 보강을 마칩니다.",
+      }));
       return { writerResult, evalResult };
     }
   }
@@ -706,7 +894,7 @@ export async function runPipeline(params: {
       message: "Harness Evaluator가 초안을 평가합니다.",
     }));
 
-    const revised = await evaluateAndMaybeReviseDraft({
+    const revised = await evaluateAndMaybeReviseDraftSmart({
       pipelineId,
       topicId: request.topicId,
       userId: request.userId,
@@ -1582,7 +1770,7 @@ export async function runWritePhase(params: {
       message: "Harness Evaluator가 초안을 평가합니다.",
     }));
 
-    const revised = await evaluateAndMaybeReviseDraft({
+    const revised = await evaluateAndMaybeReviseDraftSmart({
       pipelineId,
       topicId,
       userId,

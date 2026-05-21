@@ -1,7 +1,8 @@
 "use client";
 
+import type { SSEEvent } from "@/lib/agents/types";
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
-import type { KeywordUsageReport, SSEEvent, SeoEvaluation } from "@/lib/agents/types";
+import type { KeywordUsageReport, SeoEvaluation } from "@/lib/agents/types";
 
 interface Props {
   contentTab: "draft" | "revision";
@@ -44,14 +45,8 @@ interface DraftColumn {
   body: string;
 }
 
-const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[자동 보강본]\n";
-const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[자동 보강본 2차]\n";
-
-function issueTone(severity: DraftReviewIssue["severity"]): string {
-  if (severity === "blocker") return "border-red-200 bg-red-50 text-red-700";
-  if (severity === "warning") return "border-amber-200 bg-amber-50 text-amber-700";
-  return "border-zinc-200 bg-zinc-50 text-zinc-700";
-}
+const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[자동 보강본 2차]\n";
+const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[자동 보강본 3차]\n";
 
 function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]): string {
   if (status === "ok") return "text-emerald-600";
@@ -60,26 +55,22 @@ function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]
   return "text-blue-600";
 }
 
+function statusLabel(status: KeywordUsageReport["items"][number]["status"]): string {
+  if (status === "ok") return "적정";
+  if (status === "caution") return "주의";
+  if (status === "danger") return "위험";
+  return "부족";
+}
+
 function buildRevisionGuides(reviewResult: DraftReviewResult | null, reviewIssues: DraftReviewIssue[]): string[] {
   const guides: string[] = [];
 
-  for (const issue of reviewIssues) {
-    guides.push(issue.message);
-  }
-
+  for (const issue of reviewIssues) guides.push(issue.message);
   for (const item of reviewResult?.keywordReport.items ?? []) {
-    if (item.status !== "ok") {
-      guides.push(`${item.keyword}: ${item.recommendation}`);
-    }
+    if (item.status !== "ok") guides.push(`${item.keyword}: ${item.recommendation}`);
   }
-
-  for (const note of reviewResult?.seoNotes ?? []) {
-    guides.push(`SEO: ${note}`);
-  }
-
-  for (const note of reviewResult?.naverLogicNotes ?? []) {
-    guides.push(`네이버 로직: ${note}`);
-  }
+  for (const note of reviewResult?.seoNotes ?? []) guides.push(`SEO: ${note}`);
+  for (const note of reviewResult?.naverLogicNotes ?? []) guides.push(`네이버 로직: ${note}`);
 
   return Array.from(new Set(guides)).slice(0, 10);
 }
@@ -89,18 +80,15 @@ function parseDraftColumns(streamingBody: string): DraftColumn[] {
   const secondMarkerIndex = normalized.indexOf(AUTO_DRAFT_MARKER_2);
   const thirdMarkerIndex = normalized.indexOf(AUTO_DRAFT_MARKER_3);
 
-  const firstBody = (
-    secondMarkerIndex >= 0 ? normalized.slice(0, secondMarkerIndex) : normalized
-  ).trim();
-  const secondBody = secondMarkerIndex >= 0
-    ? normalized.slice(
-        secondMarkerIndex + AUTO_DRAFT_MARKER_2.length,
-        thirdMarkerIndex >= 0 ? thirdMarkerIndex : undefined
-      ).trim()
-    : "";
-  const thirdBody = thirdMarkerIndex >= 0
-    ? normalized.slice(thirdMarkerIndex + AUTO_DRAFT_MARKER_3.length).trim()
-    : "";
+  const firstBody = (secondMarkerIndex >= 0 ? normalized.slice(0, secondMarkerIndex) : normalized).trim();
+  const secondBody =
+    secondMarkerIndex >= 0
+      ? normalized
+          .slice(secondMarkerIndex + AUTO_DRAFT_MARKER_2.length, thirdMarkerIndex >= 0 ? thirdMarkerIndex : undefined)
+          .trim()
+      : "";
+  const thirdBody =
+    thirdMarkerIndex >= 0 ? normalized.slice(thirdMarkerIndex + AUTO_DRAFT_MARKER_3.length).trim() : "";
 
   return [
     { label: "1차 초안", badge: "1차", body: firstBody },
@@ -163,7 +151,7 @@ export function PipelineWorkspacePanel({
           <div>
             <p className="text-sm font-semibold text-zinc-900">본문 작업 영역</p>
             <p className="mt-1 text-xs text-zinc-500">
-              초안 3단계와 수정본을 같은 화면에서 비교하면서 이어서 작업합니다.
+              초안과 수정본을 한 화면에서 비교하면서 실제로 다듬는 작업 공간입니다.
             </p>
           </div>
           <div className="inline-flex rounded-lg bg-zinc-100 p-1">
@@ -194,7 +182,8 @@ export function PipelineWorkspacePanel({
           <div className="flex min-h-[42rem] flex-col justify-center rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-10">
             <p className="text-sm font-semibold text-zinc-700">본문이 여기에 표시됩니다</p>
             <p className="mt-2 text-sm leading-6 text-zinc-500">
-              글쓰기를 시작하면 1차 초안, 자동 보강본 2차, 자동 보강본 3차가 차례대로 쌓이고 수정본 탭에서는 실제 최종 본문을 기준으로 다시 검토할 수 있습니다.
+              글쓰기를 시작하면 1차 초안이 먼저 나오고, 실제로 점수가 낮거나 키워드 반복 위험이 높을 때만
+              자동 보강본이 이어집니다. 보강본은 이전 초안의 문제를 줄이는 방향으로만 작성됩니다.
             </p>
           </div>
         ) : contentTab === "draft" ? (
@@ -211,7 +200,8 @@ export function PipelineWorkspacePanel({
                 <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3">
                   <p className="text-xs font-semibold text-blue-700">초안 비교 보기</p>
                   <p className="mt-1 text-xs leading-5 text-blue-600">
-                    1차 초안과 자동 보강본을 나란히 비교할 수 있습니다. 각 초안 아래에서 주요 키워드와 핵심 단어 반복 수까지 바로 확인할 수 있습니다.
+                    각 버전은 본문, 키워드 반복, SEO 점수를 따로 계산해 보여줍니다. 2차와 3차는 무조건 쓰는 게
+                    아니라 실제 개선이 있을 때만 이어집니다.
                   </p>
                 </div>
 
@@ -241,9 +231,7 @@ export function PipelineWorkspacePanel({
                             </div>
                             <p className="mt-1 text-[11px] text-zinc-500">{columnStatusText(column, hasAnyDraft)}</p>
                           </div>
-                          <span className="shrink-0 text-[11px] text-zinc-400">
-                            {column.body.length.toLocaleString()}자
-                          </span>
+                          <span className="shrink-0 text-[11px] text-zinc-400">{column.body.length.toLocaleString()}자</span>
                         </div>
 
                         <div className="min-h-[38rem] max-h-[calc(100vh-12rem)] overflow-y-auto bg-zinc-950 px-5 py-4">
@@ -252,10 +240,10 @@ export function PipelineWorkspacePanel({
                               {column.body}
                             </pre>
                           ) : (
-                            <div className="flex h-full min-h-[30rem] items-center justify-center text-center">
-                              <p className="text-sm leading-6 text-zinc-500">
+                            <div className="flex min-h-[32rem] items-center justify-center text-center">
+                              <p className="max-w-xs text-sm leading-6 text-zinc-400">
                                 {hasAnyDraft
-                                  ? `${column.label}은 아직 생성되지 않았습니다.`
+                                  ? "이 버전은 아직 생성되지 않았습니다."
                                   : "초안 생성을 시작하면 버전별 본문이 여기에 표시됩니다."}
                               </p>
                             </div>
@@ -280,30 +268,15 @@ export function PipelineWorkspacePanel({
                                   <div className="flex items-center justify-between gap-3">
                                     <p className="text-xs font-semibold text-zinc-800">{item.keyword}</p>
                                     <p className={`text-[11px] font-semibold ${keywordStatusTone(item.status)}`}>
-                                      실제 {item.count}회 · {item.status}
+                                      본문 {item.count}회 · {statusLabel(item.status)}
                                     </p>
                                   </div>
                                   <p className="mt-1 text-[11px] text-zinc-500">
-                                    권장 {item.targetMin}~{item.targetMax}회
+                                    적정 범위 {item.targetMin}~{item.targetMax}회
                                   </p>
                                 </div>
                               ))}
                             </div>
-                            {(versionReport.keywordReport.tokenItems?.length ?? 0) > 0 && (
-                              <div className="rounded-md border border-zinc-100 bg-white px-3 py-3">
-                                <p className="text-[11px] font-semibold text-zinc-600">핵심 단어 분포</p>
-                                <div className="mt-2 flex flex-wrap gap-2">
-                                  {versionReport.keywordReport.tokenItems.slice(0, 8).map((item) => (
-                                    <span
-                                      key={`${column.label}-token-${item.token}`}
-                                      className="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] text-zinc-700"
-                                    >
-                                      {item.token} {item.count}회
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
                           </div>
                         )}
                       </section>
@@ -312,19 +285,18 @@ export function PipelineWorkspacePanel({
                 </div>
 
                 {hasDraftToPolish && (
-                  <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4">
-                    <div>
-                      <p className="text-sm font-semibold text-zinc-900">보강 방향 직접 요청</p>
-                      <p className="mt-1 text-xs leading-5 text-zinc-500">
-                        키워드 과다, 문단 길이, 구조 보완처럼 바로 수정하고 싶은 점이 있으면 적어 주세요. 자동 보강본을 다시 만들 때 이 요청을 우선 반영합니다.
-                      </p>
-                    </div>
+                  <div className="rounded-xl border border-zinc-200 bg-white p-4">
+                    <p className="text-sm font-semibold text-zinc-900">보강 방향 직접 요청</p>
+                    <p className="mt-1 text-xs leading-5 text-zinc-500">
+                      키워드 과다, 문단 길이, 구조 보완처럼 바로 수정하고 싶은 점이 있다면 적어 주세요.
+                      자동 보강본이 다시 작성될 때 이 요청을 우선 반영합니다.
+                    </p>
                     <div className="mt-3 space-y-3">
                       <textarea
                         value={revisionRequest}
                         onChange={(event) => onRevisionRequestChange(event.target.value)}
                         className="min-h-28 w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                        placeholder="예: 메인 키워드 반복을 줄이고, 비교 기준 문단을 더 짧고 선명하게 정리해 주세요."
+                        placeholder="예: 메인 키워드 반복을 줄이고, 선택 기준 문단을 더 구체적으로 써 주세요."
                       />
                       <button
                         type="button"
@@ -332,7 +304,7 @@ export function PipelineWorkspacePanel({
                         disabled={reviewSaving || !revisionRequest.trim()}
                         className="w-full rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
                       >
-                        {reviewSaving ? "보강 요청 반영 중..." : "요청 반영 후 초안 다시 생성"}
+                        {reviewSaving ? "보강 반영 중" : "보강 요청 반영 후 계속"}
                       </button>
                     </div>
                   </div>
@@ -341,166 +313,107 @@ export function PipelineWorkspacePanel({
             ) : result ? (
               <div className="space-y-4">
                 <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3">
-                  <p className="text-xs font-semibold text-zinc-500">생성된 초안 제목</p>
+                  <p className="text-xs font-semibold text-zinc-500">완료된 초안 제목</p>
                   <p className="mt-1 text-base font-semibold text-zinc-900">{result.title}</p>
                   <p className="mt-1 text-xs text-zinc-500">{result.wordCount.toLocaleString()}자</p>
                 </div>
                 <div className="min-h-[34rem] rounded-xl border border-dashed border-zinc-300 bg-white px-5 py-6">
                   <p className="text-sm leading-6 text-zinc-500">
-                    본문 생성은 완료되었지만 버전별 초안 본문이 아직 표시되지 않았습니다. 다시 실행하면 이 영역에 초안과 자동 보강본이 쌓입니다.
+                    초안 본문은 아직 스트리밍 영역에 남아 있지 않습니다. 다시 글쓰기를 실행하면 이곳에 1차 초안과
+                    자동 보강본이 버전별로 표시됩니다.
                   </p>
                 </div>
               </div>
             ) : (
               <div className="min-h-[34rem] rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-5 py-6">
-                <p className="text-sm text-zinc-500">초안 생성을 시작하면 1차 초안과 자동 보강본이 각각 따로 표시됩니다.</p>
+                <p className="text-sm text-zinc-500">초안 생성을 시작하면 1차 초안과 보강본이 이곳에 표시됩니다.</p>
               </div>
             )}
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4">
-              <p className="text-xs font-semibold text-zinc-600">수정본 작업 안내</p>
-              <p className="mt-1 text-xs text-zinc-500">
-                실제 작성할 제목과 본문을 넣으면 그 본문 기준으로 다시 SEO와 키워드 반복을 평가하고, 바로 아래에서 수정본을 다듬을 수 있습니다.
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3">
+              <p className="text-xs font-semibold text-zinc-500">수정본 편집기</p>
+              <p className="mt-1 text-xs leading-5 text-zinc-500">
+                실제 발행할 제목과 본문을 기준으로 다시 검토합니다. 아래에서 직접 수정하거나 자동 검토 결과를 반영할 수 있습니다.
               </p>
             </div>
 
-            <div>
-              <label htmlFor="actual-title" className="mb-1 block text-xs font-semibold text-zinc-600">
-                실제 작성 제목
-              </label>
-              <input
-                id="actual-title"
-                value={reviewTitle}
-                onChange={(event) => onReviewTitleChange(event.target.value)}
-                className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                placeholder="실제 작성 제목"
-              />
-            </div>
+            <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
+              <div>
+                <label className="mb-1 block text-xs font-semibold text-zinc-600">실제 제목</label>
+                <input
+                  value={reviewTitle}
+                  onChange={(event) => onReviewTitleChange(event.target.value)}
+                  className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  placeholder="최종 발행 제목"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="actual-body" className="mb-1 block text-xs font-semibold text-zinc-600">
-                실제 작성 본문
-              </label>
-              <textarea
-                id="actual-body"
-                value={reviewBody}
-                onChange={(event) => onReviewBodyChange(event.target.value)}
-                className="min-h-56 w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                placeholder="실제 발행할 본문을 이곳에 붙여 넣으면 수정본 검토와 키워드 분석이 이 본문 기준으로 다시 계산됩니다."
-              />
-            </div>
+              <div>
+                <label className="mb-1 block text-xs font-semibold text-zinc-600">실제 본문</label>
+                <textarea
+                  value={reviewBody}
+                  onChange={(event) => onReviewBodyChange(event.target.value)}
+                  className="min-h-[18rem] w-full rounded-lg border border-zinc-200 px-3 py-3 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  placeholder="실제 발행 본문"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="revision-request" className="mb-1 block text-xs font-semibold text-zinc-600">
-                수정 요청 메모
-              </label>
-              <textarea
-                id="revision-request"
-                value={revisionRequest}
-                onChange={(event) => onRevisionRequestChange(event.target.value)}
-                className="min-h-28 w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                placeholder="예: 첫 문단을 더 짧게, 비교 기준을 표처럼 정리, 키워드 반복 줄이기"
-              />
-              <p className="mt-1 text-xs text-zinc-500">
-                수정 요청을 적지 않아도 검토 실행은 가능하지만, 방향을 넣으면 더 정확하게 다듬습니다.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              onClick={onRunDraftReview}
-              disabled={reviewSaving || !reviewTitle.trim()}
-              className="w-full rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
-            >
-              {reviewSaving ? "수정본 검토 중..." : "실제 본문 기준으로 다시 검토"}
-            </button>
-
-            {reviewResult ? (
-              <div className="space-y-4 rounded-xl border border-blue-100 bg-blue-50 p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-sm font-semibold text-blue-700">수정본 제안</p>
-                    <p className="mt-1 text-xs text-blue-600">
-                      실제 작성 본문을 기준으로 다시 계산한 결과입니다. 아래 내용을 바로 손봐서 원본에 반영할 수 있습니다.
-                    </p>
-                  </div>
-                  {reviewApplied && (
-                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">
-                      원본 반영 완료
-                    </span>
-                  )}
-                </div>
-
-                <div>
-                  <label className="mb-1 block text-xs font-semibold text-blue-700">수정본 제목</label>
-                  <input
-                    value={reviewEditorTitle}
-                    onChange={(event) => onReviewedTitleChange(event.target.value)}
-                    className="w-full rounded-lg border border-blue-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-1 block text-xs font-semibold text-blue-700">수정본 본문</label>
-                  <textarea
-                    value={reviewEditorBody}
-                    onChange={(event) => onReviewedBodyChange(event.target.value)}
-                    className="min-h-[24rem] w-full rounded-lg border border-blue-200 px-3 py-2 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  />
-                </div>
-
-                <div className="space-y-3 rounded-lg border border-blue-100 bg-white/90 p-4">
-                  <div>
-                    <p className="text-xs font-semibold text-blue-700">수정 가이드</p>
-                    <p className="mt-1 text-xs text-blue-600">
-                      아래 항목은 실제 본문을 다시 분석해서 추린 우선 수정 포인트입니다.
-                    </p>
-                  </div>
-
-                  {revisionGuides.length > 0 ? (
-                    <div className="space-y-2">
-                      {revisionGuides.map((guide, index) => {
-                        const issue = reviewIssues.find((item) => item.message === guide);
-                        return (
-                          <div
-                            key={`${guide}-${index}`}
-                            className={`rounded-md border px-3 py-2 text-xs ${issue ? issueTone(issue.severity) : "border-blue-100 bg-blue-50 text-zinc-700"}`}
-                          >
-                            {guide}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <p className="text-xs text-zinc-600">추가 수정 포인트가 없으면 현재 수정본을 그대로 써도 됩니다.</p>
-                  )}
-
-                  {reviewResult.checks?.length > 0 && (
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      {reviewResult.checks.map((check) => (
-                        <div key={check.label} className="rounded-md border border-zinc-100 bg-white px-3 py-2">
-                          <p className={`text-xs font-semibold ${check.passed ? "text-emerald-600" : "text-amber-600"}`}>
-                            {check.passed ? "통과" : "확인 필요"} · {check.label}
-                          </p>
-                          <p className="mt-1 text-[11px] text-zinc-500">{check.detail}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
+              <div className="grid gap-3 md:grid-cols-2">
+                <button
+                  type="button"
+                  onClick={onRunDraftReview}
+                  disabled={reviewSaving || !reviewBody.trim()}
+                  className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
+                >
+                  {reviewSaving ? "검토 중" : "수정본 검토 실행"}
+                </button>
                 <button
                   type="button"
                   onClick={onApplyReviewedDraft}
-                  disabled={reviewSaving || !reviewEditorTitle.trim() || !reviewEditorBody.trim()}
-                  className="w-full rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-40"
+                  disabled={!reviewEditorBody.trim()}
+                  className="rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 disabled:opacity-40"
                 >
-                  {reviewSaving ? "원본 반영 중..." : "수정본을 원본에 반영"}
+                  검토 반영본을 편집기에 적용
                 </button>
               </div>
-            ) : null}
+            </div>
+
+            {revisionGuides.length > 0 && (
+              <div className="rounded-xl border border-zinc-200 bg-white p-4">
+                <p className="mb-3 text-xs font-semibold text-zinc-600">검토 반영 가이드</p>
+                <ul className="space-y-1 text-sm text-zinc-700">
+                  {revisionGuides.map((guide) => (
+                    <li key={guide} className="flex gap-2">
+                      <span className="text-zinc-400">-</span>
+                      <span>{guide}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {(reviewEditorTitle || reviewEditorBody) && (
+              <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
+                <p className="text-xs font-semibold text-zinc-600">검토 반영 초안</p>
+                <input
+                  value={reviewEditorTitle}
+                  onChange={(event) => onReviewedTitleChange(event.target.value)}
+                  className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  placeholder="검토 반영 제목"
+                />
+                <textarea
+                  value={reviewEditorBody}
+                  onChange={(event) => onReviewedBodyChange(event.target.value)}
+                  className="min-h-[20rem] w-full rounded-lg border border-zinc-200 px-3 py-3 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  placeholder="검토 반영 본문"
+                />
+                {reviewApplied && (
+                  <p className="text-xs text-emerald-600">검토 결과가 편집기에 반영되었습니다.</p>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -225,6 +225,8 @@ export interface EvalResult {
   reasoning: Record<string, string>;
   recommendations: string[];
   pass: boolean;
+  seoEvaluation?: SeoEvaluation;
+  naverLogicEvaluation?: NaverLogicEvaluation;
 }
 
 export interface ApprovalPayload {

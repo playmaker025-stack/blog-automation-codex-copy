@@ -1,4 +1,4 @@
-import type { Tool } from "@anthropic-ai/sdk/resources/messages";
+﻿import type { Tool } from "@anthropic-ai/sdk/resources/messages";
 import { MODELS } from "@/lib/anthropic/client";
 import { runToolUseLoop } from "@/lib/anthropic/tool-executor";
 import { userCorpusRetriever } from "@/lib/skills/user-corpus-retriever";
@@ -12,24 +12,24 @@ import { HARNESS_PASS_THRESHOLD } from "./harness-guidance";
 import { evaluateSeoCompleteness } from "./seo-metrics";
 import { naverLogicAgent } from "./naver-logic-agent";
 
-const SYSTEM_PROMPT = `당신은 네이버 블로그 콘텐츠 품질 평가 전문가입니다.
+const SYSTEM_PROMPT = `?뱀떊? ?ㅼ씠踰?釉붾줈洹?肄섑뀗痢??덉쭏 ?됯? ?꾨Ц媛?낅땲??
 
-## 평가 차원 (각 0-100점)
-- originality (0.25): 독창적 관점, 표절 없음, 고유한 인사이트
-- style_match (0.30): 사용자 코퍼스 글쓰기 스타일 일치도
-- structure (0.20): 논리적 흐름, 섹션 구성, 가독성, 전략의 허브글/리프글 역할 반영
-- engagement (0.15): 독자 관심 유도, 유용성
-- forbidden_check (0.10): 금지 표현 미포함 여부 (포함 시 0점)
+## ?됯? 李⑥썝 (媛?0-100??
+- originality (0.25): ?낆갹??愿?? ?쒖젅 ?놁쓬, 怨좎쑀???몄궗?댄듃
+- style_match (0.30): ?ъ슜??肄뷀띁??湲?곌린 ?ㅽ????쇱튂??
+- structure (0.20): ?쇰━???먮쫫, ?뱀뀡 援ъ꽦, 媛?낆꽦, ?꾨왂???덈툕湲/由ы봽湲 ??븷 諛섏쁺
+- engagement (0.15): ?낆옄 愿???좊룄, ?좎슜??
+- forbidden_check (0.10): 湲덉? ?쒗쁽 誘명룷???щ? (?ы븿 ??0??
 
-## 작업 순서
-1. user_corpus_retriever로 예시 글 로드 (style_match 기준)
-2. review_record_audit으로 과거 포스팅 패턴 확인
-3. 각 차원별 점수와 근거 작성
-4. SEO 적합도와 네이버 로직 충실도를 가장 중요하게 평가
-5. 나머지 점수는 보조 품질 지표로만 반영
-6. 개선 권고사항 1-3개 제시
+## ?묒뾽 ?쒖꽌
+1. user_corpus_retriever濡??덉떆 湲 濡쒕뱶 (style_match 湲곗?)
+2. review_record_audit?쇰줈 怨쇨굅 ?ъ뒪???⑦꽩 ?뺤씤
+3. 媛?李⑥썝蹂??먯닔? 洹쇨굅 ?묒꽦
+4. SEO ?곹빀?꾩? ?ㅼ씠踰?濡쒖쭅 異⑹떎?꾨? 媛??以묒슂?섍쾶 ?됯?
+5. ?섎㉧吏 ?먯닔??蹂댁“ ?덉쭏 吏?쒕줈留?諛섏쁺
+6. 媛쒖꽑 沅뚭퀬?ы빆 1-3媛??쒖떆
 
-## 출력 형식 (반드시 JSON 코드블록)
+## 異쒕젰 ?뺤떇 (諛섎뱶??JSON 肄붾뱶釉붾줉)
 \`\`\`json
 {
   "scores": {
@@ -41,20 +41,20 @@ const SYSTEM_PROMPT = `당신은 네이버 블로그 콘텐츠 품질 평가 전
   },
   "aggregateScore": 87,
   "reasoning": {
-    "originality": "근거",
-    "style_match": "근거",
-    "structure": "근거",
-    "engagement": "근거",
-    "forbidden_check": "금지 표현 없음"
+    "originality": "洹쇨굅",
+    "style_match": "洹쇨굅",
+    "structure": "洹쇨굅",
+    "engagement": "洹쇨굅",
+    "forbidden_check": "湲덉? ?쒗쁽 ?놁쓬"
   },
-  "recommendations": ["권고사항 1", "권고사항 2"]
+  "recommendations": ["沅뚭퀬?ы빆 1", "沅뚭퀬?ы빆 2"]
 }
 \`\`\``;
 
 const TOOLS: Tool[] = [
   {
     name: "user_corpus_retriever",
-    description: "사용자 예시 글 코퍼스를 로드합니다 (style_match 기준).",
+    description: "?ъ슜???덉떆 湲 肄뷀띁?ㅻ? 濡쒕뱶?⑸땲??(style_match 湲곗?).",
     input_schema: {
       type: "object" as const,
       properties: {
@@ -66,7 +66,7 @@ const TOOLS: Tool[] = [
   },
   {
     name: "review_record_audit",
-    description: "과거 포스팅 패턴을 분석합니다.",
+    description: "怨쇨굅 ?ъ뒪???⑦꽩??遺꾩꽍?⑸땲??",
     input_schema: {
       type: "object" as const,
       properties: {
@@ -103,12 +103,11 @@ function parseEvalFromText(text: string): Omit<EvalResult, "runId" | "pass"> {
       // fallthrough
     }
   }
-  // 파싱 실패 시 기본값 반환
   return {
     scores: { originality: 0, style_match: 0, structure: 0, engagement: 0, forbidden_check: 0 },
     aggregateScore: 0,
-    reasoning: { error: "평가 결과 파싱 실패" },
-    recommendations: ["평가를 다시 실행해주세요."],
+    reasoning: { error: "평가 결과를 파싱하지 못했습니다." },
+    recommendations: ["평가를 다시 실행해 주세요."],
   };
 }
 
@@ -175,7 +174,7 @@ async function runOpenAIHarnessEvaluator(params: {
     ? AbortSignal.any([signal, AbortSignal.timeout(180_000)])
     : AbortSignal.timeout(180_000);
 
-  onProgress?.("Harness Evaluator가 OpenAI로 코퍼스와 실패 패턴을 확인합니다.");
+  onProgress?.("Harness Evaluator媛 OpenAI濡?肄뷀띁?ㅼ? ?ㅽ뙣 ?⑦꽩???뺤씤?⑸땲??");
   const [corpus, audit] = await Promise.all([
     userCorpusRetriever({ userId: userId.trim().toLowerCase(), limit: 5 }),
     reviewRecordAudit({ userId: userId.trim().toLowerCase(), limit: 8 }),
@@ -198,7 +197,7 @@ async function runOpenAIHarnessEvaluator(params: {
       ].join("\n")
     : "No Naver community signals.";
 
-  onProgress?.("평가 기준에 따라 점수 산정 중...");
+  onProgress?.("?됯? 湲곗????곕씪 ?먯닔 ?곗젙 以?..");
   const parsed = await requestOpenAIJson<Omit<EvalResult, "runId" | "aggregateScore" | "pass">>({
     model,
     input: [
@@ -294,8 +293,8 @@ async function runOpenAIHarnessEvaluator(params: {
     aggregateScore,
     reasoning: {
       ...parsed.reasoning,
-      seo: `SEO 점수 ${seoEvaluation.score}점. ${seoEvaluation.evidence[0] ?? "키워드/제목/도입부 배치를 점검했습니다."}`,
-      naver_logic: `네이버 로직 점수 ${naverLogicEvaluation.completenessScore}점. ${naverLogicEvaluation.evidence[0] ?? "로직 흐름을 점검했습니다."}`,
+      seo: `SEO ?먯닔 ${seoEvaluation.score}?? ${seoEvaluation.evidence[0] ?? "?ㅼ썙???쒕ぉ/?꾩엯遺 諛곗튂瑜??먭??덉뒿?덈떎."}`,
+      naver_logic: `?ㅼ씠踰?濡쒖쭅 ?먯닔 ${naverLogicEvaluation.completenessScore}?? ${naverLogicEvaluation.evidence[0] ?? "濡쒖쭅 ?먮쫫???먭??덉뒿?덈떎."}`,
     },
     recommendations: [
       ...seoEvaluation.improvements,
@@ -306,7 +305,7 @@ async function runOpenAIHarnessEvaluator(params: {
   };
 
   await saveEvalRun(evalResult, writerResult.postId);
-  onProgress?.(`평가 완료: ${aggregateScore}점 (${evalResult.pass ? "통과" : "미달"})`);
+  onProgress?.(`?됯? ?꾨즺: ${aggregateScore}??(${evalResult.pass ? "?듦낵" : "誘몃떖"})`);
   return evalResult;
 }
 
@@ -319,7 +318,7 @@ export async function runHarnessEvaluator(params: {
 }): Promise<EvalResult> {
   const { writerResult, strategy, userId, onProgress, signal } = params;
 
-  onProgress?.("Harness Evaluator 시작...");
+  onProgress?.("Harness Evaluator ?쒖옉...");
 
   if (hasOpenAIKey()) {
     return runOpenAIHarnessEvaluator(params);
@@ -335,31 +334,31 @@ export async function runHarnessEvaluator(params: {
   const topology = strategy.contentTopology;
   const topologySection = topology
     ? `
-콘텐츠 구조 판단:
-- 유형: ${topology.kind === "hub" ? "허브글" : "리프글"}
-- 판단 근거: ${topology.reason}
-- 검색 의도: ${topology.searchIntent}
-- 본문 반영 요구: ${topology.requiredSections.join(" / ")}
+肄섑뀗痢?援ъ“ ?먮떒:
+- ?좏삎: ${topology.kind === "hub" ? "?덈툕湲" : "由ы봽湲"}
+- ?먮떒 洹쇨굅: ${topology.reason}
+- 寃???섎룄: ${topology.searchIntent}
+- 蹂몃Ц 諛섏쁺 ?붽뎄: ${topology.requiredSections.join(" / ")}
 `
     : "";
 
-  const userMessage = `다음 블로그 본문을 평가해주세요.
+  const userMessage = `?ㅼ쓬 釉붾줈洹?蹂몃Ц???됯??댁＜?몄슂.
 
-제목: ${writerResult.title}
-글자수: ${writerResult.wordCount}자
-전략 톤: ${strategy.tone}
-목표 키워드: ${strategy.keywords.join(", ")}
-담당 사용자 ID: ${userId}
+?쒕ぉ: ${writerResult.title}
+湲?먯닔: ${writerResult.wordCount}??
+?꾨왂 ?? ${strategy.tone}
+紐⑺몴 ?ㅼ썙?? ${strategy.keywords.join(", ")}
+?대떦 ?ъ슜??ID: ${userId}
 ${topologySection}
 
---- 본문 시작 ---
-${writerResult.content.slice(0, 1500)}${writerResult.content.length > 1500 ? "\n...(이하 생략)..." : ""}
---- 본문 끝 ---
+--- 蹂몃Ц ?쒖옉 ---
+${writerResult.content.slice(0, 1500)}${writerResult.content.length > 1500 ? "\n...(?댄븯 ?앸왂)..." : ""}
+--- 蹂몃Ц ??---
 
-user_corpus_retriever로 코퍼스를 로드하고, review_record_audit으로 패턴을 확인한 후 평가 JSON을 출력해주세요.
-structure 점수에는 콘텐츠 구조 판단의 허브글/리프글 역할이 본문에 자연스럽게 반영됐는지 반드시 포함하세요.`;
+user_corpus_retriever濡?肄뷀띁?ㅻ? 濡쒕뱶?섍퀬, review_record_audit?쇰줈 ?⑦꽩???뺤씤?????됯? JSON??異쒕젰?댁＜?몄슂.
+structure ?먯닔?먮뒗 肄섑뀗痢?援ъ“ ?먮떒???덈툕湲/由ы봽湲 ??븷??蹂몃Ц???먯뿰?ㅻ읇寃?諛섏쁺?먮뒗吏 諛섎뱶???ы븿?섏꽭??`;
 
-  onProgress?.("평가 에이전트 실행 중...");
+  onProgress?.("?됯? ?먯씠?꾪듃 ?ㅽ뻾 以?..");
 
   const resultText = await runToolUseLoop({
     model: MODELS.sonnet,
@@ -372,10 +371,10 @@ structure 점수에는 콘텐츠 구조 판단의 허브글/리프글 역할이 
     signal,
   });
 
-  onProgress?.("평가 결과 파싱 중...");
+  onProgress?.("?됯? 寃곌낵 ?뚯떛 以?..");
   const parsed = parseEvalFromText(resultText);
 
-  // sub score는 보조 지표이고, 최종 점수는 SEO와 네이버 로직을 우선 반영합니다.
+  // sub score??蹂댁“ 吏?쒖씠怨? 理쒖쥌 ?먯닔??SEO? ?ㅼ씠踰?濡쒖쭅???곗꽑 諛섏쁺?⑸땲??
   const subScore = computeAggregate(parsed.scores);
 
   const runId = `eval-${randomUUID().slice(0, 8)}`;
@@ -414,8 +413,8 @@ structure 점수에는 콘텐츠 구조 판단의 허브글/리프글 역할이 
     aggregateScore,
     reasoning: {
       ...parsed.reasoning,
-      seo: `SEO 점수 ${seoEvaluation.score}점. ${seoEvaluation.evidence[0] ?? "키워드/제목/도입부 배치를 점검했습니다."}`,
-      naver_logic: `네이버 로직 점수 ${naverLogicEvaluation.completenessScore}점. ${naverLogicEvaluation.evidence[0] ?? "로직 흐름을 점검했습니다."}`,
+      seo: `SEO ?먯닔 ${seoEvaluation.score}?? ${seoEvaluation.evidence[0] ?? "?ㅼ썙???쒕ぉ/?꾩엯遺 諛곗튂瑜??먭??덉뒿?덈떎."}`,
+      naver_logic: `?ㅼ씠踰?濡쒖쭅 ?먯닔 ${naverLogicEvaluation.completenessScore}?? ${naverLogicEvaluation.evidence[0] ?? "濡쒖쭅 ?먮쫫???먭??덉뒿?덈떎."}`,
     },
     recommendations: [
       ...seoEvaluation.improvements,
@@ -425,11 +424,11 @@ structure 점수에는 콘텐츠 구조 판단의 허브글/리프글 역할이 
     pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
   };
 
-  // GitHub에 eval run 저장
+  // GitHub??eval run ???
   await saveEvalRun(evalResult, writerResult.postId);
 
   onProgress?.(
-    `평가 완료: ${aggregateScore}점 (${evalResult.pass ? "통과" : "미달"})`
+    `?됯? ?꾨즺: ${aggregateScore}??(${evalResult.pass ? "?듦낵" : "誘몃떖"})`
   );
 
   return evalResult;
@@ -448,7 +447,7 @@ async function saveEvalRun(evalResult: EvalResult, postId: string): Promise<void
   );
 }
 
-// 베이스라인과 비교하여 회귀 여부 확인
+// 踰좎씠?ㅻ씪?멸낵 鍮꾧탳?섏뿬 ?뚭? ?щ? ?뺤씤
 export async function compareWithBaseline(
   evalResult: EvalResult,
   caseId: string
@@ -464,3 +463,6 @@ export async function compareWithBaseline(
     return null;
   }
 }
+
+
+

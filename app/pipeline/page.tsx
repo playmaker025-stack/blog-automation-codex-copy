@@ -57,8 +57,8 @@ interface DraftVersionSeoReport extends DraftVersionSnapshot {
   keywordReport: KeywordUsageReport;
 }
 
-const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[자동 보강본]\n";
-const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[자동 보강본 2차]\n";
+const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[\uC790\uB3D9 \uBCF4\uAC15\uBCF8 2\uCC28]\n";
+const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[\uC790\uB3D9 \uBCF4\uAC15\uBCF8 3\uCC28]\n";
 
 function parseDraftVersionSnapshots(streamingBody: string): DraftVersionSnapshot[] {
   const normalized = streamingBody.replace(/\r\n/g, "\n");
@@ -79,9 +79,9 @@ function parseDraftVersionSnapshots(streamingBody: string): DraftVersionSnapshot
     : "";
 
   return [
-    { label: "1차 초안", body: firstBody },
-    { label: "자동 보강본 2차", body: secondBody },
-    { label: "자동 보강본 3차", body: thirdBody },
+    { label: "\u0031\uCC28 \uCD08\uC548", body: firstBody },
+    { label: "\uC790\uB3D9 \uBCF4\uAC15\uBCF8 2\uCC28", body: secondBody },
+    { label: "\uC790\uB3D9 \uBCF4\uAC15\uBCF8 3\uCC28", body: thirdBody },
   ];
 }
 
@@ -90,12 +90,12 @@ function buildDraftCompletionMessage(streamingBody: string): string | null {
 
   if (completedCount <= 0) return null;
   if (completedCount === 1) {
-    return "1차 초안 작성이 완료되었습니다. 추가 자동 보강 없이도 다음 단계로 진행 가능한 상태입니다.";
+    return "\u0031\uCC28 \uCD08\uC548 \uC791\uC131\uC774 \uC644\uB8CC\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uCD94\uAC00 \uBCF4\uAC15\uC774 \uAF2D \uD544\uC694\uD558\uC9C0 \uC54A\uB2E4\uBA74 \uBC14\uB85C \uC218\uC815\uBCF8 \uB2E8\uACC4\uB85C \uB118\uC5B4\uAC00\uBA74 \uB429\uB2C8\uB2E4.";
   }
   if (completedCount === 2) {
-    return "1차 초안과 자동 보강본 2차 작성이 완료되었습니다. 추가 보강 없이 초안 작성을 마칩니다.";
+    return "\u0031\uCC28 \uCD08\uC548\uACFC \uC790\uB3D9 \uBCF4\uAC15\uBCF8 2\uCC28\uAC00 \uC900\uBE44\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uB450 \uBC84\uC804\uC744 \uBE44\uAD50\uD574 \uB354 \uB098\uC740 \uCABD\uC744 \uACE8\uB77C \uC218\uC815\uBCF8\uC73C\uB85C \uB118\uAE30\uBA74 \uB429\uB2C8\uB2E4.";
   }
-  return "1차 초안부터 자동 보강본 3차까지 모두 작성되었습니다. 각 버전을 비교한 뒤 수정본 탭에서 실제 작성 본문을 검토해 주세요.";
+  return "\u0031\uCC28 \uCD08\uC548\uBD80\uD130 \uC790\uB3D9 \uBCF4\uAC15\uBCF8 3\uCC28\uAE4C\uC9C0 \uBAA8\uB450 \uC900\uBE44\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uAC00\uC7A5 \uB098\uC740 \uBC84\uC804\uC744 \uACE8\uB77C \uC218\uC815\uBCF8 \uD0ED\uC5D0\uC11C \uC2E4\uC81C \uBC1C\uD589 \uBCF8\uBB38\uC744 \uC815\uB9AC\uD574 \uC8FC\uC138\uC694.";
 }
 
 function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]): string {
@@ -295,7 +295,7 @@ export default function PipelinePage() {
       });
   }, [draftRewriteContext?.strategy, streamingBody]);
   const profileDisplayName = !profile?.displayName || looksCorruptedText(profile.displayName)
-    ? normalizedUserId || "사용자 연결됨"
+    ? normalizedUserId || "\uC0AC\uC6A9\uC790 \uC5F0\uACB0\uB428"
     : profile.displayName;
   const selectedTopic = selectedTopicId
     ? topics.find((topic) => topic.topicId === selectedTopicId) ?? null
@@ -435,18 +435,18 @@ export default function PipelinePage() {
     }
 
     if (event.type === "error") {
-      const message = (event.data as { message?: string })?.message ?? "파이프라인 오류가 발생했습니다.";
+      const message = (event.data as { message?: string })?.message ?? "\uD30C\uC774\uD504\uB77C\uC778 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4.";
       const isPreflight = message.includes("Preflight check blocked writing");
-      const isPublishedTopicBlock = message.includes("이미 발행된 토픽입니다");
+      const isPublishedTopicBlock = message.includes("\uC774\uBBF8 \uBC1C\uD589\uB41C \uD1A0\uD53D\uC785\uB2C8\uB2E4");
       setPreflightBlocked(isPreflight);
       setPublishedDuplicateBlocked(isPublishedTopicBlock);
       setPipelineError(
         isPreflight
-          ? "이미 이전 작성목록에 있는 내용입니다. 비슷한 주제로 유사문서가 되지 않게 다른 각도로 작성할까요?"
+          ? "\uC774\uBBF8 \uC774\uC804 \uC791\uC131\uBAA9\uB85D\uC5D0 \uC788\uB294 \uB0B4\uC6A9\uC785\uB2C8\uB2E4. \uBE44\uC2B7\uD55C \uC8FC\uC81C\uB85C \uC720\uC0AC\uBB38\uC11C\uAC00 \uB418\uC9C0 \uC54A\uAC8C \uB2E4\uB978 \uAC01\uB3C4\uB85C \uC791\uC131\uD560\uAE4C\uC694?"
           : isPublishedTopicBlock
-            ? "이미 발행된 토픽입니다. 그래도 같은 제목/토픽으로 다시 발행하려면 계속 진행을 눌러 주세요."
+            ? "\uC774\uBBF8 \uBC1C\uD589\uB41C \uD1A0\uD53D\uC785\uB2C8\uB2E4. \uADF8\uB798\uB3C4 \uAC19\uC740 \uC81C\uBAA9/\uD1A0\uD53D\uC73C\uB85C \uB2E4\uC2DC \uBC1C\uD589\uD558\uB824\uBA74 \uACC4\uC18D \uC9C4\uD589\uC744 \uB20C\uB7EC \uC8FC\uC138\uC694."
           : message.includes("Request was aborted")
-            ? "요청 시간이 길어져 중단되었습니다. 잠시 후 다시 실행해 주세요."
+            ? "\uC694\uCCAD \uC2DC\uAC04\uC774 \uAE38\uC5B4\uC838 \uC911\uB2E8\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2E4\uD589\uD574 \uC8FC\uC138\uC694."
             : message
       );
       setStage("idle");
@@ -821,7 +821,7 @@ export default function PipelinePage() {
 
     if (stored && requested) {
       if (stored === requested) return stored;
-      return `${stored}\n\n추가 초안 보완 요청:\n${requested}`;
+      return `${stored}\n\n\uCD94\uAC00 \uCD08\uC548 \uBCF4\uC644 \uC694\uCCAD:\n${requested}`;
     }
 
     return stored || requested || undefined;
@@ -1342,7 +1342,7 @@ export default function PipelinePage() {
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 p-4">
           <div className="w-full max-w-md rounded-xl border border-blue-200 bg-white shadow-2xl">
             <div className="border-b border-blue-100 bg-blue-50 px-6 py-4">
-              <p className="text-sm font-semibold text-blue-700">초안 작성 완료</p>
+              <p className="text-sm font-semibold text-blue-700">\uCD08\uC548 \uC791\uC131 \uC644\uB8CC</p>
             </div>
             <div className="px-6 py-5">
               <p className="text-sm leading-6 text-zinc-700">{draftCompletionMessage}</p>
@@ -1353,7 +1353,7 @@ export default function PipelinePage() {
                 onClick={() => setDraftCompletionMessage(null)}
                 className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
               >
-                확인
+                \uD655\uC778
               </button>
             </div>
           </div>
