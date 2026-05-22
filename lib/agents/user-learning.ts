@@ -510,7 +510,68 @@ export async function syncPublishedPostToUserCorpus(params: {
     metas: [prepared.meta],
     exemplars: [prepared.exemplar],
   });
+  await writeWritingProfileFromStoredArtifacts(userId);
   return true;
+}
+
+export async function syncMissingPublishedToCorpus(
+  userId: string,
+  limit = 15
+): Promise<{ synced: number; skipped: number; failed: number }> {
+  const normalizedUserId = normalizeUserId(userId);
+  if (!normalizedUserId) return { synced: 0, skipped: 0, failed: 0 };
+
+  const posts = await loadPublishedPosts(normalizedUserId);
+  if (posts.length === 0) return { synced: 0, skipped: 0, failed: 0 };
+
+  const corpusPath = Paths.corpusIndex(normalizedUserId);
+  const existingIds = new Set<string>();
+  if (await fileExists(corpusPath)) {
+    const { data } = await readJsonFile<CorpusIndex>(corpusPath);
+    for (const s of data.samples) existingIds.add(s.sampleId);
+  }
+
+  const missing = posts.filter((p) => !existingIds.has(makeSampleId(p.postId)));
+  const toProcess = missing.slice(0, limit);
+  const skipped = missing.length - toProcess.length;
+
+  if (toProcess.length === 0) return { synced: 0, skipped, failed: 0 };
+
+  const [profile, topicsMap] = await Promise.all([
+    readProfile(normalizedUserId),
+    loadTopicsMap(),
+  ]);
+
+  let synced = 0;
+  let failed = 0;
+  const usable: Array<{ meta: CorpusSampleMeta; exemplar: ExemplarEntry }> = [];
+
+  for (const post of toProcess) {
+    const prepared = await ensureCorpusDirectoriesFromPost({
+      userId: normalizedUserId,
+      post,
+      topic: topicsMap.get(post.topicId) ?? null,
+      profile,
+    }).catch(() => null);
+
+    if (prepared) {
+      usable.push(prepared);
+      synced++;
+    } else {
+      failed++;
+    }
+  }
+
+  if (usable.length > 0) {
+    await writeCorpusArtifacts({
+      userId: normalizedUserId,
+      metas: usable.map((u) => u.meta),
+      exemplars: usable.map((u) => u.exemplar),
+    });
+    await writeWritingProfileFromStoredArtifacts(normalizedUserId);
+  }
+
+  return { synced, skipped, failed };
 }
 
 async function loadLearningEntries(userId: string): Promise<PublicationLearningEntry[]> {
