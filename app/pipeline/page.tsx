@@ -112,7 +112,7 @@ function looksBrokenKorean(value: string | null | undefined): boolean {
 
 function formatPipelineError(message: string): string {
   if (message.includes("data/posting-list/index.json") && message.includes("파일이 아닙니다")) {
-    return message;
+    return `${message}\n\n로컬 확인 결과 codex-copy/main의 해당 경로는 정상 파일입니다. 같은 오류가 계속 뜨면 Railway Variables가 다른 데이터 저장소나 브랜치를 보고 있을 가능성이 큽니다.`;
   }
   if (message.includes("data/posting-list/index.json")) {
     return '"data/posting-list/index.json" 파일을 읽는 중 문제가 발생했습니다. GitHub 데이터 저장소에서 해당 경로가 정상 JSON 파일인지 확인해 주세요.';

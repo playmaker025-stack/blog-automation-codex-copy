@@ -28,7 +28,13 @@ export async function readFile(filePath: string): Promise<FileContent> {
 
   const data = response.data;
   if (Array.isArray(data) || data.type !== "file") {
-    throw new Error(`"${filePath}" 경로가 파일이 아닙니다. GitHub 데이터 저장소에서 같은 이름의 폴더가 있는지 확인해 주세요.`);
+    const actualType = Array.isArray(data) ? "dir" : data.type;
+    throw new Error(
+      `"${filePath}" 경로가 파일이 아닙니다. ` +
+      `현재 데이터 저장소: ${owner}/${repo}@${branch}, 실제 타입: ${actualType}. ` +
+      `Railway Variables의 GITHUB_DATA_REPO/GITHUB_DATA_REPO_BRANCH가 맞는지 확인하고, ` +
+      `GitHub 웹에서 같은 이름의 폴더가 있으면 삭제해 주세요.`
+    );
   }
 
   // GitHub API는 1MB 초과 파일의 경우 content를 빈 문자열로 반환
