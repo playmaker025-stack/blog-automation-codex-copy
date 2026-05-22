@@ -60,6 +60,11 @@ const SYSTEM_PROMPT = `
   "estimatedLength": 1700,
   "tone": "friendly",
   "keywords": ["메인키워드", "서브키워드"],
+  "keywordContract": {
+    "mainKeyword": "실제 네이버 검색창 입력어 (20자 이내, 자연어 문장 금지)",
+    "subKeywords": ["검색어1", "검색어2"],
+    "bridgeKeywords": []
+  },
   "suggestedSources": [],
   "rationale": "전략 근거"
 }
@@ -71,6 +76,11 @@ const SYSTEM_PROMPT = `
 - 금지 주제가 아니라면 전자담배/액상/기기/입문/추천/리뷰/문제해결 글은 정상 허용합니다.
 - 검색의도와 블로그 역할(A~E), 허브/리프 구조를 함께 반영합니다.
 - naver_content_fetcher에서 파악한 상위 글의 공통점은 참고하되, 제목/목차/결론/링크 구조는 그대로 베끼지 않습니다.
+- keywordContract.mainKeyword와 subKeywords는 반드시 실제 네이버 검색창에 입력하는 형태여야 합니다.
+  - 올바른 예: "전자담배 입문", "입호흡 전자담배 추천", "액상형 전자담배 차이"
+  - 잘못된 예: "2025년 기준 입호흡 전자담배 추천 TOP5 인천 만수동만수르 픽" (글 제목이므로 금지)
+  - 잘못된 예: "전자담배를 처음 시작하는 분들을 위한 가이드" (자연어 문장이므로 금지)
+  - 20자를 초과하거나 조사/어미로 끝나는 표현은 키워드가 아닙니다.
 `.trim();
 
 function buildPolicySystemPrompt(): string {
@@ -658,6 +668,19 @@ function compactKeywords(values: string[], limit = 6): string[] {
   return output;
 }
 
+// 키워드 유효성 검사: 20자 초과, 자연어 문장, 글 제목 패턴을 차단
+function sanitizeAiKeyword(kw: string): string | null {
+  const normalized = normalizeKeyword(kw);
+  if (!normalized || normalized.length > 20) return null;
+  // 조사/어미로 끝나는 자연어 문장 패턴 차단
+  if (/[을를이가은는으로에서도만과와]$/.test(normalized)) return null;
+  // 숫자+단위 서수 패턴 (TOP5, 5선 등 포함한 제목형) 차단
+  if (/TOP\s?\d+|^\d+선$|^\d+가지$/.test(normalized)) return null;
+  // 지역명+블로그명 조합 같은 긴 고유명사 차단
+  if (/픽$|만수르|인천\s*만수/.test(normalized)) return null;
+  return normalized;
+}
+
 function inferArticleType(topic: Topic, plan: StrategyPlanResult, topologyKind: "hub" | "leaf"): ArticleType {
   const text = `${topic.title} ${topic.description} ${plan.title}`.toLowerCase();
   if (topic.seriesRole === "prelude") return "warmup";
@@ -679,14 +702,6 @@ function inferArticleStage(articleType: ArticleType): ArticleStage {
   return "info_summary";
 }
 
-function buildWarmupMainKeyword(topic: Topic, plan: StrategyPlanResult): string {
-  const text = `${topic.title} ${plan.title}`;
-  if (/선택|고르|기준/u.test(text)) return "전자담배 선택 기준";
-  if (/차이|구분/u.test(text)) return "전자담배 차이";
-  if (/입문|처음|초보/u.test(text)) return "전자담배 입문 기준";
-  return compactKeywords([topic.title, plan.title, ...(plan.keywords ?? [])], 1)[0] ?? topic.title;
-}
-
 function buildKeywordContract(params: {
   topic: Topic;
   plan: StrategyPlanResult;
@@ -696,28 +711,60 @@ function buildKeywordContract(params: {
   const { topic, plan, topologyKind, directIntent } = params;
   const articleType = inferArticleType(topic, plan, topologyKind);
   const articleStage = inferArticleStage(articleType);
-  const targetMainKeyword = normalizeKeyword(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "");
   const isPrelude = articleType === "warmup";
-  const mainKeyword = isPrelude
-    ? buildWarmupMainKeyword(topic, plan)
-    : normalizeKeyword(directIntent?.mainKeyword ?? targetMainKeyword ?? plan.keywords[0] ?? topic.title);
-  const bridgeKeywords = compactKeywords(isPrelude && targetMainKeyword ? [targetMainKeyword] : [], 3);
-  const internalLinkAnchors = compactKeywords(
-    (plan.contentTopology?.internalLinkTargets ?? []).map((item) => item.title),
-    4
-  );
-  const subKeywords = compactKeywords(
-    [
-      ...(directIntent?.subKeywords ?? []),
-      ...(plan.keywords ?? []),
-      ...(plan.targetSearchCombinations ?? []).map((item) => item.phrase),
-    ].filter((keyword) => {
-      const normalized = normalizeKeyword(keyword).toLowerCase();
-      if (normalized === mainKeyword.toLowerCase()) return false;
-      return !bridgeKeywords.some((bridge) => normalized.includes(bridge.toLowerCase()) || bridge.toLowerCase().includes(normalized));
-    }),
-    7
-  );
+
+  // AI가 제공한 keywordContract 우선 사용, 유효성 검사 후 적용
+  const aiContract = plan.keywordContract;
+  const aiMainKeyword = aiContract?.mainKeyword ? sanitizeAiKeyword(aiContract.mainKeyword) : null;
+  const aiSubKeywords = (aiContract?.subKeywords ?? [])
+    .map(sanitizeAiKeyword)
+    .filter((kw): kw is string => kw !== null);
+  const aiBridgeKeywords = (aiContract?.bridgeKeywords ?? [])
+    .map(sanitizeAiKeyword)
+    .filter((kw): kw is string => kw !== null);
+
+  // mainKeyword 결정: directIntent > AI > targetMainKeyword > plan.keywords[0] > topic.title
+  const targetMainKeyword = normalizeKeyword(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "");
+  const mainKeyword =
+    normalizeKeyword(directIntent?.mainKeyword ?? "") ||
+    aiMainKeyword ||
+    targetMainKeyword ||
+    compactKeywords([...(plan.keywords ?? [])], 1)[0] ||
+    normalizeKeyword(topic.title);
+
+  // bridgeKeywords: 워밍업 글이면 타겟 메인 키워드를 bridge로
+  const bridgeKeywords = aiBridgeKeywords.length > 0
+    ? aiBridgeKeywords
+    : compactKeywords(isPrelude && targetMainKeyword ? [targetMainKeyword] : [], 3);
+
+  // internalLinkAnchors: 항상 빈 배열 — 글 제목은 키워드가 아님
+  const internalLinkAnchors: string[] = [];
+
+  // subKeywords: AI 제공 > directIntent > plan.keywords (sanitize 적용, AI bypass isGenericKeyword)
+  const rawSubCandidates = [
+    ...aiSubKeywords,
+    ...(directIntent?.subKeywords ?? []).map(sanitizeAiKeyword).filter((kw): kw is string => kw !== null),
+    ...(plan.keywords ?? [])
+      .map(sanitizeAiKeyword)
+      .filter((kw): kw is string => kw !== null)
+      .filter((kw) => !isGenericKeyword(kw)),
+    ...(plan.targetSearchCombinations ?? [])
+      .map((item) => sanitizeAiKeyword(item.phrase))
+      .filter((kw): kw is string => kw !== null)
+      .filter((kw) => !isGenericKeyword(kw)),
+  ];
+
+  const mainLower = mainKeyword.toLowerCase();
+  const subKeywords: string[] = [];
+  const seen = new Set<string>([mainLower]);
+  for (const kw of rawSubCandidates) {
+    const lower = kw.toLowerCase();
+    if (seen.has(lower)) continue;
+    if (bridgeKeywords.some((b) => lower.includes(b.toLowerCase()) || b.toLowerCase().includes(lower))) continue;
+    seen.add(lower);
+    subKeywords.push(kw);
+    if (subKeywords.length >= 7) break;
+  }
 
   const limitedKeywords = [
     { keyword: mainKeyword, min: isPrelude ? 2 : 4, max: isPrelude ? 4 : 7, role: "main" as const },
