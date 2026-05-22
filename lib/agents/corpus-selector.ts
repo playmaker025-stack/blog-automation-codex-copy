@@ -59,6 +59,7 @@ export interface CorpusSummaryArtifact {
     excerpt: string;
     styleNotes: string;
   }>;
+  representativeExcerpts: string[];  // writing-profile의 실제 발행 글 발췌 (500자 수준)
   retrievalStrategy: "exemplar_index" | "fallback_recent";
   staleWarnings: string[];      // 오래된 exemplar 경고
   scoringBreakdown: Array<{     // 선택 근거 추적
@@ -325,9 +326,14 @@ export function buildSummaryArtifact(params: {
   userTone?: string;
   staleWarnings?: string[];
   scoringBreakdown?: ScoredExemplar[];
+  representativeExcerpts?: string[];
+  profileSignatureExpressions?: string[];
 }): CorpusSummaryArtifact {
   const userId = normalizeUserId(params.userId);
-  const { exemplars, strategy, userTone, staleWarnings = [], scoringBreakdown = [] } = params;
+  const {
+    exemplars, strategy, userTone, staleWarnings = [], scoringBreakdown = [],
+    representativeExcerpts = [], profileSignatureExpressions = [],
+  } = params;
 
   const excerpts = exemplars.map((e) => e.excerpt).filter(Boolean);
   const avgWordCount =
@@ -335,13 +341,16 @@ export function buildSummaryArtifact(params: {
       ? Math.round(exemplars.reduce((acc, e) => acc + e.wordCount, 0) / exemplars.length)
       : 0;
 
+  const autoSignatures = extractSignatureExpressions(excerpts);
+  const signatureExpressions = autoSignatures.length > 0 ? autoSignatures : profileSignatureExpressions;
+
   return {
     userId,
     selectedCount: exemplars.length,
     styleProfile: {
       dominantTone: userTone ?? "friendly",
       avgWordCount,
-      signatureExpressions: extractSignatureExpressions(excerpts),
+      signatureExpressions,
       structurePattern: inferStructurePattern(excerpts),
       openingPattern: inferOpeningPattern(excerpts),
     },
@@ -351,6 +360,7 @@ export function buildSummaryArtifact(params: {
       excerpt: e.excerpt,
       styleNotes: e.styleNotes,
     })),
+    representativeExcerpts,
     retrievalStrategy: strategy,
     staleWarnings,
     scoringBreakdown: scoringBreakdown.map((s) => ({
@@ -378,12 +388,32 @@ export async function getCorpusSummary(params: {
   topicTitle?: string;
 }): Promise<CorpusSummaryArtifact> {
   const userId = normalizeUserId(params.userId);
-  const { exemplars, strategy, staleWarnings, scoringBreakdown } = await selectExemplars({
-    userId,
-    category: params.category,
-    tags: params.tags,
-    topicTitle: params.topicTitle,
-  });
+
+  const [exemplarResult, writingProfile] = await Promise.all([
+    selectExemplars({
+      userId,
+      category: params.category,
+      tags: params.tags,
+      topicTitle: params.topicTitle,
+    }),
+    (async () => {
+      const profilePath = Paths.writingProfile(userId);
+      if (!(await fileExists(profilePath))) return null;
+      const { data } = await readJsonFile<{
+        representativeExcerpts?: string[];
+        signatureExpressions?: string[];
+        writingStyle?: { signatureExpressions?: string[] };
+      }>(profilePath);
+      return data;
+    })(),
+  ]);
+
+  const { exemplars, strategy, staleWarnings, scoringBreakdown } = exemplarResult;
+
+  const representativeExcerpts = writingProfile?.representativeExcerpts ?? [];
+  const profileSignatureExpressions = writingProfile?.signatureExpressions
+    ?? writingProfile?.writingStyle?.signatureExpressions
+    ?? [];
 
   return buildSummaryArtifact({
     userId,
@@ -392,5 +422,7 @@ export async function getCorpusSummary(params: {
     userTone: params.userTone,
     staleWarnings,
     scoringBreakdown,
+    representativeExcerpts,
+    profileSignatureExpressions,
   });
 }

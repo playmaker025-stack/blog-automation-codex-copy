@@ -56,8 +56,24 @@ function wrapForNaverMobile(text: string): string {
   return result.join("\n");
 }
 
+function stripExcerptMeta(excerpt: string): string {
+  return excerpt
+    .replace(/^[\d\s./·:]+작성\s*/u, "")
+    .replace(/^레퍼런스\s*\d+\s*/u, "")
+    .replace(/^제목\s*=\s*/u, "")
+    .trim();
+}
+
 function buildCorpusSummarySection(corpus: CorpusSummaryArtifact): string {
-  const { styleProfile, exemplarExcerpts } = corpus;
+  const { styleProfile, exemplarExcerpts, representativeExcerpts = [] } = corpus;
+
+  const representativeSection = representativeExcerpts.length > 0
+    ? `\n\n## 실제 발행 글 발췌 (문체 직접 참고)\n이 블로그에서 실제 발행된 글의 일부입니다. 이 말투와 문장 흐름을 그대로 재현하세요.\n${representativeExcerpts
+        .slice(0, 5)
+        .map((excerpt, i) => `### 발행 글 ${i + 1}\n${excerpt}`)
+        .join("\n\n")}`
+    : "";
+
   return `
 ## 사용자 스타일 프로필 (corpus summary)
 - 주요 어투: ${styleProfile.dominantTone}
@@ -70,9 +86,9 @@ function buildCorpusSummarySection(corpus: CorpusSummaryArtifact): string {
 ${exemplarExcerpts
   .map(
     (e, i) =>
-      `### 예시 ${i + 1}: ${e.title}\n스타일 메모: ${e.styleNotes}\n발췌: ${e.excerpt}`
+      `### 예시 ${i + 1}: ${e.title}\n스타일 메모: ${e.styleNotes}\n발췌: ${stripExcerptMeta(e.excerpt)}`
   )
-  .join("\n\n")}`;
+  .join("\n\n")}${representativeSection}`;
 }
 
 function buildContentTopologySection(topology: ContentTopologyPlan | undefined): string {
@@ -207,9 +223,12 @@ function getKeywordPlacementTargets(_estimatedLength: number): {
 }
 
 function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
-  const primaryKeyword = strategy.keywords[0] || "none";
-  const secondaryKeyword = strategy.keywords[1] || "none";
+  const contract = strategy.keywordContract;
+  const primaryKeyword = contract?.mainKeyword || strategy.keywords[0] || "none";
+  const secondaryKeyword = contract?.subKeywords[0] || strategy.keywords[1] || "none";
   const targets = getKeywordPlacementTargets(strategy.estimatedLength);
+  const mainLimit = contract?.limitedKeywords.find((item) => item.role === "main");
+  const bridgeLimits = contract?.limitedKeywords.filter((item) => item.role === "bridge") ?? [];
   const primaryTokens = primaryKeyword
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
     .split(/\s+/)
@@ -218,7 +237,7 @@ function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
 
   return [
     `- Primary keyword: '${primaryKeyword}'`,
-    `- Keep the primary keyword as the article's fixed center. Recommended body usage: ${strategy.seriesRole === "prelude" && strategy.targetMainKeyword?.trim().toLowerCase() === primaryKeyword.trim().toLowerCase() ? "1-3" : `${targets.mainMin}-${targets.mainMax}`} times.`,
+    `- Keep the primary keyword as the article's fixed center. Recommended body usage: ${mainLimit ? `${mainLimit.min}-${mainLimit.max}` : `${targets.mainMin}-${targets.mainMax}`} times.`,
     "- Include the primary keyword in the title, preferably close to the front.",
     "- Include the primary keyword in the first sentence or at least the first paragraph.",
     "- Include the primary keyword again within the first 2 paragraphs.",
@@ -233,8 +252,38 @@ function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
       : "- If the keyword starts feeling repetitive, reduce duplicate echoes and replace them with concrete criteria, examples, or decision language.",
     `- Secondary keyword: '${secondaryKeyword}'. Use it only as supporting context, around ${targets.secondaryMin}-${targets.secondaryMax} times when it fits naturally.`,
     "- A secondary keyword must not replace the article's main angle or dominate headings over the primary keyword.",
+    ...bridgeLimits.map((item) => `- Bridge keyword '${item.keyword}' is only for handoff to the next article. Keep it within ${item.min}-${item.max} body mentions and do not turn this article into that main topic.`),
+    ...(contract?.forbiddenTerms ?? []).map((term) => `- Forbidden in published body: '${term}'.`),
     "- If the draft reads stuffed, reduce duplicate phrases and replace some repeats with practical criteria, examples, or decision language.",
   ];
+}
+
+function formatKeywordContract(strategy: StrategyPlanResult): string {
+  const contract = strategy.keywordContract;
+  if (!contract) return "Keyword contract is unavailable. Use only the provided strategy keywords and avoid extracting random words from the draft.";
+
+  return [
+    "[키워드 계약서]",
+    `글 제목: ${contract.title}`,
+    `글 타입: ${contract.articleType}`,
+    `글 단계: ${contract.articleStage}`,
+    `검색의도: ${contract.searchIntent}`,
+    `허브/리프: ${contract.topology}`,
+    `본문 역할: ${contract.bodyRole}`,
+    "",
+    `이 글이 먹을 메인 키워드: ${contract.mainKeyword}`,
+    `서브 키워드: ${contract.subKeywords.join(", ") || "없음"}`,
+    `다음 글로 넘길 브릿지 키워드: ${contract.bridgeKeywords.join(", ") || "없음"}`,
+    `내부링크 앵커: ${contract.internalLinkAnchors.join(", ") || "없음"}`,
+    `본문 금지어: ${contract.forbiddenTerms.join(", ")}`,
+    `반복 제한: ${contract.limitedKeywords.map((item) => `${item.keyword} ${item.min}-${item.max}회/${item.role}`).join(" / ")}`,
+    "",
+    `이 글에서 다루지 않을 내용: ${contract.excludedTopics.join(", ") || "없음"}`,
+    `다음 글로 넘길 내용: ${contract.handoffTopics.join(", ") || "없음"}`,
+    `기존 글과 겹치지 않게 분리할 포인트: ${contract.differentiationPoints.join(" / ") || "없음"}`,
+    "",
+    "중요: 위 계약서는 작성자가 지키는 내부 기준입니다. 발행 본문에는 '키워드 계약서', '검색의도', '메인 키워드', '서브 키워드', '선행포스팅', '키워드빌드업', 'SEO 점수' 같은 작업용 표현을 쓰지 마세요.",
+  ].join("\n");
 }
 
 function formatOpenAICorpus(corpus: CorpusSummaryArtifact | undefined): string {
@@ -246,6 +295,16 @@ function formatOpenAICorpus(corpus: CorpusSummaryArtifact | undefined): string {
     ].join("\n");
   }
 
+  const representativeSection = (corpus.representativeExcerpts ?? []).length > 0
+    ? [
+        "",
+        "Published post excerpts (directly replicate this tone and sentence flow):",
+        ...(corpus.representativeExcerpts ?? []).slice(0, 5).map((excerpt, i) =>
+          `[Published ${i + 1}]\n${excerpt}`
+        ),
+      ]
+    : [];
+
   return [
     `Dominant tone: ${corpus.styleProfile.dominantTone}`,
     `Average length reference: ${corpus.styleProfile.avgWordCount}`,
@@ -255,8 +314,9 @@ function formatOpenAICorpus(corpus: CorpusSummaryArtifact | undefined): string {
     "",
     "Reference excerpts:",
     ...corpus.exemplarExcerpts.slice(0, 4).map((item, index) =>
-      `${index + 1}. ${item.title}\nStyle notes: ${item.styleNotes}\nExcerpt: ${item.excerpt}`
+      `${index + 1}. ${item.title}\nStyle notes: ${item.styleNotes}\nExcerpt: ${stripExcerptMeta(item.excerpt)}`
     ),
+    ...representativeSection,
   ].join("\n");
 }
 
@@ -410,6 +470,9 @@ function buildOpenAIWriterUserPrompt(params: {
     "Content topology:",
     formatOpenAITopology(strategy.contentTopology),
     "",
+    "Keyword contract:",
+    formatKeywordContract(strategy),
+    "",
     "Naver logic pre-check:",
     naverLogicAgent.buildWriterBrief(strategy.naverLogic),
     "",
@@ -435,7 +498,9 @@ function buildOpenAIWriterUserPrompt(params: {
     "",
     "Required writing behavior:",
     "- Start with the reader's likely situation or question, not a generic definition.",
-    "- Treat the primary keyword as the non-negotiable center of the article. Do not let a secondary keyword replace the article's main angle.",
+    "- Treat the keyword contract as the non-negotiable boundary for this article. Do not auto-extract extra keywords from the draft.",
+    "- Separate the keyword this article should own from the keyword that should be handed off to the next article.",
+    "- Treat the primary keyword as the non-negotiable center of the article. Do not let a secondary or bridge keyword replace the article's main angle.",
     "- Use the secondary keyword only to sharpen context, comparison intent, or the practical scenario around the primary keyword.",
     ...keywordPlacementGuidance,
     "- Make the target search combinations visible across the article. Cover every core combination at least once naturally through the title, intro, subheadings, or key body paragraphs.",
@@ -596,6 +661,9 @@ export async function runMasterWriter(params: {
 핵심 포인트: ${strategy.keyPoints.join(" / ")}
 
 ${buildContentTopologySection(strategy.contentTopology)}
+
+키워드 계약서:
+${formatKeywordContract(strategy)}
 
 Naver logic pre-check:
 ${naverLogicAgent.buildWriterBrief(strategy.naverLogic)}
