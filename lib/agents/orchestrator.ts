@@ -1,4 +1,4 @@
-﻿import { randomUUID } from "crypto";
+import { randomUUID } from "crypto";
 import { runStrategyPlanner } from "./strategy-planner";
 import { runMasterWriter } from "./master-writer";
 import { runHarnessEvaluator } from "./harness-evaluator";
@@ -171,122 +171,6 @@ async function prepareHarnessBriefing(params: {
   });
 }
 
-async function _evaluateAndMaybeReviseDraft(params: {
-  pipelineId: string;
-  topicId: string;
-  userId: string;
-  postId: string;
-  strategy: StrategyPlanResult;
-  corpusSummary: import("./corpus-selector").CorpusSummaryArtifact;
-  harnessBriefing: string;
-  writerResult: WriterResult;
-  controller: ReadableStreamDefaultController;
-  signal?: AbortSignal;
-}): Promise<{ writerResult: WriterResult; evalResult: EvalResult }> {
-  const MAX_AUTO_REVISION_ROUNDS = 2;
-  const {
-    pipelineId,
-    topicId,
-    userId,
-    postId,
-    strategy,
-    corpusSummary,
-    harnessBriefing,
-    controller,
-    signal,
-  } = params;
-
-  let writerResult = params.writerResult;
-  let evalResult = await runHarnessEvaluator({
-    writerResult,
-    strategy,
-    userId,
-    onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
-    signal,
-  });
-
-  if (evalResult.pass) {
-    return { writerResult, evalResult };
-  }
-
-  await appendWritingFailure({
-    pipelineId,
-    topicId,
-    userId,
-    title: writerResult.title,
-    evalResult,
-    phase: "preliminary",
-  });
-
-  for (let round = 1; round <= MAX_AUTO_REVISION_ROUNDS; round += 1) {
-    emit(controller, makeEvent("progress", "evaluating", {
-      message: `초안 예상 점수 ${evalResult.aggregateScore}점으로 자동 보강을 ${round}/${MAX_AUTO_REVISION_ROUNDS}회 진행합니다.`,
-    }));
-    emit(controller, makeEvent("token", "writing", {
-      token: round === 1 ? "\n\n---\n\n[자동 보강본]\n" : `\n\n---\n\n[자동 보강본 ${round}차]\n`,
-    }));
-
-    writerResult = await runMasterWriter({
-      strategy,
-      userId,
-      topicId,
-      postId,
-      corpusSummary,
-      harnessBriefing,
-      revisionInstructions: buildRevisionInstruction({ evalResult, briefing: harnessBriefing }),
-      onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
-      onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
-      signal,
-    });
-
-    await saveArtifact<DraftOutputData>(pipelineId, "draft_output", {
-      postId: writerResult.postId,
-      title: writerResult.title,
-      wordCount: writerResult.wordCount,
-      generatedAt: writerResult.generatedAt,
-      contentPath: Paths.postContent(postId),
-      corpusSummaryUsed: true,
-    }).catch(() => {});
-
-    await updatePostRecord(postId, {
-      status: "ready",
-      wordCount: writerResult.wordCount,
-      compositionSessionId: pipelineId,
-    });
-
-    emit(controller, makeEvent("progress", "evaluating", {
-      message: round === MAX_AUTO_REVISION_ROUNDS
-        ? "자동 보강본 최종 하네스 평가 중..."
-        : `자동 보강본 ${round}차 하네스 평가 중...`,
-    }));
-
-    evalResult = await runHarnessEvaluator({
-      writerResult,
-      strategy,
-      userId,
-      onProgress: (msg) => emit(controller, makeEvent("progress", "evaluating", { message: msg })),
-      signal,
-    });
-
-    if (evalResult.pass) {
-      return { writerResult, evalResult };
-    }
-  }
-
-  if (!evalResult.pass) {
-    await appendWritingFailure({
-      pipelineId,
-      topicId,
-      userId,
-      title: writerResult.title,
-      evalResult,
-      phase: "final",
-    });
-  }
-
-  return { writerResult, evalResult };
-}
-
 function getKeywordDangerCount(evalResult: EvalResult): number {
   return evalResult.seoEvaluation?.keywordReport.items.filter((item) => item.status === "danger").length ?? 0;
 }
@@ -308,13 +192,17 @@ function compareKeywordRiskLevel(value: "low" | "medium" | "high"): number {
 function shouldAttemptSmartRevision(evalResult: EvalResult): boolean {
   if (evalResult.pass) return false;
 
-  const overallRisk = evalResult.seoEvaluation?.keywordReport.overallRisk ?? "low";
+  const keywordReport = evalResult.seoEvaluation?.keywordReport;
+  const overallRisk = keywordReport?.overallRisk ?? "low";
+  const dangerCount = getKeywordDangerCount(evalResult);
+  const paragraphWarningCount = keywordReport?.paragraphWarnings.length ?? 0;
+
   return (
     evalResult.aggregateScore < 70 ||
     getSeoScore(evalResult) < 72 ||
     getNaverScore(evalResult) < 72 ||
-    overallRisk === "high" ||
-    getKeywordDangerCount(evalResult) > 0
+    dangerCount >= 2 ||
+    (overallRisk === "high" && paragraphWarningCount >= 2)
   );
 }
 
@@ -382,7 +270,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
 
   if (!shouldAttemptSmartRevision(evalResult)) {
     emit(controller, makeEvent("progress", "evaluating", {
-      message: `초안 점수 ${evalResult.aggregateScore}점이지만, 자동 보강으로 얻을 개선 폭이 크지 않아 현재 초안을 유지합니다.`,
+      message: `\uCD08\uC548 \uC810\uC218 ${evalResult.aggregateScore}\uC810\uC785\uB2C8\uB2E4. \uC790\uB3D9 \uBCF4\uAC15\uC73C\uB85C \uC5BB\uC744 \uAC1C\uC120 \uD3ED\uC774 \uD06C\uC9C0 \uC54A\uC544 \uD604\uC7AC \uCD08\uC548\uC744 \uC720\uC9C0\uD569\uB2C8\uB2E4.`,
     }));
     return { writerResult, evalResult };
   }
@@ -392,10 +280,10 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
     const previousEvalResult = evalResult;
 
     emit(controller, makeEvent("progress", "evaluating", {
-      message: `초안 점수 ${evalResult.aggregateScore}점 기준으로 실제 부족한 항목만 보강하는 자동 보강 ${round}/${MAX_AUTO_REVISION_ROUNDS}차를 진행합니다.`,
+      message: `\uCD08\uC548 \uC810\uC218 ${evalResult.aggregateScore}\uC810 \uAE30\uC900\uC73C\uB85C \uBD80\uC871\uD55C \uD56D\uBAA9\uB9CC \uBCF4\uAC15\uD558\uB294 ${round + 1}\uCC28 \uCD08\uC548\uC744 \uC791\uC131\uD569\uB2C8\uB2E4.`,
     }));
     emit(controller, makeEvent("token", "writing", {
-      token: `\n\n---\n\n[자동 보강본 ${round + 1}차]\n`,
+      token: `\n\n---\n\n[${round + 1}\uCC28 \uCD08\uC548]\n`,
     }));
 
     writerResult = await runMasterWriter({
@@ -427,9 +315,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
     });
 
     emit(controller, makeEvent("progress", "evaluating", {
-      message: round === MAX_AUTO_REVISION_ROUNDS
-        ? "자동 보강본 최종 하네스 평가 중..."
-        : `자동 보강본 ${round + 1}차 하네스 평가 중...`,
+      message: `${round + 1}\uCC28 \uCD08\uC548 \uD558\uB124\uC2A4 \uD3C9\uAC00 \uC911...`,
     }));
 
     evalResult = await runHarnessEvaluator({
@@ -446,7 +332,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
 
     if (!isMaterialRevisionImprovement(previousEvalResult, evalResult)) {
       emit(controller, makeEvent("progress", "evaluating", {
-        message: "자동 보강본이 이전 초안보다 뚜렷하게 좋아지지 않아, 더 이상 억지로 보강하지 않고 직전 초안을 유지합니다.",
+        message: "\uC0C8 \uCD08\uC548\uC774 \uC774\uC804 \uCD08\uC548\uBCF4\uB2E4 \uB69C\uB837\uD558\uAC8C \uB098\uC544\uC9C0\uC9C0 \uC54A\uC544, \uCD94\uAC00 \uBCF4\uAC15\uC744 \uBA48\uCD94\uACE0 \uC9C1\uC804 \uCD08\uC548\uC744 \uC720\uC9C0\uD569\uB2C8\uB2E4.",
       }));
       writerResult = previousWriterResult;
       evalResult = previousEvalResult;
@@ -455,7 +341,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
 
     if (!shouldAttemptSmartRevision(evalResult)) {
       emit(controller, makeEvent("progress", "evaluating", {
-        message: "보강으로 핵심 위험도가 충분히 낮아져 여기서 자동 보강을 마칩니다.",
+        message: "\uBCF4\uAC15 \uD6C4 \uD575\uC2EC \uC704\uD5D8\uB3C4\uAC00 \uCDA9\uBD84\uD788 \uB0AE\uC544\uC838 \uC790\uB3D9 \uBCF4\uAC15\uC744 \uB9C8\uCE69\uB2C8\uB2E4.",
       }));
       return { writerResult, evalResult };
     }

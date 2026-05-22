@@ -71,7 +71,7 @@ function issueTone(severity: DraftReviewIssue["severity"]): string {
 
 function looksBroken(value: string | null | undefined): boolean {
   if (!value) return false;
-  return /[\uFFFD]|\u00C3|\u00C2|[\u00EC\u00ED\u00EF][\S\s]{0,3}[\u00EB\u00EA]|[?]{2,}/.test(value);
+  return /[\uFFFD]|\u00C3|\u00C2|[\u00EC\u00ED\u00EF][\S\s]{0,3}[\u00EB\u00EA]|[\u0000-\u0008\u000B-\u000C\u000E-\u001F]/.test(value);
 }
 
 function cleanNotes(notes: string[]): string[] {
