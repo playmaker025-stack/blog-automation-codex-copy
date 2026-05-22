@@ -686,27 +686,43 @@ function normalizeKeyword(value: string): string {
   return value.trim().replace(/\s+/g, " ");
 }
 
+const GENERIC_KEYWORD_SET = new Set([
+  "전자담배",
+  "추천",
+  "고르기",
+  "고르는",
+  "전에",
+  "많이",
+  "보는",
+  "선택",
+  "선택기준",
+  "기준",
+  "방법",
+  "정리",
+  "가이드",
+  "선행포스팅",
+  "키워드빌드업",
+  "메인포스팅",
+  "입문",
+  "시작",
+  "체크",
+  "체크포인트",
+  "체크리스트",
+  "포인트",
+  "팁",
+  "방향",
+  "초보자",
+  "초보",
+]);
+
 function isGenericKeyword(value: string): boolean {
   const normalized = normalizeKeyword(value).toLowerCase();
   if (!normalized || normalized.length < 2) return true;
-  return [
-    "전자담배",
-    "추천",
-    "고르기",
-    "고르는",
-    "전에",
-    "많이",
-    "보는",
-    "선택",
-    "선택기준",
-    "기준",
-    "방법",
-    "정리",
-    "가이드",
-    "선행포스팅",
-    "키워드빌드업",
-    "메인포스팅",
-  ].includes(normalized);
+  if (GENERIC_KEYWORD_SET.has(normalized)) return true;
+  // 모든 토큰이 일반 용어인 조합(예: "선택 기준", "체크 포인트")도 일반으로 처리
+  const tokens = normalized.split(/\s+/).filter((t) => t.length >= 2);
+  if (tokens.length > 1 && tokens.every((t) => GENERIC_KEYWORD_SET.has(t))) return true;
+  return false;
 }
 
 function compactKeywords(values: string[], limit = 6): string[] {
@@ -723,12 +739,21 @@ function compactKeywords(values: string[], limit = 6): string[] {
   return output;
 }
 
-// 키워드 유효성 검사: 20자 초과, 자연어 문장, 글 제목 패턴을 차단
+// 실제 네이버 검색어인지 판별: 자연어 문장, 조사·어미·부사 포함 표현은 차단
+const SENTENCE_ADVERBS = new Set(["자주", "항상", "정말", "너무", "매우", "꼭", "바로", "모두", "항시", "늘"]);
+
 function sanitizeAiKeyword(kw: string): string | null {
   const normalized = normalizeKeyword(kw);
   if (!normalized || normalized.length > 20) return null;
-  // 조사/어미로 끝나는 자연어 문장 패턴 차단
-  if (/[을를이가은는으로에서도만과와]$/.test(normalized)) return null;
+  const tokens = normalized.split(/\s+/);
+  // 토큰 5개 이상이면 문장으로 간주
+  if (tokens.length >= 5) return null;
+  // 조사로 끝나는 토큰이 있으면 자연어 문장 (예: "초보자가", "전에", "찾는데")
+  if (tokens.some((t) => /[가이은는을를에서]$/.test(t))) return null;
+  // 동사형 어미 포함 (예: "놓치는", "알아야", "해야", "되는", "있는")
+  if (tokens.some((t) => /(하는|있는|없는|되는|놓치는|알아야|해야|하면|찾는법|하는법)$/.test(t))) return null;
+  // 부사가 독립 토큰으로 존재
+  if (tokens.some((t) => SENTENCE_ADVERBS.has(t))) return null;
   // 숫자+단위 서수 패턴 (TOP5, 5선 등 포함한 제목형) 차단
   if (/TOP\s?\d+|^\d+선$|^\d+가지$/.test(normalized)) return null;
   // 지역명+블로그명 조합 같은 긴 고유명사 차단
@@ -786,8 +811,8 @@ function buildKeywordContract(params: {
     .map((kw) => sanitizeAiKeyword(normalizeKeyword(kw)))
     .filter((kw): kw is string => kw !== null);
 
-  // mainKeyword 결정: directIntent > seriesDetailPlan.primaryKeyword > AI > targetMainKeyword > plan.keywords[0] > topic.title
-  // targetMainKeyword는 시리즈 전체 타겟 키워드로 이 글의 핵심 키워드가 아님 — 가장 낮은 우선순위
+  // mainKeyword 결정: directIntent > seriesDetailPlan.primaryKeyword > AI > plan.keywords[0] > targetMainKeyword
+  // topic.title은 자연어 문장이므로 키워드로 절대 사용하지 않음
   const targetMainKeyword = normalizeKeyword(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "");
   const mainKeyword =
     normalizeKeyword(directIntent?.mainKeyword ?? "") ||
@@ -795,7 +820,7 @@ function buildKeywordContract(params: {
     aiMainKeyword ||
     compactKeywords([...(plan.keywords ?? [])], 1)[0] ||
     targetMainKeyword ||
-    normalizeKeyword(topic.title);
+    "";
 
   // bridgeKeywords: 워밍업 글이면 타겟 메인 키워드를 bridge로 (단, mainKeyword와 다를 때만)
   const bridgeKeywords = aiBridgeKeywords.length > 0

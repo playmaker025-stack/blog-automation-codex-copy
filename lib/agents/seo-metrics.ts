@@ -62,6 +62,13 @@ const GENERIC_KEYWORD_TOKENS = new Set([
   "초안",
   "보강",
   "자동",
+  "입문",
+  "초보",
+  "초보자",
+  "방향",
+  "핵심",
+  "주의",
+  "사항",
 ]);
 
 const META_KEYWORD_PATTERNS = [
@@ -91,10 +98,26 @@ function isMetaKeywordPhrase(value: string): boolean {
   return META_KEYWORD_PATTERNS.some((pattern) => pattern.test(normalized));
 }
 
+const SEO_SENTENCE_ADVERBS = new Set(["자주", "항상", "정말", "너무", "매우", "꼭", "바로", "모두", "항시", "늘"]);
+
+function isNaturalLanguageSentence(value: string): boolean {
+  const tokens = value.trim().split(/\s+/);
+  // 토큰 5개 이상이면 문장
+  if (tokens.length >= 5) return true;
+  // 조사로 끝나는 토큰 (예: "초보자가", "전에", "찾는데")
+  if (tokens.some((t) => /[가이은는을를에서]$/.test(t))) return true;
+  // 동사형 어미 (예: "놓치는", "알아야", "되는", "있는", "하면")
+  if (tokens.some((t) => /(하는|있는|없는|되는|놓치는|알아야|해야|하면|찾는법|하는법)$/.test(t))) return true;
+  // 독립 부사 토큰
+  if (tokens.some((t) => SEO_SENTENCE_ADVERBS.has(t))) return true;
+  return false;
+}
+
 function isKeywordPhraseUseful(value: string): boolean {
   const normalized = value.trim().replace(/\s+/g, " ");
   if (normalized.length < 2) return false;
   if (isMetaKeywordPhrase(normalized)) return false;
+  if (isNaturalLanguageSentence(normalized)) return false;
   const tokens = splitCombinationTokens(normalized).filter((token) => !GENERIC_KEYWORD_TOKENS.has(token.toLowerCase()));
   return tokens.length > 0;
 }
