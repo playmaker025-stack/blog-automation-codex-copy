@@ -1200,6 +1200,19 @@ async function createPostingRecord(params: {
   const userId = normalizeUserId(params.userId);
   const postId = `post-${randomUUID().slice(0, 8)}`;
 
+  // 디렉터리가 파일 경로를 점유하고 있으면 재시도 없이 즉시 실패
+  try {
+    await fileExists(Paths.postingListIndex());
+  } catch (err) {
+    if (err instanceof Error && err.message.includes("경로가 파일이 아닙니다")) {
+      throw new Error(
+        `GitHub 데이터 저장소에 "data/posting-list/index.json" 이름의 폴더가 있습니다. ` +
+        `GitHub 웹(data/posting-list/ 경로)에서 해당 폴더를 삭제한 뒤 다시 시도해 주세요.`
+      );
+    }
+    throw err;
+  }
+
   await withConflictRetry(async () => {
     const now = new Date().toISOString();
     const path = Paths.postingListIndex();
