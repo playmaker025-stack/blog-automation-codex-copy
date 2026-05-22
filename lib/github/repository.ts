@@ -31,6 +31,13 @@ export async function readFile(filePath: string): Promise<FileContent> {
     throw new Error(`"${filePath}" 경로가 파일이 아닙니다. GitHub 데이터 저장소에서 같은 이름의 폴더가 있는지 확인해 주세요.`);
   }
 
+  // GitHub API는 1MB 초과 파일의 경우 content를 빈 문자열로 반환
+  if (!data.content || data.encoding !== "base64") {
+    throw new Error(
+      `"${filePath}" 파일이 너무 크거나 인코딩이 예상과 다릅니다 (size: ${data.size}, encoding: ${data.encoding ?? "none"}). ` +
+      `GitHub API는 1MB 초과 파일은 직접 읽을 수 없습니다.`
+    );
+  }
   const content = Buffer.from(data.content, "base64").toString("utf-8");
   return { content, sha: data.sha };
 }
