@@ -104,7 +104,7 @@ function columnStatusText(column: DraftColumn, hasAnyDraft: boolean): string {
 
 function summarizeKeywordRow(keywordReport: KeywordUsageReport): string {
   return keywordReport.items
-    .filter((item) => item.role !== "forbidden" || item.count > 0)
+    .filter((item) => item.role !== "anchor" && (item.role !== "forbidden" || item.count > 0))
     .slice(0, 4)
     .map((item) => `${item.keyword} 본문 ${item.count}회`)
     .join(" · ");
@@ -258,7 +258,7 @@ export function PipelineWorkspacePanel({
                             </p>
                             <div className="space-y-2">
                               {versionReport.keywordReport.items
-                                .filter((item) => item.role !== "forbidden" || item.count > 0)
+                                .filter((item) => item.role !== "anchor" && (item.role !== "forbidden" || item.count > 0))
                                 .map((item) => (
                                 <div
                                   key={`${column.label}-${item.keyword}`}
