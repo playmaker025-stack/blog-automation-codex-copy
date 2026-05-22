@@ -80,8 +80,8 @@ function parseDraftVersionSnapshots(streamingBody: string): DraftVersionSnapshot
 
   return [
     { label: "\u0031\uCC28 \uCD08\uC548", body: firstBody },
-    { label: "\uC790\uB3D9 \uBCF4\uAC15\uBCF8 2\uCC28", body: secondBody },
-    { label: "\uC790\uB3D9 \uBCF4\uAC15\uBCF8 3\uCC28", body: thirdBody },
+    { label: "\u0032\uCC28 \uCD08\uC548", body: secondBody },
+    { label: "\u0033\uCC28 \uCD08\uC548", body: thirdBody },
   ];
 }
 

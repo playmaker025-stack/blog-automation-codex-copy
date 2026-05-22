@@ -30,11 +30,16 @@ const GENERIC_KEYWORD_TOKENS = new Set([
   "고르기",
   "고르는",
   "선택",
+  "선택기준",
+  "추천",
   "찾는",
   "이유",
   "실제",
   "시작",
   "전에",
+  "고르기전",
+  "고르기전에",
+  "많이보는",
   "정리",
   "가이드",
   "기준",
@@ -50,7 +55,25 @@ const GENERIC_KEYWORD_TOKENS = new Set([
   "메인포스팅",
   "키워드빌드업",
   "키워드시리즈",
+  "빌드업",
+  "선행",
+  "포스팅",
+  "초안",
+  "보강",
+  "자동",
 ]);
+
+const META_KEYWORD_PATTERNS = [
+  /키워드\s*빌드업/u,
+  /선행\s*포스팅/u,
+  /메인\s*포스팅/u,
+  /자동\s*보강/u,
+  /초안/u,
+  /보강본/u,
+  /시리즈/u,
+];
+
+const LOCALITY_TOKEN_PATTERN = /^[가-힣]{2,}(역|동|구|시|군|읍|면|리)$/u;
 
 function isMeaningfulKeywordToken(token: string): boolean {
   const normalized = token.trim().toLowerCase();
@@ -58,6 +81,21 @@ function isMeaningfulKeywordToken(token: string): boolean {
   if (GENERIC_KEYWORD_TOKENS.has(normalized)) return false;
   if (/^\d+$/u.test(normalized)) return false;
   return true;
+}
+
+function isMetaKeywordPhrase(value: string): boolean {
+  const normalized = value.trim().replace(/\s+/g, " ").toLowerCase();
+  if (!normalized) return true;
+  if (GENERIC_KEYWORD_TOKENS.has(normalized)) return true;
+  return META_KEYWORD_PATTERNS.some((pattern) => pattern.test(normalized));
+}
+
+function isKeywordPhraseUseful(value: string): boolean {
+  const normalized = value.trim().replace(/\s+/g, " ");
+  if (normalized.length < 2) return false;
+  if (isMetaKeywordPhrase(normalized)) return false;
+  const tokens = splitCombinationTokens(normalized).filter((token) => !GENERIC_KEYWORD_TOKENS.has(token.toLowerCase()));
+  return tokens.length > 0;
 }
 
 function escapeRegExp(value: string): string {
@@ -153,7 +191,7 @@ function selectMainKeyword(title: string, keywords: string[] = [], targetMainKey
   const explicitMainKeyword = targetMainKeyword?.trim();
   if (explicitMainKeyword) return explicitMainKeyword;
 
-  const normalizedKeywords = uniqueKeywords(keywords);
+  const normalizedKeywords = uniqueKeywords(keywords).filter(isKeywordPhraseUseful);
   if (normalizedKeywords.length > 0) {
     return normalizedKeywords[0];
   }
@@ -161,11 +199,36 @@ function selectMainKeyword(title: string, keywords: string[] = [], targetMainKey
   return selectFocusKeywords(title, keywords, 1)[0] ?? "";
 }
 
-function selectSubKeywords(mainKeyword: string, title: string, keywords: string[] = []): string[] {
-  const keywordPool = collectKeywordPool(title, keywords);
-  return keywordPool
-    .filter((keyword) => keyword.trim().toLowerCase() !== mainKeyword.trim().toLowerCase())
-    .slice(0, 7);
+function extractLocalityTokens(text: string): string[] {
+  return uniqueKeywords(
+    text
+      .replace(/[^\p{L}\p{N}\s]/gu, " ")
+      .split(/\s+/)
+      .map((token) => token.trim())
+      .filter((token) => LOCALITY_TOKEN_PATTERN.test(token))
+  );
+}
+
+function buildTrackedKeywords(params: {
+  title: string;
+  body: string;
+  mainKeyword: string;
+  keywords: string[];
+}): string[] {
+  const keywordPool = collectKeywordPool(params.title, [params.mainKeyword, ...params.keywords]);
+  const localityTokens = extractLocalityTokens(`${params.title}\n${params.body}`);
+  const componentUnits = buildMeaningfulKeywordUnits(keywordPool)
+    .filter((unit) => unit !== params.mainKeyword)
+    .filter((unit) => countKeywordOccurrences(params.body, unit) > 0);
+
+  return uniqueKeywords([
+    params.mainKeyword,
+    ...localityTokens,
+    ...keywordPool.filter((keyword) => keyword !== params.mainKeyword),
+    ...componentUnits,
+  ])
+    .filter(isKeywordPhraseUseful)
+    .slice(0, 8);
 }
 
 function getMainKeywordStatus(count: number, isPreludeMainKeyword: boolean): KeywordUsageItem["status"] {
@@ -553,16 +616,15 @@ export function selectFocusKeywords(title: string, keywords: string[] = [], limi
     .split(/\s+/)
     .filter((token) => isMeaningfulKeywordToken(token));
 
-  return uniqueKeywords([...keywords, ...titleTokens]).slice(0, limit);
+  return uniqueKeywords([...keywords, ...titleTokens]).filter(isKeywordPhraseUseful).slice(0, limit);
 }
 
 function collectKeywordPool(title: string, keywords: string[] = []): string[] {
-  const titleTokens = title
-    .replace(/[^\p{L}\p{N}\s]/gu, " ")
-    .split(/\s+/)
-    .filter((token) => isMeaningfulKeywordToken(token));
+  const explicitKeywords = uniqueKeywords(keywords).filter(isKeywordPhraseUseful);
+  if (explicitKeywords.length > 0) return explicitKeywords;
 
-  return uniqueKeywords([...keywords, ...titleTokens]);
+  const fallbackTitlePhrases = selectFocusKeywords(title, [], 5).filter(isKeywordPhraseUseful);
+  return uniqueKeywords(fallbackTitlePhrases);
 }
 
 function buildMeaningfulKeywordUnits(keywordPool: string[]): string[] {
@@ -650,8 +712,12 @@ export function analyzeKeywordUsage(params: {
   const introText = paragraphs.slice(0, 2).join("\n\n");
   const bodyLength = params.body.replace(/\s+/g, "").length;
   const mainKeyword = selectMainKeyword(params.title, params.keywords ?? [], params.targetMainKeyword);
-  const subKeywords = selectSubKeywords(mainKeyword, params.title, params.keywords ?? []);
-  const orderedKeywords = [mainKeyword, ...subKeywords].filter(Boolean);
+  const orderedKeywords = buildTrackedKeywords({
+    title: params.title,
+    body: params.body,
+    mainKeyword,
+    keywords: params.keywords ?? [],
+  }).filter(Boolean);
   const keywordPool = collectKeywordPool(params.title, orderedKeywords);
   const normalizedTargetMainKeyword = params.targetMainKeyword?.trim().toLowerCase() ?? "";
 

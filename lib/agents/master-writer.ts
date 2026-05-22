@@ -362,6 +362,8 @@ function buildOpenAIWriterSystemPrompt(): string {
     "Before finalizing, silently revise the draft if any dimension would score below 75.",
     "Never say that the user profile, corpus, or examples could not be loaded.",
     "Avoid keyword stuffing, exaggerated guarantees, unsupported best/only claims, and generic filler.",
+    "Never expose internal SEO mechanics to readers. Do not write phrases such as keyword buildup, prelude posting, main posting, SEO score, evaluator, harness, corpus, profile, or strategy.",
+    "Write like the user's actual blog post, not like an SEO consultant explaining how to rank.",
     "For Naver Blog, prioritize clear search intent, short readable paragraphs, concrete selection criteria, natural keyword placement, and a closing that helps the reader decide.",
     buildPolicyPromptSection(),
     "When Naver community demand or KnowledgeIn problem signals are provided, make them visible through the article's angle, subheadings, examples, and decision criteria.",
@@ -441,6 +443,8 @@ function buildOpenAIWriterUserPrompt(params: {
     "- Do not awkwardly list combinations back-to-back. Each combination should appear because the paragraph genuinely answers that search intent.",
     "- If content topology provides internal link references with URLs, keep each title-URL pair exact. Do not rewrite, shorten, merge, or swap linked titles.",
     "- If Naver signals are present, answer the repeated community questions and demand patterns directly in the body.",
+    "- Never mention internal planning terms in the published body: keyword buildup, prelude posting, main posting, series design, SEO score, evaluator, harness, corpus, profile, or strategy.",
+    "- Do not instruct readers to search with the target keyword. Instead, answer the search intent directly with practical local/store/user-context information.",
     "- Make the hub/leaf role visible through structure, not by announcing the words hub or leaf.",
     "- Include practical criteria, examples, and decision points instead of broad advice.",
     "- Keep paragraph rhythm suitable for Naver Blog mobile reading.",
@@ -600,6 +604,11 @@ ${formatTargetSearchCombinations(strategy)}
 
 키워드 배치 규칙:
 ${anthropicKeywordPlacementRules}
+
+발행 본문 금지 표현:
+- 키워드빌드업, 선행포스팅, 메인포스팅, 시리즈 설계, SEO 점수, evaluator, harness, corpus, profile, strategy 같은 내부 작업 용어를 독자에게 노출하지 마세요.
+- 독자에게 특정 키워드를 검색해보라고 지시하지 말고, 그 검색 의도에 대한 답을 본문에서 바로 제공하세요.
+- 사용자 블로그의 실제 말투와 상담/매장 안내 맥락을 우선하고, SEO 강의처럼 쓰지 마세요.
 
 아웃라인:
 ${strategy.outline
