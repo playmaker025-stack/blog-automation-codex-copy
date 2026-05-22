@@ -92,6 +92,9 @@ interface EditTopicState {
   status: Topic["status"];
   seriesDetailPlan?: EditSeriesDetailState;
   hasSeries: boolean;
+  seriesRole?: "prelude" | "main";
+  sequenceOrder?: number;
+  targetMainKeyword?: string;
 }
 
 function resolveTopicBadgeCode(topic: Topic): string | null {
@@ -153,6 +156,7 @@ export default function TopicsPage() {
 
   // 개별 편집
   const [editing, setEditing] = useState<EditTopicState | null>(null);
+  const [regenerating, setRegenerating] = useState(false);
 
   // 단일 추가
   const [showAdd, setShowAdd] = useState(false);
@@ -288,6 +292,9 @@ export default function TopicsPage() {
       assignedUserId: t.assignedUserId ?? "",
       status: t.status,
       hasSeries: !!t.seriesId,
+      seriesRole: t.seriesRole,
+      sequenceOrder: t.sequenceOrder,
+      targetMainKeyword: t.targetMainKeyword,
       seriesDetailPlan: dp ? {
         articleGoal: dp.articleGoal ?? "",
         searchIntent: dp.searchIntent ?? "",
@@ -343,6 +350,56 @@ export default function TopicsPage() {
       loadTopics();
     } catch {
       setNotice({ type: "err", msg: "수정 실패" });
+    }
+  };
+
+  // ── 시리즈 상세 설계 AI 재생성 ─────────────────────────
+  const handleRegenerateSeriesDetail = async () => {
+    if (!editing?.seriesDetailPlan) return;
+    setRegenerating(true);
+    try {
+      const dp = editing.seriesDetailPlan;
+      const res = await fetch("/api/topics/series-detail/regenerate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topicId: editing.topicId,
+          userId: editing.assignedUserId.trim().toLowerCase() || undefined,
+          title: editing.title,
+          primaryKeyword: dp.primaryKeyword,
+          secondaryKeywords: dp.secondaryKeywords.split(",").map((s) => s.trim()).filter(Boolean),
+          seriesRole: editing.seriesRole,
+          sequenceOrder: editing.sequenceOrder,
+          targetMainKeyword: editing.targetMainKeyword,
+        }),
+      });
+      const json = await res.json() as { detailPlan?: {
+        articleGoal: string; searchIntent: string; readerQuestion: string;
+        primaryKeyword: string; secondaryKeywords: string[];
+        recommendedSections: string[]; keywordPlacementRules: string[];
+        internalLinkTitles: string[]; callToAction: string; draftAngle: string;
+      }; error?: string };
+      if (!res.ok || !json.detailPlan) throw new Error(json.error ?? "재생성 실패");
+      const p = json.detailPlan;
+      setEditing({
+        ...editing,
+        seriesDetailPlan: {
+          articleGoal: p.articleGoal,
+          searchIntent: p.searchIntent,
+          readerQuestion: p.readerQuestion,
+          primaryKeyword: p.primaryKeyword,
+          secondaryKeywords: p.secondaryKeywords.join(", "),
+          recommendedSections: p.recommendedSections.join("\n"),
+          keywordPlacementRules: p.keywordPlacementRules.join("\n"),
+          internalLinkTitles: p.internalLinkTitles.join("\n"),
+          callToAction: p.callToAction,
+          draftAngle: p.draftAngle,
+        },
+      });
+    } catch (e) {
+      setNotice({ type: "err", msg: e instanceof Error ? e.message : "재생성 실패" });
+    } finally {
+      setRegenerating(false);
     }
   };
 
@@ -1032,7 +1089,26 @@ export default function TopicsPage() {
                       setEditing({ ...editing, seriesDetailPlan: { ...dp, ...patch } });
                     return (
                       <div className="border-t border-zinc-100 pt-3 space-y-3">
-                        <p className="text-xs font-semibold text-amber-700">시리즈 상세 설계</p>
+                        <div className="flex items-center justify-between">
+                          <p className="text-xs font-semibold text-amber-700">시리즈 상세 설계</p>
+                          <button
+                            type="button"
+                            onClick={handleRegenerateSeriesDetail}
+                            disabled={regenerating || !dp.primaryKeyword.trim()}
+                            className="flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-lg bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                          >
+                            {regenerating ? (
+                              <>
+                                <svg className="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                                </svg>
+                                생성 중...
+                              </>
+                            ) : "핵심·보조 키워드 기준으로 나머지 AI 재생성"}
+                          </button>
+                        </div>
+                        <p className="text-[10px] text-zinc-400">핵심 키워드와 보조 키워드를 먼저 입력한 뒤 재생성하면 검색의도·섹션구조 등 나머지 항목을 자동으로 채웁니다.</p>
                         <div className="grid grid-cols-2 gap-3">
                           <div>
                             <label className="block text-xs text-zinc-500 mb-1">핵심 키워드</label>

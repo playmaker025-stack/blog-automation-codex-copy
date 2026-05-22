@@ -253,6 +253,38 @@ function buildMainDetailPlan(params: {
   };
 }
 
+export function regenerateSingleTopicDetailPlan(params: {
+  seriesRole: "prelude" | "main";
+  title: string;
+  primaryKeyword: string;
+  secondaryKeywords: string[];
+  mainKeyword: string;
+  sequenceOrder: number;
+  internalLinkTitles: string[];
+}): TopicSeriesDetailPlan {
+  const effectiveMainKeyword = params.primaryKeyword.trim() || params.mainKeyword;
+  const base =
+    params.seriesRole === "main"
+      ? buildMainDetailPlan({
+          title: params.title,
+          mainKeyword: effectiveMainKeyword,
+          internalLinkTitles: params.internalLinkTitles,
+        })
+      : buildPreludeDetailPlan({
+          title: params.title,
+          mainKeyword: effectiveMainKeyword,
+          sequenceOrder: Math.max(1, params.sequenceOrder),
+          internalLinkTitles: params.internalLinkTitles,
+        });
+
+  return {
+    ...base,
+    primaryKeyword: params.primaryKeyword.trim() || base.primaryKeyword,
+    secondaryKeywords:
+      params.secondaryKeywords.length > 0 ? params.secondaryKeywords : base.secondaryKeywords,
+  };
+}
+
 export function runSeriesDetailPlanner(input: SeriesDetailPlannerInput): SeriesDetailPlannerOutput {
   const sortedTopics = input.seriesTopics
     .slice()
