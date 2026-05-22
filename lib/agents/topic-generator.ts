@@ -111,6 +111,26 @@ function derivePreludeAnchor(mainKeyword: string): string {
   return tokens.at(-1) ?? phrase;
 }
 
+function derivePreludePrimaryKeyword(mainKeyword: string, sequenceOrder: number): string {
+  const base = derivePreludeTopicPhrase(mainKeyword);
+  const anchor = derivePreludeAnchor(mainKeyword);
+
+  if (/선택|고르|기준/u.test(mainKeyword) || sequenceOrder === 2) {
+    return `${anchor} 선택 기준`;
+  }
+  if (/입호흡/u.test(base) && sequenceOrder === 1) {
+    return "입호흡 폐호흡 차이";
+  }
+  if (/차이|비교/u.test(mainKeyword) || sequenceOrder === 1) {
+    return `${base} 기초 비교`;
+  }
+  if (/입문|처음|초보/u.test(mainKeyword) || sequenceOrder >= 3) {
+    return `${anchor} 입문 체크`;
+  }
+
+  return `${base} 선택 기준`;
+}
+
 function buildDistributedPreludeTitles(mainKeyword: string, count: number): string[] {
   const keyword = derivePreludeTopicPhrase(mainKeyword);
   const anchor = derivePreludeAnchor(mainKeyword);
@@ -184,6 +204,7 @@ function buildPreludeDetailPlan(params: {
   sequenceOrder: number;
   internalLinkTitles: string[];
 }): TopicSeriesDetailPlan {
+  const primaryKeyword = derivePreludePrimaryKeyword(params.mainKeyword, params.sequenceOrder);
   const stageLabel =
     params.sequenceOrder === 1
       ? "기본 개념과 차이를 먼저 잡아주는 글"
@@ -205,7 +226,7 @@ function buildPreludeDetailPlan(params: {
         : params.sequenceOrder === 2
           ? `${params.mainKeyword}를 보기 전에 어떤 기준으로 기기와 액상을 골라야 하나?`
           : `${params.mainKeyword}를 볼 때 초보자가 실제로 많이 놓치는 부분은 무엇인가?`,
-    primaryKeyword: params.title,
+    primaryKeyword,
     secondaryKeywords: [params.mainKeyword, "입문", "선택 기준"].filter((item, index, array) => array.indexOf(item) === index),
     recommendedSections: [
       "검색자가 먼저 헷갈리는 상황 정리",
@@ -262,7 +283,11 @@ export function regenerateSingleTopicDetailPlan(params: {
   sequenceOrder: number;
   internalLinkTitles: string[];
 }): TopicSeriesDetailPlan {
-  const effectiveMainKeyword = params.primaryKeyword.trim() || params.mainKeyword;
+  const manualPrimaryKeyword = params.primaryKeyword.trim();
+  const effectiveMainKeyword =
+    params.seriesRole === "main"
+      ? manualPrimaryKeyword || params.mainKeyword
+      : params.mainKeyword;
   const base =
     params.seriesRole === "main"
       ? buildMainDetailPlan({
@@ -279,7 +304,7 @@ export function regenerateSingleTopicDetailPlan(params: {
 
   return {
     ...base,
-    primaryKeyword: params.primaryKeyword.trim() || base.primaryKeyword,
+    primaryKeyword: manualPrimaryKeyword || base.primaryKeyword,
     secondaryKeywords:
       params.secondaryKeywords.length > 0 ? params.secondaryKeywords : base.secondaryKeywords,
   };

@@ -201,7 +201,7 @@ function shouldAttemptSmartRevision(evalResult: EvalResult): boolean {
     evalResult.aggregateScore < 70 ||
     getSeoScore(evalResult) < 72 ||
     getNaverScore(evalResult) < 72 ||
-    dangerCount >= 2 ||
+    dangerCount >= 1 ||
     (overallRisk === "high" && paragraphWarningCount >= 2)
   );
 }

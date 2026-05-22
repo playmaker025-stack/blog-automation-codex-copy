@@ -779,7 +779,9 @@ function buildKeywordContract(params: {
     .filter((kw): kw is string => kw !== null);
 
   // seriesDetailPlan.primaryKeyword — 사용자가 직접 재설계한 핵심 키워드
-  const seriesDetailPrimaryKw = normalizeKeyword(topic.seriesDetailPlan?.primaryKeyword ?? "");
+  const seriesDetailPrimaryKw = topic.seriesDetailPlan?.primaryKeyword
+    ? sanitizeAiKeyword(topic.seriesDetailPlan.primaryKeyword) ?? ""
+    : "";
   const seriesDetailSecondaryKws = (topic.seriesDetailPlan?.secondaryKeywords ?? [])
     .map((kw) => sanitizeAiKeyword(normalizeKeyword(kw)))
     .filter((kw): kw is string => kw !== null);
