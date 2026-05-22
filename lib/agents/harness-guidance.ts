@@ -57,7 +57,7 @@ function lowScoreReasons(entry: WritingFailureEntry): string[] {
   return Object.entries(entry.scores)
     .filter(([, score]) => score < HARNESS_PASS_THRESHOLD)
     .sort((a, b) => a[1] - b[1])
-    .map(([dimension, score]) => `${dimension} ${score}점 - ${entry.reasoning[dimension] ?? "평가 근거 없음"}`);
+    .map(([dimension, score]) => `${dimension} ${score}\uC810 - ${entry.reasoning[dimension] ?? "\uD3C9\uAC00 \uADFC\uAC70 \uC5C6\uC74C"}`);
 }
 
 export async function getRecentHarnessFailureGuidance(params: {
@@ -177,48 +177,57 @@ export function buildRevisionInstruction(params: {
   const lowDimensions = Object.entries(params.evalResult.scores)
     .filter(([, score]) => score < HARNESS_PASS_THRESHOLD)
     .sort((a, b) => a[1] - b[1])
-    .map(([dimension, score]) => `- ${dimension}: ${score}점 / ${params.evalResult.reasoning[dimension] ?? "평가 근거 없음"}`)
+    .map(([dimension, score]) => `- ${dimension}: ${score}\uC810 / ${params.evalResult.reasoning[dimension] ?? "\uD3C9\uAC00 \uADFC\uAC70 \uC5C6\uC74C"}`)
     .join("\n");
 
-  const seoNotes =
-    params.evalResult.seoEvaluation?.keywordReport.items
-      .filter((item) => item.status !== "ok")
-      .map((item) => `- 키워드 '${item.keyword}': ${item.recommendation}`) ?? [];
+  const keywordItems = params.evalResult.seoEvaluation?.keywordReport.items ?? [];
+  const seoNotes = keywordItems
+    .filter((item) => item.status !== "ok")
+    .map((item) => `- 키워드 '${item.keyword}': 현재 ${item.count}회, 권장 ${item.targetMin}~${item.targetMax}회, 상태 ${item.status}. ${item.recommendation}`);
+
+  const dangerKeywords = keywordItems
+    .filter((item) => item.status === "danger")
+    .map((item) => `${item.keyword}(${item.count}회)`);
+
+  const underKeywords = keywordItems
+    .filter((item) => item.status === "under")
+    .map((item) => `${item.keyword}(${item.count}회)`);
 
   const paragraphWarnings =
     params.evalResult.seoEvaluation?.keywordReport.paragraphWarnings.map((warning) => `- ${warning.message}`) ?? [];
 
-  const dangerKeywords =
-    params.evalResult.seoEvaluation?.keywordReport.items
-      .filter((item) => item.status === "danger")
-      .map((item) => item.keyword) ?? [];
+  const seoScore = params.evalResult.seoEvaluation?.score ?? params.evalResult.aggregateScore;
+  const risk = params.evalResult.seoEvaluation?.keywordReport.overallRisk ?? "unknown";
 
-  const cautionKeywords =
-    params.evalResult.seoEvaluation?.keywordReport.items
-      .filter((item) => item.status === "caution")
-      .map((item) => item.keyword) ?? [];
+  return `## 자동 보강 지시
+이전 초안은 통과 기준 ${HARNESS_PASS_THRESHOLD}점에 도달하지 못했습니다. 아래 문제를 반영해 본문 전체를 다시 작성하세요. 기존 문장을 덧붙이지 말고, 과한 반복을 줄이면서 부족한 정보와 구조를 보강해야 합니다.
 
-  return `## 초안 보강 지시
-이번 초안은 ${HARNESS_PASS_THRESHOLD}점 기준을 아직 넘지 못했습니다. 아래 문제만 직접 줄이는 방향으로 보강하세요.
+현재 점수
+- 종합: ${params.evalResult.aggregateScore}점
+- SEO: ${seoScore}점
+- 키워드 반복 위험도: ${risk}
 
 낮은 평가 항목
-${lowDimensions || "- 명시적으로 낮은 세부 점수는 없습니다."}
+${lowDimensions || "- 세부 점수는 통과권이지만 SEO/키워드/네이버 로직 보정이 필요합니다."}
 
-평가 요약 권고
-${params.evalResult.recommendations.map((item) => `- ${item}`).join("\n") || "- 추가 권고 없음"}
-
-SEO/키워드 보완 포인트
-${seoNotes.join("\n") || "- 현재 키워드 상태 기준 별도 보완 없음"}
+키워드 직접 수정 지시
+${seoNotes.join("\n") || "- 키워드 반복 수는 큰 문제 없음. 구조와 정보 충실도를 중심으로 보강하세요."}
 ${paragraphWarnings.join("\n") || ""}
 
-보강 원칙
-- 초안 전체를 새로 쓰지 말고, 실제로 점수를 깎은 부분만 줄이거나 보강합니다.
-- 키워드가 과하면 같은 단어를 반복하지 말고 기준, 상황, 예시, 비교 포인트로 바꿉니다.
-- 내용이 약하면 불필요한 수식어 대신 실제 선택 기준, 사용 상황, 주의점, 구조 설명을 보강합니다.
-- 이미 괜찮은 문단은 유지하고, 문제 문단만 최소 범위로 손봅니다.
-- 위험 키워드: ${dangerKeywords.join(", ") || "없음"}
-- 주의 키워드: ${cautionKeywords.join(", ") || "없음"}
+반드시 줄일 표현
+- 과반복 키워드: ${dangerKeywords.join(", ") || "없음"}
+- 위 키워드는 같은 문단에서 반복하지 말고, 일부를 선택 기준, 상황 설명, 제품/액상 예시, 비교 문장으로 치환하세요.
 
-기본 브리핑
+반드시 보강할 표현
+- 부족 키워드: ${underKeywords.join(", ") || "없음"}
+- 부족 키워드는 억지로 나열하지 말고 검색자가 실제로 묻는 질문에 답하는 문단 안에 넣으세요.
+
+보강본 채택 조건
+- 키워드 danger 개수가 이전보다 줄어야 합니다.
+- SEO 점수 또는 네이버 로직 점수가 이전보다 올라야 합니다.
+- 메인 키워드는 본문 4~7회, 서브 키워드는 각 1~3회를 목표로 합니다.
+- 선행 글의 targetMainKeyword는 본문 1~3회만 자연 노출합니다.
+
+기존 브리핑
 ${params.briefing}`;
 }

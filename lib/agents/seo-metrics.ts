@@ -28,6 +28,7 @@ const GENERIC_KEYWORD_TOKENS = new Set([
   "보는",
   "많이",
   "고르기",
+  "고르는",
   "선택",
   "찾는",
   "이유",
@@ -83,7 +84,7 @@ function extractConclusionText(body: string): string {
 }
 
 function _getKeywordTargets(
-  bodyLength: number,
+  _bodyLength: number,
   index: number,
   options?: {
     seriesRole?: "prelude" | "main";
@@ -99,25 +100,9 @@ function _getKeywordTargets(
     !!normalizedKeyword &&
     normalizedTargetMainKeyword === normalizedKeyword;
 
-  if (isPreludeTarget) {
-    return { targetMin: 1, targetMax: 3 };
-  }
-
-  if (index === 0) {
-    if (bodyLength >= 2200) return { targetMin: 5, targetMax: 8 };
-    if (bodyLength >= 1400) return { targetMin: 4, targetMax: 6 };
-    return { targetMin: 3, targetMax: 5 };
-  }
-
-  if (index === 1) {
-    if (bodyLength >= 2200) return { targetMin: 2, targetMax: 5 };
-    if (bodyLength >= 1400) return { targetMin: 2, targetMax: 4 };
-    return { targetMin: 1, targetMax: 3 };
-  }
-
-  if (bodyLength >= 2200) return { targetMin: 1, targetMax: 4 };
-  if (bodyLength >= 1400) return { targetMin: 1, targetMax: 3 };
-  return { targetMin: 1, targetMax: 2 };
+  if (isPreludeTarget) return { targetMin: 1, targetMax: 3 };
+  if (index === 0) return { targetMin: 4, targetMax: 7 };
+  return { targetMin: 1, targetMax: 3 };
 }
 
 function splitCombinationTokens(value: string): string[] {
@@ -213,30 +198,30 @@ function buildKeywordRecommendation(
   if (role === "main") {
     if (status === "under") {
       return isPreludeMainKeyword
-        ? `?? ? ??? '${keyword}'? 1~3? ????? ??? ?? ?? ????.`
-        : `?? ??? '${keyword}'? ?? ?? 4~7? ??? ?????. ??? ??? ?????.`;
+        ? `선행 글 본문에 '${keyword}'를 1~3회 자연스럽게 넣어 주세요.`
+        : `메인 키워드 '${keyword}'는 본문 기준 4~7회가 적정입니다. 핵심 문단에 자연스럽게 보강해 주세요.`;
     }
     if (status === "caution") {
       return isPreludeMainKeyword
-        ? `?? ??? '${keyword}'? ?? ?? ????. ?? ?? ??? ?? ????? ??? ???.`
-        : `?? ??? '${keyword}'? ?? ?? ????. ?? ?? ??? ??? ??? ???? ?? ???.`;
+        ? `선행 글에서 '${keyword}' 반복이 조금 많습니다. 일부는 하위 의도 표현으로 풀어 주세요.`
+        : `메인 키워드 '${keyword}' 반복이 주의 구간입니다. 같은 표현 일부를 구체 기준이나 사례 문장으로 바꿔 주세요.`;
     }
     if (status === "danger") {
-      return `'${keyword}'? ??? ?? ?????. ??? ???, ??? ??, ?? ???? ??? ???.`;
+      return `'${keyword}'가 과도하게 반복됩니다. 일부 문장은 동의어, 선택 기준, 실제 예시로 바꿔 주세요.`;
     }
-    return `?? ??? '${keyword}' ??? ?? ?? ?????.`;
+    return `메인 키워드 '${keyword}' 반복은 현재 적정합니다.`;
   }
 
   if (status === "under") {
-    return `?? ??? '${keyword}'? ?? 1~3? ??? ?????. ??? ??? ?????.`;
+    return `서브 키워드 '${keyword}'는 본문 1~3회가 적정입니다. 관련 문단에 자연스럽게 보강해 주세요.`;
   }
   if (status === "caution") {
-    return `?? ??? '${keyword}'? ?? ?? ????. ?? ??? ??? ??? ??? ???.`;
+    return `서브 키워드 '${keyword}' 반복이 약간 많습니다. 일부는 설명형 문장으로 풀어 주세요.`;
   }
   if (status === "danger") {
-    return `?? ??? '${keyword}'? ??? ?? ?????. ?? ??? ?? ?? ???? ?? ???.`;
+    return `서브 키워드 '${keyword}'가 과도하게 반복됩니다. 직접 반복을 줄이고 의미만 남겨 주세요.`;
   }
-  return `?? ??? '${keyword}' ??? ?? ?? ?????.`;
+  return `서브 키워드 '${keyword}' 반복은 현재 적정합니다.`;
 }
 
 function buildParagraphWarnings(paragraphs: string[], items: KeywordUsageItem[]): KeywordUsageReport["paragraphWarnings"] {
@@ -250,7 +235,7 @@ function buildParagraphWarnings(paragraphs: string[], items: KeywordUsageItem[])
         keyword: item.keyword,
         paragraphIndex,
         count,
-        message: `${paragraphIndex + 1}? ???? '${item.keyword}'? ${count}? ?????. ?? ???? ?? ??? ??? ???.`,
+        message: `${paragraphIndex + 1}번 문단에서 '${item.keyword}'가 ${count}회 반복됩니다. 같은 문단 안 반복을 줄여 주세요.`,
       });
     }
   });
@@ -271,20 +256,20 @@ function evaluateOverallRisk(
   if (dangerCount > 0 || paragraphWarnings.length >= 2) {
     return {
       overallRisk: "high",
-      overallRiskSummary: "??? ?? ?? ?? ??? ??? ??? ?? ???? ?? ????.",
+      overallRiskSummary: "과반복 위험이 높습니다. 반복 경고가 있는 키워드를 먼저 줄여 주세요.",
     };
   }
 
   if (cautionCount > 0 || underCount > 0 || paragraphWarnings.length > 0) {
     return {
       overallRisk: "medium",
-      overallRiskSummary: "?? ???? ??? ?????, ?????? ?? ??? ?????.",
+      overallRiskSummary: "일부 키워드 조정이 필요하지만, 문맥을 유지하며 보정할 수 있습니다.",
     };
   }
 
   return {
     overallRisk: "low",
-    overallRiskSummary: "??? ??? ??? ????? ???? ????.",
+    overallRiskSummary: "키워드 반복 위험도는 낮은 편입니다.",
   };
 }
 
@@ -380,28 +365,28 @@ function buildKeywordFocusMetrics(params: {
 
     const summaryParts: string[] = [];
     if (titleIncluded) {
-      summaryParts.push(role === "main" && titleFrontLoaded ? "?? ???" : "?? ??");
+      summaryParts.push(role === "main" && titleFrontLoaded ? "\uC81C\uBAA9 \uC55E\uBC30\uCE58" : "\uC81C\uBAA9 \uD3EC\uD568");
     } else {
-      summaryParts.push("?? ???");
+      summaryParts.push("\uC81C\uBAA9 \uBBF8\uD3EC\uD568");
     }
-    summaryParts.push(introIncluded ? "??? ??" : "??? ???");
-    summaryParts.push(`?? ${item.count}?`);
+    summaryParts.push(introIncluded ? "\uB3C4\uC785\uBD80 \uD3EC\uD568" : "\uB3C4\uC785\uBD80 \uBD80\uC871");
+    summaryParts.push(`\uBCF8\uBB38 ${item.count}\uD68C`);
 
-    let action = `?? '${item.keyword}' ??? ????? ??????.`;
+    let action = `\uB3C4\uC785\uBD80\uC5D0\uC11C \'${item.keyword}\' \uAC80\uC0C9 \uC758\uB3C4\uB97C \uB354 \uC9C1\uC811\uC801\uC73C\uB85C \uBC1B\uC544 \uC8FC\uC138\uC694.`;
     if (!titleIncluded && !isPreludeTarget) {
-      action = `'${item.keyword}'? ??? ? ????? ???? ?? ??? ? ??????.`;
+      action = `\'${item.keyword}\'\uB97C \uC81C\uBAA9\uC774\uB098 \uD575\uC2EC \uC18C\uC81C\uBAA9\uC5D0 \uB354 \uBD84\uBA85\uD558\uAC8C \uBC30\uCE58\uD574 \uC8FC\uC138\uC694.`;
     } else if (!introIncluded) {
-      action = `??? ??? '${item.keyword}'? ? ? ? ????? ??? ???.`;
+      action = `\uB3C4\uC785\uBD80\uC5D0\uC11C \'${item.keyword}\' \uAC80\uC0C9 \uC758\uB3C4\uB97C \uB354 \uC9C1\uC811\uC801\uC73C\uB85C \uBC1B\uC544 \uC8FC\uC138\uC694.`;
     } else if (item.status !== "ok") {
       action = item.recommendation;
     } else if (bodyLength < 1200) {
-      action = "?? ??? ?? ???, ??? ?????? ?? ??? ?? ? ???? ????.";
+      action = "\uBCF8\uBB38 \uBD84\uB7C9\uC744 \uC870\uAE08 \uB298\uB9AC\uACE0, \uC2E4\uC81C \uC120\uD0DD \uAE30\uC900\uC774\uB098 \uC0AC\uB840 \uBB38\uB2E8\uC744 \uBCF4\uAC15\uD574 \uC8FC\uC138\uC694.";
     }
 
     return {
       keyword: item.keyword,
       role,
-      label: role === "main" ? "?? ???" : `?? ??? ${index}` ,
+      label: role === "main" ? "\uBA54\uC778 \uD0A4\uC6CC\uB4DC" : `\uC11C\uBE0C \uD0A4\uC6CC\uB4DC ${index}`,
       completenessScore: clampScore(completenessScore),
       exposurePotentialScore: clampScore(exposurePotentialScore),
       count: item.count,
@@ -719,15 +704,15 @@ export function analyzeKeywordUsage(params: {
 
   const summary: string[] = [];
   if (mainKeywordItem) {
-    summary.push(`?? ??? '${mainKeywordItem.keyword}' ?? ${mainKeywordItem.count}?`);
+    summary.push(`메인 키워드 '${mainKeywordItem.keyword}' 본문 ${mainKeywordItem.count}회`);
   }
   if (!introCoverage && mainKeywordItem) {
-    summary.push("? ? ?? ?? ?? ???? ??? ????.");
+    summary.push("제목 앞부분의 메인 키워드 배치가 약합니다.");
   }
   if (!titleFrontLoaded && mainKeywordItem && params.seriesRole !== "prelude") {
-    summary.push("?? ???? ?? ???? ?? ??? ????.");
+    summary.push("\uC81C\uBAA9 \uC55E\uBD80\uBD84\uC758 \uBA54\uC778 \uD0A4\uC6CC\uB4DC \uBC30\uCE58\uAC00 \uC57D\uD569\uB2C8\uB2E4.");
   }
-  summary.push(`?? ??? ?? ??? ${overallRisk}`);
+  summary.push(`전체 반복 위험도 ${overallRisk}`);
 
   const recommendations = [
     ...items.filter((item) => item.status !== "ok").map((item) => item.recommendation),
@@ -851,7 +836,7 @@ export function evaluateSeoCompleteness(params: {
 
   for (const item of keywordReport.items) {
     if (item.status === "ok") {
-      evidence.push(`'${item.keyword}' ?? ${item.count}?? ?? ?? ?? ?? ????.`);
+      evidence.push(`\'${item.keyword}\' \uBCF8\uBB38 ${item.count}\uD68C\uB294 \uD604\uC7AC \uAD8C\uC7A5 \uBC94\uC704\uC785\uB2C8\uB2E4.`);
       continue;
     }
     if (item.status === "under") {

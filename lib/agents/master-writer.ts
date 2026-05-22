@@ -197,19 +197,13 @@ const BASE_TOOLS: Tool[] = [
   },
 ];
 
-function getKeywordPlacementTargets(estimatedLength: number): {
+function getKeywordPlacementTargets(_estimatedLength: number): {
   mainMin: number;
   mainMax: number;
   secondaryMin: number;
   secondaryMax: number;
 } {
-  if (estimatedLength >= 2200) {
-    return { mainMin: 5, mainMax: 8, secondaryMin: 2, secondaryMax: 5 };
-  }
-  if (estimatedLength >= 1400) {
-    return { mainMin: 4, mainMax: 6, secondaryMin: 2, secondaryMax: 4 };
-  }
-  return { mainMin: 3, mainMax: 5, secondaryMin: 1, secondaryMax: 3 };
+  return { mainMin: 4, mainMax: 7, secondaryMin: 1, secondaryMax: 3 };
 }
 
 function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
@@ -224,7 +218,7 @@ function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
 
   return [
     `- Primary keyword: '${primaryKeyword}'`,
-    `- Keep the primary keyword as the article's fixed center. Recommended total usage: ${targets.mainMin}-${targets.mainMax} times for this target length.`,
+    `- Keep the primary keyword as the article's fixed center. Recommended body usage: ${strategy.seriesRole === "prelude" && strategy.targetMainKeyword?.trim().toLowerCase() === primaryKeyword.trim().toLowerCase() ? "1-3" : `${targets.mainMin}-${targets.mainMax}`} times.`,
     "- Include the primary keyword in the title, preferably close to the front.",
     "- Include the primary keyword in the first sentence or at least the first paragraph.",
     "- Include the primary keyword again within the first 2 paragraphs.",
@@ -486,7 +480,7 @@ async function runOpenAIMasterWriter(params: {
     ? AbortSignal.any([signal, AbortSignal.timeout(420_000)])
     : AbortSignal.timeout(420_000);
 
-  onProgress?.("Master Writer가 OpenAI로 하네스 기준 초안을 작성합니다.");
+  onProgress?.("Master Writer가 OpenAI로 초안을 작성합니다.");
   const firstDraft = await requestOpenAIText({
     model,
     input: [
@@ -498,7 +492,7 @@ async function runOpenAIMasterWriter(params: {
     signal: callSignal,
   });
 
-  onProgress?.("초안 내부 검수 및 SEO 보강 중...");
+  onProgress?.("초안 내부 검수와 SEO 보정을 진행합니다.");
   const finalDraft = await requestOpenAIText({
     model,
     input: [
@@ -527,7 +521,7 @@ async function runOpenAIMasterWriter(params: {
 
   const bodyText = wrapForNaverMobile(finalDraft);
   onToken?.(bodyText);
-  onProgress?.("본문 생성 완료 - GitHub에 저장 중...");
+  onProgress?.("본문 생성 완료 - GitHub에 저장 중입니다.");
 
   return saveWriterResult({
     topicId,
@@ -563,7 +557,7 @@ export async function runMasterWriter(params: {
     signal,
   } = params;
 
-  onProgress?.(corpusSummary ? "Master Writer 시작 — corpus summary 적용 중..." : "Master Writer 시작 — 코퍼스 로드 중...");
+  onProgress?.(corpusSummary ? "Master Writer 시작 - 코퍼스 요약을 적용합니다." : "Master Writer 시작 - 코퍼스를 로드합니다.");
 
   if (hasOpenAIKey()) {
     return runOpenAIMasterWriter(params);
@@ -632,11 +626,11 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
 
   while (iterCount < maxIter) {
     iterCount++;
-    if (signal?.aborted) throw new Error("파이프라인이 중단되었습니다.");
+    if (signal?.aborted) throw new Error("본문 작성이 사용자 요청으로 중단되었습니다.");
 
     console.log(`[master-writer] iteration ${iterCount} start — messages=${messages.length}, topicId=${topicId}`);
     if (iterCount > 1) {
-      onProgress?.(`본문 생성 중... (단계 ${iterCount})`);
+      onProgress?.(`본문 생성 중입니다. (단계 ${iterCount})`);
     }
 
     // 스트리밍 모드로 API 호출 — 토큰 단위 수신으로 타임아웃 감지 신뢰성 향상
@@ -740,14 +734,14 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
 
     if (toolUseBlocks.length > 0) {
       const toolLabels: Record<string, string> = {
-        user_corpus_retriever: "코퍼스 로드 중...",
-        expansion_planner: "아웃라인 확장 중...",
-        source_resolver: "참조 URL 확인 중...",
+        user_corpus_retriever: "코퍼스를 불러오는 중입니다.",
+        expansion_planner: "확장 아웃라인을 보강하는 중입니다.",
+        source_resolver: "참조 URL을 확인하는 중입니다.",
       };
       const toolResults: import("@anthropic-ai/sdk/resources/messages").ToolResultBlockParam[] = [];
 
       for (const block of toolUseBlocks) {
-        onProgress?.(toolLabels[block.name] ?? `${block.name} 실행 중...`);
+        onProgress?.(toolLabels[block.name] ?? `${block.name} \uC2E4\uD589 \uC911\uC785\uB2C8\uB2E4.`);
         const fn = toolRegistry[block.name as keyof typeof toolRegistry];
         if (!fn) {
           toolResults.push({ type: "tool_result", tool_use_id: block.id, is_error: true, content: `알 수 없는 도구: ${block.name}` });
@@ -767,7 +761,7 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
     break;
   }
 
-  throw new Error(`Master Writer가 ${maxIter}회 반복 한계에 도달했습니다.`);
+  throw new Error(`Master Writer가 ${maxIter}회 안에 본문 작성을 완료하지 못했습니다.`);
 }
 
 async function saveWriterResult(params: {

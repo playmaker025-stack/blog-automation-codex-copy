@@ -57,8 +57,8 @@ interface DraftVersionSeoReport extends DraftVersionSnapshot {
   keywordReport: KeywordUsageReport;
 }
 
-const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[\uC790\uB3D9 \uBCF4\uAC15\uBCF8 2\uCC28]\n";
-const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[\uC790\uB3D9 \uBCF4\uAC15\uBCF8 3\uCC28]\n";
+const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[2차 초안]\n";
+const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[3차 초안]\n";
 
 function parseDraftVersionSnapshots(streamingBody: string): DraftVersionSnapshot[] {
   const normalized = streamingBody.replace(/\r\n/g, "\n");
@@ -151,7 +151,7 @@ function buildDirectTopicTitle(mainKeyword: string, subKeyword: string): string 
 
 function looksCorruptedText(value: string | null | undefined): boolean {
   if (!value) return false;
-  return /[�꾩몄쓣蹂몃Ц섏젙됯?]/.test(value) && !/[가-힣]/.test(value);
+  return /[\uFFFD]|\u00C3|\u00C2|[\u00C0-\u00FF]{2,}/u.test(value) && !/[가-힣]/u.test(value);
 }
 
 function compareTopicsForPipeline(left: Topic, right: Topic): number {
@@ -180,7 +180,7 @@ function formatPipelineTopicLabel(topic: Topic): string {
     return topic.title;
   }
 
-  const roleLabel = topic.seriesRole === "main" ? "메인" : `선행 ${topic.sequenceOrder ?? 0}`;
+  const roleLabel = topic.seriesRole === "main" ? "\uBA54\uC778" : `\uC120\uD589 ${topic.sequenceOrder ?? 0}`;
   const keywordLabel = topic.targetMainKeyword?.trim() ? ` | ${topic.targetMainKeyword.trim()}` : "";
 
   return `[${roleLabel}${keywordLabel}] ${topic.title}`;
@@ -383,11 +383,11 @@ export default function PipelinePage() {
             return;
           }
           setProfile(null);
-          setProfileError(json.error ?? "프로필 조회 실패");
+          setProfileError(json.error ?? "\uD504\uB85C\uD544 \uC870\uD68C \uC2E4\uD328");
         })
         .catch((error) => {
           setProfile(null);
-          setProfileError(error instanceof Error ? error.message : "네트워크 오류");
+          setProfileError(error instanceof Error ? error.message : "\uB124\uD2B8\uC6CC\uD06C \uC624\uB958");
         })
         .finally(() => setProfileLoading(false));
     }, 500);
@@ -1045,16 +1045,16 @@ export default function PipelinePage() {
           </div>
           <button
             type="button"
-            aria-label="오류 닫기"
+            aria-label="\uC624\uB958 \uB2EB\uAE30"
             onClick={() => setPipelineError(null)}
             className="ml-3 text-red-400 hover:text-red-600 shrink-0 text-lg leading-none"
           >
-            ×
+            \u00D7
           </button>
         </div>
       )}
 
-      <div className="grid grid-cols-1 xl:grid-cols-[minmax(280px,320px)_minmax(0,1.7fr)_minmax(240px,300px)] 2xl:grid-cols-[minmax(300px,340px)_minmax(0,1.95fr)_minmax(250px,320px)] gap-5 xl:gap-6 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(220px,260px)_minmax(0,2.15fr)_minmax(220px,280px)] 2xl:grid-cols-[minmax(230px,280px)_minmax(0,2.45fr)_minmax(230px,300px)] gap-5 xl:gap-6 items-start">
         <section className="min-w-0 space-y-6">
           <div className="bg-white border border-zinc-200 rounded-xl p-5 space-y-5">
             <div>

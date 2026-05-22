@@ -1,4 +1,4 @@
-﻿import type { Tool } from "@anthropic-ai/sdk/resources/messages";
+import type { Tool } from "@anthropic-ai/sdk/resources/messages";
 import { MODELS } from "@/lib/anthropic/client";
 import { runToolUseLoop } from "@/lib/anthropic/tool-executor";
 import { userCorpusRetriever } from "@/lib/skills/user-corpus-retriever";
@@ -12,25 +12,23 @@ import { HARNESS_PASS_THRESHOLD } from "./harness-guidance";
 import { evaluateSeoCompleteness } from "./seo-metrics";
 import { naverLogicAgent } from "./naver-logic-agent";
 
-const SYSTEM_PROMPT = `?뱀떊? ?ㅼ씠踰?釉붾줈洹?肄섑뀗痢??덉쭏 ?됯? ?꾨Ц媛?낅땲??
+const SYSTEM_PROMPT = `당신은 네이버 블로그 글쓰기 품질을 검수하는 Harness Evaluator입니다.
 
-## ?됯? 李⑥썝 (媛?0-100??
-- originality (0.25): ?낆갹??愿?? ?쒖젅 ?놁쓬, 怨좎쑀???몄궗?댄듃
-- style_match (0.30): ?ъ슜??肄뷀띁??湲?곌린 ?ㅽ????쇱튂??
-- structure (0.20): ?쇰━???먮쫫, ?뱀뀡 援ъ꽦, 媛?낆꽦, ?꾨왂???덈툕湲/由ы봽湲 ??븷 諛섏쁺
-- engagement (0.15): ?낆옄 愿???좊룄, ?좎슜??
-- forbidden_check (0.10): 湲덉? ?쒗쁽 誘명룷???щ? (?ы븿 ??0??
+평가 기준:
+- originality: 실제 사례, 구체성, 반복 없는 관점
+- style_match: 사용자 코퍼스와 말투/문장 리듬/구성 습관의 일치
+- structure: 검색 의도, 허브/리프 역할, 도입-본문-마무리 구조
+- engagement: 독자가 계속 읽고 선택할 수 있게 만드는 실용성
+- forbidden_check: 금지 표현, 과장, 근거 없는 단정, 위험한 문구
 
-## ?묒뾽 ?쒖꽌
-1. user_corpus_retriever濡??덉떆 湲 濡쒕뱶 (style_match 湲곗?)
-2. review_record_audit?쇰줈 怨쇨굅 ?ъ뒪???⑦꽩 ?뺤씤
-3. 媛?李⑥썝蹂??먯닔? 洹쇨굅 ?묒꽦
-4. SEO ?곹빀?꾩? ?ㅼ씠踰?濡쒖쭅 異⑹떎?꾨? 媛??以묒슂?섍쾶 ?됯?
-5. ?섎㉧吏 ?먯닔??蹂댁“ ?덉쭏 吏?쒕줈留?諛섏쁺
-6. 媛쒖꽑 沅뚭퀬?ы빆 1-3媛??쒖떆
+반드시 확인할 항목:
+1. user_corpus_retriever로 사용자 문체를 확인한다.
+2. review_record_audit로 과거 실패/개선 패턴을 확인한다.
+3. 키워드 과반복, 약한 도입, 실체 없는 조언, 근거 없는 최고/유일 표현을 감점한다.
+4. 네이버 검색 의도와 D.I.A/C-Rank 관점에서 실사용 정보와 문제 해결성이 충분한지 본다.
+5. 결과는 JSON만 반환한다. 설명 문장은 JSON 밖에 쓰지 않는다.
 
-## 異쒕젰 ?뺤떇 (諛섎뱶??JSON 肄붾뱶釉붾줉)
-\`\`\`json
+JSON 형식:
 {
   "scores": {
     "originality": 85,
@@ -41,20 +39,19 @@ const SYSTEM_PROMPT = `?뱀떊? ?ㅼ씠踰?釉붾줈洹?肄섑뀗痢??덉쭏 ?
   },
   "aggregateScore": 87,
   "reasoning": {
-    "originality": "洹쇨굅",
-    "style_match": "洹쇨굅",
-    "structure": "洹쇨굅",
-    "engagement": "洹쇨굅",
-    "forbidden_check": "湲덉? ?쒗쁽 ?놁쓬"
+    "originality": "평가 근거",
+    "style_match": "평가 근거",
+    "structure": "평가 근거",
+    "engagement": "평가 근거",
+    "forbidden_check": "평가 근거"
   },
-  "recommendations": ["沅뚭퀬?ы빆 1", "沅뚭퀬?ы빆 2"]
-}
-\`\`\``;
+  "recommendations": ["수정 권장 사항 1", "수정 권장 사항 2"]
+}`;
 
 const TOOLS: Tool[] = [
   {
     name: "user_corpus_retriever",
-    description: "?ъ슜???덉떆 湲 肄뷀띁?ㅻ? 濡쒕뱶?⑸땲??(style_match 湲곗?).",
+    description: "사용자별 코퍼스 요약과 대표 샘플을 불러와 문체 일치도를 판단합니다.",
     input_schema: {
       type: "object" as const,
       properties: {
@@ -66,7 +63,7 @@ const TOOLS: Tool[] = [
   },
   {
     name: "review_record_audit",
-    description: "怨쇨굅 ?ъ뒪???⑦꽩??遺꾩꽍?⑸땲??",
+    description: "과거 글쓰기 평가 기록과 실패 패턴을 확인합니다.",
     input_schema: {
       type: "object" as const,
       properties: {
@@ -92,7 +89,7 @@ function parseEvalFromText(text: string): Omit<EvalResult, "runId" | "pass"> {
     try {
       return JSON.parse(jsonMatch[1]) as Omit<EvalResult, "runId" | "pass">;
     } catch {
-      // fallthrough
+      // fall through
     }
   }
   const braceMatch = text.match(/\{[\s\S]*\}/);
@@ -100,13 +97,13 @@ function parseEvalFromText(text: string): Omit<EvalResult, "runId" | "pass"> {
     try {
       return JSON.parse(braceMatch[0]) as Omit<EvalResult, "runId" | "pass">;
     } catch {
-      // fallthrough
+      // fall through
     }
   }
   return {
     scores: { originality: 0, style_match: 0, structure: 0, engagement: 0, forbidden_check: 0 },
     aggregateScore: 0,
-    reasoning: { error: "평가 결과를 파싱하지 못했습니다." },
+    reasoning: { error: "평가 결과를 JSON으로 파싱하지 못했습니다." },
     recommendations: ["평가를 다시 실행해 주세요."],
   };
 }
@@ -161,6 +158,78 @@ function clampScore(value: number): number {
   return Math.max(0, Math.min(100, Math.round(value)));
 }
 
+function buildTopologyText(strategy: StrategyPlanResult): string {
+  const topology = strategy.contentTopology;
+  if (!topology) return "No topology plan.";
+
+  return [
+    `kind: ${topology.kind}`,
+    `reason: ${topology.reason}`,
+    `searchIntent: ${topology.searchIntent}`,
+    `requiredSections: ${topology.requiredSections.join(" / ")}`,
+  ].join("\n");
+}
+
+function buildNaverSignalsText(strategy: StrategyPlanResult): string {
+  if (!strategy.naverSignals) return "No Naver community signals.";
+
+  return [
+    `keyword: ${strategy.naverSignals.keyword}`,
+    `cafeDemand: ${strategy.naverSignals.cafeDemandSummary || "none"}`,
+    `kinProblems: ${strategy.naverSignals.kinProblemSummary || "none"}`,
+  ].join("\n");
+}
+
+function finalizeEval(params: {
+  provisionalEval: EvalResult;
+  writerResult: WriterResult;
+  strategy: StrategyPlanResult;
+  parsedReasoning: EvalResult["reasoning"];
+  parsedRecommendations: string[];
+}): EvalResult {
+  const { provisionalEval, writerResult, strategy, parsedReasoning, parsedRecommendations } = params;
+  const seoEvaluation = evaluateSeoCompleteness({
+    title: writerResult.title,
+    body: writerResult.content,
+    keywords: strategy.keywords,
+    targetSearchCombinations: strategy.targetSearchCombinations,
+    seriesRole: strategy.seriesRole,
+    targetMainKeyword: strategy.targetMainKeyword,
+  });
+  const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
+    strategy,
+    writerResult,
+    evalResult: provisionalEval,
+  });
+  const aggregateScore = Math.round(
+    seoEvaluation.score * 0.45 +
+    naverLogicEvaluation.completenessScore * 0.35 +
+    provisionalEval.scores.style_match * 0.08 +
+    provisionalEval.scores.structure * 0.07 +
+    provisionalEval.scores.engagement * 0.03 +
+    provisionalEval.scores.originality * 0.01 +
+    provisionalEval.scores.forbidden_check * 0.01
+  );
+
+  return {
+    ...provisionalEval,
+    aggregateScore,
+    reasoning: {
+      ...parsedReasoning,
+      seo: `SEO \uC810\uC218 ${seoEvaluation.score}\uC810. ${seoEvaluation.evidence[0] ?? "\uD0A4\uC6CC\uB4DC \uBC30\uCE58\uC640 \uBCF8\uBB38 \uAD6C\uC870\uB97C \uAE30\uC900\uC73C\uB85C \uD3C9\uAC00\uD588\uC2B5\uB2C8\uB2E4."}`,
+      naver_logic: `\uB124\uC774\uBC84 \uB85C\uC9C1 \uC810\uC218 ${naverLogicEvaluation.completenessScore}\uC810. ${naverLogicEvaluation.evidence[0] ?? "\uAC80\uC0C9 \uC758\uB3C4\uC640 \uBB38\uC11C \uC5ED\uD560\uC744 \uAE30\uC900\uC73C\uB85C \uD3C9\uAC00\uD588\uC2B5\uB2C8\uB2E4."}`,
+    },
+    recommendations: [
+      ...seoEvaluation.improvements,
+      ...naverLogicEvaluation.improvements,
+      ...parsedRecommendations,
+    ].filter((value, index, array) => value && array.indexOf(value) === index).slice(0, 6),
+    pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
+    seoEvaluation,
+    naverLogicEvaluation,
+  };
+}
+
 async function runOpenAIHarnessEvaluator(params: {
   writerResult: WriterResult;
   strategy: StrategyPlanResult;
@@ -174,30 +243,13 @@ async function runOpenAIHarnessEvaluator(params: {
     ? AbortSignal.any([signal, AbortSignal.timeout(180_000)])
     : AbortSignal.timeout(180_000);
 
-  onProgress?.("Harness Evaluator媛 OpenAI濡?肄뷀띁?ㅼ? ?ㅽ뙣 ?⑦꽩???뺤씤?⑸땲??");
+  onProgress?.("Harness Evaluator가 OpenAI 평가를 준비합니다.");
   const [corpus, audit] = await Promise.all([
     userCorpusRetriever({ userId: userId.trim().toLowerCase(), limit: 5 }),
     reviewRecordAudit({ userId: userId.trim().toLowerCase(), limit: 8 }),
   ]);
 
-  const topology = strategy.contentTopology;
-  const topologyText = topology
-    ? [
-        `kind: ${topology.kind}`,
-        `reason: ${topology.reason}`,
-        `searchIntent: ${topology.searchIntent}`,
-        `requiredSections: ${topology.requiredSections.join(" / ")}`,
-      ].join("\n")
-    : "No topology plan.";
-  const naverSignalsText = strategy.naverSignals
-    ? [
-        `keyword: ${strategy.naverSignals.keyword}`,
-        `cafeDemand: ${strategy.naverSignals.cafeDemandSummary || "none"}`,
-        `kinProblems: ${strategy.naverSignals.kinProblemSummary || "none"}`,
-      ].join("\n")
-    : "No Naver community signals.";
-
-  onProgress?.("?됯? 湲곗????곕씪 ?먯닔 ?곗젙 以?..");
+  onProgress?.("초안 품질과 SEO 기준을 평가합니다.");
   const parsed = await requestOpenAIJson<Omit<EvalResult, "runId" | "aggregateScore" | "pass">>({
     model,
     input: [
@@ -209,9 +261,7 @@ async function runOpenAIHarnessEvaluator(params: {
           "Score realistically. A publishable but generic draft should not exceed 70.",
           "Use this rubric for sub scores only: originality, style_match, structure, engagement, forbidden_check.",
           "Final evaluation must prioritize SEO fit and Naver logic completeness over the sub scores.",
-          "Give credit for concrete search-intent fit, corpus style match, hub/leaf structure, mobile readability, and practical decision criteria.",
-          "Penalize generic advice, missing user style, weak opening, vague examples, keyword stuffing, unsupported absolute claims, and missing topology role.",
-          "When Naver community demand or KnowledgeIn problem signals are provided, penalize drafts that ignore those repeated demand and question patterns.",
+          "Penalize keyword stuffing, weak search intent, vague examples, unsupported claims, and missing topology role.",
         ].join("\n"),
       },
       {
@@ -224,10 +274,10 @@ async function runOpenAIHarnessEvaluator(params: {
           `Key points: ${strategy.keyPoints.join(" / ") || "none"}`,
           "",
           "Content topology:",
-          topologyText,
+          buildTopologyText(strategy),
           "",
           "Naver research signals:",
-          naverSignalsText,
+          buildNaverSignalsText(strategy),
           "",
           "Corpus/style evidence:",
           JSON.stringify(corpus).slice(0, 5000),
@@ -257,55 +307,24 @@ async function runOpenAIHarnessEvaluator(params: {
     forbidden_check: clampScore(parsed.scores.forbidden_check),
   };
   const subScore = computeAggregate(scores);
-  const runId = `eval-${randomUUID().slice(0, 8)}`;
   const provisionalEval: EvalResult = {
-    runId,
+    runId: `eval-${randomUUID().slice(0, 8)}`,
     scores,
     aggregateScore: subScore,
     reasoning: parsed.reasoning,
     recommendations: parsed.recommendations,
     pass: subScore >= HARNESS_PASS_THRESHOLD,
   };
-  const seoEvaluation = evaluateSeoCompleteness({
-    title: writerResult.title,
-    body: writerResult.content,
-    keywords: strategy.keywords,
-    targetSearchCombinations: strategy.targetSearchCombinations,
-    seriesRole: strategy.seriesRole,
-    targetMainKeyword: strategy.targetMainKeyword,
-  });
-  const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
-    strategy,
+  const evalResult = finalizeEval({
+    provisionalEval,
     writerResult,
-    evalResult: provisionalEval,
+    strategy,
+    parsedReasoning: parsed.reasoning,
+    parsedRecommendations: parsed.recommendations,
   });
-  const aggregateScore = Math.round(
-    seoEvaluation.score * 0.45 +
-    naverLogicEvaluation.completenessScore * 0.35 +
-    scores.style_match * 0.08 +
-    scores.structure * 0.07 +
-    scores.engagement * 0.03 +
-    scores.originality * 0.01 +
-    scores.forbidden_check * 0.01
-  );
-  const evalResult: EvalResult = {
-    ...provisionalEval,
-    aggregateScore,
-    reasoning: {
-      ...parsed.reasoning,
-      seo: `SEO ?먯닔 ${seoEvaluation.score}?? ${seoEvaluation.evidence[0] ?? "?ㅼ썙???쒕ぉ/?꾩엯遺 諛곗튂瑜??먭??덉뒿?덈떎."}`,
-      naver_logic: `?ㅼ씠踰?濡쒖쭅 ?먯닔 ${naverLogicEvaluation.completenessScore}?? ${naverLogicEvaluation.evidence[0] ?? "濡쒖쭅 ?먮쫫???먭??덉뒿?덈떎."}`,
-    },
-    recommendations: [
-      ...seoEvaluation.improvements,
-      ...naverLogicEvaluation.improvements,
-      ...parsed.recommendations,
-    ].filter((value, index, array) => value && array.indexOf(value) === index).slice(0, 6),
-    pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
-  };
 
   await saveEvalRun(evalResult, writerResult.postId);
-  onProgress?.(`?됯? ?꾨즺: ${aggregateScore}??(${evalResult.pass ? "?듦낵" : "誘몃떖"})`);
+  onProgress?.(`초안 평가 완료: ${evalResult.aggregateScore}점(${evalResult.pass ? "통과" : "보강 필요"})`);
   return evalResult;
 }
 
@@ -318,7 +337,7 @@ export async function runHarnessEvaluator(params: {
 }): Promise<EvalResult> {
   const { writerResult, strategy, userId, onProgress, signal } = params;
 
-  onProgress?.("Harness Evaluator ?쒖옉...");
+  onProgress?.("Harness Evaluator 시작...");
 
   if (hasOpenAIKey()) {
     return runOpenAIHarnessEvaluator(params);
@@ -331,35 +350,34 @@ export async function runHarnessEvaluator(params: {
       reviewRecordAudit(input as Parameters<typeof reviewRecordAudit>[0]),
   };
 
-  const topology = strategy.contentTopology;
-  const topologySection = topology
-    ? `
-肄섑뀗痢?援ъ“ ?먮떒:
-- ?좏삎: ${topology.kind === "hub" ? "?덈툕湲" : "由ы봽湲"}
-- ?먮떒 洹쇨굅: ${topology.reason}
-- 寃???섎룄: ${topology.searchIntent}
-- 蹂몃Ц 諛섏쁺 ?붽뎄: ${topology.requiredSections.join(" / ")}
-`
+  const topologySection = strategy.contentTopology
+    ? [
+        "콘텐츠 구조 계획:",
+        `- 역할: ${strategy.contentTopology.kind === "hub" ? "허브" : "리프"}`,
+        `- 이유: ${strategy.contentTopology.reason}`,
+        `- 검색 의도: ${strategy.contentTopology.searchIntent}`,
+        `- 필수 섹션: ${strategy.contentTopology.requiredSections.join(" / ")}`,
+      ].join("\n")
     : "";
 
-  const userMessage = `?ㅼ쓬 釉붾줈洹?蹂몃Ц???됯??댁＜?몄슂.
+  const userMessage = [
+    "다음 네이버 블로그 초안을 평가해 주세요.",
+    "",
+    `제목: ${writerResult.title}`,
+    `본문 글자수: ${writerResult.wordCount}자`,
+    `목표 톤: ${strategy.tone}`,
+    `핵심 키워드: ${strategy.keywords.join(", ")}`,
+    `사용자 ID: ${userId}`,
+    topologySection,
+    "",
+    "--- 본문 시작 ---",
+    `${writerResult.content.slice(0, 1500)}${writerResult.content.length > 1500 ? "\n...(본문 일부 생략)..." : ""}`,
+    "--- 본문 끝 ---",
+    "",
+    "user_corpus_retriever와 review_record_audit를 사용한 뒤 JSON만 반환해 주세요.",
+  ].join("\n");
 
-?쒕ぉ: ${writerResult.title}
-湲?먯닔: ${writerResult.wordCount}??
-?꾨왂 ?? ${strategy.tone}
-紐⑺몴 ?ㅼ썙?? ${strategy.keywords.join(", ")}
-?대떦 ?ъ슜??ID: ${userId}
-${topologySection}
-
---- 蹂몃Ц ?쒖옉 ---
-${writerResult.content.slice(0, 1500)}${writerResult.content.length > 1500 ? "\n...(?댄븯 ?앸왂)..." : ""}
---- 蹂몃Ц ??---
-
-user_corpus_retriever濡?肄뷀띁?ㅻ? 濡쒕뱶?섍퀬, review_record_audit?쇰줈 ?⑦꽩???뺤씤?????됯? JSON??異쒕젰?댁＜?몄슂.
-structure ?먯닔?먮뒗 肄섑뀗痢?援ъ“ ?먮떒???덈툕湲/由ы봽湲 ??븷??蹂몃Ц???먯뿰?ㅻ읇寃?諛섏쁺?먮뒗吏 諛섎뱶???ы븿?섏꽭??`;
-
-  onProgress?.("?됯? ?먯씠?꾪듃 ?ㅽ뻾 以?..");
-
+  onProgress?.("초안 평가 도구를 실행합니다.");
   const resultText = await runToolUseLoop({
     model: MODELS.sonnet,
     system: SYSTEM_PROMPT,
@@ -371,65 +389,27 @@ structure ?먯닔?먮뒗 肄섑뀗痢?援ъ“ ?먮떒???덈툕湲/由ы봽湲
     signal,
   });
 
-  onProgress?.("?됯? 寃곌낵 ?뚯떛 以?..");
+  onProgress?.("평가 결과를 정리합니다.");
   const parsed = parseEvalFromText(resultText);
-
-  // sub score??蹂댁“ 吏?쒖씠怨? 理쒖쥌 ?먯닔??SEO? ?ㅼ씠踰?濡쒖쭅???곗꽑 諛섏쁺?⑸땲??
   const subScore = computeAggregate(parsed.scores);
-
-  const runId = `eval-${randomUUID().slice(0, 8)}`;
   const provisionalEval: EvalResult = {
-    runId,
+    runId: `eval-${randomUUID().slice(0, 8)}`,
     scores: parsed.scores,
     aggregateScore: subScore,
     reasoning: parsed.reasoning,
     recommendations: parsed.recommendations,
     pass: subScore >= HARNESS_PASS_THRESHOLD,
   };
-  const seoEvaluation = evaluateSeoCompleteness({
-    title: writerResult.title,
-    body: writerResult.content,
-    keywords: strategy.keywords,
-    targetSearchCombinations: strategy.targetSearchCombinations,
-    seriesRole: strategy.seriesRole,
-    targetMainKeyword: strategy.targetMainKeyword,
-  });
-  const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
-    strategy,
+  const evalResult = finalizeEval({
+    provisionalEval,
     writerResult,
-    evalResult: provisionalEval,
+    strategy,
+    parsedReasoning: parsed.reasoning,
+    parsedRecommendations: parsed.recommendations,
   });
-  const aggregateScore = Math.round(
-    seoEvaluation.score * 0.45 +
-    naverLogicEvaluation.completenessScore * 0.35 +
-    parsed.scores.style_match * 0.08 +
-    parsed.scores.structure * 0.07 +
-    parsed.scores.engagement * 0.03 +
-    parsed.scores.originality * 0.01 +
-    parsed.scores.forbidden_check * 0.01
-  );
-  const evalResult: EvalResult = {
-    ...provisionalEval,
-    aggregateScore,
-    reasoning: {
-      ...parsed.reasoning,
-      seo: `SEO ?먯닔 ${seoEvaluation.score}?? ${seoEvaluation.evidence[0] ?? "?ㅼ썙???쒕ぉ/?꾩엯遺 諛곗튂瑜??먭??덉뒿?덈떎."}`,
-      naver_logic: `?ㅼ씠踰?濡쒖쭅 ?먯닔 ${naverLogicEvaluation.completenessScore}?? ${naverLogicEvaluation.evidence[0] ?? "濡쒖쭅 ?먮쫫???먭??덉뒿?덈떎."}`,
-    },
-    recommendations: [
-      ...seoEvaluation.improvements,
-      ...naverLogicEvaluation.improvements,
-      ...parsed.recommendations,
-    ].filter((value, index, array) => value && array.indexOf(value) === index).slice(0, 6),
-    pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
-  };
 
-  // GitHub??eval run ???
   await saveEvalRun(evalResult, writerResult.postId);
-
-  onProgress?.(
-    `?됯? ?꾨즺: ${aggregateScore}??(${evalResult.pass ? "?듦낵" : "誘몃떖"})`
-  );
+  onProgress?.(`초안 평가 완료: ${evalResult.aggregateScore}점(${evalResult.pass ? "통과" : "보강 필요"})`);
 
   return evalResult;
 }
@@ -447,7 +427,6 @@ async function saveEvalRun(evalResult: EvalResult, postId: string): Promise<void
   );
 }
 
-// 踰좎씠?ㅻ씪?멸낵 鍮꾧탳?섏뿬 ?뚭? ?щ? ?뺤씤
 export async function compareWithBaseline(
   evalResult: EvalResult,
   caseId: string
@@ -463,6 +442,3 @@ export async function compareWithBaseline(
     return null;
   }
 }
-
-
-
