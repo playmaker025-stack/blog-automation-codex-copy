@@ -72,11 +72,26 @@ const BLOG_BADGE_COLORS: Record<string, string> = {
   E: "bg-pink-100 text-pink-700",
 };
 
+interface EditSeriesDetailState {
+  articleGoal: string;
+  searchIntent: string;
+  readerQuestion: string;
+  primaryKeyword: string;
+  secondaryKeywords: string;   // 쉼표 구분
+  recommendedSections: string; // 줄바꿈 구분
+  keywordPlacementRules: string;
+  internalLinkTitles: string;
+  callToAction: string;
+  draftAngle: string;
+}
+
 interface EditTopicState {
   topicId: string;
   title: string;
   assignedUserId: string;
   status: Topic["status"];
+  seriesDetailPlan?: EditSeriesDetailState;
+  hasSeries: boolean;
 }
 
 function resolveTopicBadgeCode(topic: Topic): string | null {
@@ -265,21 +280,62 @@ export default function TopicsPage() {
   };
 
   // ── 수정 ───────────────────────────────────────────────
-  const startEdit = (t: Topic) =>
-    setEditing({ topicId: t.topicId, title: t.title, assignedUserId: t.assignedUserId ?? "", status: t.status });
+  const startEdit = (t: Topic) => {
+    const dp = t.seriesDetailPlan;
+    setEditing({
+      topicId: t.topicId,
+      title: t.title,
+      assignedUserId: t.assignedUserId ?? "",
+      status: t.status,
+      hasSeries: !!t.seriesId,
+      seriesDetailPlan: dp ? {
+        articleGoal: dp.articleGoal ?? "",
+        searchIntent: dp.searchIntent ?? "",
+        readerQuestion: dp.readerQuestion ?? "",
+        primaryKeyword: dp.primaryKeyword ?? "",
+        secondaryKeywords: (dp.secondaryKeywords ?? []).join(", "),
+        recommendedSections: (dp.recommendedSections ?? []).join("\n"),
+        keywordPlacementRules: (dp.keywordPlacementRules ?? []).join("\n"),
+        internalLinkTitles: (dp.internalLinkTitles ?? []).join("\n"),
+        callToAction: dp.callToAction ?? "",
+        draftAngle: dp.draftAngle ?? "",
+      } : (t.seriesId ? {
+        articleGoal: "", searchIntent: "", readerQuestion: "", primaryKeyword: "",
+        secondaryKeywords: "", recommendedSections: "", keywordPlacementRules: "",
+        internalLinkTitles: "", callToAction: "", draftAngle: "",
+      } : undefined),
+    });
+  };
 
   const handleSaveEdit = async () => {
     if (!editing) return;
     try {
+      const dp = editing.seriesDetailPlan;
+      const body: Record<string, unknown> = {
+        topicId: editing.topicId,
+        title: editing.title,
+        assignedUserId: editing.assignedUserId.trim().toLowerCase() || null,
+        status: editing.status,
+      };
+      if (dp) {
+        body.seriesDetailPlan = {
+          articleGoal: dp.articleGoal.trim(),
+          searchIntent: dp.searchIntent.trim(),
+          readerQuestion: dp.readerQuestion.trim(),
+          primaryKeyword: dp.primaryKeyword.trim(),
+          secondaryKeywords: dp.secondaryKeywords.split(",").map((s) => s.trim()).filter(Boolean),
+          recommendedSections: dp.recommendedSections.split("\n").map((s) => s.trim()).filter(Boolean),
+          keywordPlacementRules: dp.keywordPlacementRules.split("\n").map((s) => s.trim()).filter(Boolean),
+          internalLinkTitles: dp.internalLinkTitles.split("\n").map((s) => s.trim()).filter(Boolean),
+          callToAction: dp.callToAction.trim(),
+          draftAngle: dp.draftAngle.trim(),
+        };
+        body.seriesDetailReadyAt = new Date().toISOString();
+      }
       const res = await fetch("/api/github/topics", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          topicId: editing.topicId,
-          title: editing.title,
-          assignedUserId: editing.assignedUserId.trim().toLowerCase() || null,
-          status: editing.status,
-        }),
+        body: JSON.stringify(body),
       });
       if (!res.ok) throw new Error();
       setEditing(null);
@@ -940,8 +996,9 @@ export default function TopicsPage() {
           {visibleTopics.map((topic, idx) => (
             <div key={topic.topicId}>
               {editing?.topicId === topic.topicId ? (
-                <div className="bg-white border-2 border-blue-300 rounded-xl p-4">
-                  <div className="grid grid-cols-1 gap-3 mb-3">
+                <div className="bg-white border-2 border-blue-300 rounded-xl p-4 space-y-4">
+                  {/* ── 기본 정보 ── */}
+                  <div className="grid grid-cols-1 gap-3">
                     <div>
                       <label className="block text-xs text-zinc-500 mb-1">글제목</label>
                       <input value={editing.title} onChange={(e) => setEditing({ ...editing, title: e.target.value })}
@@ -967,7 +1024,82 @@ export default function TopicsPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-2 justify-end">
+
+                  {/* ── 시리즈 상세 설계 ── */}
+                  {editing.hasSeries && editing.seriesDetailPlan && (() => {
+                    const dp = editing.seriesDetailPlan;
+                    const setDp = (patch: Partial<EditSeriesDetailState>) =>
+                      setEditing({ ...editing, seriesDetailPlan: { ...dp, ...patch } });
+                    return (
+                      <div className="border-t border-zinc-100 pt-3 space-y-3">
+                        <p className="text-xs font-semibold text-amber-700">시리즈 상세 설계</p>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-xs text-zinc-500 mb-1">핵심 키워드</label>
+                            <input value={dp.primaryKeyword} onChange={(e) => setDp({ primaryKeyword: e.target.value })}
+                              placeholder="예: 전자담배 입문"
+                              className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-zinc-500 mb-1">보조 키워드 (쉼표 구분)</label>
+                            <input value={dp.secondaryKeywords} onChange={(e) => setDp({ secondaryKeywords: e.target.value })}
+                              placeholder="예: 입호흡, 액상형, 초보"
+                              className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-zinc-500 mb-1">검색 의도</label>
+                          <input value={dp.searchIntent} onChange={(e) => setDp({ searchIntent: e.target.value })}
+                            placeholder="예: how-to"
+                            className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-zinc-500 mb-1">글 목표</label>
+                          <input value={dp.articleGoal} onChange={(e) => setDp({ articleGoal: e.target.value })}
+                            placeholder="이 글이 독자에게 달성해야 할 목표"
+                            className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-zinc-500 mb-1">독자 질문</label>
+                          <input value={dp.readerQuestion} onChange={(e) => setDp({ readerQuestion: e.target.value })}
+                            placeholder="독자가 검색창에 실제로 떠올리는 질문"
+                            className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-zinc-500 mb-1">섹션 구조 (한 줄 = 섹션 1개)</label>
+                          <textarea value={dp.recommendedSections} onChange={(e) => setDp({ recommendedSections: e.target.value })}
+                            rows={3} placeholder={"섹션 1\n섹션 2\n섹션 3"}
+                            className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none" />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-zinc-500 mb-1">키워드 배치 규칙 (한 줄 = 규칙 1개)</label>
+                          <textarea value={dp.keywordPlacementRules} onChange={(e) => setDp({ keywordPlacementRules: e.target.value })}
+                            rows={2} placeholder={"도입부 1문단 내 메인 키워드 1회\n소제목에 보조 키워드 포함"}
+                            className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none" />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-zinc-500 mb-1">내부링크 대상 글제목 (한 줄 = 1개)</label>
+                          <textarea value={dp.internalLinkTitles} onChange={(e) => setDp({ internalLinkTitles: e.target.value })}
+                            rows={2} placeholder={"2025 입호흡 전자담배 추천 TOP5\n전자담배 액상 고르는 법"}
+                            className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none" />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-zinc-500 mb-1">작성 각도 (draftAngle)</label>
+                          <input value={dp.draftAngle} onChange={(e) => setDp({ draftAngle: e.target.value })}
+                            placeholder="예: 처음 전자담배를 접하는 독자 관점에서 쉽게 설명"
+                            className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-zinc-500 mb-1">CTA (callToAction)</label>
+                          <input value={dp.callToAction} onChange={(e) => setDp({ callToAction: e.target.value })}
+                            placeholder="예: 다음 글에서 구체적인 기기를 비교해드릴게요"
+                            className="w-full border border-zinc-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400" />
+                        </div>
+                      </div>
+                    );
+                  })()}
+
+                  <div className="flex gap-2 justify-end pt-1">
                     <button onClick={() => setEditing(null)} className="px-3 py-1.5 text-xs text-zinc-600 hover:text-zinc-900">취소</button>
                     <button onClick={handleSaveEdit} className="px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700">저장</button>
                   </div>
