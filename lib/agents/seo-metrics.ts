@@ -1,4 +1,5 @@
-﻿import type {
+import type {
+  KeywordContract,
   KeywordFocusMetric,
   KeywordUsageItem,
   KeywordUsageReport,
@@ -252,6 +253,32 @@ function getSubKeywordStatus(count: number): KeywordUsageItem["status"] {
   return "danger";
 }
 
+function getLimitedKeywordStatus(count: number, min: number, max: number): KeywordUsageItem["status"] {
+  if (count < min) return "under";
+  if (count <= max) return "ok";
+  if (count <= max + 3) return "caution";
+  return "danger";
+}
+
+function buildContractKeywordRecommendation(
+  keyword: string,
+  role: KeywordUsageItem["role"],
+  status: KeywordUsageItem["status"],
+  min: number,
+  max: number
+): string {
+  if (role === "forbidden") {
+    return status === "ok"
+      ? `'${keyword}'는 본문에 노출되지 않았습니다.`
+      : `'${keyword}'는 작업용 표현이라 발행 본문에서 반드시 삭제해야 합니다.`;
+  }
+  const label = role === "main" ? "메인 키워드" : role === "bridge" ? "브릿지 키워드" : role === "anchor" ? "내부링크 앵커" : "서브 키워드";
+  if (status === "under") return `${label} '${keyword}'는 본문 기준 ${min}~${max}회가 목표입니다. 필요한 문단에만 자연스럽게 보강해 주세요.`;
+  if (status === "caution") return `${label} '${keyword}'가 주의 구간입니다. 반복 문장을 줄이고 같은 의미는 설명형 문장으로 바꿔 주세요.`;
+  if (status === "danger") return `${label} '${keyword}'가 과도하게 반복됩니다. 직접 반복을 줄이고 이 글에서 다루지 않을 내용은 다음 글로 넘겨 주세요.`;
+  return `${label} '${keyword}' 반복은 현재 적정합니다.`;
+}
+
 function buildKeywordRecommendation(
   keyword: string,
   role: "main" | "sub",
@@ -349,8 +376,8 @@ function buildKeywordFocusMetrics(params: {
   const compactTitle = params.title.toLowerCase();
   const bodyLength = params.keywordReport.bodyLength;
 
-  return params.keywordReport.items.map((item, index) => {
-    const role: KeywordFocusMetric["role"] = index === 0 ? "main" : "sub";
+  return params.keywordReport.items.filter((item) => item.role !== "forbidden" && item.role !== "anchor").map((item, index) => {
+    const role: KeywordFocusMetric["role"] = item.role === "main" || index === 0 ? "main" : "sub";
     const isPreludeTarget =
       params.seriesRole === "prelude" &&
       item.keyword.trim().toLowerCase() === (params.targetMainKeyword?.trim().toLowerCase() ?? "");
@@ -449,7 +476,7 @@ function buildKeywordFocusMetrics(params: {
     return {
       keyword: item.keyword,
       role,
-      label: role === "main" ? "\uBA54\uC778 \uD0A4\uC6CC\uB4DC" : `\uC11C\uBE0C \uD0A4\uC6CC\uB4DC ${index}`,
+      label: role === "main" ? "\uBA54\uC778 \uD0A4\uC6CC\uB4DC" : item.role === "bridge" ? "브릿지 키워드" : `\uC11C\uBE0C \uD0A4\uC6CC\uB4DC ${index}`,
       completenessScore: clampScore(completenessScore),
       exposurePotentialScore: clampScore(exposurePotentialScore),
       count: item.count,
@@ -701,27 +728,79 @@ export function countKeywordOccurrences(body: string, keyword: string): number {
   return matches?.length ?? 0;
 }
 
+function buildContractKeywordItems(contract: KeywordContract, body: string): KeywordUsageItem[] {
+  const limitsByKey = new Map(
+    contract.limitedKeywords.map((limit) => [limit.keyword.trim().toLowerCase(), limit])
+  );
+  const ordered = uniqueKeywords([
+    contract.mainKeyword,
+    ...contract.subKeywords,
+    ...contract.bridgeKeywords,
+    ...contract.internalLinkAnchors,
+  ]).filter((keyword) => limitsByKey.has(keyword.trim().toLowerCase()) || isKeywordPhraseUseful(keyword));
+
+  const keywordItems = ordered.map((keyword) => {
+    const limit = limitsByKey.get(keyword.trim().toLowerCase());
+    const role = limit?.role ?? (keyword === contract.mainKeyword ? "main" : "sub");
+    const min = limit?.min ?? (role === "main" ? 4 : 1);
+    const max = limit?.max ?? (role === "main" ? 7 : 3);
+    const count = countKeywordOccurrences(body, keyword);
+    const status = getLimitedKeywordStatus(count, min, max);
+    return {
+      keyword,
+      count,
+      status,
+      targetMin: min,
+      targetMax: max,
+      role,
+      recommendation: buildContractKeywordRecommendation(keyword, role, status, min, max),
+    } satisfies KeywordUsageItem;
+  });
+
+  const forbiddenItems = uniqueKeywords(contract.forbiddenTerms).map((keyword) => {
+    const count = countKeywordOccurrences(body, keyword);
+    const status: KeywordUsageItem["status"] = count > 0 ? "danger" : "ok";
+    return {
+      keyword,
+      count,
+      status,
+      targetMin: 0,
+      targetMax: 0,
+      role: "forbidden" as const,
+      recommendation: buildContractKeywordRecommendation(keyword, "forbidden", status, 0, 0),
+    };
+  });
+
+  return [...keywordItems, ...forbiddenItems];
+}
+
 export function analyzeKeywordUsage(params: {
   title: string;
   body: string;
   keywords?: string[];
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
+  keywordContract?: KeywordContract;
 }): KeywordUsageReport {
   const paragraphs = splitParagraphs(params.body);
   const introText = paragraphs.slice(0, 2).join("\n\n");
   const bodyLength = params.body.replace(/\s+/g, "").length;
-  const mainKeyword = selectMainKeyword(params.title, params.keywords ?? [], params.targetMainKeyword);
-  const orderedKeywords = buildTrackedKeywords({
-    title: params.title,
-    body: params.body,
-    mainKeyword,
-    keywords: params.keywords ?? [],
-  }).filter(Boolean);
-  const keywordPool = collectKeywordPool(params.title, orderedKeywords);
+  const contract = params.keywordContract;
+  const mainKeyword = contract?.mainKeyword ?? selectMainKeyword(params.title, params.keywords ?? [], params.targetMainKeyword);
+  const orderedKeywords = contract
+    ? []
+    : buildTrackedKeywords({
+        title: params.title,
+        body: params.body,
+        mainKeyword,
+        keywords: params.keywords ?? [],
+      }).filter(Boolean);
+  const keywordPool = contract
+    ? [contract.mainKeyword, ...contract.subKeywords, ...contract.bridgeKeywords, ...contract.internalLinkAnchors]
+    : collectKeywordPool(params.title, orderedKeywords);
   const normalizedTargetMainKeyword = params.targetMainKeyword?.trim().toLowerCase() ?? "";
 
-  const items: KeywordUsageItem[] = orderedKeywords.map((keyword, index) => {
+  const items: KeywordUsageItem[] = contract ? buildContractKeywordItems(contract, params.body) : orderedKeywords.map((keyword, index) => {
     const count = countKeywordOccurrences(params.body, keyword);
     const isPreludeMainKeyword =
       params.seriesRole === "prelude" &&
@@ -752,8 +831,13 @@ export function analyzeKeywordUsage(params: {
     };
   });
 
-  const mainKeywordItem = items[0] ?? null;
-  const subKeywordItems = items.slice(1, 8);
+  const mainKeywordItem = items.find((item) => item.role === "main") ?? items[0] ?? null;
+  const subKeywordItems = contract
+    ? items.filter((item) => item.role === "sub")
+    : items.slice(1, 8);
+  const bridgeKeywordItems = items.filter((item) => item.role === "bridge");
+  const internalLinkAnchorItems = items.filter((item) => item.role === "anchor");
+  const forbiddenItems = items.filter((item) => item.role === "forbidden");
   const introCoverage = mainKeyword ? countKeywordOccurrences(introText, mainKeyword) > 0 : true;
   const titleFrontLoaded =
     mainKeyword ? params.title.indexOf(mainKeyword) >= 0 && params.title.indexOf(mainKeyword) <= 12 : true;
@@ -761,10 +845,11 @@ export function analyzeKeywordUsage(params: {
   const paragraphWarnings = buildParagraphWarnings(paragraphs, [
     ...(mainKeywordItem ? [mainKeywordItem] : []),
     ...subKeywordItems,
+    ...bridgeKeywordItems,
   ]);
   const { overallRisk, overallRiskSummary } = evaluateOverallRisk(
     mainKeywordItem,
-    subKeywordItems,
+    [...subKeywordItems, ...bridgeKeywordItems, ...internalLinkAnchorItems, ...forbiddenItems],
     paragraphWarnings
   );
 
@@ -789,10 +874,14 @@ export function analyzeKeywordUsage(params: {
     items,
     mainKeyword: mainKeywordItem,
     subKeywords: subKeywordItems,
+    bridgeKeywords: bridgeKeywordItems,
+    internalLinkAnchors: internalLinkAnchorItems,
+    forbiddenItems,
+    contractApplied: Boolean(contract),
     overallRisk,
     overallRiskSummary,
     paragraphWarnings,
-    tokenItems: buildKeywordTokenItems(keywordPool, params.body),
+    tokenItems: contract ? [] : buildKeywordTokenItems(keywordPool, params.body),
     totalMentions,
     introCoverage,
     titleFrontLoaded,
@@ -809,6 +898,7 @@ export function evaluateSeoCompleteness(params: {
   targetSearchCombinations?: SearchCombinationTarget[];
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
+  keywordContract?: KeywordContract;
 }): SeoEvaluation {
   const keywordReport = analyzeKeywordUsage(params);
   const keywordMetrics = buildKeywordFocusMetrics({
@@ -818,8 +908,21 @@ export function evaluateSeoCompleteness(params: {
     seriesRole: params.seriesRole,
     targetMainKeyword: params.targetMainKeyword,
   });
+  const contractCombinations = params.keywordContract
+    ? params.keywordContract.limitedKeywords
+        .filter((item) => item.role !== "anchor")
+        .map((item): SearchCombinationTarget => ({
+          phrase: item.keyword,
+          role: item.role === "main" ? "main" : "support",
+          priority: item.role === "main" ? "core" : "support",
+          rationale: "키워드 계약서에 확정된 검사 대상입니다.",
+          suggestedPlacement: item.role === "bridge" ? "본문 후반 연결 문단" : "본문 핵심 문단",
+        }))
+    : [];
   const combinations =
-    (params.targetSearchCombinations ?? []).length > 0
+    contractCombinations.length > 0
+      ? contractCombinations
+      : (params.targetSearchCombinations ?? []).length > 0
       ? params.targetSearchCombinations ?? []
       : buildFallbackSearchCombinations(params.keywords ?? keywordReport.items.map((item) => item.keyword));
   const combinationMetrics = buildSearchCombinationMetrics({
@@ -901,6 +1004,13 @@ export function evaluateSeoCompleteness(params: {
   }
 
   for (const item of keywordReport.items) {
+    if (item.role === "forbidden") {
+      if (item.status === "danger") {
+        score -= 18;
+        improvements.push(item.recommendation);
+      }
+      continue;
+    }
     if (item.status === "ok") {
       evidence.push(`\'${item.keyword}\' \uBCF8\uBB38 ${item.count}\uD68C\uB294 \uD604\uC7AC \uAD8C\uC7A5 \uBC94\uC704\uC785\uB2C8\uB2E4.`);
       continue;

@@ -1,4 +1,4 @@
-import type { KeywordUsageReport, SeoEvaluation } from "./types";
+import type { KeywordContract, KeywordUsageReport, SeoEvaluation } from "./types";
 import { evaluateSeoCompleteness } from "./seo-metrics";
 
 export type DraftReviewSeverity = "info" | "warning" | "blocker";
@@ -25,6 +25,7 @@ export interface DraftReviewInput {
   title: string;
   body: string;
   revisionRequest?: string;
+  keywordContract?: KeywordContract;
 }
 
 export interface DraftReviewResult {
@@ -213,6 +214,7 @@ export function reviewActualDraft(input: DraftReviewInput): DraftReviewResult {
   const seoEvaluation = evaluateSeoCompleteness({
     title: normalizedTitle,
     body,
+    keywordContract: input.keywordContract,
   });
 
   return {

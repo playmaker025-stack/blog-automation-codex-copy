@@ -181,6 +181,21 @@ function buildNaverSignalsText(strategy: StrategyPlanResult): string {
   ].join("\n");
 }
 
+function buildKeywordContractText(strategy: StrategyPlanResult): string {
+  const contract = strategy.keywordContract;
+  if (!contract) return "No keyword contract.";
+  return [
+    `articleType: ${contract.articleType}`,
+    `bodyRole: ${contract.bodyRole}`,
+    `mainKeyword: ${contract.mainKeyword}`,
+    `subKeywords: ${contract.subKeywords.join(" / ") || "none"}`,
+    `bridgeKeywords: ${contract.bridgeKeywords.join(" / ") || "none"}`,
+    `forbiddenTerms: ${contract.forbiddenTerms.join(" / ")}`,
+    `excludedTopics: ${contract.excludedTopics.join(" / ") || "none"}`,
+    `handoffTopics: ${contract.handoffTopics.join(" / ") || "none"}`,
+  ].join("\n");
+}
+
 function finalizeEval(params: {
   provisionalEval: EvalResult;
   writerResult: WriterResult;
@@ -196,6 +211,7 @@ function finalizeEval(params: {
     targetSearchCombinations: strategy.targetSearchCombinations,
     seriesRole: strategy.seriesRole,
     targetMainKeyword: strategy.targetMainKeyword,
+    keywordContract: strategy.keywordContract,
   });
   const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
     strategy,
@@ -211,6 +227,10 @@ function finalizeEval(params: {
     provisionalEval.scores.originality * 0.01 +
     provisionalEval.scores.forbidden_check * 0.01
   );
+  const hasForbiddenBodyTerm = seoEvaluation.keywordReport.forbiddenItems?.some((item) => item.status === "danger") ?? false;
+  const hasKeywordDanger = seoEvaluation.keywordReport.items.some(
+    (item) => item.role !== "forbidden" && item.status === "danger"
+  );
 
   return {
     ...provisionalEval,
@@ -225,7 +245,7 @@ function finalizeEval(params: {
       ...naverLogicEvaluation.improvements,
       ...parsedRecommendations,
     ].filter((value, index, array) => value && array.indexOf(value) === index).slice(0, 6),
-    pass: aggregateScore >= HARNESS_PASS_THRESHOLD,
+    pass: aggregateScore >= HARNESS_PASS_THRESHOLD && !hasForbiddenBodyTerm && !hasKeywordDanger,
     seoEvaluation,
     naverLogicEvaluation,
   };
@@ -371,6 +391,9 @@ export async function runHarnessEvaluator(params: {
     `핵심 키워드: ${strategy.keywords.join(", ")}`,
     `사용자 ID: ${userId}`,
     topologySection,
+    "",
+    "키워드 계약서:",
+    buildKeywordContractText(strategy),
     "",
     "--- 본문 시작 ---",
     `${writerResult.content.slice(0, 1500)}${writerResult.content.length > 1500 ? "\n...(본문 일부 생략)..." : ""}`,

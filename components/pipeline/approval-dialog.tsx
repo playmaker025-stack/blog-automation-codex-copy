@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ApprovalRequest, NaverLogicPlan } from "@/lib/agents/types";
+import type { ApprovalRequest, KeywordContract, NaverLogicPlan } from "@/lib/agents/types";
 
 interface Props {
   pipelineId: string;
@@ -9,6 +9,7 @@ interface Props {
   proposedTitle: string;
   rationale: string;
   outline: string[];
+  keywordContract?: KeywordContract;
   naverLogic?: NaverLogicPlan;
   onApprove: (req: ApprovalRequest) => Promise<void>;
   onReject: () => void;
@@ -20,6 +21,7 @@ export function ApprovalDialog({
   proposedTitle,
   rationale,
   outline,
+  keywordContract,
   naverLogic,
   onApprove,
   onReject,
@@ -108,6 +110,19 @@ export function ApprovalDialog({
                   <li key={`${heading}-${index}`} className="text-sm text-zinc-700">{heading}</li>
                 ))}
               </ol>
+            </div>
+          )}
+
+          {keywordContract && (
+            <div className="rounded-lg border border-emerald-100 bg-emerald-50 p-3">
+              <p className="mb-1 text-xs font-medium text-emerald-700">키워드 계약서</p>
+              <div className="space-y-1 text-xs leading-5 text-zinc-700">
+                <p><span className="font-semibold">글 타입:</span> {keywordContract.articleType}</p>
+                <p><span className="font-semibold">본문 역할:</span> {keywordContract.bodyRole}</p>
+                <p><span className="font-semibold">이 글이 먹을 키워드:</span> {keywordContract.mainKeyword}</p>
+                <p><span className="font-semibold">다음 글로 넘길 키워드:</span> {keywordContract.bridgeKeywords.join(", ") || "없음"}</p>
+                <p><span className="font-semibold">본문 금지어:</span> {keywordContract.forbiddenTerms.join(", ")}</p>
+              </div>
             </div>
           )}
 

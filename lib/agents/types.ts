@@ -44,6 +44,52 @@ export interface StrategyPlanResult {
   publicationLearning?: PublicationLearningSummary | null;
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
+  keywordContract?: KeywordContract;
+}
+
+export type ArticleType =
+  | "warmup"
+  | "main_recommendation"
+  | "comparison"
+  | "problem_solution"
+  | "review"
+  | "howto"
+  | "local_hub"
+  | "leaf";
+
+export type ArticleStage =
+  | "pre_suasion"
+  | "info_summary"
+  | "comparison_judgment"
+  | "purchase_review"
+  | "problem_solution"
+  | "internal_link";
+
+export type KeywordContractRole = "main" | "sub" | "bridge" | "anchor" | "forbidden";
+
+export interface KeywordLimit {
+  keyword: string;
+  min: number;
+  max: number;
+  role: Exclude<KeywordContractRole, "forbidden">;
+}
+
+export interface KeywordContract {
+  title: string;
+  articleType: ArticleType;
+  articleStage: ArticleStage;
+  searchIntent: string;
+  topology: ContentTopologyKind;
+  bodyRole: string;
+  mainKeyword: string;
+  subKeywords: string[];
+  bridgeKeywords: string[];
+  internalLinkAnchors: string[];
+  forbiddenTerms: string[];
+  limitedKeywords: KeywordLimit[];
+  excludedTopics: string[];
+  handoffTopics: string[];
+  differentiationPoints: string[];
 }
 
 export interface SearchCombinationTarget {
@@ -112,6 +158,7 @@ export interface KeywordUsageItem {
   targetMin: number;
   targetMax: number;
   recommendation: string;
+  role?: KeywordContractRole;
 }
 
 export interface KeywordParagraphWarning {
@@ -125,6 +172,10 @@ export interface KeywordUsageReport {
   items: KeywordUsageItem[];
   mainKeyword: KeywordUsageItem | null;
   subKeywords: KeywordUsageItem[];
+  bridgeKeywords?: KeywordUsageItem[];
+  internalLinkAnchors?: KeywordUsageItem[];
+  forbiddenItems?: KeywordUsageItem[];
+  contractApplied?: boolean;
   overallRisk: "low" | "medium" | "high";
   overallRiskSummary: string;
   paragraphWarnings: KeywordParagraphWarning[];

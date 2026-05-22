@@ -12,7 +12,7 @@ import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-re
 import { readJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { Topic, TopicIndex } from "@/lib/types/github-data";
-import type { SearchCombinationTarget, StrategyPlanResult } from "./types";
+import type { ArticleStage, ArticleType, KeywordContract, SearchCombinationTarget, StrategyPlanResult } from "./types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import { buildContentTopologyPlan } from "./content-topology";
 import { buildPolicyPromptSection } from "./blog-workflow-policy";
@@ -603,6 +603,157 @@ function sanitizeStrategyLanguage(plan: StrategyPlanResult): StrategyPlanResult 
   };
 }
 
+const BODY_FORBIDDEN_TERMS = [
+  "선행포스팅",
+  "키워드빌드업",
+  "SEO 점수",
+  "검색의도",
+  "메인 키워드",
+  "서브 키워드",
+  "본문 n회",
+  "적정 범위",
+  "내부링크 설계",
+  "허브/리프",
+  "상위노출 가능성",
+];
+
+function normalizeKeyword(value: string): string {
+  return value.trim().replace(/\s+/g, " ");
+}
+
+function isGenericKeyword(value: string): boolean {
+  const normalized = normalizeKeyword(value).toLowerCase();
+  if (!normalized || normalized.length < 2) return true;
+  return [
+    "전자담배",
+    "추천",
+    "고르기",
+    "고르는",
+    "전에",
+    "많이",
+    "보는",
+    "선택",
+    "선택기준",
+    "기준",
+    "방법",
+    "정리",
+    "가이드",
+    "선행포스팅",
+    "키워드빌드업",
+    "메인포스팅",
+  ].includes(normalized);
+}
+
+function compactKeywords(values: string[], limit = 6): string[] {
+  const seen = new Set<string>();
+  const output: string[] = [];
+  for (const value of values) {
+    const normalized = normalizeKeyword(value);
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key) || isGenericKeyword(normalized)) continue;
+    seen.add(key);
+    output.push(normalized);
+    if (output.length >= limit) break;
+  }
+  return output;
+}
+
+function inferArticleType(topic: Topic, plan: StrategyPlanResult, topologyKind: "hub" | "leaf"): ArticleType {
+  const text = `${topic.title} ${topic.description} ${plan.title}`.toLowerCase();
+  if (topic.seriesRole === "prelude") return "warmup";
+  if (topic.seriesRole === "main") return "main_recommendation";
+  if (topologyKind === "hub") return "local_hub";
+  if (/(비교|차이|vs|고르는|고르기|선택 기준|기준)/u.test(text)) return "comparison";
+  if (/(해결|고장|누수|탄맛|문제|안됨|교체|원인)/u.test(text)) return "problem_solution";
+  if (/(후기|리뷰|사용감|실사용)/u.test(text)) return "review";
+  if (/(사용법|방법|가이드|입문|처음)/u.test(text)) return "howto";
+  return "leaf";
+}
+
+function inferArticleStage(articleType: ArticleType): ArticleStage {
+  if (articleType === "warmup") return "pre_suasion";
+  if (articleType === "comparison") return "comparison_judgment";
+  if (articleType === "main_recommendation") return "purchase_review";
+  if (articleType === "problem_solution") return "problem_solution";
+  if (articleType === "local_hub") return "internal_link";
+  return "info_summary";
+}
+
+function buildWarmupMainKeyword(topic: Topic, plan: StrategyPlanResult): string {
+  const text = `${topic.title} ${plan.title}`;
+  if (/선택|고르|기준/u.test(text)) return "전자담배 선택 기준";
+  if (/차이|구분/u.test(text)) return "전자담배 차이";
+  if (/입문|처음|초보/u.test(text)) return "전자담배 입문 기준";
+  return compactKeywords([topic.title, plan.title, ...(plan.keywords ?? [])], 1)[0] ?? topic.title;
+}
+
+function buildKeywordContract(params: {
+  topic: Topic;
+  plan: StrategyPlanResult;
+  topologyKind: "hub" | "leaf";
+  directIntent: DirectKeywordIntent | null;
+}): KeywordContract {
+  const { topic, plan, topologyKind, directIntent } = params;
+  const articleType = inferArticleType(topic, plan, topologyKind);
+  const articleStage = inferArticleStage(articleType);
+  const targetMainKeyword = normalizeKeyword(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "");
+  const isPrelude = articleType === "warmup";
+  const mainKeyword = isPrelude
+    ? buildWarmupMainKeyword(topic, plan)
+    : normalizeKeyword(directIntent?.mainKeyword ?? targetMainKeyword ?? plan.keywords[0] ?? topic.title);
+  const bridgeKeywords = compactKeywords(isPrelude && targetMainKeyword ? [targetMainKeyword] : [], 3);
+  const internalLinkAnchors = compactKeywords(
+    (plan.contentTopology?.internalLinkTargets ?? []).map((item) => item.title),
+    4
+  );
+  const subKeywords = compactKeywords(
+    [
+      ...(directIntent?.subKeywords ?? []),
+      ...(plan.keywords ?? []),
+      ...(plan.targetSearchCombinations ?? []).map((item) => item.phrase),
+    ].filter((keyword) => {
+      const normalized = normalizeKeyword(keyword).toLowerCase();
+      if (normalized === mainKeyword.toLowerCase()) return false;
+      return !bridgeKeywords.some((bridge) => normalized.includes(bridge.toLowerCase()) || bridge.toLowerCase().includes(normalized));
+    }),
+    7
+  );
+
+  const limitedKeywords = [
+    { keyword: mainKeyword, min: isPrelude ? 2 : 4, max: isPrelude ? 4 : 7, role: "main" as const },
+    ...subKeywords.slice(0, 7).map((keyword) => ({ keyword, min: 1, max: 3, role: "sub" as const })),
+    ...bridgeKeywords.map((keyword) => ({ keyword, min: 1, max: 2, role: "bridge" as const })),
+    ...internalLinkAnchors.map((keyword) => ({ keyword, min: 0, max: 2, role: "anchor" as const })),
+  ];
+
+  return {
+    title: plan.title,
+    articleType,
+    articleStage,
+    searchIntent: topic.seriesDetailPlan?.searchIntent ?? plan.rationale ?? topic.description,
+    topology: topologyKind,
+    bodyRole: isPrelude
+      ? "본편 추천 글로 바로 경쟁하지 않고 선택 기준을 먼저 정리해 다음 글로 자연스럽게 넘기는 워밍업 본문"
+      : "독자의 검색 의도에 직접 답하고 필요한 비교, 설명, 상담 맥락을 완결하는 본문",
+    mainKeyword,
+    subKeywords,
+    bridgeKeywords,
+    internalLinkAnchors,
+    forbiddenTerms: BODY_FORBIDDEN_TERMS,
+    limitedKeywords,
+    excludedTopics: isPrelude
+      ? ["제품명 나열", "TOP5 순위", "구체 추천 기기 비교", targetMainKeyword].filter(Boolean)
+      : [],
+    handoffTopics: isPrelude && targetMainKeyword ? [targetMainKeyword, "구체 제품 후보", "추천 TOP5"] : [],
+    differentiationPoints: isPrelude
+      ? [
+          "이 글은 선택 기준을 정리하고 본편 추천 글은 구체 제품 후보를 다룬다.",
+          "지역명은 실제 상담 맥락에서만 사용하고 억지 반복하지 않는다.",
+        ]
+      : ["기존 글과 같은 제목/목차를 반복하지 않고 현재 검색 의도에만 답한다."],
+  };
+}
+
 export async function runStrategyPlanner(params: {
   topicId: string;
   userId: string;
@@ -722,6 +873,15 @@ export async function runStrategyPlanner(params: {
     },
     naverLogic,
   };
+  plan = {
+    ...plan,
+    keywordContract: buildKeywordContract({
+      topic,
+      plan,
+      topologyKind: contentTopology.kind,
+      directIntent,
+    }),
+  };
 
   onProgress?.(`전략 수립 완료: "${plan.title}" (${contentTopology.kind === "hub" ? "허브글" : "리프글"})`);
   onProgress?.(
@@ -732,6 +892,12 @@ export async function runStrategyPlanner(params: {
       ...plan,
       seriesRole: topic.seriesRole,
       targetMainKeyword: topic.targetMainKeyword,
+      keywordContract: buildKeywordContract({
+        topic,
+        plan: { ...plan, seriesRole: topic.seriesRole, targetMainKeyword: topic.targetMainKeyword },
+        topologyKind: contentTopology.kind,
+        directIntent,
+      }),
     };
   }
   return plan;

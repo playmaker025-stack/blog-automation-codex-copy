@@ -303,6 +303,7 @@ export default function PipelinePage() {
           targetSearchCombinations: strategy.targetSearchCombinations,
           seriesRole: strategy.seriesRole,
           targetMainKeyword: strategy.targetMainKeyword,
+          keywordContract: strategy.keywordContract,
         });
 
         return {
@@ -799,6 +800,7 @@ export default function PipelinePage() {
           title: payload.title,
           body: payload.body,
           revisionRequest,
+          keywordContract: draftRewriteContext?.strategy.keywordContract,
         }),
       });
       const review = await res.json() as DraftReviewResult & { error?: string };
@@ -1308,6 +1310,7 @@ export default function PipelinePage() {
               proposedTitle={approval.proposedTitle}
               rationale={approval.rationale}
               outline={approval.outline}
+              keywordContract={approval.strategy.keywordContract}
               naverLogic={approval.strategy.naverLogic}
               onApprove={handleApprove}
               onReject={() => handleApprove({ pipelineId: approval.pipelineId, approved: false })}

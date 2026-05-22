@@ -106,6 +106,43 @@ function keywordRecommendation(item: KeywordUsageReport["items"][number], role: 
   return `서브 키워드 '${item.keyword}'의 반복 횟수는 적정 범위입니다.`;
 }
 
+function keywordRoleLabel(role: KeywordUsageReport["items"][number]["role"]): string {
+  if (role === "main") return "메인 키워드";
+  if (role === "bridge") return "브릿지 키워드";
+  if (role === "anchor") return "내부링크 앵커";
+  if (role === "forbidden") return "본문 금지어";
+  return "서브 키워드";
+}
+
+function KeywordItemCard({
+  item,
+  keywordStatusTone,
+}: {
+  item: KeywordUsageReport["items"][number];
+  keywordStatusTone: (status: KeywordUsageReport["items"][number]["status"]) => string;
+}) {
+  const isForbidden = item.role === "forbidden";
+  return (
+    <div className={`rounded-md border px-3 py-2 ${isForbidden ? "border-red-100 bg-red-50" : "border-zinc-200 bg-white"}`}>
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="text-sm font-medium text-zinc-800">{item.keyword}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-500">{keywordRoleLabel(item.role)}</p>
+        </div>
+        <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
+          본문 {item.count}회 / {keywordStatusLabel(item.status)}
+        </p>
+      </div>
+      <p className="mt-1 text-[11px] text-zinc-500">
+        허용 범위 {item.targetMin}~{item.targetMax}회
+      </p>
+      <p className="mt-1 text-xs text-zinc-700">
+        {item.recommendation || keywordRecommendation(item, item.role === "main" ? "main" : "sub")}
+      </p>
+    </div>
+  );
+}
+
 function overallRiskSummary(report: KeywordUsageReport): string {
   const warningCount = report.paragraphWarnings.length;
   if (report.overallRisk === "high") {
@@ -180,7 +217,9 @@ function KeywordRiskReport({
           <p className="mt-2 text-xs text-zinc-500">
             적정 범위 {report.mainKeyword.targetMin}~{report.mainKeyword.targetMax}회
           </p>
-          <p className="mt-1 text-xs text-zinc-700">{keywordRecommendation(report.mainKeyword, "main")}</p>
+          <p className="mt-1 text-xs text-zinc-700">
+            {report.mainKeyword.recommendation || keywordRecommendation(report.mainKeyword, "main")}
+          </p>
         </div>
       )}
 
@@ -189,18 +228,32 @@ function KeywordRiskReport({
           <p className="text-xs font-semibold text-zinc-500">서브 키워드</p>
           <div className="mt-2 space-y-2">
             {report.subKeywords.map((item) => (
-              <div key={`sub-${item.keyword}`} className="rounded-md border border-zinc-200 bg-white px-3 py-2">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-medium text-zinc-800">{item.keyword}</p>
-                  <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
-                    본문 {item.count}회 / {keywordStatusLabel(item.status)}
-                  </p>
-                </div>
-                <p className="mt-1 text-[11px] text-zinc-500">
-                  적정 범위 {item.targetMin}~{item.targetMax}회
-                </p>
-                <p className="mt-1 text-xs text-zinc-700">{keywordRecommendation(item, "sub")}</p>
-              </div>
+              <KeywordItemCard key={`sub-${item.keyword}`} item={item} keywordStatusTone={keywordStatusTone} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {(report.bridgeKeywords?.length ?? 0) > 0 && (
+        <div className="rounded-lg border border-blue-100 bg-blue-50 px-3 py-3">
+          <p className="text-xs font-semibold text-blue-700">브릿지 키워드</p>
+          <p className="mt-1 text-[11px] leading-5 text-blue-600">
+            다음 글로 넘길 연결 키워드입니다. 본문을 이 주제로 바꾸지 않고 제한 횟수 안에서만 씁니다.
+          </p>
+          <div className="mt-2 space-y-2">
+            {report.bridgeKeywords?.map((item) => (
+              <KeywordItemCard key={`bridge-${item.keyword}`} item={item} keywordStatusTone={keywordStatusTone} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {(report.forbiddenItems?.length ?? 0) > 0 && (
+        <div className="rounded-lg border border-red-100 bg-red-50 px-3 py-3">
+          <p className="text-xs font-semibold text-red-700">본문 금지어 검수</p>
+          <div className="mt-2 space-y-2">
+            {report.forbiddenItems?.map((item) => (
+              <KeywordItemCard key={`forbidden-${item.keyword}`} item={item} keywordStatusTone={keywordStatusTone} />
             ))}
           </div>
         </div>

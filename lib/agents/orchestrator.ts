@@ -293,7 +293,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
       postId,
       corpusSummary,
       harnessBriefing,
-      revisionInstructions: buildRevisionInstruction({ evalResult, briefing: harnessBriefing }),
+      revisionInstructions: buildRevisionInstruction({ evalResult, briefing: harnessBriefing, strategy }),
       onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
       onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
       signal,
@@ -1716,6 +1716,7 @@ export async function runWritePhase(params: {
       targetSearchCombinations: effectiveStrategy.targetSearchCombinations,
       seriesRole: effectiveStrategy.seriesRole,
       targetMainKeyword: effectiveStrategy.targetMainKeyword,
+      keywordContract: effectiveStrategy.keywordContract,
     });
 
     if (!postGateResult.passed) {

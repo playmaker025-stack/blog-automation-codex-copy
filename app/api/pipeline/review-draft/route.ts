@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { reviewActualDraft, type DraftReviewChange } from "@/lib/agents/draft-review";
+import type { KeywordContract } from "@/lib/agents/types";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -9,6 +10,7 @@ interface ReviewDraftRequest {
   title: string;
   body: string;
   revisionRequest?: string;
+  keywordContract?: KeywordContract;
 }
 
 interface OpenAIReviewResult {
@@ -178,6 +180,7 @@ async function requestOpenAIReview(input: ReviewDraftRequest, repairReason?: str
             "Revise the user's actual final draft, not a placeholder and not a mere review memo. " +
             "Improve the SEO title, typo/spacing, sentence flow, paragraph structure, search intent fit, " +
             "keyword placement, readability, and Naver Blog retention flow while preserving the user's facts and intent. " +
+            "Follow the keyword contract if present. Do not introduce forbidden body terms from the contract into revisedBody. " +
             "Keep the revisedTitle concise: 28 to 45 Korean characters, with the main keyword near the front. " +
             "Do not add adult guidance, minor warnings, legal disclaimers, health warnings, safety notices, " +
             "nicotine cautions, or e-cigarette safety copy unless that exact idea already exists in the source text. " +
@@ -191,6 +194,8 @@ async function requestOpenAIReview(input: ReviewDraftRequest, repairReason?: str
           content: `Original app draft title: ${input.originalTitle ?? ""}
 User's final title to improve: ${input.title}
 Additional user revision request: ${input.revisionRequest?.trim() || "없음"}
+Keyword contract:
+${input.keywordContract ? JSON.stringify(input.keywordContract, null, 2) : "none"}
 
 Local pre-checks:
 ${localReview.issues.map((issue) => `- [${issue.severity}] ${issue.message}`).join("\n")}
@@ -202,6 +207,8 @@ Required work:
 - Keep the user's meaning, order of facts, shop/location/product claims, and personal intent.
 - Improve paragraph rhythm: short intro, problem/situation, selection criteria, practical examples, and closing.
 - Use keywords naturally. Do not stuff repeated keywords.
+- If a keyword contract is present, only evaluate and adjust the contracted main/sub/bridge/anchor keywords. Do not treat generic words such as before, many, choosing, recommendation, or the broad category word as SEO keywords unless explicitly listed in the contract.
+- Contract forbidden terms may appear in this instruction, but they must not appear in revisedBody.
 - Remove or soften exaggerated claims, unsupported guarantees, and clickbait.
 - Fix Korean spacing, typo, and awkward phrasing.
 - If the user included an additional revision request, reflect it unless it conflicts with facts, safety rules, or SEO readability.
@@ -275,6 +282,7 @@ export async function POST(request: NextRequest) {
       originalTitle: body.originalTitle,
       title: aiReview.revisedTitle,
       body: aiReview.revisedBody,
+      keywordContract: body.keywordContract,
     });
 
     return NextResponse.json({

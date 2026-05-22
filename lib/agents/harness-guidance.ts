@@ -173,6 +173,7 @@ ${failureSection}
 export function buildRevisionInstruction(params: {
   evalResult: EvalResult;
   briefing: string;
+  strategy?: StrategyPlanResult;
 }): string {
   const lowDimensions = Object.entries(params.evalResult.scores)
     .filter(([, score]) => score < HARNESS_PASS_THRESHOLD)
@@ -198,6 +199,17 @@ export function buildRevisionInstruction(params: {
 
   const seoScore = params.evalResult.seoEvaluation?.score ?? params.evalResult.aggregateScore;
   const risk = params.evalResult.seoEvaluation?.keywordReport.overallRisk ?? "unknown";
+  const contract = params.strategy?.keywordContract;
+  const contractSection = contract
+    ? [
+        "키워드 계약서 기준",
+        `- 이 글이 먹을 키워드: ${contract.mainKeyword}`,
+        `- 다음 글로 넘길 키워드: ${contract.bridgeKeywords.join(", ") || "없음"}`,
+        `- 본문 금지어: ${contract.forbiddenTerms.join(", ")}`,
+        `- 이 글에서 다루지 않을 내용: ${contract.excludedTopics.join(", ") || "없음"}`,
+        `- 다음 글로 넘길 내용: ${contract.handoffTopics.join(", ") || "없음"}`,
+      ].join("\n")
+    : "";
 
   return `## 자동 보강 지시
 이전 초안은 통과 기준 ${HARNESS_PASS_THRESHOLD}점에 도달하지 못했습니다. 아래 문제를 반영해 본문 전체를 다시 작성하세요. 기존 문장을 덧붙이지 말고, 과한 반복을 줄이면서 부족한 정보와 구조를 보강해야 합니다.
@@ -217,16 +229,19 @@ ${paragraphWarnings.join("\n") || ""}
 반드시 줄일 표현
 - 과반복 키워드: ${dangerKeywords.join(", ") || "없음"}
 - 위 키워드는 같은 문단에서 반복하지 말고, 일부를 선택 기준, 상황 설명, 제품/액상 예시, 비교 문장으로 치환하세요.
+- 브릿지 키워드는 다음 글로 넘기는 연결 문장에만 남기고, 본문 전체 주제로 키우지 마세요.
 
 반드시 보강할 표현
 - 부족 키워드: ${underKeywords.join(", ") || "없음"}
 - 부족 키워드는 억지로 나열하지 말고 검색자가 실제로 묻는 질문에 답하는 문단 안에 넣으세요.
 
+${contractSection}
+
 보강본 채택 조건
 - 키워드 danger 개수가 이전보다 줄어야 합니다.
 - SEO 점수 또는 네이버 로직 점수가 이전보다 올라야 합니다.
-- 메인 키워드는 본문 4~7회, 서브 키워드는 각 1~3회를 목표로 합니다.
-- 선행 글의 targetMainKeyword는 본문 1~3회만 자연 노출합니다.
+- 키워드 계약서가 있으면 계약서의 반복 제한을 우선합니다.
+- 계약서가 없을 때만 메인 키워드는 본문 4~7회, 서브 키워드는 각 1~3회를 목표로 합니다.
 
 기존 브리핑
 ${params.briefing}`;
