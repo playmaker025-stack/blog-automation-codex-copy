@@ -248,17 +248,6 @@ function KeywordRiskReport({
         </div>
       )}
 
-      {(report.forbiddenItems?.length ?? 0) > 0 && (
-        <div className="rounded-lg border border-red-100 bg-red-50 px-3 py-3">
-          <p className="text-xs font-semibold text-red-700">본문 금지어 검수</p>
-          <div className="mt-2 space-y-2">
-            {report.forbiddenItems?.map((item) => (
-              <KeywordItemCard key={`forbidden-${item.keyword}`} item={item} keywordStatusTone={keywordStatusTone} />
-            ))}
-          </div>
-        </div>
-      )}
-
       <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-3">
         <p className="text-xs font-semibold text-zinc-500">전체 반복 위험도</p>
         <p className="mt-2 text-sm font-semibold text-zinc-900">{overallRiskLabel(report.overallRisk)}</p>
