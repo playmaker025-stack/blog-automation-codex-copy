@@ -490,6 +490,61 @@ function buildCommunityResearchBrief(params: {
 }
 
 function buildLocalFallbackStrategy(topic: Topic): StrategyPlanResult {
+  const dp = topic.seriesDetailPlan;
+
+  // seriesDetailPlan이 있으면 그 내용을 폴백 전략의 기반으로 사용
+  if (dp) {
+    const mainKeyword = dp.primaryKeyword || topic.title;
+    const sections = dp.recommendedSections ?? [];
+    const outline = sections.length > 0
+      ? sections.map((heading, i) => ({
+          heading,
+          subPoints: [dp.articleGoal || "글 목표에 맞춰 작성"],
+          contentDirection: i === 0
+            ? `${dp.readerQuestion || "독자의 질문"}에 답하는 방식으로 시작합니다.`
+            : dp.draftAngle || "설계된 방향으로 작성합니다.",
+          estimatedParagraphs: 2,
+        }))
+      : [
+          {
+            heading: `${mainKeyword}를 찾는 이유`,
+            subPoints: [dp.readerQuestion || "검색자의 상황과 고민을 먼저 정리"],
+            contentDirection: "서론에서 검색의도와 현재 고민을 자연스럽게 연결합니다.",
+            estimatedParagraphs: 2,
+          },
+          {
+            heading: dp.articleGoal || "핵심 내용",
+            subPoints: ["구체적인 판단 기준 제시", "실사용 관점에서 정리"],
+            contentDirection: dp.draftAngle || "작성 각도에 맞춰 정리합니다.",
+            estimatedParagraphs: 3,
+          },
+          {
+            heading: "정리와 다음 단계",
+            subPoints: ["핵심 요약", dp.callToAction || "다음 행동 제안"],
+            contentDirection: "독자가 다음 행동을 자연스럽게 이어가도록 마무리합니다.",
+            estimatedParagraphs: 2,
+          },
+        ];
+
+    return {
+      title: topic.title,
+      outline,
+      keyPoints: [
+        dp.articleGoal || "검색의도에 바로 답하는 구조를 유지한다.",
+        ...(dp.keywordPlacementRules ?? []).slice(0, 2),
+      ].filter(Boolean),
+      estimatedLength: 1800,
+      tone: "friendly",
+      keywords: [
+        dp.primaryKeyword,
+        ...(dp.secondaryKeywords ?? []),
+      ].filter(Boolean),
+      suggestedSources: topic.relatedSources,
+      rationale: "AI 전략 수립이 지연되어 시리즈 상세 설계 기반의 안전 폴백 전략을 사용했습니다.",
+    };
+  }
+
+  // seriesDetailPlan 없을 때 기존 폴백
   const keywords = extractFallbackKeywords(topic);
   const mainKeyword = keywords[0] ?? topic.title;
 
@@ -723,25 +778,37 @@ function buildKeywordContract(params: {
     .map(sanitizeAiKeyword)
     .filter((kw): kw is string => kw !== null);
 
-  // mainKeyword 결정: directIntent > AI > targetMainKeyword > plan.keywords[0] > topic.title
+  // seriesDetailPlan.primaryKeyword — 사용자가 직접 재설계한 핵심 키워드
+  const seriesDetailPrimaryKw = normalizeKeyword(topic.seriesDetailPlan?.primaryKeyword ?? "");
+  const seriesDetailSecondaryKws = (topic.seriesDetailPlan?.secondaryKeywords ?? [])
+    .map((kw) => sanitizeAiKeyword(normalizeKeyword(kw)))
+    .filter((kw): kw is string => kw !== null);
+
+  // mainKeyword 결정: directIntent > seriesDetailPlan.primaryKeyword > AI > targetMainKeyword > plan.keywords[0] > topic.title
+  // targetMainKeyword는 시리즈 전체 타겟 키워드로 이 글의 핵심 키워드가 아님 — 가장 낮은 우선순위
   const targetMainKeyword = normalizeKeyword(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "");
   const mainKeyword =
     normalizeKeyword(directIntent?.mainKeyword ?? "") ||
+    seriesDetailPrimaryKw ||
     aiMainKeyword ||
-    targetMainKeyword ||
     compactKeywords([...(plan.keywords ?? [])], 1)[0] ||
+    targetMainKeyword ||
     normalizeKeyword(topic.title);
 
-  // bridgeKeywords: 워밍업 글이면 타겟 메인 키워드를 bridge로
+  // bridgeKeywords: 워밍업 글이면 타겟 메인 키워드를 bridge로 (단, mainKeyword와 다를 때만)
   const bridgeKeywords = aiBridgeKeywords.length > 0
     ? aiBridgeKeywords
-    : compactKeywords(isPrelude && targetMainKeyword ? [targetMainKeyword] : [], 3);
+    : compactKeywords(
+        isPrelude && targetMainKeyword && targetMainKeyword !== mainKeyword ? [targetMainKeyword] : [],
+        3
+      );
 
   // internalLinkAnchors: 항상 빈 배열 — 글 제목은 키워드가 아님
   const internalLinkAnchors: string[] = [];
 
-  // subKeywords: AI 제공 > directIntent > plan.keywords (sanitize 적용, AI bypass isGenericKeyword)
+  // subKeywords: seriesDetailPlan > AI > directIntent > plan.keywords (sanitize 적용)
   const rawSubCandidates = [
+    ...seriesDetailSecondaryKws,
     ...aiSubKeywords,
     ...(directIntent?.subKeywords ?? []).map(sanitizeAiKeyword).filter((kw): kw is string => kw !== null),
     ...(plan.keywords ?? [])
