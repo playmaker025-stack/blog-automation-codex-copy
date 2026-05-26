@@ -806,8 +806,11 @@ function buildKeywordContract(params: {
     .filter((kw) => !isGenericKeyword(kw));
 
   // seriesDetailPlan.primaryKeyword — 사용자가 직접 재설계한 핵심 키워드
-  const seriesDetailPrimaryKw = topic.seriesDetailPlan?.primaryKeyword
+  const _seriesDetailPrimaryRaw = topic.seriesDetailPlan?.primaryKeyword
     ? sanitizeAiKeyword(topic.seriesDetailPlan.primaryKeyword) ?? ""
+    : "";
+  const seriesDetailPrimaryKw = _seriesDetailPrimaryRaw && !isGenericKeyword(_seriesDetailPrimaryRaw)
+    ? _seriesDetailPrimaryRaw
     : "";
   const seriesDetailSecondaryKws = (topic.seriesDetailPlan?.secondaryKeywords ?? [])
     .map((kw) => sanitizeAiKeyword(normalizeKeyword(kw)))

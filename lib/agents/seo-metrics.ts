@@ -821,6 +821,18 @@ export function analyzeKeywordUsage(params: {
   const keywordPool = contract
     ? [contract.mainKeyword, ...contract.subKeywords, ...contract.bridgeKeywords, ...contract.internalLinkAnchors]
     : collectKeywordPool(params.title, orderedKeywords);
+  // contract 사용 여부와 관계없이 실제 본문에서 자주 쓰인 단어도 tokenItems에 포함
+  const tokenPool = contract
+    ? uniqueKeywords([
+        ...keywordPool,
+        ...buildTrackedKeywords({
+          title: params.title,
+          body: params.body,
+          mainKeyword,
+          keywords: keywordPool,
+        }),
+      ])
+    : keywordPool;
   const normalizedTargetMainKeyword = params.targetMainKeyword?.trim().toLowerCase() ?? "";
 
   const items: KeywordUsageItem[] = contract ? buildContractKeywordItems(contract, params.body) : orderedKeywords.map((keyword, index) => {
@@ -904,7 +916,7 @@ export function analyzeKeywordUsage(params: {
     overallRisk,
     overallRiskSummary,
     paragraphWarnings,
-    tokenItems: contract ? [] : buildKeywordTokenItems(keywordPool, params.body),
+    tokenItems: buildKeywordTokenItems(tokenPool, params.body),
     totalMentions,
     introCoverage,
     titleFrontLoaded,

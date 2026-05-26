@@ -113,22 +113,10 @@ function derivePreludeAnchor(mainKeyword: string): string {
 
 function derivePreludePrimaryKeyword(mainKeyword: string, sequenceOrder: number): string {
   const base = derivePreludeTopicPhrase(mainKeyword);
-  const anchor = derivePreludeAnchor(mainKeyword);
-
-  if (/선택|고르|기준/u.test(mainKeyword) || sequenceOrder === 2) {
-    return `${anchor} 선택 기준`;
-  }
   if (/입호흡/u.test(base) && sequenceOrder === 1) {
     return "입호흡 폐호흡 차이";
   }
-  if (/차이|비교/u.test(mainKeyword) || sequenceOrder === 1) {
-    return `${base} 기초 비교`;
-  }
-  if (/입문|처음|초보/u.test(mainKeyword) || sequenceOrder >= 3) {
-    return `${anchor} 입문 체크`;
-  }
-
-  return `${base} 선택 기준`;
+  return base;
 }
 
 function buildDistributedPreludeTitles(mainKeyword: string, count: number): string[] {
