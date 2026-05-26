@@ -1727,6 +1727,7 @@ export async function runWritePhase(params: {
       targetSearchCombinations: effectiveStrategy.targetSearchCombinations,
       seriesRole: effectiveStrategy.seriesRole,
       targetMainKeyword: effectiveStrategy.targetMainKeyword,
+      keywordContract: effectiveStrategy.keywordContract,
       forbiddenTerms: effectiveStrategy.keywordContract?.forbiddenTerms,
     });
 

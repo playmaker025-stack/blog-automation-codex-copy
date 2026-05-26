@@ -390,8 +390,6 @@ export function PipelineReportPanel({
 }: Props) {
   const activeSeoEvaluation =
     contentTab === "revision" ? reviewResult?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
-  const activeKeywordReport =
-    contentTab === "revision" ? reviewResult?.keywordReport ?? null : result?.seoEvaluation?.keywordReport ?? null;
   const activeSeoNotes = cleanNotes(
     contentTab === "revision" ? reviewResult?.seoNotes ?? [] : result?.seoEvaluation?.improvements ?? []
   );
@@ -477,8 +475,6 @@ export function PipelineReportPanel({
         </div>
       )}
 
-      {activeKeywordReport && <KeywordRiskReport report={activeKeywordReport} keywordStatusTone={keywordStatusTone} />}
-      {activeKeywordReport && <KeywordTokenPanel report={activeKeywordReport} idPrefix={contentTab} />}
       {activeSeoEvaluation && <SeoMetricPanel seoEvaluation={activeSeoEvaluation} contentTab={contentTab} />}
 
       {result?.naverLogicEvaluation && (

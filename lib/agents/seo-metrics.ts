@@ -88,6 +88,8 @@ function isMeaningfulKeywordToken(token: string): boolean {
   if (normalized.length < 2) return false;
   if (GENERIC_KEYWORD_TOKENS.has(normalized)) return false;
   if (/^\d+$/u.test(normalized)) return false;
+  // Korean conditional/connective verb endings — not real search keywords
+  if (/(?:이라면|다면|라면|두면|치면|이면|으면|면서|지만|거나|더라도|더라면|는데|하면|하여|하고|서는)$/u.test(normalized)) return false;
   return true;
 }
 
