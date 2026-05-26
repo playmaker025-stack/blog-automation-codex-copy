@@ -813,12 +813,13 @@ function buildKeywordContract(params: {
 
   // mainKeyword 결정: directIntent > seriesDetailPlan.primaryKeyword > AI > plan.keywords[0] > targetMainKeyword
   // topic.title은 자연어 문장이므로 키워드로 절대 사용하지 않음
-  const targetMainKeyword = normalizeKeyword(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "");
+  // targetMainKeyword도 sanitize 적용 — 자연어 문장이 mainKeyword로 올라오는 경로 차단
+  const targetMainKeyword = sanitizeAiKeyword(normalizeKeyword(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "")) ?? "";
   const mainKeyword =
     normalizeKeyword(directIntent?.mainKeyword ?? "") ||
     seriesDetailPrimaryKw ||
     aiMainKeyword ||
-    compactKeywords([...(plan.keywords ?? [])], 1)[0] ||
+    compactKeywords((plan.keywords ?? []).map(sanitizeAiKeyword).filter((kw): kw is string => kw !== null), 1)[0] ||
     targetMainKeyword ||
     "";
 
