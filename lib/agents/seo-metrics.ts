@@ -804,6 +804,7 @@ export function analyzeKeywordUsage(params: {
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
+  forbiddenTerms?: string[];
 }): KeywordUsageReport {
   const paragraphs = splitParagraphs(params.body);
   const introText = paragraphs.slice(0, 2).join("\n\n");
@@ -872,7 +873,15 @@ export function analyzeKeywordUsage(params: {
     : items.slice(1, 8);
   const bridgeKeywordItems = items.filter((item) => item.role === "bridge");
   const internalLinkAnchorItems = items.filter((item) => item.role === "anchor");
-  const forbiddenItems = items.filter((item) => item.role === "forbidden");
+  // contract 없을 때도 forbiddenTerms 파라미터로 금지어 체크
+  const extraForbiddenItems: KeywordUsageItem[] = !contract && params.forbiddenTerms
+    ? uniqueKeywords(params.forbiddenTerms).map((keyword) => {
+        const count = countKeywordOccurrences(params.body, keyword);
+        const status: KeywordUsageItem["status"] = count > 0 ? "danger" : "ok";
+        return { keyword, count, status, targetMin: 0, targetMax: 0, role: "forbidden" as const, recommendation: count > 0 ? `금지어 '${keyword}'가 본문에 포함되어 있습니다. 즉시 제거하세요.` : "" };
+      })
+    : [];
+  const forbiddenItems = [...items.filter((item) => item.role === "forbidden"), ...extraForbiddenItems];
   const introCoverage = mainKeyword ? countKeywordOccurrences(introText, mainKeyword) > 0 : true;
   const titleFrontLoaded =
     mainKeyword ? params.title.indexOf(mainKeyword) >= 0 && params.title.indexOf(mainKeyword) <= 12 : true;
@@ -934,8 +943,9 @@ export function evaluateSeoCompleteness(params: {
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
+  forbiddenTerms?: string[];
 }): SeoEvaluation {
-  const keywordReport = analyzeKeywordUsage(params);
+  const keywordReport = analyzeKeywordUsage({ ...params });
   const keywordMetrics = buildKeywordFocusMetrics({
     title: params.title,
     body: params.body,

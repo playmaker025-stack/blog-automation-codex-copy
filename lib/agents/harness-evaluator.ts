@@ -211,7 +211,7 @@ function finalizeEval(params: {
     targetSearchCombinations: strategy.targetSearchCombinations,
     seriesRole: strategy.seriesRole,
     targetMainKeyword: strategy.targetMainKeyword,
-    keywordContract: strategy.keywordContract,
+    forbiddenTerms: strategy.keywordContract?.forbiddenTerms,
   });
   const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({
     strategy,
