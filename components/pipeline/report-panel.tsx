@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
-import type { KeywordUsageReport, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
+import type { NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
 
 interface ResultData {
   title: string;
@@ -23,44 +23,17 @@ interface Props {
   reviewResult: DraftReviewResult | null;
   reviewIssues: DraftReviewIssue[];
   reviewApplied: boolean;
-  draftVersionReports: Array<{
-    label: string;
-    body: string;
-    seoEvaluation: SeoEvaluation;
-    keywordReport: KeywordUsageReport;
-  }>;
   publishUrl: string;
   publishingToIndex: boolean;
   publishNotice: { type: "ok" | "err"; msg: string } | null;
   onPublishUrlChange: (value: string) => void;
   onPublishToIndex: () => void;
-  keywordStatusTone: (status: KeywordUsageReport["items"][number]["status"]) => string;
 }
 
 function scoreTone(score: number): string {
   if (score >= 80) return "text-emerald-600";
   if (score >= 65) return "text-amber-600";
   return "text-red-500";
-}
-
-function tokenTone(count: number): string {
-  if (count >= 20) return "text-red-500";
-  if (count >= 10) return "text-amber-600";
-  if (count >= 4) return "text-zinc-700";
-  return "text-blue-600";
-}
-
-function keywordStatusLabel(status: KeywordUsageReport["items"][number]["status"]): string {
-  if (status === "ok") return "적정";
-  if (status === "caution") return "주의";
-  if (status === "danger") return "위험";
-  return "부족";
-}
-
-function overallRiskLabel(risk: KeywordUsageReport["overallRisk"]): string {
-  if (risk === "low") return "낮음";
-  if (risk === "medium") return "보통";
-  return "높음";
 }
 
 function issueTone(severity: DraftReviewIssue["severity"]): string {
@@ -76,103 +49,6 @@ function looksBroken(value: string | null | undefined): boolean {
 
 function cleanNotes(notes: string[]): string[] {
   return notes.filter((note) => note.trim() && !looksBroken(note));
-}
-
-function keywordRecommendation(item: KeywordUsageReport["items"][number], role: "main" | "sub"): string {
-  const range = `${item.targetMin}~${item.targetMax}회`;
-
-  if (role === "main") {
-    if (item.status === "under") {
-      return `메인 키워드 '${item.keyword}'의 본문 반영이 부족합니다. 본문 기준 ${range} 안에서 핵심 문단에 자연스럽게 보강하세요.`;
-    }
-    if (item.status === "caution") {
-      return `메인 키워드 '${item.keyword}'가 다소 많습니다. 같은 문단 반복을 줄이고 일부 표현은 동의어나 설명형 문장으로 바꾸세요.`;
-    }
-    if (item.status === "danger") {
-      return `메인 키워드 '${item.keyword}'가 과하게 반복됩니다. 초안 보강 전에 반복 문장, 중복 소제목, 불필요한 재언급을 먼저 줄여야 합니다.`;
-    }
-    return `메인 키워드 '${item.keyword}'의 반복 횟수는 적정 범위입니다.`;
-  }
-
-  if (item.status === "under") {
-    return `서브 키워드 '${item.keyword}'가 본문에 충분히 반영되지 않았습니다. 실제 설명 문맥에 1~3회만 자연스럽게 넣으세요.`;
-  }
-  if (item.status === "caution") {
-    return `서브 키워드 '${item.keyword}'가 조금 많습니다. 같은 표현을 반복하기보다 의미를 풀어서 설명하세요.`;
-  }
-  if (item.status === "danger") {
-    return `서브 키워드 '${item.keyword}'가 과하게 반복됩니다. 일부 문장은 일반 설명으로 바꾸고 반복 문단을 정리하세요.`;
-  }
-  return `서브 키워드 '${item.keyword}'의 반복 횟수는 적정 범위입니다.`;
-}
-
-function keywordRoleLabel(role: KeywordUsageReport["items"][number]["role"]): string {
-  if (role === "main") return "메인 키워드";
-  if (role === "bridge") return "브릿지 키워드";
-  if (role === "anchor") return "내부링크 앵커";
-  if (role === "forbidden") return "본문 금지어";
-  return "서브 키워드";
-}
-
-function KeywordItemCard({
-  item,
-  keywordStatusTone,
-}: {
-  item: KeywordUsageReport["items"][number];
-  keywordStatusTone: (status: KeywordUsageReport["items"][number]["status"]) => string;
-}) {
-  const isForbidden = item.role === "forbidden";
-  return (
-    <div className={`rounded-md border px-3 py-2 ${isForbidden ? "border-red-100 bg-red-50" : "border-zinc-200 bg-white"}`}>
-      <div className="flex items-center justify-between gap-3">
-        <div>
-          <p className="text-sm font-medium text-zinc-800">{item.keyword}</p>
-          <p className="mt-0.5 text-[11px] text-zinc-500">{keywordRoleLabel(item.role)}</p>
-        </div>
-        <p className={`text-xs font-semibold ${keywordStatusTone(item.status)}`}>
-          본문 {item.count}회 / {keywordStatusLabel(item.status)}
-        </p>
-      </div>
-      <p className="mt-1 text-[11px] text-zinc-500">
-        허용 범위 {item.targetMin}~{item.targetMax}회
-      </p>
-      <p className="mt-1 text-xs text-zinc-700">
-        {item.recommendation || keywordRecommendation(item, item.role === "main" ? "main" : "sub")}
-      </p>
-    </div>
-  );
-}
-
-function overallRiskSummary(report: KeywordUsageReport): string {
-  const warningCount = report.paragraphWarnings.length;
-  if (report.overallRisk === "high") {
-    return warningCount > 0
-      ? `과반복 위험이 큽니다. 문단 내 반복 경고가 ${warningCount}건 있어 같은 키워드가 한 문단에 몰려 있습니다.`
-      : "과반복 위험이 큽니다. 메인/서브 키워드 반복을 줄인 뒤 다시 검수해야 합니다.";
-  }
-  if (report.overallRisk === "medium") {
-    return warningCount > 0
-      ? `반복 위험도는 보통입니다. 문단 내 반복 경고 ${warningCount}건을 먼저 정리하세요.`
-      : "일부 키워드가 부족하거나 다소 많습니다. 문맥을 해치지 않는 선에서 조정하세요.";
-  }
-  return "키워드 반복 위험도는 낮습니다.";
-}
-
-function paragraphWarningText(warning: KeywordUsageReport["paragraphWarnings"][number]): string {
-  return `${warning.paragraphIndex + 1}번 문단에서 '${warning.keyword}'가 ${warning.count}회 반복됩니다. 같은 문단 안의 반복을 줄이거나 표현을 분산하세요.`;
-}
-
-function tokenNote(item: KeywordUsageReport["tokenItems"][number]): string {
-  if (item.count >= 20) {
-    return "본문 전체에서 매우 자주 반복되는 단어입니다. 브랜드명이나 핵심 키워드가 아니라면 일부 표현을 바꾸는 편이 좋습니다.";
-  }
-  if (item.count >= 10) {
-    return "본문에서 반복이 많은 단어입니다. 문맥상 필요한 반복인지 확인하세요.";
-  }
-  if (item.count >= 4) {
-    return "보조 축으로 반복되는 단어입니다. 같은 문단에 몰려 있지 않은지 확인하세요.";
-  }
-  return "현재 본문에서 가볍게 반복되는 단어입니다.";
 }
 
 function metricSummary(metric: SeoEvaluation["keywordMetrics"][number]): string {
@@ -194,109 +70,6 @@ function metricAction(metric: SeoEvaluation["keywordMetrics"][number]): string {
     return `본문 기준 '${metric.keyword}'가 많습니다. 중복 문장이나 불필요한 재언급을 줄이세요.`;
   }
   return `'${metric.keyword}' 배치는 적정 범위입니다.`;
-}
-
-function KeywordRiskReport({
-  report,
-  keywordStatusTone,
-}: {
-  report: KeywordUsageReport;
-  keywordStatusTone: (status: KeywordUsageReport["items"][number]["status"]) => string;
-}) {
-  return (
-    <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
-      {report.mainKeyword && (
-        <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-3">
-          <p className="text-xs font-semibold text-zinc-500">메인 키워드</p>
-          <div className="mt-2 flex items-center justify-between gap-3">
-            <p className="text-sm font-semibold text-zinc-900">{report.mainKeyword.keyword}</p>
-            <p className={`text-xs font-semibold ${keywordStatusTone(report.mainKeyword.status)}`}>
-              본문 {report.mainKeyword.count}회 / {keywordStatusLabel(report.mainKeyword.status)}
-            </p>
-          </div>
-          <p className="mt-2 text-xs text-zinc-500">
-            적정 범위 {report.mainKeyword.targetMin}~{report.mainKeyword.targetMax}회
-          </p>
-          <p className="mt-1 text-xs text-zinc-700">
-            {report.mainKeyword.recommendation || keywordRecommendation(report.mainKeyword, "main")}
-          </p>
-        </div>
-      )}
-
-      {report.subKeywords.length > 0 && (
-        <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-3">
-          <p className="text-xs font-semibold text-zinc-500">서브 키워드</p>
-          <div className="mt-2 space-y-2">
-            {report.subKeywords.map((item) => (
-              <KeywordItemCard key={`sub-${item.keyword}`} item={item} keywordStatusTone={keywordStatusTone} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {(report.bridgeKeywords?.length ?? 0) > 0 && (
-        <div className="rounded-lg border border-blue-100 bg-blue-50 px-3 py-3">
-          <p className="text-xs font-semibold text-blue-700">브릿지 키워드</p>
-          <p className="mt-1 text-[11px] leading-5 text-blue-600">
-            다음 글로 넘길 연결 키워드입니다. 본문을 이 주제로 바꾸지 않고 제한 횟수 안에서만 씁니다.
-          </p>
-          <div className="mt-2 space-y-2">
-            {report.bridgeKeywords?.map((item) => (
-              <KeywordItemCard key={`bridge-${item.keyword}`} item={item} keywordStatusTone={keywordStatusTone} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-3">
-        <p className="text-xs font-semibold text-zinc-500">전체 반복 위험도</p>
-        <p className="mt-2 text-sm font-semibold text-zinc-900">{overallRiskLabel(report.overallRisk)}</p>
-        <p className="mt-1 text-xs text-zinc-600">{overallRiskSummary(report)}</p>
-      </div>
-
-      {report.paragraphWarnings.length > 0 && (
-        <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-3">
-          <p className="text-xs font-semibold text-amber-700">문단 내 반복 경고</p>
-          <ul className="mt-2 space-y-1 text-xs text-amber-800">
-            {report.paragraphWarnings.map((warning) => (
-              <li key={`${warning.keyword}-${warning.paragraphIndex}`}>- {paragraphWarningText(warning)}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function KeywordTokenPanel({
-  report,
-  idPrefix,
-}: {
-  report: KeywordUsageReport;
-  idPrefix: string;
-}) {
-  if ((report.tokenItems?.length ?? 0) === 0) return null;
-
-  return (
-    <div className="rounded-xl border border-zinc-200 bg-white p-4">
-      <p className="text-xs font-semibold text-zinc-600">실제 본문 핵심 단어 분포</p>
-      <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-        선택된 포커스 키워드뿐 아니라, 본문 안에서 실제로 자주 반복된 핵심 단어를 함께 확인합니다.
-      </p>
-      <div className="mt-3 grid gap-2">
-        {report.tokenItems.slice(0, 10).map((item) => (
-          <div key={`${idPrefix}-token-${item.token}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3">
-            <div className="flex items-center justify-between gap-3">
-              <p className="text-sm font-semibold text-zinc-800">{item.token}</p>
-              <p className={`text-xs font-semibold ${tokenTone(item.count)}`}>본문 {item.count}회</p>
-            </div>
-            <p className="mt-1 text-[11px] text-zinc-500">연결 구문: {item.sourceKeywords.join(" / ")}</p>
-            <p className="mt-2 text-xs text-zinc-700">{tokenNote(item)}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 function SeoMetricPanel({
@@ -380,13 +153,11 @@ export function PipelineReportPanel({
   reviewResult,
   reviewIssues,
   reviewApplied,
-  draftVersionReports,
   publishUrl,
   publishingToIndex,
   publishNotice,
   onPublishUrlChange,
   onPublishToIndex,
-  keywordStatusTone,
 }: Props) {
   const activeSeoEvaluation =
     contentTab === "revision" ? reviewResult?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
@@ -397,13 +168,12 @@ export function PipelineReportPanel({
     contentTab === "revision" ? reviewResult?.naverLogicNotes ?? [] : result?.naverLogicEvaluation?.improvements ?? []
   );
   const visibleReviewIssues = reviewIssues.filter((issue) => !looksBroken(issue.message));
-  const showVersionedDraftReports = contentTab === "draft" && draftVersionReports.length > 0;
 
   return (
     <aside className="space-y-4">
       {approval}
 
-      {!result && !reviewResult && draftVersionReports.length === 0 ? (
+      {!result && !reviewResult ? (
         <div className="rounded-xl border border-zinc-200 bg-white p-6">
           <p className="text-sm font-semibold text-zinc-900">평가 / 보고서</p>
           <p className="mt-3 text-sm leading-7 text-zinc-500">
@@ -446,32 +216,6 @@ export function PipelineReportPanel({
               </p>
             </div>
           </div>
-        </div>
-      )}
-
-      {showVersionedDraftReports && (
-        <div className="space-y-4">
-          {draftVersionReports.map((report) => (
-            <div key={report.label} className="rounded-xl border border-zinc-200 bg-white p-4">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-sm font-semibold text-zinc-900">{report.label} 키워드 / SEO 분석</p>
-                  <p className="mt-1 text-xs text-zinc-500">
-                    각 초안별 본문 기준 키워드 반복과 위험도를 따로 계산합니다.
-                  </p>
-                </div>
-                <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-right">
-                  <p className="text-[11px] font-semibold text-emerald-700">SEO 점수</p>
-                  <p className="text-lg font-bold text-emerald-700">{report.seoEvaluation.score}점</p>
-                </div>
-              </div>
-
-              <div className="mt-4 space-y-4">
-                <KeywordRiskReport report={report.keywordReport} keywordStatusTone={keywordStatusTone} />
-                <KeywordTokenPanel report={report.keywordReport} idPrefix={report.label} />
-              </div>
-            </div>
-          ))}
         </div>
       )}
 

@@ -98,13 +98,6 @@ function buildDraftCompletionMessage(streamingBody: string): string | null {
   return "\u0031\uCC28 \uCD08\uC548\uBD80\uD130 \uC790\uB3D9 \uBCF4\uAC15\uBCF8 3\uCC28\uAE4C\uC9C0 \uBAA8\uB450 \uC900\uBE44\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uAC00\uC7A5 \uB098\uC740 \uBC84\uC804\uC744 \uACE8\uB77C \uC218\uC815\uBCF8 \uD0ED\uC5D0\uC11C \uC2E4\uC81C \uBC1C\uD589 \uBCF8\uBB38\uC744 \uC815\uB9AC\uD574 \uC8FC\uC138\uC694.";
 }
 
-function keywordStatusTone(status: KeywordUsageReport["items"][number]["status"]): string {
-  if (status === "ok") return "text-emerald-600";
-  if (status === "caution") return "text-amber-600";
-  if (status === "danger") return "text-red-500";
-  return "text-blue-600";
-}
-
 function looksBrokenKorean(value: string | null | undefined): boolean {
   if (!value) return false;
   return /[\uFFFD]|\u00C3|\u00C2|[\u00EC\u00ED\u00EF][\S\s]{0,3}[\u00EB\u00EA]|[\u0000-\u0008\u000B-\u000C\u000E-\u001F]/.test(value);
@@ -1320,7 +1313,6 @@ export default function PipelinePage() {
           reviewResult={reviewResult}
           reviewIssues={reviewIssues}
           reviewApplied={reviewApplied}
-          draftVersionReports={draftVersionReports}
           publishUrl={publishUrl}
           publishingToIndex={publishingToIndex}
           publishNotice={publishNotice}
@@ -1330,7 +1322,6 @@ export default function PipelinePage() {
             setPublishCompletionMessage(null);
           }}
           onPublishToIndex={publishToIndex}
-          keywordStatusTone={keywordStatusTone}
         />
       </div>
 
