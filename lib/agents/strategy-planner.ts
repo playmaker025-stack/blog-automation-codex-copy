@@ -798,10 +798,12 @@ function buildKeywordContract(params: {
   const aiMainKeyword = aiContract?.mainKeyword ? sanitizeAiKeyword(aiContract.mainKeyword) : null;
   const aiSubKeywords = (aiContract?.subKeywords ?? [])
     .map(sanitizeAiKeyword)
-    .filter((kw): kw is string => kw !== null);
+    .filter((kw): kw is string => kw !== null)
+    .filter((kw) => !isGenericKeyword(kw));
   const aiBridgeKeywords = (aiContract?.bridgeKeywords ?? [])
     .map(sanitizeAiKeyword)
-    .filter((kw): kw is string => kw !== null);
+    .filter((kw): kw is string => kw !== null)
+    .filter((kw) => !isGenericKeyword(kw));
 
   // seriesDetailPlan.primaryKeyword — 사용자가 직접 재설계한 핵심 키워드
   const seriesDetailPrimaryKw = topic.seriesDetailPlan?.primaryKeyword
