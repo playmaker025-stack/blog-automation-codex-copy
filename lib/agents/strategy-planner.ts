@@ -811,7 +811,8 @@ function buildKeywordContract(params: {
     : "";
   const seriesDetailSecondaryKws = (topic.seriesDetailPlan?.secondaryKeywords ?? [])
     .map((kw) => sanitizeAiKeyword(normalizeKeyword(kw)))
-    .filter((kw): kw is string => kw !== null);
+    .filter((kw): kw is string => kw !== null)
+    .filter((kw) => !isGenericKeyword(kw));
 
   // mainKeyword 결정: directIntent > seriesDetailPlan.primaryKeyword > AI > plan.keywords[0] > targetMainKeyword
   // topic.title은 자연어 문장이므로 키워드로 절대 사용하지 않음
@@ -840,7 +841,7 @@ function buildKeywordContract(params: {
   const rawSubCandidates = [
     ...seriesDetailSecondaryKws,
     ...aiSubKeywords,
-    ...(directIntent?.subKeywords ?? []).map(sanitizeAiKeyword).filter((kw): kw is string => kw !== null),
+    ...(directIntent?.subKeywords ?? []).map(sanitizeAiKeyword).filter((kw): kw is string => kw !== null).filter((kw) => !isGenericKeyword(kw)),
     ...(plan.keywords ?? [])
       .map(sanitizeAiKeyword)
       .filter((kw): kw is string => kw !== null)
@@ -857,6 +858,7 @@ function buildKeywordContract(params: {
   for (const kw of rawSubCandidates) {
     const lower = kw.toLowerCase();
     if (seen.has(lower)) continue;
+    if (isGenericKeyword(kw)) continue;
     if (bridgeKeywords.some((b) => lower.includes(b.toLowerCase()) || b.toLowerCase().includes(lower))) continue;
     seen.add(lower);
     subKeywords.push(kw);

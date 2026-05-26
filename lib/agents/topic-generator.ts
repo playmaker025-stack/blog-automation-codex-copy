@@ -227,7 +227,7 @@ function buildPreludeDetailPlan(params: {
           ? `${params.mainKeyword}를 보기 전에 어떤 기준으로 기기와 액상을 골라야 하나?`
           : `${params.mainKeyword}를 볼 때 초보자가 실제로 많이 놓치는 부분은 무엇인가?`,
     primaryKeyword,
-    secondaryKeywords: [params.mainKeyword, "입문", "선택 기준"].filter((item, index, array) => array.indexOf(item) === index),
+    secondaryKeywords: [params.mainKeyword].filter(Boolean),
     recommendedSections: [
       "검색자가 먼저 헷갈리는 상황 정리",
       "비교 또는 선택 기준 제시",
@@ -255,7 +255,7 @@ function buildMainDetailPlan(params: {
     searchIntent: "추천형/전환형",
     readerQuestion: `${params.mainKeyword}를 지금 고른다면 어떤 기준으로 어떤 옵션을 먼저 봐야 하나?`,
     primaryKeyword: params.mainKeyword,
-    secondaryKeywords: ["입문", "추천", "선택 기준", "비교"].filter((item, index, array) => array.indexOf(item) === index),
+    secondaryKeywords: [],
     recommendedSections: [
       "추천 글을 찾는 현재 상황과 전제 정리",
       "선행 글에서 다룬 기준 요약",
