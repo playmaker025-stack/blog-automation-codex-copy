@@ -18,6 +18,7 @@ import { buildContentTopologyPlan } from "./content-topology";
 import { buildPolicyPromptSection } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
 import { getPublicationLearningSummary } from "./user-learning";
+import { classifySearchCombination, normalizeSearchPhrase, sanitizeMainKeywordCandidate } from "./search-combination-utils";
 
 const STRATEGY_LOOP_TIMEOUT_MS = 120_000;
 const SIMPLE_STRATEGY_TIMEOUT_MS = 45_000;
@@ -61,7 +62,7 @@ const SYSTEM_PROMPT = `
   "tone": "friendly",
   "keywords": ["메인키워드", "서브키워드"],
   "keywordContract": {
-    "mainKeyword": "실제 네이버 검색창 입력어 (20자 이내, 자연어 문장 금지)",
+    "mainKeyword": "실제 네이버 검색창 입력어 (24자 이내, 자연어 문장 금지)",
     "subKeywords": ["검색어1", "검색어2"],
     "bridgeKeywords": []
   },
@@ -80,7 +81,7 @@ const SYSTEM_PROMPT = `
   - 올바른 예: "전자담배 입문", "입호흡 전자담배 추천", "액상형 전자담배 차이"
   - 잘못된 예: "2025년 기준 입호흡 전자담배 추천 TOP5 인천 만수동만수르 픽" (글 제목이므로 금지)
   - 잘못된 예: "전자담배를 처음 시작하는 분들을 위한 가이드" (자연어 문장이므로 금지)
-  - 20자를 초과하거나 조사/어미로 끝나는 표현은 키워드가 아닙니다.
+  - 24자를 초과하거나 조사/어미로 끝나는 표현은 키워드가 아닙니다.
 `.trim();
 
 function buildPolicySystemPrompt(): string {
@@ -292,6 +293,24 @@ function parseKeywordList(value: string): string[] {
   );
 }
 
+export function sanitizeDirectIntent(rawDirectIntent: DirectKeywordIntent | null): DirectKeywordIntent | null {
+  if (!rawDirectIntent) return null;
+
+  const mainKeyword = rawDirectIntent.mainKeyword
+    ? sanitizeMainKeywordCandidate(rawDirectIntent.mainKeyword) ?? ""
+    : "";
+  const subKeywords = uniq(
+    rawDirectIntent.subKeywords
+      .map((keyword) => sanitizeAiKeyword(normalizeKeyword(keyword)))
+      .filter((keyword): keyword is string => keyword !== null)
+      .filter((keyword) => !isGenericKeyword(keyword))
+      .filter((keyword) => keyword.toLowerCase() !== mainKeyword.toLowerCase())
+  );
+
+  if (!mainKeyword && subKeywords.length === 0) return null;
+  return { mainKeyword, subKeywords };
+}
+
 function decomposeMainKeyword(mainKeyword: string): { baseTopic: string; suffixKeyword: string | null } {
   const normalized = mainKeyword.trim().replace(/\s+/g, " ");
   if (!normalized) {
@@ -329,8 +348,19 @@ function buildTargetSearchCombinations(params: {
   plan: StrategyPlanResult;
   directIntent: DirectKeywordIntent | null;
 }): SearchCombinationTarget[] {
-  const mainKeyword = params.directIntent?.mainKeyword ?? params.plan.keywords[0] ?? params.topic.title;
-  const fallbackSupports = uniq(params.plan.keywords.slice(1, 5));
+  const mainKeyword = [
+    params.directIntent?.mainKeyword ?? "",
+    sanitizeMainKeywordCandidate(params.plan.keywords[0] ?? "") ?? "",
+    sanitizeMainKeywordCandidate(params.topic.targetMainKeyword ?? params.plan.targetMainKeyword ?? "") ?? "",
+  ].find(Boolean) ?? "";
+  if (!mainKeyword) return [];
+  const fallbackSupports = uniq(
+    params.plan.keywords
+      .slice(1, 5)
+      .map((keyword) => sanitizeAiKeyword(keyword))
+      .filter((keyword): keyword is string => keyword !== null)
+      .filter((keyword) => !isGenericKeyword(keyword))
+  );
   const subKeywords = uniq([
     ...(params.directIntent?.subKeywords ?? []),
     ...fallbackSupports,
@@ -344,10 +374,20 @@ function buildTargetSearchCombinations(params: {
     rationale: string,
     suggestedPlacement: string
   ) => {
-    const normalized = phrase.trim().replace(/\s+/g, " ");
+    const normalized = normalizeSearchPhrase(phrase);
     if (!normalized) return;
     if (combinations.some((item) => item.phrase.toLowerCase() === normalized.toLowerCase())) return;
-    combinations.push({ phrase: normalized, role, priority, rationale, suggestedPlacement });
+    const classification = classifySearchCombination(normalized);
+    combinations.push({
+      phrase: normalized,
+      displayIntent: classification.displayIntent,
+      exactInsertionAllowed: classification.exactInsertionAllowed,
+      exactBlockReason: classification.exactBlockReason,
+      role,
+      priority,
+      rationale,
+      suggestedPlacement,
+    });
   };
 
   pushCombination(
@@ -450,31 +490,35 @@ function applyDirectKeywordPriority(
   plan: StrategyPlanResult,
   directIntent: DirectKeywordIntent | null
 ): StrategyPlanResult {
-  if (!directIntent) return plan;
+  if (!directIntent || (!directIntent.mainKeyword && directIntent.subKeywords.length === 0)) return plan;
 
   const orderedKeywords = uniq([
-    directIntent.mainKeyword,
+    ...(directIntent.mainKeyword ? [directIntent.mainKeyword] : []),
     ...directIntent.subKeywords,
     ...plan.keywords,
   ]).filter(Boolean);
 
   const keyPoints = uniq([
-    `${directIntent.mainKeyword}를 글의 중심 검색축으로 유지한다.`,
+    directIntent.mainKeyword ? `${directIntent.mainKeyword}를 글의 중심 검색축으로 유지한다.` : "",
     directIntent.subKeywords.length > 0
       ? `${directIntent.subKeywords.join(", ")}는 보조 맥락으로 활용하되 메인 키워드를 대체하지 않는다.`
       : "",
     ...plan.keyPoints,
   ]).filter(Boolean);
 
-  const rationalePrefix = directIntent.subKeywords.length > 0
+  const rationalePrefix = directIntent.mainKeyword && directIntent.subKeywords.length > 0
     ? `직접 입력 토픽이므로 메인 키워드 '${directIntent.mainKeyword}'를 중심축으로 두고, 서브 키워드 '${directIntent.subKeywords.join(", ")}'는 보조 맥락으로 반영했습니다.`
-    : `직접 입력 토픽이므로 메인 키워드 '${directIntent.mainKeyword}'를 중심축으로 반영했습니다.`;
+    : directIntent.mainKeyword
+      ? `직접 입력 토픽이므로 메인 키워드 '${directIntent.mainKeyword}'를 중심축으로 반영했습니다.`
+      : directIntent.subKeywords.length > 0
+        ? `직접 입력 토픽의 보조 검색어 '${directIntent.subKeywords.join(", ")}'를 맥락 키워드로 반영했습니다.`
+        : "";
 
   return {
     ...plan,
     keywords: orderedKeywords,
     keyPoints,
-    rationale: `${rationalePrefix} ${plan.rationale}`.trim(),
+    rationale: rationalePrefix ? `${rationalePrefix} ${plan.rationale}`.trim() : plan.rationale,
   };
 }
 
@@ -631,9 +675,9 @@ function buildUserMessage(
     `설명: ${topic.description}`,
     `카테고리: ${topic.category}`,
     `태그: ${topic.tags.join(", ") || "없음"}`,
-    directIntent ? `직접입력 메인 키워드: ${directIntent.mainKeyword}` : "",
+    directIntent?.mainKeyword ? `직접입력 메인 키워드: ${directIntent.mainKeyword}` : "",
     directIntent && directIntent.subKeywords.length > 0 ? `직접입력 서브 키워드: ${directIntent.subKeywords.join(", ")}` : "",
-    directIntent
+    directIntent?.mainKeyword
       ? "직접 입력 모드 규칙: 메인 키워드를 글의 중심 검색축으로 유지하고, 제목/도입부/핵심 문단의 판단 기준이 메인 키워드와 일치해야 합니다. 서브 키워드는 메인 키워드를 보조하는 맥락으로만 사용하세요."
       : "",
     seriesBrief,
@@ -795,7 +839,7 @@ function buildKeywordContract(params: {
 
   // AI가 제공한 keywordContract 우선 사용, 유효성 검사 후 적용
   const aiContract = plan.keywordContract;
-  const aiMainKeyword = aiContract?.mainKeyword ? sanitizeAiKeyword(aiContract.mainKeyword) : null;
+  const aiMainKeyword = aiContract?.mainKeyword ? sanitizeMainKeywordCandidate(aiContract.mainKeyword) : null;
   const aiSubKeywords = (aiContract?.subKeywords ?? [])
     .map(sanitizeAiKeyword)
     .filter((kw): kw is string => kw !== null)
@@ -807,7 +851,7 @@ function buildKeywordContract(params: {
 
   // seriesDetailPlan.primaryKeyword — 사용자가 직접 재설계한 핵심 키워드
   const _seriesDetailPrimaryRaw = topic.seriesDetailPlan?.primaryKeyword
-    ? sanitizeAiKeyword(topic.seriesDetailPlan.primaryKeyword) ?? ""
+    ? sanitizeMainKeywordCandidate(topic.seriesDetailPlan.primaryKeyword) ?? ""
     : "";
   const seriesDetailPrimaryKw = _seriesDetailPrimaryRaw && !isGenericKeyword(_seriesDetailPrimaryRaw)
     ? _seriesDetailPrimaryRaw
@@ -820,12 +864,16 @@ function buildKeywordContract(params: {
   // mainKeyword 결정: directIntent > seriesDetailPlan.primaryKeyword > AI > plan.keywords[0] > targetMainKeyword
   // topic.title은 자연어 문장이므로 키워드로 절대 사용하지 않음
   // targetMainKeyword도 sanitize 적용 — 자연어 문장이 mainKeyword로 올라오는 경로 차단
-  const targetMainKeyword = sanitizeAiKeyword(normalizeKeyword(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "")) ?? "";
+  const directMainKeyword = directIntent?.mainKeyword
+    ? sanitizeMainKeywordCandidate(directIntent.mainKeyword) ?? ""
+    : "";
+  const targetMainKeyword = sanitizeMainKeywordCandidate(topic.targetMainKeyword ?? plan.targetMainKeyword ?? "") ?? "";
+  const sanitizedPlanKeyword0 = sanitizeMainKeywordCandidate(plan.keywords[0] ?? "") ?? "";
   const mainKeyword =
-    normalizeKeyword(directIntent?.mainKeyword ?? "") ||
+    directMainKeyword ||
     seriesDetailPrimaryKw ||
     aiMainKeyword ||
-    compactKeywords((plan.keywords ?? []).map(sanitizeAiKeyword).filter((kw): kw is string => kw !== null), 1)[0] ||
+    sanitizedPlanKeyword0 ||
     targetMainKeyword ||
     "";
 
@@ -912,12 +960,21 @@ export async function runStrategyPlanner(params: {
   const { topicId, onProgress, signal } = params;
   const userId = normalizeUserId(params.userId);
   const topic = await loadTopic(topicId);
-  const directIntent = extractDirectKeywordIntent(topic);
+  const rawDirectIntent = extractDirectKeywordIntent(topic);
+  const directIntent = sanitizeDirectIntent(rawDirectIntent);
   const publicationLearning = await getPublicationLearningSummary(userId);
 
   onProgress?.(`토픽 "${topicId}" 전략 수립 시작`);
 
-  const researchKeyword = directIntent?.mainKeyword ?? topic.title;
+  const researchKeyword = [
+    directIntent?.mainKeyword ?? "",
+    ...topic.tags
+      .map((keyword) => sanitizeMainKeywordCandidate(keyword) ?? "")
+      .filter(Boolean),
+    sanitizeMainKeywordCandidate(topic.targetMainKeyword ?? "") ?? "",
+    sanitizeMainKeywordCandidate(topic.title) ?? "",
+    topic.category,
+  ].find(Boolean) ?? topic.title;
 
   onProgress?.("네이버 카페 수요 신호 확인 중...");
   const [cafeResearch, kinResearch] = await Promise.all([

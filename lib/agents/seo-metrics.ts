@@ -7,6 +7,7 @@ import type {
   SearchCombinationTarget,
   SeoEvaluation,
 } from "./types";
+import { classifySearchCombination, splitSearchCombinationTokens } from "./search-combination-utils";
 
 function clampScore(value: number): number {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -169,13 +170,7 @@ function _getKeywordTargets(
   return { targetMin: 1, targetMax: 3 };
 }
 
-function splitCombinationTokens(value: string): string[] {
-  return value
-    .replace(/[^\p{L}\p{N}\s]/gu, " ")
-    .split(/\s+/)
-    .map((token) => token.trim())
-    .filter((token) => token.length >= 2);
-}
+const splitCombinationTokens = splitSearchCombinationTokens;
 
 function normalizeBodyForKeywordCounting(body: string): string {
   return body
@@ -522,20 +517,30 @@ function buildFallbackSearchCombinations(keywords: string[]): SearchCombinationT
   if (!mainKeyword) return [];
 
   const combinations: SearchCombinationTarget[] = [
-    {
-      phrase: mainKeyword,
-      role: "main",
-      priority: "core",
-      rationale: "메인 키워드 자체의 검색 의도입니다.",
-      suggestedPlacement: "제목, 도입부, 결론",
-    },
+    (() => {
+      const classification = classifySearchCombination(mainKeyword);
+      return {
+        phrase: mainKeyword,
+        displayIntent: classification.displayIntent,
+        exactInsertionAllowed: classification.exactInsertionAllowed,
+        exactBlockReason: classification.exactBlockReason,
+        role: "main",
+        priority: "core",
+        rationale: "메인 키워드 자체의 검색 의도입니다.",
+        suggestedPlacement: "제목, 도입부, 결론",
+      };
+    })(),
   ];
 
   for (const keyword of keywords.slice(1, 4)) {
     const phrase = uniqueKeywords([`${keyword} ${mainKeyword}`])[0];
     if (!phrase) continue;
+    const classification = classifySearchCombination(phrase);
     combinations.push({
       phrase,
+      displayIntent: classification.displayIntent,
+      exactInsertionAllowed: classification.exactInsertionAllowed,
+      exactBlockReason: classification.exactBlockReason,
       role: "support",
       priority: "support",
       rationale: "서브 키워드를 메인 키워드와 연결한 기본 조합입니다.",
@@ -557,6 +562,7 @@ function buildSearchCombinationMetrics(params: {
   const headingText = findHeadingLines(params.body).join("\n");
 
   return params.combinations.map((combination) => {
+    const exactAllowed = combination.exactInsertionAllowed !== false;
     const tokens = splitCombinationTokens(combination.phrase);
     const exactMatches = countKeywordOccurrences(params.body, combination.phrase);
     const titleIncluded = includesAllTokens(params.title, combination.phrase);
@@ -598,7 +604,7 @@ function buildSearchCombinationMetrics(params: {
       exposurePotentialScore -= 5;
     }
 
-    if (exactMatches > 0) {
+    if (exactMatches > 0 && exactAllowed) {
       coverageScore += combination.priority === "core" ? 10 : 7;
       exposurePotentialScore += combination.priority === "core" ? 9 : 6;
     } else if (tokenCoverage >= 1) {
@@ -609,7 +615,7 @@ function buildSearchCombinationMetrics(params: {
       exposurePotentialScore -= combination.priority === "core" ? 12 : 8;
     }
 
-    if (exactMatches >= 4) {
+    if (exactMatches >= 4 && exactAllowed) {
       coverageScore -= 6;
       exposurePotentialScore -= 8;
     }
@@ -618,19 +624,23 @@ function buildSearchCombinationMetrics(params: {
       titleIncluded ? "제목 연결" : "제목 약함",
       introIncluded ? "도입부 연결" : "도입부 약함",
       headingIncluded ? "소제목 연결" : "소제목 보강 가능",
-      `${exactMatches}회 직접 표현`,
+      exactAllowed ? `${exactMatches}회 직접 표현` : "직접 표현 강제 없음",
     ];
 
     let action = "현재 조합 흐름을 유지해도 괜찮습니다.";
     if (!titleIncluded && combination.priority === "core") {
-      action = `'${combination.phrase}' 조합을 제목이나 제목 가까운 소제목에 더 직접적으로 드러내는 편이 좋습니다.`;
+      action = exactAllowed
+        ? `'${combination.phrase}' 조합을 제목이나 제목 가까운 소제목에 더 직접적으로 드러내는 편이 좋습니다.`
+        : `${combination.displayIntent ?? "관련 검색의도"}가 제목이나 제목 가까운 소제목에서 더 선명하게 보이도록 보강해 주세요.`;
     } else if (!introIncluded) {
-      action = `첫 두 문단 안에서 '${combination.phrase}' 검색 의도를 더 직접적으로 받아 주세요.`;
-    } else if (exactMatches === 0 && tokenCoverage >= 1) {
+      action = exactAllowed
+        ? `첫 두 문단 안에서 '${combination.phrase}' 검색 의도를 더 직접적으로 받아 주세요.`
+        : `첫 두 문단 안에서 ${combination.displayIntent ?? "관련 검색의도"}를 더 직접적으로 받아 주세요.`;
+    } else if (exactAllowed && exactMatches === 0 && tokenCoverage >= 1) {
       action = `토큰은 모두 들어가 있으니 '${combination.phrase}' 조합을 한 문장 안에서 한 번 더 자연스럽게 묶어 주세요.`;
     } else if (tokenCoverage < 0.6) {
-      action = `이 글에서 '${combination.phrase}' 조합을 실제로 다루는 문단이 부족합니다. ${combination.suggestedPlacement} 쪽을 보강해 주세요.`;
-    } else if (exactMatches >= 4) {
+      action = `이 글에서 ${combination.displayIntent ?? `'${combination.phrase}' 관련`} 검색의도를 실제로 다루는 문단이 부족합니다. ${combination.suggestedPlacement} 쪽을 보강해 주세요.`;
+    } else if (exactAllowed && exactMatches >= 4) {
       action = `'${combination.phrase}' 직접 반복이 많아 보여 일부는 동의어/설명형 문장으로 풀어 주는 편이 좋습니다.`;
     }
 
@@ -958,13 +968,19 @@ export function evaluateSeoCompleteness(params: {
   const contractCombinations = params.keywordContract
     ? params.keywordContract.limitedKeywords
         .filter((item) => item.role !== "anchor")
-        .map((item): SearchCombinationTarget => ({
-          phrase: item.keyword,
-          role: item.role === "main" ? "main" : "support",
-          priority: item.role === "main" ? "core" : "support",
-          rationale: "키워드 계약서에 확정된 검사 대상입니다.",
-          suggestedPlacement: item.role === "bridge" ? "본문 후반 연결 문단" : "본문 핵심 문단",
-        }))
+        .map((item): SearchCombinationTarget => {
+          const classification = classifySearchCombination(item.keyword);
+          return {
+            phrase: item.keyword,
+            displayIntent: classification.displayIntent,
+            exactInsertionAllowed: classification.exactInsertionAllowed,
+            exactBlockReason: classification.exactBlockReason,
+            role: item.role === "main" ? "main" : "support",
+            priority: item.role === "main" ? "core" : "support",
+            rationale: "키워드 계약서에 확정된 검사 대상입니다.",
+            suggestedPlacement: item.role === "bridge" ? "본문 후반 연결 문단" : "본문 핵심 문단",
+          };
+        })
     : [];
   const combinations =
     contractCombinations.length > 0

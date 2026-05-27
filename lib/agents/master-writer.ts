@@ -11,14 +11,53 @@ import type { ContentTopologyPlan, StrategyPlanResult, WriterResult } from "./ty
 import type { CorpusSummaryArtifact } from "./corpus-selector";
 import { buildPolicyPromptSection, SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
+import { classifySearchCombination } from "./search-combination-utils";
 
 // ============================================================
 // 발행용 본문은 이 에이전트만 작성한다 — 핵심 원칙
 // ============================================================
 
-// 네이버 블로그 줄바꿈 규칙: 1줄 최대 25자
-// 빈 줄, 구분선(---), 마크다운 헤더(#)만 유지, 나머지 전부 25자 래핑
-function wrapForNaverMobile(text: string): string {
+// 네이버 블로그 줄바꿈 규칙: 모바일에서 읽기 쉽게 어절 단위로 래핑
+function wrapTextByWords(content: string, max: number, prefix = ""): string[] {
+  const words = content.split(/(\s+)/).filter(Boolean);
+  const result: string[] = [];
+  let current = prefix;
+
+  for (const word of words) {
+    const candidate = `${current}${word}`;
+    if (candidate.length <= max) {
+      current = candidate;
+      continue;
+    }
+
+    if (current.trim()) {
+      result.push(current.trimEnd());
+      current = prefix;
+    }
+
+    const bareWord = word.trim();
+    if (bareWord && `${prefix}${bareWord}`.length > max) {
+      let remaining = bareWord;
+      const available = Math.max(1, max - prefix.length);
+      while (remaining.length > available) {
+        result.push(`${prefix}${remaining.slice(0, available)}`);
+        remaining = remaining.slice(available);
+      }
+      current = remaining ? `${prefix}${remaining}` : prefix;
+      continue;
+    }
+
+    current = `${prefix}${word.trimStart()}`;
+  }
+
+  if (current.trim()) {
+    result.push(current.trimEnd());
+  }
+
+  return result;
+}
+
+export function wrapForNaverMobile(text: string): string {
   const MAX = 26;
   const lines = text.split("\n");
   const result: string[] = [];
@@ -32,25 +71,33 @@ function wrapForNaverMobile(text: string): string {
       continue;
     }
 
-    // 마크다운 헤더(#) → 그대로 (구조적 포맷)
-    if (trimmed.startsWith("#")) {
+    // 마크다운 헤더(#), URL 단독 라인, 마크다운 링크 단독 라인 → 그대로
+    if (
+      trimmed.startsWith("#") ||
+      /^https?:\/\/\S+$/i.test(trimmed) ||
+      /^\[[^\]]+\]\([^)]+\)$/.test(trimmed)
+    ) {
       result.push(line);
       continue;
     }
 
-    // 25자 이하 → 그대로
+    const listMatch = line.match(/^(\s*(?:[-*]|\d+\.)\s+)(.+)$/);
+    if (listMatch) {
+      const [, marker, content] = listMatch;
+      if (`${marker}${content}`.length <= MAX) {
+        result.push(line);
+        continue;
+      }
+      result.push(...wrapTextByWords(content, MAX, marker));
+      continue;
+    }
+
     if (line.length <= MAX) {
       result.push(line);
       continue;
     }
 
-    // 25자 초과 → 25자 단위로 줄바꿈
-    let remaining = line;
-    while (remaining.length > MAX) {
-      result.push(remaining.slice(0, MAX));
-      remaining = remaining.slice(MAX);
-    }
-    if (remaining) result.push(remaining);
+    result.push(...wrapTextByWords(line, MAX));
   }
 
   return result.join("\n");
@@ -162,6 +209,9 @@ ${step1}
 - 자연스러운 키워드 삽입 (억지 삽입 금지)
 - 독자 관점에서 실제 유용한 내용 중심
 - 전략에 포함된 콘텐츠 구조 판단이 허브글인지 리프글인지 확인하고 본문 구조에 반드시 반영
+- 일반 글은 핵심 답변을 다음 글로 미루지 않고 이 글 안에서 완결
+- 첫 2문단은 실제 손님 질문이나 상황에서 시작
+- '한 번에 정리', '실패 없는 선택', '체크포인트', '핵심 포인트' 같은 AI형 표현과 소제목 금지
 
 ## 출력 형식
 전략에 따른 마크다운 본문 전체를 출력한다. 설명·메타 정보 없이 본문만 출력한다.
@@ -413,24 +463,24 @@ function formatOpenAIExpandedOutline(strategy: StrategyPlanResult): string {
   ].join("\n")).join("\n\n");
 }
 
-function buildOpenAIWriterSystemPrompt(): string {
+export function buildOpenAIWriterSystemPrompt(): string {
   return [
-    "You are a senior Korean Naver Blog writer and SEO editor.",
+    "You are a senior Korean Naver Blog writer focused on search-intent completion and natural local consultation flow.",
     "Write only the publishable Korean markdown body. Do not include meta notes, score explanations, or placeholders.",
     `Target an internal harness score of at least ${SEO_PASS_THRESHOLD} before returning the final draft.`,
-    "The harness priorities are: SEO 45%, Naver logic 35%, then style_match 8%, structure 7%, and the rest as minor checks.",
     "Before finalizing, silently revise the draft if any dimension would score below 75.",
     "Never say that the user profile, corpus, or examples could not be loaded.",
     "Avoid keyword stuffing, exaggerated guarantees, unsupported best/only claims, and generic filler.",
     "Never expose internal SEO mechanics to readers. Do not write phrases such as keyword buildup, prelude posting, main posting, SEO score, evaluator, harness, corpus, profile, or strategy.",
     "Write like the user's actual blog post, not like an SEO consultant explaining how to rank.",
-    "For Naver Blog, prioritize clear search intent, short readable paragraphs, concrete selection criteria, natural keyword placement, and a closing that helps the reader decide.",
+    "Prioritize these in order: complete the reader's search intent, start from real customer questions or situations, keep a natural Naver mobile reading rhythm, maintain a consultation-style flow, then place keywords naturally.",
+    "Do not write sentences just to insert keywords. Solve the reader's situation first, and let the keywords appear naturally inside useful sentences.",
     buildPolicyPromptSection(),
     "When Naver community demand or KnowledgeIn problem signals are provided, make them visible through the article's angle, subheadings, examples, and decision criteria.",
   ].join("\n");
 }
 
-function formatTargetSearchCombinations(strategy: StrategyPlanResult): string {
+export function formatTargetSearchCombinations(strategy: StrategyPlanResult): string {
   const combinations = strategy.targetSearchCombinations ?? [];
   if (combinations.length === 0) {
     return [
@@ -441,13 +491,20 @@ function formatTargetSearchCombinations(strategy: StrategyPlanResult): string {
 
   return [
     "Target search combinations:",
-    ...combinations.map((item, index) =>
-      `${index + 1}. ${item.phrase} [${item.priority}/${item.role}] - ${item.suggestedPlacement} - ${item.rationale}`
-    ),
+    ...combinations.map((item, index) => {
+      const exactAllowed = item.exactInsertionAllowed !== false;
+      const visibleTarget = exactAllowed
+        ? item.phrase
+        : item.displayIntent || classifySearchCombination(item.phrase).displayIntent;
+      const insertionRule = exactAllowed
+        ? "exact phrase usable when natural"
+        : `intent signal only${item.exactBlockReason ? ` (${item.exactBlockReason})` : ""}`;
+      return `${index + 1}. ${visibleTarget} [${item.priority}/${item.role}] - ${item.suggestedPlacement} - ${item.rationale} - ${insertionRule}`;
+    }),
   ].join("\n");
 }
 
-function buildOpenAIWriterUserPrompt(params: {
+export function buildOpenAIWriterUserPrompt(params: {
   strategy: StrategyPlanResult;
   userId: string;
   corpusSummary?: CorpusSummaryArtifact;
@@ -456,6 +513,7 @@ function buildOpenAIWriterUserPrompt(params: {
 }): string {
   const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
   const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy);
+  const isPrelude = strategy.seriesRole === "prelude";
   return [
     `User id: ${userId.trim().toLowerCase()}`,
     `Title: ${strategy.title}`,
@@ -497,15 +555,21 @@ function buildOpenAIWriterUserPrompt(params: {
       : "First draft instructions: write a strong first draft that should pass the evaluator without needing repair.",
     "",
     "Required writing behavior:",
-    "- Start with the reader's likely situation or question, not a generic definition.",
+    "- Start with the reader's likely situation or question in the first two paragraphs, not a generic definition.",
     "- Treat the keyword contract as the non-negotiable boundary for this article. Do not auto-extract extra keywords from the draft.",
     "- Separate the keyword this article should own from the keyword that should be handed off to the next article.",
     "- Treat the primary keyword as the non-negotiable center of the article. Do not let a secondary or bridge keyword replace the article's main angle.",
     "- Use the secondary keyword only to sharpen context, comparison intent, or the practical scenario around the primary keyword.",
     ...keywordPlacementGuidance,
-    "- Make the target search combinations visible across the article. Cover every core combination at least once naturally through the title, intro, subheadings, or key body paragraphs.",
-    "- Spread combinations by section role: use local combinations in location/proof paragraphs, use use-case combinations in selection/comparison paragraphs, and keep the main keyword as the repeated anchor.",
-    "- Do not awkwardly list combinations back-to-back. Each combination should appear because the paragraph genuinely answers that search intent.",
+    isPrelude
+      ? "- Prelude articles may hand off to the next article, but still need to explain the current decision context clearly."
+      : "- General articles must complete the core answer in this article. Do not defer the main answer with lines like 'we will cover it in the next post.'",
+    isPrelude
+      ? "- Keep the bridge keyword light and natural. Do not let this article consume the next article's main topic."
+      : "- Before naming products, explain selection criteria, failure reasons, or consultation standards that help the reader decide now.",
+    "- Target search combinations are intent coverage signals, not mandatory exact phrases.",
+    "- If exact phrase insertion is blocked for a combination, do not write that raw long-tail phrase in the body. Break it into natural sentence parts instead.",
+    "- Do not awkwardly list combinations back-to-back. Each paragraph should solve the reader's search intent, not expose the internal combination phrase.",
     "- If content topology provides internal link references with URLs, keep each title-URL pair exact. Do not rewrite, shorten, merge, or swap linked titles.",
     "- If Naver signals are present, answer the repeated community questions and demand patterns directly in the body.",
     "- Never mention internal planning terms in the published body: keyword buildup, prelude posting, main posting, series design, SEO score, evaluator, harness, corpus, profile, or strategy.",
@@ -513,10 +577,45 @@ function buildOpenAIWriterUserPrompt(params: {
     "- Make the hub/leaf role visible through structure, not by announcing the words hub or leaf.",
     "- Include practical criteria, examples, and decision points instead of broad advice.",
     "- Keep paragraph rhythm suitable for Naver Blog mobile reading.",
-    "- Use markdown headings, but do not over-fragment into tiny bullet lists.",
+    "- Use headings only when the reader's question changes. Avoid generic headings such as '핵심 기준', '체크포인트', '한 번에 정리', '정리와 다음 확인 포인트'.",
+    "- Never use these exact phrases in the published body: '실패 없는 선택', '꼼꼼히 안내', '핵심 포인트', '만족스러운 결과', '도움이 되었길 바랍니다'.",
     "- End with a useful summary or next-step guide that matches the search intent.",
     "- Output only the final body markdown.",
   ].join("\n");
+}
+
+export function buildOpenAIWriterPayloadPreview(params: {
+  strategy: StrategyPlanResult;
+  userId: string;
+  corpusSummary?: CorpusSummaryArtifact;
+  harnessBriefing?: string;
+  revisionInstructions?: string;
+  model?: string;
+}): {
+  model: string;
+  input: Array<{ role: "system" | "user"; content: string }>;
+  maxOutputTokens: number;
+  temperature: number;
+} {
+  const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
+  return {
+    model: params.model ?? process.env.OPENAI_WRITER_MODEL ?? "gpt-4.1",
+    input: [
+      { role: "system", content: buildOpenAIWriterSystemPrompt() },
+      {
+        role: "user",
+        content: buildOpenAIWriterUserPrompt({
+          strategy,
+          userId,
+          corpusSummary,
+          harnessBriefing,
+          revisionInstructions,
+        }),
+      },
+    ],
+    maxOutputTokens: 6500,
+    temperature: 0.55,
+  };
 }
 
 async function runOpenAIMasterWriter(params: {
@@ -677,6 +776,10 @@ ${anthropicKeywordPlacementRules}
 - 키워드빌드업, 선행포스팅, 메인포스팅, 시리즈 설계, SEO 점수, evaluator, harness, corpus, profile, strategy 같은 내부 작업 용어를 독자에게 노출하지 마세요.
 - 독자에게 특정 키워드를 검색해보라고 지시하지 말고, 그 검색 의도에 대한 답을 본문에서 바로 제공하세요.
 - 사용자 블로그의 실제 말투와 상담/매장 안내 맥락을 우선하고, SEO 강의처럼 쓰지 마세요.
+- 긴 검색 조합은 exact phrase가 아니라 검색의도 신호입니다. 그대로 나열하지 말고 자연 문장으로 분해하세요.
+- 일반 글은 핵심 답을 다음 글로 미루지 말고, 제품명보다 선택 기준/실패 이유/상담 기준을 먼저 설명하세요.
+- '한 번에 정리', '실패 없는 선택', '꼼꼼히 안내', '체크포인트', '핵심 포인트', '도움이 되었길 바랍니다' 같은 표현은 절대 쓰지 마세요.
+- '선택 전에 보는 핵심 기준', '실제로 비교할 때 체크할 포인트', '정리와 다음 확인 포인트', '꼭 확인해야 할 체크리스트', '마무리 정리' 같은 소제목은 피하세요.
 
 아웃라인:
 ${strategy.outline

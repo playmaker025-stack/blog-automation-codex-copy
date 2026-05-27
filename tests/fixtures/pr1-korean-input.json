@@ -1,0 +1,17 @@
+{
+  "rawInputTitle": "부평 고유가 피해 지원금 사용처 전자담배 만수르",
+  "mainKeyword": "부평 고유가 피해 지원금 사용처 전자담배 만수르",
+  "subKeywords": [
+    "부평 전자담배",
+    "입호흡 전자담배 추천"
+  ],
+  "articleType": "general",
+  "seriesRole": null,
+  "completionMode": "end_here",
+  "expected": {
+    "promptPrimaryKeyword": "부평 고유가 피해 지원금",
+    "displayIntent": "부평 고유가 피해 지원금 사용처 확인 + 전자담배 매장 결제 가능 여부 확인",
+    "exactInsertionAllowed": false,
+    "exactBlockReason": "길이 20자 초과, 토큰 4개 이상, 지역/카테고리/매장명 블록형 조합"
+  }
+}

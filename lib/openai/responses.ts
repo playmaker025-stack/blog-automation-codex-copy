@@ -22,7 +22,7 @@ export function hasOpenAIKey(): boolean {
   return Boolean(process.env.OPENAI_API_KEY?.trim());
 }
 
-function extractOutputText(response: unknown): string {
+export function extractOpenAIOutputText(response: unknown): string {
   const direct = (response as { output_text?: unknown }).output_text;
   if (typeof direct === "string") return direct.trim();
 
@@ -72,7 +72,9 @@ async function sleepWithSignal(ms: number, signal?: AbortSignal): Promise<void> 
   });
 }
 
-async function requestOpenAI(params: OpenAITextRequest & { text?: Record<string, unknown> }): Promise<unknown> {
+export async function requestOpenAIResponse(
+  params: OpenAITextRequest & { text?: Record<string, unknown> }
+): Promise<unknown> {
   const apiKey = process.env.OPENAI_API_KEY?.trim();
   if (!apiKey) {
     throw new Error("OPENAI_API_KEY is not configured.");
@@ -112,8 +114,8 @@ async function requestOpenAI(params: OpenAITextRequest & { text?: Record<string,
 }
 
 export async function requestOpenAIText(params: OpenAITextRequest): Promise<string> {
-  const json = await requestOpenAI(params);
-  const text = extractOutputText(json);
+  const json = await requestOpenAIResponse(params);
+  const text = extractOpenAIOutputText(json);
   if (!text) {
     throw new Error("OpenAI response did not include output text.");
   }
@@ -121,7 +123,7 @@ export async function requestOpenAIText(params: OpenAITextRequest): Promise<stri
 }
 
 export async function requestOpenAIJson<T>(params: OpenAIJsonRequest): Promise<T> {
-  const json = await requestOpenAI({
+  const json = await requestOpenAIResponse({
     ...params,
     text: {
       format: {
@@ -132,7 +134,7 @@ export async function requestOpenAIJson<T>(params: OpenAIJsonRequest): Promise<T
       },
     },
   });
-  const text = extractOutputText(json);
+  const text = extractOpenAIOutputText(json);
   if (!text) {
     throw new Error("OpenAI JSON response did not include output text.");
   }

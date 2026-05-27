@@ -94,10 +94,13 @@ export interface KeywordContract {
 
 export interface SearchCombinationTarget {
   phrase: string;
+  displayIntent?: string;
   role: "main" | "support" | "local" | "brand" | "mixed";
   priority: "core" | "support";
   rationale: string;
   suggestedPlacement: string;
+  exactInsertionAllowed?: boolean;
+  exactBlockReason?: string;
 }
 
 export interface PublicationLearningSummary {
