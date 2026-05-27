@@ -12,6 +12,13 @@ import type { CorpusSummaryArtifact } from "./corpus-selector";
 import { buildPolicyPromptSection, SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
 import { classifySearchCombination } from "./search-combination-utils";
+import {
+  buildRoleSpecificWriterGuidance,
+  evaluateStrategyQualityGate,
+  findQuestionKeywordStuffingViolations,
+  formatArticleContract,
+} from "./article-contract-utils";
+import { formatOverlapReport } from "./overlap-report-utils";
 
 // ============================================================
 // 발행용 본문은 이 에이전트만 작성한다 — 핵심 원칙
@@ -513,7 +520,8 @@ export function buildOpenAIWriterUserPrompt(params: {
 }): string {
   const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
   const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy);
-  const isPrelude = strategy.seriesRole === "prelude";
+  const contract = strategy.articleContract;
+  const roleSpecificGuidance = buildRoleSpecificWriterGuidance(contract);
   return [
     `User id: ${userId.trim().toLowerCase()}`,
     `Title: ${strategy.title}`,
@@ -527,6 +535,10 @@ export function buildOpenAIWriterUserPrompt(params: {
     "",
     "Content topology:",
     formatOpenAITopology(strategy.contentTopology),
+    "",
+    formatArticleContract(strategy.articleContract),
+    "",
+    formatOverlapReport(strategy.overlapReport),
     "",
     "Keyword contract:",
     formatKeywordContract(strategy),
@@ -556,17 +568,24 @@ export function buildOpenAIWriterUserPrompt(params: {
     "",
     "Required writing behavior:",
     "- Start with the reader's likely situation or question in the first two paragraphs, not a generic definition.",
+    contract?.readerQuestions?.length
+      ? `- Reflect 1-2 reader questions naturally in the first two paragraphs: ${contract.readerQuestions.join(" / ")}.`
+      : "- Reflect one or two realistic reader questions in the first two paragraphs.",
     "- Treat the keyword contract as the non-negotiable boundary for this article. Do not auto-extract extra keywords from the draft.",
     "- Separate the keyword this article should own from the keyword that should be handed off to the next article.",
     "- Treat the primary keyword as the non-negotiable center of the article. Do not let a secondary or bridge keyword replace the article's main angle.",
     "- Use the secondary keyword only to sharpen context, comparison intent, or the practical scenario around the primary keyword.",
+    contract?.mustResolve?.length
+      ? `- Resolve every required responsibility in the body: ${contract.mustResolve.join(" / ")}.`
+      : "- Resolve the current article's required responsibilities directly in the body.",
+    contract?.mustNotDefer?.length
+      ? `- Do not defer these items to another post: ${contract.mustNotDefer.join(" / ")}.`
+      : "- Do not defer the current article's core answer to another post.",
+    strategy.overlapReport
+      ? `- Overlap risk is ${strategy.overlapReport.riskLevel}. Avoid repeating the same title direction, intro pattern, conclusion pattern, or CTA from similar existing posts. Follow this rewrite direction: ${strategy.overlapReport.recommendedRewriteDirection}`
+      : "- Avoid repeating the same title direction, intro pattern, conclusion pattern, or CTA from earlier posts.",
     ...keywordPlacementGuidance,
-    isPrelude
-      ? "- Prelude articles may hand off to the next article, but still need to explain the current decision context clearly."
-      : "- General articles must complete the core answer in this article. Do not defer the main answer with lines like 'we will cover it in the next post.'",
-    isPrelude
-      ? "- Keep the bridge keyword light and natural. Do not let this article consume the next article's main topic."
-      : "- Before naming products, explain selection criteria, failure reasons, or consultation standards that help the reader decide now.",
+    ...roleSpecificGuidance,
     "- Target search combinations are intent coverage signals, not mandatory exact phrases.",
     "- If exact phrase insertion is blocked for a combination, do not write that raw long-tail phrase in the body. Break it into natural sentence parts instead.",
     "- Do not awkwardly list combinations back-to-back. Each paragraph should solve the reader's search intent, not expose the internal combination phrase.",
@@ -576,6 +595,16 @@ export function buildOpenAIWriterUserPrompt(params: {
     "- Do not instruct readers to search with the target keyword. Instead, answer the search intent directly with practical local/store/user-context information.",
     "- Make the hub/leaf role visible through structure, not by announcing the words hub or leaf.",
     "- Include practical criteria, examples, and decision points instead of broad advice.",
+    contract?.keywordUsagePolicy.avoidSubKeywordStuffingInQuestions
+      ? "- Never place mainKeyword or subKeywords as exact phrases inside quoted customer questions."
+      : "- Keep reader questions natural even when using secondary keywords.",
+    contract?.keywordUsagePolicy.preferContextualSubKeywordUse
+      ? "- Customer questions must sound like real spoken customer questions, not SEO keyword containers."
+      : "- Place secondary keywords where they sound most natural.",
+    contract?.keywordUsagePolicy.preferContextualSubKeywordUse
+      ? "- If a keyword is needed, use it in explanation paragraphs, comparison sections, and consultation context, not inside quotes."
+      : "- Place secondary keywords where they sound most natural.",
+    "- Use concrete criteria and examples before closing, not vague reassurance.",
     "- Keep paragraph rhythm suitable for Naver Blog mobile reading.",
     "- Use headings only when the reader's question changes. Avoid generic headings such as '핵심 기준', '체크포인트', '한 번에 정리', '정리와 다음 확인 포인트'.",
     "- Never use these exact phrases in the published body: '실패 없는 선택', '꼼꼼히 안내', '핵심 포인트', '만족스러운 결과', '도움이 되었길 바랍니다'.",
@@ -688,6 +717,14 @@ async function runOpenAIMasterWriter(params: {
   });
 
   const bodyText = wrapForNaverMobile(finalDraft);
+  const questionKeywordViolations = findQuestionKeywordStuffingViolations({
+    content: bodyText,
+    mainKeyword: strategy.keywordContract?.mainKeyword ?? strategy.keywords[0] ?? "",
+    subKeywords: strategy.keywordContract?.subKeywords ?? [],
+  });
+  if (questionKeywordViolations.length) {
+    throw new Error(`질문문 exact keyword 위반: ${questionKeywordViolations.join(" / ")}`);
+  }
   onToken?.(bodyText);
   onProgress?.("본문 생성 완료 - GitHub에 저장 중입니다.");
 
@@ -725,6 +762,11 @@ export async function runMasterWriter(params: {
     signal,
   } = params;
 
+  const qualityGate = strategy.strategyQualityGate ?? evaluateStrategyQualityGate(strategy);
+  if (!qualityGate.ok) {
+    throw new Error(`전략 계약서가 불완전해 writer 실행을 차단합니다: ${qualityGate.blockingReasons.join(" / ")}`);
+  }
+
   onProgress?.(corpusSummary ? "Master Writer 시작 - 코퍼스 요약을 적용합니다." : "Master Writer 시작 - 코퍼스를 로드합니다.");
 
   if (hasOpenAIKey()) {
@@ -750,6 +792,9 @@ export async function runMasterWriter(params: {
   const anthropicKeywordPlacementRules = buildKeywordPlacementGuidance(strategy)
     .map((line) => line.replace(/^- /, "- "))
     .join("\n");
+  const anthropicRoleSpecificGuidance = buildRoleSpecificWriterGuidance(strategy.articleContract)
+    .map((line) => line.replace(/^- /, "- "))
+    .join("\n");
 
   const userMessage = `다음 전략에 따라 네이버 블로그 본문을 작성해주세요.
 
@@ -760,6 +805,15 @@ export async function runMasterWriter(params: {
 핵심 포인트: ${strategy.keyPoints.join(" / ")}
 
 ${buildContentTopologySection(strategy.contentTopology)}
+
+작성 의무 계약서:
+${formatArticleContract(strategy.articleContract)}
+
+role-specific writing directives:
+${anthropicRoleSpecificGuidance}
+
+overlap report:
+${formatOverlapReport(strategy.overlapReport)}
 
 키워드 계약서:
 ${formatKeywordContract(strategy)}
@@ -777,7 +831,10 @@ ${anthropicKeywordPlacementRules}
 - 독자에게 특정 키워드를 검색해보라고 지시하지 말고, 그 검색 의도에 대한 답을 본문에서 바로 제공하세요.
 - 사용자 블로그의 실제 말투와 상담/매장 안내 맥락을 우선하고, SEO 강의처럼 쓰지 마세요.
 - 긴 검색 조합은 exact phrase가 아니라 검색의도 신호입니다. 그대로 나열하지 말고 자연 문장으로 분해하세요.
+- readerQuestions 중 1~2개는 첫 2문단 안에 자연스럽게 반영하세요.
+- mustResolve 항목은 본문에서 모두 해결하고, mustNotDefer 항목은 다른 글로 미루지 마세요.
 - 일반 글은 핵심 답을 다음 글로 미루지 말고, 제품명보다 선택 기준/실패 이유/상담 기준을 먼저 설명하세요.
+- 서브 키워드를 손님 질문문 안에 exact phrase로 억지 삽입하지 마세요. 손님 질문은 실제 말처럼 쓰고, 서브 키워드는 설명 문단/비교 문단/상담 맥락에서 자연스럽게 분산하세요.
 - '한 번에 정리', '실패 없는 선택', '꼼꼼히 안내', '체크포인트', '핵심 포인트', '도움이 되었길 바랍니다' 같은 표현은 절대 쓰지 마세요.
 - '선택 전에 보는 핵심 기준', '실제로 비교할 때 체크할 포인트', '정리와 다음 확인 포인트', '꼭 확인해야 할 체크리스트', '마무리 정리' 같은 소제목은 피하세요.
 
@@ -902,6 +959,14 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
     if (finalStopReason === "end_turn" && toolUseBlocks.length === 0) {
       // 본문 생성 완료
       const bodyText = wrapForNaverMobile(rawText);
+      const questionKeywordViolations = findQuestionKeywordStuffingViolations({
+        content: bodyText,
+        mainKeyword: strategy.keywordContract?.mainKeyword ?? strategy.keywords[0] ?? "",
+        subKeywords: strategy.keywordContract?.subKeywords ?? [],
+      });
+      if (questionKeywordViolations.length) {
+        throw new Error(`질문문 exact keyword 위반: ${questionKeywordViolations.join(" / ")}`);
+      }
       onProgress?.("본문 생성 완료 — GitHub에 저장 중...");
       return await saveWriterResult({
         topicId,

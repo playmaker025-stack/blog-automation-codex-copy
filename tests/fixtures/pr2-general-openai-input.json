@@ -1,0 +1,33 @@
+{
+  "topicId": "pr2-general-openai",
+  "userId": "mansour-test",
+  "rawInputTitle": "부평 전자담배 액상 추천",
+  "displayTitle": "부평 전자담배 액상 추천, 맛보다 먼저 봐야 할 기준",
+  "mainKeyword": "부평 전자담배 액상 추천",
+  "subKeywords": [
+    "부평 전자담배",
+    "입호흡 전자담배 추천"
+  ],
+  "articleRole": "general",
+  "seriesRole": null,
+  "handoffKeyword": null,
+  "searchIntent": "부평에서 전자담배 액상을 고르려는 사람이 취향 기준과 기기 궁합, 방문 전 상담 기준을 알고 싶어 하는 상황",
+  "rationale": "일반 글이므로 다음 글로 미루지 않고 액상 선택 기준과 방문 전 상담 기준을 현재 글 안에서 해결해야 합니다.",
+  "keyPoints": [
+    "실제 손님 질문으로 시작하고 인기 순위보다 기준이 먼저라는 흐름으로 전개",
+    "쿨링감, 단맛, 목넘김, 기기 궁합을 나눠서 설명",
+    "방문 전 어떤 기준을 말하면 상담이 쉬워지는지까지 정리"
+  ],
+  "differentiationPoints": [
+    "제품 TOP5 나열보다 취향 기준과 기기 궁합을 먼저 설명",
+    "방문 전 상담 기준을 실제 질문 흐름으로 연결"
+  ],
+  "payloadPreviewMustInclude": [
+    "부평 전자담배 액상 추천",
+    "전자담배",
+    "부평"
+  ],
+  "expected": {
+    "promptPrimaryKeyword": "부평 전자담배 액상 추천"
+  }
+}

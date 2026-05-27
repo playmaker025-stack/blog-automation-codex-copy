@@ -45,6 +45,96 @@ export interface StrategyPlanResult {
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
+  articleContract?: ArticleContract;
+  strategyQualityGate?: StrategyQualityGateResult;
+  overlapReport?: OverlapReport;
+}
+
+export type ArticleRole =
+  | "general"
+  | "prelude"
+  | "problem_solution"
+  | "review"
+  | "comparison"
+  | "main_recommendation";
+
+export type CompletionMode = "end_here" | "handoff";
+
+export type IntroPattern =
+  | "customer_question"
+  | "recent_inquiry"
+  | "problem_symptom"
+  | "purchase_before_visit"
+  | "policy_confusion"
+  | "product_experience";
+
+export type ConclusionPattern =
+  | "visit_consultation"
+  | "criteria_summary"
+  | "handoff_next_article"
+  | "problem_checklist"
+  | "product_fit_summary";
+
+export type ContentNodeType = "hub" | "leaf" | "bridge";
+
+export interface KeywordUsagePolicy {
+  avoidSubKeywordStuffingInQuestions: boolean;
+  preferContextualSubKeywordUse: boolean;
+}
+
+export interface ArticleContract {
+  articleRole: ArticleRole;
+  completionMode: CompletionMode;
+  nodeType: ContentNodeType;
+  introPattern: IntroPattern;
+  conclusionPattern: ConclusionPattern;
+  mainIntent: string;
+  readerState: string;
+  readerQuestions: string[];
+  mustResolve: string[];
+  mustNotDefer: string[];
+  handoffKeyword?: string | null;
+  forbiddenExactPhrases: string[];
+  forbiddenHeadingPatterns: string[];
+  forbiddenTonePatterns: string[];
+  ctaMode: string;
+  keywordUsagePolicy: KeywordUsagePolicy;
+}
+
+export interface StrategyQualityGateResult {
+  ok: boolean;
+  blockingReasons: string[];
+  warnings: string[];
+}
+
+export interface ExistingArticleSummary {
+  title: string;
+  normalizedTitle: string;
+  userId: string;
+  articleRole: ArticleRole;
+  nodeType: ContentNodeType;
+  targetKeyword: string;
+  normalizedTargetKeyword: string;
+  searchIntent: string;
+  normalizedSearchIntent: string;
+  internalLinkTargets: string[];
+  introPattern?: IntroPattern | null;
+  conclusionPattern?: ConclusionPattern | null;
+  ctaMode?: string | null;
+  topicId?: string | null;
+  postId?: string | null;
+}
+
+export interface OverlapReport {
+  riskLevel: "low" | "medium" | "high";
+  similarTitles: string[];
+  similarIntents: string[];
+  repeatedIntroPatterns: string[];
+  repeatedConclusionPatterns: string[];
+  repeatedInternalLinkTargets: string[];
+  repeatedCtaModes: string[];
+  roleConflicts: string[];
+  recommendedRewriteDirection: string;
 }
 
 export type ArticleType =

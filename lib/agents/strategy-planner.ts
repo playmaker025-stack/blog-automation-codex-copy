@@ -11,7 +11,7 @@ import { naverContentFetcher } from "@/lib/skills/naver-content-fetcher";
 import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-research";
 import { readJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
-import type { Topic, TopicIndex } from "@/lib/types/github-data";
+import type { PostingIndex, Topic, TopicIndex } from "@/lib/types/github-data";
 import type { ArticleStage, ArticleType, KeywordContract, SearchCombinationTarget, StrategyPlanResult } from "./types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import { buildContentTopologyPlan } from "./content-topology";
@@ -19,6 +19,8 @@ import { buildPolicyPromptSection } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
 import { getPublicationLearningSummary } from "./user-learning";
 import { classifySearchCombination, normalizeSearchPhrase, sanitizeMainKeywordCandidate } from "./search-combination-utils";
+import { buildArticleContract, evaluateStrategyQualityGate } from "./article-contract-utils";
+import { buildExistingArticleSummaries, buildOverlapReport } from "./overlap-report-utils";
 
 const STRATEGY_LOOP_TIMEOUT_MS = 120_000;
 const SIMPLE_STRATEGY_TIMEOUT_MS = 45_000;
@@ -217,6 +219,23 @@ async function loadTopic(topicId: string): Promise<Topic> {
     throw new Error(`topicId "${topicId}"를 찾을 수 없습니다.`);
   }
   return topic;
+}
+
+async function loadExistingArticleSummariesForUser(userId: string) {
+  if (!(await fileExists(Paths.postingListIndex())) || !(await fileExists(Paths.topicsIndex()))) {
+    return [];
+  }
+
+  const [{ data: postingIndex }, { data: topicIndex }] = await Promise.all([
+    readJsonFile<PostingIndex>(Paths.postingListIndex()),
+    readJsonFile<TopicIndex>(Paths.topicsIndex()),
+  ]);
+
+  return buildExistingArticleSummaries({
+    posts: postingIndex.posts,
+    topics: topicIndex.topics,
+    userId,
+  });
 }
 
 function parseStrategyFromText(text: string): StrategyPlanResult {
@@ -811,8 +830,9 @@ function inferArticleType(topic: Topic, plan: StrategyPlanResult, topologyKind: 
   if (topic.seriesRole === "main") return "main_recommendation";
   if (topologyKind === "hub") return "local_hub";
   if (/(비교|차이|vs|고르는|고르기|선택 기준|기준)/u.test(text)) return "comparison";
-  if (/(해결|고장|누수|탄맛|문제|안됨|교체|원인)/u.test(text)) return "problem_solution";
-  if (/(후기|리뷰|사용감|실사용)/u.test(text)) return "review";
+  if (/(해결|고장|누수|탄맛|문제|안됨|교체|원인|액튐|결로|교체주기|인식 안됨|체크팟|노아토마이저|No Atomizer|No Pod|팟 인식|빨리 닳|맛이 약|맛이 탁|새는)/iu.test(text)) return "problem_solution";
+  if (/(후기|리뷰|사용감|실사용|솔직후기)/u.test(text)) return "review";
+  if (/(추천|best|top|처음 고를 때|입문자 추천)/iu.test(text)) return "main_recommendation";
   if (/(사용법|방법|가이드|입문|처음)/u.test(text)) return "howto";
   return "leaf";
 }
@@ -1088,6 +1108,36 @@ export async function runStrategyPlanner(params: {
       directIntent,
     }),
   };
+  plan = {
+    ...plan,
+    articleContract: buildArticleContract({ topic, plan }),
+  };
+  const existingArticles = await loadExistingArticleSummariesForUser(userId);
+  const currentContract = plan.articleContract;
+  const currentKeywordContract = plan.keywordContract;
+  if (!currentContract || !currentKeywordContract) {
+    throw new Error("articleContract 또는 keywordContract가 생성되지 않아 overlapReport를 만들 수 없습니다.");
+  }
+  plan = {
+    ...plan,
+    overlapReport: buildOverlapReport({
+      currentTitle: plan.title,
+      articleRole: currentContract.articleRole,
+      nodeType: currentContract.nodeType,
+      introPattern: currentContract.introPattern,
+      conclusionPattern: currentContract.conclusionPattern,
+      ctaMode: currentContract.ctaMode,
+      targetKeyword: currentKeywordContract.mainKeyword,
+      searchIntent: currentContract.mainIntent,
+      handoffKeyword: currentContract.handoffKeyword,
+      internalLinkTargets: plan.contentTopology?.internalLinkTargets.map((item) => item.title) ?? [],
+      existingArticles,
+    }),
+  };
+  plan = {
+    ...plan,
+    strategyQualityGate: evaluateStrategyQualityGate(plan),
+  };
 
   onProgress?.(`전략 수립 완료: "${plan.title}" (${contentTopology.kind === "hub" ? "허브글" : "리프글"})`);
   onProgress?.(
@@ -1105,6 +1155,38 @@ export async function runStrategyPlanner(params: {
         directIntent,
       }),
     };
+    plan = {
+      ...plan,
+      articleContract: buildArticleContract({ topic, plan }),
+    };
+    const seriesContract = plan.articleContract;
+    const seriesKeywordContract = plan.keywordContract;
+    if (!seriesContract || !seriesKeywordContract) {
+      throw new Error("series articleContract 또는 keywordContract가 생성되지 않아 overlapReport를 만들 수 없습니다.");
+    }
+    plan = {
+      ...plan,
+      overlapReport: buildOverlapReport({
+        currentTitle: plan.title,
+        articleRole: seriesContract.articleRole,
+        nodeType: seriesContract.nodeType,
+        introPattern: seriesContract.introPattern,
+        conclusionPattern: seriesContract.conclusionPattern,
+        ctaMode: seriesContract.ctaMode,
+        targetKeyword: seriesKeywordContract.mainKeyword,
+        searchIntent: seriesContract.mainIntent,
+        handoffKeyword: seriesContract.handoffKeyword,
+        internalLinkTargets: plan.contentTopology?.internalLinkTargets.map((item) => item.title) ?? [],
+        existingArticles,
+      }),
+    };
+    plan = {
+      ...plan,
+      strategyQualityGate: evaluateStrategyQualityGate(plan),
+    };
+  }
+  if (plan.strategyQualityGate?.warnings.length) {
+    onProgress?.(`계약 경고: ${plan.strategyQualityGate.warnings.join(" / ")}`);
   }
   return plan;
 }

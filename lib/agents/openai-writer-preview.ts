@@ -1,4 +1,6 @@
 import { classifySearchCombination } from "./search-combination-utils.ts";
+import { buildRoleSpecificWriterGuidance, formatArticleContract } from "./article-contract-utils.ts";
+import { formatOverlapReport } from "./overlap-report-utils.ts";
 
 const SEO_PASS_THRESHOLD = 90;
 
@@ -116,6 +118,8 @@ type StrategyPlanResult = {
   } | null;
   seriesRole?: "prelude" | "main";
   keywordContract?: KeywordContract;
+  articleContract?: import("./types.ts").ArticleContract;
+  overlapReport?: import("./types.ts").OverlapReport;
 };
 
 function buildPolicyPromptSection(): string {
@@ -396,7 +400,8 @@ export function buildOpenAIWriterUserPrompt(params: {
 }): string {
   const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
   const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy);
-  const isPrelude = strategy.seriesRole === "prelude";
+  const contract = strategy.articleContract;
+  const roleSpecificGuidance = buildRoleSpecificWriterGuidance(contract);
   return [
     `User id: ${userId.trim().toLowerCase()}`,
     `Title: ${strategy.title}`,
@@ -410,6 +415,10 @@ export function buildOpenAIWriterUserPrompt(params: {
     "",
     "Content topology:",
     formatOpenAITopology(strategy.contentTopology),
+    "",
+    formatArticleContract(strategy.articleContract),
+    "",
+    formatOverlapReport(strategy.overlapReport),
     "",
     "Keyword contract:",
     formatKeywordContract(strategy),
@@ -439,17 +448,24 @@ export function buildOpenAIWriterUserPrompt(params: {
     "",
     "Required writing behavior:",
     "- Start with the reader's likely situation or question in the first two paragraphs, not a generic definition.",
+    contract?.readerQuestions?.length
+      ? `- Reflect 1-2 reader questions naturally in the first two paragraphs: ${contract.readerQuestions.join(" / ")}.`
+      : "- Reflect one or two realistic reader questions in the first two paragraphs.",
     "- Treat the keyword contract as the non-negotiable boundary for this article. Do not auto-extract extra keywords from the draft.",
     "- Separate the keyword this article should own from the keyword that should be handed off to the next article.",
     "- Treat the primary keyword as the non-negotiable center of the article. Do not let a secondary or bridge keyword replace the article's main angle.",
     "- Use the secondary keyword only to sharpen context, comparison intent, or the practical scenario around the primary keyword.",
+    contract?.mustResolve?.length
+      ? `- Resolve every required responsibility in the body: ${contract.mustResolve.join(" / ")}.`
+      : "- Resolve the current article's required responsibilities directly in the body.",
+    contract?.mustNotDefer?.length
+      ? `- Do not defer these items to another post: ${contract.mustNotDefer.join(" / ")}.`
+      : "- Do not defer the current article's core answer to another post.",
+    strategy.overlapReport
+      ? `- Overlap risk is ${strategy.overlapReport.riskLevel}. Avoid repeating the same title direction, intro pattern, conclusion pattern, or CTA from similar existing posts. Follow this rewrite direction: ${strategy.overlapReport.recommendedRewriteDirection}`
+      : "- Avoid repeating the same title direction, intro pattern, conclusion pattern, or CTA from earlier posts.",
     ...keywordPlacementGuidance,
-    isPrelude
-      ? "- Prelude articles may hand off to the next article, but still need to explain the current decision context clearly."
-      : "- General articles must complete the core answer in this article. Do not defer the main answer with lines like 'we will cover it in the next post.'",
-    isPrelude
-      ? "- Keep the bridge keyword light and natural. Do not let this article consume the next article's main topic."
-      : "- Before naming products, explain selection criteria, failure reasons, or consultation standards that help the reader decide now.",
+    ...roleSpecificGuidance,
     "- Target search combinations are intent coverage signals, not mandatory exact phrases.",
     "- If exact phrase insertion is blocked for a combination, do not write that raw long-tail phrase in the body. Break it into natural sentence parts instead.",
     "- Do not awkwardly list combinations back-to-back. Each paragraph should solve the reader's search intent, not expose the internal combination phrase.",
@@ -459,6 +475,16 @@ export function buildOpenAIWriterUserPrompt(params: {
     "- Do not instruct readers to search with the target keyword. Instead, answer the search intent directly with practical local/store/user-context information.",
     "- Make the hub/leaf role visible through structure, not by announcing the words hub or leaf.",
     "- Include practical criteria, examples, and decision points instead of broad advice.",
+    contract?.keywordUsagePolicy.avoidSubKeywordStuffingInQuestions
+      ? "- Never place mainKeyword or subKeywords as exact phrases inside quoted customer questions."
+      : "- Keep reader questions natural even when using secondary keywords.",
+    contract?.keywordUsagePolicy.preferContextualSubKeywordUse
+      ? "- Customer questions must sound like real spoken customer questions, not SEO keyword containers."
+      : "- Place secondary keywords where they sound most natural.",
+    contract?.keywordUsagePolicy.preferContextualSubKeywordUse
+      ? "- If a keyword is needed, use it in explanation paragraphs, comparison sections, and consultation context, not inside quotes."
+      : "- Place secondary keywords where they sound most natural.",
+    "- Use concrete criteria and examples before closing, not vague reassurance.",
     "- Keep paragraph rhythm suitable for Naver Blog mobile reading.",
     "- Use headings only when the reader's question changes. Avoid generic headings such as '핵심 기준', '체크포인트', '한 번에 정리', '정리와 다음 확인 포인트'.",
     "- Never use these exact phrases in the published body: '실패 없는 선택', '꼼꼼히 안내', '핵심 포인트', '만족스러운 결과', '도움이 되었길 바랍니다'.",
