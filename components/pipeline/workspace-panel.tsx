@@ -3,6 +3,7 @@
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
 import type { KeywordUsageReport, SeoEvaluation } from "@/lib/agents/types";
 import { KeywordReportSections } from "@/components/pipeline/keyword-report-sections";
+import { getDraftVersionReportForIndex } from "@/components/pipeline/keyword-report-utils";
 
 interface Props {
   contentTab: "draft" | "revision";
@@ -28,7 +29,7 @@ interface Props {
     body: string;
     seoEvaluation: SeoEvaluation;
     keywordReport: KeywordUsageReport;
-  }>;
+  } | null>;
   onReviewTitleChange: (value: string) => void;
   onReviewBodyChange: (value: string) => void;
   onRevisionRequestChange: (value: string) => void;
@@ -184,7 +185,7 @@ export function PipelineWorkspacePanel({
                 <div className="grid gap-4 2xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1.05fr)_minmax(0,1.05fr)]">
                   {draftColumns.map((column, index) => {
                     const isLatest = index === lastCompletedIndex && Boolean(column.body);
-                    const versionReport = draftVersionReports.find((item) => item.label === column.label);
+                    const versionReport = getDraftVersionReportForIndex(draftVersionReports, index);
 
                     return (
                       <section
@@ -224,12 +225,16 @@ export function PipelineWorkspacePanel({
                           )}
                         </div>
 
-                        {versionReport ? (
-                          <div className="border-t border-zinc-100 bg-white px-4 py-4">
-                            <p className="mb-3 text-sm font-semibold text-zinc-900">초안별 키워드 사용량</p>
+                        <div className="border-t border-zinc-100 bg-white px-4 py-4">
+                          <p className="mb-3 text-sm font-semibold text-zinc-900">초안별 키워드 사용량</p>
+                          {versionReport ? (
                             <KeywordReportSections report={versionReport.keywordReport} compact />
-                          </div>
-                        ) : null}
+                          ) : (
+                            <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3 text-[11px] text-zinc-500">
+                              키워드 분석 대기 중
+                            </div>
+                          )}
+                        </div>
                       </section>
                     );
                   })}

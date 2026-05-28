@@ -284,13 +284,14 @@ export default function PipelinePage() {
   const progressEvents = events.filter(
     (event) => event.type === "stage_change" || event.type === "progress" || event.type === "error"
   );
-  const draftVersionReports = useMemo<DraftVersionSeoReport[]>(() => {
+  const draftVersionReports = useMemo<Array<DraftVersionSeoReport | null>>(() => {
     const strategy = draftRewriteContext?.strategy;
-    if (!strategy || !streamingBody.trim()) return [];
+    if (!strategy || !streamingBody.trim()) return [null, null, null];
 
     return parseDraftVersionSnapshots(streamingBody)
-      .filter((snapshot) => snapshot.body.trim())
       .map((snapshot) => {
+        if (!snapshot.body.trim()) return null;
+
         const seoEvaluation = evaluateSeoCompleteness({
           title: strategy.title,
           body: snapshot.body,

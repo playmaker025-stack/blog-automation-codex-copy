@@ -39,7 +39,7 @@ interface Props {
   publishUrl: string;
   publishingToIndex: boolean;
   publishNotice: { type: "ok" | "err"; msg: string } | null;
-  draftVersionReports: DraftVersionReport[];
+  draftVersionReports: Array<DraftVersionReport | null>;
   onPublishUrlChange: (value: string) => void;
   onPublishToIndex: () => void;
 }

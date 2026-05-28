@@ -1,6 +1,7 @@
 "use client";
 
 import type { BodyRepetitionItem, KeywordUsageReport, SeoKeywordItem } from "@/lib/agents/types";
+import { getVisibleBodyRepetitionItems, getVisibleSeoKeywordItems } from "@/components/pipeline/keyword-report-utils";
 
 interface Props {
   report: KeywordUsageReport;
@@ -41,18 +42,12 @@ function repetitionTone(severity: BodyRepetitionItem["severity"]): string {
   return severity === "caution" ? "text-amber-700" : "text-zinc-600";
 }
 
-function shouldShowRepetitionItem(item: BodyRepetitionItem): boolean {
-  if (item.category === "sentence_ending" || item.category === "verb_stem") return false;
-  if (item.category === "category_word") return item.count >= 12;
-  if (item.category === "noun") return item.count >= 8;
-  return false;
-}
-
 export function KeywordReportSections({ report, title, compact = false }: Props) {
   const stageTitleClass = compact ? "text-[11px]" : "text-xs";
   const bodyClass = compact ? "text-[11px]" : "text-sm";
   const cardPadding = compact ? "p-3" : "p-4";
-  const visibleRepetitionItems = report.bodyRepetitionItems.filter(shouldShowRepetitionItem);
+  const visibleSeoKeywordItems = getVisibleSeoKeywordItems(report);
+  const visibleRepetitionItems = getVisibleBodyRepetitionItems(report);
 
   return (
     <div className="space-y-3">
@@ -72,7 +67,12 @@ export function KeywordReportSections({ report, title, compact = false }: Props)
         </div>
 
         <div className="mt-3 space-y-2">
-          {report.seoKeywordItems.map((item) => (
+          {visibleSeoKeywordItems.length === 0 ? (
+            <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3 text-[11px] text-zinc-500">
+              표시할 메인/서브 키워드가 아직 없습니다.
+            </div>
+          ) : null}
+          {visibleSeoKeywordItems.map((item) => (
             <div key={`seo-${item.role}-${item.keyword}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3">
               <div className="flex items-start justify-between gap-3">
                 <div>
