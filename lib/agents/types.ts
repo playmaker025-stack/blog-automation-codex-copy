@@ -282,6 +282,20 @@ export interface BodyRepetitionItem {
   isSeoRisk: false;
 }
 
+export type ConfirmedSeoKeywordSource = "keywordContract" | "directInput" | "postingList" | "none";
+
+export interface ConfirmedSeoKeywordRejection {
+  value: string;
+  reason: string;
+}
+
+export interface ConfirmedSeoKeywords {
+  mainKeyword: string | null;
+  subKeywords: string[];
+  source: ConfirmedSeoKeywordSource;
+  rejectedCandidates: ConfirmedSeoKeywordRejection[];
+}
+
 export interface KeywordUsageReport {
   items: KeywordUsageItem[];
   mainKeyword: KeywordUsageItem | null;
@@ -313,6 +327,7 @@ export interface KeywordUsageReport {
   bodyLength: number;
   summary: string[];
   recommendations: string[];
+  confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }
 
 export interface FinalDraftCheck {

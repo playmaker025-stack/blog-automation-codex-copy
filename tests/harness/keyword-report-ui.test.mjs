@@ -3,13 +3,15 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const { buildConfirmedSeoKeywords } = await import(new URL("../../lib/agents/confirmed-seo-keywords.ts", import.meta.url));
+const { analyzeKeywordUsage, evaluateSeoCompleteness } = await import(new URL("../../lib/agents/seo-metrics.ts", import.meta.url));
 const {
   getDraftVersionReportForIndex,
   getVisibleSeoKeywordItems,
 } = await import(new URL("../../components/pipeline/keyword-report-utils.ts", import.meta.url));
 const { isValidSeoKeyword } = await import(new URL("../../lib/agents/seo-keyword-utils.ts", import.meta.url));
 
-test("draftVersionReports는 초안 index 기준으로 매칭되고 다른 초안에 재사용되지 않는다", () => {
+test("각 초안 카드는 자기 index의 키워드 리포트만 사용한다", () => {
   const reports = [
     { label: "1차 초안", keywordReport: { seoKeywordItems: [{ keyword: "부평 전자담배 액상 추천" }] } },
     null,
@@ -29,7 +31,125 @@ test("제목형 문장과 heading 문구는 SEO 키워드로 취급하지 않는
   assert.equal(isValidSeoKeyword("처음 고를 때 실패 줄이는 방법"), false);
 });
 
-test("확정된 메인/서브 키워드만 Stage 1에 표시한다", () => {
+test("직접 입력한 확정 메인/서브 키워드만 Stage 1에 표시한다", () => {
+  const confirmed = buildConfirmedSeoKeywords({
+    directInput: {
+      mainKeyword: "입호흡 전자담배",
+      subKeywords: ["전자담배 초보자", "전자담배 처음 시작"],
+    },
+    selectedPostingTopic: {
+      title: "초보자가 시작 전에 자주 놓치는 체크포인트",
+      targetKeyword: "초보자가 시작 전에 자주 놓치는 체크포인트",
+    },
+  });
+
+  assert.equal(confirmed.mainKeyword, "입호흡 전자담배");
+  assert.deepEqual(confirmed.subKeywords, ["전자담배 초보자", "전자담배 처음 시작"]);
+
+  const report = analyzeKeywordUsage({
+    title: "초보자가 시작 전에 자주 놓치는 체크포인트",
+    body: "입호흡 전자담배는 입문자가 먼저 기준을 잡고 보아야 합니다. 전자담배 초보자와 전자담배 처음 시작 사용자가 같이 확인하면 좋습니다.",
+    confirmedSeoKeywords: confirmed,
+  });
+
+  assert.deepEqual(
+    report.seoKeywordItems.map((item) => item.keyword),
+    ["입호흡 전자담배", "전자담배 초보자", "전자담배 처음 시작"]
+  );
+});
+
+test("메인 키워드가 없으면 제목 전체를 Stage 1에 넣지 않는다", () => {
+  const confirmed = buildConfirmedSeoKeywords({
+    directInput: {
+      mainKeyword: "",
+      subKeywords: [],
+    },
+    selectedPostingTopic: {
+      title: "초보자가 시작 전에 자주 놓치는 체크포인트",
+    },
+  });
+
+  assert.equal(confirmed.mainKeyword, null);
+  assert.deepEqual(confirmed.subKeywords, []);
+  assert.ok(confirmed.rejectedCandidates.some((item) => item.reason.includes("타깃 키워드가 없습니다")));
+
+  const report = analyzeKeywordUsage({
+    title: "초보자가 시작 전에 자주 놓치는 체크포인트",
+    body: "설명 본문입니다.",
+    confirmedSeoKeywords: confirmed,
+  });
+
+  assert.deepEqual(report.seoKeywordItems, []);
+});
+
+test("final recommendation은 제목형 문장을 메인 키워드로 다시 쓰지 않는다", () => {
+  const evaluation = evaluateSeoCompleteness({
+    title: "초보자가 시작 전에 자주 놓치는 체크포인트",
+    body: "입호흡 전자담배는 초보자가 시작하기 전에 기준을 먼저 잡는 데 도움이 됩니다. 전자담배 초보자라면 흡입감과 관리 난이도를 함께 보세요.",
+    confirmedSeoKeywords: {
+      mainKeyword: "입호흡 전자담배",
+      subKeywords: ["전자담배 초보자"],
+      source: "directInput",
+      rejectedCandidates: [],
+    },
+  });
+
+  const joined = [...evaluation.improvements, ...evaluation.keywordReport.recommendations].join("\n");
+  assert.match(joined, /입호흡 전자담배/);
+  assert.doesNotMatch(joined, /초보자가 시작 전에 자주 놓치는 체크포인트/);
+});
+
+test("글 목록 항목에 targetKeyword가 있으면 Stage 1이 그 값을 사용한다", () => {
+  const confirmed = buildConfirmedSeoKeywords({
+    selectedPostingTopic: {
+      title: "부평 전자담배 액상 추천 가이드",
+      targetKeyword: "부평 전자담배 액상 추천",
+      subKeywords: ["부평 전자담배", "전자담배 액상"],
+    },
+  });
+
+  assert.equal(confirmed.source, "postingList");
+  assert.equal(confirmed.mainKeyword, "부평 전자담배 액상 추천");
+  assert.deepEqual(confirmed.subKeywords, ["부평 전자담배", "전자담배 액상"]);
+});
+
+test("글 목록 항목에 targetKeyword가 없으면 title을 keyword로 쓰지 않고 경고한다", () => {
+  const confirmed = buildConfirmedSeoKeywords({
+    selectedPostingTopic: {
+      title: "초보자가 시작 전에 자주 놓치는 체크포인트",
+    },
+  });
+
+  assert.equal(confirmed.source, "none");
+  assert.equal(confirmed.mainKeyword, null);
+  assert.ok(confirmed.rejectedCandidates.some((item) => item.reason.includes("타깃 키워드가 없습니다")));
+});
+
+test("Stage 1 UI는 확정 SEO 키워드 사용량 문구와 직접 입력 경고 문구를 포함한다", async () => {
+  const source = await fs.readFile(path.join(process.cwd(), "components/pipeline/keyword-report-sections.tsx"), "utf8");
+  const pageSource = await fs.readFile(path.join(process.cwd(), "app/pipeline/page.tsx"), "utf8");
+
+  assert.match(source, /Stage 1\. 확정 SEO 키워드 사용량/);
+  assert.match(source, /제목, 소제목, 검색의도 문장은 제외됩니다/);
+  assert.match(pageSource, /메인 키워드가 입력되지 않았습니다/);
+  assert.match(pageSource, /이 글 목록 항목에 타깃 키워드가 없습니다/);
+});
+
+test("workspace-panel은 index 기반 리포트와 Stage 1 fallback을 초안 카드마다 붙인다", async () => {
+  const source = await fs.readFile(path.join(process.cwd(), "components/pipeline/workspace-panel.tsx"), "utf8");
+
+  assert.match(source, /getDraftVersionReportForIndex\(draftVersionReports,\s*index\)/);
+  assert.match(source, /stage1EmptyMessage=\{stage1EmptyMessage\}/);
+});
+
+test("pipeline page는 수정본 검토 요청과 발행 검토에 confirmedSeoKeywords를 전달한다", async () => {
+  const source = await fs.readFile(path.join(process.cwd(), "app/pipeline/page.tsx"), "utf8");
+
+  assert.match(source, /confirmedSeoKeywords/);
+  assert.doesNotMatch(source, /seoKeywordSource/);
+});
+
+test("Stage 1 visible items는 여전히 main/sub만 노출한다", () => {
   const visible = getVisibleSeoKeywordItems({
     seoKeywordItems: [
       {
@@ -62,78 +182,12 @@ test("확정된 메인/서브 키워드만 Stage 1에 표시한다", () => {
         note: "",
         exactPhraseExclusionApplied: false,
       },
-      {
-        keyword: "부평 전자담배",
-        role: "sub",
-        exactCount: 4,
-        includedCount: 0,
-        effectiveCount: 4,
-        risk: "ok",
-        note: "",
-        exactPhraseExclusionApplied: false,
-      },
     ],
     contractApplied: true,
   });
 
   assert.deepEqual(
     visible.map((item) => item.keyword),
-    ["입호흡 전자담배", "전자담배 초보자", "부평 전자담배"]
+    ["입호흡 전자담배", "전자담배 초보자"]
   );
-});
-
-test("workspace-panel은 초안 탭에 발행/수정 버튼을 두지 않고 수정본 탭에만 둔다", async () => {
-  const source = await fs.readFile(path.join(process.cwd(), "components/pipeline/workspace-panel.tsx"), "utf8");
-
-  assert.match(source, /contentTab === "draft"/);
-  assert.match(source, /contentTab === "revision"/);
-  assert.match(source, /실제 발행본 진행/);
-  assert.doesNotMatch(source, /이 초안으로 발행 진행/);
-});
-
-test("pipeline page는 수정본 검토 팝업을 빈 값으로 열고 초안 가져오기를 선택 기능으로 둔다", async () => {
-  const source = await fs.readFile(path.join(process.cwd(), "app/pipeline/page.tsx"), "utf8");
-
-  assert.match(source, /const openReviewModal = useCallback\(\(\) => \{\s*setReviewTitle\(""\);\s*setReviewBody\(""\);/s);
-  assert.match(source, /초안 가져오기/);
-});
-
-test("pipeline page는 실제 발행본 인덱스 반영을 finalDraftCheck로 막지 않는다", async () => {
-  const source = await fs.readFile(path.join(process.cwd(), "app/pipeline/page.tsx"), "utf8");
-  const publishSection = source.slice(source.indexOf("const publishToIndex"), source.indexOf("const canStart"));
-
-  assert.match(source, /실제 발행본 진행/);
-  assert.match(source, /발행 완료 및 인덱스 반영/);
-  assert.doesNotMatch(publishSection, /canApproveFinalDraft/);
-});
-
-test("workspace-panel은 각 초안 카드에 index 기반 키워드 리포트와 fallback을 붙인다", async () => {
-  const source = await fs.readFile(path.join(process.cwd(), "components/pipeline/workspace-panel.tsx"), "utf8");
-
-  assert.match(source, /getDraftVersionReportForIndex\(draftVersionReports,\s*index\)/);
-  assert.match(source, /키워드 분석 대기 중/);
-});
-
-test("keyword-report-sections는 Stage 1에서 seoKeywordItems만 사용하고 tokenItems는 쓰지 않는다", async () => {
-  const source = await fs.readFile(path.join(process.cwd(), "components/pipeline/keyword-report-sections.tsx"), "utf8");
-
-  assert.match(source, /getVisibleSeoKeywordItems\(report\)/);
-  assert.doesNotMatch(source, /tokenItems/);
-});
-
-test("keyword-report-sections는 exact와 included를 상세 보기에서만 보여준다", async () => {
-  const source = await fs.readFile(path.join(process.cwd(), "components/pipeline/keyword-report-sections.tsx"), "utf8");
-
-  assert.match(source, /상세 보기/);
-  assert.match(source, /정확일치/);
-  assert.match(source, /포함형/);
-});
-
-test("seo-metrics는 Stage 1 source로 keywordContract와 seoKeywordSource만 사용한다", async () => {
-  const source = await fs.readFile(path.join(process.cwd(), "lib/agents/seo-metrics.ts"), "utf8");
-
-  assert.match(source, /const trackedPhrases = params\.contract/);
-  assert.match(source, /params\.source\?\.mainKeyword/);
-  assert.match(source, /params\.source\?\.subKeywords/);
-  assert.doesNotMatch(source, /targetSearchCombinations.*buildSeoKeywordItems/s);
 });

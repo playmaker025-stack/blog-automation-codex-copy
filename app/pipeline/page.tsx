@@ -12,6 +12,7 @@ import { reviewActualDraft, type DraftReviewIssue, type DraftReviewResult } from
 import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport, FinalDraftCheck } from "@/lib/agents/types";
 import { evaluateSeoCompleteness } from "@/lib/agents/seo-metrics";
 import { canApproveFinalDraft } from "@/lib/agents/final-draft-check";
+import { buildConfirmedSeoKeywords } from "@/lib/agents/confirmed-seo-keywords";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -57,11 +58,6 @@ interface DraftVersionSnapshot {
 interface DraftVersionSeoReport extends DraftVersionSnapshot {
   seoEvaluation: SeoEvaluation;
   keywordReport: KeywordUsageReport;
-}
-
-interface SeoKeywordSource {
-  mainKeyword?: string;
-  subKeywords?: string[];
 }
 
 const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[2차 초안]\n";
@@ -195,48 +191,6 @@ function topicIsPublishedById(topic: Topic, posts: PostingRecord[]): boolean {
   return posts.some((post) => post.status === "published" && post.topicId === topic.topicId);
 }
 
-function buildSeoKeywordSource(params: {
-  strategy: StrategyPlanResult | null | undefined;
-  topicMode: "list" | "direct";
-  directMainKeyword: string;
-  directSubKeyword: string;
-  selectedTopic: Topic | null;
-}): SeoKeywordSource | undefined {
-  const contract = params.strategy?.keywordContract;
-  if (contract?.mainKeyword?.trim()) {
-    return {
-      mainKeyword: contract.mainKeyword.trim(),
-      subKeywords: contract.subKeywords,
-    };
-  }
-
-  if (params.topicMode === "direct") {
-    const mainKeyword = params.directMainKeyword.trim();
-    const subKeywords = params.directSubKeyword.trim() ? [params.directSubKeyword.trim()] : [];
-    if (mainKeyword || subKeywords.length > 0) {
-      return {
-        mainKeyword,
-        subKeywords,
-      };
-    }
-  }
-
-  const topicMainKeyword = params.selectedTopic?.targetMainKeyword?.trim() ?? params.strategy?.targetMainKeyword?.trim() ?? "";
-  const topicSubKeywords = (params.selectedTopic?.tags ?? [])
-    .map((tag) => tag.trim())
-    .filter(Boolean)
-    .filter((tag) => tag !== topicMainKeyword);
-
-  if (topicMainKeyword || topicSubKeywords.length > 0) {
-    return {
-      mainKeyword: topicMainKeyword,
-      subKeywords: topicSubKeywords,
-    };
-  }
-
-  return undefined;
-}
-
 const PIPELINE_SOFT_WARNING_SECONDS = 480;
 const PIPELINE_TIMEOUT_SECONDS = 570;
 
@@ -244,6 +198,7 @@ export default function PipelinePage() {
   const userId = usePipelineStore((state) => state.userId);
   const topicMode = usePipelineStore((state) => state.topicMode);
   const selectedTopicId = usePipelineStore((state) => state.selectedTopicId);
+  const directTopicTitle = usePipelineStore((state) => state.directTopicTitle);
   const directMainKeyword = usePipelineStore((state) => state.directMainKeyword);
   const directSubKeyword = usePipelineStore((state) => state.directSubKeyword);
   const autoApprove = usePipelineStore((state) => state.autoApprove);
@@ -257,6 +212,7 @@ export default function PipelinePage() {
   const setUserId = usePipelineStore((state) => state.setUserId);
   const setTopicMode = usePipelineStore((state) => state.setTopicMode);
   const setSelectedTopicId = usePipelineStore((state) => state.setSelectedTopicId);
+  const setDirectTopicTitle = usePipelineStore((state) => state.setDirectTopicTitle);
   const setDirectMainKeyword = usePipelineStore((state) => state.setDirectMainKeyword);
   const setDirectSubKeyword = usePipelineStore((state) => state.setDirectSubKeyword);
   const setAutoApprove = usePipelineStore((state) => state.setAutoApprove);
@@ -343,17 +299,46 @@ export default function PipelinePage() {
   const selectedTopic = selectedTopicId
     ? topics.find((topic) => topic.topicId === selectedTopicId) ?? null
     : null;
-  const draftSeoKeywordSource = useMemo(
+  const confirmedSeoKeywords = useMemo(
     () =>
-      buildSeoKeywordSource({
-        strategy: draftRewriteContext?.strategy,
-        topicMode,
-        directMainKeyword,
-        directSubKeyword,
-        selectedTopic,
+      buildConfirmedSeoKeywords({
+        keywordContract: draftRewriteContext?.strategy?.keywordContract,
+        directInput:
+          topicMode === "direct"
+            ? {
+                mainKeyword: directMainKeyword,
+                subKeywords: directSubKeyword.trim() ? [directSubKeyword.trim()] : [],
+              }
+            : undefined,
+        selectedPostingTopic: selectedTopic
+          ? {
+              title: selectedTopic.title,
+              targetKeyword: selectedTopic.targetKeyword,
+              targetMainKeyword: selectedTopic.targetMainKeyword,
+              subKeywords: selectedTopic.subKeywords,
+            }
+          : undefined,
+        topicMetadata: {
+          targetKeyword: draftRewriteContext?.strategy?.keywordContract?.mainKeyword,
+          targetMainKeyword: draftRewriteContext?.strategy?.targetMainKeyword,
+          subKeywords: draftRewriteContext?.strategy?.keywordContract?.subKeywords,
+        },
       }),
     [directMainKeyword, directSubKeyword, draftRewriteContext?.strategy, selectedTopic, topicMode]
   );
+  const stage1EmptyMessage = useMemo(() => {
+    if (confirmedSeoKeywords.mainKeyword || confirmedSeoKeywords.subKeywords.length > 0) return null;
+    if (topicMode === "direct" && !directMainKeyword.trim()) {
+      return "메인 키워드가 입력되지 않았습니다.";
+    }
+    if (topicMode === "list" && selectedTopic) {
+      const postingListWarning = confirmedSeoKeywords.rejectedCandidates.find(
+        (candidate) => candidate.reason === "이 글 목록 항목에 타깃 키워드가 없습니다."
+      );
+      if (postingListWarning) return postingListWarning.reason;
+    }
+    return "표시 가능한 SEO 키워드가 없습니다.";
+  }, [confirmedSeoKeywords, directMainKeyword, selectedTopic, topicMode]);
   const draftVersionReports = useMemo<Array<DraftVersionSeoReport | null>>(() => {
     const strategy = draftRewriteContext?.strategy;
     if (!strategy || !streamingBody.trim()) return [null, null, null];
@@ -370,7 +355,7 @@ export default function PipelinePage() {
           seriesRole: strategy.seriesRole,
           targetMainKeyword: strategy.targetMainKeyword,
           keywordContract: strategy.keywordContract,
-          seoKeywordSource: draftSeoKeywordSource,
+          confirmedSeoKeywords,
         });
 
         return {
@@ -379,7 +364,7 @@ export default function PipelinePage() {
           keywordReport: seoEvaluation.keywordReport,
         };
       });
-  }, [draftRewriteContext?.strategy, draftSeoKeywordSource, streamingBody]);
+  }, [confirmedSeoKeywords, draftRewriteContext?.strategy, streamingBody]);
   const latestDraftSnapshot = useMemo(() => pickLatestDraftSnapshot(streamingBody), [streamingBody]);
   const profileDisplayName = !profile?.displayName || looksCorruptedText(profile.displayName)
     ? normalizedUserId || "\uC0AC\uC6A9\uC790 \uC5F0\uACB0\uB428"
@@ -634,7 +619,7 @@ export default function PipelinePage() {
 
     const mainKeyword = directMainKeyword.trim();
     const subKeyword = directSubKeyword.trim();
-    const title = buildDirectTopicTitle(mainKeyword, subKeyword);
+    const title = directTopicTitle.trim() || buildDirectTopicTitle(mainKeyword, subKeyword);
     if (!mainKeyword || !title) return null;
 
     const res = await fetch("/api/github/topics", {
@@ -646,6 +631,9 @@ export default function PipelinePage() {
           ? `메인키워드: ${mainKeyword} / 서브 키워드: ${subKeyword}`
           : `메인키워드: ${mainKeyword}`,
         tags: [mainKeyword, subKeyword].filter(Boolean),
+        targetKeyword: mainKeyword,
+        targetMainKeyword: mainKeyword,
+        subKeywords: subKeyword ? [subKeyword] : [],
         assignedUserId: normalizeUserId(userId.trim()),
         category: "direct-run",
         source: "direct",
@@ -658,7 +646,7 @@ export default function PipelinePage() {
 
   const startPipeline = async (forcePreflightOverride = false, forcePublishedDuplicateOverride = false) => {
     const uid = normalizeUserId(userId.trim());
-    const directComposedTitle = buildDirectTopicTitle(directMainKeyword, directSubKeyword);
+    const directComposedTitle = directTopicTitle.trim() || buildDirectTopicTitle(directMainKeyword, directSubKeyword);
     if (!uid) return;
     if (topicMode === "list" && !selectedTopicId) return;
     if (topicMode === "direct" && !directMainKeyword.trim()) return;
@@ -872,7 +860,7 @@ export default function PipelinePage() {
           body: payload.body,
           revisionRequest,
           keywordContract: draftRewriteContext?.strategy.keywordContract,
-          seoKeywordSource: draftSeoKeywordSource,
+          confirmedSeoKeywords,
         }),
       });
       const review = await res.json() as DraftReviewResult & { error?: string };
@@ -953,6 +941,7 @@ export default function PipelinePage() {
       title: finalTitle,
       body: finalBody,
       keywordContract: draftRewriteContext?.strategy.keywordContract,
+      confirmedSeoKeywords,
     });
     setReviewIssues(review.issues);
     setReviewResult(review);
@@ -1175,6 +1164,19 @@ export default function PipelinePage() {
               ) : (
                 <div className="space-y-3">
                   <div>
+                    <label htmlFor="pipeline-direct-topic-title" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
+                      제목 또는 주제
+                    </label>
+                    <input
+                      id="pipeline-direct-topic-title"
+                      value={directTopicTitle}
+                      onChange={(event) => setDirectTopicTitle(event.target.value)}
+                      placeholder="예: 부평 전자담배 액상 고를 때 먼저 보는 기준"
+                      disabled={running}
+                      className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                    />
+                  </div>
+                  <div>
                     <label htmlFor="pipeline-direct-main-keyword" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
                       메인 키워드
                     </label>
@@ -1203,11 +1205,11 @@ export default function PipelinePage() {
                   <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2">
                     <p className="text-[11px] font-semibold text-zinc-500">조합 제목 미리보기</p>
                     <p className="mt-1 text-sm text-zinc-800">
-                      {buildDirectTopicTitle(directMainKeyword, directSubKeyword) || "메인 키워드를 입력해 주세요."}
+                      {directTopicTitle.trim() || buildDirectTopicTitle(directMainKeyword, directSubKeyword) || "메인 키워드를 입력해 주세요."}
                     </p>
                   </div>
                   <p className="text-xs text-zinc-400 mt-1.5">
-                    메인 키워드는 필수이고, 서브 키워드는 선택입니다. 입력한 값은 draft 주제로 등록된 뒤 바로 글쓰기를 시작합니다.
+                    제목 또는 주제는 선택이고, 메인 키워드는 필수입니다. 입력한 키워드는 확정 SEO 키워드 사용량의 기준으로 바로 사용됩니다.
                   </p>
                 </div>
               )}
@@ -1287,6 +1289,7 @@ export default function PipelinePage() {
           reviewResult={reviewResult}
           reviewIssues={reviewIssues}
           draftVersionReports={draftVersionReports}
+          stage1EmptyMessage={stage1EmptyMessage}
           onOpenReviewModal={openReviewModal}
           onOpenPublishModal={openPublishModal}
         />

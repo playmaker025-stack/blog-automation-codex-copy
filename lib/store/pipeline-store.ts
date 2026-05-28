@@ -29,6 +29,7 @@ interface PipelineStore {
   userId: string;
   topicMode: TopicMode;
   selectedTopicId: string;
+  directTopicTitle: string;
   directMainKeyword: string;
   directSubKeyword: string;
   autoApprove: boolean;
@@ -43,6 +44,7 @@ interface PipelineStore {
   setUserId: (id: string) => void;
   setTopicMode: (mode: TopicMode) => void;
   setSelectedTopicId: (id: string) => void;
+  setDirectTopicTitle: (title: string) => void;
   setDirectMainKeyword: (keyword: string) => void;
   setDirectSubKeyword: (keyword: string) => void;
   setAutoApprove: (v: boolean) => void;
@@ -61,6 +63,7 @@ export const usePipelineStore = create<PipelineStore>()((set) => ({
   userId: "",
   topicMode: "list",
   selectedTopicId: "",
+  directTopicTitle: "",
   directMainKeyword: "",
   directSubKeyword: "",
   autoApprove: false,
@@ -79,6 +82,7 @@ export const usePipelineStore = create<PipelineStore>()((set) => ({
       return {
         userId: id,
         selectedTopicId: "",
+        directTopicTitle: "",
         directMainKeyword: "",
         directSubKeyword: "",
         stage: "idle",
@@ -91,6 +95,7 @@ export const usePipelineStore = create<PipelineStore>()((set) => ({
     }),
   setTopicMode: (mode) => set({ topicMode: mode }),
   setSelectedTopicId: (id) => set({ selectedTopicId: id }),
+  setDirectTopicTitle: (title) => set({ directTopicTitle: title }),
   setDirectMainKeyword: (keyword) => set({ directMainKeyword: keyword }),
   setDirectSubKeyword: (keyword) => set({ directSubKeyword: keyword }),
   setAutoApprove: (v) => set({ autoApprove: v }),

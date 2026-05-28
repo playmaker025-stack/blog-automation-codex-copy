@@ -1,5 +1,6 @@
 ﻿import type {
   BodyRepetitionItem,
+  ConfirmedSeoKeywords,
   KeywordContract,
   KeywordFocusMetric,
   KeywordUsageItem,
@@ -9,8 +10,8 @@
   SeoEvaluation,
   SeoKeywordItem,
 } from "./types";
-import { classifySearchCombination, splitSearchCombinationTokens } from "./search-combination-utils";
-import { filterValidSeoKeywordItems } from "./seo-keyword-utils";
+import { classifySearchCombination, splitSearchCombinationTokens } from "./search-combination-utils.ts";
+import { filterValidSeoKeywordItems } from "./seo-keyword-utils.ts";
 
 function clampScore(value: number): number {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -245,7 +246,7 @@ function findHeadingLines(body: string): string[] {
     .filter((line) => line.startsWith("#") || /^\d+[.)]\s+/.test(line) || /^\*\*.+\*\*$/.test(line));
 }
 
-function selectMainKeyword(title: string, keywords: string[] = [], targetMainKeyword?: string): string {
+function _selectMainKeyword(title: string, keywords: string[] = [], targetMainKeyword?: string): string {
   const explicitMainKeyword = targetMainKeyword?.trim();
   if (explicitMainKeyword) return explicitMainKeyword;
 
@@ -434,7 +435,7 @@ function buildKeywordFocusMetrics(params: {
   const bodyLength = params.keywordReport.bodyLength;
 
   return params.keywordReport.items.filter((item) => item.role !== "forbidden" && item.role !== "anchor").map((item, index) => {
-    const role: KeywordFocusMetric["role"] = item.role === "main" || index === 0 ? "main" : "sub";
+    const role: KeywordFocusMetric["role"] = item.role === "main" ? "main" : "sub";
     const isPreludeTarget =
       params.seriesRole === "prelude" &&
       item.keyword.trim().toLowerCase() === (params.targetMainKeyword?.trim().toLowerCase() ?? "");
@@ -834,14 +835,14 @@ function buildSeoKeywordItems(params: {
   body: string;
   contract?: KeywordContract;
   items: KeywordUsageItem[];
-  source?: {
-    mainKeyword?: string;
-    subKeywords?: string[];
-  };
+  confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }): SeoKeywordItem[] {
   const trackedPhrases = params.contract
     ? uniqueKeywords([params.contract.mainKeyword, ...params.contract.subKeywords])
-    : uniqueKeywords([params.source?.mainKeyword ?? "", ...(params.source?.subKeywords ?? [])]);
+    : uniqueKeywords([
+        params.confirmedSeoKeywords?.mainKeyword ?? "",
+        ...(params.confirmedSeoKeywords?.subKeywords ?? []),
+      ]);
   if (trackedPhrases.length === 0) return [];
 
   const seoItems = params.items
@@ -1014,30 +1015,23 @@ export function analyzeKeywordUsage(params: {
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
   forbiddenTerms?: string[];
-  seoKeywordSource?: {
-    mainKeyword?: string;
-    subKeywords?: string[];
-  };
+  confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }): KeywordUsageReport {
   const paragraphs = splitParagraphs(params.body);
   const introText = paragraphs.slice(0, 2).join("\n\n");
   const bodyLength = params.body.replace(/\s+/g, "").length;
   const contract = params.keywordContract;
-  const fallbackSourceMainKeyword = params.seoKeywordSource?.mainKeyword?.trim() ?? "";
-  const fallbackSourceSubKeywords = uniqueKeywords(params.seoKeywordSource?.subKeywords ?? []);
-  const mainKeyword = contract?.mainKeyword ?? (fallbackSourceMainKeyword || selectMainKeyword(params.title, params.keywords ?? [], params.targetMainKeyword));
-  const sourceKeywords = uniqueKeywords([
-    ...fallbackSourceSubKeywords,
-    ...(params.keywords ?? []),
-  ]);
-  const orderedKeywords = contract
+  const mainKeyword = contract?.mainKeyword ?? params.confirmedSeoKeywords?.mainKeyword?.trim() ?? "";
+  const sourceKeywords = uniqueKeywords(params.confirmedSeoKeywords?.subKeywords ?? []);
+  const nonContractKeywordSpecs = contract
     ? []
-    : buildTrackedKeywords({
-        title: params.title,
-        body: params.body,
-        mainKeyword,
-        keywords: sourceKeywords,
-      }).filter(Boolean);
+    : [
+        ...(mainKeyword ? [{ keyword: mainKeyword, role: "main" as const }] : []),
+        ...sourceKeywords
+          .filter((keyword) => keyword !== mainKeyword)
+          .map((keyword) => ({ keyword, role: "sub" as const })),
+      ];
+  const orderedKeywords = nonContractKeywordSpecs.map((item) => item.keyword);
   const keywordPool = contract
     ? [contract.mainKeyword, ...contract.subKeywords, ...contract.bridgeKeywords, ...contract.internalLinkAnchors]
     : collectKeywordPool(params.title, orderedKeywords);
@@ -1055,35 +1049,35 @@ export function analyzeKeywordUsage(params: {
     : keywordPool;
   const normalizedTargetMainKeyword = params.targetMainKeyword?.trim().toLowerCase() ?? "";
 
-  const items: KeywordUsageItem[] = contract ? buildContractKeywordItems(contract, params.body) : orderedKeywords.map((keyword, index) => {
-    const count = countKeywordOccurrences(params.body, keyword);
+  const items: KeywordUsageItem[] = contract ? buildContractKeywordItems(contract, params.body) : nonContractKeywordSpecs.map((keywordSpec) => {
+    const count = countKeywordOccurrences(params.body, keywordSpec.keyword);
     const isPreludeMainKeyword =
       params.seriesRole === "prelude" &&
-      index === 0 &&
+      keywordSpec.role === "main" &&
       !!normalizedTargetMainKeyword &&
-      keyword.trim().toLowerCase() === normalizedTargetMainKeyword;
+      keywordSpec.keyword.trim().toLowerCase() === normalizedTargetMainKeyword;
 
-    const targetMin = index === 0 ? (isPreludeMainKeyword ? 1 : 4) : 1;
-    const targetMax = index === 0 ? (isPreludeMainKeyword ? 3 : 7) : 3;
+    const targetMin = keywordSpec.role === "main" ? (isPreludeMainKeyword ? 1 : 4) : 1;
+    const targetMax = keywordSpec.role === "main" ? (isPreludeMainKeyword ? 3 : 7) : 3;
     const status =
-      index === 0
+      keywordSpec.role === "main"
         ? getMainKeywordStatus(count, isPreludeMainKeyword)
         : getSubKeywordStatus(count);
     const recommendation = buildKeywordRecommendation(
-      keyword,
-      index === 0 ? "main" : "sub",
+      keywordSpec.keyword,
+      keywordSpec.role,
       status,
       isPreludeMainKeyword
     );
 
     return {
-      keyword,
+      keyword: keywordSpec.keyword,
       count,
       status,
       targetMin,
       targetMax,
       recommendation,
-      role: index === 0 ? "main" : "sub",
+      role: keywordSpec.role,
     };
   });
 
@@ -1120,7 +1114,7 @@ export function analyzeKeywordUsage(params: {
     body: params.body,
     contract,
     items,
-    source: params.seoKeywordSource,
+    confirmedSeoKeywords: params.confirmedSeoKeywords,
   });
   const legacyTokenItems = buildKeywordTokenItems(tokenPool, params.body);
   const bodyRepetitionItems = buildBodyRepetitionItems(params.body);
@@ -1163,6 +1157,7 @@ export function analyzeKeywordUsage(params: {
     bodyLength,
     summary,
     recommendations: uniqueKeywords(recommendations).slice(0, 10),
+    confirmedSeoKeywords: params.confirmedSeoKeywords,
   };
 }
 
@@ -1175,10 +1170,7 @@ export function evaluateSeoCompleteness(params: {
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
   forbiddenTerms?: string[];
-  seoKeywordSource?: {
-    mainKeyword?: string;
-    subKeywords?: string[];
-  };
+  confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }): SeoEvaluation {
   const keywordReport = analyzeKeywordUsage({ ...params });
   const keywordMetrics = buildKeywordFocusMetrics({
@@ -1220,7 +1212,7 @@ export function evaluateSeoCompleteness(params: {
   const firstSentence = extractFirstSentence(params.body);
   const headingText = findHeadingLines(params.body).join("\n");
   const conclusionText = extractConclusionText(params.body);
-  const mainKeyword = keywordReport.items[0]?.keyword ?? "";
+  const mainKeyword = keywordReport.mainKeyword?.keyword ?? "";
   const mainInFirstSentence = mainKeyword ? includesKeyword(firstSentence, mainKeyword) : true;
   const mainInHeading = mainKeyword ? includesKeyword(headingText, mainKeyword) : true;
   const mainInConclusion = mainKeyword ? includesKeyword(conclusionText, mainKeyword) : true;
@@ -1232,6 +1224,11 @@ export function evaluateSeoCompleteness(params: {
   let score = 88;
   const evidence: string[] = [];
   const improvements: string[] = [];
+
+  if (!mainKeyword) {
+    score -= 14;
+    improvements.push("확정 메인 키워드가 없어 SEO 키워드 배치를 계산하지 못했습니다.");
+  }
 
   if (params.title.length >= 28 && params.title.length <= 45) {
     score += 4;
@@ -1246,20 +1243,20 @@ export function evaluateSeoCompleteness(params: {
   } else if (keywordReport.titleFrontLoaded) {
     score += 4;
     evidence.push("메인 키워드가 제목 앞부분에 배치되어 있습니다.");
-  } else if (keywordReport.items[0]) {
+  } else if (keywordReport.mainKeyword) {
     score -= 8;
-    improvements.push(`제목 앞부분에 '${keywordReport.items[0].keyword}'를 더 빠르게 노출하면 검색 의도가 선명해집니다.`);
+    improvements.push(`제목 앞부분에 '${keywordReport.mainKeyword.keyword}'를 더 빠르게 노출하면 검색 의도가 선명해집니다.`);
   }
 
   if (keywordReport.introCoverage) {
     score += 4;
     evidence.push("도입부에 메인 키워드가 보여 검색 의도 연결이 자연스럽습니다.");
-  } else if (keywordReport.items[0]) {
+  } else if (keywordReport.mainKeyword) {
     score -= isPreludeMainKeyword ? 3 : 10;
     improvements.push(
       isPreludeMainKeyword
-        ? `선행 글 본문에 '${keywordReport.items[0].keyword}'를 최소 한 번 자연스럽게 등장시켜 주세요.`
-        : `첫 두 문단 안에 '${keywordReport.items[0].keyword}'를 자연스럽게 넣는 편이 좋습니다.`
+        ? `선행 글 본문에 '${keywordReport.mainKeyword.keyword}'를 최소 한 번 자연스럽게 등장시켜 주세요.`
+        : `첫 두 문단 안에 '${keywordReport.mainKeyword.keyword}'를 자연스럽게 넣는 편이 좋습니다.`
     );
   }
 
@@ -1290,6 +1287,7 @@ export function evaluateSeoCompleteness(params: {
   }
 
   for (const item of keywordReport.items) {
+    const isMainItem = Boolean(mainKeyword) && item.keyword === mainKeyword;
     if (item.role === "forbidden") {
       if (item.status === "danger") {
         score -= 18;
@@ -1302,16 +1300,16 @@ export function evaluateSeoCompleteness(params: {
       continue;
     }
     if (item.status === "under") {
-      score -= item.keyword === keywordReport.items[0]?.keyword ? 10 : 5;
+      score -= isMainItem ? 10 : 5;
       improvements.push(item.recommendation);
       continue;
     }
     if (item.status === "caution") {
-      score -= item.keyword === keywordReport.items[0]?.keyword ? 8 : 4;
+      score -= isMainItem ? 8 : 4;
       improvements.push(item.recommendation);
       continue;
     }
-    score -= item.keyword === keywordReport.items[0]?.keyword ? 10 : 6;
+    score -= isMainItem ? 10 : 6;
     improvements.push(item.recommendation);
   }
 

@@ -1,11 +1,13 @@
 import type {
   ArticleContract,
+  ConfirmedSeoKeywords,
   FinalDraftCheck,
   FinalDraftRewriteResult,
   KeywordLimit,
   OverlapReport,
   StrategyPlanResult,
 } from "./types";
+import { buildConfirmedSeoKeywords } from "./confirmed-seo-keywords.ts";
 
 const DEFER_PHRASES = [
   "다음 글에서",
@@ -37,6 +39,25 @@ function uniq(values: string[]): string[] {
     result.push(normalized);
   }
   return result;
+}
+
+function collectConfirmedDraftCheckKeywords(
+  strategy: StrategyPlanResult,
+  confirmedSeoKeywords?: ConfirmedSeoKeywords
+): string[] {
+  const confirmed = confirmedSeoKeywords ?? buildConfirmedSeoKeywords({
+    keywordContract: strategy.keywordContract,
+    topicMetadata: {
+      targetKeyword: strategy.keywordContract?.mainKeyword,
+      targetMainKeyword: strategy.targetMainKeyword,
+      subKeywords: strategy.keywordContract?.subKeywords,
+    },
+  });
+
+  return uniq([
+    confirmed.mainKeyword ?? "",
+    ...confirmed.subKeywords,
+  ].filter(Boolean));
 }
 
 function normalizeText(value: string): string {
@@ -117,16 +138,13 @@ function findQuestionKeywordStuffing(params: {
   content: string;
   contract?: ArticleContract;
   strategy: StrategyPlanResult;
+  confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }): string[] {
   const contract = params.contract;
   const shouldCheck = contract?.keywordUsagePolicy?.avoidSubKeywordStuffingInQuestions ?? true;
   if (!shouldCheck) return [];
 
-  const keywords = uniq([
-    params.strategy.keywordContract?.mainKeyword ?? "",
-    ...(params.strategy.keywordContract?.subKeywords ?? []),
-    ...(params.strategy.keywords ?? []),
-  ].filter(Boolean));
+  const keywords = collectConfirmedDraftCheckKeywords(params.strategy, params.confirmedSeoKeywords);
   if (!keywords.length) return [];
 
   const fragments = extractQuestionLikeFragments(params.content);
@@ -233,6 +251,7 @@ export function runFinalDraftCheck(params: {
   title: string;
   content: string;
   strategy: StrategyPlanResult;
+  confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }): FinalDraftCheck {
   const contract = params.strategy.articleContract;
   const overlapReport = params.strategy.overlapReport;
@@ -242,6 +261,7 @@ export function runFinalDraftCheck(params: {
     content: params.content,
     contract,
     strategy: params.strategy,
+    confirmedSeoKeywords: params.confirmedSeoKeywords,
   });
   const keywordLimitFindings = evaluateKeywordLimits(params.content, params.strategy.keywordContract?.limitedKeywords);
   const preludeConsumptionFindings = findPreludeOverConsumption({
@@ -350,12 +370,12 @@ function rewriteForbiddenHeadings(content: string, contract?: ArticleContract): 
     .join("\n");
 }
 
-function naturalizeQuestionKeywordStuffing(content: string, strategy: StrategyPlanResult): string {
-  const keywords = uniq([
-    strategy.keywordContract?.mainKeyword ?? "",
-    ...(strategy.keywordContract?.subKeywords ?? []),
-    ...(strategy.keywords ?? []),
-  ].filter(Boolean));
+function naturalizeQuestionKeywordStuffing(
+  content: string,
+  strategy: StrategyPlanResult,
+  confirmedSeoKeywords?: ConfirmedSeoKeywords
+): string {
+  const keywords = collectConfirmedDraftCheckKeywords(strategy, confirmedSeoKeywords);
   if (!keywords.length) return content;
 
   return content
@@ -412,6 +432,7 @@ export function runLimitedFinalDraftRewrite(params: {
   content: string;
   strategy: StrategyPlanResult;
   beforeCheck?: FinalDraftCheck;
+  confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }): FinalDraftRewriteResult & { content: string } {
   const beforeCheck = params.beforeCheck ?? runFinalDraftCheck(params);
   if (beforeCheck.ok || beforeCheck.blockingReasons.length === 0) {
@@ -429,7 +450,7 @@ export function runLimitedFinalDraftRewrite(params: {
   let rewritten = params.content;
   rewritten = removeForbiddenPhrases(rewritten, beforeCheck.matchedForbiddenPhrases);
   rewritten = rewriteForbiddenHeadings(rewritten, params.strategy.articleContract);
-  rewritten = naturalizeQuestionKeywordStuffing(rewritten, params.strategy);
+  rewritten = naturalizeQuestionKeywordStuffing(rewritten, params.strategy, params.confirmedSeoKeywords);
   rewritten = resolveDeferSentences(rewritten, params.strategy.articleContract);
   rewritten = appendMissingMustResolveParagraphs(rewritten, beforeCheck, params.strategy.articleContract);
   rewritten = rewritten.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
@@ -438,6 +459,7 @@ export function runLimitedFinalDraftRewrite(params: {
     title: params.title,
     content: rewritten,
     strategy: params.strategy,
+    confirmedSeoKeywords: params.confirmedSeoKeywords,
   });
 
   return {

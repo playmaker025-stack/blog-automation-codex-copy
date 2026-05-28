@@ -73,6 +73,8 @@ export interface Topic {
   description: string;
   category: string;
   tags: string[];
+  targetKeyword?: string;
+  subKeywords?: string[];
   source?: "imported" | "generated" | "manual" | "direct";
   contentKind?: "hub" | "leaf";
   seriesId?: string;

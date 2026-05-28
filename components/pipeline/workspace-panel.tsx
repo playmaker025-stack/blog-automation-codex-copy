@@ -22,6 +22,7 @@ interface Props {
   reviewSaving: boolean;
   reviewResult: DraftReviewResult | null;
   reviewIssues: DraftReviewIssue[];
+  stage1EmptyMessage?: string | null;
   draftVersionReports: Array<{
     label: string;
     body: string;
@@ -187,6 +188,7 @@ export function PipelineWorkspacePanel({
   reviewSaving,
   reviewResult,
   reviewIssues,
+  stage1EmptyMessage,
   draftVersionReports,
   onOpenReviewModal,
   onOpenPublishModal,
@@ -303,7 +305,7 @@ export function PipelineWorkspacePanel({
                         <div className="border-t border-zinc-100 bg-white px-4 py-4">
                           <p className="mb-3 text-sm font-semibold text-zinc-900">초안별 키워드 사용량</p>
                           {versionReport ? (
-                            <KeywordReportSections report={versionReport.keywordReport} compact />
+                            <KeywordReportSections report={versionReport.keywordReport} compact stage1EmptyMessage={stage1EmptyMessage} />
                           ) : (
                             <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3 text-[11px] text-zinc-500">
                               키워드 분석 대기 중

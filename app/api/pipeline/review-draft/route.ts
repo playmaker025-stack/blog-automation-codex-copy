@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { reviewActualDraft, type DraftReviewChange } from "@/lib/agents/draft-review";
-import type { KeywordContract } from "@/lib/agents/types";
+import type { ConfirmedSeoKeywords, KeywordContract } from "@/lib/agents/types";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
@@ -11,10 +11,7 @@ interface ReviewDraftRequest {
   body: string;
   revisionRequest?: string;
   keywordContract?: KeywordContract;
-  seoKeywordSource?: {
-    mainKeyword?: string;
-    subKeywords?: string[];
-  };
+  confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }
 
 interface OpenAIReviewResult {
@@ -287,7 +284,7 @@ export async function POST(request: NextRequest) {
       title: aiReview.revisedTitle,
       body: aiReview.revisedBody,
       keywordContract: body.keywordContract,
-      seoKeywordSource: body.seoKeywordSource,
+      confirmedSeoKeywords: body.confirmedSeoKeywords,
     });
 
     return NextResponse.json({

@@ -14,6 +14,7 @@ interface Props {
   report: KeywordUsageReport;
   title?: string;
   compact?: boolean;
+  stage1EmptyMessage?: string | null;
 }
 
 function keywordRiskLabel(risk: SeoKeywordItem["risk"]): string {
@@ -91,7 +92,7 @@ function BodyRepetitionCard({ item }: { item: BodyRepetitionItem }) {
   );
 }
 
-export function KeywordReportSections({ report, title, compact = false }: Props) {
+export function KeywordReportSections({ report, title, compact = false, stage1EmptyMessage }: Props) {
   const sectionPadding = compact ? "p-3" : "p-4";
   const titleClass = compact ? "text-[11px]" : "text-xs";
 
@@ -110,9 +111,9 @@ export function KeywordReportSections({ report, title, compact = false }: Props)
       <section className={`rounded-xl border border-zinc-200 bg-white ${sectionPadding}`}>
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className={`font-semibold text-zinc-700 ${titleClass}`}>Stage 1. SEO 키워드 사용량</p>
+            <p className={`font-semibold text-zinc-700 ${titleClass}`}>Stage 1. 확정 SEO 키워드 사용량</p>
             <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-              확정된 메인 키워드와 서브 키워드만 표시합니다.
+              사용자가 입력했거나 글 목록/전략에서 확정한 메인·서브 키워드만 계산합니다. 제목, 소제목, 검색의도 문장은 제외됩니다.
             </p>
           </div>
           <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-semibold text-zinc-600">
@@ -123,7 +124,7 @@ export function KeywordReportSections({ report, title, compact = false }: Props)
         <div className="mt-3 space-y-2">
           {primarySeoItems.length === 0 ? (
             <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3 text-[11px] text-zinc-500">
-              표시 가능한 SEO 키워드가 없습니다.
+              {stage1EmptyMessage ?? "표시 가능한 SEO 키워드가 없습니다."}
             </div>
           ) : (
             primarySeoItems.map((item) => <SeoKeywordCard key={`seo-${item.role}-${item.keyword}`} item={item} />)
