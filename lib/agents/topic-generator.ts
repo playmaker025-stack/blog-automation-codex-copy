@@ -31,6 +31,25 @@ export interface PrePostingSeriesInput {
   preludeCount?: number;
 }
 
+export type SeriesWorkflowRole =
+  | "preheat_criteria"
+  | "preheat_experience"
+  | "preheat_consulting"
+  | "main_hub"
+  | "followup";
+
+export interface SeriesWorkflowPlannerInput {
+  userId: string;
+  targetTopic: string;
+  targetKeyword: string;
+  region?: string;
+  productGroup?: string;
+  targetUser?: string;
+  preferredBlog?: "A" | "B" | "C" | "D" | "E" | null;
+  existingTopics?: Topic[];
+  existingPosts?: PostingRecord[];
+}
+
 export interface SeriesDetailPlannerInput {
   userId: string;
   mainKeyword: string;
@@ -58,6 +77,59 @@ export interface TopicGeneratorOutput {
   competitionInfo: string;
 }
 
+export interface SeriesPostPlan {
+  sequence: 1 | 2 | 3 | 4 | 5;
+  role: SeriesWorkflowRole;
+  title: string;
+  mainKeyword: string;
+  subKeywords: string[];
+  searchIntent: string;
+  hubLeafType: "hub" | "leaf";
+  recommendedBlog: "A" | "B" | "C" | "D" | "E";
+  purpose: string;
+  outline: string[];
+  internalLinkDirection: string;
+  internalLinkSentence: string;
+  cannibalizationRisk: "low" | "medium" | "high";
+  riskReason: string;
+  keywordDistanceScore: number;
+}
+
+export interface KeywordSafetyReport {
+  reservedMainKeyword: string;
+  duplicateTitlePrefixCount: number;
+  exactMainKeywordUsedInPreheats: number;
+  keywordDistanceScore: number;
+  cannibalizationRisk: "low" | "medium" | "high";
+  recommendations: string[];
+}
+
+export interface SeriesValidationChecklist {
+  mainKeywordReservedForMainPost: boolean;
+  preheatKeywordsAreDistributed: boolean;
+  searchIntentIsDifferentEachPost: boolean;
+  mainPostIsHub: boolean;
+  preheatPostsAreLeaf: boolean;
+  followupConnectsAfterMain: boolean;
+  internalLinksAreDesigned: boolean;
+  existingIndexChecked: boolean;
+  existingPostHistoryChecked: boolean;
+  cannibalizationRiskAcceptable: boolean;
+}
+
+export interface SeriesWorkflowOutput {
+  seriesId: string;
+  targetTopic: string;
+  reservedMainKeyword: string;
+  seriesPurpose: string;
+  internalLinkStructure: string;
+  keywordSafetyReport: KeywordSafetyReport;
+  validationChecklist: SeriesValidationChecklist;
+  generatedTopics: GeneratedTopic[];
+  seriesPlans: SeriesPostPlan[];
+  replacementTopicText: string;
+}
+
 export interface SeriesDetailPlannerOutput {
   seriesId: string;
   mainKeyword: string;
@@ -77,6 +149,304 @@ function slugifyKeyword(value: string): string {
     .replace(/[^\p{L}\p{N}]+/gu, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 48) || "keyword";
+}
+
+const DEFAULT_SERIES_BLOG_MAP: Record<SeriesWorkflowRole, Array<"A" | "B" | "C" | "D" | "E">> = {
+  preheat_criteria: ["C", "E"],
+  preheat_experience: ["C", "D"],
+  preheat_consulting: ["B", "E"],
+  main_hub: ["A", "B"],
+  followup: ["E", "B", "D"],
+};
+
+function compactTitleForSeries(value: string): string {
+  return value
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, "")
+    .trim();
+}
+
+function sharedPrefixLength(left: string, right: string): number {
+  const a = left.normalize("NFKC");
+  const b = right.normalize("NFKC");
+  let index = 0;
+  while (index < a.length && index < b.length && a[index] === b[index]) index += 1;
+  return index;
+}
+
+function _tokenizeKeyword(value: string): string[] {
+  return value
+    .normalize("NFKC")
+    .toLowerCase()
+    .split(/[^\p{L}\p{N}]+/gu)
+    .map((token) => token.trim())
+    .filter(Boolean);
+}
+
+function uniqueList(values: string[]): string[] {
+  return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+}
+
+function chooseRecommendedBlog(
+  role: SeriesWorkflowRole,
+  preferredBlog?: "A" | "B" | "C" | "D" | "E" | null
+): "A" | "B" | "C" | "D" | "E" {
+  const candidates = DEFAULT_SERIES_BLOG_MAP[role];
+  if (preferredBlog && candidates.includes(preferredBlog)) return preferredBlog;
+  return candidates[0];
+}
+
+function deriveKeywordCore(targetKeyword: string): string {
+  return derivePreludeTopicPhrase(targetKeyword)
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function _buildSeriesKeywordCandidates(input: SeriesWorkflowPlannerInput): {
+  criteriaKeyword: string;
+  experienceKeyword: string;
+  consultingKeyword: string;
+  followupKeyword: string;
+  supportKeywords: string[];
+} {
+  const core = deriveKeywordCore(input.targetKeyword);
+  const hasMtl = /입호흡/u.test(input.targetKeyword);
+  const product = input.productGroup?.trim() || (hasMtl ? "입호흡" : core.split(" ")[0] || "전자담배");
+
+  const criteriaKeyword = /고르는법/u.test(core) ? core : `${product} 고르는법`;
+  const experienceKeyword = hasMtl ? "입호흡 흡입압" : `${product} 사용감`;
+  const consultingKeyword = hasMtl ? "전담 입문자" : `${product} 처음`;
+  const followupKeyword = hasMtl ? "입호흡 액상 선택" : `${product} 관리법`;
+
+  const supportKeywords = uniqueList([
+    input.targetKeyword,
+    `${product} 입문자`,
+    `${product} 선택 기준`,
+    input.region ? `${input.region} ${product}` : "",
+    input.targetUser ? `${input.targetUser} ${product}` : "",
+  ]);
+
+  return {
+    criteriaKeyword,
+    experienceKeyword,
+    consultingKeyword,
+    followupKeyword,
+    supportKeywords,
+  };
+}
+
+function _buildInternalLinkSentence(params: {
+  fromRole: SeriesWorkflowRole;
+  mainTitle: string;
+  criteriaTitle: string;
+  followupTitle: string;
+}): string {
+  switch (params.fromRole) {
+    case "preheat_criteria":
+    case "preheat_experience":
+    case "preheat_consulting":
+      return `기준을 먼저 정리했다면, 다음 글에서는 이 기준을 바탕으로 ${params.mainTitle} 흐름을 이어서 확인해보겠습니다.`;
+    case "main_hub":
+      return `기기를 고른 뒤에도 만족도가 갈린다면, 다음 단계는 ${params.followupTitle} 글까지 함께 보는 것입니다.`;
+    case "followup":
+      return `아직 기기 선택이 끝나지 않았다면, 먼저 ${params.mainTitle} 글부터 확인한 뒤 다시 이 내용을 보면 더 이해가 쉽습니다.`;
+  }
+}
+
+function _buildSeriesOutline(role: SeriesWorkflowRole): string[] {
+  switch (role) {
+    case "preheat_criteria":
+      return [
+        "처음부터 제품명으로 고르면 실패하는 이유",
+        "연초와 비슷한 흡입감을 원하는지 확인하기",
+        "관리 난이도와 유지비를 먼저 보는 기준",
+        "기준이 정리된 뒤 추천 글을 봐야 하는 이유",
+      ];
+    case "preheat_experience":
+      return [
+        "같은 제품인데 만족도가 갈리는 이유",
+        "흡입압·타격감·목넘김 차이 정리",
+        "체감이 맞지 않을 때 생기는 불편",
+        "추천 글에서 무엇을 중점적으로 봐야 하는지",
+      ];
+    case "preheat_consulting":
+      return [
+        "입문자가 매장에서 가장 많이 헷갈리는 질문",
+        "예산·관리·호환성에서 먼저 물어볼 것",
+        "상담 전에 정리하면 좋은 본인 기준",
+        "추천 허브 글로 이어지는 체크리스트",
+      ];
+    case "main_hub":
+      return [
+        "입문자 기준으로 실패를 줄이는 전제 정리",
+        "선행 글에서 다룬 기준 요약",
+        "사용자 유형별 선택 포인트",
+        "실제 추천 후보를 읽는 기준",
+      ];
+    case "followup":
+      return [
+        "기기 선택 뒤 만족도가 갈리는 이유",
+        "액상·관리·세팅에서 다시 보는 기준",
+        "구매 후 자주 겪는 불만 정리",
+        "다시 본편으로 돌아가 봐야 할 조건",
+      ];
+  }
+}
+
+function _inferSearchIntent(role: SeriesWorkflowRole): string {
+  switch (role) {
+    case "preheat_criteria":
+      return "추천 제품을 보기 전에 선택 기준을 알고 싶은 정보형 의도";
+    case "preheat_experience":
+      return "같은 제품인데 체감이 다른 이유를 알고 싶은 문제 인식형 의도";
+    case "preheat_consulting":
+      return "처음 구매 전 무엇을 물어봐야 할지 모르는 상담형 의도";
+    case "main_hub":
+      return "최종 선택을 위해 추천 후보를 비교하고 싶은 구매검토형 의도";
+    case "followup":
+      return "구매 후 만족도와 실패 요인을 줄이고 싶은 후속 관리형 의도";
+  }
+}
+
+function _inferPurpose(role: SeriesWorkflowRole): string {
+  switch (role) {
+    case "preheat_criteria":
+      return "본편 추천 글 전에 판단 기준을 만들어주는 예열글";
+    case "preheat_experience":
+      return "사용감 차이를 설명해 본편 추천 기준을 강화하는 예열글";
+    case "preheat_consulting":
+      return "구매 전 질문을 정리하고 본편 추천 글로 연결하는 예열글";
+    case "main_hub":
+      return "예열글 3편을 받아 사용자 유형별 추천으로 전환하는 중심 허브";
+    case "followup":
+      return "본편 이후 만족도 문제를 보완하고 역링크를 거는 후속글";
+  }
+}
+
+function inferRiskLevel(distanceScore: number): "low" | "medium" | "high" {
+  if (distanceScore >= 80) return "low";
+  if (distanceScore >= 60) return "medium";
+  return "high";
+}
+
+function buildReplacementTopicText(userId: string, plans: SeriesPostPlan[]): string {
+  return plans
+    .map((plan) => `${plan.recommendedBlog}|${userId}|${plan.title}`)
+    .join("\n");
+}
+
+function buildCleanSeriesKeywordCandidates(input: SeriesWorkflowPlannerInput): {
+  criteriaKeyword: string;
+  experienceKeyword: string;
+  consultingKeyword: string;
+  followupKeyword: string;
+  supportKeywords: string[];
+} {
+  const core = deriveKeywordCore(input.targetKeyword);
+  const hasMtl = /입호흡/u.test(input.targetKeyword);
+  const product = input.productGroup?.trim() || (hasMtl ? "입호흡 전자담배" : core.split(" ")[0] || "전자담배");
+
+  return {
+    criteriaKeyword: /고르는법|선택 기준/u.test(core) ? core : `${product} 고르는법`,
+    experienceKeyword: hasMtl ? "입호흡 흡입압" : `${product} 사용감`,
+    consultingKeyword: hasMtl ? "전담 입문자" : `${product} 처음`,
+    followupKeyword: hasMtl ? "입호흡 액상 선택" : `${product} 관리법`,
+    supportKeywords: uniqueList([
+      input.targetKeyword,
+      `${product} 입문자`,
+      `${product} 선택 기준`,
+      input.region ? `${input.region} ${product}` : "",
+      input.targetUser ? `${input.targetUser} ${product}` : "",
+    ]),
+  };
+}
+
+function buildCleanInternalLinkSentence(params: {
+  fromRole: SeriesWorkflowRole;
+  mainTitle: string;
+  followupTitle: string;
+}): string {
+  switch (params.fromRole) {
+    case "preheat_criteria":
+    case "preheat_experience":
+    case "preheat_consulting":
+      return `기준을 먼저 정리했다면, 다음 글에서는 이 기준을 바탕으로 ${params.mainTitle} 흐름을 이어서 확인해보겠습니다.`;
+    case "main_hub":
+      return `기기를 고른 뒤에도 만족도가 갈린다면, 다음 단계는 ${params.followupTitle} 글까지 함께 보는 것입니다.`;
+    case "followup":
+      return `아직 기기 선택이 끝나지 않았다면, 먼저 ${params.mainTitle} 글부터 확인한 뒤 다시 보는 편이 이해가 쉽습니다.`;
+  }
+}
+
+function buildCleanSeriesOutline(role: SeriesWorkflowRole): string[] {
+  switch (role) {
+    case "preheat_criteria":
+      return [
+        "처음부터 제품명으로 고르면 실패하는 이유",
+        "연초와 비슷한 흡입감을 원하는지 확인하기",
+        "관리가 쉬운 기기를 원하는지 먼저 보기",
+        "기준이 정리된 뒤 추천 글을 봐야 하는 이유",
+      ];
+    case "preheat_experience":
+      return [
+        "같은 제품인데 만족감이 갈리는 이유",
+        "흡입압과 목넘김 차이 정리",
+        "체감이 맞지 않을 때 생기는 불편",
+        "추천 글에서 무엇을 중점으로 봐야 하는지",
+      ];
+    case "preheat_consulting":
+      return [
+        "입문자가 매장에서 가장 많이 헷갈리는 질문",
+        "예산과 관리 편의성에서 먼저 물어볼 것",
+        "상담 전에 정리하면 좋은 본인 기준",
+        "추천 허브 글로 이어지는 체크리스트",
+      ];
+    case "main_hub":
+      return [
+        "입문자 기준으로 실패를 줄이는 추천 기준 정리",
+        "예열글에서 다룬 판단 기준 요약",
+        "사용자 유형별 선택 포인트",
+        "실제 추천 후보를 좁히는 기준",
+      ];
+    case "followup":
+      return [
+        "기기를 골랐는데 만족감이 갈리는 이유",
+        "액상과 관리, 세팅에서 다시 보는 기준",
+        "구매 후 자주 겪는 불만 정리",
+        "다시 본편으로 돌아가 점검할 조건",
+      ];
+  }
+}
+
+function inferCleanSearchIntent(role: SeriesWorkflowRole): string {
+  switch (role) {
+    case "preheat_criteria":
+      return "추천 제품을 보기 전에 선택 기준을 알고 싶은 정보형 의도";
+    case "preheat_experience":
+      return "같은 제품인데 체감이 다른 이유를 알고 싶은 문제 인식형 의도";
+    case "preheat_consulting":
+      return "처음 구매 전 무엇을 물어봐야 할지 모르는 상담형 의도";
+    case "main_hub":
+      return "최종 선택을 위해 추천 후보를 비교하고 싶은 구매검토형 의도";
+    case "followup":
+      return "구매 후 만족도와 사용 문제를 줄이고 싶은 후속 관리형 의도";
+  }
+}
+
+function inferCleanPurpose(role: SeriesWorkflowRole): string {
+  switch (role) {
+    case "preheat_criteria":
+      return "본편 추천 글 전에 판단 기준을 먼저 만들어주는 예열글";
+    case "preheat_experience":
+      return "사용감 차이를 설명해 본편 추천 기준을 강화하는 예열글";
+    case "preheat_consulting":
+      return "구매 전 질문을 정리하고 본편 추천글로 연결하는 예열글";
+    case "main_hub":
+      return "예열글 3편을 받아 사용자 유형별 추천으로 전환하는 중심 허브";
+    case "followup":
+      return "본편 이후 만족도 문제를 보완하고 후속 고민을 받는 글";
+  }
 }
 
 function derivePreludeTopicPhrase(mainKeyword: string): string {
@@ -183,6 +553,205 @@ export function runPrePostingSeriesPlanner(input: PrePostingSeriesInput): TopicG
     generatedTopics: [...preludeTopics, mainTopic],
     researchKeyword: mainKeyword,
     competitionInfo: `선행 ${preludeCount}개 + 메인 1개 시리즈 설계`,
+  };
+}
+
+export function runSeriesWorkflowPlanner(input: SeriesWorkflowPlannerInput): SeriesWorkflowOutput {
+  const targetKeyword = input.targetKeyword.trim().replace(/\s+/g, " ");
+  const targetTopic = input.targetTopic.trim().replace(/\s+/g, " ") || targetKeyword;
+  if (!targetKeyword) throw new Error("본편 목표 키워드가 필요합니다.");
+
+  const seriesStamp = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+  const seriesId = `series-workflow-${slugifyKeyword(input.userId)}-${slugifyKeyword(targetKeyword)}-${seriesStamp}`;
+  const { criteriaKeyword, experienceKeyword, consultingKeyword, followupKeyword, supportKeywords } =
+    buildCleanSeriesKeywordCandidates(input);
+  const mainAnchor = targetKeyword.replace(/\s*추천/u, "").trim() || targetKeyword;
+  const regionPrefix = input.region?.trim() ? `${input.region.trim()} ` : "";
+  const targetUserLabel = input.targetUser?.trim() || "입문자";
+
+  const mainTitle = `${targetKeyword}, ${targetUserLabel} 기준으로 실패 적은 선택 흐름 정리`;
+  const criteriaTitle = `${regionPrefix}${criteriaKeyword} 먼저 정리하고 봐야 하는 이유`;
+  const experienceTitle = `${experienceKeyword}이 맞지 않으면 왜 만족도가 갈릴까`;
+  const consultingTitle = `${consultingKeyword}가 구매 전에 가장 많이 헷갈리는 질문 정리`;
+  const followupTitle = `${followupKeyword}을 다시 봐야 만족도가 갈리는 이유`;
+
+  const plans: SeriesPostPlan[] = [
+    {
+      sequence: 1,
+      role: "preheat_criteria",
+      title: criteriaTitle,
+      mainKeyword: criteriaKeyword,
+      subKeywords: uniqueList([mainAnchor, ...supportKeywords.slice(1, 3)]),
+      searchIntent: inferCleanSearchIntent("preheat_criteria"),
+      hubLeafType: "leaf",
+      recommendedBlog: chooseRecommendedBlog("preheat_criteria", input.preferredBlog),
+      purpose: inferCleanPurpose("preheat_criteria"),
+      outline: buildCleanSeriesOutline("preheat_criteria"),
+      internalLinkDirection: "예열글 1 → 본편",
+      internalLinkSentence: buildCleanInternalLinkSentence({ fromRole: "preheat_criteria", mainTitle, followupTitle }),
+      cannibalizationRisk: "low",
+      riskReason: "본편 추천 키워드를 직접 반복하지 않고 선택 기준 쪽으로 분산했습니다.",
+      keywordDistanceScore: 88,
+    },
+    {
+      sequence: 2,
+      role: "preheat_experience",
+      title: experienceTitle,
+      mainKeyword: experienceKeyword,
+      subKeywords: uniqueList([mainAnchor, "흡입감", "목넘김"]),
+      searchIntent: inferCleanSearchIntent("preheat_experience"),
+      hubLeafType: "leaf",
+      recommendedBlog: chooseRecommendedBlog("preheat_experience", input.preferredBlog),
+      purpose: inferCleanPurpose("preheat_experience"),
+      outline: buildCleanSeriesOutline("preheat_experience"),
+      internalLinkDirection: "예열글 2 → 본편",
+      internalLinkSentence: buildCleanInternalLinkSentence({ fromRole: "preheat_experience", mainTitle, followupTitle }),
+      cannibalizationRisk: "low",
+      riskReason: "체감 문제를 설명하는 정보형 글이라 구매검토형 본편과 직접 충돌하지 않습니다.",
+      keywordDistanceScore: 84,
+    },
+    {
+      sequence: 3,
+      role: "preheat_consulting",
+      title: consultingTitle,
+      mainKeyword: consultingKeyword,
+      subKeywords: uniqueList([mainAnchor, "전자담배 처음", "매장 질문"]),
+      searchIntent: inferCleanSearchIntent("preheat_consulting"),
+      hubLeafType: "leaf",
+      recommendedBlog: chooseRecommendedBlog("preheat_consulting", input.preferredBlog),
+      purpose: inferCleanPurpose("preheat_consulting"),
+      outline: buildCleanSeriesOutline("preheat_consulting"),
+      internalLinkDirection: "예열글 3 → 본편",
+      internalLinkSentence: buildCleanInternalLinkSentence({ fromRole: "preheat_consulting", mainTitle, followupTitle }),
+      cannibalizationRisk: "medium",
+      riskReason: "상담형 의도라 전환 직전 검색과 맞닿아 있지만 본편 메인 키워드는 비워뒀습니다.",
+      keywordDistanceScore: 72,
+    },
+    {
+      sequence: 4,
+      role: "main_hub",
+      title: mainTitle,
+      mainKeyword: targetKeyword,
+      subKeywords: uniqueList([`${mainAnchor} 추천`, `${mainAnchor} 기기`, "전자담배 추천"]),
+      searchIntent: inferCleanSearchIntent("main_hub"),
+      hubLeafType: "hub",
+      recommendedBlog: chooseRecommendedBlog("main_hub", input.preferredBlog),
+      purpose: inferCleanPurpose("main_hub"),
+      outline: buildCleanSeriesOutline("main_hub"),
+      internalLinkDirection: "예열글 1/2/3 → 본편 → 후속글",
+      internalLinkSentence: buildCleanInternalLinkSentence({ fromRole: "main_hub", mainTitle, followupTitle }),
+      cannibalizationRisk: "medium",
+      riskReason: "본편은 메인 키워드를 예약해 가져가므로 예열글보다 더 강한 허브 신호가 필요합니다.",
+      keywordDistanceScore: 65,
+    },
+    {
+      sequence: 5,
+      role: "followup",
+      title: followupTitle,
+      mainKeyword: followupKeyword,
+      subKeywords: uniqueList([mainAnchor, "관리법", "만족도"]),
+      searchIntent: inferCleanSearchIntent("followup"),
+      hubLeafType: "leaf",
+      recommendedBlog: chooseRecommendedBlog("followup", input.preferredBlog),
+      purpose: inferCleanPurpose("followup"),
+      outline: buildCleanSeriesOutline("followup"),
+      internalLinkDirection: "본편 → 후속글 / 후속글 → 본편",
+      internalLinkSentence: buildCleanInternalLinkSentence({ fromRole: "followup", mainTitle, followupTitle }),
+      cannibalizationRisk: "low",
+      riskReason: "구매 후 만족도와 관리 흐름으로 비켜서 본편의 추천 의도를 보호합니다.",
+      keywordDistanceScore: 82,
+    },
+  ];
+
+  const existingTopics = input.existingTopics ?? [];
+  const existingPosts = input.existingPosts ?? [];
+  const reservedMainKeyword = targetKeyword;
+  const exactMainKeywordUsedInPreheats = plans
+    .slice(0, 3)
+    .filter((plan) => plan.mainKeyword === reservedMainKeyword || plan.title.includes(reservedMainKeyword))
+    .length;
+  const duplicateTitlePrefixCount = plans.reduce((count, plan, index) => {
+    const rest = plans.slice(index + 1);
+    return count + rest.filter((candidate) => sharedPrefixLength(plan.title, candidate.title) >= 10).length;
+  }, 0);
+  const averageDistance = Math.round(plans.reduce((sum, plan) => sum + plan.keywordDistanceScore, 0) / plans.length);
+  const existingConflicts = plans.flatMap((plan) => {
+    const compact = compactTitleForSeries(plan.title);
+    const matchedTopic = existingTopics.find((topic) => compactTitleForSeries(topic.title) === compact);
+    const matchedPost = existingPosts.find((post) => compactTitleForSeries(post.title) === compact);
+    return [matchedTopic?.title, matchedPost?.title].filter(Boolean) as string[];
+  });
+  const keywordDistanceScore = Math.max(
+    0,
+    averageDistance - duplicateTitlePrefixCount * 12 - exactMainKeywordUsedInPreheats * 20 - existingConflicts.length * 10
+  );
+  const keywordSafetyRisk = inferRiskLevel(keywordDistanceScore);
+
+  const keywordSafetyReport: KeywordSafetyReport = {
+    reservedMainKeyword,
+    duplicateTitlePrefixCount,
+    exactMainKeywordUsedInPreheats,
+    keywordDistanceScore,
+    cannibalizationRisk: keywordSafetyRisk,
+    recommendations: uniqueList([
+      duplicateTitlePrefixCount > 0 ? "예열글 제목 시작 패턴이 겹치지 않도록 다시 분산하는 편이 좋습니다." : "",
+      exactMainKeywordUsedInPreheats > 0 ? "예열글에서는 본편 메인 키워드를 제목 앞쪽에 직접 쓰지 마세요." : "",
+      existingConflicts.length > 0 ? `기존 글과 유사한 제목이 있어 분리 필요: ${existingConflicts.join(", ")}` : "",
+      keywordSafetyRisk === "low" ? "현재 구조는 본편 키워드를 보호하면서 주변 유입을 모으는 데 무리가 없습니다." : "",
+    ]),
+  };
+
+  const validationChecklist: SeriesValidationChecklist = {
+    mainKeywordReservedForMainPost: exactMainKeywordUsedInPreheats === 0,
+    preheatKeywordsAreDistributed: new Set(plans.slice(0, 3).map((plan) => plan.mainKeyword)).size === 3,
+    searchIntentIsDifferentEachPost: new Set(plans.map((plan) => plan.searchIntent)).size === plans.length,
+    mainPostIsHub: plans[3].hubLeafType === "hub",
+    preheatPostsAreLeaf: plans.slice(0, 3).every((plan) => plan.hubLeafType === "leaf"),
+    followupConnectsAfterMain: plans[4].internalLinkDirection.includes("본편"),
+    internalLinksAreDesigned: plans.every((plan) => !!plan.internalLinkSentence.trim()),
+    existingIndexChecked: true,
+    existingPostHistoryChecked: true,
+    cannibalizationRiskAcceptable: keywordSafetyReport.cannibalizationRisk !== "high",
+  };
+
+  const plannedTopicIds = plans.map((_, index) => `topic-series-workflow-${seriesStamp}-${index + 1}`);
+  const generatedTopics: GeneratedTopic[] = plans.map((plan, index) => {
+    const isMain = plan.role === "main_hub";
+    const isPrelude = plan.role.startsWith("preheat");
+    return {
+      topicId: plannedTopicIds[index],
+      title: plan.title,
+      description: `${plan.purpose} 검색의도: ${plan.searchIntent}`,
+      category: `${plan.recommendedBlog} blog`,
+      tags: uniqueList([plan.mainKeyword, ...plan.subKeywords].slice(0, 6)),
+      contentKind: plan.hubLeafType,
+      seriesId,
+      seriesRole: isMain ? "main" : isPrelude ? "prelude" : undefined,
+      targetMainKeyword: reservedMainKeyword,
+      sequenceOrder: plan.sequence,
+      prerequisiteTopicIds: isMain ? plannedTopicIds.slice(0, 3) : [],
+      rationale: `${plan.purpose} / 내부링크: ${plan.internalLinkDirection}`,
+    };
+  });
+
+  return {
+    seriesId,
+    targetTopic,
+    reservedMainKeyword,
+    seriesPurpose: `${reservedMainKeyword} 본편 키워드를 보호하면서 예열글 3편과 후속글 1편으로 검색자 여정을 분산 설계합니다.`,
+    internalLinkStructure: "예열글 1·2·3 → 본편 / 본편 → 후속글 / 후속글 → 본편",
+    keywordSafetyReport,
+    validationChecklist,
+    generatedTopics,
+    seriesPlans: plans.map((plan) => ({
+      ...plan,
+      cannibalizationRisk: plan.role === "main_hub" ? keywordSafetyReport.cannibalizationRisk : plan.cannibalizationRisk,
+      riskReason:
+        plan.role === "main_hub" && existingConflicts.length > 0
+          ? `${plan.riskReason} 기존 유사 제목: ${existingConflicts.join(", ")}`
+          : plan.riskReason,
+    })),
+    replacementTopicText: buildReplacementTopicText(input.userId, plans),
   };
 }
 

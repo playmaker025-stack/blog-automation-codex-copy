@@ -5,7 +5,13 @@ import type { Topic, PostingRecord } from "@/lib/types/github-data";
 import { parseTopicText, readFileAutoEncoding } from "@/lib/skills/import-parser";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import { blogCode, userIdToBlogCode } from "@/lib/utils/blog-code";
-import type { GeneratedTopic, TopicGeneratorOutput } from "@/lib/agents/topic-generator";
+import type {
+  GeneratedTopic,
+  SeriesPostPlan,
+  SeriesValidationChecklist,
+  SeriesWorkflowOutput,
+  TopicGeneratorOutput,
+} from "@/lib/agents/topic-generator";
 
 interface SeriesDetailPreviewItem {
   topicId: string;
@@ -38,7 +44,11 @@ interface SavedSeriesSummary {
   topicIds: string[];
   titles: string[];
   savedAt: string;
+  replacementTopicText?: string;
 }
+
+type GenerateMode = "topics" | "preposting-series" | "series-detail" | "series-workflow";
+type SeriesWorkflowResult = SeriesWorkflowOutput;
 
 interface TopicPersistResponse {
   topic: Topic;
@@ -72,6 +82,33 @@ const BLOG_BADGE_COLORS: Record<string, string> = {
   E: "bg-pink-100 text-pink-700",
 };
 
+const SERIES_ROLE_LABELS: Record<SeriesPostPlan["role"], string> = {
+  preheat_criteria: "예열글 1 · 기준 정리형",
+  preheat_experience: "예열글 2 · 체감/문제 인식형",
+  preheat_consulting: "예열글 3 · 상담/구매 전 질문형",
+  main_hub: "본편 · 추천 허브형",
+  followup: "후속글 · 만족도/실패 방지형",
+};
+
+const RISK_LABELS: Record<"low" | "medium" | "high", string> = {
+  low: "낮음",
+  medium: "주의",
+  high: "높음",
+};
+
+const CHECKLIST_LABELS: Record<keyof SeriesValidationChecklist, string> = {
+  mainKeywordReservedForMainPost: "본편 메인 키워드가 본편에만 예약되었는가",
+  preheatKeywordsAreDistributed: "예열글 3편의 키워드가 역할별로 분산되었는가",
+  searchIntentIsDifferentEachPost: "각 글의 검색의도가 서로 다른가",
+  mainPostIsHub: "본편이 허브 글로 설계되었는가",
+  preheatPostsAreLeaf: "예열글 3편이 모두 리프 글인가",
+  followupConnectsAfterMain: "후속글이 본편 이후 흐름으로 연결되는가",
+  internalLinksAreDesigned: "내부링크 문장과 방향이 설계되었는가",
+  existingIndexChecked: "기존 인덱스를 확인했는가",
+  existingPostHistoryChecked: "기존 작성/발행 내역을 확인했는가",
+  cannibalizationRiskAcceptable: "키워드 충돌 위험이 허용 가능한 수준인가",
+};
+
 interface EditSeriesDetailState {
   articleGoal: string;
   searchIntent: string;
@@ -101,7 +138,7 @@ function resolveTopicBadgeCode(topic: Topic): string | null {
   return blogCode(topic.category) ?? (topic.assignedUserId ? userIdToBlogCode(topic.assignedUserId) : null);
 }
 
-function getGeneratePanelCopy(mode: "topics" | "preposting-series" | "series-detail"): {
+function getGeneratePanelCopy(mode: GenerateMode): {
   title: string;
   badge: string;
   description: string;
@@ -124,6 +161,16 @@ function getGeneratePanelCopy(mode: "topics" | "preposting-series" | "series-det
       description:
         "이미 만든 시리즈 토픽을 불러와 각 편의 목표, 검색 의도, 핵심 키워드, 섹션 구조, 내부링크 계획까지 저장합니다. 이후 전략 수립과 초안 생성이 이 설계를 우선 참고합니다.",
       actionLabel: "상세 설계 생성",
+    };
+  }
+
+  if (mode === "series-workflow") {
+    return {
+      title: "시리즈물 선행포스팅 설계",
+      badge: "검색자 여정 기반",
+      description:
+        "본편 키워드를 예약한 뒤 예열글 3편, 본편 1편, 후속글 1편을 검색의도와 내부링크 흐름까지 포함해 한 번에 설계합니다.",
+      actionLabel: "시리즈 설계 생성",
     };
   }
 
@@ -164,13 +211,19 @@ export default function TopicsPage() {
   const [addUserId, setAddUserId] = useState("");
 
   // AI 글목록 생성
-  const [generateMode, setGenerateMode] = useState<"topics" | "preposting-series" | "series-detail">("topics");
+  const [generateMode, setGenerateMode] = useState<GenerateMode>("topics");
   const [generateUserId, setGenerateUserId] = useState("");
   const [seriesMainKeyword, setSeriesMainKeyword] = useState("");
   const [seriesPreludeCount, setSeriesPreludeCount] = useState(3);
+  const [seriesTargetTopic, setSeriesTargetTopic] = useState("");
+  const [seriesRegion, setSeriesRegion] = useState("");
+  const [seriesProductGroup, setSeriesProductGroup] = useState("");
+  const [seriesTargetUser, setSeriesTargetUser] = useState("");
+  const [seriesPreferredBlog, setSeriesPreferredBlog] = useState<"" | "A" | "B" | "C" | "D" | "E">("");
   const [generating, setGenerating] = useState(false);
   const [generateResult, setGenerateResult] = useState<TopicGeneratorOutput | null>(null);
   const [seriesDetailResult, setSeriesDetailResult] = useState<SeriesDetailPreviewResult | null>(null);
+  const [seriesWorkflowResult, setSeriesWorkflowResult] = useState<SeriesWorkflowResult | null>(null);
   const [selectedGenerated, setSelectedGenerated] = useState<Set<number>>(new Set());
   const [selectedSeriesDetails, setSelectedSeriesDetails] = useState<Set<number>>(new Set());
   const [savingGenerated, setSavingGenerated] = useState(false);
@@ -178,6 +231,9 @@ export default function TopicsPage() {
   const fileRef = useRef<HTMLInputElement>(null);
   const savedSeriesSummaryRef = useRef<HTMLDivElement>(null);
   const panelCopy = getGeneratePanelCopy(generateMode);
+  const seriesWorkflowReady = seriesWorkflowResult
+    ? Object.values(seriesWorkflowResult.validationChecklist).every(Boolean)
+    : false;
 
   const loadTopics = () => {
     setLoading(true);
@@ -410,6 +466,7 @@ export default function TopicsPage() {
     setGenerating(true);
     setGenerateResult(null);
     setSeriesDetailResult(null);
+    setSeriesWorkflowResult(null);
     setSelectedGenerated(new Set());
     setSelectedSeriesDetails(new Set());
     setNotice(null);
@@ -427,6 +484,25 @@ export default function TopicsPage() {
         if (!res.ok) throw new Error(json.error ?? "상세 설계 생성 실패");
         setSeriesDetailResult(json);
         setSelectedSeriesDetails(new Set(json.plannedTopics.map((_, i) => i)));
+      } else if (generateMode === "series-workflow") {
+        const res = await fetch("/api/topics/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: generateUserId.trim(),
+            mode: generateMode,
+            targetTopic: seriesTargetTopic.trim() || seriesMainKeyword.trim(),
+            targetKeyword: seriesMainKeyword.trim(),
+            region: seriesRegion.trim() || undefined,
+            productGroup: seriesProductGroup.trim() || undefined,
+            targetUser: seriesTargetUser.trim() || undefined,
+            preferredBlog: seriesPreferredBlog || undefined,
+          }),
+        });
+        const json = await res.json() as SeriesWorkflowResult & { error?: string };
+        if (!res.ok) throw new Error(json.error ?? "시리즈 설계 생성 실패");
+        setSeriesWorkflowResult(json);
+        setSelectedGenerated(new Set(json.generatedTopics.map((_, i) => i)));
       } else {
         const res = await fetch("/api/topics/generate", {
           method: "POST",
@@ -518,12 +594,16 @@ export default function TopicsPage() {
   };
 
   const handleSaveGenerated = async () => {
-    if (!generateResult || selectedGenerated.size === 0) return;
+    const activeGeneratedTopics =
+      generateMode === "series-workflow"
+        ? seriesWorkflowResult?.generatedTopics ?? []
+        : generateResult?.generatedTopics ?? [];
+    if (activeGeneratedTopics.length === 0 || selectedGenerated.size === 0) return;
     setSavingGenerated(true);
     setNotice(null);
     let savedCount = 0;
     try {
-      const selected = generateResult.generatedTopics.filter((_, i) => selectedGenerated.has(i));
+      const selected = activeGeneratedTopics.filter((_, i) => selectedGenerated.has(i));
       const savedTopics: Topic[] = [];
       for (const topic of selected) {
         const res = await fetch("/api/github/topics", {
@@ -574,12 +654,30 @@ export default function TopicsPage() {
         });
         setUserFilter(generateUserId.trim().toLowerCase());
         setFilter("all");
+      } else if (generateMode === "series-workflow" && seriesWorkflowResult) {
+        const selectedIndexes = [...selectedGenerated].sort((left, right) => left - right);
+        const summaryTitles = selectedIndexes
+          .map((index) => seriesWorkflowResult.seriesPlans[index])
+          .filter(Boolean)
+          .map((plan) => `${plan.sequence}. ${plan.title}`);
+        setNotice({ type: "ok", msg: `${selected.length}개 시리즈 토픽이 포스팅 목록에 반영되었습니다.` });
+        setSavedSeriesSummary({
+          seriesId: seriesWorkflowResult.seriesId,
+          mainKeyword: seriesWorkflowResult.reservedMainKeyword,
+          topicIds: savedTopics.map((topic) => topic.topicId),
+          titles: summaryTitles,
+          savedAt: new Date().toISOString(),
+          replacementTopicText: seriesWorkflowResult.replacementTopicText,
+        });
+        setUserFilter(generateUserId.trim().toLowerCase());
+        setFilter("all");
       } else {
         setNotice({ type: "ok", msg: `${selected.length}개 토픽이 추가되었습니다.` });
         setSavedSeriesSummary(null);
       }
       setGenerateResult(null);
       setSeriesDetailResult(null);
+      setSeriesWorkflowResult(null);
       setSelectedGenerated(new Set());
       setSelectedSeriesDetails(new Set());
       loadTopics();
@@ -697,7 +795,7 @@ export default function TopicsPage() {
       )}
 
       {savedSeriesSummary && (
-        <div className="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+        <div ref={savedSeriesSummaryRef} className="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
           <div className="flex items-center justify-between gap-3 mb-2">
             <div>
               <p className="text-sm font-semibold text-emerald-800">시리즈 저장 완료</p>
@@ -722,6 +820,14 @@ export default function TopicsPage() {
               </span>
             ))}
           </div>
+          {savedSeriesSummary.replacementTopicText && (
+            <div className="mt-3 rounded-lg border border-emerald-200 bg-white px-3 py-2">
+              <p className="text-[11px] font-semibold text-emerald-800 mb-1">포스팅 목록 반영용 전체 교체 텍스트</p>
+              <pre className="whitespace-pre-wrap break-all text-[11px] text-zinc-700 font-mono">
+                {savedSeriesSummary.replacementTopicText}
+              </pre>
+            </div>
+          )}
         </div>
       )}
 
@@ -803,6 +909,8 @@ export default function TopicsPage() {
             {([
               { value: "topics", label: "AI 글목록 생성" },
               { value: "preposting-series", label: "선행 포스팅 설계" },
+              { value: "series-workflow", label: "시리즈물 선행포스팅 설계" },
+              { value: "series-detail", label: "시리즈 상세 설계" },
             ] as const).map((mode) => (
             <button
               key={mode.value}
@@ -810,6 +918,7 @@ export default function TopicsPage() {
                 setGenerateMode(mode.value);
                 setGenerateResult(null);
                 setSeriesDetailResult(null);
+                setSeriesWorkflowResult(null);
                 setSelectedGenerated(new Set());
                 setSelectedSeriesDetails(new Set());
                 setNotice(null);
@@ -831,11 +940,13 @@ export default function TopicsPage() {
                 ? "사용자 ID (예: user-a)"
                 : generateMode === "preposting-series"
                   ? "시리즈를 만들 사용자 ID"
-                  : "상세 설계를 저장할 사용자 ID"
+                  : generateMode === "series-workflow"
+                    ? "시리즈 워크플로우를 설계할 사용자 ID"
+                    : "상세 설계를 저장할 사용자 ID"
             }
             className="flex-1 border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          {generateMode !== "topics" && (
+          {(generateMode === "preposting-series" || generateMode === "series-detail") && (
             <>
               <input
                 value={seriesMainKeyword}
@@ -858,18 +969,72 @@ export default function TopicsPage() {
           )}
           <button
             onClick={handleGenerate}
-            disabled={generating || !generateUserId.trim() || (generateMode !== "topics" && !seriesMainKeyword.trim())}
+            disabled={
+              generating ||
+              !generateUserId.trim() ||
+              ((generateMode === "preposting-series" || generateMode === "series-detail") && !seriesMainKeyword.trim()) ||
+              (generateMode === "series-workflow" && !seriesMainKeyword.trim())
+            }
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
           >
             {generating ? "생성 중..." : panelCopy.actionLabel}
           </button>
         </div>
+        {generateMode === "series-workflow" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2">
+            <input
+              value={seriesTargetTopic}
+              onChange={(e) => setSeriesTargetTopic(e.target.value)}
+              placeholder="본편 목표 주제"
+              className="border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              value={seriesMainKeyword}
+              onChange={(e) => setSeriesMainKeyword(e.target.value)}
+              placeholder="본편 목표 키워드"
+              className="border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              value={seriesRegion}
+              onChange={(e) => setSeriesRegion(e.target.value)}
+              placeholder="지역 키워드 (선택)"
+              className="border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              value={seriesProductGroup}
+              onChange={(e) => setSeriesProductGroup(e.target.value)}
+              placeholder="제품군 (선택)"
+              className="border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              value={seriesTargetUser}
+              onChange={(e) => setSeriesTargetUser(e.target.value)}
+              placeholder="타깃 사용자 (선택)"
+              className="border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <select
+              value={seriesPreferredBlog}
+              onChange={(e) => setSeriesPreferredBlog(e.target.value as "" | "A" | "B" | "C" | "D" | "E")}
+              className="border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="원하는 블로그"
+            >
+              <option value="">원하는 블로그 자동 추천</option>
+              <option value="A">A 블로그 우선</option>
+              <option value="B">B 블로그 우선</option>
+              <option value="C">C 블로그 우선</option>
+              <option value="D">D 블로그 우선</option>
+              <option value="E">E 블로그 우선</option>
+            </select>
+          </div>
+        )}
         <p className="text-[11px] text-zinc-400 mb-4">
           {generateMode === "topics"
             ? "사용자 ID만 입력하면 기존 발행 흐름을 바탕으로 새 글목록 후보를 생성합니다."
             : generateMode === "preposting-series"
               ? "메인 키워드와 선행 개수를 정하면 시리즈 토픽을 만들고, 저장 시 편별 상세 설계까지 자동으로 함께 저장합니다."
-              : "이미 만든 시리즈 토픽을 기준으로 편별 목표, 키워드, 섹션, 내부링크 계획을 저장합니다."}
+              : generateMode === "series-workflow"
+                ? "본편 키워드를 예약한 뒤 예열글 3편, 본편 1편, 후속글 1편을 검색의도와 내부링크 흐름까지 포함해 설계합니다."
+                : "이미 만든 시리즈 토픽을 기준으로 편별 목표, 키워드, 섹션, 내부링크 계획을 저장합니다."}
         </p>
 
         {generateResult && (
@@ -953,6 +1118,212 @@ export default function TopicsPage() {
                     : generateMode === "preposting-series"
                       ? `선택한 ${selectedGenerated.size}개 시리즈 저장`
                       : `선택한 ${selectedGenerated.size}개 추가`}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {seriesWorkflowResult && (
+          <div className="space-y-4">
+            <div className="rounded-lg border border-blue-100 bg-blue-50 px-4 py-3">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="text-xs font-semibold text-blue-800">시리즈 요약</span>
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                  seriesWorkflowResult.keywordSafetyReport.cannibalizationRisk === "low"
+                    ? "bg-emerald-100 text-emerald-700"
+                    : seriesWorkflowResult.keywordSafetyReport.cannibalizationRisk === "medium"
+                      ? "bg-amber-100 text-amber-700"
+                      : "bg-red-100 text-red-700"
+                }`}>
+                  키워드 충돌 위험 {RISK_LABELS[seriesWorkflowResult.keywordSafetyReport.cannibalizationRisk]}
+                </span>
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                  seriesWorkflowReady ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"
+                }`}>
+                  {seriesWorkflowReady ? "확정 가능" : "재검토 필요"}
+                </span>
+              </div>
+              <p className="text-sm font-medium text-zinc-900">{seriesWorkflowResult.targetTopic}</p>
+              <p className="text-xs text-zinc-600 mt-1">
+                예약된 본편 메인 키워드: <span className="font-medium">{seriesWorkflowResult.reservedMainKeyword}</span>
+              </p>
+              <p className="text-xs text-zinc-600 mt-1">{seriesWorkflowResult.seriesPurpose}</p>
+              <p className="text-xs text-zinc-500 mt-1">내부링크 구조: {seriesWorkflowResult.internalLinkStructure}</p>
+            </div>
+
+            <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3">
+              <p className="text-xs font-semibold text-zinc-800 mb-2">키워드 충돌 리포트</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                <div className="rounded-lg bg-white border border-zinc-200 px-3 py-2">
+                  <p className="text-zinc-500">본편 키워드</p>
+                  <p className="font-medium text-zinc-900">{seriesWorkflowResult.keywordSafetyReport.reservedMainKeyword}</p>
+                </div>
+                <div className="rounded-lg bg-white border border-zinc-200 px-3 py-2">
+                  <p className="text-zinc-500">예열글 직접 사용</p>
+                  <p className="font-medium text-zinc-900">{seriesWorkflowResult.keywordSafetyReport.exactMainKeywordUsedInPreheats}회</p>
+                </div>
+                <div className="rounded-lg bg-white border border-zinc-200 px-3 py-2">
+                  <p className="text-zinc-500">제목 시작 패턴 중복</p>
+                  <p className="font-medium text-zinc-900">{seriesWorkflowResult.keywordSafetyReport.duplicateTitlePrefixCount}건</p>
+                </div>
+                <div className="rounded-lg bg-white border border-zinc-200 px-3 py-2">
+                  <p className="text-zinc-500">키워드 분산 점수</p>
+                  <p className="font-medium text-zinc-900">{seriesWorkflowResult.keywordSafetyReport.keywordDistanceScore}점</p>
+                </div>
+              </div>
+              {seriesWorkflowResult.keywordSafetyReport.recommendations.length > 0 && (
+                <ul className="mt-3 space-y-1 text-xs text-zinc-600 list-disc list-inside">
+                  {seriesWorkflowResult.keywordSafetyReport.recommendations.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div className="space-y-3">
+              {seriesWorkflowResult.seriesPlans.map((plan, i) => {
+                const isSelected = selectedGenerated.has(i);
+                return (
+                  <div
+                    key={`${plan.role}-${plan.sequence}`}
+                    onClick={() => {
+                      const next = new Set(selectedGenerated);
+                      if (next.has(i)) next.delete(i); else next.add(i);
+                      setSelectedGenerated(next);
+                    }}
+                    className={`border rounded-xl px-4 py-4 cursor-pointer transition-colors ${
+                      isSelected ? "border-blue-400 bg-blue-50/50" : "border-zinc-200 hover:border-zinc-300"
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className={`mt-0.5 w-4 h-4 rounded border shrink-0 flex items-center justify-center ${
+                        isSelected ? "border-blue-500 bg-blue-500" : "border-zinc-300"
+                      }`}>
+                        {isSelected && (
+                          <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0 space-y-2">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="rounded-full bg-zinc-900 px-2 py-0.5 text-[10px] font-medium text-white">
+                            {plan.sequence}
+                          </span>
+                          <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-medium text-blue-700">
+                            {SERIES_ROLE_LABELS[plan.role]}
+                          </span>
+                          <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                            plan.hubLeafType === "hub" ? "bg-violet-100 text-violet-700" : "bg-emerald-100 text-emerald-700"
+                          }`}>
+                            {plan.hubLeafType === "hub" ? "허브" : "리프"}
+                          </span>
+                          <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${BLOG_BADGE_COLORS[plan.recommendedBlog]}`}>
+                            추천 블로그 {plan.recommendedBlog}
+                          </span>
+                          <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                            plan.cannibalizationRisk === "low"
+                              ? "bg-emerald-100 text-emerald-700"
+                              : plan.cannibalizationRisk === "medium"
+                                ? "bg-amber-100 text-amber-700"
+                                : "bg-red-100 text-red-700"
+                          }`}>
+                            충돌 위험 {RISK_LABELS[plan.cannibalizationRisk]}
+                          </span>
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-zinc-900">{plan.title}</p>
+                          <p className="text-xs text-zinc-500 mt-1">{plan.purpose}</p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                          <div className="rounded-lg border border-zinc-200 bg-white px-3 py-2">
+                            <p className="text-zinc-500">메인 키워드</p>
+                            <p className="font-medium text-zinc-900">{plan.mainKeyword}</p>
+                          </div>
+                          <div className="rounded-lg border border-zinc-200 bg-white px-3 py-2">
+                            <p className="text-zinc-500">검색의도</p>
+                            <p className="text-zinc-900">{plan.searchIntent}</p>
+                          </div>
+                        </div>
+                        <div className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-xs">
+                          <p className="text-zinc-500 mb-1">서브 키워드</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {plan.subKeywords.map((keyword) => (
+                              <span key={keyword} className="rounded-full bg-zinc-100 px-2 py-0.5 text-zinc-600">
+                                {keyword}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-xs">
+                          <p className="text-zinc-500 mb-1">목차</p>
+                          <ol className="space-y-1 list-decimal list-inside text-zinc-700">
+                            {plan.outline.map((item) => (
+                              <li key={item}>{item}</li>
+                            ))}
+                          </ol>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                          <div className="rounded-lg border border-zinc-200 bg-white px-3 py-2">
+                            <p className="text-zinc-500">내부링크 방향</p>
+                            <p className="text-zinc-900">{plan.internalLinkDirection}</p>
+                          </div>
+                          <div className="rounded-lg border border-zinc-200 bg-white px-3 py-2">
+                            <p className="text-zinc-500">내부링크 문장</p>
+                            <p className="text-zinc-900">{plan.internalLinkSentence}</p>
+                          </div>
+                        </div>
+                        <div className="rounded-lg border border-zinc-200 bg-white px-3 py-2 text-xs">
+                          <p className="text-zinc-500">위험 사유</p>
+                          <p className="text-zinc-900">{plan.riskReason}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="rounded-lg border border-zinc-200 bg-white px-4 py-3">
+              <p className="text-xs font-semibold text-zinc-800 mb-2">최종 검수 기준</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {Object.entries(seriesWorkflowResult.validationChecklist).map(([key, value]) => (
+                  <div key={key} className="flex items-center justify-between rounded-lg border border-zinc-200 px-3 py-2 text-xs">
+                    <span className="text-zinc-600">{CHECKLIST_LABELS[key as keyof SeriesValidationChecklist]}</span>
+                    <span className={`font-medium ${value ? "text-emerald-600" : "text-red-500"}`}>
+                      {value ? "통과" : "미통과"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3">
+              <p className="text-xs font-semibold text-zinc-800 mb-1">포스팅 목록 반영 안내</p>
+              <p className="text-xs text-zinc-600">
+                이 시리즈 구성을 앞으로 작성될 글 목록에 반영할 수 있습니다. 저장 후에는 아래 전체 교체용 최신본 텍스트를 사용해 목록 파일을 교체하는 흐름을 기준으로 운영합니다.
+              </p>
+              <pre className="mt-3 whitespace-pre-wrap break-all rounded-lg border border-zinc-200 bg-white px-3 py-2 text-[11px] text-zinc-700 font-mono">
+                {seriesWorkflowResult.replacementTopicText}
+              </pre>
+            </div>
+
+            <div className="flex justify-between items-center pt-1">
+              <p className="text-xs text-zinc-400">{selectedGenerated.size}개 선택됨</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => { setSeriesWorkflowResult(null); setSelectedGenerated(new Set()); }}
+                  className="px-3 py-1.5 text-xs text-zinc-600 hover:text-zinc-900"
+                >
+                  취소
+                </button>
+                <button
+                  onClick={handleSaveGenerated}
+                  disabled={savingGenerated || selectedGenerated.size === 0 || !seriesWorkflowReady}
+                  className="px-4 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  {savingGenerated ? "저장 중..." : `선택한 ${selectedGenerated.size}개 시리즈 저장`}
                 </button>
               </div>
             </div>
