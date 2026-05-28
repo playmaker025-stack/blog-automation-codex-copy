@@ -94,6 +94,9 @@ const NOUN_REPETITION_TOKENS = new Set([
   "코일",
   "흡입감",
   "목넘김",
+  "결제",
+  "지원금",
+  "사용처",
   "유지비",
   "쿨링",
   "니코틴",
@@ -895,10 +898,11 @@ function buildBodyRepetitionItems(body: string): BodyRepetitionItem[] {
     else if (NOUN_REPETITION_TOKENS.has(token)) category = "noun";
     else category = "verb_stem";
 
-    const threshold = category === "category_word" ? 4 : 3;
+    const threshold = category === "category_word" ? 12 : category === "noun" ? 8 : 3;
     if (count < threshold) continue;
 
-    const severity: BodyRepetitionItem["severity"] = count >= (category === "category_word" ? 8 : 5) ? "caution" : "notice";
+    const severity: BodyRepetitionItem["severity"] =
+      count >= (category === "category_word" ? 16 : category === "noun" ? 12 : 5) ? "caution" : "notice";
     items.push({
       token,
       count,

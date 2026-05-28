@@ -2,6 +2,7 @@
 
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
 import type { KeywordUsageReport, SeoEvaluation } from "@/lib/agents/types";
+import { KeywordReportSections } from "@/components/pipeline/keyword-report-sections";
 
 interface Props {
   contentTab: "draft" | "revision";
@@ -86,28 +87,6 @@ function parseDraftColumns(streamingBody: string): DraftColumn[] {
 function columnStatusText(column: DraftColumn, hasAnyDraft: boolean): string {
   if (column.body) return "작성 완료";
   return hasAnyDraft ? "생성 대기" : "초안 생성 대기";
-}
-
-function summarizeKeywordRow(keywordReport: KeywordUsageReport): string {
-  if (keywordReport.seoKeywordItems.length === 0) return "키워드 리포트가 아직 없습니다.";
-  return keywordReport.seoKeywordItems
-    .slice(0, 4)
-    .map((item) => `${item.keyword} ${item.effectiveCount}회`)
-    .join(" · ");
-}
-
-function statusTone(status: KeywordUsageReport["seoKeywordItems"][number]["risk"]): string {
-  if (status === "ok") return "text-emerald-600";
-  if (status === "caution") return "text-amber-600";
-  if (status === "danger") return "text-red-600";
-  return "text-blue-600";
-}
-
-function statusLabel(status: KeywordUsageReport["seoKeywordItems"][number]["risk"]): string {
-  if (status === "ok") return "적정";
-  if (status === "caution") return "주의";
-  if (status === "danger") return "위험";
-  return "부족";
 }
 
 export function PipelineWorkspacePanel({
@@ -198,7 +177,7 @@ export function PipelineWorkspacePanel({
                 <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3">
                   <p className="text-xs font-semibold text-blue-700">초안 비교 보기</p>
                   <p className="mt-1 text-xs leading-5 text-blue-600">
-                    자동 보강은 실제 문제가 있을 때만 생성됩니다. 각 버전 아래에서 키워드 요약과 점수를 함께 비교할 수 있습니다.
+                    자동 보강은 실제 문제가 있을 때만 생성됩니다. 각 초안 아래에서 키워드 사용량과 본문 반복 점검을 바로 비교할 수 있습니다.
                   </p>
                 </div>
 
@@ -246,27 +225,9 @@ export function PipelineWorkspacePanel({
                         </div>
 
                         {versionReport ? (
-                          <div className="space-y-3 border-t border-zinc-100 bg-white px-4 py-3">
-                            <div className="flex items-center justify-between gap-3">
-                              <p className="text-xs font-semibold text-zinc-700">{column.label} 키워드 요약</p>
-                              <p className="text-[11px] text-zinc-500">SEO {versionReport.seoEvaluation.score}점</p>
-                            </div>
-                            <p className="text-[11px] leading-5 text-zinc-500">{summarizeKeywordRow(versionReport.keywordReport)}</p>
-                            <div className="space-y-2">
-                              {versionReport.keywordReport.seoKeywordItems.slice(0, 4).map((item) => (
-                                <div key={`${column.label}-${item.keyword}`} className="rounded-md border border-zinc-100 bg-zinc-50 px-3 py-2">
-                                  <div className="flex items-center justify-between gap-3">
-                                    <p className="text-xs font-semibold text-zinc-800">{item.keyword}</p>
-                                    <p className={`text-[11px] font-semibold ${statusTone(item.risk)}`}>
-                                      총 {item.effectiveCount}회 · {statusLabel(item.risk)}
-                                    </p>
-                                  </div>
-                                  <p className="mt-1 text-[11px] text-zinc-500">
-                                    exact {item.exactCount}회 / included {item.includedCount}회
-                                  </p>
-                                </div>
-                              ))}
-                            </div>
+                          <div className="border-t border-zinc-100 bg-white px-4 py-4">
+                            <p className="mb-3 text-sm font-semibold text-zinc-900">초안별 키워드 사용량</p>
+                            <KeywordReportSections report={versionReport.keywordReport} compact />
                           </div>
                         ) : null}
                       </section>
@@ -278,14 +239,14 @@ export function PipelineWorkspacePanel({
                   <div className="rounded-xl border border-zinc-200 bg-white p-4">
                     <p className="text-sm font-semibold text-zinc-900">보강 방향 직접 요청</p>
                     <p className="mt-1 text-xs leading-5 text-zinc-500">
-                      키워드 반복, 구조 보강, 사례 추가처럼 바로 고치고 싶은 점이 있으면 적어 주세요.
+                      키워드 반복, 구조 보강, 사례 추가처럼 바로 수정하고 싶은 점이 있으면 적어 주세요.
                     </p>
                     <div className="mt-3 space-y-3">
                       <textarea
                         value={revisionRequest}
                         onChange={(event) => onRevisionRequestChange(event.target.value)}
                         className="min-h-28 w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                        placeholder="예: 메인 키워드 반복을 줄이고, 비교 기준 문단을 더 또렷하게 정리해 주세요."
+                        placeholder="예: 메인 키워드 반복을 줄이고, 비교 기준 문단을 더 선명하게 정리해 주세요."
                       />
                       <button
                         type="button"
@@ -370,7 +331,7 @@ export function PipelineWorkspacePanel({
 
             {revisionGuides.length > 0 ? (
               <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
-                <p className="text-sm font-semibold text-amber-900">검토 결과 보강 포인트</p>
+                <p className="text-sm font-semibold text-amber-900">검토 결과 보강 사인</p>
                 <ul className="mt-2 space-y-1 text-xs leading-5 text-amber-800">
                   {revisionGuides.map((guide) => (
                     <li key={guide}>- {guide}</li>

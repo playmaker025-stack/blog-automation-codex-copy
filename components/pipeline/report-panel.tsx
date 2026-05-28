@@ -3,7 +3,6 @@
 import type { ReactNode } from "react";
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
 import type { FinalDraftCheck, KeywordUsageReport, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
-import { KeywordReportSections } from "@/components/pipeline/keyword-report-sections";
 import {
   canApproveFinalDraft,
   collectFinalDraftCheckMessages,
@@ -84,58 +83,54 @@ function SimpleNotePanel({ title, notes }: { title: string; notes: string[] }) {
   );
 }
 
-function FinalDraftCheckPanel({ check }: { check: FinalDraftCheck }) {
+function FinalDraftCheckBadge({ check }: { check: FinalDraftCheck }) {
   const status = getFinalDraftCheckApprovalStatus(check);
   const messages = collectFinalDraftCheckMessages(check);
-  const tone =
-    status === "blocked"
-      ? "border-red-200 bg-red-50 text-red-800"
-      : status === "warning"
-        ? "border-amber-200 bg-amber-50 text-amber-800"
-        : "border-emerald-200 bg-emerald-50 text-emerald-800";
-  const statusText = status === "blocked" ? "승인 불가" : status === "warning" ? "승인 가능 · 주의 필요" : "승인 가능";
-  const sections = [
-    { title: "차단 사유", items: messages.blockingReasons, tone: "text-red-700" },
-    { title: "주의 사항", items: messages.warnings, tone: "text-amber-700" },
-    { title: "금지 표현", items: messages.matchedForbiddenPhrases, tone: "text-red-700" },
-    { title: "질문문 / exact keyword", items: messages.keywordStuffingFindings, tone: "text-red-700" },
-    { title: "다음 글로 미루기", items: messages.deferFindings, tone: "text-red-700" },
-    { title: "계약서 반영 부족", items: messages.contractCoverageFindings, tone: "text-amber-700" },
-    { title: "중복 감리", items: messages.overlapFindings, tone: "text-amber-700" },
-  ].filter((section) => section.items.length > 0);
+  const isBlocked = status === "blocked";
+  const isWarning = status === "warning";
+  const tone = isBlocked
+    ? "border-red-200 bg-red-50 text-red-800"
+    : isWarning
+      ? "border-amber-200 bg-amber-50 text-amber-800"
+      : "border-emerald-200 bg-emerald-50 text-emerald-800";
+  const badgeTone = isBlocked
+    ? "bg-red-100 text-red-700"
+    : isWarning
+      ? "bg-amber-100 text-amber-700"
+      : "bg-emerald-100 text-emerald-700";
+  const badgeLabel = isBlocked ? "승인 불가" : isWarning ? "주의 필요" : "승인 가능";
+  const summaryItems = [
+    ...messages.blockingReasons,
+    ...messages.warnings,
+    ...messages.matchedForbiddenPhrases,
+    ...messages.deferFindings,
+  ].slice(0, 3);
 
   return (
     <div className={`rounded-xl border p-4 ${tone}`}>
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-center justify-between gap-3">
         <div>
-          <p className="text-sm font-semibold">발행 전 최종 검사</p>
-          <p className="mt-1 text-xs leading-5">
-            {status === "blocked"
-              ? "차단 사유가 있어 초안은 아직 승인 단계로 넘어갈 수 없습니다."
-              : status === "warning"
-                ? "차단 사유는 없지만, 아래 주의 항목을 확인한 뒤 승인하는 편이 좋습니다."
-                : "최종 검사 기준에서 차단 요소가 없습니다."}
+          <p className="text-xs font-semibold">발행 전 최종 검사 상태</p>
+          <p className="mt-1 text-sm font-semibold">
+            {isBlocked
+              ? "차단 사유가 있어 아직 승인 단계로 넘어갈 수 없습니다."
+              : isWarning
+                ? "차단 사유는 없지만 주의 항목을 보고 승인하는 편이 좋습니다."
+                : "발행 전 최종 검사 기준에서 차단 항목이 없습니다."}
           </p>
         </div>
-        <span className="rounded-full bg-white/70 px-2.5 py-1 text-xs font-semibold">{statusText}</span>
+        <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${badgeTone}`}>{badgeLabel}</span>
       </div>
 
-      {sections.length > 0 ? (
-        <div className="mt-4 space-y-3">
-          {sections.map((section) => (
-            <div key={section.title} className="rounded-lg border border-white/70 bg-white/70 px-3 py-3">
-              <p className={`text-xs font-semibold ${section.tone}`}>{section.title}</p>
-              <ul className="mt-2 space-y-1">
-                {section.items.map((item, index) => (
-                  <li key={`${section.title}-${index}-${item}`} className="flex gap-2 text-xs leading-5 text-zinc-700">
-                    <span className="text-zinc-400">-</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {summaryItems.length > 0 ? (
+        <ul className="mt-3 space-y-1 text-xs leading-5">
+          {summaryItems.map((item, index) => (
+            <li key={`${badgeLabel}-${index}-${item}`} className="flex gap-2">
+              <span className="text-zinc-400">-</span>
+              <span>{item}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       ) : null}
     </div>
   );
@@ -154,7 +149,7 @@ function SeoSummaryPanel({
         <div>
           <p className="text-xs font-semibold text-zinc-600">SEO 평가 / 보고서</p>
           <p className="mt-1 text-sm font-semibold text-zinc-900">{result?.title ?? "현재 초안"}</p>
-          <p className="mt-1 text-xs text-zinc-500">키워드, 구조, 제목-본문 연결성을 종합 점검합니다.</p>
+          <p className="mt-1 text-xs text-zinc-500">제목과 본문 구조, 키워드 문맥, 검색의도 연결성을 종합 평가합니다.</p>
         </div>
         <div className="text-right">
           <p className="text-[11px] font-semibold text-zinc-500">SEO 점수</p>
@@ -174,10 +169,10 @@ function NaverLogicPanel({ evaluation }: { evaluation: NaverLogicEvaluation }) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold text-zinc-600">네이버 로직 평가</p>
-          <p className="mt-1 text-sm font-semibold text-zinc-900">{evaluation.label}</p>
+          <p className="mt-1 text-sm font-semibold text-zinc-900">D.I.A. + C-Rank 혼합</p>
           <p className="mt-1 text-xs leading-5 text-zinc-500">
             {looksBroken(evaluation.reason)
-              ? "제목, 본문 구조, 검색의도 연결성을 기준으로 네이버 노출 적합도를 평가합니다."
+              ? "제목, 본문 구성, 검색의도 연결성을 기준으로 네이버 노출 적합도를 평가합니다."
               : evaluation.reason}
           </p>
         </div>
@@ -244,15 +239,13 @@ export function PipelineReportPanel({
   publishUrl,
   publishingToIndex,
   publishNotice,
-  draftVersionReports,
   onPublishUrlChange,
   onPublishToIndex,
 }: Props) {
   const activeSeoEvaluation =
     contentTab === "revision" ? reviewResult?.seoEvaluation ?? result?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
-  const activeKeywordReport =
-    contentTab === "revision" ? reviewResult?.keywordReport ?? result?.seoEvaluation?.keywordReport ?? null : result?.seoEvaluation?.keywordReport ?? null;
   const visibleReviewIssues = reviewIssues.filter((issue) => !looksBroken(issue.message));
+  const canPublish = canApproveFinalDraft(result?.finalDraftCheck);
 
   return (
     <aside className="space-y-4">
@@ -262,27 +255,12 @@ export function PipelineReportPanel({
         <div className="rounded-xl border border-zinc-200 bg-white p-6">
           <p className="text-sm font-semibold text-zinc-900">평가 / 보고서</p>
           <p className="mt-3 text-sm leading-7 text-zinc-500">
-            초안 생성과 평가가 끝나면 이곳에 최종 검사, 키워드 분석, SEO 보고서, 해시태그와 사진 파일명이 정리됩니다.
+            초안 생성과 평가가 끝나면 이곳에 최종 검사 상태, SEO 평가, 네이버 로직, 해시태그와 사진 파일명이 정리됩니다.
           </p>
         </div>
       ) : null}
 
-      {result?.finalDraftCheck ? <FinalDraftCheckPanel check={result.finalDraftCheck} /> : null}
-
-      {contentTab === "draft" && draftVersionReports.length > 0 ? (
-        <div className="space-y-3">
-          {draftVersionReports.map((versionReport) => (
-            <KeywordReportSections
-              key={`keyword-${versionReport.label}`}
-              report={versionReport.keywordReport}
-              title={versionReport.label}
-              compact
-            />
-          ))}
-        </div>
-      ) : activeKeywordReport ? (
-        <KeywordReportSections report={activeKeywordReport} title="키워드 분석" />
-      ) : null}
+      {result?.finalDraftCheck ? <FinalDraftCheckBadge check={result.finalDraftCheck} /> : null}
 
       {activeSeoEvaluation ? <SeoSummaryPanel seoEvaluation={activeSeoEvaluation} result={result} /> : null}
 
@@ -322,15 +300,15 @@ export function PipelineReportPanel({
           <button
             type="button"
             onClick={onPublishToIndex}
-            disabled={publishingToIndex || !publishUrl.trim() || !canApproveFinalDraft(result.finalDraftCheck)}
+            disabled={publishingToIndex || !publishUrl.trim() || !canPublish}
             className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
           >
-            {publishingToIndex ? "발행 인덱스 반영 중" : "발행 인덱스에 반영"}
+            {publishingToIndex ? "발행 인덱스 반영 중..." : "발행 인덱스에 반영"}
           </button>
 
-          {result.finalDraftCheck && !canApproveFinalDraft(result.finalDraftCheck) ? (
+          {result.finalDraftCheck && !canPublish ? (
             <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
-              발행 전 최종 검사에 차단 사유가 있어 인덱스 반영을 막고 있습니다. 먼저 차단 사유를 수정해 주세요.
+              발행 전 최종 검사에서 차단 사유가 있어 승인/발행할 수 없습니다. 먼저 차단 사유를 수정해 주세요.
             </div>
           ) : null}
 
@@ -348,7 +326,7 @@ export function PipelineReportPanel({
 
           {reviewApplied ? (
             <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-3 text-sm text-blue-700">
-              수정본을 실제 본문에 반영했습니다. 발행 후 URL을 입력하면 인덱스와 학습 데이터에 함께 반영됩니다.
+              수정본을 실제 본문에 반영했습니다. 발행 후 URL을 입력하면 인덱스와 학습 데이터에 반영됩니다.
             </div>
           ) : null}
         </div>
