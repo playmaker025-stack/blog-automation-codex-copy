@@ -137,10 +137,7 @@ function buildPolicyPromptSection(): string {
 }
 
 function formatNaverWriterBrief(plan: NaverLogicPlan | undefined): string {
-  if (!plan) {
-    return "Focus on practical local decision flow, not a generic SEO article.";
-  }
-
+  if (!plan) return "Focus on practical local decision flow, not a generic SEO article.";
   return [
     `Primary logic: ${plan.label}`,
     `Reason: ${plan.reason}`,
@@ -152,7 +149,7 @@ function formatNaverWriterBrief(plan: NaverLogicPlan | undefined): string {
 
 function stripExcerptMeta(excerpt: string): string {
   return excerpt
-    .replace(/^[\d\s./·:]+작성\s*/u, "")
+    .replace(/^[\d\s./:]+?작성\s*/u, "")
     .replace(/^레퍼런스\s*\d+\s*/u, "")
     .replace(/^제목\s*=\s*/u, "")
     .trim();
@@ -205,7 +202,9 @@ function buildKeywordPlacementGuidance(strategy: StrategyPlanResult): string[] {
 
 function formatKeywordContract(strategy: StrategyPlanResult): string {
   const contract = strategy.keywordContract;
-  if (!contract) return "Keyword contract is unavailable. Use only the provided strategy keywords and avoid extracting random words from the draft.";
+  if (!contract) {
+    return "Keyword contract is unavailable. Use only the provided strategy keywords and avoid extracting random words from the draft.";
+  }
 
   return [
     "[키워드 계약서]",
@@ -221,13 +220,13 @@ function formatKeywordContract(strategy: StrategyPlanResult): string {
     `다음 글로 넘길 브릿지 키워드: ${contract.bridgeKeywords.join(", ") || "없음"}`,
     `내부링크 앵커: ${contract.internalLinkAnchors.join(", ") || "없음"}`,
     `본문 금지어: ${contract.forbiddenTerms.join(", ")}`,
-    `반복 제한: ${contract.limitedKeywords.map((item) => `${item.keyword} ${item.min}-${item.max}회/${item.role}`).join(" / ")}`,
+    `반복 제한: ${contract.limitedKeywords.map((item) => `${item.keyword} ${item.min}-${item.max}회 ${item.role}`).join(" / ")}`,
     "",
     `이 글에서 다루지 않을 내용: ${contract.excludedTopics.join(", ") || "없음"}`,
     `다음 글로 넘길 내용: ${contract.handoffTopics.join(", ") || "없음"}`,
     `기존 글과 겹치지 않게 분리할 포인트: ${contract.differentiationPoints.join(" / ") || "없음"}`,
     "",
-    "중요: 위 계약서는 작성자가 지키는 내부 기준입니다. 발행 본문에는 '키워드 계약서', '검색의도', '메인 키워드', '서브 키워드', '선행포스팅', '키워드빌드업', 'SEO 점수' 같은 작업용 표현을 쓰지 마세요.",
+    "중요: 이 계약서는 작성자가 지키는 내부 기준입니다. 발행 본문에는 '키워드 계약서', '검색의도', '메인 키워드', '서브 키워드', '선행포스팅', '키워드빌드업', 'SEO 점수' 같은 작업용 표현을 절대 쓰지 마세요.",
   ].join("\n");
 }
 
@@ -244,8 +243,8 @@ function formatOpenAICorpus(corpus: CorpusSummaryArtifact | undefined): string {
     ? [
         "",
         "Published post excerpts (directly replicate this tone and sentence flow):",
-        ...(corpus.representativeExcerpts ?? []).slice(0, 5).map((excerpt, i) =>
-          `[Published ${i + 1}]\n${excerpt}`
+        ...(corpus.representativeExcerpts ?? []).slice(0, 5).map((excerpt, index) =>
+          `[Published ${index + 1}]\n${excerpt}`
         ),
       ]
     : [];
@@ -330,7 +329,6 @@ function formatOpenAINaverSignals(strategy: StrategyPlanResult): string {
 
   const cafeTitles = signals.cafeTopItems?.slice(0, 3).map((item) => item.title).filter(Boolean) ?? [];
   const kinTitles = signals.kinTopItems?.slice(0, 3).map((item) => item.title).filter(Boolean) ?? [];
-
   return [
     `Research keyword: ${signals.keyword}`,
     `Cafe demand summary: ${signals.cafeDemandSummary || "none"}`,
@@ -402,6 +400,7 @@ export function buildOpenAIWriterUserPrompt(params: {
   const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy);
   const contract = strategy.articleContract;
   const roleSpecificGuidance = buildRoleSpecificWriterGuidance(contract);
+
   return [
     `User id: ${userId.trim().toLowerCase()}`,
     `Title: ${strategy.title}`,
@@ -487,7 +486,7 @@ export function buildOpenAIWriterUserPrompt(params: {
     "- Use concrete criteria and examples before closing, not vague reassurance.",
     "- Keep paragraph rhythm suitable for Naver Blog mobile reading.",
     "- Use headings only when the reader's question changes. Avoid generic headings such as '핵심 기준', '체크포인트', '한 번에 정리', '정리와 다음 확인 포인트'.",
-    "- Never use these exact phrases in the published body: '실패 없는 선택', '꼼꼼히 안내', '핵심 포인트', '만족스러운 결과', '도움이 되었길 바랍니다'.",
+    "- Never use these exact phrases in the published body: '실패 없는 선택', '꼼꼼한 안내', '핵심 포인트', '만족스러운 결과', '유의하시기 바랍니다'.",
     "- End with a useful summary or next-step guide that matches the search intent.",
     "- Output only the final body markdown.",
   ].join("\n");

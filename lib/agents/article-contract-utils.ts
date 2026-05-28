@@ -13,21 +13,32 @@ import type {
 } from "./types.ts";
 
 const PROBLEM_SOLUTION_PATTERN =
-  /(원인|왜|누수|탄맛|고장|안됨|액튐|결로|교체주기|인식 안됨|체크팟|노아토마이저|No Atomizer|No Pod|팟 인식|빨리 닳|맛이 약|맛이 탁|새는)/iu;
+  /(원인|필수|탄맛|고장|안됨|느림|결로|교체주기|인식 안됨|체크|No Atomizer|No Pod|누수|빨리 탐|맛이 안 나는)/iu;
 const REVIEW_PATTERN = /(후기|리뷰|실사용|솔직후기|사용감|직접 써본)/iu;
 const COMPARISON_PATTERN = /(차이|비교|vs|VS|어떤 게 나을까|뭐가 더 나을까)/iu;
 const MAIN_RECOMMENDATION_PATTERN = /(추천|best|BEST|top|TOP|처음 고를 때|입문자 추천)/iu;
 const LOCAL_PURCHASE_PATTERN = /(부평|만수|매장|방문|결제|상담|사용처|지원금)/iu;
-const POLICY_PATTERN = /(지원금|사용처|결제|가능|정책|가맹점)/iu;
+const POLICY_PATTERN = /(지원금|사용처|결제|가능|가맹점)/iu;
 const CTA_VERB_PATTERN = /(상담|비교|확인|정리|방문)/iu;
 
 const DEFAULT_FORBIDDEN_EXACT_PHRASES = [
   "한 번에 정리",
   "실패 없는 선택",
-  "꼼꼼히 안내",
+  "꼼꼼한 안내",
   "체크포인트",
   "핵심 포인트",
-  "도움이 되었길 바랍니다",
+  "유의하시기 바랍니다",
+  "선행포스팅",
+  "키워드빌드업",
+  "SEO 점수",
+  "검색의도",
+  "메인 키워드",
+  "서브 키워드",
+  "본문 n회",
+  "적정 범위",
+  "내부링크 설계",
+  "허브/리프",
+  "상위노출 가능성",
 ];
 
 const DEFAULT_FORBIDDEN_HEADING_PATTERNS = [
@@ -40,9 +51,9 @@ const DEFAULT_FORBIDDEN_HEADING_PATTERNS = [
 
 const DEFAULT_FORBIDDEN_TONE_PATTERNS = [
   "실패 없는 선택",
-  "꼼꼼히 안내",
+  "꼼꼼한 안내",
   "만족스러운 결과",
-  "도움이 되었길 바랍니다",
+  "유의하시기 바랍니다",
 ];
 
 function uniq(values: string[]): string[] {
@@ -121,33 +132,31 @@ function buildMainIntent(topic: Topic, plan: StrategyPlanResult, articleRole: Ar
   if (plan.keywordContract?.searchIntent) return plan.keywordContract.searchIntent;
 
   const mainKeyword = pickMainKeyword(plan) || topic.title;
-
   switch (articleRole) {
     case "prelude":
-      return `${topic.title}를 찾는 사람이 현재 글에서 확인 기준을 정리하고 다음 메인 주제로 자연스럽게 넘어가도록 돕는다.`;
+      return `${topic.title}를 찾는 독자가 현재 글에서 확인 기준을 정리하고 다음 메인 주제로 자연스럽게 넘어가도록 돕는다.`;
     case "problem_solution":
       return `${mainKeyword} 문제의 원인과 점검 기준을 이 글 안에서 해결한다.`;
     case "review":
-      return `${mainKeyword}를 실제로 써본 체감과 아쉬운 점을 바탕으로 구매 전 판단 기준을 제공한다.`;
+      return `${mainKeyword}를 실제로 써본 체감과 장단점을 바탕으로 구매 전 판단 기준을 제공한다.`;
     case "comparison":
       return `${mainKeyword}처럼 비교가 필요한 상황에서 단순 승패가 아니라 사용자별 선택 기준을 정리한다.`;
     case "main_recommendation":
-      return `${mainKeyword}를 찾는 사람에게 추천 기준과 사용자 유형별 선택 방향을 제시한다.`;
+      return `${mainKeyword}를 찾는 독자에게 추천 기준과 사용자 유형별 선택 방향을 제시한다.`;
     default:
-      return `${topic.title}를 찾는 사람이 지금 필요한 핵심 기준을 이 글 안에서 바로 이해하도록 돕는다.`;
+      return `${topic.title}를 찾는 독자가 지금 필요한 핵심 기준을 이 글 안에서 바로 이해하도록 돕는다.`;
   }
 }
 
 function buildReaderState(topic: Topic, plan: StrategyPlanResult, articleRole: ArticleRole): string {
   const mainKeyword = pickMainKeyword(plan) || topic.title;
-
   switch (articleRole) {
     case "prelude":
       return `${mainKeyword} 관련 확인을 마치고 다음 선택으로 넘어가려는데 방문 전에 무엇을 정리해야 하는지 헷갈리는 상태`;
     case "problem_solution":
-      return `${mainKeyword} 문제를 겪고 있지만 기기 문제인지 사용 습관 문제인지 구분이 안 되는 상태`;
+      return `${mainKeyword} 문제를 겪고 있지만 기기 문제인지 사용 습관 문제인지 구분하지 못하는 상태`;
     case "review":
-      return `${mainKeyword}가 실제로 어떤지, 장점만 있는지 아쉬운 점도 있는지 구매 전에 확인하고 싶은 상태`;
+      return `${mainKeyword}가 실제로 어떤지, 장점만 있는지 단점도 있는지 구매 전에 확인하고 싶은 상태`;
     case "comparison":
       return `${mainKeyword}처럼 두 선택지의 차이를 파악하고 어떤 상황에서 무엇이 맞는지 판단하고 싶은 상태`;
     case "main_recommendation":
@@ -157,11 +166,7 @@ function buildReaderState(topic: Topic, plan: StrategyPlanResult, articleRole: A
   }
 }
 
-function buildFallbackReaderQuestions(
-  articleRole: ArticleRole,
-  mainKeyword: string,
-  subKeywords: string[]
-): string[] {
+function buildFallbackReaderQuestions(articleRole: ArticleRole, mainKeyword: string, subKeywords: string[]): string[] {
   switch (articleRole) {
     case "prelude":
       return [
@@ -177,7 +182,7 @@ function buildFallbackReaderQuestions(
           "지금 바로 바꿔야 할 사용 습관이 있나요?",
         ];
       }
-      if (/(누수|새는|결로|액튐)/u.test(mainKeyword)) {
+      if (/(누수|새는|결로|느림)/u.test(mainKeyword)) {
         return [
           "왜 이렇게 자꾸 새는 것 같죠?",
           "기기 문제인지 사용 습관 문제인지 어떻게 구분하나요?",
@@ -208,7 +213,7 @@ function buildFallbackReaderQuestions(
         "매장에 가기 전에 어떤 걸 먼저 생각해두면 좋을까요?",
       ];
     default:
-      if (/(액상)/u.test(mainKeyword) || subKeywords.some((keyword) => /(액상)/u.test(keyword))) {
+      if (/액상/u.test(mainKeyword) || subKeywords.some((keyword) => /액상/u.test(keyword))) {
         return [
           "요즘 뭐가 제일 잘 나가요?",
           "멘솔 약한 액상도 있나요?",
@@ -251,17 +256,13 @@ export function sanitizeReaderQuestions(params: {
       })
   );
 
-  if (sanitized.length >= 2) {
-    return sanitized.slice(0, 3);
-  }
-
+  if (sanitized.length >= 2) return sanitized.slice(0, 3);
   const fallback = fallbackQuestions.filter((question) => !containsExactPhrase(question, blockedPhrases));
   return uniq([...sanitized, ...fallback]).slice(0, 3);
 }
 
 function buildMustResolve(topic: Topic, plan: StrategyPlanResult, articleRole: ArticleRole): string[] {
   const mainKeyword = pickMainKeyword(plan) || topic.title;
-
   switch (articleRole) {
     case "prelude":
       return [
@@ -276,87 +277,52 @@ function buildMustResolve(topic: Topic, plan: StrategyPlanResult, articleRole: A
         "즉시 점검 순서와 예방 기준",
       ];
     case "review":
-      return [
-        "실제 체감 포인트",
-        "장점과 아쉬운 점",
-        "어떤 사용자에게 맞는지",
-        "구매 전 확인할 점",
-      ];
+      return ["실제 체감 포인트", "장점과 아쉬운 점", "어떤 사용자에게 맞는지", "구매 전 확인할 점"];
     case "comparison":
-      return [
-        "비교 대상별 차이",
-        "선택 기준",
-        "어떤 상황에서 A/B가 맞는지",
-        "단순 승패가 아니라 사용자별 판단 기준",
-      ];
+      return ["비교 대상별 차이", "선택 기준", "어떤 상황에서 A/B가 맞는지", "단순 승패가 아니라 사용자별 판단 기준"];
     case "main_recommendation":
-      return [
-        "추천 기준",
-        "사용자 유형별 분기",
-        "입문자/기존 사용자 기준",
-        "유지비/관리/사용감 기준",
-        "방문 전 상담 기준",
-      ];
+      return ["추천 기준", "사용자 유형별 분기", "입문자/기존 사용자 기준", "유지비/관리/사용감 기준", "방문 전 상담 기준"];
     default:
       return [
         `${mainKeyword} 관련 선택 기준`,
         "실패를 줄이는 비교/상담 기준",
-        "방문 전 미리 확인해야 할 포인트",
+        "방문 전 미리 확인해야 할 사항",
       ];
   }
 }
 
 function buildMustNotDefer(topic: Topic, plan: StrategyPlanResult, articleRole: ArticleRole): string[] {
   const mainKeyword = pickMainKeyword(plan) || topic.title;
-
   switch (articleRole) {
     case "prelude":
-      return [
-        `${mainKeyword}의 현재 확인 기준`,
-        "방문 전 체크해야 할 핵심 판단 기준",
-      ];
+      return [`${mainKeyword}의 현재 확인 기준`, "방문 전 체크해야 할 핵심 판단 기준"];
     case "problem_solution":
-      return [
-        `${mainKeyword}의 주요 원인`,
-        "지금 바로 확인할 점검 항목",
-      ];
+      return [`${mainKeyword}의 주요 원인`, "지금 바로 확인할 점검 항목"];
     case "review":
-      return [
-        "실제 체감 포인트",
-        "아쉬운 점과 구매 전 확인할 부분",
-      ];
+      return ["실제 체감 포인트", "장점과 아쉬운 점"];
     case "comparison":
-      return [
-        "핵심 차이와 선택 기준",
-        "상황별 A/B 판단 기준",
-      ];
+      return ["핵심 차이와 선택 기준", "상황별 A/B 판단 기준"];
     case "main_recommendation":
-      return [
-        `${mainKeyword}의 추천 기준`,
-        "입문자/기존 사용자 분기와 방문 전 상담 기준",
-      ];
+      return [`${mainKeyword}의 추천 기준`, "입문자/기존 사용자 분기와 방문 전 상담 기준"];
     default:
-      return [
-        `${mainKeyword}의 핵심 답변`,
-        "현재 글에서 끝내야 하는 선택 기준",
-      ];
+      return [`${mainKeyword}의 핵심 답변`, "현재 글에서 끝내야 하는 선택 기준"];
   }
 }
 
 function buildCtaMode(articleRole: ArticleRole): string {
   switch (articleRole) {
     case "prelude":
-      return "현재 글 확인 기준을 정리한 뒤 다음 메인 글로 자연스럽게 handoff";
+      return "현재 글의 확인 기준을 정리한 뒤 다음 메인 글로 자연스럽게 handoff";
     case "problem_solution":
-      return "점검 후 교체나 상담이 필요한지 판단하도록 마무리";
+      return "점검 및 교체 상담이 필요한지 판단하도록 마무리";
     case "review":
-      return "체감과 아쉬운 점을 정리한 뒤 본인 취향에 맞는지 판단하도록 마무리";
+      return "체감과 장단점을 정리해 본인 취향에 맞는지 판단하도록 마무리";
     case "comparison":
-      return "상황별 선택 기준을 정리한 뒤 본인 사용 방식에 맞는 쪽을 고르도록 마무리";
+      return "상황별 선택 기준을 정리해 본인 사용 방식에 맞는 쪽을 고르도록 마무리";
     case "main_recommendation":
       return "추천 기준과 사용자 유형을 정리한 뒤 방문 전 상담으로 연결";
     default:
-      return "현재 글 기준을 정리한 뒤 방문 전 상담이나 선택 판단으로 연결";
+      return "현재 글의 기준을 정리한 뒤 방문 전 상담이나 선택 판단으로 연결";
   }
 }
 
@@ -381,10 +347,7 @@ export function inferCompletionMode(articleRole: ArticleRole): CompletionMode {
   return articleRole === "prelude" ? "handoff" : "end_here";
 }
 
-export function buildArticleContract(params: {
-  topic: Topic;
-  plan: StrategyPlanResult;
-}): ArticleContract {
+export function buildArticleContract(params: { topic: Topic; plan: StrategyPlanResult }): ArticleContract {
   const { topic, plan } = params;
   const articleRole = inferArticleRole(topic, plan);
   const completionMode = inferCompletionMode(articleRole);
@@ -456,7 +419,7 @@ export function evaluateStrategyQualityGate(strategy: {
   if (overlapReport?.riskLevel === "high") {
     blockingReasons.push("기존 글과의 중복 위험이 높습니다.");
   } else if (overlapReport?.riskLevel === "medium") {
-    warnings.push("기존 글과 일부 방향이 겹칩니다. recommendedRewriteDirection을 따르세요.");
+    warnings.push("기존 글과 일부 방향이 겹칩니다. recommendedRewriteDirection을 따라야 합니다.");
   }
 
   if (overlapReport?.repeatedIntroPatterns.length) {
@@ -472,11 +435,7 @@ export function evaluateStrategyQualityGate(strategy: {
     warnings.push(`CTA 반복 주의: ${overlapReport.repeatedCtaModes.join(", ")}`);
   }
 
-  return {
-    ok: blockingReasons.length === 0,
-    blockingReasons,
-    warnings,
-  };
+  return { ok: blockingReasons.length === 0, blockingReasons, warnings };
 }
 
 export function findQuestionKeywordStuffingViolations(params: {
@@ -488,7 +447,7 @@ export function findQuestionKeywordStuffingViolations(params: {
   if (!blockedPhrases.length) return [];
 
   const violations: string[] = [];
-  const quotedMatches = Array.from(params.content.matchAll(/[“"]([^”"\n]{2,})[”"]/gu));
+  const quotedMatches = Array.from(params.content.matchAll(/["“”'‘’「」『』]([^"“”'‘’「」『』\n]{2,})["“”'‘’「」『』]/gu));
   for (const match of quotedMatches) {
     const question = normalizeQuestion(match[1] ?? "");
     if (containsExactPhrase(question, blockedPhrases)) {
@@ -560,10 +519,7 @@ export function buildRoleSpecificWriterGuidance(contract: ArticleContract | unde
 
 export function formatArticleContract(contract: ArticleContract | undefined): string {
   if (!contract) {
-    return [
-      "Article contract: unavailable.",
-      "Do not mention that the contract is unavailable in the draft.",
-    ].join("\n");
+    return ["Article contract: unavailable.", "Do not mention that the contract is unavailable in the draft."].join("\n");
   }
 
   return [

@@ -40,11 +40,7 @@ function uniq(values: string[]): string[] {
 }
 
 function normalizeText(value: string): string {
-  return value
-    .normalize("NFKC")
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .trim();
+  return value.normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim();
 }
 
 function normalizeLoose(value: string): string {
@@ -227,7 +223,7 @@ function findPreludeOverConsumption(params: {
     .filter((pattern) => pattern.test(params.content))
     .map((pattern) => pattern.source);
   if (consumedMainRecommendation.length > 0) {
-    findings.push(`prelude 본문에 main_recommendation 성격의 표현이 감지됐습니다: ${consumedMainRecommendation.join(", ")}`);
+    findings.push(`prelude 본문에서 main_recommendation 성격의 표현이 감지됐습니다: ${consumedMainRecommendation.join(", ")}`);
   }
 
   return findings;
@@ -396,7 +392,7 @@ function appendMissingMustResolveParagraphs(content: string, check: FinalDraftCh
   const addition = [
     "",
     "## 추가 확인 기준",
-    ...missing.map((item) => `- ${item}: 이 글에서 바로 확인해야 할 기준입니다. 실제 선택 전에 이 부분을 먼저 점검하면 판단이 더 쉬워집니다.`),
+    ...missing.map((item) => `- ${item}: 이 글에서 바로 확인해야 할 기준입니다. 실제 선택 전에 이 부분을 먼저 점검하면 판단이 쉬워집니다.`),
   ].join("\n");
   return `${content.trimEnd()}\n${addition}`;
 }
