@@ -2,7 +2,8 @@
 
 import type { ReactNode } from "react";
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
-import type { FinalDraftCheck, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
+import type { FinalDraftCheck, KeywordUsageReport, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
+import { KeywordReportSections } from "@/components/pipeline/keyword-report-sections";
 import {
   canApproveFinalDraft,
   collectFinalDraftCheckMessages,
@@ -22,6 +23,13 @@ interface ResultData {
   finalDraftCheck?: FinalDraftCheck;
 }
 
+interface DraftVersionReport {
+  label: string;
+  body: string;
+  seoEvaluation: SeoEvaluation;
+  keywordReport: KeywordUsageReport;
+}
+
 interface Props {
   contentTab: "draft" | "revision";
   approval: ReactNode;
@@ -32,6 +40,7 @@ interface Props {
   publishUrl: string;
   publishingToIndex: boolean;
   publishNotice: { type: "ok" | "err"; msg: string } | null;
+  draftVersionReports: DraftVersionReport[];
   onPublishUrlChange: (value: string) => void;
   onPublishToIndex: () => void;
 }
@@ -40,12 +49,6 @@ function scoreTone(score: number): string {
   if (score >= 80) return "text-emerald-600";
   if (score >= 65) return "text-amber-600";
   return "text-red-500";
-}
-
-function issueTone(severity: DraftReviewIssue["severity"]): string {
-  if (severity === "blocker") return "border-red-200 bg-red-50 text-red-700";
-  if (severity === "warning") return "border-amber-200 bg-amber-50 text-amber-700";
-  return "border-zinc-200 bg-zinc-50 text-zinc-700";
 }
 
 function looksBroken(value: string | null | undefined): boolean {
@@ -57,81 +60,10 @@ function cleanNotes(notes: string[]): string[] {
   return notes.filter((note) => note.trim() && !looksBroken(note));
 }
 
-function metricSummary(metric: SeoEvaluation["keywordMetrics"][number]): string {
-  const parts = [
-    metric.titleIncluded ? "제목 포함" : "제목 미포함",
-    metric.introIncluded ? "도입부 포함" : "도입부 미포함",
-    `본문 ${metric.count}회`,
-  ];
-  return parts.join(" / ");
-}
-
-function metricAction(metric: SeoEvaluation["keywordMetrics"][number]): string {
-  if (!metric.titleIncluded) return `제목에 '${metric.keyword}'를 자연스럽게 반영하는 편이 좋습니다.`;
-  if (!metric.introIncluded) return `첫 1~2문단 안에 '${metric.keyword}'를 자연스럽게 넣어 주세요.`;
-  if (metric.count < metric.targetMin) {
-    return `본문 기준 '${metric.keyword}'가 부족합니다. ${metric.targetMin}회 이상 자연스럽게 보강하세요.`;
-  }
-  if (metric.count > metric.targetMax) {
-    return `본문 기준 '${metric.keyword}'가 많습니다. 중복 문장이나 불필요한 재언급을 줄이세요.`;
-  }
-  return `'${metric.keyword}' 배치는 적정 범위입니다.`;
-}
-
-function SeoMetricPanel({
-  seoEvaluation,
-  contentTab,
-}: {
-  seoEvaluation: SeoEvaluation;
-  contentTab: "draft" | "revision";
-}) {
-  if ((seoEvaluation.keywordMetrics?.length ?? 0) === 0) return null;
-
-  return (
-    <div className="rounded-xl border border-zinc-200 bg-white p-4">
-      <p className="text-xs font-semibold text-zinc-600">키워드 배치 / SEO 분석</p>
-      <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-        제목, 도입부, 본문 반복 수를 기준으로 메인/서브 키워드 배치 상태를 계산합니다.
-      </p>
-      <div className="mt-3 space-y-3">
-        {seoEvaluation.keywordMetrics.map((metric) => (
-          <div key={`${contentTab}-metric-${metric.keyword}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-sm font-semibold text-zinc-800">{metric.keyword}</p>
-                <p className="mt-1 text-[11px] text-zinc-500">{metric.label}</p>
-              </div>
-              <p className={`text-xs font-semibold ${metric.role === "main" ? "text-blue-600" : "text-zinc-500"}`}>
-                {metric.role === "main" ? "메인 축" : "서브 축"}
-              </p>
-            </div>
-
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <div className="rounded-md bg-white px-3 py-2">
-                <p className="text-[11px] font-semibold text-zinc-500">완성도</p>
-                <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.completenessScore)}`}>
-                  {metric.completenessScore}점
-                </p>
-              </div>
-              <div className="rounded-md bg-white px-3 py-2">
-                <p className="text-[11px] font-semibold text-zinc-500">노출 가능성</p>
-                <p className={`mt-1 text-sm font-semibold ${scoreTone(metric.exposurePotentialScore)}`}>
-                  {metric.exposurePotentialScore}점
-                </p>
-              </div>
-            </div>
-
-            <p className="mt-3 text-xs text-zinc-600">{metricSummary(metric)}</p>
-            <p className="mt-1 text-[11px] text-zinc-500">
-              제목 {metric.titleIncluded ? "포함" : "미포함"} / 도입부 {metric.introIncluded ? "포함" : "미포함"} /
-              적정 범위 {metric.targetMin}~{metric.targetMax}회 / 본문 {metric.count}회
-            </p>
-            <p className="mt-2 text-xs text-zinc-700">{metricAction(metric)}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+function issueTone(severity: DraftReviewIssue["severity"]): string {
+  if (severity === "blocker") return "border-red-200 bg-red-50 text-red-700";
+  if (severity === "warning") return "border-amber-200 bg-amber-50 text-amber-700";
+  return "border-zinc-200 bg-zinc-50 text-zinc-700";
 }
 
 function SimpleNotePanel({ title, notes }: { title: string; notes: string[] }) {
@@ -166,8 +98,8 @@ function FinalDraftCheckPanel({ check }: { check: FinalDraftCheck }) {
     { title: "차단 사유", items: messages.blockingReasons, tone: "text-red-700" },
     { title: "주의 사항", items: messages.warnings, tone: "text-amber-700" },
     { title: "금지 표현", items: messages.matchedForbiddenPhrases, tone: "text-red-700" },
-    { title: "키워드 과반복/질문문", items: messages.keywordStuffingFindings, tone: "text-red-700" },
-    { title: "다음 글로 미룸", items: messages.deferFindings, tone: "text-red-700" },
+    { title: "질문문 / exact keyword", items: messages.keywordStuffingFindings, tone: "text-red-700" },
+    { title: "다음 글로 미루기", items: messages.deferFindings, tone: "text-red-700" },
     { title: "계약서 반영 부족", items: messages.contractCoverageFindings, tone: "text-amber-700" },
     { title: "중복 감리", items: messages.overlapFindings, tone: "text-amber-700" },
   ].filter((section) => section.items.length > 0);
@@ -179,16 +111,16 @@ function FinalDraftCheckPanel({ check }: { check: FinalDraftCheck }) {
           <p className="text-sm font-semibold">발행 전 최종 검사</p>
           <p className="mt-1 text-xs leading-5">
             {status === "blocked"
-              ? "차단 사유가 있어 이 초안은 승인/발행으로 넘길 수 없습니다."
+              ? "차단 사유가 있어 초안은 아직 승인 단계로 넘어갈 수 없습니다."
               : status === "warning"
-                ? "차단 사유는 없어서 승인 가능하지만, 아래 주의 항목을 확인해야 합니다."
-                : "차단 사유와 주의 항목이 없습니다."}
+                ? "차단 사유는 없지만, 아래 주의 항목을 확인한 뒤 승인하는 편이 좋습니다."
+                : "최종 검사 기준에서 차단 요소가 없습니다."}
           </p>
         </div>
-        <span className="shrink-0 rounded-full bg-white/70 px-2.5 py-1 text-xs font-semibold">{statusText}</span>
+        <span className="rounded-full bg-white/70 px-2.5 py-1 text-xs font-semibold">{statusText}</span>
       </div>
 
-      {sections.length > 0 && (
+      {sections.length > 0 ? (
         <div className="mt-4 space-y-3">
           {sections.map((section) => (
             <div key={section.title} className="rounded-lg border border-white/70 bg-white/70 px-3 py-3">
@@ -204,7 +136,100 @@ function FinalDraftCheckPanel({ check }: { check: FinalDraftCheck }) {
             </div>
           ))}
         </div>
-      )}
+      ) : null}
+    </div>
+  );
+}
+
+function SeoSummaryPanel({
+  seoEvaluation,
+  result,
+}: {
+  seoEvaluation: SeoEvaluation;
+  result: ResultData | null;
+}) {
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white p-4">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold text-zinc-600">SEO 평가 / 보고서</p>
+          <p className="mt-1 text-sm font-semibold text-zinc-900">{result?.title ?? "현재 초안"}</p>
+          <p className="mt-1 text-xs text-zinc-500">키워드, 구조, 제목-본문 연결성을 종합 점검합니다.</p>
+        </div>
+        <div className="text-right">
+          <p className="text-[11px] font-semibold text-zinc-500">SEO 점수</p>
+          <p className={`mt-1 text-2xl font-bold ${scoreTone(seoEvaluation.score)}`}>{seoEvaluation.score}</p>
+        </div>
+      </div>
+
+      <SimpleNotePanel title="좋은 점" notes={cleanNotes(seoEvaluation.evidence)} />
+      <SimpleNotePanel title="보강 권장 사항" notes={cleanNotes(seoEvaluation.improvements)} />
+    </div>
+  );
+}
+
+function NaverLogicPanel({ evaluation }: { evaluation: NaverLogicEvaluation }) {
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white p-4">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold text-zinc-600">네이버 로직 평가</p>
+          <p className="mt-1 text-sm font-semibold text-zinc-900">{evaluation.label}</p>
+          <p className="mt-1 text-xs leading-5 text-zinc-500">
+            {looksBroken(evaluation.reason)
+              ? "제목, 본문 구조, 검색의도 연결성을 기준으로 네이버 노출 적합도를 평가합니다."
+              : evaluation.reason}
+          </p>
+        </div>
+        <div className="text-right">
+          <p className="text-[11px] font-semibold text-zinc-500">완성도</p>
+          <p className={`mt-1 text-lg font-bold ${scoreTone(evaluation.completenessScore)}`}>{evaluation.completenessScore}</p>
+        </div>
+      </div>
+      <SimpleNotePanel title="근거" notes={cleanNotes(evaluation.evidence)} />
+      <SimpleNotePanel title="보강 권장 사항" notes={cleanNotes(evaluation.improvements)} />
+    </div>
+  );
+}
+
+function HashAssetPanel({
+  hashtags,
+  imageFileNames,
+}: {
+  hashtags?: string[];
+  imageFileNames?: string[];
+}) {
+  if ((!hashtags || hashtags.length === 0) && (!imageFileNames || imageFileNames.length === 0)) return null;
+
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white p-4">
+      <p className="text-xs font-semibold text-zinc-600">해시태그 / 사진 파일명</p>
+
+      {hashtags && hashtags.length > 0 ? (
+        <div className="mt-3">
+          <p className="text-[11px] font-semibold text-zinc-500">추천 해시태그</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {hashtags.map((tag) => (
+              <span key={tag} className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-700">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {imageFileNames && imageFileNames.length > 0 ? (
+        <div className="mt-4">
+          <p className="text-[11px] font-semibold text-zinc-500">추천 사진 파일명</p>
+          <ul className="mt-2 space-y-1">
+            {imageFileNames.map((name) => (
+              <li key={name} className="rounded-md bg-zinc-50 px-2.5 py-2 text-xs text-zinc-700">
+                {name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -219,17 +244,14 @@ export function PipelineReportPanel({
   publishUrl,
   publishingToIndex,
   publishNotice,
+  draftVersionReports,
   onPublishUrlChange,
   onPublishToIndex,
 }: Props) {
   const activeSeoEvaluation =
-    contentTab === "revision" ? reviewResult?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
-  const activeSeoNotes = cleanNotes(
-    contentTab === "revision" ? reviewResult?.seoNotes ?? [] : result?.seoEvaluation?.improvements ?? []
-  );
-  const activeNaverNotes = cleanNotes(
-    contentTab === "revision" ? reviewResult?.naverLogicNotes ?? [] : result?.naverLogicEvaluation?.improvements ?? []
-  );
+    contentTab === "revision" ? reviewResult?.seoEvaluation ?? result?.seoEvaluation ?? null : result?.seoEvaluation ?? null;
+  const activeKeywordReport =
+    contentTab === "revision" ? reviewResult?.keywordReport ?? result?.seoEvaluation?.keywordReport ?? null : result?.seoEvaluation?.keywordReport ?? null;
   const visibleReviewIssues = reviewIssues.filter((issue) => !looksBroken(issue.message));
 
   return (
@@ -240,102 +262,53 @@ export function PipelineReportPanel({
         <div className="rounded-xl border border-zinc-200 bg-white p-6">
           <p className="text-sm font-semibold text-zinc-900">평가 / 보고서</p>
           <p className="mt-3 text-sm leading-7 text-zinc-500">
-            초안 생성과 평가가 끝나면 이곳에 SEO, 네이버 로직, 해시태그, 추천 파일명이 정리됩니다.
+            초안 생성과 평가가 끝나면 이곳에 최종 검사, 키워드 분석, SEO 보고서, 해시태그와 사진 파일명이 정리됩니다.
           </p>
         </div>
       ) : null}
 
-      {result && (
-        <div className={`rounded-xl border p-4 ${result.pass ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"}`}>
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className={`text-sm font-semibold ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
-                {result.pass ? "초안 평가 통과" : "초안 평가 보강 필요"}
-              </p>
-              <p className="mt-1 text-sm font-semibold text-zinc-900">{result.title}</p>
-              <p className="mt-1 text-xs text-zinc-500">{result.wordCount.toLocaleString()}자</p>
-            </div>
-            <div className="text-right">
-              <p className="text-[11px] font-semibold text-zinc-500">최종 점수</p>
-              <p className="text-2xl font-bold text-zinc-900">{result.evalScore}</p>
-            </div>
-          </div>
+      {result?.finalDraftCheck ? <FinalDraftCheckPanel check={result.finalDraftCheck} /> : null}
 
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            <div className="rounded-lg bg-white/70 px-3 py-2">
-              <p className="text-[11px] font-semibold text-zinc-500">SEO</p>
-              <p className="mt-1 text-sm font-semibold text-zinc-900">{result.seoEvaluation?.score ?? "-"}</p>
-            </div>
-            <div className="rounded-lg bg-white/70 px-3 py-2">
-              <p className="text-[11px] font-semibold text-zinc-500">네이버 로직</p>
-              <p className="mt-1 text-sm font-semibold text-zinc-900">
-                {result.naverLogicEvaluation?.completenessScore ?? "-"}
-              </p>
-            </div>
-            <div className="rounded-lg bg-white/70 px-3 py-2">
-              <p className="text-[11px] font-semibold text-zinc-500">상태</p>
-              <p className={`mt-1 text-sm font-semibold ${result.pass ? "text-emerald-700" : "text-amber-700"}`}>
-                {result.pass ? "통과" : "보강"}
-              </p>
-            </div>
-          </div>
+      {contentTab === "draft" && draftVersionReports.length > 0 ? (
+        <div className="space-y-3">
+          {draftVersionReports.map((versionReport) => (
+            <KeywordReportSections
+              key={`keyword-${versionReport.label}`}
+              report={versionReport.keywordReport}
+              title={versionReport.label}
+              compact
+            />
+          ))}
         </div>
-      )}
+      ) : activeKeywordReport ? (
+        <KeywordReportSections report={activeKeywordReport} title="키워드 분석" />
+      ) : null}
 
-      {result?.finalDraftCheck && <FinalDraftCheckPanel check={result.finalDraftCheck} />}
+      {activeSeoEvaluation ? <SeoSummaryPanel seoEvaluation={activeSeoEvaluation} result={result} /> : null}
 
-      {activeSeoEvaluation && <SeoMetricPanel seoEvaluation={activeSeoEvaluation} contentTab={contentTab} />}
+      {result?.naverLogicEvaluation ? <NaverLogicPanel evaluation={result.naverLogicEvaluation} /> : null}
 
-      {result?.naverLogicEvaluation && (
-        <div className="rounded-xl border border-zinc-200 bg-white p-4">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold text-zinc-600">네이버 로직 평가</p>
-              <p className="mt-1 text-sm font-semibold text-zinc-900">{result.naverLogicEvaluation.label}</p>
-              <p className="mt-1 text-xs text-zinc-500">
-                {looksBroken(result.naverLogicEvaluation.reason)
-                  ? "제목과 본문 구조, 키워드 분산, 정보 충실도를 기준으로 평가했습니다."
-                  : result.naverLogicEvaluation.reason}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-[11px] font-semibold text-zinc-500">완성도</p>
-              <p className={`mt-1 text-lg font-bold ${scoreTone(result.naverLogicEvaluation.completenessScore)}`}>
-                {result.naverLogicEvaluation.completenessScore}점
-              </p>
-            </div>
-          </div>
-          {result.naverLogicEvaluation.evidence.length > 0 && (
-            <SimpleNotePanel title="근거" notes={cleanNotes(result.naverLogicEvaluation.evidence)} />
-          )}
-        </div>
-      )}
-
-      <SimpleNotePanel title="SEO 보강 사항" notes={activeSeoNotes} />
-      <SimpleNotePanel title="네이버 로직 보강 사항" notes={activeNaverNotes} />
-
-      {visibleReviewIssues.length > 0 && (
+      {visibleReviewIssues.length > 0 ? (
         <div className="rounded-xl border border-zinc-200 bg-white p-4">
           <p className="mb-3 text-xs font-semibold text-zinc-600">수정본 검토 이슈</p>
           <div className="space-y-2">
             {visibleReviewIssues.map((issue) => (
-              <div
-                key={`${issue.severity}-${issue.message}`}
-                className={`rounded-lg border px-3 py-2 text-sm ${issueTone(issue.severity)}`}
-              >
+              <div key={`${issue.severity}-${issue.message}`} className={`rounded-lg border px-3 py-2 text-sm ${issueTone(issue.severity)}`}>
                 {issue.message}
               </div>
             ))}
           </div>
         </div>
-      )}
+      ) : null}
 
-      {contentTab === "revision" && result && (
+      <HashAssetPanel hashtags={result?.hashtags} imageFileNames={result?.imageFileNames} />
+
+      {contentTab === "revision" && result ? (
         <div className="space-y-4 rounded-xl border border-zinc-200 bg-white p-4">
           <div>
-            <p className="text-xs font-semibold text-zinc-600">실제 발행 URL 입력</p>
+            <p className="text-xs font-semibold text-zinc-600">인덱스 템플릿 / 발행 반영</p>
             <p className="mt-1 text-[11px] leading-5 text-zinc-500">
-              수정본을 네이버에 반영한 뒤 실제 발행 URL을 입력하면 발행 인덱스와 사용자 학습 데이터에 반영됩니다.
+              수정본을 실제로 발행한 뒤 URL을 입력하면 발행 인덱스와 학습 데이터에 함께 반영합니다.
             </p>
           </div>
 
@@ -355,13 +328,13 @@ export function PipelineReportPanel({
             {publishingToIndex ? "발행 인덱스 반영 중" : "발행 인덱스에 반영"}
           </button>
 
-          {result.finalDraftCheck && !canApproveFinalDraft(result.finalDraftCheck) && (
+          {result.finalDraftCheck && !canApproveFinalDraft(result.finalDraftCheck) ? (
             <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
-              발행 전 최종 검사에서 차단 사유가 있어 인덱스 반영을 막았습니다. 차단 사유를 수정한 뒤 다시 검토해 주세요.
+              발행 전 최종 검사에 차단 사유가 있어 인덱스 반영을 막고 있습니다. 먼저 차단 사유를 수정해 주세요.
             </div>
-          )}
+          ) : null}
 
-          {publishNotice && (
+          {publishNotice ? (
             <div
               className={`rounded-lg px-3 py-3 text-sm ${
                 publishNotice.type === "ok"
@@ -371,15 +344,15 @@ export function PipelineReportPanel({
             >
               {publishNotice.msg}
             </div>
-          )}
+          ) : null}
 
-          {reviewApplied && (
+          {reviewApplied ? (
             <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-3 text-sm text-blue-700">
-              수정본을 저장본에 반영했습니다. 네이버에 실제 발행한 뒤 URL을 입력해 인덱스에 추가하세요.
+              수정본을 실제 본문에 반영했습니다. 발행 후 URL을 입력하면 인덱스와 학습 데이터에 함께 반영됩니다.
             </div>
-          )}
+          ) : null}
         </div>
-      )}
+      ) : null}
     </aside>
   );
 }

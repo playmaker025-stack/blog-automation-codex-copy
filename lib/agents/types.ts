@@ -261,6 +261,27 @@ export interface KeywordParagraphWarning {
   message: string;
 }
 
+export interface SeoKeywordItem {
+  keyword: string;
+  role: "main" | "sub";
+  exactCount: number;
+  includedCount: number;
+  effectiveCount: number;
+  risk: KeywordUsageStatus;
+  note: string;
+  exactPhraseExclusionApplied: boolean;
+}
+
+export interface BodyRepetitionItem {
+  token: string;
+  count: number;
+  category: "noun" | "category_word" | "verb_stem" | "sentence_ending";
+  severity: "notice" | "caution";
+  message: string;
+  suggestion: string;
+  isSeoRisk: false;
+}
+
 export interface KeywordUsageReport {
   items: KeywordUsageItem[];
   mainKeyword: KeywordUsageItem | null;
@@ -272,7 +293,15 @@ export interface KeywordUsageReport {
   overallRisk: "low" | "medium" | "high";
   overallRiskSummary: string;
   paragraphWarnings: KeywordParagraphWarning[];
-  tokenItems: Array<{
+  seoKeywordItems: SeoKeywordItem[];
+  bodyRepetitionItems: BodyRepetitionItem[];
+  legacyTokenItems?: Array<{
+    token: string;
+    count: number;
+    sourceKeywords: string[];
+    note: string;
+  }>;
+  tokenItems?: Array<{
     token: string;
     count: number;
     sourceKeywords: string[];

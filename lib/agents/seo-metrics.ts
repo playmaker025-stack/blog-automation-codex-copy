@@ -1,4 +1,5 @@
-import type {
+﻿import type {
+  BodyRepetitionItem,
   KeywordContract,
   KeywordFocusMetric,
   KeywordUsageItem,
@@ -6,6 +7,7 @@ import type {
   SearchCombinationMetric,
   SearchCombinationTarget,
   SeoEvaluation,
+  SeoKeywordItem,
 } from "./types";
 import { classifySearchCombination, splitSearchCombinationTokens } from "./search-combination-utils";
 
@@ -83,6 +85,37 @@ const META_KEYWORD_PATTERNS = [
 ];
 
 const LOCALITY_TOKEN_PATTERN = /^[가-힣]{2,}(역|동|구|시|군|읍|면|리)$/u;
+const CATEGORY_WORD_TOKENS = new Set(["전자담배", "전담", "입호흡", "폐호흡", "추천"]);
+const NOUN_REPETITION_TOKENS = new Set([
+  "기기",
+  "제품",
+  "액상",
+  "팟",
+  "코일",
+  "흡입감",
+  "목넘김",
+  "유지비",
+  "쿨링",
+  "니코틴",
+  "매장",
+  "상담",
+  "호환성",
+  "누수",
+  "타격감",
+]);
+const VERB_STEM_PATTERNS = [
+  { pattern: /^고르(?:기|는|면|려고)?$/u, stem: "고르" },
+  { pattern: /^선택(?:하기|하면|할|하는)?$/u, stem: "선택하" },
+  { pattern: /^비교(?:하기|하면|할|하는)?$/u, stem: "비교하" },
+  { pattern: /^확인(?:하기|하면|할|하는)?$/u, stem: "확인하" },
+  { pattern: /^정리(?:하기|하면|할|하는)?$/u, stem: "정리하" },
+];
+const SENTENCE_ENDING_PATTERNS = [
+  { pattern: /입니다[.!?]?$/u, token: "입니다" },
+  { pattern: /합니다[.!?]?$/u, token: "합니다" },
+  { pattern: /됩니다[.!?]?$/u, token: "됩니다" },
+  { pattern: /세요[.!?]?$/u, token: "세요" },
+];
 
 function isMeaningfulKeywordToken(token: string): boolean {
   const normalized = token.trim().toLowerCase();
@@ -763,6 +796,162 @@ export function countKeywordOccurrences(body: string, keyword: string): number {
   return matches?.length ?? 0;
 }
 
+function collectPhraseSpans(body: string, phrase: string): Array<{ start: number; end: number }> {
+  const trimmed = phrase.trim();
+  if (!trimmed) return [];
+
+  const normalizedBody = normalizeBodyForKeywordCounting(body);
+  const pattern = buildFlexibleKeywordPattern(trimmed);
+  const spans: Array<{ start: number; end: number }> = [];
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(normalizedBody)) !== null) {
+    spans.push({ start: match.index, end: match.index + match[0].length });
+    if (pattern.lastIndex === match.index) pattern.lastIndex += 1;
+  }
+
+  return spans;
+}
+
+function phraseIncludesKeywordPhrase(sourcePhrase: string, targetPhrase: string): boolean {
+  const sourceTokens = splitCombinationTokens(sourcePhrase);
+  const targetTokens = splitCombinationTokens(targetPhrase);
+  if (targetTokens.length === 0 || sourceTokens.length <= targetTokens.length) return false;
+
+  for (let index = 0; index <= sourceTokens.length - targetTokens.length; index += 1) {
+    const chunk = sourceTokens.slice(index, index + targetTokens.length);
+    if (chunk.join(" ") === targetTokens.join(" ")) return true;
+  }
+
+  return false;
+}
+
+function buildSeoKeywordItems(params: {
+  body: string;
+  contract?: KeywordContract;
+  items: KeywordUsageItem[];
+}): SeoKeywordItem[] {
+  const trackedPhrases = params.contract
+    ? uniqueKeywords([
+        params.contract.mainKeyword,
+        ...params.contract.subKeywords,
+        ...params.contract.bridgeKeywords,
+        ...params.contract.internalLinkAnchors,
+      ])
+    : params.items.filter((item) => item.role !== "forbidden" && item.role !== "anchor").map((item) => item.keyword);
+
+  return params.items
+    .filter((item) => item.role === "main" || item.role === "sub")
+    .map((item) => {
+      const ownSpans = collectPhraseSpans(params.body, item.keyword);
+      const longerSpans = trackedPhrases
+        .filter((phrase) => phrase !== item.keyword && phraseIncludesKeywordPhrase(phrase, item.keyword))
+        .flatMap((phrase) => collectPhraseSpans(params.body, phrase));
+
+      const exactCount = ownSpans.filter(
+        (span) => !longerSpans.some((longer) => span.start >= longer.start && span.end <= longer.end)
+      ).length;
+      const includedCount = ownSpans.length - exactCount;
+      const exactPhraseExclusionApplied = includedCount > 0;
+
+      return {
+        keyword: item.keyword,
+        role: item.role === "main" ? "main" : "sub",
+        exactCount,
+        includedCount,
+        effectiveCount: item.count,
+        risk: item.status,
+        note: exactPhraseExclusionApplied
+          ? `긴 계획 키워드에 포함된 ${includedCount}회를 분리해 exact ${exactCount}회 / included ${includedCount}회로 계산했습니다.`
+          : "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+        exactPhraseExclusionApplied,
+      };
+    });
+}
+
+function buildBodyRepetitionItems(body: string): BodyRepetitionItem[] {
+  const items: BodyRepetitionItem[] = [];
+  const tokenCounts = new Map<string, number>();
+  const tokens = body.match(/[가-힣]{2,}/gu) ?? [];
+
+  for (const token of tokens) {
+    const normalized = token.trim();
+    if (CATEGORY_WORD_TOKENS.has(normalized) || NOUN_REPETITION_TOKENS.has(normalized)) {
+      tokenCounts.set(normalized, (tokenCounts.get(normalized) ?? 0) + 1);
+      continue;
+    }
+
+    for (const rule of VERB_STEM_PATTERNS) {
+      if (rule.pattern.test(normalized)) {
+        tokenCounts.set(rule.stem, (tokenCounts.get(rule.stem) ?? 0) + 1);
+        break;
+      }
+    }
+  }
+
+  for (const [token, count] of tokenCounts.entries()) {
+    let category: BodyRepetitionItem["category"] | null = null;
+    if (CATEGORY_WORD_TOKENS.has(token)) category = "category_word";
+    else if (NOUN_REPETITION_TOKENS.has(token)) category = "noun";
+    else category = "verb_stem";
+
+    const threshold = category === "category_word" ? 4 : 3;
+    if (count < threshold) continue;
+
+    const severity: BodyRepetitionItem["severity"] = count >= (category === "category_word" ? 8 : 5) ? "caution" : "notice";
+    items.push({
+      token,
+      count,
+      category,
+      severity,
+      message:
+        severity === "caution"
+          ? `'${token}' 반복이 많아 본문이 단조롭게 보일 수 있습니다.`
+          : `'${token}' 반복이 눈에 띄기 시작합니다.`,
+      suggestion:
+        category === "category_word"
+          ? "같은 축 단어를 연속 반복하지 말고 기준, 사례, 비교 문장으로 분산해 주세요."
+          : category === "noun"
+            ? "같은 명사를 설명형 문장, 수치, 사례 표현으로 바꿔 밀도를 낮춰 주세요."
+            : "같은 동사 어간을 반복하지 말고 문장 구조를 바꿔 주세요.",
+      isSeoRisk: false,
+    });
+  }
+
+  const sentences = body
+    .replace(/\r\n/g, "\n")
+    .split(/[\n.!?]+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+  const endingCounts = new Map<string, number>();
+
+  for (const sentence of sentences) {
+    for (const rule of SENTENCE_ENDING_PATTERNS) {
+      if (rule.pattern.test(sentence)) {
+        endingCounts.set(rule.token, (endingCounts.get(rule.token) ?? 0) + 1);
+      }
+    }
+  }
+
+  for (const [token, count] of endingCounts.entries()) {
+    if (count < 4) continue;
+    items.push({
+      token,
+      count,
+      category: "sentence_ending",
+      severity: count >= 7 ? "caution" : "notice",
+      message: `'${token}' 문장 마무리가 반복됩니다.`,
+      suggestion: "문장 종결 표현을 섞어서 리듬을 바꿔 주세요.",
+      isSeoRisk: false,
+    });
+  }
+
+  return items.sort((left, right) => {
+    if (right.count !== left.count) return right.count - left.count;
+    return left.token.localeCompare(right.token, "ko");
+  });
+}
+
 function buildContractKeywordItems(contract: KeywordContract, body: string): KeywordUsageItem[] {
   const limitsByKey = new Map(
     contract.limitedKeywords.map((limit) => [limit.keyword.trim().toLowerCase(), limit])
@@ -876,6 +1065,7 @@ export function analyzeKeywordUsage(params: {
       targetMin,
       targetMax,
       recommendation,
+      role: index === 0 ? "main" : "sub",
     };
   });
 
@@ -908,6 +1098,13 @@ export function analyzeKeywordUsage(params: {
     [...subKeywordItems, ...bridgeKeywordItems, ...internalLinkAnchorItems, ...forbiddenItems],
     paragraphWarnings
   );
+  const seoKeywordItems = buildSeoKeywordItems({
+    body: params.body,
+    contract,
+    items,
+  });
+  const legacyTokenItems = buildKeywordTokenItems(tokenPool, params.body);
+  const bodyRepetitionItems = buildBodyRepetitionItems(params.body);
 
   const summary: string[] = [];
   if (mainKeywordItem) {
@@ -937,7 +1134,10 @@ export function analyzeKeywordUsage(params: {
     overallRisk,
     overallRiskSummary,
     paragraphWarnings,
-    tokenItems: buildKeywordTokenItems(tokenPool, params.body),
+    seoKeywordItems,
+    bodyRepetitionItems,
+    legacyTokenItems,
+    tokenItems: legacyTokenItems,
     totalMentions,
     introCoverage,
     titleFrontLoaded,
@@ -1095,7 +1295,7 @@ export function evaluateSeoCompleteness(params: {
   const mainKeywordTokens = splitCombinationTokens(mainKeyword).filter((token) => isMeaningfulKeywordToken(token));
   if (!isPreludeMainKeyword && mainKeywordTokens.length > 0) {
     const componentTokenLimit = keywordReport.bodyLength >= 2200 ? 14 : keywordReport.bodyLength >= 1400 ? 10 : 8;
-    const overusedComponentTokens = keywordReport.tokenItems.filter(
+    const overusedComponentTokens = (keywordReport.tokenItems ?? []).filter(
       (item) =>
         splitCombinationTokens(item.token).length === 1 &&
         mainKeywordTokens.includes(item.token) &&
@@ -1150,3 +1350,5 @@ export function evaluateSeoCompleteness(params: {
     combinationMetrics,
   };
 }
+
+

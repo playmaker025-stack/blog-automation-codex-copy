@@ -1319,6 +1319,7 @@ export default function PipelinePage() {
           reviewResult={reviewResult}
           reviewIssues={reviewIssues}
           reviewApplied={reviewApplied}
+          draftVersionReports={draftVersionReports}
           publishUrl={publishUrl}
           publishingToIndex={publishingToIndex}
           publishNotice={publishNotice}
