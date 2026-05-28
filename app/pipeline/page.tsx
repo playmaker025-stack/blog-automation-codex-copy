@@ -9,7 +9,7 @@ import { ApprovalDialog } from "@/components/pipeline/approval-dialog";
 import { PipelineStateInspector, applyEventToInspector } from "@/components/pipeline/state-inspector";
 import { usePipelineStore } from "@/lib/store/pipeline-store";
 import { reviewActualDraft, type DraftReviewIssue, type DraftReviewResult } from "@/lib/agents/draft-review";
-import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport } from "@/lib/agents/types";
+import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport, FinalDraftCheck } from "@/lib/agents/types";
 import { evaluateSeoCompleteness } from "@/lib/agents/seo-metrics";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
@@ -43,6 +43,7 @@ interface ResultData {
   imageFileNames?: string[];
   seoEvaluation?: SeoEvaluation;
   naverLogicEvaluation?: NaverLogicEvaluation;
+  finalDraftCheck?: FinalDraftCheck;
 }
 
 type ContentTab = "draft" | "revision";

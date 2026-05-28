@@ -44,6 +44,7 @@ import type {
   StrategyPlanResult,
   WriterResult,
   EvalResult,
+  FinalDraftCheck,
 } from "./types";
 import type {
   SourceReportData,
@@ -113,6 +114,25 @@ function uniqueNonEmpty(values: string[]): string[] {
     out.push(normalized);
   }
   return out;
+}
+
+function summarizeFinalDraftCheck(check: FinalDraftCheck | undefined): string[] {
+  if (!check) return ["FinalDraftCheck가 생성되지 않았습니다."];
+  return uniqueNonEmpty([
+    ...check.blockingReasons,
+    ...check.warnings,
+    ...check.matchedForbiddenPhrases.map((phrase) => `금지 표현: ${phrase}`),
+    ...check.keywordStuffingFindings,
+    ...check.deferFindings,
+    ...check.contractCoverageFindings,
+    ...check.overlapFindings,
+  ]);
+}
+
+function finalDraftCheckFailureReason(check: FinalDraftCheck | undefined): string | null {
+  if (!check) return "FinalDraftCheck가 생성되지 않았습니다.";
+  if (check.ok) return null;
+  return check.blockingReasons[0] ?? "FinalDraftCheck에서 발행 전 차단 사유가 감지되었습니다.";
 }
 
 function extractApprovedTitle(modifications?: string): string | null {
@@ -304,6 +324,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
       generatedAt: writerResult.generatedAt,
       contentPath: Paths.postContent(postId),
       corpusSummaryUsed: true,
+      finalDraftCheck: writerResult.finalDraftCheck,
     }).catch(() => {});
 
     await updatePostRecord(postId, {
@@ -761,6 +782,7 @@ export async function runPipeline(params: {
       generatedAt: writerResult.generatedAt,
       contentPath: Paths.postContent(postRecord.postId),
       corpusSummaryUsed: true,
+      finalDraftCheck: writerResult.finalDraftCheck,
     });
 
     // posting-list wordCount 업데이트
@@ -850,8 +872,13 @@ export async function runPipeline(params: {
       topicCategory
     );
     const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy, writerResult, evalResult });
+    const finalDraftFailureReason = finalDraftCheckFailureReason(writerResult.finalDraftCheck);
+    const finalRecommendations = uniqueNonEmpty([
+      ...evalResult.recommendations,
+      ...summarizeFinalDraftCheck(writerResult.finalDraftCheck),
+    ]);
 
-    if (!postGateResult.passed) {
+    if (!postGateResult.passed || finalDraftFailureReason) {
       await updatePostRecord(postRecord.postId, {
         evalScore: evalResult.aggregateScore,
         status: "ready",
@@ -859,7 +886,9 @@ export async function runPipeline(params: {
       await transitionApprovalState({
         pipelineId,
         to: "released",
-        reason: `Draft saved with eval warning: ${postGateResult.reason}`,
+        reason: finalDraftFailureReason
+          ? `Draft saved with final check warning: ${finalDraftFailureReason}`
+          : `Draft saved with eval warning: ${postGateResult.reason}`,
       }).catch(() => {});
       try { await updateTopicStatus(request.topicId, "draft"); } catch { /* ignore */ }
 
@@ -882,7 +911,8 @@ export async function runPipeline(params: {
         evalScore: evalResult.aggregateScore,
         baselineDelta,
         pass: false,
-        recommendations: evalResult.recommendations,
+        recommendations: finalRecommendations,
+        finalDraftCheck: writerResult.finalDraftCheck,
         naverLogicEvaluation,        hashtags,
         imageFileNames,
       }));
@@ -958,7 +988,8 @@ export async function runPipeline(params: {
         evalScore: evalResult.aggregateScore,
         baselineDelta,
         pass: evalResult.pass,
-        recommendations: evalResult.recommendations,
+        recommendations: finalRecommendations,
+        finalDraftCheck: writerResult.finalDraftCheck,
         naverLogicEvaluation,        hashtags,
         imageFileNames,
       }));
@@ -1651,6 +1682,7 @@ export async function runWritePhase(params: {
       generatedAt: writerResult.generatedAt,
       contentPath: Paths.postContent(postRecord.postId),
       corpusSummaryUsed: true,
+      finalDraftCheck: writerResult.finalDraftCheck,
     }).catch(() => {});
 
     await updatePostRecord(postRecord.postId, {
@@ -1720,6 +1752,11 @@ export async function runWritePhase(params: {
       topicCategory
     );
     const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({ strategy: effectiveStrategy, writerResult, evalResult });
+    const finalDraftFailureReason = finalDraftCheckFailureReason(writerResult.finalDraftCheck);
+    const finalRecommendations = uniqueNonEmpty([
+      ...evalResult.recommendations,
+      ...summarizeFinalDraftCheck(writerResult.finalDraftCheck),
+    ]);
     const seoEvaluation = evaluateSeoCompleteness({
       title: writerResult.title,
       body: writerResult.content,
@@ -1731,7 +1768,7 @@ export async function runWritePhase(params: {
       forbiddenTerms: effectiveStrategy.keywordContract?.forbiddenTerms,
     });
 
-    if (!postGateResult.passed) {
+    if (!postGateResult.passed || finalDraftFailureReason) {
       await updatePostRecord(postRecord.postId, {
         evalScore: evalResult.aggregateScore,
         status: "ready",
@@ -1752,7 +1789,8 @@ export async function runWritePhase(params: {
         evalScore: evalResult.aggregateScore,
         baselineDelta,
         pass: false,
-        recommendations: evalResult.recommendations,
+        recommendations: finalRecommendations,
+        finalDraftCheck: writerResult.finalDraftCheck,
         seoEvaluation,
         naverLogicEvaluation,        hashtags,
         imageFileNames,
@@ -1816,7 +1854,8 @@ export async function runWritePhase(params: {
         evalScore: evalResult.aggregateScore,
         baselineDelta,
         pass: evalResult.pass,
-        recommendations: evalResult.recommendations,
+        recommendations: finalRecommendations,
+        finalDraftCheck: writerResult.finalDraftCheck,
         seoEvaluation,
         naverLogicEvaluation,        hashtags,
         imageFileNames,

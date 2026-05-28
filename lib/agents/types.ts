@@ -286,6 +286,17 @@ export interface KeywordUsageReport {
   recommendations: string[];
 }
 
+export interface FinalDraftCheck {
+  ok: boolean;
+  blockingReasons: string[];
+  warnings: string[];
+  matchedForbiddenPhrases: string[];
+  keywordStuffingFindings: string[];
+  deferFindings: string[];
+  contractCoverageFindings: string[];
+  overlapFindings: string[];
+}
+
 export interface KeywordFocusMetric {
   keyword: string;
   role: "main" | "sub";
@@ -354,6 +365,7 @@ export interface WriterResult {
   content: string;
   wordCount: number;
   generatedAt: string;
+  finalDraftCheck?: FinalDraftCheck;
 }
 
 export interface EvalResult {

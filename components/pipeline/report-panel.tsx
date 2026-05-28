@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
-import type { NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
+import type { FinalDraftCheck, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
 
 interface ResultData {
   title: string;
@@ -14,6 +14,7 @@ interface ResultData {
   imageFileNames?: string[];
   seoEvaluation?: SeoEvaluation;
   naverLogicEvaluation?: NaverLogicEvaluation;
+  finalDraftCheck?: FinalDraftCheck;
 }
 
 interface Props {

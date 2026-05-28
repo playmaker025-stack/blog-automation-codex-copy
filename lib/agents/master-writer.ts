@@ -15,10 +15,10 @@ import { classifySearchCombination } from "./search-combination-utils";
 import {
   buildRoleSpecificWriterGuidance,
   evaluateStrategyQualityGate,
-  findQuestionKeywordStuffingViolations,
   formatArticleContract,
 } from "./article-contract-utils";
 import { formatOverlapReport } from "./overlap-report-utils";
+import { runFinalDraftCheck } from "./final-draft-check";
 
 // ============================================================
 // 발행용 본문은 이 에이전트만 작성한다 — 핵심 원칙
@@ -717,18 +717,11 @@ async function runOpenAIMasterWriter(params: {
   });
 
   const bodyText = wrapForNaverMobile(finalDraft);
-  const questionKeywordViolations = findQuestionKeywordStuffingViolations({
-    content: bodyText,
-    mainKeyword: strategy.keywordContract?.mainKeyword ?? strategy.keywords[0] ?? "",
-    subKeywords: strategy.keywordContract?.subKeywords ?? [],
-  });
-  if (questionKeywordViolations.length) {
-    throw new Error(`질문문 exact keyword 위반: ${questionKeywordViolations.join(" / ")}`);
-  }
   onToken?.(bodyText);
   onProgress?.("본문 생성 완료 - GitHub에 저장 중입니다.");
 
   return saveWriterResult({
+    strategy,
     topicId,
     postId,
     title: strategy.title,
@@ -959,16 +952,9 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
     if (finalStopReason === "end_turn" && toolUseBlocks.length === 0) {
       // 본문 생성 완료
       const bodyText = wrapForNaverMobile(rawText);
-      const questionKeywordViolations = findQuestionKeywordStuffingViolations({
-        content: bodyText,
-        mainKeyword: strategy.keywordContract?.mainKeyword ?? strategy.keywords[0] ?? "",
-        subKeywords: strategy.keywordContract?.subKeywords ?? [],
-      });
-      if (questionKeywordViolations.length) {
-        throw new Error(`질문문 exact keyword 위반: ${questionKeywordViolations.join(" / ")}`);
-      }
-      onProgress?.("본문 생성 완료 — GitHub에 저장 중...");
+      onProgress?.("본문 생성 완료 – GitHub에 저장 중...");
       return await saveWriterResult({
+        strategy,
         topicId,
         postId,
         title: strategy.title,
@@ -1010,6 +996,7 @@ expansion_planner로 아웃라인을 확장하고, 본문을 마크다운으로 
 }
 
 async function saveWriterResult(params: {
+  strategy: StrategyPlanResult;
   topicId: string;
   postId?: string;
   title: string;
@@ -1020,6 +1007,11 @@ async function saveWriterResult(params: {
   const contentPath = Paths.postContent(postId);
   const wordCount = params.content.replace(/\s+/g, "").length;
   const generatedAt = new Date().toISOString();
+  const finalDraftCheck = runFinalDraftCheck({
+    title: params.title,
+    content: params.content,
+    strategy: params.strategy,
+  });
 
   // GitHub에 본문 저장 (파일이 없을 때만 — sha null)
   const exists = await fileExists(contentPath);
@@ -1039,5 +1031,6 @@ async function saveWriterResult(params: {
     content: params.content,
     wordCount,
     generatedAt,
+    finalDraftCheck,
   };
 }
