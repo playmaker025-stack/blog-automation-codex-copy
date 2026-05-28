@@ -18,7 +18,7 @@ import {
   formatArticleContract,
 } from "./article-contract-utils";
 import { formatOverlapReport } from "./overlap-report-utils";
-import { runFinalDraftCheck } from "./final-draft-check";
+import { runFinalDraftCheck, runLimitedFinalDraftRewrite } from "./final-draft-check";
 
 // ============================================================
 // 발행용 본문은 이 에이전트만 작성한다 — 핵심 원칙
@@ -1005,13 +1005,24 @@ async function saveWriterResult(params: {
 }): Promise<WriterResult> {
   const postId = params.postId ?? `post-${randomUUID().slice(0, 8)}`;
   const contentPath = Paths.postContent(postId);
-  const wordCount = params.content.replace(/\s+/g, "").length;
   const generatedAt = new Date().toISOString();
-  const finalDraftCheck = runFinalDraftCheck({
+  let finalContent = params.content;
+  let finalDraftCheck = runFinalDraftCheck({
     title: params.title,
-    content: params.content,
+    content: finalContent,
     strategy: params.strategy,
   });
+  const finalDraftRewrite = runLimitedFinalDraftRewrite({
+    title: params.title,
+    content: finalContent,
+    strategy: params.strategy,
+    beforeCheck: finalDraftCheck,
+  });
+  if (finalDraftRewrite.attempted && finalDraftRewrite.applied) {
+    finalContent = finalDraftRewrite.content;
+    finalDraftCheck = finalDraftRewrite.afterCheck;
+  }
+  const wordCount = finalContent.replace(/\s+/g, "").length;
 
   // GitHub에 본문 저장 (파일이 없을 때만 — sha null)
   const exists = await fileExists(contentPath);
@@ -1019,7 +1030,7 @@ async function saveWriterResult(params: {
     const sha = exists ? (await readFile(contentPath)).sha : null;
     await writeFile(
       contentPath,
-      params.content,
+      finalContent,
       `feat: master-writer generated post ${postId}`,
       sha
     );
@@ -1028,9 +1039,10 @@ async function saveWriterResult(params: {
   return {
     postId,
     title: params.title,
-    content: params.content,
+    content: finalContent,
     wordCount,
     generatedAt,
     finalDraftCheck,
+    finalDraftRewrite: finalDraftRewrite.attempted ? finalDraftRewrite : undefined,
   };
 }

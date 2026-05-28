@@ -1,6 +1,7 @@
 import type {
   ArticleContract,
   FinalDraftCheck,
+  FinalDraftRewriteResult,
   KeywordLimit,
   OverlapReport,
   StrategyPlanResult,
@@ -319,5 +320,136 @@ export function collectFinalDraftCheckMessages(check: FinalDraftCheck | null | u
     deferFindings: check?.deferFindings ?? [],
     contractCoverageFindings: check?.contractCoverageFindings ?? [],
     overlapFindings: check?.overlapFindings ?? [],
+  };
+}
+
+function replaceExactPhraseAll(content: string, phrase: string, replacement: string): string {
+  if (!phrase.trim()) return content;
+  return content.replace(new RegExp(escapeRegExp(phrase), "giu"), replacement);
+}
+
+function removeForbiddenPhrases(content: string, phrases: string[]): string {
+  let next = content;
+  for (const phrase of phrases) {
+    next = replaceExactPhraseAll(next, phrase, "");
+  }
+  return next
+    .split("\n")
+    .map((line) => line.replace(/[ \t]{2,}/g, " ").trimEnd())
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n");
+}
+
+function rewriteForbiddenHeadings(content: string, contract?: ArticleContract): string {
+  const patterns = contract?.forbiddenHeadingPatterns ?? [];
+  if (!patterns.length) return content;
+  return content
+    .split("\n")
+    .map((line) => {
+      if (!/^#{1,6}\s+/.test(line)) return line;
+      if (!patterns.some((pattern) => countExactPhrase(line, pattern) > 0 || containsLoose(line, pattern))) return line;
+      const level = line.match(/^#{1,6}/)?.[0] ?? "##";
+      return `${level} 확인 기준 정리`;
+    })
+    .join("\n");
+}
+
+function naturalizeQuestionKeywordStuffing(content: string, strategy: StrategyPlanResult): string {
+  const keywords = uniq([
+    strategy.keywordContract?.mainKeyword ?? "",
+    ...(strategy.keywordContract?.subKeywords ?? []),
+    ...(strategy.keywords ?? []),
+  ].filter(Boolean));
+  if (!keywords.length) return content;
+
+  return content
+    .split("\n")
+    .map((line) => {
+      const questionLike = /[?？]|["“”'‘’「」『』]/u.test(line);
+      if (!questionLike) return line;
+      let next = line;
+      for (const keyword of keywords) {
+        if (countExactPhrase(next, keyword) > 0) {
+          next = replaceExactPhraseAll(next, keyword, "이 기준");
+        }
+      }
+      return next.replace(/\s{2,}/g, " ");
+    })
+    .join("\n");
+}
+
+function resolveDeferSentences(content: string, contract?: ArticleContract): string {
+  if (contract?.completionMode !== "end_here") return content;
+  let next = content;
+  for (const phrase of DEFER_PHRASES) {
+    next = replaceExactPhraseAll(next, phrase, "이 글에서");
+  }
+  return next
+    .replace(/이 글에서\s*(더\s*)?자세히\s*(다루겠습니다|알아보겠습니다|정리하겠습니다)/giu, "이 글에서 바로 정리합니다")
+    .replace(/이 글에서\s*(확인해\s*보겠습니다|보겠습니다)/giu, "이 글에서 확인합니다");
+}
+
+function appendMissingMustResolveParagraphs(content: string, check: FinalDraftCheck, contract?: ArticleContract): string {
+  if (!contract?.mustResolve?.length || check.contractCoverageFindings.length === 0) return content;
+  const missing = contract.mustResolve.filter((item) => !phraseHasMinimalCue(content, item));
+  if (!missing.length) return content;
+  const addition = [
+    "",
+    "## 추가 확인 기준",
+    ...missing.map((item) => `- ${item}: 이 글에서 바로 확인해야 할 기준입니다. 실제 선택 전에 이 부분을 먼저 점검하면 판단이 더 쉬워집니다.`),
+  ].join("\n");
+  return `${content.trimEnd()}\n${addition}`;
+}
+
+function buildLimitedRewriteInstructions(check: FinalDraftCheck): string[] {
+  return uniq([
+    ...check.blockingReasons.map((reason) => `차단 사유 수정: ${reason}`),
+    ...check.matchedForbiddenPhrases.map((phrase) => `금지 표현 제거: ${phrase}`),
+    ...check.keywordStuffingFindings.map((finding) => `키워드/질문문 자연화: ${finding}`),
+    ...check.deferFindings.map((finding) => `defer 문장 제거: ${finding}`),
+    ...check.contractCoverageFindings.map((finding) => `누락 기준 보강: ${finding}`),
+  ]);
+}
+
+export function runLimitedFinalDraftRewrite(params: {
+  title: string;
+  content: string;
+  strategy: StrategyPlanResult;
+  beforeCheck?: FinalDraftCheck;
+}): FinalDraftRewriteResult & { content: string } {
+  const beforeCheck = params.beforeCheck ?? runFinalDraftCheck(params);
+  if (beforeCheck.ok || beforeCheck.blockingReasons.length === 0) {
+    return {
+      attempted: false,
+      applied: false,
+      instructions: [],
+      beforeCheck,
+      afterCheck: beforeCheck,
+      content: params.content,
+    };
+  }
+
+  const instructions = buildLimitedRewriteInstructions(beforeCheck);
+  let rewritten = params.content;
+  rewritten = removeForbiddenPhrases(rewritten, beforeCheck.matchedForbiddenPhrases);
+  rewritten = rewriteForbiddenHeadings(rewritten, params.strategy.articleContract);
+  rewritten = naturalizeQuestionKeywordStuffing(rewritten, params.strategy);
+  rewritten = resolveDeferSentences(rewritten, params.strategy.articleContract);
+  rewritten = appendMissingMustResolveParagraphs(rewritten, beforeCheck, params.strategy.articleContract);
+  rewritten = rewritten.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+
+  const afterCheck = runFinalDraftCheck({
+    title: params.title,
+    content: rewritten,
+    strategy: params.strategy,
+  });
+
+  return {
+    attempted: true,
+    applied: rewritten !== params.content,
+    instructions,
+    beforeCheck,
+    afterCheck,
+    content: rewritten,
   };
 }

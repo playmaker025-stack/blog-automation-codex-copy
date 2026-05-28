@@ -297,6 +297,14 @@ export interface FinalDraftCheck {
   overlapFindings: string[];
 }
 
+export interface FinalDraftRewriteResult {
+  attempted: boolean;
+  applied: boolean;
+  instructions: string[];
+  beforeCheck: FinalDraftCheck;
+  afterCheck: FinalDraftCheck;
+}
+
 export interface KeywordFocusMetric {
   keyword: string;
   role: "main" | "sub";
@@ -366,6 +374,7 @@ export interface WriterResult {
   wordCount: number;
   generatedAt: string;
   finalDraftCheck?: FinalDraftCheck;
+  finalDraftRewrite?: FinalDraftRewriteResult;
 }
 
 export interface EvalResult {

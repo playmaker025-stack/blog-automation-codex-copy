@@ -325,6 +325,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
       contentPath: Paths.postContent(postId),
       corpusSummaryUsed: true,
       finalDraftCheck: writerResult.finalDraftCheck,
+      finalDraftRewrite: writerResult.finalDraftRewrite,
     }).catch(() => {});
 
     await updatePostRecord(postId, {
@@ -783,6 +784,7 @@ export async function runPipeline(params: {
       contentPath: Paths.postContent(postRecord.postId),
       corpusSummaryUsed: true,
       finalDraftCheck: writerResult.finalDraftCheck,
+      finalDraftRewrite: writerResult.finalDraftRewrite,
     });
 
     // posting-list wordCount 업데이트
@@ -1683,6 +1685,7 @@ export async function runWritePhase(params: {
       contentPath: Paths.postContent(postRecord.postId),
       corpusSummaryUsed: true,
       finalDraftCheck: writerResult.finalDraftCheck,
+      finalDraftRewrite: writerResult.finalDraftRewrite,
     }).catch(() => {});
 
     await updatePostRecord(postRecord.postId, {
