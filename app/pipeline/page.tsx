@@ -100,6 +100,11 @@ function buildDraftCompletionMessage(streamingBody: string): string | null {
   return "\u0031\uCC28 \uCD08\uC548\uBD80\uD130 \uC790\uB3D9 \uBCF4\uAC15\uBCF8 3\uCC28\uAE4C\uC9C0 \uBAA8\uB450 \uC900\uBE44\uB418\uC5C8\uC2B5\uB2C8\uB2E4. \uAC00\uC7A5 \uB098\uC740 \uBC84\uC804\uC744 \uACE8\uB77C \uC218\uC815\uBCF8 \uD0ED\uC5D0\uC11C \uC2E4\uC81C \uBC1C\uD589 \uBCF8\uBB38\uC744 \uC815\uB9AC\uD574 \uC8FC\uC138\uC694.";
 }
 
+function pickLatestDraftSnapshot(streamingBody: string): DraftVersionSnapshot | null {
+  const versions = parseDraftVersionSnapshots(streamingBody).filter((version) => version.body.trim());
+  return versions.at(-1) ?? null;
+}
+
 function looksBrokenKorean(value: string | null | undefined): boolean {
   if (!value) return false;
   return /[\uFFFD]|\u00C3|\u00C2|[\u00EC\u00ED\u00EF][\S\s]{0,3}[\u00EB\u00EA]|[\u0000-\u0008\u000B-\u000C\u000E-\u001F]/.test(value);
@@ -234,13 +239,17 @@ export default function PipelinePage() {
   const forcePreflightOverrideRef = useRef(false);
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewBody, setReviewBody] = useState("");
-  const [revisionRequest, setRevisionRequest] = useState("");
+  const [revisionRequest] = useState("");
   const [reviewIssues, setReviewIssues] = useState<DraftReviewIssue[]>([]);
   const [reviewResult, setReviewResult] = useState<DraftReviewResult | null>(null);
   const [reviewedTitle, setReviewedTitle] = useState("");
   const [reviewedBody, setReviewedBody] = useState("");
-  const [reviewApplied, setReviewApplied] = useState(false);
+  const [_reviewApplied, setReviewApplied] = useState(false);
   const [reviewSaving, setReviewSaving] = useState(false);
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
+  const [publishModalOpen, setPublishModalOpen] = useState(false);
+  const [publishTitle, setPublishTitle] = useState("");
+  const [publishBody, setPublishBody] = useState("");
   const [draftRewriteContext, setDraftRewriteContext] = useState<DraftRewriteContext | null>(null);
   const [publishUrl, setPublishUrl] = useState("");
   const [publishingToIndex, setPublishingToIndex] = useState(false);
@@ -309,6 +318,7 @@ export default function PipelinePage() {
         };
       });
   }, [draftRewriteContext?.strategy, streamingBody]);
+  const latestDraftSnapshot = useMemo(() => pickLatestDraftSnapshot(streamingBody), [streamingBody]);
   const profileDisplayName = !profile?.displayName || looksCorruptedText(profile.displayName)
     ? normalizedUserId || "\uC0AC\uC6A9\uC790 \uC5F0\uACB0\uB428"
     : profile.displayName;
@@ -442,6 +452,8 @@ export default function PipelinePage() {
       setPublishNotice(null);
       setPublishCompletionMessage(null);
       setDraftCompletionMessage(buildDraftCompletionMessage(streamingBodyRef.current));
+      setReviewModalOpen(false);
+      setPublishModalOpen(false);
       setContentTab("draft");
       setRunning(false);
       setRunningTitle(null);
@@ -624,9 +636,13 @@ export default function PipelinePage() {
     setReviewedBody("");
     setReviewApplied(false);
     setPublishUrl("");
+    setPublishTitle("");
+    setPublishBody("");
     setPublishNotice(null);
     setPublishCompletionMessage(null);
     setDraftCompletionMessage(null);
+    setReviewModalOpen(false);
+    setPublishModalOpen(false);
     setContentTab("draft");
     setStage("idle");
     setApproval(null);
@@ -822,8 +838,17 @@ export default function PipelinePage() {
     }
   };
 
-  const runDraftReview = async () => {
-    if (!result) return;
+  const openReviewModal = useCallback(() => {
+    const baseTitle = reviewedTitle.trim() || reviewTitle.trim() || result?.title?.trim() || "";
+    const baseBody = reviewedBody.trim() || reviewBody.trim() || latestDraftSnapshot?.body?.trim() || "";
+    setReviewTitle(baseTitle);
+    setReviewBody(baseBody);
+    setReviewModalOpen(true);
+  }, [latestDraftSnapshot?.body, result?.title, reviewBody, reviewTitle, reviewedBody, reviewedTitle]);
+
+  const submitReviewModal = async () => {
+    if (!result || !reviewTitle.trim() || !reviewBody.trim()) return;
+    setReviewModalOpen(false);
     await requestDraftReview({
       originalTitle: result.title,
       title: reviewTitle,
@@ -831,116 +856,38 @@ export default function PipelinePage() {
     });
   };
 
-  const buildDraftRewriteRequest = (): string | undefined => {
-    const stored = draftRewriteContext?.modifications?.trim();
-    const requested = revisionRequest.trim();
-
-    if (stored && requested) {
-      if (stored === requested) return stored;
-      return `${stored}\n\n\uCD94\uAC00 \uCD08\uC548 \uBCF4\uC644 \uC694\uCCAD:\n${requested}`;
-    }
-
-    return stored || requested || undefined;
-  };
-
-  const runDraftPolish = async () => {
-    const uid = normalizeUserId(userId.trim());
-    if (!uid || !draftRewriteContext || !streamingBody.trim() || !revisionRequest.trim()) return;
-
-    const pipelineId = `pipe-${crypto.randomUUID().slice(0, 8)}`;
-    const rewriteRequest = buildDraftRewriteRequest();
-
-    resetRun();
-    setEvents([]);
-    setStreamingBody("");
-    streamingBodyRef.current = "";
-    setResult(null);
-    setReviewTitle("");
-    setReviewBody("");
-    setReviewIssues([]);
-    setReviewResult(null);
-    setReviewedTitle("");
-    setReviewedBody("");
-    setReviewApplied(false);
-    setPublishUrl("");
-    setPublishNotice(null);
-    setPublishCompletionMessage(null);
-    setDraftCompletionMessage(null);
-    setContentTab("draft");
-    setStage("idle");
-    setApproval(null);
-    setPipelineError(null);
-    setPreflightBlocked(false);
-    setPublishedDuplicateBlocked(false);
-    setRunning(true);
-    setElapsed(0);
-    setRunningTitle(draftRewriteContext.strategy.title);
-    stopTimer();
-    timerRef.current = setInterval(() => setElapsed((seconds) => seconds + 1), 1000);
-
-    startWritePhase(
-      {
-        pipelineId,
-        topicId: draftRewriteContext.topicId,
-        previousTitle: result?.title ?? "",
-        proposedTitle: draftRewriteContext.strategy.title,
-        rationale: draftRewriteContext.strategy.rationale,
-        outline: draftRewriteContext.strategy.outline.map((section) => section.heading),
-        strategy: draftRewriteContext.strategy,
-        modifications: rewriteRequest,
-      },
-      uid
-    );
-  };
-
-  const applyReviewedDraft = async () => {
-    if (!result || !reviewResult) return;
-
-    setReviewSaving(true);
-    try {
-      const res = await fetch("/api/github/posts", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          postId: result.postId,
-          title: reviewedTitle.trim(),
-          content: reviewedBody.trim(),
-        }),
-      });
-      if (!res.ok) throw new Error("reviewed draft update failed");
-      setResult({ ...result, title: reviewedTitle.trim() });
-      setReviewTitle(reviewedTitle.trim());
-      setReviewBody(reviewedBody.trim());
-      setReviewApplied(true);
-      setPublishNotice({ type: "ok", msg: "수정본을 저장본에 반영했습니다. 이제 네이버에 반영한 뒤 URL을 입력해 인덱스에 추가하세요." });
-    } catch {
-      setReviewIssues((prev) => [
-        { severity: "blocker", message: "수정본을 저장본에 반영하지 못했습니다. 잠시 후 다시 시도해 주세요." },
-        ...prev,
-      ]);
-    } finally {
-      setReviewSaving(false);
-    }
-  };
+  const openPublishModal = useCallback(() => {
+    const baseTitle = reviewedTitle.trim() || reviewResult?.revisedTitle?.trim() || reviewTitle.trim() || result?.title?.trim() || "";
+    const baseBody =
+      reviewedBody.trim() ||
+      reviewResult?.revisedBody?.trim() ||
+      reviewBody.trim() ||
+      latestDraftSnapshot?.body?.trim() ||
+      "";
+    setPublishTitle(baseTitle);
+    setPublishBody(baseBody);
+    setPublishModalOpen(true);
+  }, [latestDraftSnapshot?.body, result?.title, reviewBody, reviewResult?.revisedBody, reviewResult?.revisedTitle, reviewTitle, reviewedBody, reviewedTitle]);
 
   const publishToIndex = async () => {
     if (!result) return;
 
     const url = publishUrl.trim();
-    const finalTitle = (reviewedTitle || reviewTitle).trim();
-    const finalBody = (reviewedBody || reviewBody).trim();
-    if (!reviewApplied) {
-      setPublishNotice({ type: "err", msg: "검토 수정본을 먼저 저장본에 반영해 주세요." });
+    const finalTitle = publishTitle.trim();
+    const finalBody = publishBody.trim();
+    if (!finalTitle || !finalBody) {
+      setPublishNotice({ type: "err", msg: "최종 발행 제목과 본문을 먼저 입력해 주세요." });
       return;
     }
     if (!canApproveFinalDraft(result.finalDraftCheck)) {
-      setPublishNotice({ type: "err", msg: "발행 전 최종 검사에서 차단 사유가 있어 승인/발행할 수 없습니다." });
+      setPublishNotice({ type: "err", msg: "본문 검수 차단 사유를 먼저 해결해야 합니다." });
       return;
     }
     const review = reviewActualDraft({
       originalTitle: result.title,
       title: finalTitle,
       body: finalBody,
+      keywordContract: draftRewriteContext?.strategy.keywordContract,
     });
     setReviewIssues(review.issues);
     setReviewResult(review);
@@ -976,12 +923,15 @@ export default function PipelinePage() {
       setResult({ ...result, title: review.normalizedTitle, pass: true });
       setReviewTitle(review.normalizedTitle);
       setReviewBody(finalBody);
+      setReviewedTitle(review.normalizedTitle);
+      setReviewedBody(finalBody);
       setReviewApplied(true);
+      setPublishModalOpen(false);
       const generatedMsg = publishResult.autoGeneratedTopics
         ? ` 현재 계획 글이 없어 다음 글목록 ${publishResult.autoGeneratedTopics}개를 자동 생성했습니다.`
         : "";
       const learningMsg = publishResult.learned ? " 발행 데이터도 학습 기록에 누적했습니다." : "";
-      const completionMessage = `발행 인덱스 목록에 추가했습니다.${generatedMsg}${learningMsg} 확인을 누르면 페이지를 새로고침합니다.`;
+      const completionMessage = `발행 완료 및 인덱스에 추가되었습니다.${generatedMsg}${learningMsg} 확인을 누르면 페이지를 새로고침합니다.`;
       setPublishNotice({ type: "ok", msg: completionMessage });
       setPublishCompletionMessage(completionMessage);
       reloadTopics();
@@ -1271,34 +1221,14 @@ export default function PipelinePage() {
           result={result ? { title: result.title, wordCount: result.wordCount } : null}
           reviewTitle={reviewTitle}
           reviewBody={reviewBody}
-          revisionRequest={revisionRequest}
           reviewedTitle={reviewedTitle}
           reviewedBody={reviewedBody}
           reviewSaving={reviewSaving}
-          reviewApplied={reviewApplied}
           reviewResult={reviewResult}
           reviewIssues={reviewIssues}
           draftVersionReports={draftVersionReports}
-          onReviewTitleChange={(value) => {
-            setReviewTitle(value);
-            setReviewApplied(false);
-          }}
-          onReviewBodyChange={(value) => {
-            setReviewBody(value);
-            setReviewApplied(false);
-          }}
-          onRevisionRequestChange={setRevisionRequest}
-          onReviewedTitleChange={(value) => {
-            setReviewedTitle(value);
-            setReviewApplied(false);
-          }}
-          onReviewedBodyChange={(value) => {
-            setReviewedBody(value);
-            setReviewApplied(false);
-          }}
-          onRunDraftReview={runDraftReview}
-          onRunDraftPolish={runDraftPolish}
-          onApplyReviewedDraft={applyReviewedDraft}
+          onOpenReviewModal={openReviewModal}
+          onOpenPublishModal={openPublishModal}
         />
 
         <PipelineReportPanel
@@ -1319,17 +1249,8 @@ export default function PipelinePage() {
           result={result}
           reviewResult={reviewResult}
           reviewIssues={reviewIssues}
-          reviewApplied={reviewApplied}
-          draftVersionReports={draftVersionReports}
           publishUrl={publishUrl}
-          publishingToIndex={publishingToIndex}
           publishNotice={publishNotice}
-          onPublishUrlChange={(value) => {
-            setPublishUrl(value);
-            setPublishNotice(null);
-            setPublishCompletionMessage(null);
-          }}
-          onPublishToIndex={publishToIndex}
         />
       </div>
 
@@ -1352,6 +1273,135 @@ export default function PipelinePage() {
                 className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
               >
                 확인 후 새로고침
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {reviewModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="w-full max-w-3xl rounded-xl border border-zinc-200 bg-white shadow-2xl">
+            <div className="border-b border-zinc-100 px-6 py-4">
+              <p className="text-sm font-semibold text-zinc-900">수정본 검토</p>
+              <p className="mt-1 text-xs text-zinc-500">수정 제목과 수정 본문을 입력한 뒤 검토를 실행하면 결과가 아래 본문 영역에 반영됩니다.</p>
+            </div>
+            <div className="space-y-4 px-6 py-5">
+              <div>
+                <label className="mb-1 block text-xs font-semibold text-zinc-600">수정 제목</label>
+                <input
+                  value={reviewTitle}
+                  onChange={(event) => {
+                    setReviewTitle(event.target.value);
+                    setReviewApplied(false);
+                  }}
+                  className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  placeholder="수정할 제목"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-semibold text-zinc-600">수정 본문</label>
+                <textarea
+                  value={reviewBody}
+                  onChange={(event) => {
+                    setReviewBody(event.target.value);
+                    setReviewApplied(false);
+                  }}
+                  className="min-h-[22rem] w-full rounded-lg border border-zinc-200 px-3 py-3 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  placeholder="수정할 본문"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end gap-2 border-t border-zinc-100 px-6 py-4">
+              <button
+                type="button"
+                onClick={() => setReviewModalOpen(false)}
+                className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-700"
+              >
+                닫기
+              </button>
+              <button
+                type="button"
+                onClick={submitReviewModal}
+                disabled={reviewSaving || !reviewTitle.trim() || !reviewBody.trim()}
+                className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
+              >
+                {reviewSaving ? "검토 중..." : "수정본 검토하기"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {publishModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="w-full max-w-3xl rounded-xl border border-emerald-200 bg-white shadow-2xl">
+            <div className="border-b border-emerald-100 bg-emerald-50 px-6 py-4">
+              <p className="text-sm font-semibold text-emerald-700">발행 진행</p>
+              <p className="mt-1 text-xs text-emerald-700/80">최종 발행 제목, 본문, URL을 입력하면 인덱스 반영까지 이어집니다.</p>
+            </div>
+            <div className="space-y-4 px-6 py-5">
+              <div>
+                <label className="mb-1 block text-xs font-semibold text-zinc-600">최종 발행 제목</label>
+                <input
+                  value={publishTitle}
+                  onChange={(event) => setPublishTitle(event.target.value)}
+                  className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  placeholder="최종 발행 제목"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-semibold text-zinc-600">최종 발행 본문</label>
+                <textarea
+                  value={publishBody}
+                  onChange={(event) => setPublishBody(event.target.value)}
+                  className="min-h-[18rem] w-full rounded-lg border border-zinc-200 px-3 py-3 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  placeholder="최종 발행 본문"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-semibold text-zinc-600">발행 URL</label>
+                <input
+                  value={publishUrl}
+                  onChange={(event) => {
+                    setPublishUrl(event.target.value);
+                    setPublishNotice(null);
+                    setPublishCompletionMessage(null);
+                  }}
+                  className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  placeholder="https://blog.naver.com/..."
+                />
+              </div>
+
+              {result?.finalDraftCheck && !canApproveFinalDraft(result.finalDraftCheck) ? (
+                <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
+                  본문 검수 차단 사유를 먼저 해결해야 합니다.
+                </div>
+              ) : !publishUrl.trim() ? (
+                <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-700">
+                  발행 URL 입력 후 인덱스 반영 가능
+                </div>
+              ) : (
+                <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-3 text-sm text-emerald-700">
+                  본문 승인 가능 · 인덱스 반영 준비 완료
+                </div>
+              )}
+            </div>
+            <div className="flex justify-end gap-2 border-t border-zinc-100 px-6 py-4">
+              <button
+                type="button"
+                onClick={() => setPublishModalOpen(false)}
+                className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-700"
+              >
+                닫기
+              </button>
+              <button
+                type="button"
+                onClick={publishToIndex}
+                disabled={publishingToIndex || !publishTitle.trim() || !publishBody.trim()}
+                className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
+              >
+                {publishingToIndex ? "인덱스 반영 중..." : "발행 완료 처리"}
               </button>
             </div>
           </div>

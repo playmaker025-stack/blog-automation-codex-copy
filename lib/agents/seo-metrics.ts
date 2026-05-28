@@ -10,6 +10,7 @@
   SeoKeywordItem,
 } from "./types";
 import { classifySearchCombination, splitSearchCombinationTokens } from "./search-combination-utils";
+import { filterValidSeoKeywordItems } from "./seo-keyword-utils";
 
 function clampScore(value: number): number {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -834,17 +835,16 @@ function buildSeoKeywordItems(params: {
   contract?: KeywordContract;
   items: KeywordUsageItem[];
 }): SeoKeywordItem[] {
-  const trackedPhrases = params.contract
-    ? uniqueKeywords([
-        params.contract.mainKeyword,
-        ...params.contract.subKeywords,
-        ...params.contract.bridgeKeywords,
-        ...params.contract.internalLinkAnchors,
-      ])
-    : params.items.filter((item) => item.role !== "forbidden" && item.role !== "anchor").map((item) => item.keyword);
+  if (!params.contract) return [];
 
-  return params.items
+  const trackedPhrases = uniqueKeywords([
+    params.contract.mainKeyword,
+    ...params.contract.subKeywords,
+  ]);
+
+  const seoItems = params.items
     .filter((item) => item.role === "main" || item.role === "sub")
+    .filter((item) => trackedPhrases.includes(item.keyword))
     .map((item) => {
       const ownSpans = collectPhraseSpans(params.body, item.keyword);
       const longerSpans = trackedPhrases
@@ -859,7 +859,7 @@ function buildSeoKeywordItems(params: {
 
       return {
         keyword: item.keyword,
-        role: item.role === "main" ? "main" : "sub",
+        role: item.role === "main" ? ("main" as const) : ("sub" as const),
         exactCount,
         includedCount,
         effectiveCount: item.count,
@@ -870,6 +870,8 @@ function buildSeoKeywordItems(params: {
         exactPhraseExclusionApplied,
       };
     });
+
+  return filterValidSeoKeywordItems(seoItems);
 }
 
 function buildBodyRepetitionItems(body: string): BodyRepetitionItem[] {

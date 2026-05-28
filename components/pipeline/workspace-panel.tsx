@@ -1,6 +1,6 @@
 "use client";
 
-import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
+import type { DraftReviewChange, DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
 import type { KeywordUsageReport, SeoEvaluation } from "@/lib/agents/types";
 import { KeywordReportSections } from "@/components/pipeline/keyword-report-sections";
 import { getDraftVersionReportForIndex } from "@/components/pipeline/keyword-report-utils";
@@ -17,11 +17,9 @@ interface Props {
   } | null;
   reviewTitle: string;
   reviewBody: string;
-  revisionRequest: string;
   reviewedTitle: string;
   reviewedBody: string;
   reviewSaving: boolean;
-  reviewApplied: boolean;
   reviewResult: DraftReviewResult | null;
   reviewIssues: DraftReviewIssue[];
   draftVersionReports: Array<{
@@ -30,14 +28,8 @@ interface Props {
     seoEvaluation: SeoEvaluation;
     keywordReport: KeywordUsageReport;
   } | null>;
-  onReviewTitleChange: (value: string) => void;
-  onReviewBodyChange: (value: string) => void;
-  onRevisionRequestChange: (value: string) => void;
-  onReviewedTitleChange: (value: string) => void;
-  onReviewedBodyChange: (value: string) => void;
-  onRunDraftReview: () => void;
-  onRunDraftPolish: () => void;
-  onApplyReviewedDraft: () => void;
+  onOpenReviewModal: () => void;
+  onOpenPublishModal: () => void;
 }
 
 interface DraftColumn {
@@ -48,21 +40,6 @@ interface DraftColumn {
 
 const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[2차 초안]\n";
 const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[3차 초안]\n";
-
-function buildRevisionGuides(reviewResult: DraftReviewResult | null, reviewIssues: DraftReviewIssue[]): string[] {
-  const guides: string[] = [];
-
-  for (const issue of reviewIssues) guides.push(issue.message);
-  for (const item of reviewResult?.keywordReport.seoKeywordItems ?? []) {
-    if (item.risk !== "ok") {
-      guides.push(`${item.keyword}: exact ${item.exactCount}회 / included ${item.includedCount}회 / 총 ${item.effectiveCount}회`);
-    }
-  }
-  for (const note of reviewResult?.seoNotes ?? []) guides.push(`SEO: ${note}`);
-  for (const note of reviewResult?.naverLogicNotes ?? []) guides.push(`네이버 로직: ${note}`);
-
-  return Array.from(new Set(guides)).slice(0, 10);
-}
 
 function parseDraftColumns(streamingBody: string): DraftColumn[] {
   const normalized = streamingBody.replace(/\r\n/g, "\n");
@@ -80,14 +57,120 @@ function parseDraftColumns(streamingBody: string): DraftColumn[] {
 
   return [
     { label: "1차 초안", badge: "1차", body: firstBody },
-    { label: "2차 보강", badge: "2차", body: secondBody },
-    { label: "3차 보강", badge: "3차", body: thirdBody },
+    { label: "2차 보강 초안", badge: "2차", body: secondBody },
+    { label: "3차 보강 초안", badge: "3차", body: thirdBody },
   ];
 }
 
 function columnStatusText(column: DraftColumn, hasAnyDraft: boolean): string {
   if (column.body) return "작성 완료";
   return hasAnyDraft ? "생성 대기" : "초안 생성 대기";
+}
+
+function findKeywordSummary(reviewResult: DraftReviewResult | null): string[] {
+  if (!reviewResult) return [];
+
+  const lines: string[] = [];
+  const main = reviewResult.keywordReport.mainKeyword;
+  if (main) {
+    lines.push(`메인 키워드 '${main.keyword}' 본문 ${main.count}회`);
+  }
+  for (const item of reviewResult.keywordReport.subKeywords.slice(0, 5)) {
+    lines.push(`서브 키워드 '${item.keyword}' 본문 ${item.count}회`);
+  }
+  return lines;
+}
+
+function buildSuggestionLines(reviewResult: DraftReviewResult | null): string[] {
+  if (!reviewResult) return [];
+  if (reviewResult.changeDetails.length > 0) {
+    return reviewResult.changeDetails.slice(0, 5).map((change) => change.reason);
+  }
+  return reviewResult.changes.slice(0, 5);
+}
+
+function lineChanged(sourceLine: string | undefined, revisedLine: string): boolean {
+  const left = (sourceLine ?? "").trim();
+  const right = revisedLine.trim();
+  return Boolean(right) && left !== right;
+}
+
+function RevisedBodyDiff({
+  originalBody,
+  revisedBody,
+}: {
+  originalBody: string;
+  revisedBody: string;
+}) {
+  const originalLines = originalBody.replace(/\r\n/g, "\n").split("\n");
+  const revisedLines = revisedBody.replace(/\r\n/g, "\n").split("\n");
+
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white p-4">
+      <p className="text-sm font-semibold text-zinc-900">수정 제안 본문</p>
+      <p className="mt-1 text-xs text-zinc-500">변경된 줄은 빨간색, 유지된 줄은 검정색으로 표시합니다.</p>
+      <div className="mt-3 max-h-[30rem] overflow-y-auto rounded-lg bg-zinc-50 px-4 py-4">
+        {revisedLines.map((line, index) => {
+          const changed = lineChanged(originalLines[index], line);
+          return (
+            <p
+              key={`${index}-${line}`}
+              className={`whitespace-pre-wrap break-words text-sm leading-7 ${changed ? "text-red-600" : "text-zinc-900"}`}
+            >
+              {line || " "}
+            </p>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ReviewIssueList({ issues }: { issues: DraftReviewIssue[] }) {
+  if (issues.length === 0) return null;
+
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white p-4">
+      <p className="text-sm font-semibold text-zinc-900">오탈자 / 띄어쓰기 / 검토 이슈</p>
+      <div className="mt-3 space-y-2">
+        {issues.map((issue) => (
+          <div
+            key={`${issue.severity}-${issue.message}`}
+            className={`rounded-lg border px-3 py-2 text-sm ${
+              issue.severity === "blocker"
+                ? "border-red-200 bg-red-50 text-red-700"
+                : issue.severity === "warning"
+                  ? "border-amber-200 bg-amber-50 text-amber-700"
+                  : "border-zinc-200 bg-zinc-50 text-zinc-700"
+            }`}
+          >
+            {issue.message}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ChangeDetailList({ changes }: { changes: DraftReviewChange[] }) {
+  if (changes.length === 0) return null;
+
+  return (
+    <div className="rounded-xl border border-zinc-200 bg-white p-4">
+      <p className="text-sm font-semibold text-zinc-900">더 자연스러운 문장 제안</p>
+      <div className="mt-3 space-y-3">
+        {changes.slice(0, 5).map((change, index) => (
+          <div key={`${index}-${change.before}-${change.after}`} className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3">
+            <p className="text-xs font-semibold text-zinc-500">변경 전</p>
+            <p className="mt-1 text-sm text-zinc-700">{change.before}</p>
+            <p className="mt-3 text-xs font-semibold text-zinc-500">변경 후</p>
+            <p className="mt-1 text-sm text-red-600">{change.after}</p>
+            <p className="mt-3 text-xs text-zinc-500">{change.reason}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export function PipelineWorkspacePanel({
@@ -99,31 +182,21 @@ export function PipelineWorkspacePanel({
   result,
   reviewTitle,
   reviewBody,
-  revisionRequest,
   reviewedTitle,
   reviewedBody,
   reviewSaving,
-  reviewApplied,
   reviewResult,
   reviewIssues,
   draftVersionReports,
-  onReviewTitleChange,
-  onReviewBodyChange,
-  onRevisionRequestChange,
-  onReviewedTitleChange,
-  onReviewedBodyChange,
-  onRunDraftReview,
-  onRunDraftPolish,
-  onApplyReviewedDraft,
+  onOpenReviewModal,
+  onOpenPublishModal,
 }: Props) {
   const hasCenterContent = Boolean(streamingBody || result || reviewResult || events.length);
   const draftColumns = parseDraftColumns(streamingBody);
   const hasAnyDraft = draftColumns.some((column) => column.body);
   const lastCompletedIndex = Math.max(...draftColumns.map((column, index) => (column.body ? index : -1)));
-  const reviewEditorTitle = reviewedTitle || reviewTitle;
-  const reviewEditorBody = reviewedBody || reviewBody;
-  const revisionGuides = buildRevisionGuides(reviewResult, reviewIssues);
-  const hasDraftToPolish = Boolean(result?.title && hasAnyDraft);
+  const keywordSummary = findKeywordSummary(reviewResult);
+  const suggestionLines = buildSuggestionLines(reviewResult);
 
   return (
     <div className="min-w-0 overflow-hidden rounded-xl border border-zinc-200 bg-white">
@@ -131,7 +204,7 @@ export function PipelineWorkspacePanel({
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-semibold text-zinc-900">본문 작업 영역</p>
-            <p className="mt-1 text-xs text-zinc-500">초안과 수정본을 같은 화면에서 비교하면서 이어서 정리합니다.</p>
+            <p className="mt-1 text-xs text-zinc-500">초안 버전 비교, 수정본 검토 결과, 실제 발행 전 정리를 한 화면에서 이어갑니다.</p>
           </div>
           <div className="inline-flex rounded-lg bg-zinc-100 p-1">
             <button
@@ -161,7 +234,7 @@ export function PipelineWorkspacePanel({
           <div className="flex min-h-[42rem] flex-col justify-center rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-10">
             <p className="text-sm font-semibold text-zinc-700">본문이 여기에 표시됩니다.</p>
             <p className="mt-2 text-sm leading-6 text-zinc-500">
-              글쓰기를 시작하면 1차 초안이 먼저 생성되고, 평가 결과에 따라 필요할 때만 2차와 3차 보강본이 추가됩니다.
+              글쓰기를 시작하면 1차 초안이 먼저 생성되고, 문제가 있는 경우에만 2차·3차 보강 초안이 추가됩니다.
             </p>
           </div>
         ) : contentTab === "draft" ? (
@@ -178,7 +251,7 @@ export function PipelineWorkspacePanel({
                 <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3">
                   <p className="text-xs font-semibold text-blue-700">초안 비교 보기</p>
                   <p className="mt-1 text-xs leading-5 text-blue-600">
-                    자동 보강은 실제 문제가 있을 때만 생성됩니다. 각 초안 아래에서 키워드 사용량과 본문 반복 점검을 바로 비교할 수 있습니다.
+                    2차·3차 초안은 문제가 있을 때만 생성됩니다. 각 초안 아래에서 키워드 사용량과 반복 점검을 바로 비교할 수 있습니다.
                   </p>
                 </div>
 
@@ -240,30 +313,23 @@ export function PipelineWorkspacePanel({
                   })}
                 </div>
 
-                {hasDraftToPolish ? (
-                  <div className="rounded-xl border border-zinc-200 bg-white p-4">
-                    <p className="text-sm font-semibold text-zinc-900">보강 방향 직접 요청</p>
-                    <p className="mt-1 text-xs leading-5 text-zinc-500">
-                      키워드 반복, 구조 보강, 사례 추가처럼 바로 수정하고 싶은 점이 있으면 적어 주세요.
-                    </p>
-                    <div className="mt-3 space-y-3">
-                      <textarea
-                        value={revisionRequest}
-                        onChange={(event) => onRevisionRequestChange(event.target.value)}
-                        className="min-h-28 w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm leading-6 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                        placeholder="예: 메인 키워드 반복을 줄이고, 비교 기준 문단을 더 선명하게 정리해 주세요."
-                      />
-                      <button
-                        type="button"
-                        onClick={onRunDraftPolish}
-                        disabled={reviewSaving || !revisionRequest.trim()}
-                        className="w-full rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
-                      >
-                        {reviewSaving ? "보강본 작성 중..." : "요청 반영 보강본 작성"}
-                      </button>
-                    </div>
-                  </div>
-                ) : null}
+                <div className="grid gap-3 md:grid-cols-2">
+                  <button
+                    type="button"
+                    onClick={onOpenPublishModal}
+                    className="rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
+                  >
+                    이 초안으로 발행 진행
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onOpenReviewModal}
+                    disabled={!hasAnyDraft || reviewSaving}
+                    className="rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 disabled:opacity-40"
+                  >
+                    수정본 검토
+                  </button>
+                </div>
               </div>
             ) : result ? (
               <div className="space-y-4">
@@ -274,7 +340,7 @@ export function PipelineWorkspacePanel({
                 </div>
                 <div className="min-h-[34rem] rounded-xl border border-dashed border-zinc-300 bg-white px-5 py-6">
                   <p className="text-sm leading-6 text-zinc-500">
-                    초안 본문이 아직 스트리밍 영역에 표시되지 않았습니다. 다시 글쓰기를 실행하면 본문과 보강본이 단계별로 표시됩니다.
+                    초안 본문이 아직 스트리밍 영역에 표시되지 않았습니다. 다시 글쓰기를 실행하면 본문과 보강 초안이 단계별로 표시됩니다.
                   </p>
                 </div>
               </div>
@@ -287,84 +353,81 @@ export function PipelineWorkspacePanel({
         ) : (
           <div className="space-y-4">
             <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3">
-              <p className="text-xs font-semibold text-zinc-500">수정본 검토</p>
+              <p className="text-xs font-semibold text-zinc-500">수정본 검토 결과</p>
               <p className="mt-1 text-xs leading-5 text-zinc-500">
-                실제 작성한 제목과 본문을 넣으면 키워드, SEO, 검토 이슈를 기준으로 다시 확인합니다.
+                수정본 검토 팝업에서 제목과 본문을 입력하면, 이곳에서 키워드 수량과 문장 보정 결과를 확인할 수 있습니다.
               </p>
             </div>
 
-            <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
-              <div>
-                <label className="mb-1 block text-xs font-semibold text-zinc-600">실제 제목</label>
-                <input
-                  value={reviewTitle}
-                  onChange={(event) => onReviewTitleChange(event.target.value)}
-                  className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  placeholder="최종 작성 제목"
-                />
-              </div>
-
-              <div>
-                <label className="mb-1 block text-xs font-semibold text-zinc-600">실제 본문</label>
-                <textarea
-                  value={reviewBody}
-                  onChange={(event) => onReviewBodyChange(event.target.value)}
-                  className="min-h-[18rem] w-full rounded-lg border border-zinc-200 px-3 py-3 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  placeholder="실제 작성한 본문"
-                />
-              </div>
-
-              <div className="grid gap-3 md:grid-cols-2">
-                <button
-                  type="button"
-                  onClick={onRunDraftReview}
-                  disabled={reviewSaving || !reviewTitle.trim() || !reviewBody.trim()}
-                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
-                >
-                  {reviewSaving ? "검토 중..." : "수정본 검토"}
-                </button>
-                <button
-                  type="button"
-                  onClick={onApplyReviewedDraft}
-                  disabled={!reviewedTitle.trim() || !reviewedBody.trim()}
-                  className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40"
-                >
-                  {reviewApplied ? "실제 본문 반영됨" : "실제 본문으로 반영"}
-                </button>
-              </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              <button
+                type="button"
+                onClick={onOpenReviewModal}
+                className="rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800"
+              >
+                수정본 검토
+              </button>
+              <button
+                type="button"
+                onClick={onOpenPublishModal}
+                className="rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
+              >
+                이 초안으로 발행 진행
+              </button>
             </div>
 
-            {revisionGuides.length > 0 ? (
-              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
-                <p className="text-sm font-semibold text-amber-900">검토 결과 보강 사인</p>
-                <ul className="mt-2 space-y-1 text-xs leading-5 text-amber-800">
-                  {revisionGuides.map((guide) => (
-                    <li key={guide}>- {guide}</li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
+            {reviewResult ? (
+              <div className="space-y-4">
+                <div className="rounded-xl border border-zinc-200 bg-white p-4">
+                  <p className="text-sm font-semibold text-zinc-900">검토 대상 제목</p>
+                  <p className="mt-1 text-sm text-zinc-700">{reviewTitle}</p>
+                  {reviewedTitle && reviewedTitle !== reviewTitle ? (
+                    <>
+                      <p className="mt-4 text-sm font-semibold text-zinc-900">제안 제목</p>
+                      <p className="mt-1 text-sm text-red-600">{reviewedTitle}</p>
+                    </>
+                  ) : null}
+                </div>
 
-            {reviewedBody ? (
-              <div className="space-y-3 rounded-xl border border-zinc-200 bg-white p-4">
-                <div>
-                  <label className="mb-1 block text-xs font-semibold text-zinc-600">검토 후 제목</label>
-                  <input
-                    value={reviewEditorTitle}
-                    onChange={(event) => onReviewedTitleChange(event.target.value)}
-                    className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  />
-                </div>
-                <div>
-                  <label className="mb-1 block text-xs font-semibold text-zinc-600">검토 후 본문</label>
-                  <textarea
-                    value={reviewEditorBody}
-                    onChange={(event) => onReviewedBodyChange(event.target.value)}
-                    className="min-h-[24rem] w-full rounded-lg border border-zinc-200 px-3 py-3 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                  />
-                </div>
+                {keywordSummary.length > 0 ? (
+                  <div className="rounded-xl border border-zinc-200 bg-white p-4">
+                    <p className="text-sm font-semibold text-zinc-900">키워드 검토 결과</p>
+                    <ul className="mt-3 space-y-1 text-sm text-zinc-700">
+                      {keywordSummary.map((line) => (
+                        <li key={line} className="flex gap-2">
+                          <span className="text-zinc-400">-</span>
+                          <span>{line}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
+                <ReviewIssueList issues={reviewIssues} />
+
+                {suggestionLines.length > 0 ? (
+                  <div className="rounded-xl border border-zinc-200 bg-white p-4">
+                    <p className="text-sm font-semibold text-zinc-900">더 자연스러운 문장 제안</p>
+                    <ul className="mt-3 space-y-1 text-sm text-zinc-700">
+                      {suggestionLines.map((line) => (
+                        <li key={line} className="flex gap-2">
+                          <span className="text-zinc-400">-</span>
+                          <span>{line}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
+                <ChangeDetailList changes={reviewResult.changeDetails} />
+
+                <RevisedBodyDiff originalBody={reviewBody} revisedBody={reviewedBody || reviewResult.revisedBody} />
               </div>
-            ) : null}
+            ) : (
+              <div className="rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-5 py-6">
+                <p className="text-sm text-zinc-500">아직 수정본 검토 결과가 없습니다. “수정본 검토”를 눌러 진행해 주세요.</p>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -216,11 +216,16 @@ function shouldAttemptSmartRevision(evalResult: EvalResult): boolean {
   const overallRisk = keywordReport?.overallRisk ?? "low";
   const dangerCount = getKeywordDangerCount(evalResult);
   const paragraphWarningCount = keywordReport?.paragraphWarnings.length ?? 0;
+  const seoScore = getSeoScore(evalResult);
+  const naverScore = getNaverScore(evalResult);
 
   return (
-    evalResult.aggregateScore < 70 ||
-    dangerCount >= 1 ||
-    (overallRisk === "high" && paragraphWarningCount >= 2)
+    evalResult.aggregateScore < 72 ||
+    seoScore < 72 ||
+    naverScore < 70 ||
+    dangerCount >= 2 ||
+    overallRisk === "high" ||
+    paragraphWarningCount >= 2
   );
 }
 
@@ -368,6 +373,9 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
   }
 
   if (!evalResult.pass) {
+    emit(controller, makeEvent("progress", "evaluating", {
+      message: "자동 보강을 마쳤지만 승인 가능한 수준까지 개선되지 않아 현재 최선 초안을 유지합니다. 보강 실패 상태로 검토가 필요합니다.",
+    }));
     await appendWritingFailure({
       pipelineId,
       topicId,
