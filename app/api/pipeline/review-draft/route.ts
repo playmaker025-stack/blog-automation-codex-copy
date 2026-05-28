@@ -11,6 +11,10 @@ interface ReviewDraftRequest {
   body: string;
   revisionRequest?: string;
   keywordContract?: KeywordContract;
+  seoKeywordSource?: {
+    mainKeyword?: string;
+    subKeywords?: string[];
+  };
 }
 
 interface OpenAIReviewResult {
@@ -283,6 +287,7 @@ export async function POST(request: NextRequest) {
       title: aiReview.revisedTitle,
       body: aiReview.revisedBody,
       keywordContract: body.keywordContract,
+      seoKeywordSource: body.seoKeywordSource,
     });
 
     return NextResponse.json({

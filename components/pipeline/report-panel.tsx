@@ -1,5 +1,3 @@
-"use client";
-
 import type { ReactNode } from "react";
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
 import type { FinalDraftCheck, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
@@ -86,7 +84,7 @@ function FinalDraftCheckBadge({ check }: { check: FinalDraftCheck }) {
     : isWarning
       ? "bg-amber-100 text-amber-700"
       : "bg-emerald-100 text-emerald-700";
-  const badgeLabel = isBlocked ? "승인 불가" : isWarning ? "주의 필요" : "승인 가능";
+  const badgeLabel = isBlocked ? "검수 차단" : isWarning ? "주의 필요" : "승인 가능";
   const summaryItems = [
     ...messages.blockingReasons,
     ...messages.warnings,
@@ -101,9 +99,9 @@ function FinalDraftCheckBadge({ check }: { check: FinalDraftCheck }) {
           <p className="text-xs font-semibold">발행 전 최종 검사 상태</p>
           <p className="mt-1 text-sm font-semibold">
             {isBlocked
-              ? "차단 사유가 있어 아직 승인 단계로 넘어갈 수 없습니다."
+              ? "검수 차단 사유가 있어 초안 기준 승인 단계로는 바로 넘어갈 수 없습니다."
               : isWarning
-                ? "차단 사유는 없지만 주의 항목을 보고 확인하는 편이 좋습니다."
+                ? "차단 사유는 없지만 주의 항목을 한 번 더 확인하는 편이 좋습니다."
                 : "발행 전 최종 검사 기준에서 차단 항목이 없습니다."}
           </p>
         </div>
@@ -128,27 +126,29 @@ function PublishReadinessPanel({
   check,
   publishUrl,
   publishNotice,
+  hasResult,
 }: {
   check: FinalDraftCheck | null | undefined;
   publishUrl: string;
   publishNotice: { type: "ok" | "err"; msg: string } | null;
+  hasResult: boolean;
 }) {
   const bodyApproved = canApproveFinalDraft(check);
   const urlProvided = Boolean(publishUrl.trim());
-  const indexReady = bodyApproved && urlProvided;
+  const indexReady = hasResult && urlProvided;
   const bodyMessage = bodyApproved
-    ? "본문 승인 가능"
-    : "본문 검수 차단 사유를 먼저 해결해야 합니다.";
+    ? "본문 검수 기준으로는 승인 가능 상태입니다."
+    : "본문 검수 차단 사유가 있어도 실제 발행본과 URL이 있으면 인덱스 반영은 진행할 수 있습니다.";
   const urlMessage = urlProvided ? "발행 URL 입력 완료" : "발행 URL 입력 후 인덱스 반영 가능";
-  const indexMessage = indexReady ? "인덱스 반영 가능" : "인덱스 반영 대기";
+  const indexMessage = indexReady ? "실제 발행본 인덱스 반영 가능" : "최종 발행 URL을 입력하면 인덱스 반영 가능";
 
   return (
     <div className="rounded-xl border border-zinc-200 bg-white p-4">
       <p className="text-xs font-semibold text-zinc-600">발행 준비 상태</p>
       <div className="mt-3 space-y-2 text-sm">
         <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2">
-          <p className="font-semibold text-zinc-800">본문 승인 여부</p>
-          <p className={`mt-1 text-xs ${bodyApproved ? "text-emerald-600" : "text-red-600"}`}>{bodyMessage}</p>
+          <p className="font-semibold text-zinc-800">본문 검수 상태</p>
+          <p className={`mt-1 text-xs ${bodyApproved ? "text-emerald-600" : "text-amber-600"}`}>{bodyMessage}</p>
         </div>
         <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2">
           <p className="font-semibold text-zinc-800">발행 URL 입력 여부</p>
@@ -211,7 +211,7 @@ function NaverLogicPanel({ evaluation }: { evaluation: NaverLogicEvaluation }) {
           <p className="mt-1 text-sm font-semibold text-zinc-900">D.I.A. + C-Rank 혼합</p>
           <p className="mt-1 text-xs leading-5 text-zinc-500">
             {looksBroken(evaluation.reason)
-              ? "제목, 본문 구성, 검색의도 연결성을 기준으로 네이버 노출 적합성을 평가합니다."
+              ? "제목, 본문 구조, 검색의도 연결성을 기준으로 네이버 노출 적합성을 평가합니다."
               : evaluation.reason}
           </p>
         </div>
@@ -302,7 +302,14 @@ export function PipelineReportPanel({
       ) : null}
 
       {result?.finalDraftCheck ? <FinalDraftCheckBadge check={result.finalDraftCheck} /> : null}
-      {result ? <PublishReadinessPanel check={result.finalDraftCheck} publishUrl={publishUrl} publishNotice={publishNotice} /> : null}
+      {result ? (
+        <PublishReadinessPanel
+          check={result.finalDraftCheck}
+          publishUrl={publishUrl}
+          publishNotice={publishNotice}
+          hasResult={Boolean(result)}
+        />
+      ) : null}
       {activeSeoEvaluation ? <SeoSummaryPanel seoEvaluation={activeSeoEvaluation} result={result} /> : null}
       {result?.naverLogicEvaluation ? <NaverLogicPanel evaluation={result.naverLogicEvaluation} /> : null}
 

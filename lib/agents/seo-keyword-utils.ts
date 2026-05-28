@@ -16,7 +16,7 @@ const BLOCKED_KEYWORD_PARTS = [
 ];
 
 const SENTENCE_ENDING_PATTERN =
-  /(합니다|입니다|됩니다|있습니다|주세요|보세요|하세요|합니다만|됩니다만)$/u;
+  /(입니다|합니다|됩니다|있습니다|주세요|보세요|하세요|좋습니다|좋습니다만)$/u;
 
 function normalizeKeyword(value: string): string {
   return value.normalize("NFKC").trim().replace(/\s+/g, " ");

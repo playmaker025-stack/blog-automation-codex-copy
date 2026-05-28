@@ -204,7 +204,9 @@ export function PipelineWorkspacePanel({
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-semibold text-zinc-900">본문 작업 영역</p>
-            <p className="mt-1 text-xs text-zinc-500">초안 버전 비교, 수정본 검토 결과, 실제 발행 전 정리를 한 화면에서 이어갑니다.</p>
+            <p className="mt-1 text-xs text-zinc-500">
+              초안 버전 비교, 수정본 검토 결과, 실제 발행 전 정리를 한 화면에서 이어갑니다.
+            </p>
           </div>
           <div className="inline-flex rounded-lg bg-zinc-100 p-1">
             <button
@@ -312,24 +314,6 @@ export function PipelineWorkspacePanel({
                     );
                   })}
                 </div>
-
-                <div className="grid gap-3 md:grid-cols-2">
-                  <button
-                    type="button"
-                    onClick={onOpenPublishModal}
-                    className="rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
-                  >
-                    이 초안으로 발행 진행
-                  </button>
-                  <button
-                    type="button"
-                    onClick={onOpenReviewModal}
-                    disabled={!hasAnyDraft || reviewSaving}
-                    className="rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 disabled:opacity-40"
-                  >
-                    수정본 검토
-                  </button>
-                </div>
               </div>
             ) : result ? (
               <div className="space-y-4">
@@ -355,7 +339,7 @@ export function PipelineWorkspacePanel({
             <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3">
               <p className="text-xs font-semibold text-zinc-500">수정본 검토 결과</p>
               <p className="mt-1 text-xs leading-5 text-zinc-500">
-                수정본 검토 팝업에서 제목과 본문을 입력하면, 이곳에서 키워드 수량과 문장 보정 결과를 확인할 수 있습니다.
+                사용자가 직접 작성한 제목과 본문을 검토한 결과를 이곳에서 확인합니다.
               </p>
             </div>
 
@@ -363,7 +347,8 @@ export function PipelineWorkspacePanel({
               <button
                 type="button"
                 onClick={onOpenReviewModal}
-                className="rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800"
+                disabled={reviewSaving}
+                className="rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 disabled:opacity-40"
               >
                 수정본 검토
               </button>
@@ -372,7 +357,7 @@ export function PipelineWorkspacePanel({
                 onClick={onOpenPublishModal}
                 className="rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
               >
-                이 초안으로 발행 진행
+                실제 발행본 진행
               </button>
             </div>
 
@@ -383,7 +368,7 @@ export function PipelineWorkspacePanel({
                   <p className="mt-1 text-sm text-zinc-700">{reviewTitle}</p>
                   {reviewedTitle && reviewedTitle !== reviewTitle ? (
                     <>
-                      <p className="mt-4 text-sm font-semibold text-zinc-900">제안 제목</p>
+                      <p className="mt-4 text-sm font-semibold text-zinc-900">수정 제안 제목</p>
                       <p className="mt-1 text-sm text-red-600">{reviewedTitle}</p>
                     </>
                   ) : null}

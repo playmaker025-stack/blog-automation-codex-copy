@@ -26,6 +26,10 @@ export interface DraftReviewInput {
   body: string;
   revisionRequest?: string;
   keywordContract?: KeywordContract;
+  seoKeywordSource?: {
+    mainKeyword?: string;
+    subKeywords?: string[];
+  };
 }
 
 export interface DraftReviewResult {
@@ -202,6 +206,7 @@ export function reviewActualDraft(input: DraftReviewInput): DraftReviewResult {
     title: normalizedTitle,
     body,
     keywordContract: input.keywordContract,
+    seoKeywordSource: input.seoKeywordSource,
   });
 
   return {

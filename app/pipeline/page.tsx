@@ -59,6 +59,11 @@ interface DraftVersionSeoReport extends DraftVersionSnapshot {
   keywordReport: KeywordUsageReport;
 }
 
+interface SeoKeywordSource {
+  mainKeyword?: string;
+  subKeywords?: string[];
+}
+
 const AUTO_DRAFT_MARKER_2 = "\n\n---\n\n[2차 초안]\n";
 const AUTO_DRAFT_MARKER_3 = "\n\n---\n\n[3차 초안]\n";
 
@@ -190,6 +195,48 @@ function topicIsPublishedById(topic: Topic, posts: PostingRecord[]): boolean {
   return posts.some((post) => post.status === "published" && post.topicId === topic.topicId);
 }
 
+function buildSeoKeywordSource(params: {
+  strategy: StrategyPlanResult | null | undefined;
+  topicMode: "list" | "direct";
+  directMainKeyword: string;
+  directSubKeyword: string;
+  selectedTopic: Topic | null;
+}): SeoKeywordSource | undefined {
+  const contract = params.strategy?.keywordContract;
+  if (contract?.mainKeyword?.trim()) {
+    return {
+      mainKeyword: contract.mainKeyword.trim(),
+      subKeywords: contract.subKeywords,
+    };
+  }
+
+  if (params.topicMode === "direct") {
+    const mainKeyword = params.directMainKeyword.trim();
+    const subKeywords = params.directSubKeyword.trim() ? [params.directSubKeyword.trim()] : [];
+    if (mainKeyword || subKeywords.length > 0) {
+      return {
+        mainKeyword,
+        subKeywords,
+      };
+    }
+  }
+
+  const topicMainKeyword = params.selectedTopic?.targetMainKeyword?.trim() ?? params.strategy?.targetMainKeyword?.trim() ?? "";
+  const topicSubKeywords = (params.selectedTopic?.tags ?? [])
+    .map((tag) => tag.trim())
+    .filter(Boolean)
+    .filter((tag) => tag !== topicMainKeyword);
+
+  if (topicMainKeyword || topicSubKeywords.length > 0) {
+    return {
+      mainKeyword: topicMainKeyword,
+      subKeywords: topicSubKeywords,
+    };
+  }
+
+  return undefined;
+}
+
 const PIPELINE_SOFT_WARNING_SECONDS = 480;
 const PIPELINE_TIMEOUT_SECONDS = 570;
 
@@ -293,6 +340,20 @@ export default function PipelinePage() {
   const progressEvents = events.filter(
     (event) => event.type === "stage_change" || event.type === "progress" || event.type === "error"
   );
+  const selectedTopic = selectedTopicId
+    ? topics.find((topic) => topic.topicId === selectedTopicId) ?? null
+    : null;
+  const draftSeoKeywordSource = useMemo(
+    () =>
+      buildSeoKeywordSource({
+        strategy: draftRewriteContext?.strategy,
+        topicMode,
+        directMainKeyword,
+        directSubKeyword,
+        selectedTopic,
+      }),
+    [directMainKeyword, directSubKeyword, draftRewriteContext?.strategy, selectedTopic, topicMode]
+  );
   const draftVersionReports = useMemo<Array<DraftVersionSeoReport | null>>(() => {
     const strategy = draftRewriteContext?.strategy;
     if (!strategy || !streamingBody.trim()) return [null, null, null];
@@ -309,6 +370,7 @@ export default function PipelinePage() {
           seriesRole: strategy.seriesRole,
           targetMainKeyword: strategy.targetMainKeyword,
           keywordContract: strategy.keywordContract,
+          seoKeywordSource: draftSeoKeywordSource,
         });
 
         return {
@@ -317,14 +379,11 @@ export default function PipelinePage() {
           keywordReport: seoEvaluation.keywordReport,
         };
       });
-  }, [draftRewriteContext?.strategy, streamingBody]);
+  }, [draftRewriteContext?.strategy, draftSeoKeywordSource, streamingBody]);
   const latestDraftSnapshot = useMemo(() => pickLatestDraftSnapshot(streamingBody), [streamingBody]);
   const profileDisplayName = !profile?.displayName || looksCorruptedText(profile.displayName)
     ? normalizedUserId || "\uC0AC\uC6A9\uC790 \uC5F0\uACB0\uB428"
     : profile.displayName;
-  const selectedTopic = selectedTopicId
-    ? topics.find((topic) => topic.topicId === selectedTopicId) ?? null
-    : null;
 
   useEffect(() => {
     if (topicMode !== "list" || !selectedTopicId) return;
@@ -813,6 +872,7 @@ export default function PipelinePage() {
           body: payload.body,
           revisionRequest,
           keywordContract: draftRewriteContext?.strategy.keywordContract,
+          seoKeywordSource: draftSeoKeywordSource,
         }),
       });
       const review = await res.json() as DraftReviewResult & { error?: string };
@@ -839,11 +899,16 @@ export default function PipelinePage() {
   };
 
   const openReviewModal = useCallback(() => {
+    setReviewTitle("");
+    setReviewBody("");
+    setReviewModalOpen(true);
+  }, []);
+
+  const fillReviewModalFromLatestDraft = useCallback(() => {
     const baseTitle = reviewedTitle.trim() || reviewTitle.trim() || result?.title?.trim() || "";
     const baseBody = reviewedBody.trim() || reviewBody.trim() || latestDraftSnapshot?.body?.trim() || "";
     setReviewTitle(baseTitle);
     setReviewBody(baseBody);
-    setReviewModalOpen(true);
   }, [latestDraftSnapshot?.body, result?.title, reviewBody, reviewTitle, reviewedBody, reviewedTitle]);
 
   const submitReviewModal = async () => {
@@ -875,12 +940,12 @@ export default function PipelinePage() {
     const url = publishUrl.trim();
     const finalTitle = publishTitle.trim();
     const finalBody = publishBody.trim();
-    if (!finalTitle || !finalBody) {
-      setPublishNotice({ type: "err", msg: "최종 발행 제목과 본문을 먼저 입력해 주세요." });
+    if (!result.postId) {
+      setPublishNotice({ type: "err", msg: "발행 대상 글 정보를 찾지 못했습니다. 다시 글쓰기를 실행해 주세요." });
       return;
     }
-    if (!canApproveFinalDraft(result.finalDraftCheck)) {
-      setPublishNotice({ type: "err", msg: "본문 검수 차단 사유를 먼저 해결해야 합니다." });
+    if (!finalTitle || !finalBody) {
+      setPublishNotice({ type: "err", msg: "최종 발행 제목과 본문을 먼저 입력해 주세요." });
       return;
     }
     const review = reviewActualDraft({
@@ -893,11 +958,6 @@ export default function PipelinePage() {
     setReviewResult(review);
     setPublishNotice(null);
     setPublishCompletionMessage(null);
-
-    if (!review.passed) {
-      setPublishNotice({ type: "err", msg: "차단 항목을 먼저 수정한 뒤 인덱스에 추가해 주세요." });
-      return;
-    }
 
     if (!url || !/^https?:\/\/blog\.naver\.com\//i.test(url)) {
       setPublishNotice({ type: "err", msg: "발행 완료된 네이버 블로그 URL을 입력해 주세요." });
@@ -1284,7 +1344,7 @@ export default function PipelinePage() {
           <div className="w-full max-w-3xl rounded-xl border border-zinc-200 bg-white shadow-2xl">
             <div className="border-b border-zinc-100 px-6 py-4">
               <p className="text-sm font-semibold text-zinc-900">수정본 검토</p>
-              <p className="mt-1 text-xs text-zinc-500">수정 제목과 수정 본문을 입력한 뒤 검토를 실행하면 결과가 아래 본문 영역에 반영됩니다.</p>
+              <p className="mt-1 text-xs text-zinc-500">사용자가 직접 작성한 제목과 본문을 붙여 넣어 검토합니다. 기본값은 비워 둡니다.</p>
             </div>
             <div className="space-y-4 px-6 py-5">
               <div>
@@ -1298,6 +1358,15 @@ export default function PipelinePage() {
                   className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="수정할 제목"
                 />
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={fillReviewModalFromLatestDraft}
+                  className="rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-700 transition-colors hover:bg-zinc-50"
+                >
+                  초안 가져오기
+                </button>
               </div>
               <div>
                 <label className="mb-1 block text-xs font-semibold text-zinc-600">수정 본문</label>
@@ -1337,7 +1406,7 @@ export default function PipelinePage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
           <div className="w-full max-w-3xl rounded-xl border border-emerald-200 bg-white shadow-2xl">
             <div className="border-b border-emerald-100 bg-emerald-50 px-6 py-4">
-              <p className="text-sm font-semibold text-emerald-700">발행 진행</p>
+              <p className="text-sm font-semibold text-emerald-700">실제 발행본 진행</p>
               <p className="mt-1 text-xs text-emerald-700/80">최종 발행 제목, 본문, URL을 입력하면 인덱스 반영까지 이어집니다.</p>
             </div>
             <div className="space-y-4 px-6 py-5">
@@ -1373,13 +1442,13 @@ export default function PipelinePage() {
                 />
               </div>
 
-              {result?.finalDraftCheck && !canApproveFinalDraft(result.finalDraftCheck) ? (
-                <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
-                  본문 검수 차단 사유를 먼저 해결해야 합니다.
-                </div>
-              ) : !publishUrl.trim() ? (
+              {!publishUrl.trim() ? (
                 <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-700">
                   발행 URL 입력 후 인덱스 반영 가능
+                </div>
+              ) : result?.finalDraftCheck && !canApproveFinalDraft(result.finalDraftCheck) ? (
+                <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-3 text-sm text-blue-700">
+                  본문 검수 차단 사유는 참고용입니다. 실제 발행본과 URL이 있으면 인덱스 반영은 계속 진행할 수 있습니다.
                 </div>
               ) : (
                 <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-3 text-sm text-emerald-700">
@@ -1398,10 +1467,10 @@ export default function PipelinePage() {
               <button
                 type="button"
                 onClick={publishToIndex}
-                disabled={publishingToIndex || !publishTitle.trim() || !publishBody.trim()}
+                disabled={publishingToIndex || !publishTitle.trim() || !publishBody.trim() || !publishUrl.trim()}
                 className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
               >
-                {publishingToIndex ? "인덱스 반영 중..." : "발행 완료 처리"}
+                {publishingToIndex ? "인덱스 반영 중..." : "발행 완료 및 인덱스 반영"}
               </button>
             </div>
           </div>

@@ -834,13 +834,15 @@ function buildSeoKeywordItems(params: {
   body: string;
   contract?: KeywordContract;
   items: KeywordUsageItem[];
+  source?: {
+    mainKeyword?: string;
+    subKeywords?: string[];
+  };
 }): SeoKeywordItem[] {
-  if (!params.contract) return [];
-
-  const trackedPhrases = uniqueKeywords([
-    params.contract.mainKeyword,
-    ...params.contract.subKeywords,
-  ]);
+  const trackedPhrases = params.contract
+    ? uniqueKeywords([params.contract.mainKeyword, ...params.contract.subKeywords])
+    : uniqueKeywords([params.source?.mainKeyword ?? "", ...(params.source?.subKeywords ?? [])]);
+  if (trackedPhrases.length === 0) return [];
 
   const seoItems = params.items
     .filter((item) => item.role === "main" || item.role === "sub")
@@ -1012,19 +1014,29 @@ export function analyzeKeywordUsage(params: {
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
   forbiddenTerms?: string[];
+  seoKeywordSource?: {
+    mainKeyword?: string;
+    subKeywords?: string[];
+  };
 }): KeywordUsageReport {
   const paragraphs = splitParagraphs(params.body);
   const introText = paragraphs.slice(0, 2).join("\n\n");
   const bodyLength = params.body.replace(/\s+/g, "").length;
   const contract = params.keywordContract;
-  const mainKeyword = contract?.mainKeyword ?? selectMainKeyword(params.title, params.keywords ?? [], params.targetMainKeyword);
+  const fallbackSourceMainKeyword = params.seoKeywordSource?.mainKeyword?.trim() ?? "";
+  const fallbackSourceSubKeywords = uniqueKeywords(params.seoKeywordSource?.subKeywords ?? []);
+  const mainKeyword = contract?.mainKeyword ?? (fallbackSourceMainKeyword || selectMainKeyword(params.title, params.keywords ?? [], params.targetMainKeyword));
+  const sourceKeywords = uniqueKeywords([
+    ...fallbackSourceSubKeywords,
+    ...(params.keywords ?? []),
+  ]);
   const orderedKeywords = contract
     ? []
     : buildTrackedKeywords({
         title: params.title,
         body: params.body,
         mainKeyword,
-        keywords: params.keywords ?? [],
+        keywords: sourceKeywords,
       }).filter(Boolean);
   const keywordPool = contract
     ? [contract.mainKeyword, ...contract.subKeywords, ...contract.bridgeKeywords, ...contract.internalLinkAnchors]
@@ -1108,6 +1120,7 @@ export function analyzeKeywordUsage(params: {
     body: params.body,
     contract,
     items,
+    source: params.seoKeywordSource,
   });
   const legacyTokenItems = buildKeywordTokenItems(tokenPool, params.body);
   const bodyRepetitionItems = buildBodyRepetitionItems(params.body);
@@ -1162,6 +1175,10 @@ export function evaluateSeoCompleteness(params: {
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
   forbiddenTerms?: string[];
+  seoKeywordSource?: {
+    mainKeyword?: string;
+    subKeywords?: string[];
+  };
 }): SeoEvaluation {
   const keywordReport = analyzeKeywordUsage({ ...params });
   const keywordMetrics = buildKeywordFocusMetrics({

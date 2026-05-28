@@ -116,7 +116,7 @@ export function KeywordReportSections({ report, title, compact = false }: Props)
             </p>
           </div>
           <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-semibold text-zinc-600">
-            {report.contractApplied ? "계약서 기준" : "키워드 미확정"}
+            {report.contractApplied ? "계약서 기준" : "확정 키워드 기준"}
           </span>
         </div>
 
@@ -158,7 +158,7 @@ export function KeywordReportSections({ report, title, compact = false }: Props)
         <div className="mt-3 space-y-2">
           {primaryRepetitionItems.length === 0 ? (
             <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-3 text-[11px] text-zinc-500">
-              기본 표시 기준을 넘는 반복 항목이 없습니다.
+              기본 표시 기준에 맞는 반복 항목이 없습니다.
             </div>
           ) : (
             primaryRepetitionItems.map((item) => (
