@@ -286,3 +286,38 @@ export function runFinalDraftCheck(params: {
     overlapFindings,
   };
 }
+
+export type FinalDraftCheckApprovalStatus = "pass" | "warning" | "blocked";
+
+export function getFinalDraftCheckApprovalStatus(
+  check: FinalDraftCheck | null | undefined
+): FinalDraftCheckApprovalStatus {
+  if (!check) return "warning";
+  if (check.blockingReasons.length > 0) return "blocked";
+  if (check.warnings.length > 0) return "warning";
+  return "pass";
+}
+
+export function canApproveFinalDraft(check: FinalDraftCheck | null | undefined): boolean {
+  return getFinalDraftCheckApprovalStatus(check) !== "blocked";
+}
+
+export function collectFinalDraftCheckMessages(check: FinalDraftCheck | null | undefined): {
+  blockingReasons: string[];
+  warnings: string[];
+  matchedForbiddenPhrases: string[];
+  keywordStuffingFindings: string[];
+  deferFindings: string[];
+  contractCoverageFindings: string[];
+  overlapFindings: string[];
+} {
+  return {
+    blockingReasons: check?.blockingReasons ?? [],
+    warnings: check?.warnings ?? [],
+    matchedForbiddenPhrases: check?.matchedForbiddenPhrases ?? [],
+    keywordStuffingFindings: check?.keywordStuffingFindings ?? [],
+    deferFindings: check?.deferFindings ?? [],
+    contractCoverageFindings: check?.contractCoverageFindings ?? [],
+    overlapFindings: check?.overlapFindings ?? [],
+  };
+}

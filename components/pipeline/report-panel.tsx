@@ -3,6 +3,11 @@
 import type { ReactNode } from "react";
 import type { DraftReviewIssue, DraftReviewResult } from "@/lib/agents/draft-review";
 import type { FinalDraftCheck, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
+import {
+  canApproveFinalDraft,
+  collectFinalDraftCheckMessages,
+  getFinalDraftCheckApprovalStatus,
+} from "@/lib/agents/final-draft-check";
 
 interface ResultData {
   title: string;
@@ -147,6 +152,63 @@ function SimpleNotePanel({ title, notes }: { title: string; notes: string[] }) {
   );
 }
 
+function FinalDraftCheckPanel({ check }: { check: FinalDraftCheck }) {
+  const status = getFinalDraftCheckApprovalStatus(check);
+  const messages = collectFinalDraftCheckMessages(check);
+  const tone =
+    status === "blocked"
+      ? "border-red-200 bg-red-50 text-red-800"
+      : status === "warning"
+        ? "border-amber-200 bg-amber-50 text-amber-800"
+        : "border-emerald-200 bg-emerald-50 text-emerald-800";
+  const statusText = status === "blocked" ? "승인 불가" : status === "warning" ? "승인 가능 · 주의 필요" : "승인 가능";
+  const sections = [
+    { title: "차단 사유", items: messages.blockingReasons, tone: "text-red-700" },
+    { title: "주의 사항", items: messages.warnings, tone: "text-amber-700" },
+    { title: "금지 표현", items: messages.matchedForbiddenPhrases, tone: "text-red-700" },
+    { title: "키워드 과반복/질문문", items: messages.keywordStuffingFindings, tone: "text-red-700" },
+    { title: "다음 글로 미룸", items: messages.deferFindings, tone: "text-red-700" },
+    { title: "계약서 반영 부족", items: messages.contractCoverageFindings, tone: "text-amber-700" },
+    { title: "중복 감리", items: messages.overlapFindings, tone: "text-amber-700" },
+  ].filter((section) => section.items.length > 0);
+
+  return (
+    <div className={`rounded-xl border p-4 ${tone}`}>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-semibold">발행 전 최종 검사</p>
+          <p className="mt-1 text-xs leading-5">
+            {status === "blocked"
+              ? "차단 사유가 있어 이 초안은 승인/발행으로 넘길 수 없습니다."
+              : status === "warning"
+                ? "차단 사유는 없어서 승인 가능하지만, 아래 주의 항목을 확인해야 합니다."
+                : "차단 사유와 주의 항목이 없습니다."}
+          </p>
+        </div>
+        <span className="shrink-0 rounded-full bg-white/70 px-2.5 py-1 text-xs font-semibold">{statusText}</span>
+      </div>
+
+      {sections.length > 0 && (
+        <div className="mt-4 space-y-3">
+          {sections.map((section) => (
+            <div key={section.title} className="rounded-lg border border-white/70 bg-white/70 px-3 py-3">
+              <p className={`text-xs font-semibold ${section.tone}`}>{section.title}</p>
+              <ul className="mt-2 space-y-1">
+                {section.items.map((item, index) => (
+                  <li key={`${section.title}-${index}-${item}`} className="flex gap-2 text-xs leading-5 text-zinc-700">
+                    <span className="text-zinc-400">-</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function PipelineReportPanel({
   contentTab,
   approval,
@@ -220,6 +282,8 @@ export function PipelineReportPanel({
         </div>
       )}
 
+      {result?.finalDraftCheck && <FinalDraftCheckPanel check={result.finalDraftCheck} />}
+
       {activeSeoEvaluation && <SeoMetricPanel seoEvaluation={activeSeoEvaluation} contentTab={contentTab} />}
 
       {result?.naverLogicEvaluation && (
@@ -285,11 +349,17 @@ export function PipelineReportPanel({
           <button
             type="button"
             onClick={onPublishToIndex}
-            disabled={publishingToIndex || !publishUrl.trim()}
+            disabled={publishingToIndex || !publishUrl.trim() || !canApproveFinalDraft(result.finalDraftCheck)}
             className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
           >
             {publishingToIndex ? "발행 인덱스 반영 중" : "발행 인덱스에 반영"}
           </button>
+
+          {result.finalDraftCheck && !canApproveFinalDraft(result.finalDraftCheck) && (
+            <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
+              발행 전 최종 검사에서 차단 사유가 있어 인덱스 반영을 막았습니다. 차단 사유를 수정한 뒤 다시 검토해 주세요.
+            </div>
+          )}
 
           {publishNotice && (
             <div

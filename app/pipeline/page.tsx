@@ -11,6 +11,7 @@ import { usePipelineStore } from "@/lib/store/pipeline-store";
 import { reviewActualDraft, type DraftReviewIssue, type DraftReviewResult } from "@/lib/agents/draft-review";
 import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport, FinalDraftCheck } from "@/lib/agents/types";
 import { evaluateSeoCompleteness } from "@/lib/agents/seo-metrics";
+import { canApproveFinalDraft } from "@/lib/agents/final-draft-check";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -929,6 +930,10 @@ export default function PipelinePage() {
     const finalBody = (reviewedBody || reviewBody).trim();
     if (!reviewApplied) {
       setPublishNotice({ type: "err", msg: "검토 수정본을 먼저 저장본에 반영해 주세요." });
+      return;
+    }
+    if (!canApproveFinalDraft(result.finalDraftCheck)) {
+      setPublishNotice({ type: "err", msg: "발행 전 최종 검사에서 차단 사유가 있어 승인/발행할 수 없습니다." });
       return;
     }
     const review = reviewActualDraft({
