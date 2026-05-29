@@ -704,7 +704,7 @@ export function buildOpenAIWriterPayloadPreview(params: {
     revisionInstructions,
   });
   return {
-    model: params.model ?? process.env.OPENAI_WRITER_MODEL ?? "gpt-4.1",
+    model: params.model ?? process.env.OPENAI_WRITER_MODEL ?? "gpt-5.5",
     input: [
       { role: "system", content: promptPlan.systemPrompt },
       {
