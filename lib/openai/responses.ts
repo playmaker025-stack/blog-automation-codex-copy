@@ -40,15 +40,15 @@ export function extractOpenAIOutputText(response: unknown): string {
 function parseRateLimitDelayMs(errorText: string, retryAfterHeader: string | null, attempt: number): number {
   const retryAfterSeconds = Number(retryAfterHeader ?? "");
   if (Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0) {
-    return Math.min(Math.ceil(retryAfterSeconds * 1000), 12_000);
+    return Math.min(Math.ceil(retryAfterSeconds * 1000), 30_000);
   }
 
   const explicitWait = errorText.match(/Please try again in\s+([\d.]+)s/i);
   if (explicitWait) {
-    return Math.min(Math.ceil(Number(explicitWait[1]) * 1000) + 250, 12_000);
+    return Math.min(Math.ceil(Number(explicitWait[1]) * 1000) + 500, 30_000);
   }
 
-  return Math.min(4_500 + attempt * 1_000, 12_000);
+  return Math.min(4_500 + attempt * 2_000, 30_000);
 }
 
 async function sleepWithSignal(ms: number, signal?: AbortSignal): Promise<void> {
@@ -80,7 +80,7 @@ export async function requestOpenAIResponse(
     throw new Error("OPENAI_API_KEY is not configured.");
   }
 
-  for (let attempt = 0; attempt < 3; attempt += 1) {
+  for (let attempt = 0; attempt < 4; attempt += 1) {
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
@@ -102,7 +102,7 @@ export async function requestOpenAIResponse(
     }
 
     const errorText = await response.text();
-    if (response.status === 429 && attempt < 2) {
+    if (response.status === 429 && attempt < 3) {
       const delayMs = parseRateLimitDelayMs(errorText, response.headers.get("retry-after"), attempt);
       await sleepWithSignal(delayMs, params.signal);
       continue;

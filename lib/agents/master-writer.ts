@@ -613,6 +613,56 @@ export function buildOpenAIWriterUserPrompt(params: {
   ].join("\n");
 }
 
+function buildOpenAIWriterRevisionPrompt(params: {
+  strategy: StrategyPlanResult;
+  userId: string;
+  firstDraft: string;
+  harnessBriefing?: string;
+  revisionInstructions?: string;
+}): string {
+  const { strategy, userId, firstDraft, harnessBriefing, revisionInstructions } = params;
+  const contract = strategy.articleContract;
+  const mainKeyword = strategy.keywordContract?.mainKeyword || strategy.keywords[0] || "none";
+  const subKeywords = strategy.keywordContract?.subKeywords?.slice(0, 5) ?? strategy.keywords.slice(1, 6);
+  const mustResolve = contract?.mustResolve?.slice(0, 6) ?? [];
+  const mustNotDefer = contract?.mustNotDefer?.slice(0, 4) ?? [];
+  const keyPoints = strategy.keyPoints.slice(0, 6);
+
+  return [
+    "Revise the Korean blog draft below into the final publishable version.",
+    "Keep the article's facts and main angle, but repair weak SEO fit, Naver logic, repetition, and awkward sections.",
+    "Output only the final Korean markdown body.",
+    "",
+    `User id: ${userId.trim().toLowerCase()}`,
+    `Title: ${strategy.title}`,
+    `Target length: ${strategy.estimatedLength} Korean characters`,
+    `Main keyword: ${mainKeyword}`,
+    `Sub keywords: ${subKeywords.join(", ") || "none"}`,
+    `Article type: ${strategy.keywordContract?.articleType ?? "general_info"}`,
+    `Article stage: ${strategy.keywordContract?.articleStage ?? "information"}`,
+    `Search intent: ${strategy.keywordContract?.searchIntent ?? strategy.topicIntentResolution?.searchIntent ?? "none"}`,
+    `Key points: ${keyPoints.join(" / ") || "none"}`,
+    mustResolve.length ? `Must resolve: ${mustResolve.join(" / ")}` : "Must resolve: none",
+    mustNotDefer.length ? `Must not defer: ${mustNotDefer.join(" / ")}` : "Must not defer: none",
+    "",
+    "Revision priorities:",
+    "- Preserve the article's actual topic and reader intent.",
+    "- Reduce repeated or stuffed keyword phrasing.",
+    "- Keep the introduction concrete and situation-based.",
+    "- Make each section solve a reader question directly.",
+    "- Remove meta/internal SEO wording completely.",
+    revisionInstructions
+      ? `- Failed evaluator instructions: ${revisionInstructions}`
+      : "- No failed evaluator instructions were provided.",
+    harnessBriefing
+      ? `- Pre-write harness briefing to respect: ${harnessBriefing}`
+      : "- No extra harness briefing was provided.",
+    "",
+    "Draft to revise:",
+    firstDraft,
+  ].join("\n");
+}
+
 export function buildOpenAIWriterPayloadPreview(params: {
   strategy: StrategyPlanResult;
   userId: string;
@@ -684,7 +734,7 @@ async function runOpenAIMasterWriter(params: {
       { role: "system", content: buildOpenAIWriterSystemPrompt() },
       { role: "user", content: buildOpenAIWriterUserPrompt({ strategy, userId, corpusSummary, harnessBriefing, revisionInstructions }) },
     ],
-    maxOutputTokens: 6500,
+    maxOutputTokens: 4200,
     temperature: 0.55,
     signal: callSignal,
   });
@@ -696,22 +746,16 @@ async function runOpenAIMasterWriter(params: {
       { role: "system", content: buildOpenAIWriterSystemPrompt() },
       {
         role: "user",
-        content: [
-          "Revise the draft below into the final version.",
-          "Silently check it against the harness rubric and Naver Blog SEO.",
-          "If SEO fit or Naver logic would be weak, rewrite the weak parts before finalizing.",
-          "Keep the user's facts and intent. Do not add disclaimers or meta commentary.",
-          "Output only the final Korean markdown body.",
-          "",
-          "Strategy and constraints:",
-          buildOpenAIWriterUserPrompt({ strategy, userId, corpusSummary, harnessBriefing, revisionInstructions }),
-          "",
-          "Draft to improve:",
+        content: buildOpenAIWriterRevisionPrompt({
+          strategy,
+          userId,
           firstDraft,
-        ].join("\n"),
+          harnessBriefing,
+          revisionInstructions,
+        }),
       },
     ],
-    maxOutputTokens: 6500,
+    maxOutputTokens: 4200,
     temperature: 0.35,
     signal: callSignal,
   });
