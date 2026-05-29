@@ -820,7 +820,7 @@ export function buildOpenAIWriterPayloadPreview(params: {
     revisionInstructions,
   });
   return {
-    model: params.model ?? process.env.OPENAI_WRITER_MODEL ?? "gpt-5.5",
+    model: params.model ?? process.env.OPENAI_WRITER_MODEL ?? "gpt-5.4",
     input: [
       { role: "system", content: promptPlan.systemPrompt },
       {
@@ -860,7 +860,7 @@ async function runOpenAIMasterWriter(params: {
     signal,
   } = params;
 
-  const model = process.env.OPENAI_WRITER_MODEL ?? "gpt-5.5";
+  const model = process.env.OPENAI_WRITER_MODEL ?? "gpt-5.4";
   const callSignal = signal
     ? AbortSignal.any([signal, AbortSignal.timeout(420_000)])
     : AbortSignal.timeout(420_000);
