@@ -26,6 +26,12 @@ export interface OpenAIRetryInfo {
   reason: "rate_limit";
 }
 
+export function supportsOpenAITemperature(model: string): boolean {
+  const normalized = model.trim().toLowerCase();
+  if (!normalized) return true;
+  return !/^(gpt-5(?:$|[.-])|o[134](?:$|[.-]))/.test(normalized);
+}
+
 export function hasOpenAIKey(): boolean {
   return Boolean(process.env.OPENAI_API_KEY?.trim());
 }
@@ -113,19 +119,23 @@ export async function requestOpenAIResponse(
   }
 
   for (let attempt = 0; attempt < 4; attempt += 1) {
+    const requestBody: Record<string, unknown> = {
+      model: params.model,
+      input: params.input,
+      max_output_tokens: params.maxOutputTokens,
+      text: params.text,
+    };
+    if (params.temperature !== undefined && supportsOpenAITemperature(params.model)) {
+      requestBody.temperature = params.temperature;
+    }
+
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        model: params.model,
-        input: params.input,
-        max_output_tokens: params.maxOutputTokens,
-        temperature: params.temperature,
-        text: params.text,
-      }),
+      body: JSON.stringify(requestBody),
       signal: params.signal,
     });
 

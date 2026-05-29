@@ -8,6 +8,7 @@ import {
 import {
   formatOpenAIRateLimitUserMessage,
   parseRateLimitDelayMs,
+  supportsOpenAITemperature,
 } from "../../lib/openai/responses.ts";
 import { shouldAttemptWriterRevision } from "../../lib/agents/writer-revision-policy.ts";
 
@@ -191,5 +192,11 @@ describe("PR11 OpenAI budget and retry guards", () => {
     };
 
     assert.equal(shouldAttemptWriterRevision(evalResult, writerResult), true);
+  });
+
+  test("gpt-5 계열은 temperature 파라미터를 사용하지 않는다", () => {
+    assert.equal(supportsOpenAITemperature("gpt-5.5"), false);
+    assert.equal(supportsOpenAITemperature("gpt-5"), false);
+    assert.equal(supportsOpenAITemperature("gpt-4.1"), true);
   });
 });
