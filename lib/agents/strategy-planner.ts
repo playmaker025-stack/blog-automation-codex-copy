@@ -21,6 +21,7 @@ import { getPublicationLearningSummary } from "./user-learning";
 import { classifySearchCombination, normalizeSearchPhrase, sanitizeMainKeywordCandidate } from "./search-combination-utils";
 import { buildArticleContract, evaluateStrategyQualityGate } from "./article-contract-utils";
 import { buildExistingArticleSummaries, buildOverlapReport } from "./overlap-report-utils";
+import { resolveTopicIntent } from "./topic-intent-resolver";
 
 const STRATEGY_LOOP_TIMEOUT_MS = 120_000;
 const SIMPLE_STRATEGY_TIMEOUT_MS = 45_000;
@@ -851,10 +852,17 @@ function buildKeywordContract(params: {
   plan: StrategyPlanResult;
   topologyKind: "hub" | "leaf";
   directIntent: DirectKeywordIntent | null;
+  topicIntentResolution: ReturnType<typeof resolveTopicIntent>;
 }): KeywordContract {
-  const { topic, plan, topologyKind, directIntent } = params;
-  const articleType = inferArticleType(topic, plan, topologyKind);
-  const articleStage = inferArticleStage(articleType);
+  const { topic, plan, topologyKind, directIntent, topicIntentResolution } = params;
+  const articleType =
+    topicIntentResolution.articleType === "general_info" && topologyKind === "hub"
+      ? "local_hub"
+      : topicIntentResolution.articleType || inferArticleType(topic, plan, topologyKind);
+  const articleStage =
+    articleType === "local_hub"
+      ? "internal_link"
+      : topicIntentResolution.articleStage || inferArticleStage(articleType);
   const isPrelude = articleType === "warmup";
 
   // AI가 제공한 keywordContract 우선 사용, 유효성 검사 후 적용
@@ -947,7 +955,11 @@ function buildKeywordContract(params: {
     title: plan.title,
     articleType,
     articleStage,
-    searchIntent: topic.seriesDetailPlan?.searchIntent ?? plan.rationale ?? topic.description,
+    searchIntent:
+      topic.seriesDetailPlan?.searchIntent ??
+      topicIntentResolution.searchIntent ??
+      plan.rationale ??
+      topic.description,
     topology: topologyKind,
     bodyRole: isPrelude
       ? "본편 추천 글로 바로 경쟁하지 않고 선택 기준을 먼저 정리해 다음 글로 자연스럽게 넘기는 워밍업 본문"
@@ -958,6 +970,9 @@ function buildKeywordContract(params: {
     internalLinkAnchors,
     forbiddenTerms: BODY_FORBIDDEN_TERMS,
     limitedKeywords,
+    subKeywordRoles: topicIntentResolution.keywordAssignments,
+    productCandidates: topicIntentResolution.productCandidates,
+    comparisonTargets: topicIntentResolution.comparisonTargets,
     excludedTopics: isPrelude
       ? ["제품명 나열", "TOP5 순위", "구체 추천 기기 비교", targetMainKeyword].filter(Boolean)
       : [],
@@ -982,6 +997,13 @@ export async function runStrategyPlanner(params: {
   const topic = await loadTopic(topicId);
   const rawDirectIntent = extractDirectKeywordIntent(topic);
   const directIntent = sanitizeDirectIntent(rawDirectIntent);
+  const topicIntentResolution = resolveTopicIntent({
+    title: topic.title,
+    description: topic.description,
+    mainKeyword: directIntent?.mainKeyword ?? topic.targetMainKeyword ?? topic.tags[0] ?? "",
+    subKeywords: directIntent?.subKeywords ?? topic.subKeywords ?? topic.tags.slice(1),
+    seriesRole: topic.seriesRole,
+  });
   const publicationLearning = await getPublicationLearningSummary(userId);
 
   onProgress?.(`토픽 "${topicId}" 전략 수립 시작`);
@@ -1079,6 +1101,7 @@ export async function runStrategyPlanner(params: {
   const naverLogic = naverLogicAgent.planBeforeWriting({ ...plan, contentTopology });
   plan = {
     ...plan,
+    topicIntentResolution,
     targetSearchCombinations,
     contentTopology,
     publicationLearning,
@@ -1105,6 +1128,7 @@ export async function runStrategyPlanner(params: {
       topic,
       plan,
       topologyKind: contentTopology.kind,
+      topicIntentResolution,
       directIntent,
     }),
   };
@@ -1152,6 +1176,7 @@ export async function runStrategyPlanner(params: {
         topic,
         plan: { ...plan, seriesRole: topic.seriesRole, targetMainKeyword: topic.targetMainKeyword },
         topologyKind: contentTopology.kind,
+        topicIntentResolution,
         directIntent,
       }),
     };

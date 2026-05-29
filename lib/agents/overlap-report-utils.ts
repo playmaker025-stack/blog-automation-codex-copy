@@ -73,7 +73,7 @@ function inferArticleRoleFromText(text: string, seriesRole?: "prelude" | "main")
 function inferNodeTypeFromTopic(topic: Topic | null, articleRole: ArticleRole): ContentNodeType {
   if (articleRole === "prelude") return "bridge";
   if (topic?.contentKind === "hub" || topic?.contentKind === "leaf") return topic.contentKind;
-  if (articleRole === "main_recommendation") return "hub";
+  if (articleRole === "main_recommendation" || articleRole === "product_list_recommendation") return "hub";
   return "leaf";
 }
 
@@ -98,7 +98,7 @@ function inferConclusionPatternFromRole(
   if (articleRole === "problem_solution") return "problem_checklist";
   if (articleRole === "review") return "product_fit_summary";
   if (articleRole === "comparison") return "criteria_summary";
-  if (articleRole === "main_recommendation") return "visit_consultation";
+  if (articleRole === "main_recommendation" || articleRole === "product_list_recommendation") return "visit_consultation";
   return "criteria_summary";
 }
 
@@ -115,7 +115,7 @@ function inferCtaModeFromRole(articleRole: ArticleRole, nodeType: ContentNodeTyp
   if (articleRole === "comparison") {
     return "상황별 선택 기준을 정리한 뒤 본인 사용 방식에 맞는 쪽을 고르도록 마무리";
   }
-  if (articleRole === "main_recommendation") {
+  if (articleRole === "main_recommendation" || articleRole === "product_list_recommendation") {
     return "추천 기준과 사용자 유형을 정리한 뒤 방문 전 상담으로 연결";
   }
   return "현재 글 기준을 정리한 뒤 방문 전 상담이나 선택 판단으로 연결";
@@ -126,7 +126,7 @@ function resolveExistingNodeType(article: ExistingArticleSummary): ContentNodeTy
     return article.nodeType;
   }
   if (article.articleRole === "prelude") return "bridge";
-  if (article.articleRole === "main_recommendation") return "hub";
+  if (article.articleRole === "main_recommendation" || article.articleRole === "product_list_recommendation") return "hub";
   return "leaf";
 }
 
@@ -256,14 +256,14 @@ export function buildOverlapReport(params: {
             (tokenOverlapRatio(params.currentTitle, article.title) >= 0.35 ||
               tokenOverlapRatio(params.targetKeyword, article.targetKeyword) >= 0.35 ||
               params.articleRole === "problem_solution" ||
-              article.articleRole === "main_recommendation")
+              (article.articleRole === "main_recommendation" || article.articleRole === "product_list_recommendation"))
         )
       : [];
   const preludeMainConflicts =
     params.articleRole === "prelude"
       ? params.existingArticles.filter(
           (article) =>
-            article.articleRole === "main_recommendation" &&
+            (article.articleRole === "main_recommendation" || article.articleRole === "product_list_recommendation") &&
             normalizedHandoffKeyword &&
             (article.normalizedTargetKeyword === normalizedHandoffKeyword ||
               tokenOverlapRatio(params.handoffKeyword ?? "", article.targetKeyword) >= 0.5)
@@ -333,7 +333,7 @@ export function buildOverlapReport(params: {
   } else if (sameIntentAndRole.length) {
     recommendedRewriteDirection =
       "같은 검색의도와 같은 articleRole이 겹칩니다. 제목 방향, 해결 범위, CTA 흐름을 분리하세요.";
-  } else if (params.articleRole === "main_recommendation" && existingHubMatches.length) {
+  } else if ((params.articleRole === "main_recommendation" || params.articleRole === "product_list_recommendation") && existingHubMatches.length) {
     recommendedRewriteDirection = /액상/u.test(`${params.currentTitle} ${params.targetKeyword}`)
       ? "기존 main_recommendation과 겹치므로 액상 취향, 기기 궁합, 사용자 유형, 문제 상황처럼 더 좁은 기준으로 분리하세요."
       : "기존 main_recommendation과 겹치므로 취향, 기기 궁합, 사용자 유형, 문제 상황처럼 더 좁은 기준으로 분리하세요.";

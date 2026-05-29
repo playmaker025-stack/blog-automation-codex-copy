@@ -103,7 +103,7 @@ function inferNodeType(topic: Topic, plan: StrategyPlanResult, articleRole: Arti
   if (articleRole === "prelude") return "bridge";
   if (topic.contentKind === "hub" || topic.contentKind === "leaf") return topic.contentKind;
   if (plan.contentTopology?.kind === "hub" || plan.contentTopology?.kind === "leaf") return plan.contentTopology.kind;
-  if (articleRole === "main_recommendation") return "hub";
+  if (articleRole === "main_recommendation" || articleRole === "product_list_recommendation") return "hub";
   return "leaf";
 }
 
@@ -122,7 +122,7 @@ function inferConclusionPattern(topic: Topic, plan: StrategyPlanResult, articleR
   if (articleRole === "problem_solution") return "problem_checklist";
   if (articleRole === "review") return "product_fit_summary";
   if (articleRole === "comparison") return "criteria_summary";
-  if (articleRole === "main_recommendation") return "visit_consultation";
+  if (articleRole === "main_recommendation" || articleRole === "product_list_recommendation") return "visit_consultation";
   const source = collectSourceText(topic, plan);
   return CTA_VERB_PATTERN.test(source) ? "visit_consultation" : "criteria_summary";
 }
@@ -333,6 +333,7 @@ export function inferArticleRole(topic: Topic, plan: StrategyPlanResult): Articl
   if (articleType === "review") return "review";
   if (articleType === "comparison") return "comparison";
   if (articleType === "main_recommendation") return "main_recommendation";
+  if (articleType === "product_list_recommendation") return "product_list_recommendation";
   if (articleType === "problem_solution") return "problem_solution";
 
   const sourceText = collectSourceText(topic, plan);
@@ -359,8 +360,9 @@ export function buildArticleContract(params: { topic: Topic; plan: StrategyPlanR
   };
   const mainKeyword = pickMainKeyword(plan) || topic.title;
   const subKeywords = plan.keywordContract?.subKeywords ?? [];
+  const productCandidates = plan.keywordContract?.productCandidates ?? [];
 
-  return {
+  const baseContract: ArticleContract = {
     articleRole,
     completionMode,
     nodeType: inferNodeType(topic, plan, articleRole),
@@ -383,6 +385,39 @@ export function buildArticleContract(params: { topic: Topic; plan: StrategyPlanR
     forbiddenTonePatterns: DEFAULT_FORBIDDEN_TONE_PATTERNS,
     ctaMode: buildCtaMode(articleRole),
     keywordUsagePolicy,
+  };
+
+  if (articleRole !== "product_list_recommendation") {
+    return baseContract;
+  }
+
+  return {
+    ...baseContract,
+    mainIntent: `${mainKeyword} 후보를 제품별로 비교해 추천 이유, 맞는 사용자, 구매 전 확인점을 한 글 안에서 정리합니다.`,
+    readerState: `${mainKeyword} 후보가 여러 개라서 어떤 제품이 자신에게 맞는지 빠르게 비교하고 싶은 상태`,
+    readerQuestions: sanitizeReaderQuestions({
+      questions: [
+        "후보 제품마다 어떤 점이 다른가요?",
+        "저한테 맞는 제품은 어떤 기준으로 골라야 하나요?",
+        "구매 전에 꼭 확인해야 할 점은 무엇인가요?",
+      ],
+      mainKeyword,
+      subKeywords,
+      keywordUsagePolicy,
+      articleRole,
+    }),
+    mustResolve: [
+      `${mainKeyword} 후보별 추천 이유`,
+      "각 후보가 맞는 사용자",
+      "구매 전에 확인해야 할 조건",
+      ...(productCandidates.length > 0 ? [`후보 제품: ${productCandidates.join(", ")}`] : []),
+    ],
+    mustNotDefer: [
+      `${mainKeyword} 후보별 차이`,
+      "각 후보가 맞는 사용자",
+      "구매 전에 확인해야 할 조건",
+    ],
+    ctaMode: "후보별 차이와 추천 이유를 정리한 뒤 사용자가 바로 고를 수 있게 마무리",
   };
 }
 
@@ -508,6 +543,13 @@ export function buildRoleSpecificWriterGuidance(contract: ArticleContract | unde
         ...common,
         "- Main recommendation articles must explain recommendation criteria and user-type branches before listing product names.",
         "- Separate beginner vs existing-user needs, and explain maintenance cost, management load, and feel of use.",
+      ];
+    case "product_list_recommendation":
+      return [
+        ...common,
+        "- Product list recommendation articles must dedicate one section per product or candidate, not a single generic checklist.",
+        "- In each section, explain the recommendation reason, the user it fits, and what to verify before purchase.",
+        "- Do not collapse the article into general criteria only. The body must clearly compare named candidates.",
       ];
     default:
       return [

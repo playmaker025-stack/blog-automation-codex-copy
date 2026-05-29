@@ -13,6 +13,7 @@ import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluatio
 import { evaluateSeoCompleteness } from "@/lib/agents/seo-metrics";
 import { canApproveFinalDraft } from "@/lib/agents/final-draft-check";
 import { buildConfirmedSeoKeywords } from "@/lib/agents/confirmed-seo-keywords";
+import { parseKeywordList } from "@/lib/agents/direct-intent-utils";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -307,7 +308,7 @@ export default function PipelinePage() {
           topicMode === "direct"
             ? {
                 mainKeyword: directMainKeyword,
-                subKeywords: directSubKeyword.trim() ? [directSubKeyword.trim()] : [],
+                subKeywords: parseKeywordList(directSubKeyword),
               }
             : undefined,
         selectedPostingTopic: selectedTopic
@@ -618,7 +619,8 @@ export default function PipelinePage() {
     if (topicMode === "list") return selectedTopicId || null;
 
     const mainKeyword = directMainKeyword.trim();
-    const subKeyword = directSubKeyword.trim();
+    const subKeywords = parseKeywordList(directSubKeyword);
+    const subKeyword = subKeywords[0] ?? "";
     const title = directTopicTitle.trim() || buildDirectTopicTitle(mainKeyword, subKeyword);
     if (!mainKeyword || !title) return null;
 
@@ -628,12 +630,12 @@ export default function PipelinePage() {
       body: JSON.stringify({
         title,
         description: subKeyword
-          ? `메인키워드: ${mainKeyword} / 서브 키워드: ${subKeyword}`
+          ? `메인키워드: ${mainKeyword} / 서브 키워드: ${subKeywords.join(", ")}`
           : `메인키워드: ${mainKeyword}`,
-        tags: [mainKeyword, subKeyword].filter(Boolean),
+        tags: [mainKeyword, ...subKeywords].filter(Boolean),
         targetKeyword: mainKeyword,
         targetMainKeyword: mainKeyword,
-        subKeywords: subKeyword ? [subKeyword] : [],
+        subKeywords,
         assignedUserId: normalizeUserId(userId.trim()),
         category: "direct-run",
         source: "direct",

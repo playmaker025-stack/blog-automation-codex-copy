@@ -48,6 +48,7 @@ export interface StrategyPlanResult {
   articleContract?: ArticleContract;
   strategyQualityGate?: StrategyQualityGateResult;
   overlapReport?: OverlapReport;
+  topicIntentResolution?: TopicIntentResolution;
 }
 
 export type ArticleRole =
@@ -56,7 +57,8 @@ export type ArticleRole =
   | "problem_solution"
   | "review"
   | "comparison"
-  | "main_recommendation";
+  | "main_recommendation"
+  | "product_list_recommendation";
 
 export type CompletionMode = "end_here" | "handoff";
 
@@ -140,10 +142,13 @@ export interface OverlapReport {
 export type ArticleType =
   | "warmup"
   | "main_recommendation"
+  | "product_list_recommendation"
+  | "criteria_recommendation"
   | "comparison"
   | "problem_solution"
   | "review"
   | "howto"
+  | "general_info"
   | "local_hub"
   | "leaf";
 
@@ -180,6 +185,41 @@ export interface KeywordContract {
   excludedTopics: string[];
   handoffTopics: string[];
   differentiationPoints: string[];
+  subKeywordRoles?: KeywordRoleAssignment[];
+  productCandidates?: string[];
+  comparisonTargets?: string[];
+}
+
+export type TopicIntentKind =
+  | "product_list_recommendation"
+  | "criteria_recommendation"
+  | "comparison"
+  | "review"
+  | "problem_solution"
+  | "prelude"
+  | "general_info";
+
+export type KeywordSemanticRole =
+  | "product_candidate"
+  | "brand_candidate"
+  | "comparison_target"
+  | "general_support";
+
+export interface KeywordRoleAssignment {
+  keyword: string;
+  role: KeywordSemanticRole;
+}
+
+export interface TopicIntentResolution {
+  intentType: TopicIntentKind;
+  articleType: ArticleType;
+  articleStage: ArticleStage;
+  searchIntent: string;
+  reason: string;
+  isProductListRecommendation: boolean;
+  productCandidates: string[];
+  comparisonTargets: string[];
+  keywordAssignments: KeywordRoleAssignment[];
 }
 
 export interface SearchCombinationTarget {

@@ -1,4 +1,5 @@
 import { sanitizeMainKeywordCandidate } from "./search-combination-utils.ts";
+import type { Topic } from "../types/github-data.ts";
 
 export interface DirectKeywordIntent {
   mainKeyword: string;
@@ -20,6 +21,15 @@ function uniq(values: string[]): string[] {
 
 function normalizeKeyword(value: string): string {
   return value.trim().replace(/\s+/g, " ");
+}
+
+export function parseKeywordList(value: string): string[] {
+  return uniq(
+    value
+      .split(/[,/\n|]+/g)
+      .map((item) => item.trim())
+      .filter(Boolean)
+  );
 }
 
 const GENERIC_KEYWORD_SET = new Set([
@@ -90,5 +100,18 @@ export function sanitizeDirectIntent(rawDirectIntent: DirectKeywordIntent | null
   );
 
   if (!mainKeyword && subKeywords.length === 0) return null;
+  return { mainKeyword, subKeywords };
+}
+
+export function extractDirectKeywordIntent(topic: Pick<Topic, "source" | "description" | "tags">): DirectKeywordIntent | null {
+  if (topic.source !== "direct") return null;
+
+  const description = topic.description ?? "";
+  const mainMatch = description.match(/메인키워드:\s*([^/\n]+?)(?:\s*\/|\s*$)/u);
+  const subMatch = description.match(/서브 키워드:\s*([^\n]+?)\s*$/u);
+  const mainKeyword = mainMatch?.[1]?.trim() || topic.tags[0]?.trim() || "";
+  const subKeywords = parseKeywordList(subMatch?.[1]?.trim() || topic.tags.slice(1).join(", "));
+
+  if (!mainKeyword) return null;
   return { mainKeyword, subKeywords };
 }
