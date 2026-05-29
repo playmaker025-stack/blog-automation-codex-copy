@@ -26,6 +26,7 @@ import { assertPreflightPassed } from "./preflight-checker";
 import { naverLogicAgent } from "./naver-logic-agent";
 import { localityKeywordAgent } from "./locality-keyword-agent";
 import { evaluateSeoCompleteness } from "./seo-metrics";
+import { shouldAttemptWriterRevision } from "./writer-revision-policy";
 import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -209,26 +210,6 @@ function compareKeywordRiskLevel(value: "low" | "medium" | "high"): number {
   return 2;
 }
 
-function shouldAttemptSmartRevision(evalResult: EvalResult): boolean {
-  if (evalResult.pass) return false;
-
-  const keywordReport = evalResult.seoEvaluation?.keywordReport;
-  const overallRisk = keywordReport?.overallRisk ?? "low";
-  const dangerCount = getKeywordDangerCount(evalResult);
-  const paragraphWarningCount = keywordReport?.paragraphWarnings.length ?? 0;
-  const seoScore = getSeoScore(evalResult);
-  const naverScore = getNaverScore(evalResult);
-
-  return (
-    evalResult.aggregateScore < 72 ||
-    seoScore < 72 ||
-    naverScore < 70 ||
-    dangerCount >= 2 ||
-    overallRisk === "high" ||
-    paragraphWarningCount >= 2
-  );
-}
-
 function isMaterialRevisionImprovement(previous: EvalResult, next: EvalResult): boolean {
   if (!previous.pass && next.pass) return true;
   if (getKeywordDangerCount(next) < getKeywordDangerCount(previous)) return true;
@@ -278,7 +259,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
     signal,
   });
 
-  if (evalResult.pass) {
+  if (evalResult.pass && !shouldAttemptWriterRevision(evalResult, writerResult)) {
     return { writerResult, evalResult };
   }
 
@@ -291,7 +272,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
     phase: "preliminary",
   });
 
-  if (!shouldAttemptSmartRevision(evalResult)) {
+  if (!shouldAttemptWriterRevision(evalResult, writerResult)) {
     emit(controller, makeEvent("progress", "evaluating", {
       message: `\uCD08\uC548 \uC810\uC218 ${evalResult.aggregateScore}\uC810\uC785\uB2C8\uB2E4. \uC790\uB3D9 \uBCF4\uAC15\uC73C\uB85C \uC5BB\uC744 \uAC1C\uC120 \uD3ED\uC774 \uD06C\uC9C0 \uC54A\uC544 \uD604\uC7AC \uCD08\uC548\uC744 \uC720\uC9C0\uD569\uB2C8\uB2E4.`,
     }));
@@ -301,10 +282,21 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
   for (let round = 1; round <= MAX_AUTO_REVISION_ROUNDS; round += 1) {
     const previousWriterResult = writerResult;
     const previousEvalResult = evalResult;
+    const revisionBackoffMs = 1_500 * round;
 
     emit(controller, makeEvent("progress", "evaluating", {
       message: `\uCD08\uC548 \uC810\uC218 ${evalResult.aggregateScore}\uC810 \uAE30\uC900\uC73C\uB85C \uBD80\uC871\uD55C \uD56D\uBAA9\uB9CC \uBCF4\uAC15\uD558\uB294 ${round + 1}\uCC28 \uCD08\uC548\uC744 \uC791\uC131\uD569\uB2C8\uB2E4.`,
     }));
+    emit(controller, makeEvent("progress", "evaluating", {
+      message: `${round + 1}\uCC28 \uCD08\uC548 \uC2DC\uC791 \uC804 ${Math.ceil(revisionBackoffMs / 1000)}\uCD08 \uB300\uAE30 \uD6C4 \uD638\uCD9C\uD569\uB2C8\uB2E4.`,
+    }));
+    await new Promise<void>((resolve, reject) => {
+      const timer = setTimeout(resolve, revisionBackoffMs);
+      signal?.addEventListener("abort", () => {
+        clearTimeout(timer);
+        reject(signal.reason instanceof Error ? signal.reason : new Error("Pipeline aborted."));
+      }, { once: true });
+    });
     emit(controller, makeEvent("token", "writing", {
       token: `\n\n---\n\n[${round + 1}\uCC28 \uCD08\uC548]\n`,
     }));
@@ -351,7 +343,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
       signal,
     });
 
-    if (evalResult.pass) {
+    if (evalResult.pass && !shouldAttemptWriterRevision(evalResult, writerResult)) {
       return { writerResult, evalResult };
     }
 
@@ -364,7 +356,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
       break;
     }
 
-    if (!shouldAttemptSmartRevision(evalResult)) {
+    if (!shouldAttemptWriterRevision(evalResult, writerResult)) {
       emit(controller, makeEvent("progress", "evaluating", {
         message: "\uBCF4\uAC15 \uD6C4 \uD575\uC2EC \uC704\uD5D8\uB3C4\uAC00 \uCDA9\uBD84\uD788 \uB0AE\uC544\uC838 \uC790\uB3D9 \uBCF4\uAC15\uC744 \uB9C8\uCE69\uB2C8\uB2E4.",
       }));

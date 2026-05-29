@@ -11,11 +11,19 @@ export interface OpenAITextRequest {
   maxOutputTokens?: number;
   temperature?: number;
   signal?: AbortSignal;
+  onRetry?: (info: OpenAIRetryInfo) => void;
 }
 
 export interface OpenAIJsonRequest extends OpenAITextRequest {
   schemaName: string;
   schema: Record<string, unknown>;
+}
+
+export interface OpenAIRetryInfo {
+  status: number;
+  attempt: number;
+  delayMs: number;
+  reason: "rate_limit";
 }
 
 export function hasOpenAIKey(): boolean {
@@ -37,7 +45,7 @@ export function extractOpenAIOutputText(response: unknown): string {
     .trim();
 }
 
-function parseRateLimitDelayMs(errorText: string, retryAfterHeader: string | null, attempt: number): number {
+export function parseRateLimitDelayMs(errorText: string, retryAfterHeader: string | null, attempt: number): number {
   const retryAfterSeconds = Number(retryAfterHeader ?? "");
   if (Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0) {
     return Math.min(Math.ceil(retryAfterSeconds * 1000), 30_000);
@@ -49,6 +57,30 @@ function parseRateLimitDelayMs(errorText: string, retryAfterHeader: string | nul
   }
 
   return Math.min(4_500 + attempt * 2_000, 30_000);
+}
+
+export function parseOpenAIRateLimitWaitMs(errorText: string): number | null {
+  const explicitWait = errorText.match(/Please try again in\s+([\d.]+)s/i);
+  if (!explicitWait) return null;
+  const seconds = Number(explicitWait[1]);
+  return Number.isFinite(seconds) && seconds > 0 ? Math.ceil(seconds * 1000) : null;
+}
+
+export function isOpenAIRateLimitErrorText(errorText: string): boolean {
+  return /rate limit reached|rate_limit_exceeded|tokens per min|TPM/i.test(errorText);
+}
+
+export function formatOpenAIRateLimitUserMessage(errorText: string, retryAfterHeader: string | null): string {
+  const waitMs =
+    parseOpenAIRateLimitWaitMs(errorText) ??
+    (Number.isFinite(Number(retryAfterHeader ?? "")) ? Math.ceil(Number(retryAfterHeader ?? "") * 1000) : null);
+
+  if (waitMs) {
+    const waitSeconds = Math.max(1, Math.ceil(waitMs / 1000));
+    return `AI 요청량 제한에 걸렸습니다. 약 ${waitSeconds}초 후 다시 시도해 주세요.`;
+  }
+
+  return "AI 요청량 제한에 걸렸습니다. 잠시 후 다시 시도해 주세요.";
 }
 
 async function sleepWithSignal(ms: number, signal?: AbortSignal): Promise<void> {
@@ -104,13 +136,23 @@ export async function requestOpenAIResponse(
     const errorText = await response.text();
     if (response.status === 429 && attempt < 3) {
       const delayMs = parseRateLimitDelayMs(errorText, response.headers.get("retry-after"), attempt);
+      params.onRetry?.({
+        status: 429,
+        attempt: attempt + 1,
+        delayMs,
+        reason: "rate_limit",
+      });
       await sleepWithSignal(delayMs, params.signal);
       continue;
     }
 
+    if (response.status === 429 && isOpenAIRateLimitErrorText(errorText)) {
+      throw new Error(formatOpenAIRateLimitUserMessage(errorText, response.headers.get("retry-after")));
+    }
+
     throw new Error(`OpenAI request failed: ${response.status} ${errorText.slice(0, 700)}`);
   }
-  throw new Error("OpenAI request failed after retries.");
+  throw new Error("AI 요청량 제한이 반복되고 있습니다. 잠시 후 다시 시도해 주세요.");
 }
 
 export async function requestOpenAIText(params: OpenAITextRequest): Promise<string> {

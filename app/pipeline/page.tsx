@@ -113,6 +113,18 @@ function looksBrokenKorean(value: string | null | undefined): boolean {
 }
 
 function formatPipelineError(message: string): string {
+  if (/AI 요청량 제한/i.test(message)) {
+    return message.includes("반복")
+      ? "AI 요청량 제한이 반복되고 있습니다. 잠시 후 다시 시도하거나 초안 보강 단계를 줄여 주세요."
+      : message;
+  }
+  const retryMatch = message.match(/Please try again in\s+([\d.]+)s/i);
+  if (/rate limit reached|rate_limit_exceeded|tokens per min|TPM/i.test(message)) {
+    if (retryMatch) {
+      return `현재 AI 요청량 제한에 걸렸습니다. 약 ${Math.max(1, Math.ceil(Number(retryMatch[1])))}초 후 자동 재시도를 시도했지만, 아직 한도가 충분히 회복되지 않았습니다. 잠시 후 다시 실행해 주세요.`;
+    }
+    return "현재 AI 요청량 제한에 걸렸습니다. 잠시 후 다시 실행해 주세요.";
+  }
   if (message.includes("data/posting-list/index.json") && message.includes("파일이 아닙니다")) {
     return `${message}\n\n로컬 확인 결과 codex-copy/main의 해당 경로는 정상 파일입니다. 같은 오류가 계속 뜨면 Railway Variables가 다른 데이터 저장소나 브랜치를 보고 있을 가능성이 큽니다.`;
   }

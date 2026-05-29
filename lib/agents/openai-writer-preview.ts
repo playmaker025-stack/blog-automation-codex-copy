@@ -81,6 +81,10 @@ type NaverLogicPlan = {
   completenessTarget: number;
 };
 
+type TopicIntentResolution = {
+  searchIntent: string;
+};
+
 type StrategyPlanResult = {
   title: string;
   outline: Array<{
@@ -120,6 +124,7 @@ type StrategyPlanResult = {
   keywordContract?: KeywordContract;
   articleContract?: import("./types.ts").ArticleContract;
   overlapReport?: import("./types.ts").OverlapReport;
+  topicIntentResolution?: TopicIntentResolution;
 };
 
 function buildPolicyPromptSection(): string {
@@ -492,6 +497,189 @@ export function buildOpenAIWriterUserPrompt(params: {
   ].join("\n");
 }
 
+const WRITER_PROMPT_TOKEN_BUDGET = {
+  input: 9_000,
+  output: 4_200,
+} as const;
+
+function estimatePromptTokens(text: string): number {
+  return Math.ceil(Array.from(text).length / 2.4);
+}
+
+function compactList(values: string[], limit = 4): string[] {
+  return values.filter(Boolean).slice(0, limit);
+}
+
+function buildCompactArticleContractSummary(contract: StrategyPlanResult["articleContract"]): string {
+  if (!contract) {
+    return [
+      "Article contract core: unavailable.",
+      "Keep the draft aligned to the direct search intent and finish the answer in this article.",
+    ].join("\n");
+  }
+
+  return [
+    `Article role: ${contract.articleRole}`,
+    `Completion mode: ${contract.completionMode}`,
+    `Node type: ${contract.nodeType}`,
+    `Main intent: ${contract.mainIntent}`,
+    `Reader state: ${contract.readerState}`,
+    `Must resolve: ${compactList(contract.mustResolve, 5).join(" / ") || "none"}`,
+    `Must not defer: ${compactList(contract.mustNotDefer, 4).join(" / ") || "none"}`,
+  ].join("\n");
+}
+
+function buildCompactKeywordContractSummary(strategy: StrategyPlanResult): string {
+  const keywordContract = strategy.keywordContract;
+  if (!keywordContract) {
+    return [
+      "Keyword contract core: unavailable.",
+      `Primary keyword fallback: ${strategy.keywords[0] || "none"}`,
+      `Supporting keywords fallback: ${compactList(strategy.keywords.slice(1), 4).join(", ") || "none"}`,
+    ].join("\n");
+  }
+
+  return [
+    `Main keyword: ${keywordContract.mainKeyword}`,
+    `Sub keywords: ${compactList(keywordContract.subKeywords, 5).join(", ") || "none"}`,
+    `Bridge keywords: ${compactList(keywordContract.bridgeKeywords, 3).join(", ") || "none"}`,
+    `Forbidden terms: ${compactList(keywordContract.forbiddenTerms, 5).join(", ") || "none"}`,
+    `Limited keywords: ${keywordContract.limitedKeywords.slice(0, 5).map((item) => `${item.keyword} ${item.min}-${item.max}`).join(" / ") || "none"}`,
+  ].join("\n");
+}
+
+function buildOpenAIWriterCompactUserPrompt(params: {
+  strategy: StrategyPlanResult;
+  userId: string;
+  harnessBriefing?: string;
+  revisionInstructions?: string;
+}): string {
+  const { strategy, userId, harnessBriefing, revisionInstructions } = params;
+  const contract = strategy.articleContract;
+  const roleSpecificGuidance = buildRoleSpecificWriterGuidance(contract).slice(0, 4);
+  const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy).slice(0, 5);
+  const overlapLine = strategy.overlapReport
+    ? `Overlap guard: ${strategy.overlapReport.riskLevel} / ${strategy.overlapReport.recommendedRewriteDirection}`
+    : "Overlap guard: keep the intro, title direction, and CTA distinct from earlier posts.";
+  const naverSignalLine = strategy.naverSignals
+    ? `Naver signals: cafe ${strategy.naverSignals.cafeDemandSummary || "none"} / kin ${strategy.naverSignals.kinProblemSummary || "none"}`
+    : "Naver signals: unavailable.";
+
+  return [
+    `User id: ${userId.trim().toLowerCase()}`,
+    `Title: ${strategy.title}`,
+    `Target length: ${strategy.estimatedLength} Korean characters`,
+    `Tone: ${strategy.tone}`,
+    `Key points: ${compactList(strategy.keyPoints, 5).join(" / ") || "none"}`,
+    "",
+    "Compact mode is active because the writer prompt exceeded the token budget.",
+    "Keep only the essential structure and keyword responsibilities.",
+    "",
+    "Article contract core:",
+    buildCompactArticleContractSummary(contract),
+    "",
+    "Keyword contract core:",
+    buildCompactKeywordContractSummary(strategy),
+    "",
+    overlapLine,
+    naverSignalLine,
+    strategy.topicIntentResolution?.searchIntent
+      ? `Resolved search intent: ${strategy.topicIntentResolution.searchIntent}`
+      : "Resolved search intent: unavailable.",
+    "",
+    revisionInstructions
+      ? `Revision instructions from the failed evaluator:\n${revisionInstructions}`
+      : "First draft instructions: write a strong first draft that should pass the evaluator without needing repair.",
+    "",
+    "Pre-write harness briefing:",
+    harnessBriefing ? harnessBriefing.slice(0, 1200) : "No extra harness briefing.",
+    "",
+    "Required writing behavior:",
+    "- Finish the current search intent inside this article.",
+    "- Keep the main keyword stable and use sub keywords only where they clarify context.",
+    "- Do not expose internal SEO, workflow, or planning terms.",
+    "- Use concrete criteria, realistic user situations, and practical decision points.",
+    ...keywordPlacementGuidance,
+    ...roleSpecificGuidance,
+    "- Output only the final Korean markdown body.",
+  ].join("\n");
+}
+
+function resolveOpenAIWriterPromptPlan(params: {
+  strategy: StrategyPlanResult;
+  userId: string;
+  corpusSummary?: CorpusSummaryArtifact;
+  harnessBriefing?: string;
+  revisionInstructions?: string;
+}) {
+  const systemPrompt = buildOpenAIWriterSystemPrompt();
+  const fullUserPrompt = buildOpenAIWriterUserPrompt(params);
+  const fullInputTokens = estimatePromptTokens(systemPrompt) + estimatePromptTokens(fullUserPrompt);
+  const compactMode = fullInputTokens + WRITER_PROMPT_TOKEN_BUDGET.output > WRITER_PROMPT_TOKEN_BUDGET.input;
+  const userPrompt = compactMode
+    ? buildOpenAIWriterCompactUserPrompt(params)
+    : fullUserPrompt;
+  const estimatedInputTokens = estimatePromptTokens(systemPrompt) + estimatePromptTokens(userPrompt);
+
+  return {
+    systemPrompt,
+    userPrompt,
+    compactMode,
+    estimatedInputTokens,
+    maxOutputTokens: WRITER_PROMPT_TOKEN_BUDGET.output,
+  };
+}
+
+export function buildOpenAIWriterRevisionPrompt(params: {
+  strategy: StrategyPlanResult;
+  userId: string;
+  firstDraft: string;
+  harnessBriefing?: string;
+  revisionInstructions?: string;
+}): string {
+  const { strategy, userId, firstDraft, harnessBriefing, revisionInstructions } = params;
+  const contract = strategy.articleContract;
+  const mainKeyword = strategy.keywordContract?.mainKeyword || strategy.keywords[0] || "none";
+  const subKeywords = strategy.keywordContract?.subKeywords?.slice(0, 5) ?? strategy.keywords.slice(1, 6);
+  const mustResolve = contract?.mustResolve?.slice(0, 6) ?? [];
+  const mustNotDefer = contract?.mustNotDefer?.slice(0, 4) ?? [];
+  const keyPoints = strategy.keyPoints.slice(0, 6);
+
+  return [
+    "Revise the Korean blog draft below into the final publishable version.",
+    "Keep the article's facts and main angle, but repair weak SEO fit, Naver logic, repetition, and awkward sections.",
+    "Output only the final Korean markdown body.",
+    "",
+    `User id: ${userId.trim().toLowerCase()}`,
+    `Title: ${strategy.title}`,
+    `Target length: ${strategy.estimatedLength} Korean characters`,
+    `Main keyword: ${mainKeyword}`,
+    `Sub keywords: ${subKeywords.join(", ") || "none"}`,
+    `Article type: ${strategy.keywordContract?.articleType ?? "general_info"}`,
+    `Article stage: ${strategy.keywordContract?.articleStage ?? "information"}`,
+    `Search intent: ${strategy.keywordContract?.searchIntent ?? strategy.topicIntentResolution?.searchIntent ?? "none"}`,
+    `Key points: ${keyPoints.join(" / ") || "none"}`,
+    mustResolve.length ? `Must resolve: ${mustResolve.join(" / ")}` : "Must resolve: none",
+    mustNotDefer.length ? `Must not defer: ${mustNotDefer.join(" / ")}` : "Must not defer: none",
+    "",
+    "Revision priorities:",
+    "- Preserve the article's actual topic and reader intent.",
+    "- Reduce repeated or stuffed keyword phrasing.",
+    "- Keep the introduction concrete and situation-based.",
+    "- Make each section solve a reader question directly.",
+    "- Remove meta/internal SEO wording completely.",
+    revisionInstructions
+      ? `- Failed evaluator instructions: ${revisionInstructions}`
+      : "- No failed evaluator instructions were provided.",
+    harnessBriefing
+      ? `- Pre-write harness briefing to respect: ${harnessBriefing}`
+      : "- No extra harness briefing was provided.",
+    "",
+    "Draft to revise:",
+    firstDraft,
+  ].join("\n");
+}
+
 export function buildOpenAIWriterPayloadPreview(params: {
   strategy: StrategyPlanResult;
   userId: string;
@@ -504,24 +692,29 @@ export function buildOpenAIWriterPayloadPreview(params: {
   input: Array<{ role: "system" | "user"; content: string }>;
   maxOutputTokens: number;
   temperature: number;
+  compactMode: boolean;
+  estimatedInputTokens: number;
 } {
   const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
+  const promptPlan = resolveOpenAIWriterPromptPlan({
+    strategy,
+    userId,
+    corpusSummary,
+    harnessBriefing,
+    revisionInstructions,
+  });
   return {
     model: params.model ?? process.env.OPENAI_WRITER_MODEL ?? "gpt-4.1",
     input: [
-      { role: "system", content: buildOpenAIWriterSystemPrompt() },
+      { role: "system", content: promptPlan.systemPrompt },
       {
         role: "user",
-        content: buildOpenAIWriterUserPrompt({
-          strategy,
-          userId,
-          corpusSummary,
-          harnessBriefing,
-          revisionInstructions,
-        }),
+        content: promptPlan.userPrompt,
       },
     ],
-    maxOutputTokens: 6500,
+    maxOutputTokens: promptPlan.maxOutputTokens,
     temperature: 0.55,
+    compactMode: promptPlan.compactMode,
+    estimatedInputTokens: promptPlan.estimatedInputTokens,
   };
 }
