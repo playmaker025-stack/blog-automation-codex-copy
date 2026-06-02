@@ -368,6 +368,7 @@ export default function PipelinePage() {
           seriesRole: strategy.seriesRole,
           targetMainKeyword: strategy.targetMainKeyword,
           keywordContract: strategy.keywordContract,
+          articlePlan: strategy.articlePlan,
           confirmedSeoKeywords,
         });
 
@@ -1045,7 +1046,7 @@ export default function PipelinePage() {
                 onClick={() => startPipeline(true)}
                 className="mt-3 px-3 py-1.5 rounded-md bg-amber-600 text-white text-xs font-semibold hover:bg-amber-700 transition-colors"
               >
-                다른 각도로 작성
+                기존 글과 다른 각도로 작성
               </button>
             )}
             {publishedDuplicateBlocked && (
@@ -1054,7 +1055,7 @@ export default function PipelinePage() {
                 onClick={() => startPipeline(true, true)}
                 className="mt-3 ml-2 px-3 py-1.5 rounded-md bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
               >
-                그래도 발행 진행
+                무시하고 중복되더라도 작성
               </button>
             )}
           </div>

@@ -212,11 +212,17 @@ const splitCombinationTokens = splitSearchCombinationTokens;
 
 function normalizeBodyForKeywordCounting(body: string): string {
   return body
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/https?:\/\/\S+/giu, " ")
+    .split(/\r?\n/)
+    .filter((line) => !/^(?:#\S+\s*)+$/u.test(line.trim()))
+    .filter((line) => !/^[a-z0-9_-]+(?:_[a-z0-9_-]+)*_\d{2}$/iu.test(line.trim()))
+    .filter((line) => !/^(사진파일명|사진 파일명|해시태그|인덱스 템플릿|SEO 리포트)/iu.test(line.trim()))
+    .join("\n")
+    .replace(/[*_`>#-]+/g, " ")
     .replace(/\r\n/g, "\n")
-    .split(/\n{2,}/)
-    .map((paragraph) => paragraph.replace(/\s+/g, " ").trim())
-    .filter(Boolean)
-    .join("\n\n");
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function buildFlexibleKeywordPattern(keyword: string): RegExp {
@@ -877,6 +883,21 @@ function buildSeoKeywordItems(params: {
   return filterValidSeoKeywordItems(seoItems);
 }
 
+function buildRequiredEntityChecks(
+  articlePlan: import("./types").ArticlePlan | undefined,
+  body: string
+): Array<{ entity: string; included: boolean; note: string }> {
+  if (!articlePlan?.requiredEntities?.length) return [];
+  return articlePlan.requiredEntities.map((entity) => {
+    const included = countKeywordOccurrences(body, entity) > 0;
+    return {
+      entity,
+      included,
+      note: included ? "포함됨" : "누락됨",
+    };
+  });
+}
+
 function buildBodyRepetitionItems(body: string): BodyRepetitionItem[] {
   const items: BodyRepetitionItem[] = [];
   const tokenCounts = new Map<string, number>();
@@ -1014,6 +1035,7 @@ export function analyzeKeywordUsage(params: {
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
+  articlePlan?: import("./types").ArticlePlan;
   forbiddenTerms?: string[];
   confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }): KeywordUsageReport {
@@ -1116,6 +1138,7 @@ export function analyzeKeywordUsage(params: {
     items,
     confirmedSeoKeywords: params.confirmedSeoKeywords,
   });
+  const requiredEntityChecks = buildRequiredEntityChecks(params.articlePlan, params.body);
   const legacyTokenItems = buildKeywordTokenItems(tokenPool, params.body);
   const bodyRepetitionItems = buildBodyRepetitionItems(params.body);
 
@@ -1148,6 +1171,7 @@ export function analyzeKeywordUsage(params: {
     overallRiskSummary,
     paragraphWarnings,
     seoKeywordItems,
+    requiredEntityChecks,
     bodyRepetitionItems,
     legacyTokenItems,
     tokenItems: legacyTokenItems,
@@ -1169,6 +1193,7 @@ export function evaluateSeoCompleteness(params: {
   seriesRole?: "prelude" | "main";
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
+  articlePlan?: import("./types").ArticlePlan;
   forbiddenTerms?: string[];
   confirmedSeoKeywords?: ConfirmedSeoKeywords;
 }): SeoEvaluation {

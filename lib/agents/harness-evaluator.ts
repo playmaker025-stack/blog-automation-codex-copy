@@ -212,6 +212,7 @@ function finalizeEval(params: {
     seriesRole: strategy.seriesRole,
     targetMainKeyword: strategy.targetMainKeyword,
     keywordContract: strategy.keywordContract,
+    articlePlan: strategy.articlePlan,
     forbiddenTerms: strategy.keywordContract?.forbiddenTerms,
   });
   const naverLogicEvaluation = naverLogicAgent.auditAfterWriting({

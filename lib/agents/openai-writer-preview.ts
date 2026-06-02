@@ -1,6 +1,7 @@
 import { classifySearchCombination } from "./search-combination-utils.ts";
 import { buildRoleSpecificWriterGuidance, formatArticleContract } from "./article-contract-utils.ts";
 import { formatOverlapReport } from "./overlap-report-utils.ts";
+import { formatArticlePlan } from "./article-plan.ts";
 
 const SEO_PASS_THRESHOLD = 90;
 
@@ -123,6 +124,7 @@ type StrategyPlanResult = {
   seriesRole?: "prelude" | "main";
   keywordContract?: KeywordContract;
   articleContract?: import("./types.ts").ArticleContract;
+  articlePlan?: import("./types.ts").ArticlePlan;
   overlapReport?: import("./types.ts").OverlapReport;
   topicIntentResolution?: TopicIntentResolution;
 };
@@ -426,6 +428,9 @@ export function buildOpenAIWriterUserPrompt(params: {
     "",
     "Keyword contract:",
     formatKeywordContract(strategy),
+    "",
+    "Article plan:",
+    formatArticlePlan(strategy.articlePlan),
     "",
     "Naver logic pre-check:",
     formatNaverWriterBrief(strategy.naverLogic),

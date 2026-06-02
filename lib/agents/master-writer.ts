@@ -19,6 +19,7 @@ import {
 } from "./article-contract-utils";
 import { formatOverlapReport } from "./overlap-report-utils";
 import { runFinalDraftCheck, runLimitedFinalDraftRewrite } from "./final-draft-check";
+import { formatArticlePlan } from "./article-plan.ts";
 
 // ============================================================
 // 발행용 본문은 이 에이전트만 작성한다 — 핵심 원칙
@@ -1008,6 +1009,9 @@ ${formatOverlapReport(strategy.overlapReport)}
 
 키워드 계약서:
 ${formatKeywordContract(strategy)}
+
+Article plan:
+${formatArticlePlan(strategy.articlePlan)}
 
 Naver logic pre-check:
 ${naverLogicAgent.buildWriterBrief(strategy.naverLogic)}

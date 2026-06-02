@@ -22,6 +22,7 @@ import { classifySearchCombination, normalizeSearchPhrase, sanitizeMainKeywordCa
 import { buildArticleContract, evaluateStrategyQualityGate } from "./article-contract-utils";
 import { buildExistingArticleSummaries, buildOverlapReport } from "./overlap-report-utils";
 import { resolveTopicIntent } from "./topic-intent-resolver";
+import { buildArticlePlan } from "./article-plan.ts";
 
 const STRATEGY_LOOP_TIMEOUT_MS = 120_000;
 const SIMPLE_STRATEGY_TIMEOUT_MS = 45_000;
@@ -782,6 +783,7 @@ const GENERIC_KEYWORD_SET = new Set([
 function isGenericKeyword(value: string): boolean {
   const normalized = normalizeKeyword(value).toLowerCase();
   if (!normalized || normalized.length < 2) return true;
+  if (["비교", "추천", "기기", "제품", "기준", "사용자", "액상", "관리"].includes(normalized)) return true;
   if (GENERIC_KEYWORD_SET.has(normalized)) return true;
   // 모든 토큰이 일반 용어인 조합(예: "선택 기준", "체크 포인트")도 일반으로 처리
   const tokens = normalized.split(/\s+/).filter((t) => t.length >= 2);
@@ -1136,6 +1138,14 @@ export async function runStrategyPlanner(params: {
     ...plan,
     articleContract: buildArticleContract({ topic, plan }),
   };
+  plan = {
+    ...plan,
+    articlePlan: buildArticlePlan({
+      topic,
+      plan,
+      topicIntentResolution,
+    }),
+  };
   const existingArticles = await loadExistingArticleSummariesForUser(userId);
   const currentContract = plan.articleContract;
   const currentKeywordContract = plan.keywordContract;
@@ -1183,6 +1193,14 @@ export async function runStrategyPlanner(params: {
     plan = {
       ...plan,
       articleContract: buildArticleContract({ topic, plan }),
+    };
+    plan = {
+      ...plan,
+      articlePlan: buildArticlePlan({
+        topic,
+        plan,
+        topicIntentResolution,
+      }),
     };
     const seriesContract = plan.articleContract;
     const seriesKeywordContract = plan.keywordContract;

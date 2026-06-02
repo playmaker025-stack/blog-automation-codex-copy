@@ -27,6 +27,7 @@ import { naverLogicAgent } from "./naver-logic-agent";
 import { localityKeywordAgent } from "./locality-keyword-agent";
 import { evaluateSeoCompleteness } from "./seo-metrics";
 import { shouldAttemptWriterRevision } from "./writer-revision-policy";
+import { patchArticlePlan } from "./article-plan.ts";
 import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -152,9 +153,15 @@ function applyApprovalModificationsToStrategy(
   if (!normalized) return strategy;
 
   const requestedTitle = extractApprovedTitle(normalized);
+  const patchedArticlePlan = patchArticlePlan(strategy.articlePlan, {
+    modifications: normalized,
+    requestedTitle,
+    fallbackRequiredEntities: strategy.keywordContract?.productCandidates,
+  });
   return {
     ...strategy,
     title: requestedTitle ?? strategy.title,
+    articlePlan: patchedArticlePlan,
     rationale: `${strategy.rationale}\n\n[사용자 승인 후 추가 수정 요청]\n${normalized}`,
     keyPoints: uniqueNonEmpty([
       ...strategy.keyPoints,
@@ -1768,6 +1775,7 @@ export async function runWritePhase(params: {
       seriesRole: effectiveStrategy.seriesRole,
       targetMainKeyword: effectiveStrategy.targetMainKeyword,
       keywordContract: effectiveStrategy.keywordContract,
+      articlePlan: effectiveStrategy.articlePlan,
       forbiddenTerms: effectiveStrategy.keywordContract?.forbiddenTerms,
     });
 

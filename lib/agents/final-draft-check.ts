@@ -46,11 +46,18 @@ function collectConfirmedDraftCheckKeywords(
   confirmedSeoKeywords?: ConfirmedSeoKeywords
 ): string[] {
   const confirmed = confirmedSeoKeywords ?? buildConfirmedSeoKeywords({
-    keywordContract: strategy.keywordContract,
+    keywordContract: {
+      mainKeyword: strategy.articlePlan?.mainKeyword ?? strategy.keywordContract?.mainKeyword ?? "",
+      subKeywords: strategy.articlePlan?.subKeywords?.length
+        ? strategy.articlePlan.subKeywords
+        : (strategy.keywordContract?.subKeywords ?? []),
+    },
     topicMetadata: {
-      targetKeyword: strategy.keywordContract?.mainKeyword,
+      targetKeyword: strategy.articlePlan?.mainKeyword ?? strategy.keywordContract?.mainKeyword ?? "",
       targetMainKeyword: strategy.targetMainKeyword,
-      subKeywords: strategy.keywordContract?.subKeywords,
+      subKeywords: strategy.articlePlan?.subKeywords?.length
+        ? strategy.articlePlan.subKeywords
+        : (strategy.keywordContract?.subKeywords ?? []),
     },
   });
 
@@ -188,6 +195,57 @@ function findContractCoverage(content: string, contract?: ArticleContract): stri
   return findings;
 }
 
+function findArticlePlanCoverage(content: string, strategy: StrategyPlanResult): { blocking: string[]; warnings: string[] } {
+  const plan = strategy.articlePlan;
+  if (!plan) {
+    return { blocking: [], warnings: ["ArticlePlan이 없어 사용자 고정 요구사항 검수를 건너뛰었습니다."] };
+  }
+
+  const blocking: string[] = [];
+  const warnings: string[] = [];
+  const normalizedContent = normalizeText(content);
+
+  for (const entity of plan.requiredEntities) {
+    if (!containsLoose(content, entity)) {
+      blocking.push(`필수 포함 요소 누락: ${entity}`);
+      continue;
+    }
+
+    const start = normalizedContent.indexOf(normalizeText(entity));
+    if (start >= 0) {
+      const context = normalizedContent.slice(start, Math.min(normalizedContent.length, start + 420));
+      if (!/(추천 이유|추천하는 이유|이유는|장점은|추천 포인트|왜 추천)/.test(context)) {
+        blocking.push(`필수 포함 요소 '${entity}' 아래 추천 이유가 부족합니다.`);
+      }
+      if (!/(추천 대상|잘 맞는 분|어울리는 분|이런 분|이런 분께|입문자|기존 사용자|사용자 유형)/.test(context)) {
+        blocking.push(`필수 포함 요소 '${entity}' 아래 추천 대상이 부족합니다.`);
+      }
+    }
+  }
+
+  for (const section of plan.requiredSections) {
+    if (!phraseHasMinimalCue(content, section)) {
+      warnings.push(`필수 섹션 반영 부족: ${section}`);
+    }
+  }
+
+  if (plan.lockedRequirements.some((item) => item.includes("기준 설명형 글로만 작성하지 않는다."))) {
+    const includedEntityCount = plan.requiredEntities.filter((entity) => containsLoose(content, entity)).length;
+    if (includedEntityCount === 0) {
+      blocking.push("제품별 추천 구조 없이 일반 기준 설명형 글로만 작성되었습니다.");
+    }
+  }
+
+  if (plan.planVersion <= 0) {
+    blocking.push("최신 글쓰기 계획 버전이 아닙니다.");
+  }
+
+  return {
+    blocking: uniq(blocking),
+    warnings: uniq(warnings),
+  };
+}
+
 function findOverlapIssues(content: string, report?: OverlapReport): string[] {
   if (!report || report.riskLevel === "low") return [];
 
@@ -276,6 +334,7 @@ export function runFinalDraftCheck(params: {
   ]);
   const deferFindings = findDeferViolations(params.content, contract);
   const contractCoverageFindings = findContractCoverage(params.content, contract);
+  const articlePlanCoverage = findArticlePlanCoverage(params.content, params.strategy);
   const overlapFindings = findOverlapIssues(params.content, overlapReport);
 
   const blockingReasons = uniq([
@@ -283,11 +342,13 @@ export function runFinalDraftCheck(params: {
     ...questionStuffing,
     ...keywordLimitFindings,
     ...deferFindings,
+    ...articlePlanCoverage.blocking,
     ...(overlapReport?.riskLevel === "high" ? overlapFindings : []),
   ]);
 
   const warnings = uniq([
     ...contractCoverageFindings,
+    ...articlePlanCoverage.warnings,
     ...preludeConsumptionFindings,
     ...(overlapReport?.riskLevel === "medium" ? overlapFindings : []),
   ]);

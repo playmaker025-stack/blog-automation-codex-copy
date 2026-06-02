@@ -20,6 +20,31 @@ interface TopicMetadataKeywordSource {
   keywords?: string[] | null;
 }
 
+const GENERIC_SEO_KEYWORDS = new Set([
+  "비교",
+  "추천",
+  "기기",
+  "제품",
+  "기준",
+  "사용자",
+  "액상",
+  "관리",
+]);
+
+const BLOCKED_HEADING_PARTS = [
+  "체크포인트",
+  "기준",
+  "먼저",
+  "시작 전에",
+  "놓치는",
+  "알아야 할",
+  "확인해야 할",
+  "정리",
+  "이유",
+  "방법",
+  "포인트",
+];
+
 function normalizeKeyword(value: string | null | undefined): string {
   return (value ?? "").normalize("NFKC").trim().replace(/\s+/g, " ");
 }
@@ -43,24 +68,9 @@ function isHeadingLikeKeyword(value: string): boolean {
   if (normalized.length > 24) return true;
   if (/[?!]/u.test(normalized)) return true;
   if (normalized.split(/\s+/).length >= 5) return true;
-
-  const blockedParts = [
-    "체크포인트",
-    "기준",
-    "먼저",
-    "시작 전에",
-    "놓치는",
-    "알아야 할",
-    "확인해야 할",
-    "정리",
-    "이유",
-    "방법",
-    "포인트",
-  ];
-
-  if (blockedParts.some((part) => normalized.includes(part))) return true;
-  if (/(하는|있는|없는|되는|놓치는|알아야|해야|보는|정리하는|확인하는)$/u.test(normalized)) return true;
-  if (/[은는이가을를에에서와과]$/.test(normalized)) return true;
+  if (BLOCKED_HEADING_PARTS.some((part) => normalized.includes(part))) return true;
+  if (/(하는|되는|없는|같은|놓치는|알아야|확인해야|정리하는|보는|잡아야)$/u.test(normalized)) return true;
+  if (/[은는이가을를에에서고]$/u.test(normalized)) return true;
   return false;
 }
 
@@ -71,13 +81,23 @@ function validateKeywordCandidate(
 ): string | null {
   const normalized = normalizeKeyword(value);
   if (!normalized) return null;
-  if (isHeadingLikeKeyword(normalized)) {
+
+  if (GENERIC_SEO_KEYWORDS.has(normalized.toLowerCase())) {
     rejectedCandidates.push({
       value: normalized,
-      reason: `${reasonPrefix}: 제목형/문장형 항목이라 확정 SEO 키워드에서 제외했습니다.`,
+      reason: `${reasonPrefix}: 일반 반복어라 확정 SEO 키워드에서 제외했습니다.`,
     });
     return null;
   }
+
+  if (isHeadingLikeKeyword(normalized)) {
+    rejectedCandidates.push({
+      value: normalized,
+      reason: `${reasonPrefix}: 제목형 또는 문장형 항목이라 확정 SEO 키워드에서 제외했습니다.`,
+    });
+    return null;
+  }
+
   return normalized;
 }
 
@@ -144,7 +164,7 @@ export function buildConfirmedSeoKeywords(params: {
       .filter((keyword): keyword is string => Boolean(keyword))
   );
 
-  if (directMain) {
+  if (directMain || directSubKeywords.length > 0) {
     return {
       mainKeyword: directMain,
       subKeywords: directSubKeywords.filter((keyword) => keyword !== directMain),

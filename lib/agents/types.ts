@@ -46,9 +46,25 @@ export interface StrategyPlanResult {
   targetMainKeyword?: string;
   keywordContract?: KeywordContract;
   articleContract?: ArticleContract;
+  articlePlan?: ArticlePlan;
   strategyQualityGate?: StrategyQualityGateResult;
   overlapReport?: OverlapReport;
   topicIntentResolution?: TopicIntentResolution;
+}
+
+export type DuplicateMode = "different_angle" | "force_duplicate";
+
+export interface ArticlePlan {
+  title: string;
+  mainKeyword: string;
+  subKeywords: string[];
+  searchIntent: string;
+  requiredEntities: string[];
+  lockedRequirements: string[];
+  requiredSections: string[];
+  duplicateMode?: DuplicateMode;
+  planVersion: number;
+  updatedAt: string;
 }
 
 export type ArticleRole =
@@ -348,6 +364,11 @@ export interface KeywordUsageReport {
   overallRiskSummary: string;
   paragraphWarnings: KeywordParagraphWarning[];
   seoKeywordItems: SeoKeywordItem[];
+  requiredEntityChecks?: Array<{
+    entity: string;
+    included: boolean;
+    note: string;
+  }>;
   bodyRepetitionItems: BodyRepetitionItem[];
   legacyTokenItems?: Array<{
     token: string;

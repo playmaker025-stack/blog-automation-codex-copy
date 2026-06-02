@@ -27,6 +27,7 @@ export function isValidSeoKeyword(keyword: string): boolean {
   if (!normalized) return false;
   if (normalized.length > 24) return false;
   if (normalized.includes("?") || normalized.includes("!")) return false;
+  if (/(체크포인트|기준|먼저|시작 전에|놓치는|알아야 할|확인해야 할|정리|이유|방법|포인트)/u.test(normalized)) return false;
   if (SENTENCE_ENDING_PATTERN.test(normalized)) return false;
   if (BLOCKED_KEYWORD_PARTS.some((term) => normalized.includes(term))) return false;
 
