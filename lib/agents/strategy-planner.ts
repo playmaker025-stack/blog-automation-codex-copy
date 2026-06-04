@@ -12,7 +12,7 @@ import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-re
 import { readJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex, Topic, TopicIndex } from "@/lib/types/github-data";
-import type { ArticleStage, ArticleType, KeywordContract, SearchCombinationTarget, StrategyPlanResult } from "./types";
+import type { ArticleStage, ArticleType, DuplicateMode, KeywordContract, SearchCombinationTarget, StrategyPlanResult } from "./types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import { buildContentTopologyPlan } from "./content-topology";
 import { buildPolicyPromptSection } from "./blog-workflow-policy";
@@ -659,7 +659,8 @@ function buildUserMessage(
   topicId: string,
   userId: string,
   directIntent: DirectKeywordIntent | null,
-  publicationLearning: StrategyPlanResult["publicationLearning"]
+  publicationLearning: StrategyPlanResult["publicationLearning"],
+  duplicateModeOverride?: DuplicateMode
 ): string {
   const seriesBrief = topic.seriesId
     ? [
@@ -705,6 +706,11 @@ function buildUserMessage(
     seriesDetailBrief,
     `사용자 ID: ${userId}`,
     `참조 URL: ${topic.relatedSources.join(", ") || "없음"}`,
+    duplicateModeOverride === "force_duplicate"
+      ? "중복 처리 모드: force_duplicate. 기존 글과 비슷하다는 이유만으로 방향을 틀지 말고, 현재 제목/검색의도 그대로 실행 가능한 전략을 세우세요. 대신 도입/결론/CTA와 예시는 반복을 줄이세요."
+      : duplicateModeOverride === "different_angle"
+        ? "중복 처리 모드: different_angle. 핵심 검색의도는 유지하되 도입, 설명 축, 결론 흐름은 기존 글과 다르게 설계하세요."
+        : "",
     "",
     formatPublicationLearningBrief(publicationLearning),
     "",
@@ -991,6 +997,7 @@ function buildKeywordContract(params: {
 export async function runStrategyPlanner(params: {
   topicId: string;
   userId: string;
+  duplicateModeOverride?: DuplicateMode;
   onProgress?: (message: string) => void;
   signal?: AbortSignal;
 }): Promise<StrategyPlanResult> {
@@ -1067,7 +1074,7 @@ export async function runStrategyPlanner(params: {
       messages: [{
         role: "user",
         content:
-          buildUserMessage(topic, topicId, userId, directIntent, publicationLearning) +
+          buildUserMessage(topic, topicId, userId, directIntent, publicationLearning, params.duplicateModeOverride) +
           `\n\n${communityResearchBrief}` +
           `\n\nRequired research focus before final JSON:\n` +
           `- Use naver_cafe_search to identify current product demand, repeated comparison language, and real community interest.\n` +
@@ -1144,6 +1151,7 @@ export async function runStrategyPlanner(params: {
       topic,
       plan,
       topicIntentResolution,
+      duplicateMode: params.duplicateModeOverride,
     }),
   };
   const existingArticles = await loadExistingArticleSummariesForUser(userId);
@@ -1200,6 +1208,7 @@ export async function runStrategyPlanner(params: {
         topic,
         plan,
         topicIntentResolution,
+        duplicateMode: params.duplicateModeOverride,
       }),
     };
     const seriesContract = plan.articleContract;

@@ -39,6 +39,7 @@ import {
 } from "@/lib/github/approval-store";
 import type { PostingIndex, Topic, TopicIndex } from "@/lib/types/github-data";
 import type {
+  DuplicateMode,
   PipelineRunRequest,
   PipelineState,
   ApprovalRequest,
@@ -147,15 +148,17 @@ function extractApprovedTitle(modifications?: string): string | null {
 
 function applyApprovalModificationsToStrategy(
   strategy: StrategyPlanResult,
-  modifications?: string
+  modifications?: string,
+  duplicateModeOverride?: DuplicateMode
 ): StrategyPlanResult {
   const normalized = modifications?.trim();
-  if (!normalized) return strategy;
+  if (!normalized && !duplicateModeOverride) return strategy;
 
   const requestedTitle = extractApprovedTitle(normalized);
   const patchedArticlePlan = patchArticlePlan(strategy.articlePlan, {
     modifications: normalized,
     requestedTitle,
+    duplicateMode: duplicateModeOverride,
     fallbackRequiredEntities: strategy.keywordContract?.productCandidates,
   });
   return {
@@ -1415,6 +1418,7 @@ export async function runStrategyPhase(params: {
   userId: string;
   pipelineId: string;
   forcePreflightOverride?: boolean;
+  duplicateModeOverride?: DuplicateMode;
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<void> {
@@ -1455,6 +1459,7 @@ export async function runStrategyPhase(params: {
     const strategy = await runStrategyPlanner({
       topicId,
       userId,
+      duplicateModeOverride: params.duplicateModeOverride,
       onProgress: (msg) => emit(controller, makeEvent("progress", "strategy-planning", { message: msg })),
       signal,
     });
@@ -1543,6 +1548,7 @@ export async function runWritePhase(params: {
   strategy: StrategyPlanResult;
   modifications?: string;
   forcePreflightOverride?: boolean;
+  duplicateModeOverride?: DuplicateMode;
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<void> {
@@ -1553,7 +1559,11 @@ export async function runWritePhase(params: {
   gate.grant(); // 클라이언트에서 이미 승인됨
   let thisSetTopicInProgress = false;
   const approvalModifications = params.modifications?.trim() || "";
-  const effectiveStrategy = applyApprovalModificationsToStrategy(strategy, approvalModifications);
+  const effectiveStrategy = applyApprovalModificationsToStrategy(
+    strategy,
+    approvalModifications,
+    params.duplicateModeOverride
+  );
 
   let state: PipelineState = {
     pipelineId,

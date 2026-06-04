@@ -2,15 +2,21 @@ import "@anthropic-ai/sdk/shims/node";
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { runStrategyPhase } from "@/lib/agents/orchestrator";
+import type { DuplicateMode } from "@/lib/agents/types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
 export async function POST(request: NextRequest) {
-  let body: { topicId: string; userId: string; forcePreflightOverride?: boolean };
+  let body: {
+    topicId: string;
+    userId: string;
+    forcePreflightOverride?: boolean;
+    duplicateModeOverride?: DuplicateMode;
+  };
   try {
-    body = (await request.json()) as { topicId: string; userId: string; forcePreflightOverride?: boolean };
+    body = (await request.json()) as typeof body;
   } catch {
     return NextResponse.json({ error: "요청 본문 파싱 실패" }, { status: 400 });
   }
@@ -62,6 +68,7 @@ export async function POST(request: NextRequest) {
         topicId: body.topicId,
         userId,
         forcePreflightOverride: body.forcePreflightOverride,
+        duplicateModeOverride: body.duplicateModeOverride,
         pipelineId,
         controller,
         signal: abortController.signal,

@@ -19,7 +19,7 @@ import {
 } from "./article-contract-utils";
 import { formatOverlapReport } from "./overlap-report-utils";
 import { runFinalDraftCheck, runLimitedFinalDraftRewrite } from "./final-draft-check";
-import { formatArticlePlan } from "./article-plan.ts";
+import { buildDuplicateModeWriterGuidance, formatArticlePlan } from "./article-plan.ts";
 
 // ============================================================
 // 발행용 본문은 이 에이전트만 작성한다 — 핵심 원칙
@@ -523,6 +523,12 @@ export function buildOpenAIWriterUserPrompt(params: {
   const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy);
   const contract = strategy.articleContract;
   const roleSpecificGuidance = buildRoleSpecificWriterGuidance(contract);
+  const duplicateModeGuidance = buildDuplicateModeWriterGuidance(strategy.articlePlan);
+  const overlapGuidance = strategy.overlapReport
+    ? strategy.articlePlan?.duplicateMode === "force_duplicate"
+      ? `- Overlap risk is ${strategy.overlapReport.riskLevel}, but duplicate mode is force_duplicate. Keep the current search intent and title direction. Only vary the intro, conclusion, CTA, and examples enough to avoid mechanical repetition.`
+      : `- Overlap risk is ${strategy.overlapReport.riskLevel}. Avoid repeating the same title direction, intro pattern, conclusion pattern, or CTA from similar existing posts. Follow this rewrite direction: ${strategy.overlapReport.recommendedRewriteDirection}`
+    : "- Avoid repeating the same title direction, intro pattern, conclusion pattern, or CTA from earlier posts.";
   return [
     `User id: ${userId.trim().toLowerCase()}`,
     `Title: ${strategy.title}`,
@@ -582,10 +588,9 @@ export function buildOpenAIWriterUserPrompt(params: {
     contract?.mustNotDefer?.length
       ? `- Do not defer these items to another post: ${contract.mustNotDefer.join(" / ")}.`
       : "- Do not defer the current article's core answer to another post.",
-    strategy.overlapReport
-      ? `- Overlap risk is ${strategy.overlapReport.riskLevel}. Avoid repeating the same title direction, intro pattern, conclusion pattern, or CTA from similar existing posts. Follow this rewrite direction: ${strategy.overlapReport.recommendedRewriteDirection}`
-      : "- Avoid repeating the same title direction, intro pattern, conclusion pattern, or CTA from earlier posts.",
+    overlapGuidance,
     ...keywordPlacementGuidance,
+    ...duplicateModeGuidance,
     ...roleSpecificGuidance,
     "- Target search combinations are intent coverage signals, not mandatory exact phrases.",
     "- If exact phrase insertion is blocked for a combination, do not write that raw long-tail phrase in the body. Break it into natural sentence parts instead.",
@@ -674,9 +679,12 @@ function buildOpenAIWriterCompactUserPrompt(params: {
   const { strategy, userId, harnessBriefing, revisionInstructions } = params;
   const contract = strategy.articleContract;
   const roleSpecificGuidance = buildRoleSpecificWriterGuidance(contract).slice(0, 4);
+  const duplicateModeGuidance = buildDuplicateModeWriterGuidance(strategy.articlePlan).slice(0, 3);
   const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy).slice(0, 5);
   const overlapLine = strategy.overlapReport
-    ? `Overlap guard: ${strategy.overlapReport.riskLevel} / ${strategy.overlapReport.recommendedRewriteDirection}`
+    ? strategy.articlePlan?.duplicateMode === "force_duplicate"
+      ? `Overlap guard: ${strategy.overlapReport.riskLevel} / force_duplicate / keep current search intent, only vary intro-conclusion-CTA repetition`
+      : `Overlap guard: ${strategy.overlapReport.riskLevel} / ${strategy.overlapReport.recommendedRewriteDirection}`
     : "Overlap guard: keep the intro, title direction, and CTA distinct from earlier posts.";
   const naverSignalLine = strategy.naverSignals
     ? `Naver signals: cafe ${strategy.naverSignals.cafeDemandSummary || "none"} / kin ${strategy.naverSignals.kinProblemSummary || "none"}`
@@ -717,6 +725,7 @@ function buildOpenAIWriterCompactUserPrompt(params: {
     "- Do not expose internal SEO, workflow, or planning terms.",
     "- Use concrete criteria, realistic user situations, and practical decision points.",
     ...keywordPlacementGuidance,
+    ...duplicateModeGuidance,
     ...roleSpecificGuidance,
     "- Output only the final Korean markdown body.",
   ].join("\n");
@@ -781,6 +790,9 @@ export function buildOpenAIWriterRevisionPrompt(params: {
     "",
     "Revision priorities:",
     "- Preserve the article's actual topic and reader intent.",
+    strategy.articlePlan?.duplicateMode === "force_duplicate"
+      ? "- Duplicate mode is force_duplicate. Do not revise the draft into a different angle just to reduce overlap risk."
+      : "- If overlap risk exists, differentiate the intro, examples, and CTA without changing the requested search intent.",
     "- Reduce repeated or stuffed keyword phrasing.",
     "- Keep the introduction concrete and situation-based.",
     "- Make each section solve a reader question directly.",

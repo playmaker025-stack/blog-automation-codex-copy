@@ -9,7 +9,7 @@ import { ApprovalDialog } from "@/components/pipeline/approval-dialog";
 import { PipelineStateInspector, applyEventToInspector } from "@/components/pipeline/state-inspector";
 import { usePipelineStore } from "@/lib/store/pipeline-store";
 import { reviewActualDraft, type DraftReviewIssue, type DraftReviewResult } from "@/lib/agents/draft-review";
-import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport, FinalDraftCheck } from "@/lib/agents/types";
+import type { SSEEvent, ApprovalRequest, StrategyPlanResult, NaverLogicEvaluation, SeoEvaluation, KeywordUsageReport, FinalDraftCheck, DuplicateMode } from "@/lib/agents/types";
 import { evaluateSeoCompleteness } from "@/lib/agents/seo-metrics";
 import { canApproveFinalDraft } from "@/lib/agents/final-draft-check";
 import { buildConfirmedSeoKeywords } from "@/lib/agents/confirmed-seo-keywords";
@@ -253,6 +253,7 @@ export default function PipelinePage() {
   const [preflightBlocked, setPreflightBlocked] = useState(false);
   const [publishedDuplicateBlocked, setPublishedDuplicateBlocked] = useState(false);
   const forcePreflightOverrideRef = useRef(false);
+  const duplicateModeOverrideRef = useRef<DuplicateMode | undefined>(undefined);
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewBody, setReviewBody] = useState("");
   const [revisionRequest] = useState("");
@@ -566,6 +567,7 @@ export default function PipelinePage() {
         strategy: approvalData.strategy,
         modifications: approvalData.modifications?.trim() || undefined,
         forcePreflightOverride: forcePreflightOverrideRef.current,
+        duplicateModeOverride: duplicateModeOverrideRef.current,
       }),
       signal: abortController.signal,
     })
@@ -659,7 +661,11 @@ export default function PipelinePage() {
     return json.topic.topicId;
   };
 
-  const startPipeline = async (forcePreflightOverride = false, forcePublishedDuplicateOverride = false) => {
+  const startPipeline = async (
+    forcePreflightOverride = false,
+    forcePublishedDuplicateOverride = false,
+    duplicateModeOverride?: DuplicateMode
+  ) => {
     const uid = normalizeUserId(userId.trim());
     const directComposedTitle = directTopicTitle.trim() || buildDirectTopicTitle(directMainKeyword, directSubKeyword);
     if (!uid) return;
@@ -714,6 +720,7 @@ export default function PipelinePage() {
     setRunning(true);
     setElapsed(0);
     forcePreflightOverrideRef.current = forcePreflightOverride;
+    duplicateModeOverrideRef.current = duplicateModeOverride;
     forceManualApprovalRef.current = forcePreflightOverride || forcePublishedDuplicateOverride;
 
     setRunningTitle(selectedTitle);
@@ -739,7 +746,7 @@ export default function PipelinePage() {
     fetch("/api/pipeline/strategy", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topicId, userId: uid, forcePreflightOverride }),
+      body: JSON.stringify({ topicId, userId: uid, forcePreflightOverride, duplicateModeOverride }),
       signal: abortController.signal,
     })
       .then((res) => {
@@ -1041,21 +1048,30 @@ export default function PipelinePage() {
             <p className="text-sm font-semibold text-red-700">글쓰기 실패</p>
             <p className="text-xs text-red-600 mt-0.5 break-words">{pipelineError}</p>
             {preflightBlocked && (
-              <button
-                type="button"
-                onClick={() => startPipeline(true)}
-                className="mt-3 px-3 py-1.5 rounded-md bg-amber-600 text-white text-xs font-semibold hover:bg-amber-700 transition-colors"
-              >
-                기존 글과 다른 각도로 작성
-              </button>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => startPipeline(true, false, "different_angle")}
+                  className="px-3 py-1.5 rounded-md bg-amber-600 text-white text-xs font-semibold hover:bg-amber-700 transition-colors"
+                >
+                  기존 글과 다른 각도로 작성
+                </button>
+                <button
+                  type="button"
+                  onClick={() => startPipeline(true, false, "force_duplicate")}
+                  className="px-3 py-1.5 rounded-md bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  무시하고 작성
+                </button>
+              </div>
             )}
             {publishedDuplicateBlocked && (
               <button
                 type="button"
-                onClick={() => startPipeline(true, true)}
+                onClick={() => startPipeline(true, true, "force_duplicate")}
                 className="mt-3 ml-2 px-3 py-1.5 rounded-md bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
               >
-                무시하고 중복되더라도 작성
+                무시하고 작성
               </button>
             )}
           </div>

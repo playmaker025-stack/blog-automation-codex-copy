@@ -106,7 +106,7 @@ describe("PR1 품질 가드", () => {
   test("strategy-planner는 directIntent를 추출 직후 sanitize하고 전 경로에 sanitized 값만 전달한다", () => {
     assert.ok(strategyPlannerSource.includes("const rawDirectIntent = extractDirectKeywordIntent(topic);"));
     assert.ok(strategyPlannerSource.includes("const directIntent = sanitizeDirectIntent(rawDirectIntent);"));
-    assert.ok(strategyPlannerSource.includes("buildUserMessage(topic, topicId, userId, directIntent, publicationLearning)"));
+    assert.ok(strategyPlannerSource.includes("buildUserMessage(topic, topicId, userId, directIntent, publicationLearning, params.duplicateModeOverride)"));
     assert.ok(strategyPlannerSource.includes("applyDirectKeywordPriority(plan, directIntent)"));
     assert.ok(strategyPlannerSource.includes("buildTargetSearchCombinations({ topic, plan, directIntent })"));
     assert.ok(strategyPlannerSource.includes("directIntent,\n    })") || strategyPlannerSource.includes("directIntent,\r\n    })"));

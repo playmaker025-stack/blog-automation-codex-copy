@@ -1,5 +1,6 @@
 import type { Topic } from "../types/github-data.ts";
 import type {
+  ArticlePlan,
   ArticleContract,
   ArticleRole,
   CompletionMode,
@@ -423,9 +424,11 @@ export function buildArticleContract(params: { topic: Topic; plan: StrategyPlanR
 
 export function evaluateStrategyQualityGate(strategy: {
   articleContract?: ArticleContract;
+  articlePlan?: ArticlePlan;
   overlapReport?: OverlapReport;
 }): StrategyQualityGateResult {
   const contract = strategy.articleContract;
+  const duplicateMode = strategy.articlePlan?.duplicateMode ?? "different_angle";
   const overlapReport = strategy.overlapReport;
   const blockingReasons: string[] = [];
   const warnings: string[] = [];
@@ -452,7 +455,11 @@ export function evaluateStrategyQualityGate(strategy: {
   }
 
   if (overlapReport?.riskLevel === "high") {
-    blockingReasons.push("기존 글과의 중복 위험이 높습니다.");
+    if (duplicateMode === "force_duplicate") {
+      warnings.push("중복 무시 작성 모드입니다. 기존 글과 유사하더라도 현재 검색의도를 유지하되 도입/결론/CTA 반복은 줄여야 합니다.");
+    } else {
+      blockingReasons.push("기존 글과의 중복 위험이 높습니다.");
+    }
   } else if (overlapReport?.riskLevel === "medium") {
     warnings.push("기존 글과 일부 방향이 겹칩니다. recommendedRewriteDirection을 따라야 합니다.");
   }

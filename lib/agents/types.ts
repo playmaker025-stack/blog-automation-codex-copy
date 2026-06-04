@@ -4,6 +4,7 @@ export interface PipelineRunRequest {
   topicId: string;
   userId: string;
   forcePreflightOverride?: boolean;
+  duplicateModeOverride?: DuplicateMode;
 }
 
 export type SSEEventType =

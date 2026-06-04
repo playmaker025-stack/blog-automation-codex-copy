@@ -220,3 +220,18 @@ export function formatArticlePlan(plan: ArticlePlan | undefined): string {
     `Plan version: ${plan.planVersion}`,
   ].join("\n");
 }
+
+export function buildDuplicateModeWriterGuidance(plan: ArticlePlan | undefined): string[] {
+  if (!plan) return [];
+  if (plan.duplicateMode === "force_duplicate") {
+    return [
+      "- Duplicate mode is 'force_duplicate'. Do not twist the article into a different angle just to avoid overlap warnings.",
+      "- Keep the current title direction, search intent, and reader need intact even if similar posts exist.",
+      "- You may vary the intro, conclusion, CTA, and examples, but do not dodge the requested topic itself.",
+    ];
+  }
+
+  return [
+    "- Duplicate mode is 'different_angle'. Keep the main topic, but differentiate the intro, body emphasis, and CTA from similar existing posts.",
+  ];
+}

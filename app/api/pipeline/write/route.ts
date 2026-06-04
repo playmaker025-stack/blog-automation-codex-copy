@@ -1,7 +1,7 @@
 import "@anthropic-ai/sdk/shims/node";
 import { NextRequest, NextResponse } from "next/server";
 import { runWritePhase } from "@/lib/agents/orchestrator";
-import type { StrategyPlanResult } from "@/lib/agents/types";
+import type { DuplicateMode, StrategyPlanResult } from "@/lib/agents/types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
     strategy: StrategyPlanResult;
     modifications?: string;
     forcePreflightOverride?: boolean;
+    duplicateModeOverride?: DuplicateMode;
   };
 
   try {
@@ -81,6 +82,7 @@ export async function POST(request: NextRequest) {
         strategy: body.strategy,
         modifications: body.modifications?.trim() || undefined,
         forcePreflightOverride: body.forcePreflightOverride,
+        duplicateModeOverride: body.duplicateModeOverride,
         controller,
         signal: abortController.signal,
       })
