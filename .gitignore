@@ -37,6 +37,10 @@ data/
 
 # sensitive config
 .mcp.json
+.codex/
+.gstack/
+.playwright-mcp/
+railway-new-github-page.png
 
 # vercel
 .vercel
