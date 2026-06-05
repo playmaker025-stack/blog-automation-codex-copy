@@ -146,15 +146,28 @@ function toAbsoluteNaverFrameUrl(sourceUrl: string, frameSrc: string): string | 
   }
 }
 
-async function fetchTextFromUrl(url: string): Promise<string | null> {
-  const response = await fetch(url, {
-    headers: {
-      "user-agent": "Mozilla/5.0 (compatible; BlogAutomationLearning/1.0)",
-    },
-    signal: AbortSignal.timeout(12000),
-  });
-  if (!response.ok) return null;
-  return response.text();
+const NAVER_FETCH_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+
+async function fetchTextFromUrl(url: string, timeoutMs = 25000): Promise<string | null> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "user-agent": NAVER_FETCH_UA,
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "accept-language": "ko-KR,ko;q=0.9",
+          "referer": "https://blog.naver.com/",
+        },
+        signal: AbortSignal.timeout(timeoutMs),
+      });
+      if (!response.ok) return null;
+      return response.text();
+    } catch {
+      if (attempt === 1) return null;
+      await new Promise((r) => setTimeout(r, 1500));
+    }
+  }
+  return null;
 }
 
 async function fetchPublishedMarkdownFromNaver(post: PostingRecord): Promise<string | null> {
@@ -169,14 +182,30 @@ async function fetchPublishedMarkdownFromNaver(post: PostingRecord): Promise<str
     const frameMatch =
       firstHtml.match(/<iframe[^>]+(?:id|name)=["']?mainFrame["']?[^>]+src=["']([^"']+)["']/i) ??
       firstHtml.match(/<iframe[^>]+src=["']([^"']*PostView[^"']+)["']/i);
-    const frameUrl = frameMatch?.[1]
-      ? toAbsoluteNaverFrameUrl(post.naverPostUrl, frameMatch[1])
-      : null;
-    const html = frameUrl ? await fetchTextFromUrl(frameUrl) : firstHtml;
-    if (!html) return null;
+
+    let html: string | null = null;
+
+    if (frameMatch?.[1]) {
+      const frameUrl = toAbsoluteNaverFrameUrl(post.naverPostUrl, frameMatch[1]);
+      if (frameUrl) html = await fetchTextFromUrl(frameUrl);
+    }
+
+    // iframe 없거나 실패 시 PostView URL 직접 구성 (fallback)
+    if (!html || html.length < 500) {
+      const blogMatch = post.naverPostUrl.match(/blog\.naver\.com\/([^/?#]+)\/(\d+)/);
+      if (blogMatch) {
+        const [, blogId, logNo] = blogMatch;
+        const postViewUrl = `https://blog.naver.com/PostView.naver?blogId=${blogId}&logNo=${logNo}&redirect=Dlog&widgetTypeCall=true`;
+        const fallback = await fetchTextFromUrl(postViewUrl);
+        if (fallback && fallback.length > (html?.length ?? 0)) html = fallback;
+      }
+    }
+
+    // 최후 수단: 첫 페이지 그대로 사용
+    if (!html) html = firstHtml;
 
     const text = htmlToText(html);
-    if (text.length < 500) return null;
+    if (text.length < 300) return null;
 
     return `# ${post.title}\n\n${text.slice(0, 20000)}`;
   } catch {
