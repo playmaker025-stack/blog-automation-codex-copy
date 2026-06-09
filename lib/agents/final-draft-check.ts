@@ -313,8 +313,6 @@ export function runFinalDraftCheck(params: {
 }): FinalDraftCheck {
   const contract = params.strategy.articleContract;
   const overlapReport = params.strategy.overlapReport;
-  const duplicateMode = params.strategy.articlePlan?.duplicateMode ?? "different_angle";
-
   const matchedForbiddenPhrases = findForbiddenMatches(params.content, contract);
   const questionStuffing = findQuestionKeywordStuffing({
     content: params.content,
@@ -344,14 +342,13 @@ export function runFinalDraftCheck(params: {
     ...keywordLimitFindings,
     ...deferFindings,
     ...articlePlanCoverage.blocking,
-    ...(overlapReport?.riskLevel === "high" && duplicateMode !== "force_duplicate" ? overlapFindings : []),
   ]);
 
   const warnings = uniq([
     ...contractCoverageFindings,
     ...articlePlanCoverage.warnings,
     ...preludeConsumptionFindings,
-    ...(overlapReport?.riskLevel === "high" && duplicateMode === "force_duplicate" ? overlapFindings : []),
+    ...(overlapReport?.riskLevel === "high" ? overlapFindings : []),
     ...(overlapReport?.riskLevel === "medium" ? overlapFindings : []),
   ]);
 

@@ -107,19 +107,20 @@ describe("PR8 limited final draft rewrite", () => {
 
   test("rewrite 후에도 blockingReasons가 남으면 승인 차단 상태를 유지한다", () => {
     const strategy = makeStrategy({
-      overlapReport: {
-        riskLevel: "high",
-        similarTitles: ["기존 전자담배 선택 기준"],
-        similarIntents: [],
-        repeatedIntroPatterns: [],
-        repeatedConclusionPatterns: [],
-        repeatedInternalLinkTargets: [],
-        repeatedCtaModes: [],
-        roleConflicts: [],
-        recommendedRewriteDirection: "기존 글과 분리 필요",
+      articlePlan: {
+        title: "입호흡 전자담배 추천 베스트 5",
+        mainKeyword: "입호흡 전자담배 추천",
+        subKeywords: ["입호흡"],
+        searchIntent: "구매검토형",
+        requiredEntities: ["유웰 발라리안 맥스프로"],
+        lockedRequirements: ["본문에 추천 기기 5개를 모두 포함한다."],
+        requiredSections: ["유웰 발라리안 맥스프로 추천 이유와 추천 대상"],
+        duplicateMode: "force_duplicate",
+        planVersion: 1,
+        updatedAt: "2026-06-09T00:00:00.000Z",
       },
     });
-    const content = "기존 전자담배 선택 기준과 같은 흐름입니다. 흡입감 기준과 관리 편의성을 정리합니다.";
+    const content = "입호흡 전자담배 추천은 흡입감 기준과 관리 편의성을 함께 봐야 합니다.";
     const result = runLimitedFinalDraftRewrite({
       title: "테스트",
       content,
@@ -128,7 +129,7 @@ describe("PR8 limited final draft rewrite", () => {
 
     assert.equal(result.attempted, true);
     assert.equal(result.afterCheck.ok, false);
-    assert.ok(result.afterCheck.blockingReasons.some((reason) => reason.includes("high overlap")));
+    assert.ok(result.afterCheck.blockingReasons.some((reason) => reason.includes("유웰 발라리안 맥스프로")));
   });
 
   test("warning only는 rewrite를 실행하지 않는다", () => {

@@ -81,10 +81,11 @@ function makeStrategy(overrides = {}) {
 }
 
 describe("PR13 force duplicate override", () => {
-  test("기본 duplicate mode에서는 high overlap을 차단한다", () => {
+  test("기본 duplicate mode에서도 high overlap은 writer를 차단하지 않고 경고로 남긴다", () => {
     const result = evaluateStrategyQualityGate(makeStrategy());
-    assert.equal(result.ok, false);
-    assert.ok(result.blockingReasons.some((reason) => reason.includes("중복 위험")));
+    assert.equal(result.ok, true);
+    assert.equal(result.blockingReasons.length, 0);
+    assert.ok(result.warnings.some((warning) => warning.includes("중복")));
   });
 
   test("force_duplicate에서는 high overlap이 경고로만 남는다", () => {
@@ -97,7 +98,7 @@ describe("PR13 force duplicate override", () => {
       })
     );
     assert.equal(result.ok, true);
-    assert.ok(result.warnings.some((warning) => warning.includes("중복 무시 작성 모드")));
+    assert.ok(result.warnings.some((warning) => warning.includes("중복 위험")));
   });
 
   test("final draft check도 force_duplicate에서는 overlap을 차단 대신 warning으로 내린다", () => {
@@ -115,6 +116,19 @@ describe("PR13 force duplicate override", () => {
     });
 
     assert.equal(result.ok, true);
+    assert.equal(result.blockingReasons.some((reason) => reason.includes("high overlap")), false);
+    assert.ok(result.warnings.some((warning) => warning.includes("high overlap")));
+  });
+
+  test("final draft check도 기본 duplicate mode에서 high overlap을 차단하지 않는다", () => {
+    const strategy = makeStrategy();
+    const result = runFinalDraftCheck({
+      title: strategy.title,
+      strategy,
+      content:
+        "부평 전자담배 추천은 제품명만 보고 고르기보다 사용 목적과 관리 기준을 함께 봐야 합니다. 처음 방문하는 분은 흡입감, 유지비, 액상 취향을 먼저 정리하면 상담 방향이 빨라집니다.",
+    });
+
     assert.equal(result.blockingReasons.some((reason) => reason.includes("high overlap")), false);
     assert.ok(result.warnings.some((warning) => warning.includes("high overlap")));
   });

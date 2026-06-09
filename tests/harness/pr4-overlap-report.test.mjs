@@ -133,8 +133,8 @@ describe("PR4 overlap report", () => {
 
     assert.equal(report.riskLevel, "high");
     assert.ok(report.similarTitles.includes("부평 전자담배 추천"));
-    assert.equal(gate.ok, false);
-    assert.match(gate.blockingReasons.join(" / "), /중복 위험이 높습니다/u);
+    assert.equal(gate.blockingReasons.some((reason) => /중복 위험이 높습니다/u.test(reason)), false);
+    assert.ok(gate.warnings.some((warning) => /중복|반복/u.test(warning)));
   });
 
   test("기존 추천글과 신규 액상 추천글은 medium risk로 분리 방향을 권고한다", () => {
