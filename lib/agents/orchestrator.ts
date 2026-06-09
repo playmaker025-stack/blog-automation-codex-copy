@@ -1473,6 +1473,14 @@ export async function runStrategyPhase(params: {
       { topicId, proposedTitle: strategy.title },
       { allowOverride: params.forcePreflightOverride }
     );
+    const duplicateBlocked = strategy.strategyQualityGate?.blockingReasons.some((reason) =>
+      reason.includes("중복 위험")
+    );
+    if (duplicateBlocked && params.duplicateModeOverride !== "force_duplicate") {
+      throw new Error(
+        `전략 계약서가 불완전해 writer 실행을 차단합니다: ${strategy.strategyQualityGate?.blockingReasons.join(" / ")}`
+      );
+    }
 
     state = updateState(state, { strategy });
     activePipelines.set(pipelineId, state);
