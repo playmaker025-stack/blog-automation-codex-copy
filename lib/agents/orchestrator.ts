@@ -28,6 +28,7 @@ import { localityKeywordAgent } from "./locality-keyword-agent";
 import { evaluateSeoCompleteness } from "./seo-metrics";
 import { shouldAttemptWriterRevision } from "./writer-revision-policy";
 import { patchArticlePlan } from "./article-plan.ts";
+import { evaluateStrategyQualityGate } from "./article-contract-utils.ts";
 import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -161,7 +162,7 @@ function applyApprovalModificationsToStrategy(
     duplicateMode: duplicateModeOverride,
     fallbackRequiredEntities: strategy.keywordContract?.productCandidates,
   });
-  return {
+  const patchedStrategy = {
     ...strategy,
     title: requestedTitle ?? strategy.title,
     articlePlan: patchedArticlePlan,
@@ -170,6 +171,11 @@ function applyApprovalModificationsToStrategy(
       ...strategy.keyPoints,
       `사용자 승인 후 수정 요청 반영: ${normalized}`,
     ]),
+  } satisfies StrategyPlanResult;
+
+  return {
+    ...patchedStrategy,
+    strategyQualityGate: evaluateStrategyQualityGate(patchedStrategy),
   };
 }
 

@@ -252,6 +252,7 @@ export default function PipelinePage() {
   const [pipelineError, setPipelineError] = useState<string | null>(null);
   const [preflightBlocked, setPreflightBlocked] = useState(false);
   const [publishedDuplicateBlocked, setPublishedDuplicateBlocked] = useState(false);
+  const [strategyDuplicateBlocked, setStrategyDuplicateBlocked] = useState(false);
   const forcePreflightOverrideRef = useRef(false);
   const duplicateModeOverrideRef = useRef<DuplicateMode | undefined>(undefined);
   const [reviewTitle, setReviewTitle] = useState("");
@@ -524,10 +525,15 @@ export default function PipelinePage() {
       const message = (event.data as { message?: string })?.message ?? "\uD30C\uC774\uD504\uB77C\uC778 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4.";
       const isPreflight = message.includes("Preflight check blocked writing");
       const isPublishedTopicBlock = message.includes("\uC774\uBBF8 \uBC1C\uD589\uB41C \uD1A0\uD53D\uC785\uB2C8\uB2E4");
+      const isStrategyDuplicateBlock =
+        message.includes("전략 계약서가 불완전") && message.includes("중복 위험");
       setPreflightBlocked(isPreflight);
       setPublishedDuplicateBlocked(isPublishedTopicBlock);
+      setStrategyDuplicateBlocked(isStrategyDuplicateBlock);
       setPipelineError(
-        isPreflight
+        isStrategyDuplicateBlock
+          ? "기존 글과의 중복 위험이 높아 writer 실행이 차단되었습니다. 다른 각도로 다시 설계하거나, 사용자가 의도한 중복 작성이면 무시하고 작성할 수 있습니다."
+          : isPreflight
           ? "\uC774\uBBF8 \uC774\uC804 \uC791\uC131\uBAA9\uB85D\uC5D0 \uC788\uB294 \uB0B4\uC6A9\uC785\uB2C8\uB2E4. \uBE44\uC2B7\uD55C \uC8FC\uC81C\uB85C \uC720\uC0AC\uBB38\uC11C\uAC00 \uB418\uC9C0 \uC54A\uAC8C \uB2E4\uB978 \uAC01\uB3C4\uB85C \uC791\uC131\uD560\uAE4C\uC694?"
           : isPublishedTopicBlock
             ? "\uC774\uBBF8 \uBC1C\uD589\uB41C \uD1A0\uD53D\uC785\uB2C8\uB2E4. \uADF8\uB798\uB3C4 \uAC19\uC740 \uC81C\uBAA9/\uD1A0\uD53D\uC73C\uB85C \uB2E4\uC2DC \uBC1C\uD589\uD558\uB824\uBA74 \uACC4\uC18D \uC9C4\uD589\uC744 \uB20C\uB7EC \uC8FC\uC138\uC694."
@@ -717,6 +723,7 @@ export default function PipelinePage() {
     setPipelineError(null);
     setPreflightBlocked(false);
     setPublishedDuplicateBlocked(false);
+    setStrategyDuplicateBlocked(false);
     setRunning(true);
     setElapsed(0);
     forcePreflightOverrideRef.current = forcePreflightOverride;
@@ -1059,6 +1066,24 @@ export default function PipelinePage() {
                 <button
                   type="button"
                   onClick={() => startPipeline(true, false, "force_duplicate")}
+                  className="px-3 py-1.5 rounded-md bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  무시하고 작성
+                </button>
+              </div>
+            )}
+            {strategyDuplicateBlocked && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => startPipeline(false, false, "different_angle")}
+                  className="px-3 py-1.5 rounded-md bg-amber-600 text-white text-xs font-semibold hover:bg-amber-700 transition-colors"
+                >
+                  기존 글과 다른 각도로 작성
+                </button>
+                <button
+                  type="button"
+                  onClick={() => startPipeline(false, false, "force_duplicate")}
                   className="px-3 py-1.5 rounded-md bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
                 >
                   무시하고 작성

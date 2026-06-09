@@ -1,5 +1,6 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
 import { evaluateStrategyQualityGate } from "../../lib/agents/article-contract-utils.ts";
 import { runFinalDraftCheck } from "../../lib/agents/final-draft-check.ts";
@@ -116,5 +117,20 @@ describe("PR13 force duplicate override", () => {
     assert.equal(result.ok, true);
     assert.equal(result.blockingReasons.some((reason) => reason.includes("high overlap")), false);
     assert.ok(result.warnings.some((warning) => warning.includes("high overlap")));
+  });
+
+  test("write phase에서 승인 후 duplicateModeOverride를 적용하면 strategyQualityGate를 재계산한다", () => {
+    const source = readFileSync("lib/agents/orchestrator.ts", "utf-8");
+
+    assert.match(source, /import \{ evaluateStrategyQualityGate \} from "\.\/article-contract-utils\.ts";/u);
+    assert.match(source, /strategyQualityGate:\s*evaluateStrategyQualityGate\(patchedStrategy\)/u);
+  });
+
+  test("pipeline UI는 전략 계약서 중복 차단 오류에 재실행 선택지를 보여준다", () => {
+    const source = readFileSync("app/pipeline/page.tsx", "utf-8");
+
+    assert.match(source, /strategyDuplicateBlocked/u);
+    assert.match(source, /message\.includes\("전략 계약서가 불완전"\) && message\.includes\("중복 위험"\)/u);
+    assert.match(source, /startPipeline\(false,\s*false,\s*"force_duplicate"\)/u);
   });
 });
