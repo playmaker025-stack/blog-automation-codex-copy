@@ -428,7 +428,7 @@ export function evaluateStrategyQualityGate(strategy: {
   overlapReport?: OverlapReport;
 }): StrategyQualityGateResult {
   const contract = strategy.articleContract;
-  const duplicateMode = strategy.articlePlan?.duplicateMode ?? "force_duplicate";
+  const duplicateMode = strategy.articlePlan?.duplicateMode ?? "different_angle";
   const overlapReport = strategy.overlapReport;
   const blockingReasons: string[] = [];
   const warnings: string[] = [];
@@ -455,7 +455,7 @@ export function evaluateStrategyQualityGate(strategy: {
   }
 
   if (overlapReport?.riskLevel === "high") {
-    if (duplicateMode === "force_duplicate" || duplicateMode === "different_angle") {
+    if (duplicateMode === "force_duplicate") {
       warnings.push("기존 글과의 중복 위험이 높지만 writer 실행은 차단하지 않습니다. 현재 검색의도를 유지하되 도입/결론/CTA 반복은 줄여야 합니다.");
     } else {
       blockingReasons.push("기존 글과의 중복 위험이 높습니다.");

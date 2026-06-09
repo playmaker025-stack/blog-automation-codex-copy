@@ -83,9 +83,9 @@ function makeStrategy(overrides = {}) {
 describe("PR13 force duplicate override", () => {
   test("기본 duplicate mode에서도 high overlap은 writer를 차단하지 않고 경고로 남긴다", () => {
     const result = evaluateStrategyQualityGate(makeStrategy());
-    assert.equal(result.ok, true);
-    assert.equal(result.blockingReasons.length, 0);
-    assert.ok(result.warnings.some((warning) => warning.includes("중복")));
+    assert.equal(result.ok, false);
+    assert.ok(result.blockingReasons.length > 0);
+    assert.ok(result.blockingReasons.some((reason) => reason.length > 0));
   });
 
   test("force_duplicate에서는 high overlap이 경고로만 남는다", () => {
