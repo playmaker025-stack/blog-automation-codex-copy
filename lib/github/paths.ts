@@ -4,6 +4,8 @@ export const Paths = {
   userProfile: (userId: string) => `user-modeling/users/${userId}/profile.json`,
   forbiddenExpressions: (userId: string) =>
     `user-modeling/users/${userId}/forbidden-expressions.json`,
+  pipelineUserDraft: (userId: string) =>
+    `data/pipeline-ledger/user-drafts/${userId}.json`,
 
   corpusIndex: (userId: string) =>
     `user-modeling/users/${userId}/corpus/index.json`,

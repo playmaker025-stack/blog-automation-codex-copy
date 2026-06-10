@@ -3,6 +3,7 @@ import type { PipelineStage } from "@/lib/types/agent";
 import type { FinalDraftCheck, SSEEvent, NaverLogicEvaluation, SeoEvaluation } from "@/lib/agents/types";
 import { INITIAL_INSPECTOR_STATE } from "@/components/pipeline/state-inspector";
 import type { InspectorState } from "@/components/pipeline/state-inspector";
+import { normalizeUserId } from "@/lib/utils/normalize";
 
 // 인메모리 스토어 — persist 없음
 // - 탭 이동(언마운트/마운트) 후에도 상태 유지
@@ -78,7 +79,7 @@ export const usePipelineStore = create<PipelineStore>()((set) => ({
   setUserId: (id) =>
     set((s) => {
       // userId가 바뀌면 이전 사용자의 실행 결과 초기화
-      if (s.userId === id) return { userId: id };
+      if (normalizeUserId(s.userId) === normalizeUserId(id)) return { userId: id };
       return {
         userId: id,
         selectedTopicId: "",

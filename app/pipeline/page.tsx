@@ -16,6 +16,8 @@ import { buildConfirmedSeoKeywords } from "@/lib/agents/confirmed-seo-keywords";
 import { parseKeywordList } from "@/lib/agents/direct-intent-utils";
 import type { Topic, UserProfile, PostingRecord } from "@/lib/types/github-data";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
+import type { PipelineUserDraft } from "@/lib/pipeline-user-draft";
+import { hasMeaningfulPipelineDraft } from "@/lib/pipeline-user-draft";
 import { normalizeUserId } from "@/lib/utils/normalize";
 
 interface ApprovalData {
@@ -33,6 +35,12 @@ interface DraftRewriteContext {
   topicId: string;
   strategy: StrategyPlanResult;
   modifications?: string;
+}
+
+interface PipelineDraftSyncState {
+  status: "idle" | "loading" | "saving" | "saved" | "error";
+  message: string | null;
+  updatedAt: string | null;
 }
 
 interface ResultData {
@@ -275,11 +283,18 @@ export default function PipelinePage() {
   const [publishCompletionMessage, setPublishCompletionMessage] = useState<string | null>(null);
   const [draftCompletionMessage, setDraftCompletionMessage] = useState<string | null>(null);
   const [contentTab, setContentTab] = useState<ContentTab>("draft");
+  const [draftSync, setDraftSync] = useState<PipelineDraftSyncState>({
+    status: "idle",
+    message: null,
+    updatedAt: null,
+  });
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const strategyAbortRef = useRef<AbortController | null>(null);
   const writeAbortRef = useRef<AbortController | null>(null);
   const forceManualApprovalRef = useRef(false);
   const streamingBodyRef = useRef("");
+  const draftLoadReadyRef = useRef(false);
+  const lastSavedDraftRef = useRef("");
   const normalizedUserId = normalizeUserId(userId.trim());
 
   const planningTopics = topics.filter((topic) => topic.source !== "direct");
@@ -404,6 +419,24 @@ export default function PipelinePage() {
     }
   }, []);
 
+  const applyPipelineDraft = useCallback((draft: PipelineUserDraft | null) => {
+    if (!draft) return;
+
+    setTopicMode(draft.topicMode);
+    setSelectedTopicId(draft.selectedTopicId);
+    setDirectTopicTitle(draft.directTopicTitle);
+    setDirectMainKeyword(draft.directMainKeyword);
+    setDirectSubKeyword(draft.directSubKeyword);
+    setAutoApprove(draft.autoApprove);
+  }, [
+    setAutoApprove,
+    setDirectMainKeyword,
+    setDirectSubKeyword,
+    setDirectTopicTitle,
+    setSelectedTopicId,
+    setTopicMode,
+  ]);
+
   useEffect(() => {
     return () => {
       stopTimer();
@@ -461,6 +494,146 @@ export default function PipelinePage() {
 
     return () => clearTimeout(timer);
   }, [normalizedUserId]);
+
+  useEffect(() => {
+    draftLoadReadyRef.current = false;
+    lastSavedDraftRef.current = "";
+
+    if (!normalizedUserId) {
+      setDraftSync({ status: "idle", message: null, updatedAt: null });
+      return;
+    }
+
+    const controller = new AbortController();
+    setDraftSync({ status: "loading", message: "임시저장 불러오는 중", updatedAt: null });
+
+    const timer = setTimeout(() => {
+      fetch(`/api/pipeline/draft?userId=${encodeURIComponent(normalizedUserId)}`, {
+        signal: controller.signal,
+      })
+        .then(async (res) => {
+          const json = await res.json() as {
+            draft?: PipelineUserDraft | null;
+            error?: string;
+            userId?: string;
+          };
+          if (!res.ok) {
+            throw new Error(json.error ?? "임시저장 불러오기에 실패했습니다.");
+          }
+
+          if (json.userId && json.userId !== normalizedUserId) return;
+
+          applyPipelineDraft(json.draft ?? null);
+          const serialized = json.draft
+            ? JSON.stringify({
+                userId: json.draft.userId,
+                topicMode: json.draft.topicMode,
+                selectedTopicId: json.draft.selectedTopicId,
+                directTopicTitle: json.draft.directTopicTitle,
+                directMainKeyword: json.draft.directMainKeyword,
+                directSubKeyword: json.draft.directSubKeyword,
+                autoApprove: json.draft.autoApprove,
+              })
+            : "";
+          lastSavedDraftRef.current = serialized;
+          draftLoadReadyRef.current = true;
+          setDraftSync(
+            json.draft
+              ? {
+                  status: "saved",
+                  message: "사용자별 임시저장을 불러왔습니다.",
+                  updatedAt: json.draft.updatedAt,
+                }
+              : {
+                  status: "idle",
+                  message: "저장된 임시입력이 없습니다.",
+                  updatedAt: null,
+                }
+          );
+        })
+        .catch((error) => {
+          if ((error as Error).name === "AbortError") return;
+          draftLoadReadyRef.current = true;
+          setDraftSync({
+            status: "error",
+            message: error instanceof Error ? error.message : "임시저장 불러오기에 실패했습니다.",
+            updatedAt: null,
+          });
+        });
+    }, 350);
+
+    return () => {
+      controller.abort();
+      clearTimeout(timer);
+    };
+  }, [applyPipelineDraft, normalizedUserId]);
+
+  useEffect(() => {
+    if (!normalizedUserId || !draftLoadReadyRef.current) return;
+
+    const draftInput = {
+      userId: normalizedUserId,
+      topicMode,
+      selectedTopicId,
+      directTopicTitle,
+      directMainKeyword,
+      directSubKeyword,
+      autoApprove,
+    } as const;
+
+    if (!hasMeaningfulPipelineDraft(draftInput) && !lastSavedDraftRef.current) return;
+
+    const timer = setTimeout(() => {
+      const payload = {
+        ...draftInput,
+        userId: normalizedUserId,
+      };
+      const serialized = JSON.stringify(payload);
+      if (serialized === lastSavedDraftRef.current) return;
+
+      setDraftSync((prev) => ({
+        status: "saving",
+        message: "사용자별 임시저장 저장 중",
+        updatedAt: prev.updatedAt,
+      }));
+
+      fetch("/api/pipeline/draft", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: serialized,
+      })
+        .then(async (res) => {
+          const json = await res.json() as { draft?: PipelineUserDraft; error?: string };
+          if (!res.ok || !json.draft) {
+            throw new Error(json.error ?? "임시저장 저장에 실패했습니다.");
+          }
+
+          lastSavedDraftRef.current = serialized;
+          setDraftSync({
+            status: "saved",
+            message: "사용자별 임시저장이 저장되었습니다.",
+            updatedAt: json.draft.updatedAt,
+          });
+        })
+        .catch((error) => {
+          setDraftSync({
+            status: "error",
+            message: error instanceof Error ? error.message : "임시저장 저장에 실패했습니다.",
+            updatedAt: null,
+          });
+        });
+    }, 900);
+
+    return () => clearTimeout(timer);
+  }, [
+    autoApprove,
+    directMainKeyword,
+    directSubKeyword,
+    directTopicTitle,
+    normalizedUserId,
+    selectedTopicId,
+    topicMode,
+  ]);
 
   const handleEvent = useCallback((event: SSEEvent) => {
     appendEvent(event);
@@ -1133,6 +1306,19 @@ export default function PipelinePage() {
                   <span className="text-xs text-red-500" title={profileError}>오류: {profileError}</span>
                 )}
               </div>
+              {normalizedUserId && (
+                <p className={`mt-1.5 text-[11px] ${
+                  draftSync.status === "error"
+                    ? "text-red-500"
+                    : draftSync.status === "saving" || draftSync.status === "loading"
+                      ? "text-blue-500"
+                      : "text-zinc-500"
+                }`}>
+                  사용자 키: <span className="font-mono">{normalizedUserId}</span>
+                  {draftSync.message ? ` · ${draftSync.message}` : ""}
+                  {draftSync.updatedAt ? ` · ${new Date(draftSync.updatedAt).toLocaleString("ko-KR")}` : ""}
+                </p>
+              )}
             </div>
 
             <div>
