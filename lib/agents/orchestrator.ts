@@ -1425,6 +1425,7 @@ export async function runStrategyPhase(params: {
   pipelineId: string;
   forcePreflightOverride?: boolean;
   duplicateModeOverride?: DuplicateMode;
+  modifications?: string;
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<void> {
@@ -1466,6 +1467,7 @@ export async function runStrategyPhase(params: {
       topicId,
       userId,
       duplicateModeOverride: params.duplicateModeOverride,
+      modifications: params.modifications,
       onProgress: (msg) => emit(controller, makeEvent("progress", "strategy-planning", { message: msg })),
       signal,
     });

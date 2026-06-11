@@ -12,8 +12,10 @@ export async function POST(request: NextRequest) {
   let body: {
     topicId: string;
     userId: string;
+    pipelineId?: string;
     forcePreflightOverride?: boolean;
     duplicateModeOverride?: DuplicateMode;
+    modifications?: string;
   };
   try {
     body = (await request.json()) as typeof body;
@@ -26,7 +28,7 @@ export async function POST(request: NextRequest) {
   }
 
   const userId = normalizeUserId(body.userId);
-  const pipelineId = `pipe-${randomUUID().slice(0, 8)}`;
+  const pipelineId = body.pipelineId ?? `pipe-${randomUUID().slice(0, 8)}`;
   const abortController = new AbortController();
 
   const stream = new ReadableStream({
@@ -69,6 +71,7 @@ export async function POST(request: NextRequest) {
         userId,
         forcePreflightOverride: body.forcePreflightOverride,
         duplicateModeOverride: body.duplicateModeOverride,
+        modifications: body.modifications,
         pipelineId,
         controller,
         signal: abortController.signal,

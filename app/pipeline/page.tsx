@@ -838,6 +838,68 @@ export default function PipelinePage() {
       });
   }, [handleEvent]);
 
+  const startReplanPhase = useCallback((approvalData: ApprovalData, modifications: string, uid: string) => {
+    strategyAbortRef.current?.abort();
+    const abortController = new AbortController();
+    strategyAbortRef.current = abortController;
+
+    fetch("/api/pipeline/strategy", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        pipelineId: approvalData.pipelineId,
+        topicId: approvalData.topicId,
+        userId: uid,
+        modifications,
+      }),
+      signal: abortController.signal,
+    })
+      .then((res) => {
+        if (!res.body) return;
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+
+        const read = () => {
+          reader.read()
+            .then(({ done, value }) => {
+              if (done) {
+                setApproval((current) => {
+                  if (!current) {
+                    setRunning(false);
+                    stopTimer();
+                  }
+                  return current;
+                });
+                return;
+              }
+              buffer += decoder.decode(value, { stream: true });
+              buffer = parseSseChunk(buffer, (event) => {
+                if (event.type === "approval_required") {
+                  (event.data as Record<string, unknown>).__topicId = approvalData.topicId;
+                }
+                handleEvent(event);
+              });
+              read();
+            })
+            .catch((error) => {
+              if ((error as Error).name === "AbortError") return;
+              setRunning(false);
+            });
+        };
+        read();
+      })
+      .catch((error) => {
+        if ((error as Error).name === "AbortError") return;
+        setRunning(false);
+      })
+      .finally(() => {
+        if (strategyAbortRef.current === abortController) {
+          strategyAbortRef.current = null;
+        }
+      });
+  }, [handleEvent, stopTimer]);
+
   const autoApproveRef = useRef(autoApprove);
   useEffect(() => {
     autoApproveRef.current = autoApprove;
@@ -1721,6 +1783,12 @@ export default function PipelinePage() {
               naverLogic={approval.strategy.naverLogic}
               onApprove={handleApprove}
               onReject={() => handleApprove({ pipelineId: approval.pipelineId, approved: false })}
+              onReplan={(mods) => {
+                const currentApproval = approval;
+                setApproval(null);
+                const uid = normalizeUserId(userId.trim());
+                startReplanPhase(currentApproval, mods, uid);
+              }}
             />
           ) : null}
           result={result}

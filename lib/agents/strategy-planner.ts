@@ -998,6 +998,7 @@ export async function runStrategyPlanner(params: {
   topicId: string;
   userId: string;
   duplicateModeOverride?: DuplicateMode;
+  modifications?: string;
   onProgress?: (message: string) => void;
   signal?: AbortSignal;
 }): Promise<StrategyPlanResult> {
@@ -1076,6 +1077,9 @@ export async function runStrategyPlanner(params: {
         content:
           buildUserMessage(topic, topicId, userId, directIntent, publicationLearning, params.duplicateModeOverride) +
           `\n\n${communityResearchBrief}` +
+          (params.modifications?.trim()
+            ? `\n\n## 전략 수정 요청\n사용자가 이전 전략에 대해 다음 수정을 요청했습니다. 반드시 아래 내용을 전략에 반영하세요:\n${params.modifications.trim()}`
+            : "") +
           `\n\nRequired research focus before final JSON:\n` +
           `- Use naver_cafe_search to identify current product demand, repeated comparison language, and real community interest.\n` +
           `- Use naver_kin_search to identify repeated questions, confusion, and pain points users ask about.\n` +

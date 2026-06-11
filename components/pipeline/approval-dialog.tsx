@@ -13,6 +13,7 @@ interface Props {
   naverLogic?: NaverLogicPlan;
   onApprove: (req: ApprovalRequest) => Promise<void>;
   onReject: () => void;
+  onReplan: (modifications: string) => void;
 }
 
 export function ApprovalDialog({
@@ -25,6 +26,7 @@ export function ApprovalDialog({
   naverLogic,
   onApprove,
   onReject,
+  onReplan,
 }: Props) {
   const [modifications, setModifications] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,17 +40,8 @@ export function ApprovalDialog({
     }
   };
 
-  const handleApproveWithModifications = async () => {
-    setLoading(true);
-    try {
-      await onApprove({
-        pipelineId,
-        approved: true,
-        modifications: modifications.trim(),
-      });
-    } finally {
-      setLoading(false);
-    }
+  const handleReplan = () => {
+    onReplan(modifications.trim());
   };
 
   const handleReject = () => {
@@ -143,7 +136,7 @@ export function ApprovalDialog({
               id="approval-modifications"
               value={modifications}
               onChange={(event) => setModifications(event.target.value)}
-              placeholder="수정 요청을 적고 '수정 요청 반영 후 계속'을 눌러 주세요."
+              placeholder="수정 요청을 적고 '다시 전략수립'을 눌러 주세요."
               rows={2}
               className="w-full resize-none rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -161,11 +154,11 @@ export function ApprovalDialog({
           </button>
           <button
             type="button"
-            onClick={handleApproveWithModifications}
+            onClick={handleReplan}
             disabled={loading || !modifications.trim()}
             className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600 disabled:opacity-50"
           >
-            수정 요청 반영 후 계속
+            수정사항 반영해서 다시 전략수립
           </button>
           <button
             type="button"
