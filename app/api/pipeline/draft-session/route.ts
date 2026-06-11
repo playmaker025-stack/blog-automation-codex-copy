@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { randomUUID } from "crypto";
 import { fileExists, readJsonFile, writeJsonFile } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { normalizeUserId } from "@/lib/utils/normalize";
@@ -105,9 +106,8 @@ export async function POST(request: NextRequest) {
 
   const now = new Date().toISOString();
   const { data, sha } = await readIndex(userId);
-  const existing = data.sessions.find((session) => session.topicId === topicId);
   const session = compactSession({
-    sessionId: existing?.sessionId ?? `draft-${topicId}`,
+    sessionId: `draft-${randomUUID().slice(0, 8)}`,
     userId,
     topicId,
     topicTitle,
@@ -116,14 +116,13 @@ export async function POST(request: NextRequest) {
     streamingBody,
     result,
     status: "draft_generated",
-    createdAt: existing?.createdAt ?? now,
+    createdAt: now,
     updatedAt: now,
   });
 
-  const sessions = [
-    session,
-    ...data.sessions.filter((item) => item.topicId !== topicId),
-  ].slice(0, 30);
+  const topicSessions = [session, ...data.sessions.filter((item) => item.topicId === topicId)].slice(0, 5);
+  const otherSessions = data.sessions.filter((item) => item.topicId !== topicId);
+  const sessions = [...topicSessions, ...otherSessions].slice(0, 30);
 
   const updated: DraftSessionIndex = {
     userId,
@@ -137,17 +136,20 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const userId = normalizeUserId(request.nextUrl.searchParams.get("userId") ?? "");
+  const sessionId = request.nextUrl.searchParams.get("sessionId")?.trim();
   const topicId = request.nextUrl.searchParams.get("topicId")?.trim();
-  if (!userId || !topicId) {
-    return NextResponse.json({ error: "userId와 topicId가 필요합니다." }, { status: 400 });
+  if (!userId || (!sessionId && !topicId)) {
+    return NextResponse.json({ error: "userId와 sessionId 또는 topicId가 필요합니다." }, { status: 400 });
   }
 
   const { data, sha } = await readIndex(userId);
-  const sessions = data.sessions.filter((session) => session.topicId !== topicId);
+  const sessions = sessionId
+    ? data.sessions.filter((session) => session.sessionId !== sessionId)
+    : data.sessions.filter((session) => session.topicId !== topicId);
   await writeJsonFile(
     Paths.draftSessions(userId),
     { userId, sessions, updatedAt: new Date().toISOString() },
-    `chore: delete draft session ${userId}/${topicId}`,
+    `chore: delete draft session ${userId}/${sessionId ?? topicId}`,
     sha
   );
   return NextResponse.json({ ok: true });

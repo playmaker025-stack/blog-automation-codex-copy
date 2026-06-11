@@ -300,6 +300,7 @@ export default function PipelinePage() {
   const [draftSessionNotice, setDraftSessionNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const [draftSessionSaving, setDraftSessionSaving] = useState(false);
   const [draftSessionLoading, setDraftSessionLoading] = useState(false);
+  const [deletingSessionId, setDeletingSessionId] = useState<string | null>(null);
   const [contentTab, setContentTab] = useState<ContentTab>("draft");
   const [draftSync, setDraftSync] = useState<PipelineDraftSyncState>({
     status: "idle",
@@ -347,9 +348,9 @@ export default function PipelinePage() {
   const selectedTopic = selectedTopicId
     ? topics.find((topic) => topic.topicId === selectedTopicId) ?? null
     : null;
-  const selectedDraftSession = selectedTopicId
-    ? draftSessions.find((session) => session.topicId === selectedTopicId) ?? null
-    : null;
+  const selectedDraftSessions = selectedTopicId
+    ? draftSessions.filter((session) => session.topicId === selectedTopicId)
+    : [];
   const confirmedSeoKeywords = useMemo(
     () =>
       buildConfirmedSeoKeywords({
@@ -1191,6 +1192,20 @@ export default function PipelinePage() {
     setDraftSessionNotice({ type: "ok", msg: "임시저장된 초안을 불러왔습니다." });
   }, [setResult, setStreamingBody]);
 
+  const deleteDraftSession = useCallback(async (sessionId: string) => {
+    const uid = normalizeUserId(userId.trim());
+    if (!uid) return;
+    setDeletingSessionId(sessionId);
+    try {
+      await fetch(`/api/pipeline/draft-session?userId=${encodeURIComponent(uid)}&sessionId=${encodeURIComponent(sessionId)}`, {
+        method: "DELETE",
+      });
+      await reloadDraftSessions();
+    } finally {
+      setDeletingSessionId(null);
+    }
+  }, [userId, reloadDraftSessions]);
+
   const handleApprove = async (request: ApprovalRequest) => {
     const uid = normalizeUserId(userId.trim());
     if (!request.approved) {
@@ -1590,20 +1605,42 @@ export default function PipelinePage() {
                         : `시리즈 선행 글 ${selectedTopic.sequenceOrder ?? "-"}번입니다. 메인 키워드: ${selectedTopic.targetMainKeyword ?? "-"}`}
                     </p>
                   )}
-                  {selectedDraftSession && (
+                  {selectedDraftSessions.length > 0 && (
                     <div className="mt-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2">
-                      <p className="text-[11px] font-semibold text-blue-700">이 주제에 임시저장본이 있습니다.</p>
-                      <p className="mt-0.5 text-[11px] text-blue-600">
-                        마지막 저장: {new Date(selectedDraftSession.updatedAt).toLocaleString("ko-KR")}
+                      <p className="text-[11px] font-semibold text-blue-700">
+                        이 주제에 임시저장 {selectedDraftSessions.length}개
                       </p>
-                      <button
-                        type="button"
-                        onClick={() => loadDraftSession(selectedDraftSession)}
-                        disabled={running}
-                        className="mt-2 rounded-md bg-blue-600 px-2.5 py-1 text-[11px] font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-                      >
-                        임시저장 불러오기
-                      </button>
+                      <div className="mt-1.5 space-y-1.5">
+                        {selectedDraftSessions.map((session) => (
+                          <div key={session.sessionId} className="flex items-center gap-2 rounded border border-blue-100 bg-white px-2 py-1.5">
+                            <div className="min-w-0 flex-1">
+                              <p className="text-[11px] font-medium text-blue-700">
+                                {new Date(session.updatedAt).toLocaleString("ko-KR")}
+                              </p>
+                              <p className="text-[11px] text-zinc-500">
+                                {session.result.wordCount ? `${session.result.wordCount.toLocaleString()}자` : ""}
+                                {session.result.evalScore ? ` · 점수 ${session.result.evalScore}` : ""}
+                              </p>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => loadDraftSession(session)}
+                              disabled={running}
+                              className="shrink-0 rounded bg-blue-600 px-2 py-1 text-[11px] font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+                            >
+                              불러오기
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => deleteDraftSession(session.sessionId)}
+                              disabled={running || deletingSessionId === session.sessionId}
+                              className="shrink-0 rounded bg-zinc-200 px-2 py-1 text-[11px] font-semibold text-zinc-600 hover:bg-zinc-300 disabled:opacity-50"
+                            >
+                              {deletingSessionId === session.sessionId ? "…" : "삭제"}
+                            </button>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                   {orderedAvailableTopics.length === 0 && (
