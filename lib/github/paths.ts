@@ -34,4 +34,5 @@ export const Paths = {
   localityKeywordLedger: (userId: string) =>
     `data/locality-keywords/${userId}/ledger.json`,
   approvalRecord: (pipelineId: string) => `data/approvals/${pipelineId}.json`,
+  draftSessions: (userId: string) => `data/draft-sessions/${userId}/index.json`,
 } as const;

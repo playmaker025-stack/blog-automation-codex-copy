@@ -57,6 +57,20 @@ interface ResultData {
   finalDraftCheck?: FinalDraftCheck;
 }
 
+interface DraftSessionRecord {
+  sessionId: string;
+  userId: string;
+  topicId: string;
+  topicTitle: string;
+  pipelineId?: string;
+  strategy?: StrategyPlanResult;
+  streamingBody: string;
+  result: ResultData;
+  status: "draft_generated";
+  createdAt: string;
+  updatedAt: string;
+}
+
 type ContentTab = "draft" | "revision";
 
 interface DraftVersionSnapshot {
@@ -282,6 +296,10 @@ export default function PipelinePage() {
   const [publishNotice, setPublishNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const [publishCompletionMessage, setPublishCompletionMessage] = useState<string | null>(null);
   const [draftCompletionMessage, setDraftCompletionMessage] = useState<string | null>(null);
+  const [draftSessions, setDraftSessions] = useState<DraftSessionRecord[]>([]);
+  const [draftSessionNotice, setDraftSessionNotice] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
+  const [draftSessionSaving, setDraftSessionSaving] = useState(false);
+  const [draftSessionLoading, setDraftSessionLoading] = useState(false);
   const [contentTab, setContentTab] = useState<ContentTab>("draft");
   const [draftSync, setDraftSync] = useState<PipelineDraftSyncState>({
     status: "idle",
@@ -328,6 +346,9 @@ export default function PipelinePage() {
   );
   const selectedTopic = selectedTopicId
     ? topics.find((topic) => topic.topicId === selectedTopicId) ?? null
+    : null;
+  const selectedDraftSession = selectedTopicId
+    ? draftSessions.find((session) => session.topicId === selectedTopicId) ?? null
     : null;
   const confirmedSeoKeywords = useMemo(
     () =>
@@ -634,6 +655,32 @@ export default function PipelinePage() {
     selectedTopicId,
     topicMode,
   ]);
+
+  const reloadDraftSessions = useCallback(async () => {
+    if (!normalizedUserId) {
+      setDraftSessions([]);
+      return;
+    }
+
+    setDraftSessionLoading(true);
+    try {
+      const res = await fetch(`/api/pipeline/draft-session?userId=${encodeURIComponent(normalizedUserId)}`, { cache: "no-store" });
+      if (!res.ok) {
+        setDraftSessions([]);
+        return;
+      }
+      const json = await res.json() as { sessions?: DraftSessionRecord[] };
+      setDraftSessions(Array.isArray(json.sessions) ? json.sessions : []);
+    } catch {
+      setDraftSessions([]);
+    } finally {
+      setDraftSessionLoading(false);
+    }
+  }, [normalizedUserId]);
+
+  useEffect(() => {
+    reloadDraftSessions();
+  }, [reloadDraftSessions]);
 
   const handleEvent = useCallback((event: SSEEvent) => {
     appendEvent(event);
@@ -1001,6 +1048,87 @@ export default function PipelinePage() {
     });
   }, [appendEvent, setRunningTitle, setStage, stopTimer]);
 
+  const saveCurrentDraftSession = useCallback(async () => {
+    const uid = normalizeUserId(userId.trim());
+    const topicId = draftRewriteContext?.topicId || selectedTopicId;
+    const topicTitle = selectedTopic?.title || runningTitle || result?.title || directTopicTitle || directMainKeyword;
+    if (!uid || !topicId || !topicTitle || !result || !streamingBody.trim()) {
+      setDraftSessionNotice({ type: "err", msg: "저장할 초안이 아직 없습니다. 초안 생성 완료 후 저장할 수 있습니다." });
+      return;
+    }
+
+    setDraftSessionSaving(true);
+    setDraftSessionNotice(null);
+    try {
+      const res = await fetch("/api/pipeline/draft-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: uid,
+          topicId,
+          topicTitle,
+          pipelineId: draftRewriteContext?.strategy ? approval?.pipelineId : undefined,
+          strategy: draftRewriteContext?.strategy,
+          streamingBody,
+          result,
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error((json as { error?: string }).error ?? "임시저장에 실패했습니다.");
+      }
+      setDraftSessionNotice({ type: "ok", msg: "현재 초안 작업을 임시저장했습니다." });
+      reloadDraftSessions();
+    } catch (error) {
+      setDraftSessionNotice({
+        type: "err",
+        msg: error instanceof Error ? error.message : "임시저장에 실패했습니다.",
+      });
+    } finally {
+      setDraftSessionSaving(false);
+    }
+  }, [
+    approval?.pipelineId,
+    directMainKeyword,
+    directTopicTitle,
+    draftRewriteContext,
+    reloadDraftSessions,
+    result,
+    runningTitle,
+    selectedTopic?.title,
+    selectedTopicId,
+    streamingBody,
+    userId,
+  ]);
+
+  const loadDraftSession = useCallback((session: DraftSessionRecord) => {
+    setResult(session.result);
+    setStreamingBody(session.streamingBody);
+    streamingBodyRef.current = session.streamingBody;
+    setDraftRewriteContext(
+      session.strategy
+        ? {
+            topicId: session.topicId,
+            strategy: session.strategy,
+          }
+        : null
+    );
+    setReviewTitle(session.result.title ?? "");
+    setReviewBody("");
+    setReviewIssues([]);
+    setReviewResult(null);
+    setReviewedTitle("");
+    setReviewedBody("");
+    setReviewApplied(false);
+    setPublishUrl("");
+    setPublishNotice(null);
+    setPublishCompletionMessage(null);
+    setDraftCompletionMessage(buildDraftCompletionMessage(session.streamingBody));
+    setContentTab("draft");
+    setPipelineError(null);
+    setDraftSessionNotice({ type: "ok", msg: "임시저장된 초안을 불러왔습니다." });
+  }, [setResult, setStreamingBody]);
+
   const handleApprove = async (request: ApprovalRequest) => {
     const uid = normalizeUserId(userId.trim());
     if (!request.approved) {
@@ -1302,6 +1430,11 @@ export default function PipelinePage() {
                 {!profileLoading && profile && (
                   <span className="text-xs text-emerald-600 font-medium">{profileDisplayName}</span>
                 )}
+                {!draftSessionLoading && draftSessions.length > 0 && (
+                  <span className="rounded-full bg-blue-50 px-2 py-1 text-[11px] font-semibold text-blue-700">
+                    임시저장 {draftSessions.length}개
+                  </span>
+                )}
                 {!profileLoading && userId.trim() && !profile && profileError && (
                   <span className="text-xs text-red-500" title={profileError}>오류: {profileError}</span>
                 )}
@@ -1395,6 +1528,22 @@ export default function PipelinePage() {
                         : `시리즈 선행 글 ${selectedTopic.sequenceOrder ?? "-"}번입니다. 메인 키워드: ${selectedTopic.targetMainKeyword ?? "-"}`}
                     </p>
                   )}
+                  {selectedDraftSession && (
+                    <div className="mt-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2">
+                      <p className="text-[11px] font-semibold text-blue-700">이 주제에 임시저장본이 있습니다.</p>
+                      <p className="mt-0.5 text-[11px] text-blue-600">
+                        마지막 저장: {new Date(selectedDraftSession.updatedAt).toLocaleString("ko-KR")}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => loadDraftSession(selectedDraftSession)}
+                        disabled={running}
+                        className="mt-2 rounded-md bg-blue-600 px-2.5 py-1 text-[11px] font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+                      >
+                        임시저장 불러오기
+                      </button>
+                    </div>
+                  )}
                   {orderedAvailableTopics.length === 0 && (
                     <p className="text-xs text-zinc-400 mt-1.5">
                       {userId.trim()
@@ -1485,6 +1634,29 @@ export default function PipelinePage() {
               >
                 글쓰기 진행 멈춤
               </button>
+            </div>
+            <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-zinc-700">초안 임시저장</p>
+                  <p className="mt-0.5 text-[11px] text-zinc-500">
+                    초안 생성 완료 상태까지만 사용자별로 저장합니다.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={saveCurrentDraftSession}
+                  disabled={running || draftSessionSaving || !result || !streamingBody.trim()}
+                  className="shrink-0 rounded-md bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {draftSessionSaving ? "저장 중" : "현재 작업까지 임시저장"}
+                </button>
+              </div>
+              {draftSessionNotice && (
+                <p className={`mt-2 text-[11px] ${draftSessionNotice.type === "ok" ? "text-emerald-600" : "text-red-500"}`}>
+                  {draftSessionNotice.msg}
+                </p>
+              )}
             </div>
           </div>
 
