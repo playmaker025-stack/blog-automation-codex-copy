@@ -1775,9 +1775,12 @@ export default function PipelinePage() {
                     modifications: mods,
                   }),
                 })
-                  .then((res) => res.json() as Promise<{ strategy?: StrategyPlanResult; error?: string }>)
-                  .then((json) => {
-                    if (!json.strategy) return;
+                  .then(async (res) => {
+                    const json = await res.json() as { strategy?: StrategyPlanResult; error?: string };
+                    if (!res.ok || !json.strategy) {
+                      setPipelineError(`전략 수정 실패: ${json.error ?? "알 수 없는 오류"}`);
+                      return;
+                    }
                     setApproval((prev) =>
                       prev
                         ? {
@@ -1794,7 +1797,9 @@ export default function PipelinePage() {
                         : null
                     );
                   })
-                  .catch(() => {})
+                  .catch((err: unknown) => {
+                    setPipelineError(`전략 수정 오류: ${err instanceof Error ? err.message : "네트워크 오류"}`);
+                  })
                   .finally(() => setIsReplanning(false));
               }}
             />
