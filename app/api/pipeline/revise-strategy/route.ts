@@ -6,26 +6,34 @@ export const dynamic = "force-dynamic";
 
 /** 수정 텍스트에서 제품/기기명 추출 (쉼표·줄바꿈 구분) */
 function extractProducts(text: string): string[] {
-  const parts = text.split(/[,，\n\r]+/);
-  const results: string[] = [];
-
-  for (const part of parts) {
-    // 한국어 조사·접두어 제거: "비교할 제품5종은 " 등
-    const cleaned = part
-      .trim()
-      .replace(/^[^A-Za-z0-9가-힣]*/, "")          // 앞쪽 특수문자 제거
-      .replace(/^.*?[은는이가의을를로]\s+/u, "")     // 조사까지 제거
-      .replace(/^\d+[.)]\s*/, "")                   // 번호 목록 제거
-      .trim();
-
-    if (!cleaned || cleaned.length < 2 || cleaned.length > 50) continue;
-    // 영문자·숫자가 포함돼야 제품명으로 인정 (순수 한국어는 일반 단어일 가능성)
-    if (/[A-Za-z0-9]/.test(cleaned)) {
-      results.push(cleaned);
-    }
+  if (!text.includes(",") && !text.includes("，") && !text.includes("\n")) {
+    return [];
   }
 
-  return [...new Set(results)];
+  const parts = text.split(/[,，\n\r]+/).map((raw) => {
+    return raw
+      .trim()
+      // "비교할 제품5종은 발라리안..." → "발라리안..."
+      // 조사(은는이가의을를) 뒤 공백까지 제거. 로/으로는 제외(아스트로 같은 단어 오탐 방지)
+      .replace(/^.*?[은는이가의을를]\s+(?=[가-힣A-Za-z])/u, "")
+      // "1. " "- " 목록 마커 제거
+      .replace(/^[\-*\d.)\s]+/, "")
+      .trim();
+  }).filter((s) => s.length >= 2 && s.length <= 50);
+
+  // 부사형 어미(-게, -히, -이)로 끝나는 항목이 절반 이상이면 문체 지시이므로 제외
+  const adverbCount = parts.filter((s) =>
+    /[게히]$/.test(s) || /해\s*주세요/.test(s) || /하게/.test(s)
+  ).length;
+  if (adverbCount > parts.length / 2) return [];
+
+  // 제품 키워드 또는 3개 이상 항목이어야 제품 목록으로 인정
+  const hasProductHint = /제품|기기|모델|디바이스|종은|개는|비교/.test(text);
+  if (parts.length >= 2 && (hasProductHint || parts.length >= 3)) {
+    return [...new Set(parts)];
+  }
+
+  return [];
 }
 
 /** 제목 변경 요청 파싱 ("제목:" 또는 "title:" 패턴) */
