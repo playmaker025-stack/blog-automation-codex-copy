@@ -14,6 +14,7 @@ interface Props {
   onApprove: (req: ApprovalRequest) => Promise<void>;
   onReject: () => void;
   onReplan: (modifications: string) => void;
+  isReplanning?: boolean;
 }
 
 export function ApprovalDialog({
@@ -27,6 +28,7 @@ export function ApprovalDialog({
   onApprove,
   onReject,
   onReplan,
+  isReplanning = false,
 }: Props) {
   const [modifications, setModifications] = useState("");
   const [loading, setLoading] = useState(false);
@@ -155,10 +157,10 @@ export function ApprovalDialog({
           <button
             type="button"
             onClick={handleReplan}
-            disabled={loading || !modifications.trim()}
+            disabled={loading || isReplanning || !modifications.trim()}
             className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-600 disabled:opacity-50"
           >
-            수정사항 반영해서 다시 전략수립
+            {isReplanning ? "전략 수정 중..." : "수정사항 반영해서 다시 전략수립"}
           </button>
           <button
             type="button"
