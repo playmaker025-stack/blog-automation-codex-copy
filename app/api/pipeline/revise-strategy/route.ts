@@ -1,11 +1,59 @@
-import "@anthropic-ai/sdk/shims/node";
 import { NextRequest, NextResponse } from "next/server";
-import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import type { StrategyPlanResult } from "@/lib/agents/types";
 import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 60;
+
+/** 수정 텍스트에서 제품/기기명 추출 (쉼표·줄바꿈 구분) */
+function extractProducts(text: string): string[] {
+  const parts = text.split(/[,，\n\r]+/);
+  const results: string[] = [];
+
+  for (const part of parts) {
+    // 한국어 조사·접두어 제거: "비교할 제품5종은 " 등
+    const cleaned = part
+      .trim()
+      .replace(/^[^A-Za-z0-9가-힣]*/, "")          // 앞쪽 특수문자 제거
+      .replace(/^.*?[은는이가의을를로]\s+/u, "")     // 조사까지 제거
+      .replace(/^\d+[.)]\s*/, "")                   // 번호 목록 제거
+      .trim();
+
+    if (!cleaned || cleaned.length < 2 || cleaned.length > 50) continue;
+    // 영문자·숫자가 포함돼야 제품명으로 인정 (순수 한국어는 일반 단어일 가능성)
+    if (/[A-Za-z0-9]/.test(cleaned)) {
+      results.push(cleaned);
+    }
+  }
+
+  return [...new Set(results)];
+}
+
+/** 제목 변경 요청 파싱 ("제목:" 또는 "title:" 패턴) */
+function extractRequestedTitle(text: string): string | null {
+  const match = text.match(/(?:제목|title)\s*[:：]\s*(.+)/iu);
+  return match ? match[1].trim() : null;
+}
+
+/** 제품 목록을 반영해 outline 재구성 */
+function rebuildOutline(
+  original: StrategyPlanResult["outline"],
+  products: string[]
+): StrategyPlanResult["outline"] {
+  const productItems = products.map((p) => ({
+    heading: `${p} 추천 이유와 추천 대상`,
+    subPoints: [] as string[],
+    contentDirection: `${p}의 특징, 장단점, 추천 대상을 구체적으로 설명`,
+    estimatedParagraphs: 3,
+  }));
+
+  if (!original || original.length === 0) return productItems;
+
+  const first = original[0];
+  const last = original[original.length - 1];
+
+  if (original.length === 1) return [first, ...productItems];
+  return [first, ...productItems, last];
+}
 
 export async function POST(request: NextRequest) {
   let body: {
@@ -30,122 +78,57 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // LLM에는 단순 문자열 필드만 전달 (복잡한 중첩 객체 제외)
-  const editableFields = {
-    title: strategy.title,
-    outlineHeadings: strategy.outline.map((item) => item.heading),
-    rationale: strategy.rationale,
-    requiredEntities: strategy.articlePlan?.requiredEntities ?? [],
+  const mod = modifications.trim();
+  const products = extractProducts(mod);
+  const requestedTitle = extractRequestedTitle(mod);
+
+  const newEntities =
+    products.length > 0
+      ? [...new Set([...(strategy.articlePlan?.requiredEntities ?? []), ...products])]
+      : strategy.articlePlan?.requiredEntities ?? [];
+
+  const revisedStrategy: StrategyPlanResult = {
+    ...strategy,
+    title: requestedTitle ?? strategy.title,
+    outline:
+      products.length > 0
+        ? rebuildOutline(strategy.outline, products)
+        : strategy.outline,
+    rationale: `${strategy.rationale}\n\n[수정 반영] ${mod}`,
+    keyPoints: [
+      ...(strategy.keyPoints ?? []),
+      `수정사항 반영: ${mod}`,
+    ],
+    articlePlan: strategy.articlePlan
+      ? {
+          ...strategy.articlePlan,
+          title: requestedTitle ?? strategy.articlePlan.title,
+          requiredEntities: newEntities,
+          requiredSections:
+            products.length > 0
+              ? [
+                  ...strategy.articlePlan.requiredSections.filter(
+                    (s) => !s.includes("추천 이유와 추천 대상")
+                  ),
+                  ...products.map((p) => `${p} 추천 이유와 추천 대상`),
+                ]
+              : strategy.articlePlan.requiredSections,
+          lockedRequirements: [
+            ...strategy.articlePlan.lockedRequirements,
+            `사용자 수정사항 반영: ${mod}`,
+            ...(products.length > 0
+              ? [
+                  `본문에 추천 대상 ${products.length}개를 모두 포함한다.`,
+                  "각 대상을 H2 또는 H3 소제목으로 분리한다.",
+                  "각 대상마다 추천 이유와 추천 대상을 작성한다.",
+                ]
+              : []),
+          ],
+          planVersion: strategy.articlePlan.planVersion + 1,
+          updatedAt: new Date().toISOString(),
+        }
+      : strategy.articlePlan,
   };
 
-  const prompt = `블로그 전략 수정 에이전트입니다. 사용자 수정 요청을 아래 전략에 반영하고 수정 결과를 JSON으로만 반환하세요.
-
-현재 전략:
-${JSON.stringify(editableFields, null, 2)}
-
-사용자 수정 요청:
-${modifications.trim()}
-
-반영 규칙:
-1. 제품·기기 이름이 나열되면 outlineHeadings를 해당 제품 중심으로 재구성하고 requiredEntities에 추가하세요.
-2. 제목 변경 요청이면 title을 바꾸세요.
-3. rationale 끝에 "[수정 반영] {수정 내용 한 줄}" 을 추가하세요.
-4. 명시되지 않은 항목은 그대로 유지하세요.
-
-아래 JSON 구조로만 반환하세요 (코드블록 없이):
-{"title":"...","outlineHeadings":["..."],"rationale":"...","requiredEntities":["..."]}`;
-
-  try {
-    const client = getAnthropicClient();
-    const message = await client.messages.create({
-      model: MODELS.sonnet,
-      max_tokens: 1024,
-      messages: [{ role: "user", content: prompt }],
-    });
-
-    const text =
-      message.content[0]?.type === "text" ? message.content[0].text.trim() : "";
-
-    const jsonStart = text.indexOf("{");
-    const jsonEnd = text.lastIndexOf("}");
-    if (jsonStart === -1 || jsonEnd === -1) {
-      return NextResponse.json(
-        { error: `LLM 응답을 JSON으로 파싱할 수 없습니다: ${text.slice(0, 200)}` },
-        { status: 500 }
-      );
-    }
-
-    let revised: {
-      title?: string;
-      outlineHeadings?: string[];
-      rationale?: string;
-      requiredEntities?: string[];
-    };
-    try {
-      revised = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
-    } catch {
-      return NextResponse.json(
-        { error: `JSON 파싱 오류: ${text.slice(0, 200)}` },
-        { status: 500 }
-      );
-    }
-
-    // 수정된 heading을 원본 복잡 객체 구조에 매핑
-    const newHeadings = Array.isArray(revised.outlineHeadings) && revised.outlineHeadings.length > 0
-      ? revised.outlineHeadings
-      : null;
-
-    const revisedOutline = newHeadings
-      ? newHeadings.map((heading, i) => ({
-          ...(strategy.outline[i] ?? {
-            subPoints: [],
-            contentDirection: "",
-            estimatedParagraphs: 3,
-          }),
-          heading: typeof heading === "string" ? heading : (strategy.outline[i]?.heading ?? ""),
-        }))
-      : strategy.outline;
-
-    const newEntities =
-      Array.isArray(revised.requiredEntities) && revised.requiredEntities.length > 0
-        ? revised.requiredEntities
-        : null;
-
-    const revisedStrategy: StrategyPlanResult = {
-      ...strategy,
-      title: revised.title?.trim() || strategy.title,
-      outline: revisedOutline,
-      rationale: revised.rationale?.trim() || strategy.rationale,
-      articlePlan: strategy.articlePlan
-        ? {
-            ...strategy.articlePlan,
-            ...(newEntities
-              ? {
-                  requiredEntities: newEntities,
-                  requiredSections: newEntities.map((e) => `${e} 추천 이유와 추천 대상`),
-                  lockedRequirements: [
-                    ...strategy.articlePlan.lockedRequirements,
-                    `본문에 추천 대상 ${newEntities.length}개를 모두 포함한다.`,
-                    `사용자 수정사항 반영: ${modifications.trim()}`,
-                  ],
-                  planVersion: strategy.articlePlan.planVersion + 1,
-                  updatedAt: new Date().toISOString(),
-                }
-              : {}),
-          }
-        : strategy.articlePlan,
-    };
-
-    return NextResponse.json({ strategy: revisedStrategy });
-  } catch (error) {
-    return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "전략 수정 중 오류가 발생했습니다.",
-      },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json({ strategy: revisedStrategy });
 }
