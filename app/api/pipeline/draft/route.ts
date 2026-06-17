@@ -10,6 +10,20 @@ import { normalizeUserId } from "@/lib/utils/normalize";
 
 export const dynamic = "force-dynamic";
 
+const MAX_RETRIES = 5;
+
+function isSameDraft(left: PipelineUserDraft, right: PipelineUserDraft): boolean {
+  return (
+    left.userId === right.userId &&
+    left.topicMode === right.topicMode &&
+    left.selectedTopicId === right.selectedTopicId &&
+    left.directTopicTitle === right.directTopicTitle &&
+    left.directMainKeyword === right.directMainKeyword &&
+    left.directSubKeyword === right.directSubKeyword &&
+    left.autoApprove === right.autoApprove
+  );
+}
+
 export async function GET(request: NextRequest) {
   const rawUserId = request.nextUrl.searchParams.get("userId");
   if (!rawUserId?.trim()) {
@@ -49,20 +63,39 @@ export async function PUT(request: NextRequest) {
   const path = Paths.pipelineUserDraft(draft.userId);
 
   try {
-    let sha: string | null = null;
-    if (await fileExists(path)) {
-      const existing = await readJsonFile<PipelineUserDraft>(path);
-      sha = existing.sha;
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      let sha: string | null = null;
+
+      if (await fileExists(path)) {
+        const existing = await readJsonFile<PipelineUserDraft>(path);
+        sha = existing.sha;
+
+        if (isSameDraft(existing.data, draft)) {
+          return NextResponse.json({ draft: existing.data });
+        }
+      }
+
+      try {
+        await writeJsonFile(
+          path,
+          draft,
+          `chore: save pipeline draft for ${draft.userId}`,
+          sha
+        );
+        return NextResponse.json({ draft });
+      } catch (error) {
+        const status = (error as { status?: number }).status;
+        const isConflict = status === 409 || status === 422;
+        if (isConflict && attempt < MAX_RETRIES) {
+          const delay = Math.min(1000, 100 * 2 ** (attempt - 1)) + Math.floor(Math.random() * 50);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          continue;
+        }
+        throw error;
+      }
     }
 
-    await writeJsonFile(
-      path,
-      draft,
-      `chore: save pipeline draft for ${draft.userId}`,
-      sha
-    );
-
-    return NextResponse.json({ draft });
+    throw new Error("pipeline draft save retry exhausted");
   } catch (error) {
     console.error("[PUT /api/pipeline/draft]", error);
     return NextResponse.json({ error: "임시저장 저장에 실패했습니다." }, { status: 500 });

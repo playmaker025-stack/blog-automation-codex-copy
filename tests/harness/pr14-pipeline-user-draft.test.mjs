@@ -92,4 +92,12 @@ describe("PR 사용자별 임시저장", () => {
     assert.match(pipelineDraftRouteSource, /const draft = buildPipelineUserDraftPayload\(body\)/u);
     assert.match(pipelineDraftRouteSource, /Paths\.pipelineUserDraft\(draft\.userId\)/u);
   });
+
+  test("임시저장 API는 SHA 충돌 시 최신 sha를 다시 읽고 재시도한다", () => {
+    assert.match(pipelineDraftRouteSource, /const MAX_RETRIES = 5/u);
+    assert.match(pipelineDraftRouteSource, /for \(let attempt = 1; attempt <= MAX_RETRIES; attempt\+\+\)/u);
+    assert.match(pipelineDraftRouteSource, /const isConflict = status === 409 \|\| status === 422/u);
+    assert.match(pipelineDraftRouteSource, /if \(isConflict && attempt < MAX_RETRIES\)/u);
+    assert.match(pipelineDraftRouteSource, /isSameDraft\(existing\.data, draft\)/u);
+  });
 });
