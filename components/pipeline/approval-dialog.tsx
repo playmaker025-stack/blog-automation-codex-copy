@@ -1,7 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ApprovalRequest, KeywordContract, NaverLogicPlan } from "@/lib/agents/types";
+
+interface ModificationFeedback {
+  status: "submitting" | "applied" | "error";
+  text: string;
+  error?: string;
+  updatedAt: string;
+}
 
 interface Props {
   pipelineId: string;
@@ -15,6 +22,7 @@ interface Props {
   onReject: () => void;
   onReplan: (modifications: string) => void;
   isReplanning?: boolean;
+  modificationFeedback?: ModificationFeedback | null;
 }
 
 export function ApprovalDialog({
@@ -29,9 +37,16 @@ export function ApprovalDialog({
   onReject,
   onReplan,
   isReplanning = false,
+  modificationFeedback = null,
 }: Props) {
   const [modifications, setModifications] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (modificationFeedback?.status === "applied") {
+      setModifications("");
+    }
+  }, [modificationFeedback]);
 
   const handleApprove = async () => {
     setLoading(true);
@@ -60,7 +75,9 @@ export function ApprovalDialog({
       <div className="w-full max-w-lg rounded-xl border-2 border-amber-400 bg-white shadow-2xl">
         <div className="flex items-center gap-2 rounded-t-xl border-b border-amber-200 bg-amber-50 px-6 py-3">
           <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-amber-400" />
-          <p className="text-sm font-semibold text-amber-700">승인 대기 중입니다. 전략을 확인한 뒤 다음 액션을 선택해 주세요.</p>
+          <p className="text-sm font-semibold text-amber-700">
+            승인 대기 중입니다. 전략을 확인한 뒤 다음 액션을 선택해 주세요.
+          </p>
         </div>
 
         <div className="border-b border-zinc-100 px-6 py-5">
@@ -71,6 +88,47 @@ export function ApprovalDialog({
         </div>
 
         <div className="space-y-4 px-6 py-5">
+          {modificationFeedback && (
+            <div
+              className={`rounded-lg border px-3 py-3 ${
+                modificationFeedback.status === "applied"
+                  ? "border-rose-200 bg-rose-50"
+                  : modificationFeedback.status === "error"
+                    ? "border-red-200 bg-red-50"
+                    : "border-amber-200 bg-amber-50"
+              }`}
+            >
+              <p
+                className={`text-xs font-semibold ${
+                  modificationFeedback.status === "applied"
+                    ? "text-rose-700"
+                    : modificationFeedback.status === "error"
+                      ? "text-red-700"
+                      : "text-amber-700"
+                }`}
+              >
+                {modificationFeedback.status === "applied"
+                  ? "사용자 수정 요청 반영됨"
+                  : modificationFeedback.status === "error"
+                    ? "사용자 수정 요청 반영 실패"
+                    : "사용자 수정 요청 반영 중"}
+              </p>
+              <p className="mt-1 whitespace-pre-wrap text-sm font-medium text-zinc-900">
+                {modificationFeedback.text}
+              </p>
+              {modificationFeedback.status === "applied" && (
+                <p className="mt-1 text-xs text-rose-700">
+                  현재 전략은 위 수정 요청을 반영한 버전입니다. 변경된 제목, 근거, 아웃라인을 다시 확인해 주세요.
+                </p>
+              )}
+              {modificationFeedback.status === "error" && modificationFeedback.error && (
+                <p className="mt-1 text-xs text-red-700">
+                  실패 사유: {modificationFeedback.error}
+                </p>
+              )}
+            </div>
+          )}
+
           {previousTitle !== proposedTitle && (
             <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
               <p className="mb-1 text-xs font-medium text-amber-700">제목 변경</p>
@@ -81,7 +139,11 @@ export function ApprovalDialog({
 
           <div>
             <p className="mb-1 text-xs font-medium text-zinc-500">제안 제목</p>
-            <p className="text-sm font-semibold text-zinc-900">{proposedTitle}</p>
+            <p className={`text-sm font-semibold ${
+              modificationFeedback?.status === "applied" ? "text-rose-700" : "text-zinc-900"
+            }`}>
+              {proposedTitle}
+            </p>
           </div>
 
           <div>
@@ -91,9 +153,17 @@ export function ApprovalDialog({
                 .split(/(?=\d+\.\s)|\n/)
                 .map((item) => item.trim())
                 .filter(Boolean)
-                .map((item, index) => (
-                  <li key={`${item}-${index}`} className="text-sm text-zinc-700">{item}</li>
-                ))}
+                .map((item, index) => {
+                  const highlighted = modificationFeedback?.status === "applied" && item.includes("수정");
+                  return (
+                    <li
+                      key={`${item}-${index}`}
+                      className={`text-sm ${highlighted ? "font-medium text-rose-700" : "text-zinc-700"}`}
+                    >
+                      {item}
+                    </li>
+                  );
+                })}
             </ol>
           </div>
 
@@ -102,7 +172,16 @@ export function ApprovalDialog({
               <p className="mb-1 text-xs font-medium text-zinc-500">아웃라인</p>
               <ol className="list-inside list-decimal space-y-1">
                 {outline.map((heading, index) => (
-                  <li key={`${heading}-${index}`} className="text-sm text-zinc-700">{heading}</li>
+                  <li
+                    key={`${heading}-${index}`}
+                    className={`text-sm ${
+                      modificationFeedback?.status === "applied" && /수정|반영|추천 이유|추천 대상/.test(heading)
+                        ? "font-medium text-rose-700"
+                        : "text-zinc-700"
+                    }`}
+                  >
+                    {heading}
+                  </li>
                 ))}
               </ol>
             </div>
@@ -138,10 +217,13 @@ export function ApprovalDialog({
               id="approval-modifications"
               value={modifications}
               onChange={(event) => setModifications(event.target.value)}
-              placeholder="수정 요청을 적고 '다시 전략수립'을 눌러 주세요."
+              placeholder="수정 요청을 적고 '수정사항 반영해서 다시 전략수립'을 눌러 주세요."
               rows={2}
               className="w-full resize-none rounded-lg border border-zinc-200 px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <p className="mt-1 text-[11px] text-zinc-500">
+              버튼을 누르면 위 요청이 전략에 반영되고, 반영된 요청은 승인창 상단에 따로 표시됩니다.
+            </p>
           </div>
         </div>
 

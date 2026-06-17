@@ -31,6 +31,13 @@ interface ApprovalData {
   modifications?: string;
 }
 
+interface ApprovalModificationFeedback {
+  status: "submitting" | "applied" | "error";
+  text: string;
+  error?: string;
+  updatedAt: string;
+}
+
 interface DraftRewriteContext {
   topicId: string;
   strategy: StrategyPlanResult;
@@ -267,6 +274,7 @@ export default function PipelinePage() {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [posts, setPosts] = useState<PostingRecord[]>([]);
   const [approval, setApproval] = useState<ApprovalData | null>(null);
+  const [approvalModificationFeedback, setApprovalModificationFeedback] = useState<ApprovalModificationFeedback | null>(null);
   const [running, setRunning] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [stuckCount, setStuckCount] = useState(0);
@@ -707,6 +715,7 @@ export default function PipelinePage() {
         strategy: StrategyPlanResult;
         __topicId?: string;
       };
+      setApprovalModificationFeedback(null);
       setApproval({
         pipelineId: data.pipelineId,
         topicId: data.__topicId ?? "",
@@ -943,6 +952,7 @@ export default function PipelinePage() {
     setContentTab("draft");
     setStage("idle");
     setApproval(null);
+    setApprovalModificationFeedback(null);
     setPipelineError(null);
     setPreflightBlocked(false);
     setPublishedDuplicateBlocked(false);
@@ -1040,6 +1050,7 @@ export default function PipelinePage() {
     setRunning(false);
     setElapsed(0);
     setApproval(null);
+    setApprovalModificationFeedback(null);
     setRunningTitle(null);
     setStage("idle");
     forceManualApprovalRef.current = false;
@@ -1150,6 +1161,7 @@ export default function PipelinePage() {
     const uid = normalizeUserId(userId.trim());
     if (!request.approved) {
       setApproval(null);
+      setApprovalModificationFeedback(null);
       setRunning(false);
       setRunningTitle(null);
       setStage("idle");
@@ -1761,10 +1773,19 @@ export default function PipelinePage() {
               onApprove={handleApprove}
               onReject={() => handleApprove({ pipelineId: approval.pipelineId, approved: false })}
               isReplanning={isReplanning}
+              modificationFeedback={approvalModificationFeedback}
               onReplan={(mods) => {
                 const uid = normalizeUserId(userId.trim());
                 const currentApproval = approval;
+                const requestedModifications = mods.trim();
+                if (!currentApproval || !requestedModifications) return;
+
                 setIsReplanning(true);
+                setApprovalModificationFeedback({
+                  status: "submitting",
+                  text: requestedModifications,
+                  updatedAt: new Date().toISOString(),
+                });
                 fetch("/api/pipeline/revise-strategy", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
@@ -1772,15 +1793,27 @@ export default function PipelinePage() {
                     topicId: currentApproval.topicId,
                     userId: uid,
                     strategy: currentApproval.strategy,
-                    modifications: mods,
+                    modifications: requestedModifications,
                   }),
                 })
                   .then(async (res) => {
                     const json = await res.json() as { strategy?: StrategyPlanResult; error?: string };
                     if (!res.ok || !json.strategy) {
-                      setPipelineError(`전략 수정 실패: ${json.error ?? "알 수 없는 오류"}`);
+                      const errorMessage = json.error ?? "알 수 없는 오류";
+                      setApprovalModificationFeedback({
+                        status: "error",
+                        text: requestedModifications,
+                        error: errorMessage,
+                        updatedAt: new Date().toISOString(),
+                      });
+                      setPipelineError(`전략 수정 실패: ${errorMessage}`);
                       return;
                     }
+                    setApprovalModificationFeedback({
+                      status: "applied",
+                      text: requestedModifications,
+                      updatedAt: new Date().toISOString(),
+                    });
                     setApproval((prev) =>
                       prev
                         ? {
@@ -1788,6 +1821,7 @@ export default function PipelinePage() {
                             strategy: json.strategy!,
                             proposedTitle: json.strategy!.title ?? prev.proposedTitle,
                             rationale: json.strategy!.rationale ?? prev.rationale,
+                            modifications: requestedModifications,
                             outline: Array.isArray(json.strategy!.outline)
                               ? (json.strategy!.outline as Array<{ heading: string } | string>).map(
                                   (item) => (typeof item === "string" ? item : item.heading)
@@ -1798,7 +1832,14 @@ export default function PipelinePage() {
                     );
                   })
                   .catch((err: unknown) => {
-                    setPipelineError(`전략 수정 오류: ${err instanceof Error ? err.message : "네트워크 오류"}`);
+                    const errorMessage = err instanceof Error ? err.message : "네트워크 오류";
+                    setApprovalModificationFeedback({
+                      status: "error",
+                      text: requestedModifications,
+                      error: errorMessage,
+                      updatedAt: new Date().toISOString(),
+                    });
+                    setPipelineError(`전략 수정 오류: ${errorMessage}`);
                   })
                   .finally(() => setIsReplanning(false));
               }}
