@@ -57,7 +57,7 @@ const SYSTEM_PROMPT = `
     {
       "heading": "섹션 제목",
       "subPoints": ["하위 포인트"],
-      "contentDirection": "작성 방향",
+      "contentDirection": "작성 방향 + 인간 지문 포인트(직접 써봤더니/실제 가격 X원/N일 사용 결과/처음엔 몰랐던 부분 등 구체 경험) + AEO 발췌 문장 위치(첫 섹션: AI 브리핑 인용용 핵심 요약 1~2문장)",
       "estimatedParagraphs": 2
     }
   ],
@@ -86,6 +86,28 @@ const SYSTEM_PROMPT = `
   - 잘못된 예: "2025년 기준 입호흡 전자담배 추천 TOP5 인천 만수동만수르 픽" (글 제목이므로 금지)
   - 잘못된 예: "전자담배를 처음 시작하는 분들을 위한 가이드" (자연어 문장이므로 금지)
   - 24자를 초과하거나 조사/어미로 끝나는 표현은 키워드가 아닙니다.
+
+## 2026 네이버 알고리즘 대응 설계 (필수)
+
+### 검색의도 분류 및 채널 전략
+- 키워드 유형을 판단하세요: "informational"(왜·방법·이유·차이·가이드 계열) vs "commercial"(추천·비교·순위·리뷰·구매 계열)
+- informational → AI 브리핑 노출 우선 전략: 아웃라인 첫 번째 섹션 contentDirection에 "AI 브리핑 발췌용 핵심 요약 1~2문장(수치·날짜 포함, 완결 문장)" 명시
+- commercial → VIEW탭 + 개인화 피드 전략: 경험 기반 섹션(실제 가격·사용 기간·전후 비교)을 아웃라인 앞쪽에 배치
+
+### AEO 구조 (Naver AI 브리핑 인용 최적화)
+- informational 키워드: 첫 번째 아웃라인 섹션 subPoints에 "독자의 핵심 질문 직접 답변" 항목 포함
+- 소제목, 비교표, 단계별 목록 형식을 outline 섹션 contentDirection에 명시
+- 날짜/수치/조건이 포함된 팩트 문장 위치를 각 섹션 contentDirection에 지정
+
+### 인간 지문 (Human Fingerprint) — D.I.A.+ AI 탐지 방지
+- 각 섹션 contentDirection에 경험 삽입 포인트 최소 1개 명시:
+  예) "직접 N일 써본 결과 ~를 발견함", "실제 가격 X원 기준으로 비교", "처음엔 ~인 줄 알았는데 실제로는 ~"
+- 구체 수치·날짜·시행착오가 없는 일반론 섹션은 D.I.A.+에서 AI 생성 문서로 분류됩니다.
+
+### 체류시간 구조
+- 아웃라인 첫 번째 섹션 contentDirection에 "목차형 요약(독자가 원하는 정보를 3~4줄로 빠르게 스캔)" 포함
+- 중간 섹션 하나의 contentDirection에 "관심 전환 장치: 예상과 달랐던 결과 또는 흔히 놓치는 포인트" 명시
+- 마지막 섹션 contentDirection에 "재방문 유도: bridgeKeyword 방향의 다음 주제로 자연스럽게 연결" 포함
 `.trim();
 
 function buildPolicySystemPrompt(): string {
