@@ -283,6 +283,8 @@ export default function PipelinePage() {
   const [preflightBlocked, setPreflightBlocked] = useState(false);
   const [publishedDuplicateBlocked, setPublishedDuplicateBlocked] = useState(false);
   const [strategyDuplicateBlocked, setStrategyDuplicateBlocked] = useState(false);
+  const [isGeneratingTitle, setIsGeneratingTitle] = useState(false);
+  const [titleCandidates, setTitleCandidates] = useState<string[]>([]);
   const forcePreflightOverrideRef = useRef(false);
   const duplicateModeOverrideRef = useRef<DuplicateMode | undefined>(undefined);
   const [reviewTitle, setReviewTitle] = useState("");
@@ -867,6 +869,33 @@ export default function PipelinePage() {
     });
     startWritePhase(approval, uid);
   }, [approval, setInspector, startWritePhase, userId]);
+
+  const generateTitle = async () => {
+    const mainKeyword = directMainKeyword.trim();
+    if (!mainKeyword || isGeneratingTitle) return;
+    setIsGeneratingTitle(true);
+    setTitleCandidates([]);
+    try {
+      const res = await fetch("/api/pipeline/generate-title", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mainKeyword,
+          subKeywords: parseKeywordList(directSubKeyword),
+          userId: normalizeUserId(userId.trim()),
+        }),
+      });
+      const json = (await res.json()) as { titles?: string[]; error?: string };
+      if (!res.ok || !json.titles?.length) {
+        throw new Error(json.error ?? "제목 생성 실패");
+      }
+      setTitleCandidates(json.titles);
+    } catch (err) {
+      setPipelineError(err instanceof Error ? err.message : "제목 생성 중 오류가 발생했습니다.");
+    } finally {
+      setIsGeneratingTitle(false);
+    }
+  };
 
   const resolveTopicId = async (): Promise<string | null> => {
     if (topicMode === "list") return selectedTopicId || null;
@@ -1606,17 +1635,55 @@ export default function PipelinePage() {
               ) : (
                 <div className="space-y-3">
                   <div>
-                    <label htmlFor="pipeline-direct-topic-title" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
-                      제목 또는 주제
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label htmlFor="pipeline-direct-topic-title" className="text-[11px] font-semibold text-zinc-500">
+                        제목 또는 주제
+                      </label>
+                      <button
+                        type="button"
+                        onClick={generateTitle}
+                        disabled={!directMainKeyword.trim() || isGeneratingTitle || running}
+                        className="flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-md bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                      >
+                        {isGeneratingTitle ? (
+                          <>
+                            <span className="inline-block h-2.5 w-2.5 animate-spin rounded-full border-2 border-violet-400 border-t-transparent" />
+                            생성 중…
+                          </>
+                        ) : (
+                          "✦ AI 제목생성"
+                        )}
+                      </button>
+                    </div>
                     <input
                       id="pipeline-direct-topic-title"
                       value={directTopicTitle}
-                      onChange={(event) => setDirectTopicTitle(event.target.value)}
+                      onChange={(event) => {
+                        setDirectTopicTitle(event.target.value);
+                        setTitleCandidates([]);
+                      }}
                       placeholder="예: 부평 전자담배 액상 고를 때 먼저 보는 기준"
                       disabled={running}
                       className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
                     />
+                    {titleCandidates.length > 0 && (
+                      <div className="mt-2 space-y-1.5">
+                        <p className="text-[10px] font-semibold text-violet-500">클릭하면 제목으로 입력됩니다</p>
+                        {titleCandidates.map((candidate, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            onClick={() => {
+                              setDirectTopicTitle(candidate);
+                              setTitleCandidates([]);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-xs text-zinc-800 bg-white border border-violet-200 rounded-lg hover:bg-violet-50 hover:border-violet-400 transition-colors"
+                          >
+                            {candidate}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="pipeline-direct-main-keyword" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
