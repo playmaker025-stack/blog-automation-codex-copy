@@ -2,76 +2,13 @@
   "userId": "c",
   "samples": [
     {
-      "sampleId": "reference-c-01",
-      "title": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
-      "category": "비교/구조 설명형",
-      "tags": [
-        "기기 비교",
-        "스펙 정리",
-        "사용법",
-        "문제 해결",
-        "입문 추천",
-        "인천전자담배",
-        "말론바",
-        "일회용"
-      ],
-      "wordCount": 1657,
-      "publishedAt": "2026-03-27T00:00:00.000Z",
-      "filePath": "user-modeling/users/c/corpus/samples/reference-c-01.md"
-    },
-    {
-      "sampleId": "reference-c-02",
-      "title": "말론 vs 아스트로 MK3 입문 추천 − 입호흡 전자담배 차이 정리",
-      "category": "비교/구조 설명형",
-      "tags": [
-        "기기 비교",
-        "스펙 정리",
-        "사용법",
-        "문제 해결",
-        "입문 추천",
-        "말론",
-        "vs",
-        "아스트로"
-      ],
-      "wordCount": 2288,
-      "publishedAt": "2026-03-09T00:00:00.000Z",
-      "filePath": "user-modeling/users/c/corpus/samples/reference-c-02.md"
-    },
-    {
-      "sampleId": "reference-c-03",
-      "title": "부평전자담배 입호흡 전담 추천 구매하기 전에 필독",
-      "category": "비교/구조 설명형",
-      "tags": [
-        "기기 비교",
-        "스펙 정리",
-        "사용법",
-        "문제 해결",
-        "입문 추천",
-        "부평전자담배",
-        "입호흡",
-        "전담"
-      ],
-      "wordCount": 3556,
-      "publishedAt": "2025-10-17T00:00:00.000Z",
-      "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
-    },
-    {
-      "sampleId": "reference-c-04",
-      "title": "인천전자담배 만수르점 베놈 아스트로 MK3 입고! 스펙&사용법 정리",
-      "category": "비교/구조 설명형",
-      "tags": [
-        "기기 비교",
-        "스펙 정리",
-        "사용법",
-        "문제 해결",
-        "입문 추천",
-        "인천전자담배",
-        "만수르점",
-        "베놈"
-      ],
-      "wordCount": 2695,
-      "publishedAt": "2025-12-31T00:00:00.000Z",
-      "filePath": "user-modeling/users/c/corpus/samples/reference-c-04.md"
+      "sampleId": "published-post-manual-mqyx6rwp",
+      "title": "일회용 전자담배 추천과 사용 시 주의사항 완벽 가이드",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 7403,
+      "publishedAt": "2026-06-29T07:52:24.171Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mqyx6rwp.md"
     },
     {
       "sampleId": "reference-c-05",
@@ -108,7 +45,79 @@
       "wordCount": 1353,
       "publishedAt": "2026-04-27T00:00:00.000Z",
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-06.md"
+    },
+    {
+      "sampleId": "reference-c-01",
+      "title": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "인천전자담배",
+        "말론바",
+        "일회용"
+      ],
+      "wordCount": 1657,
+      "publishedAt": "2026-03-27T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-01.md"
+    },
+    {
+      "sampleId": "reference-c-02",
+      "title": "말론 vs 아스트로 MK3 입문 추천 − 입호흡 전자담배 차이 정리",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "말론",
+        "vs",
+        "아스트로"
+      ],
+      "wordCount": 2288,
+      "publishedAt": "2026-03-09T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-02.md"
+    },
+    {
+      "sampleId": "reference-c-04",
+      "title": "인천전자담배 만수르점 베놈 아스트로 MK3 입고! 스펙&사용법 정리",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "인천전자담배",
+        "만수르점",
+        "베놈"
+      ],
+      "wordCount": 2695,
+      "publishedAt": "2025-12-31T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-04.md"
+    },
+    {
+      "sampleId": "reference-c-03",
+      "title": "부평전자담배 입호흡 전담 추천 구매하기 전에 필독",
+      "category": "비교/구조 설명형",
+      "tags": [
+        "기기 비교",
+        "스펙 정리",
+        "사용법",
+        "문제 해결",
+        "입문 추천",
+        "부평전자담배",
+        "입호흡",
+        "전담"
+      ],
+      "wordCount": 3556,
+      "publishedAt": "2025-10-17T00:00:00.000Z",
+      "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-05-07T00:00:00.000Z"
+  "lastUpdated": "2026-06-29T07:52:29.859Z"
 }
