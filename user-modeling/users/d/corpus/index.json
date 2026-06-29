@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mqz4nijs",
+      "title": "전자담배 액상 추천받으러 왔다가 결국 원래 피던 거 사가는 이유 😂",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6485,
+      "publishedAt": "2026-06-29T11:21:23.410Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mqz4nijs.md"
+    },
+    {
       "sampleId": "reference-d-01",
       "title": "포켓코리아 아머미니 전자담배 – 입문자용으로 쓰기 편한 이유 정리",
       "category": "기술/문제해결형",
@@ -18,6 +27,19 @@
       "wordCount": 2077,
       "publishedAt": "2026-05-07T00:00:00.000Z",
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-01.md"
+    },
+    {
+      "sampleId": "published-post-21e6d9ae",
+      "title": "전자담배 액상 종류별 특징과 입문자 맞춤 맛 선택법",
+      "category": "발행 글 샘플",
+      "tags": [
+        "실제 발행 글",
+        "문체 참고",
+        "전자담배"
+      ],
+      "wordCount": 1839,
+      "publishedAt": "2026-05-07T00:00:00.000Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-21e6d9ae.md"
     },
     {
       "sampleId": "reference-d-02",
@@ -108,20 +130,7 @@
       "wordCount": 2428,
       "publishedAt": "2025-09-04T00:00:00.000Z",
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-06.md"
-    },
-    {
-      "sampleId": "published-post-21e6d9ae",
-      "title": "전자담배 액상 종류별 특징과 입문자 맞춤 맛 선택법",
-      "category": "발행 글 샘플",
-      "tags": [
-        "실제 발행 글",
-        "문체 참고",
-        "전자담배"
-      ],
-      "wordCount": 1839,
-      "publishedAt": "2026-05-07T00:00:00.000Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-21e6d9ae.md"
     }
   ],
-  "lastUpdated": "2026-05-07T00:00:00.000Z"
+  "lastUpdated": "2026-06-29T11:21:29.813Z"
 }
