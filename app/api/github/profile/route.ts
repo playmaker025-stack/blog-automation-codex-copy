@@ -22,8 +22,20 @@ export async function GET(request: NextRequest) {
     const { data } = await readJsonFile<UserProfile>(path);
     return NextResponse.json({ profile: data });
   } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const status = (error as { status?: number }).status;
     console.error("[GET /api/github/profile]", error);
-    return NextResponse.json({ error: "프로필 조회 실패" }, { status: 500 });
+
+    if (status === 401 || msg.includes("GITHUB_TOKEN") || msg.includes("Bad credentials")) {
+      return NextResponse.json({ error: "GitHub 토큰이 유효하지 않습니다. Railway Variables의 GITHUB_TOKEN을 확인해 주세요." }, { status: 500 });
+    }
+    if (status === 403) {
+      return NextResponse.json({ error: "GitHub 접근 권한이 없습니다. GITHUB_TOKEN 권한을 확인해 주세요." }, { status: 500 });
+    }
+    if (msg.includes("GITHUB_DATA_REPO")) {
+      return NextResponse.json({ error: `데이터 저장소 설정 오류: ${msg}` }, { status: 500 });
+    }
+    return NextResponse.json({ error: `프로필 조회 실패: ${msg.slice(0, 200)}` }, { status: 500 });
   }
 }
 
