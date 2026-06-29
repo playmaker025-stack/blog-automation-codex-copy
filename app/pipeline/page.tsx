@@ -1635,6 +1635,32 @@ export default function PipelinePage() {
               ) : (
                 <div className="space-y-3">
                   <div>
+                    <label htmlFor="pipeline-direct-main-keyword" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
+                      메인 키워드
+                    </label>
+                    <input
+                      id="pipeline-direct-main-keyword"
+                      value={directMainKeyword}
+                      onChange={(event) => setDirectMainKeyword(event.target.value)}
+                      placeholder="예: 부평 전자담배"
+                      disabled={running}
+                      className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="pipeline-direct-sub-keyword" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
+                      서브 키워드
+                    </label>
+                    <input
+                      id="pipeline-direct-sub-keyword"
+                      value={directSubKeyword}
+                      onChange={(event) => setDirectSubKeyword(event.target.value)}
+                      placeholder="예: 입문 기기 추천"
+                      disabled={running}
+                      className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                    />
+                  </div>
+                  <div>
                     <div className="flex items-center justify-between mb-1.5">
                       <label htmlFor="pipeline-direct-topic-title" className="text-[11px] font-semibold text-zinc-500">
                         제목 또는 주제
@@ -1684,32 +1710,6 @@ export default function PipelinePage() {
                         ))}
                       </div>
                     )}
-                  </div>
-                  <div>
-                    <label htmlFor="pipeline-direct-main-keyword" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
-                      메인 키워드
-                    </label>
-                    <input
-                      id="pipeline-direct-main-keyword"
-                      value={directMainKeyword}
-                      onChange={(event) => setDirectMainKeyword(event.target.value)}
-                      placeholder="예: 부평 전자담배"
-                      disabled={running}
-                      className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="pipeline-direct-sub-keyword" className="block text-[11px] font-semibold text-zinc-500 mb-1.5">
-                      서브 키워드
-                    </label>
-                    <input
-                      id="pipeline-direct-sub-keyword"
-                      value={directSubKeyword}
-                      onChange={(event) => setDirectSubKeyword(event.target.value)}
-                      placeholder="예: 입문 기기 추천"
-                      disabled={running}
-                      className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-                    />
                   </div>
                   <div className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2">
                     <p className="text-[11px] font-semibold text-zinc-500">조합 제목 미리보기</p>
