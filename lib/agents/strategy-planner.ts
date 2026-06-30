@@ -26,6 +26,21 @@ import { buildArticlePlan } from "./article-plan.ts";
 
 const STRATEGY_LOOP_TIMEOUT_MS = 120_000;
 const SIMPLE_STRATEGY_TIMEOUT_MS = 45_000;
+const ANTHROPIC_CREDIT_BLOCK_MESSAGE =
+  "Anthropic API 크레딧이 부족해 전략 수립을 중단합니다. 결제/크레딧을 충전한 뒤 다시 실행해 주세요.";
+
+function stringifyStrategyError(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  return String(error);
+}
+
+function isFatalStrategyProviderError(error: unknown): boolean {
+  const message = stringifyStrategyError(error).toLowerCase();
+  return (
+    message.includes("credit balance is too low") ||
+    (message.includes("invalid_request_error") && message.includes("credit balance"))
+  );
+}
 
 const ALLOWED_VAPE_TOPIC_CLARIFICATION = [
   "## Allowed vape topic clarification",
@@ -1145,8 +1160,13 @@ export async function runStrategyPlanner(params: {
       throw new Error("파이프라인 취소 - 전략 수립 중단");
     }
 
+    const fallbackReason = stringifyStrategyError(error);
+    if (isFatalStrategyProviderError(error)) {
+      onProgress?.(ANTHROPIC_CREDIT_BLOCK_MESSAGE);
+      throw new Error(`${ANTHROPIC_CREDIT_BLOCK_MESSAGE} 원문: ${fallbackReason}`);
+    }
+
     console.warn("[strategy-planner] tool-use 루프/파싱 실패, 안전 폴백 전략으로 전환:", String(error));
-    const fallbackReason = error instanceof Error ? error.message : String(error);
     onProgress?.("AI 전략 수립에 실패해 안전 폴백을 만들었지만, 발행용 writer 실행은 차단합니다.");
     plan = {
       ...buildLocalFallbackStrategy(topic),
@@ -1233,10 +1253,6 @@ export async function runStrategyPlanner(params: {
     strategyQualityGate: evaluatePublishableStrategyGate(plan),
   };
 
-  onProgress?.(`전략 수립 완료: "${plan.title}" (${contentTopology.kind === "hub" ? "허브글" : "리프글"})`);
-  onProgress?.(
-    `네이버 작성 로직 검토 완료: ${naverLogicAgent.formatLabel(naverLogic.primary)} / 목표 완성도 ${naverLogic.completenessTarget}%`
-  );
   if (topic.seriesRole === "prelude" || topic.seriesRole === "main") {
     plan = {
       ...plan,
@@ -1289,9 +1305,17 @@ export async function runStrategyPlanner(params: {
       strategyQualityGate: evaluatePublishableStrategyGate(plan),
     };
   }
+  if (plan.strategyQualityGate && !plan.strategyQualityGate.ok) {
+    onProgress?.(`전략 수립 실패: ${plan.strategyQualityGate.blockingReasons.join(" / ")}`);
+    return plan;
+  }
   if (plan.strategyQualityGate?.warnings.length) {
     onProgress?.(`계약 경고: ${plan.strategyQualityGate.warnings.join(" / ")}`);
   }
+  onProgress?.(`전략 수립 완료: "${plan.title}" (${contentTopology.kind === "hub" ? "허브글" : "리프글"})`);
+  onProgress?.(
+    `네이버 작성 로직 검토 완료: ${naverLogicAgent.formatLabel(naverLogic.primary)} / 목표 완성도 ${naverLogic.completenessTarget}%`
+  );
   return plan;
 }
 
