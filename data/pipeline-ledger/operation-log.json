@@ -2494,7 +2494,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-9f8e1bc4",
       "at": "2026-06-30T07:29:10.454Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전담 뜨거움 원인과 해결방법 - 만수르 전자담배",
+      "proposedTitle": "전담 뜨거움 원인과 해결방법 - 만수르 전자담배",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-109866c8",
+      "at": "2026-06-30T07:31:34.537Z"
     }
   ],
-  "lastUpdated": "2026-06-30T07:29:10.454Z"
+  "lastUpdated": "2026-06-30T07:31:34.537Z"
 }
