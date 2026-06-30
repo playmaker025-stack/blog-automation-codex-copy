@@ -2505,7 +2505,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-109866c8",
       "at": "2026-06-30T07:31:34.537Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 하복SE 기기 특징과 사용자 후기 분석",
+      "proposedTitle": "부평 전자담배 하복SE 기기 특징과 사용자 후기 분석",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-02ffb595",
+      "at": "2026-06-30T07:34:49.835Z"
     }
   ],
-  "lastUpdated": "2026-06-30T07:31:34.537Z"
+  "lastUpdated": "2026-06-30T07:34:49.835Z"
 }
