@@ -2,6 +2,15 @@
   "userId": "e",
   "samples": [
     {
+      "sampleId": "published-post-manual-mr0k6kud",
+      "title": "구월동 전자담배 네스티 원 5% 고농도 일회용 전자담배 사용기",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 7261,
+      "publishedAt": "2026-06-30T11:23:58.548Z",
+      "filePath": "user-modeling/users/e/corpus/samples/published-post-manual-mr0k6kud.md"
+    },
+    {
       "sampleId": "reference-e-01",
       "title": "전자담배 입호흡 폐호흡 차이점 만수동만수르에서 알려드릴게요",
       "category": "입문/실용 확장형",
@@ -92,5 +101,5 @@
       "filePath": "user-modeling/users/e/corpus/samples/reference-e-05.md"
     }
   ],
-  "lastUpdated": "2026-05-07T00:00:00.000Z"
+  "lastUpdated": "2026-06-30T11:24:04.238Z"
 }
