@@ -2571,7 +2571,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-7c92160a",
       "at": "2026-06-30T08:55:22.602Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-46b143b8",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-7d8b6ac5 / Similar existing title found: 부평 전자담배 하복SE 기기 특징과 사용자 후기 분석 (ready, 1)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-7a6661a3",
+      "at": "2026-06-30T08:56:49.491Z"
     }
   ],
-  "lastUpdated": "2026-06-30T08:55:22.602Z"
+  "lastUpdated": "2026-06-30T08:56:49.491Z"
 }
