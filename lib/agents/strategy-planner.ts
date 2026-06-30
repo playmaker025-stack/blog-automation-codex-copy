@@ -676,6 +676,23 @@ function buildLocalFallbackStrategy(topic: Topic): StrategyPlanResult {
   };
 }
 
+function evaluatePublishableStrategyGate(plan: StrategyPlanResult) {
+  const gate = evaluateStrategyQualityGate(plan);
+  if (plan.strategySource !== "local_fallback") return gate;
+
+  return {
+    ok: false,
+    blockingReasons: [
+      "AI 전략 수립 실패로 안전 폴백 전략이 생성되어 발행용 writer 실행을 차단합니다. 다시 전략 수립을 실행해 주세요.",
+      ...gate.blockingReasons,
+    ],
+    warnings: [
+      ...(plan.strategyFallbackReason ? [`폴백 사유: ${plan.strategyFallbackReason}`] : []),
+      ...gate.warnings,
+    ],
+  };
+}
+
 function buildUserMessage(
   topic: Topic,
   topicId: string,
@@ -1119,14 +1136,23 @@ export async function runStrategyPlanner(params: {
     if (!plan.title || typeof plan.title !== "string") {
       throw new Error("전략 파싱 실패: title 필드가 비어 있습니다.");
     }
+    plan = {
+      ...plan,
+      strategySource: "ai",
+    };
   } catch (error) {
     if (signal?.aborted) {
       throw new Error("파이프라인 취소 - 전략 수립 중단");
     }
 
     console.warn("[strategy-planner] tool-use 루프/파싱 실패, 안전 폴백 전략으로 전환:", String(error));
-    onProgress?.("AI 전략 응답이 지연되어 안전 폴백 전략으로 이어갑니다.");
-    plan = buildLocalFallbackStrategy(topic);
+    const fallbackReason = error instanceof Error ? error.message : String(error);
+    onProgress?.("AI 전략 수립에 실패해 안전 폴백을 만들었지만, 발행용 writer 실행은 차단합니다.");
+    plan = {
+      ...buildLocalFallbackStrategy(topic),
+      strategySource: "local_fallback",
+      strategyFallbackReason: fallbackReason,
+    };
   }
 
   plan = sanitizeStrategyLanguage(applyDirectKeywordPriority(plan, directIntent));
@@ -1204,7 +1230,7 @@ export async function runStrategyPlanner(params: {
   };
   plan = {
     ...plan,
-    strategyQualityGate: evaluateStrategyQualityGate(plan),
+    strategyQualityGate: evaluatePublishableStrategyGate(plan),
   };
 
   onProgress?.(`전략 수립 완료: "${plan.title}" (${contentTopology.kind === "hub" ? "허브글" : "리프글"})`);
@@ -1260,7 +1286,7 @@ export async function runStrategyPlanner(params: {
     };
     plan = {
       ...plan,
-      strategyQualityGate: evaluateStrategyQualityGate(plan),
+      strategyQualityGate: evaluatePublishableStrategyGate(plan),
     };
   }
   if (plan.strategyQualityGate?.warnings.length) {

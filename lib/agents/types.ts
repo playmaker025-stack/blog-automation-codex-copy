@@ -51,6 +51,8 @@ export interface StrategyPlanResult {
   strategyQualityGate?: StrategyQualityGateResult;
   overlapReport?: OverlapReport;
   topicIntentResolution?: TopicIntentResolution;
+  strategySource?: "ai" | "local_fallback";
+  strategyFallbackReason?: string;
 }
 
 export type DuplicateMode = "different_angle" | "force_duplicate";
