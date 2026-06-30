@@ -52,6 +52,7 @@ export interface StrategyPlanResult {
   overlapReport?: OverlapReport;
   topicIntentResolution?: TopicIntentResolution;
   strategySource?: "ai" | "local_fallback";
+  strategyProvider?: "anthropic" | "openai" | "local";
   strategyFallbackReason?: string;
 }
 

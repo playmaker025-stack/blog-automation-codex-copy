@@ -20,19 +20,30 @@ const typesSource = readFileSync(
 describe("PR16 strategy fallback publish gate", () => {
   test("StrategyPlanResult는 AI 전략과 로컬 폴백 전략 출처를 구분한다", () => {
     assert.match(typesSource, /strategySource\?: "ai" \| "local_fallback"/u);
+    assert.match(typesSource, /strategyProvider\?: "anthropic" \| "openai" \| "local"/u);
     assert.match(typesSource, /strategyFallbackReason\?: string/u);
   });
 
-  test("Anthropic 크레딧 부족은 안전 폴백으로 넘기지 않고 즉시 중단한다", () => {
+  test("Anthropic 크레딧 부족은 OpenAI 키가 있으면 전략 폴백으로 복구한다", () => {
+    assert.match(strategyPlannerSource, /hasOpenAIKey\(\)/u);
+    assert.match(strategyPlannerSource, /runOpenAIStrategyFallback/u);
+    assert.match(strategyPlannerSource, /strategyProvider: "openai"/u);
+    assert.match(strategyPlannerSource, /Anthropic 크레딧 부족은 OpenAI 전략 폴백으로 복구했습니다/u);
+  });
+
+  test("OpenAI 키가 없을 때만 Anthropic 크레딧 부족을 즉시 중단한다", () => {
     assert.match(strategyPlannerSource, /ANTHROPIC_CREDIT_BLOCK_MESSAGE/u);
     assert.match(strategyPlannerSource, /isFatalStrategyProviderError\(error\)/u);
     assert.match(strategyPlannerSource, /credit balance is too low/u);
+    assert.match(strategyPlannerSource, /OPENAI_API_KEY도 없어 OpenAI 폴백을 사용할 수 없습니다/u);
     assert.match(strategyPlannerSource, /throw new Error\(`\$\{ANTHROPIC_CREDIT_BLOCK_MESSAGE\} 원문: \$\{fallbackReason\}`\)/u);
   });
 
   test("일반 AI 전략 실패 폴백은 local_fallback으로 표시되고 발행용 writer 차단 사유를 만든다", () => {
     assert.match(strategyPlannerSource, /strategySource: "ai"/u);
+    assert.match(strategyPlannerSource, /strategyProvider: "anthropic"/u);
     assert.match(strategyPlannerSource, /strategySource: "local_fallback"/u);
+    assert.match(strategyPlannerSource, /strategyProvider: "local"/u);
     assert.match(strategyPlannerSource, /strategyFallbackReason: fallbackReason/u);
     assert.match(strategyPlannerSource, /evaluatePublishableStrategyGate\(plan\)/u);
   });

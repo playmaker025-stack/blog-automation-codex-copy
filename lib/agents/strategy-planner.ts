@@ -1,6 +1,7 @@
 import type { Tool } from "@anthropic-ai/sdk/resources/messages";
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { runToolUseLoop } from "@/lib/anthropic/tool-executor";
+import { hasOpenAIKey, requestOpenAIText } from "@/lib/openai/responses";
 import { userProfileLoader } from "@/lib/skills/user-profile-loader";
 import { userCorpusRetriever } from "@/lib/skills/user-corpus-retriever";
 import { topicFeasibilityJudge } from "@/lib/skills/topic-feasibility-judge";
@@ -26,8 +27,9 @@ import { buildArticlePlan } from "./article-plan.ts";
 
 const STRATEGY_LOOP_TIMEOUT_MS = 120_000;
 const SIMPLE_STRATEGY_TIMEOUT_MS = 45_000;
+const OPENAI_STRATEGY_TIMEOUT_MS = 120_000;
 const ANTHROPIC_CREDIT_BLOCK_MESSAGE =
-  "Anthropic API 크레딧이 부족해 전략 수립을 중단합니다. 결제/크레딧을 충전한 뒤 다시 실행해 주세요.";
+  "Anthropic API 크레딧이 부족합니다. OpenAI 전략 폴백을 사용할 수 없으면 전략 수립을 중단합니다.";
 
 function stringifyStrategyError(error: unknown): string {
   if (error instanceof Error) return error.message;
@@ -772,6 +774,78 @@ function buildUserMessage(
   ].filter(Boolean).join("\n");
 }
 
+async function runOpenAIStrategyFallback(params: {
+  topic: Topic;
+  topicId: string;
+  userId: string;
+  directIntent: DirectKeywordIntent | null;
+  publicationLearning: StrategyPlanResult["publicationLearning"];
+  duplicateModeOverride?: DuplicateMode;
+  communityResearchBrief: string;
+  modifications?: string;
+  onProgress?: (message: string) => void;
+  signal?: AbortSignal;
+}): Promise<StrategyPlanResult> {
+  const model = process.env.OPENAI_STRATEGY_MODEL ?? process.env.OPENAI_TOPIC_MODEL ?? "gpt-4.1-mini";
+  const callSignal = params.signal
+    ? AbortSignal.any([params.signal, AbortSignal.timeout(OPENAI_STRATEGY_TIMEOUT_MS)])
+    : AbortSignal.timeout(OPENAI_STRATEGY_TIMEOUT_MS);
+
+  params.onProgress?.("Anthropic 크레딧 부족으로 OpenAI 전략 플래너로 전환합니다.");
+
+  const userPrompt = [
+    "Anthropic tool-use strategy planner could not run because provider credits were unavailable.",
+    "Use only the supplied topic, publication learning, duplicate-mode, and community research briefs below.",
+    "Do not claim that external tools were called in this OpenAI fallback path.",
+    buildUserMessage(
+      params.topic,
+      params.topicId,
+      params.userId,
+      params.directIntent,
+      params.publicationLearning,
+      params.duplicateModeOverride
+    ),
+    params.communityResearchBrief,
+    params.modifications?.trim()
+      ? `## 전략 수정 요청\n사용자가 이전 전략에 대해 다음 수정을 요청했습니다. 반드시 반영하세요.\n${params.modifications.trim()}`
+      : "",
+    "Return only one valid JSON object or one ```json code block. Do not add commentary.",
+  ].filter(Boolean).join("\n\n");
+
+  const result = await requestOpenAIText({
+    model,
+    input: [
+      {
+        role: "system",
+        content: [
+          buildPolicySystemPrompt(),
+          "You are the OpenAI fallback strategy planner. Produce the same strategy JSON schema as the primary planner.",
+          "Because this fallback has no tool calls, lean on the provided briefs and keep factual claims conservative.",
+        ].join("\n\n"),
+      },
+      { role: "user", content: userPrompt },
+    ],
+    maxOutputTokens: 3500,
+    temperature: 0.25,
+    signal: callSignal,
+    onRetry: (info) => {
+      params.onProgress?.(`OpenAI 전략 요청 제한으로 약 ${Math.ceil(info.delayMs / 1000)}초 후 자동 재시도합니다.`);
+    },
+  });
+
+  const plan = parseStrategyFromText(result);
+  if (!plan.title || typeof plan.title !== "string") {
+    throw new Error("OpenAI 전략 폴백 파싱 실패: title 필드가 비어 있습니다.");
+  }
+
+  params.onProgress?.("OpenAI 전략 폴백 응답을 정상 파싱했습니다.");
+  return {
+    ...plan,
+    strategySource: "ai",
+    strategyProvider: "openai",
+  };
+}
+
 function sanitizeOutlineHeadingLanguage(value: string): string {
   return value
     .replace(/(.+?(?:추천|비교|후기|리뷰))(?:을|를)\s*찾는\s*이유/gu, "$1이 필요한 이유")
@@ -1154,6 +1228,7 @@ export async function runStrategyPlanner(params: {
     plan = {
       ...plan,
       strategySource: "ai",
+      strategyProvider: "anthropic",
     };
   } catch (error) {
     if (signal?.aborted) {
@@ -1162,17 +1237,34 @@ export async function runStrategyPlanner(params: {
 
     const fallbackReason = stringifyStrategyError(error);
     if (isFatalStrategyProviderError(error)) {
-      onProgress?.(ANTHROPIC_CREDIT_BLOCK_MESSAGE);
-      throw new Error(`${ANTHROPIC_CREDIT_BLOCK_MESSAGE} 원문: ${fallbackReason}`);
+      if (hasOpenAIKey()) {
+        plan = await runOpenAIStrategyFallback({
+          topic,
+          topicId,
+          userId,
+          directIntent,
+          publicationLearning,
+          duplicateModeOverride: params.duplicateModeOverride,
+          communityResearchBrief,
+          modifications: params.modifications,
+          onProgress,
+          signal: plannerSignal,
+        });
+        onProgress?.("Anthropic 크레딧 부족은 OpenAI 전략 폴백으로 복구했습니다.");
+      } else {
+        onProgress?.(`${ANTHROPIC_CREDIT_BLOCK_MESSAGE} OPENAI_API_KEY도 없어 OpenAI 폴백을 사용할 수 없습니다.`);
+        throw new Error(`${ANTHROPIC_CREDIT_BLOCK_MESSAGE} 원문: ${fallbackReason}`);
+      }
+    } else {
+      console.warn("[strategy-planner] tool-use 루프/파싱 실패, 안전 폴백 전략으로 전환:", String(error));
+      onProgress?.("AI 전략 수립에 실패해 안전 폴백을 만들었지만, 발행용 writer 실행은 차단합니다.");
+      plan = {
+        ...buildLocalFallbackStrategy(topic),
+        strategySource: "local_fallback",
+        strategyProvider: "local",
+        strategyFallbackReason: fallbackReason,
+      };
     }
-
-    console.warn("[strategy-planner] tool-use 루프/파싱 실패, 안전 폴백 전략으로 전환:", String(error));
-    onProgress?.("AI 전략 수립에 실패해 안전 폴백을 만들었지만, 발행용 writer 실행은 차단합니다.");
-    plan = {
-      ...buildLocalFallbackStrategy(topic),
-      strategySource: "local_fallback",
-      strategyFallbackReason: fallbackReason,
-    };
   }
 
   plan = sanitizeStrategyLanguage(applyDirectKeywordPriority(plan, directIntent));
