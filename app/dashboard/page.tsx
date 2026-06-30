@@ -17,7 +17,7 @@ export default function DashboardPage() {
     setError(null);
     Promise.all([
       fetch(`/api/github/topics?_t=${t}`).then((r) => r.json()),
-      fetch(`/api/github/posts?limit=5&_t=${t}`).then((r) => r.json()),
+      fetch(`/api/github/posts?limit=1000&_t=${t}`).then((r) => r.json()),
     ])
       .then(([topicData, postData]) => {
         setTopics((topicData as { topics: Topic[] }).topics ?? []);
@@ -38,6 +38,9 @@ export default function DashboardPage() {
   };
 
   const publishedPosts = posts.filter((p) => p.status === "published");
+  const postStatusCounts = {
+    published: publishedPosts.length,
+  };
   const avgEval =
     publishedPosts.length > 0
       ? Math.round(
@@ -80,7 +83,7 @@ export default function DashboardPage() {
         {[
           { label: "전체 토픽", value: loading ? "-" : topics.length, color: "text-zinc-900" },
           { label: "진행 중", value: loading ? "-" : statusCounts["in-progress"], color: "text-blue-600" },
-          { label: "발행 완료", value: loading ? "-" : statusCounts.published, color: "text-emerald-600" },
+          { label: "발행 완료", value: loading ? "-" : postStatusCounts.published, color: "text-emerald-600" },
           {
             label: "평균 Eval",
             value: loading ? "-" : avgEval !== null ? `${avgEval}점` : "-",
@@ -141,7 +144,7 @@ export default function DashboardPage() {
           </p>
         ) : (
           <div className="space-y-2">
-            {posts.map((post) => (
+            {posts.slice(0, 5).map((post) => (
               <div
                 key={post.postId}
                 className="flex items-center justify-between py-2 border-b border-zinc-50 last:border-0"
