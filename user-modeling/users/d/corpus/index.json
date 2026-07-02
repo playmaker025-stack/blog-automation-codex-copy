@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mr3i1u04",
+      "title": "여름철 전자담배를 차량에 두면 안 되는 이유",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6008,
+      "publishedAt": "2026-07-02T12:47:30.502Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mr3i1u04.md"
+    },
+    {
       "sampleId": "published-post-manual-mr1ze6cd",
       "title": "케이스가 들어있는 크로스미니6 번들킷 리뷰 스펙 및 사용법 정리!",
       "category": "published-post",
@@ -150,5 +159,5 @@
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-06.md"
     }
   ],
-  "lastUpdated": "2026-07-01T11:17:34.622Z"
+  "lastUpdated": "2026-07-02T12:47:36.965Z"
 }
