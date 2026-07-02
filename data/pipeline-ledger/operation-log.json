@@ -2782,7 +2782,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-6cd3e6cf",
       "at": "2026-07-02T07:23:52.672Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-402530fe",
+      "userId": "c",
+      "message": "전략 계약서가 불완전해 writer 실행을 차단합니다: AI 전략 수립 실패로 안전 폴백 전략이 생성되어 발행용 writer 실행을 차단합니다. 다시 전략 수립을 실행해 주세요.",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-17136a83",
+      "at": "2026-07-02T08:01:26.018Z"
     }
   ],
-  "lastUpdated": "2026-07-02T07:23:52.672Z"
+  "lastUpdated": "2026-07-02T08:01:26.018Z"
 }
