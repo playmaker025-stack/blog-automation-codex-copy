@@ -1477,9 +1477,12 @@ export async function runStrategyPhase(params: {
     );
     const qualityGateBlocked = strategy.strategyQualityGate && !strategy.strategyQualityGate.ok;
     if (qualityGateBlocked) {
-      throw new Error(
-        `전략 계약서가 불완전해 writer 실행을 차단합니다: ${strategy.strategyQualityGate?.blockingReasons.join(" / ")}`
-      );
+      const warnings = strategy.strategyQualityGate?.warnings ?? [];
+      const detail = [
+        strategy.strategyQualityGate?.blockingReasons.join(" / "),
+        warnings.length ? `[상세] ${warnings.join(" / ")}` : null,
+      ].filter(Boolean).join(" — ");
+      throw new Error(`전략 계약서가 불완전해 writer 실행을 차단합니다: ${detail}`);
     }
 
     state = updateState(state, { strategy });
