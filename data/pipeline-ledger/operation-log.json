@@ -2815,7 +2815,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-1013af66",
       "at": "2026-07-02T09:11:35.500Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-b39ccdca",
+      "userId": "a",
+      "message": "전략 계약서가 불완전해 writer 실행을 차단합니다: AI 전략 수립 실패로 안전 폴백 전략이 생성되어 발행용 writer 실행을 차단합니다. 다시 전략 수립을 실행해 주세요. — [상세] 폴백 사유: 400 Invalid response body while trying to fetch https://api.anthropic.com/v1/messages: Premature close / 기존 글과 일부 방향이 겹칩니다. recommendedRewriteDirection을 따라야 합니다. / 도입 패턴 반복 주의: customer_question / 결론 패턴 반복 주의: criteria_summary",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-9c82622b",
+      "at": "2026-07-02T09:33:12.933Z"
     }
   ],
-  "lastUpdated": "2026-07-02T09:11:35.500Z"
+  "lastUpdated": "2026-07-02T09:33:12.933Z"
 }
