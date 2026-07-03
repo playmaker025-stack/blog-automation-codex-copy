@@ -31,12 +31,30 @@ class StallTimeoutError extends Error {
 // client.messages.stream()으로 전환해 SSE 이벤트가 계속 흐르게 하면 중간 유휴
 // 연결로 오인되어 끊기는 문제 자체가 줄어든다(master-writer.ts와 동일 패턴).
 // 그래도 연결이 아예 안 열리거나 도중에 멎는 등 진짜 일시적 문제는 여전히 재시도한다.
+//
+// 2026-07-03 실측: Railway 환경에서 "400 Invalid response body ... Premature
+// close"가 반복 재현됐는데, 로컬에서 동일 요청을 재현해보니 실제 원인은
+// Anthropic 크레딧 소진(진짜 응답은 BadRequestError, status=400, credit
+// balance too low)이었다 — Railway 쪽에서만 그 에러 본문을 읽는 것 자체가
+// 실패해 "Premature close"로 가려진 것. status가 명확한 4xx로 찍혀 있으면
+// 서버가 이미 요청을 거부한 것이므로, 동일 요청을 재시도해도 똑같이 거부된다.
+// 단, 이 SDK(core.js shouldRetry)가 원래 재시도 대상으로 보는 408(요청
+// 타임아웃)/409(락 타임아웃)/429(rate limit)/5xx는 여전히 재시도한다 —
+// client.ts가 maxRetries:0으로 SDK 자체 재시도를 꺼둔 만큼 여기서 그 역할을
+// 대신해야 한다(codex-rescue 리뷰로 408/409 누락을 확인, 2026-07-03).
+const NON_RETRYABLE_4XX = new Set([400, 401, 403, 404, 422]);
 function isRetryableConnectionError(error: unknown): boolean {
-  if (error instanceof APIConnectionError) return true;
-  if (error instanceof APIUserAbortError) return true;
   if (error instanceof RateLimitError) return true;
   if (error instanceof InternalServerError) return true;
   if (error instanceof StallTimeoutError) return true;
+  if (error instanceof APIUserAbortError) return true;
+
+  const status = (error as { status?: number } | null)?.status;
+  if (typeof status === "number" && NON_RETRYABLE_4XX.has(status)) {
+    return false;
+  }
+
+  if (error instanceof APIConnectionError) return true;
   const message = error instanceof Error ? error.message.toLowerCase() : "";
   return (
     message.includes("premature close") ||

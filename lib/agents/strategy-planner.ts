@@ -28,20 +28,36 @@ import { buildArticlePlan } from "./article-plan.ts";
 const STRATEGY_LOOP_TIMEOUT_MS = 120_000;
 const SIMPLE_STRATEGY_TIMEOUT_MS = 45_000;
 const OPENAI_STRATEGY_TIMEOUT_MS = 120_000;
-const ANTHROPIC_CREDIT_BLOCK_MESSAGE =
-  "Anthropic API 크레딧이 부족합니다. OpenAI 전략 폴백을 사용할 수 없으면 전략 수립을 중단합니다.";
 
 function stringifyStrategyError(error: unknown): string {
   if (error instanceof Error) return error.message;
   return String(error);
 }
 
-function isFatalStrategyProviderError(error: unknown): boolean {
+type FatalStrategyProviderClassification = "confirmed_credit" | "masked_400_unknown_cause" | null;
+
+// 2026-07-03 실측: Railway 환경에서는 400 응답의 에러 본문을 읽는 것 자체가
+// 실패해 "Premature close"로 가려지는 경우가 있었다 — 로컬에서 동일 요청을
+// 재현해보니 그때는 크레딧 소진(BadRequestError, status=400)이었다. 하지만
+// "본문을 못 읽은 400"이 전부 크레딧 문제라고 단정할 근거는 없다 — 우리 쪽
+// 코드가 만든 malformed request 같은 실제 버그도 같은 모양으로 나타날 수
+// 있다(codex-rescue 리뷰 지적, 2026-07-03). 그래서 이 두 경우를 구분해서
+// 반환한다: "confirmed_credit"은 메시지로 확인된 것, "masked_400_unknown_cause"는
+// status=400인데 원인을 못 읽은 것 — 둘 다 재시도는 무의미하므로 OpenAI
+// 폴백을 시도하되, 로그/진행 메시지는 실제로 확인된 사실만 말한다.
+function classifyFatalStrategyProviderError(error: unknown): FatalStrategyProviderClassification {
   const message = stringifyStrategyError(error).toLowerCase();
-  return (
+  if (
     message.includes("credit balance is too low") ||
     (message.includes("invalid_request_error") && message.includes("credit balance"))
-  );
+  ) {
+    return "confirmed_credit";
+  }
+  const status = (error as { status?: number } | null)?.status;
+  if (status === 400 && (message.includes("premature close") || message.includes("invalid response body"))) {
+    return "masked_400_unknown_cause";
+  }
+  return null;
 }
 
 const ALLOWED_VAPE_TOPIC_CLARIFICATION = [
@@ -1236,7 +1252,13 @@ export async function runStrategyPlanner(params: {
     }
 
     const fallbackReason = stringifyStrategyError(error);
-    if (isFatalStrategyProviderError(error)) {
+    const fatalClassification = classifyFatalStrategyProviderError(error);
+    if (fatalClassification) {
+      const situationLabel =
+        fatalClassification === "confirmed_credit"
+          ? "Anthropic 크레딧 부족"
+          : "Anthropic 400 응답(사유 확인 불가 — 크레딧 문제일 수도, 다른 요청 오류일 수도 있음)";
+      console.warn(`[strategy-planner] ${situationLabel}:`, fallbackReason);
       if (hasOpenAIKey()) {
         plan = await runOpenAIStrategyFallback({
           topic,
@@ -1250,10 +1272,10 @@ export async function runStrategyPlanner(params: {
           onProgress,
           signal: plannerSignal,
         });
-        onProgress?.("Anthropic 크레딧 부족은 OpenAI 전략 폴백으로 복구했습니다.");
+        onProgress?.(`${situationLabel} — OpenAI 전략 폴백으로 복구했습니다.`);
       } else {
-        onProgress?.(`${ANTHROPIC_CREDIT_BLOCK_MESSAGE} OPENAI_API_KEY도 없어 OpenAI 폴백을 사용할 수 없습니다.`);
-        throw new Error(`${ANTHROPIC_CREDIT_BLOCK_MESSAGE} 원문: ${fallbackReason}`);
+        onProgress?.(`${situationLabel}. OPENAI_API_KEY도 없어 OpenAI 폴백을 사용할 수 없습니다.`);
+        throw new Error(`${situationLabel}. 원문: ${fallbackReason}`);
       }
     } else {
       console.warn("[strategy-planner] tool-use 루프/파싱 실패, 안전 폴백 전략으로 전환:", String(error));

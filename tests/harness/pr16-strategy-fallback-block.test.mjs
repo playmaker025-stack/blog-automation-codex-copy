@@ -28,15 +28,18 @@ describe("PR16 strategy fallback publish gate", () => {
     assert.match(strategyPlannerSource, /hasOpenAIKey\(\)/u);
     assert.match(strategyPlannerSource, /runOpenAIStrategyFallback/u);
     assert.match(strategyPlannerSource, /strategyProvider: "openai"/u);
-    assert.match(strategyPlannerSource, /Anthropic 크레딧 부족은 OpenAI 전략 폴백으로 복구했습니다/u);
+    assert.match(strategyPlannerSource, /situationLabel\} — OpenAI 전략 폴백으로 복구했습니다\./u);
   });
 
-  test("OpenAI 키가 없을 때만 Anthropic 크레딧 부족을 즉시 중단한다", () => {
-    assert.match(strategyPlannerSource, /ANTHROPIC_CREDIT_BLOCK_MESSAGE/u);
-    assert.match(strategyPlannerSource, /isFatalStrategyProviderError\(error\)/u);
+  test("OpenAI 키가 없을 때만 치명적 provider 오류를 즉시 중단한다", () => {
+    // pr20에서 isFatalStrategyProviderError(boolean) → classifyFatalStrategyProviderError
+    // (confirmed_credit | masked_400_unknown_cause | null)로 바뀌었다. ANTHROPIC_CREDIT_BLOCK_MESSAGE
+    // 상수도 상황별 situationLabel로 대체됐다 — 크레딧 문제로 확인 안 된 masked 400을
+    // 무조건 "크레딧 부족"이라 단정하지 않기 위함(codex-rescue 리뷰, 2026-07-03).
+    assert.match(strategyPlannerSource, /const fatalClassification = classifyFatalStrategyProviderError\(error\)/u);
     assert.match(strategyPlannerSource, /credit balance is too low/u);
     assert.match(strategyPlannerSource, /OPENAI_API_KEY도 없어 OpenAI 폴백을 사용할 수 없습니다/u);
-    assert.match(strategyPlannerSource, /throw new Error\(`\$\{ANTHROPIC_CREDIT_BLOCK_MESSAGE\} 원문: \$\{fallbackReason\}`\)/u);
+    assert.match(strategyPlannerSource, /throw new Error\(`\$\{situationLabel\}\. 원문: \$\{fallbackReason\}`\)/u);
   });
 
   test("일반 AI 전략 실패 폴백은 local_fallback으로 표시되고 발행용 writer 차단 사유를 만든다", () => {

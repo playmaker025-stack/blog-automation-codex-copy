@@ -145,3 +145,15 @@
 - 대응: `Apply N changes`가 남아 있으면 완료 선언 금지
 
 <!-- Railway `Apply N changes`가 남아 있으면 GitHub 자동배포가 아직 적용되지 않은 상태 -->
+
+### [2026-07-03] "전략 수립 실패 / Premature close"가 실제로는 Anthropic 크레딧 소진
+
+- 증상: `전략 계약서가 불완전해 writer 실행을 차단합니다` + `[상세] 폴백 사유: 400 Invalid response body while trying to fetch https://api.anthropic.com/v1/messages: Premature close`가 토픽/사용자 무관하게 100% 재현. 재시도 로직·스트리밍 전환·Railway 재배포 빈도 수정 등 코드 쪽 원인을 며칠간 판 뒤에야 실제 원인을 확인함 — 순서가 잘못됐었다.
+- 원인: Anthropic 계정 크레딧 소진(`credit balance is too low`). Railway 환경에서만 400 에러 응답 본문을 읽는 것 자체가 실패해(SDK core.js가 `response.text().catch(...)`로 본문 읽기 실패를 삼킴) 진짜 사유 대신 "Premature close"로 가려짐.
+- **대응(다음부터 이 에러/유사 증상이 보이면 코드를 파기 전에 반드시 이 순서로 먼저 확인)**:
+  1. https://console.anthropic.com/settings/billing 에서 크레딧 잔액부터 확인한다.
+  2. 애매하면 로컬에서 실패한 요청과 동일한 topic/user 데이터로 Anthropic API를 직접 1회 호출해본다 — Railway의 body-read 마스킹 없이 진짜 에러 원문이 그대로 보인다.
+  3. 크레딧 문제가 아님을 확인한 뒤에만 네트워크/재시도/배포 설정 등 다른 원인을 조사한다.
+- 재발 방지 코드: `lib/anthropic/tool-executor.ts`의 `isRetryableConnectionError`는 status가 명확한 4xx(429 제외)면 재시도하지 않음(동일 요청 재시도는 무의미). `lib/agents/strategy-planner.ts`의 `isFatalStrategyProviderError`는 status=400 + 본문 읽기 실패 메시지도 치명적 provider 오류로 간주해 OpenAI 폴백을 시도함. 회귀 테스트: `tests/harness/pr20-masked-400-credit-fallback.test.mjs`.
+
+<!-- "Premature close"/네트워크 에러처럼 보이는 전략 수립 실패는 크레딧 잔액부터 확인 -->
