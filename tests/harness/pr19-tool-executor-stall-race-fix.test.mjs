@@ -11,10 +11,12 @@ import path from "node:path";
 // 2) stall/hard-deadline 타임아웃이 재시도 대상으로 분류되지 않아 1회 실패로 끝났음
 //    → StallTimeoutError / APIUserAbortError를 재시도 대상에 추가.
 const ROOT = process.cwd();
+// CRLF/LF 무관하게 매칭되도록 정규화 (Windows git core.autocrlf + eslint --fix가
+// 커밋 훅에서 줄바꿈을 CRLF로 바꿔서, \n 기준 문자열 슬라이싱이 깨지는 걸 방지).
 const toolExecutorSource = readFileSync(
   path.join(ROOT, "lib", "anthropic", "tool-executor.ts"),
   "utf8"
-);
+).replace(/\r\n/gu, "\n");
 
 describe("PR19 tool-executor stall 레이스 컨디션 수정 (codex-rescue 리뷰 반영)", () => {
   test("시도별 AbortController로 stall 시 실제 스트림을 끊는다", () => {
