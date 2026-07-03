@@ -1,6 +1,6 @@
 {
-  "$schema": "https://schema.railway.app/railway-schema.json",
-  "deploy": {
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
     "watchPatterns": [
       "app/**",
       "lib/**",
@@ -15,5 +15,9 @@
       "postcss.config.*",
       "railway.json"
     ]
+  },
+  "deploy": {
+    "overlapSeconds": 180,
+    "drainingSeconds": 180
   }
 }
