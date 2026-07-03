@@ -1,27 +1,49 @@
-import type { MessageParam, ToolResultBlockParam } from "@anthropic-ai/sdk/resources/messages";
-import { APIConnectionError, InternalServerError, RateLimitError } from "@anthropic-ai/sdk";
+import type { MessageParam, ToolResultBlockParam, ContentBlock } from "@anthropic-ai/sdk/resources/messages";
+import { APIConnectionError, APIUserAbortError, InternalServerError, RateLimitError } from "@anthropic-ai/sdk";
 import { getAnthropicClient } from "./client";
 import type { ToolUseLoopOptions } from "@/lib/types/agent";
 
 const DEFAULT_MAX_ITERATIONS = 10;
-const CALL_TIMEOUT_MS = 90_000;
 const SKILL_TIMEOUT_MS = 30_000;
 const NETWORK_RETRY_ATTEMPTS = 3;
 const NETWORK_RETRY_BASE_DELAY_MS = 2_000;
 
-// client.ts는 maxRetries:0으로 SDK 내부 재시도를 꺼둔다 (조용한 대기가 아니라
-// 여기서 명시적으로 backoff 로그를 남기며 재시도하기 위해서). "Premature close" 같은
-// 연결 레벨 오류는 크레딧/스키마 문제가 아니라 순수 네트워크 불안정이므로 재시도가 맞다.
+// INITIAL: 첫 스트림 이벤트 수신 전 허용 지연 (Anthropic 큐잉 + 첫 토큰까지).
+// STALL: 첫 이벤트 수신 후 연속 무응답 허용 시간.
+// HARD_DEADLINE: stall 타이머가 실패해도 HTTP 연결 자체를 강제 종료하는 최종 백업.
+const INITIAL_TIMEOUT_MS = 150_000;
+const STALL_TIMEOUT_MS = 90_000;
+const HARD_DEADLINE_MS = 160_000;
+
+// stall 타이머가 발동시키는 에러를 name으로 구분해 재시도 대상으로 분류한다
+// (연결이 살아있는지조차 확인 안 되는 "멎음"도 premature close와 같은 부류의 실패).
+class StallTimeoutError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "StallTimeoutError";
+  }
+}
+
+// client.ts는 maxRetries:0으로 SDK 내부 재시도를 꺼둔다. non-streaming
+// client.messages.create()는 응답이 다 만들어질 때까지 바이트가 전혀 흐르지 않아
+// "Premature close"(응답 완료 전 연결 종료) 오류에 구조적으로 취약했다 — 재시도 3회를
+// 붙여도 매 시도가 같은 방식으로 끊겨 계속 실패했다(2026-07-02~07-03 반복 재현).
+// client.messages.stream()으로 전환해 SSE 이벤트가 계속 흐르게 하면 중간 유휴
+// 연결로 오인되어 끊기는 문제 자체가 줄어든다(master-writer.ts와 동일 패턴).
+// 그래도 연결이 아예 안 열리거나 도중에 멎는 등 진짜 일시적 문제는 여전히 재시도한다.
 function isRetryableConnectionError(error: unknown): boolean {
   if (error instanceof APIConnectionError) return true;
+  if (error instanceof APIUserAbortError) return true;
   if (error instanceof RateLimitError) return true;
   if (error instanceof InternalServerError) return true;
+  if (error instanceof StallTimeoutError) return true;
   const message = error instanceof Error ? error.message.toLowerCase() : "";
   return (
     message.includes("premature close") ||
     message.includes("econnreset") ||
     message.includes("socket hang up") ||
-    message.includes("fetch failed")
+    message.includes("fetch failed") ||
+    message.includes("aborterror")
   );
 }
 
@@ -57,36 +79,86 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
   while (iterations < maxIterations) {
     iterations += 1;
 
-    let response: Awaited<ReturnType<typeof client.messages.create>> | null = null;
+    let finalContent: ContentBlock[] | null = null;
+    let finalStopReason: string | null = null;
     let lastError: unknown = null;
 
     for (let attempt = 1; attempt <= NETWORK_RETRY_ATTEMPTS; attempt++) {
-      try {
-        const callTimeoutSignal = AbortSignal.timeout(CALL_TIMEOUT_MS);
-        const callSignal = pipelineSignal
-          ? AbortSignal.any([callTimeoutSignal, pipelineSignal])
-          : callTimeoutSignal;
+      let stallTimer: ReturnType<typeof setTimeout> | null = null;
+      let stallReject: ((err: Error) => void) | null = null;
+      let firstEventReceived = false;
+      // 이 시도 전용 AbortController — stall/hard-deadline이 뜨면 실제 스트림도
+      // 강제로 끊어서, 버려진 이전 시도가 나중에 조용히 완료되며 finalContent를
+      // 덮어쓰는 레이스를 막는다. attemptContent/attemptStopReason도 시도별로
+      // 분리해 두어, Promise.race가 성공으로 끝난 경우에만 바깥 변수에 반영한다.
+      const attemptAbort = new AbortController();
 
+      const resetStallTimer = () => {
+        if (stallTimer) clearTimeout(stallTimer);
+        if (!stallReject) return;
+        const ms = firstEventReceived ? STALL_TIMEOUT_MS : INITIAL_TIMEOUT_MS;
+        stallTimer = setTimeout(() => {
+          attemptAbort.abort();
+          stallReject!(
+            new StallTimeoutError(
+              firstEventReceived
+                ? `AI 응답 스트림 타임아웃 — ${ms / 1000}초 이상 토큰 없음 (iter=${iterations})`
+                : `AI 응답 초기 타임아웃 — ${ms / 1000}초 이내 첫 토큰 없음 (iter=${iterations})`
+            )
+          );
+        }, ms);
+      };
+
+      try {
         onProgress?.(
           attempt === 1
             ? `AI 분석 중... (${iterations}/${maxIterations})`
             : `AI 분석 재시도 중... (${iterations}/${maxIterations}, ${attempt}회차)`
         );
-        console.log(`[tool-executor] iteration ${iterations} API call start (attempt ${attempt}/${NETWORK_RETRY_ATTEMPTS})`);
-        response = await client.messages.create(
-          {
-            model,
-            system,
-            messages,
-            tools,
-            max_tokens: 4096,
-          },
-          { signal: callSignal }
-        );
-        console.log(`[tool-executor] iteration ${iterations} API call done - stop_reason=${response.stop_reason}`);
+        console.log(`[tool-executor] iteration ${iterations} stream start (attempt ${attempt}/${NETWORK_RETRY_ATTEMPTS})`);
+
+        const stallPromise = new Promise<never>((_, reject) => {
+          stallReject = reject;
+          resetStallTimer();
+        });
+
+        const hardDeadline = AbortSignal.timeout(HARD_DEADLINE_MS);
+        const signals = [attemptAbort.signal, hardDeadline];
+        if (pipelineSignal) signals.push(pipelineSignal);
+        const callSignal = AbortSignal.any(signals);
+
+        let attemptContent: ContentBlock[] | null = null;
+        let attemptStopReason: string | null = null;
+
+        await Promise.race([
+          (async () => {
+            const stream = client.messages.stream(
+              { model, system, messages, tools, max_tokens: 4096 },
+              { signal: callSignal }
+            );
+
+            for await (const event of stream) {
+              if (!firstEventReceived) firstEventReceived = true;
+              resetStallTimer();
+              if (event.type === "message_stop") attemptStopReason = "end_turn";
+            }
+
+            const finalMsg = await stream.finalMessage();
+            attemptStopReason = finalMsg.stop_reason ?? attemptStopReason;
+            attemptContent = finalMsg.content;
+          })(),
+          stallPromise,
+        ]);
+
+        // 여기 도달했다는 건 이 시도(attempt)가 stall/abort 없이 끝까지 완료됐다는
+        // 뜻이므로만 바깥 상태를 갱신한다 — 버려진 이전 시도는 절대 여기 도달 못 함.
+        finalContent = attemptContent;
+        finalStopReason = attemptStopReason;
+        console.log(`[tool-executor] iteration ${iterations} stream done - stop_reason=${finalStopReason}`);
         lastError = null;
         break;
       } catch (error) {
+        attemptAbort.abort();
         lastError = error;
         console.error("[tool-executor] Anthropic API 오류:", {
           attempt,
@@ -103,26 +175,28 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
         const delayMs = NETWORK_RETRY_BASE_DELAY_MS * 2 ** (attempt - 1);
         onProgress?.(`AI 연결이 불안정해 ${Math.round(delayMs / 1000)}초 후 재시도합니다... (${attempt}/${NETWORK_RETRY_ATTEMPTS})`);
         await sleep(delayMs);
+      } finally {
+        if (stallTimer) clearTimeout(stallTimer);
       }
     }
 
-    if (!response) {
+    if (!finalContent) {
       throw lastError ?? new Error("Anthropic API 호출이 재시도 후에도 실패했습니다.");
     }
 
-    messages.push({ role: "assistant", content: response.content });
+    const content = finalContent as ContentBlock[];
+    messages.push({ role: "assistant", content });
 
-    if (response.stop_reason === "end_turn") {
-      const textBlock = response.content.find((block) => block.type === "text");
+    if (finalStopReason === "end_turn") {
+      const textBlock = content.find((block) => block.type === "text");
       return textBlock && "text" in textBlock ? textBlock.text : "";
     }
 
-    if (response.stop_reason === "tool_use") {
+    const toolUseBlocks = content.filter((block) => block.type === "tool_use");
+    if (toolUseBlocks.length > 0) {
       const toolResults: ToolResultBlockParam[] = [];
 
-      for (const block of response.content) {
-        if (block.type !== "tool_use") continue;
-
+      for (const block of toolUseBlocks) {
         const skillFn = toolRegistry[block.name];
         if (!skillFn) {
           toolResults.push({
