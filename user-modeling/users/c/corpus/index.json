@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mr5y47o6",
+      "title": "마이팟프로 누수 잡는법! 원인과 해결방법",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6762,
+      "publishedAt": "2026-07-04T05:52:48.421Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mr5y47o6.md"
+    },
+    {
       "sampleId": "published-post-manual-mr4m14xy",
       "title": "젤로맥스 누수 잡는법 액튐 원인과 해결방법 !",
       "category": "published-post",
@@ -137,5 +146,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-03T07:26:47.480Z"
+  "lastUpdated": "2026-07-04T05:52:53.605Z"
 }
