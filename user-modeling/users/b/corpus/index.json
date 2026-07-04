@@ -2,6 +2,69 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mr69b8nu",
+      "title": "만수동 전자담배 크로스미니6 후기! 스펙 & 사용법 총정리",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 5989,
+      "publishedAt": "2026-07-04T11:06:12.021Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mr69b8nu.md"
+    },
+    {
+      "sampleId": "reference-b-05",
+      "title": "만수동 전자담배 시원한 입호흡 과일 액상 추천 3종 DJ쥬스",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "만수동",
+        "시원한",
+        "입호흡"
+      ],
+      "wordCount": 1371,
+      "publishedAt": "2026-04-02T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-05.md"
+    },
+    {
+      "sampleId": "reference-b-06",
+      "title": "부개동 전자담배 시원한 입호흡 액상 델리 시리즈",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "부개동",
+        "시원한",
+        "입호흡"
+      ],
+      "wordCount": 1234,
+      "publishedAt": "2026-01-16T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-06.md"
+    },
+    {
+      "sampleId": "reference-b-04",
+      "title": "상동전자담배 일회용 대용량 액상 전담 버블몬 그래비티",
+      "category": "상담/구매전환형",
+      "tags": [
+        "실사용 후기",
+        "기기 추천",
+        "액상 추천",
+        "관리법",
+        "지역 매장 상담",
+        "상동전자담배",
+        "일회용",
+        "대용량"
+      ],
+      "wordCount": 1588,
+      "publishedAt": "2025-06-21T00:00:00.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/reference-b-04.md"
+    },
+    {
       "sampleId": "reference-b-01",
       "title": "인천전자담배 만수동 만수르 말론 실사용 후기",
       "category": "상담/구매전환형",
@@ -54,61 +117,7 @@
       "wordCount": 2757,
       "publishedAt": "2024-08-06T00:00:00.000Z",
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
-    },
-    {
-      "sampleId": "reference-b-04",
-      "title": "상동전자담배 일회용 대용량 액상 전담 버블몬 그래비티",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "상동전자담배",
-        "일회용",
-        "대용량"
-      ],
-      "wordCount": 1588,
-      "publishedAt": "2025-06-21T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-04.md"
-    },
-    {
-      "sampleId": "reference-b-05",
-      "title": "만수동 전자담배 시원한 입호흡 과일 액상 추천 3종 DJ쥬스",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "만수동",
-        "시원한",
-        "입호흡"
-      ],
-      "wordCount": 1371,
-      "publishedAt": "2026-04-02T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-05.md"
-    },
-    {
-      "sampleId": "reference-b-06",
-      "title": "부개동 전자담배 시원한 입호흡 액상 델리 시리즈",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "부개동",
-        "시원한",
-        "입호흡"
-      ],
-      "wordCount": 1234,
-      "publishedAt": "2026-01-16T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-06.md"
     }
   ],
-  "lastUpdated": "2026-05-07T00:00:00.000Z"
+  "lastUpdated": "2026-07-04T11:06:17.984Z"
 }
