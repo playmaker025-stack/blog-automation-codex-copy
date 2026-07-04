@@ -2903,7 +2903,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-bd74cae7",
       "at": "2026-07-03T10:10:36.516Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-402530fe",
+      "userId": "c",
+      "message": "전략 계약서가 불완전해 writer 실행을 차단합니다: AI 전략 수립 실패로 안전 폴백 전략이 생성되어 발행용 writer 실행을 차단합니다. 다시 전략 수립을 실행해 주세요. — [상세] 폴백 사유: Premature close / 기존 글과 일부 방향이 겹칩니다. recommendedRewriteDirection을 따라야 합니다. / 도입 패턴 반복 주의: problem_symptom / 결론 패턴 반복 주의: problem_checklist",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-051b644b",
+      "at": "2026-07-04T03:05:55.053Z"
     }
   ],
-  "lastUpdated": "2026-07-03T10:10:36.516Z"
+  "lastUpdated": "2026-07-04T03:05:55.053Z"
 }
