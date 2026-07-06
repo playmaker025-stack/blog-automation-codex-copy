@@ -2947,7 +2947,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-50b8d0a0",
       "at": "2026-07-06T06:35:27.150Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-a3c8bcf2",
+      "userId": "b",
+      "message": "전략 계약서가 불완전해 writer 실행을 차단합니다: AI 전략 수립 실패로 안전 폴백 전략이 생성되어 발행용 writer 실행을 차단합니다. 다시 전략 수립을 실행해 주세요. — [상세] 폴백 사유: Request was aborted. / 기존 글과 일부 방향이 겹칩니다. recommendedRewriteDirection을 따라야 합니다. / 도입 패턴 반복 주의: problem_symptom / 결론 패턴 반복 주의: problem_checklist",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-7d4090b9",
+      "at": "2026-07-06T07:41:25.537Z"
     }
   ],
-  "lastUpdated": "2026-07-06T06:35:27.150Z"
+  "lastUpdated": "2026-07-06T07:41:25.537Z"
 }
