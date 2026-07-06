@@ -2958,7 +2958,20 @@
       "errorName": "Error",
       "pipelineId": "pipe-7d4090b9",
       "at": "2026-07-06T07:41:25.537Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "베이포레소 크로스미니 6 직접 사용 후기, 인천 전자담배 매장 방문기",
+      "proposedTitle": "베이포레소 크로스미니 6 직접 써봤습니다, 인천 전자담배 만수동만수르 방문기",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.6764705882352942,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c4f02ba0",
+      "at": "2026-07-06T08:02:01.960Z"
     }
   ],
-  "lastUpdated": "2026-07-06T07:41:25.537Z"
+  "lastUpdated": "2026-07-06T08:02:01.960Z"
 }
