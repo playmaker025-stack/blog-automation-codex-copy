@@ -157,3 +157,16 @@
 - 재발 방지 코드: `lib/anthropic/tool-executor.ts`의 `isRetryableConnectionError`는 status가 명확한 4xx(429 제외)면 재시도하지 않음(동일 요청 재시도는 무의미). `lib/agents/strategy-planner.ts`의 `isFatalStrategyProviderError`는 status=400 + 본문 읽기 실패 메시지도 치명적 provider 오류로 간주해 OpenAI 폴백을 시도함. 회귀 테스트: `tests/harness/pr20-masked-400-credit-fallback.test.mjs`.
 
 <!-- "Premature close"/네트워크 에러처럼 보이는 전략 수립 실패는 크레딧 잔액부터 확인 -->
+
+### [2026-07-06] status 없는 "Premature close"(ERR_STREAM_PREMATURE_CLOSE)가 파이프라인 iteration 1에서 반복 재현 — 원인 미확정, 실험 중
+
+- 증상: 크레딧 충전 이후에도 `[상세] 폴백 사유: Premature close`(앞에 "400 ..." 없음)가 파이프라인 시작(iteration 1)마다 재현. Railway 로그로 직접 확인한 타이밍: 3회 재시도가 전부 1.5~4.5초 안에 동일하게 실패(`ERR_STREAM_PREMATURE_CLOSE`, `status: undefined`) — 첫 토큰을 오래 기다리다 끊긴 게 아니라 연결 자체가 거의 즉시 실패. 같은 기간 master-writer.ts(streaming 호출, 항상 strategy 성공 직후에 실행됨)에서는 이 증상이 관측 안 됨.
+- 가설(미확정): 모듈 싱글턴 `getAnthropicClient()`가 앱 전체 API 호출의 소켓 풀을 공유하는데, 파이프라인 사이 유휴 시간 동안 죽은 keep-alive 소켓을 재사용하면서 각 파이프라인의 첫 호출(iteration 1)에서만 반복되는 것으로 추정. 다만 codex-rescue 리뷰(2026-07-06)에서 SDK 기본 에이전트(`agentkeepalive`)의 `freeSocketTimeout`이 이미 4초라 이 가설만으론 완전히 설명 안 된다는 반론이 나옴 — **확정된 root cause 아님**.
+- 조치: `lib/anthropic/client.ts`에서 `httpAgent`를 `new https.Agent({ keepAlive: false })`로 교체 — "재사용" 변수를 제거하는 실험. 동시에 `tool-executor.ts`의 오류 로그에 `elapsedMs`/`firstEventReceived`/`causeCode`/`causeErrno`를 추가해, 이 실험이 효과 없을 경우 다음 조사에 바로 쓸 데이터를 남김.
+- **다음에 이 증상이 다시 보이면 확인할 것**:
+  1. 여전히 1~5초 안에 실패하는지, 아니면 다른 타이밍(예: 수십 초 대기 후)으로 바뀌었는지 — `elapsedMs` 로그로 확인.
+  2. `causeCode`/`causeErrno`가 이전과 같은지(`ERR_STREAM_PREMATURE_CLOSE`) 다른 에러로 바뀌었는지.
+  3. keepAlive:false 배포 이후에도 100% 재현되면 이 가설은 폐기하고 Railway 아웃바운드 네트워크 자체(egress NAT, 리전 등) 쪽을 봐야 한다.
+- 회귀 테스트: `tests/harness/pr21-stale-keepalive-connection.test.mjs`.
+
+<!-- status 없는 즉시 실패형 Premature close는 keepAlive 실험 결과부터 확인 — 확정 원인 아님 -->

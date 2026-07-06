@@ -127,6 +127,7 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
         }, ms);
       };
 
+      const attemptStartedAt = Date.now();
       try {
         onProgress?.(
           attempt === 1
@@ -178,12 +179,17 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
       } catch (error) {
         attemptAbort.abort();
         lastError = error;
+        const cause = error instanceof Error ? (error as { cause?: unknown }).cause : undefined;
         console.error("[tool-executor] Anthropic API 오류:", {
           attempt,
+          elapsedMs: Date.now() - attemptStartedAt,
+          firstEventReceived,
           name: error instanceof Error ? error.constructor.name : "UnknownError",
           message: error instanceof Error ? error.message : String(error),
           status: (error as { status?: number }).status,
-          cause: error instanceof Error ? (error as { cause?: unknown }).cause : undefined,
+          cause,
+          causeCode: cause instanceof Error ? (cause as { code?: string }).code : undefined,
+          causeErrno: cause instanceof Error ? (cause as { errno?: number }).errno : undefined,
           code: error instanceof Error ? (error as { code?: string }).code : undefined,
         });
 
