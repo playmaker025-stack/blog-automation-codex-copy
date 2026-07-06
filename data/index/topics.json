@@ -785,7 +785,29 @@
       "assignedUserId": "a",
       "createdAt": "2026-07-06T06:33:22.819Z",
       "updatedAt": "2026-07-06T06:33:22.819Z"
+    },
+    {
+      "topicId": "topic-a3c8bcf2",
+      "title": "만수동 전자담배 입문자 필수 질문과 답변 총정리",
+      "description": "만수동에서 전자담배를 처음 시작하는 분들이 매장에서 꼭 물어봐야 하는 핵심 질문과 그에 대한 답변을 정리합니다.",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "전자담배",
+        "입문자",
+        "질문답변",
+        "매장"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "b",
+      "createdAt": "2026-07-06T07:27:51.893Z",
+      "updatedAt": "2026-07-06T07:27:51.893Z"
     }
   ],
-  "lastUpdated": "2026-07-06T06:33:22.819Z"
+  "lastUpdated": "2026-07-06T07:27:51.893Z"
 }
