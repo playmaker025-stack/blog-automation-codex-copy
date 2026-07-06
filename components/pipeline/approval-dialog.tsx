@@ -71,23 +71,23 @@ export function ApprovalDialog({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-      <div className="w-full max-w-lg rounded-xl border-2 border-amber-400 bg-white shadow-2xl">
-        <div className="flex items-center gap-2 rounded-t-xl border-b border-amber-200 bg-amber-50 px-6 py-3">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4">
+      <div className="flex max-h-[calc(100vh-2rem)] w-full max-w-lg flex-col rounded-xl border-2 border-amber-400 bg-white shadow-2xl">
+        <div className="shrink-0 flex items-center gap-2 rounded-t-xl border-b border-amber-200 bg-amber-50 px-6 py-3">
           <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-amber-400" />
           <p className="text-sm font-semibold text-amber-700">
             승인 대기 중입니다. 전략을 확인한 뒤 다음 액션을 선택해 주세요.
           </p>
         </div>
 
-        <div className="border-b border-zinc-100 px-6 py-5">
+        <div className="shrink-0 border-b border-zinc-100 px-6 py-5">
           <h2 className="text-lg font-semibold text-zinc-900">전략 승인 요청</h2>
           <p className="mt-1 text-sm text-zinc-500">
             아래 전략을 승인하면 Master Writer가 본문 작성을 시작합니다.
           </p>
         </div>
 
-        <div className="space-y-4 px-6 py-5">
+        <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-6 py-5">
           {modificationFeedback && (
             <div
               className={`rounded-lg border px-3 py-3 ${
@@ -227,7 +227,7 @@ export function ApprovalDialog({
           </div>
         </div>
 
-        <div className="flex justify-end gap-3 border-t border-zinc-100 px-6 py-4">
+        <div className="shrink-0 flex justify-end gap-3 border-t border-zinc-100 px-6 py-4">
           <button
             type="button"
             onClick={handleReject}
