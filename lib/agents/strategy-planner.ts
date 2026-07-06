@@ -1277,9 +1277,36 @@ export async function runStrategyPlanner(params: {
         onProgress?.(`${situationLabel}. OPENAI_API_KEY도 없어 OpenAI 폴백을 사용할 수 없습니다.`);
         throw new Error(`${situationLabel}. 원문: ${fallbackReason}`);
       }
+    } else if (hasOpenAIKey()) {
+      console.warn("[strategy-planner] Anthropic 전략 수립 실패, OpenAI 전략 폴백 시도:", fallbackReason);
+      try {
+        plan = await runOpenAIStrategyFallback({
+          topic,
+          topicId,
+          userId,
+          directIntent,
+          publicationLearning,
+          duplicateModeOverride: params.duplicateModeOverride,
+          communityResearchBrief,
+          modifications: params.modifications,
+          onProgress,
+          signal: plannerSignal,
+        });
+        onProgress?.("Anthropic 전략 수립 실패 — OpenAI 전략 폴백으로 복구했습니다.");
+      } catch (fallbackError) {
+        const openAiFallbackReason = stringifyStrategyError(fallbackError);
+        console.warn("[strategy-planner] OpenAI 전략 폴백도 실패, 안전 폴백 전략으로 전환:", openAiFallbackReason);
+        onProgress?.("AI 전략 수립과 OpenAI 폴백이 모두 실패해 안전 폴백을 만들었지만, 발행용 writer 실행은 차단합니다.");
+        plan = {
+          ...buildLocalFallbackStrategy(topic),
+          strategySource: "local_fallback",
+          strategyProvider: "local",
+          strategyFallbackReason: `${fallbackReason} / OpenAI 폴백 실패: ${openAiFallbackReason}`,
+        };
+      }
     } else {
       console.warn("[strategy-planner] tool-use 루프/파싱 실패, 안전 폴백 전략으로 전환:", String(error));
-      onProgress?.("AI 전략 수립에 실패해 안전 폴백을 만들었지만, 발행용 writer 실행은 차단합니다.");
+      onProgress?.("AI 전략 수립에 실패했고 OPENAI_API_KEY도 없어 안전 폴백을 만들었지만, 발행용 writer 실행은 차단합니다.");
       plan = {
         ...buildLocalFallbackStrategy(topic),
         strategySource: "local_fallback",

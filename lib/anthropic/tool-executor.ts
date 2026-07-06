@@ -7,6 +7,11 @@ const DEFAULT_MAX_ITERATIONS = 10;
 const SKILL_TIMEOUT_MS = 30_000;
 const NETWORK_RETRY_ATTEMPTS = 3;
 const NETWORK_RETRY_BASE_DELAY_MS = 2_000;
+// 2026-07-06 실측: 최종 전략 JSON을 쓰는 마지막 iteration이 4096 토큰으로 잘려
+// stop_reason=max_tokens가 났다(도구 호출은 iteration 1~3에서 정상 완료, iteration 4가
+// 최종 출력 생성 중 중단). outline 여러 섹션 + AEO/인간지문 지시문을 담은 JSON은
+// 4096으로 빠듯할 수 있어 여유를 둔다.
+const MAX_OUTPUT_TOKENS = 8192;
 
 // INITIAL: 첫 스트림 이벤트 수신 전 허용 지연 (Anthropic 큐잉 + 첫 토큰까지).
 // STALL: 첫 이벤트 수신 후 연속 무응답 허용 시간.
@@ -93,6 +98,11 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
   const client = getAnthropicClient();
   const messages: MessageParam[] = [...options.messages];
   let iterations = 0;
+  // 루프를 빠져나온 진짜 이유를 구분하기 위해 마지막 stop_reason을 기록해 둔다.
+  // 2026-07-06 실측: max_tokens로 응답이 잘려 tool_use 없이 while 루프를 조기
+  // 탈출(break)한 경우에도 "N회 반복 한계 도달"이라는 같은 메시지가 떠서
+  // 실제 원인(토큰 초과)이 완전히 가려졌었다.
+  let lastStopReason: string | null = null;
 
   while (iterations < maxIterations) {
     iterations += 1;
@@ -105,6 +115,12 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
       let stallTimer: ReturnType<typeof setTimeout> | null = null;
       let stallReject: ((err: Error) => void) | null = null;
       let firstEventReceived = false;
+      let firstEventAt: number | null = null;
+      // 실패 시점에 "연결은 됐는데 응답 전에 죽었는지" vs "응답 도중에 죽었는지"
+      // vs "스트림은 다 받았는데 finalMessage()에서 죽었는지"를 구분하기 위한 단계
+      // 표시(codex-rescue 리뷰 지적, 2026-07-06 — 기존 elapsedMs/firstEventReceived
+      // 만으로는 stale 소켓 재사용과 다른 즉시 연결 실패를 못 갈랐음).
+      let phase: "connecting" | "streaming" | "finalizing" = "connecting";
       // 이 시도 전용 AbortController — stall/hard-deadline이 뜨면 실제 스트림도
       // 강제로 끊어서, 버려진 이전 시도가 나중에 조용히 완료되며 finalContent를
       // 덮어쓰는 레이스를 막는다. attemptContent/attemptStopReason도 시도별로
@@ -152,16 +168,21 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
         await Promise.race([
           (async () => {
             const stream = client.messages.stream(
-              { model, system, messages, tools, max_tokens: 4096 },
+              { model, system, messages, tools, max_tokens: MAX_OUTPUT_TOKENS },
               { signal: callSignal }
             );
 
             for await (const event of stream) {
-              if (!firstEventReceived) firstEventReceived = true;
+              if (!firstEventReceived) {
+                firstEventReceived = true;
+                firstEventAt = Date.now();
+                phase = "streaming";
+              }
               resetStallTimer();
               if (event.type === "message_stop") attemptStopReason = "end_turn";
             }
 
+            phase = "finalizing";
             const finalMsg = await stream.finalMessage();
             attemptStopReason = finalMsg.stop_reason ?? attemptStopReason;
             attemptContent = finalMsg.content;
@@ -180,16 +201,27 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
         attemptAbort.abort();
         lastError = error;
         const cause = error instanceof Error ? (error as { cause?: unknown }).cause : undefined;
+        // cause가 Error 인스턴스가 아닌 순수 객체(undici/fetch 내부 에러 등)로 올 때도
+        // code/errno를 놓치지 않도록 완화 — instanceof Error로만 좁히면 정작 중요한
+        // 구조화 필드가 조용히 undefined로 빠질 수 있었다(codex-rescue 리뷰, 2026-07-06).
+        const causeObj =
+          cause && typeof cause === "object"
+            ? (cause as { code?: unknown; errno?: unknown; name?: unknown; message?: unknown })
+            : null;
         console.error("[tool-executor] Anthropic API 오류:", {
           attempt,
+          phase,
           elapsedMs: Date.now() - attemptStartedAt,
           firstEventReceived,
+          timeToFirstEventMs: firstEventAt ? firstEventAt - attemptStartedAt : null,
           name: error instanceof Error ? error.constructor.name : "UnknownError",
           message: error instanceof Error ? error.message : String(error),
           status: (error as { status?: number }).status,
           cause,
-          causeCode: cause instanceof Error ? (cause as { code?: string }).code : undefined,
-          causeErrno: cause instanceof Error ? (cause as { errno?: number }).errno : undefined,
+          causeName: causeObj?.name,
+          causeMessage: causeObj?.message,
+          causeCode: causeObj?.code,
+          causeErrno: causeObj?.errno,
           code: error instanceof Error ? (error as { code?: string }).code : undefined,
         });
 
@@ -210,6 +242,7 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
 
     const content = finalContent as ContentBlock[];
     messages.push({ role: "assistant", content });
+    lastStopReason = finalStopReason;
 
     if (finalStopReason === "end_turn") {
       const textBlock = content.find((block) => block.type === "text");
@@ -269,5 +302,13 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
     break;
   }
 
-  throw new Error(`tool-use 루프가 ${maxIterations}회 반복 한계에 도달했습니다.`);
+  // iterations가 maxIterations에 도달해서 while 조건으로 자연 종료된 경우에만
+  // "반복 한계 도달"이 맞는 설명이다. 그 외(예: max_tokens로 잘려 tool_use 없이
+  // break한 경우)에는 실제 stop_reason을 그대로 알려준다.
+  if (iterations >= maxIterations) {
+    throw new Error(`tool-use 루프가 ${maxIterations}회 반복 한계에 도달했습니다.`);
+  }
+  throw new Error(
+    `AI 응답이 예상치 못한 사유(stop_reason=${lastStopReason ?? "unknown"})로 중단되었습니다. (iteration ${iterations}/${maxIterations})`
+  );
 }
