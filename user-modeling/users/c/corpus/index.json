@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mr8tac1r",
+      "title": "발라리안R 누수·고장 생겼을 때 원인과 해결 순서",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 7382,
+      "publishedAt": "2026-07-06T06:00:54.382Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mr8tac1r.md"
+    },
+    {
       "sampleId": "published-post-manual-mr5y47o6",
       "title": "마이팟프로 누수 잡는법! 원인과 해결방법",
       "category": "published-post",
@@ -146,5 +155,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-04T05:52:53.605Z"
+  "lastUpdated": "2026-07-06T06:01:00.607Z"
 }
