@@ -3004,7 +3004,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-52a2b05e",
       "at": "2026-07-07T02:48:37.638Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "젤로 전자담배 불량 증상별 점검과 해결법 (부평전자담배)",
+      "proposedTitle": "젤로 전자담배 불량 증상별 점검과 해결법 (부평전자담배)",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-9aff8a38",
+      "at": "2026-07-07T03:08:55.439Z"
     }
   ],
-  "lastUpdated": "2026-07-07T02:48:37.638Z"
+  "lastUpdated": "2026-07-07T03:08:55.439Z"
 }
