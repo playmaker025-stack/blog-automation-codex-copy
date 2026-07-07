@@ -1,0 +1,29 @@
+{
+  "pipelineId": "pipe-edc62052",
+  "type": "draft_output",
+  "savedAt": "2026-07-07T04:12:07.113Z",
+  "data": {
+    "postId": "post-ac14b188",
+    "title": "부평전자담배 크로스미니6 vs 말론S 입문자 맞춤 비교 분석",
+    "wordCount": 3733,
+    "generatedAt": "2026-07-07T04:12:06.065Z",
+    "contentPath": "data/posting-list/posts/post-ac14b188/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": true,
+      "blockingReasons": [],
+      "warnings": [
+        "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
+        "medium overlap: 결론 패턴 반복 위험 criteria_summary"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
+        "medium overlap: 결론 패턴 반복 위험 criteria_summary"
+      ]
+    }
+  }
+}
