@@ -32,11 +32,15 @@ describe("PR22 tool-executor max_tokens 상향 + 정확한 조기종료 사유 �
     assert.match(toolExecutorSource, /AI 응답이 예상치 못한 사유\(stop_reason=\$\{lastStopReason \?\? "unknown"\}\)로 중단되었습니다/u);
   });
 
-  test("실패 시점의 phase(connecting/streaming/finalizing)와 첫 이벤트 도달 시각을 로그에 남긴다", () => {
-    assert.match(toolExecutorSource, /let phase: "connecting" \| "streaming" \| "finalizing" = "connecting";/u);
+  test("실패 시점의 phase(pre_first_event/streaming/finalizing)와 단계별 시각을 로그에 남긴다", () => {
+    // phase 이름은 "connecting"이 아니라 "pre_first_event"다 — 이 SDK stream()의
+    // 첫 이벤트를 아직 못 받았다는 뜻일 뿐, "응답 바이트를 전혀 못 받음"을
+    // 보장하지 않는다는 codex-rescue 지적(2026-07-06)을 반영해 이름을 정정했다.
+    assert.match(toolExecutorSource, /let phase: "pre_first_event" \| "streaming" \| "finalizing" = "pre_first_event";/u);
     assert.match(toolExecutorSource, /phase = "streaming";/u);
     assert.match(toolExecutorSource, /phase = "finalizing";/u);
     assert.match(toolExecutorSource, /timeToFirstEventMs: firstEventAt \? firstEventAt - attemptStartedAt : null/u);
+    assert.match(toolExecutorSource, /timeInFinalizingMs: finalizingStartedAt \? Date\.now\(\) - finalizingStartedAt : null/u);
   });
 
   test("cause가 Error 인스턴스가 아니어도 code/errno를 놓치지 않는다", () => {

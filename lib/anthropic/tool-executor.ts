@@ -116,11 +116,16 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
       let stallReject: ((err: Error) => void) | null = null;
       let firstEventReceived = false;
       let firstEventAt: number | null = null;
-      // 실패 시점에 "연결은 됐는데 응답 전에 죽었는지" vs "응답 도중에 죽었는지"
-      // vs "스트림은 다 받았는데 finalMessage()에서 죽었는지"를 구분하기 위한 단계
-      // 표시(codex-rescue 리뷰 지적, 2026-07-06 — 기존 elapsedMs/firstEventReceived
-      // 만으로는 stale 소켓 재사용과 다른 즉시 연결 실패를 못 갈랐음).
-      let phase: "connecting" | "streaming" | "finalizing" = "connecting";
+      let finalizingStartedAt: number | null = null;
+      // 실패 시점의 대략적인 단계 표시. "pre_first_event"는 이 SDK의 stream()
+      // 이벤트를 아직 하나도 못 받았다는 뜻일 뿐이며, "TCP/TLS 연결이 아예 안
+      // 열렸다"거나 "응답 바이트를 한 바이트도 못 받았다"를 보장하지는 않는다
+      // (HTTP 헤더까지 받고 첫 SSE 이벤트 전에 끊기는 경우도 여기 포함됨) —
+      // codex-rescue 리뷰가 phase="connecting"이라는 이름이 실제 신뢰 수준보다
+      // 과장돼 보인다고 지적해 이름과 주석을 정정했다(2026-07-06). stale 소켓
+      // 재사용 여부를 확정하려면 이 파일보다 낮은 레벨(fetch/undici dispatcher)
+      // 계측이 추가로 필요하다.
+      let phase: "pre_first_event" | "streaming" | "finalizing" = "pre_first_event";
       // 이 시도 전용 AbortController — stall/hard-deadline이 뜨면 실제 스트림도
       // 강제로 끊어서, 버려진 이전 시도가 나중에 조용히 완료되며 finalContent를
       // 덮어쓰는 레이스를 막는다. attemptContent/attemptStopReason도 시도별로
@@ -183,6 +188,7 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
             }
 
             phase = "finalizing";
+            finalizingStartedAt = Date.now();
             const finalMsg = await stream.finalMessage();
             attemptStopReason = finalMsg.stop_reason ?? attemptStopReason;
             attemptContent = finalMsg.content;
@@ -214,6 +220,7 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
           elapsedMs: Date.now() - attemptStartedAt,
           firstEventReceived,
           timeToFirstEventMs: firstEventAt ? firstEventAt - attemptStartedAt : null,
+          timeInFinalizingMs: finalizingStartedAt ? Date.now() - finalizingStartedAt : null,
           name: error instanceof Error ? error.constructor.name : "UnknownError",
           message: error instanceof Error ? error.message : String(error),
           status: (error as { status?: number }).status,
