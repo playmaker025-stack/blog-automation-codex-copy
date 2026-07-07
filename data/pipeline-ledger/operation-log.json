@@ -3048,7 +3048,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-7cd4a778",
       "at": "2026-07-07T05:59:18.830Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 처음 방문하면 받는 상담",
+      "proposedTitle": "부평 전자담배 처음 방문하면 받는 상담 만수르가 실제로 묻는 것들",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5925925925925926,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c87aa7d2",
+      "at": "2026-07-07T06:49:48.764Z"
     }
   ],
-  "lastUpdated": "2026-07-07T05:59:18.830Z"
+  "lastUpdated": "2026-07-07T06:49:48.764Z"
 }
