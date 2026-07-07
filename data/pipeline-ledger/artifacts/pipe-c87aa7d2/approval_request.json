@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-c87aa7d2",
+  "type": "approval_request",
+  "savedAt": "2026-07-07T06:51:49.771Z",
+  "data": {
+    "pipelineId": "pipe-c87aa7d2",
+    "previousTitle": "",
+    "proposedTitle": "부평 전자담배 처음 방문하면 받는 상담 만수르가 실제로 묻는 것들",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "검색의도 분류: commercial + informational 혼합형. '부평 전자담배'는 지역 매장 탐색(commercial) 수요와 초보 입문 가이드(informational) 수요가 동시에 존재하는 키워드. VIEW탭 개인화 피드 전략을 우선하되 AEO 발췌용 요약도 첫 섹션에 배치. 코퍼스 분석 결과 만수르 특유의 구어체 서술(짧은 문장 끊기, '솔직히', '개인적으로는', 손님 반응 직접 인용)을 전 섹션에 적용. 지식인 데이터에서 반복 확인된 '입호흡/폐호흡 구분 혼란', '잘못된 액상 구매', '탄맛·지지직 소리 오해' 세 가지 페인포인트를 섹션 5에 집중 배치. 카페 커뮤니티 시그널에서 '상담 분위기 편안한 매장' 수요가 반복 확인되어 매장 방문 진입 장벽 낮추기 방향으로 전체 톤 설계. 과거 발행 기록 중 '구월동 전자담배 처음 매장 가는 분들 체크리스트'가 유사 주제이나 지역(구월동 vs 부평) 및 각도(체크리스트 vs 실제 상담 루틴 공개)가 달라 중복 리스크 낮음. 최고 성과 글(도조 오팔 리뷰)과 유사한 직접 경험·수치·손님 반응 삼각 구조를 이번 글에도 적용해 평균 평가 점수 65점 이상 목표.",
+    "requestedAt": "2026-07-07T06:51:45.189Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-07T06:51:45.189Z",
+      "modifications": null
+    }
+  }
+}
