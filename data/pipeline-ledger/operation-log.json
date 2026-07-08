@@ -3081,7 +3081,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-63be5c1d",
       "at": "2026-07-08T05:38:26.409Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-0a1e6bb3",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-ac14b188 / Similar existing title found: 부평전자담배 크로스미니6 vs 말론S 입문자 맞춤 비교 분석 (ready, 1)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-0c3a13cb",
+      "at": "2026-07-08T05:44:14.478Z"
     }
   ],
-  "lastUpdated": "2026-07-08T05:38:26.409Z"
+  "lastUpdated": "2026-07-08T05:44:14.478Z"
 }
