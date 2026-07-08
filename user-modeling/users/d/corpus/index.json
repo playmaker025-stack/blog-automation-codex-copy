@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mrc05zu3",
+      "title": "전자담배 액상을 바꿨는데 맛이 이상한 이유액상이 문제가 아닐 수도 있습니다",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6361,
+      "publishedAt": "2026-07-08T11:36:48.579Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrc05zu3.md"
+    },
+    {
       "sampleId": "published-post-manual-mralr041",
       "title": "전자담배 액상을 바꿀 때 팟도 같이 바꿔야 할까?새 액상마다 팟을 교체해야 하는지 알려드립니다",
       "category": "published-post",
@@ -195,5 +204,5 @@
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-06.md"
     }
   ],
-  "lastUpdated": "2026-07-07T12:05:34.112Z"
+  "lastUpdated": "2026-07-08T11:36:54.836Z"
 }
