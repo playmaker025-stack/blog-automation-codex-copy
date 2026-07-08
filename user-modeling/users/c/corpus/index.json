@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mrbo3baf",
+      "title": "부평전자담배 크로스미니6 vs 말론S 입문자 맞춤 비교 분석",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 9155,
+      "publishedAt": "2026-07-08T05:58:48.408Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mrbo3baf.md"
+    },
+    {
       "sampleId": "published-post-manual-mr8tac1r",
       "title": "발라리안R 누수·고장 생겼을 때 원인과 해결 순서",
       "category": "published-post",
@@ -155,5 +164,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-06T06:01:00.607Z"
+  "lastUpdated": "2026-07-08T05:58:54.324Z"
 }
