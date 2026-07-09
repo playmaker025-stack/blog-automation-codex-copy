@@ -3147,7 +3147,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-f582e113",
       "at": "2026-07-09T06:16:52.108Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수동 전자담배 매장 추천과 방문 전 꼭 알아야 할 상담 팁",
+      "proposedTitle": "만수동 전자담배 매장 방문 전 꼭 물어봐야 할 상담 질문 정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5833333333333333,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-9ce07ea6",
+      "at": "2026-07-09T06:22:32.276Z"
     }
   ],
-  "lastUpdated": "2026-07-09T06:16:52.108Z"
+  "lastUpdated": "2026-07-09T06:22:32.276Z"
 }
