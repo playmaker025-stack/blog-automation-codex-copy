@@ -3125,7 +3125,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-405ff9cc",
       "at": "2026-07-09T04:20:45.818Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 관리법: 액상 보관과 기기 청소 기준 총정리",
+      "proposedTitle": "전자담배 관리법: 액상 보관과 기기 청소 기준 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-6621897d",
+      "at": "2026-07-09T05:11:01.666Z"
     }
   ],
-  "lastUpdated": "2026-07-09T04:20:45.818Z"
+  "lastUpdated": "2026-07-09T05:11:01.666Z"
 }
