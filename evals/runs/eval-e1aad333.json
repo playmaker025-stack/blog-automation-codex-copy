@@ -1,0 +1,1379 @@
+{
+  "runId": "eval-e1aad333",
+  "scores": {
+    "originality": 65,
+    "style_match": 70,
+    "structure": 68,
+    "engagement": 66,
+    "forbidden_check": 100
+  },
+  "aggregateScore": 65,
+  "reasoning": {
+    "originality": "전자담배 관리법이라는 주제는 비교적 흔한 주제이나, 본문은 구체적인 온도, 보관 자세, 청소 주기 등 실용적인 팁을 명확히 제시하여 차별성을 갖추고 있습니다. 다만, 완전히 새로운 정보나 독창적인 시각은 부족한 편입니다.",
+    "style_match": "친근하고 이해하기 쉬운 문체로 작성되어 네이버 블로그 스타일에 잘 맞습니다. 전문용어를 적절히 풀어 설명하며, 독자와 대화하듯 서술하는 점이 긍정적입니다.",
+    "structure": "허브형 도입부와 세부 항목별 정리, 점검 순서 제시 등 체계적인 구성이 돋보입니다. 다만, 각 소제목 간 연결이 다소 단절된 느낌이 있고, 하위 주제별 확장 안내가 구체적으로 부족해 보입니다.",
+    "engagement": "독자가 자주 묻는 질문을 직접 답변하는 형식과 실제 경험을 바탕으로 한 설명이 흥미를 유발합니다. 그러나 시각 자료나 사례, 사용자 후기 등 구체적 예시가 부족해 몰입감이 다소 떨어집니다.",
+    "forbidden_check": "내부 SEO 용어, 평가자 언급, 키워드 과다 사용 등 금지된 표현이나 내부 용어가 전혀 포함되어 있지 않아 매우 우수합니다.",
+    "seo": "SEO 점수 97점. 제목 길이가 모바일 검색 노출 구간에 비교적 안정적입니다.",
+    "naver_logic": "네이버 로직 점수 20점. 문제 상황과 선택 기준이 본문에 드러나 검색 의도 연결이 자연스럽습니다."
+  },
+  "recommendations": [
+    "핵심 소제목 1개 이상에 '전자담배 관리법'를 포함해 주제 축을 더 선명하게 잡아주세요.",
+    "마무리 문단에서 '전자담배 관리법'를 한 번 더 정리해 글의 중심 키워드를 닫아주세요.",
+    "허브 참조 링크는 '팟 전자담배 vs 일회용 전자담배 차이 − 입문자 추천 전자담배 비교 (부평동전자담배)' 제목과 https://blog.naver.com/mansur_vape/224213849431 URL을 정확히 같은 쌍으로 써야 합니다.",
+    "리프 참조 링크는 '입호흡 전자담배 수명 - 기기 오래 쓰려면 꼭 알아야 할 교체 기준' 제목과 https://blog.naver.com/mansur_vape/224238522947 URL을 정확히 같은 쌍으로 써야 합니다.",
+    "문맥보다 키워드 반복이 먼저 보이는 구간은 표현을 풀어 자연스럽게 정리해 주세요.",
+    "본문 내 각 소제목 간 자연스러운 연결 문장을 추가해 흐름을 개선하세요."
+  ],
+  "pass": false,
+  "seoEvaluation": {
+    "score": 97,
+    "evidence": [
+      "제목 길이가 모바일 검색 노출 구간에 비교적 안정적입니다.",
+      "메인 키워드가 제목 앞부분에 배치되어 있습니다.",
+      "도입부에 메인 키워드가 보여 검색 의도 연결이 자연스럽습니다.",
+      "첫 문장에 메인 키워드가 보여 검색 의도를 바로 연결합니다.",
+      "'전자담배 관리법' 본문 3회는 현재 권장 범위입니다.",
+      "'전자담배 액상 보관' 본문 1회는 현재 권장 범위입니다."
+    ],
+    "improvements": [
+      "핵심 소제목 1개 이상에 '전자담배 관리법'를 포함해 주제 축을 더 선명하게 잡아주세요.",
+      "마무리 문단에서 '전자담배 관리법'를 한 번 더 정리해 글의 중심 키워드를 닫아주세요."
+    ],
+    "keywordReport": {
+      "items": [
+        {
+          "keyword": "전자담배 관리법",
+          "count": 3,
+          "status": "ok",
+          "targetMin": 2,
+          "targetMax": 4,
+          "role": "main",
+          "recommendation": "메인 키워드 '전자담배 관리법' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 액상 보관",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전자담배 액상 보관' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 기기 청소",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전자담배 기기 청소' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전담 탄맛 원인",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전담 탄맛 원인' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "팟 접점 청소",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '팟 접점 청소' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "팟 청소 방법",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '팟 청소 방법' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 팟 교체 주기",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 2,
+          "role": "bridge",
+          "recommendation": "브릿지 키워드 '전자담배 팟 교체 주기' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 코일 교체 시기",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 2,
+          "role": "bridge",
+          "recommendation": "브릿지 키워드 '전자담배 코일 교체 시기' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "선행포스팅",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'선행포스팅'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "키워드빌드업",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'키워드빌드업'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "SEO 점수",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'SEO 점수'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "검색의도",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'검색의도'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "메인 키워드",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'메인 키워드'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "서브 키워드",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'서브 키워드'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "본문 n회",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'본문 n회'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "적정 범위",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'적정 범위'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "내부링크 설계",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'내부링크 설계'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "허브/리프",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'허브/리프'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "상위노출 가능성",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'상위노출 가능성'는 본문에 노출되지 않았습니다."
+        }
+      ],
+      "mainKeyword": {
+        "keyword": "전자담배 관리법",
+        "count": 3,
+        "status": "ok",
+        "targetMin": 2,
+        "targetMax": 4,
+        "role": "main",
+        "recommendation": "메인 키워드 '전자담배 관리법' 반복은 현재 적정합니다."
+      },
+      "subKeywords": [
+        {
+          "keyword": "전자담배 액상 보관",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전자담배 액상 보관' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 기기 청소",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전자담배 기기 청소' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전담 탄맛 원인",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전담 탄맛 원인' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "팟 접점 청소",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '팟 접점 청소' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "팟 청소 방법",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '팟 청소 방법' 반복은 현재 적정합니다."
+        }
+      ],
+      "bridgeKeywords": [
+        {
+          "keyword": "전자담배 팟 교체 주기",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 2,
+          "role": "bridge",
+          "recommendation": "브릿지 키워드 '전자담배 팟 교체 주기' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 코일 교체 시기",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 2,
+          "role": "bridge",
+          "recommendation": "브릿지 키워드 '전자담배 코일 교체 시기' 반복은 현재 적정합니다."
+        }
+      ],
+      "internalLinkAnchors": [],
+      "forbiddenItems": [
+        {
+          "keyword": "선행포스팅",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'선행포스팅'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "키워드빌드업",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'키워드빌드업'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "SEO 점수",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'SEO 점수'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "검색의도",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'검색의도'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "메인 키워드",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'메인 키워드'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "서브 키워드",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'서브 키워드'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "본문 n회",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'본문 n회'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "적정 범위",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'적정 범위'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "내부링크 설계",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'내부링크 설계'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "허브/리프",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'허브/리프'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "상위노출 가능성",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'상위노출 가능성'는 본문에 노출되지 않았습니다."
+        }
+      ],
+      "contractApplied": true,
+      "overallRisk": "low",
+      "overallRiskSummary": "키워드 반복 위험도는 낮은 편입니다.",
+      "paragraphWarnings": [],
+      "seoKeywordItems": [
+        {
+          "keyword": "전자담배 관리법",
+          "role": "main",
+          "exactCount": 3,
+          "includedCount": 0,
+          "effectiveCount": 3,
+          "risk": "ok",
+          "note": "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+          "exactPhraseExclusionApplied": false
+        },
+        {
+          "keyword": "전자담배 액상 보관",
+          "role": "sub",
+          "exactCount": 1,
+          "includedCount": 0,
+          "effectiveCount": 1,
+          "risk": "ok",
+          "note": "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+          "exactPhraseExclusionApplied": false
+        },
+        {
+          "keyword": "전자담배 기기 청소",
+          "role": "sub",
+          "exactCount": 1,
+          "includedCount": 0,
+          "effectiveCount": 1,
+          "risk": "ok",
+          "note": "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+          "exactPhraseExclusionApplied": false
+        },
+        {
+          "keyword": "전담 탄맛 원인",
+          "role": "sub",
+          "exactCount": 1,
+          "includedCount": 0,
+          "effectiveCount": 1,
+          "risk": "ok",
+          "note": "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+          "exactPhraseExclusionApplied": false
+        },
+        {
+          "keyword": "팟 접점 청소",
+          "role": "sub",
+          "exactCount": 2,
+          "includedCount": 0,
+          "effectiveCount": 2,
+          "risk": "ok",
+          "note": "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+          "exactPhraseExclusionApplied": false
+        }
+      ],
+      "requiredEntityChecks": [],
+      "bodyRepetitionItems": [
+        {
+          "token": "입니다",
+          "count": 11,
+          "category": "sentence_ending",
+          "severity": "caution",
+          "message": "'입니다' 문장 마무리가 반복됩니다.",
+          "suggestion": "문장 종결 표현을 섞어서 리듬을 바꿔 주세요.",
+          "isSeoRisk": false
+        },
+        {
+          "token": "코일",
+          "count": 10,
+          "category": "noun",
+          "severity": "notice",
+          "message": "'코일' 반복이 눈에 띄기 시작합니다.",
+          "suggestion": "같은 명사를 설명형 문장, 수치, 사례 표현으로 바꿔 밀도를 낮춰 주세요.",
+          "isSeoRisk": false
+        },
+        {
+          "token": "확인하",
+          "count": 7,
+          "category": "verb_stem",
+          "severity": "caution",
+          "message": "'확인하' 반복이 많아 본문이 단조롭게 보일 수 있습니다.",
+          "suggestion": "같은 동사 어간을 반복하지 말고 문장 구조를 바꿔 주세요.",
+          "isSeoRisk": false
+        },
+        {
+          "token": "됩니다",
+          "count": 6,
+          "category": "sentence_ending",
+          "severity": "notice",
+          "message": "'됩니다' 문장 마무리가 반복됩니다.",
+          "suggestion": "문장 종결 표현을 섞어서 리듬을 바꿔 주세요.",
+          "isSeoRisk": false
+        },
+        {
+          "token": "합니다",
+          "count": 4,
+          "category": "sentence_ending",
+          "severity": "notice",
+          "message": "'합니다' 문장 마무리가 반복됩니다.",
+          "suggestion": "문장 종결 표현을 섞어서 리듬을 바꿔 주세요.",
+          "isSeoRisk": false
+        }
+      ],
+      "legacyTokenItems": [
+        {
+          "token": "청소",
+          "count": 24,
+          "sourceKeywords": [
+            "전자담배 기기 청소",
+            "팟 접점 청소",
+            "팟 청소 방법"
+          ],
+          "note": "반복이 매우 많은 편입니다. 일부는 다른 표현이나 구체 기준으로 치환하는 편이 안전합니다."
+        },
+        {
+          "token": "보관",
+          "count": 17,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "접점",
+          "count": 16,
+          "sourceKeywords": [
+            "팟 접점 청소"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "액상",
+          "count": 15,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "교체",
+          "count": 11,
+          "sourceKeywords": [
+            "전자담배 팟 교체 주기",
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "코일",
+          "count": 11,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "탄맛",
+          "count": 11,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "전자담배",
+          "count": 10,
+          "sourceKeywords": [
+            "전자담배 관리법",
+            "전자담배 액상 보관",
+            "전자담배 기기 청소",
+            "전자담배 팟 교체 주기"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "기기",
+          "count": 8,
+          "sourceKeywords": [
+            "전자담배 기기 청소"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "접점 청소",
+          "count": 4,
+          "sourceKeywords": [
+            "팟 접점 청소"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "보시면",
+          "count": 4,
+          "sourceKeywords": [
+            "보시면"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "전자담배 관리법",
+          "count": 3,
+          "sourceKeywords": [
+            "전자담배 관리법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "관리법",
+          "count": 3,
+          "sourceKeywords": [
+            "전자담배 관리법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "생기면",
+          "count": 3,
+          "sourceKeywords": [
+            "생기면"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "원인",
+          "count": 3,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "주기",
+          "count": 3,
+          "sourceKeywords": [
+            "전자담배 팟 교체 주기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 팟 교체 주기",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 팟 교체 주기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "팟 접점 청소",
+          "count": 2,
+          "sourceKeywords": [
+            "팟 접점 청소"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "교체 주기",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 팟 교체 주기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "액상 보관",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 코일 교체 시기",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 기기 청소",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 기기 청소"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상 보관",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전담 탄맛 원인",
+          "count": 1,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 기기",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 기기 청소"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 코일",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "팟 청소 방법",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 기기 청소",
+            "팟 접점 청소",
+            "팟 청소 방법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "교체 시기",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "기기 청소",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 기기 청소"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전담 탄맛",
+          "count": 1,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "코일 교체",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "탄맛 원인",
+          "count": 1,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "길어지면",
+          "count": 1,
+          "sourceKeywords": [
+            "길어지면"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "시기",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전담",
+          "count": 1,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        }
+      ],
+      "tokenItems": [
+        {
+          "token": "청소",
+          "count": 24,
+          "sourceKeywords": [
+            "전자담배 기기 청소",
+            "팟 접점 청소",
+            "팟 청소 방법"
+          ],
+          "note": "반복이 매우 많은 편입니다. 일부는 다른 표현이나 구체 기준으로 치환하는 편이 안전합니다."
+        },
+        {
+          "token": "보관",
+          "count": 17,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "접점",
+          "count": 16,
+          "sourceKeywords": [
+            "팟 접점 청소"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "액상",
+          "count": 15,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "교체",
+          "count": 11,
+          "sourceKeywords": [
+            "전자담배 팟 교체 주기",
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "코일",
+          "count": 11,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "탄맛",
+          "count": 11,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "전자담배",
+          "count": 10,
+          "sourceKeywords": [
+            "전자담배 관리법",
+            "전자담배 액상 보관",
+            "전자담배 기기 청소",
+            "전자담배 팟 교체 주기"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "기기",
+          "count": 8,
+          "sourceKeywords": [
+            "전자담배 기기 청소"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "접점 청소",
+          "count": 4,
+          "sourceKeywords": [
+            "팟 접점 청소"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "보시면",
+          "count": 4,
+          "sourceKeywords": [
+            "보시면"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "전자담배 관리법",
+          "count": 3,
+          "sourceKeywords": [
+            "전자담배 관리법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "관리법",
+          "count": 3,
+          "sourceKeywords": [
+            "전자담배 관리법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "생기면",
+          "count": 3,
+          "sourceKeywords": [
+            "생기면"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "원인",
+          "count": 3,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "주기",
+          "count": 3,
+          "sourceKeywords": [
+            "전자담배 팟 교체 주기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 팟 교체 주기",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 팟 교체 주기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "팟 접점 청소",
+          "count": 2,
+          "sourceKeywords": [
+            "팟 접점 청소"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "교체 주기",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 팟 교체 주기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "액상 보관",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 코일 교체 시기",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 기기 청소",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 기기 청소"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상 보관",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전담 탄맛 원인",
+          "count": 1,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 기기",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 기기 청소"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 액상 보관"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 코일",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "팟 청소 방법",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 기기 청소",
+            "팟 접점 청소",
+            "팟 청소 방법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "교체 시기",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "기기 청소",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 기기 청소"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전담 탄맛",
+          "count": 1,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "코일 교체",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "탄맛 원인",
+          "count": 1,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "길어지면",
+          "count": 1,
+          "sourceKeywords": [
+            "길어지면"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "시기",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 코일 교체 시기"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전담",
+          "count": 1,
+          "sourceKeywords": [
+            "전담 탄맛 원인"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        }
+      ],
+      "totalMentions": 12,
+      "introCoverage": true,
+      "titleFrontLoaded": true,
+      "bodyLength": 3642,
+      "summary": [
+        "메인 키워드 '전자담배 관리법' 본문 3회",
+        "전체 반복 위험도 low"
+      ],
+      "recommendations": []
+    },
+    "keywordMetrics": [
+      {
+        "keyword": "전자담배 관리법",
+        "role": "main",
+        "label": "메인 키워드",
+        "completenessScore": 94,
+        "exposurePotentialScore": 100,
+        "count": 3,
+        "targetMin": 2,
+        "targetMax": 4,
+        "titleIncluded": true,
+        "titleFrontLoaded": true,
+        "introIncluded": true,
+        "earlyCoverage": true,
+        "summary": "제목 앞배치 / 도입부 포함 / 본문 3회",
+        "action": "도입부에서 '전자담배 관리법' 검색 의도를 더 직접적으로 받아 주세요."
+      },
+      {
+        "keyword": "전자담배 액상 보관",
+        "role": "sub",
+        "label": "서브 키워드 1",
+        "completenessScore": 49,
+        "exposurePotentialScore": 65,
+        "count": 1,
+        "targetMin": 1,
+        "targetMax": 3,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 1회",
+        "action": "'전자담배 액상 보관'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "전자담배 기기 청소",
+        "role": "sub",
+        "label": "서브 키워드 2",
+        "completenessScore": 49,
+        "exposurePotentialScore": 65,
+        "count": 1,
+        "targetMin": 1,
+        "targetMax": 3,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 1회",
+        "action": "'전자담배 기기 청소'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "전담 탄맛 원인",
+        "role": "sub",
+        "label": "서브 키워드 3",
+        "completenessScore": 49,
+        "exposurePotentialScore": 65,
+        "count": 1,
+        "targetMin": 1,
+        "targetMax": 3,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 1회",
+        "action": "'전담 탄맛 원인'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "팟 접점 청소",
+        "role": "sub",
+        "label": "서브 키워드 4",
+        "completenessScore": 58,
+        "exposurePotentialScore": 68,
+        "count": 2,
+        "targetMin": 1,
+        "targetMax": 3,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 2회",
+        "action": "'팟 접점 청소'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "팟 청소 방법",
+        "role": "sub",
+        "label": "서브 키워드 5",
+        "completenessScore": 49,
+        "exposurePotentialScore": 65,
+        "count": 1,
+        "targetMin": 1,
+        "targetMax": 3,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 1회",
+        "action": "'팟 청소 방법'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "전자담배 팟 교체 주기",
+        "role": "sub",
+        "label": "브릿지 키워드",
+        "completenessScore": 55,
+        "exposurePotentialScore": 65,
+        "count": 2,
+        "targetMin": 1,
+        "targetMax": 2,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 2회",
+        "action": "'전자담배 팟 교체 주기'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "전자담배 코일 교체 시기",
+        "role": "sub",
+        "label": "브릿지 키워드",
+        "completenessScore": 55,
+        "exposurePotentialScore": 65,
+        "count": 1,
+        "targetMin": 1,
+        "targetMax": 2,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 1회",
+        "action": "'전자담배 코일 교체 시기'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      }
+    ],
+    "combinationCoverageScore": 78,
+    "combinationMetrics": [
+      {
+        "phrase": "전자담배 관리법",
+        "role": "main",
+        "priority": "core",
+        "exactMatches": 3,
+        "tokenCoverage": 1,
+        "titleIncluded": true,
+        "headingIncluded": false,
+        "introIncluded": true,
+        "earlyCoverage": true,
+        "coverageScore": 100,
+        "exposurePotentialScore": 100,
+        "summary": "제목 연결 · 도입부 연결 · 소제목 보강 가능 · 3회 직접 표현",
+        "action": "현재 조합 흐름을 유지해도 괜찮습니다."
+      },
+      {
+        "phrase": "전자담배 액상 보관",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 1,
+        "tokenCoverage": 1,
+        "titleIncluded": true,
+        "headingIncluded": false,
+        "introIncluded": true,
+        "earlyCoverage": true,
+        "coverageScore": 99,
+        "exposurePotentialScore": 98,
+        "summary": "제목 연결 · 도입부 연결 · 소제목 보강 가능 · 1회 직접 표현",
+        "action": "현재 조합 흐름을 유지해도 괜찮습니다."
+      },
+      {
+        "phrase": "전자담배 기기 청소",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 1,
+        "tokenCoverage": 1,
+        "titleIncluded": true,
+        "headingIncluded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "coverageScore": 74,
+        "exposurePotentialScore": 71,
+        "summary": "제목 연결 · 도입부 약함 · 소제목 보강 가능 · 1회 직접 표현",
+        "action": "첫 두 문단 안에서 '전자담배 기기 청소' 검색 의도를 더 직접적으로 받아 주세요."
+      },
+      {
+        "phrase": "전담 탄맛 원인",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 1,
+        "tokenCoverage": 1,
+        "titleIncluded": false,
+        "headingIncluded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "coverageScore": 58,
+        "exposurePotentialScore": 52,
+        "summary": "제목 약함 · 도입부 약함 · 소제목 보강 가능 · 1회 직접 표현",
+        "action": "첫 두 문단 안에서 '전담 탄맛 원인' 검색 의도를 더 직접적으로 받아 주세요."
+      },
+      {
+        "phrase": "팟 접점 청소",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 2,
+        "tokenCoverage": 1,
+        "titleIncluded": false,
+        "headingIncluded": true,
+        "introIncluded": true,
+        "earlyCoverage": true,
+        "coverageScore": 91,
+        "exposurePotentialScore": 87,
+        "summary": "제목 약함 · 도입부 연결 · 소제목 연결 · 2회 직접 표현",
+        "action": "현재 조합 흐름을 유지해도 괜찮습니다."
+      },
+      {
+        "phrase": "팟 청소 방법",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 1,
+        "tokenCoverage": 1,
+        "titleIncluded": false,
+        "headingIncluded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "coverageScore": 58,
+        "exposurePotentialScore": 52,
+        "summary": "제목 약함 · 도입부 약함 · 소제목 보강 가능 · 1회 직접 표현",
+        "action": "첫 두 문단 안에서 '팟 청소 방법' 검색 의도를 더 직접적으로 받아 주세요."
+      },
+      {
+        "phrase": "전자담배 팟 교체 주기",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 2,
+        "tokenCoverage": 1,
+        "titleIncluded": false,
+        "headingIncluded": false,
+        "introIncluded": true,
+        "earlyCoverage": true,
+        "coverageScore": 83,
+        "exposurePotentialScore": 79,
+        "summary": "제목 약함 · 도입부 연결 · 소제목 보강 가능 · 2회 직접 표현",
+        "action": "현재 조합 흐름을 유지해도 괜찮습니다."
+      },
+      {
+        "phrase": "전자담배 코일 교체 시기",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 1,
+        "tokenCoverage": 1,
+        "titleIncluded": false,
+        "headingIncluded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "coverageScore": 55,
+        "exposurePotentialScore": 48,
+        "summary": "제목 약함 · 도입부 약함 · 소제목 보강 가능 · 직접 표현 강제 없음",
+        "action": "첫 두 문단 안에서 전자담배 선택 기준 확인를 더 직접적으로 받아 주세요."
+      }
+    ]
+  },
+  "naverLogicEvaluation": {
+    "primary": "hybrid",
+    "label": "D.I.A. + C-Rank 혼합",
+    "completenessScore": 20,
+    "reason": "이 주제는 문제 해결 흐름과 주제권 연결이 모두 중요해서 D.I.A.와 C-Rank를 함께 맞추는 편이 좋습니다.",
+    "evidence": [
+      "문제 상황과 선택 기준이 본문에 드러나 검색 의도 연결이 자연스럽습니다.",
+      "비교와 선택 기준 요소가 살아 있어 실전 검색 의도에 잘 맞습니다.",
+      "내부링크 설계 대상이 있어 주제권 확장 관점이 살아 있습니다.",
+      "지역성과 실사용 맥락이 보여 C-Rank 관점의 주제권 연결이 자연스럽습니다.",
+      "실사용 맥락과 검색자 질문이 보여 D.I.A. 관점의 설득력이 있습니다."
+    ],
+    "improvements": [
+      "허브 참조 링크는 '팟 전자담배 vs 일회용 전자담배 차이 − 입문자 추천 전자담배 비교 (부평동전자담배)' 제목과 https://blog.naver.com/mansur_vape/224213849431 URL을 정확히 같은 쌍으로 써야 합니다.",
+      "리프 참조 링크는 '입호흡 전자담배 수명 - 기기 오래 쓰려면 꼭 알아야 할 교체 기준' 제목과 https://blog.naver.com/mansur_vape/224238522947 URL을 정확히 같은 쌍으로 써야 합니다.",
+      "문맥보다 키워드 반복이 먼저 보이는 구간은 표현을 풀어 자연스럽게 정리해 주세요."
+    ]
+  },
+  "postId": "post-801b023b",
+  "savedAt": "2026-07-09T05:13:56.940Z"
+}
