@@ -1024,10 +1024,10 @@
       "contentKind": "hub",
       "feasibility": null,
       "relatedSources": [],
-      "status": "draft",
+      "status": "in-progress",
       "assignedUserId": "b",
       "createdAt": "2026-07-09T06:19:55.019Z",
-      "updatedAt": "2026-07-09T06:19:55.019Z"
+      "updatedAt": "2026-07-09T06:22:35.566Z"
     },
     {
       "topicId": "topic-2e8aab34",
@@ -1072,5 +1072,5 @@
       "updatedAt": "2026-07-09T06:19:59.339Z"
     }
   ],
-  "lastUpdated": "2026-07-09T06:19:59.339Z"
+  "lastUpdated": "2026-07-09T06:22:35.566Z"
 }
