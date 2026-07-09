@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mrdh0oej",
+      "title": "전자담배 코일을 새로 갈았는데도 탄맛이 나는 이유",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6268,
+      "publishedAt": "2026-07-09T12:16:20.880Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrdh0oej.md"
+    },
+    {
       "sampleId": "published-post-manual-mrc05zu3",
       "title": "전자담배 액상을 바꿨는데 맛이 이상한 이유액상이 문제가 아닐 수도 있습니다",
       "category": "published-post",
@@ -204,5 +213,5 @@
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-06.md"
     }
   ],
-  "lastUpdated": "2026-07-08T11:36:54.836Z"
+  "lastUpdated": "2026-07-09T12:16:27.808Z"
 }
