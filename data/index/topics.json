@@ -1049,7 +1049,28 @@
       "assignedUserId": "b",
       "createdAt": "2026-07-09T06:19:57.774Z",
       "updatedAt": "2026-07-09T06:19:57.774Z"
+    },
+    {
+      "topicId": "topic-8449f5e3",
+      "title": "만수동 전자담배 사고 예방과 안전 사용법 정리",
+      "description": "만수동 지역에서 발생할 수 있는 전자담배 사고 유형과 이를 예방하는 안전 사용법을 구체적으로 설명합니다.",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "전자담배",
+        "사고예방",
+        "안전사용법"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "b",
+      "createdAt": "2026-07-09T06:19:59.339Z",
+      "updatedAt": "2026-07-09T06:19:59.339Z"
     }
   ],
-  "lastUpdated": "2026-07-09T06:19:57.774Z"
+  "lastUpdated": "2026-07-09T06:19:59.339Z"
 }
