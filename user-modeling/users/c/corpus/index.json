@@ -2,6 +2,21 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-801b023b",
+      "title": "전자담배 관리법 : 액상 보관과 기기 청소 기준 총정리",
+      "category": "c",
+      "tags": [
+        "전자담배관리",
+        "액상보관",
+        "기기청소",
+        "사용팁",
+        "인천전자담배"
+      ],
+      "wordCount": 3443,
+      "publishedAt": "2026-07-10T06:40:57.594Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-801b023b.md"
+    },
+    {
       "sampleId": "published-post-manual-mrbo3baf",
       "title": "부평전자담배 크로스미니6 vs 말론S 입문자 맞춤 비교 분석",
       "category": "published-post",
@@ -164,5 +179,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-08T05:58:54.324Z"
+  "lastUpdated": "2026-07-10T06:41:16.679Z"
 }
