@@ -1,0 +1,29 @@
+{
+  "pipelineId": "pipe-890601e0",
+  "type": "draft_output",
+  "savedAt": "2026-07-11T06:24:29.253Z",
+  "data": {
+    "postId": "post-14a4e3aa",
+    "title": "인천 전자담배 액상 맛 차이 기준 총정리 – 계열별 선택 가이드",
+    "wordCount": 3879,
+    "generatedAt": "2026-07-11T06:24:28.143Z",
+    "contentPath": "data/posting-list/posts/post-14a4e3aa/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": true,
+      "blockingReasons": [],
+      "warnings": [
+        "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
+        "medium overlap: 결론 패턴 반복 위험 criteria_summary"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
+        "medium overlap: 결론 패턴 반복 위험 criteria_summary"
+      ]
+    }
+  }
+}
