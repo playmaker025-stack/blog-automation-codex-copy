@@ -3290,7 +3290,20 @@
       "errorName": "Error",
       "pipelineId": "pipe-fbc7515e",
       "at": "2026-07-11T06:19:56.845Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 전자담배 액상별 맛과 향 차이 완벽 가이드",
+      "proposedTitle": "인천 전자담배 액상 맛 차이 기준 총정리 – 계열별 선택 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "coreKeywordChanged"
+      ],
+      "stringSimilarity": 0.43999999999999995,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-890601e0",
+      "at": "2026-07-11T06:22:29.058Z"
     }
   ],
-  "lastUpdated": "2026-07-11T06:19:56.845Z"
+  "lastUpdated": "2026-07-11T06:22:29.058Z"
 }
