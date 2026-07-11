@@ -2,6 +2,20 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-17e1dade",
+      "title": "남동구 전자담배 매장 방문 전 꼭 확인할 상담 질문 5가지",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "전자담배매장",
+        "상담팁",
+        "매장추천"
+      ],
+      "wordCount": 3459,
+      "publishedAt": "2026-07-11T11:41:27.543Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-17e1dade.md"
+    },
+    {
       "sampleId": "published-post-manual-mraln0hw",
       "title": "인천 전자담배 만수르 누수 원인과 해결방법 꿀팁 방출",
       "category": "published-post",
@@ -128,5 +142,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-07-07T12:02:28.907Z"
+  "lastUpdated": "2026-07-11T11:41:44.282Z"
 }
