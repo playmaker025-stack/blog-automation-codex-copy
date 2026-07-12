@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mrh5sq1h",
+      "title": "전자담배 액상은 남았는데 연기가 안 나오는 이유",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6137,
+      "publishedAt": "2026-07-12T02:13:17.485Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrh5sq1h.md"
+    },
+    {
       "sampleId": "published-post-manual-mreu8a6g",
       "title": "전자담배 코일은 아직 멀쩡한데 맛이 약해지는 이유",
       "category": "published-post",
@@ -222,5 +231,5 @@
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-06.md"
     }
   ],
-  "lastUpdated": "2026-07-10T11:14:02.564Z"
+  "lastUpdated": "2026-07-12T02:13:32.015Z"
 }
