@@ -3336,7 +3336,18 @@
       "errorName": "y",
       "pipelineId": "pipe-13531b39",
       "at": "2026-07-13T03:03:34.655Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-5e8c17c3",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-b20979f1 / Similar existing title found: 인천 부천 상동 전자담배 코일 관리와 교체 시기 총정리 (ready, 1)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-b12768a3",
+      "at": "2026-07-13T03:19:00.100Z"
     }
   ],
-  "lastUpdated": "2026-07-13T03:03:34.655Z"
+  "lastUpdated": "2026-07-13T03:19:00.100Z"
 }
