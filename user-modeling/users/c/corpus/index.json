@@ -2,6 +2,20 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-6de3673d",
+      "title": "인천 부천 상동 전자담배 코일 관리와 교체 시기 총정리",
+      "category": "c",
+      "tags": [
+        "전자담배관리",
+        "코일관리",
+        "부천상동",
+        "교체시기"
+      ],
+      "wordCount": 2792,
+      "publishedAt": "2026-07-13T05:57:08.291Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-6de3673d.md"
+    },
+    {
       "sampleId": "published-post-14a4e3aa",
       "title": "인천 전자담배 액상별 맛과 향 차이 완벽 가이드",
       "category": "c",
@@ -194,5 +208,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-11T10:04:27.588Z"
+  "lastUpdated": "2026-07-13T05:57:19.720Z"
 }
