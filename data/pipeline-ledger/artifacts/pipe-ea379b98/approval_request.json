@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-ea379b98",
+  "type": "approval_request",
+  "savedAt": "2026-07-13T03:23:25.338Z",
+  "data": {
+    "pipelineId": "pipe-ea379b98",
+    "previousTitle": "",
+    "proposedTitle": "인천 부천 상동 전자담배 코일 관리와 교체 시기 총정리",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "최근 부천 상동 지역 전자담배 사용자들의 코일 관리와 교체 시기에 대한 수요가 높아, 지역 맞춤형 경험과 문제 해결 중심의 정보를 제공하는 것이 검색 의도에 부합한다. 허브형 구조에 맞춰 코일 상태 구분, 문제 원인, 관리법, 교체 시기 순으로 체계적 안내를 하며, 실제 사용자 경험과 체크리스트를 포함해 신뢰도를 높인다. 마지막 섹션에서 액상 관리법으로 자연스럽게 연결해 블로그 내 체류시간과 재방문을 유도한다.\n\n[수정 반영] 전체글이 너무 길지 않게 작성해줘\n\n[사용자 승인 후 추가 수정 요청]\n",
+    "requestedAt": "2026-07-13T03:23:04.774Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-13T03:23:04.774Z",
+      "modifications": null
+    }
+  }
+}
