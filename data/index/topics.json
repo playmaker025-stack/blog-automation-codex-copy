@@ -603,10 +603,10 @@
       "contentKind": "hub",
       "feasibility": null,
       "relatedSources": [],
-      "status": "in-progress",
+      "status": "draft",
       "assignedUserId": "c",
       "createdAt": "2026-07-02T07:06:01.433Z",
-      "updatedAt": "2026-07-14T02:34:13.981Z"
+      "updatedAt": "2026-07-14T02:37:34.203Z"
     },
     {
       "topicId": "topic-dd455e7f",
@@ -1093,5 +1093,5 @@
       "updatedAt": "2026-07-13T05:57:12.712Z"
     }
   ],
-  "lastUpdated": "2026-07-14T02:34:13.981Z"
+  "lastUpdated": "2026-07-14T02:37:34.203Z"
 }
