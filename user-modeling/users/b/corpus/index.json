@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mrki1yl0",
+      "title": "구월동 전자담배 입문자가 많이 찾는 액상계열 3종 추천",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 9826,
+      "publishedAt": "2026-07-14T10:19:42.203Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mrki1yl0.md"
+    },
+    {
       "sampleId": "published-post-17e1dade",
       "title": "남동구 전자담배 매장 방문 전 꼭 확인할 상담 질문 5가지",
       "category": "b",
@@ -142,5 +151,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-07-11T11:41:44.282Z"
+  "lastUpdated": "2026-07-14T10:19:48.264Z"
 }
