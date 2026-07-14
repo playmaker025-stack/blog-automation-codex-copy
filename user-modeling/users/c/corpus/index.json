@@ -2,6 +2,20 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-928f746e",
+      "title": "젤로 전자담배 불량 증상 점검과 해결법 (부평전자담배)",
+      "category": "c",
+      "tags": [
+        "젤로",
+        "전자담배불량",
+        "부평전자담배",
+        "문제해결"
+      ],
+      "wordCount": 2863,
+      "publishedAt": "2026-07-14T06:43:16.168Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-928f746e.md"
+    },
+    {
       "sampleId": "published-post-6de3673d",
       "title": "인천 부천 상동 전자담배 코일 관리와 교체 시기 총정리",
       "category": "c",
@@ -208,5 +222,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-13T05:57:19.720Z"
+  "lastUpdated": "2026-07-14T06:43:23.839Z"
 }
