@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-a788be69",
+  "type": "approval_request",
+  "savedAt": "2026-07-14T02:34:16.436Z",
+  "data": {
+    "pipelineId": "pipe-a788be69",
+    "previousTitle": "",
+    "proposedTitle": "젤로 전자담배 불량 증상별 점검과 해결법 (부평전자담배)",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "부평지역 젤로 전자담배 사용자들이 자주 문의하는 불량 증상을 중심으로, 증상별 원인과 점검법을 구체적으로 안내해 검색 의도에 부합한다. 친근한 경험담과 실제 부평 전문점 서비스 정보를 포함해 신뢰도를 높이고, 자가 점검과 전문점 방문 시기를 명확히 구분해 문제 해결 효율성을 강화한다. 내부 링크로 코일 관리 관련 글을 연결해 체류시간과 재방문을 유도하는 허브-리프 구조에 적합하다.\n\n[수정 반영] 너가 작성해주는 글이 항상 너무 길어\n쓸데없는 말 적지말고 적당한 길이로 작성해줘",
+    "requestedAt": "2026-07-14T02:34:11.721Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-14T02:34:11.721Z",
+      "modifications": null
+    }
+  }
+}
