@@ -1143,7 +1143,33 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-15T07:25:06.543Z",
       "updatedAt": "2026-07-15T07:25:06.543Z"
+    },
+    {
+      "topicId": "topic-series-mrlr6pw4-4q3o-3",
+      "title": "초보자가 무니코틴 시작 전에 자주 놓치는 체크포인트",
+      "description": "메인 키워드 \"무니코틴\"를 바로 정면으로 쓰기 전에 검색자가 먼저 궁금해하는 하위 의도를 다룹니다. 본문에서는 메인 키워드를 억지 반복하지 않고 1~3회 자연스럽게 노출합니다.",
+      "category": "c",
+      "tags": [
+        "무니코틴",
+        "선행포스팅",
+        "키워드빌드업",
+        "초보자가이드"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "leaf",
+      "seriesId": "series-c-무니코틴-mrlr6pw4-4q3o",
+      "seriesRole": "prelude",
+      "targetMainKeyword": "무니코틴",
+      "sequenceOrder": 3,
+      "prerequisiteTopicIds": [],
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-15T07:25:08.506Z",
+      "updatedAt": "2026-07-15T07:25:08.506Z"
     }
   ],
-  "lastUpdated": "2026-07-15T07:25:06.543Z"
+  "lastUpdated": "2026-07-15T07:25:08.506Z"
 }
