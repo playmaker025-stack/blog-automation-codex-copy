@@ -2,6 +2,20 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-3442dcc2",
+      "title": "무니코틴 고르기 전에 핵심 개념부터 정리",
+      "category": "c",
+      "tags": [
+        "무니코틴",
+        "선행포스팅",
+        "키워드빌드업",
+        "개념정리"
+      ],
+      "wordCount": 1580,
+      "publishedAt": "2026-07-15T09:31:58.693Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-3442dcc2.md"
+    },
+    {
       "sampleId": "published-post-928f746e",
       "title": "젤로 전자담배 불량 증상 점검과 해결법 (부평전자담배)",
       "category": "c",
@@ -222,5 +236,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-14T06:43:23.839Z"
+  "lastUpdated": "2026-07-15T09:32:06.357Z"
 }
