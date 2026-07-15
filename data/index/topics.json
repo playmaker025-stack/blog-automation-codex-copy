@@ -1117,7 +1117,33 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-15T07:25:04.625Z",
       "updatedAt": "2026-07-15T07:25:04.625Z"
+    },
+    {
+      "topicId": "topic-series-mrlr6pw4-4q3o-2",
+      "title": "무니코틴 고르기 전에 많이 보는 선택 기준",
+      "description": "메인 키워드 \"무니코틴\"를 바로 정면으로 쓰기 전에 검색자가 먼저 궁금해하는 하위 의도를 다룹니다. 본문에서는 메인 키워드를 억지 반복하지 않고 1~3회 자연스럽게 노출합니다.",
+      "category": "c",
+      "tags": [
+        "무니코틴",
+        "선행포스팅",
+        "키워드빌드업",
+        "선택기준"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "leaf",
+      "seriesId": "series-c-무니코틴-mrlr6pw4-4q3o",
+      "seriesRole": "prelude",
+      "targetMainKeyword": "무니코틴",
+      "sequenceOrder": 2,
+      "prerequisiteTopicIds": [],
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-15T07:25:06.543Z",
+      "updatedAt": "2026-07-15T07:25:06.543Z"
     }
   ],
-  "lastUpdated": "2026-07-15T07:25:04.625Z"
+  "lastUpdated": "2026-07-15T07:25:06.543Z"
 }
