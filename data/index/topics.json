@@ -1113,10 +1113,10 @@
       "prerequisiteTopicIds": [],
       "feasibility": null,
       "relatedSources": [],
-      "status": "draft",
+      "status": "published",
       "assignedUserId": "c",
       "createdAt": "2026-07-15T07:25:04.625Z",
-      "updatedAt": "2026-07-15T07:29:36.742Z",
+      "updatedAt": "2026-07-15T09:32:01.790Z",
       "seriesDetailPlan": {
         "articleGoal": "무니코틴를 바로 추천하기 전에 기본 개념과 차이를 먼저 잡아주는 글",
         "searchIntent": "비교형/기초이해형",
@@ -1312,5 +1312,5 @@
       "seriesDetailReadyAt": "2026-07-15T07:25:18.609Z"
     }
   ],
-  "lastUpdated": "2026-07-15T07:29:36.742Z"
+  "lastUpdated": "2026-07-15T09:32:01.790Z"
 }
