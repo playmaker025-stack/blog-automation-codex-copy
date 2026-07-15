@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-54cb0918",
+  "type": "approval_request",
+  "savedAt": "2026-07-15T07:27:19.322Z",
+  "data": {
+    "pipelineId": "pipe-54cb0918",
+    "previousTitle": "",
+    "proposedTitle": "무니코틴 보기 전에 핵심 개념부터 정리",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "검색자의 무니코틴 관련 기초 이해 욕구가 높고, 바로 무니코틴 추천으로 넘어가기 전에 입호흡/폐호흡 등 기본 개념과 혼동 상황을 명확히 정리하는 것이 검색 의도에 부합함. 친근한 설명과 구체적 경험담을 통해 신뢰도를 높이고, 비교 기준을 명확히 제시해 다음 추천 글로 자연스럽게 연결하는 선행 포스팅 역할에 최적화됨. 내부 링크를 활용해 시리즈 흐름을 강화하여 체류시간과 재방문율을 높일 수 있음.\n\n[수정 반영] 항상 너가 써주는 글이 너무 길어\n글이 너무 길어지지 않게 작성해줘",
+    "requestedAt": "2026-07-15T07:27:14.262Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-15T07:27:14.262Z",
+      "modifications": null
+    }
+  }
+}
