@@ -1091,7 +1091,33 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-11T03:18:25.315Z",
       "updatedAt": "2026-07-13T05:57:12.712Z"
+    },
+    {
+      "topicId": "topic-series-mrlr6pw4-4q3o-1",
+      "title": "무니코틴 보기 전에 핵심 개념부터 정리",
+      "description": "메인 키워드 \"무니코틴\"를 바로 정면으로 쓰기 전에 검색자가 먼저 궁금해하는 하위 의도를 다룹니다. 본문에서는 메인 키워드를 억지 반복하지 않고 1~3회 자연스럽게 노출합니다.",
+      "category": "c",
+      "tags": [
+        "무니코틴",
+        "선행포스팅",
+        "키워드빌드업",
+        "개념정리"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "leaf",
+      "seriesId": "series-c-무니코틴-mrlr6pw4-4q3o",
+      "seriesRole": "prelude",
+      "targetMainKeyword": "무니코틴",
+      "sequenceOrder": 1,
+      "prerequisiteTopicIds": [],
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-15T07:25:04.625Z",
+      "updatedAt": "2026-07-15T07:25:04.625Z"
     }
   ],
-  "lastUpdated": "2026-07-15T07:07:57.929Z"
+  "lastUpdated": "2026-07-15T07:25:04.625Z"
 }
