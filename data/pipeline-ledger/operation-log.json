@@ -3402,7 +3402,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-a788be69",
       "at": "2026-07-14T02:33:43.673Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "무니코틴 보기 전에 핵심 개념부터 정리",
+      "proposedTitle": "무니코틴 보기 전에 핵심 개념부터 정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-54cb0918",
+      "at": "2026-07-15T07:26:37.916Z"
     }
   ],
-  "lastUpdated": "2026-07-14T02:33:43.673Z"
+  "lastUpdated": "2026-07-15T07:26:37.916Z"
 }
