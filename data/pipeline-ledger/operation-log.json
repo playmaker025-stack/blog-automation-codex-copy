@@ -3545,7 +3545,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-b59146af",
       "at": "2026-07-16T02:32:47.731Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-series-mrlr6pw4-4q3o-2",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-3b0d1431, ready:post-30fd0f5d / Similar existing title found: 무니코틴 고르기 전에 많이 보는 선택 기준 (ready, 1); 무니코틴 고르기 전에 많이 보는 선택 기준 (ready, 1)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-2a5bcf22",
+      "at": "2026-07-16T02:33:14.385Z"
     }
   ],
-  "lastUpdated": "2026-07-16T02:32:47.731Z"
+  "lastUpdated": "2026-07-16T02:33:14.385Z"
 }
