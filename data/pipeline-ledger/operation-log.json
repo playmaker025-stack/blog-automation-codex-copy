@@ -3435,7 +3435,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-12fddc92",
       "at": "2026-07-16T02:09:21.884Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-series-mrlr6pw4-4q3o-2",
+      "userId": "c",
+      "message": "전략 계약서가 불완전해 writer 실행을 차단합니다: 기존 글과의 중복 위험이 높습니다. — [상세] 도입 패턴 반복 주의: purchase_before_visit / 결론 패턴 반복 주의: handoff_next_article",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-ebbe0dd7",
+      "at": "2026-07-16T02:09:24.193Z"
     }
   ],
-  "lastUpdated": "2026-07-16T02:09:21.884Z"
+  "lastUpdated": "2026-07-16T02:09:24.193Z"
 }
