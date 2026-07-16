@@ -3446,7 +3446,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-ebbe0dd7",
       "at": "2026-07-16T02:09:24.193Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-series-mrlr6pw4-4q3o-2",
+      "userId": "c",
+      "message": "토픽 선택 실패: 현재 다른 작업에서 진행 중인 토픽입니다. 완료 후 다시 시도해 주세요.",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-04bf0d30",
+      "at": "2026-07-16T02:10:11.210Z"
     }
   ],
-  "lastUpdated": "2026-07-16T02:09:24.193Z"
+  "lastUpdated": "2026-07-16T02:10:11.210Z"
 }
