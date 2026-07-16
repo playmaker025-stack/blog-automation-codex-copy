@@ -3622,7 +3622,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-dd15fd5f",
       "at": "2026-07-16T02:39:32.832Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-series-mrlr6pw4-4q3o-4",
+      "userId": "c",
+      "message": "선행 포스팅 미발행: 메인 글 \"무니코틴\" 작성 전 \"무니코틴 고르기 전에 많이 보는 선택 기준\", \"초보자가 무니코틴 시작 전에 자주 놓치는 체크포인트\" 발행이 필요합니다.",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-b47c053b",
+      "at": "2026-07-16T02:41:58.489Z"
     }
   ],
-  "lastUpdated": "2026-07-16T02:39:32.832Z"
+  "lastUpdated": "2026-07-16T02:41:58.489Z"
 }
