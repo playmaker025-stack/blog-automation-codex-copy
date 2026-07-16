@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-12fddc92",
+  "type": "approval_request",
+  "savedAt": "2026-07-16T02:10:01.608Z",
+  "data": {
+    "pipelineId": "pipe-12fddc92",
+    "previousTitle": "",
+    "proposedTitle": "무니코틴 고르기 전에 많이 보는 선택 기준",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "검색자의 무니코틴 관련 기본 궁금증과 선택 기준을 먼저 다루는 선행 포스팅 역할에 맞춰, 무니코틴 키워드를 본문 내 자연스럽게 1~3회 노출하는 전략이다. 최근 인천 부평 지역 전자담배 사용자들의 실제 고민과 경험을 반영해 친근하고 구체적인 설명을 우선하며, 무니코틴 제품 추천 글로 자연스럽게 연결해 시리즈 완성도를 높인다. 반복 키워드와 제목 패턴을 피하고, 비교와 문제 해결 중심의 구조로 네이버 검색 의도에 부합한다.\n\n[수정 반영] 전체글이 너무 길지 않게 작성해줘",
+    "requestedAt": "2026-07-16T02:09:56.157Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-16T02:09:56.157Z",
+      "modifications": null
+    }
+  }
+}
