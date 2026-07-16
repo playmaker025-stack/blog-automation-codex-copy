@@ -1221,10 +1221,10 @@
       "prerequisiteTopicIds": [],
       "feasibility": null,
       "relatedSources": [],
-      "status": "draft",
+      "status": "in-progress",
       "assignedUserId": "c",
       "createdAt": "2026-07-15T07:25:08.506Z",
-      "updatedAt": "2026-07-15T07:25:17.106Z",
+      "updatedAt": "2026-07-16T02:40:33.262Z",
       "seriesDetailPlan": {
         "articleGoal": "무니코틴를 바로 추천하기 전에 초보자가 실제로 헷갈리는 상황을 정리해 주는 글",
         "searchIntent": "문제해결형/초보자가이드형",
@@ -1312,5 +1312,5 @@
       "seriesDetailReadyAt": "2026-07-15T07:25:18.609Z"
     }
   ],
-  "lastUpdated": "2026-07-16T02:30:04.635Z"
+  "lastUpdated": "2026-07-16T02:40:33.262Z"
 }
