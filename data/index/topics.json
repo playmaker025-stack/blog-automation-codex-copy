@@ -1167,10 +1167,10 @@
       "prerequisiteTopicIds": [],
       "feasibility": null,
       "relatedSources": [],
-      "status": "draft",
+      "status": "in-progress",
       "assignedUserId": "c",
       "createdAt": "2026-07-15T07:25:06.543Z",
-      "updatedAt": "2026-07-15T07:25:15.285Z",
+      "updatedAt": "2026-07-16T02:09:58.444Z",
       "seriesDetailPlan": {
         "articleGoal": "무니코틴를 바로 추천하기 전에 선택 기준과 실사용 판단 포인트를 잡아주는 글",
         "searchIntent": "선택기준형",
@@ -1312,5 +1312,5 @@
       "seriesDetailReadyAt": "2026-07-15T07:25:18.609Z"
     }
   ],
-  "lastUpdated": "2026-07-15T09:32:01.790Z"
+  "lastUpdated": "2026-07-16T02:09:58.444Z"
 }
