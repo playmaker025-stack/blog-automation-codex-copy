@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-dd15fd5f",
+  "type": "approval_request",
+  "savedAt": "2026-07-16T02:40:36.139Z",
+  "data": {
+    "pipelineId": "pipe-dd15fd5f",
+    "previousTitle": "",
+    "proposedTitle": "초보자가 무니코틴 시작 전에 자주 놓치는 체크포인트",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "초보자가 무니코틴을 접하기 전 실제로 많이 헷갈리는 상황과 실수 포인트를 중심으로 문제해결형 가이드로 구성해 검색 의도에 부합한다. 메인 키워드를 본문 내 1~3회 자연스럽게 노출하며, 친근하고 정보 중심의 문체를 유지해 기존 발행 스타일과 일치한다. 내부링크로 시리즈 내 핵심 개념 및 선택 기준 글과 자연스럽게 연결해 허브-리프 구조를 완성한다. CTA를 통해 다음 추천 글로 유도해 체류시간과 재방문율을 높일 전략이다.\n\n[수정 반영] 전체글이 너무 길지 않게 작성해줘\n\n[사용자 승인 후 추가 수정 요청]\n",
+    "requestedAt": "2026-07-16T02:40:31.313Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-16T02:40:31.313Z",
+      "modifications": null
+    }
+  }
+}
