@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mrn1y37e",
+      "title": "하복 전담 누수 잡는법 액튐 원인 & 해결방법 - 만수르 전자담배",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6961,
+      "publishedAt": "2026-07-16T05:12:04.791Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mrn1y37e.md"
+    },
+    {
       "sampleId": "published-post-3442dcc2",
       "title": "무니코틴 고르기 전에 핵심 개념부터 정리",
       "category": "c",
@@ -236,5 +245,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-15T09:32:06.357Z"
+  "lastUpdated": "2026-07-16T05:12:11.124Z"
 }
