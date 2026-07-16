@@ -3611,7 +3611,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-be640f50",
       "at": "2026-07-16T02:37:40.174Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "초보자가 무니코틴 시작 전에 자주 놓치는 체크포인트",
+      "proposedTitle": "초보자가 무니코틴 시작 전에 자주 놓치는 체크포인트",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-dd15fd5f",
+      "at": "2026-07-16T02:39:32.832Z"
     }
   ],
-  "lastUpdated": "2026-07-16T02:37:40.174Z"
+  "lastUpdated": "2026-07-16T02:39:32.832Z"
 }
