@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-d436d8f9",
+  "type": "approval_request",
+  "savedAt": "2026-07-16T02:27:24.391Z",
+  "data": {
+    "pipelineId": "pipe-d436d8f9",
+    "previousTitle": "",
+    "proposedTitle": "무니코틴 고르기 전에 많이 보는 선택 기준",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "검색자의 무니코틴 관련 선택 기준에 대한 궁금증을 해소하는 선행 포스팅 역할에 맞춰, 무니코틴을 직접 반복하지 않고 자연스러운 노출을 유지한다. 최근 발행 글의 친근하고 정보 중심 문체를 반영해 실제 경험과 구체적 비교 기준을 중심으로 작성하며, 내부 링크를 활용해 시리즈 흐름을 강화한다. 검색 의도에 부합하는 선택기준형 글로서, AI 브리핑용 핵심 요약과 단계별 목록, 비교표를 포함해 네이버 SEO 점수 90+를 목표로 한다.\n\n[수정 반영] 전체글이 너무 길지 않게 작성해줘\n\n[사용자 승인 후 추가 수정 요청]\n",
+    "requestedAt": "2026-07-16T02:27:20.011Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-16T02:27:20.011Z",
+      "modifications": null
+    }
+  }
+}
