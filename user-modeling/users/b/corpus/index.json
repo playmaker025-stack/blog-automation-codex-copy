@@ -2,6 +2,18 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-c96872ab",
+      "title": "만수동 전자담배 디저트 액상 추천, 스팀랩 돌체 시리즈 집중 리뷰",
+      "category": "direct-run",
+      "tags": [
+        "만수동 전자담배",
+        "디저트 액상 추천"
+      ],
+      "wordCount": 3449,
+      "publishedAt": "2026-07-18T11:19:27.575Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-c96872ab.md"
+    },
+    {
       "sampleId": "published-post-manual-mrki1yl0",
       "title": "구월동 전자담배 입문자가 많이 찾는 액상계열 3종 추천",
       "category": "published-post",
@@ -151,5 +163,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-07-14T10:19:48.264Z"
+  "lastUpdated": "2026-07-18T11:19:35.142Z"
 }
