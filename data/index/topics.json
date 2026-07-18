@@ -1254,7 +1254,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-16T05:12:27.064Z",
       "updatedAt": "2026-07-16T05:12:27.064Z"
+    },
+    {
+      "topicId": "topic-64851d12",
+      "title": "만수동 전자담배 디저트 액상 추천 스팀랩 돌체 시리즈",
+      "description": "메인키워드: 만수동 전자담배 / 서브 키워드: 디저트 액상 추천",
+      "category": "direct-run",
+      "tags": [
+        "만수동 전자담배",
+        "디저트 액상 추천"
+      ],
+      "targetKeyword": "만수동 전자담배",
+      "subKeywords": [
+        "디저트 액상 추천"
+      ],
+      "source": "direct",
+      "targetMainKeyword": "만수동 전자담배",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "b",
+      "createdAt": "2026-07-18T09:16:03.980Z",
+      "updatedAt": "2026-07-18T09:16:03.980Z"
     }
   ],
-  "lastUpdated": "2026-07-16T05:12:27.064Z"
+  "lastUpdated": "2026-07-18T09:16:03.980Z"
 }
