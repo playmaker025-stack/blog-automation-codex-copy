@@ -3655,7 +3655,20 @@
       "errorName": "y",
       "pipelineId": "pipe-dd15fd5f",
       "at": "2026-07-16T02:42:04.506Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수동 전자담배 디저트 액상 추천 스팀랩 돌체 시리즈",
+      "proposedTitle": "만수동 전자담배 디저트 액상 추천, 스팀랩 돌체 시리즈 집중 리뷰",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.8148148148148149,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-a95d40d3",
+      "at": "2026-07-18T09:16:39.573Z"
     }
   ],
-  "lastUpdated": "2026-07-16T02:42:04.506Z"
+  "lastUpdated": "2026-07-18T09:16:39.573Z"
 }
