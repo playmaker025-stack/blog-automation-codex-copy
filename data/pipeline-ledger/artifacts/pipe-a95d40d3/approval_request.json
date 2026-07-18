@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-a95d40d3",
+  "type": "approval_request",
+  "savedAt": "2026-07-18T09:16:45.569Z",
+  "data": {
+    "pipelineId": "pipe-a95d40d3",
+    "previousTitle": "",
+    "proposedTitle": "만수동 전자담배 디저트 액상 추천, 스팀랩 돌체 시리즈 집중 리뷰",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '만수동 전자담배'를 중심축으로 두고, 서브 키워드 '디저트 액상 추천'는 보조 맥락으로 반영했습니다. 만수동 전자담배를 중심으로 지역 매장과 디저트 액상 수요를 정확히 반영하여 검색 의도에 부합한다. 스팀랩 돌체 시리즈를 구체 제품으로 선정해 상세 리뷰와 비교를 제공, 독자가 직접 선택할 수 있도록 돕는다. 친근한 체험 위주 문체와 단계별 가이드, 매장별 상담 팁을 포함해 신뢰도를 높이고 체류시간을 늘릴 수 있다. 마지막으로 다음 주제인 기기 추천으로 자연스러운 내부 링크를 유도해 블로그 허브 역할을 강화한다.",
+    "requestedAt": "2026-07-18T09:16:41.146Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-18T09:16:41.146Z",
+      "modifications": null
+    }
+  }
+}
