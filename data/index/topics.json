@@ -1212,7 +1212,30 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-20T02:16:51.276Z",
       "updatedAt": "2026-07-20T02:16:51.276Z"
+    },
+    {
+      "topicId": "topic-a5d1e8de",
+      "title": "인천 부천 상동 전자담배 코일 이상 증상별 점검과 교체 시기",
+      "description": "부천 상동 지역 전자담배 사용자들을 위한 코일 불량 증상별 점검 방법과 적절한 교체 시기를 상세히 설명합니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "부천",
+        "상동",
+        "전자담배",
+        "코일",
+        "점검"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-20T02:16:53.377Z",
+      "updatedAt": "2026-07-20T02:16:53.377Z"
     }
   ],
-  "lastUpdated": "2026-07-20T02:16:51.276Z"
+  "lastUpdated": "2026-07-20T02:16:53.377Z"
 }
