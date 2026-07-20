@@ -3668,7 +3668,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-a95d40d3",
       "at": "2026-07-18T09:16:39.573Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
+      "proposedTitle": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-4a7c9d21",
+      "at": "2026-07-20T02:19:37.068Z"
     }
   ],
-  "lastUpdated": "2026-07-18T09:16:39.573Z"
+  "lastUpdated": "2026-07-20T02:19:37.068Z"
 }
