@@ -1189,7 +1189,30 @@
       "assignedUserId": "b",
       "createdAt": "2026-07-18T09:16:03.980Z",
       "updatedAt": "2026-07-18T11:19:30.732Z"
+    },
+    {
+      "topicId": "topic-9e025ecf",
+      "title": "인천 부평역 주변 전자담배 액상 구매처 및 인기 맛 비교",
+      "description": "부평역 인근에서 인기 있는 전자담배 액상 구매처와 각 액상의 맛과 향을 비교 분석해드립니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "부평역",
+        "전자담배",
+        "액상",
+        "구매처",
+        "맛비교"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-20T02:16:51.276Z",
+      "updatedAt": "2026-07-20T02:16:51.276Z"
     }
   ],
-  "lastUpdated": "2026-07-20T02:12:27.352Z"
+  "lastUpdated": "2026-07-20T02:16:51.276Z"
 }
