@@ -2,6 +2,22 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-65b33019",
+      "title": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
+      "category": "c",
+      "tags": [
+        "인천",
+        "만수역",
+        "전자담배",
+        "액상추천",
+        "맛선택",
+        "사용자맞춤"
+      ],
+      "wordCount": 2962,
+      "publishedAt": "2026-07-20T03:50:50.305Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-65b33019.md"
+    },
+    {
       "sampleId": "published-post-manual-mrorbz92",
       "title": "발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법!",
       "category": "published-post",
@@ -263,5 +279,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-17T09:50:36.583Z"
+  "lastUpdated": "2026-07-20T03:50:57.927Z"
 }
