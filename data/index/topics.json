@@ -1303,7 +1303,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-20T02:19:01.468Z",
       "updatedAt": "2026-07-20T03:50:53.978Z"
+    },
+    {
+      "topicId": "topic-ecb28828",
+      "title": "가성비 좋은 전자담배의 기준",
+      "description": "메인키워드: 가성비, 전자담배",
+      "category": "direct-run",
+      "tags": [
+        "가성비, 전자담배"
+      ],
+      "targetKeyword": "가성비, 전자담배",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "가성비, 전자담배",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-21T04:57:43.888Z",
+      "updatedAt": "2026-07-21T04:57:43.888Z"
     }
   ],
-  "lastUpdated": "2026-07-20T03:50:53.978Z"
+  "lastUpdated": "2026-07-21T04:57:43.888Z"
 }
