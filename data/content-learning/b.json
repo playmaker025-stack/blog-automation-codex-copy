@@ -2,6 +2,19 @@
   "userId": "b",
   "entries": [
     {
+      "postId": "post-b626b001",
+      "topicId": "topic-27a3249d",
+      "userId": "b",
+      "title": "장수동 전자담배 시원한 멘솔 액상 추천 펠릭스랩 더블라임",
+      "naverPostUrl": "https://blog.naver.com/youferst/224353627929",
+      "evalScore": 66,
+      "wordCount": 2990,
+      "publishedAt": "2026-07-21T12:44:21.880Z",
+      "topicSource": "direct",
+      "contentKind": null,
+      "learnedAt": "2026-07-21T12:44:27.725Z"
+    },
+    {
       "postId": "post-c96872ab",
       "topicId": "topic-64851d12",
       "userId": "b",
@@ -67,5 +80,5 @@
       "learnedAt": "2026-07-04T11:06:13.483Z"
     }
   ],
-  "updatedAt": "2026-07-18T11:19:32.131Z"
+  "updatedAt": "2026-07-21T12:44:27.725Z"
 }
