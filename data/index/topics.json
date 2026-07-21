@@ -1322,7 +1322,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-21T04:57:43.888Z",
       "updatedAt": "2026-07-21T05:02:36.715Z"
+    },
+    {
+      "topicId": "topic-27a3249d",
+      "title": "장수동 전자담배 시원한 멘솔 액상 추천 펠릭스랩 더블라임",
+      "description": "메인키워드: 장수동 전자담배 / 서브 키워드: 펠릭스랩 더블라임",
+      "category": "direct-run",
+      "tags": [
+        "장수동 전자담배",
+        "펠릭스랩 더블라임"
+      ],
+      "targetKeyword": "장수동 전자담배",
+      "subKeywords": [
+        "펠릭스랩 더블라임"
+      ],
+      "source": "direct",
+      "targetMainKeyword": "장수동 전자담배",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "b",
+      "createdAt": "2026-07-21T11:04:29.467Z",
+      "updatedAt": "2026-07-21T11:04:29.467Z"
     }
   ],
-  "lastUpdated": "2026-07-21T05:02:36.715Z"
+  "lastUpdated": "2026-07-21T11:04:29.467Z"
 }
