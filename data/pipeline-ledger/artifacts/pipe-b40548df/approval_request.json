@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-b40548df",
+  "type": "approval_request",
+  "savedAt": "2026-07-21T04:58:38.583Z",
+  "data": {
+    "pipelineId": "pipe-b40548df",
+    "previousTitle": "",
+    "proposedTitle": "가성비 좋은 전자담배의 기준: 현명한 선택 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '가성비, 전자담배'를 중심축으로 반영했습니다. 최근 인천 부평, 만수역 지역 전자담배 사용자들의 가성비 관련 검색과 질문이 많아, 지역 밀착형 경험과 구체적 비교를 중심으로 한 글이 필요함. 기존 발행 글들의 평균 평가가 63점으로 개선 여지가 있어, 본 전략은 친근하면서도 정보 중심 문체로 가성비 판단 기준을 명확히 제시하고, 실제 사용 경험을 녹여 신뢰도를 높임. 허브-리프 구조를 유지하며, 가성비 기준(허브)과 추천 제품 및 액상 가이드(리프)를 자연스럽게 연결해 체류시간과 재방문율을 높임.",
+    "requestedAt": "2026-07-21T04:58:33.880Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-21T04:58:33.880Z",
+      "modifications": null
+    }
+  }
+}
