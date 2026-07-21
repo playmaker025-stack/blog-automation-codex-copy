@@ -3679,7 +3679,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-4a7c9d21",
       "at": "2026-07-20T02:19:37.068Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "가성비 좋은 전자담배의 기준",
+      "proposedTitle": "가성비 좋은 전자담배의 기준: 현명한 선택 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5714285714285714,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-b40548df",
+      "at": "2026-07-21T04:58:17.210Z"
     }
   ],
-  "lastUpdated": "2026-07-20T02:19:37.068Z"
+  "lastUpdated": "2026-07-21T04:58:17.210Z"
 }
