@@ -3690,7 +3690,20 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-b40548df",
       "at": "2026-07-21T04:58:17.210Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "장수동 전자담배 시원한 멘솔 액상 추천 펠릭스랩 더블라임",
+      "proposedTitle": "장수동 전자담배 시원한 멘솔 액상 추천, 펠릭스랩 더블라임 집중 리뷰",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.8275862068965517,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-1505884c",
+      "at": "2026-07-21T11:05:04.022Z"
     }
   ],
-  "lastUpdated": "2026-07-21T04:58:17.210Z"
+  "lastUpdated": "2026-07-21T11:05:04.022Z"
 }
