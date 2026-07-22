@@ -2,6 +2,19 @@
   "userId": "c",
   "entries": [
     {
+      "postId": "post-f4873ead",
+      "topicId": "topic-ecb28828",
+      "userId": "c",
+      "title": "가성비 좋은 전자담배의 기준",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224354324677",
+      "evalScore": 52,
+      "wordCount": 2666,
+      "publishedAt": "2026-07-22T05:22:46.470Z",
+      "topicSource": "direct",
+      "contentKind": null,
+      "learnedAt": "2026-07-22T05:22:51.455Z"
+    },
+    {
       "postId": "post-65b33019",
       "topicId": "topic-de75afd6",
       "userId": "c",
@@ -197,5 +210,5 @@
       "learnedAt": "2026-06-29T07:52:25.672Z"
     }
   ],
-  "updatedAt": "2026-07-20T03:50:55.344Z"
+  "updatedAt": "2026-07-22T05:22:51.455Z"
 }
