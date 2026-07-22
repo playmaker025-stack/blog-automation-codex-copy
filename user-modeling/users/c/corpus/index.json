@@ -2,6 +2,17 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-f4873ead",
+      "title": "가성비 좋은 전자담배의 기준",
+      "category": "direct-run",
+      "tags": [
+        "가성비, 전자담배"
+      ],
+      "wordCount": 2666,
+      "publishedAt": "2026-07-22T05:22:46.470Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-f4873ead.md"
+    },
+    {
       "sampleId": "published-post-65b33019",
       "title": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
       "category": "c",
@@ -279,5 +290,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-20T03:50:57.927Z"
+  "lastUpdated": "2026-07-22T05:22:54.678Z"
 }
