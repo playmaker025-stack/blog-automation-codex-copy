@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-dbb7a914",
+  "type": "approval_request",
+  "savedAt": "2026-07-22T03:30:46.892Z",
+  "data": {
+    "pipelineId": "pipe-dbb7a914",
+    "previousTitle": "",
+    "proposedTitle": "가성비 좋은 전자담배의 기준: 현명한 선택 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '가성비, 전자담배'를 중심축으로 반영했습니다. 검색자의 핵심 의도인 '가성비 좋은 전자담배'를 중심으로 초기 비용과 유지비용, 내구성, 사용자 경험 등 구체적이고 실용적인 판단 기준을 제시한다. 인천 부평 지역을 포함한 지역 맞춤형 추천으로 로컬 검색 최적화를 도모하며, 기존 발행 글과 중복을 피하면서도 허브-리프 구조를 활용해 내부 링크를 강화한다. 친근한 문체와 직접 사용 경험을 녹여내어 신뢰도를 높이고, 단계별 체크리스트와 문제 해결법으로 체류시간과 만족도를 극대화한다.\n\n[사용자 승인 후 추가 수정 요청]\n",
+    "requestedAt": "2026-07-22T03:30:41.203Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-22T03:30:41.203Z",
+      "modifications": null
+    }
+  }
+}
