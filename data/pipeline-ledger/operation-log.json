@@ -3703,7 +3703,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-1505884c",
       "at": "2026-07-21T11:05:04.022Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-ecb28828",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-28bc65ed",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-d3a8a173",
+      "at": "2026-07-22T03:25:02.630Z"
     }
   ],
-  "lastUpdated": "2026-07-21T11:05:04.022Z"
+  "lastUpdated": "2026-07-22T03:25:02.630Z"
 }
