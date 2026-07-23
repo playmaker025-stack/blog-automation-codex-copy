@@ -2,6 +2,18 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-1191adb8",
+      "title": "전담 액상 니코틴 종류와 건강 영향 분석",
+      "category": "direct-run",
+      "tags": [
+        "니코틴 종류",
+        "건강 영향"
+      ],
+      "wordCount": 2637,
+      "publishedAt": "2026-07-23T05:42:25.716Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-1191adb8.md"
+    },
+    {
       "sampleId": "published-post-f4873ead",
       "title": "가성비 좋은 전자담배의 기준",
       "category": "direct-run",
@@ -290,5 +302,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-22T05:22:54.678Z"
+  "lastUpdated": "2026-07-23T05:42:32.870Z"
 }
