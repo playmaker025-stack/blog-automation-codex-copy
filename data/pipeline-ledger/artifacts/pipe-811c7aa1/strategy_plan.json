@@ -1,7 +1,7 @@
 {
   "pipelineId": "pipe-811c7aa1",
   "type": "strategy_plan",
-  "savedAt": "2026-07-23T01:56:29.184Z",
+  "savedAt": "2026-07-23T01:56:53.757Z",
   "data": {
     "title": "인천 부평 전자담배 액상별 니코틴 함량과 건강 영향 분석",
     "outline": [
@@ -63,7 +63,110 @@
       "니코틴 건강 영향"
     ],
     "rationale": "인천 부평 지역 전자담배 액상별 니코틴 함량과 건강 영향에 대한 구체적이고 실용적인 정보를 제공하여 지역 사용자들의 검색 의도를 충족한다. 최근 발행 글들의 키워드와 구조를 반영해 액상별 니코틴 함량 비교, 건강 영향 분석, 선택 기준, 문제 해결법을 체계적으로 다룬다. 친근한 문체와 실제 경험 중심 서술로 신뢰도를 높이고, 허브-리프 구조를 활용해 관련 글로 자연스러운 내부 링크 유도 가능하다.",
-    "corpusSummary": null,
+    "corpusSummary": {
+      "userId": "c",
+      "selectedCount": 5,
+      "styleProfile": {
+        "dominantTone": "friendly",
+        "avgWordCount": 3090,
+        "signatureExpressions": [],
+        "structurePattern": "서술형 (자연스러운 단락)",
+        "openingPattern": "주제 직접 서술로 시작"
+      },
+      "exemplarExcerpts": [
+        {
+          "sampleId": "published-post-65b33019",
+          "title": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
+          "excerpt": "만수역 전자담배 액상 추천을 원하는 분이라면 결론은 꽤 단순합니다. 역 근처에서 반응이 가장 안정적인 쪽은 과일 아이스 계열 이었고 처음 고를 때는 브랜드보다는 단맛, 쿨링감, 목넘김 순서로 취향을 정하는 편이 실패가 적었습니다. 직접 써봤더니 같은 망고 계열도 쿨링이 센 제품은 3일 정도 지나면 피로감이 오고 은은한 타입은 일주일 넘게 데일리로 쓰기 편했습니다. 인천 전자담배 액상 매장에서 실제로 많이 보이는 라인업은 과일,",
+          "styleNotes": "tone=professional, contentKind=leaf, category=c"
+        },
+        {
+          "sampleId": "published-post-801b023b",
+          "title": "전자담배 관리법 : 액상 보관과 기기 청소 기준 총정리",
+          "excerpt": "전자담배 관리법은 복잡하게 외우는 것보다 25도 이하 보관, 직사광선 차단, 접점은 팟 교체 때마다 청소 이 3가지만 먼저 지켜도 문제를 크게 줄일 수 있습니다. 많이들 묻는 탄맛, 흡입 저항 증가, 액튐은 대체로 \"점검할 타이밍\"으로 보면 됩니다. 반대로 코일 내부는 닦아서 살리는 영역이 아니라 교체를 판단하는 영역에 더 가깝고 팟 안에 액상을 남긴 채 오래 두면 과유입과 누수가 빨라질 수 있습니다. 오늘은 가볍게 이 순서로",
+          "styleNotes": "tone=professional, contentKind=hub, category=c"
+        },
+        {
+          "sampleId": "published-post-6de3673d",
+          "title": "인천 부천 상동 전자담배 코일 관리와 교체 시기 총정리",
+          "excerpt": "전자담배 코일 관리는 탄 맛이 날 때만 하는 게 아니라 보통 7일 14일 사용 주기와 액상 색 변화, 흡입감 변화를 같이 보고 판단하는 게 가장 정확합니다. 특히 단맛이 강한 액상을 자주 쓰면 같은 코일도 3 5일 정도 더 빨리 성능이 떨어지는 경우가 많습니다. 부천 상동 전자담배 매장 쪽에서 가장 많이 듣는 질문이 \"기기가 고장인지, 코일만 바꾸면 되는지\" 인데요 결론부터 말하면 탄 맛, 액상 튐, 답답한 흡입감, 누수 중에",
+          "styleNotes": "tone=professional, contentKind=hub, category=c"
+        },
+        {
+          "sampleId": "published-post-928f746e",
+          "title": "젤로 전자담배 불량 증상 점검과 해결법 (부평전자담배)",
+          "excerpt": "젤로 전자담배 불량은 기기 자체 고장보다 팟 체결, 접점 오염, 액상 주입 습관, 소모품 수명 때문에 생기는 경우가 더 많습니다. 제가 부평에서 실제로 본 기준으로는 비슷한 문의 10건 중 6건 정도는 5분 안쪽 자가 점검으로 원인이 갈렸고 팟이나 케이블만 바꿔도 해결되는 일이 꽤 있었습니다. 특히 전원은 들어오는데 흡입이 안 되거나 탄맛이 갑자기 올라오거나 액상이 반복해서 새는 증상은 정상 마모와 비정상 신호를 먼저 구분해야",
+          "styleNotes": "tone=professional, contentKind=hub, category=c"
+        },
+        {
+          "sampleId": "published-post-14a4e3aa",
+          "title": "인천 전자담배 액상별 맛과 향 차이 완벽 가이드",
+          "excerpt": "액상 맛이 다르게 느껴지는 이유부터 전자담배 액상 맛 차이는 단순히 복숭아냐 디저트냐로 끝나지 않습니다. 실제로는 향 계열, 쿨링 강도, 니코틴 농도가 겹쳐서 최종 체감이 만들어져요. 향이 같아도 쿨링이 강하면 더 가볍고 시원하게 느껴졌고 니코틴이 높으면 목 타격감 때문에 맛이 더 진하다고 느껴지는 경우도 있었습니다. 향은 마음에 드는데 너무 차갑거나 반대로 맛은 괜찮은데 심심하게 느껴지는 경우가 많이 있었습니다. 향 계열별로",
+          "styleNotes": "tone=professional, contentKind=hub, category=c"
+        }
+      ],
+      "representativeExcerpts": [
+        "전자담배를 고를 때 \"싼 모델 하나 사면 끝 아닌가요?\" 라는 질문을 많이 듣습니다. 가성비 좋은 전담을 제대로 보려면 기기값 3 5만원대만 볼 게 아니라 코일·팟 교체비, 한달 사용량, 누수 여부까지 같이 계산해야 후회가 적습니다. 한 달 기준으로 보면 초보자 유지비는 대체로 2 6만원 사이에서 갈립니다. 처음 구매가 저렴해도 팟 수명이 짧거나 누수가 반복되면 오히려 더 자주 바꾸게 됩니다. 그래서 오늘은 이렇게 보시면 되는",
+        "만수역 전자담배 액상 추천을 원하는 분이라면 결론은 꽤 단순합니다. 역 근처에서 반응이 가장 안정적인 쪽은 과일 아이스 계열 이었고 처음 고를 때는 브랜드보다는 단맛, 쿨링감, 목넘김 순서로 취향을 정하는 편이 실패가 적었습니다. 직접 써봤더니 같은 망고 계열도 쿨링이 센 제품은 3일 정도 지나면 피로감이 오고 은은한 타입은 일주일 넘게 데일리로 쓰기 편했습니다. 인천 전자담배 액상 매장에서 실제로 많이 보이는 라인업은 과일,",
+        "발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법! 발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소",
+        "하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기",
+        "하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기"
+      ],
+      "retrievalStrategy": "exemplar_index",
+      "staleWarnings": [],
+      "scoringBreakdown": [
+        {
+          "sampleId": "published-post-65b33019",
+          "finalScore": 0.707,
+          "components": {
+            "relevance": 0.67,
+            "recency": 0.98,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-801b023b",
+          "finalScore": 0.694,
+          "components": {
+            "relevance": 0.68,
+            "recency": 0.91,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-6de3673d",
+          "finalScore": 0.683,
+          "components": {
+            "relevance": 0.64,
+            "recency": 0.93,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-928f746e",
+          "finalScore": 0.681,
+          "components": {
+            "relevance": 0.63,
+            "recency": 0.93,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-14a4e3aa",
+          "finalScore": 0.668,
+          "components": {
+            "relevance": 0.61,
+            "recency": 0.91,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        }
+      ]
+    },
     "publicationLearning": {
       "source": "writing-profile",
       "totalEntries": 57,
