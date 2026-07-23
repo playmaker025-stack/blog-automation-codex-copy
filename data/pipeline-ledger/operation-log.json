@@ -3736,7 +3736,20 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-811c7aa1",
       "at": "2026-07-23T01:56:31.817Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "니코틴 종류와 건강 영향 분석",
+      "proposedTitle": "니코틴 종류와 건강 영향 분석: 전자담배 사용자 필독 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.48,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-62ab6a24",
+      "at": "2026-07-23T02:04:07.679Z"
     }
   ],
-  "lastUpdated": "2026-07-23T01:56:31.817Z"
+  "lastUpdated": "2026-07-23T02:04:07.679Z"
 }
