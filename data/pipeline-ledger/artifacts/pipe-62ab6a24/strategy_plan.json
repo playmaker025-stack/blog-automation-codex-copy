@@ -1,7 +1,7 @@
 {
   "pipelineId": "pipe-62ab6a24",
   "type": "strategy_plan",
-  "savedAt": "2026-07-23T02:04:06.008Z",
+  "savedAt": "2026-07-23T02:04:27.660Z",
   "data": {
     "title": "니코틴 종류와 건강 영향 분석: 전자담배 사용자 필독 가이드",
     "outline": [
@@ -50,7 +50,110 @@
       "건강 영향"
     ],
     "rationale": "직접 입력 토픽이므로 메인 키워드 '니코틴 종류'를 중심축으로 두고, 서브 키워드 '건강 영향'는 보조 맥락으로 반영했습니다. 사용자의 최근 발행 패턴과 평가 점수를 고려해, 친근하면서도 정보 중심의 설명형 문체를 유지한다. 메인 키워드 '니코틴 종류'를 중심으로 글 전체를 구성하고, 서브 키워드 '건강 영향'은 보조적 맥락으로 활용한다. 독자가 니코틴 종류별 특징과 건강 영향을 빠르게 비교하고 이해할 수 있도록 목차형 요약과 비교표, FAQ 형식을 도입해 체류시간을 높인다. 실제 사용자 경험과 지역 매장 추천 사례를 포함해 인간 지문을 강화하고, 재방문 유도용 내부 링크(허브 및 리프 구조)를 자연스럽게 연결한다. 네이버 검색 의도에 부합하는 정보성과 친근함을 균형 있게 반영하여 90점 이상 SEO 점수를 목표로 한다.",
-    "corpusSummary": null,
+    "corpusSummary": {
+      "userId": "c",
+      "selectedCount": 5,
+      "styleProfile": {
+        "dominantTone": "friendly",
+        "avgWordCount": 5114,
+        "signatureExpressions": [],
+        "structurePattern": "질문-답변형",
+        "openingPattern": "주제 직접 서술로 시작"
+      },
+      "exemplarExcerpts": [
+        {
+          "sampleId": "published-post-manual-mrorbz92",
+          "title": "발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법!",
+          "excerpt": "발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법! 발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 ",
+          "styleNotes": "tone=professional"
+        },
+        {
+          "sampleId": "published-post-manual-mrn1yh1x",
+          "title": "하복 전담 누수 잡는법 액튐 원인 & 해결방법 - 만수르 전자담배",
+          "excerpt": "하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기",
+          "styleNotes": "tone=professional"
+        },
+        {
+          "sampleId": "published-post-manual-mrn1y37e",
+          "title": "하복 전담 누수 잡는법 액튐 원인 & 해결방법 - 만수르 전자담배",
+          "excerpt": "하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기",
+          "styleNotes": "tone=professional"
+        },
+        {
+          "sampleId": "published-post-65b33019",
+          "title": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
+          "excerpt": "만수역 전자담배 액상 추천을 원하는 분이라면 결론은 꽤 단순합니다. 역 근처에서 반응이 가장 안정적인 쪽은 과일 아이스 계열 이었고 처음 고를 때는 브랜드보다는 단맛, 쿨링감, 목넘김 순서로 취향을 정하는 편이 실패가 적었습니다. 직접 써봤더니 같은 망고 계열도 쿨링이 센 제품은 3일 정도 지나면 피로감이 오고 은은한 타입은 일주일 넘게 데일리로 쓰기 편했습니다. 인천 전자담배 액상 매장에서 실제로 많이 보이는 라인업은 과일,",
+          "styleNotes": "tone=professional, contentKind=leaf, category=c"
+        },
+        {
+          "sampleId": "published-post-f4873ead",
+          "title": "가성비 좋은 전자담배의 기준",
+          "excerpt": "전자담배를 고를 때 \"싼 모델 하나 사면 끝 아닌가요?\" 라는 질문을 많이 듣습니다. 가성비 좋은 전담을 제대로 보려면 기기값 3 5만원대만 볼 게 아니라 코일·팟 교체비, 한달 사용량, 누수 여부까지 같이 계산해야 후회가 적습니다. 한 달 기준으로 보면 초보자 유지비는 대체로 2 6만원 사이에서 갈립니다. 처음 구매가 저렴해도 팟 수명이 짧거나 누수가 반복되면 오히려 더 자주 바꾸게 됩니다. 그래서 오늘은 이렇게 보시면 되는",
+          "styleNotes": "tone=professional, category=direct-run"
+        }
+      ],
+      "representativeExcerpts": [
+        "전자담배를 고를 때 \"싼 모델 하나 사면 끝 아닌가요?\" 라는 질문을 많이 듣습니다. 가성비 좋은 전담을 제대로 보려면 기기값 3 5만원대만 볼 게 아니라 코일·팟 교체비, 한달 사용량, 누수 여부까지 같이 계산해야 후회가 적습니다. 한 달 기준으로 보면 초보자 유지비는 대체로 2 6만원 사이에서 갈립니다. 처음 구매가 저렴해도 팟 수명이 짧거나 누수가 반복되면 오히려 더 자주 바꾸게 됩니다. 그래서 오늘은 이렇게 보시면 되는",
+        "만수역 전자담배 액상 추천을 원하는 분이라면 결론은 꽤 단순합니다. 역 근처에서 반응이 가장 안정적인 쪽은 과일 아이스 계열 이었고 처음 고를 때는 브랜드보다는 단맛, 쿨링감, 목넘김 순서로 취향을 정하는 편이 실패가 적었습니다. 직접 써봤더니 같은 망고 계열도 쿨링이 센 제품은 3일 정도 지나면 피로감이 오고 은은한 타입은 일주일 넘게 데일리로 쓰기 편했습니다. 인천 전자담배 액상 매장에서 실제로 많이 보이는 라인업은 과일,",
+        "발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법! 발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소",
+        "하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기",
+        "하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 하복 전담 누수 잡는법 액튐 원인 & 해결방법 만수르 전자담배 : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기"
+      ],
+      "retrievalStrategy": "exemplar_index",
+      "staleWarnings": [],
+      "scoringBreakdown": [
+        {
+          "sampleId": "published-post-manual-mrorbz92",
+          "finalScore": 0.669,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.96,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mrn1yh1x",
+          "finalScore": 0.667,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.95,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mrn1y37e",
+          "finalScore": 0.667,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.95,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-65b33019",
+          "finalScore": 0.662,
+          "components": {
+            "relevance": 0.67,
+            "recency": 0.98,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-f4873ead",
+          "finalScore": 0.651,
+          "components": {
+            "relevance": 0.52,
+            "recency": 0.99,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        }
+      ]
+    },
     "publicationLearning": {
       "source": "writing-profile",
       "totalEntries": 57,
