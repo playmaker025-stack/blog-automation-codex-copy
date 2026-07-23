@@ -3725,7 +3725,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-dbb7a914",
       "at": "2026-07-22T03:25:38.209Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 부평 전자담배 액상별 니코틴 함량과 건강 영향 분석",
+      "proposedTitle": "인천 부평 전자담배 액상별 니코틴 함량과 건강 영향 분석",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-811c7aa1",
+      "at": "2026-07-23T01:56:31.817Z"
     }
   ],
-  "lastUpdated": "2026-07-22T03:25:38.209Z"
+  "lastUpdated": "2026-07-23T01:56:31.817Z"
 }
