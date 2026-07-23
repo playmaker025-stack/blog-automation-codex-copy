@@ -1344,7 +1344,30 @@
       "assignedUserId": "b",
       "createdAt": "2026-07-21T11:04:29.467Z",
       "updatedAt": "2026-07-21T12:44:26.128Z"
+    },
+    {
+      "topicId": "topic-498ebd71",
+      "title": "인천 부평 전자담배 액상별 니코틴 함량과 건강 영향 분석",
+      "description": "인천 부평 지역에서 인기 있는 전자담배 액상별 니코틴 함량과 그에 따른 건강 영향을 상세히 분석합니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "부평",
+        "전자담배",
+        "액상",
+        "니코틴",
+        "건강"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-23T01:55:53.924Z",
+      "updatedAt": "2026-07-23T01:55:53.924Z"
     }
   ],
-  "lastUpdated": "2026-07-22T05:22:50.315Z"
+  "lastUpdated": "2026-07-23T01:55:53.924Z"
 }
