@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mryqqt28",
+      "title": "더위를 날려줄 시원한 입호흡 액상 추천!",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6002,
+      "publishedAt": "2026-07-24T09:31:43.669Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mryqqt28.md"
+    },
+    {
       "sampleId": "published-post-1191adb8",
       "title": "전담 액상 니코틴 종류와 건강 영향 분석",
       "category": "direct-run",
@@ -302,5 +311,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-23T05:42:32.870Z"
+  "lastUpdated": "2026-07-24T09:31:49.709Z"
 }
