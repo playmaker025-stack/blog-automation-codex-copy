@@ -3760,7 +3760,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-27b990f9",
       "at": "2026-07-24T02:07:49.907Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평 전자담배 처음 방문하면 받는 상담",
+      "proposedTitle": "부평 전자담배 처음 방문하면 받는 상담 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.7619047619047619,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-0447d82f",
+      "at": "2026-07-24T02:08:46.980Z"
     }
   ],
-  "lastUpdated": "2026-07-24T02:07:49.907Z"
+  "lastUpdated": "2026-07-24T02:08:46.980Z"
 }
