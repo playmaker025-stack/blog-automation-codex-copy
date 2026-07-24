@@ -73,10 +73,10 @@
       "tags": [],
       "feasibility": null,
       "relatedSources": [],
-      "status": "in-progress",
+      "status": "draft",
       "assignedUserId": "a",
       "createdAt": "2026-04-02T07:01:19.418Z",
-      "updatedAt": "2026-07-24T02:10:43.651Z"
+      "updatedAt": "2026-07-24T02:14:27.315Z"
     },
     {
       "topicId": "topic-afccca09",
@@ -1391,5 +1391,5 @@
       "updatedAt": "2026-07-23T05:42:28.598Z"
     }
   ],
-  "lastUpdated": "2026-07-24T02:10:43.651Z"
+  "lastUpdated": "2026-07-24T02:14:27.315Z"
 }
