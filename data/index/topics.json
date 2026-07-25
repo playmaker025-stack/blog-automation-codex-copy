@@ -1433,7 +1433,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-25T08:50:00.146Z",
       "updatedAt": "2026-07-25T08:50:00.146Z"
+    },
+    {
+      "topicId": "topic-466b0341",
+      "title": "인천 인근 전기차 충전소 위치와 전자담배 충전기 활용법",
+      "description": "인천 인근 전기차 충전소 정보를 제공하고, 전자담배 충전기와의 차이점 및 활용법을 설명합니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "전기차충전소",
+        "전자담배충전기",
+        "인근정보",
+        "활용법"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-25T08:50:01.971Z",
+      "updatedAt": "2026-07-25T08:50:01.971Z"
     }
   ],
-  "lastUpdated": "2026-07-25T08:50:00.146Z"
+  "lastUpdated": "2026-07-25T08:50:01.971Z"
 }
