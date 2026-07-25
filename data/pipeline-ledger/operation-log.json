@@ -3771,7 +3771,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-0447d82f",
       "at": "2026-07-24T02:08:46.980Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 만수역 전자담배 코일 문제 해결과 교체 방법 안내",
+      "proposedTitle": "인천 만수역 전자담배 코일 문제 해결과 교체 방법 안내",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-853a4155",
+      "at": "2026-07-25T08:58:07.999Z"
     }
   ],
-  "lastUpdated": "2026-07-24T02:08:46.980Z"
+  "lastUpdated": "2026-07-25T08:58:07.999Z"
 }
