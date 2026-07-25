@@ -1320,7 +1320,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-25T08:57:29.859Z",
       "updatedAt": "2026-07-25T09:02:19.500Z"
+    },
+    {
+      "topicId": "topic-b131b6c8",
+      "title": "전자담배 코일은 언제 갈아야 할까?",
+      "description": "메인키워드: 코일 언제",
+      "category": "direct-run",
+      "tags": [
+        "코일 언제"
+      ],
+      "targetKeyword": "코일 언제",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "코일 언제",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-25T09:27:59.431Z",
+      "updatedAt": "2026-07-25T09:27:59.431Z"
     }
   ],
-  "lastUpdated": "2026-07-25T09:02:19.500Z"
+  "lastUpdated": "2026-07-25T09:27:59.431Z"
 }
