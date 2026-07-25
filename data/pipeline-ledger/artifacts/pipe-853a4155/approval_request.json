@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-853a4155",
+  "type": "approval_request",
+  "savedAt": "2026-07-25T08:58:34.053Z",
+  "data": {
+    "pipelineId": "pipe-853a4155",
+    "previousTitle": "",
+    "proposedTitle": "인천 만수역 전자담배 코일 문제 해결과 교체 방법 안내",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수역 인근 전자담배 사용자들이 자주 겪는 코일 문제를 중심으로 문제 상황별 점검법과 교체 방법을 구체적으로 안내하는 글이 검색 의도에 부합한다. 친근하고 정보 중심의 문체를 유지하며, 실제 사용자 경험과 지역 전문점 정보를 포함해 신뢰도를 높인다. 허브 주제인 '전자담배 코일 문제'와 리프 주제인 '전자담배 코일 추천'을 내부 링크로 연결해 블로그 체류시간과 검색 노출을 극대화한다.",
+    "requestedAt": "2026-07-25T08:58:29.424Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-25T08:58:29.424Z",
+      "modifications": null
+    }
+  }
+}
