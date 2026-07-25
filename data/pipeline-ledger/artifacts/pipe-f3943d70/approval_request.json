@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-f3943d70",
+  "type": "approval_request",
+  "savedAt": "2026-07-25T09:30:51.967Z",
+  "data": {
+    "pipelineId": "pipe-f3943d70",
+    "previousTitle": "",
+    "proposedTitle": "전자담배 코일은 언제 갈아야 할까? 사용 시기와 교체 기준 완벽 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '코일 언제'를 중심축으로 반영했습니다. 사용자 프로필과 최근 발행 글 스타일에 맞춰 친근하지만 정보 중심의 설명형 문장으로 구성. 메인 키워드 '코일 언제'를 도입부와 핵심 문단에 자연스럽게 반복하며, 검색자가 바로 비교하고 결정할 수 있도록 문제, 기준, 선택지를 순서대로 풀어냄. 인천 부평 지역을 중심으로 한 로컬 매장 추천으로 지역성 강화. 상위 노출 글들의 공통점인 명확한 교체 기준과 실제 경험담을 반영해 신뢰도와 체류시간을 높임.",
+    "requestedAt": "2026-07-25T09:30:46.923Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-25T09:30:46.923Z",
+      "modifications": null
+    }
+  }
+}
