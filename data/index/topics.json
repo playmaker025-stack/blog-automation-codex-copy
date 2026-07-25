@@ -1298,7 +1298,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-23T02:03:43.435Z",
       "updatedAt": "2026-07-23T05:42:28.598Z"
+    },
+    {
+      "topicId": "topic-bfb2788f",
+      "title": "인천 만수역 전자담배 코일 문제 해결과 교체 방법 안내",
+      "description": "만수역 인근 사용자들이 자주 겪는 전자담배 코일 문제 상황별 점검법과 교체 시기를 자세히 설명합니다.",
+      "category": "c",
+      "tags": [
+        "만수역",
+        "전자담배",
+        "코일교체",
+        "문제해결",
+        "사용자가이드"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-25T08:57:29.859Z",
+      "updatedAt": "2026-07-25T08:57:29.859Z"
     }
   ],
-  "lastUpdated": "2026-07-25T08:51:05.532Z"
+  "lastUpdated": "2026-07-25T08:57:29.859Z"
 }
