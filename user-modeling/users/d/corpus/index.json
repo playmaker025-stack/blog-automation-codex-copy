@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-ms1fi6e8",
+      "title": "전자담배 충전하면서 사용해도 괜찮을까?(feat.아머미니)",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6418,
+      "publishedAt": "2026-07-26T06:40:24.724Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-ms1fi6e8.md"
+    },
+    {
       "sampleId": "published-post-manual-mryvhfci",
       "title": "전자담배 배터리가 빨리 닳는 이유",
       "category": "published-post",
@@ -303,5 +312,5 @@
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-06.md"
     }
   ],
-  "lastUpdated": "2026-07-24T11:44:31.441Z"
+  "lastUpdated": "2026-07-26T06:40:30.587Z"
 }
