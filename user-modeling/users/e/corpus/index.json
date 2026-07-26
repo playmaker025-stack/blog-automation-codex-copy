@@ -2,6 +2,15 @@
   "userId": "e",
   "samples": [
     {
+      "sampleId": "published-post-manual-ms1qobk6",
+      "title": "부평시청역 전자담배 오랜만에 입호흡 디저트액상 나왔슴다",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6347,
+      "publishedAt": "2026-07-26T11:53:11.918Z",
+      "filePath": "user-modeling/users/e/corpus/samples/published-post-manual-ms1qobk6.md"
+    },
+    {
       "sampleId": "published-post-manual-mrly9f82",
       "title": "만수동 전자담배 멘솔 과일맛 일회용 전담 도조 오팔",
       "category": "published-post",
@@ -128,5 +137,5 @@
       "filePath": "user-modeling/users/e/corpus/samples/reference-e-05.md"
     }
   ],
-  "lastUpdated": "2026-07-15T10:41:20.215Z"
+  "lastUpdated": "2026-07-26T11:53:18.010Z"
 }
