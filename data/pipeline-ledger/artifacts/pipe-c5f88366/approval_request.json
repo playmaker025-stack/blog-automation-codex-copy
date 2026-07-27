@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-c5f88366",
+  "type": "approval_request",
+  "savedAt": "2026-07-27T05:01:39.083Z",
+  "data": {
+    "pipelineId": "pipe-c5f88366",
+    "previousTitle": "",
+    "proposedTitle": "전자담배 코일은 언제 갈아야 할까? 정확한 교체 시기와 체크포인트",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '코일 언제'를 중심축으로 반영했습니다. 사용자 검색 의도인 '코일 언제'에 정확히 부합하도록 교체 시기와 상태 점검법을 중심으로 구성했다. 도입부에서 핵심 질문에 직접 답변하며, 실제 사용 경험과 구체적 체크포인트를 포함해 신뢰도를 높였다. 문제 발생 시 대처법과 관리 팁을 제시해 독자가 바로 활용할 수 있도록 했다. 마무리에서 다음 주제로 자연스럽게 연결해 체류시간과 재방문을 유도한다. 기존 발행 글 구조인 hub, leaf를 반영해 허브 글로서 역할에 적합하다.\n\n[사용자 승인 후 추가 수정 요청]\n",
+    "requestedAt": "2026-07-27T05:01:33.874Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-27T05:01:33.874Z",
+      "modifications": null
+    }
+  }
+}
