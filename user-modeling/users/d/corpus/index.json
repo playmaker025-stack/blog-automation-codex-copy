@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-ms384q6y",
+      "title": "전자담배는 흡입을 오래 할수록 무화량이 많아질까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6392,
+      "publishedAt": "2026-07-27T12:49:31.449Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-ms384q6y.md"
+    },
+    {
       "sampleId": "published-post-manual-ms1fi6e8",
       "title": "전자담배 충전하면서 사용해도 괜찮을까?(feat.아머미니)",
       "category": "published-post",
@@ -312,5 +321,5 @@
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-06.md"
     }
   ],
-  "lastUpdated": "2026-07-26T06:40:30.587Z"
+  "lastUpdated": "2026-07-27T12:49:37.559Z"
 }
