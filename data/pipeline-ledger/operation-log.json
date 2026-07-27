@@ -3804,7 +3804,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-fcb56229",
       "at": "2026-07-27T05:00:12.525Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 코일은 언제 갈아야 할까?",
+      "proposedTitle": "전자담배 코일은 언제 갈아야 할까? 정확한 교체 시기와 체크포인트",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5357142857142857,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-c5f88366",
+      "at": "2026-07-27T05:00:54.418Z"
     }
   ],
-  "lastUpdated": "2026-07-27T05:00:12.525Z"
+  "lastUpdated": "2026-07-27T05:00:54.418Z"
 }
