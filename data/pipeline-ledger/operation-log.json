@@ -3793,7 +3793,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-f3943d70",
       "at": "2026-07-25T09:28:36.554Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-b131b6c8",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-22b4b75c / Similar existing title found: 전자담배 코일은 언제 갈아야 할까? 사용 시기와 교체 기준 완벽 가이드 (ready, 1)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-fcb56229",
+      "at": "2026-07-27T05:00:12.525Z"
     }
   ],
-  "lastUpdated": "2026-07-25T09:28:36.554Z"
+  "lastUpdated": "2026-07-27T05:00:12.525Z"
 }
