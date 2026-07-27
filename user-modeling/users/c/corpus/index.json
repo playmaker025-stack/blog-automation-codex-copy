@@ -2,6 +2,17 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-3a147bb4",
+      "title": "전자담배 코일은 언제 갈아야 할까?",
+      "category": "direct-run",
+      "tags": [
+        "코일 언제"
+      ],
+      "wordCount": 2228,
+      "publishedAt": "2026-07-27T08:12:14.897Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-3a147bb4.md"
+    },
+    {
       "sampleId": "published-post-manual-mryqqt28",
       "title": "더위를 날려줄 시원한 입호흡 액상 추천!",
       "category": "published-post",
@@ -311,5 +322,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-24T09:31:49.709Z"
+  "lastUpdated": "2026-07-27T08:12:23.471Z"
 }
