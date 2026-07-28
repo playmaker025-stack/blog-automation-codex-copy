@@ -1339,7 +1339,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-25T09:27:59.431Z",
       "updatedAt": "2026-07-27T08:12:18.914Z"
+    },
+    {
+      "topicId": "topic-a34bf1d9",
+      "title": "전자담배 입호흡 폐호흡 차이 총정리",
+      "description": "메인키워드: 입호흡 폐호흡 차이",
+      "category": "direct-run",
+      "tags": [
+        "입호흡 폐호흡 차이"
+      ],
+      "targetKeyword": "입호흡 폐호흡 차이",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "입호흡 폐호흡 차이",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-28T05:30:06.703Z",
+      "updatedAt": "2026-07-28T05:30:06.703Z"
     }
   ],
-  "lastUpdated": "2026-07-27T08:12:18.914Z"
+  "lastUpdated": "2026-07-28T05:30:06.703Z"
 }
