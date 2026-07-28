@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-ac1d6835",
+  "type": "approval_request",
+  "savedAt": "2026-07-28T08:12:24.966Z",
+  "data": {
+    "pipelineId": "pipe-ac1d6835",
+    "previousTitle": "",
+    "proposedTitle": "만수동 간석동 인천 전자담배 기기 선택 시 꼭 확인할 3가지",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "사용자 프로필과 최근 발행 글 구조를 반영해 만수동과 간석동 지역 전자담배 기기 구매 시 실제로 중요하게 체크하는 3가지 기준을 중심으로 구성. 검색자의 즉각적 의사결정 지원을 위해 문제-기준-선택지 순서로 명확히 풀어내며, 지역 매장 경험과 사용자 후기 기반 현실감 있는 조언을 포함. 친근하면서도 정보 중심 문체를 유지해 네이버 검색 의도에 부합하며, 허브 글과 리프 글 간 내부 링크를 자연스럽게 연결해 체류시간과 재방문율을 높임.",
+    "requestedAt": "2026-07-28T08:12:20.130Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-28T08:12:20.130Z",
+      "modifications": null
+    }
+  }
+}
