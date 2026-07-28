@@ -2,6 +2,17 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-f3b26f79",
+      "title": "전자담배 입호흡 폐호흡 차이 총정리",
+      "category": "direct-run",
+      "tags": [
+        "입호흡 폐호흡 차이"
+      ],
+      "wordCount": 3013,
+      "publishedAt": "2026-07-28T09:16:18.571Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-f3b26f79.md"
+    },
+    {
       "sampleId": "published-post-3a147bb4",
       "title": "전자담배 코일은 언제 갈아야 할까?",
       "category": "direct-run",
@@ -322,5 +333,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-27T08:12:23.471Z"
+  "lastUpdated": "2026-07-28T09:16:27.166Z"
 }
