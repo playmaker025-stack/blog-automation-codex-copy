@@ -2,6 +2,21 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-fcd2d1c7",
+      "title": "간석동 전자담배 기기 선택법 추천 3가지 포인트",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "간석동",
+        "인천",
+        "전자담배",
+        "기기추천"
+      ],
+      "wordCount": 3490,
+      "publishedAt": "2026-07-28T12:13:06.433Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-fcd2d1c7.md"
+    },
+    {
       "sampleId": "published-post-manual-ms09w5z0",
       "title": "부평 전자담배 폐호흡 쿨링 액상 좀비런 시리즈",
       "category": "published-post",
@@ -184,5 +199,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-07-25T11:15:43.198Z"
+  "lastUpdated": "2026-07-28T12:13:15.208Z"
 }
