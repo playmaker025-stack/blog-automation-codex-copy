@@ -1,0 +1,27 @@
+{
+  "pipelineId": "pipe-fe4fdd8f",
+  "type": "draft_output",
+  "savedAt": "2026-07-28T05:31:54.754Z",
+  "data": {
+    "postId": "post-f3b26f79",
+    "title": "전자담배 입호흡 폐호흡 차이 총정리",
+    "wordCount": 3104,
+    "generatedAt": "2026-07-28T05:31:53.690Z",
+    "contentPath": "data/posting-list/posts/post-f3b26f79/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": true,
+      "blockingReasons": [],
+      "warnings": [
+        "medium overlap: 결론 패턴 반복 위험 criteria_summary"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 결론 패턴 반복 위험 criteria_summary"
+      ]
+    }
+  }
+}
