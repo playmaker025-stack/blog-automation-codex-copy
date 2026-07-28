@@ -847,10 +847,10 @@
       "contentKind": "hub",
       "feasibility": null,
       "relatedSources": [],
-      "status": "in-progress",
+      "status": "draft",
       "assignedUserId": "b",
       "createdAt": "2026-07-06T07:27:55.958Z",
-      "updatedAt": "2026-07-28T08:12:21.949Z"
+      "updatedAt": "2026-07-28T08:17:08.157Z"
     },
     {
       "topicId": "topic-10159e19",
@@ -1360,5 +1360,5 @@
       "updatedAt": "2026-07-28T05:34:33.731Z"
     }
   ],
-  "lastUpdated": "2026-07-28T08:12:21.949Z"
+  "lastUpdated": "2026-07-28T08:17:08.157Z"
 }
