@@ -3815,7 +3815,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-c5f88366",
       "at": "2026-07-27T05:00:54.418Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 입호흡 폐호흡 차이 총정리",
+      "proposedTitle": "전자담배 입호흡 폐호흡 차이 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-fe4fdd8f",
+      "at": "2026-07-28T05:30:38.730Z"
     }
   ],
-  "lastUpdated": "2026-07-27T05:00:54.418Z"
+  "lastUpdated": "2026-07-28T05:30:38.730Z"
 }
