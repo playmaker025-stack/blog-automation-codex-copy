@@ -1415,7 +1415,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-29T02:53:05.797Z",
       "updatedAt": "2026-07-29T02:53:43.788Z"
+    },
+    {
+      "topicId": "topic-5c11e096",
+      "title": "인천전자담배 액상 섞어 사용해도 될까?",
+      "description": "메인키워드: 액상 섞어",
+      "category": "direct-run",
+      "tags": [
+        "액상 섞어"
+      ],
+      "targetKeyword": "액상 섞어",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "액상 섞어",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-29T02:56:45.962Z",
+      "updatedAt": "2026-07-29T02:56:45.962Z"
     }
   ],
-  "lastUpdated": "2026-07-29T02:53:59.209Z"
+  "lastUpdated": "2026-07-29T02:56:45.962Z"
 }
