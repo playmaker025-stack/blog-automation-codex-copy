@@ -3837,7 +3837,20 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-ac1d6835",
       "at": "2026-07-28T08:12:18.541Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부천전자담배 가습현상 원인",
+      "proposedTitle": "부천 전자담배 가습현상 원인과 해결법 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.631578947368421,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7e5c0a08",
+      "at": "2026-07-29T02:50:23.367Z"
     }
   ],
-  "lastUpdated": "2026-07-28T08:12:18.541Z"
+  "lastUpdated": "2026-07-29T02:50:23.367Z"
 }
