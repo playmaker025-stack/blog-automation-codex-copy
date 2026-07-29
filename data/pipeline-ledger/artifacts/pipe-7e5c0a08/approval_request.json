@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-7e5c0a08",
+  "type": "approval_request",
+  "savedAt": "2026-07-29T02:50:34.598Z",
+  "data": {
+    "pipelineId": "pipe-7e5c0a08",
+    "previousTitle": "",
+    "proposedTitle": "부천 전자담배 가습현상 원인과 해결법 총정리",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '가습현상'를 중심축으로 반영했습니다. 부천 지역 전자담배 사용자들이 자주 겪는 가습현상 문제에 대해 구체적이고 실용적인 해결책을 제공하는 글이 필요함. 최근 발행 글들의 평균 평가가 61점으로 개선 여지가 크고, 가습현상은 검색 수요가 높은 키워드임. 친근하면서도 정보 중심의 문체와 단계별 점검법, 지역 특화 경험 공유를 통해 독자 신뢰와 체류시간을 높일 수 있음. 허브와 리프 주제와의 내부 링크를 통해 블로그 내 체계적 정보망 구축 가능.",
+    "requestedAt": "2026-07-29T02:50:29.557Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-29T02:50:29.557Z",
+      "modifications": null
+    }
+  }
+}
