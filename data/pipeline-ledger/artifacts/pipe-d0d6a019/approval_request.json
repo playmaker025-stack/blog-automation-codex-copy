@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-d0d6a019",
+  "type": "approval_request",
+  "savedAt": "2026-07-29T02:57:18.853Z",
+  "data": {
+    "pipelineId": "pipe-d0d6a019",
+    "previousTitle": "",
+    "proposedTitle": "인천전자담배 액상 섞어 사용해도 될까? 안전과 맛, 선택 기준 총정리",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '액상 섞어'를 중심축으로 반영했습니다. 사용자 검색 의도는 액상 섞어 사용 가능 여부와 안전성, 문제 발생 시 대처법에 집중되어 있음. 최근 발행 글과 평가 점수를 고려해 친근하면서도 구체적 경험과 지역 특화 정보를 중심으로 작성한다. 허브-리프 구조를 반영해 액상 섞기 기본 개념(허브)과 문제점 및 해결법(리프)을 자연스럽게 연결한다. 인천 부평, 만수 등 주요 지역 경험을 녹여 지역 밀착형 콘텐츠로 차별화하며, 검색자가 바로 비교하고 결정할 수 있도록 문제, 기준, 선택지를 순서대로 풀어내는 구조를 따른다.",
+    "requestedAt": "2026-07-29T02:57:14.241Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-29T02:57:14.241Z",
+      "modifications": null
+    }
+  }
+}
