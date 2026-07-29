@@ -1358,7 +1358,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-28T05:30:06.703Z",
       "updatedAt": "2026-07-28T09:16:22.593Z"
+    },
+    {
+      "topicId": "topic-19fd8bb5",
+      "title": "부천전자담배 가습현상 원인",
+      "description": "메인키워드: 가습현상",
+      "category": "direct-run",
+      "tags": [
+        "가습현상"
+      ],
+      "targetKeyword": "가습현상",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "가습현상",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-29T02:49:53.994Z",
+      "updatedAt": "2026-07-29T02:49:53.994Z"
     }
   ],
-  "lastUpdated": "2026-07-28T12:13:10.575Z"
+  "lastUpdated": "2026-07-29T02:49:53.994Z"
 }
