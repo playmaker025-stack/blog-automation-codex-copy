@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-fd7f53a8",
+  "type": "approval_request",
+  "savedAt": "2026-07-29T02:53:46.439Z",
+  "data": {
+    "pipelineId": "pipe-fd7f53a8",
+    "previousTitle": "",
+    "proposedTitle": "인천전자담배 가습현상의 원인은 뭘까?",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '가습현상'를 중심축으로 반영했습니다. 사용자 프로필과 최근 발행 글 구조를 반영해 가습현상에 대한 명확한 정의와 원인, 해결책을 친근한 문체로 상세히 안내한다. 인천 지역 전자담배 사용자 경험과 지역 수리점 정보를 포함해 지역 밀착형 콘텐츠로 검색 의도에 부합한다. 허브-리프 구조를 유지하며 메인 키워드 '가습현상'을 중심으로 서브 키워드를 자연스럽게 보조한다. 문제 상황과 정상/비정상 구분, 원인 분류, 해결책, 점검 시기까지 단계별로 구체적이고 실용적인 정보를 제공해 네이버 검색 90점 이상 달성 가능성을 높인다.",
+    "requestedAt": "2026-07-29T02:53:41.663Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-07-29T02:53:41.663Z",
+      "modifications": null
+    }
+  }
+}
