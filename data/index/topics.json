@@ -1396,7 +1396,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-29T02:50:23.275Z",
       "updatedAt": "2026-07-29T02:50:23.275Z"
+    },
+    {
+      "topicId": "topic-9bc6b39f",
+      "title": "인천전자담배 가습현상의 원인은 뭘까?",
+      "description": "메인키워드: 가습현상",
+      "category": "direct-run",
+      "tags": [
+        "가습현상"
+      ],
+      "targetKeyword": "가습현상",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "가습현상",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-29T02:53:05.797Z",
+      "updatedAt": "2026-07-29T02:53:05.797Z"
     }
   ],
-  "lastUpdated": "2026-07-29T02:50:31.576Z"
+  "lastUpdated": "2026-07-29T02:53:05.797Z"
 }
