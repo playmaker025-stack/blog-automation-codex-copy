@@ -3874,7 +3874,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-fd7f53a8",
       "at": "2026-07-29T02:53:31.651Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천전자담배 액상 섞어 사용해도 될까?",
+      "proposedTitle": "인천전자담배 액상 섞어 사용해도 될까? 안전과 맛, 선택 기준 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5862068965517242,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-d0d6a019",
+      "at": "2026-07-29T02:57:09.394Z"
     }
   ],
-  "lastUpdated": "2026-07-29T02:53:31.651Z"
+  "lastUpdated": "2026-07-29T02:57:09.394Z"
 }
