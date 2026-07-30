@@ -1434,7 +1434,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-29T02:56:45.962Z",
       "updatedAt": "2026-07-29T05:49:15.289Z"
+    },
+    {
+      "topicId": "topic-8a533872",
+      "title": "누수없는 전자담배가 있을까?",
+      "description": "메인키워드: 누수없는 전자담배",
+      "category": "direct-run",
+      "tags": [
+        "누수없는 전자담배"
+      ],
+      "targetKeyword": "누수없는 전자담배",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "누수없는 전자담배",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-30T05:08:05.150Z",
+      "updatedAt": "2026-07-30T05:08:05.150Z"
     }
   ],
-  "lastUpdated": "2026-07-29T05:49:15.289Z"
+  "lastUpdated": "2026-07-30T05:08:05.150Z"
 }
