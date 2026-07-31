@@ -1453,7 +1453,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-30T05:08:05.150Z",
       "updatedAt": "2026-07-30T05:11:37.418Z"
+    },
+    {
+      "topicId": "topic-9f107eee",
+      "title": "일회용 전담 탄맛은 뭘까?",
+      "description": "메인키워드: 일회용 전담 탄맛",
+      "category": "direct-run",
+      "tags": [
+        "일회용 전담 탄맛"
+      ],
+      "targetKeyword": "일회용 전담 탄맛",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "일회용 전담 탄맛",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-07-31T03:05:06.195Z",
+      "updatedAt": "2026-07-31T03:05:06.195Z"
     }
   ],
-  "lastUpdated": "2026-07-30T05:11:37.418Z"
+  "lastUpdated": "2026-07-31T03:05:06.195Z"
 }
