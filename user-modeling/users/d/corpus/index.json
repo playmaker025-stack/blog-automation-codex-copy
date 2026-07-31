@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-ms8vjho9",
+      "title": "전자담배 출력(W)이 높으면 무조건 더 좋은 걸까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6563,
+      "publishedAt": "2026-07-31T11:43:42.729Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-ms8vjho9.md"
+    },
+    {
       "sampleId": "published-post-manual-ms7fg4gm",
       "title": "전자담배 같은 액상인데 왜 기기마다 맛이 다를까?",
       "category": "published-post",
@@ -292,25 +301,7 @@
       "wordCount": 2384,
       "publishedAt": "2025-10-22T00:00:00.000Z",
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-03.md"
-    },
-    {
-      "sampleId": "reference-d-04",
-      "title": "친구들아 RDA 파바박 소리 나게 빌드 하는법 만수르 전자담배에서 알려준다 이말이야!",
-      "category": "기술/문제해결형",
-      "tags": [
-        "기기 고장",
-        "누수/탄맛/뜨거움 원인",
-        "RDA 빌드",
-        "사용법 가이드",
-        "문제 해결",
-        "친구들아",
-        "RDA",
-        "파바박"
-      ],
-      "wordCount": 2050,
-      "publishedAt": "2025-10-20T00:00:00.000Z",
-      "filePath": "user-modeling/users/d/corpus/samples/reference-d-04.md"
     }
   ],
-  "lastUpdated": "2026-07-30T11:25:32.468Z"
+  "lastUpdated": "2026-07-31T11:43:48.749Z"
 }
