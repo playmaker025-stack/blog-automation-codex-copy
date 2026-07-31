@@ -1,0 +1,29 @@
+{
+  "pipelineId": "pipe-0b746a81",
+  "type": "draft_output",
+  "savedAt": "2026-07-31T03:06:52.321Z",
+  "data": {
+    "postId": "post-e83cf288",
+    "title": "일회용 전담 탄맛 원인과 해결법 총정리",
+    "wordCount": 3026,
+    "generatedAt": "2026-07-31T03:06:51.370Z",
+    "contentPath": "data/posting-list/posts/post-e83cf288/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": true,
+      "blockingReasons": [],
+      "warnings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ]
+    }
+  }
+}
