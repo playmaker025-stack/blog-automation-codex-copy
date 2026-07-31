@@ -3896,7 +3896,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-865a9514",
       "at": "2026-07-30T05:08:32.147Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "일회용 전담 탄맛은 뭘까?",
+      "proposedTitle": "일회용 전담 탄맛은 뭘까? 제대로 알고 선택하는 기준과 해결법",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.42307692307692313,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-adcd062a",
+      "at": "2026-07-31T03:05:29.650Z"
     }
   ],
-  "lastUpdated": "2026-07-30T05:08:32.147Z"
+  "lastUpdated": "2026-07-31T03:05:29.650Z"
 }
