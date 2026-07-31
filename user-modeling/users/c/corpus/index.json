@@ -2,6 +2,17 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-e83cf288",
+      "title": "일회용 전담 탄맛 원인은 뭘까?",
+      "category": "direct-run",
+      "tags": [
+        "일회용 전담 탄맛"
+      ],
+      "wordCount": 2803,
+      "publishedAt": "2026-07-31T09:31:34.577Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-e83cf288.md"
+    },
+    {
       "sampleId": "published-post-manual-ms7559nt",
       "title": "누수없는 전자담배가 정말 있을까?",
       "category": "published-post",
@@ -353,5 +364,5 @@
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-07-30T06:37:10.666Z"
+  "lastUpdated": "2026-07-31T09:31:42.300Z"
 }
