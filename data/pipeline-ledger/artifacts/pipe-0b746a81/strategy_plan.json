@@ -1,7 +1,7 @@
 {
   "pipelineId": "pipe-0b746a81",
   "type": "strategy_plan",
-  "savedAt": "2026-07-31T03:05:46.038Z",
+  "savedAt": "2026-07-31T03:05:59.947Z",
   "data": {
     "title": "일회용 전담 탄맛 원인과 해결법 총정리",
     "outline": [
@@ -62,7 +62,110 @@
       "일회용 전담 문제 해결"
     ],
     "rationale": "직접 입력 토픽이므로 메인 키워드 '일회용 전담 탄맛'를 중심축으로 반영했습니다. 최근 네이버 커뮤니티에서 일회용 전담 탄맛 관련 질문이 많고, 사용자들이 탄맛 원인과 해결법을 구체적으로 찾는 경향이 강함. 기존 발행 글 구조인 hub와 leaf를 반영하여 탄맛 원인(허브)과 해결법(리프)을 명확히 구분했다. 친근하면서도 정보 중심 문체로 도입부에 메인 키워드를 자연스럽게 반복하며, 실제 사용 경험과 체크포인트를 구체적으로 서술해 검색 의도에 부합하도록 설계했다. 재방문 유도를 위해 관련 허브 글로 자연스럽게 연결하는 구조를 포함했다.",
-    "corpusSummary": null,
+    "corpusSummary": {
+      "userId": "c",
+      "selectedCount": 5,
+      "styleProfile": {
+        "dominantTone": "friendly",
+        "avgWordCount": 3326,
+        "signatureExpressions": [],
+        "structurePattern": "질문-답변형",
+        "openingPattern": "주제 직접 서술로 시작"
+      },
+      "exemplarExcerpts": [
+        {
+          "sampleId": "published-post-f3b26f79",
+          "title": "전자담배 입호흡 폐호흡 차이 총정리",
+          "excerpt": "결론적으로는 담배처럼 익숙하게 쓰고 싶다면 입호흡 무화량과 진한 맛 표현을 원한다면 폐호흡 이 잘 맞다고 보시면 되는데요 보통 매장에서 가장 쉽게 설명하는 기준은 출력인데 입호흡은 대체로 10 20w 전후 폐호흡은 30W 이상부터 체감 차이가 확실히 납니다. 입호흡과 폐호흡의 차이는 연기 양보다도 흡입 방식과 사용환경에서 갈려요. 연무가 많다고 무조건 더 잘 맞는 건 아니고 출근길처럼 짧게 쓰는지 집에서 여유 있게 쓰는지가 만",
+          "styleNotes": "tone=professional, category=direct-run"
+        },
+        {
+          "sampleId": "published-post-1191adb8",
+          "title": "전담 액상 니코틴 종류와 건강 영향 분석",
+          "excerpt": "전자담배 액상의 니코틴 종류는 크게 프리베이스와 솔트로 나뉘고 전담에서 체감 차이는 목 자극, 흡수감, 기기 궁합에서 가장 크게 갈립니다. 같은 농도 표기라도 사용 패턴이 달라져서 결국 중요한 건 \"더 센가 약한가\" 보다 \"내가 어떤 방식으로 더 자주 쓰게 되는가\" 였습니다. 건강 영향은 종류가 달라도 기본적으로 의존성, 심박수 증가, 수면 방해 가능성을 함께 봐야 합니다. 밤 1 2시간 전에 쓰면 두근거림이 더 잘 느껴지는 ",
+          "styleNotes": "tone=professional, category=direct-run"
+        },
+        {
+          "sampleId": "published-post-28fdb89d",
+          "title": "인천전자담배 - 액상 섞어서 사용해도 될까?",
+          "excerpt": "액상을 섞어서 사용을 해도 되는데 다만 아무 액상이나 섞는 방식은 추천하기 어렵습니다. 보통 같은 계열, 비슷한 점도의 액상끼리 7:3이나 5:5로 시작하면 맛 변화와 니코틴 농도 계산이 쉬운 편이고 같은 브랜드 과일 계열은 비교적 안정적입니다. 최근 매장에서 가장 많이 받는 질문은 \"섞어서 사용하면 더 맛있나요?\" \"기기에는 문제생기지 않겠죠?\" 라는 질문을 하시는데 맛 만족도는 올라가도 코일 수명이 3 5일 정도 빨리 줄어",
+          "styleNotes": "tone=professional, category=direct-run"
+        },
+        {
+          "sampleId": "published-post-3a147bb4",
+          "title": "전자담배 코일은 언제 갈아야 할까?",
+          "excerpt": "전자담배 쓰다 보면 제일 많이 나오는 질문이 \"코일 언제 바꿔야 하나요?\" 입니다. 결론부터 말하면 날짜보다 정확한 기준은 맛 변화, 연무량 감소, 탄맛 입니다. 같은 액상을 써도 단맛이 갑자기 죽거나 목 넘김이 거칠어지는 순간이 실제 교체 신호인 경우가 많습니다. 또 하나는 정상 소모와 비정상 상태를 구분하는 것입니다. 연속 사용이 많은 날은 1주일 안에도 성능이 떨어지고 반대로 출력이 낮고 자극이 약한 액상을 쓰면 2주 전",
+          "styleNotes": "tone=professional, category=direct-run"
+        },
+        {
+          "sampleId": "published-post-manual-mryqqt28",
+          "title": "더위를 날려줄 시원한 입호흡 액상 추천!",
+          "excerpt": "더위를 날려줄 시원한 입호흡 액상 추천! 더위를 날려줄 시원한 입호흡 액상 추천! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불가 안내 블로그 마켓 ",
+          "styleNotes": "tone=professional"
+        }
+      ],
+      "representativeExcerpts": [
+        "누수없는 전자담배가 정말 있을까? 누수없는 전자담배가 정말 있을까? : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불가 안내 블로그 마켓 판매자의 이력",
+        "액상을 섞어서 사용을 해도 되는데 다만 아무 액상이나 섞는 방식은 추천하기 어렵습니다. 보통 같은 계열, 비슷한 점도의 액상끼리 7:3이나 5:5로 시작하면 맛 변화와 니코틴 농도 계산이 쉬운 편이고 같은 브랜드 과일 계열은 비교적 안정적입니다. 최근 매장에서 가장 많이 받는 질문은 \"섞어서 사용하면 더 맛있나요?\" \"기기에는 문제생기지 않겠죠?\" 라는 질문을 하시는데 맛 만족도는 올라가도 코일 수명이 3 5일 정도 빨리 줄어",
+        "결론적으로는 담배처럼 익숙하게 쓰고 싶다면 입호흡 무화량과 진한 맛 표현을 원한다면 폐호흡 이 잘 맞다고 보시면 되는데요 보통 매장에서 가장 쉽게 설명하는 기준은 출력인데 입호흡은 대체로 10 20w 전후 폐호흡은 30W 이상부터 체감 차이가 확실히 납니다. 입호흡과 폐호흡의 차이는 연기 양보다도 흡입 방식과 사용환경에서 갈려요. 연무가 많다고 무조건 더 잘 맞는 건 아니고 출근길처럼 짧게 쓰는지 집에서 여유 있게 쓰는지가 만",
+        "전자담배 쓰다 보면 제일 많이 나오는 질문이 \"코일 언제 바꿔야 하나요?\" 입니다. 결론부터 말하면 날짜보다 정확한 기준은 맛 변화, 연무량 감소, 탄맛 입니다. 같은 액상을 써도 단맛이 갑자기 죽거나 목 넘김이 거칠어지는 순간이 실제 교체 신호인 경우가 많습니다. 또 하나는 정상 소모와 비정상 상태를 구분하는 것입니다. 연속 사용이 많은 날은 1주일 안에도 성능이 떨어지고 반대로 출력이 낮고 자극이 약한 액상을 쓰면 2주 전",
+        "더위를 날려줄 시원한 입호흡 액상 추천! 더위를 날려줄 시원한 입호흡 액상 추천! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불가 안내 블로그 마켓"
+      ],
+      "retrievalStrategy": "exemplar_index",
+      "staleWarnings": [],
+      "scoringBreakdown": [
+        {
+          "sampleId": "published-post-f3b26f79",
+          "finalScore": 0.719,
+          "components": {
+            "relevance": 0.51,
+            "recency": 0.98,
+            "roleMatch": 0.6,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-1191adb8",
+          "finalScore": 0.702,
+          "components": {
+            "relevance": 0.68,
+            "recency": 0.94,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-28fdb89d",
+          "finalScore": 0.685,
+          "components": {
+            "relevance": 0.61,
+            "recency": 0.99,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-3a147bb4",
+          "finalScore": 0.67,
+          "components": {
+            "relevance": 0.58,
+            "recency": 0.97,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mryqqt28",
+          "finalScore": 0.667,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.95,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        }
+      ]
+    },
     "publicationLearning": {
       "source": "writing-profile",
       "totalEntries": 63,
