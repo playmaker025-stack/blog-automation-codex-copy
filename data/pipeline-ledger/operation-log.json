@@ -3918,7 +3918,20 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-c42ce1a5",
       "at": "2026-07-31T03:05:43.638Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "일회용 전담 탄맛 원인은 뭘까?",
+      "proposedTitle": "일회용 전담 탄맛 원인과 해결법 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.5625,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-0b746a81",
+      "at": "2026-07-31T03:05:48.025Z"
     }
   ],
-  "lastUpdated": "2026-07-31T03:05:43.638Z"
+  "lastUpdated": "2026-07-31T03:05:48.025Z"
 }
