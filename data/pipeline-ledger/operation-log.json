@@ -3931,7 +3931,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-0b746a81",
       "at": "2026-07-31T03:05:48.025Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수동 전자담배 액상 맛 변화 문제 원인과 해결법",
+      "proposedTitle": "만수동 전자담배 액상 맛 변화 문제 원인과 해결법",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-f5fc5fea",
+      "at": "2026-08-01T07:52:08.882Z"
     }
   ],
-  "lastUpdated": "2026-07-31T03:05:48.025Z"
+  "lastUpdated": "2026-08-01T07:52:08.882Z"
 }
