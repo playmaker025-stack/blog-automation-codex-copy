@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-f5fc5fea",
+  "type": "approval_request",
+  "savedAt": "2026-08-01T07:53:31.312Z",
+  "data": {
+    "pipelineId": "pipe-f5fc5fea",
+    "previousTitle": "",
+    "proposedTitle": "만수동 전자담배 액상 맛 변화 문제 원인과 해결법",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수동 지역 사용자가 자주 겪는 액상 맛 변화 문제를 중심으로 지역 특화 원인과 해결법을 구체적으로 다루어 검색 의도에 부합한다. 기존 발행 글 구조인 허브형을 유지하며, 문제 상황부터 원인 분석, 해결법, 점검 시기까지 단계별로 상세히 안내하여 체류시간과 신뢰도를 높인다. 친근하면서도 정보 중심 문체로 실제 경험과 매장 팁을 녹여내어 사용자 만족도를 극대화한다. 내부 링크로 허브 주제인 '만수동 전자담배 액상 추천'과 리프 주제인 '전자담배 기기 점검법'을 연결해 블로그 내 체계적 네비게이션을 지원한다.\n\n[수정 반영] 지역명을 구월동 으로 수정",
+    "requestedAt": "2026-08-01T07:53:26.252Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-01T07:53:26.252Z",
+      "modifications": null
+    }
+  }
+}
