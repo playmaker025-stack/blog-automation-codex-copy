@@ -2,6 +2,21 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-20c03ef6",
+      "title": "구월동 전자담배 액상 맛이 갑자기 달라졌다면? 원인과 해결 방법",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "전자담배",
+        "액상맛변화",
+        "문제해결",
+        "매장팁"
+      ],
+      "wordCount": 2857,
+      "publishedAt": "2026-08-01T11:05:28.250Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-20c03ef6.md"
+    },
+    {
       "sampleId": "published-post-fcd2d1c7",
       "title": "간석동 전자담배 기기 선택법 추천 3가지 포인트",
       "category": "b",
@@ -199,5 +214,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-07-28T12:13:15.208Z"
+  "lastUpdated": "2026-08-01T11:05:36.692Z"
 }
