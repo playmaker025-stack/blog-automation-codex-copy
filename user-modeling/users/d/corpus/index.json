@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-msbg3dsw",
+      "title": "전자담배 배터리 용량(mAh)이 크면 무조건 오래 사용할까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6410,
+      "publishedAt": "2026-08-02T06:54:36.122Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msbg3dsw.md"
+    },
+    {
       "sampleId": "published-post-manual-ms8vjho9",
       "title": "전자담배 출력(W)이 높으면 무조건 더 좋은 걸까?",
       "category": "published-post",
@@ -283,25 +292,7 @@
       "wordCount": 2844,
       "publishedAt": "2026-01-04T00:00:00.000Z",
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-02.md"
-    },
-    {
-      "sampleId": "reference-d-03",
-      "title": "<필독> 주안전자담배 만수르 모든 일회용 전담 종류 총집합! 구입하기전 꼭 봐야할 정보!.",
-      "category": "기술/문제해결형",
-      "tags": [
-        "기기 고장",
-        "누수/탄맛/뜨거움 원인",
-        "RDA 빌드",
-        "사용법 가이드",
-        "문제 해결",
-        "필독",
-        "주안전자담배",
-        "모든"
-      ],
-      "wordCount": 2384,
-      "publishedAt": "2025-10-22T00:00:00.000Z",
-      "filePath": "user-modeling/users/d/corpus/samples/reference-d-03.md"
     }
   ],
-  "lastUpdated": "2026-07-31T11:43:48.749Z"
+  "lastUpdated": "2026-08-02T06:54:41.578Z"
 }
