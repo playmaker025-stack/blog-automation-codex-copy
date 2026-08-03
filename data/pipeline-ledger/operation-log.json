@@ -3942,7 +3942,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-f5fc5fea",
       "at": "2026-08-01T07:52:08.882Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배도 냄새가 날까?",
+      "proposedTitle": "전자담배도 냄새가 날까? 냄새 원인과 관리법 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.45833333333333337,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7d44265e",
+      "at": "2026-08-03T04:57:23.446Z"
     }
   ],
-  "lastUpdated": "2026-08-01T07:52:08.882Z"
+  "lastUpdated": "2026-08-03T04:57:23.446Z"
 }
