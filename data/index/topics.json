@@ -1510,7 +1510,26 @@
       "assignedUserId": "c",
       "createdAt": "2026-07-31T03:05:22.522Z",
       "updatedAt": "2026-07-31T09:31:37.870Z"
+    },
+    {
+      "topicId": "topic-df3f48d0",
+      "title": "전자담배도 냄새가 날까?",
+      "description": "메인키워드: 전자담배 냄새",
+      "category": "direct-run",
+      "tags": [
+        "전자담배 냄새"
+      ],
+      "targetKeyword": "전자담배 냄새",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "전자담배 냄새",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-03T04:56:54.465Z",
+      "updatedAt": "2026-08-03T04:56:54.465Z"
     }
   ],
-  "lastUpdated": "2026-08-01T11:05:32.181Z"
+  "lastUpdated": "2026-08-03T04:56:54.465Z"
 }
