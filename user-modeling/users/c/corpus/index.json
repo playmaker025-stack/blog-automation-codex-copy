@@ -2,6 +2,17 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-426888f1",
+      "title": "전자담배도 냄새가 날까? 냄새 원인과 관리법 완벽 가이드",
+      "category": "direct-run",
+      "tags": [
+        "전자담배 냄새"
+      ],
+      "wordCount": 2758,
+      "publishedAt": "2026-08-03T07:48:35.204Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-426888f1.md"
+    },
+    {
       "sampleId": "published-post-manual-msa13cve",
       "title": "젤로 누수 잡는법 액튐 원인과 해결 방법! 만수르 전자담배",
       "category": "published-post",
@@ -353,25 +364,7 @@
       "wordCount": 2695,
       "publishedAt": "2025-12-31T00:00:00.000Z",
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-04.md"
-    },
-    {
-      "sampleId": "reference-c-03",
-      "title": "부평전자담배 입호흡 전담 추천 구매하기 전에 필독",
-      "category": "비교/구조 설명형",
-      "tags": [
-        "기기 비교",
-        "스펙 정리",
-        "사용법",
-        "문제 해결",
-        "입문 추천",
-        "부평전자담배",
-        "입호흡",
-        "전담"
-      ],
-      "wordCount": 3556,
-      "publishedAt": "2025-10-17T00:00:00.000Z",
-      "filePath": "user-modeling/users/c/corpus/samples/reference-c-03.md"
     }
   ],
-  "lastUpdated": "2026-08-01T07:06:58.982Z"
+  "lastUpdated": "2026-08-03T07:48:43.071Z"
 }
