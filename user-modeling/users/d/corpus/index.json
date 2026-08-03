@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-msd6tai1",
+      "title": "전자담배가 가장 맛있게 느껴지는 순간은 언제일까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6382,
+      "publishedAt": "2026-08-03T12:10:20.336Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msd6tai1.md"
+    },
+    {
       "sampleId": "published-post-manual-msbg3dsw",
       "title": "전자담배 배터리 용량(mAh)이 크면 무조건 오래 사용할까?",
       "category": "published-post",
@@ -274,25 +283,7 @@
       "wordCount": 1839,
       "publishedAt": "2026-05-07T00:00:00.000Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-21e6d9ae.md"
-    },
-    {
-      "sampleId": "reference-d-02",
-      "title": "인천전자담배 젤로 크리스탈 울트라[신상] 출시 스펙 차이 비교!",
-      "category": "기술/문제해결형",
-      "tags": [
-        "기기 고장",
-        "누수/탄맛/뜨거움 원인",
-        "RDA 빌드",
-        "사용법 가이드",
-        "문제 해결",
-        "인천전자담배",
-        "젤로",
-        "크리스탈"
-      ],
-      "wordCount": 2844,
-      "publishedAt": "2026-01-04T00:00:00.000Z",
-      "filePath": "user-modeling/users/d/corpus/samples/reference-d-02.md"
     }
   ],
-  "lastUpdated": "2026-08-02T06:54:41.578Z"
+  "lastUpdated": "2026-08-03T12:10:26.949Z"
 }
