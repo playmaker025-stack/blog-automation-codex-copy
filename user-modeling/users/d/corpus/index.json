@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-msenaehp",
+      "title": "전자담배 입문자는 언제 '인생 액상'을 찾게 될까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6629,
+      "publishedAt": "2026-08-04T12:39:19.496Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msenaehp.md"
+    },
+    {
       "sampleId": "published-post-manual-msd6tai1",
       "title": "전자담배가 가장 맛있게 느껴지는 순간은 언제일까?",
       "category": "published-post",
@@ -270,20 +279,7 @@
       "wordCount": 2077,
       "publishedAt": "2026-05-07T00:00:00.000Z",
       "filePath": "user-modeling/users/d/corpus/samples/reference-d-01.md"
-    },
-    {
-      "sampleId": "published-post-21e6d9ae",
-      "title": "전자담배 액상 종류별 특징과 입문자 맞춤 맛 선택법",
-      "category": "발행 글 샘플",
-      "tags": [
-        "실제 발행 글",
-        "문체 참고",
-        "전자담배"
-      ],
-      "wordCount": 1839,
-      "publishedAt": "2026-05-07T00:00:00.000Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-21e6d9ae.md"
     }
   ],
-  "lastUpdated": "2026-08-03T12:10:26.949Z"
+  "lastUpdated": "2026-08-04T12:39:26.895Z"
 }
