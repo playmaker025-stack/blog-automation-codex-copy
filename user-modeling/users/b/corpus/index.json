@@ -2,6 +2,21 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-ed806d65",
+      "title": "남동구청역 전자담배 입문자 위한 한달 유지 비용·예산 가이드",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "전자담배",
+        "입문자",
+        "비용",
+        "예산"
+      ],
+      "wordCount": 3426,
+      "publishedAt": "2026-08-04T11:16:51.229Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-ed806d65.md"
+    },
+    {
       "sampleId": "published-post-20c03ef6",
       "title": "구월동 전자담배 액상 맛이 갑자기 달라졌다면? 원인과 해결 방법",
       "category": "b",
@@ -214,5 +229,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-08-01T11:05:36.692Z"
+  "lastUpdated": "2026-08-04T11:17:00.573Z"
 }
