@@ -3953,7 +3953,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-7d44265e",
       "at": "2026-08-03T04:57:23.446Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수동 전자담배 입문자 한달 비용과 예산 계획 가이드",
+      "proposedTitle": "만수동 전자담배 입문자 한달 비용과 예산 계획 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-69631a12",
+      "at": "2026-08-04T08:31:31.271Z"
     }
   ],
-  "lastUpdated": "2026-08-03T04:57:23.446Z"
+  "lastUpdated": "2026-08-04T08:31:31.271Z"
 }
