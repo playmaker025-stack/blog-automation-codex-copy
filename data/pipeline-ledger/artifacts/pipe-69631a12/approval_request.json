@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-69631a12",
+  "type": "approval_request",
+  "savedAt": "2026-08-04T08:31:37.974Z",
+  "data": {
+    "pipelineId": "pipe-69631a12",
+    "previousTitle": "",
+    "proposedTitle": "만수동 전자담배 입문자 한달 비용과 예산 계획 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수동 지역 전자담배 입문자들이 가장 궁금해하는 한달 비용과 예산 계획을 실제 사용자 경험과 지역 매장 정보 기반으로 상세히 안내하여 검색 의도에 정확히 부합한다. 친근한 문체와 단계별 비교, 점검 리스트를 통해 실용적이고 신뢰성 높은 정보를 제공하며, 부평 전자담배 관련 글로 자연스러운 내부 링크를 연결해 체류시간과 재방문율을 높인다.",
+    "requestedAt": "2026-08-04T08:31:32.889Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-04T08:31:32.889Z",
+      "modifications": null
+    }
+  }
+}
