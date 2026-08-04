@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mseafpt7",
+      "title": "아스몬하이 누수 잡는법 액튐 원인과 해결방법! 만수르전자담배",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 3406,
+      "publishedAt": "2026-08-04T06:39:31.340Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mseafpt7.md"
+    },
+    {
       "sampleId": "published-post-426888f1",
       "title": "전자담배도 냄새가 날까? 냄새 원인과 관리법 완벽 가이드",
       "category": "direct-run",
@@ -346,25 +355,7 @@
       "wordCount": 2288,
       "publishedAt": "2026-03-09T00:00:00.000Z",
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-02.md"
-    },
-    {
-      "sampleId": "reference-c-04",
-      "title": "인천전자담배 만수르점 베놈 아스트로 MK3 입고! 스펙&사용법 정리",
-      "category": "비교/구조 설명형",
-      "tags": [
-        "기기 비교",
-        "스펙 정리",
-        "사용법",
-        "문제 해결",
-        "입문 추천",
-        "인천전자담배",
-        "만수르점",
-        "베놈"
-      ],
-      "wordCount": 2695,
-      "publishedAt": "2025-12-31T00:00:00.000Z",
-      "filePath": "user-modeling/users/c/corpus/samples/reference-c-04.md"
     }
   ],
-  "lastUpdated": "2026-08-03T07:48:43.071Z"
+  "lastUpdated": "2026-08-04T06:39:37.175Z"
 }
