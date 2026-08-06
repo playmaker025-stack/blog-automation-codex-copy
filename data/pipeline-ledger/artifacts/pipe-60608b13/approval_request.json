@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-60608b13",
+  "type": "approval_request",
+  "savedAt": "2026-08-06T08:21:13.650Z",
+  "data": {
+    "pipelineId": "pipe-60608b13",
+    "previousTitle": "",
+    "proposedTitle": "만수동 전자담배 사고 예방과 안전 사용법 정리",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수동 지역 전자담배 사용자 대상 사고 유형과 예방법에 대한 구체적 정보 수요가 높아, 사고 사례와 안전 수칙을 중심으로 작성한다. 최근 발행 글 구조와 키워드 반복 경향을 반영해 친근하고 정보 중심 문체로, 문제-기준-선택지 순서로 독자가 쉽게 비교·판단할 수 있게 구성했다. 허브 글로서 만수동 사고 예방을 다루고, 리프 글로 부평역 안전 사용법 글을 연결해 지역 내 전자담배 안전 정보 네트워크를 강화한다.",
+    "requestedAt": "2026-08-06T08:21:08.459Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-06T08:21:08.459Z",
+      "modifications": null
+    }
+  }
+}
