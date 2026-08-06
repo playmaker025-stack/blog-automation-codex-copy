@@ -3977,7 +3977,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-3c06f964",
       "at": "2026-08-06T06:16:25.078Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수동 전자담배 사고 예방과 안전 사용법 정리",
+      "proposedTitle": "만수동 전자담배 사고 예방과 안전 사용법 정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-60608b13",
+      "at": "2026-08-06T08:21:06.813Z"
     }
   ],
-  "lastUpdated": "2026-08-06T06:16:25.078Z"
+  "lastUpdated": "2026-08-06T08:21:06.813Z"
 }
