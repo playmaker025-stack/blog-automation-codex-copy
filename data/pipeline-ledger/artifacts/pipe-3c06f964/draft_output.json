@@ -1,29 +1,25 @@
 {
   "pipelineId": "pipe-3c06f964",
   "type": "draft_output",
-  "savedAt": "2026-08-06T06:18:28.094Z",
+  "savedAt": "2026-08-06T06:19:38.230Z",
   "data": {
     "postId": "post-15731f9f",
     "title": "액상형 전자담배 종류 뭐가 좋을까? 비교와 선택 기준 완벽 가이드",
-    "wordCount": 2747,
-    "generatedAt": "2026-08-06T06:18:26.895Z",
+    "wordCount": 3055,
+    "generatedAt": "2026-08-06T06:19:37.041Z",
     "contentPath": "data/posting-list/posts/post-15731f9f/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
       "ok": true,
       "blockingReasons": [],
       "warnings": [
-        "mustResolve 단서 부족: 장점과 아쉬운 점",
-        "필수 섹션 반영 부족: 장점과 아쉬운 점",
         "medium overlap: 도입 패턴 반복 위험 product_experience",
         "medium overlap: 결론 패턴 반복 위험 product_fit_summary"
       ],
       "matchedForbiddenPhrases": [],
       "keywordStuffingFindings": [],
       "deferFindings": [],
-      "contractCoverageFindings": [
-        "mustResolve 단서 부족: 장점과 아쉬운 점"
-      ],
+      "contractCoverageFindings": [],
       "overlapFindings": [
         "medium overlap: 도입 패턴 반복 위험 product_experience",
         "medium overlap: 결론 패턴 반복 위험 product_fit_summary"
