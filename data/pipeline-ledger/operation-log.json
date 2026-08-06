@@ -3964,7 +3964,20 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-69631a12",
       "at": "2026-08-04T08:31:31.271Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "액상형 전자담배 종류 뭐가 좋을까?",
+      "proposedTitle": "액상형 전자담배 종류 뭐가 좋을까? 비교와 선택 기준 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.5555555555555556,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-3c06f964",
+      "at": "2026-08-06T06:16:25.078Z"
     }
   ],
-  "lastUpdated": "2026-08-04T08:31:31.271Z"
+  "lastUpdated": "2026-08-06T06:16:25.078Z"
 }
