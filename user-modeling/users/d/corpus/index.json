@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-msiwq135",
+      "title": "전자담배 액상 추천을 받았는데 내 입맛에는 안 맞는 이유",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6467,
+      "publishedAt": "2026-08-07T12:14:28.650Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msiwq135.md"
+    },
+    {
       "sampleId": "published-post-manual-msenaehp",
       "title": "전자담배 입문자는 언제 '인생 액상'을 찾게 될까?",
       "category": "published-post",
@@ -261,25 +270,7 @@
       "wordCount": 6485,
       "publishedAt": "2026-06-29T11:21:23.410Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mqz4nijs.md"
-    },
-    {
-      "sampleId": "reference-d-01",
-      "title": "포켓코리아 아머미니 전자담배 – 입문자용으로 쓰기 편한 이유 정리",
-      "category": "기술/문제해결형",
-      "tags": [
-        "기기 고장",
-        "누수/탄맛/뜨거움 원인",
-        "RDA 빌드",
-        "사용법 가이드",
-        "문제 해결",
-        "포켓코리아",
-        "아머미니",
-        "입문자용으로"
-      ],
-      "wordCount": 2077,
-      "publishedAt": "2026-05-07T00:00:00.000Z",
-      "filePath": "user-modeling/users/d/corpus/samples/reference-d-01.md"
     }
   ],
-  "lastUpdated": "2026-08-04T12:39:26.895Z"
+  "lastUpdated": "2026-08-07T12:14:34.886Z"
 }
