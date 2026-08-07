@@ -2,6 +2,17 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-fb0461a1",
+      "title": "일회용전자담배 불량 증상 원인과 해결방법!",
+      "category": "direct-run",
+      "tags": [
+        "일회용전자담배 불량"
+      ],
+      "wordCount": 2993,
+      "publishedAt": "2026-08-07T08:00:42.820Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-fb0461a1.md"
+    },
+    {
       "sampleId": "published-post-15731f9f",
       "title": "액상형 전자담배 종류 뭐가 좋을까? 비교와 선택 기준 완벽 가이드",
       "category": "direct-run",
@@ -330,25 +341,7 @@
       "wordCount": 1353,
       "publishedAt": "2026-04-27T00:00:00.000Z",
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-06.md"
-    },
-    {
-      "sampleId": "reference-c-01",
-      "title": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
-      "category": "비교/구조 설명형",
-      "tags": [
-        "기기 비교",
-        "스펙 정리",
-        "사용법",
-        "문제 해결",
-        "입문 추천",
-        "인천전자담배",
-        "말론바",
-        "일회용"
-      ],
-      "wordCount": 1657,
-      "publishedAt": "2026-03-27T00:00:00.000Z",
-      "filePath": "user-modeling/users/c/corpus/samples/reference-c-01.md"
     }
   ],
-  "lastUpdated": "2026-08-06T07:43:40.824Z"
+  "lastUpdated": "2026-08-07T08:00:50.701Z"
 }
