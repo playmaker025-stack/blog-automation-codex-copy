@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-a0db489c",
+  "type": "approval_request",
+  "savedAt": "2026-08-07T05:41:27.701Z",
+  "data": {
+    "pipelineId": "pipe-a0db489c",
+    "previousTitle": "",
+    "proposedTitle": "일회용전자담배 불량 증상 원인과 해결방법!",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '일회용전자담배 불량'를 중심축으로 반영했습니다. 사용자 프로필과 최근 발행 글 구조를 반영하여, 일회용전자담배 불량 증상과 원인, 해결법을 체계적으로 안내하는 정보형 글로 기획함. 메인 키워드를 중심으로 도입부와 핵심 문단에 반복 노출하며, 실제 사용 경험과 지역 서비스 안내를 포함해 신뢰도를 높임. 허브-리프 구조를 활용해 관련 주제로 자연스러운 내부 링크를 유도, 체류시간과 재방문율을 높이는 전략이다.",
+    "requestedAt": "2026-08-07T05:41:23.035Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-07T05:41:23.035Z",
+      "modifications": null
+    }
+  }
+}
