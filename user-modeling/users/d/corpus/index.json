@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mslcq13v",
+      "title": "전자담배 액상 시향만으로는 모르는 것들",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 7579,
+      "publishedAt": "2026-08-09T05:17:55.972Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mslcq13v.md"
+    },
+    {
       "sampleId": "published-post-manual-msiwq135",
       "title": "전자담배 액상 추천을 받았는데 내 입맛에는 안 맞는 이유",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6170,
       "publishedAt": "2026-06-30T12:01:01.285Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mr0liclf.md"
-    },
-    {
-      "sampleId": "published-post-manual-mqz4nijs",
-      "title": "전자담배 액상 추천받으러 왔다가 결국 원래 피던 거 사가는 이유 😂",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6485,
-      "publishedAt": "2026-06-29T11:21:23.410Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mqz4nijs.md"
     }
   ],
-  "lastUpdated": "2026-08-07T12:14:34.886Z"
+  "lastUpdated": "2026-08-09T05:18:01.703Z"
 }
