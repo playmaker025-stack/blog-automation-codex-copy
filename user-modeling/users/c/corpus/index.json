@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-msmx35tq",
+      "title": "베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기!",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6941,
+      "publishedAt": "2026-08-10T07:35:47.046Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-msmx35tq.md"
+    },
+    {
       "sampleId": "published-post-fb0461a1",
       "title": "일회용전자담배 불량 증상 원인과 해결방법!",
       "category": "direct-run",
@@ -323,25 +332,7 @@
       "wordCount": 2863,
       "publishedAt": "2026-05-07T00:00:00.000Z",
       "filePath": "user-modeling/users/c/corpus/samples/reference-c-05.md"
-    },
-    {
-      "sampleId": "reference-c-06",
-      "title": "같은 액상인데 기기 바꾸면 맛이 달라지는 이유",
-      "category": "비교/구조 설명형",
-      "tags": [
-        "기기 비교",
-        "스펙 정리",
-        "사용법",
-        "문제 해결",
-        "입문 추천",
-        "같은",
-        "액상인데",
-        "기기"
-      ],
-      "wordCount": 1353,
-      "publishedAt": "2026-04-27T00:00:00.000Z",
-      "filePath": "user-modeling/users/c/corpus/samples/reference-c-06.md"
     }
   ],
-  "lastUpdated": "2026-08-07T08:00:50.701Z"
+  "lastUpdated": "2026-08-10T07:35:53.598Z"
 }
