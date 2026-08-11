@@ -1,7 +1,7 @@
 {
   "pipelineId": "pipe-ed234bef",
   "type": "strategy_plan",
-  "savedAt": "2026-08-11T06:33:34.952Z",
+  "savedAt": "2026-08-11T06:35:21.065Z",
   "data": {
     "title": "구월동 전자담배 매장 기준 입문자가 자주 찾는 액상 3종 비교",
     "outline": [
@@ -61,7 +61,110 @@
       "구월동 액상 비교"
     ],
     "rationale": "최근 발행 글과 최고 성과 글 분석 결과, 입문자 대상 액상 비교 글은 구월동 지역 매장 방문 경험과 현실적 조언을 중심으로 작성할 때 검색 의도에 부합하며, 친근한 설명과 구체적 비교가 독자 체류시간과 만족도를 높임. 허브-리프 구조에 맞춰 입문자 맞춤 정보와 지역 밀착형 팁을 균형 있게 배치해 네이버 SEO 점수 90+ 달성 가능.",
-    "corpusSummary": null,
+    "corpusSummary": {
+      "userId": "b",
+      "selectedCount": 5,
+      "styleProfile": {
+        "dominantTone": "friendly",
+        "avgWordCount": 5208,
+        "signatureExpressions": [],
+        "structurePattern": "서술형 (자연스러운 단락)",
+        "openingPattern": "주제 직접 서술로 시작"
+      },
+      "exemplarExcerpts": [
+        {
+          "sampleId": "published-post-manual-ms09w5z0",
+          "title": "부평 전자담배 폐호흡 쿨링 액상 좀비런 시리즈",
+          "excerpt": "부평 전자담배 폐호흡 쿨링 액상 좀비런 시리즈 부평 전자담배 폐호흡 쿨링 액상 좀비런 시리즈 : 네이버 블로그 NAVER 블로그 만수동만수르동생 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불가 안내 블로그 ",
+          "styleNotes": "tone=friendly"
+        },
+        {
+          "sampleId": "published-post-ed806d65",
+          "title": "남동구청역 전자담배 입문자 위한 한달 유지 비용·예산 가이드",
+          "excerpt": "안녕하십니까. 남동구청역 전자담배 만수르 동생입니다. ​ 전자담배 입문을 고민하는 분들이 가장 궁금해하는 부분 중 하나는 바로 유지 비용입니다. ​ 사용량과 선택하는 제품에 따라 차이가 있기도하죠 첫 사용에는 기기 구매 비용이 추가되기 때문에 미리 알고 준비 하시는게 좋습니다. ​ 다만 처음에는 자신이 마음에 드는 기기와 액상 맛을 찾는 과정에서 예상보다 비용차이가 나는 제품을 구매할 수 있습니다. ​ 따라서 단순히 기기 가격",
+          "styleNotes": "tone=friendly, contentKind=hub, category=b"
+        },
+        {
+          "sampleId": "published-post-manual-mrki1yl0",
+          "title": "구월동 전자담배 입문자가 많이 찾는 액상계열 3종 추천",
+          "excerpt": "구월동 전자담배 입문자가 많이 찾는 액상계열 3종 추천 구월동 전자담배 입문자가 많이 찾는 액상계열 3종 추천 : 네이버 블로그 NAVER 블로그 만수동만수르동생 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 ",
+          "styleNotes": "tone=friendly"
+        },
+        {
+          "sampleId": "published-post-b626b001",
+          "title": "장수동 전자담배 시원한 멘솔 액상 추천 펠릭스랩 더블라임",
+          "excerpt": "안녕하십니까! 장수동 전자담배 만수동 만수르 동생입니다. ​ 한창중인 장마철 미지근하고 덥고 습하고 찝찝하기까지 이럴땐 역시 시원한 멘솔 액상이죠 ​ 오늘은 가벼운 멘솔이 있으면서 시원함을 가져다줄 펠릭스랩의 라임 시리즈를 들고왔습니다. ​ 오랜기간부터 사랑받아온 브랜드 인데 폐호흡도 아주 유명하죠 비슷한거같으면서 가짓수도 너무 많아서 이름을 잘 확인해야 합니다. ​ 폐호흡과 입호흡용 액상은 PG/VG 비율이 서로 달라 ​ 잘",
+          "styleNotes": "tone=friendly, category=direct-run"
+        },
+        {
+          "sampleId": "published-post-8859dd10",
+          "title": "만수동 전자담배 사고 예방과 안전 사용법 핵심 정리",
+          "excerpt": "안녕하십니까. 만수동 전자담배 만수르 동생입니다. ​ 이제 입춘이라고 하는데 날씨는 아직도 푹푹 찌고있습니다. ​ 이런 더운날 전담 요즘 정말 많이들 사용하시죠 단순히 연기만 나오는게 아닌 전자기기입니다. ​ 그렇기 때문에 관리도 필요합니다. ​ 이유도 모르고 갑자기 작동이 안된다거나 처음 살때랑 뭔가 다른 느낌이 들때 답답했던 부분도 있을거고 스트레스를 받는경우도 생깁니다. ​ 오늘은 전자담배 사고를 예방하고 안전하게 사용하",
+          "styleNotes": "tone=friendly, contentKind=hub, category=b"
+        }
+      ],
+      "representativeExcerpts": [
+        "안녕하십니까. 만수동 전자담배 만수르 동생입니다. ​ 이제 입춘이라고 하는데 날씨는 아직도 푹푹 찌고있습니다. ​ 이런 더운날 전담 요즘 정말 많이들 사용하시죠 단순히 연기만 나오는게 아닌 전자기기입니다. ​ 그렇기 때문에 관리도 필요합니다. ​ 이유도 모르고 갑자기 작동이 안된다거나 처음 살때랑 뭔가 다른 느낌이 들때 답답했던 부분도 있을거고 스트레스를 받는경우도 생깁니다. ​ 오늘은 전자담배 사고를 예방하고 안전하게 사용하",
+        "안녕하십니까. 남동구청역 전자담배 만수르 동생입니다. ​ 전자담배 입문을 고민하는 분들이 가장 궁금해하는 부분 중 하나는 바로 유지 비용입니다. ​ 사용량과 선택하는 제품에 따라 차이가 있기도하죠 첫 사용에는 기기 구매 비용이 추가되기 때문에 미리 알고 준비 하시는게 좋습니다. ​ 다만 처음에는 자신이 마음에 드는 기기와 액상 맛을 찾는 과정에서 예상보다 비용차이가 나는 제품을 구매할 수 있습니다. ​ 따라서 단순히 기기 가격",
+        "안녕하십니까. 구월동 전자담배 만수르 동생입니다. ​ 전자담배를 사용하다가 액상 맛이 갑자기 달라졌다면 주요 원인은 크게 세 가지로 나눌 수 있습니다. ​ 바로 액상 보관 환경, 팟과 코일의 오염 및 수명, 액상과 기기의 조합 문제입니다. ​ 이번 글에서는 전자담배 액상 맛 변화의 원인을 확인하고, 문제를 빠르게 해결할 수 있는 점검 방법을 소개해 드리겠습니다. 1. 정상적인 맛 변화와 이상 신호 구분하기 ​ 전자담배 액상의",
+        "안녕하세요. 간석동 전자담배 만수르 동생입니다. ​ 전자담배 기기를 구매하려는 분들께 가장 중요한 점은 무엇일까요? ​ 단순히 브랜드나 가격만 비교하기보다는 자신의 사용 습관과 생활 패턴에 맞는 기기를 선택하는 것이 중요합니다. ​ 이번 글에서는 기기를 선택할 때 꼭 확인해야 할 세 가지 핵심 포인트를 간결하게 알려드리겠습니다. 간석동 전자담배 기기 선택법 추천 3가지 포인트 1. 나에게 맞는 흡입 방식 확인하기 ​ 먼저 전자",
+        "부평 전자담배 폐호흡 쿨링 액상 좀비런 시리즈 부평 전자담배 폐호흡 쿨링 액상 좀비런 시리즈 : 네이버 블로그 NAVER 블로그 만수동만수르동생 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불가 안내 블로그"
+      ],
+      "retrievalStrategy": "exemplar_index",
+      "staleWarnings": [],
+      "scoringBreakdown": [
+        {
+          "sampleId": "published-post-manual-ms09w5z0",
+          "finalScore": 0.575,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.88,
+            "roleMatch": 0,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-ed806d65",
+          "finalScore": 0.509,
+          "components": {
+            "relevance": 0.68,
+            "recency": 0.95,
+            "roleMatch": 0,
+            "intentMatch": 0
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mrki1yl0",
+          "finalScore": 0.482,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.81,
+            "roleMatch": 0,
+            "intentMatch": 0
+          }
+        },
+        {
+          "sampleId": "published-post-b626b001",
+          "finalScore": 0.477,
+          "components": {
+            "relevance": 0.66,
+            "recency": 0.85,
+            "roleMatch": 0,
+            "intentMatch": 0
+          }
+        },
+        {
+          "sampleId": "published-post-8859dd10",
+          "finalScore": 0.476,
+          "components": {
+            "relevance": 0.58,
+            "recency": 0.98,
+            "roleMatch": 0,
+            "intentMatch": 0
+          }
+        }
+      ]
+    },
     "publicationLearning": {
       "source": "writing-profile",
       "totalEntries": 42,
