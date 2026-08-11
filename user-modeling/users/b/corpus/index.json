@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-30c0e0bb",
+      "title": "구월동 전자담배 액상 계열 3종 비교와 입문자 맞춤 추천",
+      "category": "B블로그",
+      "tags": [],
+      "wordCount": 3868,
+      "publishedAt": "2026-08-11T11:00:57.520Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-30c0e0bb.md"
+    },
+    {
       "sampleId": "published-post-8859dd10",
       "title": "만수동 전자담배 사고 예방과 안전 사용법 핵심 정리",
       "category": "b",
@@ -243,5 +252,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-08-08T09:15:39.576Z"
+  "lastUpdated": "2026-08-11T11:01:08.980Z"
 }
