@@ -3999,7 +3999,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-a0db489c",
       "at": "2026-08-07T05:38:26.145Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-bbfcb4ec",
+      "userId": "b",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-89dcc7bb / Similar existing title found: 구월동 전자담배 매장 기준 입문자가 자주 찾는 액상 3종 비교 (ready, 1)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-06dcc5c5",
+      "at": "2026-08-11T06:28:29.293Z"
     }
   ],
-  "lastUpdated": "2026-08-07T05:38:26.145Z"
+  "lastUpdated": "2026-08-11T06:28:29.293Z"
 }
