@@ -4021,7 +4021,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-ed234bef",
       "at": "2026-08-11T06:33:37.037Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-bfb2788f",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-9a1127f3 / Similar existing title found: 인천 만수역 전자담배 코일 문제 해결과 교체 방법 안내 (ready, 1)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-bda1d39b",
+      "at": "2026-08-12T07:12:49.153Z"
     }
   ],
-  "lastUpdated": "2026-08-11T06:33:37.037Z"
+  "lastUpdated": "2026-08-12T07:12:49.153Z"
 }
