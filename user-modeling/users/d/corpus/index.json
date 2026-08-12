@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-msq4y2ie",
+      "title": "전자담배 액상이 갑자기 빨리 줄어드는 이유 – 새는 곳이 없는데 왜 소모량이 늘었을까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 8127,
+      "publishedAt": "2026-08-12T13:39:04.899Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msq4y2ie.md"
+    },
+    {
       "sampleId": "published-post-manual-msol9uan",
       "title": "전자담배 흡입할 때 갑자기 목이 따가운 이유 – 액상 문제일까 기기 문제일까",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6160,
       "publishedAt": "2026-07-03T11:31:08.116Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mr4urgdx.md"
-    },
-    {
-      "sampleId": "published-post-manual-mr3i1u04",
-      "title": "여름철 전자담배를 차량에 두면 안 되는 이유",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6008,
-      "publishedAt": "2026-07-02T12:47:30.502Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mr3i1u04.md"
     }
   ],
-  "lastUpdated": "2026-08-11T11:40:41.912Z"
+  "lastUpdated": "2026-08-12T13:39:11.826Z"
 }
