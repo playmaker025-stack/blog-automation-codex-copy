@@ -2,6 +2,19 @@
   "userId": "b",
   "entries": [
     {
+      "postId": "post-8d184c88",
+      "topicId": "topic-4b5ae896",
+      "userId": "b",
+      "title": "주안 전자담배 액상 누수 문제 해결법과 점검 방법",
+      "naverPostUrl": "https://blog.naver.com/youferst/224377821083",
+      "evalScore": 63,
+      "wordCount": 2857,
+      "publishedAt": "2026-08-13T12:27:46.782Z",
+      "topicSource": "generated",
+      "contentKind": "leaf",
+      "learnedAt": "2026-08-13T12:27:59.915Z"
+    },
+    {
       "postId": "post-30c0e0bb",
       "topicId": "topic-bbfcb4ec",
       "userId": "b",
@@ -158,5 +171,5 @@
       "learnedAt": "2026-07-04T11:06:13.483Z"
     }
   ],
-  "updatedAt": "2026-08-11T11:01:05.934Z"
+  "updatedAt": "2026-08-13T12:27:59.915Z"
 }
