@@ -4043,7 +4043,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-1df0437e",
       "at": "2026-08-12T07:14:35.656Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수동 전자담배 액상 누수 문제 해결법과 점검 포인트",
+      "proposedTitle": "만수동 전자담배 액상 누수 문제 해결법과 점검 포인트",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-4c6d0476",
+      "at": "2026-08-13T05:30:07.262Z"
     }
   ],
-  "lastUpdated": "2026-08-12T07:14:35.656Z"
+  "lastUpdated": "2026-08-13T05:30:07.262Z"
 }
