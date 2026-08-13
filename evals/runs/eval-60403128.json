@@ -1,0 +1,1022 @@
+{
+  "runId": "eval-60403128",
+  "scores": {
+    "originality": 65,
+    "style_match": 70,
+    "structure": 68,
+    "engagement": 66,
+    "forbidden_check": 100
+  },
+  "aggregateScore": 63,
+  "reasoning": {
+    "originality": "전자담배 액상 누수 문제를 만수동 지역 특성 및 사용자 경험과 연계하여 구체적으로 다룬 점에서 신선함이 있으나, 전자담배 누수 문제 자체는 흔한 주제라 완전한 독창성은 부족합니다.",
+    "style_match": "친근하고 이해하기 쉬운 문체로 작성되어 있으며, 독자에게 직접 경험을 공유하는 등 친근한 톤을 잘 살렸습니다. 다만, 일부 문장 연결이 다소 산만해 보일 수 있습니다.",
+    "structure": "도입부, 문제 인식, 점검 순서, 원인별 해결법, 점검 권고, 마무리 정리 등 요구된 토폴로지에 충실하나, 각 섹션 간 연결과 요약이 조금 더 명확하면 좋겠습니다.",
+    "engagement": "실제 경험과 구체적인 점검 방법을 제시하여 독자의 관심을 끌고 유지하는 데 성공했으나, 사례나 시각 자료 부재로 몰입감이 다소 떨어질 수 있습니다.",
+    "forbidden_check": "내부 SEO 용어, 워크플로우 용어, 평가자 언급 등 금지된 표현이 전혀 포함되어 있지 않아 매우 우수합니다.",
+    "seo": "SEO 점수 89점. 제목 길이가 모바일 검색 노출 구간에 비교적 안정적입니다.",
+    "naver_logic": "네이버 로직 점수 25점. 문제 상황과 선택 기준이 본문에 드러나 검색 의도 연결이 자연스럽습니다."
+  },
+  "recommendations": [
+    "핵심 소제목 1개 이상에 '만수동 전자담배 액상 누수'를 포함해 주제 축을 더 선명하게 잡아주세요.",
+    "마무리 문단에서 '만수동 전자담배 액상 누수'를 한 번 더 정리해 글의 중심 키워드를 닫아주세요.",
+    "'누수' 반복이 17회로 많습니다. 같은 명사를 연달아 반복하지 말고 기준, 상황, 비교 포인트, 기기/액상 예시로 일부 치환해 주세요.",
+    "허브 참조 링크는 '만수동 전자담배 탄맛 나는 이유? 처음 쓰면 가장 많이 겪는 문제 해결 방법' 제목과 https://blog.naver.com/youferst/224224753742 URL을 정확히 같은 쌍으로 써야 합니다.",
+    "리프 참조 링크는 '구월동 전자담배 액상 맛이 갑자기 달라졌다면? 원인과 해결 방법' 제목과 https://blog.naver.com/youferst/224365065716 URL을 정확히 같은 쌍으로 써야 합니다.",
+    "본문 중간중간에 만수동 지역 특성이나 사용자 후기 등 구체적인 사례를 추가해 신뢰도와 현지화 감각을 높이세요."
+  ],
+  "pass": false,
+  "seoEvaluation": {
+    "score": 89,
+    "evidence": [
+      "제목 길이가 모바일 검색 노출 구간에 비교적 안정적입니다.",
+      "메인 키워드가 제목 앞부분에 배치되어 있습니다.",
+      "도입부에 메인 키워드가 보여 검색 의도 연결이 자연스럽습니다.",
+      "첫 문장에 메인 키워드가 보여 검색 의도를 바로 연결합니다.",
+      "'만수동 전자담배 액상 누수' 본문 4회는 현재 권장 범위입니다.",
+      "'전자담배 액상 누수 해결법' 본문 1회는 현재 권장 범위입니다."
+    ],
+    "improvements": [
+      "핵심 소제목 1개 이상에 '만수동 전자담배 액상 누수'를 포함해 주제 축을 더 선명하게 잡아주세요.",
+      "마무리 문단에서 '만수동 전자담배 액상 누수'를 한 번 더 정리해 글의 중심 키워드를 닫아주세요.",
+      "'누수' 반복이 17회로 많습니다. 같은 명사를 연달아 반복하지 말고 기준, 상황, 비교 포인트, 기기/액상 예시로 일부 치환해 주세요."
+    ],
+    "keywordReport": {
+      "items": [
+        {
+          "keyword": "만수동 전자담배 액상 누수",
+          "count": 4,
+          "status": "ok",
+          "targetMin": 4,
+          "targetMax": 7,
+          "role": "main",
+          "recommendation": "메인 키워드 '만수동 전자담배 액상 누수' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 액상 누수 해결법",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전자담배 액상 누수 해결법' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 액상 누수 점검",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전자담배 액상 누수 점검' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 액상 선택",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 2,
+          "role": "bridge",
+          "recommendation": "브릿지 키워드 '전자담배 액상 선택' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 기기 관리",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 2,
+          "role": "bridge",
+          "recommendation": "브릿지 키워드 '전자담배 기기 관리' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "선행포스팅",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'선행포스팅'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "키워드빌드업",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'키워드빌드업'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "SEO 점수",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'SEO 점수'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "검색의도",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'검색의도'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "메인 키워드",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'메인 키워드'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "서브 키워드",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'서브 키워드'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "본문 n회",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'본문 n회'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "적정 범위",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'적정 범위'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "내부링크 설계",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'내부링크 설계'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "허브/리프",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'허브/리프'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "상위노출 가능성",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'상위노출 가능성'는 본문에 노출되지 않았습니다."
+        }
+      ],
+      "mainKeyword": {
+        "keyword": "만수동 전자담배 액상 누수",
+        "count": 4,
+        "status": "ok",
+        "targetMin": 4,
+        "targetMax": 7,
+        "role": "main",
+        "recommendation": "메인 키워드 '만수동 전자담배 액상 누수' 반복은 현재 적정합니다."
+      },
+      "subKeywords": [
+        {
+          "keyword": "전자담배 액상 누수 해결법",
+          "count": 1,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전자담배 액상 누수 해결법' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 액상 누수 점검",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 3,
+          "role": "sub",
+          "recommendation": "서브 키워드 '전자담배 액상 누수 점검' 반복은 현재 적정합니다."
+        }
+      ],
+      "bridgeKeywords": [
+        {
+          "keyword": "전자담배 액상 선택",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 2,
+          "role": "bridge",
+          "recommendation": "브릿지 키워드 '전자담배 액상 선택' 반복은 현재 적정합니다."
+        },
+        {
+          "keyword": "전자담배 기기 관리",
+          "count": 2,
+          "status": "ok",
+          "targetMin": 1,
+          "targetMax": 2,
+          "role": "bridge",
+          "recommendation": "브릿지 키워드 '전자담배 기기 관리' 반복은 현재 적정합니다."
+        }
+      ],
+      "internalLinkAnchors": [],
+      "forbiddenItems": [
+        {
+          "keyword": "선행포스팅",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'선행포스팅'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "키워드빌드업",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'키워드빌드업'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "SEO 점수",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'SEO 점수'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "검색의도",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'검색의도'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "메인 키워드",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'메인 키워드'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "서브 키워드",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'서브 키워드'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "본문 n회",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'본문 n회'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "적정 범위",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'적정 범위'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "내부링크 설계",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'내부링크 설계'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "허브/리프",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'허브/리프'는 본문에 노출되지 않았습니다."
+        },
+        {
+          "keyword": "상위노출 가능성",
+          "count": 0,
+          "status": "ok",
+          "targetMin": 0,
+          "targetMax": 0,
+          "role": "forbidden",
+          "recommendation": "'상위노출 가능성'는 본문에 노출되지 않았습니다."
+        }
+      ],
+      "contractApplied": true,
+      "overallRisk": "low",
+      "overallRiskSummary": "키워드 반복 위험도는 낮은 편입니다.",
+      "paragraphWarnings": [],
+      "seoKeywordItems": [
+        {
+          "keyword": "만수동 전자담배 액상 누수",
+          "role": "main",
+          "exactCount": 4,
+          "includedCount": 0,
+          "effectiveCount": 4,
+          "risk": "ok",
+          "note": "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+          "exactPhraseExclusionApplied": false
+        },
+        {
+          "keyword": "전자담배 액상 누수 해결법",
+          "role": "sub",
+          "exactCount": 1,
+          "includedCount": 0,
+          "effectiveCount": 1,
+          "risk": "ok",
+          "note": "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+          "exactPhraseExclusionApplied": false
+        },
+        {
+          "keyword": "전자담배 액상 누수 점검",
+          "role": "sub",
+          "exactCount": 2,
+          "includedCount": 0,
+          "effectiveCount": 2,
+          "risk": "ok",
+          "note": "긴 계획 키워드 포함형이 없어 exact 기준으로만 계산했습니다.",
+          "exactPhraseExclusionApplied": false
+        }
+      ],
+      "requiredEntityChecks": [],
+      "bodyRepetitionItems": [
+        {
+          "token": "전자담배",
+          "count": 12,
+          "category": "category_word",
+          "severity": "notice",
+          "message": "'전자담배' 반복이 눈에 띄기 시작합니다.",
+          "suggestion": "같은 축 단어를 연속 반복하지 말고 기준, 사례, 비교 문장으로 분산해 주세요.",
+          "isSeoRisk": false
+        },
+        {
+          "token": "액상",
+          "count": 9,
+          "category": "noun",
+          "severity": "notice",
+          "message": "'액상' 반복이 눈에 띄기 시작합니다.",
+          "suggestion": "같은 명사를 설명형 문장, 수치, 사례 표현으로 바꿔 밀도를 낮춰 주세요.",
+          "isSeoRisk": false
+        },
+        {
+          "token": "합니다",
+          "count": 8,
+          "category": "sentence_ending",
+          "severity": "caution",
+          "message": "'합니다' 문장 마무리가 반복됩니다.",
+          "suggestion": "문장 종결 표현을 섞어서 리듬을 바꿔 주세요.",
+          "isSeoRisk": false
+        },
+        {
+          "token": "확인하",
+          "count": 6,
+          "category": "verb_stem",
+          "severity": "caution",
+          "message": "'확인하' 반복이 많아 본문이 단조롭게 보일 수 있습니다.",
+          "suggestion": "같은 동사 어간을 반복하지 말고 문장 구조를 바꿔 주세요.",
+          "isSeoRisk": false
+        },
+        {
+          "token": "세요",
+          "count": 5,
+          "category": "sentence_ending",
+          "severity": "notice",
+          "message": "'세요' 문장 마무리가 반복됩니다.",
+          "suggestion": "문장 종결 표현을 섞어서 리듬을 바꿔 주세요.",
+          "isSeoRisk": false
+        }
+      ],
+      "legacyTokenItems": [
+        {
+          "token": "누수",
+          "count": 17,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "전자담배",
+          "count": 13,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검",
+            "전자담배 액상 선택"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "액상",
+          "count": 10,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검",
+            "전자담배 액상 선택"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "전자담배 액상",
+          "count": 9,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검",
+            "전자담배 액상 선택"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "기기",
+          "count": 9,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "점검",
+          "count": 8,
+          "sourceKeywords": [
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "액상 누수",
+          "count": 7,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "만수동",
+          "count": 7,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "만수동"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "만수동 전자담배 액상 누수",
+          "count": 4,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "만수동 전자담배",
+          "count": 4,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "보시면",
+          "count": 4,
+          "sourceKeywords": [
+            "보시면"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "해결법",
+          "count": 3,
+          "sourceKeywords": [
+            "전자담배 액상 누수 해결법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상 누수 점검",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 기기 관리",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상 선택",
+          "count": 2,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검",
+            "전자담배 액상 선택"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 기기",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "기기 관리",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "누수 점검",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "관리",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상 누수 해결법",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 액상 누수 해결법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "누수 해결법",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 액상 누수 해결법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "정도면",
+          "count": 1,
+          "sourceKeywords": [
+            "정도면"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "흡입구",
+          "count": 1,
+          "sourceKeywords": [
+            "흡입구"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        }
+      ],
+      "tokenItems": [
+        {
+          "token": "누수",
+          "count": 17,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "전자담배",
+          "count": 13,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검",
+            "전자담배 액상 선택"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "액상",
+          "count": 10,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검",
+            "전자담배 액상 선택"
+          ],
+          "note": "반복이 많은 편입니다. 이 단어가 메인 축이라도 문단마다 되풀이되면 과밀로 보일 수 있습니다."
+        },
+        {
+          "token": "전자담배 액상",
+          "count": 9,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검",
+            "전자담배 액상 선택"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "기기",
+          "count": 9,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "점검",
+          "count": 8,
+          "sourceKeywords": [
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "액상 누수",
+          "count": 7,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "만수동",
+          "count": 7,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "만수동"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "만수동 전자담배 액상 누수",
+          "count": 4,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "만수동 전자담배",
+          "count": 4,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "보시면",
+          "count": 4,
+          "sourceKeywords": [
+            "보시면"
+          ],
+          "note": "적당히 보이는 편입니다. 다른 핵심 단어와의 균형을 같이 보는 것이 좋습니다."
+        },
+        {
+          "token": "해결법",
+          "count": 3,
+          "sourceKeywords": [
+            "전자담배 액상 누수 해결법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상 누수 점검",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 기기 관리",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상 선택",
+          "count": 2,
+          "sourceKeywords": [
+            "만수동 전자담배 액상 누수",
+            "전자담배 액상 누수 해결법",
+            "전자담배 액상 누수 점검",
+            "전자담배 액상 선택"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 기기",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "기기 관리",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "누수 점검",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 액상 누수 점검"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "관리",
+          "count": 2,
+          "sourceKeywords": [
+            "전자담배 기기 관리"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "전자담배 액상 누수 해결법",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 액상 누수 해결법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "누수 해결법",
+          "count": 1,
+          "sourceKeywords": [
+            "전자담배 액상 누수 해결법"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "정도면",
+          "count": 1,
+          "sourceKeywords": [
+            "정도면"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        },
+        {
+          "token": "흡입구",
+          "count": 1,
+          "sourceKeywords": [
+            "흡입구"
+          ],
+          "note": "실제 본문에서 확인된 키워드 축입니다."
+        }
+      ],
+      "totalMentions": 11,
+      "introCoverage": true,
+      "titleFrontLoaded": true,
+      "bodyLength": 2986,
+      "summary": [
+        "메인 키워드 '만수동 전자담배 액상 누수' 본문 4회",
+        "전체 반복 위험도 low"
+      ],
+      "recommendations": []
+    },
+    "keywordMetrics": [
+      {
+        "keyword": "만수동 전자담배 액상 누수",
+        "role": "main",
+        "label": "메인 키워드",
+        "completenessScore": 94,
+        "exposurePotentialScore": 100,
+        "count": 4,
+        "targetMin": 4,
+        "targetMax": 7,
+        "titleIncluded": true,
+        "titleFrontLoaded": true,
+        "introIncluded": true,
+        "earlyCoverage": true,
+        "summary": "제목 앞배치 / 도입부 포함 / 본문 4회",
+        "action": "도입부에서 '만수동 전자담배 액상 누수' 검색 의도를 더 직접적으로 받아 주세요."
+      },
+      {
+        "keyword": "전자담배 액상 누수 해결법",
+        "role": "sub",
+        "label": "서브 키워드 1",
+        "completenessScore": 49,
+        "exposurePotentialScore": 65,
+        "count": 1,
+        "targetMin": 1,
+        "targetMax": 3,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 1회",
+        "action": "'전자담배 액상 누수 해결법'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "전자담배 액상 누수 점검",
+        "role": "sub",
+        "label": "서브 키워드 2",
+        "completenessScore": 49,
+        "exposurePotentialScore": 65,
+        "count": 2,
+        "targetMin": 1,
+        "targetMax": 3,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": true,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 2회",
+        "action": "'전자담배 액상 누수 점검'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "전자담배 액상 선택",
+        "role": "sub",
+        "label": "브릿지 키워드",
+        "completenessScore": 55,
+        "exposurePotentialScore": 65,
+        "count": 2,
+        "targetMin": 1,
+        "targetMax": 2,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 2회",
+        "action": "'전자담배 액상 선택'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      },
+      {
+        "keyword": "전자담배 기기 관리",
+        "role": "sub",
+        "label": "브릿지 키워드",
+        "completenessScore": 55,
+        "exposurePotentialScore": 65,
+        "count": 2,
+        "targetMin": 1,
+        "targetMax": 2,
+        "titleIncluded": false,
+        "titleFrontLoaded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "summary": "제목 미포함 / 도입부 부족 / 본문 2회",
+        "action": "'전자담배 기기 관리'를 제목이나 핵심 소제목에 더 분명하게 배치해 주세요."
+      }
+    ],
+    "combinationCoverageScore": 77,
+    "combinationMetrics": [
+      {
+        "phrase": "만수동 전자담배 액상 누수",
+        "role": "main",
+        "priority": "core",
+        "exactMatches": 4,
+        "tokenCoverage": 1,
+        "titleIncluded": true,
+        "headingIncluded": false,
+        "introIncluded": true,
+        "earlyCoverage": true,
+        "coverageScore": 100,
+        "exposurePotentialScore": 100,
+        "summary": "제목 연결 · 도입부 연결 · 소제목 보강 가능 · 직접 표현 강제 없음",
+        "action": "현재 조합 흐름을 유지해도 괜찮습니다."
+      },
+      {
+        "phrase": "전자담배 액상 누수 해결법",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 1,
+        "tokenCoverage": 1,
+        "titleIncluded": true,
+        "headingIncluded": false,
+        "introIncluded": false,
+        "earlyCoverage": true,
+        "coverageScore": 81,
+        "exposurePotentialScore": 78,
+        "summary": "제목 연결 · 도입부 약함 · 소제목 보강 가능 · 직접 표현 강제 없음",
+        "action": "첫 두 문단 안에서 전자담배 선택 기준 확인를 더 직접적으로 받아 주세요."
+      },
+      {
+        "phrase": "전자담배 액상 누수 점검",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 2,
+        "tokenCoverage": 1,
+        "titleIncluded": true,
+        "headingIncluded": false,
+        "introIncluded": false,
+        "earlyCoverage": true,
+        "coverageScore": 81,
+        "exposurePotentialScore": 78,
+        "summary": "제목 연결 · 도입부 약함 · 소제목 보강 가능 · 직접 표현 강제 없음",
+        "action": "첫 두 문단 안에서 전자담배 선택 기준 확인를 더 직접적으로 받아 주세요."
+      },
+      {
+        "phrase": "전자담배 액상 선택",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 2,
+        "tokenCoverage": 1,
+        "titleIncluded": false,
+        "headingIncluded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "coverageScore": 58,
+        "exposurePotentialScore": 52,
+        "summary": "제목 약함 · 도입부 약함 · 소제목 보강 가능 · 2회 직접 표현",
+        "action": "첫 두 문단 안에서 '전자담배 액상 선택' 검색 의도를 더 직접적으로 받아 주세요."
+      },
+      {
+        "phrase": "전자담배 기기 관리",
+        "role": "support",
+        "priority": "support",
+        "exactMatches": 2,
+        "tokenCoverage": 1,
+        "titleIncluded": false,
+        "headingIncluded": false,
+        "introIncluded": false,
+        "earlyCoverage": false,
+        "coverageScore": 58,
+        "exposurePotentialScore": 52,
+        "summary": "제목 약함 · 도입부 약함 · 소제목 보강 가능 · 2회 직접 표현",
+        "action": "첫 두 문단 안에서 '전자담배 기기 관리' 검색 의도를 더 직접적으로 받아 주세요."
+      }
+    ]
+  },
+  "naverLogicEvaluation": {
+    "primary": "hybrid",
+    "label": "D.I.A. + C-Rank 혼합",
+    "completenessScore": 25,
+    "reason": "이 주제는 문제 해결 흐름과 주제권 연결이 모두 중요해서 D.I.A.와 C-Rank를 함께 맞추는 편이 좋습니다.",
+    "evidence": [
+      "문제 상황과 선택 기준이 본문에 드러나 검색 의도 연결이 자연스럽습니다.",
+      "비교와 선택 기준 요소가 살아 있어 실전 검색 의도에 잘 맞습니다.",
+      "내부링크 설계 대상이 있어 주제권 확장 관점이 살아 있습니다.",
+      "지역성과 실사용 맥락이 보여 C-Rank 관점의 주제권 연결이 자연스럽습니다.",
+      "실사용 맥락과 검색자 질문이 보여 D.I.A. 관점의 설득력이 있습니다."
+    ],
+    "improvements": [
+      "허브 참조 링크는 '만수동 전자담배 탄맛 나는 이유? 처음 쓰면 가장 많이 겪는 문제 해결 방법' 제목과 https://blog.naver.com/youferst/224224753742 URL을 정확히 같은 쌍으로 써야 합니다.",
+      "리프 참조 링크는 '구월동 전자담배 액상 맛이 갑자기 달라졌다면? 원인과 해결 방법' 제목과 https://blog.naver.com/youferst/224365065716 URL을 정확히 같은 쌍으로 써야 합니다."
+    ]
+  },
+  "postId": "post-8d184c88",
+  "savedAt": "2026-08-13T05:31:27.623Z"
+}
