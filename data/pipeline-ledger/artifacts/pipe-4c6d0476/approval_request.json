@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-4c6d0476",
+  "type": "approval_request",
+  "savedAt": "2026-08-13T05:30:14.735Z",
+  "data": {
+    "pipelineId": "pipe-4c6d0476",
+    "previousTitle": "",
+    "proposedTitle": "만수동 전자담배 액상 누수 문제 해결법과 점검 포인트",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수동 지역 내 전자담배 액상 누수 문제에 대한 구체적이고 실질적인 해결책을 제공함으로써 지역 사용자들의 검색 의도에 부합한다. 최근 발행 글 구조와 키워드 반복 패턴을 반영해 친근하면서도 정보 중심의 설명형 문체로 작성하며, 허브-리프 구조를 활용해 누수 문제의 원인부터 점검, 해결, 재발 방지까지 체계적으로 안내한다. 직접 경험과 지역 특성을 반영한 사례 중심 서술로 인간 지문을 강화하고, 검색자가 즉시 비교·판단할 수 있도록 문제별 체크리스트와 해결법을 구체적으로 제시해 네이버 SEO 점수 90점 이상 달성을 목표로 한다.",
+    "requestedAt": "2026-08-13T05:30:08.915Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-13T05:30:08.915Z",
+      "modifications": null
+    }
+  }
+}
