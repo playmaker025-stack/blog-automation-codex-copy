@@ -1003,10 +1003,10 @@
       "contentKind": "leaf",
       "feasibility": null,
       "relatedSources": [],
-      "status": "in-progress",
+      "status": "draft",
       "assignedUserId": "b",
       "createdAt": "2026-07-09T06:19:53.361Z",
-      "updatedAt": "2026-08-13T05:30:11.543Z"
+      "updatedAt": "2026-08-13T05:32:41.514Z"
     },
     {
       "topicId": "topic-86f213ca",
@@ -1653,5 +1653,5 @@
       "updatedAt": "2026-08-12T09:12:13.735Z"
     }
   ],
-  "lastUpdated": "2026-08-13T05:30:11.543Z"
+  "lastUpdated": "2026-08-13T05:32:41.514Z"
 }
