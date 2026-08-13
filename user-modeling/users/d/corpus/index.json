@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-msrj1dd5",
+      "title": "전자담배 액상 가격이 너무 싼 경우 확인해야 할 것 – 무조건 저렴한 게 좋은 건 아닙니다",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 7824,
+      "publishedAt": "2026-08-13T13:01:19.953Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msrj1dd5.md"
+    },
+    {
       "sampleId": "published-post-manual-msq4y2ie",
       "title": "전자담배 액상이 갑자기 빨리 줄어드는 이유 – 새는 곳이 없는데 왜 소모량이 늘었을까?",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6367,
       "publishedAt": "2026-07-05T02:39:40.811Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mr76npd2.md"
-    },
-    {
-      "sampleId": "published-post-manual-mr4urgdx",
-      "title": "여름철 전자담배 액상이 더 잘 새는 이유-액상 문제가 아닐 수도 있습니다",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6160,
-      "publishedAt": "2026-07-03T11:31:08.116Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mr4urgdx.md"
     }
   ],
-  "lastUpdated": "2026-08-12T13:39:11.826Z"
+  "lastUpdated": "2026-08-13T13:01:26.427Z"
 }
