@@ -1,7 +1,7 @@
 {
   "pipelineId": "pipe-d88b8886",
   "type": "strategy_plan",
-  "savedAt": "2026-08-14T07:33:26.525Z",
+  "savedAt": "2026-08-14T07:35:11.940Z",
   "data": {
     "title": "전자담배로 넘어오려는 사람이 가장 많이 비교하는 선택 기준 5가지",
     "outline": [
@@ -88,7 +88,110 @@
       "부평 전자담배 추천"
     ],
     "rationale": "사용자 프로필과 최근 발행 글 스타일에 맞춰 친근하면서도 정보 중심의 설명형 문장으로 구성. 검색자의 즉각적 비교와 결정 지원을 위해 5가지 핵심 기준을 중심으로 목차형 요약과 구체적 경험을 강조. 부평 지역 내 매장과 제품 추천을 포함해 지역 밀착형 콘텐츠로 차별화. 허브와 리프 글 연결로 체류시간과 재방문 유도 전략 반영.",
-    "corpusSummary": null,
+    "corpusSummary": {
+      "userId": "e",
+      "selectedCount": 5,
+      "styleProfile": {
+        "dominantTone": "friendly",
+        "avgWordCount": 6444,
+        "signatureExpressions": [],
+        "structurePattern": "서술형 (자연스러운 단락)",
+        "openingPattern": "주제 직접 서술로 시작"
+      },
+      "exemplarExcerpts": [
+        {
+          "sampleId": "published-post-manual-mslqjgv4",
+          "title": "상큼 깔끔 입호흡 전자담배 액상 몇개 가져왔습니다!!",
+          "excerpt": "상큼 깔끔 입호흡 전자담배 액상 몇개 가져왔습니다!! 상큼 깔끔 입호흡 전자담배 액상 몇개 가져왔습니다!! : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 ",
+          "styleNotes": "tone=friendly"
+        },
+        {
+          "sampleId": "published-post-manual-ms1qobk6",
+          "title": "부평시청역 전자담배 오랜만에 입호흡 디저트액상 나왔슴다",
+          "excerpt": "부평시청역 전자담배 오랜만에 입호흡 디저트액상 나왔슴다 부평시청역 전자담배 오랜만에 입호흡 디저트액상 나왔슴다 : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주",
+          "styleNotes": "tone=friendly"
+        },
+        {
+          "sampleId": "published-post-manual-mrly9f82",
+          "title": "만수동 전자담배 멘솔 과일맛 일회용 전담 도조 오팔",
+          "excerpt": "만수동 전자담배 멘솔 과일맛 일회용 전담 도조 오팔 만수동 전자담배 멘솔 과일맛 일회용 전담 도조 오팔 : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경",
+          "styleNotes": "tone=friendly"
+        },
+        {
+          "sampleId": "published-post-manual-msbpt05i",
+          "title": "인천 일회용 전자담배 매장 종류 후기 네스티원 말론바 등등~",
+          "excerpt": "인천 일회용 전자담배 매장 종류 후기 네스티원 말론바 등등 인천 일회용 전자담배 매장 종류 후기 네스티원 말론바 등등 : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블",
+          "styleNotes": "tone=friendly"
+        },
+        {
+          "sampleId": "published-post-manual-mrc0xqcj",
+          "title": "습하고 무더운 여름에 맞는 입호흡액상 부평역 전자담배에서 남기는 후기",
+          "excerpt": "습하고 무더운 여름에 맞는 입호흡액상 부평역 전자담배에서 남기는 후기 습하고 무더운 여름에 맞는 입호흡액상 부평역 전자담배에서 남기는 후기 : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 ",
+          "styleNotes": "tone=friendly"
+        }
+      ],
+      "representativeExcerpts": [
+        "상큼 깔끔 입호흡 전자담배 액상 몇개 가져왔습니다!! 상큼 깔끔 입호흡 전자담배 액상 몇개 가져왔습니다!! : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소",
+        "인천 일회용 전자담배 매장 종류 후기 네스티원 말론바 등등 인천 일회용 전자담배 매장 종류 후기 네스티원 말론바 등등 : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블",
+        "부평시청역 전자담배 오랜만에 입호흡 디저트액상 나왔슴다 부평시청역 전자담배 오랜만에 입호흡 디저트액상 나왔슴다 : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주",
+        "만수동 전자담배 멘솔 과일맛 일회용 전담 도조 오팔 만수동 전자담배 멘솔 과일맛 일회용 전담 도조 오팔 : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경",
+        "습하고 무더운 여름에 맞는 입호흡액상 부평역 전자담배에서 남기는 후기 습하고 무더운 여름에 맞는 입호흡액상 부평역 전자담배에서 남기는 후기 : 네이버 블로그 NAVER 블로그 인천전자담배 만수동만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을"
+      ],
+      "retrievalStrategy": "exemplar_index",
+      "staleWarnings": [],
+      "scoringBreakdown": [
+        {
+          "sampleId": "published-post-manual-mslqjgv4",
+          "finalScore": 0.596,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.96,
+            "roleMatch": 0,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-manual-ms1qobk6",
+          "finalScore": 0.571,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.87,
+            "roleMatch": 0,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mrly9f82",
+          "finalScore": 0.554,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.79,
+            "roleMatch": 0,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-manual-msbpt05i",
+          "finalScore": 0.508,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.91,
+            "roleMatch": 0,
+            "intentMatch": 0
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mrc0xqcj",
+          "finalScore": 0.468,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.75,
+            "roleMatch": 0,
+            "intentMatch": 0
+          }
+        }
+      ]
+    },
     "publicationLearning": {
       "source": "writing-profile",
       "totalEntries": 14,
