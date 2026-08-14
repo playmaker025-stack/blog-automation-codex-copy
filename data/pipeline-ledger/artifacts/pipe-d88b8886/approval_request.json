@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-d88b8886",
+  "type": "approval_request",
+  "savedAt": "2026-08-14T07:35:08.149Z",
+  "data": {
+    "pipelineId": "pipe-d88b8886",
+    "previousTitle": "",
+    "proposedTitle": "전자담배로 넘어오려는 사람이 가장 많이 비교하는 선택 기준 5가지",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "사용자 프로필과 최근 발행 글 스타일에 맞춰 친근하면서도 정보 중심의 설명형 문장으로 구성. 검색자의 즉각적 비교와 결정 지원을 위해 5가지 핵심 기준을 중심으로 목차형 요약과 구체적 경험을 강조. 부평 지역 내 매장과 제품 추천을 포함해 지역 밀착형 콘텐츠로 차별화. 허브와 리프 글 연결로 체류시간과 재방문 유도 전략 반영.",
+    "requestedAt": "2026-08-14T07:35:02.427Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-14T07:35:02.427Z",
+      "modifications": null
+    }
+  }
+}
