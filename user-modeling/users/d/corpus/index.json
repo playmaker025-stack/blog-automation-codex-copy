@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mssxeywf",
+      "title": "전자담배 새 액상을 넣었는데 맛이 이상한 이유 – 액상 문제일까 팟 문제일까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 7932,
+      "publishedAt": "2026-08-14T12:31:34.365Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mssxeywf.md"
+    },
+    {
       "sampleId": "published-post-manual-msrj1dd5",
       "title": "전자담배 액상 가격이 너무 싼 경우 확인해야 할 것 – 무조건 저렴한 게 좋은 건 아닙니다",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6405,
       "publishedAt": "2026-07-06T11:31:16.046Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mr9536qs.md"
-    },
-    {
-      "sampleId": "published-post-manual-mr76npd2",
-      "title": "전자담배 팟 안에 물방울이 생기는 이유누수일까? 결로일까? 헷갈리는 분들을 위한 관리법",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6367,
-      "publishedAt": "2026-07-05T02:39:40.811Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mr76npd2.md"
     }
   ],
-  "lastUpdated": "2026-08-13T13:01:26.427Z"
+  "lastUpdated": "2026-08-14T12:31:40.835Z"
 }
