@@ -4054,7 +4054,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-4c6d0476",
       "at": "2026-08-13T05:30:07.262Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배로 넘어오려는 사람이 가장 많이 비교하는 선택 기준 5가지",
+      "proposedTitle": "전자담배로 넘어오려는 사람이 가장 많이 비교하는 선택 기준 5가지",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-d88b8886",
+      "at": "2026-08-14T07:33:28.632Z"
     }
   ],
-  "lastUpdated": "2026-08-13T05:30:07.262Z"
+  "lastUpdated": "2026-08-14T07:33:28.632Z"
 }
