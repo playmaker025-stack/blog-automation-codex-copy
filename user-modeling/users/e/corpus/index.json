@@ -2,6 +2,15 @@
   "userId": "e",
   "samples": [
     {
+      "sampleId": "published-post-154bea02",
+      "title": "전자담배로 바꿀때 가장 많이 비교하는 것 5가지",
+      "category": "E블로그",
+      "tags": [],
+      "wordCount": 4443,
+      "publishedAt": "2026-08-14T13:07:12.170Z",
+      "filePath": "user-modeling/users/e/corpus/samples/published-post-154bea02.md"
+    },
+    {
       "sampleId": "published-post-manual-mslqjgv4",
       "title": "상큼 깔끔 입호흡 전자담배 액상 몇개 가져왔습니다!!",
       "category": "published-post",
@@ -155,5 +164,5 @@
       "filePath": "user-modeling/users/e/corpus/samples/reference-e-05.md"
     }
   ],
-  "lastUpdated": "2026-08-09T11:44:50.809Z"
+  "lastUpdated": "2026-08-14T13:07:32.330Z"
 }
