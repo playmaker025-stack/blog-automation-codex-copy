@@ -4087,7 +4087,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-f1b4b8b7",
       "at": "2026-08-17T04:18:44.030Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-5d0c0499",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-0cfe5e5d / Similar existing title found: 부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우 (ready, 1)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-ecbf5a48",
+      "at": "2026-08-17T07:07:57.551Z"
     }
   ],
-  "lastUpdated": "2026-08-17T04:18:44.030Z"
+  "lastUpdated": "2026-08-17T07:07:57.551Z"
 }
