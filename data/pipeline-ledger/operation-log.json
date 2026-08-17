@@ -4098,7 +4098,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-ecbf5a48",
       "at": "2026-08-17T07:07:57.551Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우",
+      "proposedTitle": "부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-1e4791e8",
+      "at": "2026-08-17T07:08:39.060Z"
     }
   ],
-  "lastUpdated": "2026-08-17T07:07:57.551Z"
+  "lastUpdated": "2026-08-17T07:08:39.060Z"
 }
