@@ -2,6 +2,21 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-bc7bfb22",
+      "title": "부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우!",
+      "category": "c",
+      "tags": [
+        "부천",
+        "상동",
+        "전자담배",
+        "액상추천",
+        "사용자맞춤"
+      ],
+      "wordCount": 3120,
+      "publishedAt": "2026-08-17T09:37:23.853Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-bc7bfb22.md"
+    },
+    {
       "sampleId": "published-post-manual-msr5i6u9",
       "title": "부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천!",
       "category": "published-post",
@@ -314,16 +329,7 @@
       "wordCount": 6829,
       "publishedAt": "2026-07-03T07:26:41.933Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mr4m14xy.md"
-    },
-    {
-      "sampleId": "published-post-manual-mr1tcu2q",
-      "title": "부평전자담배 크로스미니6 후기! 스펙 & 사용법 총정리",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6343,
-      "publishedAt": "2026-07-01T08:28:27.986Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mr1tcu2q.md"
     }
   ],
-  "lastUpdated": "2026-08-13T06:42:36.531Z"
+  "lastUpdated": "2026-08-17T09:37:33.244Z"
 }
