@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-1e4791e8",
+  "type": "approval_request",
+  "savedAt": "2026-08-17T07:08:48.564Z",
+  "data": {
+    "pipelineId": "pipe-1e4791e8",
+    "previousTitle": "",
+    "proposedTitle": "부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "부천 상동 지역 전자담배 사용자 대상 맞춤 액상 추천과 선택 노하우는 지역 특성과 사용자 취향을 반영한 구체적 정보 제공이 핵심이다. 최근 발행 글들의 평균 평가가 61점으로 개선 여지가 크므로, 친근하면서도 경험 기반 구체적 설명과 비교표, 단계별 목록을 활용해 검색자의 즉각적 의사결정 지원에 집중한다. 허브-리프 구조를 유지하며 관련 기기 추천과 문제 해결 글과 자연스럽게 연결해 체류시간과 재방문율을 높일 전략이다.\n\n[사용자 승인 후 추가 수정 요청]\n",
+    "requestedAt": "2026-08-17T07:08:43.379Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-17T07:08:43.379Z",
+      "modifications": null
+    }
+  }
+}
