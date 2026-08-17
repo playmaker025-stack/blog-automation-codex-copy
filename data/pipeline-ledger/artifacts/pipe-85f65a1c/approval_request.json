@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-85f65a1c",
+  "type": "approval_request",
+  "savedAt": "2026-08-17T03:28:24.582Z",
+  "data": {
+    "pipelineId": "pipe-85f65a1c",
+    "previousTitle": "",
+    "proposedTitle": "만수동 전자담배 입문자 필수! 기기 선택과 예산 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수동 지역 전자담배 입문자 대상의 구체적이고 현실적인 기기 선택과 예산 가이드 콘텐츠는 검색자의 직접적 의문을 해결하는 데 최적화됨. 최근 발행 글과 최고 성과 글의 제목과 구조를 참고해, 친근한 문체와 실제 경험을 중심으로 작성해 신뢰도를 높이고, 문제 해결과 Q&A 섹션으로 체류시간과 재방문을 유도하는 허브-리프 구조를 반영함. 키워드는 네이버 검색창 입력형태에 맞춰 자연스럽게 배치해 SEO 최적화에 부합함.",
+    "requestedAt": "2026-08-17T03:28:19.089Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-17T03:28:19.089Z",
+      "modifications": null
+    }
+  }
+}
