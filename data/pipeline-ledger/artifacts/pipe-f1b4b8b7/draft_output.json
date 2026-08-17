@@ -1,20 +1,18 @@
 {
   "pipelineId": "pipe-f1b4b8b7",
   "type": "draft_output",
-  "savedAt": "2026-08-17T04:21:06.529Z",
+  "savedAt": "2026-08-17T04:22:19.722Z",
   "data": {
     "postId": "post-0cfe5e5d",
     "title": "부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우",
-    "wordCount": 3196,
-    "generatedAt": "2026-08-17T04:21:05.068Z",
+    "wordCount": 3084,
+    "generatedAt": "2026-08-17T04:22:18.277Z",
     "contentPath": "data/posting-list/posts/post-0cfe5e5d/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
       "ok": true,
       "blockingReasons": [],
       "warnings": [
-        "mustResolve 단서 부족: 사용자 유형별 분기",
-        "필수 섹션 반영 부족: 사용자 유형별 분기",
         "medium overlap: 기존 제목 유사 위험 1건",
         "medium overlap: 결론 패턴 반복 위험 visit_consultation",
         "medium overlap: CTA 반복 위험 1건",
@@ -23,9 +21,7 @@
       "matchedForbiddenPhrases": [],
       "keywordStuffingFindings": [],
       "deferFindings": [],
-      "contractCoverageFindings": [
-        "mustResolve 단서 부족: 사용자 유형별 분기"
-      ],
+      "contractCoverageFindings": [],
       "overlapFindings": [
         "medium overlap: 기존 제목 유사 위험 1건",
         "medium overlap: 결론 패턴 반복 위험 visit_consultation",
