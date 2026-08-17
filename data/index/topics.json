@@ -1611,7 +1611,113 @@
       "assignedUserId": "c",
       "createdAt": "2026-08-17T04:18:12.175Z",
       "updatedAt": "2026-08-17T09:37:28.338Z"
+    },
+    {
+      "topicId": "topic-44bedeea",
+      "title": "인천 부평 전자담배 통매음 문제 발생 시 대처법",
+      "description": "인천 부평 지역에서 전자담배 사용 중 통매음 현상이 발생할 때 원인 파악과 합의 절차, 해결 방법을 자세히 안내합니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "부평",
+        "전자담배",
+        "통매음",
+        "문제해결"
+      ],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-17T09:37:56.828Z",
+      "updatedAt": "2026-08-17T09:37:56.828Z"
+    },
+    {
+      "topicId": "topic-f7b1288a",
+      "title": "부천 상동 전자담배 사용자 후기와 액상별 맛 비교",
+      "description": "부천 상동 지역 전자담배 사용자들의 실제 후기와 액상별 맛과 향의 차이를 상세 비교 분석합니다.",
+      "category": "c",
+      "tags": [
+        "부천",
+        "상동",
+        "전자담배",
+        "액상후기",
+        "맛비교"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-17T09:37:56.828Z",
+      "updatedAt": "2026-08-17T09:37:56.828Z"
+    },
+    {
+      "topicId": "topic-174e3e8a",
+      "title": "인천 만수역 전자담배 코일 불량 점검과 교체 시기 안내",
+      "description": "인천 만수역 인근에서 전자담배 코일 불량 증상별 점검 방법과 적절한 교체 시기를 구체적으로 설명합니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "만수역",
+        "전자담배",
+        "코일교체",
+        "불량점검"
+      ],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-17T09:37:56.828Z",
+      "updatedAt": "2026-08-17T09:37:56.828Z"
+    },
+    {
+      "topicId": "topic-0816c878",
+      "title": "인천 부평구 전자담배 액상 최저가 시세표와 구매 팁",
+      "description": "인천 부평구 지역 전자담배 액상 최저가 시세표를 제공하고, 현명한 구매를 위한 팁과 주의사항을 안내합니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "부평구",
+        "전자담배",
+        "액상",
+        "최저가",
+        "시세표"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-17T09:37:56.828Z",
+      "updatedAt": "2026-08-17T09:37:56.828Z"
+    },
+    {
+      "topicId": "topic-3bc03055",
+      "title": "인천 전자담배 사용자 아이피 추적 관련 보안과 개인정보 보호",
+      "description": "인천 지역 전자담배 사용자들이 궁금해하는 아이피 추적 가능성과 개인정보 보호 방법, 주의사항을 상세히 설명합니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "전자담배",
+        "아이피추적",
+        "보안",
+        "개인정보"
+      ],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-17T09:37:56.828Z",
+      "updatedAt": "2026-08-17T09:37:56.828Z"
     }
   ],
-  "lastUpdated": "2026-08-17T09:37:28.338Z"
+  "lastUpdated": "2026-08-17T09:37:56.828Z"
 }
