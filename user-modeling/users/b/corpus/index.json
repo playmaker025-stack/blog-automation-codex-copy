@@ -2,6 +2,20 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-f3e7657b",
+      "title": "갈산동 전자담배 입문자 필수 기기 선택 방법",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "전자담배입문",
+        "기기선택",
+        "예산가이드"
+      ],
+      "wordCount": 3391,
+      "publishedAt": "2026-08-18T10:35:27.000Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-f3e7657b.md"
+    },
+    {
       "sampleId": "published-post-8d184c88",
       "title": "주안 전자담배 액상 누수 문제 해결법과 점검 방법",
       "category": "b",
@@ -266,5 +280,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-08-13T12:28:03.626Z"
+  "lastUpdated": "2026-08-18T10:35:41.895Z"
 }
