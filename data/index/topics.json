@@ -1717,7 +1717,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-08-17T09:37:56.828Z",
       "updatedAt": "2026-08-17T09:37:56.828Z"
+    },
+    {
+      "topicId": "topic-e0d3543c",
+      "title": "인천 남동구 전자담배 기기 고장 시 자가 점검법과 수리 팁",
+      "description": "남동구 지역 전자담배 사용자들을 위한 기기 고장 증상별 자가 점검법과 간단 수리 팁을 안내합니다.",
+      "category": "c",
+      "tags": [
+        "인천",
+        "남동구",
+        "전자담배",
+        "기기고장",
+        "자가점검"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-20T05:16:30.950Z",
+      "updatedAt": "2026-08-20T05:16:30.950Z"
     }
   ],
-  "lastUpdated": "2026-08-18T10:35:37.583Z"
+  "lastUpdated": "2026-08-20T05:16:30.950Z"
 }
