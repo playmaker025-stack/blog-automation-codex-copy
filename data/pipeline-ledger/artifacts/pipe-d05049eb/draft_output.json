@@ -1,29 +1,25 @@
 {
   "pipelineId": "pipe-d05049eb",
   "type": "draft_output",
-  "savedAt": "2026-08-20T05:19:53.790Z",
+  "savedAt": "2026-08-20T05:21:05.394Z",
   "data": {
     "postId": "post-70d278e7",
     "title": "인천 남동구 전자담배 기기 고장 시 자가 점검법과 수리 팁",
-    "wordCount": 2975,
-    "generatedAt": "2026-08-20T05:19:52.667Z",
+    "wordCount": 2733,
+    "generatedAt": "2026-08-20T05:21:04.250Z",
     "contentPath": "data/posting-list/posts/post-70d278e7/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
       "ok": true,
       "blockingReasons": [],
       "warnings": [
-        "mustResolve 단서 부족: 즉시 점검 순서와 예방 기준",
-        "필수 섹션 반영 부족: 즉시 점검 순서와 예방 기준",
         "medium overlap: 도입 패턴 반복 위험 problem_symptom",
         "medium overlap: 결론 패턴 반복 위험 problem_checklist"
       ],
       "matchedForbiddenPhrases": [],
       "keywordStuffingFindings": [],
       "deferFindings": [],
-      "contractCoverageFindings": [
-        "mustResolve 단서 부족: 즉시 점검 순서와 예방 기준"
-      ],
+      "contractCoverageFindings": [],
       "overlapFindings": [
         "medium overlap: 도입 패턴 반복 위험 problem_symptom",
         "medium overlap: 결론 패턴 반복 위험 problem_checklist"
