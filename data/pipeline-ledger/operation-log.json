@@ -4120,7 +4120,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-d05049eb",
       "at": "2026-08-20T05:17:07.517Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수동 전자담배 입문자 필수 질문과 답변 총정리",
+      "proposedTitle": "만수동 전자담배 입문자 필수 질문과 답변 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-c3625d5f",
+      "at": "2026-08-20T07:50:29.101Z"
     }
   ],
-  "lastUpdated": "2026-08-20T05:17:07.517Z"
+  "lastUpdated": "2026-08-20T07:50:29.101Z"
 }
