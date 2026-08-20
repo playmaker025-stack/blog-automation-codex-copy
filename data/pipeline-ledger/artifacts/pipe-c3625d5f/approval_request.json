@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-c3625d5f",
+  "type": "approval_request",
+  "savedAt": "2026-08-20T07:50:37.020Z",
+  "data": {
+    "pipelineId": "pipe-c3625d5f",
+    "previousTitle": "",
+    "proposedTitle": "만수동 전자담배 입문자 필수 질문과 답변 총정리",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수동 지역 전자담배 입문자들이 매장에서 가장 궁금해하는 질문과 답변을 중심으로, 실제 매장 방문 경험과 문제 해결 사례를 포함해 신뢰도와 실용성을 높임. 친근한 문체로 입문자 눈높이에 맞추고, 검색자가 바로 비교·결정할 수 있도록 문제, 기준, 선택지를 순서대로 풀어내는 구조를 반영. 허브 역할의 '입문자 필수 질문과 답변' 글로서, 리프 주제인 '만수동 전자담배 액상 추천'으로 자연스러운 내부 링크 연결 계획.",
+    "requestedAt": "2026-08-20T07:50:30.887Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-20T07:50:30.887Z",
+      "modifications": null
+    }
+  }
+}
