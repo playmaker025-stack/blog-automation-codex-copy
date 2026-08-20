@@ -1,7 +1,7 @@
 {
   "pipelineId": "pipe-d05049eb",
   "type": "strategy_plan",
-  "savedAt": "2026-08-20T05:17:05.386Z",
+  "savedAt": "2026-08-20T05:17:48.028Z",
   "data": {
     "title": "인천 남동구 전자담배 기기 고장 시 자가 점검법과 수리 팁",
     "outline": [
@@ -51,7 +51,110 @@
       "남동구 전자담배 수리"
     ],
     "rationale": "남동구 전자담배 사용자 대상 고장 증상별 자가 점검과 간단 수리법을 구체적이고 친근하게 안내하여 검색 의도에 부합. 최근 발행 글 구조와 키워드 반복 패턴을 반영해 제목과 도입부에 핵심 키워드를 자연스럽게 배치. 실제 사용자 경험과 단계별 점검법, 수리 팁을 포함해 신뢰도와 체류시간을 높임. 허브-리프 구조를 고려해 수리점 안내 후 액상 선택 및 코일 관리 관련 글로 자연스러운 내부 링크 연결 전략 적용.",
-    "corpusSummary": null,
+    "corpusSummary": {
+      "userId": "c",
+      "selectedCount": 5,
+      "styleProfile": {
+        "dominantTone": "friendly",
+        "avgWordCount": 3036,
+        "signatureExpressions": [],
+        "structurePattern": "서술형 (자연스러운 단락)",
+        "openingPattern": "주제 직접 서술로 시작"
+      },
+      "exemplarExcerpts": [
+        {
+          "sampleId": "published-post-bc7bfb22",
+          "title": "부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우!",
+          "excerpt": "전자담배 코일 문제처럼 보이는데 사실은 액상 선택에서 시작되는 경우가 많습니다. 부천 상동 근처에서 전자담배 액상 추천을 원하신다면 제품 이름부터 고르기보다 맛 성향, 니코틴 농도, VG/PG 비율을 먼저 정하는 쪽이 실패가 적습니다. 가격이 저렴한 액상이어도 기기와 흡입 습관이 안 맞으면 만족도가 확 떨어지곤 합니다. 입문자는 처음부터 강한 쿨링이나 높은 농도로 가기보다는 9.8mg 솔트 기준의 중간 강도부터 보는 편이 훨씬",
+          "styleNotes": "tone=professional, contentKind=leaf, category=c"
+        },
+        {
+          "sampleId": "published-post-65b33019",
+          "title": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
+          "excerpt": "만수역 전자담배 액상 추천을 원하는 분이라면 결론은 꽤 단순합니다. 역 근처에서 반응이 가장 안정적인 쪽은 과일 아이스 계열 이었고 처음 고를 때는 브랜드보다는 단맛, 쿨링감, 목넘김 순서로 취향을 정하는 편이 실패가 적었습니다. 직접 써봤더니 같은 망고 계열도 쿨링이 센 제품은 3일 정도 지나면 피로감이 오고 은은한 타입은 일주일 넘게 데일리로 쓰기 편했습니다. 인천 전자담배 액상 매장에서 실제로 많이 보이는 라인업은 과일,",
+          "styleNotes": "tone=professional, contentKind=leaf, category=c"
+        },
+        {
+          "sampleId": "published-post-801b023b",
+          "title": "전자담배 관리법 : 액상 보관과 기기 청소 기준 총정리",
+          "excerpt": "전자담배 관리법은 복잡하게 외우는 것보다 25도 이하 보관, 직사광선 차단, 접점은 팟 교체 때마다 청소 이 3가지만 먼저 지켜도 문제를 크게 줄일 수 있습니다. 많이들 묻는 탄맛, 흡입 저항 증가, 액튐은 대체로 \"점검할 타이밍\"으로 보면 됩니다. 반대로 코일 내부는 닦아서 살리는 영역이 아니라 교체를 판단하는 영역에 더 가깝고 팟 안에 액상을 남긴 채 오래 두면 과유입과 누수가 빨라질 수 있습니다. 오늘은 가볍게 이 순서로",
+          "styleNotes": "tone=professional, contentKind=hub, category=c"
+        },
+        {
+          "sampleId": "published-post-6de3673d",
+          "title": "인천 부천 상동 전자담배 코일 관리와 교체 시기 총정리",
+          "excerpt": "전자담배 코일 관리는 탄 맛이 날 때만 하는 게 아니라 보통 7일 14일 사용 주기와 액상 색 변화, 흡입감 변화를 같이 보고 판단하는 게 가장 정확합니다. 특히 단맛이 강한 액상을 자주 쓰면 같은 코일도 3 5일 정도 더 빨리 성능이 떨어지는 경우가 많습니다. 부천 상동 전자담배 매장 쪽에서 가장 많이 듣는 질문이 \"기기가 고장인지, 코일만 바꾸면 되는지\" 인데요 결론부터 말하면 탄 맛, 액상 튐, 답답한 흡입감, 누수 중에",
+          "styleNotes": "tone=professional, contentKind=hub, category=c"
+        },
+        {
+          "sampleId": "published-post-928f746e",
+          "title": "젤로 전자담배 불량 증상 점검과 해결법 (부평전자담배)",
+          "excerpt": "젤로 전자담배 불량은 기기 자체 고장보다 팟 체결, 접점 오염, 액상 주입 습관, 소모품 수명 때문에 생기는 경우가 더 많습니다. 제가 부평에서 실제로 본 기준으로는 비슷한 문의 10건 중 6건 정도는 5분 안쪽 자가 점검으로 원인이 갈렸고 팟이나 케이블만 바꿔도 해결되는 일이 꽤 있었습니다. 특히 전원은 들어오는데 흡입이 안 되거나 탄맛이 갑자기 올라오거나 액상이 반복해서 새는 증상은 정상 마모와 비정상 신호를 먼저 구분해야",
+          "styleNotes": "tone=professional, contentKind=hub, category=c"
+        }
+      ],
+      "representativeExcerpts": [
+        "전자담배 코일 문제처럼 보이는데 사실은 액상 선택에서 시작되는 경우가 많습니다. 부천 상동 근처에서 전자담배 액상 추천을 원하신다면 제품 이름부터 고르기보다 맛 성향, 니코틴 농도, VG/PG 비율을 먼저 정하는 쪽이 실패가 적습니다. 가격이 저렴한 액상이어도 기기와 흡입 습관이 안 맞으면 만족도가 확 떨어지곤 합니다. 입문자는 처음부터 강한 쿨링이나 높은 농도로 가기보다는 9.8mg 솔트 기준의 중간 강도부터 보는 편이 훨씬",
+        "부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천! 부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블",
+        "인천 만수역 전자담배 코일 문제 해결과 교체 방법! 인천 만수역 전자담배 코일 문제 해결과 교체 방법! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불",
+        "베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기! 베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요",
+        "액상형 전자담배 종류를 고를 때는 기기 형태 2가지, 액상 성향 3가지, 니코틴 함량만 먼저 봐도 방향이 꽤 빨리 잡힙니다. 입문자는 팟형이 편하고 맛 표현과 세팅 폭을 중요하게 보는 분은 모드형 기기가 만족도가 확실히 높습니다. 결론부터 말하면 액상형 전자담배 종류는 기기와 액상의 궁합으로 결정된다고 보는 게 맞습니다. 액상형 전자담배 종류 가장 먼저 나누는 기준은 기기입니다 보통은 팟형과 모드형으로 구분하면 이해가 쉽습니다"
+      ],
+      "retrievalStrategy": "exemplar_index",
+      "staleWarnings": [],
+      "scoringBreakdown": [
+        {
+          "sampleId": "published-post-bc7bfb22",
+          "finalScore": 0.712,
+          "components": {
+            "relevance": 0.68,
+            "recency": 0.98,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-65b33019",
+          "finalScore": 0.66,
+          "components": {
+            "relevance": 0.67,
+            "recency": 0.79,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-801b023b",
+          "finalScore": 0.649,
+          "components": {
+            "relevance": 0.68,
+            "recency": 0.73,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-6de3673d",
+          "finalScore": 0.638,
+          "components": {
+            "relevance": 0.64,
+            "recency": 0.75,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-928f746e",
+          "finalScore": 0.635,
+          "components": {
+            "relevance": 0.63,
+            "recency": 0.75,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        }
+      ]
+    },
     "publicationLearning": {
       "source": "writing-profile",
       "totalEntries": 73,
