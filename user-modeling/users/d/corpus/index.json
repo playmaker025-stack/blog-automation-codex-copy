@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt1jysvx",
+      "title": "전자담배 액상을 넣고 바로 흡입하면 액상이 튀는 이유 – 몇 분 기다려야 할까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 8000,
+      "publishedAt": "2026-08-20T13:25:00.744Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mt1jysvx.md"
+    },
+    {
       "sampleId": "published-post-manual-mt006d8p",
       "title": "전자담배 팟에 액상이 자꾸 맺히는 이유 – 닦아도 다시 생긴다면 이것부터 확인하세요",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6268,
       "publishedAt": "2026-07-09T12:16:20.880Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrdh0oej.md"
-    },
-    {
-      "sampleId": "published-post-manual-mrc05zu3",
-      "title": "전자담배 액상을 바꿨는데 맛이 이상한 이유액상이 문제가 아닐 수도 있습니다",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6361,
-      "publishedAt": "2026-07-08T11:36:48.579Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrc05zu3.md"
     }
   ],
-  "lastUpdated": "2026-08-19T11:23:22.982Z"
+  "lastUpdated": "2026-08-20T13:25:07.411Z"
 }
