@@ -1,0 +1,29 @@
+{
+  "pipelineId": "pipe-c3625d5f",
+  "type": "draft_output",
+  "savedAt": "2026-08-20T07:51:43.050Z",
+  "data": {
+    "postId": "post-5fbf9c10",
+    "title": "만수동 전자담배 입문자 필수 질문과 답변 총정리",
+    "wordCount": 3206,
+    "generatedAt": "2026-08-20T07:51:42.080Z",
+    "contentPath": "data/posting-list/posts/post-5fbf9c10/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": true,
+      "blockingReasons": [],
+      "warnings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ]
+    }
+  }
+}
