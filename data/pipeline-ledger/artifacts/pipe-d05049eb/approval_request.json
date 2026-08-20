@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-d05049eb",
+  "type": "approval_request",
+  "savedAt": "2026-08-20T05:17:44.045Z",
+  "data": {
+    "pipelineId": "pipe-d05049eb",
+    "previousTitle": "",
+    "proposedTitle": "인천 남동구 전자담배 기기 고장 시 자가 점검법과 수리 팁",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "남동구 전자담배 사용자 대상 고장 증상별 자가 점검과 간단 수리법을 구체적이고 친근하게 안내하여 검색 의도에 부합. 최근 발행 글 구조와 키워드 반복 패턴을 반영해 제목과 도입부에 핵심 키워드를 자연스럽게 배치. 실제 사용자 경험과 단계별 점검법, 수리 팁을 포함해 신뢰도와 체류시간을 높임. 허브-리프 구조를 고려해 수리점 안내 후 액상 선택 및 코일 관리 관련 글로 자연스러운 내부 링크 연결 전략 적용.",
+    "requestedAt": "2026-08-20T05:17:38.677Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-20T05:17:38.677Z",
+      "modifications": null
+    }
+  }
+}
