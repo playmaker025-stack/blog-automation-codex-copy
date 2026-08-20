@@ -2,6 +2,21 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-70d278e7",
+      "title": "인천 남동구 전자담배 기기 고장 시 자가 점검법과 수리 팁",
+      "category": "c",
+      "tags": [
+        "인천",
+        "남동구",
+        "전자담배",
+        "기기고장",
+        "자가점검"
+      ],
+      "wordCount": 2733,
+      "publishedAt": "2026-08-20T07:12:41.245Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-70d278e7.md"
+    },
+    {
       "sampleId": "published-post-bc7bfb22",
       "title": "부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우!",
       "category": "c",
@@ -320,16 +335,7 @@
       "wordCount": 6762,
       "publishedAt": "2026-07-04T05:52:48.421Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mr5y47o6.md"
-    },
-    {
-      "sampleId": "published-post-manual-mr4m14xy",
-      "title": "젤로맥스 누수 잡는법 액튐 원인과 해결방법 !",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6829,
-      "publishedAt": "2026-07-03T07:26:41.933Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mr4m14xy.md"
     }
   ],
-  "lastUpdated": "2026-08-17T09:37:33.244Z"
+  "lastUpdated": "2026-08-20T07:12:49.594Z"
 }
