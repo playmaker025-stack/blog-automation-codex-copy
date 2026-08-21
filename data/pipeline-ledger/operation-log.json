@@ -4142,7 +4142,20 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-1375f6ec",
       "at": "2026-08-21T05:18:13.734Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전담 기기 종류 뭐가 있을까?",
+      "proposedTitle": "전담기기 종류 뭐가 있을까? 인천 부평 기준으로 쉽게 정리",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.5,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-8a6e2a1e",
+      "at": "2026-08-21T06:52:19.339Z"
     }
   ],
-  "lastUpdated": "2026-08-21T05:18:13.734Z"
+  "lastUpdated": "2026-08-21T06:52:19.339Z"
 }
