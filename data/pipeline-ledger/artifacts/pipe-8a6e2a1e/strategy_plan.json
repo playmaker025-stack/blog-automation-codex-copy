@@ -1,7 +1,7 @@
 {
   "pipelineId": "pipe-8a6e2a1e",
   "type": "strategy_plan",
-  "savedAt": "2026-08-21T06:52:16.635Z",
+  "savedAt": "2026-08-21T07:00:30.830Z",
   "data": {
     "title": "전담기기 종류 뭐가 있을까? 인천 부평 기준으로 쉽게 정리",
     "outline": [
@@ -50,7 +50,110 @@
       "전자담배 전담기기"
     ],
     "rationale": "직접 입력 토픽이므로 메인 키워드 '전담기기종류'를 중심축으로 반영했습니다. 검색자들이 ‘전담기기 종류’에 대해 구체적이고 실용적인 정보를 원하며, 인천 부평 지역 사용자 후기와 문제 해결 경험을 반영한 친근하고 정보 중심의 글이 필요함. 허브-리프 구조를 활용해 전담기기 종류를 중심으로 문제 해결과 선택 기준을 함께 다루어 검색 의도에 최적화함. 최근 발행 글과 커뮤니티 수요를 반영해 누수, 폐호흡, 액상 호환성 등 핵심 키워드를 자연스럽게 포함하고, 실제 사용 경험과 지역 특성을 살려 신뢰도를 높임.",
-    "corpusSummary": null,
+    "corpusSummary": {
+      "userId": "c",
+      "selectedCount": 5,
+      "styleProfile": {
+        "dominantTone": "friendly",
+        "avgWordCount": 4124,
+        "signatureExpressions": [],
+        "structurePattern": "서술형 (자연스러운 단락)",
+        "openingPattern": "주제 직접 서술로 시작"
+      },
+      "exemplarExcerpts": [
+        {
+          "sampleId": "published-post-1191adb8",
+          "title": "전담 액상 니코틴 종류와 건강 영향 분석",
+          "excerpt": "전자담배 액상의 니코틴 종류는 크게 프리베이스와 솔트로 나뉘고 전담에서 체감 차이는 목 자극, 흡수감, 기기 궁합에서 가장 크게 갈립니다. 같은 농도 표기라도 사용 패턴이 달라져서 결국 중요한 건 \"더 센가 약한가\" 보다 \"내가 어떤 방식으로 더 자주 쓰게 되는가\" 였습니다. 건강 영향은 종류가 달라도 기본적으로 의존성, 심박수 증가, 수면 방해 가능성을 함께 봐야 합니다. 밤 1 2시간 전에 쓰면 두근거림이 더 잘 느껴지는 ",
+          "styleNotes": "tone=professional, category=direct-run"
+        },
+        {
+          "sampleId": "published-post-manual-msr5i6u9",
+          "title": "부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천!",
+          "excerpt": "부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천! 부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블",
+          "styleNotes": "tone=professional"
+        },
+        {
+          "sampleId": "published-post-bc7bfb22",
+          "title": "부천 상동 전자담배 사용자 맞춤 액상 추천과 선택 노하우!",
+          "excerpt": "전자담배 코일 문제처럼 보이는데 사실은 액상 선택에서 시작되는 경우가 많습니다. 부천 상동 근처에서 전자담배 액상 추천을 원하신다면 제품 이름부터 고르기보다 맛 성향, 니코틴 농도, VG/PG 비율을 먼저 정하는 쪽이 실패가 적습니다. 가격이 저렴한 액상이어도 기기와 흡입 습관이 안 맞으면 만족도가 확 떨어지곤 합니다. 입문자는 처음부터 강한 쿨링이나 높은 농도로 가기보다는 9.8mg 솔트 기준의 중간 강도부터 보는 편이 훨씬",
+          "styleNotes": "tone=professional, contentKind=leaf, category=c"
+        },
+        {
+          "sampleId": "published-post-manual-mryqqt28",
+          "title": "더위를 날려줄 시원한 입호흡 액상 추천!",
+          "excerpt": "더위를 날려줄 시원한 입호흡 액상 추천! 더위를 날려줄 시원한 입호흡 액상 추천! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불가 안내 블로그 마켓 ",
+          "styleNotes": "tone=professional"
+        },
+        {
+          "sampleId": "published-post-15731f9f",
+          "title": "액상형 전자담배 종류 뭐가 좋을까? 비교와 선택 기준 완벽 가이드",
+          "excerpt": "액상형 전자담배 종류를 고를 때는 기기 형태 2가지, 액상 성향 3가지, 니코틴 함량만 먼저 봐도 방향이 꽤 빨리 잡힙니다. 입문자는 팟형이 편하고 맛 표현과 세팅 폭을 중요하게 보는 분은 모드형 기기가 만족도가 확실히 높습니다. 결론부터 말하면 액상형 전자담배 종류는 기기와 액상의 궁합으로 결정된다고 보는 게 맞습니다. 액상형 전자담배 종류 가장 먼저 나누는 기준은 기기입니다 보통은 팟형과 모드형으로 구분하면 이해가 쉽습니다",
+          "styleNotes": "tone=professional, category=direct-run"
+        }
+      ],
+      "representativeExcerpts": [
+        "전자담배 코일 문제처럼 보이는데 사실은 액상 선택에서 시작되는 경우가 많습니다. 부천 상동 근처에서 전자담배 액상 추천을 원하신다면 제품 이름부터 고르기보다 맛 성향, 니코틴 농도, VG/PG 비율을 먼저 정하는 쪽이 실패가 적습니다. 가격이 저렴한 액상이어도 기기와 흡입 습관이 안 맞으면 만족도가 확 떨어지곤 합니다. 입문자는 처음부터 강한 쿨링이나 높은 농도로 가기보다는 9.8mg 솔트 기준의 중간 강도부터 보는 편이 훨씬",
+        "부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천! 부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블",
+        "인천 만수역 전자담배 코일 문제 해결과 교체 방법! 인천 만수역 전자담배 코일 문제 해결과 교체 방법! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불",
+        "베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기! 베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요",
+        "액상형 전자담배 종류를 고를 때는 기기 형태 2가지, 액상 성향 3가지, 니코틴 함량만 먼저 봐도 방향이 꽤 빨리 잡힙니다. 입문자는 팟형이 편하고 맛 표현과 세팅 폭을 중요하게 보는 분은 모드형 기기가 만족도가 확실히 높습니다. 결론부터 말하면 액상형 전자담배 종류는 기기와 액상의 궁합으로 결정된다고 보는 게 맞습니다. 액상형 전자담배 종류 가장 먼저 나누는 기준은 기기입니다 보통은 팟형과 모드형으로 구분하면 이해가 쉽습니다"
+      ],
+      "retrievalStrategy": "exemplar_index",
+      "staleWarnings": [],
+      "scoringBreakdown": [
+        {
+          "sampleId": "published-post-1191adb8",
+          "finalScore": 0.667,
+          "components": {
+            "relevance": 0.68,
+            "recency": 0.8,
+            "roleMatch": 0.6,
+            "intentMatch": 0.5
+          }
+        },
+        {
+          "sampleId": "published-post-manual-msr5i6u9",
+          "finalScore": 0.665,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.94,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-bc7bfb22",
+          "finalScore": 0.665,
+          "components": {
+            "relevance": 0.68,
+            "recency": 0.97,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mryqqt28",
+          "finalScore": 0.632,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.81,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-15731f9f",
+          "finalScore": 0.607,
+          "components": {
+            "relevance": 0.66,
+            "recency": 0.89,
+            "roleMatch": 0.6,
+            "intentMatch": 0
+          }
+        }
+      ]
+    },
     "publicationLearning": {
       "source": "writing-profile",
       "totalEntries": 74,
