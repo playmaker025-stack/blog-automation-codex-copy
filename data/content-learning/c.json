@@ -2,6 +2,19 @@
   "userId": "c",
   "entries": [
     {
+      "postId": "post-b4e0e44a",
+      "topicId": "topic-f1a2b356",
+      "userId": "c",
+      "title": "전담기기 종류 뭐가 있을까? 인천 부평 기준으로 쉽게 정리",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224385828317",
+      "evalScore": 58,
+      "wordCount": 3068,
+      "publishedAt": "2026-08-21T08:20:53.904Z",
+      "topicSource": "direct",
+      "contentKind": null,
+      "learnedAt": "2026-08-21T08:20:59.222Z"
+    },
+    {
       "postId": "post-70d278e7",
       "topicId": "topic-e0d3543c",
       "userId": "c",
@@ -431,5 +444,5 @@
       "learnedAt": "2026-06-29T07:52:25.672Z"
     }
   ],
-  "updatedAt": "2026-08-20T07:12:46.493Z"
+  "updatedAt": "2026-08-21T08:20:59.222Z"
 }
