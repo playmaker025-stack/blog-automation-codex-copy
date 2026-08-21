@@ -1805,7 +1805,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-08-21T05:08:51.843Z",
       "updatedAt": "2026-08-21T05:08:51.843Z"
+    },
+    {
+      "topicId": "topic-0b8f06ac",
+      "title": "인천 부평역 근처 맛집 추천과 실제 방문 후기",
+      "description": "부평역 인근에서 인기 있는 맛집을 엄선하여 소개하고, 방문 후기를 통해 맛과 분위기를 생생하게 전달합니다.",
+      "category": "c",
+      "tags": [
+        "부평역",
+        "맛집",
+        "후기",
+        "인천",
+        "음식"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-21T05:08:53.508Z",
+      "updatedAt": "2026-08-21T05:08:53.508Z"
     }
   ],
-  "lastUpdated": "2026-08-21T05:08:51.843Z"
+  "lastUpdated": "2026-08-21T05:08:53.508Z"
 }
