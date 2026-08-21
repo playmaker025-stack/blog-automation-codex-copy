@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-8a6e2a1e",
+  "type": "approval_request",
+  "savedAt": "2026-08-21T07:00:26.988Z",
+  "data": {
+    "pipelineId": "pipe-8a6e2a1e",
+    "previousTitle": "",
+    "proposedTitle": "전담기기 종류 뭐가 있을까? 인천 부평 기준으로 쉽게 정리",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '전담기기종류'를 중심축으로 반영했습니다. 검색자들이 ‘전담기기 종류’에 대해 구체적이고 실용적인 정보를 원하며, 인천 부평 지역 사용자 후기와 문제 해결 경험을 반영한 친근하고 정보 중심의 글이 필요함. 허브-리프 구조를 활용해 전담기기 종류를 중심으로 문제 해결과 선택 기준을 함께 다루어 검색 의도에 최적화함. 최근 발행 글과 커뮤니티 수요를 반영해 누수, 폐호흡, 액상 호환성 등 핵심 키워드를 자연스럽게 포함하고, 실제 사용 경험과 지역 특성을 살려 신뢰도를 높임.",
+    "requestedAt": "2026-08-21T07:00:21.009Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-21T07:00:21.009Z",
+      "modifications": null
+    }
+  }
+}
