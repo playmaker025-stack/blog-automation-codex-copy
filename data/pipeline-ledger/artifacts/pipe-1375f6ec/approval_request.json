@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-1375f6ec",
+  "type": "approval_request",
+  "savedAt": "2026-08-21T05:18:50.540Z",
+  "data": {
+    "pipelineId": "pipe-1375f6ec",
+    "previousTitle": "",
+    "proposedTitle": "인천 주안지역 전자담배 신규 사용자 맞춤 기기 추천 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "주안 지역 신규 전자담배 사용자들의 검색 의도는 구체적이고 실용적인 기기 선택 가이드에 집중되어 있어, 초보자 맞춤 추천과 문제 해결 중심의 내용을 포함해 검색 만족도를 높임. 최근 발행 글과 사용자 후기, 지역 특성을 반영하여 친근하면서도 정보 중심의 글쓰기를 권장. 허브 역할의 기기 선택 기준과 리프 역할의 상세 제품 리뷰 및 문제 해결법을 연결해 내부 링크 시너지 효과 기대.",
+    "requestedAt": "2026-08-21T05:18:45.556Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-08-21T05:18:45.556Z",
+      "modifications": null
+    }
+  }
+}
