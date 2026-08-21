@@ -4131,7 +4131,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-c3625d5f",
       "at": "2026-08-20T07:50:29.101Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 주안지역 전자담배 신규 사용자 맞춤 기기 추천 가이드",
+      "proposedTitle": "인천 주안지역 전자담배 신규 사용자 맞춤 기기 추천 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-1375f6ec",
+      "at": "2026-08-21T05:18:13.734Z"
     }
   ],
-  "lastUpdated": "2026-08-20T07:50:29.101Z"
+  "lastUpdated": "2026-08-21T05:18:13.734Z"
 }
