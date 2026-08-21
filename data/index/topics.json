@@ -1652,7 +1652,107 @@
       "assignedUserId": "c",
       "createdAt": "2026-08-21T06:51:45.819Z",
       "updatedAt": "2026-08-21T08:20:57.650Z"
+    },
+    {
+      "topicId": "topic-2d5eec48",
+      "title": "인천28센터 1층 흡연구역 전자담배 이용 후기와 팁",
+      "description": "인천28센터 1층 흡연구역에서 전자담배를 사용하는 이용자들의 실제 후기와 쾌적한 이용을 위한 팁을 공유합니다.",
+      "category": "c",
+      "tags": [
+        "인천28센터",
+        "흡연구역",
+        "전자담배후기",
+        "전자담배팁"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-21T08:21:22.995Z",
+      "updatedAt": "2026-08-21T08:21:22.995Z"
+    },
+    {
+      "topicId": "topic-e22b43ec",
+      "title": "인천 아시아나 마일리지 전환 후 전자담배 구매 활용법 안내",
+      "description": "아시아나 마일리지 전환 신청 후 대한항공 마일리지로 전자담배 구매에 활용하는 방법과 주의사항을 상세히 설명합니다.",
+      "category": "c",
+      "tags": [
+        "아시아나마일리지",
+        "대한항공",
+        "전자담배구매",
+        "마일리지활용"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-21T08:21:22.995Z",
+      "updatedAt": "2026-08-21T08:21:22.995Z"
+    },
+    {
+      "topicId": "topic-b881a3b7",
+      "title": "인천 주안 지역 전자담배 사용자 맞춤 액상 추천과 선택 기준",
+      "description": "주안 지역 전자담배 이용자들이 선호하는 액상 추천과 맛, 향, 니코틴 농도별 선택 기준을 자세히 안내합니다.",
+      "category": "c",
+      "tags": [
+        "주안",
+        "전자담배액상",
+        "액상추천",
+        "사용자맞춤"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-21T08:21:22.995Z",
+      "updatedAt": "2026-08-21T08:21:22.995Z"
+    },
+    {
+      "topicId": "topic-dc28165d",
+      "title": "인천 부평역 전자담배 기기 고장 유형별 자가 점검 및 수리법",
+      "description": "부평역 인근 전자담배 기기 고장 시 자가 점검 방법과 문제별 해결법을 단계별로 안내하는 문제해결 중심 허브 포스트입니다.",
+      "category": "c",
+      "tags": [
+        "부평역",
+        "전자담배고장",
+        "자가점검",
+        "수리법"
+      ],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-21T08:21:22.995Z",
+      "updatedAt": "2026-08-21T08:21:22.995Z"
+    },
+    {
+      "topicId": "topic-facda50d",
+      "title": "인천 미추홀구 전자담배 액상 보관법과 맛 유지 비법",
+      "description": "미추홀구 전자담배 사용자들을 위한 액상 보관법과 맛과 향을 오래 유지하는 실용적인 방법을 자세히 설명합니다.",
+      "category": "c",
+      "tags": [
+        "미추홀구",
+        "전자담배액상",
+        "액상보관",
+        "맛유지"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-08-21T08:21:22.995Z",
+      "updatedAt": "2026-08-21T08:21:22.995Z"
     }
   ],
-  "lastUpdated": "2026-08-21T08:20:57.650Z"
+  "lastUpdated": "2026-08-21T08:21:22.995Z"
 }
