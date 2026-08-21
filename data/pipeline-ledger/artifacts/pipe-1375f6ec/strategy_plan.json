@@ -1,7 +1,7 @@
 {
   "pipelineId": "pipe-1375f6ec",
   "type": "strategy_plan",
-  "savedAt": "2026-08-21T05:18:11.372Z",
+  "savedAt": "2026-08-21T05:18:54.686Z",
   "data": {
     "title": "인천 주안지역 전자담배 신규 사용자 맞춤 기기 추천 가이드",
     "outline": [
@@ -61,7 +61,110 @@
       "주안 전자담배 기기 비교"
     ],
     "rationale": "주안 지역 신규 전자담배 사용자들의 검색 의도는 구체적이고 실용적인 기기 선택 가이드에 집중되어 있어, 초보자 맞춤 추천과 문제 해결 중심의 내용을 포함해 검색 만족도를 높임. 최근 발행 글과 사용자 후기, 지역 특성을 반영하여 친근하면서도 정보 중심의 글쓰기를 권장. 허브 역할의 기기 선택 기준과 리프 역할의 상세 제품 리뷰 및 문제 해결법을 연결해 내부 링크 시너지 효과 기대.",
-    "corpusSummary": null,
+    "corpusSummary": {
+      "userId": "c",
+      "selectedCount": 5,
+      "styleProfile": {
+        "dominantTone": "friendly",
+        "avgWordCount": 5481,
+        "signatureExpressions": [],
+        "structurePattern": "질문-답변형",
+        "openingPattern": "주제 직접 서술로 시작"
+      },
+      "exemplarExcerpts": [
+        {
+          "sampleId": "published-post-65b33019",
+          "title": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
+          "excerpt": "만수역 전자담배 액상 추천을 원하는 분이라면 결론은 꽤 단순합니다. 역 근처에서 반응이 가장 안정적인 쪽은 과일 아이스 계열 이었고 처음 고를 때는 브랜드보다는 단맛, 쿨링감, 목넘김 순서로 취향을 정하는 편이 실패가 적었습니다. 직접 써봤더니 같은 망고 계열도 쿨링이 센 제품은 3일 정도 지나면 피로감이 오고 은은한 타입은 일주일 넘게 데일리로 쓰기 편했습니다. 인천 전자담배 액상 매장에서 실제로 많이 보이는 라인업은 과일,",
+          "styleNotes": "tone=professional, contentKind=leaf, category=c"
+        },
+        {
+          "sampleId": "published-post-manual-mspveav0",
+          "title": "인천 만수역 전자담배 코일 문제 해결과 교체 방법!",
+          "excerpt": "인천 만수역 전자담배 코일 문제 해결과 교체 방법! 인천 만수역 전자담배 코일 문제 해결과 교체 방법! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불",
+          "styleNotes": "tone=professional"
+        },
+        {
+          "sampleId": "published-post-manual-msmx35tq",
+          "title": "베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기!",
+          "excerpt": "베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기! 베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 ",
+          "styleNotes": "tone=professional"
+        },
+        {
+          "sampleId": "published-post-manual-mseafpt7",
+          "title": "아스몬하이 누수 잡는법 액튐 원인과 해결방법! 만수르전자담배",
+          "excerpt": "아스몬하이 누수 잡는법 액튐 원인과 해결방법! 만수르전자담배 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불가 안내 블로그 마켓 판매자의 이력 관리를 위해 블로그 주소 변경이 불가합니다. 자세히 보기 레이어 닫기 블로그 아이디가 필요해요! 블로그에서 진짜 나를 기록하고 다양한 이웃과 소식을 만나보세요. 지금 시작해볼까요? 블로그 아이디 만",
+          "styleNotes": "tone=professional"
+        },
+        {
+          "sampleId": "published-post-manual-msa13cve",
+          "title": "젤로 누수 잡는법 액튐 원인과 해결 방법! 만수르 전자담배",
+          "excerpt": "젤로 누수 잡는법 액튐 원인과 해결 방법! 만수르 전자담배 젤로 누수 잡는법 액튐 원인과 해결 방법! 만수르 전자담배 : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그",
+          "styleNotes": "tone=professional"
+        }
+      ],
+      "representativeExcerpts": [
+        "전자담배 코일 문제처럼 보이는데 사실은 액상 선택에서 시작되는 경우가 많습니다. 부천 상동 근처에서 전자담배 액상 추천을 원하신다면 제품 이름부터 고르기보다 맛 성향, 니코틴 농도, VG/PG 비율을 먼저 정하는 쪽이 실패가 적습니다. 가격이 저렴한 액상이어도 기기와 흡입 습관이 안 맞으면 만족도가 확 떨어지곤 합니다. 입문자는 처음부터 강한 쿨링이나 높은 농도로 가기보다는 9.8mg 솔트 기준의 중간 강도부터 보는 편이 훨씬",
+        "부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천! 부천역전자담배 알케마스터 멘솔없는 과일맛 폐호흡 액상 추천! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블",
+        "인천 만수역 전자담배 코일 문제 해결과 교체 방법! 인천 만수역 전자담배 코일 문제 해결과 교체 방법! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요 공유하기 블로그 주소 변경 불",
+        "베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기! 베놈 팬텀 엔트리 누수 잡는법 액튐현상 원인과 해결방법 알아보기! : 네이버 블로그 NAVER 블로그 부평 전자담배 만수르 블로그 검색 이 블로그에서 검색 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 span.u likeit button) 공감 face 3개 (전체)) 공감 0 공감 0 칭찬 0 감사 0 웃김 0 놀람 0 슬픔 0 첫 댓글을 남겨보세요",
+        "액상형 전자담배 종류를 고를 때는 기기 형태 2가지, 액상 성향 3가지, 니코틴 함량만 먼저 봐도 방향이 꽤 빨리 잡힙니다. 입문자는 팟형이 편하고 맛 표현과 세팅 폭을 중요하게 보는 분은 모드형 기기가 만족도가 확실히 높습니다. 결론부터 말하면 액상형 전자담배 종류는 기기와 액상의 궁합으로 결정된다고 보는 게 맞습니다. 액상형 전자담배 종류 가장 먼저 나누는 기준은 기기입니다 보통은 팟형과 모드형으로 구분하면 이해가 쉽습니다"
+      ],
+      "retrievalStrategy": "exemplar_index",
+      "staleWarnings": [],
+      "scoringBreakdown": [
+        {
+          "sampleId": "published-post-65b33019",
+          "finalScore": 0.733,
+          "components": {
+            "relevance": 0.67,
+            "recency": 0.78,
+            "roleMatch": 0.6,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mspveav0",
+          "finalScore": 0.664,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.93,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-manual-msmx35tq",
+          "finalScore": 0.66,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.92,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-manual-mseafpt7",
+          "finalScore": 0.649,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.88,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        },
+        {
+          "sampleId": "published-post-manual-msa13cve",
+          "finalScore": 0.644,
+          "components": {
+            "relevance": 0.7,
+            "recency": 0.86,
+            "roleMatch": 0,
+            "intentMatch": 1
+          }
+        }
+      ]
+    },
     "publicationLearning": {
       "source": "writing-profile",
       "totalEntries": 74,
