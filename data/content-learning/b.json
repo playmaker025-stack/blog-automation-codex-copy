@@ -2,6 +2,19 @@
   "userId": "b",
   "entries": [
     {
+      "postId": "post-5fbf9c10",
+      "topicId": "topic-a3c8bcf2",
+      "userId": "b",
+      "title": "연수동 전자담배 입문자를 위한 필수 질문과 매장 선택법",
+      "naverPostUrl": "https://blog.naver.com/youferst/224386746626",
+      "evalScore": 60,
+      "wordCount": 3573,
+      "publishedAt": "2026-08-22T09:23:45.427Z",
+      "topicSource": "generated",
+      "contentKind": "hub",
+      "learnedAt": "2026-08-22T09:23:53.161Z"
+    },
+    {
       "postId": "post-f3e7657b",
       "topicId": "topic-e75bd53c",
       "userId": "b",
@@ -184,5 +197,5 @@
       "learnedAt": "2026-07-04T11:06:13.483Z"
     }
   ],
-  "updatedAt": "2026-08-18T10:35:39.060Z"
+  "updatedAt": "2026-08-22T09:23:53.161Z"
 }
