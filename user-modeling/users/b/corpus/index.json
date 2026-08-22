@@ -2,6 +2,21 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-5fbf9c10",
+      "title": "연수동 전자담배 입문자를 위한 필수 질문과 매장 선택법",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "전자담배",
+        "입문자",
+        "질문답변",
+        "매장"
+      ],
+      "wordCount": 3573,
+      "publishedAt": "2026-08-22T09:23:45.427Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-5fbf9c10.md"
+    },
+    {
       "sampleId": "published-post-f3e7657b",
       "title": "갈산동 전자담배 입문자 필수 기기 선택 방법",
       "category": "b",
@@ -280,5 +295,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-08-18T10:35:41.895Z"
+  "lastUpdated": "2026-08-22T09:23:56.336Z"
 }
