@@ -30,7 +30,7 @@ export async function reviewRecordAudit(
 
   // 해당 사용자 포스팅만 필터링
   const userPosts = postingIndex.posts
-    .filter((p) => p.userId === userId && p.status === "published")
+    .filter((p) => normalizeUserId(p.userId) === userId && p.status === "published")
     .sort(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
