@@ -1,7 +1,11 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 
-import { VAPE_DOMAIN_CONTRACT } from "../../lib/agents/domain-contract.ts";
+import {
+  VAPE_DOMAIN_CONTRACT,
+  buildGapSearchKeyword,
+  findCoverageGaps,
+} from "../../lib/agents/domain-contract.ts";
 import {
   buildExtractionPrompt,
   formatDemandSignals,
@@ -141,5 +145,49 @@ describe("PR29 제품명 자동 등록", () => {
 
   test("등록부가 비어 있으면 계약을 그대로 쓴다", () => {
     assert.deepEqual(withRegisteredBrands(C, emptyRegistry()), C);
+  });
+});
+
+// 검색어가 발행 이력의 최빈어 하나뿐이면 그 주변만 계속 돈다.
+// 미개척 조합을 검색어로 써서 아직 안 다룬 영역의 실수요를 가져온다.
+describe("PR29 조합 검색어", () => {
+  test("업종어를 앞에 붙인다", () => {
+    // "코일 불량"만 검색하면 자동차/기계 코일 글이 섞인다.
+    const keyword = buildGapSearchKeyword({ subject: "코일", angle: "불량", kind: "problem" }, C);
+    assert.equal(keyword, "전자담배 코일 불량");
+  });
+
+  test("이미 업종어가 들어간 소재는 중복해서 붙이지 않는다", () => {
+    const keyword = buildGapSearchKeyword(
+      { subject: "전자담배", angle: "여름철", kind: "intent" },
+      C
+    );
+    assert.equal(keyword, "전자담배 여름철");
+  });
+
+  test("브랜드 조합도 검색어가 된다", () => {
+    const keyword = buildGapSearchKeyword({ subject: "말론", angle: "수명", kind: "problem" }, C);
+    assert.equal(keyword, "전자담배 말론 수명");
+  });
+
+  test("실제 조합에서 검색어를 만들면 전부 업종어를 포함한다", () => {
+    const gaps = findCoverageGaps({ contract: C, publishedTitles: [], limit: 20 });
+    for (const gap of gaps) {
+      const keyword = buildGapSearchKeyword(gap, C);
+      assert.ok(keyword.includes("전자담배"), `업종어 누락: ${keyword}`);
+    }
+  });
+});
+
+describe("PR29 추출 입력 상한", () => {
+  test("수집이 많아도 추출 프롬프트는 상한을 넘지 않는다", () => {
+    const many = Array.from({ length: 200 }, (_, index) => ({
+      title: `전자담배 질문 ${index}`,
+      description: "",
+    }));
+    const prompt = buildExtractionPrompt({ items: many, contract: C });
+    // 60건 상한이라 61번째는 들어가면 안 된다.
+    assert.ok(prompt.includes("전자담배 질문 0"));
+    assert.equal(prompt.includes("전자담배 질문 60"), false);
   });
 });

@@ -218,6 +218,22 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
   ],
 };
 
+/**
+ * 미개척 조합을 네이버 검색어로 바꾼다.
+ *
+ * 검색 키워드가 발행 이력의 최빈어 하나뿐이면 그 주변만 계속 돈다. 조합을 검색어로
+ * 쓰면 아직 안 다룬 영역의 실수요를 가져올 수 있다.
+ *
+ * 업종어를 앞에 붙이는 이유: "코일 불량"만 검색하면 자동차/기계 코일 글이 섞인다.
+ * 소재 자체가 업종을 특정하지 못하는 경우가 많아 항상 붙인다.
+ */
+export function buildGapSearchKeyword(gap: CoverageGap, contract: DomainContract): string {
+  const anchor = contract.productCategories[0] ?? "";
+  const base = `${gap.subject} ${gap.angle}`.trim();
+  if (!anchor || base.includes(anchor)) return base;
+  return `${anchor} ${base}`;
+}
+
 /** 다루지 않기로 한 소재를 건드리는지 본다. */
 export function touchesExcludedTopic(text: string, contract: DomainContract): boolean {
   const normalized = text.normalize("NFKC");

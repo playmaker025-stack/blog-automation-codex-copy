@@ -32,6 +32,8 @@ export const ALLOWED_LOCALITY_TERMS = [
   "연수",
   "주안",
   "간석",
+  "갈산동",
+  "갈산",
   "계산",
   "삼산동",
   "백운",

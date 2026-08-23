@@ -49,11 +49,19 @@ export function cleanText(value: string): string {
     .trim();
 }
 
+/**
+ * 추출에 넣을 글 수 상한.
+ * 미개척 조합 검색을 붙이면서 수집량이 30건에서 100건 이상으로 늘었다.
+ * haiku 한 번에 다 넣으면 비용과 지연이 커지고 추출 품질도 떨어진다.
+ */
+const MAX_EXTRACTION_ITEMS = 60;
+
 export function buildExtractionPrompt(params: {
   items: SourceItem[];
   contract: DomainContract;
 }): string {
-  const { items, contract } = params;
+  const { contract } = params;
+  const items = params.items.slice(0, MAX_EXTRACTION_ITEMS);
   const lines = items
     .map((item, index) => {
       const title = cleanText(item.title ?? "");

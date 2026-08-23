@@ -30,6 +30,7 @@ import {
   findCoverageGaps,
   formatCoverageGaps,
   touchesExcludedTopic,
+  buildGapSearchKeyword,
 } from "./domain-contract";
 import { extractDemand } from "./demand-extractor";
 import { formatDemandSignals } from "./demand-signals";
@@ -1063,6 +1064,16 @@ const OPENAI_TOPIC_SCHEMA = {
   required: ["topics"],
 } as const;
 
+/** 미개척 조합 중 몇 개를 검색어로 쓸지. 조합당 카페+지식인 2회씩 호출된다. */
+const GAP_SEARCH_KEYWORDS = 5;
+const GAP_SEARCH_DISPLAY = 8;
+
+interface NaverSearchItemLike {
+  title?: string;
+  description?: string;
+  link?: string;
+}
+
 export async function runTopicGenerator(input: TopicGeneratorInput): Promise<TopicGeneratorOutput> {
   const { userId, onProgress } = input;
   const publishedTopics = input.publishedTopics.length > 0
@@ -1131,8 +1142,46 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   // 네이버 커뮤니티에서 실제 수요와 제품명을 LLM으로 추출한다.
   // 예전에는 단어 빈도(extractRelatedWords)로 긁어서 다주제 블로그의 헬스기구/주식
   // 단어가 주제 재료가 됐다. 오염 원인은 네이버를 본 것이 아니라 보는 방식이었다.
+  // 검색어를 대표 키워드 하나로 두면 그 주변만 계속 돈다. 미개척 조합을 검색어로 써서
+  // 아직 안 다룬 영역의 실수요까지 긁는다. 실패해도 파이프라인은 계속 간다.
+  const gapKeywords = coverageGaps.slice(0, GAP_SEARCH_KEYWORDS).map((gap) =>
+    buildGapSearchKeyword(gap, contract)
+  );
+  if (gapKeywords.length > 0) {
+    onProgress?.(`미개척 조합 ${gapKeywords.length}개로 추가 검색합니다: ${gapKeywords.join(" / ")}`);
+  }
+  const gapSettled = await Promise.allSettled(
+    gapKeywords.flatMap((keyword) => [
+      naverCafeSearch({ keyword, display: GAP_SEARCH_DISPLAY }),
+      naverKinSearch({ keyword, display: GAP_SEARCH_DISPLAY }),
+    ])
+  );
+  // 검색별 결과를 라운드로빈으로 뽑는다. 앞에서부터 이어붙이면 상한에 걸렸을 때
+  // 뒤쪽 검색어의 결과가 통째로 잘려서 그 조합만 수요를 못 본다.
+  const gapBuckets = gapSettled
+    .map((result) => (result.status === "fulfilled" ? result.value.items : []))
+    .filter((items) => items.length > 0);
+  const gapItems: NaverSearchItemLike[] = [];
+  for (let index = 0; ; index += 1) {
+    const before = gapItems.length;
+    for (const bucket of gapBuckets) {
+      if (index < bucket.length) gapItems.push(bucket[index]);
+    }
+    if (gapItems.length === before) break;
+  }
+
+  // 같은 글이 여러 검색에서 중복으로 잡힌다. link 기준으로 정리한다.
+  const seenLinks = new Set<string>();
+  const collectedItems = [...cafeResearch.items, ...kinResearch.items, ...gapItems].filter((item) => {
+    const key = item.link || item.title;
+    if (!key || seenLinks.has(key)) return false;
+    seenLinks.add(key);
+    return true;
+  });
+  onProgress?.(`카페/지식인 ${collectedItems.length}건을 수집했습니다.`);
+
   const demand = await extractDemand({
-    items: [...cafeResearch.items, ...kinResearch.items],
+    items: collectedItems,
     contract,
     onProgress,
   });
