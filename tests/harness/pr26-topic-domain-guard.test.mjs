@@ -12,6 +12,7 @@ import {
   hasOutsideDomain,
   isLocalityToken,
   isOnDomainTopic,
+  isTopicVocabularyCoherent,
 } from "../../lib/agents/blog-workflow-policy.ts";
 
 // 실측 배경:
@@ -207,9 +208,9 @@ describe("PR26 지역 화이트리스트", () => {
 
   test("허용 목록에 없는 지역명은 차단한다", () => {
     for (const title of [
-      "청량리 전자담배 매장 추천",
       "판교동 전자담배 구매처",
       "학익동 전자담배 액상",
+      "청량리 전자담배 매장 추천",
     ]) {
       assert.equal(hasDisallowedLocality(title), true, `차단 실패: ${title}`);
       assert.equal(filterBlockedTopics([{ title }]).length, 0);
@@ -268,5 +269,76 @@ describe("PR26 리서치 신호 화이트리스트", () => {
   test("어휘 근거가 부족하면 신호를 그대로 통과시킨다", () => {
     const signals = ["아무 신호", "다른 신호"];
     assert.deepEqual(filterSignalsByDomainVocabulary(signals, new Set(["전자담배"])), signals);
+  });
+});
+
+// 업종어 하나만 있으면 통과하는 isOnDomainTopic으로는 결합형을 못 잡는다.
+// "인천 아시아나 마일리지 전환 후 전자담배 구매 활용법"이 실제로 생성돼 저장까지 됐다.
+describe("PR26 결합형 주제 차단 (어휘 적중률)", () => {
+  const vocabulary = new Set([
+    "전자담배", "액상", "기기", "코일", "입호흡", "폐호흡", "매장", "만수르",
+    "니코틴", "무화기", "일회용", "베이포레소", "크로스미니", "말론", "탄맛",
+    "누수", "농도", "팟", "배터리", "충전", "가습현상", "원인", "증상", "점검",
+  ]);
+
+  test("무관한 고유명사가 붙은 결합형을 잡는다", () => {
+    for (const title of [
+      "인천 아시아나 마일리지 전환 후 전자담배 구매 활용법 안내",
+      "인천28센터 1층 흡연구역 전자담배 이용 후기와 팁",
+      "포항 지역에서 인기 있는 전자담배 매장과 구매 팁",
+      "인천대교 완공일과 인천 지역 전자담배 시장 변화 전망",
+    ]) {
+      assert.equal(isTopicVocabularyCoherent({ title }, vocabulary), false, `결합형 미검출: ${title}`);
+    }
+  });
+
+  test("제품명이 들어간 정상 주제는 통과한다", () => {
+    for (const title of [
+      "베이포레소 크로스미니 6 직접 사용해본 인천 전자담배 후기",
+      "부천전자담배 가습현상의 원인은 뭘까?",
+      "전자담배 코일 탄맛 원인과 점검 순서",
+    ]) {
+      assert.equal(isTopicVocabularyCoherent({ title }, vocabulary), true, `오탐: ${title}`);
+    }
+  });
+
+  // 신제품명 하나로 된 짧은 제목은 어휘에 없어도 막으면 안 된다.
+  test("짧은 제목은 적중률 판정을 건너뛴다", () => {
+    assert.equal(isTopicVocabularyCoherent({ title: "말론S 후기" }, vocabulary), true);
+    assert.equal(isTopicVocabularyCoherent({ title: "신제품 아스트로MK4" }, vocabulary), true);
+  });
+
+  test("어휘 근거가 부족하면 판정하지 않는다", () => {
+    assert.equal(
+      isTopicVocabularyCoherent({ title: "인천 아시아나 마일리지 전환 후 구매" }, new Set(["전자담배"])),
+      true
+    );
+  });
+});
+
+// isLocalityToken의 접미사에서 "면"과 "리"를 뺐다. 실제 글 제목 261건을 훑어보니
+// -면은 충돌 21건이 전부 어미(방문하면, 시작하면)였고, -리는 배터리/엔트리였다.
+// 접미사를 유지하면 정상 주제가 대량으로 막힌다.
+describe("PR26 지역 접미사 오탐 방지", () => {
+  test("조건 어미 -면을 지역명으로 오인하지 않는다", () => {
+    for (const title of [
+      "부평 전자담배 처음 방문하면 받는 상담",
+      "전자담배 처음 시작하면 한달 비용",
+      "연초에서 전자담배로 바꾸면 달라지는 점",
+      "입문자라면 알아두면 좋은 기기 기준",
+    ]) {
+      assert.equal(hasDisallowedLocality(title), false, `오탐: ${title}`);
+    }
+  });
+
+  test("배터리 같은 -리 업종어를 지역명으로 오인하지 않는다", () => {
+    for (const title of ["전자담배 배터리 충전 습관", "액상 총정리와 엔트리 모델 비교"]) {
+      assert.equal(hasDisallowedLocality(title), false, `오탐: ${title}`);
+    }
+  });
+
+  test("-리로 끝나는 운영 외 지명은 목록으로 막는다", () => {
+    assert.equal(filterBlockedTopics([{ title: "청량리 전자담배 매장" }]).length, 0);
+    assert.equal(filterBlockedTopics([{ title: "포항 전자담배 매장" }]).length, 0);
   });
 });

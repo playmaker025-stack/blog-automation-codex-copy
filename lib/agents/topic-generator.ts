@@ -22,6 +22,7 @@ import {
   buildDomainAnchors,
   buildDomainVocabulary,
   isOnDomainTopic,
+  isTopicVocabularyCoherent,
 } from "./blog-workflow-policy";
 import { PRIMARY_LOCALITY_PRIORITY, SECONDARY_LOCALITY_PRIORITY } from "./locality-keyword-agent";
 
@@ -1071,8 +1072,16 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   const mainCategory = extractMainCategory(publishedTopics);
   // 업종 축은 사용자 기존 글에서 유도한다. 금지어 목록으로는 계속 새기 때문에
   // (병원/대출을 막으니 맞춤복/택배가 나옴) 화이트리스트로 뒤집는다.
-  const domainAnchors = buildDomainAnchors(publishedTopics);
-  const domainVocabulary = buildDomainVocabulary(publishedTopics);
+  //
+  // 어휘는 토픽 인덱스가 아니라 실제 발행 글까지 합쳐서 만든다. 토픽 인덱스의 published는
+  // 33건뿐인데 발행 포스트는 228건이라, 토픽만 쓰면 "그래피티", "말론", "젤로맥스" 같은
+  // 제품명이 어휘에 없어서 정상적인 제품 비교 주제가 통째로 차단됐다.
+  const vocabularySource = [
+    ...publishedTopics,
+    ...(input.publishedPosts ?? []).map(postToTopic),
+  ];
+  const domainAnchors = buildDomainAnchors(vocabularySource);
+  const domainVocabulary = buildDomainVocabulary(vocabularySource);
   const domainAnchorLine = domainAnchors.join(", ") || "기존 발행 글 주제 범위";
 
   onProgress?.(`네이버 키워드 리서치 "${representativeKeyword}"`);
@@ -1196,6 +1205,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     )
       .filter((topic) => topic.title)
       .filter((topic) => isOnDomainTopic(topic, domainVocabulary))
+      .filter((topic) => isTopicVocabularyCoherent(topic, domainVocabulary))
       .slice(0, 5);
 
     onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
@@ -1290,6 +1300,7 @@ ${directCommunitySignals}
   )
     .filter((topic) => topic.title)
     .filter((topic) => isOnDomainTopic(topic, domainVocabulary))
+      .filter((topic) => isTopicVocabularyCoherent(topic, domainVocabulary))
     .slice(0, 5);
 
   onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);

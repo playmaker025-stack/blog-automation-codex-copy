@@ -77,6 +77,17 @@ export const BLOCKED_OUTSIDE_LOCALITY_TERMS = [
   "청주",
   "전주",
   "제주",
+  "포항",
+  "창원",
+  "김해",
+  "구미",
+  "원주",
+  "춘천",
+  // -리로 끝나는 운영 외 지명. isLocalityToken의 접미사에서 "리"를 뺐기 때문에
+  // 패턴으로는 안 잡힌다. 실제 글 제목에서 -리 토큰은 배터리/엔트리/총정리뿐이라
+  // 접미사를 복원하면 "배터리" 주제가 지역명으로 오인돼 차단된다. 그래서 지명만 직접 넣는다.
+  "청량리",
+  "왕십리",
 ];
 
 /**
@@ -215,7 +226,9 @@ export function isLocalityToken(token: string): boolean {
   if (!normalized) return false;
   if (ALLOWED_LOCALITY_TERMS.includes(normalized)) return true;
   if (BLOCKED_OUTSIDE_LOCALITY_TERMS.includes(normalized)) return true;
-  return /^[가-힣]{2,5}(동|읍|면|리|구|시|군|역)$/u.test(normalized);
+  // 면/리는 뺐다. "방문하면", "시작하면", "바꾸면"처럼 조건 어미 -면이 훨씬 흔하고,
+  // -리도 "자가수리" 같은 업종어와 충돌한다. 이 사업 영역(인천)에 면/리 단위 지명도 없다.
+  return /^[가-힣]{2,5}(동|읍|구|시|군|역)$/u.test(normalized);
 }
 
 /**
@@ -235,6 +248,10 @@ const NON_PLACE_TOKENS = new Set([
   "오작동",
   "반자동",
   "전자동",
+  "재가동",
+  "출입구",
+  "비상구",
+  "예비군",
 ]);
 
 /**
@@ -280,6 +297,44 @@ export function filterOutsideDomainSignals(values: string[]): string[] {
  * 신호는 어디까지나 참고값이라 버리는 비용이 낮다. 그래서 출력 쪽보다 공격적으로,
  * 업종 어휘에 걸리는 신호만 남긴다.
  */
+/**
+ * 업종 어휘 적중률로 "결합형" 주제를 걸러낸다.
+ *
+ * 업종어 하나만 있으면 통과하는 isOnDomainTopic으로는 결합형을 못 잡는다.
+ * "인천 아시아나 마일리지 전환 후 전자담배 구매 활용법"은 전자담배가 있어서 통과했다.
+ * 무관한 고유명사가 업종어에 붙는 형태라 어휘 밖 토큰이 다수를 차지하는 게 특징이다.
+ *
+ * 실측(발행 261건 기준 어휘 677개):
+ *   14~20% → 포항 지역 매장 / 아시아나 마일리지 / 인천28센터  (전부 부적합)
+ *   40~57% → 베이포레소 크로스미니 후기 / 가습현상 원인       (전부 정상)
+ * 30%에서 깨끗하게 갈린다.
+ *
+ * 짧은 제목은 제외한다. "말론S 후기"처럼 신제품명 하나로 된 제목이 0%로 걸리기 때문이다.
+ */
+const MIN_COHERENCE_TOKENS = 4;
+const MIN_COHERENCE_RATIO = 0.3;
+
+export function domainCoherenceRatio(text: string, vocabulary: Set<string>): number {
+  const tokens = meaningfulTokens(text);
+  if (tokens.length === 0) return 1;
+  const known = tokens.filter(
+    (token) =>
+      vocabulary.has(token) ||
+      [...vocabulary].some((term) => term.length >= 3 && token.includes(term))
+  ).length;
+  return known / tokens.length;
+}
+
+export function isTopicVocabularyCoherent(
+  topic: { title: string },
+  vocabulary: Set<string>
+): boolean {
+  if (vocabulary.size < MIN_DOMAIN_VOCABULARY) return true;
+  const tokens = meaningfulTokens(topic.title);
+  if (tokens.length < MIN_COHERENCE_TOKENS) return true;
+  return domainCoherenceRatio(topic.title, vocabulary) >= MIN_COHERENCE_RATIO;
+}
+
 export function filterSignalsByDomainVocabulary(
   values: string[],
   vocabulary: Set<string>
@@ -392,7 +447,14 @@ export function isOnDomainTopic(
 ): boolean {
   if (vocabulary.size < MIN_DOMAIN_VOCABULARY) return true;
   const text = [topic.title, topic.description ?? "", ...(topic.tags ?? [])].join(" ");
-  return meaningfulTokens(text).some((token) => vocabulary.has(token));
+  const tokens = meaningfulTokens(text);
+  if (tokens.some((token) => vocabulary.has(token))) return true;
+
+  // 붙여쓴 복합어 대응. "부천전자담배"는 한 토큰이라 정확히 일치하지 않지만
+  // 업종어 "전자담배"를 품고 있다. 짧은 어휘로 인한 우연한 일치를 막으려고 3글자 이상만 본다.
+  return tokens.some((token) =>
+    [...vocabulary].some((term) => term.length >= 3 && token.includes(term))
+  );
 }
 
 export function summarizeTopicLinkMap(currentTopic: Topic, allTopics: Topic[]): string {
