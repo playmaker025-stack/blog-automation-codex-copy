@@ -386,7 +386,9 @@ export function analyzeSerpModule(params: {
   });
 
   const placeSubtype = serpModule === "place" ? resolvePlaceSubtype({ text, localityTokens }) : null;
-  const citation = serpModule === "ai_briefing" ? resolveCitationType(text) : null;
+  // 인용 레이어가 전 모듈 공통이 됐으므로 인용 타입도 항상 계산한다.
+  // 예전에는 ai_briefing일 때만 계산해서 나머지 모듈은 인용 전략이 아예 없었다.
+  const citation = resolveCitationType(text);
 
   return {
     serpModule,
@@ -403,12 +405,12 @@ export function analyzeSerpModule(params: {
     primarySearchIntent: resolvePrimarySearchIntent({ module: serpModule, text, placeSubtype }),
     recommendedBlogRole: resolveBlogRole({
       module: serpModule,
-      citationType: citation?.type ?? null,
+      citationType: citation.type,
       hasLocality: localityTokens.length > 0,
       text,
     }),
-    aiBriefingCitationType: citation?.type ?? null,
-    aiBriefingCitationNote: citation?.note ?? null,
+    aiBriefingCitationType: citation.type,
+    aiBriefingCitationNote: citation.note,
     placeSubtype,
     blogTabIsPrimarySignal: false,
     checkedAt: (params.now ?? new Date()).toISOString(),

@@ -3,6 +3,8 @@ import type { EvalResult, FinalDraftCheck, StrategyPlanResult } from "./types";
 import type { CorpusSummaryArtifact } from "./corpus-selector";
 import { formatFinalDraftRevisionSection } from "./final-draft-check";
 import { formatStyleFingerprint } from "./style-fingerprint";
+import { buildCitationRevisionInstructions } from "./citation-readiness";
+import type { CitationReadiness } from "./citation-readiness";
 
 import { SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
 
@@ -181,6 +183,7 @@ export function buildRevisionInstruction(params: {
   briefing: string;
   strategy?: StrategyPlanResult;
   finalDraftCheck?: FinalDraftCheck | null;
+  citationReadiness?: CitationReadiness | null;
 }): string {
   const lowDimensions = Object.entries(params.evalResult.scores)
     .filter(([, score]) => score < HARNESS_PASS_THRESHOLD)
@@ -218,6 +221,15 @@ export function buildRevisionInstruction(params: {
       ].join("\n")
     : "";
   const finalDraftSection = formatFinalDraftRevisionSection(params.finalDraftCheck);
+  const citationLines = params.citationReadiness
+    ? buildCitationRevisionInstructions(params.citationReadiness)
+    : [];
+  const citationSection = citationLines.length
+    ? [
+        "AI 인용 가능성 보강 (네이버 AI탭 노출 목표)",
+        ...citationLines.map((item) => `- ${item}`),
+      ].join("\n")
+    : "";
 
   return `## 자동 보강 지시
 이전 초안은 통과 기준 ${HARNESS_PASS_THRESHOLD}점에 도달하지 못했습니다. 아래 문제를 반영해 본문 전체를 다시 작성하세요. 기존 문장을 덧붙이지 말고, 과한 반복을 줄이면서 부족한 정보와 구조를 보강해야 합니다.
@@ -244,6 +256,8 @@ ${paragraphWarnings.join("\n") || ""}
 - 부족 키워드는 억지로 나열하지 말고 검색자가 실제로 묻는 질문에 답하는 문단 안에 넣으세요.
 
 ${contractSection}
+
+${citationSection}
 
 ${finalDraftSection}
 

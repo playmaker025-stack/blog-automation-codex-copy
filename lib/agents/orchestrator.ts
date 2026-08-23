@@ -329,6 +329,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
         briefing: harnessBriefing,
         strategy,
         finalDraftCheck: writerResult.finalDraftCheck,
+        citationReadiness: writerResult.citationReadiness,
       }),
       onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
       onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),

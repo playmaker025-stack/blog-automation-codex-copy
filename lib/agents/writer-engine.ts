@@ -18,8 +18,60 @@ import type {
   WriterStructurePlan,
 } from "./types";
 
+/**
+ * AI 인용 레이어 — 모든 모듈 공통.
+ *
+ * 배경: 연구(references/agent-seo-analyst.md, agent-review-qa.md)는 ai_briefing에만
+ * 인용 유도를 적용하고 blog_view/place에는 "요약 회피"를 적용했다. 클릭을 뺏기지 않으려는
+ * 설계였다. 그런데 실측하니 전체 토픽의 59%가 blog_view/place라서, 목표인
+ * 네이버 AI탭 노출과 정반대로 대부분의 글이 인용되기 어렵게 쓰이고 있었다.
+ *
+ * 그래서 인용 가능성을 전 모듈 기본값으로 올린다. 대신 클릭 방어는 회피가 아니라
+ * clickRetention으로 한다 — 인용될 답변은 주되, 결정적 정보는 본문에만 남긴다.
+ */
+function buildCitationLayer(analysis: SerpAnalysis): string[] {
+  const geoPriority = analysis.aiBriefingCitationType === "geo_priority";
+
+  return [
+    "첫 3문단 안에 그 자체로 인용 가능한 독립 문장 3개를 넣으세요. 앞뒤 문맥 없이 읽어도 뜻이 통해야 합니다.",
+    "  (1) 검색 질문에 대한 직접 답변 1문장",
+    "  (2) 비교 또는 판단 기준 1문장",
+    "  (3) 예외 조건이나 주의점 1문장",
+    "각 문장에 숫자, 가격, 기간, 날짜 중 최소 하나의 구체값을 넣으세요. 확인 못 한 값은 지어내지 말고 그 문장을 다른 구체값으로 바꾸세요.",
+    "본문 안에 목록, 단계, 표 중 최소 하나를 넣어 AI가 파싱할 수 있게 하세요.",
+    "하단에 FAQ 2~3개를 실제 검색 질문 형태로 넣으세요. 질문은 사람이 검색창에 칠 법한 문장이어야 합니다.",
+    geoPriority
+      ? "이 주제는 정보/방법/문제해결형이라 상위노출과 무관하게 인용될 수 있습니다. 답변 명확성과 문단 구조를 최우선으로 두세요."
+      : "이 주제는 비교/추천/구매검토형이라 상위노출과 인용이 함께 갑니다. 본문 충실도와 실제 경험 서술을 함께 강화하세요.",
+    "AI탭은 대화형이라 한 번 인용되면 후속 질문에서 반복 노출될 수 있습니다. 한 문장이 아니라 주제 전체를 일관되게 답하도록 쓰세요.",
+  ];
+}
+
+/**
+ * 클릭 방어 — AI가 요약해도 클릭할 이유를 남긴다.
+ * 인용을 막는 대신, 인용된 답변만으로는 해결되지 않는 정보를 본문에 남기는 방식이다.
+ */
+function buildClickRetention(module: SerpModule): string[] {
+  const shared = [
+    "인용될 답변 문장은 '무엇을/왜'까지만 답하고, '내 경우엔 어떤지'는 본문에서 풀어주세요.",
+    "실제 확인한 값(가격, 재고, 시연 결과, 실물 비교, 상담 기준)은 본문에만 두세요. 도입부 요약에 전부 옮기지 마세요.",
+  ];
+
+  if (module === "place") {
+    return [...shared, "매장 위치, 주차, 영업시간, 방문 전 확인 사항은 본문에서만 구체적으로 밝히세요."];
+  }
+  if (module === "shopping") {
+    return [...shared, "가격 비교와 재고 상황은 확인 시점과 함께 본문에만 쓰세요."];
+  }
+  if (module === "blog_view") {
+    return [...shared, "증상별 분기와 실제 점검 순서는 본문에서만 단계로 풀어주세요."];
+  }
+  return shared;
+}
+
 const MODULE_LABEL: Record<SerpModule, string> = {
   ai_briefing: "AI 브리핑형",
+  ai_tab: "AI탭 대화형",
   clip: "클립 보조형",
   place: "플레이스 보조형",
   shopping: "구매 판단 보조형",
@@ -75,10 +127,12 @@ function buildAiBriefingPlan(analysis: SerpAnalysis): WriterStructurePlan {
       analysis.serpModuleConfidence === "low"
         ? "첫 화면을 직접 확인하지 않은 예측값입니다. AI 브리핑 인용 구조를 적용하되, 블로그 롱폼으로서의 완결성도 함께 유지하세요."
         : "AI 브리핑 인용 구조를 우선 적용하세요.",
+    citationLayer: buildCitationLayer(analysis),
+    clickRetention: buildClickRetention("ai_briefing"),
   };
 }
 
-function buildClipPlan(): WriterStructurePlan {
+function buildClipPlan(analysis: SerpAnalysis): WriterStructurePlan {
   return {
     serpModule: "clip",
     label: MODULE_LABEL.clip,
@@ -99,6 +153,8 @@ function buildClipPlan(): WriterStructurePlan {
     ],
     qaChecklist: ["클립 링크 또는 촬영 가이드가 있는가 (필수)"],
     briefingNote: "이 글은 영상 보조 텍스트입니다. 길이를 억지로 늘리지 마세요.",
+    citationLayer: buildCitationLayer(analysis),
+    clickRetention: buildClickRetention("clip"),
   };
 }
 
@@ -122,19 +178,21 @@ function buildPlacePlan(analysis: SerpAnalysis): WriterStructurePlan {
       "확인되지 않은 영업 정보는 쓰지 말고, 확인 가능한 범위만 쓰세요.",
     ],
     forbiddenMoves: [
-      "블로그 단독 상위노출만을 목표로 잡지 마세요. 플레이스 보조 문서 노출이 우선입니다.",
       "지역명을 문장마다 반복해 넣지 마세요.",
+      "방문 안내를 도입부에서 다 끝내지 마세요. 인용될 답변과 본문에서만 얻는 정보를 분리하세요.",
     ],
     qaChecklist: [
       "매장 정보가 있는가 (필수)",
       "스마트플레이스 연결이 있는가 (필수)",
-      "FAQ는 불필요 — 억지로 붙이지 말 것",
+      "FAQ 2~3개가 있는가 (인용 레이어 필수)",
     ],
     briefingNote: "방문 직전 독자가 필요한 정보를 우선하세요.",
+    citationLayer: buildCitationLayer(analysis),
+    clickRetention: buildClickRetention("place"),
   };
 }
 
-function buildShoppingPlan(): WriterStructurePlan {
+function buildShoppingPlan(analysis: SerpAnalysis): WriterStructurePlan {
   return {
     serpModule: "shopping",
     label: MODULE_LABEL.shopping,
@@ -155,6 +213,8 @@ function buildShoppingPlan(): WriterStructurePlan {
     ],
     qaChecklist: ["과장 없는 장단점이 함께 있는가"],
     briefingNote: "이 글의 역할은 구매 결정을 돕는 보조 문서입니다.",
+    citationLayer: buildCitationLayer(analysis),
+    clickRetention: buildClickRetention("shopping"),
   };
 }
 
@@ -184,6 +244,8 @@ function buildBlogViewPlan(analysis: SerpAnalysis): WriterStructurePlan {
       ? ["증상/원인/해결 구조가 있는가 (필수)"]
       : ["단계별 순서가 실제로 따라할 수 있게 쓰였는가"],
     briefingNote: "D.I.A./C-Rank 기준이 그대로 적용되는 유형입니다.",
+    citationLayer: buildCitationLayer(analysis),
+    clickRetention: buildClickRetention("blog_view"),
   };
 }
 
@@ -191,16 +253,50 @@ function buildBlogViewPlan(analysis: SerpAnalysis): WriterStructurePlan {
 // 진입점
 // ============================================================
 
+function buildAiTabPlan(analysis: SerpAnalysis): WriterStructurePlan {
+  return {
+    serpModule: "ai_tab",
+    label: MODULE_LABEL.ai_tab,
+    goal: "AI탭 대화에서 반복 인용되는 출처가 된다.",
+    requiredSections: [
+      "첫 문단: 검색 질문에 대한 직접 답변",
+      "두 번째 문단: 판단 기준",
+      "세 번째 문단: 예외 조건",
+      "본문: 상황별 분기를 목록이나 표로",
+      "하단: 후속 질문 형태의 FAQ 3개",
+    ],
+    requiredElements: [
+      "AI탭은 대화형이라 후속 질문이 이어집니다. 하나의 답이 아니라 '그다음 궁금해질 것'까지 같은 글에서 답하세요.",
+      "FAQ는 첫 질문의 후속 질문으로 구성하세요. 독립된 잡다한 질문 나열은 대화 흐름에 안 걸립니다.",
+      "같은 주제를 다루는 다른 글로 이어지는 연결을 본문 안에 두세요. 반복 인용 시 주제 묶음 전체가 노출될 수 있습니다.",
+    ],
+    forbiddenMoves: [
+      "정의형 제목만으로 끝내지 마세요.",
+      "출처 없는 수치를 단정하지 마세요.",
+    ],
+    qaChecklist: [
+      "첫 문단에 독립 답변 문장이 있는가 (필수)",
+      "후속 질문형 FAQ 3개가 있는가 (필수)",
+      "상황별 분기가 파싱 가능한 형태인가 (필수)",
+    ],
+    briefingNote: "한 번 인용되면 후속 대화에서 반복 노출될 수 있는 유형입니다. 주제 전체를 일관되게 답하세요.",
+    citationLayer: buildCitationLayer(analysis),
+    clickRetention: buildClickRetention("ai_tab"),
+  };
+}
+
 export function buildWriterStructurePlan(analysis: SerpAnalysis): WriterStructurePlan {
   switch (analysis.serpModule) {
     case "ai_briefing":
       return buildAiBriefingPlan(analysis);
+    case "ai_tab":
+      return buildAiTabPlan(analysis);
     case "clip":
-      return buildClipPlan();
+      return buildClipPlan(analysis);
     case "place":
       return buildPlacePlan(analysis);
     case "shopping":
-      return buildShoppingPlan();
+      return buildShoppingPlan(analysis);
     case "blog_view":
     default:
       return buildBlogViewPlan(analysis);
@@ -257,6 +353,13 @@ export function formatWriterStructureBrief(params: {
       : null,
     "",
     `이 글의 목표: ${plan.goal}`,
+    "",
+    "[AI 인용 레이어 — 모듈과 무관하게 이 글의 최우선 요구사항]",
+    "네이버 AI탭과 AI 브리핑이 이 글을 출처로 뽑을 수 있어야 합니다.",
+    ...plan.citationLayer.map((item) => (item.startsWith("  ") ? item : `- ${item}`)),
+    "",
+    "[클릭 방어 — 인용되더라도 읽을 이유를 남긴다]",
+    ...plan.clickRetention.map((item) => `- ${item}`),
     "",
     "반드시 이 순서의 구조로 쓰세요:",
     ...plan.requiredSections.map((section, index) => `${index + 1}. ${section}`),

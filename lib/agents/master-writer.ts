@@ -21,6 +21,7 @@ import {
 } from "./article-contract-utils";
 import { formatOverlapReport } from "./overlap-report-utils";
 import { runFinalDraftCheck, buildFinalDraftRevisionInstructions } from "./final-draft-check";
+import { evaluateCitationReadiness } from "./citation-readiness";
 import { buildDuplicateModeWriterGuidance, formatArticlePlan } from "./article-plan.ts";
 
 // ============================================================
@@ -81,9 +82,11 @@ export function wrapForNaverMobile(text: string): string {
       continue;
     }
 
-    // 마크다운 헤더(#), URL 단독 라인, 마크다운 링크 단독 라인 → 그대로
+    // 마크다운 헤더(#), 표 행(|), URL 단독 라인, 마크다운 링크 단독 라인 → 그대로
+    // 표 행을 26자로 접으면 마크다운 표가 깨진다. AI가 파싱할 구조를 만들어야 하므로 보존한다.
     if (
       trimmed.startsWith("#") ||
+      trimmed.startsWith("|") ||
       /^https?:\/\/\S+$/i.test(trimmed) ||
       /^\[[^\]]+\]\([^)]+\)$/.test(trimmed)
     ) {
@@ -1309,6 +1312,8 @@ async function saveWriterResult(params: {
     strategy: params.strategy,
   });
   const finalDraftRevisionInstructions = buildFinalDraftRevisionInstructions(finalDraftCheck);
+  // LAYER 6 — AI 인용 가능성. 발행을 막지는 않고 재작성 압력으로만 쓴다.
+  const citationReadiness = evaluateCitationReadiness(finalContent);
   const wordCount = finalContent.replace(/\s+/g, "").length;
 
   // GitHub에 본문 저장 (파일이 없을 때만 — sha null)
@@ -1333,5 +1338,6 @@ async function saveWriterResult(params: {
     finalDraftRevisionInstructions: finalDraftRevisionInstructions.length
       ? finalDraftRevisionInstructions
       : undefined,
+    citationReadiness,
   };
 }

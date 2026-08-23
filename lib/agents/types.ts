@@ -286,7 +286,7 @@ export interface NaverSignals {
 // SERP 모듈 분류 (references/agent-seo-analyst.md)
 // ============================================================
 
-export type SerpModule = "ai_briefing" | "clip" | "place" | "shopping" | "blog_view";
+export type SerpModule = "ai_briefing" | "ai_tab" | "clip" | "place" | "shopping" | "blog_view";
 
 export type SerpModuleConfidence = "high" | "medium" | "low";
 
@@ -336,6 +336,16 @@ export interface WriterStructurePlan {
   forbiddenMoves: string[];
   qaChecklist: string[];
   briefingNote: string;
+  /**
+   * AI 인용 레이어 — 모듈과 무관하게 모든 글에 요구된다.
+   * 목표가 네이버 AI탭/AI 브리핑 노출이므로 인용 가능성은 선택이 아니라 기본값이다.
+   */
+  citationLayer: string[];
+  /**
+   * AI가 본문을 요약해도 클릭할 이유가 남도록 본문에만 두는 정보.
+   * 인용 유도와 클릭 방어를 양립시키는 장치다.
+   */
+  clickRetention: string[];
 }
 
 export type ContentTopologyKind = "hub" | "leaf";
@@ -540,6 +550,12 @@ export interface WriterResult {
   generatedAt: string;
   finalDraftCheck?: FinalDraftCheck;
   finalDraftRevisionInstructions?: FinalDraftRevisionInstructions;
+  /**
+   * AI 인용 가능성 검수 (LAYER 6).
+   * 계약 검사(finalDraftCheck)와 분리한다 — 계약 위반은 발행 금지지만
+   * 인용 가능성은 재작성으로 끌어올리는 품질 축이다.
+   */
+  citationReadiness?: import("./citation-readiness").CitationReadiness;
 }
 
 export interface EvalResult {
