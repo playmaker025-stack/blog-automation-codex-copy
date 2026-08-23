@@ -468,6 +468,54 @@ export function isOnDomainTopic(
   );
 }
 
+/**
+ * 리서치 키워드를 뽑는다.
+ *
+ * 실측으로 드러난 문제 세 가지를 모두 막는다.
+ *
+ * 1. 제목의 첫 단어만 셌다. 사용자 a의 published 토픽이 1건뿐이었는데 그 제목이
+ *    "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰"였다. 첫 단어만 보니 "인천"만
+ *    집계되고 바로 옆의 "전자담배"는 무시됐다.
+ * 2. 지역명이 1위일 때 붙일 업종 토큰을 같은 후보 풀에서만 찾았다. 풀에 "인천"뿐이라
+ *    결합에 실패하고 맨 "인천"이 리서치 키워드가 됐다.
+ * 3. 그 결과 네이버를 "인천"으로 검색해서 아파트 매매, 병원 비교, 롯데택배, 월변 대출
+ *    글이 쏟아졌다. 오염의 최초 지점이 여기였다.
+ *
+ * 그래서 제목 전체를 세고, 업종 토큰을 못 찾으면 계약의 대표 제품어를 붙인다.
+ * 리서치 키워드는 어떤 경우에도 업종어를 포함한다.
+ */
+export function extractRepresentativeKeyword(
+  topics: Array<{ title?: string; tags?: string[] }>,
+  domainAnchor: string
+): string {
+  const counts = new Map<string, number>();
+
+  for (const topic of topics) {
+    for (const tag of topic.tags ?? []) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    }
+    // 제목 전체를 센다. 첫 단어만 보면 "인천 전자담배 ..."에서 업종어를 놓친다.
+    for (const raw of (topic.title ?? "").split(/\s+/)) {
+      const word = raw.normalize("NFKC").replace(/[^\p{L}\p{N}]/gu, "").trim();
+      if (word.length >= 2) counts.set(word, (counts.get(word) ?? 0) + 1);
+    }
+  }
+
+  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([token]) => token);
+  const top = ranked[0];
+  if (!top) return domainAnchor;
+  if (!isLocalityToken(top)) {
+    // 1위가 업종어가 아니어도 업종어를 포함하지 않으면 검색이 엉뚱한 데로 간다.
+    return top.includes(domainAnchor) ? top : `${top} ${domainAnchor}`;
+  }
+
+  const domainToken = ranked.find(
+    (token) => !isLocalityToken(token) && !hasOutsideDomain(token) && token !== top
+  );
+  // 후보 풀에 업종 토큰이 없어도 지역명 단독으로 검색하지 않는다.
+  return `${top} ${domainToken ?? domainAnchor}`;
+}
+
 export function summarizeTopicLinkMap(currentTopic: Topic, allTopics: Topic[]): string {
   const sameCategory = allTopics.filter(
     (topic) => topic.topicId !== currentTopic.topicId && topic.category === currentTopic.category

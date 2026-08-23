@@ -15,12 +15,11 @@ import {
   BLOCKED_OUTSIDE_LOCALITY_TERMS,
   buildPolicyPromptSection,
   filterBlockedTopics,
-  hasOutsideDomain,
-  isLocalityToken,
   buildDomainAnchors,
   buildDomainVocabulary,
   isOnDomainTopic,
   isTopicVocabularyCoherent,
+  extractRepresentativeKeyword,
 } from "./blog-workflow-policy";
 import { PRIMARY_LOCALITY_PRIORITY, SECONDARY_LOCALITY_PRIORITY } from "./locality-keyword-agent";
 import {
@@ -964,43 +963,6 @@ function extractMainCategory(topics: Topic[]): string {
   return [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0];
 }
 
-/**
- * 리서치 키워드를 뽑는다.
- *
- * 예전에는 최빈 토큰 하나를 그대로 썼는데, 실측 결과 그 값이 "만수동"처럼 **지역명 단독**이었다.
- * 지역명만으로 네이버를 검색하면 그 지역의 병원/대출/부동산 글이 결과를 채우고,
- * 그 단어들이 연관 키워드와 질문 의도로 프롬프트에 유입돼 엉뚱한 업종 주제가 생성됐다.
- *
- * 그래서 지역명이 1위로 뽑히면 업종 축(지역명이 아닌 최빈 토큰)을 결합해 돌려준다.
- * 업종 용어를 하드코딩하지 않고 사용자의 기존 글에서 유도하므로 다른 업종에도 그대로 쓸 수 있다.
- */
-function extractRepresentativeKeyword(topics: Topic[]): string {
-  const counts = new Map<string, number>();
-
-  for (const topic of topics) {
-    for (const tag of topic.tags ?? []) {
-      counts.set(tag, (counts.get(tag) ?? 0) + 1);
-    }
-
-    const firstWord = topic.title.split(/\s+/)[0];
-    if (firstWord.length >= 2) {
-      counts.set(firstWord, (counts.get(firstWord) ?? 0) + 1);
-    }
-  }
-
-  if (counts.size === 0) {
-    return topics[0]?.title.split(/\s+/)[0] ?? "블로그";
-  }
-
-  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([token]) => token);
-  const top = ranked[0];
-  if (!isLocalityToken(top)) return top;
-
-  // 지역명이 1위면 업종 축을 붙여 "지역 + 업종" 형태로 만든다.
-  const domainToken = ranked.find((token) => !isLocalityToken(token) && !hasOutsideDomain(token));
-  return domainToken ? `${top} ${domainToken}` : top;
-}
-
 function parseGeneratedTopics(text: string): GeneratedTopic[] {
   const jsonMatch = text.match(/```json\s*([\s\S]*?)```/);
   const raw = jsonMatch?.[1] ?? text;
@@ -1082,7 +1044,6 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
 
   onProgress?.(`${publishedTopics.length}개 기존 발행 글 분석 중...`);
 
-  const representativeKeyword = extractRepresentativeKeyword(publishedTopics);
   const mainCategory = extractMainCategory(publishedTopics);
   // 업종 축은 사용자 기존 글에서 유도한다. 금지어 목록으로는 계속 새기 때문에
   // (병원/대출을 막으니 맞춤복/택배가 나옴) 화이트리스트로 뒤집는다.
@@ -1102,6 +1063,12 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     ...publishedTopics,
     ...(input.publishedPosts ?? []).map(postToTopic),
   ];
+  // 리서치 키워드도 넓은 소스에서 뽑는다. 토픽이 1건뿐인 사용자는 그 한 건만 보게 되어
+  // 발행글 수십 건에 있는 업종어를 놓친다.
+  const representativeKeyword = extractRepresentativeKeyword(
+    vocabularySource,
+    contract.productCategories[0] ?? "전자담배"
+  );
   const domainAnchors = buildDomainAnchors(vocabularySource);
   // 계약을 필터가 아니라 생성기로도 쓴다. 검색 자유 텍스트를 뺀 뒤 주제가 단조로워졌는데,
   // 소재가 없어서가 아니라 어디가 비었는지 알려주는 장치가 없어서였다.

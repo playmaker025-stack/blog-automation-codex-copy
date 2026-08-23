@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import {
   buildDomainAnchors,
+  extractRepresentativeKeyword,
   buildDomainVocabulary,
   filterBlockedTopics,
   filterOutsideDomainSignals,
@@ -372,5 +373,42 @@ describe("PR26 지역 접미사 오탐 방지", () => {
   test("-리로 끝나는 운영 외 지명은 목록으로 막는다", () => {
     assert.equal(filterBlockedTopics([{ title: "청량리 전자담배 매장" }]).length, 0);
     assert.equal(filterBlockedTopics([{ title: "포항 전자담배 매장" }]).length, 0);
+  });
+});
+
+// 실측 버그: 사용자 a의 published 토픽이 1건이고 제목이
+// "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰"였는데 리서치 키워드가 "인천"이 됐다.
+// 그 키워드로 네이버를 검색하니 아파트 매매, 병원 비교, 롯데택배, 월변 대출이 쏟아졌다.
+// 오염의 최초 지점이 여기였다.
+describe("PR26 리서치 키워드 도출", () => {
+  test("제목 첫 단어만 보지 않는다", () => {
+    const keyword = extractRepresentativeKeyword(
+      [{ title: "인천 전자담배 만수르 도조 오팔 일회용 기기 리뷰", tags: [] }],
+      "전자담배"
+    );
+    assert.equal(keyword.includes("전자담배"), true, `업종어 누락: ${keyword}`);
+    assert.notEqual(keyword, "인천", "지역명 단독으로 검색하면 안 됨");
+  });
+
+  test("후보에 업종 토큰이 없어도 지역명 단독이 되지 않는다", () => {
+    const keyword = extractRepresentativeKeyword([{ title: "인천", tags: [] }], "전자담배");
+    assert.equal(keyword, "인천 전자담배");
+  });
+
+  test("업종어가 1위면 그대로 쓴다", () => {
+    const keyword = extractRepresentativeKeyword(
+      [{ title: "전자담배 코일 교체", tags: [] }, { title: "전자담배 액상 추천", tags: [] }],
+      "전자담배"
+    );
+    assert.ok(keyword.includes("전자담배"));
+  });
+
+  test("업종어가 없는 제목이어도 업종어를 붙인다", () => {
+    const keyword = extractRepresentativeKeyword([{ title: "코일 탄맛 원인", tags: [] }], "전자담배");
+    assert.ok(keyword.includes("전자담배"), `업종어 누락: ${keyword}`);
+  });
+
+  test("입력이 비어도 업종어를 돌려준다", () => {
+    assert.equal(extractRepresentativeKeyword([], "전자담배"), "전자담배");
   });
 });
