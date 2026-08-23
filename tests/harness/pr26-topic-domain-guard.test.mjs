@@ -6,6 +6,7 @@ import {
   buildDomainVocabulary,
   filterBlockedTopics,
   filterOutsideDomainSignals,
+  filterSignalsByDomainVocabulary,
   hasDisallowedLocality,
   hasLandmarkMention,
   hasOutsideDomain,
@@ -227,5 +228,45 @@ describe("PR26 지역 화이트리스트", () => {
     ]) {
       assert.equal(hasDisallowedLocality(title), false, `오탐: ${title}`);
     }
+  });
+});
+
+// 금지어 목록만으로는 무관한 고유명사를 막을 수 없었다.
+// "만수동 15만원대 토이푸들 전자담배 기기 후기", "인천 아시아나 마일리지 전환 후 전자담배 구매"
+// 같은 결합이 나온 원인은 네이버 지역 검색 결과가 연관 키워드로 유입된 것이었다.
+describe("PR26 리서치 신호 화이트리스트", () => {
+  const vocabulary = buildDomainVocabulary([
+    { title: "부평 전자담배 만수르 입문자 기기 추천", description: "", tags: ["전자담배", "기기"] },
+    { title: "입호흡 액상 고르는 방법", description: "", tags: ["액상", "입호흡"] },
+    { title: "전자담배 코일 탄맛 원인", description: "", tags: ["코일"] },
+    { title: "만수동 전자담배 매장 방문 안내", description: "", tags: ["매장"] },
+    { title: "폐호흡 무화기 세척 주기", description: "", tags: ["폐호흡", "무화기"] },
+    { title: "니코틴 농도 단계별 정리", description: "", tags: ["니코틴", "농도"] },
+    { title: "일회용 전자담배 종류 안내", description: "", tags: ["일회용", "종류"] },
+    { title: "팟 누수 증상 점검 순서", description: "", tags: ["팟", "누수"] },
+    { title: "배터리 충전 습관 정리", description: "", tags: ["배터리", "충전"] },
+    { title: "액상 보관 온도 관리", description: "", tags: ["보관", "온도"] },
+  ]);
+
+  test("무관한 고유명사 신호를 떨어뜨린다", () => {
+    const signals = [
+      "인천대교 완공일",
+      "토이푸들 분양",
+      "아시아나 마일리지 전환",
+      "인천28센터 1층",
+      "전자담배 액상 추천",
+      "코일 교체 시기",
+      "니코틴 농도 차이",
+    ];
+    assert.deepEqual(filterSignalsByDomainVocabulary(signals, vocabulary), [
+      "전자담배 액상 추천",
+      "코일 교체 시기",
+      "니코틴 농도 차이",
+    ]);
+  });
+
+  test("어휘 근거가 부족하면 신호를 그대로 통과시킨다", () => {
+    const signals = ["아무 신호", "다른 신호"];
+    assert.deepEqual(filterSignalsByDomainVocabulary(signals, new Set(["전자담배"])), signals);
   });
 });

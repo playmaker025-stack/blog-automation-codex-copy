@@ -16,6 +16,7 @@ import {
   buildPolicyPromptSection,
   filterBlockedTopics,
   filterOutsideDomainSignals,
+  filterSignalsByDomainVocabulary,
   hasOutsideDomain,
   isLocalityToken,
   buildDomainAnchors,
@@ -1099,14 +1100,17 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     .join("\n");
   // 리서치 신호는 지역 검색 결과에서 나오므로 타업종 조각이 섞여 들어온다.
   // 프롬프트에 넣기 전에 걷어내야 모델이 애초에 그 주제를 떠올리지 않는다.
-  const longtailHints = filterOutsideDomainSignals(research.longtailSuggestions).slice(0, 5).join(", ");
-  const relatedWords = filterOutsideDomainSignals(
-    research.relatedKeywords.map((item) => item.word)
-  )
+  // 신호는 두 겹으로 거른다. 금지어(블랙리스트)로 명백한 타업종을 치우고,
+  // 업종 어휘(화이트리스트)로 무관한 고유명사를 떨어뜨린다.
+  const cleanSignals = (values: string[]) =>
+    filterSignalsByDomainVocabulary(filterOutsideDomainSignals(values), domainVocabulary);
+
+  const longtailHints = cleanSignals(research.longtailSuggestions).slice(0, 5).join(", ");
+  const relatedWords = cleanSignals(research.relatedKeywords.map((item) => item.word))
     .slice(0, 8)
     .join(", ");
-  const questionIntents = filterOutsideDomainSignals(research.questionIntents).slice(0, 6).join(", ");
-  const communitySignals = filterOutsideDomainSignals(research.communitySignals).slice(0, 6).join(", ");
+  const questionIntents = cleanSignals(research.questionIntents).slice(0, 6).join(", ");
+  const communitySignals = cleanSignals(research.communitySignals).slice(0, 6).join(", ");
   const intentMix = research.summary.intentMix.join(" / ");
   const contentAngles = research.summary.contentAngles.join(", ");
   const directCommunitySignals = formatDirectCommunitySignals({
@@ -1251,6 +1255,8 @@ ${directCommunitySignals}
 7. category는 "${mainCategory}" 계열 유지
 8. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
 9. 5개 모두 이 블로그 업종의 제품/서비스/사용 상황을 다뤄야 하며, 타업종 주제는 하나도 포함하지 않습니다
+10. 업종과 무관한 고유명사(다리, 경기장, 항공 마일리지, 동물, 건물 이름 등)를 업종어와 결합하지 않습니다.
+    리서치 신호에 그런 단어가 남아 있어도 무시하세요. 지역명은 업종을 수식할 때만 씁니다.
 
 ## 출력 형식 (JSON 코드블록)
 \`\`\`json

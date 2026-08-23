@@ -268,6 +268,28 @@ export function filterOutsideDomainSignals(values: string[]): string[] {
   return values.filter((value) => !hasOutsideDomain(value));
 }
 
+/**
+ * 리서치 신호에 업종 화이트리스트를 적용한다.
+ *
+ * 금지어 필터(filterOutsideDomainSignals)만으로는 부족했다. 네이버 지역 검색 결과에서
+ * "인천대교", "토이푸들", "아시아나 마일리지", "인천28센터" 같은 무관한 고유명사가
+ * 연관 키워드로 들어오고, 모델이 그걸 업종어와 결합해 "만수동 15만원대 토이푸들
+ * 전자담배 기기 실사용 후기" 같은 주제를 만들었다. 금지어 목록으로는 이런 고유명사를
+ * 열거할 수 없다.
+ *
+ * 신호는 어디까지나 참고값이라 버리는 비용이 낮다. 그래서 출력 쪽보다 공격적으로,
+ * 업종 어휘에 걸리는 신호만 남긴다.
+ */
+export function filterSignalsByDomainVocabulary(
+  values: string[],
+  vocabulary: Set<string>
+): string[] {
+  if (vocabulary.size < MIN_DOMAIN_VOCABULARY) return values;
+  return values.filter((value) =>
+    meaningfulTokens(value).some((token) => vocabulary.has(token))
+  );
+}
+
 export function filterBlockedTopics<T extends { title: string }>(topics: T[]): T[] {
   return topics.filter(
     (topic) =>
