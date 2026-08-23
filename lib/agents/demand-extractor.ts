@@ -15,6 +15,7 @@
 
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import type { DomainContract } from "./domain-contract";
+import { isAccountLevelFailure, describeExtractionError } from "./demand-error";
 import {
   buildExtractionPrompt,
   parseExtraction,
@@ -78,13 +79,16 @@ export async function extractDemand(params: {
       );
       return { ...parsed, model };
     } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      errors.push(`${model}: ${message}`);
-      console.warn(`[demand-extractor] ${model} 추출 실패:`, message);
+      const described = describeExtractionError(error);
+      errors.push(described);
+      console.warn(`[demand-extractor] ${model} 추출 실패:`, described);
+      // 계정 단위 거부는 모델을 바꿔도 같은 결과다. 호출을 더 낭비하지 않는다.
+      if (isAccountLevelFailure(error)) break;
     }
   }
 
   // 추출 실패가 파이프라인을 막으면 안 된다. 신호 없이 계속 진행하되 사유는 남긴다.
-  onProgress?.(`수요 추출에 실패해 신호 없이 진행합니다. (${errors.join(" / ")})`);
-  return { ...EMPTY_DEMAND, error: errors.join(" / ") };
+  const reason = [...new Set(errors)].join(" / ");
+  onProgress?.(`수요 추출에 실패해 신호 없이 진행합니다. (${reason})`);
+  return { ...EMPTY_DEMAND, error: reason };
 }

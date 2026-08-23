@@ -13,6 +13,10 @@ import {
   EMPTY_DEMAND,
 } from "../../lib/agents/demand-signals.ts";
 import {
+  isAccountLevelFailure,
+  describeExtractionError,
+} from "../../lib/agents/demand-error.ts";
+import {
   emptyRegistry,
   mergeBrandCandidates,
   withRegisteredBrands,
@@ -203,5 +207,43 @@ describe("PR29 추출 입력 상한", () => {
     // 60건 상한이라 61번째는 들어가면 안 된다.
     assert.ok(prompt.includes("전자담배 질문 0"));
     assert.equal(prompt.includes("전자담배 질문 60"), false);
+  });
+});
+
+// 실측(2026-08-23): 크레딧 소진 상태에서 haiku가 400으로 거부됐는데 sonnet으로
+// 폴백해 똑같이 거부됐다. 계정 단위 거부는 모델을 바꿔도 결과가 같다.
+// CLAUDE.md [2026-07-03]: 이 증상이 보이면 코드보다 잔액을 먼저 확인할 것.
+describe("PR29 계정 단위 실패 처리", () => {
+  test("크레딧 소진 메시지를 조치 가능한 문장으로 바꾼다", () => {
+    const raw = new Error(
+      '400 {"type":"error","error":{"type":"invalid_request_error","message":"Your credit balance is too low to access the Anthropic API."}}'
+    );
+    const described = describeExtractionError(raw);
+    assert.ok(described.includes("크레딧"));
+    assert.ok(described.includes("billing"));
+    // 원문 JSON을 그대로 노출하지 않는다.
+    assert.equal(described.includes('{"type"'), false);
+  });
+
+  test("API 키 오류도 구분한다", () => {
+    const described = describeExtractionError(new Error("401 invalid x-api-key"));
+    assert.ok(described.includes("API 키"));
+  });
+
+  test("계정 단위 실패를 식별한다", () => {
+    assert.equal(isAccountLevelFailure(Object.assign(new Error("400"), { status: 400 })), true);
+    assert.equal(isAccountLevelFailure(new Error("Your credit balance is too low")), true);
+    assert.equal(isAccountLevelFailure(new Error("invalid x-api-key")), true);
+  });
+
+  test("일시적 오류는 계정 단위로 보지 않는다", () => {
+    assert.equal(isAccountLevelFailure(Object.assign(new Error("429"), { status: 429 })), false);
+    assert.equal(isAccountLevelFailure(new Error("premature close")), false);
+    assert.equal(isAccountLevelFailure(Object.assign(new Error("500"), { status: 500 })), false);
+  });
+
+  test("모르는 오류는 원문을 자르되 남긴다", () => {
+    const described = describeExtractionError(new Error("x".repeat(500)));
+    assert.ok(described.length <= 300);
   });
 });
