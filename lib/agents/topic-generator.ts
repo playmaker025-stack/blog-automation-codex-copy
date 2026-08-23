@@ -15,6 +15,9 @@ import {
   BLOCKED_OUTSIDE_LOCALITY_TERMS,
   buildPolicyPromptSection,
   filterBlockedTopics,
+  filterOutsideDomainSignals,
+  hasOutsideDomain,
+  isLocalityToken,
 } from "./blog-workflow-policy";
 import { PRIMARY_LOCALITY_PRIORITY, SECONDARY_LOCALITY_PRIORITY } from "./locality-keyword-agent";
 
@@ -941,6 +944,16 @@ function extractMainCategory(topics: Topic[]): string {
   return [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0];
 }
 
+/**
+ * 리서치 키워드를 뽑는다.
+ *
+ * 예전에는 최빈 토큰 하나를 그대로 썼는데, 실측 결과 그 값이 "만수동"처럼 **지역명 단독**이었다.
+ * 지역명만으로 네이버를 검색하면 그 지역의 병원/대출/부동산 글이 결과를 채우고,
+ * 그 단어들이 연관 키워드와 질문 의도로 프롬프트에 유입돼 엉뚱한 업종 주제가 생성됐다.
+ *
+ * 그래서 지역명이 1위로 뽑히면 업종 축(지역명이 아닌 최빈 토큰)을 결합해 돌려준다.
+ * 업종 용어를 하드코딩하지 않고 사용자의 기존 글에서 유도하므로 다른 업종에도 그대로 쓸 수 있다.
+ */
 function extractRepresentativeKeyword(topics: Topic[]): string {
   const counts = new Map<string, number>();
 
@@ -959,7 +972,13 @@ function extractRepresentativeKeyword(topics: Topic[]): string {
     return topics[0]?.title.split(/\s+/)[0] ?? "블로그";
   }
 
-  return [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0];
+  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([token]) => token);
+  const top = ranked[0];
+  if (!isLocalityToken(top)) return top;
+
+  // 지역명이 1위면 업종 축을 붙여 "지역 + 업종" 형태로 만든다.
+  const domainToken = ranked.find((token) => !isLocalityToken(token) && !hasOutsideDomain(token));
+  return domainToken ? `${top} ${domainToken}` : top;
 }
 
 function parseGeneratedTopics(text: string): GeneratedTopic[] {
@@ -1070,13 +1089,16 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   const publishedTitles = publishedTopics
     .map((topic) => `- ${topic.title}${topic.contentKind ? ` [${topic.contentKind}]` : ""}`)
     .join("\n");
-  const longtailHints = research.longtailSuggestions.slice(0, 5).join(", ");
-  const relatedWords = research.relatedKeywords
+  // 리서치 신호는 지역 검색 결과에서 나오므로 타업종 조각이 섞여 들어온다.
+  // 프롬프트에 넣기 전에 걷어내야 모델이 애초에 그 주제를 떠올리지 않는다.
+  const longtailHints = filterOutsideDomainSignals(research.longtailSuggestions).slice(0, 5).join(", ");
+  const relatedWords = filterOutsideDomainSignals(
+    research.relatedKeywords.map((item) => item.word)
+  )
     .slice(0, 8)
-    .map((item) => item.word)
     .join(", ");
-  const questionIntents = research.questionIntents.slice(0, 6).join(", ");
-  const communitySignals = research.communitySignals.slice(0, 6).join(", ");
+  const questionIntents = filterOutsideDomainSignals(research.questionIntents).slice(0, 6).join(", ");
+  const communitySignals = filterOutsideDomainSignals(research.communitySignals).slice(0, 6).join(", ");
   const intentMix = research.summary.intentMix.join(" / ");
   const contentAngles = research.summary.contentAngles.join(", ");
   const directCommunitySignals = formatDirectCommunitySignals({
@@ -1165,15 +1187,25 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   }
 
   const client = getAnthropicClient();
-  const response = await client.messages.create(
-    {
-      model: MODELS.sonnet,
-      max_tokens: 2048,
-      messages: [
-        {
-          role: "user",
-          content: `사용자(${userId})의 발행 완료 글 목록입니다.
+  // 프롬프트는 변수로 분리한다. 인라인으로 두면 호출부와 signal 사이가 멀어져
+  // RULE-001(Anthropic 호출은 취소 가능해야 함) 검사가 signal을 못 찾는다.
+  const topicPrompt = `사용자(${userId})의 발행 완료 글 목록입니다.
 아래 목록과 네이버 리서치 결과를 참고해서 다음 신규 글목록 5개를 추천해 주세요.
+
+${buildPolicyPromptSection()}
+
+## 업종 고정
+이 블로그의 업종은 기존 발행 글 목록에서 드러나는 주제 영역이며, 그 범위를 벗어나면 안 됩니다.
+지역명은 업종을 수식할 때만 쓰고, 지역명만으로 주제를 만들지 마세요.
+아래 리서치 결과는 지역 검색에서 수집돼 다른 업종이 섞여 있을 수 있습니다.
+업종과 무관한 신호는 무시하세요. (예: 병원, 대출, 부동산, 맛집, 학원)
+
+## 지역 규칙
+- 사용할 수 있는 지역: ${ALLOWED_LOCALITY_TERMS.join(", ")}
+- 절대 쓰면 안 되는 지역: ${BLOCKED_OUTSIDE_LOCALITY_TERMS.join(", ")}
+- 우선 지역: ${PRIMARY_LOCALITY_PRIORITY.join(", ")}
+- 차순위 지역: ${SECONDARY_LOCALITY_PRIORITY.join(", ")}
+- 위 두 묶음을 다 다룬 뒤에만 다른 인천 지역을 씁니다.
 
 ## 기존 발행 글 목록
 ${publishedTitles}
@@ -1205,6 +1237,7 @@ ${directCommunitySignals}
 6. 데이터랩 상승 추세면 시의성 있는 주제를 우선
 7. category는 "${mainCategory}" 계열 유지
 8. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
+9. 5개 모두 이 블로그 업종의 제품/서비스/사용 상황을 다뤄야 하며, 타업종 주제는 하나도 포함하지 않습니다
 
 ## 출력 형식 (JSON 코드블록)
 \`\`\`json
@@ -1220,9 +1253,13 @@ ${directCommunitySignals}
 ]
 \`\`\`
 
-반드시 5개를 출력해 주세요.`,
-        },
-      ],
+반드시 5개를 출력해 주세요.`;
+
+  const response = await client.messages.create(
+    {
+      model: MODELS.sonnet,
+      max_tokens: 2048,
+      messages: [{ role: "user", content: topicPrompt }],
     },
     { signal: AbortSignal.timeout(60_000) },
   );

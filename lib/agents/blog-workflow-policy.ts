@@ -79,6 +79,62 @@ export const BLOCKED_OUTSIDE_LOCALITY_TERMS = [
   "제주",
 ];
 
+/**
+ * 명백한 타업종 용어.
+ *
+ * 리서치 키워드가 지역명 단독("만수동")이 되면 네이버 검색 결과가 그 지역의 병원/대출/부동산
+ * 글로 채워지고, 그 신호가 연관 키워드와 질문 의도로 프롬프트에 그대로 유입된다.
+ * 지역 필터는 "인천 안"만 보기 때문에 "부평 병원"은 통과해버린다. 업종 축을 따로 막는다.
+ */
+export const BLOCKED_OUTSIDE_DOMAIN_TERMS = [
+  // 의료
+  "병원",
+  "의원",
+  "치과",
+  "한의원",
+  "피부과",
+  "성형",
+  "정형외과",
+  "산부인과",
+  "약국",
+  "탈모",
+  "다이어트",
+  // 금융
+  "대출",
+  "보험",
+  "적금",
+  "예금",
+  "신용카드",
+  "파산",
+  "개인회생",
+  "재테크",
+  // 부동산
+  "부동산",
+  "아파트",
+  "분양",
+  "전세",
+  "월세",
+  "청약",
+  "인테리어",
+  "이사업체",
+  // 기타 생활 업종
+  "맛집",
+  "미용실",
+  "헤어샵",
+  "네일",
+  "학원",
+  "과외",
+  "입시",
+  "헬스장",
+  "변호사",
+  "법무사",
+  "세무사",
+  "중고차",
+  "렌터카",
+  "웨딩",
+  "장례",
+];
+
 export const BLOG_WORKFLOW_PRINCIPLES = [
   "Group topics by the user's blog/category cluster before planning a post.",
   "Treat the topic index as an internal-link map: identify one hub topic and one leaf topic related to the draft.",
@@ -109,8 +165,39 @@ export function hasAllowedLocality(title: string): boolean {
   return ALLOWED_LOCALITY_TERMS.some((term) => normalized.includes(term));
 }
 
+/**
+ * 지역 검사(`hasOutsideLocality`)와 달리 공백을 제거하지 않는다.
+ * 공백을 지우면 "확대 출시"가 "확대출시"가 되어 "대출"에 걸리는 식의 오탐이 생긴다.
+ * 업종 용어는 지역명과 달리 다른 단어에 흡수되기 쉬워서 원문 그대로 검사한다.
+ */
+export function hasOutsideDomain(text: string): boolean {
+  return BLOCKED_OUTSIDE_DOMAIN_TERMS.some((term) => text.includes(term));
+}
+
+/** 지역명 단독 토큰인지 판별한다. 리서치 키워드가 지역명만 남는 것을 막는 데 쓴다. */
+export function isLocalityToken(token: string): boolean {
+  const normalized = token.replace(/\s+/g, "");
+  if (!normalized) return false;
+  if (ALLOWED_LOCALITY_TERMS.includes(normalized)) return true;
+  if (BLOCKED_OUTSIDE_LOCALITY_TERMS.includes(normalized)) return true;
+  return /^[가-힣]{2,5}(동|읍|면|리|구|시|군|역)$/u.test(normalized);
+}
+
+/**
+ * 리서치 신호(연관 키워드, 질문 의도, 카페 신호)에서 타업종 조각을 걷어낸다.
+ * 프롬프트에 들어가기 전에 막아야 모델이 애초에 그 주제를 떠올리지 않는다.
+ */
+export function filterOutsideDomainSignals(values: string[]): string[] {
+  return values.filter((value) => !hasOutsideDomain(value));
+}
+
 export function filterBlockedTopics<T extends { title: string }>(topics: T[]): T[] {
-  return topics.filter((topic) => !isBlockedTopicTitle(topic.title) && !hasOutsideLocality(topic.title));
+  return topics.filter(
+    (topic) =>
+      !isBlockedTopicTitle(topic.title) &&
+      !hasOutsideLocality(topic.title) &&
+      !hasOutsideDomain(topic.title)
+  );
 }
 
 export function summarizeTopicLinkMap(currentTopic: Topic, allTopics: Topic[]): string {
@@ -153,6 +240,9 @@ export function buildPolicyPromptSection(): string {
     "- Do not plan or write store vs online purchase comparison posts.",
     "- Do not plan or write posts titled or angled around how to quit electronic cigarette liquid.",
     "- Do not plan outside-area locality posts. If a locality is used, it must be inside the user's operating area.",
+    "- Stay inside the user's own industry. A locality name alone is not a topic — every topic must be about the user's actual products and services.",
+    `- Never plan topics about other industries even inside the operating area: ${BLOCKED_OUTSIDE_DOMAIN_TERMS.join(", ")}.`,
+    "- Research signals are pulled from local search results and may contain other industries. Ignore any signal that is not about the user's own business.",
     `- Allowed locality terms: ${ALLOWED_LOCALITY_TERMS.join(", ")}.`,
     `- Block outside locality terms: ${BLOCKED_OUTSIDE_LOCALITY_TERMS.join(", ")}.`,
     "- Do not interpret the previous line as a ban on electronic-cigarette content in general.",
