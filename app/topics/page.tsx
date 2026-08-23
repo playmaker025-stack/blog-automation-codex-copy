@@ -1043,6 +1043,42 @@ export default function TopicsPage() {
               <span className="font-medium">리서치 키워드:</span> {generateResult.researchKeyword} &nbsp;·&nbsp;
               {generateResult.competitionInfo}
             </div>
+            {generateResult.researchSummary && (
+              <div className="text-xs text-zinc-600 bg-zinc-50 rounded-lg px-3 py-2 space-y-1">
+                <div>
+                  <span className="font-medium">추가 검색:</span>{" "}
+                  {generateResult.researchSummary.gapKeywords.length > 0
+                    ? generateResult.researchSummary.gapKeywords.join(" / ")
+                    : "없음"}
+                </div>
+                <div>
+                  <span className="font-medium">수집:</span> 카페·지식인{" "}
+                  {generateResult.researchSummary.collectedCount}건
+                  &nbsp;·&nbsp;
+                  <span className="font-medium">추출:</span> 질문{" "}
+                  {generateResult.researchSummary.extractedQuestions}건 / 제품명{" "}
+                  {generateResult.researchSummary.extractedProducts}건
+                  &nbsp;·&nbsp;
+                  <span className="font-medium">업종 무관으로 버림:</span>{" "}
+                  {generateResult.researchSummary.discardedCount}건
+                  {generateResult.researchSummary.extractionFailed && (
+                    <span className="text-amber-700"> (추출 실패 — 신호 없이 생성)</span>
+                  )}
+                </div>
+                <div>
+                  <span className="font-medium">생성:</span>{" "}
+                  {generateResult.researchSummary.generatedBeforeFilter}건 중{" "}
+                  {generateResult.researchSummary.generatedAfterFilter}건 통과
+                  {generateResult.researchSummary.registeredBrands.length > 0 && (
+                    <>
+                      &nbsp;·&nbsp;
+                      <span className="font-medium">새 제품명 등록:</span>{" "}
+                      {generateResult.researchSummary.registeredBrands.join(", ")}
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
             {generateMode === "preposting-series" && (
               <div className="text-xs text-amber-700 bg-amber-50 rounded-lg px-3 py-2">
                 저장 버튼을 누르면 시리즈 토픽 추가와 편별 상세 설계 저장까지 한 번에 진행됩니다.

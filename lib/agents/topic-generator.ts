@@ -97,6 +97,25 @@ export interface TopicGeneratorOutput {
   generatedTopics: GeneratedTopic[];
   researchKeyword: string;
   competitionInfo: string;
+  /**
+   * 수집·추출·필터 결과 요약.
+   *
+   * 라우트가 단발 JSON을 돌려주고 onProgress를 넘기지 않아서, 진행 메시지는
+   * 어디에도 도달하지 않는다. 실제로 무엇이 걸러졌는지 보려면 응답에 담아야 한다.
+   *
+   * 시리즈 플래너는 네이버 리서치를 하지 않으므로 이 필드가 없다.
+   */
+  researchSummary?: {
+    gapKeywords: string[];
+    collectedCount: number;
+    extractedQuestions: number;
+    extractedProducts: number;
+    discardedCount: number;
+    registeredBrands: string[];
+    extractionFailed: boolean;
+    generatedBeforeFilter: number;
+    generatedAfterFilter: number;
+  };
 }
 
 export interface SeriesPostPlan {
@@ -1154,6 +1173,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   });
 
   // 추출된 제품명을 자동 등록한다. 출처를 남겨서 오탐을 추적할 수 있다.
+  let registeredBrands: string[] = [];
   if (demand.products.length > 0) {
     const merged = mergeBrandCandidates({
       registry: brandRegistry,
@@ -1161,10 +1181,26 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
       contract: VAPE_DOMAIN_CONTRACT,
     });
     if (merged.added.length > 0) {
+      registeredBrands = merged.added;
       onProgress?.(`새 제품명 ${merged.added.length}건을 등록했습니다: ${merged.added.join(", ")}`);
       await saveBrandRegistry(merged.registry, brandRegistrySha);
     }
   }
+
+  const buildResearchSummary = (
+    beforeFilter: number,
+    afterFilter: number
+  ): TopicGeneratorOutput["researchSummary"] => ({
+    gapKeywords,
+    collectedCount: collectedItems.length,
+    extractedQuestions: demand.questions.length,
+    extractedProducts: demand.products.length,
+    discardedCount: demand.discardedCount,
+    registeredBrands,
+    extractionFailed: demand.failed,
+    generatedBeforeFilter: beforeFilter,
+    generatedAfterFilter: afterFilter,
+  });
 
   onProgress?.("다음 토픽 5개 생성 중...");
 
@@ -1263,7 +1299,12 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
       .slice(0, 5);
 
     onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
-    return { generatedTopics, researchKeyword: representativeKeyword, competitionInfo };
+    return {
+      generatedTopics,
+      researchKeyword: representativeKeyword,
+      competitionInfo,
+      researchSummary: buildResearchSummary(result.topics.length, generatedTopics.length),
+    };
   }
 
   const client = getAnthropicClient();
@@ -1348,8 +1389,9 @@ ${mainCategory}
 
   const text = response.content.find((block) => block.type === "text");
   const rawText = text?.type === "text" ? text.text : "";
+  const parsedTopics = parseGeneratedTopics(rawText);
   const generatedTopics = filterBlockedTopics(
-    parseGeneratedTopics(rawText).map((topic) => normalizeGeneratedTopic(topic, mainCategory)),
+    parsedTopics.map((topic) => normalizeGeneratedTopic(topic, mainCategory)),
   )
     .filter((topic) => topic.title)
     .filter((topic) => isOnDomainTopic(topic, domainVocabulary))
@@ -1359,5 +1401,10 @@ ${mainCategory}
 
   onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
 
-  return { generatedTopics, researchKeyword: representativeKeyword, competitionInfo };
+  return {
+    generatedTopics,
+    researchKeyword: representativeKeyword,
+    competitionInfo,
+    researchSummary: buildResearchSummary(parsedTopics.length, generatedTopics.length),
+  };
 }
