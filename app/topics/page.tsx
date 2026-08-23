@@ -1061,10 +1061,23 @@ export default function TopicsPage() {
                   &nbsp;·&nbsp;
                   <span className="font-medium">업종 무관으로 버림:</span>{" "}
                   {generateResult.researchSummary.discardedCount}건
-                  {generateResult.researchSummary.extractionFailed && (
-                    <span className="text-amber-700"> (추출 실패 — 신호 없이 생성)</span>
+                  {generateResult.researchSummary.extractionModel && (
+                    <span className="text-zinc-400">
+                      {" "}
+                      ({generateResult.researchSummary.extractionModel})
+                    </span>
                   )}
                 </div>
+                {generateResult.researchSummary.extractionFailed && (
+                  <div className="text-amber-700">
+                    추출 실패 — 신호 없이 생성했습니다.
+                    {generateResult.researchSummary.extractionError && (
+                      <span className="block break-all">
+                        사유: {generateResult.researchSummary.extractionError}
+                      </span>
+                    )}
+                  </div>
+                )}
                 <div>
                   <span className="font-medium">생성:</span>{" "}
                   {generateResult.researchSummary.generatedBeforeFilter}건 중{" "}

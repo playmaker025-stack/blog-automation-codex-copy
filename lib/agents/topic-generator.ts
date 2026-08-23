@@ -30,6 +30,7 @@ import {
   formatCoverageGaps,
   touchesExcludedTopic,
   buildGapSearchKeyword,
+  buildBroadGapSearchKeyword,
 } from "./domain-contract";
 import { extractDemand } from "./demand-extractor";
 import { formatDemandSignals } from "./demand-signals";
@@ -113,6 +114,10 @@ export interface TopicGeneratorOutput {
     discardedCount: number;
     registeredBrands: string[];
     extractionFailed: boolean;
+    /** 실패 사유. 삼키면 원인을 못 찾는다. */
+    extractionError?: string;
+    /** 어느 모델로 추출했는지. 폴백이 걸렸는지 확인용. */
+    extractionModel?: string;
     generatedBeforeFilter: number;
     generatedAfterFilter: number;
   };
@@ -1130,9 +1135,16 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   // 단어가 주제 재료가 됐다. 오염 원인은 네이버를 본 것이 아니라 보는 방식이었다.
   // 검색어를 대표 키워드 하나로 두면 그 주변만 계속 돈다. 미개척 조합을 검색어로 써서
   // 아직 안 다룬 영역의 실수요까지 긁는다. 실패해도 파이프라인은 계속 간다.
-  const gapKeywords = coverageGaps.slice(0, GAP_SEARCH_KEYWORDS).map((gap) =>
-    buildGapSearchKeyword(gap, contract)
-  );
+  // 좁은 검색어(소재+관점)와 넓은 검색어(소재만)를 섞는다. 좁은 쪽은 정확하지만
+  // 결과가 몇 건 안 나오고, 넓은 쪽은 표본이 크다. 둘 다 있어야 수집량이 확보된다.
+  const gapKeywords = [
+    ...new Set(
+      coverageGaps.slice(0, GAP_SEARCH_KEYWORDS).flatMap((gap) => [
+        buildGapSearchKeyword(gap, contract),
+        buildBroadGapSearchKeyword(gap, contract),
+      ])
+    ),
+  ];
   if (gapKeywords.length > 0) {
     onProgress?.(`미개척 조합 ${gapKeywords.length}개로 추가 검색합니다: ${gapKeywords.join(" / ")}`);
   }
@@ -1198,6 +1210,8 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     discardedCount: demand.discardedCount,
     registeredBrands,
     extractionFailed: demand.failed,
+    extractionError: demand.error,
+    extractionModel: demand.model,
     generatedBeforeFilter: beforeFilter,
     generatedAfterFilter: afterFilter,
   });

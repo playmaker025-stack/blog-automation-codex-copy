@@ -27,6 +27,10 @@ export interface ExtractedDemand {
   discardedCount: number;
   /** 추출에 실패하면 true. 파이프라인은 계속 진행한다. */
   failed: boolean;
+  /** 실패 사유. 삼키면 원인을 못 찾는다. */
+  error?: string;
+  /** 어느 모델로 성공했는지. 폴백이 걸렸는지 확인용. */
+  model?: string;
 }
 
 export const EMPTY_DEMAND: ExtractedDemand = {

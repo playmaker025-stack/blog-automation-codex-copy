@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   VAPE_DOMAIN_CONTRACT,
   buildGapSearchKeyword,
+  buildBroadGapSearchKeyword,
   findCoverageGaps,
 } from "../../lib/agents/domain-contract.ts";
 import {
@@ -168,6 +169,19 @@ describe("PR29 조합 검색어", () => {
   test("브랜드 조합도 검색어가 된다", () => {
     const keyword = buildGapSearchKeyword({ subject: "말론", angle: "수명", kind: "problem" }, C);
     assert.equal(keyword, "전자담배 말론 수명");
+  });
+
+  // "전자담배 리플 추천"처럼 세 단어로 검색하면 결과가 몇 건 안 나온다.
+  // 실측에서 조합 검색 5개를 붙였는데 수집이 36건에 그쳤다.
+  test("넓은 검색어는 관점을 빼고 소재만 쓴다", () => {
+    const gap = { subject: "리플", angle: "추천", kind: "intent" };
+    assert.equal(buildGapSearchKeyword(gap, C), "전자담배 리플 추천");
+    assert.equal(buildBroadGapSearchKeyword(gap, C), "전자담배 리플");
+  });
+
+  test("넓은 검색어도 업종어를 중복해서 붙이지 않는다", () => {
+    const gap = { subject: "전자담배", angle: "여름철", kind: "intent" };
+    assert.equal(buildBroadGapSearchKeyword(gap, C), "전자담배");
   });
 
   test("실제 조합에서 검색어를 만들면 전부 업종어를 포함한다", () => {

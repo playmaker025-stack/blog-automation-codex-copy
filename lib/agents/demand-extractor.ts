@@ -27,6 +27,15 @@ interface SourceItem {
   description?: string;
 }
 
+/**
+ * 추출에 쓸 모델 순서.
+ *
+ * haiku가 싸고 빨라서 먼저 쓴다. 다만 실측에서 haiku 호출만 실패하고 토픽 생성(sonnet)은
+ * 정상인 경우가 나왔다. 모델 가용성 문제일 수 있어 sonnet으로 폴백한다.
+ * 추출이 실패하면 실수요 신호가 통째로 사라져서 주제가 단조로워지므로 한 번 더 시도한다.
+ */
+const EXTRACTION_MODELS = [MODELS.haiku, MODELS.sonnet] as const;
+
 export async function extractDemand(params: {
   items: SourceItem[];
   contract: DomainContract;
@@ -38,36 +47,44 @@ export async function extractDemand(params: {
 
   onProgress?.("네이버 커뮤니티에서 실제 수요와 제품명을 추출합니다.");
 
-  // 추출은 단순 작업이라 haiku로 충분하다. 토픽 생성마다 호출되므로 비용과 지연을 낮게 둔다.
   const client = getAnthropicClient();
-  const hardDeadline = AbortSignal.timeout(60_000);
-  const callSignal = signal ? AbortSignal.any([signal, hardDeadline]) : hardDeadline;
+  const prompt = buildExtractionPrompt({ items, contract });
+  const errors: string[] = [];
 
-  try {
-    const response = await client.messages.create(
-      {
-        model: MODELS.haiku,
-        max_tokens: 2048,
-        messages: [{ role: "user", content: buildExtractionPrompt({ items, contract }) }],
-      },
-      { signal: callSignal }
-    );
+  for (const model of EXTRACTION_MODELS) {
+    const hardDeadline = AbortSignal.timeout(60_000);
+    const callSignal = signal ? AbortSignal.any([signal, hardDeadline]) : hardDeadline;
 
-    const block = response.content.find((item) => item.type === "text");
-    const parsed = block?.type === "text" ? parseExtraction(block.text) : null;
-    if (!parsed) {
-      onProgress?.("수요 추출 결과를 해석하지 못해 이번 회차는 건너뜁니다.");
-      return EMPTY_DEMAND;
+    try {
+      const response = await client.messages.create(
+        {
+          model,
+          max_tokens: 3000,
+          messages: [{ role: "user", content: prompt }],
+        },
+        { signal: callSignal }
+      );
+
+      const block = response.content.find((item) => item.type === "text");
+      const parsed = block?.type === "text" ? parseExtraction(block.text) : null;
+      if (!parsed) {
+        // 파싱 실패는 모델을 바꿔도 같은 결과일 가능성이 높지만, 잘린 응답이면 달라질 수 있다.
+        errors.push(`${model}: 응답을 JSON으로 해석하지 못함`);
+        continue;
+      }
+
+      onProgress?.(
+        `실제 질문 ${parsed.questions.length}건, 제품명 ${parsed.products.length}건을 추출했습니다. 업종 무관 ${parsed.discardedCount}건은 버렸습니다.`
+      );
+      return { ...parsed, model };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      errors.push(`${model}: ${message}`);
+      console.warn(`[demand-extractor] ${model} 추출 실패:`, message);
     }
-
-    onProgress?.(
-      `실제 질문 ${parsed.questions.length}건, 제품명 ${parsed.products.length}건을 추출했습니다. 업종 무관 ${parsed.discardedCount}건은 버렸습니다.`
-    );
-    return parsed;
-  } catch (error) {
-    // 추출 실패가 파이프라인을 막으면 안 된다. 신호 없이 계속 진행한다.
-    console.warn("[demand-extractor] 추출 실패, 신호 없이 진행:", String(error));
-    onProgress?.("수요 추출에 실패해 이번 회차는 신호 없이 진행합니다.");
-    return EMPTY_DEMAND;
   }
+
+  // 추출 실패가 파이프라인을 막으면 안 된다. 신호 없이 계속 진행하되 사유는 남긴다.
+  onProgress?.(`수요 추출에 실패해 신호 없이 진행합니다. (${errors.join(" / ")})`);
+  return { ...EMPTY_DEMAND, error: errors.join(" / ") };
 }

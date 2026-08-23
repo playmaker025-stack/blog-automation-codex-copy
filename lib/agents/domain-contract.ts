@@ -248,6 +248,19 @@ export function buildGapSearchKeyword(gap: CoverageGap, contract: DomainContract
 }
 
 /**
+ * 관점을 뺀 넓은 검색어.
+ *
+ * "전자담배 리플 추천"처럼 세 단어로 검색하면 네이버가 돌려주는 글이 몇 건 안 된다.
+ * 실측에서 조합 검색 5개를 붙였는데 수집이 36건에 그쳤다(중복 제거 후 조합 기여분 6건).
+ * 소재만으로 한 번 더 검색해 표본을 넓힌다.
+ */
+export function buildBroadGapSearchKeyword(gap: CoverageGap, contract: DomainContract): string {
+  const anchor = contract.productCategories[0] ?? "";
+  if (!anchor || gap.subject.includes(anchor)) return gap.subject;
+  return `${anchor} ${gap.subject}`;
+}
+
+/**
  * 다루지 않기로 한 소재를 건드리는지 본다.
  * 허용 예외를 먼저 가려낸 뒤에 검사한다. 안 그러면 "무니코틴"이 "니코틴"에 걸린다.
  */
