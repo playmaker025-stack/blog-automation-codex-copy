@@ -160,6 +160,41 @@ export function hasOutsideLocality(title: string): boolean {
   return BLOCKED_OUTSIDE_LOCALITY_TERMS.some((term) => normalized.includes(term));
 }
 
+/**
+ * 특정 건물·랜드마크 이름.
+ *
+ * 지역 축은 아직 블랙리스트라 목록에 없는 지명은 전부 통과한다.
+ * 그래서 "인천 송도 포스코타워 전자담배 구매처"가 나왔다 —
+ * 인천/송도가 허용 목록에 있어 지역 검사를 통과하고, 전자담배가 있어 업종 검사도 통과했다.
+ *
+ * 매장은 랜드마크가 아니라 실제 주소에 있다. 건물명을 붙인 "구매처" 글은
+ * 존재하지 않는 매장 위치를 지어내는 셈이라 단순한 부적합보다 나쁘다.
+ * 그래서 건물명은 허용 지역 안이든 밖이든 무조건 막는다.
+ *
+ * 접미사는 오탐이 없는 것만 골랐다. "센터", "몰", "백화점"은 서비스센터/쇼핑몰처럼
+ * 일반 문맥에서도 쓰여서 뺐다.
+ */
+const LANDMARK_MARKERS = [
+  "타워",
+  "스퀘어",
+  "스트리트",
+  "플라자",
+  "프라자",
+  "아울렛",
+  "캠퍼스",
+  "신도시",
+  "빌딩",
+];
+
+export function hasLandmarkMention(title: string): boolean {
+  return title
+    .split(/\s+/)
+    .map((raw) => raw.normalize("NFKC").replace(/[^\p{L}\p{N}]/gu, "").trim())
+    // endsWith가 아니라 includes다. "스퀘어원", "트리플스트리트"처럼
+    // 표지가 이름 중간에 오는 경우가 흔하다.
+    .some((token) => token.length >= 3 && LANDMARK_MARKERS.some((marker) => token.includes(marker)));
+}
+
 export function hasAllowedLocality(title: string): boolean {
   const normalized = title.replace(/\s+/g, "");
   return ALLOWED_LOCALITY_TERMS.some((term) => normalized.includes(term));
@@ -196,6 +231,7 @@ export function filterBlockedTopics<T extends { title: string }>(topics: T[]): T
     (topic) =>
       !isBlockedTopicTitle(topic.title) &&
       !hasOutsideLocality(topic.title) &&
+      !hasLandmarkMention(topic.title) &&
       !hasOutsideDomain(topic.title)
   );
 }
@@ -335,6 +371,7 @@ export function buildPolicyPromptSection(): string {
     "- Do not plan or write posts titled or angled around how to quit electronic cigarette liquid.",
     "- Do not plan outside-area locality posts. If a locality is used, it must be inside the user's operating area.",
     "- Stay inside the user's own industry. A locality name alone is not a topic — every topic must be about the user's actual products and services.",
+    "- Never name a specific building, tower, mall, or landmark. The store has a street address, not a landmark. Use only administrative area or station names from the allowed list.",
     `- Never plan topics about other industries even inside the operating area: ${BLOCKED_OUTSIDE_DOMAIN_TERMS.join(", ")}.`,
     "- Research signals are pulled from local search results and may contain other industries. Ignore any signal that is not about the user's own business.",
     `- Allowed locality terms: ${ALLOWED_LOCALITY_TERMS.join(", ")}.`,

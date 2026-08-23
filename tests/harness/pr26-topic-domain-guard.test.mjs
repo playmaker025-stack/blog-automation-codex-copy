@@ -6,6 +6,7 @@ import {
   buildDomainVocabulary,
   filterBlockedTopics,
   filterOutsideDomainSignals,
+  hasLandmarkMention,
   hasOutsideDomain,
   isLocalityToken,
   isOnDomainTopic,
@@ -150,5 +151,38 @@ describe("PR26 업종 축 화이트리스트", () => {
 
   test("어휘 근거가 부족하면 차단하지 않는다", () => {
     assert.equal(isOnDomainTopic({ title: "아무 주제" }, new Set(["전자담배"])), true);
+  });
+});
+
+// 지역 축은 블랙리스트라 목록에 없는 지명은 전부 통과했다.
+// "인천 송도 포스코타워 전자담배 구매처"가 그렇게 새어나왔다.
+describe("PR26 건물·랜드마크 차단", () => {
+  test("허용 지역 안이어도 건물명이 붙으면 막는다", () => {
+    const title = "인천 송도 포스코타워 전자담배 구매처와 체험 후기";
+    assert.equal(hasLandmarkMention(title), true);
+    assert.equal(filterBlockedTopics([{ title }]).length, 0);
+  });
+
+  test("여러 랜드마크 접미사를 잡는다", () => {
+    for (const title of [
+      "부평 스퀘어원 전자담배 매장",
+      "송도 트리플스트리트 아울렛 전자담배",
+      "인천 청라 플라자 전자담배 구매",
+      "부평 삼산타워 전자담배 후기",
+    ]) {
+      assert.equal(hasLandmarkMention(title), true, `랜드마크 미검출: ${title}`);
+    }
+  });
+
+  // 접미사는 오탐 없는 것만 골랐다. 센터/몰/백화점은 일반 문맥에서도 쓰여 제외했다.
+  test("일반 문맥의 단어를 랜드마크로 오인하지 않는다", () => {
+    for (const title of [
+      "전자담배 서비스센터 문의 방법",
+      "온라인 쇼핑몰 구매 시 확인할 것",
+      "부평 전자담배 매장 방문 안내",
+      "코일 탄맛 원인과 해결",
+    ]) {
+      assert.equal(hasLandmarkMention(title), false, `오탐: ${title}`);
+    }
   });
 });
