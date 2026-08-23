@@ -30,6 +30,14 @@ import {
   findCoverageGaps,
   formatCoverageGaps,
 } from "./domain-contract";
+import { extractDemand } from "./demand-extractor";
+import { formatDemandSignals } from "./demand-signals";
+import {
+  loadBrandRegistry,
+  mergeBrandCandidates,
+  saveBrandRegistry,
+  withRegisteredBrands,
+} from "./brand-registry";
 
 export interface TopicGeneratorInput {
   userId: string;
@@ -1074,7 +1082,9 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   // 발행 이력은 후보 우선순위와 중복 방지 용도로만 쓴다 (domainAnchors).
   // 이력을 판정 근거로 삼으면 주제 공간이 닫히고, 한 번 발행된 오염 제목이
   // 영구적으로 업종 증거가 된다.
-  const contract = VAPE_DOMAIN_CONTRACT;
+  // 등록부를 얹은 계약. 계약이 루트이고 등록부는 LLM이 추출한 신제품 확장분이다.
+  const { data: brandRegistry, sha: brandRegistrySha } = await loadBrandRegistry();
+  const contract = withRegisteredBrands(VAPE_DOMAIN_CONTRACT, brandRegistry);
   const contractVocabulary = buildContractVocabulary(contract);
   const vocabularySource = [
     ...publishedTopics,
@@ -1117,6 +1127,28 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
         `직접지식인 ${kinResearch.problemSummary}`,
       ].join(" / ");
 
+  // 네이버 커뮤니티에서 실제 수요와 제품명을 LLM으로 추출한다.
+  // 예전에는 단어 빈도(extractRelatedWords)로 긁어서 다주제 블로그의 헬스기구/주식
+  // 단어가 주제 재료가 됐다. 오염 원인은 네이버를 본 것이 아니라 보는 방식이었다.
+  const demand = await extractDemand({
+    items: [...cafeResearch.items, ...kinResearch.items],
+    contract,
+    onProgress,
+  });
+
+  // 추출된 제품명을 자동 등록한다. 출처를 남겨서 오탐을 추적할 수 있다.
+  if (demand.products.length > 0) {
+    const merged = mergeBrandCandidates({
+      registry: brandRegistry,
+      candidates: demand.products,
+      contract: VAPE_DOMAIN_CONTRACT,
+    });
+    if (merged.added.length > 0) {
+      onProgress?.(`새 제품명 ${merged.added.length}건을 등록했습니다: ${merged.added.join(", ")}`);
+      await saveBrandRegistry(merged.registry, brandRegistrySha);
+    }
+  }
+
   onProgress?.("다음 토픽 5개 생성 중...");
 
   const publishedTitles = publishedTopics
@@ -1155,6 +1187,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             "If the trend is rising, prioritize timely topics over generic evergreen clones.",
             "Locality rule: generate only Incheon operating-area topics when using a place name.",
             formatDomainContract(contract),
+            formatDemandSignals(demand),
             formatCoverageGaps(coverageGaps),
             `Frequently used terms in this blog (for prioritization, not for scope): ${domainAnchorLine}.`,
             "A locality name alone is never a topic. Each topic must be about this blog's own products and services.",
@@ -1228,6 +1261,8 @@ ${formatDomainContract(contract)}
 ## 자주 쓰는 표현 (범위가 아니라 우선순위 참고용)
 ${domainAnchorLine}
 
+${formatDemandSignals(demand)}
+
 ${formatCoverageGaps(coverageGaps)}
 지역명은 업종을 수식할 때만 쓰고, 지역명만으로 주제를 만들지 마세요.
 
@@ -1250,22 +1285,22 @@ ${mainCategory}
 - 카페 결과 수: ${research.cafe.total}
 - 데이터랩 추세: ${describeTrendLabel(research.datalabSearch.trend)} (latest ${research.datalabSearch.latestRatio}, avg ${research.datalabSearch.averageRatio})
 
-네이버 연관 키워드와 카페/지식인 원문은 의도적으로 제외했습니다.
-다주제 마케팅 블로그 때문에 다른 업종 단어가 섞여 들어오기 때문입니다.
-위 수치는 경쟁도와 시의성 판단에만 쓰고, 주제 소재는 업종 계약과 기존 발행 글의 빈틈에서 찾으세요.
-없는 자료를 있다고 가정하고 지어내지 마세요.
+카페/지식인 원문은 그대로 넣지 않고 아래 "실제 검색 수요"로 추출해서 넣었습니다.
+다주제 마케팅 블로그의 무관한 소재는 추출 단계에서 걸러냈습니다.
+위 수치는 경쟁도와 시의성 판단에 쓰세요. 없는 자료를 지어내지 마세요.
 
 ## 요구사항
 1. 기존 발행 글과 겹치지 않으면서 자연스럽게 이어지는 주제
 2. 이미 발행된 허브글이 적으면 먼저 리프글을 보강하고, 리프글만 많으면 상위 허브글을 제안
 3. 5개 안에 hub와 leaf를 균형 있게 섞되, 현재 목록의 빈틈을 우선
    5개는 서로 다른 소재를 다뤄야 합니다. 같은 소재에 관점만 바꾼 주제를 여러 개 넣지 마세요.
-4. 네이버 검색 의도가 드러나는 롱테일 키워드를 포함
-5. 데이터랩 상승 추세면 시의성 있는 주제를 우선
-6. category는 "${mainCategory}" 계열 유지
-7. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
-8. 5개 모두 이 블로그 업종의 제품/서비스/사용 상황을 다뤄야 하며, 타업종 주제는 하나도 포함하지 않습니다
-9. 업종과 무관한 고유명사(다리, 경기장, 항공 마일리지, 동물, 건물 이름 등)를 업종어와 결합하지 않습니다.
+4. 추출된 실제 질문이 있으면 그 질문에 답하는 주제를 우선하고, 남는 자리를 미개척 조합으로 채웁니다
+5. 네이버 검색 의도가 드러나는 롱테일 키워드를 포함
+6. 데이터랩 상승 추세면 시의성 있는 주제를 우선
+7. category는 "${mainCategory}" 계열 유지
+8. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
+9. 5개 모두 이 블로그 업종의 제품/서비스/사용 상황을 다뤄야 하며, 타업종 주제는 하나도 포함하지 않습니다
+10. 업종과 무관한 고유명사(다리, 경기장, 항공 마일리지, 동물, 건물 이름 등)를 업종어와 결합하지 않습니다.
     리서치 신호에 그런 단어가 남아 있어도 무시하세요. 지역명은 업종을 수식할 때만 씁니다.
 
 ## 출력 형식 (JSON 코드블록)
