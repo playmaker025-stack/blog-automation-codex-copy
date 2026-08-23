@@ -286,28 +286,15 @@ export function filterOutsideDomainSignals(values: string[]): string[] {
 }
 
 /**
- * 리서치 신호에 업종 화이트리스트를 적용한다.
- *
- * 금지어 필터(filterOutsideDomainSignals)만으로는 부족했다. 네이버 지역 검색 결과에서
- * "인천대교", "토이푸들", "아시아나 마일리지", "인천28센터" 같은 무관한 고유명사가
- * 연관 키워드로 들어오고, 모델이 그걸 업종어와 결합해 "만수동 15만원대 토이푸들
- * 전자담배 기기 실사용 후기" 같은 주제를 만들었다. 금지어 목록으로는 이런 고유명사를
- * 열거할 수 없다.
- *
- * 신호는 어디까지나 참고값이라 버리는 비용이 낮다. 그래서 출력 쪽보다 공격적으로,
- * 업종 어휘에 걸리는 신호만 남긴다.
- */
-/**
  * 업종 어휘 적중률로 "결합형" 주제를 걸러낸다.
  *
  * 업종어 하나만 있으면 통과하는 isOnDomainTopic으로는 결합형을 못 잡는다.
  * "인천 아시아나 마일리지 전환 후 전자담배 구매 활용법"은 전자담배가 있어서 통과했다.
- * 무관한 고유명사가 업종어에 붙는 형태라 어휘 밖 토큰이 다수를 차지하는 게 특징이다.
  *
- * 실측(발행 261건 기준 어휘 677개):
- *   14~20% → 포항 지역 매장 / 아시아나 마일리지 / 인천28센터  (전부 부적합)
- *   40~57% → 베이포레소 크로스미니 후기 / 가습현상 원인       (전부 정상)
- * 30%에서 깨끗하게 갈린다.
+ * 한계: 적중률은 "희석"을 재지 "오염"을 재지 못한다. 나머지 단어가 전부 정상이면
+ * 이물질 하나가 섞여도 비율이 안 떨어진다. "인천 전자담배 초보자를 위한 디랙스
+ * 스미스머신 사용법"은 60%로 통과한다. 그래서 이 필터는 마지막 그물일 뿐이고,
+ * 실제 방어는 신호 단계(filterSignalsByDomainVocabulary)에서 해야 한다.
  *
  * 짧은 제목은 제외한다. "말론S 후기"처럼 신제품명 하나로 된 제목이 0%로 걸리기 때문이다.
  */
@@ -335,14 +322,33 @@ export function isTopicVocabularyCoherent(
   return domainCoherenceRatio(topic.title, vocabulary) >= MIN_COHERENCE_RATIO;
 }
 
+/**
+ * 리서치 신호에서 업종 어휘 밖 토큰이 하나라도 있으면 통째로 버린다.
+ *
+ * 왜 "하나라도"인가:
+ * 처음에는 "토큰 중 하나라도 업종어면 통과"로 만들었는데 그게 구멍이었다.
+ * makeLongtails가 연관어 앞에 검색 키워드를 붙여서 "만수동 전자담배 스미스머신"을 만든다.
+ * 여기엔 전자담배가 들어 있으니 통과해버리고, 모델은 스미스머신을 주제 재료로 받는다.
+ * 실제로 "인천 전자담배 초보자를 위한 디랙스 스미스머신 사용법"이 그렇게 나왔다.
+ *
+ * 오염은 희석이 아니다. 이물질 하나면 주제가 망가지므로 하나라도 있으면 버린다.
+ * 신호는 참고값이라 버리는 비용이 낮다. 새 제품명이 잠깐 신호에서 빠지는 편이
+ * 헬스기구가 주제로 올라오는 것보다 훨씬 낫다.
+ */
 export function filterSignalsByDomainVocabulary(
   values: string[],
   vocabulary: Set<string>
 ): string[] {
   if (vocabulary.size < MIN_DOMAIN_VOCABULARY) return values;
-  return values.filter((value) =>
-    meaningfulTokens(value).some((token) => vocabulary.has(token))
-  );
+  return values.filter((value) => {
+    const tokens = meaningfulTokens(value);
+    if (tokens.length === 0) return false;
+    return tokens.every(
+      (token) =>
+        vocabulary.has(token) ||
+        [...vocabulary].some((term) => term.length >= 3 && token.includes(term))
+    );
+  });
 }
 
 export function filterBlockedTopics<T extends { title: string }>(topics: T[]): T[] {

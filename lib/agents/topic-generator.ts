@@ -1120,8 +1120,10 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     .join(", ");
   const questionIntents = cleanSignals(research.questionIntents).slice(0, 6).join(", ");
   const communitySignals = cleanSignals(research.communitySignals).slice(0, 6).join(", ");
+  // intentMix는 검색량/트렌드 집계에서 만들어져 고유명사가 없다. 그대로 쓴다.
   const intentMix = research.summary.intentMix.join(" / ");
-  const contentAngles = research.summary.contentAngles.join(", ");
+  // contentAngles는 연관어를 "스미스머신 관점 설명" 식으로 재포장한 것뿐이다.
+  // 오염을 그대로 옮기면서 relatedKeywords와 내용이 겹치므로 프롬프트에서 뺀다.
   const directCommunitySignals = formatDirectCommunitySignals({
     cafeSummary: cafeResearch.demandSummary,
     kinSummary: kinResearch.problemSummary,
@@ -1175,7 +1177,6 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             `Question intents: ${questionIntents || "none"}`,
             `Community signals: ${communitySignals || "none"}`,
             `Intent mix: ${intentMix || "none"}`,
-            `Content angles: ${contentAngles || "none"}`,
             "",
             "Direct Naver community signals:",
             directCommunitySignals,
@@ -1250,7 +1251,6 @@ ${mainCategory}
 - 질문 의도: ${questionIntents || "없음"}
 - 카페 신호: ${communitySignals || "없음"}
 - 의도 요약: ${intentMix || "없음"}
-- 추천 각도: ${contentAngles || "없음"}
 
 ## 직접 네이버 커뮤니티 신호
 ${directCommunitySignals}

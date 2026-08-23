@@ -236,7 +236,10 @@ describe("PR26 지역 화이트리스트", () => {
 // "만수동 15만원대 토이푸들 전자담배 기기 후기", "인천 아시아나 마일리지 전환 후 전자담배 구매"
 // 같은 결합이 나온 원인은 네이버 지역 검색 결과가 연관 키워드로 유입된 것이었다.
 describe("PR26 리서치 신호 화이트리스트", () => {
+  // 실제 어휘는 발행 글 261건에서 뽑은 677개다. 픽스처도 연결 명사(교체, 시기, 보관 등)를
+  // 포함해야 실제와 같은 판정이 나온다.
   const vocabulary = buildDomainVocabulary([
+    { title: "전자담배 코일 교체 시기와 액상 보관 온도", description: "", tags: ["교체", "시기", "보관", "온도"] },
     { title: "부평 전자담배 만수르 입문자 기기 추천", description: "", tags: ["전자담배", "기기"] },
     { title: "입호흡 액상 고르는 방법", description: "", tags: ["액상", "입호흡"] },
     { title: "전자담배 코일 탄맛 원인", description: "", tags: ["코일"] },
@@ -254,16 +257,35 @@ describe("PR26 리서치 신호 화이트리스트", () => {
       "인천대교 완공일",
       "토이푸들 분양",
       "아시아나 마일리지 전환",
-      "인천28센터 1층",
       "전자담배 액상 추천",
       "코일 교체 시기",
-      "니코틴 농도 차이",
     ];
     assert.deepEqual(filterSignalsByDomainVocabulary(signals, vocabulary), [
       "전자담배 액상 추천",
       "코일 교체 시기",
-      "니코틴 농도 차이",
     ]);
+  });
+
+  // makeLongtails가 연관어 앞에 검색 키워드를 붙인다. "하나라도 업종어면 통과" 규칙이었을 때
+  // "만수동 전자담배 스미스머신"이 전자담배 때문에 통과해서 헬스기구가 주제로 올라왔다.
+  test("업종어를 앞에 붙여 밀반입하는 신호를 막는다", () => {
+    const signals = [
+      "만수동 전자담배 스미스머신",
+      "만수동 전자담배 공기업",
+      "만수동 전자담배 액상",
+      "전자담배 코일 교체 시기",
+    ];
+    assert.deepEqual(filterSignalsByDomainVocabulary(signals, vocabulary), [
+      "만수동 전자담배 액상",
+      "전자담배 코일 교체 시기",
+    ]);
+  });
+
+  test("어휘 밖 단일어 신호를 막는다", () => {
+    assert.deepEqual(
+      filterSignalsByDomainVocabulary(["디랙스", "주식", "코일", "액상"], vocabulary),
+      ["코일", "액상"]
+    );
   });
 
   test("어휘 근거가 부족하면 신호를 그대로 통과시킨다", () => {
