@@ -2,7 +2,6 @@ import type {
   ArticleContract,
   ConfirmedSeoKeywords,
   FinalDraftCheck,
-  FinalDraftRewriteResult,
   KeywordLimit,
   OverlapReport,
   StrategyPlanResult,
@@ -399,135 +398,45 @@ export function collectFinalDraftCheckMessages(check: FinalDraftCheck | null | u
   };
 }
 
-function replaceExactPhraseAll(content: string, phrase: string, replacement: string): string {
-  if (!phrase.trim()) return content;
-  return content.replace(new RegExp(escapeRegExp(phrase), "giu"), replacement);
-}
+// ============================================================
+// 발행 본문 자동 수정 금지 원칙
+// ------------------------------------------------------------
+// finalDraftCheck는 위반을 "감지"만 한다. 예전에는 여기서 금지어를 빈 문자열로
+// 지우고, 걸린 소제목을 고정 문자열로 갈아끼우고, 누락 항목에 템플릿 문단을
+// 덧붙였다. 그 결과 모든 글에 동일한 소제목과 동일한 안내 문장이 박혀서
+// 사람이 쓴 글이 아니라 코드가 조립한 글처럼 읽혔다.
+//
+// 지금은 위반을 재작성 지시문으로만 바꾸고, 실제 수정은 master-writer가 한다.
+// writer-revision-policy.shouldAttemptWriterRevision이 blockingReasons > 0이면
+// 자동으로 재작성 라운드를 돌리므로 차단된 초안은 그대로 방치되지 않는다.
+// ============================================================
 
-function removeForbiddenPhrases(content: string, phrases: string[]): string {
-  let next = content;
-  for (const phrase of phrases) {
-    next = replaceExactPhraseAll(next, phrase, "");
-  }
-  return next
-    .split("\n")
-    .map((line) => line.replace(/[ \t]{2,}/g, " ").trimEnd())
-    .join("\n")
-    .replace(/\n{3,}/g, "\n\n");
-}
-
-function rewriteForbiddenHeadings(content: string, contract?: ArticleContract): string {
-  const patterns = contract?.forbiddenHeadingPatterns ?? [];
-  if (!patterns.length) return content;
-  return content
-    .split("\n")
-    .map((line) => {
-      if (!/^#{1,6}\s+/.test(line)) return line;
-      if (!patterns.some((pattern) => countExactPhrase(line, pattern) > 0 || containsLoose(line, pattern))) return line;
-      const level = line.match(/^#{1,6}/)?.[0] ?? "##";
-      return `${level} 확인 기준 정리`;
-    })
-    .join("\n");
-}
-
-function naturalizeQuestionKeywordStuffing(
-  content: string,
-  strategy: StrategyPlanResult,
-  confirmedSeoKeywords?: ConfirmedSeoKeywords
-): string {
-  const keywords = collectConfirmedDraftCheckKeywords(strategy, confirmedSeoKeywords);
-  if (!keywords.length) return content;
-
-  return content
-    .split("\n")
-    .map((line) => {
-      const questionLike = /[?？]|["“”'‘’「」『』]/u.test(line);
-      if (!questionLike) return line;
-      let next = line;
-      for (const keyword of keywords) {
-        if (countExactPhrase(next, keyword) > 0) {
-          next = replaceExactPhraseAll(next, keyword, "이 기준");
-        }
-      }
-      return next.replace(/\s{2,}/g, " ");
-    })
-    .join("\n");
-}
-
-function resolveDeferSentences(content: string, contract?: ArticleContract): string {
-  if (contract?.completionMode !== "end_here") return content;
-  let next = content;
-  for (const phrase of DEFER_PHRASES) {
-    next = replaceExactPhraseAll(next, phrase, "이 글에서");
-  }
-  return next
-    .replace(/이 글에서\s*(더\s*)?자세히\s*(다루겠습니다|알아보겠습니다|정리하겠습니다)/giu, "이 글에서 바로 정리합니다")
-    .replace(/이 글에서\s*(확인해\s*보겠습니다|보겠습니다)/giu, "이 글에서 확인합니다");
-}
-
-function appendMissingMustResolveParagraphs(content: string, check: FinalDraftCheck, contract?: ArticleContract): string {
-  if (!contract?.mustResolve?.length || check.contractCoverageFindings.length === 0) return content;
-  const missing = contract.mustResolve.filter((item) => !phraseHasMinimalCue(content, item));
-  if (!missing.length) return content;
-  const addition = [
-    "",
-    "## 추가 확인 기준",
-    ...missing.map((item) => `- ${item}: 이 글에서 바로 확인해야 할 기준입니다. 실제 선택 전에 이 부분을 먼저 점검하면 판단이 쉬워집니다.`),
-  ].join("\n");
-  return `${content.trimEnd()}\n${addition}`;
-}
-
-function buildLimitedRewriteInstructions(check: FinalDraftCheck): string[] {
+export function buildFinalDraftRevisionInstructions(check: FinalDraftCheck): string[] {
   return uniq([
-    ...check.blockingReasons.map((reason) => `차단 사유 수정: ${reason}`),
-    ...check.matchedForbiddenPhrases.map((phrase) => `금지 표현 제거: ${phrase}`),
-    ...check.keywordStuffingFindings.map((finding) => `키워드/질문문 자연화: ${finding}`),
-    ...check.deferFindings.map((finding) => `defer 문장 제거: ${finding}`),
-    ...check.contractCoverageFindings.map((finding) => `누락 기준 보강: ${finding}`),
+    ...check.matchedForbiddenPhrases.map(
+      (phrase) => `금지 표현 '${phrase}'을(를) 쓰지 말고, 같은 뜻을 사용자 말투의 다른 문장으로 다시 쓰세요. 단어만 지우지 말고 문장을 다시 쓰세요.`
+    ),
+    ...check.keywordStuffingFindings.map(
+      (finding) => `키워드 과다/질문문 삽입 수정: ${finding}. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.`
+    ),
+    ...check.deferFindings.map(
+      (finding) => `${finding} — 미루는 문장을 지우는 데 그치지 말고, 그 자리에서 실제 답을 본문에 쓰세요.`
+    ),
+    ...check.contractCoverageFindings.map(
+      (finding) => `${finding} — 별도 요약 섹션을 덧붙이지 말고, 관련 본문 문단 안에서 자연스럽게 다루세요.`
+    ),
+    ...check.blockingReasons.map((reason) => `발행 차단 사유 해결: ${reason}`),
   ]);
 }
 
-export function runLimitedFinalDraftRewrite(params: {
-  title: string;
-  content: string;
-  strategy: StrategyPlanResult;
-  beforeCheck?: FinalDraftCheck;
-  confirmedSeoKeywords?: ConfirmedSeoKeywords;
-}): FinalDraftRewriteResult & { content: string } {
-  const beforeCheck = params.beforeCheck ?? runFinalDraftCheck(params);
-  if (beforeCheck.ok || beforeCheck.blockingReasons.length === 0) {
-    return {
-      attempted: false,
-      applied: false,
-      instructions: [],
-      beforeCheck,
-      afterCheck: beforeCheck,
-      content: params.content,
-    };
-  }
+export function formatFinalDraftRevisionSection(check: FinalDraftCheck | null | undefined): string {
+  if (!check || check.blockingReasons.length === 0) return "";
+  const instructions = buildFinalDraftRevisionInstructions(check);
+  if (instructions.length === 0) return "";
 
-  const instructions = buildLimitedRewriteInstructions(beforeCheck);
-  let rewritten = params.content;
-  rewritten = removeForbiddenPhrases(rewritten, beforeCheck.matchedForbiddenPhrases);
-  rewritten = rewriteForbiddenHeadings(rewritten, params.strategy.articleContract);
-  rewritten = naturalizeQuestionKeywordStuffing(rewritten, params.strategy, params.confirmedSeoKeywords);
-  rewritten = resolveDeferSentences(rewritten, params.strategy.articleContract);
-  rewritten = appendMissingMustResolveParagraphs(rewritten, beforeCheck, params.strategy.articleContract);
-  rewritten = rewritten.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
-
-  const afterCheck = runFinalDraftCheck({
-    title: params.title,
-    content: rewritten,
-    strategy: params.strategy,
-    confirmedSeoKeywords: params.confirmedSeoKeywords,
-  });
-
-  return {
-    attempted: true,
-    applied: rewritten !== params.content,
-    instructions,
-    beforeCheck,
-    afterCheck,
-    content: rewritten,
-  };
+  return [
+    "발행 전 검수에서 걸린 항목 (반드시 본문 재작성으로 해결)",
+    ...instructions.map((item) => `- ${item}`),
+    "- 위 항목은 문장을 지우거나 고정 문구로 갈아끼우는 방식으로 해결하지 마세요. 해당 문단을 사용자 말투로 다시 쓰세요.",
+  ].join("\n");
 }

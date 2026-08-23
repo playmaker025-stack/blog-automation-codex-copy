@@ -18,6 +18,8 @@ import { normalizeUserId } from "@/lib/utils/normalize";
 import { buildContentTopologyPlan } from "./content-topology";
 import { buildPolicyPromptSection } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
+import { seoAnalystAgent } from "./seo-analyst-agent";
+import { writerEngine } from "./writer-engine";
 import { getPublicationLearningSummary } from "./user-learning";
 import { classifySearchCombination, normalizeSearchPhrase, sanitizeMainKeywordCandidate } from "./search-combination-utils";
 import { buildArticleContract, evaluateStrategyQualityGate } from "./article-contract-utils";
@@ -1321,11 +1323,20 @@ export async function runStrategyPlanner(params: {
   const contentTopology = await buildContentTopologyPlan({ topic, strategy: plan, userId });
   const targetSearchCombinations = buildTargetSearchCombinations({ topic, plan, directIntent });
   const naverLogic = naverLogicAgent.planBeforeWriting({ ...plan, contentTopology });
+  // SERP 모듈 판정 → 모듈별 글 구조 선택 (references/agent-seo-analyst.md, agent-writer-engine.md)
+  const serpAnalysis = seoAnalystAgent.analyze({
+    title: plan.title,
+    keywords: plan.keywords,
+    mainKeyword: plan.targetMainKeyword ?? plan.keywords[0],
+  });
+  const writerStructure = writerEngine.planStructure(serpAnalysis);
   plan = {
     ...plan,
     topicIntentResolution,
     targetSearchCombinations,
     contentTopology,
+    serpAnalysis,
+    writerStructure,
     publicationLearning,
     naverSignals: {
       keyword: researchKeyword,

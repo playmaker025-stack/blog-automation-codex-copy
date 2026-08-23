@@ -1,5 +1,13 @@
 # Agent SEO Analyst Reference
 
+> **구현 상태: 부분 구현** — `lib/agents/seo-analyst-agent.ts`
+> 구현된 것: 언어 패턴 기반 `predictedSerpModule`, `placeSubtype`, `aiBriefingCitationType`,
+> `recommendedBlogRole`, observed/predicted 분리와 신뢰도 판정.
+> **아직 없는 것: 실제 모바일 SERP 첫 화면 관측.** `analyzeSerpModule`은
+> `observedSerpModule` 파라미터를 받도록 열려 있지만 현재 호출부는 항상 미지정으로 넘긴다.
+> 따라서 운영 중 값은 전부 예측값이며, 예측만으로는 `ai_briefing`을 확정하지 않고
+> 신뢰도를 `low`로 낮춘다. 관측 수집기를 붙이면 그 지점만 채우면 된다.
+
 ## 네이버 SERP 모듈 기반 키워드 분류
 
 ### 적용 배경

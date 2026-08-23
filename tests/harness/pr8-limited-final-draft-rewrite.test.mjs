@@ -3,7 +3,9 @@ import assert from "node:assert/strict";
 
 import {
   runFinalDraftCheck,
-  runLimitedFinalDraftRewrite,
+  buildFinalDraftRevisionInstructions,
+  formatFinalDraftRevisionSection,
+  canApproveFinalDraft,
 } from "../../lib/agents/final-draft-check.ts";
 
 function makeStrategy(overrides = {}) {
@@ -60,52 +62,47 @@ function makeStrategy(overrides = {}) {
   };
 }
 
-describe("PR8 limited final draft rewrite", () => {
-  test("금지 표현이 있는 초안은 1회 rewrite 후 제거된다", () => {
+// 이전 동작(PR8): 금지어를 빈 문자열로 지우고, 걸린 소제목을 "## 확인 기준 정리"로 갈아끼우고,
+// 누락 항목에 "## 추가 확인 기준" 템플릿 문단을 덧붙였다 → 모든 글에 같은 문장이 박혔다.
+// 현재 동작: 감지만 하고 본문은 건드리지 않는다. 수정은 master-writer 재작성 라운드가 한다.
+describe("발행 본문 자동 수정 제거 — 감지만 하고 본문은 보존한다", () => {
+  test("금지 표현이 있어도 본문을 코드가 고치지 않는다", () => {
     const strategy = makeStrategy();
     const content = "이 글은 선행포스팅 흐름입니다. 꼭 확인하세요. 흡입감 기준과 관리 편의성을 정리합니다.";
-    const result = runLimitedFinalDraftRewrite({
-      title: "테스트",
-      content,
-      strategy,
-    });
+    const check = runFinalDraftCheck({ title: "테스트", content, strategy });
 
-    assert.equal(result.attempted, true);
-    assert.equal(result.applied, true);
-    assert.equal(result.content.includes("선행포스팅"), false);
-    assert.equal(result.content.includes("꼭 확인하세요"), false);
-    assert.equal(result.afterCheck.ok, true);
+    assert.equal(check.ok, false);
+    assert.ok(check.matchedForbiddenPhrases.includes("선행포스팅"));
+    assert.ok(check.matchedForbiddenPhrases.includes("꼭 확인하세요"));
+    // 감지 후에도 원문은 그대로여야 한다 — 자동 삭제/치환이 없어야 한다.
+    assert.ok(content.includes("선행포스팅"));
   });
 
-  test("질문문 안 exact keyword는 자연 질문으로 수정된다", () => {
+  test("차단 사유는 재작성 지시문으로 변환된다", () => {
     const strategy = makeStrategy();
-    const content = "\"흡입감 괜찮나요?\"라고 묻는 분들이 많습니다. 흡입감 기준과 관리 편의성을 정리합니다.";
-    const result = runLimitedFinalDraftRewrite({
-      title: "테스트",
-      content,
-      strategy,
-    });
+    const content = "이 글은 선행포스팅 흐름입니다. 흡입감 기준과 관리 편의성을 정리합니다.";
+    const check = runFinalDraftCheck({ title: "테스트", content, strategy });
+    const instructions = buildFinalDraftRevisionInstructions(check);
 
-    assert.equal(result.attempted, true);
-    assert.equal(result.content.includes("\"흡입감 괜찮나요?\""), false);
-    assert.equal(runFinalDraftCheck({ title: "테스트", content: result.content, strategy }).blockingReasons.length, 0);
+    assert.ok(instructions.length > 0);
+    assert.ok(instructions.some((item) => item.includes("선행포스팅")));
+    // 지시문은 "다시 쓰라"는 방향이어야 하고, 고정 대체 문구를 담아서는 안 된다.
+    assert.ok(instructions.some((item) => item.includes("다시 쓰세요")));
+    assert.equal(instructions.some((item) => item.includes("확인 기준 정리")), false);
+    assert.equal(instructions.some((item) => item.includes("추가 확인 기준")), false);
   });
 
-  test("end_here defer 문장은 현재 글 안에서 답변하는 문장으로 바뀐다", () => {
+  test("end_here 글의 defer 문장은 답을 본문에 쓰라는 지시가 된다", () => {
     const strategy = makeStrategy();
     const content = "흡입감 기준과 관리 편의성을 정리했습니다. 다음 글에서 더 자세히 다루겠습니다.";
-    const result = runLimitedFinalDraftRewrite({
-      title: "테스트",
-      content,
-      strategy,
-    });
+    const check = runFinalDraftCheck({ title: "테스트", content, strategy });
+    const instructions = buildFinalDraftRevisionInstructions(check);
 
-    assert.equal(result.attempted, true);
-    assert.equal(result.content.includes("다음 글에서"), false);
-    assert.equal(result.afterCheck.deferFindings.length, 0);
+    assert.ok(check.deferFindings.length > 0);
+    assert.ok(instructions.some((item) => item.includes("실제 답을 본문에 쓰세요")));
   });
 
-  test("rewrite 후에도 blockingReasons가 남으면 승인 차단 상태를 유지한다", () => {
+  test("차단 초안은 승인 불가 상태를 유지한다", () => {
     const strategy = makeStrategy({
       articlePlan: {
         title: "입호흡 전자담배 추천 베스트 5",
@@ -121,31 +118,20 @@ describe("PR8 limited final draft rewrite", () => {
       },
     });
     const content = "입호흡 전자담배 추천은 흡입감 기준과 관리 편의성을 함께 봐야 합니다.";
-    const result = runLimitedFinalDraftRewrite({
-      title: "테스트",
-      content,
-      strategy,
-    });
+    const check = runFinalDraftCheck({ title: "테스트", content, strategy });
 
-    assert.equal(result.attempted, true);
-    assert.equal(result.afterCheck.ok, false);
-    assert.ok(result.afterCheck.blockingReasons.some((reason) => reason.includes("유웰 발라리안 맥스프로")));
+    assert.equal(check.ok, false);
+    assert.equal(canApproveFinalDraft(check), false);
+    assert.ok(check.blockingReasons.some((reason) => reason.includes("유웰 발라리안 맥스프로")));
   });
 
-  test("warning only는 rewrite를 실행하지 않는다", () => {
+  test("차단 사유가 없으면 지시문 섹션은 비어 있다", () => {
     const strategy = makeStrategy();
-    const content = "전자담배를 고르기 전에는 예산과 사용 시간을 먼저 생각하면 좋습니다.";
-    const before = runFinalDraftCheck({ title: "테스트", content, strategy });
-    const result = runLimitedFinalDraftRewrite({
-      title: "테스트",
-      content,
-      strategy,
-      beforeCheck: before,
-    });
+    const content = "전자담배를 고르기 전에는 예산과 사용 시간을 먼저 생각하면 좋습니다. 흡입감 기준과 관리 편의성도 함께 봅니다.";
+    const check = runFinalDraftCheck({ title: "테스트", content, strategy });
 
-    assert.equal(before.ok, true);
-    assert.ok(before.warnings.length > 0);
-    assert.equal(result.attempted, false);
-    assert.equal(result.content, content);
+    assert.equal(check.blockingReasons.length, 0);
+    assert.deepEqual(buildFinalDraftRevisionInstructions(check), []);
+    assert.equal(formatFinalDraftRevisionSection(check), "");
   });
 });

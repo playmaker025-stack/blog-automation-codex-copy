@@ -1,5 +1,11 @@
 # Agent Writer Engine Reference
 
+> **구현 상태: 구현됨** — `lib/agents/writer-engine.ts`
+> 입력 판정은 `lib/agents/seo-analyst-agent.ts`, 배선은 `lib/agents/strategy-planner.ts`,
+> 프롬프트 주입은 `lib/agents/master-writer.ts`(전체/compact 양쪽), 회귀 테스트는
+> `tests/harness/pr24-serp-module-writer-engine.test.mjs`.
+> 이 문서를 고치면 `writer-engine.ts`의 구조 정의도 함께 고쳐야 한다.
+
 ## 목적
 
 Writer Engine은 SEO Analyst가 판정한 `serpModule`, `contentType`, `aiBriefingCitationType`, `placeSubtype`을 받아 글 구조를 선택한다. writer는 자체적으로 키워드나 SERP 모듈을 추론하지 않는다.

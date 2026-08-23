@@ -1,6 +1,7 @@
 import { fileExists, readJsonFile, writeJsonFile } from "@/lib/github/repository";
-import type { EvalResult, StrategyPlanResult } from "./types";
+import type { EvalResult, FinalDraftCheck, StrategyPlanResult } from "./types";
 import type { CorpusSummaryArtifact } from "./corpus-selector";
+import { formatFinalDraftRevisionSection } from "./final-draft-check";
 
 import { SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
 
@@ -176,6 +177,7 @@ export function buildRevisionInstruction(params: {
   evalResult: EvalResult;
   briefing: string;
   strategy?: StrategyPlanResult;
+  finalDraftCheck?: FinalDraftCheck | null;
 }): string {
   const lowDimensions = Object.entries(params.evalResult.scores)
     .filter(([, score]) => score < HARNESS_PASS_THRESHOLD)
@@ -212,6 +214,7 @@ export function buildRevisionInstruction(params: {
         `- 다음 글로 넘길 내용: ${contract.handoffTopics.join(", ") || "없음"}`,
       ].join("\n")
     : "";
+  const finalDraftSection = formatFinalDraftRevisionSection(params.finalDraftCheck);
 
   return `## 자동 보강 지시
 이전 초안은 통과 기준 ${HARNESS_PASS_THRESHOLD}점에 도달하지 못했습니다. 아래 문제를 반영해 본문 전체를 다시 작성하세요. 기존 문장을 덧붙이지 말고, 과한 반복을 줄이면서 부족한 정보와 구조를 보강해야 합니다.
@@ -238,6 +241,8 @@ ${paragraphWarnings.join("\n") || ""}
 - 부족 키워드는 억지로 나열하지 말고 검색자가 실제로 묻는 질문에 답하는 문단 안에 넣으세요.
 
 ${contractSection}
+
+${finalDraftSection}
 
 보강본 채택 조건
 - 키워드 danger 개수가 이전보다 줄어야 합니다.

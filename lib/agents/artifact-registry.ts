@@ -85,7 +85,7 @@ export interface DraftOutputData {
   contentPath: string;
   corpusSummaryUsed: boolean;
   finalDraftCheck?: unknown;
-  finalDraftRewrite?: unknown;
+  finalDraftRevisionInstructions?: string[];
 }
 
 export interface AuditReportData {

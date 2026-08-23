@@ -324,7 +324,12 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
       postId,
       corpusSummary,
       harnessBriefing,
-      revisionInstructions: buildRevisionInstruction({ evalResult, briefing: harnessBriefing, strategy }),
+      revisionInstructions: buildRevisionInstruction({
+        evalResult,
+        briefing: harnessBriefing,
+        strategy,
+        finalDraftCheck: writerResult.finalDraftCheck,
+      }),
       onToken: (token) => emit(controller, makeEvent("token", "writing", { token })),
       onProgress: (msg) => emit(controller, makeEvent("progress", "writing", { message: msg })),
       signal,
@@ -338,7 +343,7 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
       contentPath: Paths.postContent(postId),
       corpusSummaryUsed: true,
       finalDraftCheck: writerResult.finalDraftCheck,
-      finalDraftRewrite: writerResult.finalDraftRewrite,
+      finalDraftRevisionInstructions: writerResult.finalDraftRevisionInstructions,
     }).catch(() => {});
 
     await updatePostRecord(postId, {
@@ -800,7 +805,7 @@ export async function runPipeline(params: {
       contentPath: Paths.postContent(postRecord.postId),
       corpusSummaryUsed: true,
       finalDraftCheck: writerResult.finalDraftCheck,
-      finalDraftRewrite: writerResult.finalDraftRewrite,
+      finalDraftRevisionInstructions: writerResult.finalDraftRevisionInstructions,
     });
 
     // posting-list wordCount 업데이트
@@ -1719,7 +1724,7 @@ export async function runWritePhase(params: {
       contentPath: Paths.postContent(postRecord.postId),
       corpusSummaryUsed: true,
       finalDraftCheck: writerResult.finalDraftCheck,
-      finalDraftRewrite: writerResult.finalDraftRewrite,
+      finalDraftRevisionInstructions: writerResult.finalDraftRevisionInstructions,
     }).catch(() => {});
 
     await updatePostRecord(postRecord.postId, {

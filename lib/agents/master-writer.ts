@@ -11,6 +11,7 @@ import type { ContentTopologyPlan, StrategyPlanResult, WriterResult } from "./ty
 import type { CorpusSummaryArtifact } from "./corpus-selector";
 import { buildPolicyPromptSection, SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
+import { writerEngine } from "./writer-engine";
 import { classifySearchCombination } from "./search-combination-utils";
 import {
   buildRoleSpecificWriterGuidance,
@@ -18,7 +19,7 @@ import {
   formatArticleContract,
 } from "./article-contract-utils";
 import { formatOverlapReport } from "./overlap-report-utils";
-import { runFinalDraftCheck, runLimitedFinalDraftRewrite } from "./final-draft-check";
+import { runFinalDraftCheck, buildFinalDraftRevisionInstructions } from "./final-draft-check";
 import { buildDuplicateModeWriterGuidance, formatArticlePlan } from "./article-plan.ts";
 
 // ============================================================
@@ -557,6 +558,12 @@ export function buildOpenAIWriterUserPrompt(params: {
     "Naver logic pre-check:",
     naverLogicAgent.buildWriterBrief(strategy.naverLogic),
     "",
+    writerEngine.buildWriterBrief({
+      analysis: strategy.serpAnalysis,
+      plan: strategy.writerStructure,
+      articlePlan: strategy.articlePlan,
+    }),
+    "",
     formatTargetSearchCombinations(strategy),
     "Naver research signals:",
     formatOpenAINaverSignals(strategy),
@@ -724,6 +731,15 @@ function buildOpenAIWriterCompactUserPrompt(params: {
     "",
     overlapLine,
     naverSignalLine,
+    // compact mode에서도 SERP 모듈 구조는 유지한다. 구조가 빠지면 모든 글이 같은 템플릿으로 돌아간다.
+    strategy.writerStructure
+      ? [
+          `Writer structure (${strategy.writerStructure.label}): ${strategy.writerStructure.goal}`,
+          `Required section order: ${strategy.writerStructure.requiredSections.join(" → ")}`,
+          `Must include: ${strategy.writerStructure.requiredElements.slice(0, 2).join(" / ")}`,
+          `Do not: ${strategy.writerStructure.forbiddenMoves.slice(0, 2).join(" / ")}`,
+        ].join("\n")
+      : "Writer structure: unavailable. Finish the search intent inside this article.",
     strategy.topicIntentResolution?.searchIntent
       ? `Resolved search intent: ${strategy.topicIntentResolution.searchIntent}`
       : "Resolved search intent: unavailable.",
@@ -1047,6 +1063,12 @@ ${formatArticlePlan(strategy.articlePlan)}
 Naver logic pre-check:
 ${naverLogicAgent.buildWriterBrief(strategy.naverLogic)}
 
+${writerEngine.buildWriterBrief({
+  analysis: strategy.serpAnalysis,
+  plan: strategy.writerStructure,
+  articlePlan: strategy.articlePlan,
+})}
+
 ${formatTargetSearchCombinations(strategy)}
 
 키워드 배치 규칙:
@@ -1239,22 +1261,15 @@ async function saveWriterResult(params: {
   const postId = params.postId ?? `post-${randomUUID().slice(0, 8)}`;
   const contentPath = Paths.postContent(postId);
   const generatedAt = new Date().toISOString();
-  let finalContent = params.content;
-  let finalDraftCheck = runFinalDraftCheck({
+  // 검수는 감지만 한다. 본문을 코드로 고치지 않는다 — 걸린 항목은 재작성 지시문으로만 남기고,
+  // orchestrator의 재작성 라운드(writer-revision-policy)가 master-writer에게 다시 쓰게 한다.
+  const finalContent = params.content;
+  const finalDraftCheck = runFinalDraftCheck({
     title: params.title,
     content: finalContent,
     strategy: params.strategy,
   });
-  const finalDraftRewrite = runLimitedFinalDraftRewrite({
-    title: params.title,
-    content: finalContent,
-    strategy: params.strategy,
-    beforeCheck: finalDraftCheck,
-  });
-  if (finalDraftRewrite.attempted && finalDraftRewrite.applied) {
-    finalContent = finalDraftRewrite.content;
-    finalDraftCheck = finalDraftRewrite.afterCheck;
-  }
+  const finalDraftRevisionInstructions = buildFinalDraftRevisionInstructions(finalDraftCheck);
   const wordCount = finalContent.replace(/\s+/g, "").length;
 
   // GitHub에 본문 저장 (파일이 없을 때만 — sha null)
@@ -1276,6 +1291,8 @@ async function saveWriterResult(params: {
     wordCount,
     generatedAt,
     finalDraftCheck,
-    finalDraftRewrite: finalDraftRewrite.attempted ? finalDraftRewrite : undefined,
+    finalDraftRevisionInstructions: finalDraftRevisionInstructions.length
+      ? finalDraftRevisionInstructions
+      : undefined,
   };
 }

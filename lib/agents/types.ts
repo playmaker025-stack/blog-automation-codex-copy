@@ -40,6 +40,8 @@ export interface StrategyPlanResult {
   rationale: string;
   targetSearchCombinations?: SearchCombinationTarget[];
   contentTopology?: ContentTopologyPlan;
+  serpAnalysis?: SerpAnalysis;
+  writerStructure?: WriterStructurePlan;
   naverLogic?: NaverLogicPlan;
   naverSignals?: NaverSignals;
   publicationLearning?: PublicationLearningSummary | null;
@@ -280,6 +282,62 @@ export interface NaverSignals {
   kinTopItems?: NaverSignalItem[];
 }
 
+// ============================================================
+// SERP 모듈 분류 (references/agent-seo-analyst.md)
+// ============================================================
+
+export type SerpModule = "ai_briefing" | "clip" | "place" | "shopping" | "blog_view";
+
+export type SerpModuleConfidence = "high" | "medium" | "low";
+
+export type AiBriefingCitationType = "geo_priority" | "seo_required";
+
+export type PlaceSubtype =
+  | "place_city"
+  | "place_dong"
+  | "place_station"
+  | "place_visit_check"
+  | "place_review";
+
+/** 블로그 역할 배정 코드 — CLAUDE.md "글목록 생성 시 블로그 역할 적합성 검사" */
+export type BlogRoleCode = "A" | "B" | "C" | "D" | "E";
+
+export interface SerpAnalysis {
+  /** 전략에 사용할 최종 모듈. 관측값이 있으면 관측값을 우선한다. */
+  serpModule: SerpModule;
+  /** 실제 모바일 통합검색 첫 화면에서 확인한 모듈. 미확인이면 null. */
+  observedSerpModule: SerpModule | null;
+  /** 키워드 언어 패턴으로 예측한 모듈. */
+  predictedSerpModule: SerpModule;
+  serpModuleConfidence: SerpModuleConfidence;
+  serpModuleReason: string;
+  serpModuleOptions: SerpModule[];
+  primarySearchIntent: string;
+  recommendedBlogRole: BlogRoleCode;
+  aiBriefingCitationType: AiBriefingCitationType | null;
+  aiBriefingCitationNote: string | null;
+  placeSubtype: PlaceSubtype | null;
+  /** 블로그탭 유무는 항상 보조 신호다. */
+  blogTabIsPrimarySignal: false;
+  checkedAt: string;
+  checkDevice: "mobile" | "unknown";
+}
+
+/**
+ * serpModule별 글 구조 계획 (references/agent-writer-engine.md).
+ * writer는 스스로 SERP 모듈을 추론하지 않고 이 계획을 받아 구조를 선택한다.
+ */
+export interface WriterStructurePlan {
+  serpModule: SerpModule;
+  label: string;
+  goal: string;
+  requiredSections: string[];
+  requiredElements: string[];
+  forbiddenMoves: string[];
+  qaChecklist: string[];
+  briefingNote: string;
+}
+
 export type ContentTopologyKind = "hub" | "leaf";
 
 export type NaverLogicType = "dia" | "c-rank" | "hybrid";
@@ -406,13 +464,11 @@ export interface FinalDraftCheck {
   overlapFindings: string[];
 }
 
-export interface FinalDraftRewriteResult {
-  attempted: boolean;
-  applied: boolean;
-  instructions: string[];
-  beforeCheck: FinalDraftCheck;
-  afterCheck: FinalDraftCheck;
-}
+/**
+ * 발행 본문은 코드가 자동 수정하지 않는다. 검수에서 걸린 항목은 본문을 고치는 대신
+ * 재작성 지시문으로만 남기고, 실제 수정은 master-writer 재작성 라운드가 담당한다.
+ */
+export type FinalDraftRevisionInstructions = string[];
 
 export interface KeywordFocusMetric {
   keyword: string;
@@ -483,7 +539,7 @@ export interface WriterResult {
   wordCount: number;
   generatedAt: string;
   finalDraftCheck?: FinalDraftCheck;
-  finalDraftRewrite?: FinalDraftRewriteResult;
+  finalDraftRevisionInstructions?: FinalDraftRevisionInstructions;
 }
 
 export interface EvalResult {
