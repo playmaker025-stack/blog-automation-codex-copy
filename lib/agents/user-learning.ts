@@ -11,6 +11,7 @@ import type {
   UserProfile,
 } from "@/lib/types/github-data";
 import type { PublicationLearningSummary } from "./types";
+import { buildStyleFingerprint, type StyleFingerprint } from "./style-fingerprint";
 
 interface PublicationLearningEntry {
   postId: string;
@@ -63,6 +64,7 @@ interface WritingProfile {
   openingPatterns: string[];
   closingPatterns: string[];
   ctaPatterns: string[];
+  styleFingerprint: StyleFingerprint;
   representativeExcerpts: string[];
 }
 
@@ -352,10 +354,12 @@ function buildWritingProfile(params: {
     .slice(0, 8)
     .map(([token]) => token);
   const averageWordCount = average(sortedSamples.map((sample) => sample.wordCount).filter((count) => count > 0));
-  const representativeExcerpts = sortedExemplars
+  const cleanedExcerpts = sortedExemplars
     .map((exemplar) => stripMarkdown(exemplar.excerpt))
-    .filter((excerpt) => excerpt.length > 0)
-    .slice(0, MAX_PROFILE_EXCERPTS);
+    .filter((excerpt) => excerpt.length > 0);
+  const representativeExcerpts = cleanedExcerpts.slice(0, MAX_PROFILE_EXCERPTS);
+  // 지문은 저장 발췌 5개가 아니라 보유한 예문 전체에서 뽑는다. 표본이 클수록 반복 표현이 정확해진다.
+  const styleFingerprint = buildStyleFingerprint(cleanedExcerpts);
 
   return {
     userId,
@@ -365,28 +369,47 @@ function buildWritingProfile(params: {
     averageWordCount,
     recentTitles: sortedSamples.slice(0, MAX_PROFILE_TITLES).map((sample) => sample.title),
     topKeywords,
-    structureRules: [
-      "제목의 핵심 키워드를 도입부 초반에 자연스럽게 반복한다.",
-      "본문은 검색자가 바로 비교하거나 결정할 수 있게 문제, 기준, 선택지를 순서대로 풀어낸다.",
-      "마무리는 과장된 결론보다 방문/상담/확인 행동으로 부드럽게 연결한다.",
-    ],
-    toneRules: [
-      "친근하지만 정보가 먼저 보이는 설명형 문장을 우선한다.",
-      "홍보 문구만 반복하지 말고 실제 사용 상황과 선택 기준을 함께 쓴다.",
-      "사용자 블로그의 기존 제목과 표현을 우선 참고하되 금지 표현은 별도 규칙을 따른다.",
-    ],
-    openingPatterns: [
-      "검색자가 지금 궁금해하는 상황을 먼저 짚고 주제를 연결한다.",
-      "지역, 제품군, 증상 같은 구체 단서를 첫 문단에 배치한다.",
-    ],
-    closingPatterns: [
-      "핵심 선택 기준을 짧게 다시 정리한다.",
-      "필요하면 매장 방문, 비교 상담, 추가 확인 같은 다음 행동으로 연결한다.",
-    ],
-    ctaPatterns: [
-      "궁금한 제품이나 액상 취향을 기준으로 상담받을 수 있다는 식의 낮은 압박 CTA를 사용한다.",
-    ],
+    ...buildDerivedStyleRules(styleFingerprint),
+    styleFingerprint,
     representativeExcerpts,
+  };
+}
+
+/**
+ * 문체 규칙은 사용자 코퍼스에서 유도한다.
+ *
+ * 예전에는 이 5개 배열이 전부 하드코딩 상수였다. 그래서 사용자 5명 전원이
+ * 바이트 단위로 동일한 "문체 규칙"을 가졌고, 프롬프트에 실어도 개인화 신호가 0이었다.
+ * 지금은 실제 종결어미 분포와 반복 표현에서 규칙을 만들고, 근거가 없으면
+ * 지어내지 않고 빈 배열을 둔다.
+ */
+function buildDerivedStyleRules(fingerprint: StyleFingerprint): {
+  structureRules: string[];
+  toneRules: string[];
+  openingPatterns: string[];
+  closingPatterns: string[];
+  ctaPatterns: string[];
+} {
+  const toneRules: string[] = [];
+  if (fingerprint.sentenceEndings.length > 0) {
+    toneRules.push(
+      `실제 종결어미 분포를 그대로 재현한다: ${fingerprint.sentenceEndings
+        .map((item) => `${item.ending}(${item.count}회)`)
+        .join(", ")}.`
+    );
+  }
+  if (fingerprint.signaturePhrases.length > 0) {
+    toneRules.push(
+      `여러 글에 반복되는 고유 표현을 살린다: ${fingerprint.signaturePhrases.slice(0, 5).join(" / ")}.`
+    );
+  }
+
+  return {
+    structureRules: [],
+    toneRules,
+    openingPatterns: fingerprint.openingLines.map((line) => `실제 도입 예: "${line}"`),
+    closingPatterns: fingerprint.closingLines.map((line) => `실제 마무리 예: "${line}"`),
+    ctaPatterns: [],
   };
 }
 

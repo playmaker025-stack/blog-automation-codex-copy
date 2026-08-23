@@ -12,6 +12,7 @@ import type { CorpusSummaryArtifact } from "./corpus-selector";
 import { buildPolicyPromptSection, SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
 import { writerEngine } from "./writer-engine";
+import { formatStyleFingerprint } from "./style-fingerprint";
 import { classifySearchCombination } from "./search-combination-utils";
 import {
   buildRoleSpecificWriterGuidance,
@@ -120,6 +121,26 @@ function stripExcerptMeta(excerpt: string): string {
     .trim();
 }
 
+/** writing-profile에 실제 근거가 있는 규칙만 프롬프트에 싣는다. 빈 배열이면 아무것도 넣지 않는다. */
+function formatProfileStyleRules(rules: CorpusSummaryArtifact["profileStyleRules"]): string {
+  if (!rules) return "";
+  const sections: Array<[string, string[]]> = [
+    ["어투 규칙", rules.toneRules],
+    ["도입 방식", rules.openingPatterns],
+    ["마무리 방식", rules.closingPatterns],
+    ["구조 규칙", rules.structureRules],
+    ["CTA 방식", rules.ctaPatterns],
+  ];
+  const filled = sections.filter(([, items]) => items.length > 0);
+  if (filled.length === 0) return "";
+
+  return [
+    "",
+    "## 저장된 문체 규칙",
+    ...filled.flatMap(([label, items]) => [`### ${label}`, ...items.map((item) => `- ${item}`)]),
+  ].join("\n");
+}
+
 function buildCorpusSummarySection(corpus: CorpusSummaryArtifact): string {
   const { styleProfile, exemplarExcerpts, representativeExcerpts = [] } = corpus;
 
@@ -130,13 +151,19 @@ function buildCorpusSummarySection(corpus: CorpusSummaryArtifact): string {
         .join("\n\n")}`
     : "";
 
+  // 문체 지문을 먼저 놓는다. 아래 형용사 요약보다 이쪽이 실제 복제 신호다.
+  const fingerprintSection = formatStyleFingerprint(corpus.styleFingerprint);
+  const profileRuleSection = formatProfileStyleRules(corpus.profileStyleRules);
+
   return `
-## 사용자 스타일 프로필 (corpus summary)
+${fingerprintSection}
+${profileRuleSection}
+
+## 사용자 스타일 프로필 (보조 지표)
 - 주요 어투: ${styleProfile.dominantTone}
 - 평균 글자수: ${styleProfile.avgWordCount}자
 - 서두 패턴: ${styleProfile.openingPattern}
 - 구조 패턴: ${styleProfile.structurePattern}
-- 시그니처 표현: ${styleProfile.signatureExpressions.join(", ") || "없음"}
 
 ## 예시 글 발췌 (${exemplarExcerpts.length}개)
 ${exemplarExcerpts
@@ -365,11 +392,13 @@ function formatOpenAICorpus(corpus: CorpusSummaryArtifact | undefined): string {
     : [];
 
   return [
+    formatStyleFingerprint(corpus.styleFingerprint),
+    formatProfileStyleRules(corpus.profileStyleRules),
+    "",
     `Dominant tone: ${corpus.styleProfile.dominantTone}`,
     `Average length reference: ${corpus.styleProfile.avgWordCount}`,
     `Opening pattern: ${corpus.styleProfile.openingPattern}`,
     `Structure pattern: ${corpus.styleProfile.structurePattern}`,
-    `Signature expressions: ${corpus.styleProfile.signatureExpressions.join(", ") || "none"}`,
     "",
     "Reference excerpts:",
     ...corpus.exemplarExcerpts.slice(0, 4).map((item, index) =>
@@ -696,10 +725,11 @@ function buildCompactKeywordContractSummary(strategy: StrategyPlanResult): strin
 function buildOpenAIWriterCompactUserPrompt(params: {
   strategy: StrategyPlanResult;
   userId: string;
+  corpusSummary?: CorpusSummaryArtifact;
   harnessBriefing?: string;
   revisionInstructions?: string;
 }): string {
-  const { strategy, userId, harnessBriefing, revisionInstructions } = params;
+  const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
   const contract = strategy.articleContract;
   const roleSpecificGuidance = buildRoleSpecificWriterGuidance(contract).slice(0, 4);
   const duplicateModeGuidance = buildDuplicateModeWriterGuidance(strategy.articlePlan).slice(0, 3);
@@ -722,6 +752,9 @@ function buildOpenAIWriterCompactUserPrompt(params: {
     "",
     "Compact mode is active because the writer prompt exceeded the token budget.",
     "Keep only the essential structure and keyword responsibilities.",
+    "",
+    // 압축하더라도 문체 지문은 남긴다. 이게 빠지면 사용자 글이 아니라 일반 블로그 글이 나온다.
+    formatStyleFingerprint(corpusSummary?.styleFingerprint),
     "",
     "Article contract core:",
     buildCompactArticleContractSummary(contract),
@@ -795,10 +828,11 @@ export function buildOpenAIWriterRevisionPrompt(params: {
   strategy: StrategyPlanResult;
   userId: string;
   firstDraft: string;
+  corpusSummary?: CorpusSummaryArtifact;
   harnessBriefing?: string;
   revisionInstructions?: string;
 }): string {
-  const { strategy, userId, firstDraft, harnessBriefing, revisionInstructions } = params;
+  const { strategy, userId, firstDraft, corpusSummary, harnessBriefing, revisionInstructions } = params;
   const contract = strategy.articleContract;
   const mainKeyword = strategy.keywordContract?.mainKeyword || strategy.keywords[0] || "none";
   const subKeywords = strategy.keywordContract?.subKeywords?.slice(0, 5) ?? strategy.keywords.slice(1, 6);
@@ -823,8 +857,12 @@ export function buildOpenAIWriterRevisionPrompt(params: {
     mustResolve.length ? `Must resolve: ${mustResolve.join(" / ")}` : "Must resolve: none",
     mustNotDefer.length ? `Must not defer: ${mustNotDefer.join(" / ")}` : "Must not defer: none",
     "",
+    // 2차 패스에서 문체 기준이 빠지면 낮은 temperature 재작성이 개성을 깎아 평균으로 되돌린다.
+    formatStyleFingerprint(corpusSummary?.styleFingerprint),
+    "",
     "Revision priorities:",
     "- Preserve the article's actual topic and reader intent.",
+    "- Keep the user's sentence endings and signature expressions above. Do not smooth them into generic blog phrasing.",
     strategy.articlePlan?.duplicateMode === "force_duplicate"
       ? "- Duplicate mode is force_duplicate. Do not revise the draft into a different angle just to reduce overlap risk."
       : "- If overlap risk exists, differentiate the intro, examples, and CTA without changing the requested search intent.",
@@ -949,6 +987,7 @@ async function runOpenAIMasterWriter(params: {
           strategy,
           userId,
           firstDraft,
+          corpusSummary,
           harnessBriefing,
           revisionInstructions,
         }),

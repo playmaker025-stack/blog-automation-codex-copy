@@ -2,6 +2,7 @@ import { fileExists, readJsonFile, writeJsonFile } from "@/lib/github/repository
 import type { EvalResult, FinalDraftCheck, StrategyPlanResult } from "./types";
 import type { CorpusSummaryArtifact } from "./corpus-selector";
 import { formatFinalDraftRevisionSection } from "./final-draft-check";
+import { formatStyleFingerprint } from "./style-fingerprint";
 
 import { SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
 
@@ -157,6 +158,8 @@ export function buildPreWriteHarnessBriefing(params: {
 - 톤: ${strategy.tone}
 - 코퍼스 구조 패턴: ${corpusSummary.styleProfile.structurePattern}
 - 코퍼스 도입 패턴: ${corpusSummary.styleProfile.openingPattern}
+
+${formatStyleFingerprint(corpusSummary.styleFingerprint)}
 
 네이버 보조 신호
 ${naverSignalsSection}

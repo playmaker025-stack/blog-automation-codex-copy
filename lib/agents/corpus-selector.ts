@@ -16,6 +16,11 @@ import { Paths } from "@/lib/github/paths";
 import type { CorpusSampleMeta } from "@/lib/types/github-data";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import { ensureUserCorpusSeeded } from "./user-learning";
+import {
+  buildStyleFingerprint,
+  isUsableFingerprint,
+  type StyleFingerprint,
+} from "./style-fingerprint";
 
 // ============================================================
 // exemplar index 타입
@@ -60,6 +65,16 @@ export interface CorpusSummaryArtifact {
     styleNotes: string;
   }>;
   representativeExcerpts: string[];  // writing-profile의 실제 발행 글 발췌 (500자 수준)
+  /** 코퍼스에서 추출한 실제 문체 증거 — 종결어미 분포, 반복 표현, 실제 도입/마무리 문장 */
+  styleFingerprint: StyleFingerprint | null;
+  /** writing-profile에 저장된 사용자별 문체 규칙 (있을 때만) */
+  profileStyleRules: {
+    structureRules: string[];
+    toneRules: string[];
+    openingPatterns: string[];
+    closingPatterns: string[];
+    ctaPatterns: string[];
+  } | null;
   retrievalStrategy: "exemplar_index" | "fallback_recent";
   staleWarnings: string[];      // 오래된 exemplar 경고
   scoringBreakdown: Array<{     // 선택 근거 추적
@@ -284,21 +299,10 @@ export async function selectExemplars(params: {
 // summary artifact 생성
 // ============================================================
 
-const SIGNATURE_PATTERNS = [
-  /직접 경험한|오늘은 제가|솔직하게 말씀드리면|정말 도움이 됐어요/g,
-  /꼭 추천드려요|안녕하세요|여러분께/g,
-];
-
-function extractSignatureExpressions(excerpts: string[]): string[] {
-  const found = new Set<string>();
-  for (const text of excerpts) {
-    for (const pattern of SIGNATURE_PATTERNS) {
-      const matches = text.match(pattern) ?? [];
-      matches.forEach((m) => found.add(m));
-    }
-  }
-  return [...found].slice(0, 5);
-}
+// 이전에는 하드코딩된 정규식 목록(`안녕하세요|오늘은 제가|솔직하게 말씀드리면` 등)으로
+// "시그니처 표현"을 뽑았다. 그건 사용자 고유 표현이 아니라 AI 블로그 클리셰 목록이라
+// 실제 지문("만수동만수르 입니다", "저처럼 멘솔고자인 사람도")은 하나도 잡히지 않았다.
+// 지금은 style-fingerprint가 코퍼스에서 실제 반복 표현을 추출한다.
 
 function inferStructurePattern(excerpts: string[]): string {
   const hasNumberedList = excerpts.some((e) => /^\d+\./m.test(e));
@@ -327,12 +331,13 @@ export function buildSummaryArtifact(params: {
   staleWarnings?: string[];
   scoringBreakdown?: ScoredExemplar[];
   representativeExcerpts?: string[];
-  profileSignatureExpressions?: string[];
+  storedFingerprint?: StyleFingerprint | null;
+  profileStyleRules?: CorpusSummaryArtifact["profileStyleRules"];
 }): CorpusSummaryArtifact {
   const userId = normalizeUserId(params.userId);
   const {
     exemplars, strategy, userTone, staleWarnings = [], scoringBreakdown = [],
-    representativeExcerpts = [], profileSignatureExpressions = [],
+    representativeExcerpts = [], storedFingerprint = null, profileStyleRules = null,
   } = params;
 
   const excerpts = exemplars.map((e) => e.excerpt).filter(Boolean);
@@ -341,8 +346,14 @@ export function buildSummaryArtifact(params: {
       ? Math.round(exemplars.reduce((acc, e) => acc + e.wordCount, 0) / exemplars.length)
       : 0;
 
-  const autoSignatures = extractSignatureExpressions(excerpts);
-  const signatureExpressions = autoSignatures.length > 0 ? autoSignatures : profileSignatureExpressions;
+  // 저장된 지문이 있으면 쓰고, 없으면(구 프로필) 지금 가진 발췌로 즉석 추출한다.
+  const derivedFingerprint = buildStyleFingerprint([...excerpts, ...representativeExcerpts]);
+  const styleFingerprint = isUsableFingerprint(storedFingerprint)
+    ? storedFingerprint
+    : isUsableFingerprint(derivedFingerprint)
+      ? derivedFingerprint
+      : null;
+  const signatureExpressions = styleFingerprint?.signaturePhrases.slice(0, 5) ?? [];
 
   return {
     userId,
@@ -361,6 +372,8 @@ export function buildSummaryArtifact(params: {
       styleNotes: e.styleNotes,
     })),
     representativeExcerpts,
+    styleFingerprint,
+    profileStyleRules,
     retrievalStrategy: strategy,
     staleWarnings,
     scoringBreakdown: scoringBreakdown.map((s) => ({
@@ -401,8 +414,12 @@ export async function getCorpusSummary(params: {
       if (!(await fileExists(profilePath))) return null;
       const { data } = await readJsonFile<{
         representativeExcerpts?: string[];
-        signatureExpressions?: string[];
-        writingStyle?: { signatureExpressions?: string[] };
+        styleFingerprint?: StyleFingerprint;
+        structureRules?: string[];
+        toneRules?: string[];
+        openingPatterns?: string[];
+        closingPatterns?: string[];
+        ctaPatterns?: string[];
       }>(profilePath);
       return data;
     })(),
@@ -411,9 +428,15 @@ export async function getCorpusSummary(params: {
   const { exemplars, strategy, staleWarnings, scoringBreakdown } = exemplarResult;
 
   const representativeExcerpts = writingProfile?.representativeExcerpts ?? [];
-  const profileSignatureExpressions = writingProfile?.signatureExpressions
-    ?? writingProfile?.writingStyle?.signatureExpressions
-    ?? [];
+  const profileStyleRules = writingProfile
+    ? {
+        structureRules: writingProfile.structureRules ?? [],
+        toneRules: writingProfile.toneRules ?? [],
+        openingPatterns: writingProfile.openingPatterns ?? [],
+        closingPatterns: writingProfile.closingPatterns ?? [],
+        ctaPatterns: writingProfile.ctaPatterns ?? [],
+      }
+    : null;
 
   return buildSummaryArtifact({
     userId,
@@ -423,6 +446,7 @@ export async function getCorpusSummary(params: {
     staleWarnings,
     scoringBreakdown,
     representativeExcerpts,
-    profileSignatureExpressions,
+    storedFingerprint: writingProfile?.styleFingerprint ?? null,
+    profileStyleRules,
   });
 }
