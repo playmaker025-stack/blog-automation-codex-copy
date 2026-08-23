@@ -9,6 +9,8 @@ import {
   sanitizeResearchItems,
   sanitizeResearchTexts,
   sanitizeKeywordResearch,
+  findCoverageGaps,
+  formatCoverageGaps,
 } from "../../lib/agents/domain-contract.ts";
 
 const C = VAPE_DOMAIN_CONTRACT;
@@ -124,5 +126,88 @@ describe("PR28 리서치 정화", () => {
   test("빈 입력에 안전하다", () => {
     assert.deepEqual(sanitizeResearchItems(undefined, C), []);
     assert.deepEqual(sanitizeResearchTexts(undefined, C), []);
+  });
+});
+
+// 검색 자유 텍스트를 뺐더니 주제가 단조로워졌다. 소재가 없어서가 아니라
+// 어디가 비었는지 알려주는 장치가 없어서였다. 계약을 생성기로도 쓴다.
+describe("PR28 커버리지 빈틈 생성기", () => {
+  const PUBLISHED = [
+    "전자담배 코일 탄맛 원인과 해결",
+    "입호흡 액상 추천 정리",
+    "전자담배 기기 입문자 추천",
+    "액상 보관 온도 관리법",
+  ];
+
+  test("이미 다룬 조합은 제안하지 않는다", () => {
+    const gaps = findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 200 });
+    const pairs = gaps.map((g) => `${g.subject}×${g.angle}`);
+    assert.equal(pairs.includes("코일×탄맛"), false, "이미 쓴 조합이 제안됨");
+    assert.equal(pairs.includes("액상×보관"), false, "이미 쓴 조합이 제안됨");
+  });
+
+  test("별칭으로 쓴 글도 다룬 것으로 인식한다", () => {
+    // "전담 고장"을 쓴 글이 있으면 "전자담배 × 고장"도 다뤄진 것이다.
+    const gaps = findCoverageGaps({
+      contract: C,
+      publishedTitles: ["전담 고장 증상 정리"],
+      limit: 500,
+    });
+    assert.equal(
+      gaps.some((g) => g.subject === "전자담배" && g.angle === "고장"),
+      false,
+      "별칭 표기를 놓침"
+    );
+  });
+
+  test("한 슬라이스가 여러 소재에 걸친다", () => {
+    const gaps = findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 6 });
+    const subjects = new Set(gaps.map((g) => g.subject));
+    assert.ok(subjects.size >= 4, `소재가 몰림: ${[...subjects].join(", ")}`);
+  });
+
+  // 소재만 교차하면 깊은 구간에서 "전부 × 상담"처럼 관점이 몰린다.
+  test("한 슬라이스 안에서 관점도 겹치지 않는다", () => {
+    for (const rotation of [0, 40, 120, 400, 900]) {
+      const gaps = findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 6, rotation });
+      const angles = new Set(gaps.map((g) => g.angle));
+      assert.ok(angles.size >= 5, `관점이 몰림(rotation ${rotation}): ${[...angles].join(", ")}`);
+    }
+  });
+
+  test("회전값이 다르면 다른 구간이 나온다", () => {
+    const a = findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 6, rotation: 0 });
+    const b = findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 6, rotation: 30 });
+    assert.notDeepEqual(
+      a.map((g) => `${g.subject}×${g.angle}`),
+      b.map((g) => `${g.subject}×${g.angle}`)
+    );
+  });
+
+  test("같은 회전값이면 같은 결과가 나온다", () => {
+    const a = findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 6, rotation: 7 });
+    const b = findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 6, rotation: 7 });
+    assert.deepEqual(a, b);
+  });
+
+  test("제안된 조합은 전부 계약 안에 있다", () => {
+    const gaps = findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 40 });
+    for (const gap of gaps) {
+      assert.equal(touchesContract(gap.subject, C), true, `계약 밖 소재: ${gap.subject}`);
+    }
+  });
+
+  test("프롬프트 블록이 조합을 나열한다", () => {
+    const text = formatCoverageGaps(
+      findCoverageGaps({ contract: C, publishedTitles: PUBLISHED, limit: 5 })
+    );
+    assert.ok(text.includes("아직 다루지 않은 조합"));
+    assert.ok(text.includes("×"));
+    assert.ok(text.includes("서로 다른 조합을 골라"));
+  });
+
+  test("빈 입력에 안전하다", () => {
+    assert.deepEqual(findCoverageGaps({ contract: C, publishedTitles: [], limit: 3 }).length, 3);
+    assert.ok(formatCoverageGaps([]).includes("계산된 것이 없습니다"));
   });
 });

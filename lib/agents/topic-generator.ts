@@ -27,6 +27,8 @@ import {
   VAPE_DOMAIN_CONTRACT,
   buildContractVocabulary,
   formatDomainContract,
+  findCoverageGaps,
+  formatCoverageGaps,
 } from "./domain-contract";
 
 export interface TopicGeneratorInput {
@@ -1079,6 +1081,17 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     ...(input.publishedPosts ?? []).map(postToTopic),
   ];
   const domainAnchors = buildDomainAnchors(vocabularySource);
+  // 계약을 필터가 아니라 생성기로도 쓴다. 검색 자유 텍스트를 뺀 뒤 주제가 단조로워졌는데,
+  // 소재가 없어서가 아니라 어디가 비었는지 알려주는 장치가 없어서였다.
+  // 실측: 계약 조합 2296개 중 발행된 건 257개(11%)뿐이었다.
+  const publishedTitles_forGaps = vocabularySource.map((topic) => topic.title ?? "");
+  const coverageGaps = findCoverageGaps({
+    contract,
+    publishedTitles: publishedTitles_forGaps,
+    limit: 12,
+    // 발행 수가 늘면 다른 구간을 보여준다. 같은 상태에서는 같은 결과가 나와 재현 가능하다.
+    rotation: publishedTitles_forGaps.length * 3,
+  });
   // 계약 어휘 + 발행 이력 어휘. 계약이 없는 항목만 이력으로 보완한다.
   const domainVocabulary = new Set([
     ...contractVocabulary,
@@ -1142,6 +1155,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             "If the trend is rising, prioritize timely topics over generic evergreen clones.",
             "Locality rule: generate only Incheon operating-area topics when using a place name.",
             formatDomainContract(contract),
+            formatCoverageGaps(coverageGaps),
             `Frequently used terms in this blog (for prioritization, not for scope): ${domainAnchorLine}.`,
             "A locality name alone is never a topic. Each topic must be about this blog's own products and services.",
             "Research signals come from local search and may contain other industries. Ignore anything outside the industry axis.",
@@ -1213,6 +1227,8 @@ ${formatDomainContract(contract)}
 
 ## 자주 쓰는 표현 (범위가 아니라 우선순위 참고용)
 ${domainAnchorLine}
+
+${formatCoverageGaps(coverageGaps)}
 지역명은 업종을 수식할 때만 쓰고, 지역명만으로 주제를 만들지 마세요.
 
 ## 지역 규칙
@@ -1243,6 +1259,7 @@ ${mainCategory}
 1. 기존 발행 글과 겹치지 않으면서 자연스럽게 이어지는 주제
 2. 이미 발행된 허브글이 적으면 먼저 리프글을 보강하고, 리프글만 많으면 상위 허브글을 제안
 3. 5개 안에 hub와 leaf를 균형 있게 섞되, 현재 목록의 빈틈을 우선
+   5개는 서로 다른 소재를 다뤄야 합니다. 같은 소재에 관점만 바꾼 주제를 여러 개 넣지 마세요.
 4. 네이버 검색 의도가 드러나는 롱테일 키워드를 포함
 5. 데이터랩 상승 추세면 시의성 있는 주제를 우선
 6. category는 "${mainCategory}" 계열 유지
