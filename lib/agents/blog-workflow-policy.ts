@@ -200,6 +200,100 @@ export function filterBlockedTopics<T extends { title: string }>(topics: T[]): T
   );
 }
 
+/**
+ * 업종 축 판별.
+ *
+ * 타업종 주제를 금지어 목록으로 막으려 했더니 계속 샜다.
+ * 병원/대출을 막으니 맞춤복/택배가 나왔다 — 금지어를 늘리는 건 두더지 잡기다.
+ * 그래서 **사용자 기존 글의 어휘로 화이트리스트를 만들어** 뒤집는다.
+ * 업종 용어를 하드코딩하지 않으므로 다른 업종에도 그대로 쓸 수 있다.
+ *
+ * 두 가지를 따로 만든다.
+ * - anchors: 빈도 2 이상 상위 토큰. 프롬프트에 "이 업종 축을 지켜라"로 보여주는 용도.
+ * - vocabulary: 제목+설명+태그의 모든 의미 토큰. 실제 차단 판정용.
+ *   앵커만으로 판정하면 "코일 탄맛"처럼 발행 이력이 적은 정상 주제가 함께 막힌다.
+ */
+const DOMAIN_ANCHOR_STOPWORDS = new Set([
+  "추천", "후기", "리뷰", "정리", "방법", "이유", "기준", "비교", "차이", "선택",
+  "가이드", "사용법", "입문", "처음", "완벽", "총정리", "고르는", "무엇", "어디",
+  "베스트", "순위", "best", "top",
+]);
+
+/** 어휘가 이보다 적으면 근거가 부족하다고 보고 차단하지 않는다. */
+const MIN_DOMAIN_VOCABULARY = 20;
+
+function meaningfulTokens(text: string): string[] {
+  return text
+    .split(/\s+/)
+    .map((raw) => raw.normalize("NFKC").replace(/[^\p{L}\p{N}]/gu, "").trim())
+    .filter(
+      (token) =>
+        token.length >= 2 &&
+        !isLocalityToken(token) &&
+        !hasOutsideDomain(token) &&
+        // 범용어를 남기면 어휘가 오염된다. "롯데택배 배송 서비스 이용 방법"이
+        // "방법" 하나로 통과해버렸다.
+        !DOMAIN_ANCHOR_STOPWORDS.has(token.toLowerCase())
+    );
+}
+
+/** 프롬프트에 보여줄 업종 축 상위 토큰. */
+export function buildDomainAnchors(topics: Topic[]): string[] {
+  const counts = new Map<string, number>();
+  for (const topic of topics) {
+    const tokens = [
+      ...(topic.tags ?? []).flatMap(meaningfulTokens),
+      ...meaningfulTokens(topic.title ?? ""),
+    ];
+    for (const token of tokens) {
+      counts.set(token, (counts.get(token) ?? 0) + 1);
+    }
+  }
+
+  return [...counts.entries()]
+    .filter(([, count]) => count >= 2)
+    .sort((left, right) => right[1] - left[1])
+    .slice(0, 15)
+    .map(([token]) => token);
+}
+
+/** 어미로 끝나는 활용형은 업종 어휘가 아니다. "좋을까", "괜찮나" 같은 조각을 걸러낸다. */
+function looksConjugated(token: string): boolean {
+  return /(까|죠|네|나|다|군요|는지)$/u.test(token);
+}
+
+/**
+ * 차단 판정용 어휘.
+ *
+ * 설명문까지 넣으면 어휘가 272개로 늘지만 활용형과 일반 서술어가 섞여 화이트리스트가 헐거워진다.
+ * 제목과 태그만 쓰면 145개로 좁아지면서도 코일/탄맛/누수/니코틴 같은 핵심 용어는 그대로 남는다.
+ * 판정 대상 쪽은 제목+설명+태그를 모두 보므로 과차단은 이 축소로 늘지 않는다.
+ */
+export function buildDomainVocabulary(topics: Topic[]): Set<string> {
+  const vocabulary = new Set<string>();
+  for (const topic of topics) {
+    const text = [topic.title ?? "", ...(topic.tags ?? [])].join(" ");
+    for (const token of meaningfulTokens(text)) {
+      if (looksConjugated(token)) continue;
+      vocabulary.add(token);
+    }
+  }
+  return vocabulary;
+}
+
+/**
+ * 생성된 주제가 이 블로그 업종 안에 있는지 본다.
+ * 근거(어휘)가 부족하면 막지 않는다 — 전부 차단되는 편이 더 나쁘다.
+ */
+export function isOnDomainTopic(
+  topic: { title: string; description?: string; tags?: string[] },
+  vocabulary: Set<string>
+): boolean {
+  if (vocabulary.size < MIN_DOMAIN_VOCABULARY) return true;
+  const text = [topic.title, topic.description ?? "", ...(topic.tags ?? [])].join(" ");
+  return meaningfulTokens(text).some((token) => vocabulary.has(token));
+}
+
 export function summarizeTopicLinkMap(currentTopic: Topic, allTopics: Topic[]): string {
   const sameCategory = allTopics.filter(
     (topic) => topic.topicId !== currentTopic.topicId && topic.category === currentTopic.category

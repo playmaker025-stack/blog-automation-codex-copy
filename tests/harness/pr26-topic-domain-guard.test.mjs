@@ -2,10 +2,13 @@ import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  buildDomainAnchors,
+  buildDomainVocabulary,
   filterBlockedTopics,
   filterOutsideDomainSignals,
   hasOutsideDomain,
   isLocalityToken,
+  isOnDomainTopic,
 } from "../../lib/agents/blog-workflow-policy.ts";
 
 // 실측 배경:
@@ -90,5 +93,62 @@ describe("PR26 지역명 단독 토큰 판별", () => {
   test("차단 지역도 지역 토큰으로 인식한다", () => {
     assert.equal(isLocalityToken("강남"), true);
     assert.equal(isLocalityToken("서울"), true);
+  });
+});
+
+// 금지어 목록만으로는 계속 샜다. 병원/대출을 막으니 맞춤복/롯데택배가 나왔다.
+// 그래서 사용자 기존 글의 어휘로 화이트리스트를 만들어 뒤집었다.
+describe("PR26 업종 축 화이트리스트", () => {
+  // 어휘가 MIN_DOMAIN_VOCABULARY(20) 미만이면 판정을 건너뛰므로 픽스처를 그 위로 채운다.
+  const PUBLISHED = [
+    { title: "부평 전자담배 만수르 입문자 기기 추천", description: "입문자가 처음 고를 때 보는 기준", tags: ["전자담배", "기기"] },
+    { title: "입호흡 액상 고르는 방법", description: "멘솔 강도와 단맛 기준으로 액상을 고른다", tags: ["액상", "입호흡"] },
+    { title: "전자담배 코일 탄맛 원인", description: "코일 수명과 와트 설정에서 오는 탄맛 원인", tags: ["코일"] },
+    { title: "만수동 전자담배 매장 방문 안내", description: "매장 상담과 시연 안내", tags: ["매장"] },
+    { title: "폐호흡 무화기 세척 주기", description: "무화기 세척", tags: ["폐호흡", "무화기"] },
+    { title: "니코틴 농도 단계별 정리", description: "농도 선택", tags: ["니코틴", "농도"] },
+    { title: "일회용 전자담배 종류 안내", description: "일회용 라인업", tags: ["일회용", "종류"] },
+    { title: "팟 누수 증상 점검 순서", description: "누수 점검", tags: ["팟", "누수"] },
+    { title: "배터리 충전 습관 정리", description: "충전 관리", tags: ["배터리", "충전"] },
+    { title: "액상 보관 온도 관리", description: "보관 온도", tags: ["보관", "온도"] },
+  ];
+
+  const vocabulary = buildDomainVocabulary(PUBLISHED);
+
+  test("업종 앵커는 기존 글에서 유도된다", () => {
+    const anchors = buildDomainAnchors(PUBLISHED);
+    assert.ok(anchors.includes("전자담배"), `앵커: ${anchors.join(", ")}`);
+    // 지역명은 업종 축이 아니다.
+    assert.equal(anchors.includes("만수동"), false);
+  });
+
+  test("완전한 타업종 주제를 차단한다", () => {
+    for (const title of [
+      "만수동 맞춤복 잘하는 곳",
+      "롯데택배 배송 서비스 이용 방법",
+      "부평 이삿짐 센터 비교",
+      "인천 반려동물 미용 예약",
+    ]) {
+      assert.equal(isOnDomainTopic({ title }, vocabulary), false, `차단 실패: ${title}`);
+    }
+  });
+
+  test("발행 이력이 적은 정상 주제는 막지 않는다", () => {
+    // "코일 탄맛"은 상위 앵커에 없지만 어휘에는 있으므로 통과해야 한다.
+    assert.equal(isOnDomainTopic({ title: "코일 탄맛 원인과 해결 방법" }, vocabulary), true);
+    assert.equal(isOnDomainTopic({ title: "입호흡 기기 관리 순서" }, vocabulary), true);
+  });
+
+  test("제목이 애매해도 설명에 업종어가 있으면 통과한다", () => {
+    const topic = {
+      title: "배터리 오래 쓰는 습관",
+      description: "전자담배 기기를 오래 쓰기 위한 충전 습관 정리",
+      tags: [],
+    };
+    assert.equal(isOnDomainTopic(topic, vocabulary), true);
+  });
+
+  test("어휘 근거가 부족하면 차단하지 않는다", () => {
+    assert.equal(isOnDomainTopic({ title: "아무 주제" }, new Set(["전자담배"])), true);
   });
 });

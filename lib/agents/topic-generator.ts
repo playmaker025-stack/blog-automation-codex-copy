@@ -18,6 +18,9 @@ import {
   filterOutsideDomainSignals,
   hasOutsideDomain,
   isLocalityToken,
+  buildDomainAnchors,
+  buildDomainVocabulary,
+  isOnDomainTopic,
 } from "./blog-workflow-policy";
 import { PRIMARY_LOCALITY_PRIORITY, SECONDARY_LOCALITY_PRIORITY } from "./locality-keyword-agent";
 
@@ -1065,6 +1068,11 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
 
   const representativeKeyword = extractRepresentativeKeyword(publishedTopics);
   const mainCategory = extractMainCategory(publishedTopics);
+  // 업종 축은 사용자 기존 글에서 유도한다. 금지어 목록으로는 계속 새기 때문에
+  // (병원/대출을 막으니 맞춤복/택배가 나옴) 화이트리스트로 뒤집는다.
+  const domainAnchors = buildDomainAnchors(publishedTopics);
+  const domainVocabulary = buildDomainVocabulary(publishedTopics);
+  const domainAnchorLine = domainAnchors.join(", ") || "기존 발행 글 주제 범위";
 
   onProgress?.(`네이버 키워드 리서치 "${representativeKeyword}"`);
   const [research, cafeResearch, kinResearch] = await Promise.all([
@@ -1125,6 +1133,9 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             "When direct cafe and KnowledgeIn signals are provided, use them to make topics concrete and practical.",
             "If the trend is rising, prioritize timely topics over generic evergreen clones.",
             "Locality rule: generate only Incheon operating-area topics when using a place name.",
+            `Industry axis (every topic must stay inside this): ${domainAnchorLine}.`,
+            "A locality name alone is never a topic. Each topic must be about this blog's own products and services.",
+            "Research signals come from local search and may contain other industries. Ignore anything outside the industry axis.",
             `Allowed localities: ${ALLOWED_LOCALITY_TERMS.join(", ")}.`,
             `Never generate outside localities: ${BLOCKED_OUTSIDE_LOCALITY_TERMS.join(", ")}.`,
             `Locality priority first: ${PRIMARY_LOCALITY_PRIORITY.join(", ")}.`,
@@ -1180,6 +1191,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
       result.topics.map((topic) => normalizeGeneratedTopic(topic, mainCategory)),
     )
       .filter((topic) => topic.title)
+      .filter((topic) => isOnDomainTopic(topic, domainVocabulary))
       .slice(0, 5);
 
     onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
@@ -1195,7 +1207,8 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
 ${buildPolicyPromptSection()}
 
 ## 업종 고정
-이 블로그의 업종은 기존 발행 글 목록에서 드러나는 주제 영역이며, 그 범위를 벗어나면 안 됩니다.
+이 블로그의 업종 축: ${domainAnchorLine}
+5개 주제 모두 이 축 안에 있어야 하며, 최소 하나의 축 용어가 제목이나 설명에 들어가야 합니다.
 지역명은 업종을 수식할 때만 쓰고, 지역명만으로 주제를 만들지 마세요.
 아래 리서치 결과는 지역 검색에서 수집돼 다른 업종이 섞여 있을 수 있습니다.
 업종과 무관한 신호는 무시하세요. (예: 병원, 대출, 부동산, 맛집, 학원)
@@ -1270,6 +1283,7 @@ ${directCommunitySignals}
     parseGeneratedTopics(rawText).map((topic) => normalizeGeneratedTopic(topic, mainCategory)),
   )
     .filter((topic) => topic.title)
+    .filter((topic) => isOnDomainTopic(topic, domainVocabulary))
     .slice(0, 5);
 
   onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
