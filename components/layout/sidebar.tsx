@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CreditMeter } from "./credit-meter";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "대시보드", icon: "▦", admin: false },
@@ -43,6 +44,8 @@ export function Sidebar() {
           );
         })}
       </nav>
+
+      <CreditMeter />
 
       <div className="hidden border-t border-zinc-800 px-4 py-4 text-xs text-zinc-600 lg:block">
         v1.0 운영 빌드

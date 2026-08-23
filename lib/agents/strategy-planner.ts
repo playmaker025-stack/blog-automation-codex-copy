@@ -1,5 +1,6 @@
 import type { Tool } from "@anthropic-ai/sdk/resources/messages";
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
+import { recordUsage, createOrRecord } from "@/lib/anthropic/usage-recorder";
 import { runToolUseLoop } from "@/lib/anthropic/tool-executor";
 import { hasOpenAIKey, requestOpenAIText } from "@/lib/openai/responses";
 import { userProfileLoader } from "@/lib/skills/user-profile-loader";
@@ -1496,7 +1497,8 @@ export async function runStrategyPlannerSimple(params: {
     ? AbortSignal.any([AbortSignal.timeout(SIMPLE_STRATEGY_TIMEOUT_MS), params.signal])
     : AbortSignal.timeout(SIMPLE_STRATEGY_TIMEOUT_MS);
 
-  const response = await client.messages.create(
+  const response = await createOrRecord(
+    () => client.messages.create(
     {
       model: MODELS.sonnet,
       system: buildPolicySystemPrompt(),
@@ -1515,7 +1517,10 @@ export async function runStrategyPlannerSimple(params: {
       ],
     },
     { signal: callSignal }
+    ),
+    "strategy-planner"
   );
+  recordUsage(response.model ?? MODELS.sonnet, response.usage, "strategy-planner");
 
   const text = response.content.find((block) => block.type === "text");
   if (!text || text.type !== "text") {

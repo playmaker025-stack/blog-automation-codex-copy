@@ -1,4 +1,5 @@
 import "@anthropic-ai/sdk/shims/node";
+import { flushUsage } from "@/lib/anthropic/usage-recorder";
 import { NextRequest, NextResponse } from "next/server";
 import { runPipeline } from "@/lib/agents/orchestrator";
 import type { PipelineRunRequest } from "@/lib/agents/types";
@@ -69,6 +70,8 @@ export async function POST(request: NextRequest) {
           clearTimeout(globalTimeout);
           clearInterval(keepalive);
           pipelineAbortController.abort(); // 정상 완료 시에도 정리
+          // 실행 직후 사이드바 게이지에 이번 회차 비용이 바로 잡히게 한다.
+          void flushUsage();
           try { controller.close(); } catch { /* already closed */ }
         });
     },

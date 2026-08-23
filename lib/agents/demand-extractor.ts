@@ -16,6 +16,7 @@
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import type { DomainContract } from "./domain-contract";
 import { isAccountLevelFailure, describeExtractionError } from "./demand-error";
+import { recordUsage, recordApiFailure } from "@/lib/anthropic/usage-recorder";
 import {
   buildExtractionPrompt,
   parseExtraction,
@@ -65,6 +66,7 @@ export async function extractDemand(params: {
         },
         { signal: callSignal }
       );
+      recordUsage(response.model ?? model, response.usage, "demand-extractor");
 
       const block = response.content.find((item) => item.type === "text");
       const parsed = block?.type === "text" ? parseExtraction(block.text) : null;
@@ -79,6 +81,7 @@ export async function extractDemand(params: {
       );
       return { ...parsed, model };
     } catch (error) {
+      recordApiFailure(error, "demand-extractor");
       const described = describeExtractionError(error);
       errors.push(described);
       console.warn(`[demand-extractor] ${model} 추출 실패:`, described);

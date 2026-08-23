@@ -7,6 +7,7 @@
  */
 
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
+import { recordUsage, createOrRecord } from "@/lib/anthropic/usage-recorder";
 
 export interface NaverContentFetcherInput {
   /** 수집할 블로그 글 URL 목록 (최대 5개) */
@@ -138,7 +139,8 @@ async function summarizeArticles(
     .join("\n\n---\n\n");
 
   const client = getAnthropicClient();
-  const response = await client.messages.create(
+  const response = await createOrRecord(
+    () => client.messages.create(
     {
       model: MODELS.haiku,
       max_tokens: 1024,
@@ -172,7 +174,11 @@ ${articlesText}
       ],
     },
     { signal: AbortSignal.timeout(30_000) }
+    ),
+    "naver-content-fetcher"
   );
+
+  recordUsage(response.model ?? MODELS.haiku, response.usage, "naver-content-fetcher");
 
   const text = response.content.find((b) => b.type === "text");
   return text?.type === "text" ? text.text : "요약 생성 실패";

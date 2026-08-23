@@ -6,6 +6,7 @@
  */
 
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
+import { recordUsage, createOrRecord } from "@/lib/anthropic/usage-recorder";
 import { naverKeywordResearch } from "@/lib/skills/naver-keyword-research";
 import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-research";
 import { hasOpenAIKey, requestOpenAIJson } from "@/lib/openai/responses";
@@ -1392,14 +1393,18 @@ ${mainCategory}
 
 반드시 5개를 출력해 주세요.`;
 
-  const response = await client.messages.create(
-    {
-      model: MODELS.sonnet,
-      max_tokens: 2048,
-      messages: [{ role: "user", content: topicPrompt }],
-    },
-    { signal: AbortSignal.timeout(60_000) },
+  const response = await createOrRecord(
+    () => client.messages.create(
+      {
+        model: MODELS.sonnet,
+        max_tokens: 2048,
+        messages: [{ role: "user", content: topicPrompt }],
+      },
+      { signal: AbortSignal.timeout(60_000) },
+    ),
+    "topic-generator"
   );
+  recordUsage(response.model ?? MODELS.sonnet, response.usage, "topic-generator");
 
   const text = response.content.find((block) => block.type === "text");
   const rawText = text?.type === "text" ? text.text : "";

@@ -1,6 +1,7 @@
 import type { MessageParam, ToolResultBlockParam, ContentBlock } from "@anthropic-ai/sdk/resources/messages";
 import { APIConnectionError, APIUserAbortError, InternalServerError, RateLimitError } from "@anthropic-ai/sdk";
 import { getAnthropicClient } from "./client";
+import { recordUsage, recordApiFailure } from "./usage-recorder";
 import type { ToolUseLoopOptions } from "@/lib/types/agent";
 
 const DEFAULT_MAX_ITERATIONS = 10;
@@ -192,6 +193,8 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
             const finalMsg = await stream.finalMessage();
             attemptStopReason = finalMsg.stop_reason ?? attemptStopReason;
             attemptContent = finalMsg.content;
+            // 사용량 집계. 실패해도 던지지 않으므로 파이프라인에 영향 없다.
+            recordUsage(finalMsg.model ?? model, finalMsg.usage, "tool-executor");
           })(),
           stallPromise,
         ]);
@@ -206,6 +209,7 @@ export async function runToolUseLoop(options: ToolUseLoopOptions): Promise<strin
       } catch (error) {
         attemptAbort.abort();
         lastError = error;
+        recordApiFailure(error, "tool-executor");
         const cause = error instanceof Error ? (error as { cause?: unknown }).cause : undefined;
         // cause가 Error 인스턴스가 아닌 순수 객체(undici/fetch 내부 에러 등)로 올 때도
         // code/errno를 놓치지 않도록 완화 — instanceof Error로만 좁히면 정작 중요한
