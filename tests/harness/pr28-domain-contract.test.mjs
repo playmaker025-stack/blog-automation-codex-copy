@@ -6,6 +6,7 @@ import {
   buildContractVocabulary,
   formatDomainContract,
   touchesContract,
+  touchesExcludedTopic,
   sanitizeResearchItems,
   sanitizeResearchTexts,
   sanitizeKeywordResearch,
@@ -209,5 +210,49 @@ describe("PR28 커버리지 빈틈 생성기", () => {
   test("빈 입력에 안전하다", () => {
     assert.deepEqual(findCoverageGaps({ contract: C, publishedTitles: [], limit: 3 }).length, 3);
     assert.ok(formatCoverageGaps([]).includes("계산된 것이 없습니다"));
+  });
+});
+
+// 사업 판단으로 제외한 소재. 계약 목록에서 빼는 것만으로는 부족하다.
+// 커버리지 생성기가 제안하지 않을 뿐, 카페 질문에서 올라오면 그대로 주제가 된다.
+describe("PR28 제외 소재", () => {
+  test("니코틴과 가격 주제를 막는다", () => {
+    for (const text of [
+      "니코틴 함량 비교",
+      "액상 가격 비교",
+      "전자담배 최저가 정리",
+      "입문 비용 얼마나 드나",
+      "기기 할인 정보",
+    ]) {
+      assert.equal(touchesExcludedTopic(text, C), true, `제외 미검출: ${text}`);
+    }
+  });
+
+  // 제외 검사가 부분 문자열이라 "농도"를 막으면 "고농도"까지 같이 막힌다.
+  // 문제는 니코틴이지 농도 표현 자체가 아니다.
+  // 계약 항목은 여러 어절이어도 된다. "고농도" 단독은 무엇의 농도인지 모호하고,
+  // "농도"만 등록하면 니코틴 농도까지 열린다. 구로 묶어서 의미를 고정한다.
+  test("고농도 액상은 구로 등록돼 통과한다", () => {
+    assert.ok(buildContractVocabulary(C).has("고농도 액상"), "구가 계약에 있어야 함");
+    assert.equal(touchesContract("고농도 액상 추천", C), true);
+    assert.equal(touchesExcludedTopic("고농도 액상 추천", C), false);
+  });
+
+  test("니코틴 농도는 여전히 막힌다", () => {
+    assert.equal(touchesExcludedTopic("니코틴 농도 비교", C), true);
+  });
+
+  test("정상 주제는 막지 않는다", () => {
+    for (const text of ["코일 교체 시기", "무화량 차이 정리", "액상 유통기한 확인법"]) {
+      assert.equal(touchesExcludedTopic(text, C), false, `오탐: ${text}`);
+    }
+  });
+
+  test("제외 소재는 커버리지 조합으로 제안되지 않는다", () => {
+    const gaps = findCoverageGaps({ contract: C, publishedTitles: [], limit: 9999 });
+    for (const gap of gaps) {
+      assert.equal(touchesExcludedTopic(`${gap.subject} ${gap.angle}`, C), false,
+        `제외 소재가 조합에 있음: ${gap.subject}×${gap.angle}`);
+    }
   });
 });

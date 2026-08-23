@@ -76,6 +76,7 @@ export function buildExtractionPrompt(params: {
 - 제품명은 이 업종의 실제 제품만 뽑으세요. 지역명, 상호, 일반명사는 제품명이 아닙니다.
 - 이미 아는 제품명도 그대로 뽑으세요. 중복은 나중에 걸러집니다.
 - 확실하지 않으면 뽑지 마세요. 적게 뽑는 편이 낫습니다.
+- 다루지 않기로 한 소재에 대한 질문은 뽑지 말고 버린 개수에 넣으세요: ${contract.excludedTopics.join(", ")}
 
 ## 이미 등록된 제품명 (참고용, 여기 없는 것도 뽑으세요)
 ${contract.brands.join(", ")}

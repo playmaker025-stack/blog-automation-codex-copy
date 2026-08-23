@@ -30,6 +30,13 @@ export interface DomainContract {
   identity: string[];
   /** 같은 대상을 가리키는 표기. 커버리지 조합에서 중복을 없애는 데 쓴다. */
   aliases: Record<string, string>;
+  /**
+   * 업종 안이지만 다루지 않기로 한 소재.
+   *
+   * 계약 목록에서 빼는 것만으로는 부족하다. 그러면 커버리지 생성기가 제안하지 않을 뿐,
+   * 카페/지식인에서 그 주제 질문이 올라오면 그대로 주제가 된다. 명시적으로 막는다.
+   */
+  excludedTopics: string[];
 }
 
 export const VAPE_DOMAIN_CONTRACT: DomainContract = {
@@ -59,15 +66,22 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
     "카트리지",
     "탱크",
     "드립팁",
-    "니코틴",
-    "농도",
-    "고농도",
     "멘솔",
     "디저트",
     "과일",
     "출력",
     "와트",
     "스펙",
+    "무화량",
+    "연기",
+    "흡입",
+    "타격감",
+    "냄새",
+    "유통기한",
+    "청소",
+    // 구로 넣는다. "고농도" 단독은 무엇의 농도인지 모호하고, "농도"만 등록하면
+    // 니코틴 농도까지 열리기 때문이다. 계약 항목은 여러 어절이어도 된다.
+    "고농도 액상",
   ],
 
   problems: [
@@ -90,6 +104,10 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
     "수명",
     "가습현상",
     "분리현상",
+    "변색",
+    "소음",
+    "실패",
+    "실수",
   ],
 
   intents: [
@@ -111,10 +129,14 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
     "방문",
     "매장",
     "구매",
-    "예산",
-    "가격",
     "시기",
     "주의사항",
+    "가성비",
+    "노하우",
+    "신제품",
+    "한정판",
+    "여름철",
+    "겨울철",
   ],
 
   brands: [
@@ -145,6 +167,18 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
     "아이수",
     "핵쥬스",
     "곰방대",
+    "스팀랩",
+    "돌체",
+    "펠릭스랩",
+    "더블라임",
+    "메가킥",
+    "엘프바",
+    "아스몬",
+    "DJ쥬스",
+    "BPMODS",
+    "RAZOR",
+    "BORO",
+    "MK3",
   ],
 
   identity: ["만수르", "만수동만수르", "부평전자담배", "인천전자담배", "구월동전자담배"],
@@ -166,9 +200,29 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
     체감: "후기",
     말론바: "말론",
     젤로맥스: "젤로",
-    고농도: "농도",
   },
+
+  // 니코틴과 가격은 다루지 않는다. 업종 안이지만 사업 판단으로 제외한 소재다.
+  //
+  // "농도"는 넣지 않는다. 제외 검사가 부분 문자열이라 "농도"를 막으면 "고농도"까지
+  // 같이 막힌다. 문제는 니코틴이지 농도 표현 자체가 아니므로 "니코틴"만 막는다.
+  excludedTopics: [
+    "니코틴",
+    "가격",
+    "비용",
+    "예산",
+    "최저가",
+    "할인",
+    "얼마",
+    "원대",
+  ],
 };
+
+/** 다루지 않기로 한 소재를 건드리는지 본다. */
+export function touchesExcludedTopic(text: string, contract: DomainContract): boolean {
+  const normalized = text.normalize("NFKC");
+  return contract.excludedTopics.some((term) => normalized.includes(term));
+}
 
 function canonical(term: string, contract: DomainContract): string {
   return contract.aliases[term] ?? term;
@@ -355,8 +409,11 @@ export function formatDomainContract(contract: DomainContract): string {
     `독자 의도: ${contract.intents.join(", ")}`,
     `브랜드·제품명: ${contract.brands.join(", ")}`,
     "",
+    `다루지 않는 소재: ${contract.excludedTopics.join(", ")}`,
+    "",
     "규칙:",
     "- 위 범위 밖의 고유명사(건물, 다리, 경기장, 헬스기구, 금융상품, 동물, 항공 마일리지 등)를 주제에 넣지 마세요.",
+    "- '다루지 않는 소재'는 업종 안이지만 제외하기로 한 것입니다. 제목과 설명 어디에도 넣지 마세요.",
     "- 지역명은 위 소재를 수식할 때만 씁니다. 지역명 단독은 주제가 아닙니다.",
     "- 새 제품이 나왔더라도 위 브랜드 목록에 없으면 주제로 만들지 마세요.",
   ].join("\n");

@@ -29,6 +29,7 @@ import {
   formatDomainContract,
   findCoverageGaps,
   formatCoverageGaps,
+  touchesExcludedTopic,
 } from "./domain-contract";
 import { extractDemand } from "./demand-extractor";
 import { formatDemandSignals } from "./demand-signals";
@@ -1242,6 +1243,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
       .filter((topic) => topic.title)
       .filter((topic) => isOnDomainTopic(topic, domainVocabulary))
       .filter((topic) => isTopicVocabularyCoherent(topic, domainVocabulary))
+      .filter((topic) => !touchesExcludedTopic(`${topic.title} ${topic.description}`, contract))
       .slice(0, 5);
 
     onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
@@ -1336,6 +1338,7 @@ ${mainCategory}
     .filter((topic) => topic.title)
     .filter((topic) => isOnDomainTopic(topic, domainVocabulary))
       .filter((topic) => isTopicVocabularyCoherent(topic, domainVocabulary))
+      .filter((topic) => !touchesExcludedTopic(`${topic.title} ${topic.description}`, contract))
     .slice(0, 5);
 
   onProgress?.(`다음 토픽 ${generatedTopics.length}개 생성 완료`);
