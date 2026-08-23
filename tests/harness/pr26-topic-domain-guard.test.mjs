@@ -6,6 +6,7 @@ import {
   buildDomainVocabulary,
   filterBlockedTopics,
   filterOutsideDomainSignals,
+  hasDisallowedLocality,
   hasLandmarkMention,
   hasOutsideDomain,
   isLocalityToken,
@@ -183,6 +184,48 @@ describe("PR26 건물·랜드마크 차단", () => {
       "코일 탄맛 원인과 해결",
     ]) {
       assert.equal(hasLandmarkMention(title), false, `오탐: ${title}`);
+    }
+  });
+});
+
+// 지역 축을 블랙리스트에서 화이트리스트로 뒤집었다.
+// 전에는 "서울/부산 등이 들어있나"만 봐서 목록에 없는 지명이 전부 통과했다.
+describe("PR26 지역 화이트리스트", () => {
+  test("허용 목록의 지역은 통과한다", () => {
+    for (const title of [
+      "만수동 전자담배 매장 안내",
+      "구월동 전자담배 액상 추천",
+      "부평역 전자담배 방문 안내",
+      "남동구 전자담배 기기 후기",
+      "송도 전자담배 입문자 기기",
+      "인천대입구 전자담배 상담",
+    ]) {
+      assert.equal(hasDisallowedLocality(title), false, `오탐: ${title}`);
+    }
+  });
+
+  test("허용 목록에 없는 지역명은 차단한다", () => {
+    for (const title of [
+      "청량리 전자담배 매장 추천",
+      "판교동 전자담배 구매처",
+      "학익동 전자담배 액상",
+    ]) {
+      assert.equal(hasDisallowedLocality(title), true, `차단 실패: ${title}`);
+      assert.equal(filterBlockedTopics([{ title }]).length, 0);
+    }
+  });
+
+  // 2음절 일반어는 접미사 앞이 한 글자라 패턴에 애초에 안 걸린다.
+  // 3음절 이상 복합어만 예외 목록으로 막는다.
+  test("지역명처럼 생긴 일반어를 지역으로 오인하지 않는다", () => {
+    for (const title of [
+      "실내 흡연구역 이용 안내",
+      "금연구역 표시 확인 방법",
+      "기기 오작동 증상 점검",
+      "코일 재작동 안 될 때",
+      "전자담배 자동 충전 기능",
+    ]) {
+      assert.equal(hasDisallowedLocality(title), false, `오탐: ${title}`);
     }
   });
 });

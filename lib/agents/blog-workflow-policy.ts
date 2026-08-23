@@ -219,6 +219,48 @@ export function isLocalityToken(token: string): boolean {
 }
 
 /**
+ * 지역명처럼 생겼지만 지역이 아닌 일반 복합어.
+ *
+ * isLocalityToken은 `2~5글자 + 동/읍/면/리/구/시/군/역` 패턴을 쓴다.
+ * 2음절 일반어(자동, 수동, 이동, 운동, 지역, 영역)는 접미사 앞이 한 글자라 애초에 안 걸린다.
+ * 걸리는 건 3음절 이상 복합어뿐이라 예외 목록이 작게 유지된다.
+ */
+const NON_PLACE_TOKENS = new Set([
+  "흡연구역",
+  "금연구역",
+  "주차구역",
+  "안전구역",
+  "위험구역",
+  "재작동",
+  "오작동",
+  "반자동",
+  "전자동",
+]);
+
+/**
+ * 허용 목록에 없는 지역명을 찾는다.
+ *
+ * 지역 축을 블랙리스트에서 화이트리스트로 뒤집는 부분이다.
+ * 전에는 "서울/부산 등이 들어있나"만 봐서 목록에 없는 지명(청량리, 판교동)이 전부 통과했다.
+ * 이제는 지역명처럼 생긴 토큰이 있으면 허용 목록에 속하는지 확인한다.
+ */
+export function findDisallowedLocalityTokens(title: string): string[] {
+  return title
+    .split(/\s+/)
+    .map((raw) => raw.normalize("NFKC").replace(/[^\p{L}\p{N}]/gu, "").trim())
+    .filter(
+      (token) =>
+        isLocalityToken(token) &&
+        !NON_PLACE_TOKENS.has(token) &&
+        !ALLOWED_LOCALITY_TERMS.some((term) => token.includes(term))
+    );
+}
+
+export function hasDisallowedLocality(title: string): boolean {
+  return findDisallowedLocalityTokens(title).length > 0;
+}
+
+/**
  * 리서치 신호(연관 키워드, 질문 의도, 카페 신호)에서 타업종 조각을 걷어낸다.
  * 프롬프트에 들어가기 전에 막아야 모델이 애초에 그 주제를 떠올리지 않는다.
  */
@@ -231,6 +273,7 @@ export function filterBlockedTopics<T extends { title: string }>(topics: T[]): T
     (topic) =>
       !isBlockedTopicTitle(topic.title) &&
       !hasOutsideLocality(topic.title) &&
+      !hasDisallowedLocality(topic.title) &&
       !hasLandmarkMention(topic.title) &&
       !hasOutsideDomain(topic.title)
   );
@@ -372,6 +415,7 @@ export function buildPolicyPromptSection(): string {
     "- Do not plan outside-area locality posts. If a locality is used, it must be inside the user's operating area.",
     "- Stay inside the user's own industry. A locality name alone is not a topic — every topic must be about the user's actual products and services.",
     "- Never name a specific building, tower, mall, or landmark. The store has a street address, not a landmark. Use only administrative area or station names from the allowed list.",
+    "- The allowed locality list is exhaustive. Any other area name, even elsewhere in Incheon, is rejected.",
     `- Never plan topics about other industries even inside the operating area: ${BLOCKED_OUTSIDE_DOMAIN_TERMS.join(", ")}.`,
     "- Research signals are pulled from local search results and may contain other industries. Ignore any signal that is not about the user's own business.",
     `- Allowed locality terms: ${ALLOWED_LOCALITY_TERMS.join(", ")}.`,
