@@ -15,8 +15,6 @@ import {
   BLOCKED_OUTSIDE_LOCALITY_TERMS,
   buildPolicyPromptSection,
   filterBlockedTopics,
-  filterOutsideDomainSignals,
-  filterSignalsByDomainVocabulary,
   hasOutsideDomain,
   isLocalityToken,
   buildDomainAnchors,
@@ -25,6 +23,11 @@ import {
   isTopicVocabularyCoherent,
 } from "./blog-workflow-policy";
 import { PRIMARY_LOCALITY_PRIORITY, SECONDARY_LOCALITY_PRIORITY } from "./locality-keyword-agent";
+import {
+  VAPE_DOMAIN_CONTRACT,
+  buildContractVocabulary,
+  formatDomainContract,
+} from "./domain-contract";
 
 export interface TopicGeneratorInput {
   userId: string;
@@ -1020,19 +1023,8 @@ function normalizeGeneratedTopic(topic: GeneratedTopic, fallbackCategory: string
   };
 }
 
-function formatDirectCommunitySignals(params: {
-  cafeSummary?: string;
-  kinSummary?: string;
-  cafeTitles?: string[];
-  kinTitles?: string[];
-}): string {
-  return [
-    `Cafe demand summary: ${params.cafeSummary || "none"}`,
-    `KnowledgeIn problem summary: ${params.kinSummary || "none"}`,
-    `Cafe examples: ${params.cafeTitles?.join(" / ") || "none"}`,
-    `KnowledgeIn examples: ${params.kinTitles?.join(" / ") || "none"}`,
-  ].join("\n");
-}
+// formatDirectCommunitySignals는 제거했다. 카페/지식인 제목을 원문 그대로
+// 프롬프트에 넣던 함수라 오염의 가장 직접적인 통로였다.
 
 const OPENAI_TOPIC_SCHEMA = {
   type: "object",
@@ -1076,12 +1068,22 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   // 어휘는 토픽 인덱스가 아니라 실제 발행 글까지 합쳐서 만든다. 토픽 인덱스의 published는
   // 33건뿐인데 발행 포스트는 228건이라, 토픽만 쓰면 "그래피티", "말론", "젤로맥스" 같은
   // 제품명이 어휘에 없어서 정상적인 제품 비교 주제가 통째로 차단됐다.
+  // 도메인 판정의 루트 권한은 선언된 업종 계약이다.
+  // 발행 이력은 후보 우선순위와 중복 방지 용도로만 쓴다 (domainAnchors).
+  // 이력을 판정 근거로 삼으면 주제 공간이 닫히고, 한 번 발행된 오염 제목이
+  // 영구적으로 업종 증거가 된다.
+  const contract = VAPE_DOMAIN_CONTRACT;
+  const contractVocabulary = buildContractVocabulary(contract);
   const vocabularySource = [
     ...publishedTopics,
     ...(input.publishedPosts ?? []).map(postToTopic),
   ];
   const domainAnchors = buildDomainAnchors(vocabularySource);
-  const domainVocabulary = buildDomainVocabulary(vocabularySource);
+  // 계약 어휘 + 발행 이력 어휘. 계약이 없는 항목만 이력으로 보완한다.
+  const domainVocabulary = new Set([
+    ...contractVocabulary,
+    ...buildDomainVocabulary(vocabularySource),
+  ]);
   const domainAnchorLine = domainAnchors.join(", ") || "기존 발행 글 주제 범위";
 
   onProgress?.(`네이버 키워드 리서치 "${representativeKeyword}"`);
@@ -1109,28 +1111,21 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
     .join("\n");
   // 리서치 신호는 지역 검색 결과에서 나오므로 타업종 조각이 섞여 들어온다.
   // 프롬프트에 넣기 전에 걷어내야 모델이 애초에 그 주제를 떠올리지 않는다.
-  // 신호는 두 겹으로 거른다. 금지어(블랙리스트)로 명백한 타업종을 치우고,
-  // 업종 어휘(화이트리스트)로 무관한 고유명사를 떨어뜨린다.
-  const cleanSignals = (values: string[]) =>
-    filterSignalsByDomainVocabulary(filterOutsideDomainSignals(values), domainVocabulary);
-
-  const longtailHints = cleanSignals(research.longtailSuggestions).slice(0, 5).join(", ");
-  const relatedWords = cleanSignals(research.relatedKeywords.map((item) => item.word))
-    .slice(0, 8)
-    .join(", ");
-  const questionIntents = cleanSignals(research.questionIntents).slice(0, 6).join(", ");
-  const communitySignals = cleanSignals(research.communitySignals).slice(0, 6).join(", ");
-  // intentMix는 검색량/트렌드 집계에서 만들어져 고유명사가 없다. 그대로 쓴다.
-  const intentMix = research.summary.intentMix.join(" / ");
-  // contentAngles는 연관어를 "스미스머신 관점 설명" 식으로 재포장한 것뿐이다.
-  // 오염을 그대로 옮기면서 relatedKeywords와 내용이 겹치므로 프롬프트에서 뺀다.
-  const directCommunitySignals = formatDirectCommunitySignals({
-    cafeSummary: cafeResearch.demandSummary,
-    kinSummary: kinResearch.problemSummary,
-    cafeTitles: cafeResearch.items.slice(0, 3).map((item) => item.title),
-    kinTitles: kinResearch.items.slice(0, 3).map((item) => item.title),
-  });
-
+  // ============================================================
+  // 네이버 검색 자유 텍스트는 주제 재료로 쓰지 않는다.
+  //
+  // extractRelatedWords는 네이버 블로그 검색 결과의 제목+설명을 토큰화해 최다 빈도
+  // 15개를 "연관 키워드"로 만든다. 국내 지역 검색 결과는 다주제 마케팅 블로그가
+  // 점령하고 있어서, 전자담배 글을 쓰는 같은 블로그의 스미스머신/공기업 주식 글
+  // 단어가 그대로 상위에 올라온다. 그걸 주제 재료로 넘기니 모델이 충실히 결합했다.
+  //
+  // 어휘 화이트리스트로 걸러봤지만 통로가 계속 나왔다. longtail은 검색 키워드를
+  // 앞에 붙여 밀반입했고, contentAngles와 directCommunitySignals는 아예 필터를
+  // 거치지 않았다. 필터를 늘리는 대신 자유 텍스트 자체를 입력에서 뺀다.
+  //
+  // 네이버는 이제 비의미적 수치(경쟁도, 결과 수, 추세)로만 쓴다. 주제는 업종 계약과
+  // 발행 이력의 빈틈에서 나온다.
+  // ============================================================
   if (hasOpenAIKey()) {
     const model = process.env.OPENAI_TOPIC_MODEL ?? "gpt-4.1-mini";
     const result = await requestOpenAIJson<{ topics: GeneratedTopic[] }>({
@@ -1144,11 +1139,10 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             "Avoid duplicate titles and avoid topics already covered.",
             "Balance hub and leaf topics based on gaps in the published list.",
             "Use Naver search-intent friendly longtail wording.",
-            "Reflect question-style demand from KnowledgeIn and lived-experience demand from Cafe.",
-            "When direct cafe and KnowledgeIn signals are provided, use them to make topics concrete and practical.",
             "If the trend is rising, prioritize timely topics over generic evergreen clones.",
             "Locality rule: generate only Incheon operating-area topics when using a place name.",
-            `Industry axis (every topic must stay inside this): ${domainAnchorLine}.`,
+            formatDomainContract(contract),
+            `Frequently used terms in this blog (for prioritization, not for scope): ${domainAnchorLine}.`,
             "A locality name alone is never a topic. Each topic must be about this blog's own products and services.",
             "Research signals come from local search and may contain other industries. Ignore anything outside the industry axis.",
             `Allowed localities: ${ALLOWED_LOCALITY_TERMS.join(", ")}.`,
@@ -1172,19 +1166,13 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
             `KnowledgeIn total: ${research.kin.total}`,
             `Cafe total: ${research.cafe.total}`,
             `Trend: ${research.datalabSearch.trend} (latest ${research.datalabSearch.latestRatio}, avg ${research.datalabSearch.averageRatio})`,
-            `Related keywords: ${relatedWords || "none"}`,
-            `Longtail hints: ${longtailHints || "none"}`,
-            `Question intents: ${questionIntents || "none"}`,
-            `Community signals: ${communitySignals || "none"}`,
-            `Intent mix: ${intentMix || "none"}`,
-            "",
-            "Direct Naver community signals:",
-            directCommunitySignals,
+            "Naver free-text search results are deliberately excluded from this prompt.",
+            "They are contaminated by multi-topic marketing blogs. Use the industry contract and the published-post gaps instead.",
             "",
             "Generate exactly 5 next posting topics.",
             "Each topic must include contentKind hub or leaf.",
             "Prefer missing hub/leaf coverage over small keyword variations.",
-            "Prefer topics that answer repeated community demand and repeated KnowledgeIn questions over generic keyword-only titles.",
+            "Community and KnowledgeIn raw text is excluded from this prompt on purpose. Do not assume you have it and do not invent it.",
             "Title length should be within 50 Korean characters.",
             "If a title needs a local modifier, use only Incheon/Bupyeong/Mansu/Guwol/Namdong/Songdo/Cheongna/Yeonsu/Juan/Ganseok/Geomdan-area wording.",
             "Do not suggest Seoul, Busan, Daegu, Gimpo, Gyeonggi, or other outside-area topics. Bucheon/Sang-dong/Jung-dong are allowed because they are in the user's priority pool.",
@@ -1221,12 +1209,11 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
 
 ${buildPolicyPromptSection()}
 
-## 업종 고정
-이 블로그의 업종 축: ${domainAnchorLine}
-5개 주제 모두 이 축 안에 있어야 하며, 최소 하나의 축 용어가 제목이나 설명에 들어가야 합니다.
+${formatDomainContract(contract)}
+
+## 자주 쓰는 표현 (범위가 아니라 우선순위 참고용)
+${domainAnchorLine}
 지역명은 업종을 수식할 때만 쓰고, 지역명만으로 주제를 만들지 마세요.
-아래 리서치 결과는 지역 검색에서 수집돼 다른 업종이 섞여 있을 수 있습니다.
-업종과 무관한 신호는 무시하세요. (예: 병원, 대출, 부동산, 맛집, 학원)
 
 ## 지역 규칙
 - 사용할 수 있는 지역: ${ALLOWED_LOCALITY_TERMS.join(", ")}
@@ -1246,26 +1233,22 @@ ${mainCategory}
 - 지식인 결과 수: ${research.kin.total}
 - 카페 결과 수: ${research.cafe.total}
 - 데이터랩 추세: ${describeTrendLabel(research.datalabSearch.trend)} (latest ${research.datalabSearch.latestRatio}, avg ${research.datalabSearch.averageRatio})
-- 연관 키워드: ${relatedWords || "없음"}
-- 롱테일 제안: ${longtailHints || "없음"}
-- 질문 의도: ${questionIntents || "없음"}
-- 카페 신호: ${communitySignals || "없음"}
-- 의도 요약: ${intentMix || "없음"}
 
-## 직접 네이버 커뮤니티 신호
-${directCommunitySignals}
+네이버 연관 키워드와 카페/지식인 원문은 의도적으로 제외했습니다.
+다주제 마케팅 블로그 때문에 다른 업종 단어가 섞여 들어오기 때문입니다.
+위 수치는 경쟁도와 시의성 판단에만 쓰고, 주제 소재는 업종 계약과 기존 발행 글의 빈틈에서 찾으세요.
+없는 자료를 있다고 가정하고 지어내지 마세요.
 
 ## 요구사항
 1. 기존 발행 글과 겹치지 않으면서 자연스럽게 이어지는 주제
 2. 이미 발행된 허브글이 적으면 먼저 리프글을 보강하고, 리프글만 많으면 상위 허브글을 제안
 3. 5개 안에 hub와 leaf를 균형 있게 섞되, 현재 목록의 빈틈을 우선
 4. 네이버 검색 의도가 드러나는 롱테일 키워드를 포함
-5. 지식인 질문 수요와 카페 실수요를 제목/설명에 반영
-6. 데이터랩 상승 추세면 시의성 있는 주제를 우선
-7. category는 "${mainCategory}" 계열 유지
-8. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
-9. 5개 모두 이 블로그 업종의 제품/서비스/사용 상황을 다뤄야 하며, 타업종 주제는 하나도 포함하지 않습니다
-10. 업종과 무관한 고유명사(다리, 경기장, 항공 마일리지, 동물, 건물 이름 등)를 업종어와 결합하지 않습니다.
+5. 데이터랩 상승 추세면 시의성 있는 주제를 우선
+6. category는 "${mainCategory}" 계열 유지
+7. contentKind는 반드시 "hub" 또는 "leaf" 중 하나로 지정
+8. 5개 모두 이 블로그 업종의 제품/서비스/사용 상황을 다뤄야 하며, 타업종 주제는 하나도 포함하지 않습니다
+9. 업종과 무관한 고유명사(다리, 경기장, 항공 마일리지, 동물, 건물 이름 등)를 업종어와 결합하지 않습니다.
     리서치 신호에 그런 단어가 남아 있어도 무시하세요. 지역명은 업종을 수식할 때만 씁니다.
 
 ## 출력 형식 (JSON 코드블록)

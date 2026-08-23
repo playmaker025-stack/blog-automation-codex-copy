@@ -20,6 +20,11 @@ import { buildPolicyPromptSection } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
 import { seoAnalystAgent } from "./seo-analyst-agent";
 import { writerEngine } from "./writer-engine";
+import {
+  VAPE_DOMAIN_CONTRACT,
+  sanitizeKeywordResearch,
+  sanitizeResearchItems,
+} from "./domain-contract";
 import { getPublicationLearningSummary } from "./user-learning";
 import { classifySearchCombination, normalizeSearchPhrase, sanitizeMainKeywordCandidate } from "./search-combination-utils";
 import { buildArticleContract, evaluateStrategyQualityGate } from "./article-contract-utils";
@@ -1197,14 +1202,23 @@ export async function runStrategyPlanner(params: {
       sourceResolver(input as Parameters<typeof sourceResolver>[0]),
     review_record_audit: (input: unknown) =>
       reviewRecordAudit(input as Parameters<typeof reviewRecordAudit>[0]),
-    naver_keyword_research: (input: unknown) =>
-      naverKeywordResearch(input as Parameters<typeof naverKeywordResearch>[0]),
+    // 리서치 도구 결과는 모델에게 돌려주기 전에 업종 계약으로 정화한다.
+    // 토픽 생성만 막으면 모델이 여기서 직접 호출해 같은 오염을 다시 끌어온다.
+    naver_keyword_research: async (input: unknown) =>
+      sanitizeKeywordResearch(
+        await naverKeywordResearch(input as Parameters<typeof naverKeywordResearch>[0]),
+        VAPE_DOMAIN_CONTRACT
+      ),
     naver_content_fetcher: (input: unknown) =>
       naverContentFetcher(input as Parameters<typeof naverContentFetcher>[0]),
-    naver_cafe_search: (input: unknown) =>
-      naverCafeSearch(input as Parameters<typeof naverCafeSearch>[0]),
-    naver_kin_search: (input: unknown) =>
-      naverKinSearch(input as Parameters<typeof naverKinSearch>[0]),
+    naver_cafe_search: async (input: unknown) => {
+      const result = await naverCafeSearch(input as Parameters<typeof naverCafeSearch>[0]);
+      return { ...result, items: sanitizeResearchItems(result.items, VAPE_DOMAIN_CONTRACT) };
+    },
+    naver_kin_search: async (input: unknown) => {
+      const result = await naverKinSearch(input as Parameters<typeof naverKinSearch>[0]);
+      return { ...result, items: sanitizeResearchItems(result.items, VAPE_DOMAIN_CONTRACT) };
+    },
   };
 
   const localTimeoutSignal = AbortSignal.timeout(STRATEGY_LOOP_TIMEOUT_MS);
@@ -1342,12 +1356,12 @@ export async function runStrategyPlanner(params: {
       keyword: researchKeyword,
       cafeDemandSummary: cafeResearch.demandSummary,
       kinProblemSummary: kinResearch.problemSummary,
-      cafeTopItems: cafeResearch.items.map((item) => ({
+      cafeTopItems: sanitizeResearchItems(cafeResearch.items, VAPE_DOMAIN_CONTRACT).map((item) => ({
         title: item.title,
         link: item.link,
         description: item.description,
       })),
-      kinTopItems: kinResearch.items.map((item) => ({
+      kinTopItems: sanitizeResearchItems(kinResearch.items, VAPE_DOMAIN_CONTRACT).map((item) => ({
         title: item.title,
         link: item.link,
         description: item.description,

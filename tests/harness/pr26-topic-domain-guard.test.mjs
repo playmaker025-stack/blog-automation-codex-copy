@@ -143,13 +143,23 @@ describe("PR26 업종 축 화이트리스트", () => {
     assert.equal(isOnDomainTopic({ title: "입호흡 기기 관리 순서" }, vocabulary), true);
   });
 
-  test("제목이 애매해도 설명에 업종어가 있으면 통과한다", () => {
-    const topic = {
-      title: "배터리 오래 쓰는 습관",
-      description: "전자담배 기기를 오래 쓰기 위한 충전 습관 정리",
-      tags: [],
+  // Codex 리뷰 지적: 제목·설명·태그를 합쳐서 보면 오프도메인 제목에 태그만
+  // "전자담배"로 달아 통과시킬 수 있다. 태그는 작성자가 임의로 넣는 값이라
+  // 업종 판정 근거가 될 수 없다. 이제 제목만 본다.
+  test("태그로 업종을 위장할 수 없다", () => {
+    const disguised = {
+      title: "디랙스 스미스머신 사용법",
+      description: "전자담배 매장에서 알려주는 운동 기구 사용법",
+      tags: ["전자담배", "기기"],
     };
-    assert.equal(isOnDomainTopic(topic, vocabulary), true);
+    assert.equal(isOnDomainTopic(disguised, vocabulary), false, "태그 위장이 통과함");
+  });
+
+  test("제목에 업종어가 있으면 통과한다", () => {
+    assert.equal(
+      isOnDomainTopic({ title: "전자담배 배터리 충전 습관", description: "", tags: [] }, vocabulary),
+      true
+    );
   });
 
   test("어휘 근거가 부족하면 차단하지 않는다", () => {

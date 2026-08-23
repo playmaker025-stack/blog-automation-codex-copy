@@ -452,7 +452,10 @@ export function isOnDomainTopic(
   vocabulary: Set<string>
 ): boolean {
   if (vocabulary.size < MIN_DOMAIN_VOCABULARY) return true;
-  const text = [topic.title, topic.description ?? "", ...(topic.tags ?? [])].join(" ");
+  // 제목만 본다. 예전에는 설명·태그까지 합쳐서 봤는데, 오프도메인 제목에 태그만
+  // "전자담배"로 달면 통과하는 구멍이었다. 태그는 작성자가 임의로 넣는 값이라
+  // 업종 판정의 근거가 될 수 없다.
+  const text = topic.title;
   const tokens = meaningfulTokens(text);
   if (tokens.some((token) => vocabulary.has(token))) return true;
 
