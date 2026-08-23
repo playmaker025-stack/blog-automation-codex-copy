@@ -256,3 +256,49 @@ describe("PR28 제외 소재", () => {
     }
   });
 });
+
+// 실제 진행 로그에서 나온 항목들로 고정한다.
+// "리서치 키워드: 전자담배"로 고친 뒤에도 RC카 부품과 형사 사건 글이 섞여 있었다.
+describe("PR28 실제 수집 항목 판정", () => {
+  const shouldPass = [
+    "편의점 릴 전담 첫구매 제발 답변 부탁드려요",
+    "전담 같은데 무슨 기기인가요",
+    "전자담배유효기간 있나요",
+    "부푸 브이메이트E2 입호흡기기 사용법",
+    "전자담배 코일 탄맛 원인과 해결",
+    "액상 누수 증상 점검",
+  ];
+  const shouldBlock = [
+    "CC-02랑 TT-01또는TT-02 고장난 또는 부품차 섀시 구 합니다",
+    "(판매완료)타미야 유니목",
+    "누범 재물손괴 건조물침입",
+  ];
+
+  test("실제 업종 질문은 통과한다", () => {
+    for (const text of shouldPass) {
+      assert.equal(touchesContract(text, C), true, `업종 미검출: ${text}`);
+      assert.equal(touchesExcludedTopic(text, C), false, `제외 오탐: ${text}`);
+    }
+  });
+
+  // "고장", "증상", "원인" 같은 일반어는 어느 업종이든 쓴다. 주어가 될 수 없다.
+  // 이걸 주어로 인정했을 때 RC카 부품 글이 "고장" 하나로 통과했다.
+  test("일반 문제어만 있는 타업종 글은 막는다", () => {
+    for (const text of shouldBlock) {
+      assert.equal(touchesContract(text, C), false, `차단 실패: ${text}`);
+    }
+  });
+
+  test("일반 문제어는 주어가 아니라 관점이다", () => {
+    assert.equal(touchesContract("고장 증상 원인 해결", C), false);
+    assert.equal(touchesContract("전자담배 고장 증상", C), true);
+  });
+
+  // 무니코틴은 "니코틴"을 품고 있지만 니코틴 함량 얘기가 아니라 제품 분류다.
+  test("무니코틴은 제외 소재로 오인하지 않는다", () => {
+    assert.equal(touchesExcludedTopic("무니코틴 액상 추천", C), false);
+    assert.equal(touchesContract("무니코틴 액상 추천", C), true);
+    // 진짜 니코틴 얘기는 여전히 막혀야 한다.
+    assert.equal(touchesExcludedTopic("니코틴 농도 비교", C), true);
+  });
+});

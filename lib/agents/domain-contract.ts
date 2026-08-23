@@ -37,6 +37,13 @@ export interface DomainContract {
    * 카페/지식인에서 그 주제 질문이 올라오면 그대로 주제가 된다. 명시적으로 막는다.
    */
   excludedTopics: string[];
+  /**
+   * 제외 소재를 부분 문자열로 품고 있지만 허용하는 표현.
+   *
+   * "무니코틴"은 "니코틴"을 품고 있어 그대로 두면 막힌다. 그런데 무니코틴은
+   * 니코틴 함량 얘기가 아니라 제품 분류이고, 오히려 니코틴을 피하는 쪽 소재다.
+   */
+  excludedOverrides: string[];
 }
 
 export const VAPE_DOMAIN_CONTRACT: DomainContract = {
@@ -82,32 +89,19 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
     // 구로 넣는다. "고농도" 단독은 무엇의 농도인지 모호하고, "농도"만 등록하면
     // 니코틴 농도까지 열리기 때문이다. 계약 항목은 여러 어절이어도 된다.
     "고농도 액상",
+    "무니코틴",
   ],
 
+  // 업종을 특정하는 증상만 남긴다. "고장", "증상", "원인" 같은 일반어는 어느 업종이든
+  // 쓰기 때문에 주어가 될 수 없다. 실측에서 "CC-02 고장난 부품차 섀시"(RC카 부품)가
+  // "고장" 하나로 업종 검사를 통과했다. 일반 문제어는 intents로 옮겼다.
   problems: [
     "누수",
     "액튐",
     "탄맛",
-    "고장",
-    "불량",
-    "증상",
-    "원인",
-    "해결",
-    "해결법",
-    "해결방법",
-    "점검",
-    "수리",
-    "교체",
-    "관리",
-    "관리법",
-    "보관",
-    "수명",
     "가습현상",
     "분리현상",
     "변색",
-    "소음",
-    "실패",
-    "실수",
   ],
 
   intents: [
@@ -137,6 +131,23 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
     "한정판",
     "여름철",
     "겨울철",
+    "고장",
+    "불량",
+    "증상",
+    "원인",
+    "해결",
+    "해결법",
+    "해결방법",
+    "점검",
+    "수리",
+    "교체",
+    "관리",
+    "관리법",
+    "보관",
+    "수명",
+    "소음",
+    "실패",
+    "실수",
   ],
 
   brands: [
@@ -216,6 +227,8 @@ export const VAPE_DOMAIN_CONTRACT: DomainContract = {
     "얼마",
     "원대",
   ],
+
+  excludedOverrides: ["무니코틴"],
 };
 
 /**
@@ -234,9 +247,15 @@ export function buildGapSearchKeyword(gap: CoverageGap, contract: DomainContract
   return `${anchor} ${base}`;
 }
 
-/** 다루지 않기로 한 소재를 건드리는지 본다. */
+/**
+ * 다루지 않기로 한 소재를 건드리는지 본다.
+ * 허용 예외를 먼저 가려낸 뒤에 검사한다. 안 그러면 "무니코틴"이 "니코틴"에 걸린다.
+ */
 export function touchesExcludedTopic(text: string, contract: DomainContract): boolean {
-  const normalized = text.normalize("NFKC");
+  let normalized = text.normalize("NFKC");
+  for (const override of contract.excludedOverrides) {
+    normalized = normalized.split(override).join(" ");
+  }
   return contract.excludedTopics.some((term) => normalized.includes(term));
 }
 
