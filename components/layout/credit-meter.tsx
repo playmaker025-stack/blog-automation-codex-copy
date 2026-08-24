@@ -1,47 +1,61 @@
 "use client";
 
 /**
- * credit-meter — 사이드바 상시 게이지 + 크레딧 소진 시 전역 배너.
+ * credit-meter — 사이드바 상시 게이지 + 공급자 경로 + 장애 배너.
  *
- * Anthropic은 잔액 조회 API를 주지 않는다. 그래서 두 갈래로 보여준다.
+ * 세 가지를 한 자리에서 보여준다.
  *
  * 1) 추정 잔액 — 앱이 센 사용액을 사용자가 찍어둔 잔액 스냅샷에서 뺀다.
- *    "며칠 남았나"까지 계산해서 충전 시점을 미리 알 수 있게 한다.
- * 2) 실제 장애 — 계정 단위 거부(크레딧 소진, 키 오류)가 실제로 나면
- *    추정과 무관하게 화면 최상단에 빨간 배너를 띄운다. 추정이 틀렸어도
- *    이건 사실이다.
+ * 2) 공급자 경로 — 각 단계가 실제로 어디로 돌았는지. 2026-08-24 조사에서
+ *    Anthropic 크레딧이 7월에 소진됐는데 코드가 OpenAI로 조용히 복구하는
+ *    바람에 6주간 아무도 몰랐던 게 드러났다. "정상 1순위"와 "떠밀려 폴백"을
+ *    구분해서 보여주는 게 이 화면의 핵심이다.
+ * 3) 실제 장애 — 계정 단위 거부가 나면 추정과 무관하게 최상단 빨간 배너.
  */
 
 import { useCallback, useEffect, useState } from "react";
 
-const CONSOLE_URL = "https://console.anthropic.com/settings/billing";
+const CONSOLE_URL = "https://platform.claude.com/settings/billing";
 const POLL_MS = 60_000;
 
 type Level = "unknown" | "healthy" | "low" | "critical" | "empty";
+type Provider = "anthropic" | "openai" | "unknown" | "local";
+type RouteReason = "primary" | "anthropic_failed" | "anthropic_credit" | "all_failed";
 
 interface Summary {
   todayUsd: number;
   todayCalls: number;
   monthUsd: number;
-  last7DaysUsd: number;
   lifetimeUsd: number;
   lifetimeCalls: number;
   dailyAvgUsd: number;
   byModel: Array<{ model: string; calls: number; usd: number }>;
+  byProvider: Array<{ provider: Provider; calls: number; usd: number }>;
   estimatedRemainingUsd: number | null;
-  spentSinceMarkUsd: number | null;
   markedAt: string | null;
   markedBalanceUsd: number | null;
   daysLeft: number | null;
   hasUnpriced: boolean;
-  daily: Array<{ date: string; usd: number; calls: number }>;
 }
 
 interface Health {
   state: "unknown" | "ok" | "blocked";
   message: string | null;
-  blockedAt: string | null;
-  label: string | null;
+}
+
+interface Route {
+  stage: string;
+  provider: Provider;
+  reason: RouteReason;
+  at: string;
+  detail?: string;
+}
+
+interface RouteHealth {
+  degraded: boolean;
+  creditFallback: boolean;
+  degradedStages: string[];
+  activeProviders: Provider[];
 }
 
 interface UsagePayload {
@@ -49,6 +63,8 @@ interface UsagePayload {
   summary: Summary;
   level: Level;
   health: Health;
+  routes: Route[];
+  routeHealth: RouteHealth;
 }
 
 const LEVEL_STYLE: Record<Level, { dot: string; bar: string; text: string; label: string }> = {
@@ -57,6 +73,20 @@ const LEVEL_STYLE: Record<Level, { dot: string; bar: string; text: string; label
   critical: { dot: "bg-orange-500", bar: "bg-orange-500", text: "text-orange-300", label: "충전 필요" },
   empty: { dot: "bg-red-500", bar: "bg-red-500", text: "text-red-300", label: "소진" },
   unknown: { dot: "bg-zinc-600", bar: "bg-zinc-600", text: "text-zinc-400", label: "미설정" },
+};
+
+const PROVIDER_LABEL: Record<Provider, string> = {
+  anthropic: "Anthropic",
+  openai: "OpenAI",
+  local: "로컬 폴백",
+  unknown: "미상",
+};
+
+const REASON_LABEL: Record<RouteReason, string> = {
+  primary: "1순위",
+  anthropic_failed: "Anthropic 실패로 전환",
+  anthropic_credit: "크레딧 부족으로 전환",
+  all_failed: "전부 실패",
 };
 
 const usd = (n: number): string => (n < 0.01 && n > 0 ? "<$0.01" : `$${n.toFixed(2)}`);
@@ -124,9 +154,11 @@ export function CreditMeter() {
   const level: Level = data?.level ?? "unknown";
   const style = LEVEL_STYLE[level];
   const summary = data?.summary;
+  const routes = data?.routes ?? [];
+  const routeHealth = data?.routeHealth;
   const blocked = data?.health.state === "blocked";
+  const degraded = routeHealth?.degraded === true;
 
-  // 게이지 채움 비율. 스냅샷 잔액 대비 남은 비율이다.
   const ratio =
     summary && summary.markedBalanceUsd && summary.markedBalanceUsd > 0 && summary.estimatedRemainingUsd !== null
       ? Math.max(0, Math.min(1, summary.estimatedRemainingUsd / summary.markedBalanceUsd))
@@ -151,6 +183,32 @@ export function CreditMeter() {
         </div>
       )}
 
+      {/* 떠밀린 폴백은 파이프라인이 성공해도 알려야 한다. 이걸 안 보여줘서
+          7월 크레딧 소진을 6주간 몰랐다. */}
+      {!blocked && degraded && (
+        <div className="fixed inset-x-0 top-0 z-40 border-b border-amber-800 bg-amber-950/95 px-4 py-2 text-xs text-amber-100 backdrop-blur">
+          <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="font-semibold">
+              {routeHealth?.creditFallback ? "크레딧 부족으로 OpenAI 대체 실행 중" : "폴백으로 실행 중"}
+            </span>
+            <span className="text-amber-200/90">
+              {routeHealth?.degradedStages.join(", ")} 단계가 원래 공급자로 돌지 못했습니다. 글은 나오지만
+              의도한 경로가 아닙니다.
+            </span>
+            {routeHealth?.creditFallback && (
+              <a
+                href={CONSOLE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="ml-auto rounded bg-amber-100 px-2 py-0.5 font-semibold text-amber-950 hover:bg-white"
+              >
+                충전 →
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+
       <div className="border-t border-zinc-800 px-4 py-3 text-xs">
         <button
           type="button"
@@ -159,16 +217,17 @@ export function CreditMeter() {
         >
           <span className={`h-2 w-2 shrink-0 rounded-full ${style.dot}`} />
           <span className="flex-1 truncate text-zinc-300">
-            {summary?.estimatedRemainingUsd !== null && summary
+            {summary && summary.estimatedRemainingUsd !== null
               ? usd(Math.max(0, summary.estimatedRemainingUsd))
               : "잔액 미설정"}
           </span>
+          {degraded && <span className="shrink-0 text-amber-400" title="폴백 실행 중">▲</span>}
           <span className={`shrink-0 ${style.text}`}>
-            {summary?.daysLeft !== null && summary ? formatDays(summary.daysLeft) : style.label}
+            {summary && summary.daysLeft !== null ? formatDays(summary.daysLeft) : style.label}
           </span>
         </button>
 
-        {summary?.estimatedRemainingUsd !== null && (
+        {summary && summary.estimatedRemainingUsd !== null && (
           <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-zinc-800">
             <div
               className={`h-full rounded-full transition-all ${style.bar}`}
@@ -186,10 +245,45 @@ export function CreditMeter() {
               <Stat label="누적" value={usd(summary?.lifetimeUsd ?? 0)} sub={`${summary?.lifetimeCalls ?? 0}회`} />
             </div>
 
+            {summary && summary.byProvider.length > 0 && (
+              <div className="space-y-1">
+                <p className="text-[10px] uppercase tracking-wider text-zinc-600">공급자별</p>
+                {summary.byProvider.map((p) => (
+                  <div key={p.provider} className="flex items-baseline justify-between gap-2">
+                    <span className="truncate text-[11px] text-zinc-500">
+                      {PROVIDER_LABEL[p.provider]}
+                      <span className="ml-1 text-zinc-700">{p.calls}회</span>
+                    </span>
+                    <span className="shrink-0 tabular-nums text-zinc-300">{usd(p.usd)}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {routes.length > 0 && (
+              <div className="space-y-1">
+                <p className="text-[10px] uppercase tracking-wider text-zinc-600">단계별 실행 경로</p>
+                {routes.map((r) => (
+                  <div key={r.stage} className="flex items-baseline justify-between gap-2">
+                    <span className="truncate text-[11px] text-zinc-500">{r.stage}</span>
+                    <span
+                      className={`shrink-0 text-[11px] ${
+                        r.reason === "primary" ? "text-zinc-300" : "text-amber-400"
+                      }`}
+                      title={r.detail ?? REASON_LABEL[r.reason]}
+                    >
+                      {PROVIDER_LABEL[r.provider]}
+                      {r.reason !== "primary" && ` · ${REASON_LABEL[r.reason]}`}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
             {summary && summary.byModel.length > 0 && (
               <div className="space-y-1">
                 <p className="text-[10px] uppercase tracking-wider text-zinc-600">모델별</p>
-                {summary.byModel.slice(0, 4).map((m) => (
+                {summary.byModel.slice(0, 5).map((m) => (
                   <div key={m.model} className="flex items-baseline justify-between gap-2">
                     <span className="truncate text-[11px] text-zinc-500">
                       {m.model.replace(/^claude-/, "").replace(/-\d{8}$/, "")}
@@ -201,9 +295,7 @@ export function CreditMeter() {
             )}
 
             <div className="space-y-1.5">
-              <p className="text-[10px] uppercase tracking-wider text-zinc-600">
-                콘솔 잔액 입력
-              </p>
+              <p className="text-[10px] uppercase tracking-wider text-zinc-600">Anthropic 잔액 입력</p>
               <div className="flex gap-1.5">
                 <input
                   value={input}
@@ -226,8 +318,8 @@ export function CreditMeter() {
               </div>
               {error && <p className="text-[11px] text-red-400">{error}</p>}
               <p className="text-[10px] leading-relaxed text-zinc-600">
-                콘솔에서 본 잔액을 찍어두면 이후 사용액을 빼서 추정합니다. 어긋나면 다시 찍으면
-                맞춰집니다.
+                게이지는 Anthropic 잔액만 추정합니다. OpenAI 지출은 위 공급자별 항목에서 금액만
+                확인하세요 — 잔액 개념이 없습니다.
                 {summary?.markedAt && (
                   <>
                     {" "}
@@ -240,7 +332,7 @@ export function CreditMeter() {
 
             {summary?.hasUnpriced && (
               <p className="text-[10px] leading-relaxed text-amber-500/80">
-                단가표에 없는 모델이 섞여 있어 일부는 Opus 등급으로 추정했습니다.
+                단가표에 없는 모델이 섞여 있어 일부는 최상위 등급으로 추정했습니다.
               </p>
             )}
 

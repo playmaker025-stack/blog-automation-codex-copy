@@ -13,6 +13,7 @@ import { getAccountHealth } from "@/lib/anthropic/account-health";
 import { flushUsage, pendingUsageCount } from "@/lib/anthropic/usage-recorder";
 import { summarize, usageLevel } from "@/lib/usage/ledger";
 import { loadUsageLedger, saveBalanceMark } from "@/lib/usage/store";
+import { latestRouteByStage, summarizeRoutes } from "@/lib/usage/provider-route";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,8 @@ export async function GET() {
       summary,
       level: usageLevel(summary),
       health: getAccountHealth(),
+      routes: latestRouteByStage(),
+      routeHealth: summarizeRoutes(),
       pending: pendingUsageCount(),
       consoleUrl: "https://console.anthropic.com/settings/billing",
     });
@@ -67,6 +70,8 @@ export async function POST(request: Request) {
       summary,
       level: usageLevel(summary),
       health: getAccountHealth(),
+      routes: latestRouteByStage(),
+      routeHealth: summarizeRoutes(),
     });
   } catch (error) {
     return NextResponse.json(

@@ -1,4 +1,5 @@
 import type { Tool } from "@anthropic-ai/sdk/resources/messages";
+import { noteProviderRoute } from "@/lib/usage/provider-route";
 import { MODELS } from "@/lib/anthropic/client";
 import { runToolUseLoop } from "@/lib/anthropic/tool-executor";
 import { userCorpusRetriever } from "@/lib/skills/user-corpus-retriever";
@@ -364,8 +365,11 @@ export async function runHarnessEvaluator(params: {
   onProgress?.("Harness Evaluator 시작...");
 
   if (hasOpenAIKey()) {
+    noteProviderRoute({ stage: "harness-evaluator", provider: "openai", reason: "primary" });
     return runOpenAIHarnessEvaluator(params);
   }
+
+  noteProviderRoute({ stage: "harness-evaluator", provider: "anthropic", reason: "primary" });
 
   const toolRegistry = {
     user_corpus_retriever: (input: unknown) =>

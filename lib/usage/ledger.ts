@@ -12,6 +12,8 @@
  * 정리(prune) 후에도 잔액 계산이 틀어지지 않는다.
  */
 
+import { providerOf, type Provider } from "./pricing.ts";
+
 export const LEDGER_VERSION = 2;
 
 /** 하루치 모델별 집계. */
@@ -194,6 +196,12 @@ export interface ModelSummary {
   cacheReadTokens: number;
 }
 
+export interface ProviderSummary {
+  provider: Provider;
+  calls: number;
+  usd: number;
+}
+
 export interface UsageSummary {
   todayUsd: number;
   todayCalls: number;
@@ -204,6 +212,8 @@ export interface UsageSummary {
   /** 데이터가 있는 날만 평균낸다. 안 돌린 날까지 나누면 소진 예상일이 부풀려진다. */
   dailyAvgUsd: number;
   byModel: ModelSummary[];
+  /** 공급자별 지출. Anthropic만 세던 게이지가 OpenAI로 넘어간 비용을 놓치지 않게 한다. */
+  byProvider: ProviderSummary[];
   /** 잔액 스냅샷이 없으면 null — 게이지 대신 "잔액을 입력하세요"를 띄운다. */
   estimatedRemainingUsd: number | null;
   spentSinceMarkUsd: number | null;
@@ -244,6 +254,7 @@ export function summarize(
   let hasUnpriced = false;
 
   const modelAcc = new Map<string, ModelSummary>();
+  const providerAcc = new Map<Provider, ProviderSummary>();
   const daily: Array<{ date: string; usd: number; calls: number }> = [];
 
   for (const day of ledger.days) {
@@ -272,6 +283,12 @@ export function summarize(
       acc.outputTokens += b.outputTokens;
       acc.cacheReadTokens += b.cacheReadTokens;
       modelAcc.set(model, acc);
+
+      const provider = providerOf(model);
+      const pAcc = providerAcc.get(provider) ?? { provider, calls: 0, usd: 0 };
+      pAcc.calls += b.calls;
+      pAcc.usd += b.usd;
+      providerAcc.set(provider, pAcc);
     }
   }
 
@@ -304,6 +321,7 @@ export function summarize(
     lifetimeCalls: ledger.lifetimeCalls,
     dailyAvgUsd,
     byModel: [...modelAcc.values()].sort((a, b) => b.usd - a.usd),
+    byProvider: [...providerAcc.values()].sort((a, b) => b.usd - a.usd),
     estimatedRemainingUsd,
     spentSinceMarkUsd,
     markedAt: mark?.at ?? null,

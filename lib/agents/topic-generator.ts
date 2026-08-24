@@ -6,6 +6,7 @@
  */
 
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
+import { noteProviderRoute } from "@/lib/usage/provider-route";
 import { recordUsage, createOrRecord } from "@/lib/anthropic/usage-recorder";
 import { naverKeywordResearch } from "@/lib/skills/naver-keyword-research";
 import { naverCafeSearch, naverKinSearch } from "@/lib/skills/naver-community-research";
@@ -1241,6 +1242,7 @@ export async function runTopicGenerator(input: TopicGeneratorInput): Promise<Top
   // ============================================================
   if (hasOpenAIKey()) {
     const model = process.env.OPENAI_TOPIC_MODEL ?? "gpt-4.1-mini";
+    noteProviderRoute({ stage: "topic-generator", provider: "openai", reason: "primary", model });
     const result = await requestOpenAIJson<{ topics: GeneratedTopic[] }>({
       model,
       input: [

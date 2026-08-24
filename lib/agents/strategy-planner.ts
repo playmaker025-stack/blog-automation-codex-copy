@@ -1,4 +1,5 @@
 import type { Tool } from "@anthropic-ai/sdk/resources/messages";
+import { noteProviderRoute } from "@/lib/usage/provider-route";
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { recordUsage, createOrRecord } from "@/lib/anthropic/usage-recorder";
 import { runToolUseLoop } from "@/lib/anthropic/tool-executor";
@@ -1263,6 +1264,7 @@ export async function runStrategyPlanner(params: {
       strategySource: "ai",
       strategyProvider: "anthropic",
     };
+    noteProviderRoute({ stage: "strategy-planner", provider: "anthropic", reason: "primary" });
   } catch (error) {
     if (signal?.aborted) {
       throw new Error("파이프라인 취소 - 전략 수립 중단");
@@ -1289,6 +1291,12 @@ export async function runStrategyPlanner(params: {
           onProgress,
           signal: plannerSignal,
         });
+        noteProviderRoute({
+          stage: "strategy-planner",
+          provider: "openai",
+          reason: fatalClassification === "confirmed_credit" ? "anthropic_credit" : "anthropic_failed",
+          detail: fallbackReason.slice(0, 200),
+        });
         onProgress?.(`${situationLabel} — OpenAI 전략 폴백으로 복구했습니다.`);
       } else {
         onProgress?.(`${situationLabel}. OPENAI_API_KEY도 없어 OpenAI 폴백을 사용할 수 없습니다.`);
@@ -1309,9 +1317,21 @@ export async function runStrategyPlanner(params: {
           onProgress,
           signal: plannerSignal,
         });
+        noteProviderRoute({
+          stage: "strategy-planner",
+          provider: "openai",
+          reason: "anthropic_failed",
+          detail: fallbackReason.slice(0, 200),
+        });
         onProgress?.("Anthropic 전략 수립 실패 — OpenAI 전략 폴백으로 복구했습니다.");
       } catch (fallbackError) {
         const openAiFallbackReason = stringifyStrategyError(fallbackError);
+        noteProviderRoute({
+          stage: "strategy-planner",
+          provider: "local",
+          reason: "all_failed",
+          detail: openAiFallbackReason.slice(0, 200),
+        });
         console.warn("[strategy-planner] OpenAI 전략 폴백도 실패, 안전 폴백 전략으로 전환:", openAiFallbackReason);
         onProgress?.("AI 전략 수립과 OpenAI 폴백이 모두 실패해 안전 폴백을 만들었지만, 발행용 writer 실행은 차단합니다.");
         plan = {

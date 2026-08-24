@@ -1,4 +1,5 @@
 import type { Tool } from "@anthropic-ai/sdk/resources/messages";
+import { noteProviderRoute } from "@/lib/usage/provider-route";
 import { getAnthropicClient, MODELS } from "@/lib/anthropic/client";
 import { userCorpusRetriever } from "@/lib/skills/user-corpus-retriever";
 import { expansionPlanner } from "@/lib/skills/expansion-planner";
@@ -1067,9 +1068,11 @@ export async function runMasterWriter(params: {
   onProgress?.(corpusSummary ? "Master Writer 시작 - 코퍼스 요약을 적용합니다." : "Master Writer 시작 - 코퍼스를 로드합니다.");
 
   if (hasOpenAIKey()) {
+    noteProviderRoute({ stage: "master-writer", provider: "openai", reason: "primary" });
     return runOpenAIMasterWriter(params);
   }
 
+  noteProviderRoute({ stage: "master-writer", provider: "anthropic", reason: "primary" });
   const client = getAnthropicClient();
   const TOOLS = corpusSummary ? BASE_TOOLS : [CORPUS_TOOL, ...BASE_TOOLS];
   const toolRegistry = {

@@ -14,7 +14,7 @@
  * 주객이 전도된다.
  */
 
-import { priceUsage, type TokenUsage } from "@/lib/usage/pricing";
+import { priceUsage, providerOf, type TokenUsage } from "@/lib/usage/pricing";
 import type { UsageSample } from "@/lib/usage/ledger";
 import { appendUsageSamples } from "@/lib/usage/store";
 import { noteApiFailure, noteApiSuccess } from "./account-health";
@@ -38,7 +38,9 @@ export function recordUsage(
   label?: string
 ): void {
   try {
-    noteApiSuccess();
+    // 계정 상태는 Anthropic 호출일 때만 갱신한다. OpenAI 호출 성공으로
+    // Anthropic 크레딧 배너가 꺼지면 정확히 이번 사고를 다시 만든다.
+    if (providerOf(model ?? "") === "anthropic") noteApiSuccess();
     if (!usage) return;
 
     const priced = priceUsage(model ?? "unknown", usage);

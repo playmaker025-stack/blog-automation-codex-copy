@@ -7,6 +7,8 @@ export interface OpenAIInputMessage {
 
 export interface OpenAITextRequest {
   model: string;
+  /** 어느 단계의 호출인지. 사용량 장부에 남는다. */
+  label?: string;
   input: OpenAIInputMessage[];
   maxOutputTokens?: number;
   temperature?: number;
@@ -110,6 +112,32 @@ async function sleepWithSignal(ms: number, signal?: AbortSignal): Promise<void> 
   });
 }
 
+/**
+ * OpenAI 사용량을 장부에 기록한다. 지연 import를 쓰는 이유:
+ *
+ * 정적 import로 "@/lib/..."를 끌어오면 harness 테스트가 이 모듈 자체를 못 읽는다.
+ * node --test는 tsconfig의 path 별칭을 모르고, 실패가 모듈 로드 시점에 나서
+ * 이 파일의 순수 헬퍼(parseRateLimitDelayMs 등)를 테스트하는 것까지 막힌다.
+ * 지연 import는 이 함수가 실제로 불릴 때만 해석되고, 그건 Next 런타임뿐이다.
+ *
+ * 기록 실패는 삼킨다. 사용량 집계가 본업을 막으면 주객전도다.
+ */
+async function recordOpenAIUsage(model: string, json: unknown, label?: string): Promise<void> {
+  try {
+    const [recorder, pricing] = await Promise.all([
+      import("@/lib/anthropic/usage-recorder"),
+      import("@/lib/usage/pricing"),
+    ]);
+    recorder.recordUsage(
+      model,
+      pricing.openAIUsageToTokenUsage(pricing.extractOpenAIUsage(json)),
+      label
+    );
+  } catch {
+    // 무시
+  }
+}
+
 export async function requestOpenAIResponse(
   params: OpenAITextRequest & { text?: Record<string, unknown> }
 ): Promise<unknown> {
@@ -140,7 +168,11 @@ export async function requestOpenAIResponse(
     });
 
     if (response.ok) {
-      return response.json() as Promise<unknown>;
+      const json = (await response.json()) as unknown;
+      // OpenAI도 같은 장부에 넣는다. Anthropic만 세면 폴백으로 넘어간 비용이
+      // 통째로 안 보인다 — 그게 7월에 소진을 6주간 못 알아챈 이유의 절반이다.
+      void recordOpenAIUsage(params.model, json, params.label);
+      return json;
     }
 
     const errorText = await response.text();

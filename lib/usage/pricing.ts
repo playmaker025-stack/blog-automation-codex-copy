@@ -51,7 +51,25 @@ export const MODEL_RATES: Record<string, ModelRate> = {
   "claude-sonnet-4-6": { input: 3, cacheWrite5m: 3.75, cacheWrite1h: 6, cacheRead: 0.3, output: 15 },
   "claude-sonnet-4-5": { input: 3, cacheWrite5m: 3.75, cacheWrite1h: 6, cacheRead: 0.3, output: 15 },
   "claude-haiku-4-5": { input: 1, cacheWrite5m: 1.25, cacheWrite1h: 2, cacheRead: 0.1, output: 5 },
+
+  // OpenAI. 출처: developers.openai.com/api/docs/pricing (2026-08-24 확인).
+  // OpenAI는 캐시 "쓰기"에 웃돈을 받지 않는다 — 쓰기는 정가 입력이고 읽기만 할인된다.
+  // 그래서 cacheWrite* 를 input과 같게 둔다.
+  "gpt-5.4": { input: 2.5, cacheWrite5m: 2.5, cacheWrite1h: 2.5, cacheRead: 0.25, output: 15 },
+  "gpt-5": { input: 1.25, cacheWrite5m: 1.25, cacheWrite1h: 1.25, cacheRead: 0.125, output: 10 },
+  "gpt-4.1": { input: 2, cacheWrite5m: 2, cacheWrite1h: 2, cacheRead: 0.5, output: 8 },
+  "gpt-4.1-mini": { input: 0.4, cacheWrite5m: 0.4, cacheWrite1h: 0.4, cacheRead: 0.1, output: 1.6 },
 };
+
+export type Provider = "anthropic" | "openai" | "unknown";
+
+/** 모델 ID로 공급자를 가른다. 장부 스키마를 바꾸지 않으려고 이름에서 유도한다. */
+export function providerOf(model: string): Provider {
+  const id = normalizeModelId(model);
+  if (id.startsWith("claude")) return "anthropic";
+  if (id.startsWith("gpt") || /^o\d/.test(id)) return "openai";
+  return "unknown";
+}
 
 /**
  * 모르는 모델의 단가. Opus 등급으로 잡는다.
@@ -143,4 +161,36 @@ export function cacheSavingsUsd(model: string, usage: TokenUsage | null | undefi
   const { rate } = rateFor(model);
   const cacheReadTokens = num(usage?.cache_read_input_tokens);
   return (cacheReadTokens * (rate.input - rate.cacheRead)) / MTOK;
+}
+
+/**
+ * OpenAI Responses API의 usage를 Anthropic 형태로 옮긴다.
+ *
+ * 두 API의 input_tokens 정의가 다르다. OpenAI는 캐시된 토큰을 input_tokens에
+ * 포함시키고 details로 따로 알려주지만, Anthropic은 캐시 읽기를 input_tokens에서
+ * 빼고 cache_read_input_tokens로 분리한다. 그대로 넘기면 캐시분이 두 번 세어져
+ * OpenAI 비용이 부풀려진다. 여기서 빼준다.
+ */
+export interface OpenAIUsage {
+  input_tokens?: number | null;
+  output_tokens?: number | null;
+  input_tokens_details?: { cached_tokens?: number | null } | null;
+}
+
+export function openAIUsageToTokenUsage(usage: OpenAIUsage | null | undefined): TokenUsage {
+  const total = num(usage?.input_tokens);
+  const cached = Math.min(num(usage?.input_tokens_details?.cached_tokens), total);
+  return {
+    input_tokens: total - cached,
+    output_tokens: num(usage?.output_tokens),
+    cache_read_input_tokens: cached,
+  };
+}
+
+/** 응답 본문(unknown)에서 usage를 안전하게 꺼낸다. */
+export function extractOpenAIUsage(response: unknown): OpenAIUsage | null {
+  if (!response || typeof response !== "object") return null;
+  const usage = (response as { usage?: unknown }).usage;
+  if (!usage || typeof usage !== "object") return null;
+  return usage as OpenAIUsage;
 }
