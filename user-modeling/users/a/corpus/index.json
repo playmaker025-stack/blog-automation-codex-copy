@@ -2,6 +2,15 @@
   "userId": "a",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt6xg9od",
+      "title": "말론바 일회용 전자담배 사용법과 인기 맛 리뷰",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 7087,
+      "publishedAt": "2026-08-24T07:41:22.056Z",
+      "filePath": "user-modeling/users/a/corpus/samples/published-post-manual-mt6xg9od.md"
+    },
+    {
       "sampleId": "published-post-manual-mt6xfi5e",
       "title": "전자담배 기기 하이엔드 폐호흡 싱글 rda 엔네콰드로 그라운드 rda Ennequadro Ground rda",
       "category": "published-post",
@@ -312,5 +321,5 @@
       "filePath": "user-modeling/users/a/corpus/samples/reference-a-15.md"
     }
   ],
-  "lastUpdated": "2026-08-24T07:40:52.358Z"
+  "lastUpdated": "2026-08-24T07:41:28.477Z"
 }
