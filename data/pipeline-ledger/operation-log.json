@@ -4155,7 +4155,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-8a6e2a1e",
       "at": "2026-08-21T06:52:19.339Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수동 전자담배 액상 추천, 남동구 인기 맛 5가지 비교",
+      "proposedTitle": "만수동 전자담배 액상 추천, 남동구 인기 맛 5가지 비교",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-a082531c",
+      "at": "2026-08-24T05:18:32.829Z"
     }
   ],
-  "lastUpdated": "2026-08-21T06:52:19.339Z"
+  "lastUpdated": "2026-08-24T05:18:32.829Z"
 }
