@@ -2,6 +2,31 @@
   "version": 1,
   "products": [
     {
+      "name": "네스티원",
+      "aliases": [
+        "네스티 원",
+        "네스티원",
+        "NASTY ONE"
+      ],
+      "category": "일회용",
+      "wattControl": true,
+      "airflowControl": true,
+      "batteryRechargeable": true,
+      "liquidRefillable": false,
+      "charging": "C타입",
+      "notes": [
+        "마그네틱으로 배터리와 카트리지를 결합하는 분리형 — 통째로 버리는 일체형이 아니라 카트리지만 교체",
+        "스크롤로 1W 단위 와트 조절 가능. 대부분의 일회용이 버튼 한 번으로 하는 전압 조절인 것과 다른 점",
+        "하단에 에어플로우 컨트롤러(옆으로 밀어 조절)와 C타입 충전포트",
+        "오픈팟이라 내부 액상이 눈으로 보이고 전면 스크린에도 잔량 표시",
+        "니코틴 농도 1%(10mg)와 5%(50mg) 두 종류로 나온다",
+        "카트리지 사용 전 접지부의 돌출 버튼을 눌러야 결합된다",
+        "개봉 제품은 항공기 반입 불가, 고지대·고온 환경 사용 자제"
+      ],
+      "source": "사장님 발행글 post-manual-mr0k6kud",
+      "verifiedAt": "2026-08-24"
+    },
+    {
       "name": "도조오팔",
       "aliases": [
         "도조 오팔",
@@ -24,6 +49,24 @@
       "batteryRechargeable": true,
       "liquidRefillable": false,
       "charging": "배터리 충전식"
+    },
+    {
+      "name": "마이팟프로",
+      "aliases": [
+        "마이팟 프로",
+        "마이팟프로"
+      ],
+      "category": "기기",
+      "inhaleMode": "겸용",
+      "batteryRechargeable": true,
+      "notes": [
+        "팟 교체형 디바이스",
+        "오토드로우(버튼 없이)와 버튼 베이핑 모두 지원",
+        "장시간 미사용·충전 시에는 디바이스에서 팟을 분리해두는 것을 권장(과유입 방지)",
+        "오토드로우 사용 시 잔증기가 남아 결로가 생기고 이를 누수로 오해하는 경우가 많다"
+      ],
+      "source": "사장님 발행글 post-manual-mr5y47o6",
+      "verifiedAt": "2026-08-24"
     },
     {
       "name": "말론S",
@@ -50,6 +93,62 @@
       "batteryMah": 2300,
       "podMl": "4ml",
       "wattRange": "10~35W"
+    },
+    {
+      "name": "말론바",
+      "aliases": [
+        "말론 바",
+        "Malone Bar"
+      ],
+      "category": "일회용",
+      "puffs": 35000,
+      "liquidMl": "22ml",
+      "batteryRechargeable": true,
+      "liquidRefillable": false,
+      "notes": [
+        "35,000퍼프는 SOFT 모드 기준 — 부스트 모드나 잦은 사용에서는 크게 줄어든다",
+        "매장 실측 체감 사용 기간 4~6일 (평균적인 흡입량 기준)",
+        "1회 충전당 약 160~180회 흡입",
+        "액상이 30%쯤 남으면 단맛 계열 특성상 맛이 흐려지기 시작(가습현상)",
+        "매장 기준 인기 맛은 블루베리와 플럼",
+        "가격대 2만원대"
+      ],
+      "source": "사장님 발행글 post-manual-mt6xg9od",
+      "verifiedAt": "2026-08-24"
+    },
+    {
+      "name": "발라리안R",
+      "aliases": [
+        "발라리안 R",
+        "발라리안R"
+      ],
+      "category": "기기",
+      "batteryRechargeable": true,
+      "notes": [
+        "팟 교체형 디바이스",
+        "팟을 2개 이상 바꿔도 같은 누수가 나면 본체 점검 신호",
+        "충전은 되는데 흡입 반응이 없거나 탄 냄새 뒤 출력이 약해지면 수리 판단"
+      ],
+      "source": "사장님 발행글 post-manual-mr8tac1r / mrorbz92",
+      "verifiedAt": "2026-08-24"
+    },
+    {
+      "name": "젤로맥스",
+      "aliases": [
+        "젤로 맥스",
+        "젤로맥스"
+      ],
+      "category": "기기",
+      "inhaleMode": "겸용",
+      "batteryRechargeable": true,
+      "notes": [
+        "입호흡 팟 디바이스",
+        "버튼 베이핑과 버튼 없는 사용 모두 가능",
+        "장시간 미사용·충전 시에는 팟을 분리해두는 것을 권장",
+        "버튼에서 미리 손을 떼면 잔증기가 덜 남는다"
+      ],
+      "source": "사장님 발행글 post-manual-mr4m14xy",
+      "verifiedAt": "2026-08-24"
     },
     {
       "name": "크로스미니6",
