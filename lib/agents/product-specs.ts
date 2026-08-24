@@ -53,6 +53,8 @@ export interface ProductSpec extends ControlAxes {
   batteryMah?: number;
   podMl?: string;
   resistanceOhm?: string;
+  /** 출력 범위 표기. 예: "15~35W". wattControl이 true여도 범위는 따로 확인해야 한다. */
+  wattRange?: string;
   charging?: string;
   sizeMm?: string;
   weightG?: number;
@@ -118,9 +120,20 @@ const INHALE_PATTERNS: Array<[InhaleMode, RegExp]> = [
   ["버튼", /버튼\s*(?:조작|식|베이핑)|버튼\s*(?:을)?\s*눌러/],
 ];
 
-/** 수치형 사양을 언급했는지. 값 대조가 아니라 "언급 여부"만 본다. */
-const NUMERIC_SPEC_PATTERN =
-  /\d+\s*mAh|\d+\.?\d*\s*ml\b|\d+\.?\d*\s*(?:옴|Ω)|\d+\s*[Ww]\b|배터리\s*용량|팟\s*용량|저항값/;
+/**
+ * 수치형 사양 주장. 값을 대조하는 게 아니라 "그 항목이 원장에 있는가"를 본다.
+ *
+ * 단위별로 나눈 이유: 처음엔 "숫자 항목이 하나라도 등록됐으면 통과"로 뭉뚱그렸는데,
+ * 그러면 배터리·팟용량을 등록하는 순간 미확인 와트 주장("35W까지")이 그냥
+ * 통과해버린다. 항목 하나를 채운 대가로 다른 항목의 감시가 풀리면 안 된다.
+ */
+const NUMERIC_CLAIMS: Array<{ attr: string; field: keyof ProductSpec; re: RegExp }> = [
+  { attr: "배터리", field: "batteryMah", re: /\d+\s*mAh|배터리\s*용량\s*(?:은|는|이)?\s*\d/ },
+  { attr: "팟용량", field: "podMl", re: /\d+\.?\d*\s*ml\b|팟\s*용량|카트리지\s*용량/ },
+  { attr: "저항값", field: "resistanceOhm", re: /\d+\.?\d*\s*(?:옴|Ω)|저항값\s*(?:은|는|이)?\s*\d/ },
+  { attr: "출력범위", field: "wattRange", re: /\d+\s*[~-]\s*\d+\s*[Ww]\b|\d+\s*[Ww]\s*(?:까지|로|출력)/ },
+  { attr: "크기", field: "sizeMm", re: /\d+\.?\d*\s*(?:mm|㎜)/ },
+];
 
 /** 근거 없는 1인칭 경험 주장. 매장 글에서는 신뢰 문제로 직결된다. */
 const FIRSTHAND_PATTERN = /직접\s*써\s*봤|직접\s*사용해\s*봤|제가\s*써\s*보니|써\s*본\s*결과|직접\s*테스트/;
@@ -331,20 +344,19 @@ export function findSpecViolations(
       break;
     }
 
-    // 수치형 사양은 값 대조 대신 "모르는 제품에 수치를 말했는지"만 본다.
-    if (flagUnknown && NUMERIC_SPEC_PATTERN.test(sentence)) {
-      for (const spec of here) {
-        const hasAnyNumber =
-          spec.batteryMah !== undefined ||
-          spec.podMl !== undefined ||
-          spec.resistanceOhm !== undefined;
-        if (!hasAnyNumber) {
-          violations.push({
-            kind: "미확인",
-            product: spec.name,
-            attribute: "수치사양",
-            sentence,
-          });
+    // 수치형 사양은 값 대조 대신 "그 항목이 원장에 있는지"만 본다.
+    if (flagUnknown) {
+      for (const claim of NUMERIC_CLAIMS) {
+        if (!claim.re.test(sentence)) continue;
+        for (const spec of here) {
+          if (spec[claim.field] === undefined) {
+            violations.push({
+              kind: "미확인",
+              product: spec.name,
+              attribute: claim.attr,
+              sentence,
+            });
+          }
         }
       }
     }

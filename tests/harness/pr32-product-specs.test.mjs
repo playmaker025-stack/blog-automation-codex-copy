@@ -134,14 +134,32 @@ describe("PR32 미확인 사양 주장", () => {
     assert.equal(미확인[0].attribute, "흡입방식");
   });
 
-  test("수치가 등록 안 된 제품에 수치를 말하면 경고한다", () => {
+  test("등록 안 된 수치 항목을 말하면 경고한다", () => {
     const v = findSpecViolations("말론S는 배터리 1200mAh입니다.", REGISTRY);
-    assert.ok(v.some((x) => x.kind === "미확인" && x.attribute === "수치사양"));
+    assert.ok(v.some((x) => x.kind === "미확인" && x.attribute === "배터리"));
   });
 
-  test("수치가 등록된 제품은 수치를 말해도 경고하지 않는다", () => {
+  test("등록된 수치 항목은 경고하지 않는다", () => {
     const v = findSpecViolations("크로스미니6는 배터리 1600mAh입니다.", REGISTRY);
-    assert.equal(v.filter((x) => x.attribute === "수치사양").length, 0);
+    assert.equal(v.filter((x) => x.attribute === "배터리").length, 0);
+  });
+
+  // 항목 하나를 채운 대가로 다른 항목의 감시가 풀리면 안 된다.
+  test("배터리를 등록해도 미등록 와트 범위 주장은 여전히 잡는다", () => {
+    const reg = {
+      ...REGISTRY,
+      products: REGISTRY.products.map((p) =>
+        p.name === "말론S" ? { ...p, batteryMah: 2300, podMl: "4ml" } : p
+      ),
+    };
+    const v = findSpecViolations("말론S는 35W까지 출력이 올라갑니다.", reg);
+    assert.ok(
+      v.some((x) => x.kind === "미확인" && x.attribute === "출력범위"),
+      JSON.stringify(v)
+    );
+    // 배터리는 등록됐으니 조용해야 한다.
+    const v2 = findSpecViolations("말론S는 배터리 2300mAh입니다.", reg);
+    assert.equal(v2.filter((x) => x.attribute === "배터리").length, 0);
   });
 
   test("flagUnknown을 끄면 미확인은 보고하지 않는다", () => {
