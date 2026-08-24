@@ -372,6 +372,53 @@ describe("PR32 업종 용어 규칙", () => {
   });
 });
 
+// 숫자가 아니라 등급어로 틀리는 경우가 따로 있다. 0.98%짜리를 "고농도"라고
+// 쓰면 손님이 훨씬 센 걸 기대하고 산다. 기준은 1% 이하가 기본, 초과가 고농도.
+describe("PR32 니코틴 등급어", () => {
+  const REG = {
+    version: 1,
+    products: [
+      { name: "도조오팔", category: "일회용", nicotinePercent: 0.98, source: "s", verifiedAt: "2026-08-24" },
+      { name: "센거", category: "일회용", nicotinePercent: 5, source: "s", verifiedAt: "2026-08-24" },
+      { name: "경계값", category: "일회용", nicotinePercent: 1, source: "s", verifiedAt: "2026-08-24" },
+    ],
+    updatedAt: "2026-08-24T00:00:00.000Z",
+  };
+
+  test("기본 농도 제품을 고농도라 하면 잡는다", () => {
+    const v = findSpecViolations("도조오팔은 고농도라 목넘김이 묵직합니다.", REG);
+    const 모순 = v.filter((x) => x.kind === "모순" && x.attribute === "니코틴등급");
+    assert.equal(모순.length, 1);
+    assert.equal(모순[0].claimed, "고농도");
+  });
+
+  test("고농도 제품을 기본 농도라 하면 잡는다", () => {
+    const v = findSpecViolations("센거는 기본 농도 제품입니다.", REG);
+    assert.ok(v.some((x) => x.kind === "모순" && x.attribute === "니코틴등급"));
+  });
+
+  test("맞게 쓴 등급어는 통과한다", () => {
+    const a = findSpecViolations("도조오팔은 일반 농도입니다.", REG);
+    const b = findSpecViolations("센거는 고농도 제품입니다.", REG);
+    assert.equal(a.filter((x) => x.attribute === "니코틴등급").length, 0);
+    assert.equal(b.filter((x) => x.attribute === "니코틴등급").length, 0);
+  });
+
+  // 경계는 1%다. 1%는 기본, 1%를 넘어야 고농도.
+  test("정확히 1%는 기본 농도로 본다", () => {
+    const v = findSpecViolations("경계값은 고농도입니다.", REG);
+    assert.ok(v.some((x) => x.kind === "모순" && x.attribute === "니코틴등급"));
+    const ok = findSpecViolations("경계값은 기본 농도입니다.", REG);
+    assert.equal(ok.filter((x) => x.attribute === "니코틴등급").length, 0);
+  });
+
+  test("농도가 등록 안 된 제품은 등급어를 판정하지 않는다", () => {
+    const reg = { ...REG, products: [{ name: "미상", category: "일회용", source: "s", verifiedAt: "2026-08-24" }] };
+    const v = findSpecViolations("미상은 고농도입니다.", reg);
+    assert.equal(v.filter((x) => x.attribute === "니코틴등급").length, 0);
+  });
+});
+
 describe("PR32 사실 시트", () => {
   test("등록된 값만 적고 모르는 항목은 아예 넣지 않는다", () => {
     const sheet = buildProductFactSheet(REGISTRY);

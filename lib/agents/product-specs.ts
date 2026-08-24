@@ -111,8 +111,8 @@ export interface ProductSpecRegistry {
    * 제품에 딸리지 않는 업종 공통 규칙. 용어 정의와 단위 뜻이 여기 들어간다.
    *
    * 필요한 이유: "고농도"처럼 업계에서 범위로 쓰는 말을 모델이 특정 숫자로
-   * 단정해버린다. 사장님 기준으로 1%가 기본, 2% 이상이 고농도인데 5%로
-   * 못 박으면 틀린 글이 된다. 제품 사양표로는 담을 수 없는 층이다.
+   * 단정해버린다. 사장님 기준으로 1% 이하가 기본이고 1%를 넘으면 고농도인데,
+   * 이걸 5%로 못 박으면 틀린 글이 된다. 제품 사양표로는 담을 수 없는 층이다.
    */
   domainNotes?: string[];
   updatedAt: string;
@@ -232,6 +232,21 @@ const NUMERIC_CLAIMS: Array<{
     // %만 보면 무관한 백분율에 걸린다. 니코틴/농도 문맥을 요구한다.
     re: /니코틴[^.]{0,12}\d+\.?\d*\s*%|\d+\.?\d*\s*%\s*(?:니코틴|농도)|농도\s*(?:는|은|가)?\s*\d+\.?\d*\s*%/,
   },
+];
+
+/**
+ * 니코틴 농도 등급 주장. 사장님 기준으로 1% 이하가 기본(일반), 1% 초과가 고농도다.
+ *
+ * 숫자가 아니라 등급어로 틀리는 경우가 따로 있다. 0.98%짜리 도조오팔을
+ * "고농도"라고 쓰면 손님이 훨씬 센 걸 기대하고 산다. 등록된 농도가 있으면
+ * 등급어가 맞는지 기계적으로 대조할 수 있어서 검사에 넣는다.
+ */
+export const HIGH_NICOTINE_THRESHOLD = 1;
+
+const NICOTINE_GRADE_PATTERNS: Array<[boolean, RegExp]> = [
+  // true = 고농도 주장
+  [true, /고농도/],
+  [false, /기본\s*농도|일반\s*농도|저농도/],
 ];
 
 /** 근거 없는 1인칭 경험 주장. 매장 글에서는 신뢰 문제로 직결된다. */
@@ -445,6 +460,28 @@ export function findSpecViolations(
           registered: known ? "가능" : "불가",
           sentence,
         });
+      }
+    }
+
+    // 니코틴 등급어(고농도/기본농도)가 등록된 농도와 맞는지 본다.
+    // 숫자를 안 쓰고 등급어만 틀리는 경우가 따로 있다.
+    {
+      const grade = firstMatch(sentence, NICOTINE_GRADE_PATTERNS);
+      if (grade && here.length === 1 && sentence.length <= MAX_ATTRIBUTABLE_LENGTH) {
+        const spec = here[0];
+        if (spec.nicotinePercent !== undefined) {
+          const isHigh = spec.nicotinePercent > HIGH_NICOTINE_THRESHOLD;
+          if (isHigh !== grade.value) {
+            violations.push({
+              kind: "모순",
+              product: spec.name,
+              attribute: "니코틴등급",
+              claimed: grade.value ? "고농도" : "기본농도",
+              registered: `${spec.nicotinePercent}% (${isHigh ? "고농도" : "기본농도"})`,
+              sentence,
+            });
+          }
+        }
       }
     }
 
