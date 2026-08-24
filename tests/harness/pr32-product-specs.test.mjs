@@ -287,6 +287,91 @@ describe("PR32 충전과 리필 구분", () => {
   });
 });
 
+// 격발 방식(자동/버튼)과 흡입 방식(입호흡/폐호흡)은 다른 축이다.
+// 마이팟프로를 누수 글의 "오토드로우+버튼"만 보고 넣었다가 정작 간판인
+// "입·폐호흡 모두 가능"을 놓칠 뻔했다.
+describe("PR32 입호흡·폐호흡 축", () => {
+  const REG = {
+    version: 1,
+    products: [
+      {
+        name: "젤로맥스",
+        category: "기기",
+        drawStyle: "입호흡",
+        inhaleMode: "겸용",
+        source: "사장님 발행글",
+        verifiedAt: "2026-08-24",
+      },
+      {
+        name: "마이팟프로",
+        category: "기기",
+        drawStyle: "겸용",
+        inhaleMode: "겸용",
+        source: "사장님 발행글",
+        verifiedAt: "2026-08-24",
+      },
+    ],
+    updatedAt: "2026-08-24T00:00:00.000Z",
+  };
+
+  test("입호흡 전용을 폐호흡이라 하면 잡는다", () => {
+    const v = findSpecViolations("젤로맥스는 폐호흡 기기입니다.", REG);
+    const 모순 = v.filter((x) => x.kind === "모순" && x.attribute === "입폐호흡");
+    assert.equal(모순.length, 1);
+    assert.equal(모순[0].registered, "입호흡");
+  });
+
+  test("맞게 쓴 입호흡 서술은 통과한다", () => {
+    const v = findSpecViolations("젤로맥스는 입호흡 팟 디바이스입니다.", REG);
+    assert.equal(v.filter((x) => x.kind === "모순").length, 0);
+  });
+
+  test("겸용 기기는 입호흡·폐호흡 어느 쪽 서술도 통과한다", () => {
+    const a = findSpecViolations("마이팟프로는 폐호흡도 가능합니다.", REG);
+    const b = findSpecViolations("마이팟프로는 입호흡으로 쓸 수 있습니다.", REG);
+    assert.equal(a.filter((x) => x.kind === "모순").length, 0);
+    assert.equal(b.filter((x) => x.kind === "모순").length, 0);
+  });
+
+  // 두 축이 각각 판정돼야 한다. 하나로 뭉치면 이 문장에서 오탐이 난다.
+  test("격발 방식과 흡입 방식을 섞지 않는다", () => {
+    const v = findSpecViolations("젤로맥스는 버튼 조작이 되는 입호흡 기기입니다.", REG);
+    assert.equal(v.filter((x) => x.kind === "모순").length, 0, JSON.stringify(v));
+  });
+});
+
+// 제품 사양표로는 담을 수 없는 층. "고농도"를 5%로 못 박으면 틀린 글이 된다.
+describe("PR32 업종 용어 규칙", () => {
+  test("domainNotes가 사실 시트 맨 앞에 들어간다", () => {
+    const reg = {
+      version: 1,
+      products: [
+        { name: "테스트기기", category: "기기", form: "박스형", source: "s", verifiedAt: "2026-08-24" },
+      ],
+      domainNotes: ["니코틴 1%가 기본 농도, 2% 이상이 고농도다."],
+      updatedAt: "2026-08-24T00:00:00.000Z",
+    };
+    const sheet = buildProductFactSheet(reg);
+    assert.ok(sheet.includes("업종 용어와 단위"));
+    assert.ok(sheet.includes("2% 이상이 고농도"));
+    assert.ok(sheet.indexOf("업종 용어와 단위") < sheet.indexOf("확인된 제품 사양"));
+  });
+
+  test("제품이 없어도 용어 규칙만으로 시트를 만든다", () => {
+    const reg = {
+      version: 1,
+      products: [],
+      domainNotes: ["mAh는 배터리 용량 단위다."],
+      updatedAt: "2026-08-24T00:00:00.000Z",
+    };
+    assert.ok(buildProductFactSheet(reg).includes("mAh는 배터리 용량"));
+  });
+
+  test("제품도 규칙도 없으면 빈 문자열", () => {
+    assert.equal(buildProductFactSheet(emptySpecRegistry()), "");
+  });
+});
+
 describe("PR32 사실 시트", () => {
   test("등록된 값만 적고 모르는 항목은 아예 넣지 않는다", () => {
     const sheet = buildProductFactSheet(REGISTRY);

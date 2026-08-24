@@ -24,7 +24,25 @@
 
 /** 상호배타적 속성. 하나를 주장하면 나머지는 거짓이 된다. */
 export type FormFactor = "원통형" | "박스형";
+
+/**
+ * 격발 방식 — 빨면 켜지는가(자동/오토드로우), 버튼을 누르는가.
+ *
+ * 아래 DrawStyle(입호흡/폐호흡)과 헷갈리면 안 된다. 실제로 한 번 섞었다:
+ * 마이팟프로를 누수 대응 글의 "오토드로우와 버튼 베이핑 둘 다"만 보고
+ * 겸용으로 넣었는데, 정작 이 기기의 간판은 "입·폐호흡 모두 가능"이었다.
+ * 둘은 완전히 다른 축이다.
+ */
 export type InhaleMode = "자동" | "버튼" | "겸용";
+
+/**
+ * 흡입 방식 — 담배처럼 입에 머금는가(MTL), 폐까지 들이마시는가(DTL).
+ *
+ * 사장님 지적: "입과 폐를 호흡법만으로 구분하는 게 아니라 기기 타입과
+ * 액상도 모두 다르다." 그래서 이걸 틀리면 손님이 맞지 않는 액상을 사서
+ * 누수로 이어진다 — 사양 오류가 실제 피해로 연결되는 축이다.
+ */
+export type DrawStyle = "입호흡" | "폐호흡" | "겸용";
 
 /**
  * 조절 방식은 배타적 열거형이 아니라 독립된 두 축이다.
@@ -61,6 +79,7 @@ export interface ProductSpec extends ControlAxes {
   officialName?: string;
   form?: FormFactor;
   inhaleMode?: InhaleMode;
+  drawStyle?: DrawStyle;
   batteryMah?: number;
   podMl?: string;
   resistanceOhm?: string;
@@ -88,13 +107,26 @@ export interface ProductSpec extends ControlAxes {
 export interface ProductSpecRegistry {
   version: number;
   products: ProductSpec[];
+  /**
+   * 제품에 딸리지 않는 업종 공통 규칙. 용어 정의와 단위 뜻이 여기 들어간다.
+   *
+   * 필요한 이유: "고농도"처럼 업계에서 범위로 쓰는 말을 모델이 특정 숫자로
+   * 단정해버린다. 사장님 기준으로 1%가 기본, 2% 이상이 고농도인데 5%로
+   * 못 박으면 틀린 글이 된다. 제품 사양표로는 담을 수 없는 층이다.
+   */
+  domainNotes?: string[];
   updatedAt: string;
 }
 
 export const SPEC_REGISTRY_VERSION = 1;
 
 export function emptySpecRegistry(now: Date = new Date()): ProductSpecRegistry {
-  return { version: SPEC_REGISTRY_VERSION, products: [], updatedAt: now.toISOString() };
+  return {
+    version: SPEC_REGISTRY_VERSION,
+    products: [],
+    domainNotes: [],
+    updatedAt: now.toISOString(),
+  };
 }
 
 // ── 주장 탐지 패턴 ────────────────────────────────────────────
@@ -157,6 +189,12 @@ const AXIS_CLAIMS: Array<{
     value: true,
     re: /배터리\s*(?:를|는)?\s*충전|충전\s*(?:하면서|해서|식|형|가능)|C\s*타입\s*(?:으로)?\s*충전|USB\s*충전/,
   },
+];
+
+const DRAW_PATTERNS: Array<[DrawStyle, RegExp]> = [
+  ["겸용", /입\s*[·,&\/]?\s*폐\s*호흡\s*(?:을|를)?\s*(?:모두|둘\s*다|다)|입폐\s*겸용|입\s*호흡\s*(?:과|와)\s*폐\s*호흡/],
+  ["폐호흡", /폐\s*호흡|폐홉|DTL/],
+  ["입호흡", /입\s*호흡|입홉|MTL/],
 ];
 
 const INHALE_PATTERNS: Array<[InhaleMode, RegExp]> = [
@@ -322,6 +360,7 @@ export function findSpecViolations(
     }> = [
       { attr: "형태", hit: firstMatch(sentence, FORM_PATTERNS), registered: (s) => s.form },
       { attr: "흡입방식", hit: firstMatch(sentence, INHALE_PATTERNS), registered: (s) => s.inhaleMode },
+      { attr: "입폐호흡", hit: firstMatch(sentence, DRAW_PATTERNS), registered: (s) => s.drawStyle },
     ];
 
     for (const { attr, hit, registered } of checks) {
@@ -355,7 +394,7 @@ export function findSpecViolations(
         continue;
       }
       // 겸용은 자동/버튼 주장과 충돌하지 않는다.
-      if (attr === "흡입방식" && known === "겸용") continue;
+      if ((attr === "흡입방식" || attr === "입폐호흡") && known === "겸용") continue;
       if (known !== hit.value) {
         violations.push({
           kind: "모순",
@@ -461,13 +500,15 @@ export function describeSpecViolation(v: SpecViolation): string {
  * 채우려 든다 — 빈칸은 채워야 할 것으로 읽히기 때문이다.
  */
 export function buildProductFactSheet(registry: ProductSpecRegistry): string {
-  if (registry.products.length === 0) return "";
+  const domain = registry.domainNotes ?? [];
+  if (registry.products.length === 0 && domain.length === 0) return "";
 
   const lines = registry.products.map((s) => {
     const bits: string[] = [];
     if (s.officialName) bits.push(`정식명 ${s.officialName}`);
     if (s.form) bits.push(`형태 ${s.form}`);
-    if (s.inhaleMode) bits.push(`흡입 ${s.inhaleMode}`);
+    if (s.inhaleMode) bits.push(`격발 ${s.inhaleMode}`);
+    if (s.drawStyle) bits.push(`흡입 ${s.drawStyle}`);
     if (s.wattControl !== undefined) bits.push(`출력(와트) 조절 ${s.wattControl ? "가능" : "없음"}`);
     if (s.airflowControl !== undefined) bits.push(`흡입압 조절 ${s.airflowControl ? "가능" : "없음"}`);
     if (s.batteryRechargeable !== undefined)
@@ -489,6 +530,9 @@ export function buildProductFactSheet(registry: ProductSpecRegistry): string {
   });
 
   return [
+    ...(domain.length > 0
+      ? ["## 업종 용어와 단위 (아래 정의를 그대로 따를 것)", ...domain.map((n) => `- ${n}`), ""]
+      : []),
     "## 확인된 제품 사양 (이 값만 사실로 쓸 것)",
     ...lines,
     "",

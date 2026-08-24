@@ -21,9 +21,37 @@
         "오픈팟이라 내부 액상이 눈으로 보이고 전면 스크린에도 잔량 표시",
         "니코틴 농도 1%(10mg)와 5%(50mg) 두 종류로 나온다",
         "카트리지 사용 전 접지부의 돌출 버튼을 눌러야 결합된다",
-        "개봉 제품은 항공기 반입 불가, 고지대·고온 환경 사용 자제"
+        "개봉 제품은 항공기 반입 불가, 고지대·고온 환경 사용 자제",
+        "1% 카트리지는 22ml / 1100mAh, 5% 카트리지는 40k 용량"
       ],
-      "source": "사장님 발행글 post-manual-mr0k6kud",
+      "source": "사장님 발행글 post-manual-mr0k6kud + 사장님 확인(배터리 1100mAh)",
+      "verifiedAt": "2026-08-24",
+      "batteryMah": 1100,
+      "liquidMl": "22ml (1% 기준)"
+    },
+    {
+      "name": "닷모드투엑스",
+      "aliases": [
+        "닷모드 투엑스",
+        "닷모드 투엑스 파티",
+        "dot2X",
+        "DOTMOD 투엑스"
+      ],
+      "category": "기기",
+      "officialName": "DOTMOD 닷모드 투엑스 파티",
+      "batteryMah": 2100,
+      "podMl": "5ml",
+      "resistanceOhm": "0.6옴 / 1.0옴",
+      "wattControl": true,
+      "batteryRechargeable": true,
+      "sizeMm": "94 x 43 x 20",
+      "notes": [
+        "최저 와트 12W. 1.0옴 팟에 12W로 쓰면 한 번 주입으로 하루도 가능",
+        "팟 앞뒤로 액상 잔량 확인 가능하고 팟을 빼기 쉽게 설계",
+        "닷모드 특유의 컬러감(블랙·실버)이 강점",
+        "일반 팟 기기보다 가격대가 조금 높다"
+      ],
+      "source": "사장님 발행글 post-manual-mt6z60ar",
       "verifiedAt": "2026-08-24"
     },
     {
@@ -60,13 +88,28 @@
       "inhaleMode": "겸용",
       "batteryRechargeable": true,
       "notes": [
+        "입호흡·폐호흡을 한 기기에서 모두 지원 — 이 제품의 핵심 차별점",
+        "0.6옴은 입호흡용으로 VG 30~50% 액상 권장. 다만 쿨링 강한 변종 액상은 과유입·누수 위험이 있어 주의",
+        "0.1옴·0.4옴은 폐호흡용으로 VG 70 이상 권장. 입호흡 액상을 넣으면 맛도 안 오르고 누수가 난다",
+        "사이드 LCD로 정보 확인. 버튼 3번=와트 변경, 4번=흡입 모드 변경, 2번=퍼프수 초기화",
+        "전용 팟 7.5ml는 시중 팟 기기 중 최대급",
+        "액상 잔량 확인 윈도우",
         "팟 교체형 디바이스",
         "오토드로우(버튼 없이)와 버튼 베이핑 모두 지원",
         "장시간 미사용·충전 시에는 디바이스에서 팟을 분리해두는 것을 권장(과유입 방지)",
         "오토드로우 사용 시 잔증기가 남아 결로가 생기고 이를 누수로 오해하는 경우가 많다"
       ],
-      "source": "사장님 발행글 post-manual-mr5y47o6",
-      "verifiedAt": "2026-08-24"
+      "source": "사장님 발행글 post-manual-mr5y47o6 + post-manual-mt6z3928",
+      "verifiedAt": "2026-08-24",
+      "officialName": "MY POD PRO",
+      "drawStyle": "겸용",
+      "wattControl": true,
+      "batteryMah": 3500,
+      "podMl": "7.5ml",
+      "resistanceOhm": "0.1옴 / 0.4옴 / 0.6옴",
+      "wattRange": "최대 80W",
+      "sizeMm": "89 x 19 x 46",
+      "weightG": 95
     },
     {
       "name": "말론S",
@@ -133,6 +176,50 @@
       "verifiedAt": "2026-08-24"
     },
     {
+      "name": "발라리안맥스프로",
+      "aliases": [
+        "발라리안 맥스 프로",
+        "발라맥스프로",
+        "유웰 발라리안 맥스 프로"
+      ],
+      "category": "기기",
+      "officialName": "유웰(Uwell) 발라리안 맥스 프로",
+      "batteryMah": 2700,
+      "podMl": "6ml",
+      "wattControl": true,
+      "batteryRechargeable": true,
+      "notes": [
+        "배터리 2700mAh — 같은 크기대 기기 대부분이 1000~1600인 것에 비해 큰 용량",
+        "컬러 LCD와 애니메이션 UI",
+        "시판 팟 기기 중 두꺼운 축이지만 손에 쥐면 오히려 안정적",
+        "마감 품질이 이전 발라리안 맥스보다 확연히 낫다",
+        "가격 10만원 미만"
+      ],
+      "source": "사장님 발행글 post-manual-mt6z50dx",
+      "verifiedAt": "2026-08-24"
+    },
+    {
+      "name": "젤로",
+      "aliases": [
+        "기본 젤로",
+        "젤로 버터",
+        "젤로버터"
+      ],
+      "category": "기기",
+      "officialName": "헬베이프 젤로 / 젤로 버터",
+      "drawStyle": "입호흡",
+      "batteryMah": 1500,
+      "podMl": "3.5ml",
+      "batteryRechargeable": true,
+      "notes": [
+        "기본 젤로와 젤로 버터는 색상만 다른 같은 기기",
+        "가격대 5만원대",
+        "휴대성 좋은 스테디셀러"
+      ],
+      "source": "사장님 발행글 post-manual-mt6z4kiq",
+      "verifiedAt": "2026-08-24"
+    },
+    {
       "name": "젤로맥스",
       "aliases": [
         "젤로 맥스",
@@ -142,13 +229,21 @@
       "inhaleMode": "겸용",
       "batteryRechargeable": true,
       "notes": [
+        "헬베이프 젤로 시리즈의 최상위 모델 (기본/버터/맥스 중 맥스)",
+        "사각형 형태",
+        "가격대 6만원대",
+        "배터리 용량은 사장님 글끼리 값이 달라 미등록 — 확인 필요",
         "입호흡 팟 디바이스",
         "버튼 베이핑과 버튼 없는 사용 모두 가능",
         "장시간 미사용·충전 시에는 팟을 분리해두는 것을 권장",
         "버튼에서 미리 손을 떼면 잔증기가 덜 남는다"
       ],
-      "source": "사장님 발행글 post-manual-mr4m14xy",
-      "verifiedAt": "2026-08-24"
+      "source": "사장님 발행글 post-manual-mr4m14xy + post-manual-mt6z4kiq",
+      "verifiedAt": "2026-08-24",
+      "officialName": "헬베이프 젤로 맥스",
+      "form": "박스형",
+      "drawStyle": "입호흡",
+      "podMl": "4ml"
     },
     {
       "name": "크로스미니6",
@@ -181,5 +276,11 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-24T00:00:00.000Z"
+  "updatedAt": "2026-08-24T00:00:00.000Z",
+  "domainNotes": [
+    "mAh는 배터리 용량 단위다. 액상 용량(ml)이나 퍼프수와 절대 섞어 쓰지 말 것.",
+    "니코틴 농도 기준: 1%가 기본 농도, 2% 이상부터 고농도다. \"고농도\"라는 말을 5%로 단정하면 안 된다 — 2%도 3%도 고농도다.",
+    "입호흡(MTL)과 폐호흡(DTL)은 호흡법 차이만이 아니다. 기기 타입과 넣는 액상(VG 비율)이 모두 달라서, 잘못 조합하면 무화량이 안 나오거나 누수가 난다.",
+    "퍼프수 표기는 전압과 사용자의 흡입 습관에 따라 실제와 크게 달라진다. 액상 용량(ml)이 더 정확한 기준이다."
+  ]
 }
