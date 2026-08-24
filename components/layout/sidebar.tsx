@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { href: "/topics", label: "글목록", icon: "◇", admin: false },
   { href: "/pipeline", label: "글쓰기 실행", icon: "▶", admin: false },
   { href: "/posts", label: "발행 인덱스", icon: "≡", admin: false },
+  { href: "/specs", label: "사양 원장", icon: "◈", admin: false },
   { href: "/eval", label: "운영 리포트", icon: "◉", admin: true },
 ] as const;
 

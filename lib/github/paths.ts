@@ -34,6 +34,7 @@ export const Paths = {
   domainBrands: () => "data/config/domain-brands.json",
   usageLedger: () => "data/usage/ledger.json",
   productSpecs: () => "data/config/product-specs.json",
+  productSpecCandidates: () => "data/config/product-spec-candidates.json",
   localityKeywordLedger: (userId: string) =>
     `data/locality-keywords/${userId}/ledger.json`,
   approvalRecord: (pipelineId: string) => `data/approvals/${pipelineId}.json`,

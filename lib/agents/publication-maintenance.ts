@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
-import { readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
+import { extractSpecCandidatesFromPost } from "./spec-extractor";
+import { readFile, readJsonFile, writeJsonFile, fileExists } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import { resolveRemainingTopics } from "@/lib/skills/remaining-topic-resolver";
@@ -99,9 +100,27 @@ function generatedToTopic(generated: GeneratedTopic, userId: string, now: string
   };
 }
 
+/** 본문을 인자에서 받거나 저장소에서 읽는다. 없으면 null. */
+async function resolvePostContent(
+  postId: string,
+  provided?: string
+): Promise<string | null> {
+  if (provided && provided.trim()) return provided;
+  try {
+    const path = Paths.postContent(postId);
+    if (!(await fileExists(path))) return null;
+    const file = await readFile(path);
+    return file.content || null;
+  } catch {
+    return null;
+  }
+}
+
 export async function runAfterPublishMaintenance(params: {
   post: PostingRecord;
   autoGenerateTopics?: boolean;
+  /** 사양 후보 추출용 본문. 없으면 추출을 건너뛴다. */
+  postContent?: string;
 }): Promise<AfterPublishMaintenanceResult> {
   const userId = normalizeUserId(params.post.userId);
   if (!userId) return { generatedCount: 0, learned: false, corpusSynced: false };
@@ -113,6 +132,25 @@ export async function runAfterPublishMaintenance(params: {
   const topic = topicsIndex.topics.find((item) => item.topicId === params.post.topicId) ?? null;
   await appendPublicationLearning({ post: params.post, topic });
   const corpusSynced = await syncPublishedPostToUserCorpus({ post: params.post, topic }).catch(() => false);
+
+  // 사양 후보 추출. 기존 학습(문체)과 다른 층이다 — 문체는 corpus가, 사실은
+  // 이 경로가 담당한다. 승인 전에는 프롬프트에 들어가지 않으므로 발행 흐름에
+  // 영향이 없고, 실패해도 무시한다.
+  //
+  // 본문을 인자로 안 받고 여기서 읽는다. 호출부가 세 군데(PATCH/PUT/POST)라
+  // 배선하면 한 곳을 빠뜨리기 쉽고, 그러면 그 경로로 들어온 글만 조용히
+  // 학습에서 빠진다 — 이번에 문체만 학습되던 것과 같은 종류의 사고다.
+  void resolvePostContent(params.post.postId, params.postContent)
+    .then((content) =>
+      content
+        ? extractSpecCandidatesFromPost({
+            postId: params.post.postId,
+            title: params.post.title ?? "",
+            content,
+          })
+        : undefined
+    )
+    .catch(() => undefined);
 
   if (!hasTopicsIndex || params.autoGenerateTopics === false) {
     return { generatedCount: 0, learned: true, corpusSynced };
