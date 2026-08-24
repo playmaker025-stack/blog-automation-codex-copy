@@ -7,6 +7,11 @@ import type {
   StrategyPlanResult,
 } from "./types";
 import { buildConfirmedSeoKeywords } from "./confirmed-seo-keywords.ts";
+import {
+  findSpecViolations,
+  describeSpecViolation,
+  type ProductSpecRegistry,
+} from "./product-specs.ts";
 
 const DEFER_PHRASES = [
   "다음 글에서",
@@ -309,6 +314,8 @@ export function runFinalDraftCheck(params: {
   content: string;
   strategy: StrategyPlanResult;
   confirmedSeoKeywords?: ConfirmedSeoKeywords;
+  /** 제품 사양 원장. 없으면 사양 검사를 건너뛴다. */
+  productSpecs?: ProductSpecRegistry;
 }): FinalDraftCheck {
   const contract = params.strategy.articleContract;
   const overlapReport = params.strategy.overlapReport;
@@ -335,12 +342,25 @@ export function runFinalDraftCheck(params: {
   const articlePlanCoverage = findArticlePlanCoverage(params.content, params.strategy);
   const overlapFindings = findOverlapIssues(params.content, overlapReport);
 
+  // 사양 검사. 등록값과 반대되는 주장(모순)은 명백한 거짓이라 차단하고,
+  // 원장에 값이 없는 항목을 단정한 경우(미확인)는 원장이 자랄 때까지 경고로 둔다.
+  const specViolations = params.productSpecs
+    ? findSpecViolations(params.content, params.productSpecs)
+    : [];
+  const specContradictions = specViolations
+    .filter((v) => v.kind === "모순")
+    .map(describeSpecViolation);
+  const specSoftFindings = specViolations
+    .filter((v) => v.kind !== "모순")
+    .map(describeSpecViolation);
+
   const blockingReasons = uniq([
     ...matchedForbiddenPhrases.map((phrase) => `금지 표현 감지: ${phrase}`),
     ...questionStuffing,
     ...keywordLimitFindings,
     ...deferFindings,
     ...articlePlanCoverage.blocking,
+    ...specContradictions,
   ]);
 
   const warnings = uniq([
@@ -349,6 +369,7 @@ export function runFinalDraftCheck(params: {
     ...preludeConsumptionFindings,
     ...(overlapReport?.riskLevel === "high" ? overlapFindings : []),
     ...(overlapReport?.riskLevel === "medium" ? overlapFindings : []),
+    ...specSoftFindings,
   ]);
 
   return {
@@ -360,6 +381,7 @@ export function runFinalDraftCheck(params: {
     deferFindings,
     contractCoverageFindings,
     overlapFindings,
+    specFindings: uniq([...specContradictions, ...specSoftFindings]),
   };
 }
 

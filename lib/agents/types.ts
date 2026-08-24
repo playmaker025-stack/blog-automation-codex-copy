@@ -472,6 +472,8 @@ export interface FinalDraftCheck {
   deferFindings: string[];
   contractCoverageFindings: string[];
   overlapFindings: string[];
+  /** 제품 사양 원장과 대조한 결과. 모순은 차단, 미확인은 경고. */
+  specFindings: string[];
 }
 
 /**

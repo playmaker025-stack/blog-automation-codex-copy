@@ -9,6 +9,8 @@ import { Paths } from "@/lib/github/paths";
 import { hasOpenAIKey, requestOpenAIText } from "@/lib/openai/responses";
 import { randomUUID } from "crypto";
 import type { ContentTopologyPlan, StrategyPlanResult, WriterResult } from "./types";
+import { buildProductFactSheet, type ProductSpecRegistry } from "./product-specs.ts";
+import { loadProductSpecs } from "./product-spec-store";
 import type { CorpusSummaryArtifact } from "./corpus-selector";
 import { buildPolicyPromptSection, SEO_PASS_THRESHOLD } from "./blog-workflow-policy";
 import { naverLogicAgent } from "./naver-logic-agent";
@@ -572,6 +574,7 @@ export function buildOpenAIWriterUserPrompt(params: {
   corpusSummary?: CorpusSummaryArtifact;
   harnessBriefing?: string;
   revisionInstructions?: string;
+  productSpecs?: ProductSpecRegistry;
 }): string {
   const { strategy, userId, corpusSummary, harnessBriefing, revisionInstructions } = params;
   const keywordPlacementGuidance = buildKeywordPlacementGuidance(strategy);
@@ -625,6 +628,10 @@ export function buildOpenAIWriterUserPrompt(params: {
     "",
     "Corpus/style reference:",
     formatOpenAICorpus(corpusSummary),
+    "",
+    // 제품 사양은 원장에 있는 것만 사실로 쓴다. 이름만 알고 사양을 모르면
+    // 모델이 빈칸을 상상으로 채운다 (2026-08-24 크로스미니6/말론S 사고).
+    params.productSpecs ? buildProductFactSheet(params.productSpecs) : "",
     "",
     "Pre-write harness briefing:",
     harnessBriefing || "No extra harness briefing.",
@@ -813,7 +820,12 @@ function buildOpenAIWriterCompactUserPrompt(params: {
     ...duplicateModeGuidance,
     ...roleSpecificGuidance,
     "- AEO (2026): First 2 paragraphs must directly answer the search intent with at least one concrete fact (number, price, date, duration). Write them as complete, quotable sentences for Naver AI Briefing citation.",
-    "- Human fingerprint (2026, mandatory): Every section needs 1-2 first-person experience sentences ('직접 써봤더니', 'N일 써보고', '가격이 X원'). No pure-information sections.",
+    // 2026-08-24: 이 지시가 거짓 경험을 만들고 있었다. "직접 써봤더니"를 강제하니
+    // 사양도 모르는 제품의 사용감을 지어냈다(크로스미니6/말론S 사고). 1인칭은
+    // 유지하되 검증 가능한 세부는 확인된 사실로만 쓰게 제한한다.
+    "- Human fingerprint (2026, mandatory): Every section needs 1-2 first-person sentences grounded in shop experience (상담하면서 본 것, 손님이 자주 묻는 것). No pure-information sections.",
+    "- Never invent verifiable product details you were not given: device shape, wattage/airflow control, battery, capacity, resistance, price. If it is not in the confirmed spec sheet above, do not state it — and do not soften it into a guess either.",
+    "- Do not claim hands-on product testing ('직접 써봤더니', 'N일 써보고') unless that specific usage was provided to you. Shop-counter observation is fine and is what you actually have.",
     "- Dwell structure (2026): Brief roadmap at the top, one mid-article hook sentence ('사실 이게 핵심인데요' style), next-step close tied to bridge keyword.",
     "- Output only the final Korean markdown body.",
   ].join("\n");
@@ -825,6 +837,7 @@ function resolveOpenAIWriterPromptPlan(params: {
   corpusSummary?: CorpusSummaryArtifact;
   harnessBriefing?: string;
   revisionInstructions?: string;
+  productSpecs?: ProductSpecRegistry;
 }) {
   const systemPrompt = buildOpenAIWriterSystemPrompt();
   const fullUserPrompt = buildOpenAIWriterUserPrompt(params);
@@ -970,12 +983,19 @@ async function runOpenAIMasterWriter(params: {
   const callSignal = signal
     ? AbortSignal.any([signal, AbortSignal.timeout(420_000)])
     : AbortSignal.timeout(420_000);
+  // 사양 원장은 실패해도 글쓰기를 막지 않는다. 없으면 사실 시트가 비고,
+  // 프롬프트의 "확인되지 않은 사양은 쓰지 말 것" 규칙만 남는다.
+  const productSpecs = await loadProductSpecs()
+    .then((r) => r.data)
+    .catch(() => undefined);
+
   const promptPlan = resolveOpenAIWriterPromptPlan({
     strategy,
     userId,
     corpusSummary,
     harnessBriefing,
     revisionInstructions,
+    productSpecs,
   });
 
   onProgress?.("Master Writer가 OpenAI로 초안을 작성합니다.");
@@ -1325,10 +1345,14 @@ async function saveWriterResult(params: {
   // 검수는 감지만 한다. 본문을 코드로 고치지 않는다 — 걸린 항목은 재작성 지시문으로만 남기고,
   // orchestrator의 재작성 라운드(writer-revision-policy)가 master-writer에게 다시 쓰게 한다.
   const finalContent = params.content;
+  const specsForCheck = await loadProductSpecs()
+    .then((r) => r.data)
+    .catch(() => undefined);
   const finalDraftCheck = runFinalDraftCheck({
     title: params.title,
     content: finalContent,
     strategy: params.strategy,
+    productSpecs: specsForCheck,
   });
   const finalDraftRevisionInstructions = buildFinalDraftRevisionInstructions(finalDraftCheck);
   // LAYER 6 — AI 인용 가능성. 발행을 막지는 않고 재작성 압력으로만 쓴다.

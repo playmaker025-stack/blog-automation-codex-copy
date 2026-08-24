@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "products": [
+    {
+      "name": "크로스미니6",
+      "aliases": [
+        "크로스미니 6",
+        "XROS 6 MINI",
+        "크로스 미니6"
+      ],
+      "category": "기기",
+      "officialName": "VAPORESSO XROS 6 MINI",
+      "form": "박스형",
+      "inhaleMode": "자동",
+      "batteryMah": 1600,
+      "podMl": "2ml, 3ml",
+      "resistanceOhm": "0.6옴 (기본 동봉 팟)",
+      "charging": "C타입",
+      "sizeMm": "110.5 x 24.55 x 14.65",
+      "weightG": 65,
+      "notes": [
+        "모든 크로스팟 호환",
+        "출력(와트) 조절은 없고 흡입압 조절바로 공기량만 조절",
+        "일반/부스트 2모드, 연속 2회 흡입으로 전환 (별도 버튼 없음)",
+        "LED 칸으로 배터리 잔량 표시",
+        "이전 5세대 대비 배터리 100mAh 증가",
+        "색상 9종"
+      ],
+      "source": "사장님 발행글 post-manual-mr1tcu2q / mr1ze6cd / mr69b8nu 스펙표 일치 + 사장님 확인",
+      "verifiedAt": "2026-08-24",
+      "wattControl": false,
+      "airflowControl": true
+    },
+    {
+      "name": "말론S",
+      "aliases": [
+        "말론 S",
+        "Malone S",
+        "말론s"
+      ],
+      "category": "기기",
+      "form": "원통형",
+      "notes": [
+        "스크린 있음",
+        "버튼 조작 가능",
+        "팟 교체형",
+        "입호흡(MTL) 중심",
+        "출력에 따라 같은 액상도 맛 인상이 달라짐",
+        "기존 말론과는 다른 모델"
+      ],
+      "source": "사장님 발행글 post-manual-mrbo3baf (blog.naver.com/mansur_vape/224340378304)",
+      "verifiedAt": "2026-08-24",
+      "wattControl": true
+    }
+  ],
+  "updatedAt": "2026-08-24T00:00:00.000Z"
+}
