@@ -2,6 +2,21 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-38ca6424",
+      "title": "부천 전자담배 액상 추천과 인기 맛 5가지 비교",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "남동구",
+        "전자담배",
+        "액상추천",
+        "입호흡"
+      ],
+      "wordCount": 3707,
+      "publishedAt": "2026-08-24T08:49:14.198Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-38ca6424.md"
+    },
+    {
       "sampleId": "published-post-5fbf9c10",
       "title": "연수동 전자담배 입문자를 위한 필수 질문과 매장 선택법",
       "category": "b",
@@ -295,5 +310,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-08-22T09:23:56.336Z"
+  "lastUpdated": "2026-08-24T08:49:25.056Z"
 }
