@@ -234,6 +234,59 @@ describe("PR32 일회용 사양 축", () => {
   });
 });
 
+// "충전식"이라는 한 단어가 배터리 충전과 액상 리필 둘 다를 가리켜서 글에서
+// 자주 뒤섞인다. 도조오팔은 배터리는 충전되지만 액상은 주입 완료 상태다.
+describe("PR32 충전과 리필 구분", () => {
+  const REG = {
+    version: 1,
+    products: [
+      {
+        name: "도조오팔",
+        category: "일회용",
+        batteryRechargeable: true,
+        liquidRefillable: false,
+        puffs: 20000,
+        liquidMl: "20ml",
+        source: "사장님 확인",
+        verifiedAt: "2026-08-24",
+      },
+    ],
+    updatedAt: "2026-08-24T00:00:00.000Z",
+  };
+
+  test("배터리 충전이 된다는 서술은 통과한다", () => {
+    const v = findSpecViolations("도조오팔은 배터리를 충전해서 씁니다.", REG);
+    assert.equal(v.filter((x) => x.kind === "모순").length, 0);
+  });
+
+  test("충전이 안 된다고 하면 잡는다", () => {
+    const v = findSpecViolations("도조오팔은 충전이 안 되는 제품입니다.", REG);
+    const 모순 = v.filter((x) => x.kind === "모순" && x.attribute === "배터리충전");
+    assert.equal(모순.length, 1);
+    assert.equal(모순[0].registered, "가능");
+  });
+
+  // 이게 제일 위험한 오류다. 배터리가 충전되니 액상도 채워 쓴다고 착각하기 쉽다.
+  test("액상을 리필해 쓴다고 하면 잡는다", () => {
+    const v = findSpecViolations("도조오팔은 액상을 리필해서 계속 쓸 수 있습니다.", REG);
+    const 모순 = v.filter((x) => x.kind === "모순" && x.attribute === "액상리필");
+    assert.equal(모순.length, 1);
+    assert.equal(모순[0].registered, "불가");
+  });
+
+  test("다 쓰면 버린다는 서술은 통과한다", () => {
+    const v = findSpecViolations("도조오팔은 다 쓰면 버리는 일회용입니다.", REG);
+    assert.equal(v.filter((x) => x.kind === "모순").length, 0);
+  });
+
+  // 한 문장이 두 축을 동시에 주장할 수 있다. 앞 축에서 멈추면 뒤를 놓친다.
+  test("한 문장에서 충전과 리필을 각각 판정한다", () => {
+    const v = findSpecViolations("도조오팔은 배터리를 충전하고 액상도 리필해서 씁니다.", REG);
+    const attrs = v.filter((x) => x.kind === "모순").map((x) => x.attribute);
+    assert.deepEqual(attrs, ["액상리필"], JSON.stringify(v));
+  });
+});
+
 describe("PR32 사실 시트", () => {
   test("등록된 값만 적고 모르는 항목은 아예 넣지 않는다", () => {
     const sheet = buildProductFactSheet(REGISTRY);

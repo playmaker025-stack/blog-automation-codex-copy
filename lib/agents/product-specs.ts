@@ -39,6 +39,17 @@ export interface ControlAxes {
   wattControl?: boolean;
   /** 흡입압(에어플로우) 조절 가능 여부. */
   airflowControl?: boolean;
+
+  /**
+   * 배터리 충전 가능 여부.
+   *
+   * 액상 리필과 반드시 나눠야 한다. "충전식"이라는 한 단어가 둘 다를 가리켜서
+   * 글에서 자주 뒤섞인다. 도조오팔이 대표적이다 — 배터리는 충전되지만 액상은
+   * 이미 주입된 상태라 다 쓰면 버린다. "충전식이니 오래 쓴다"고 쓰면 틀린다.
+   */
+  batteryRechargeable?: boolean;
+  /** 액상 리필(재주입) 가능 여부. */
+  liquidRefillable?: boolean;
 }
 
 export interface ProductSpec extends ControlAxes {
@@ -120,6 +131,31 @@ const AXIS_CLAIMS: Array<{
     field: "wattControl",
     value: true,
     re: /(?:출력|와트|파워)\s*(?:을|를)?\s*조절|출력\s*세팅|와트\s*설정|\d+\s*[Ww]\s*(?:까지|로)\s*조절/,
+  },
+  // 액상 리필을 배터리 충전보다 먼저 본다. "액상 충전"이 아래 배터리 패턴에도 걸린다.
+  {
+    attr: "액상리필",
+    field: "liquidRefillable",
+    value: false,
+    re: /액상\s*(?:을|를|은|이)?\s*(?:리필|충전|주입|보충)\s*(?:은|이|가)?\s*(?:안\s*[되돼]|불가|없)|다\s*쓰면\s*버리|리필\s*(?:형|식)\s*(?:이|은)?\s*아니/,
+  },
+  {
+    attr: "액상리필",
+    field: "liquidRefillable",
+    value: true,
+    re: /액상\s*(?:을|를)?\s*(?:리필|재?주입|보충)|리필\s*(?:해서|하며|가능|형|식)/,
+  },
+  {
+    attr: "배터리충전",
+    field: "batteryRechargeable",
+    value: false,
+    re: /충전\s*(?:이|은|가)?\s*(?:안\s*[되돼]|불가|없)|충전\s*(?:식|형)\s*(?:이|은)?\s*아니/,
+  },
+  {
+    attr: "배터리충전",
+    field: "batteryRechargeable",
+    value: true,
+    re: /배터리\s*(?:를|는)?\s*충전|충전\s*(?:하면서|해서|식|형|가능)|C\s*타입\s*(?:으로)?\s*충전|USB\s*충전/,
   },
 ];
 
@@ -334,12 +370,18 @@ export function findSpecViolations(
 
     // 조절 축(와트/흡입압)은 독립된 불리언이라 따로 본다.
     // 와트 조절이 없으면서 흡입압 조절이 있는 기기가 실제로 있다(크로스미니6).
+    // 축마다 한 번씩만 판정한다. 부정형 패턴을 긍정형보다 앞에 뒀으므로
+    // 먼저 걸린 쪽이 이긴다. 전체 루프를 break하면 한 문장이 여러 축을
+    // 주장할 때(출력 조절 + 충전) 뒤쪽 축이 통째로 안 걸린다.
+    const judgedAxes = new Set<string>();
     for (const claim of AXIS_CLAIMS) {
+      if (judgedAxes.has(claim.field)) continue;
       const m = claim.re.exec(sentence);
       if (!m) continue;
       if (NEGATION_AFTER.test(sentence.slice(m.index + m[0].length))) continue;
       if (here.length > 1) break;
       if (sentence.length > MAX_ATTRIBUTABLE_LENGTH) break;
+      judgedAxes.add(claim.field);
 
       const owner = here.length === 1 ? here[0] : attributeTo(sentence, m.index, specs);
       if (!owner) break;
@@ -365,8 +407,6 @@ export function findSpecViolations(
           sentence,
         });
       }
-      // 한 문장에서 같은 축을 두 번 판정하지 않는다. 부정형이 먼저 걸리면 그걸로 끝.
-      break;
     }
 
     // 수치형 사양은 값 대조 대신 "그 항목이 원장에 있는지"만 본다.
@@ -430,6 +470,10 @@ export function buildProductFactSheet(registry: ProductSpecRegistry): string {
     if (s.inhaleMode) bits.push(`흡입 ${s.inhaleMode}`);
     if (s.wattControl !== undefined) bits.push(`출력(와트) 조절 ${s.wattControl ? "가능" : "없음"}`);
     if (s.airflowControl !== undefined) bits.push(`흡입압 조절 ${s.airflowControl ? "가능" : "없음"}`);
+    if (s.batteryRechargeable !== undefined)
+      bits.push(`배터리 충전 ${s.batteryRechargeable ? "가능" : "불가"}`);
+    if (s.liquidRefillable !== undefined)
+      bits.push(`액상 리필 ${s.liquidRefillable ? "가능" : "불가(주입 완료 상태)"}`);
     if (s.batteryMah) bits.push(`배터리 ${s.batteryMah}mAh`);
     if (s.podMl) bits.push(`팟용량 ${s.podMl}`);
     if (s.liquidMl) bits.push(`액상용량 ${s.liquidMl}`);

@@ -14,12 +14,16 @@
       "nicotinePercent": 0.98,
       "batteryMah": 1000,
       "notes": [
+        "배터리는 충전식이지만 액상은 주입 완료 상태 — 다 쓰면 버리는 일회용",
         "표기 퍼프수는 전압과 흡입 습관에 따라 크게 달라진다 — 액상 용량(ml)이 더 정확한 기준",
         "0.98%는 일반 농도대",
         "멘솔·과일 계열"
       ],
-      "source": "사장님 발행글 post-manual-mrly9f82",
-      "verifiedAt": "2026-08-24"
+      "source": "사장님 발행글 post-manual-mrly9f82 + 사장님 확인(충전/리필 구분)",
+      "verifiedAt": "2026-08-24",
+      "batteryRechargeable": true,
+      "liquidRefillable": false,
+      "charging": "배터리 충전식"
     },
     {
       "name": "말론S",
@@ -39,12 +43,13 @@
         "기존 말론과는 다른 모델",
         "기존 말론(2000mAh/5ml) 대비 배터리 증가·팟 용량 감소"
       ],
-      "source": "사장님 발행글 post-manual-mrbo3baf (blog.naver.com/mansur_vape/224340378304) + 사장님 확인(배터리/팟용량/흡입방식) 2026-08-24",
+      "source": "사장님 발행글 post-manual-mrbo3baf (blog.naver.com/mansur_vape/224340378304) + 사장님 확인(배터리/팟용량/흡입방식) 2026-08-24 + 사장님 확인(와트 범위)",
       "verifiedAt": "2026-08-24",
       "wattControl": true,
       "inhaleMode": "겸용",
       "batteryMah": 2300,
-      "podMl": "4ml"
+      "podMl": "4ml",
+      "wattRange": "10~35W"
     },
     {
       "name": "크로스미니6",
