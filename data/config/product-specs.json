@@ -2,6 +2,51 @@
   "version": 1,
   "products": [
     {
+      "name": "도조오팔",
+      "aliases": [
+        "도조 오팔",
+        "도조오팔",
+        "DOJO OPAL"
+      ],
+      "category": "일회용",
+      "puffs": 20000,
+      "liquidMl": "20ml",
+      "nicotinePercent": 0.98,
+      "batteryMah": 1000,
+      "notes": [
+        "표기 퍼프수는 전압과 흡입 습관에 따라 크게 달라진다 — 액상 용량(ml)이 더 정확한 기준",
+        "0.98%는 일반 농도대",
+        "멘솔·과일 계열"
+      ],
+      "source": "사장님 발행글 post-manual-mrly9f82",
+      "verifiedAt": "2026-08-24"
+    },
+    {
+      "name": "말론S",
+      "aliases": [
+        "말론 S",
+        "Malone S",
+        "말론s"
+      ],
+      "category": "기기",
+      "form": "원통형",
+      "notes": [
+        "스크린 있음",
+        "자동·버튼 흡입 모두 가능",
+        "팟 교체형",
+        "입호흡(MTL) 중심",
+        "출력에 따라 같은 액상도 맛 인상이 달라짐",
+        "기존 말론과는 다른 모델",
+        "기존 말론(2000mAh/5ml) 대비 배터리 증가·팟 용량 감소"
+      ],
+      "source": "사장님 발행글 post-manual-mrbo3baf (blog.naver.com/mansur_vape/224340378304) + 사장님 확인(배터리/팟용량/흡입방식) 2026-08-24",
+      "verifiedAt": "2026-08-24",
+      "wattControl": true,
+      "inhaleMode": "겸용",
+      "batteryMah": 2300,
+      "podMl": "4ml"
+    },
+    {
       "name": "크로스미니6",
       "aliases": [
         "크로스미니 6",
@@ -30,31 +75,6 @@
       "verifiedAt": "2026-08-24",
       "wattControl": false,
       "airflowControl": true
-    },
-    {
-      "name": "말론S",
-      "aliases": [
-        "말론 S",
-        "Malone S",
-        "말론s"
-      ],
-      "category": "기기",
-      "form": "원통형",
-      "notes": [
-        "스크린 있음",
-        "자동·버튼 흡입 모두 가능",
-        "팟 교체형",
-        "입호흡(MTL) 중심",
-        "출력에 따라 같은 액상도 맛 인상이 달라짐",
-        "기존 말론과는 다른 모델",
-        "기존 말론(2000mAh/5ml) 대비 배터리 증가·팟 용량 감소"
-      ],
-      "source": "사장님 발행글 post-manual-mrbo3baf (blog.naver.com/mansur_vape/224340378304) + 사장님 확인(배터리/팟용량/흡입방식) 2026-08-24",
-      "verifiedAt": "2026-08-24",
-      "wattControl": true,
-      "inhaleMode": "겸용",
-      "batteryMah": 2300,
-      "podMl": "4ml"
     }
   ],
   "updatedAt": "2026-08-24T00:00:00.000Z"

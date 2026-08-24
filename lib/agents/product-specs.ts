@@ -55,6 +55,15 @@ export interface ProductSpec extends ControlAxes {
   resistanceOhm?: string;
   /** 출력 범위 표기. 예: "15~35W". wattControl이 true여도 범위는 따로 확인해야 한다. */
   wattRange?: string;
+
+  // ── 일회용(disposable) 전용 축 ──
+  // 기기와 사양 축이 다르다. 일회용은 형태·출력보다 퍼프수·농도·액상량으로 팔린다.
+  /** 표기 퍼프 수. 사장님 지적대로 실사용은 전압·흡입 습관에 따라 크게 달라진다. */
+  puffs?: number;
+  /** 니코틴 농도(%). */
+  nicotinePercent?: number;
+  /** 내장 액상 용량. 팟 교체형의 podMl과 구분한다. */
+  liquidMl?: string;
   charging?: string;
   sizeMm?: string;
   weightG?: number;
@@ -127,12 +136,28 @@ const INHALE_PATTERNS: Array<[InhaleMode, RegExp]> = [
  * 그러면 배터리·팟용량을 등록하는 순간 미확인 와트 주장("35W까지")이 그냥
  * 통과해버린다. 항목 하나를 채운 대가로 다른 항목의 감시가 풀리면 안 된다.
  */
-const NUMERIC_CLAIMS: Array<{ attr: string; field: keyof ProductSpec; re: RegExp }> = [
-  { attr: "배터리", field: "batteryMah", re: /\d+\s*mAh|배터리\s*용량\s*(?:은|는|이)?\s*\d/ },
-  { attr: "팟용량", field: "podMl", re: /\d+\.?\d*\s*ml\b|팟\s*용량|카트리지\s*용량/ },
-  { attr: "저항값", field: "resistanceOhm", re: /\d+\.?\d*\s*(?:옴|Ω)|저항값\s*(?:은|는|이)?\s*\d/ },
-  { attr: "출력범위", field: "wattRange", re: /\d+\s*[~-]\s*\d+\s*[Ww]\b|\d+\s*[Ww]\s*(?:까지|로|출력)/ },
-  { attr: "크기", field: "sizeMm", re: /\d+\.?\d*\s*(?:mm|㎜)/ },
+const NUMERIC_CLAIMS: Array<{
+  attr: string;
+  /** 하나라도 등록돼 있으면 통과. 일회용/팟형이 같은 단위를 다른 필드로 쓴다. */
+  fields: Array<keyof ProductSpec>;
+  re: RegExp;
+}> = [
+  { attr: "배터리", fields: ["batteryMah"], re: /\d+\s*mAh|배터리\s*용량\s*(?:은|는|이)?\s*\d/ },
+  {
+    attr: "용량",
+    fields: ["podMl", "liquidMl"],
+    re: /\d+\.?\d*\s*ml\b|팟\s*용량|카트리지\s*용량|액상\s*용량/,
+  },
+  { attr: "저항값", fields: ["resistanceOhm"], re: /\d+\.?\d*\s*(?:옴|Ω)|저항값\s*(?:은|는|이)?\s*\d/ },
+  { attr: "출력범위", fields: ["wattRange"], re: /\d+\s*[~-]\s*\d+\s*[Ww]\b|\d+\s*[Ww]\s*(?:까지|로|출력)/ },
+  { attr: "크기", fields: ["sizeMm"], re: /\d+\.?\d*\s*(?:mm|㎜)/ },
+  { attr: "퍼프수", fields: ["puffs"], re: /\d[\d,]*\s*퍼프|\d+\s*만\s*퍼프/ },
+  {
+    attr: "니코틴농도",
+    fields: ["nicotinePercent"],
+    // %만 보면 무관한 백분율에 걸린다. 니코틴/농도 문맥을 요구한다.
+    re: /니코틴[^.]{0,12}\d+\.?\d*\s*%|\d+\.?\d*\s*%\s*(?:니코틴|농도)|농도\s*(?:는|은|가)?\s*\d+\.?\d*\s*%/,
+  },
 ];
 
 /** 근거 없는 1인칭 경험 주장. 매장 글에서는 신뢰 문제로 직결된다. */
@@ -349,7 +374,7 @@ export function findSpecViolations(
       for (const claim of NUMERIC_CLAIMS) {
         if (!claim.re.test(sentence)) continue;
         for (const spec of here) {
-          if (spec[claim.field] === undefined) {
+          if (claim.fields.every((f) => spec[f] === undefined)) {
             violations.push({
               kind: "미확인",
               product: spec.name,
@@ -407,6 +432,10 @@ export function buildProductFactSheet(registry: ProductSpecRegistry): string {
     if (s.airflowControl !== undefined) bits.push(`흡입압 조절 ${s.airflowControl ? "가능" : "없음"}`);
     if (s.batteryMah) bits.push(`배터리 ${s.batteryMah}mAh`);
     if (s.podMl) bits.push(`팟용량 ${s.podMl}`);
+    if (s.liquidMl) bits.push(`액상용량 ${s.liquidMl}`);
+    if (s.puffs) bits.push(`표기 퍼프 ${s.puffs.toLocaleString("ko-KR")}`);
+    if (s.nicotinePercent !== undefined) bits.push(`니코틴 ${s.nicotinePercent}%`);
+    if (s.wattRange) bits.push(`출력범위 ${s.wattRange}`);
     if (s.resistanceOhm) bits.push(`저항 ${s.resistanceOhm}`);
     if (s.charging) bits.push(`충전 ${s.charging}`);
     if (s.sizeMm) bits.push(`크기 ${s.sizeMm}`);

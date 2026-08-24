@@ -181,6 +181,59 @@ describe("PR32 근거 없는 사용 경험", () => {
   });
 });
 
+// 일회용은 기기와 사양 축이 다르다. 퍼프수·니코틴 농도·액상량으로 판다.
+describe("PR32 일회용 사양 축", () => {
+  const DISPOSABLE = {
+    version: 1,
+    products: [
+      {
+        name: "도조오팔",
+        aliases: ["도조 오팔"],
+        category: "일회용",
+        puffs: 20000,
+        liquidMl: "20ml",
+        nicotinePercent: 0.98,
+        batteryMah: 1000,
+        source: "사장님 발행글",
+        verifiedAt: "2026-08-24",
+      },
+      {
+        name: "미등록일회용",
+        category: "일회용",
+        source: "테스트",
+        verifiedAt: "2026-08-24",
+      },
+    ],
+    updatedAt: "2026-08-24T00:00:00.000Z",
+  };
+
+  test("등록된 퍼프수·농도·액상량은 통과한다", () => {
+    const t = "도조오팔은 20000퍼프에 20ml, 니코틴 0.98%입니다.";
+    assert.equal(findSpecViolations(t, DISPOSABLE).length, 0);
+  });
+
+  test("미등록 일회용의 퍼프수 주장은 잡는다", () => {
+    const v = findSpecViolations("미등록일회용은 30000퍼프입니다.", DISPOSABLE);
+    assert.ok(v.some((x) => x.kind === "미확인" && x.attribute === "퍼프수"));
+  });
+
+  test("미등록 일회용의 니코틴 농도 주장은 잡는다", () => {
+    const v = findSpecViolations("미등록일회용은 니코틴 2% 제품입니다.", DISPOSABLE);
+    assert.ok(v.some((x) => x.kind === "미확인" && x.attribute === "니코틴농도"));
+  });
+
+  // %만 보면 무관한 백분율까지 잡아 정상 글을 막는다.
+  test("니코틴과 무관한 백분율은 잡지 않는다", () => {
+    const v = findSpecViolations("미등록일회용을 쓴 손님의 80%가 재구매했습니다.", DISPOSABLE);
+    assert.equal(v.filter((x) => x.attribute === "니코틴농도").length, 0);
+  });
+
+  test("액상 용량은 팟용량과 같은 단위라도 각자 필드로 인정된다", () => {
+    const v = findSpecViolations("도조오팔은 20ml가 들어 있습니다.", DISPOSABLE);
+    assert.equal(v.filter((x) => x.attribute === "용량").length, 0);
+  });
+});
+
 describe("PR32 사실 시트", () => {
   test("등록된 값만 적고 모르는 항목은 아예 넣지 않는다", () => {
     const sheet = buildProductFactSheet(REGISTRY);
