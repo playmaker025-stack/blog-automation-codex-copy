@@ -2,6 +2,15 @@
   "userId": "a",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt6xepnf",
+      "title": "베이포레소 크로스미니 6 직접 사용해본 후기와 장단점",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 8088,
+      "publishedAt": "2026-08-24T07:40:09.435Z",
+      "filePath": "user-modeling/users/a/corpus/samples/published-post-manual-mt6xepnf.md"
+    },
+    {
       "sampleId": "published-post-manual-mt6xe3jm",
       "title": "인천 전자담배 만수동만수르 드래곤바 원보틀 후기",
       "category": "published-post",
@@ -294,5 +303,5 @@
       "filePath": "user-modeling/users/a/corpus/samples/reference-a-15.md"
     }
   ],
-  "lastUpdated": "2026-08-24T07:39:47.122Z"
+  "lastUpdated": "2026-08-24T07:40:15.268Z"
 }
