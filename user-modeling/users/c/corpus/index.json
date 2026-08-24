@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt75drce",
+      "title": "인천전자담배 무니코틴 액상 입호흡 크라운 2종 후기!",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 5831,
+      "publishedAt": "2026-08-24T11:23:20.985Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt75drce.md"
+    },
+    {
       "sampleId": "published-post-b4e0e44a",
       "title": "전담기기 종류 뭐가 있을까? 인천 부평 기준으로 쉽게 정리",
       "category": "direct-run",
@@ -328,16 +337,7 @@
       "wordCount": 9155,
       "publishedAt": "2026-07-08T05:58:48.408Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mrbo3baf.md"
-    },
-    {
-      "sampleId": "published-post-manual-mr8tac1r",
-      "title": "발라리안R 누수·고장 생겼을 때 원인과 해결 순서",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 7382,
-      "publishedAt": "2026-07-06T06:00:54.382Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mr8tac1r.md"
     }
   ],
-  "lastUpdated": "2026-08-21T08:21:02.804Z"
+  "lastUpdated": "2026-08-24T11:23:27.683Z"
 }
