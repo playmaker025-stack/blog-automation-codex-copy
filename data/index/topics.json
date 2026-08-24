@@ -825,10 +825,10 @@
       "contentKind": "leaf",
       "feasibility": null,
       "relatedSources": [],
-      "status": "in-progress",
+      "status": "draft",
       "assignedUserId": "b",
       "createdAt": "2026-07-06T07:27:53.428Z",
-      "updatedAt": "2026-08-24T05:18:36.991Z"
+      "updatedAt": "2026-08-24T05:22:53.451Z"
     },
     {
       "topicId": "topic-556d475c",
@@ -1754,5 +1754,5 @@
       "updatedAt": "2026-08-21T08:21:22.995Z"
     }
   ],
-  "lastUpdated": "2026-08-24T05:18:36.991Z"
+  "lastUpdated": "2026-08-24T05:22:53.451Z"
 }
