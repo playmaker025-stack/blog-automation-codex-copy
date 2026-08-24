@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "lifetimeUsd": 0.0033231999999999997,
+  "lifetimeCalls": 1,
+  "days": [
+    {
+      "date": "2026-08-24",
+      "models": {
+        "gpt-4.1-mini": {
+          "calls": 1,
+          "inputTokens": 3568,
+          "outputTokens": 1185,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "usd": 0.0033231999999999997,
+          "unpriced": false
+        }
+      }
+    }
+  ],
+  "balanceMarks": [],
+  "updatedAt": "2026-08-24T05:18:38.781Z"
+}
