@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87kkfp",
+      "title": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6369,
+      "publishedAt": "2026-08-25T05:12:23.695Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87kkfp.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87k2r5",
       "title": "계산동전자담배 입호흡기기 발라리안 맥스 프로",
       "category": "published-post",
@@ -301,21 +310,7 @@
       "wordCount": 6961,
       "publishedAt": "2026-07-16T05:12:04.791Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mrn1y37e.md"
-    },
-    {
-      "sampleId": "published-post-3442dcc2",
-      "title": "무니코틴 고르기 전에 핵심 개념부터 정리",
-      "category": "c",
-      "tags": [
-        "무니코틴",
-        "선행포스팅",
-        "키워드빌드업",
-        "개념정리"
-      ],
-      "wordCount": 1580,
-      "publishedAt": "2026-07-15T09:31:58.693Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-3442dcc2.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:12:06.978Z"
+  "lastUpdated": "2026-08-25T05:12:30.047Z"
 }
