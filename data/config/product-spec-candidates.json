@@ -3773,7 +3773,95 @@
       "postTitle": "부평전자담배 아스몬 하이 입고! 스펙 & 구성품 & 사용법 총정리",
       "extractedAt": "2026-08-25T05:58:25.860Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-3a16a248",
+      "product": "말론바",
+      "field": "batteryMah",
+      "value": "650mAh",
+      "evidence": "배터리 : 650mAh",
+      "postId": "post-manual-mt898yex",
+      "postTitle": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "extractedAt": "2026-08-25T05:59:38.398Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-def0e078",
+      "product": "말론바",
+      "field": "charging",
+      "value": "C 타입",
+      "evidence": "충전 : C 타입",
+      "postId": "post-manual-mt898yex",
+      "postTitle": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "extractedAt": "2026-08-25T05:59:38.398Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-4a31a997",
+      "product": "말론바",
+      "field": "nicotinePercent",
+      "value": "0.98%",
+      "evidence": "니코틴 함량 : 0.98%",
+      "postId": "post-manual-mt898yex",
+      "postTitle": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "extractedAt": "2026-08-25T05:59:38.398Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-e514aa85",
+      "product": "말론바",
+      "field": "resistanceOhm",
+      "value": "듀얼 메쉬",
+      "evidence": "코일 : 듀얼 메쉬",
+      "postId": "post-manual-mt898yex",
+      "postTitle": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "extractedAt": "2026-08-25T05:59:38.398Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-1401424f",
+      "product": "말론바",
+      "field": "airflowControl",
+      "value": "가능",
+      "evidence": "말론바 기기의 하단에는 에어홀 조절바, 버튼, C 타입 충전 단자 이렇게 3가지가 보입니다. 흡입압 조절바와 버튼을 이용해서 기능을 사용하실 수 있어요!",
+      "postId": "post-manual-mt898yex",
+      "postTitle": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "extractedAt": "2026-08-25T05:59:38.398Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-6c92e0d8",
+      "product": "말론바",
+      "field": "inhaleMode",
+      "value": "버튼",
+      "evidence": "하단의 버튼을 한번 누르면 미러 디스플레이에 숨어있던 정보들이 생기는데요",
+      "postId": "post-manual-mt898yex",
+      "postTitle": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "extractedAt": "2026-08-25T05:59:38.398Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-9ebe77cb",
+      "product": "말론바",
+      "field": "drawStyle",
+      "value": "입호흡",
+      "evidence": "입호흡 기기인 말론은",
+      "postId": "post-manual-mt898yex",
+      "postTitle": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "extractedAt": "2026-08-25T05:59:38.398Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-79968e96",
+      "product": "말론바",
+      "field": "wattControl",
+      "value": "가능",
+      "evidence": "버튼 한번 클릭 - 출력 단계 3단계 조절",
+      "postId": "post-manual-mt898yex",
+      "postTitle": "인천전자담배 말론바 일회용 전담 스펙 & 사용법 그리고 후기",
+      "extractedAt": "2026-08-25T05:59:38.398Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-08-25T05:58:26.435Z"
+  "updatedAt": "2026-08-25T05:59:39.173Z"
 }
