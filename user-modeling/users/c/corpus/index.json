@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87suy8",
+      "title": "청천동전자담배 엘프바 조인원 아이스 20000퍼프 일회용 전담 만수르 후기!!",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6520,
+      "publishedAt": "2026-08-25T05:18:50.695Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87suy8.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87sf6n",
       "title": "부평전자담배 입호흡 전담 만수르 막내의 주관적인 1순위는?",
       "category": "published-post",
@@ -287,18 +296,7 @@
       "wordCount": 3013,
       "publishedAt": "2026-07-28T09:16:18.571Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-f3b26f79.md"
-    },
-    {
-      "sampleId": "published-post-3a147bb4",
-      "title": "전자담배 코일은 언제 갈아야 할까?",
-      "category": "direct-run",
-      "tags": [
-        "코일 언제"
-      ],
-      "wordCount": 2228,
-      "publishedAt": "2026-07-27T08:12:14.897Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-3a147bb4.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:18:36.230Z"
+  "lastUpdated": "2026-08-25T05:18:56.885Z"
 }
