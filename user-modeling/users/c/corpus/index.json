@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87qx6m",
+      "title": "산곡동전자담배 SUPA X3 수파 일회용 전담 후기 만수르",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6839,
+      "publishedAt": "2026-08-25T05:17:20.326Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87qx6m.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87ped6",
       "title": "와카일회용전담 이게 진짜 누수없는전자담배 아닐까요",
       "category": "published-post",
@@ -292,18 +301,7 @@
       "wordCount": 2637,
       "publishedAt": "2026-07-23T05:42:25.716Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-1191adb8.md"
-    },
-    {
-      "sampleId": "published-post-f4873ead",
-      "title": "가성비 좋은 전자담배의 기준",
-      "category": "direct-run",
-      "tags": [
-        "가성비, 전자담배"
-      ],
-      "wordCount": 2666,
-      "publishedAt": "2026-07-22T05:22:46.470Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-f4873ead.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:16:15.265Z"
+  "lastUpdated": "2026-08-25T05:17:26.900Z"
 }
