@@ -39,3 +39,19 @@ select {
   color: #71717a;
   opacity: 1;
 }
+
+/*
+ * 자동완성된 입력칸 글씨가 안 보이던 문제.
+ *
+ * Chrome은 자동완성한 칸에 -webkit-text-fill-color를 강제로 씌우는데, 이건
+ * 일반 color 지정을 이긴다. 어두운 사이드바에서는 배경만 어둡게 남고 글씨가
+ * 검정이 돼서 입력해도 아무것도 안 보인다. 배경도 함께 되돌린다.
+ */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f4f4f5;
+  -webkit-box-shadow: 0 0 0 1000px #18181b inset;
+  caret-color: #f4f4f5;
+  transition: background-color 9999s ease-in-out 0s;
+}
