@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 0.4195851999999999,
-  "lifetimeCalls": 24,
+  "lifetimeUsd": 0.4214735999999999,
+  "lifetimeCalls": 25,
   "days": [
     {
       "date": "2026-08-24",
@@ -30,12 +30,12 @@
       "date": "2026-08-25",
       "models": {
         "gpt-4.1-mini": {
-          "calls": 13,
-          "inputTokens": 52566,
-          "outputTokens": 6943,
+          "calls": 14,
+          "inputTokens": 56591,
+          "outputTokens": 7117,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.0321352,
+          "usd": 0.0340236,
           "unpriced": false
         }
       }
@@ -48,5 +48,5 @@
       "spentAtMarkUsd": 0.39440519999999996
     }
   ],
-  "updatedAt": "2026-08-25T05:16:03.452Z"
+  "updatedAt": "2026-08-25T05:16:28.556Z"
 }
