@@ -807,6 +807,37 @@ export function countKeywordOccurrences(body: string, keyword: string): number {
   return matches?.length ?? 0;
 }
 
+/**
+ * 더 긴 키워드에 포함된 매치는 빼고 센다.
+ *
+ * 왜 필요한가: "부천 전자담배 액상"을 한 번 쓰면 '부천 전자담배', '전자담배 액상',
+ * '전자담배', '액상' 카운터가 전부 같이 올라간다. 실측(2026-08-25) — 실제로 쓴
+ * 표현 5회가 22회로 집계됐고, 서브 키워드 기준(5회 이상 위험) 때문에 정상적인
+ * 글이 자동으로 "키워드 과다"가 됐다. 그 danger 개수가 재작성 트리거라서,
+ * 틀린 숫자로 글을 두 번 더 쓰게 만들고 있었다.
+ */
+export function countKeywordOccurrencesExcludingLonger(
+  body: string,
+  keyword: string,
+  allKeywords: string[]
+): number {
+  const target = keyword.trim();
+  if (!target) return 0;
+
+  const spans = collectPhraseSpans(body, target);
+  if (spans.length === 0) return 0;
+
+  const longerSpans = allKeywords
+    .map((candidate) => candidate.trim())
+    .filter((candidate) => candidate.length > target.length)
+    .flatMap((candidate) => collectPhraseSpans(body, candidate));
+  if (longerSpans.length === 0) return spans.length;
+
+  return spans.filter(
+    (span) => !longerSpans.some((outer) => outer.start <= span.start && outer.end >= span.end)
+  ).length;
+}
+
 function collectPhraseSpans(body: string, phrase: string): Array<{ start: number; end: number }> {
   const trimmed = phrase.trim();
   if (!trimmed) return [];
@@ -998,7 +1029,7 @@ function buildContractKeywordItems(contract: KeywordContract, body: string): Key
     const role = limit?.role ?? (keyword === contract.mainKeyword ? "main" : "sub");
     const min = limit?.min ?? (role === "main" ? 4 : 1);
     const max = limit?.max ?? (role === "main" ? 7 : 3);
-    const count = countKeywordOccurrences(body, keyword);
+    const count = countKeywordOccurrencesExcludingLonger(body, keyword, ordered);
     const status = getLimitedKeywordStatus(count, min, max);
     return {
       keyword,
@@ -1072,7 +1103,7 @@ export function analyzeKeywordUsage(params: {
   const normalizedTargetMainKeyword = params.targetMainKeyword?.trim().toLowerCase() ?? "";
 
   const items: KeywordUsageItem[] = contract ? buildContractKeywordItems(contract, params.body) : nonContractKeywordSpecs.map((keywordSpec) => {
-    const count = countKeywordOccurrences(params.body, keywordSpec.keyword);
+    const count = countKeywordOccurrencesExcludingLonger(params.body, keywordSpec.keyword, orderedKeywords);
     const isPreludeMainKeyword =
       params.seriesRole === "prelude" &&
       keywordSpec.role === "main" &&
