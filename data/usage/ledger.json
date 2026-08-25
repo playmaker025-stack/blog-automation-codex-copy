@@ -64,7 +64,13 @@
       "at": "2026-08-25T05:01:09.449Z",
       "balanceUsd": 5,
       "spentAtMarkUsd": 0.39440519999999996
+    },
+    {
+      "at": "2026-08-25T07:22:51.829Z",
+      "balanceUsd": 4.68,
+      "spentAtMarkUsd": 0,
+      "provider": "anthropic"
     }
   ],
-  "updatedAt": "2026-08-25T06:10:14.827Z"
+  "updatedAt": "2026-08-25T07:22:51.834Z"
 }
