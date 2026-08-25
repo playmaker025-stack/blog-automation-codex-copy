@@ -39,6 +39,11 @@ export async function GET() {
       stopReason: response.stop_reason,
       response: text,
       env: {
+        // 값은 절대 싣지 않는다. 있는지와 길이만 봐도 "안 넣었다 / 오타 / 따옴표
+        // 같이 넣었다"가 구분된다.
+        ADMIN_API_KEY_exists: "ADMIN_API_KEY" in process.env,
+        ADMIN_API_KEY_len: process.env.ADMIN_API_KEY?.trim().length ?? 0,
+        ADMIN_API_KEY_quoted: /^["']|["']$/.test(process.env.ADMIN_API_KEY ?? ""),
         TELEGRAM_BOT_TOKEN_exists: "TELEGRAM_BOT_TOKEN" in process.env,
         TELEGRAM_BOT_TOKEN_len: process.env.TELEGRAM_BOT_TOKEN?.trim().length ?? 0,
         NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL ?? null,
