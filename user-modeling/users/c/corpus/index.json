@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87k2r5",
+      "title": "계산동전자담배 입호흡기기 발라리안 맥스 프로",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6337,
+      "publishedAt": "2026-08-25T05:12:00.739Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87k2r5.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87jki9",
       "title": "작전동전자담배 일회용 와카(waka) 버스트30000 내돈내산 후기",
       "category": "published-post",
@@ -306,21 +315,7 @@
       "wordCount": 1580,
       "publishedAt": "2026-07-15T09:31:58.693Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-3442dcc2.md"
-    },
-    {
-      "sampleId": "published-post-928f746e",
-      "title": "젤로 전자담배 불량 증상 점검과 해결법 (부평전자담배)",
-      "category": "c",
-      "tags": [
-        "젤로",
-        "전자담배불량",
-        "부평전자담배",
-        "문제해결"
-      ],
-      "wordCount": 2863,
-      "publishedAt": "2026-07-14T06:43:16.168Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-928f746e.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:11:44.239Z"
+  "lastUpdated": "2026-08-25T05:12:06.978Z"
 }
