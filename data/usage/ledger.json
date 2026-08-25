@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 0.6020147999999999,
-  "lifetimeCalls": 80,
+  "lifetimeUsd": 0.7161227999999998,
+  "lifetimeCalls": 83,
   "days": [
     {
       "date": "2026-08-24",
@@ -46,6 +46,15 @@
           "cacheWriteTokens": 0,
           "usd": 0.06735,
           "unpriced": false
+        },
+        "claude-sonnet-4-6": {
+          "calls": 3,
+          "inputTokens": 32991,
+          "outputTokens": 1009,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "usd": 0.114108,
+          "unpriced": false
         }
       }
     }
@@ -57,5 +66,5 @@
       "spentAtMarkUsd": 0.39440519999999996
     }
   ],
-  "updatedAt": "2026-08-25T06:08:39.910Z"
+  "updatedAt": "2026-08-25T06:10:14.827Z"
 }
