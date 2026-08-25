@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87rzfg",
+      "title": "상동전자담배 닷투엑스 입호흡 전담 후기 만수르",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6885,
+      "publishedAt": "2026-08-25T05:18:09.725Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87rzfg.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87qx6m",
       "title": "산곡동전자담배 SUPA X3 수파 일회용 전담 후기 만수르",
       "category": "published-post",
@@ -289,19 +298,7 @@
       "wordCount": 6002,
       "publishedAt": "2026-07-24T09:31:43.669Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mryqqt28.md"
-    },
-    {
-      "sampleId": "published-post-1191adb8",
-      "title": "전담 액상 니코틴 종류와 건강 영향 분석",
-      "category": "direct-run",
-      "tags": [
-        "니코틴 종류",
-        "건강 영향"
-      ],
-      "wordCount": 2637,
-      "publishedAt": "2026-07-23T05:42:25.716Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-1191adb8.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:17:26.900Z"
+  "lastUpdated": "2026-08-25T05:18:15.716Z"
 }
