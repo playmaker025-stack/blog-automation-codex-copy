@@ -12,6 +12,7 @@ import type {
 } from "@/lib/types/github-data";
 import type { PublicationLearningSummary } from "./types";
 import { buildStyleFingerprint, type StyleFingerprint } from "./style-fingerprint";
+import { stripNaverChrome, hasNaverChrome, isUsableCorpusText } from "./naver-chrome.ts";
 
 interface PublicationLearningEntry {
   postId: string;
@@ -72,6 +73,8 @@ const MAX_STORED_CORPUS_SAMPLES = 30;
 const MAX_STORED_EXEMPLARS = 30;
 const MAX_PROFILE_TITLES = 8;
 const MAX_PROFILE_EXCERPTS = 5;
+/** 발췌 길이. 240자는 문체 지문을 뽑기에 너무 짧다 — 종결어미 표본이 두세 개밖에 안 나온다. */
+const EXCERPT_LENGTH = 600;
 
 const STOPWORDS = new Set([
   "전자담배",
@@ -98,13 +101,18 @@ function normalizeWhitespace(value: string): string {
   return value.replace(/\s+/g, " ").trim();
 }
 
+/**
+ * 발췌는 문체 학습의 원재료다 — 프롬프트에 "이 문장 흐름을 그대로 복제하라"로 실리고
+ * 종결어미·반복 표현 지문도 여기서 뽑는다. 그래서 네이버 UI를 먼저 걷어내야 한다.
+ * 걷어내기 전에는 앞부분이 통째로 헤더·검색창·공감 위젯이었다.
+ */
 function buildExcerpt(markdown: string): string {
   return normalizeWhitespace(
-    markdown
-      .replace(/^#+\s*/gm, "")
+    stripNaverChrome(markdown)
+      .text.replace(/^#+\s*/gm, "")
       .replace(/[`>*_~-]/g, " ")
       .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-  ).slice(0, 240);
+  ).slice(0, EXCERPT_LENGTH);
 }
 
 function stripMarkdown(markdown: string): string {
@@ -206,7 +214,8 @@ async function fetchPublishedMarkdownFromNaver(post: PostingRecord): Promise<str
     // 최후 수단: 첫 페이지 그대로 사용
     if (!html) html = firstHtml;
 
-    const text = htmlToText(html);
+    // 페이지 전체의 태그를 벗긴 결과라 헤더·메뉴·푸터가 전부 섞여 있다. 본문만 남긴다.
+    const text = stripNaverChrome(htmlToText(html)).text;
     if (text.length < 300) return null;
 
     return `# ${post.title}\n\n${text.slice(0, 20000)}`;
@@ -354,9 +363,11 @@ function buildWritingProfile(params: {
     .slice(0, 8)
     .map(([token]) => token);
   const averageWordCount = average(sortedSamples.map((sample) => sample.wordCount).filter((count) => count > 0));
+  // 예전에 저장된 발췌에는 네이버 UI가 그대로 들어 있다. 문체 지문이 "주소 변경 불가",
+  // "후기 네이버"를 사장님 고유 표현으로 배운 원인이라 여기서 한 번 더 막는다.
   const cleanedExcerpts = sortedExemplars
-    .map((exemplar) => stripMarkdown(exemplar.excerpt))
-    .filter((excerpt) => excerpt.length > 0);
+    .map((exemplar) => stripMarkdown(stripNaverChrome(exemplar.excerpt).text))
+    .filter((excerpt) => excerpt.length > 0 && !hasNaverChrome(excerpt));
   const representativeExcerpts = cleanedExcerpts.slice(0, MAX_PROFILE_EXCERPTS);
   // 지문은 저장 발췌 5개가 아니라 보유한 예문 전체에서 뽑는다. 표본이 클수록 반복 표현이 정확해진다.
   const styleFingerprint = buildStyleFingerprint(cleanedExcerpts);
@@ -413,21 +424,45 @@ function buildDerivedStyleRules(fingerprint: StyleFingerprint): {
   };
 }
 
+/**
+ * sha 충돌을 한 번 재시도한다.
+ *
+ * 사장님이 글을 발행하면 프로덕션이 같은 파일(코퍼스·예문·프로필)을 쓴다. 읽은
+ * 뒤 쓰기까지 사이에 바뀌면 GitHub이 sha 불일치로 거절한다. 실측으로 재학습을
+ * 돌리는 동안 발행이 겹쳐 두 사용자가 실패했다. build가 현재 값을 받는 이유는
+ * 재시도할 때 남의 변경을 덮어쓰지 않고 합치기 위해서다.
+ */
+async function writeJsonWithRetry<T>(
+  path: string,
+  build: (current: T | null) => T,
+  message: string
+): Promise<void> {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const current = (await fileExists(path))
+      ? await readJsonFile<T>(path)
+      : { data: null, sha: null };
+    try {
+      await writeJsonFile(path, build(current.data), message, current.sha);
+      return;
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error);
+      if (attempt === 1 || !/but expected|does not match|409/.test(detail)) throw error;
+    }
+  }
+}
+
 async function writeWritingProfile(params: {
   userId: string;
   samples: CorpusSampleMeta[];
   exemplars: ExemplarEntry[];
-}): Promise<void> {
-  const profilePath = Paths.writingProfile(params.userId);
-  const current = (await fileExists(profilePath))
-    ? await readJsonFile<WritingProfile>(profilePath)
-    : { data: null, sha: null };
-  await writeJsonFile(
-    profilePath,
-    buildWritingProfile(params),
-    `chore: update writing profile for ${params.userId}`,
-    current.sha
+}): Promise<WritingProfile> {
+  const profile = buildWritingProfile(params);
+  await writeJsonWithRetry<WritingProfile>(
+    Paths.writingProfile(params.userId),
+    () => profile,
+    `chore: update writing profile for ${params.userId}`
   );
+  return profile;
 }
 
 async function writeWritingProfileFromStoredArtifacts(userId: string): Promise<number> {
@@ -445,6 +480,177 @@ async function writeWritingProfileFromStoredArtifacts(userId: string): Promise<n
     exemplars: exemplarIndex.exemplars,
   });
   return corpus.samples.length;
+}
+
+export interface ProfileHealth {
+  userId: string;
+  exists: boolean;
+  updatedAt: string | null;
+  sampleCount: number;
+  excerptCount: number;
+  /** 네이버 UI가 남아 있는 대표 발췌 수. 0이 아니면 재학습이 필요하다. */
+  contaminatedExcerpts: number;
+  /** 종결어미 분포를 실제로 뽑아냈는지. 없으면 문체 규칙이 일반론뿐이다. */
+  hasFingerprint: boolean;
+  signaturePhrases: string[];
+}
+
+/** "문체가 어느 정도 학습됐나"를 화면에서 볼 수 있게 만든다. 그동안은 볼 방법이 없었다. */
+export async function getProfileHealth(userId: string): Promise<ProfileHealth> {
+  const normalizedUserId = normalizeUserId(userId);
+  const profile = await loadWritingProfile(normalizedUserId);
+  if (!profile) {
+    return {
+      userId: normalizedUserId,
+      exists: false,
+      updatedAt: null,
+      sampleCount: 0,
+      excerptCount: 0,
+      contaminatedExcerpts: 0,
+      hasFingerprint: false,
+      signaturePhrases: [],
+    };
+  }
+
+  const excerpts = profile.representativeExcerpts ?? [];
+  return {
+    userId: normalizedUserId,
+    exists: true,
+    updatedAt: profile.updatedAt ?? null,
+    sampleCount: profile.sourceSampleCount ?? 0,
+    excerptCount: excerpts.length,
+    contaminatedExcerpts: excerpts.filter((excerpt) => hasNaverChrome(excerpt)).length,
+    hasFingerprint: (profile.styleFingerprint?.sentenceEndings?.length ?? 0) > 0,
+    signaturePhrases: profile.styleFingerprint?.signaturePhrases?.slice(0, 3) ?? [],
+  };
+}
+
+export interface ProfileRebuildResult {
+  userId: string;
+  sampleCount: number;
+  /** 네이버 UI를 걷어내고 새로 뽑은 발췌 수 */
+  refreshedExcerpts: number;
+  /** 본문 없이 UI만 담겨 학습에서 뺀 샘플 */
+  droppedSamples: string[];
+  hasFingerprint: boolean;
+}
+
+/** GitHub 왕복이 30번씩 나가지 않게 묶어서 읽는다. */
+const REBUILD_CONCURRENCY = 6;
+
+/**
+ * 발행을 기다리지 않고 프로필을 다시 만든다.
+ *
+ * 왜 필요한가: 프로필은 발행할 때만 갱신된다. 그래서 발행이 뜸한 사용자는 학습이
+ * 멈춘다 — 실측으로 사장님 d는 79편을 쓰고도 2026-08-20 이후 발행이 없어 문체
+ * 지문이 아예 없었다. 저장된 발췌가 네이버 UI로 오염돼 있어도 발행 전에는 고칠
+ * 방법이 없었다.
+ *
+ * 저장된 발췌를 그대로 쓰지 않고 코퍼스 원문을 다시 읽어 발췌를 새로 뽑는다.
+ * 그래야 이미 저장된 오염이 씻긴다.
+ */
+export async function rebuildUserProfile(userId: string): Promise<ProfileRebuildResult> {
+  const normalizedUserId = normalizeUserId(userId);
+  const empty: ProfileRebuildResult = {
+    userId: normalizedUserId,
+    sampleCount: 0,
+    refreshedExcerpts: 0,
+    droppedSamples: [],
+    hasFingerprint: false,
+  };
+
+  const corpusPath = Paths.corpusIndex(normalizedUserId);
+  const exemplarPath = Paths.exemplarIndex(normalizedUserId);
+  if (!(await fileExists(corpusPath)) || !(await fileExists(exemplarPath))) return empty;
+
+  // sha는 여기서 잡지 않는다. 쓰기 직전에 다시 읽어야 충돌 창이 좁아진다.
+  const [{ data: corpus }, { data: exemplarIndex }] = await Promise.all([
+    readJsonFile<CorpusIndex>(corpusPath),
+    readJsonFile<ExemplarIndex>(exemplarPath),
+  ]);
+
+  const droppedSamples: string[] = [];
+  const refreshed: ExemplarEntry[] = [];
+  let refreshedExcerpts = 0;
+
+  const source = exemplarIndex.exemplars;
+  for (let offset = 0; offset < source.length; offset += REBUILD_CONCURRENCY) {
+    const batch = source.slice(offset, offset + REBUILD_CONCURRENCY);
+    const results = await Promise.all(
+      batch.map(async (exemplar) => {
+        const samplePath = Paths.corpusSample(normalizedUserId, exemplar.sampleId);
+        if (!(await fileExists(samplePath))) return { exemplar, usable: true, changed: false };
+        const { content } = await readFile(samplePath);
+        if (!isUsableCorpusText(stripNaverChrome(content).text)) {
+          return { exemplar, usable: false, changed: false };
+        }
+        const excerpt = buildExcerpt(content);
+        return {
+          exemplar: { ...exemplar, excerpt },
+          usable: true,
+          changed: excerpt !== exemplar.excerpt,
+        };
+      })
+    );
+    for (const result of results) {
+      if (!result.usable) {
+        droppedSamples.push(result.exemplar.sampleId);
+        continue;
+      }
+      if (result.changed) refreshedExcerpts += 1;
+      refreshed.push(result.exemplar);
+    }
+  }
+
+  const dropped = new Set(droppedSamples);
+  const samples = corpus.samples.filter((sample) => !dropped.has(sample.sampleId));
+  const now = new Date().toISOString();
+
+  // 재학습 도중 발행이 겹치면 프로덕션이 새 예문을 넣는다. 덮어쓰지 않고 합친다.
+  const refreshedById = new Map(refreshed.map((entry) => [entry.sampleId, entry] as const));
+  await writeJsonWithRetry<ExemplarIndex>(
+    exemplarPath,
+    (current) => {
+      const base = current?.exemplars ?? exemplarIndex.exemplars;
+      const merged = base.map((entry) => refreshedById.get(entry.sampleId) ?? entry);
+      const seen = new Set(merged.map((entry) => entry.sampleId));
+      for (const entry of refreshed) if (!seen.has(entry.sampleId)) merged.push(entry);
+      return {
+        ...(current ?? exemplarIndex),
+        exemplars: merged.filter((entry) => !dropped.has(entry.sampleId)),
+        lastCurated: now,
+      };
+    },
+    `chore: rebuild exemplar excerpts for ${normalizedUserId}`
+  );
+  if (dropped.size > 0) {
+    await writeJsonWithRetry<CorpusIndex>(
+      corpusPath,
+      (current) => {
+        const base = current?.samples ?? corpus.samples;
+        return {
+          ...(current ?? corpus),
+          samples: base.filter((sample) => !dropped.has(sample.sampleId)),
+          lastUpdated: now,
+        };
+      },
+      `chore: drop unusable corpus samples for ${normalizedUserId}`
+    );
+  }
+
+  const profile = await writeWritingProfile({
+    userId: normalizedUserId,
+    samples,
+    exemplars: refreshed,
+  });
+
+  return {
+    userId: normalizedUserId,
+    sampleCount: samples.length,
+    refreshedExcerpts,
+    droppedSamples,
+    hasFingerprint: (profile.styleFingerprint?.sentenceEndings.length ?? 0) > 0,
+  };
 }
 
 async function writeCorpusArtifacts(params: {

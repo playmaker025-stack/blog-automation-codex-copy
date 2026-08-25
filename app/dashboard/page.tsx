@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import type { Topic, PostingRecord } from "@/lib/types/github-data";
+import ProfileHealthPanel from "@/components/users/profile-health";
 
 export default function DashboardPage() {
   const [topics, setTopics] = useState<Topic[]>([]);
@@ -119,6 +120,8 @@ export default function DashboardPage() {
           ))}
         </div>
       </div>
+
+      <ProfileHealthPanel />
 
       {/* 최근 포스팅 */}
       <div className="bg-white border border-zinc-200 rounded-xl p-5">
