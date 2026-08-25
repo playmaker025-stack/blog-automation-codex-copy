@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87ped6",
+      "title": "와카일회용전담 이게 진짜 누수없는전자담배 아닐까요",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 5968,
+      "publishedAt": "2026-08-25T05:16:09.287Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87ped6.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87oul4",
       "title": "인천전자담배샵 폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다 !",
       "category": "published-post",
@@ -294,23 +303,7 @@
       "wordCount": 2666,
       "publishedAt": "2026-07-22T05:22:46.470Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-f4873ead.md"
-    },
-    {
-      "sampleId": "published-post-65b33019",
-      "title": "인천 만수역 전자담배 액상 추천과 사용자 맞춤 맛 선택 가이드",
-      "category": "c",
-      "tags": [
-        "인천",
-        "만수역",
-        "전자담배",
-        "액상추천",
-        "맛선택",
-        "사용자맞춤"
-      ],
-      "wordCount": 2962,
-      "publishedAt": "2026-07-20T03:50:50.305Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-65b33019.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:15:49.642Z"
+  "lastUpdated": "2026-08-25T05:16:15.265Z"
 }
