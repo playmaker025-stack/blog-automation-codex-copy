@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87o9e9",
+      "title": "부평역전자담배 추천 누수없는 입호흡 입문용 아머프로",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6964,
+      "publishedAt": "2026-08-25T05:15:16.440Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87o9e9.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87ls3h",
       "title": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
       "category": "published-post",
@@ -301,16 +310,7 @@
       "wordCount": 2962,
       "publishedAt": "2026-07-20T03:50:50.305Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-65b33019.md"
-    },
-    {
-      "sampleId": "published-post-manual-mrorbz92",
-      "title": "발라리안 전자담배 안빨림, 고장 오류 원인과 해결방법!",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6022,
-      "publishedAt": "2026-07-17T09:50:30.469Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mrorbz92.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:13:27.452Z"
+  "lastUpdated": "2026-08-25T05:15:22.851Z"
 }
