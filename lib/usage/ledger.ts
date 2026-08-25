@@ -340,7 +340,15 @@ export function summarize(
 
     // 거절된 호출은 요금이 0원이다. 그래서 "완전히 차단됨"과 "잘 있는데 안 씀"이
     // 지출 0으로 똑같이 보인다. 다른 공급자는 도는데 이쪽만 조용하면 의심해야 한다.
-    markedProviderCalls = providerAcc.get(markedProvider)?.calls ?? 0;
+    // 스냅샷 "이후" 호출만 센다. 전체 기간으로 세면 석 달 전 호출 한 건이
+    // 오늘의 완전한 차단을 가려버린다 — 이 신호가 쓸모없어지는 지점이 거기다.
+    const markDate = kstDateKey(mark.at);
+    for (const day of ledger.days) {
+      if (day.date < markDate) continue;
+      for (const [model, bucket] of Object.entries(day.models)) {
+        if (providerOf(model) === markedProvider) markedProviderCalls += bucket.calls;
+      }
+    }
     const otherCalls = [...providerAcc.values()]
       .filter((entry) => entry.provider !== markedProvider)
       .reduce((sum, entry) => sum + entry.calls, 0);
