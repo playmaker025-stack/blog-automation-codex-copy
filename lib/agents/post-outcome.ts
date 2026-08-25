@@ -68,6 +68,12 @@ export interface OutcomeTracking {
   /** 본문 지문. 글이 수정되면 이전 관측과 섞으면 안 된다. */
   contentHash: string;
   trackedFrom: string;
+  /**
+   * 이미 발행된 글에 나중에 붙인 계약인지.
+   * 소급분은 발행 당시 본문을 모르므로 수정 여부를 판단할 수 없고, 지나간
+   * 관측 시점도 영영 못 잰다. 나중에 데이터를 볼 때 구분해야 한다.
+   */
+  backfilled?: boolean;
 }
 
 export const SCHEMA_VERSION = 1;
@@ -140,36 +146,51 @@ export function hoursSince(publishedAt: string | null, at: string): number | nul
  * 안 잡힌 것"과 "잡혔다가 밀린 것"이 구분된다.
  */
 export const CHECKPOINT_HOURS = [0, 168, 336, 672] as const;
+/** 28일이 지난 뒤에도 이 간격으로 계속 지켜본다. 순위는 나중에도 움직인다. */
+export const ONGOING_INTERVAL_HOURS = 672;
 
 /**
- * 지금 관측해야 할 시점들.
+ * 지금 재야 할 시점 하나. 없으면 null.
  *
- * 이미 성공 관측이 있는 구간은 건너뛴다. 실패 관측은 건너뛰기 근거로 쓰지
- * 않는다 — 실패했으면 아직 그 시점을 못 잰 것이다. 다만 같은 실행 안에서
- * 재시도하지는 않는다(호출부 정책).
+ * 각 시점에는 "그 구간 안에서만 유효하다"는 창이 있다. 7일차 관측을 21일에
+ * 재면 그건 7일차가 아니다. 수집기가 며칠 멈췄거나 오래된 글을 소급 추적할 때
+ * 지나간 시점을 지금 채우면 라벨과 실제가 어긋난 데이터가 쌓인다. 놓친 구간은
+ * 놓친 채로 두는 게 맞다.
+ *
+ * 28일을 넘긴 글은 어느 구간에도 안 들어가므로, 마지막 성공 관측이 28일보다
+ * 오래됐으면 다시 잰다. 소급 추적한 옛날 글도 이 경로로 잡힌다.
+ *
+ * 실패 관측은 "쟀다"로 치지 않는다. 실패했으면 아직 못 잰 것이다.
  */
-export function dueCheckpoints(params: {
+export function dueCheckpoint(params: {
   publishedAt: string | null;
   now: string;
   existing: PostOutcomeObservation[];
-}): number[] {
+}): number | null {
   const age = hoursSince(params.publishedAt, params.now);
-  if (age === null) return [];
+  if (age === null) return null;
 
-  const covered = params.existing
+  const measured = params.existing
     .filter((item) => item.status === "ok" && item.source === "serp")
     .map((item) => item.postAgeHours)
     .filter((hours): hours is number => typeof hours === "number");
 
-  const due: number[] = [];
   for (let i = 0; i < CHECKPOINT_HOURS.length; i += 1) {
     const checkpoint = CHECKPOINT_HOURS[i];
-    if (age < checkpoint) break;
-    const nextCheckpoint = CHECKPOINT_HOURS[i + 1] ?? Number.POSITIVE_INFINITY;
-    const alreadyDone = covered.some((hours) => hours >= checkpoint && hours < nextCheckpoint);
-    if (!alreadyDone) due.push(checkpoint);
+    // 마지막 구간의 창을 무한대로 두면 그 뒤 모든 관측이 "이미 쟀다"로 잡혀
+    // 아래 지속 관측 경로가 영영 실행되지 않는다.
+    const windowEnd = CHECKPOINT_HOURS[i + 1] ?? checkpoint + ONGOING_INTERVAL_HOURS;
+    if (age < checkpoint || age >= windowEnd) continue;
+    const covered = measured.some((hours) => hours >= checkpoint && hours < windowEnd);
+    return covered ? null : checkpoint;
   }
-  return due;
+
+  // 마지막 구간을 넘긴 글. 한동안 안 쟀으면 다시 잰다.
+  const lastMeasured = measured.length > 0 ? Math.max(...measured) : null;
+  if (lastMeasured === null || age - lastMeasured >= ONGOING_INTERVAL_HOURS) {
+    return CHECKPOINT_HOURS[CHECKPOINT_HOURS.length - 1];
+  }
+  return null;
 }
 
 // ── 요약 ──────────────────────────────────────────────────
@@ -249,6 +270,7 @@ export function buildOutcomeTracking(params: {
   content: string;
   targetKeywords: string[];
   at?: string;
+  backfilled?: boolean;
 }): OutcomeTracking | null {
   const canonical = parseNaverPostUrl(params.naverPostUrl);
   if (!canonical) return null;
@@ -268,6 +290,7 @@ export function buildOutcomeTracking(params: {
     publishedTitle: params.title.trim(),
     contentHash: hashContent(params.content),
     trackedFrom: params.at ?? new Date().toISOString(),
+    ...(params.backfilled ? { backfilled: true } : {}),
   };
 }
 
