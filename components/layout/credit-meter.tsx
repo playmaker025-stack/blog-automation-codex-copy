@@ -326,7 +326,9 @@ export function CreditMeter() {
                   }}
                   placeholder="예: 20.00"
                   inputMode="decimal"
-                  className="min-w-0 flex-1 rounded border border-zinc-700 bg-zinc-900 px-2 py-1 text-xs text-zinc-100 placeholder:text-zinc-600 focus:border-zinc-500 focus:outline-none"
+                  // 자동완성이 끼면 글씨가 검정으로 덮인다. 금액 칸은 기억해줄 이유도 없다.
+                  autoComplete="off"
+                  className="min-w-0 flex-1 rounded border border-zinc-700 bg-zinc-900 px-2 py-1 text-xs text-zinc-100 caret-zinc-100 placeholder:text-zinc-600 focus:border-zinc-500 focus:outline-none"
                 />
                 <button
                   type="button"
