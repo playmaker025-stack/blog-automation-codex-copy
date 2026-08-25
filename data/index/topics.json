@@ -1731,7 +1731,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-08-21T08:21:22.995Z",
       "updatedAt": "2026-08-21T08:21:22.995Z"
+    },
+    {
+      "topicId": "topic-83c7f479",
+      "title": "만수동 전자담배 배터리 추천과 안전 사용법 가이드",
+      "description": "만수동 지역에서 사용할 수 있는 전자담배 배터리 추천과 함께 안전하게 사용하는 방법을 자세히 안내합니다.",
+      "category": "b",
+      "tags": [
+        "만수동",
+        "전자담배",
+        "배터리",
+        "추천",
+        "안전사용"
+      ],
+      "subKeywords": [],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "b",
+      "createdAt": "2026-08-25T04:54:05.555Z",
+      "updatedAt": "2026-08-25T04:54:05.555Z"
     }
   ],
-  "lastUpdated": "2026-08-24T08:50:57.812Z"
+  "lastUpdated": "2026-08-25T04:54:05.555Z"
 }
