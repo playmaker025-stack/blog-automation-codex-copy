@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87jki9",
+      "title": "작전동전자담배 일회용 와카(waka) 버스트30000 내돈내산 후기",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6227,
+      "publishedAt": "2026-08-25T05:11:37.324Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87jki9.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87j13u",
       "title": "굴포천전자담배 일회용기기 네스티바(20000) 가져왔습니다!",
       "category": "published-post",
@@ -311,21 +320,7 @@
       "wordCount": 2863,
       "publishedAt": "2026-07-14T06:43:16.168Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-928f746e.md"
-    },
-    {
-      "sampleId": "published-post-6de3673d",
-      "title": "인천 부천 상동 전자담배 코일 관리와 교체 시기 총정리",
-      "category": "c",
-      "tags": [
-        "전자담배관리",
-        "코일관리",
-        "부천상동",
-        "교체시기"
-      ],
-      "wordCount": 2792,
-      "publishedAt": "2026-07-13T05:57:08.291Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-6de3673d.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:11:18.397Z"
+  "lastUpdated": "2026-08-25T05:11:44.239Z"
 }
