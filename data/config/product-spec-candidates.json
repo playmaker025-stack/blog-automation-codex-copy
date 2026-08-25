@@ -2299,7 +2299,95 @@
       "postTitle": "작전역전자담배 베놈 팬텀 엔트리 전담 언박싱 후기 리뷰 VANOM PHANTOM ENTRY",
       "extractedAt": "2026-08-25T05:23:33.386Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-f5d99ef9",
+      "product": "호라이즌 세이커즈 마스터 탱크",
+      "field": "officialName",
+      "value": "호라이즌 세이커즈 마스터 탱크",
+      "evidence": "호라이즌 에서 제조한 \" 세이커즈 \" 마스터 탱크 입니다.",
+      "postId": "post-manual-mt87zlum",
+      "postTitle": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "extractedAt": "2026-08-25T05:24:25.419Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-3e062dfc",
+      "product": "호라이즌 세이커즈 마스터 탱크",
+      "field": "form",
+      "value": "탱크",
+      "evidence": "오늘 다뤄볼 제품은 기기도 액상도 아닌 폐호흡 무화기 인데요 호라이즌 에서 제조한 \" 세이커즈 \" 마스터 탱크 입니다.",
+      "postId": "post-manual-mt87zlum",
+      "postTitle": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "extractedAt": "2026-08-25T05:24:25.419Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-2c49584a",
+      "product": "호라이즌 세이커즈 마스터 탱크",
+      "field": "drawStyle",
+      "value": "폐호흡",
+      "evidence": "오늘 다뤄볼 제품은 기기도 액상도 아닌 폐호흡 무화기 인데요",
+      "postId": "post-manual-mt87zlum",
+      "postTitle": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "extractedAt": "2026-08-25T05:24:25.419Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-0e2698ec",
+      "product": "호라이즌 세이커즈 마스터 탱크",
+      "field": "liquidRefillable",
+      "value": "가능",
+      "evidence": "큰곳에 액상을 주입하면 다른 한쪽의 작은 구멍 에서 공기가 빠져나올 수 있게 되어 있습니다.",
+      "postId": "post-manual-mt87zlum",
+      "postTitle": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "extractedAt": "2026-08-25T05:24:25.419Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-9ee8a42d",
+      "product": "호라이즌 세이커즈 마스터 탱크",
+      "field": "podMl",
+      "value": "5ml(버블),3.5ml(일자)",
+      "evidence": "탱크용량 : 5ml(버블),3.5ml(일자)",
+      "postId": "post-manual-mt87zlum",
+      "postTitle": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "extractedAt": "2026-08-25T05:24:25.419Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-05c5d9bc",
+      "product": "호라이즌 세이커즈 마스터 탱크",
+      "field": "resistanceOhm",
+      "value": "0.4옴, 0.16옴, 0.17옴",
+      "evidence": "코일 : 0.4옴, 0.16옴, 0.17옴",
+      "postId": "post-manual-mt87zlum",
+      "postTitle": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "extractedAt": "2026-08-25T05:24:25.419Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-05097874",
+      "product": "호라이즌 세이커즈 마스터 탱크",
+      "field": "sizeMm",
+      "value": "29.5 * 56",
+      "evidence": "사이즈 : 29.5(일자탱크 기준) * 56",
+      "postId": "post-manual-mt87zlum",
+      "postTitle": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "extractedAt": "2026-08-25T05:24:25.419Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-c2869342",
+      "product": "호라이즌 세이커즈 마스터 탱크",
+      "field": "wattRange",
+      "value": "최대 70W 권장",
+      "evidence": "두가지 다 동일하게 70W 까지가 최적의 권장설정 이긴한데 더 높여도 사용가능 하십니다.",
+      "postId": "post-manual-mt87zlum",
+      "postTitle": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "extractedAt": "2026-08-25T05:24:25.419Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-08-25T05:23:34.155Z"
+  "updatedAt": "2026-08-25T05:24:26.009Z"
 }
