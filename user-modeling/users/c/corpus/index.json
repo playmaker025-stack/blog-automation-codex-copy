@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87zlum",
+      "title": "호라이즌 세이커즈 마스터 탱크 Horizon Sakerz Master Tank",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 7196,
+      "publishedAt": "2026-08-25T05:24:05.246Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87zlum.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87yhul",
       "title": "작전역전자담배 베놈 팬텀 엔트리 전담 언박싱 후기 리뷰 VANOM PHANTOM ENTRY",
       "category": "published-post",
@@ -275,18 +284,7 @@
       "wordCount": 6941,
       "publishedAt": "2026-08-10T07:35:47.046Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-msmx35tq.md"
-    },
-    {
-      "sampleId": "published-post-fb0461a1",
-      "title": "일회용전자담배 불량 증상 원인과 해결방법!",
-      "category": "direct-run",
-      "tags": [
-        "일회용전자담배 불량"
-      ],
-      "wordCount": 2993,
-      "publishedAt": "2026-08-07T08:00:42.820Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-fb0461a1.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:23:20.009Z"
+  "lastUpdated": "2026-08-25T05:24:11.478Z"
 }
