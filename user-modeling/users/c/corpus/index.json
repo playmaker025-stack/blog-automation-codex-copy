@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87hyvp",
+      "title": "갈산동전자담배 옥스바 오네오 솔직후기",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 5998,
+      "publishedAt": "2026-08-25T05:10:22.664Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87hyvp.md"
+    },
+    {
       "sampleId": "published-post-manual-mt75drce",
       "title": "인천전자담배 무니코틴 액상 입호흡 크라운 2종 후기!",
       "category": "published-post",
@@ -328,16 +337,7 @@
       "wordCount": 3443,
       "publishedAt": "2026-07-10T06:40:57.594Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-801b023b.md"
-    },
-    {
-      "sampleId": "published-post-manual-mrbo3baf",
-      "title": "부평전자담배 크로스미니6 vs 말론S 입문자 맞춤 비교 분석",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 9155,
-      "publishedAt": "2026-07-08T05:58:48.408Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mrbo3baf.md"
     }
   ],
-  "lastUpdated": "2026-08-24T11:23:27.683Z"
+  "lastUpdated": "2026-08-25T05:10:29.193Z"
 }
