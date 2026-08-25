@@ -51,6 +51,13 @@ export default function ProfileHealthPanel() {
   const [busy, setBusy] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // 관리자 키는 sessionStorage에만 둔다. 탭을 닫으면 사라진다.
+  const [adminKey, setAdminKey] = useState("");
+  const [needsKey, setNeedsKey] = useState(false);
+
+  useEffect(() => {
+    setAdminKey(sessionStorage.getItem("admin-key") ?? "");
+  }, []);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -69,17 +76,30 @@ export default function ProfileHealthPanel() {
     setError(null);
     fetch("/api/admin/profile-rebuild", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", "x-admin-key": adminKey },
       body: JSON.stringify(userId ? { userId } : {}),
     })
       .then((r) => r.json())
-      .then((data: { results?: RebuildResult[]; health?: ProfileHealth[] }) => {
-        if (data.health) setHealth(data.health);
-        if (data.results) setMessage(summarize(data.results));
-      })
+      .then(
+        (data: {
+          code?: string;
+          error?: string;
+          results?: RebuildResult[];
+          health?: ProfileHealth[];
+        }) => {
+          if (data.code === "admin_key_required" || data.code === "admin_key_missing") {
+            setNeedsKey(true);
+            setError(data.error ?? "관리자 키가 필요합니다.");
+            return;
+          }
+          setNeedsKey(false);
+          if (data.health) setHealth(data.health);
+          if (data.results) setMessage(summarize(data.results));
+        }
+      )
       .catch(() => setError("재학습에 실패했습니다."))
       .finally(() => setBusy(null));
-  }, []);
+  }, [adminKey]);
 
   const needsWork = health.filter((h) => h.contaminatedExcerpts > 0 || !h.hasFingerprint).length;
 
@@ -116,6 +136,28 @@ export default function ProfileHealthPanel() {
         <p className="text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2 mb-3">
           {error}
         </p>
+      )}
+
+      {needsKey && (
+        <div className="flex items-center gap-2 mb-3">
+          <input
+            type="password"
+            value={adminKey}
+            onChange={(event) => setAdminKey(event.target.value)}
+            placeholder="관리자 키 (ADMIN_API_KEY)"
+            className="flex-1 text-xs border border-zinc-200 rounded-lg px-2 py-1.5"
+          />
+          <button
+            onClick={() => {
+              sessionStorage.setItem("admin-key", adminKey);
+              setNeedsKey(false);
+              setError(null);
+            }}
+            className="text-xs px-2.5 py-1.5 rounded-lg border border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+          >
+            저장
+          </button>
+        </div>
       )}
 
       {loading ? (

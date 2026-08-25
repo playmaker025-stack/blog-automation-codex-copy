@@ -18,7 +18,7 @@ import { useCallback, useEffect, useState } from "react";
 const CONSOLE_URL = "https://platform.claude.com/settings/billing";
 const POLL_MS = 60_000;
 
-type Level = "unknown" | "healthy" | "low" | "critical" | "empty";
+type Level = "unknown" | "healthy" | "low" | "critical" | "empty" | "silent";
 type Provider = "anthropic" | "openai" | "unknown" | "local";
 type RouteReason = "primary" | "anthropic_failed" | "anthropic_credit" | "all_failed";
 
@@ -34,6 +34,9 @@ interface Summary {
   estimatedRemainingUsd: number | null;
   markedAt: string | null;
   markedBalanceUsd: number | null;
+  markedProvider: string | null;
+  markedProviderCalls: number;
+  markedProviderSilent: boolean;
   daysLeft: number | null;
   hasUnpriced: boolean;
 }
@@ -72,6 +75,9 @@ const LEVEL_STYLE: Record<Level, { dot: string; bar: string; text: string; label
   low: { dot: "bg-amber-400", bar: "bg-amber-400", text: "text-amber-300", label: "곧 충전" },
   critical: { dot: "bg-orange-500", bar: "bg-orange-500", text: "text-orange-300", label: "충전 필요" },
   empty: { dot: "bg-red-500", bar: "bg-red-500", text: "text-red-300", label: "소진" },
+  // 잔액은 남아 보이는데 그 공급자로 호출이 한 건도 안 나간 상태. 거절된 호출은
+  // 요금이 0원이라 지출만 보면 "안 씀"과 구분이 안 된다.
+  silent: { dot: "bg-amber-400", bar: "bg-amber-400", text: "text-amber-300", label: "호출 없음" },
   unknown: { dot: "bg-zinc-600", bar: "bg-zinc-600", text: "text-zinc-400", label: "미설정" },
 };
 
@@ -158,6 +164,9 @@ export function CreditMeter() {
   const routeHealth = data?.routeHealth;
   const blocked = data?.health.state === "blocked";
   const degraded = routeHealth?.degraded === true;
+  // health.state는 메모리에만 있어 서버가 재시작되면 지워진다. 그래서 저장된
+  // 장부에서 유도한 이 신호가 실제로는 더 오래 산다.
+  const silent = summary?.markedProviderSilent === true;
 
   const ratio =
     summary && summary.markedBalanceUsd && summary.markedBalanceUsd > 0 && summary.estimatedRemainingUsd !== null
@@ -185,7 +194,19 @@ export function CreditMeter() {
 
       {/* 떠밀린 폴백은 파이프라인이 성공해도 알려야 한다. 이걸 안 보여줘서
           7월 크레딧 소진을 6주간 몰랐다. */}
-      {!blocked && degraded && (
+      {!blocked && silent && (
+        <div className="fixed inset-x-0 top-0 z-40 border-b border-amber-800 bg-amber-950/95 px-4 py-2 text-xs text-amber-100 backdrop-blur">
+          <span className="font-semibold">
+            {summary?.markedProvider === "openai" ? "OpenAI" : "Anthropic"} 호출이 한 건도 없습니다
+          </span>
+          <span className="text-amber-200/90">
+            {" "}— 잔액은 남아 보이지만 스냅샷 이후 이 공급자로 나간 호출이 0건입니다. 거절된 호출은
+            요금이 0원이라 &ldquo;차단됨&rdquo;과 &ldquo;안 씀&rdquo;이 똑같이 보입니다. 키와 잔액을 확인하세요.
+          </span>
+        </div>
+      )}
+
+      {!blocked && !silent && degraded && (
         <div className="fixed inset-x-0 top-0 z-40 border-b border-amber-800 bg-amber-950/95 px-4 py-2 text-xs text-amber-100 backdrop-blur">
           <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-3 gap-y-1">
             <span className="font-semibold">

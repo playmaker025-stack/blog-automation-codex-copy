@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { syncMissingPublishedToCorpus } from "@/lib/agents/user-learning";
+import { requireAdmin } from "@/lib/auth/admin-guard";
 
 const ALL_USER_IDS = ["a", "b", "c", "d", "e"];
 
 export async function POST(request: Request) {
+  const denied = requireAdmin(request);
+  if (denied) return denied;
+
   const body = await request.json().catch(() => ({})) as { userId?: string; limit?: number };
   const limit = typeof body.limit === "number" ? body.limit : 15;
   const targets = body.userId ? [body.userId] : ALL_USER_IDS;

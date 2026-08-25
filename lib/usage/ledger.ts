@@ -41,6 +41,12 @@ export interface BalanceMark {
   balanceUsd: number;
   /** 그 시점까지의 앱 누적 지출(USD). 이후 지출만 빼기 위한 기준점. */
   spentAtMarkUsd: number;
+  /**
+   * 어느 공급자의 잔액인지. 없으면 anthropic으로 본다 — 잔액 입력 화면이
+   * Anthropic 콘솔을 가리키고 있었다. 공급자를 안 붙이면 Anthropic 잔액에서
+   * OpenAI 지출을 빼는 일이 생긴다.
+   */
+  provider?: Provider;
   note?: string;
 }
 
@@ -48,6 +54,11 @@ export interface UsageLedger {
   version: number;
   /** 절대 줄어들지 않는 누적 지출. prune의 영향을 받지 않는다. */
   lifetimeUsd: number;
+  /**
+   * 공급자별 누적 지출. 일별 버킷을 훑어 계산하면 정리(prune) 후에 값이 틀어지고,
+   * 스냅샷 당일의 스냅샷 이전 지출까지 딸려 들어온다. 그래서 별도로 누적한다.
+   */
+  lifetimeByProvider?: Record<string, number>;
   lifetimeCalls: number;
   /** 최근 N일 상세. 오래된 것부터 정리된다. */
   days: DayBucket[];
@@ -77,6 +88,7 @@ export function emptyLedger(now: Date = new Date()): UsageLedger {
     version: LEDGER_VERSION,
     lifetimeUsd: 0,
     lifetimeCalls: 0,
+    lifetimeByProvider: {},
     days: [],
     balanceMarks: [],
     updatedAt: now.toISOString(),
@@ -116,6 +128,7 @@ export function recordSamples(ledger: UsageLedger, samples: UsageSample[]): Usag
   const byDate = new Map(days.map((d) => [d.date, d]));
   let lifetimeUsd = ledger.lifetimeUsd;
   let lifetimeCalls = ledger.lifetimeCalls;
+  const lifetimeByProvider: Record<string, number> = { ...(ledger.lifetimeByProvider ?? {}) };
 
   for (const sample of samples) {
     const date = kstDateKey(sample.at);
@@ -141,6 +154,8 @@ export function recordSamples(ledger: UsageLedger, samples: UsageSample[]): Usag
 
     lifetimeUsd += sample.usd;
     lifetimeCalls += calls;
+    const sampleProvider = providerOf(sample.model || "");
+    lifetimeByProvider[sampleProvider] = (lifetimeByProvider[sampleProvider] ?? 0) + sample.usd;
   }
 
   days.sort((a, b) => a.date.localeCompare(b.date));
@@ -150,6 +165,7 @@ export function recordSamples(ledger: UsageLedger, samples: UsageSample[]): Usag
     version: LEDGER_VERSION,
     lifetimeUsd,
     lifetimeCalls,
+    lifetimeByProvider,
     days,
     updatedAt: new Date().toISOString(),
   };
@@ -168,12 +184,14 @@ export function pruneLedger(ledger: UsageLedger, keepDays: number = DEFAULT_KEEP
 export function markBalance(
   ledger: UsageLedger,
   balanceUsd: number,
-  options: { at?: string; note?: string } = {}
+  options: { at?: string; note?: string; provider?: Provider } = {}
 ): UsageLedger {
   const mark: BalanceMark = {
     at: options.at ?? new Date().toISOString(),
     balanceUsd,
-    spentAtMarkUsd: ledger.lifetimeUsd,
+    spentAtMarkUsd:
+      (ledger.lifetimeByProvider ?? {})[options.provider ?? "anthropic"] ?? 0,
+    provider: options.provider ?? "anthropic",
     ...(options.note ? { note: options.note } : {}),
   };
   const balanceMarks = [...ledger.balanceMarks, mark]
@@ -219,6 +237,12 @@ export interface UsageSummary {
   spentSinceMarkUsd: number | null;
   markedAt: string | null;
   markedBalanceUsd: number | null;
+  /** 그 잔액이 어느 공급자 것인지. */
+  markedProvider: Provider | null;
+  /** 스냅샷 이후 그 공급자로 실제로 나간 호출 수. 0이면 게이지를 믿으면 안 된다. */
+  markedProviderCalls: number;
+  /** 다른 공급자는 도는데 이 공급자만 호출이 0건. 차단됐을 가능성. */
+  markedProviderSilent: boolean;
   /** 남은 일수. 잔액이나 일평균이 없으면 null, 잔액이 0 이하면 0. */
   daysLeft: number | null;
   /** 단가 미상 모델이 섞였는지. */
@@ -301,10 +325,27 @@ export function summarize(
   let estimatedRemainingUsd: number | null = null;
   let spentSinceMarkUsd: number | null = null;
   let daysLeft: number | null = null;
+  let markedProvider: Provider | null = null;
+  let markedProviderCalls = 0;
+  let markedProviderSilent = false;
 
   if (mark) {
-    spentSinceMarkUsd = Math.max(0, ledger.lifetimeUsd - mark.spentAtMarkUsd);
+    // 잔액은 공급자별로 따로 산다. 예전에는 전체 누적 지출을 뺐는데, 그러면
+    // Anthropic 잔액이 OpenAI 지출로 줄어든다. 실측(2026-08-25) — 60건 전부
+    // OpenAI였는데 Anthropic 잔액 게이지가 그만큼 깎여 있었다.
+    markedProvider = mark.provider ?? "anthropic";
+    const spentNow = (ledger.lifetimeByProvider ?? {})[markedProvider] ?? 0;
+    spentSinceMarkUsd = Math.max(0, spentNow - mark.spentAtMarkUsd);
     estimatedRemainingUsd = mark.balanceUsd - spentSinceMarkUsd;
+
+    // 거절된 호출은 요금이 0원이다. 그래서 "완전히 차단됨"과 "잘 있는데 안 씀"이
+    // 지출 0으로 똑같이 보인다. 다른 공급자는 도는데 이쪽만 조용하면 의심해야 한다.
+    markedProviderCalls = providerAcc.get(markedProvider)?.calls ?? 0;
+    const otherCalls = [...providerAcc.values()]
+      .filter((entry) => entry.provider !== markedProvider)
+      .reduce((sum, entry) => sum + entry.calls, 0);
+    markedProviderSilent = markedProviderCalls === 0 && otherCalls > 0;
+
     if (estimatedRemainingUsd <= 0) {
       daysLeft = 0;
     } else if (dailyAvgUsd > 0) {
@@ -326,13 +367,16 @@ export function summarize(
     spentSinceMarkUsd,
     markedAt: mark?.at ?? null,
     markedBalanceUsd: mark?.balanceUsd ?? null,
+    markedProvider,
+    markedProviderCalls,
+    markedProviderSilent,
     daysLeft,
     hasUnpriced,
     daily: daily.slice(-dailyWindow),
   };
 }
 
-export type UsageLevel = "unknown" | "healthy" | "low" | "critical" | "empty";
+export type UsageLevel = "unknown" | "healthy" | "low" | "critical" | "empty" | "silent";
 
 /**
  * 게이지 색깔을 정한다. 금액이 아니라 남은 일수로 판정하는 이유:
@@ -343,6 +387,8 @@ export type UsageLevel = "unknown" | "healthy" | "low" | "critical" | "empty";
 export function usageLevel(summary: UsageSummary): UsageLevel {
   const remaining = summary.estimatedRemainingUsd;
   if (remaining === null) return "unknown";
+  // 잔액이 남아 보여도 그 공급자로 나가는 호출이 0건이면 정상이라고 하면 안 된다.
+  if (summary.markedProviderSilent) return "silent";
   if (remaining <= 0) return "empty";
   if (summary.daysLeft === null) {
     // 잔액은 아는데 사용 이력이 없어 속도를 모른다. 금액으로만 대충 나눈다.

@@ -603,7 +603,6 @@ export async function rebuildUserProfile(userId: string): Promise<ProfileRebuild
   }
 
   const dropped = new Set(droppedSamples);
-  const samples = corpus.samples.filter((sample) => !dropped.has(sample.sampleId));
   const now = new Date().toISOString();
 
   // 재학습 도중 발행이 겹치면 프로덕션이 새 예문을 넣는다. 덮어쓰지 않고 합친다.
@@ -638,15 +637,23 @@ export async function rebuildUserProfile(userId: string): Promise<ProfileRebuild
     );
   }
 
+  // 인덱스를 쓴 뒤 다시 읽는다. 재학습 도중 발행이 끝났다면 그 글은 인덱스에는
+  // 병합돼 있는데, 시작 시점 목록으로 프로필을 만들면 프로필에서만 사라진다.
+  // 그러면 코퍼스에는 있는 글이 문체 학습에는 안 잡히는 어긋난 상태가 된다.
+  const [{ data: latestCorpus }, { data: latestExemplars }] = await Promise.all([
+    readJsonFile<CorpusIndex>(corpusPath),
+    readJsonFile<ExemplarIndex>(exemplarPath),
+  ]);
+
   const profile = await writeWritingProfile({
     userId: normalizedUserId,
-    samples,
-    exemplars: refreshed,
+    samples: latestCorpus.samples,
+    exemplars: latestExemplars.exemplars,
   });
 
   return {
     userId: normalizedUserId,
-    sampleCount: samples.length,
+    sampleCount: latestCorpus.samples.length,
     refreshedExcerpts,
     droppedSamples,
     hasFingerprint: (profile.styleFingerprint?.sentenceEndings.length ?? 0) > 0,
