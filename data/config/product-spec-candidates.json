@@ -693,7 +693,62 @@
       "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
       "extractedAt": "2026-08-25T05:13:39.756Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-378bd3dc",
+      "product": "아머프로",
+      "field": "wattRange",
+      "value": "30W",
+      "evidence": "포켓코리아 \"아머프로\" 스펙 크기 : 82*39*16.5mm 무게 : 52g 배터리 : 1500mAh 팟 용량 : 3.5ml 최대 출력 와트 : 30W",
+      "postId": "post-manual-mt87o9e9",
+      "postTitle": "부평역전자담배 추천 누수없는 입호흡 입문용 아머프로",
+      "extractedAt": "2026-08-25T05:15:36.311Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-67d8733c",
+      "product": "아머프로",
+      "field": "resistanceOhm",
+      "value": "0.4옴, 0.6옴, 0.8옴, 1.2옴",
+      "evidence": "포켓코리아 \"아머프로\" 스펙 크기 : 82*39*16.5mm 무게 : 52g 배터리 : 1500mAh 팟 용량 : 3.5ml 최대 출력 와트 : 30W 팟저항 : 0.4옴, 0.6옴, 0.8옴, 1.2옴",
+      "postId": "post-manual-mt87o9e9",
+      "postTitle": "부평역전자담배 추천 누수없는 입호흡 입문용 아머프로",
+      "extractedAt": "2026-08-25T05:15:36.311Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-445b68f2",
+      "product": "아머프로",
+      "field": "airflowControl",
+      "value": "가능",
+      "evidence": "기기하단을 보시면은 에어홀 조절바 라고 흡입압을 조절하실수가 있습니다.",
+      "postId": "post-manual-mt87o9e9",
+      "postTitle": "부평역전자담배 추천 누수없는 입호흡 입문용 아머프로",
+      "extractedAt": "2026-08-25T05:15:36.311Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-039a72a1",
+      "product": "아머프로",
+      "field": "batteryRechargeable",
+      "value": "가능",
+      "evidence": "구매시 박스 구성품 ... C타입 충전케이블",
+      "postId": "post-manual-mt87o9e9",
+      "postTitle": "부평역전자담배 추천 누수없는 입호흡 입문용 아머프로",
+      "extractedAt": "2026-08-25T05:15:36.311Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-9bece2a6",
+      "product": "아머프로",
+      "field": "liquidRefillable",
+      "value": "가능",
+      "evidence": "저거를 \"오픈 더 고무마개!!!\" 외치면서 열어주시면 ... 요로케 열립니다! 이 구멍으로 액상주입을 하시면 되는겁니다잉",
+      "postId": "post-manual-mt87o9e9",
+      "postTitle": "부평역전자담배 추천 누수없는 입호흡 입문용 아머프로",
+      "extractedAt": "2026-08-25T05:15:36.311Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-08-25T05:13:40.280Z"
+  "updatedAt": "2026-08-25T05:15:36.765Z"
 }
