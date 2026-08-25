@@ -107,3 +107,18 @@ describe("PR36 조용한 공급자 감지", () => {
     assert.equal(usageLevel(summary), "unknown");
   });
 });
+
+// 전체 기간으로 세면 오래된 호출 한 건이 오늘의 완전한 차단을 가려버린다.
+describe("PR36 조용함은 스냅샷 이후만 본다", () => {
+  test("스냅샷 이전 호출은 판정에 쓰지 않는다", () => {
+    let ledger = recordSamples(emptyLedger(), [
+      sample("claude-haiku-4-5", 0.1, "2026-05-01T01:00:00Z"),
+    ]);
+    ledger = markBalance(ledger, 5, { provider: "anthropic" });
+    ledger = recordSamples(ledger, [sample("gpt-4.1-mini", 0.5)]);
+
+    const summary = summarize(ledger, { now: NOW });
+    assert.equal(summary.markedProviderCalls, 0);
+    assert.equal(summary.markedProviderSilent, true);
+  });
+});
