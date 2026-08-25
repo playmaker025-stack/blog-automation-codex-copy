@@ -440,7 +440,73 @@
       "postTitle": "계산동전자담배 입호흡기기 발라리안 맥스 프로",
       "extractedAt": "2026-08-25T05:12:19.607Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-8ce26203",
+      "product": "마이팟프로",
+      "field": "resistanceOhm",
+      "value": "0.1옴, 0.4옴, 0.6옴",
+      "evidence": "팟저항 : 0.1옴, 0.4옴, 0.6옴",
+      "postId": "post-manual-mt87kkfp",
+      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
+      "extractedAt": "2026-08-25T05:12:42.561Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-432df7cf",
+      "product": "마이팟프로",
+      "field": "wattRange",
+      "value": "5W ~ 80W",
+      "evidence": "출력값 : 5W ~ 80W",
+      "postId": "post-manual-mt87kkfp",
+      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
+      "extractedAt": "2026-08-25T05:12:42.561Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-0154e525",
+      "product": "마이팟프로",
+      "field": "charging",
+      "value": "C타입",
+      "evidence": "충전 : C타입",
+      "postId": "post-manual-mt87kkfp",
+      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
+      "extractedAt": "2026-08-25T05:12:42.561Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-40b7d3e8",
+      "product": "마이팟프로",
+      "field": "drawStyle",
+      "value": "입호흡 폐호흡 겸용",
+      "evidence": "입호흡 폐호흡 둘 다 가능한데다가",
+      "postId": "post-manual-mt87kkfp",
+      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
+      "extractedAt": "2026-08-25T05:12:42.561Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-471307c6",
+      "product": "마이팟프로",
+      "field": "airflowControl",
+      "value": "가능",
+      "evidence": "팟 옆면에 있는것은 에어홀 이라는건데 원하시는 흡압으로 조절이 가능합니다!",
+      "postId": "post-manual-mt87kkfp",
+      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
+      "extractedAt": "2026-08-25T05:12:42.561Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-5cdf670d",
+      "product": "마이팟프로",
+      "field": "inhaleMode",
+      "value": "오토모드, 버튼모드, 프리모드(둘 다)",
+      "evidence": "버튼을 누르지않고 흡입이 가능한 오토모드 와 버튼을 눌러야만 흡입가능한 버튼모드 그리고 둘 다 가능한 프리모드 이렇게 있습니당",
+      "postId": "post-manual-mt87kkfp",
+      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
+      "extractedAt": "2026-08-25T05:12:42.561Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-08-25T05:12:20.139Z"
+  "updatedAt": "2026-08-25T05:12:43.054Z"
 }
