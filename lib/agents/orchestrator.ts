@@ -253,7 +253,8 @@ async function evaluateAndMaybeReviseDraftSmart(params: {
   controller: ReadableStreamDefaultController;
   signal?: AbortSignal;
 }): Promise<{ writerResult: WriterResult; evalResult: EvalResult }> {
-  const MAX_AUTO_REVISION_ROUNDS = 2;
+  // 라운드를 늘려도 글이 나아지지 않는다는 게 확인됐다(3편이 다 비슷한 수준).
+  const MAX_AUTO_REVISION_ROUNDS = 1;
   const {
     pipelineId,
     topicId,
