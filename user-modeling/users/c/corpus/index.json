@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mt87trwt",
+      "title": "약대동전자담배 리로드 아이킥 입호흡 전담 추천 만수르",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 6523,
+      "publishedAt": "2026-08-25T05:19:33.256Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt87trwt.md"
+    },
+    {
       "sampleId": "published-post-manual-mt87tbja",
       "title": "갈산동전자담배 릴렉스 크리에이터 15000 일회용 전담 후기 !",
       "category": "published-post",
@@ -283,18 +292,7 @@
       "wordCount": 7240,
       "publishedAt": "2026-07-30T06:37:03.621Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-ms7559nt.md"
-    },
-    {
-      "sampleId": "published-post-28fdb89d",
-      "title": "인천전자담배 - 액상 섞어서 사용해도 될까?",
-      "category": "direct-run",
-      "tags": [
-        "액상 섞어"
-      ],
-      "wordCount": 2749,
-      "publishedAt": "2026-07-29T05:49:11.273Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-28fdb89d.md"
     }
   ],
-  "lastUpdated": "2026-08-25T05:19:18.256Z"
+  "lastUpdated": "2026-08-25T05:19:39.170Z"
 }
