@@ -130,6 +130,48 @@ export function hoursSince(publishedAt: string | null, at: string): number | nul
   return Math.max(0, Math.round((to - from) / 3_600_000));
 }
 
+// ── 관측 시점 ─────────────────────────────────────────────
+
+/**
+ * 발행 직후 / 7일 / 14일 / 28일.
+ *
+ * 두 점(7일·28일)만 재려다 늘렸다. 두 점으로는 색인 지연, 순위 급등락, 경쟁 글
+ * 등장이 전부 뒤섞여 원인을 못 가린다. 특히 발행 직후 관측이 있어야 "처음부터
+ * 안 잡힌 것"과 "잡혔다가 밀린 것"이 구분된다.
+ */
+export const CHECKPOINT_HOURS = [0, 168, 336, 672] as const;
+
+/**
+ * 지금 관측해야 할 시점들.
+ *
+ * 이미 성공 관측이 있는 구간은 건너뛴다. 실패 관측은 건너뛰기 근거로 쓰지
+ * 않는다 — 실패했으면 아직 그 시점을 못 잰 것이다. 다만 같은 실행 안에서
+ * 재시도하지는 않는다(호출부 정책).
+ */
+export function dueCheckpoints(params: {
+  publishedAt: string | null;
+  now: string;
+  existing: PostOutcomeObservation[];
+}): number[] {
+  const age = hoursSince(params.publishedAt, params.now);
+  if (age === null) return [];
+
+  const covered = params.existing
+    .filter((item) => item.status === "ok" && item.source === "serp")
+    .map((item) => item.postAgeHours)
+    .filter((hours): hours is number => typeof hours === "number");
+
+  const due: number[] = [];
+  for (let i = 0; i < CHECKPOINT_HOURS.length; i += 1) {
+    const checkpoint = CHECKPOINT_HOURS[i];
+    if (age < checkpoint) break;
+    const nextCheckpoint = CHECKPOINT_HOURS[i + 1] ?? Number.POSITIVE_INFINITY;
+    const alreadyDone = covered.some((hours) => hours >= checkpoint && hours < nextCheckpoint);
+    if (!alreadyDone) due.push(checkpoint);
+  }
+  return due;
+}
+
 // ── 요약 ──────────────────────────────────────────────────
 
 export interface OutcomeSummary {
