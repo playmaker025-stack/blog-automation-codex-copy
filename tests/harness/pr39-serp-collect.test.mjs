@@ -2,7 +2,7 @@ import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 
 import { parseSerp, findRank, looksBlocked, buildMobileSearchUrl } from "../../lib/agents/serp-parse.ts";
-import { dueCheckpoints, CHECKPOINT_HOURS } from "../../lib/agents/post-outcome.ts";
+import { dueCheckpoint, ONGOING_INTERVAL_HOURS } from "../../lib/agents/post-outcome.ts";
 
 // 실측(2026-08-25): 한 글의 링크가 화면에 9번씩 반복됐다. 중복을 안 지우면
 // 1위 글이 1~9위를 다 차지한 것처럼 보인다.
@@ -80,57 +80,55 @@ describe("PR39 결과 화면을 못 받은 경우", () => {
 });
 
 describe("PR39 관측 시점", () => {
-  const obs = (hours) => ({
+  const obs = (hours, status = "ok") => ({
     schemaVersion: 1,
     observationId: String(hours),
     postId: "p",
     source: "serp",
     capturedAt: "2026-08-25T00:00:00.000Z",
     postAgeHours: hours,
-    status: "ok",
+    status,
     collector: { method: "crawler", version: "1" },
   });
+  const at = (publishedAt, now, existing = []) => dueCheckpoint({ publishedAt, now, existing });
 
-  test("발행 직후부터 잰다", () => {
-    const due = dueCheckpoints({
-      publishedAt: "2026-08-25T00:00:00Z",
-      now: "2026-08-25T01:00:00Z",
-      existing: [],
-    });
-    assert.deepEqual(due, [0]);
+  test("발행 직후 구간이면 0을 잰다", () => {
+    assert.equal(at("2026-08-25T00:00:00Z", "2026-08-25T01:00:00Z"), 0);
   });
 
-  test("시간이 지나면 지난 시점들이 밀려서 나온다", () => {
-    const due = dueCheckpoints({
-      publishedAt: "2026-08-01T00:00:00Z",
-      now: "2026-08-29T00:00:00Z",
-      existing: [],
-    });
-    assert.deepEqual(due, [...CHECKPOINT_HOURS]);
+  test("7일이 지나면 168 구간을 잰다", () => {
+    assert.equal(at("2026-08-01T00:00:00Z", "2026-08-09T00:00:00Z"), 168);
   });
 
-  test("이미 잰 구간은 건너뛴다", () => {
-    const due = dueCheckpoints({
-      publishedAt: "2026-08-01T00:00:00Z",
-      now: "2026-08-09T00:00:00Z",
-      existing: [obs(2), obs(170)],
-    });
-    assert.deepEqual(due, []);
+  // 7일차 관측을 21일에 재면 그건 7일차가 아니다. 놓친 구간은 놓친 채로 둔다.
+  test("지나간 구간은 다시 돌려주지 않는다", () => {
+    // 발행 15일 뒤 — 0과 168 구간은 이미 지났다. 336 구간만 유효하다.
+    assert.equal(at("2026-08-01T00:00:00Z", "2026-08-16T00:00:00Z"), 336);
   });
 
-  // 실패했으면 그 시점을 아직 못 잰 것이다. 건너뛰면 영원히 빈칸으로 남는다.
+  test("그 구간에서 이미 쟀으면 건너뛴다", () => {
+    assert.equal(at("2026-08-01T00:00:00Z", "2026-08-09T00:00:00Z", [obs(170)]), null);
+  });
+
+  // 실패했으면 아직 못 잰 것이다. 건너뛰면 그 구간이 영원히 빈칸으로 남는다.
   test("실패 관측은 건너뛰기 근거가 아니다", () => {
-    const failed = { ...obs(2), status: "request_failed" };
-    const due = dueCheckpoints({
-      publishedAt: "2026-08-25T00:00:00Z",
-      now: "2026-08-25T03:00:00Z",
-      existing: [failed],
-    });
-    assert.deepEqual(due, [0]);
+    assert.equal(at("2026-08-25T00:00:00Z", "2026-08-25T03:00:00Z", [obs(2, "request_failed")]), 0);
   });
 
-  test("발행일이 없으면 잴 시점이 없다", () => {
-    assert.deepEqual(dueCheckpoints({ publishedAt: null, now: "2026-08-25T00:00:00Z", existing: [] }), []);
+  test("28일을 넘긴 글도 계속 지켜본다", () => {
+    // 소급 추적한 옛날 글이 이 경로로 잡힌다.
+    assert.equal(at("2026-05-01T00:00:00Z", "2026-08-25T00:00:00Z"), 672);
+  });
+
+  test("최근에 쟀으면 지속 관측을 쉰다", () => {
+    const now = "2026-08-25T00:00:00Z";
+    const age = Math.round((new Date(now) - new Date("2026-05-01T00:00:00Z")) / 3600000);
+    assert.equal(at("2026-05-01T00:00:00Z", now, [obs(age - 10)]), null);
+    assert.equal(at("2026-05-01T00:00:00Z", now, [obs(age - ONGOING_INTERVAL_HOURS - 1)]), 672);
+  });
+
+  test("발행일이 없으면 잴 게 없다", () => {
+    assert.equal(at(null, "2026-08-25T00:00:00Z"), null);
   });
 });
 

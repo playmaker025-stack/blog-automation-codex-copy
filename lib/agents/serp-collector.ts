@@ -16,7 +16,7 @@ import type { PostingRecord } from "@/lib/types/github-data";
 import {
   SCHEMA_VERSION,
   buildObservationId,
-  dueCheckpoints,
+  dueCheckpoint,
   hoursSince,
   type PostOutcomeObservation,
 } from "./post-outcome.ts";
@@ -141,12 +141,8 @@ export async function collectDueOutcomes(params: {
     }
 
     const existing = await loadObservations(post.postId).catch(() => []);
-    const due = dueCheckpoints({ publishedAt: post.publishedAt, now, existing });
-    if (due.length === 0) continue;
-
-    // 밀린 시점이 여러 개여도 가장 이른 것 하나만 잰다. 지난 시점을 지금 재봐야
-    // 그때 순위가 아니다. 몰아서 요청하는 것도 피한다.
-    const checkpointHours = due[0];
+    const checkpointHours = dueCheckpoint({ publishedAt: post.publishedAt, now, existing });
+    if (checkpointHours === null) continue;
 
     for (const keyword of post.outcomeTracking?.targetKeywords ?? []) {
       if (collected.length >= maxQueries) break;
