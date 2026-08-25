@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "brands": [
     {
-      "name": "소울 2",
-      "evidence": "누수없는 전자담배 추천",
-      "registeredAt": "2026-08-25T06:02:52.642Z",
-      "seenCount": 2
-    },
-    {
       "name": "폴츠",
       "evidence": "팟 좀 쓰다보면 탄맛 올라오는데 폴츠 전자담배는 엄청 오래감",
+      "registeredAt": "2026-08-25T06:02:52.642Z",
+      "seenCount": 3
+    },
+    {
+      "name": "소울 2",
+      "evidence": "누수없는 전자담배 추천",
       "registeredAt": "2026-08-25T06:02:52.642Z",
       "seenCount": 2
     },
@@ -23,6 +23,36 @@
       "name": "에이펙스",
       "evidence": "새 기기인데 연기가 안나와요",
       "registeredAt": "2026-08-25T06:02:52.642Z",
+      "seenCount": 2
+    },
+    {
+      "name": "발라리안 맥스 프로",
+      "evidence": "전자담배액상 전담 액상 발라리안 맥스 프로 젤로 말론 제로",
+      "registeredAt": "2026-08-25T06:03:42.717Z",
+      "seenCount": 2
+    },
+    {
+      "name": "젤로 맥스",
+      "evidence": "입호흡 전자담배 추천",
+      "registeredAt": "2026-08-25T06:03:42.717Z",
+      "seenCount": 2
+    },
+    {
+      "name": "말론S",
+      "evidence": "입호흡 전자담배 추천",
+      "registeredAt": "2026-08-25T06:03:42.717Z",
+      "seenCount": 2
+    },
+    {
+      "name": "젤로 크리스탈",
+      "evidence": "입호흡 전자담배 추천",
+      "registeredAt": "2026-08-25T06:03:42.717Z",
+      "seenCount": 2
+    },
+    {
+      "name": "긱베이프 소울2",
+      "evidence": "입호흡기기 안빨려요",
+      "registeredAt": "2026-08-25T06:03:42.717Z",
       "seenCount": 2
     },
     {
@@ -62,41 +92,59 @@
       "seenCount": 1
     },
     {
-      "name": "발라리안 맥스 프로",
-      "evidence": "전자담배액상 전담 액상 발라리안 맥스 프로 젤로 말론 제로",
-      "registeredAt": "2026-08-25T06:03:42.717Z",
-      "seenCount": 1
-    },
-    {
-      "name": "젤로 맥스",
-      "evidence": "입호흡 전자담배 추천",
-      "registeredAt": "2026-08-25T06:03:42.717Z",
-      "seenCount": 1
-    },
-    {
-      "name": "말론S",
-      "evidence": "입호흡 전자담배 추천",
-      "registeredAt": "2026-08-25T06:03:42.717Z",
-      "seenCount": 1
-    },
-    {
-      "name": "젤로 크리스탈",
-      "evidence": "입호흡 전자담배 추천",
-      "registeredAt": "2026-08-25T06:03:42.717Z",
-      "seenCount": 1
-    },
-    {
-      "name": "긱베이프 소울2",
-      "evidence": "입호흡기기 안빨려요",
-      "registeredAt": "2026-08-25T06:03:42.717Z",
-      "seenCount": 1
-    },
-    {
       "name": "아보카도 베이비",
       "evidence": "입호흡 전자담배 추천 부탁드려요~!",
       "registeredAt": "2026-08-25T06:03:42.717Z",
       "seenCount": 1
+    },
+    {
+      "name": "버블몬 그래피티",
+      "evidence": "일회용 전자담배, 어떤 제품이 인기가 많을까요?",
+      "registeredAt": "2026-08-25T06:06:10.882Z",
+      "seenCount": 1
+    },
+    {
+      "name": "버블몬 그래피티 2",
+      "evidence": "팟 교체형 전자담배 추천",
+      "registeredAt": "2026-08-25T06:06:10.882Z",
+      "seenCount": 1
+    },
+    {
+      "name": "위베이프 그래피티",
+      "evidence": "비행기 전자담배 소지",
+      "registeredAt": "2026-08-25T06:06:10.882Z",
+      "seenCount": 1
+    },
+    {
+      "name": "위베이프 그래피티 롤리팝",
+      "evidence": "비행기 전자담배 소지",
+      "registeredAt": "2026-08-25T06:06:10.882Z",
+      "seenCount": 1
+    },
+    {
+      "name": "헬베이프 젤로",
+      "evidence": "누수없는 전자담배 추천",
+      "registeredAt": "2026-08-25T06:06:10.882Z",
+      "seenCount": 1
+    },
+    {
+      "name": "하복",
+      "evidence": "전담 하복 팟/코일 알려주세요",
+      "registeredAt": "2026-08-25T06:06:10.882Z",
+      "seenCount": 1
+    },
+    {
+      "name": "하복 SE",
+      "evidence": "전담 기기 어떤게 더 좋을까요??",
+      "registeredAt": "2026-08-25T06:06:10.882Z",
+      "seenCount": 1
+    },
+    {
+      "name": "아보카도",
+      "evidence": "전자담배 추천해주세요",
+      "registeredAt": "2026-08-25T06:06:10.882Z",
+      "seenCount": 1
     }
   ],
-  "updatedAt": "2026-08-25T06:03:42.717Z"
+  "updatedAt": "2026-08-25T06:06:10.882Z"
 }
