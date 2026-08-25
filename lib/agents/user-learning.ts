@@ -13,6 +13,8 @@ import type {
 import type { PublicationLearningSummary } from "./types";
 import { buildStyleFingerprint, type StyleFingerprint } from "./style-fingerprint";
 import { stripNaverChrome, hasNaverChrome, isUsableCorpusText } from "./naver-chrome.ts";
+import { rankByOutcome } from "./post-outcome.ts";
+import { loadOutcomeSummaries } from "./post-outcome-store";
 
 interface PublicationLearningEntry {
   postId: string;
@@ -923,9 +925,28 @@ export async function getPublicationLearningSummary(userId: string): Promise<Pub
     .sort((left, right) => new Date(right.publishedAt ?? right.learnedAt).getTime() - new Date(left.publishedAt ?? left.learnedAt).getTime())
     .slice(0, 3)
     .map((entry) => entry.title);
-  const bestPerforming = entries
-    .filter((entry) => entry.evalScore !== null)
-    .sort((left, right) => (right.evalScore ?? -1) - (left.evalScore ?? -1))[0] ?? null;
+  // "가장 잘한 글"은 실제 성과로 고른다.
+  //
+  // 예전에는 evalScore(앱이 스스로 매긴 점수) 1등을 뽑아 다음 글 전략에 넣었다.
+  // 자기 채점을 성과로 착각하는 구조라, 실측을 도입해도 이 경로를 안 바꾸면
+  // 내부 점수가 다시 승자를 정한다. 관측이 충분히 쌓인 글이 하나도 없으면
+  // 예전 방식으로 물러서되, 그 사실을 source에 남겨 프롬프트가 구분하게 한다.
+  const outcomeSummaries = await loadOutcomeSummaries(entries.map((entry) => entry.postId)).catch(
+    () => new Map<string, ReturnType<typeof rankByOutcome>[number]["summary"]>()
+  );
+  const byOutcome = rankByOutcome(
+    entries
+      .map((entry) => ({ entry, summary: outcomeSummaries.get(entry.postId) }))
+      .filter((item): item is { entry: typeof entries[number]; summary: NonNullable<typeof item.summary> } =>
+        Boolean(item.summary)
+      )
+  );
+  const bestPerforming = byOutcome[0]?.entry ??
+    (entries
+      .filter((entry) => entry.evalScore !== null)
+      .sort((left, right) => (right.evalScore ?? -1) - (left.evalScore ?? -1))[0] ?? null);
+  const bestPerformingSource: "measured_outcome" | "internal_score" | null =
+    byOutcome.length > 0 ? "measured_outcome" : bestPerforming ? "internal_score" : null;
   const lastPublishedAt = entries
     .map((entry) => entry.publishedAt ?? entry.learnedAt)
     .sort()
@@ -962,6 +983,7 @@ export async function getPublicationLearningSummary(userId: string): Promise<Pub
     topKeywords: mergedKeywords,
     dominantContentKinds,
     bestPerformingTitle: bestPerforming?.title ?? null,
+    bestPerformingSource,
     lastPublishedAt,
     guidance,
   };

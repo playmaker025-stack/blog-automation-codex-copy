@@ -3,6 +3,7 @@ import { readFile, readJsonFile, writeFile, writeJsonFile, fileExists } from "@/
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex, PostingRecord, TopicIndex } from "@/lib/types/github-data";
 import { normalizeUserId } from "@/lib/utils/normalize";
+import { buildOutcomeTracking } from "@/lib/agents/post-outcome";
 import {
   runAfterPublishMaintenance,
   type AfterPublishMaintenanceResult,
@@ -49,6 +50,28 @@ export async function GET(request: NextRequest) {
 }
 
 // 인덱스 항목 수정
+/**
+ * 이 글이 어떤 검색어를 노렸는지 확정한다.
+ *
+ * 토픽에 targetKeyword가 있으면 그걸 쓰고, 없으면 제목 앞부분을 쓴다.
+ * 제목 앞쪽에 핵심 키워드를 놓는 게 이 앱의 작성 규칙이라 실제로 맞는 경우가 많다.
+ * 완벽하진 않지만, 아무것도 기록하지 않는 것보다 낫다 — 나중에 화면에서 고칠 수 있다.
+ */
+async function resolveTargetKeywords(topicId: string, title: string): Promise<string[]> {
+  const fromTitle = title.trim().split(/\s+/).slice(0, 3).join(" ");
+  if (!topicId) return fromTitle ? [fromTitle] : [];
+
+  try {
+    if (!(await fileExists(Paths.topicsIndex()))) return fromTitle ? [fromTitle] : [];
+    const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
+    const topic = data.topics.find((item) => item.topicId === topicId);
+    const target = topic?.targetKeyword?.trim();
+    return [target, fromTitle].filter((value): value is string => Boolean(value));
+  } catch {
+    return fromTitle ? [fromTitle] : [];
+  }
+}
+
 export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json() as { postId: string; content?: string } & Partial<PostingRecord>;
@@ -65,6 +88,18 @@ export async function PATCH(request: NextRequest) {
     const now = new Date().toISOString();
     const { postId, content, ...patch } = body;
     const publishing = patch.status === "published";
+
+    // 발행하는 순간 추적 계약을 박는다. 나중에 주제가 바뀌어도 뭘 측정했는지 남는다.
+    const trackingUrl = patch.naverPostUrl ?? exists.naverPostUrl;
+    const outcomeTracking =
+      publishing && !exists.outcomeTracking
+        ? buildOutcomeTracking({
+            naverPostUrl: trackingUrl,
+            title: patch.title ?? exists.title,
+            content: content ?? "",
+            targetKeywords: await resolveTargetKeywords(exists.topicId, patch.title ?? exists.title),
+          })
+        : null;
     let updatedPost: PostingRecord | null = null;
     const updated: PostingIndex = {
       posts: index.posts.map((p) =>
@@ -72,6 +107,7 @@ export async function PATCH(request: NextRequest) {
           ? (updatedPost = {
               ...p,
               ...patch,
+              ...(outcomeTracking ? { outcomeTracking } : {}),
               publishedAt: publishing ? (patch.publishedAt ?? p.publishedAt ?? now) : (patch.publishedAt ?? p.publishedAt),
               updatedAt: now,
             })

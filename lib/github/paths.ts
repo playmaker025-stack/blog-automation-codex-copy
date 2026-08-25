@@ -7,6 +7,14 @@ export const Paths = {
   pipelineUserDraft: (userId: string) =>
     `data/pipeline-ledger/user-drafts/${userId}.json`,
 
+  /**
+   * 발행 결과 관측치. 글마다 파일을 따로 쌓는다(덧붙이기 전용).
+   * 발행 목록(index.json)에 배열로 넣으면 수집기끼리 통째로 덮어쓴다.
+   */
+  postOutcomeDir: (postId: string) => `data/outcomes/${postId}`,
+  postOutcome: (postId: string, observationId: string) =>
+    `data/outcomes/${postId}/${observationId}.json`,
+
   corpusIndex: (userId: string) =>
     `user-modeling/users/${userId}/corpus/index.json`,
   corpusSample: (userId: string, sampleId: string) =>

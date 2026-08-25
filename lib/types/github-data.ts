@@ -123,6 +123,8 @@ export interface TopicIndex {
 
 export type PostStatus = "draft" | "ready" | "approved" | "audit_failed" | "published" | "failed";
 
+import type { OutcomeTracking } from "@/lib/agents/post-outcome";
+
 export interface PostingRecord {
   postId: string;
   topicId: string;
@@ -130,7 +132,12 @@ export interface PostingRecord {
   title: string;
   status: PostStatus;
   naverPostUrl: string | null;
-  evalScore: number | null; // 종합 품질 점수 0–100
+  evalScore: number | null; // 종합 품질 점수 0–100 (앱이 매긴 내부 점수 — 실제 성과가 아니다)
+  /**
+   * 발행 시점에 박아두는 추적 계약. 나중에 주제나 제목이 바뀌어도
+   * "이 글이 무엇을 노렸는지"가 남아야 관측을 원래 전략에 귀속할 수 있다.
+   */
+  outcomeTracking?: OutcomeTracking;
   wordCount: number;
   compositionSessionId: string | null;
   pendingApproval: PendingApproval | null; // 승인 대기 상태

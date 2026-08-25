@@ -264,6 +264,12 @@ export interface PublicationLearningSummary {
   topKeywords: string[];
   dominantContentKinds: string[];
   bestPerformingTitle: string | null;
+  /**
+   * 그 "가장 잘한 글"을 무엇으로 골랐는지.
+   * measured_outcome = 실제 관측된 성과, internal_score = 앱이 매긴 점수(성과 아님).
+   * 프롬프트가 이걸 구분해야 자기 채점을 성과로 착각하지 않는다.
+   */
+  bestPerformingSource?: "measured_outcome" | "internal_score" | null;
   lastPublishedAt: string | null;
   guidance: string[];
 }
