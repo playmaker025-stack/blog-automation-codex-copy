@@ -41,6 +41,12 @@
       }
     }
   ],
-  "balanceMarks": [],
-  "updatedAt": "2026-08-25T05:01:08.390Z"
+  "balanceMarks": [
+    {
+      "at": "2026-08-25T05:01:09.449Z",
+      "balanceUsd": 5,
+      "spentAtMarkUsd": 0.39440519999999996
+    }
+  ],
+  "updatedAt": "2026-08-25T05:01:09.449Z"
 }
