@@ -2053,8 +2053,27 @@ export default function PipelinePage() {
                   발행 URL 입력 후 인덱스 반영 가능
                 </div>
               ) : result?.finalDraftCheck && !canApproveFinalDraft(result.finalDraftCheck) ? (
-                <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-3 text-sm text-blue-700">
-                  본문 검수 차단 사유는 참고용입니다. 실제 발행본과 URL이 있으면 인덱스 반영은 계속 진행할 수 있습니다.
+                <div className="space-y-2 rounded-lg border border-blue-200 bg-blue-50 px-3 py-3 text-sm text-blue-700">
+                  <p>
+                    본문 검수 차단 사유는 참고용입니다. 실제 발행본과 URL이 있으면 인덱스 반영은 계속 진행할 수 있습니다.
+                  </p>
+                  {(result.finalDraftCheck.specFindings ?? []).length > 0 && (
+                    <div className="rounded-md border border-red-200 bg-red-50 px-2.5 py-2 text-xs text-red-700">
+                      <p className="font-semibold">등록된 제품 사양과 어긋납니다</p>
+                      <ul className="mt-1 list-disc space-y-0.5 pl-4">
+                        {(result.finalDraftCheck.specFindings ?? []).map((finding) => (
+                          <li key={finding}>{finding}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {result.finalDraftCheck.blockingReasons.length > 0 && (
+                    <ul className="list-disc space-y-0.5 pl-4 text-xs">
+                      {result.finalDraftCheck.blockingReasons.map((reason) => (
+                        <li key={reason}>{reason}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ) : (
                 <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-3 text-sm text-emerald-700">
