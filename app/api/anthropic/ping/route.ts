@@ -44,6 +44,10 @@ export async function GET() {
         ADMIN_API_KEY_exists: "ADMIN_API_KEY" in process.env,
         ADMIN_API_KEY_len: process.env.ADMIN_API_KEY?.trim().length ?? 0,
         ADMIN_API_KEY_quoted: /^["']|["']$/.test(process.env.ADMIN_API_KEY ?? ""),
+        // 이름만 싣는다. 이름이 살짝 다르게 들어간 경우를 잡으려는 것이다.
+        secretishKeys: Object.keys(process.env)
+          .filter((name) => /ADMIN|KEY|TOKEN|SECRET/i.test(name))
+          .sort(),
         TELEGRAM_BOT_TOKEN_exists: "TELEGRAM_BOT_TOKEN" in process.env,
         TELEGRAM_BOT_TOKEN_len: process.env.TELEGRAM_BOT_TOKEN?.trim().length ?? 0,
         NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL ?? null,
