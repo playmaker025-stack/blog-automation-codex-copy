@@ -108,7 +108,7 @@
       "batteryMah": 3500,
       "podMl": "7.5ml",
       "resistanceOhm": "0.1옴, 0.4옴, 0.6옴",
-      "wattRange": "5W ~ 80W",
+      "wattRange": "5~80W",
       "sizeMm": "46 × 19 × 89mm",
       "weightG": 95
     },
@@ -278,5 +278,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:12:56.357Z"
+  "updatedAt": "2026-08-26T03:28:47.173Z"
 }
