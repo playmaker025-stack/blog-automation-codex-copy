@@ -37,6 +37,9 @@ function normalize(raw: Partial<ProductSpecRegistry> | null): ProductSpecRegistr
   return {
     version: SPEC_REGISTRY_VERSION,
     products: Array.isArray(raw.products) ? raw.products : [],
+    // 업종 규칙을 여기서 빠뜨리면 원장을 읽고 다시 쓰는 모든 경로가(일괄 승인,
+    // 직접 편집) 규칙을 조용히 지운다. 실제로 그렇게 사라졌다.
+    ...(Array.isArray(raw.domainNotes) ? { domainNotes: raw.domainNotes } : {}),
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : base.updatedAt,
   };
 }

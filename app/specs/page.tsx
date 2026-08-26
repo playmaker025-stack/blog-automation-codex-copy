@@ -308,7 +308,7 @@ function PendingSection({
       ) : (
         <div className="space-y-4">
           {visible.map(({ product, items, conflicts }) => {
-            const included = items.filter((i) => !excluded.has(i.id));
+            const included = items.filter((i) => !isOff(i));
             const droppedCount = items.length - included.length;
             return (
               <article key={product} className="rounded-lg border border-zinc-200 bg-white">
@@ -342,7 +342,6 @@ function PendingSection({
                           <input
                             value={edits[c.id] ?? c.value}
                             onChange={(e) => setEdits((p) => ({ ...p, [c.id]: e.target.value }))}
-                            disabled={off}
                             className="min-w-0 flex-1 rounded border border-zinc-300 px-2 py-1 text-sm disabled:bg-zinc-100"
                           />
                           {conflict && (

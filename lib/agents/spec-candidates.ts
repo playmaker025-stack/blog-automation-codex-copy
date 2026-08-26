@@ -105,8 +105,9 @@ function normalizeValue(value: string): string {
   return value.trim().toLowerCase().replace(/\s+/g, "");
 }
 
-const TRUE_WORDS = ["true", "가능", "있음", "지원", "예", "o"];
-const FALSE_WORDS = ["false", "불가", "없음", "미지원", "아니오", "x"];
+// 한 글자(o/x)와 "예"/"아니오"는 정확 일치로만 본다. 부분 문자열로 보면 오작동한다.
+const TRUE_WORDS = ["true", "가능", "있음", "지원"];
+const FALSE_WORDS = ["false", "불가", "없음", "미지원"];
 
 /**
  * 업종에서 실제로 쓰는 표현들. 실측(2026-08-26) 일괄 승인에서 21건이
@@ -159,11 +160,15 @@ export function coerceValue(field: CandidateField, raw: string): string | number
     field === "batteryRechargeable" ||
     field === "liquidRefillable"
   ) {
-    const v = value.toLowerCase();
-    if (TRUE_WORDS.some((w) => v.includes(w))) return true;
+    const v = value.toLowerCase().trim();
+    // 한 글자 표기(o/x)는 정확히 그것일 때만 본다. 부분 문자열로 보면
+    // "max 80w"의 x가 "불가"로 읽힌다.
+    if (v === "o" || v === "예") return true;
+    if (v === "x" || v === "아니오") return false;
+    // 부정을 긍정보다 먼저 본다. "불가능"은 "가능"을 포함하므로 순서가 뒤집히면
+    // "충전 불가능"이 "충전 가능"으로 저장된다.
     if (FALSE_WORDS.some((w) => v.includes(w))) return false;
-    // 부정 신호를 먼저 본다. "팟교체형"에는 "교체"와 "충전"이 같이 나올 수 있는데
-    // 그때 뜻은 "리필 안 됨"이다.
+    if (TRUE_WORDS.some((w) => v.includes(w))) return true;
     if ((FIELD_FALSE_HINTS[field] ?? []).some((w) => v.includes(w))) return false;
     if ((FIELD_TRUE_HINTS[field] ?? []).some((w) => v.includes(w))) return true;
     return null;

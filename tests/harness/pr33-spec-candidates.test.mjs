@@ -341,3 +341,26 @@ describe("PR40 숫자 항목 쓰레기 차단", () => {
     assert.equal(out[0].facts.length, 1);
   });
 });
+
+// 코덱스 리뷰(2026-08-26)가 잡은 것. "불가능"은 "가능"을 포함하므로 긍정을 먼저
+// 보면 뒤집힌다. 실제로 원장에 2건이 반대로 저장돼 있었다.
+describe("PR42 부정 표현이 긍정에 먹히지 않는다", () => {
+  test("불가능은 불가다", () => {
+    assert.equal(coerceValue("wattControl", "불가능"), false);
+    assert.equal(coerceValue("wattControl", "조절 불가능"), false);
+    assert.equal(coerceValue("batteryRechargeable", "충전 불가능"), false);
+    assert.equal(coerceValue("liquidRefillable", "리필 불가능"), false);
+  });
+
+  test("가능은 여전히 가능이다", () => {
+    assert.equal(coerceValue("wattControl", "가능"), true);
+    assert.equal(coerceValue("wattControl", "조절 가능"), true);
+  });
+
+  // "max 80w"의 x가 부정으로 읽히면 안 된다.
+  test("한 글자 표기는 정확히 그것일 때만 본다", () => {
+    assert.equal(coerceValue("wattControl", "x"), false);
+    assert.equal(coerceValue("wattControl", "o"), true);
+    assert.equal(coerceValue("wattControl", "max 80w"), null);
+  });
+});
