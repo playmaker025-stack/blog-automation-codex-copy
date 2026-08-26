@@ -56,6 +56,13 @@
       "verifiedAt": "2026-08-24"
     },
     {
+      "name": "닷팟 맥스",
+      "category": "기기",
+      "source": "post-manual-mt88my0j 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "92 × 43.2 × 20mm"
+    },
+    {
       "name": "도조오팔",
       "aliases": [
         "도조 오팔",
@@ -285,5 +292,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:29:52.151Z"
+  "updatedAt": "2026-08-26T03:29:59.513Z"
 }
