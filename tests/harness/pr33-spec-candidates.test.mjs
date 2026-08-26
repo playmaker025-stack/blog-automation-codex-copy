@@ -267,10 +267,19 @@ describe("PR33 추출 프롬프트", () => {
 // 실측(2026-08-26): 일괄 승인에서 21건이 "해석 못 함"으로 떨어졌는데
 // 절반은 사람이 읽으면 명백한 값이었다.
 describe("PR40 업종 표현 해석", () => {
-  test("팟교체형은 액상 리필 불가다", () => {
-    assert.equal(coerceValue("liquidRefillable", "팟교체형"), false);
-    assert.equal(coerceValue("liquidRefillable", "액상팟 교체형"), false);
+  // 사장님 지적: 팟 교체형은 두 가지다. 이미 주입된 팟만 교체하는 것(리필 불가)과
+  // 팟을 교체하되 액상은 직접 주입하는 것(리필 가능). 표현만으로는 모른다.
+  test("팟교체형만으로는 리필 여부를 판정하지 않는다", () => {
+    assert.equal(coerceValue("liquidRefillable", "팟교체형"), null);
+    assert.equal(coerceValue("liquidRefillable", "액상팟 교체형"), null);
+  });
+
+  test("일회용은 리필 불가로 본다", () => {
     assert.equal(coerceValue("liquidRefillable", "일회용 전자담배"), false);
+  });
+
+  test("액상 주입이 명시되면 리필 가능이다", () => {
+    assert.equal(coerceValue("liquidRefillable", "팟 교체형, 액상 주입 방식"), true);
   });
 
   test("충전하며 재사용은 배터리 충전 가능이다", () => {
@@ -296,9 +305,11 @@ describe("PR40 업종 표현 해석", () => {
     assert.equal(coerceValue("airflowControl", "불명"), null);
   });
 
-  test("부정 신호가 긍정보다 먼저다", () => {
-    // "충전식 팟 교체형" — 교체형이 최종 의미다.
-    assert.equal(coerceValue("liquidRefillable", "충전식 팟 교체형"), false);
+  // 가능/불가가 명시돼 있으면 그걸 따른다. 그 말이 어느 항목을 가리키는지까지
+  // 추론하려 들면 틀린 사실을 원장에 넣게 된다. 애매하면 사람이 본다.
+  test("명시된 가능·불가가 업종 힌트보다 우선한다", () => {
+    assert.equal(coerceValue("liquidRefillable", "리필 가능한 팟 교체형"), true);
+    assert.equal(coerceValue("liquidRefillable", "리필 불가"), false);
   });
 });
 
