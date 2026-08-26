@@ -12,6 +12,7 @@
  *   setNotes        { product, notes: string[] }
  *   setAliases      { product, aliases: string[] }
  *   setDomainNotes  { notes: string[] }
+  mergeProducts   { keeper, loser }
  */
 
 import { NextResponse } from "next/server";
@@ -19,6 +20,7 @@ import { loadProductSpecs } from "@/lib/agents/product-spec-store";
 import { Paths } from "@/lib/github/paths";
 import { writeJsonFile } from "@/lib/github/repository";
 import type { ProductSpec, ProductSpecRegistry } from "@/lib/agents/product-specs";
+import { mergeProducts } from "@/lib/agents/product-identity";
 import {
   addProduct,
   clearSpecField,
@@ -34,6 +36,8 @@ export const dynamic = "force-dynamic";
 
 interface Body {
   action?: string;
+  keeper?: string;
+  loser?: string;
   product?: string;
   field?: string;
   value?: string;
@@ -69,6 +73,12 @@ function apply(registry: ProductSpecRegistry, body: Body): EditResult {
       return setProductAliases(registry, body.product, body.aliases ?? []);
     case "setDomainNotes":
       return setDomainNotes(registry, body.notes ?? []);
+    case "mergeProducts": {
+      if (!body.keeper || !body.loser)
+        return { registry, error: "keeper와 loser가 필요합니다." };
+      const merged = mergeProducts(registry, body.keeper, body.loser);
+      return { registry: merged.registry, error: merged.error };
+    }
     default:
       return { registry, error: `알 수 없는 action: ${body.action}` };
   }

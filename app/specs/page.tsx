@@ -30,6 +30,13 @@ interface Candidate {
   coercible?: boolean;
 }
 
+interface DuplicateSuggestion {
+  keeper: string;
+  loser: string;
+  reason: string;
+  conflictingFields: string[];
+}
+
 interface Spec {
   name: string;
   category: string;
@@ -49,6 +56,7 @@ interface Payload {
   ok: boolean;
   registry: Registry;
   pending: Candidate[];
+  duplicates?: DuplicateSuggestion[];
   counts: { pending: number; conflict: number; decided: number; products: number };
   fieldLabels: Record<string, string>;
 }
@@ -194,6 +202,18 @@ export default function SpecsPage() {
         </div>
       )}
 
+      <DuplicateSection
+        suggestions={data?.duplicates ?? []}
+        busy={busy}
+        onMerge={(keeper, loser) =>
+          edit(
+            { action: "mergeProducts", keeper, loser },
+            `merge-${loser}`,
+            `"${loser}"를 "${keeper}"에 합쳤습니다.`
+          )
+        }
+      />
+
       <PendingSection
         pending={data?.pending ?? []}
         label={label}
@@ -233,6 +253,59 @@ export default function SpecsPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+// ── 중복 제안 ────────────────────────────────────────────────
+
+/**
+ * 같은 기기가 표기만 달라 쪼개진 것을 제안한다. 자동으로 합치지 않는다.
+ * 말론/말론S처럼 진짜 다른 제품이 섞일 수 있어서 사람이 확인해야 한다.
+ */
+function DuplicateSection({
+  suggestions,
+  busy,
+  onMerge,
+}: {
+  suggestions: DuplicateSuggestion[];
+  busy: string | null;
+  onMerge: (keeper: string, loser: string) => void;
+}) {
+  if (suggestions.length === 0) return null;
+
+  return (
+    <section className="mb-8">
+      <h2 className="mb-1 text-sm font-semibold text-zinc-700">합칠 만한 제품</h2>
+      <p className="mb-3 text-xs text-zinc-500">
+        표기만 다르고 같은 기기로 보입니다. 확인하고 합치면 사양이 한곳에 모입니다.
+      </p>
+      <div className="space-y-2">
+        {suggestions.map((s) => (
+          <div
+            key={`${s.keeper}|${s.loser}`}
+            className="flex flex-wrap items-center gap-2 rounded border border-amber-200 bg-amber-50/50 px-4 py-3"
+          >
+            <span className="font-medium text-zinc-900">{s.keeper}</span>
+            <span className="text-zinc-400">←</span>
+            <span className="text-zinc-600">{s.loser}</span>
+            <span className="rounded bg-zinc-200 px-1.5 py-0.5 text-[11px] text-zinc-700">{s.reason}</span>
+            {s.conflictingFields.length > 0 && (
+              <span className="rounded bg-red-100 px-1.5 py-0.5 text-[11px] text-red-700">
+                값이 어긋나는 항목 {s.conflictingFields.length}개 — 남길 쪽 값이 유지됩니다
+              </span>
+            )}
+            <button
+              type="button"
+              disabled={busy === `merge-${s.loser}`}
+              onClick={() => onMerge(s.keeper, s.loser)}
+              className="ml-auto rounded bg-zinc-900 px-3 py-1 text-sm text-white disabled:opacity-40"
+            >
+              {busy === `merge-${s.loser}` ? "합치는 중…" : "합치기"}
+            </button>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 

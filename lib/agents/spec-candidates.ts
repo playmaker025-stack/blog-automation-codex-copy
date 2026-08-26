@@ -17,6 +17,7 @@
  */
 
 import type { ProductSpec, ProductSpecRegistry } from "./product-specs";
+import { resolveProduct } from "./product-identity.ts";
 
 /** 원장에 실제로 넣을 수 있는 필드만 후보로 받는다. */
 export const CANDIDATE_FIELDS = [
@@ -239,7 +240,13 @@ export function mergeCandidates(
   let added = 0;
   let skipped = 0;
 
-  for (const c of incoming) {
+  for (const raw of incoming) {
+    // 표기가 달라도 같은 제품이면 원장의 이름으로 맞춘다. 안 맞추면 같은 기기가
+    // 대기함에서 카드 두 개로 갈라지고, 원장에도 중복으로 쌓인다.
+    // 실측(2026-08-26): 'SUPA X3'와 '수파X3 (SUPA X3)'가 따로 등록돼 있었다.
+    // 확정이 안 되면(모르는 이름·후보 둘 이상) 원래 표기를 그대로 둔다.
+    const resolved = resolveProduct(registry, raw.product).spec;
+    const c = resolved ? { ...raw, product: resolved.name } : raw;
     const key = candidateKey(c);
     if (seen.has(key)) {
       skipped++;
