@@ -354,6 +354,32 @@ export interface SpecCheckOptions {
  * (원통형↔박스형, 와트조절↔조절없음, 자동↔버튼)만 본다. 이번 사고가
  * 정확히 그 형태였고, 기계적으로 확실하게 잡힌다.
  */
+/**
+ * 저항값이 드로우 방식을 가른다. 사장님 확정(2026-08-26):
+ *   폐호흡 0.1옴~0.3옴 / 입호흡 0.6옴~1.2옴
+ *
+ * 0.4~0.5옴은 어느 쪽으로도 단정하지 않는다. 해외에서는 VG:PG 5:5 입호흡 액상을
+ * 0.4옴에 넣어 반폐호흡으로 쓰지만, 국내에는 5:5가 거의 없고 3:7·4:6이 많아
+ * 점도가 낮다. 그래서 0.4옴을 입호흡·반폐호흡 용도로 쓰면 누수가 난다.
+ */
+const OHM_PATTERN = /(\d+\.?\d*)\s*(?:옴|Ω|ohm)/gi;
+
+export type OhmBand = "폐호흡" | "입호흡" | "애매";
+
+export function ohmBand(ohm: number): OhmBand {
+  if (ohm >= 0.1 && ohm <= 0.3) return "폐호흡";
+  if (ohm >= 0.6 && ohm <= 1.2) return "입호흡";
+  return "애매";
+}
+
+function firstOhm(sentence: string): { ohm: number; index: number } | null {
+  OHM_PATTERN.lastIndex = 0;
+  const m = OHM_PATTERN.exec(sentence);
+  if (!m) return null;
+  const ohm = Number(m[1]);
+  return Number.isFinite(ohm) && ohm > 0 ? { ohm, index: m.index } : null;
+}
+
 export function findSpecViolations(
   content: string,
   registry: ProductSpecRegistry,
@@ -417,6 +443,41 @@ export function findSpecViolations(
           attribute: attr,
           claimed: String(hit.value),
           registered: known,
+          sentence,
+        });
+      }
+    }
+
+    // 저항값과 드로우 방식은 숫자로 연결된다. 원장을 안 봐도 문장 안에서
+    // 앞뒤가 맞는지 판정할 수 있다 — "0.2옴 코일로 입호흡"은 그 자체로 틀렸다.
+    const ohmHit = firstOhm(sentence);
+    const drawHit = firstMatch(sentence, DRAW_PATTERNS);
+    if (
+      ohmHit &&
+      drawHit &&
+      here.length === 1 &&
+      sentence.length <= MAX_ATTRIBUTABLE_LENGTH &&
+      drawHit.value !== "겸용"
+    ) {
+      const band = ohmBand(ohmHit.ohm);
+      if (band === "애매") {
+        // 0.4~0.5옴을 입호흡용으로 권하면 국내 액상 점도로는 누수가 난다.
+        if (drawHit.value === "입호흡") {
+          violations.push({
+            kind: "미확인",
+            product: here[0].name,
+            attribute: "저항값과 드로우",
+            claimed: `${ohmHit.ohm}옴을 ${drawHit.value}용으로 씀 — 국내 액상 점도로는 누수 위험`,
+            sentence,
+          });
+        }
+      } else if (band !== drawHit.value) {
+        violations.push({
+          kind: "모순",
+          product: here[0].name,
+          attribute: "저항값과 드로우",
+          claimed: `${ohmHit.ohm}옴(${band} 구간)인데 ${drawHit.value}이라고 씀`,
+          registered: band,
           sentence,
         });
       }

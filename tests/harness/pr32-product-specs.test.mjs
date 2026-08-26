@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import {
   findSpecViolations,
+  ohmBand,
   describeSpecViolation,
   buildProductFactSheet,
   splitSentences,
@@ -460,5 +461,61 @@ describe("PR32 기타", () => {
     const v = findSpecViolations("말론S는 박스형입니다.", REGISTRY).find((x) => x.kind === "모순");
     const msg = describeSpecViolation(v);
     assert.ok(msg.includes("원통형") && msg.includes("박스형"));
+  });
+});
+
+// 사장님 확정(2026-08-26): 폐호흡 0.1~0.3옴, 입호흡 0.6~1.2옴.
+// 0.4~0.5옴은 국내 액상 점도(3:7, 4:6) 때문에 어느 쪽으로도 단정하지 않는다.
+describe("PR41 저항값과 드로우 방식", () => {
+  const REG = {
+    version: 1,
+    products: [{ name: "크로스미니6", aliases: [], category: "기기", source: "t", verifiedAt: "2026-08-26" }],
+    updatedAt: "2026-08-26",
+  };
+  const ohmFindings = (text) =>
+    findSpecViolations(text, REG).filter((v) => v.attribute === "저항값과 드로우");
+
+  test("구간을 나눈다", () => {
+    assert.equal(ohmBand(0.15), "폐호흡");
+    assert.equal(ohmBand(0.3), "폐호흡");
+    assert.equal(ohmBand(0.6), "입호흡");
+    assert.equal(ohmBand(1.2), "입호흡");
+  });
+
+  test("0.4옴과 0.5옴은 어느 쪽도 아니다", () => {
+    assert.equal(ohmBand(0.4), "애매");
+    assert.equal(ohmBand(0.5), "애매");
+  });
+
+  test("폐호흡 구간을 입호흡이라고 하면 모순", () => {
+    const found = ohmFindings("크로스미니6는 0.2옴 코일로 입호흡이 아주 부드럽습니다.");
+    assert.equal(found.length, 1);
+    assert.equal(found[0].kind, "모순");
+  });
+
+  test("입호흡 구간을 폐호흡이라고 해도 모순", () => {
+    const found = ohmFindings("크로스미니6는 0.8옴 코일이라 폐호흡으로 쓰기 좋습니다.");
+    assert.equal(found[0].kind, "모순");
+  });
+
+  // 국내에는 VG:PG 5:5 액상이 거의 없어 0.4옴 입호흡은 누수가 난다.
+  test("0.4옴을 입호흡용으로 권하면 경고", () => {
+    const found = ohmFindings("크로스미니6는 0.4옴 팟으로 입호흡 하기 좋습니다.");
+    assert.equal(found.length, 1);
+    assert.equal(found[0].kind, "미확인");
+    assert.ok(found[0].claimed.includes("누수"));
+  });
+
+  test("맞게 쓰면 아무것도 안 뜬다", () => {
+    assert.equal(ohmFindings("크로스미니6는 0.2옴 코일로 폐호흡이 시원합니다.").length, 0);
+    assert.equal(ohmFindings("크로스미니6는 0.8옴 코일로 입호흡이 편합니다.").length, 0);
+  });
+
+  test("겸용 주장은 저항값과 다투지 않는다", () => {
+    assert.equal(ohmFindings("크로스미니6는 0.2옴 코일로 입폐호흡 겸용입니다.").length, 0);
+  });
+
+  test("저항값만 있고 드로우 주장이 없으면 판정하지 않는다", () => {
+    assert.equal(ohmFindings("크로스미니6 코일은 0.4옴입니다.").length, 0);
   });
 });
