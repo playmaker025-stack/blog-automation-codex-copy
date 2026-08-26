@@ -665,7 +665,7 @@
     {
       "name": "옥스바 오네오",
       "category": "기기",
-      "source": "post-manual-mt87hyvp 자동 추출 → 사장님 승인",
+      "source": "post-manual-mt87hyvp 자동 추출 → 사장님 승인 + 사장님 직접 입력",
       "verifiedAt": "2026-08-26",
       "sizeMm": "23 * 32.5 * 102 (mm)",
       "batteryMah": 1600,
@@ -676,7 +676,7 @@
       "airflowControl": true,
       "form": "입호흡 전자담배",
       "inhaleMode": "자동",
-      "wattControl": true
+      "wattControl": false
     },
     {
       "name": "와카 버스트",
@@ -868,5 +868,5 @@
       "wattRange": "최대 70W 권장"
     }
   ],
-  "updatedAt": "2026-08-26T06:18:20.501Z"
+  "updatedAt": "2026-08-26T06:34:06.478Z"
 }
