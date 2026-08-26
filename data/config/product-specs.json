@@ -63,7 +63,8 @@
       "sizeMm": "92 × 43.2 × 20mm",
       "weightG": 104,
       "batteryMah": 2100,
-      "charging": "C 타입"
+      "charging": "C 타입",
+      "resistanceOhm": "1.0 / 0.6 / 0.4"
     },
     {
       "name": "도조오팔",
@@ -295,5 +296,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:30:09.520Z"
+  "updatedAt": "2026-08-26T03:30:15.877Z"
 }
