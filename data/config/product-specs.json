@@ -61,7 +61,8 @@
       "source": "post-manual-mt88my0j 자동 추출 → 사장님 승인",
       "verifiedAt": "2026-08-26",
       "sizeMm": "92 × 43.2 × 20mm",
-      "weightG": 104
+      "weightG": 104,
+      "batteryMah": 2100
     },
     {
       "name": "도조오팔",
@@ -293,5 +294,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:30:01.045Z"
+  "updatedAt": "2026-08-26T03:30:02.826Z"
 }
