@@ -474,7 +474,8 @@
       "verifiedAt": "2026-08-26",
       "officialName": "버블몬 그래피티2",
       "nicotinePercent": 1.98,
-      "puffs": 30000
+      "puffs": 30000,
+      "batteryRechargeable": true
     },
     {
       "name": "베놈 아스트로 MK3(마크3)",
@@ -867,5 +868,5 @@
       "wattRange": "최대 70W 권장"
     }
   ],
-  "updatedAt": "2026-08-26T06:18:02.844Z"
+  "updatedAt": "2026-08-26T06:18:20.501Z"
 }
