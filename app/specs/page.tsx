@@ -125,6 +125,40 @@ export default function SpecsPage() {
     }
   };
 
+  const bulk = async (
+    ids: string[],
+    action: "승인" | "거절",
+    overrides: Record<string, string>
+  ) => {
+    setBusy("bulk");
+    setError(null);
+    try {
+      const res = await fetch("/api/specs/bulk", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids, action, overrides }),
+      });
+      const json = (await res.json()) as {
+        ok: boolean;
+        error?: string;
+        applied?: number;
+        failed?: Array<{ id: string; reason: string }>;
+      };
+      if (!json.ok) throw new Error(json.error ?? "일괄 처리에 실패했습니다.");
+      // 실패는 조용히 넘기지 않는다. 뭐가 안 들어갔는지 보여야 한다.
+      if (json.failed && json.failed.length > 0) {
+        setError(
+          `${json.applied ?? 0}건 처리, ${json.failed.length}건 실패. 예: ${json.failed[0].reason}`
+        );
+      }
+      await load();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setBusy(null);
+    }
+  };
+
   const labels = data?.fieldLabels ?? {};
   const label = (f: string) => labels[f] ?? f;
 
@@ -163,6 +197,7 @@ export default function SpecsPage() {
         label={label}
         busy={busy}
         onDecide={decide}
+        onBulk={bulk}
       />
 
       <DomainNotesSection
@@ -201,18 +236,36 @@ export default function SpecsPage() {
 
 // ── 확인 대기 ────────────────────────────────────────────────
 
+/** 한 번에 그리는 카드 수. 전부 그리면 화면이 멎는다. */
+const PAGE_SIZE = 40;
+
 function PendingSection({
   pending,
   label,
   busy,
   onDecide,
+  onBulk,
 }: {
   pending: Candidate[];
   label: (f: string) => string;
   busy: string | null;
   onDecide: (c: Candidate, action: "승인" | "거절", value?: string) => void;
+  onBulk: (ids: string[], action: "승인" | "거절", overrides: Record<string, string>) => void;
 }) {
   const [edits, setEdits] = useState<Record<string, string>>({});
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  // 363개를 한꺼번에 그리면 화면이 멎는다. 실측으로 PC가 버벅였다.
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+  const visible = pending.slice(0, visibleCount);
+  const toggle = (id: string) =>
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  const selectAll = (list: Candidate[]) => setSelected(new Set(list.map((c) => c.id)));
 
   return (
     <section className="mb-8">
@@ -223,7 +276,51 @@ function PendingSection({
         </p>
       ) : (
         <div className="space-y-3">
-          {pending.map((c) => {
+          {/* 하나씩 누르면 후보당 커밋 2개가 나간다. 묶어서 한 번에 보낸다. */}
+          <div className="sticky top-0 z-10 flex flex-wrap items-center gap-2 rounded border border-zinc-200 bg-white/95 px-3 py-2 backdrop-blur">
+            <span className="text-sm font-medium text-zinc-700">{selected.size}건 선택</span>
+            <button
+              type="button"
+              onClick={() => selectAll(pending.filter((c) => c.verdict !== "충돌"))}
+              className="rounded border border-zinc-300 px-2 py-1 text-xs text-zinc-600 hover:bg-zinc-50"
+            >
+              신규 전체 선택 ({pending.filter((c) => c.verdict !== "충돌").length})
+            </button>
+            <button
+              type="button"
+              onClick={() => selectAll(visible)}
+              className="rounded border border-zinc-300 px-2 py-1 text-xs text-zinc-600 hover:bg-zinc-50"
+            >
+              보이는 것 전체
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelected(new Set())}
+              className="rounded border border-zinc-300 px-2 py-1 text-xs text-zinc-600 hover:bg-zinc-50"
+            >
+              선택 해제
+            </button>
+            <div className="ml-auto flex gap-2">
+              <button
+                type="button"
+                disabled={selected.size === 0 || busy === "bulk"}
+                onClick={() => onBulk([...selected], "승인", edits)}
+                className="rounded bg-zinc-900 px-3 py-1 text-sm text-white disabled:opacity-40"
+              >
+                {busy === "bulk" ? "처리 중…" : `선택 ${selected.size}건 승인`}
+              </button>
+              <button
+                type="button"
+                disabled={selected.size === 0 || busy === "bulk"}
+                onClick={() => onBulk([...selected], "거절", edits)}
+                className="rounded border border-zinc-300 px-3 py-1 text-sm text-zinc-600 disabled:opacity-40"
+              >
+                거절
+              </button>
+            </div>
+          </div>
+
+          {visible.map((c) => {
             const conflict = c.verdict === "충돌";
             return (
               <article
@@ -233,6 +330,12 @@ function PendingSection({
                 }`}
               >
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  <input
+                    type="checkbox"
+                    checked={selected.has(c.id)}
+                    onChange={() => toggle(c.id)}
+                    className="mr-1 h-4 w-4 self-center accent-zinc-900"
+                  />
                   <span className="font-semibold text-zinc-900">{c.product}</span>
                   <span className="text-sm text-zinc-500">{label(c.field)}</span>
                   <span
@@ -284,6 +387,15 @@ function PendingSection({
               </article>
             );
           })}
+          {visibleCount < pending.length && (
+            <button
+              type="button"
+              onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
+              className="w-full rounded border border-zinc-300 px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-50"
+            >
+              더 보기 ({pending.length - visibleCount}건 남음)
+            </button>
+          )}
         </div>
       )}
     </section>

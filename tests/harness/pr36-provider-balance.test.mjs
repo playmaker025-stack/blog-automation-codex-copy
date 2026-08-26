@@ -23,12 +23,14 @@ const sample = (model, usd, at = "2026-08-25T01:00:00Z") => ({
 });
 
 const NOW = new Date("2026-08-25T05:00:00Z");
+// 스냅샷 시각을 고정한다. 기본값이 new Date()라 오늘 날짜가 바뀌면 결과가 달라진다.
+const MARKED_AT = "2026-08-25T00:30:00Z";
 
 // 실측(2026-08-25): 스냅샷 $5(Anthropic 콘솔 기준)를 찍은 뒤 OpenAI로만 60건이
 // 나갔는데, 게이지는 그 지출만큼 Anthropic 잔액이 줄어든 것으로 표시했다.
 describe("PR36 공급자별 잔액", () => {
   test("Anthropic 잔액이 OpenAI 지출로 줄지 않는다", () => {
-    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic" });
+    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic", at: MARKED_AT });
     ledger = recordSamples(ledger, [sample("gpt-4.1-mini", 0.5)]);
 
     const summary = summarize(ledger, { now: NOW });
@@ -38,7 +40,7 @@ describe("PR36 공급자별 잔액", () => {
   });
 
   test("같은 공급자 지출은 정상적으로 차감된다", () => {
-    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic" });
+    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic", at: MARKED_AT });
     ledger = recordSamples(ledger, [sample("claude-haiku-4-5", 1.5)]);
 
     const summary = summarize(ledger, { now: NOW });
@@ -49,14 +51,14 @@ describe("PR36 공급자별 잔액", () => {
   // 스냅샷 이전 지출이 딸려 들어오면 안 된다. 일별 버킷을 훑던 초안이 이걸 틀렸다.
   test("스냅샷 이전 지출은 차감하지 않는다", () => {
     let ledger = recordSamples(emptyLedger(), [sample("claude-haiku-4-5", 2)]);
-    ledger = markBalance(ledger, 5, { provider: "anthropic" });
+    ledger = markBalance(ledger, 5, { provider: "anthropic", at: MARKED_AT });
     ledger = recordSamples(ledger, [sample("claude-haiku-4-5", 1)]);
 
     assert.equal(summarize(ledger, { now: NOW }).estimatedRemainingUsd, 4);
   });
 
   test("오래된 버킷을 정리해도 잔액이 그대로다", () => {
-    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic" });
+    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic", at: MARKED_AT });
     for (let day = 1; day <= 100; day += 1) {
       const date = `2026-05-${String(day).padStart(2, "0")}T01:00:00Z`;
       ledger = recordSamples(ledger, [sample("claude-haiku-4-5", 0.01, date)]);
@@ -70,7 +72,7 @@ describe("PR36 공급자별 잔액", () => {
 // 거절된 호출은 요금이 0원이라 "차단됨"과 "안 씀"이 지출 0으로 똑같이 보인다.
 describe("PR36 조용한 공급자 감지", () => {
   test("다른 공급자만 돌면 정상이라고 하지 않는다", () => {
-    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic" });
+    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic", at: MARKED_AT });
     ledger = recordSamples(ledger, [sample("gpt-4.1-mini", 0.5)]);
 
     const summary = summarize(ledger, { now: NOW });
@@ -80,7 +82,7 @@ describe("PR36 조용한 공급자 감지", () => {
   });
 
   test("그 공급자가 실제로 돌면 조용하다고 하지 않는다", () => {
-    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic" });
+    let ledger = markBalance(emptyLedger(), 5, { provider: "anthropic", at: MARKED_AT });
     ledger = recordSamples(ledger, [
       sample("claude-haiku-4-5", 0.1),
       sample("gpt-4.1-mini", 0.5),
@@ -93,7 +95,7 @@ describe("PR36 조용한 공급자 감지", () => {
 
   // 아무것도 안 돌린 상태는 장애가 아니다. 겁주면 배너를 무시하게 된다.
   test("아무 호출도 없으면 조용하다고 하지 않는다", () => {
-    const summary = summarize(markBalance(emptyLedger(), 5, { provider: "anthropic" }), {
+    const summary = summarize(markBalance(emptyLedger(), 5, { provider: "anthropic", at: MARKED_AT }), {
       now: NOW,
     });
     assert.equal(summary.markedProviderSilent, false);
@@ -114,7 +116,7 @@ describe("PR36 조용함은 스냅샷 이후만 본다", () => {
     let ledger = recordSamples(emptyLedger(), [
       sample("claude-haiku-4-5", 0.1, "2026-05-01T01:00:00Z"),
     ]);
-    ledger = markBalance(ledger, 5, { provider: "anthropic" });
+    ledger = markBalance(ledger, 5, { provider: "anthropic", at: MARKED_AT });
     ledger = recordSamples(ledger, [sample("gpt-4.1-mini", 0.5)]);
 
     const summary = summarize(ledger, { now: NOW });
