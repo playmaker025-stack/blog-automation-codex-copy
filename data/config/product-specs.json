@@ -100,7 +100,7 @@
         "장시간 미사용·충전 시에는 디바이스에서 팟을 분리해두는 것을 권장(과유입 방지)",
         "오토드로우 사용 시 잔증기가 남아 결로가 생기고 이를 누수로 오해하는 경우가 많다"
       ],
-      "source": "사장님 발행글 post-manual-mr5y47o6 + post-manual-mt6z3928 + post-manual-mt87kkfp 자동 추출 → 사장님 승인",
+      "source": "사장님 발행글 post-manual-mr5y47o6 + post-manual-mt6z3928 + post-manual-mt87kkfp 자동 추출 → 사장님 승인 + post-manual-mt88hupy 자동 추출 → 사장님 승인",
       "verifiedAt": "2026-08-26",
       "officialName": "MY POD PRO",
       "drawStyle": "입호흡 폐호흡 겸용",
@@ -109,7 +109,7 @@
       "podMl": "7.5ml",
       "resistanceOhm": "0.1옴 / 0.4옴 / 0.6옴",
       "wattRange": "최대 80W",
-      "sizeMm": "89 x 19 x 46",
+      "sizeMm": "46 × 19 × 89mm",
       "weightG": 95
     },
     {
@@ -278,5 +278,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:10:26.551Z"
+  "updatedAt": "2026-08-26T03:12:20.493Z"
 }
