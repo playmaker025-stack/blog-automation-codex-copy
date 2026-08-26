@@ -86,7 +86,7 @@
         "마이팟프로"
       ],
       "category": "기기",
-      "inhaleMode": "겸용",
+      "inhaleMode": "오토모드, 버튼모드, 프리모드(둘 다)",
       "batteryRechargeable": true,
       "notes": [
         "입호흡·폐호흡을 한 기기에서 모두 지원 — 이 제품의 핵심 차별점",
@@ -278,5 +278,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:12:53.792Z"
+  "updatedAt": "2026-08-26T03:12:56.357Z"
 }
