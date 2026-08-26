@@ -364,3 +364,31 @@ describe("PR42 부정 표현이 긍정에 먹히지 않는다", () => {
     assert.equal(coerceValue("wattControl", "max 80w"), null);
   });
 });
+
+// 코덱스 리뷰(2026-08-26): 단위를 무시하고 숫자만 남기면 1000배 틀린 값이
+// 사실로 저장된다. 실제로 "3만퍼프"가 3으로, "8mg"가 8%로 원장에 들어가 있었다.
+describe("PR44 단위를 무시하지 않는다", () => {
+  test("한글 수사를 환산한다", () => {
+    assert.equal(coerceValue("puffs", "3만퍼프"), 30000);
+    assert.equal(coerceValue("puffs", "1천 퍼프"), 1000);
+    assert.equal(coerceValue("puffs", "35,000퍼프"), 35000);
+  });
+
+  test("Ah는 mAh의 1000배다", () => {
+    assert.equal(coerceValue("batteryMah", "1.2Ah"), 1200);
+    assert.equal(coerceValue("batteryMah", "1200mAh"), 1200);
+    assert.equal(coerceValue("batteryMah", "1,500 mAh"), 1500);
+  });
+
+  test("kg는 g의 1000배다", () => {
+    assert.equal(coerceValue("weightG", "0.095kg"), 95);
+    assert.equal(coerceValue("weightG", "약 95g"), 95);
+  });
+
+  // mg/ml인지 총량인지 글마다 다르다. 어림으로 바꾸면 틀린 사실이 원장에 남는다.
+  test("mg는 %로 바꾸지 않고 사람에게 넘긴다", () => {
+    assert.equal(coerceValue("nicotinePercent", "9.8mg"), null);
+    assert.equal(coerceValue("nicotinePercent", "20MG"), null);
+    assert.equal(coerceValue("nicotinePercent", "0.98%"), 0.98);
+  });
+});

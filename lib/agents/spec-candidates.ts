@@ -151,6 +151,49 @@ const FIELD_FALSE_HINTS: Partial<Record<CandidateField, string[]>> = {
  *
  * 실패하면 null을 준다 — 억지로 넣느니 승인 화면에서 사람이 고치는 게 낫다.
  */
+/**
+ * 숫자와 단위를 같이 읽는다.
+ *
+ * 왜 필요한가: 예전에는 숫자 아닌 글자를 전부 지우고 숫자만 남겼다. 그래서
+ * "3만퍼프"가 3이 되고 "1.2Ah"가 1.2mAh가 됐다. 단위를 무시하면 1000배 틀린
+ * 값이 사실로 저장된다.
+ *
+ * 배수가 명확한 단위만 환산한다. 종류가 다른 단위(mg vs %)는 환산하지 않고
+ * 거부한다 — 어림으로 바꾸면 틀린 사실을 원장에 넣게 된다.
+ */
+function parseNumberWithUnit(raw: string, field: CandidateField): number | null {
+  const value = raw.trim().toLowerCase().replace(/,/g, "");
+
+  const match = value.match(/(\d+\.?\d*)/);
+  if (!match) return null;
+  let n = Number(match[1]);
+  if (!Number.isFinite(n)) return null;
+
+  // 한글 수사. "3만퍼프", "1천 퍼프"
+  const after = value.slice(match.index! + match[1].length);
+  if (/^\s*만/.test(after)) n *= 10000;
+  else if (/^\s*천/.test(after)) n *= 1000;
+
+  if (field === "batteryMah") {
+    // Ah는 mAh의 1000배. "1.2Ah"를 1.2로 저장하면 안 된다.
+    if (/ah|[0-9.]\s*ah/.test(value) && !/mah/.test(value)) n *= 1000;
+    return n;
+  }
+
+  if (field === "weightG") {
+    if (/kg/.test(value)) n *= 1000;
+    return n;
+  }
+
+  if (field === "nicotinePercent") {
+    // mg는 %가 아니다. mg/ml인지 총량인지도 글마다 다르다. 사람이 판단해야 한다.
+    if (/mg/.test(value)) return null;
+    return n;
+  }
+
+  return n;
+}
+
 export function coerceValue(field: CandidateField, raw: string): string | number | boolean | null {
   const value = raw.trim();
   if (!value) return null;
@@ -176,14 +219,13 @@ export function coerceValue(field: CandidateField, raw: string): string | number
   }
 
   if (field === "batteryMah" || field === "puffs" || field === "weightG") {
-    // "35,000퍼프", "3500mAh", "약 95g" 모두 받는다.
-    const n = Number(value.replace(/[^\d.]/g, ""));
-    return Number.isFinite(n) && n > 0 ? n : null;
+    const n = parseNumberWithUnit(value, field);
+    return n !== null && n > 0 ? n : null;
   }
 
   if (field === "nicotinePercent") {
-    const n = Number(value.replace(/[^\d.]/g, ""));
-    return Number.isFinite(n) && n >= 0 ? n : null;
+    const n = parseNumberWithUnit(value, field);
+    return n !== null && n >= 0 ? n : null;
   }
 
   return value;
