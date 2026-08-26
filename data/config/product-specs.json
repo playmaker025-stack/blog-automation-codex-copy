@@ -185,7 +185,7 @@
       ],
       "category": "기기",
       "officialName": "유웰(Uwell) 발라리안 맥스 프로",
-      "batteryMah": 2700,
+      "batteryMah": 2600,
       "podMl": "6ml",
       "wattControl": true,
       "batteryRechargeable": true,
@@ -196,8 +196,8 @@
         "마감 품질이 이전 발라리안 맥스보다 확연히 낫다",
         "가격 10만원 미만"
       ],
-      "source": "사장님 발행글 post-manual-mt6z50dx",
-      "verifiedAt": "2026-08-24"
+      "source": "사장님 발행글 post-manual-mt6z50dx + post-manual-mt87k2r5 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26"
     },
     {
       "name": "젤로",
@@ -278,5 +278,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:09:36.220Z"
+  "updatedAt": "2026-08-26T03:09:46.272Z"
 }
