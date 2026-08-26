@@ -136,7 +136,7 @@
       "inhaleMode": "겸용",
       "batteryMah": 2300,
       "podMl": "4ml",
-      "wattRange": "10~35W"
+      "wattRange": "0.6옴 (25~35W), 0.6옴 (15~30W), 1.0옴 (10~15W)"
     },
     {
       "name": "말론바",
@@ -278,5 +278,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:09:26.559Z"
+  "updatedAt": "2026-08-26T03:09:36.220Z"
 }
