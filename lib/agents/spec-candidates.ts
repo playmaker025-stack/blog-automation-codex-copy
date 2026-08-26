@@ -186,9 +186,12 @@ function parseNumberWithUnit(raw: string, field: CandidateField): number | null 
   }
 
   if (field === "nicotinePercent") {
-    // mg는 %가 아니다. mg/ml인지 총량인지도 글마다 다르다. 사람이 판단해야 한다.
-    if (/mg/.test(value)) return null;
-    return n;
+    // 업계 기준 1% = 10mg/ml. 사장님 확인(2026-08-26)으로 확정했다.
+    // 이걸 안 바꾸면 "8mg"가 8%로 저장된다 — 8% 니코틴은 존재하지 않는다.
+    // 부동소수점 때문에 9.8/10이 0.9800000000000001이 된다. 원장에 그대로
+    // 들어가면 값 비교와 화면 표시가 지저분해진다.
+    const percent = /mg/.test(value) ? n / 10 : n;
+    return Math.round(percent * 1000) / 1000;
   }
 
   return n;

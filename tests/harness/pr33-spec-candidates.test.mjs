@@ -385,10 +385,21 @@ describe("PR44 단위를 무시하지 않는다", () => {
     assert.equal(coerceValue("weightG", "약 95g"), 95);
   });
 
-  // mg/ml인지 총량인지 글마다 다르다. 어림으로 바꾸면 틀린 사실이 원장에 남는다.
-  test("mg는 %로 바꾸지 않고 사람에게 넘긴다", () => {
-    assert.equal(coerceValue("nicotinePercent", "9.8mg"), null);
-    assert.equal(coerceValue("nicotinePercent", "20MG"), null);
+  // 업계 기준 1% = 10mg/ml. 사장님 확인으로 확정했다.
+  // 안 바꾸면 "8mg"가 8%로 저장되는데 8% 니코틴은 존재하지 않는다.
+  test("mg를 %로 환산한다", () => {
+    assert.equal(coerceValue("nicotinePercent", "5mg"), 0.5);
+    assert.equal(coerceValue("nicotinePercent", "8MG"), 0.8);
+    assert.equal(coerceValue("nicotinePercent", "20MG"), 2);
+    assert.equal(coerceValue("nicotinePercent", "9.8mg"), 0.98);
+  });
+
+  test("%로 적힌 값은 그대로 둔다", () => {
     assert.equal(coerceValue("nicotinePercent", "0.98%"), 0.98);
+    assert.equal(coerceValue("nicotinePercent", "2"), 2);
+  });
+
+  test("mg 변형 여러 개도 함께 환산한다", () => {
+    assert.deepEqual(coerceValue("nicotinePercent", "5mg, 8mg"), [0.5, 0.8]);
   });
 });
