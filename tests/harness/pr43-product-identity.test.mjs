@@ -175,3 +175,29 @@ describe("PR43 병합", () => {
     assert.equal(registry.products.length, before);
   });
 });
+
+// 코덱스 리뷰(2026-08-26): mergeProducts가 이름만 다르면 무엇이든 합쳤다.
+// API를 직접 부르거나 화면이 바뀌면 '말론'과 '말론S'가 합쳐져 하나가 삭제된다.
+describe("PR46 병합 안전장치", () => {
+  test("표기가 다른 제품은 합치기를 거부한다", () => {
+    const r = mergeProducts(reg(spec("말론"), spec("말론S")), "말론", "말론S");
+    assert.ok(r.error);
+    assert.equal(r.registry.products.length, 2);
+  });
+
+  test("진짜 중복은 그대로 합친다", () => {
+    const r = mergeProducts(reg(spec("와카버스트"), spec("와카 버스트")), "와카버스트", "와카 버스트");
+    assert.equal(r.error, undefined);
+    assert.equal(r.registry.products.length, 1);
+  });
+
+  // 합쳐질 쪽에만 있던 농도가 사라지면 그 제품은 원장에서 없는 농도가 된다.
+  test("농도 변형은 양쪽을 다 살린다", () => {
+    const r = mergeProducts(
+      reg(spec("컴온", { nicotinePercent: 0.5 }), spec("컴 온", { nicotinePercent: 0.8 })),
+      "컴온",
+      "컴 온"
+    );
+    assert.deepEqual(r.registry.products[0].nicotinePercent, [0.5, 0.8]);
+  });
+});
