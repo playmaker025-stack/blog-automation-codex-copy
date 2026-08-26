@@ -19,6 +19,7 @@ import {
   FIELD_LABELS,
 } from "@/lib/agents/spec-candidates";
 import type { ProductSpecRegistry } from "@/lib/agents/product-specs";
+import { findDuplicateSuggestions } from "@/lib/agents/product-identity";
 
 export const dynamic = "force-dynamic";
 
@@ -39,6 +40,8 @@ export async function GET() {
       ok: true,
       registry,
       pending,
+      // 같은 기기가 표기만 달라 쪼개진 것. 자동으로 합치지 않고 제안만 한다.
+      duplicates: findDuplicateSuggestions(registry),
       counts: {
         pending: pending.length,
         conflict: pending.filter((c) => c.verdict === "충돌").length,
