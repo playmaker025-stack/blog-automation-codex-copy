@@ -109,6 +109,36 @@ const TRUE_WORDS = ["true", "가능", "있음", "지원", "예", "o"];
 const FALSE_WORDS = ["false", "불가", "없음", "미지원", "아니오", "x"];
 
 /**
+ * 업종에서 실제로 쓰는 표현들. 실측(2026-08-26) 일괄 승인에서 21건이
+ * "해석 못 함"으로 떨어졌는데 절반은 사람이 읽으면 명백한 값이었다.
+ *
+ * "팟교체형"은 팟을 통째로 갈아끼운다는 뜻이라 액상 리필이 아니다.
+ * "3단계", "노멀/터보"는 출력 단계가 있다는 뜻이라 조절이 된다.
+ *
+ * 필드마다 다르게 읽어야 한다. "조절"은 airflowControl에서는 있다는 뜻이지만
+ * liquidRefillable에서는 아무 뜻도 아니다.
+ */
+const FIELD_TRUE_HINTS: Partial<Record<CandidateField, string[]>> = {
+  liquidRefillable: ["리필", "주입", "충전식 팟", "액상 주입"],
+  batteryRechargeable: ["충전", "재사용", "c타입", "usb", "type-c"],
+  wattControl: ["단계", "모드", "다이얼", "조절", "가변"],
+  airflowControl: ["조절", "슬라이드", "다이얼", "링", "조리개"],
+};
+
+/** 숫자여야 하는 항목. 숫자가 없으면 값이 아니라 항목 이름이 들어온 것이다. */
+const NUMERIC_FIELDS = new Set<CandidateField>([
+  "batteryMah",
+  "puffs",
+  "weightG",
+  "nicotinePercent",
+]);
+
+const FIELD_FALSE_HINTS: Partial<Record<CandidateField, string[]>> = {
+  liquidRefillable: ["팟교체", "팟 교체", "교체형", "일회용", "카트리지 교체", "리필 불가"],
+  batteryRechargeable: ["일회용", "충전 불가"],
+};
+
+/**
  * 후보 값을 원장 필드 타입으로 바꾼다.
  *
  * 실패하면 null을 준다 — 억지로 넣느니 승인 화면에서 사람이 고치는 게 낫다.
@@ -126,6 +156,10 @@ export function coerceValue(field: CandidateField, raw: string): string | number
     const v = value.toLowerCase();
     if (TRUE_WORDS.some((w) => v.includes(w))) return true;
     if (FALSE_WORDS.some((w) => v.includes(w))) return false;
+    // 부정 신호를 먼저 본다. "팟교체형"에는 "교체"와 "충전"이 같이 나올 수 있는데
+    // 그때 뜻은 "리필 안 됨"이다.
+    if ((FIELD_FALSE_HINTS[field] ?? []).some((w) => v.includes(w))) return false;
+    if ((FIELD_TRUE_HINTS[field] ?? []).some((w) => v.includes(w))) return true;
     return null;
   }
 
@@ -376,6 +410,10 @@ export function parseSpecExtraction(text: string): ExtractedProduct[] {
       const evidence = (f as { evidence?: unknown })?.evidence;
       if (typeof field !== "string" || !allowed.has(field)) continue;
       if (typeof value !== "string" || !value.trim()) continue;
+      // 숫자 항목인데 숫자가 하나도 없으면 값이 아니라 항목 이름이다.
+      // 실측(2026-08-26): "사용 가능 퍼프 수", "배터리 성능 개선", "가벼운 무게"가
+      // 값으로 들어와 승인 대기함에 쌓였다. 사람이 판단할 것도 없는 쓰레기다.
+      if (NUMERIC_FIELDS.has(field as CandidateField) && !/\d/.test(value)) continue;
       facts.push({
         field: field as CandidateField,
         value: value.trim(),

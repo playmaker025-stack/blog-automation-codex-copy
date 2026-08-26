@@ -263,3 +263,70 @@ describe("PR33 추출 프롬프트", () => {
     assert.ok(prompt.includes("35000퍼프"));
   });
 });
+
+// 실측(2026-08-26): 일괄 승인에서 21건이 "해석 못 함"으로 떨어졌는데
+// 절반은 사람이 읽으면 명백한 값이었다.
+describe("PR40 업종 표현 해석", () => {
+  test("팟교체형은 액상 리필 불가다", () => {
+    assert.equal(coerceValue("liquidRefillable", "팟교체형"), false);
+    assert.equal(coerceValue("liquidRefillable", "액상팟 교체형"), false);
+    assert.equal(coerceValue("liquidRefillable", "일회용 전자담배"), false);
+  });
+
+  test("충전하며 재사용은 배터리 충전 가능이다", () => {
+    assert.equal(coerceValue("batteryRechargeable", "충전하며 재사용하는 방식"), true);
+    assert.equal(coerceValue("batteryRechargeable", "충전 하며 사용"), true);
+  });
+
+  test("단계·모드가 있으면 출력 조절이 된다", () => {
+    assert.equal(coerceValue("wattControl", "3단계"), true);
+    assert.equal(coerceValue("wattControl", "출력모드 : 노멀 , 터보"), true);
+  });
+
+  test("조절 슬라이드가 있으면 흡입압 조절이 된다", () => {
+    assert.equal(
+      coerceValue("airflowControl", "흡입압 조절 슬라이드바가 디바이스 하단부에 위치해 있습니다"),
+      true
+    );
+  });
+
+  // 항목이 틀리게 들어온 값까지 억지로 읽으면 원장이 오염된다.
+  test("항목과 무관한 값은 여전히 해석하지 않는다", () => {
+    assert.equal(coerceValue("liquidRefillable", "액상 탱크 : 20ml"), null);
+    assert.equal(coerceValue("airflowControl", "불명"), null);
+  });
+
+  test("부정 신호가 긍정보다 먼저다", () => {
+    // "충전식 팟 교체형" — 교체형이 최종 의미다.
+    assert.equal(coerceValue("liquidRefillable", "충전식 팟 교체형"), false);
+  });
+});
+
+describe("PR40 숫자 항목 쓰레기 차단", () => {
+  test("숫자 없는 값은 후보로 만들지 않는다", () => {
+    const out = parseSpecExtraction(
+      JSON.stringify({
+        products: [
+          {
+            name: "그래피티2",
+            facts: [
+              { field: "puffs", value: "사용 가능 퍼프 수", evidence: "e" },
+              { field: "batteryMah", value: "배터리 성능 개선", evidence: "e" },
+              { field: "weightG", value: "가벼운 무게", evidence: "e" },
+              { field: "podMl", value: "2ml", evidence: "e" },
+            ],
+          },
+        ],
+      })
+    );
+    assert.equal(out.length, 1);
+    assert.deepEqual(out[0].facts.map((f) => f.field), ["podMl"]);
+  });
+
+  test("숫자가 있으면 그대로 통과한다", () => {
+    const out = parseSpecExtraction(
+      '{"products":[{"name":"A","facts":[{"field":"puffs","value":"35000퍼프","evidence":"e"}]}]}'
+    );
+    assert.equal(out[0].facts.length, 1);
+  });
+});
