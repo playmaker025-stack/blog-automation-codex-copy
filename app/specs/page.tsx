@@ -236,14 +236,13 @@ export default function SpecsPage() {
 
 // ── 확인 대기 ────────────────────────────────────────────────
 
-/** 한 번에 그리는 카드 수. 전부 그리면 화면이 멎는다. */
-const PAGE_SIZE = 40;
+/** 한 번에 그리는 제품 카드 수. 전부 그리면 화면이 멎는다. */
+const PAGE_SIZE = 10;
 
 function PendingSection({
   pending,
   label,
   busy,
-  onDecide,
   onBulk,
 }: {
   pending: Candidate[];
@@ -253,147 +252,152 @@ function PendingSection({
   onBulk: (ids: string[], action: "승인" | "거절", overrides: Record<string, string>) => void;
 }) {
   const [edits, setEdits] = useState<Record<string, string>>({});
-  const [selected, setSelected] = useState<Set<string>>(new Set());
-  // 363개를 한꺼번에 그리면 화면이 멎는다. 실측으로 PC가 버벅였다.
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  // 기본은 "포함". 사장님이 훑어보다 이상한 것만 빼는 흐름이 자연스럽다.
+  const [excluded, setExcluded] = useState<Set<string>>(new Set());
+  const [visibleProducts, setVisibleProducts] = useState(PAGE_SIZE);
 
-  const visible = pending.slice(0, visibleCount);
+  const groups = useMemo(() => {
+    const byProduct = new Map<string, Candidate[]>();
+    for (const c of pending) {
+      const list = byProduct.get(c.product) ?? [];
+      list.push(c);
+      byProduct.set(c.product, list);
+    }
+    return [...byProduct.entries()]
+      .map(([product, items]) => ({
+        product,
+        items,
+        conflicts: items.filter((i) => i.verdict === "충돌").length,
+      }))
+      // 기존 값과 다른 게 있는 제품을 먼저 본다.
+      .sort((a, b) => b.conflicts - a.conflicts || b.items.length - a.items.length);
+  }, [pending]);
+
   const toggle = (id: string) =>
-    setSelected((prev) => {
+    setExcluded((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
       return next;
     });
-  const selectAll = (list: Candidate[]) => setSelected(new Set(list.map((c) => c.id)));
+
+  const visible = groups.slice(0, visibleProducts);
 
   return (
     <section className="mb-8">
-      <h2 className="mb-3 text-sm font-semibold text-zinc-700">확인 대기</h2>
+      <div className="mb-3 flex items-baseline gap-2">
+        <h2 className="text-sm font-semibold text-zinc-700">확인 대기</h2>
+        <span className="text-xs text-zinc-500">
+          제품 {groups.length}개 · 항목 {pending.length}건
+        </span>
+      </div>
+
       {pending.length === 0 ? (
         <p className="rounded border border-zinc-200 bg-zinc-50 px-4 py-5 text-center text-sm text-zinc-500">
           확인할 후보가 없습니다. 새 글이 발행되면 여기에 쌓입니다.
         </p>
       ) : (
-        <div className="space-y-3">
-          {/* 하나씩 누르면 후보당 커밋 2개가 나간다. 묶어서 한 번에 보낸다. */}
-          <div className="sticky top-0 z-10 flex flex-wrap items-center gap-2 rounded border border-zinc-200 bg-white/95 px-3 py-2 backdrop-blur">
-            <span className="text-sm font-medium text-zinc-700">{selected.size}건 선택</span>
-            <button
-              type="button"
-              onClick={() => selectAll(pending.filter((c) => c.verdict !== "충돌"))}
-              className="rounded border border-zinc-300 px-2 py-1 text-xs text-zinc-600 hover:bg-zinc-50"
-            >
-              신규 전체 선택 ({pending.filter((c) => c.verdict !== "충돌").length})
-            </button>
-            <button
-              type="button"
-              onClick={() => selectAll(visible)}
-              className="rounded border border-zinc-300 px-2 py-1 text-xs text-zinc-600 hover:bg-zinc-50"
-            >
-              보이는 것 전체
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelected(new Set())}
-              className="rounded border border-zinc-300 px-2 py-1 text-xs text-zinc-600 hover:bg-zinc-50"
-            >
-              선택 해제
-            </button>
-            <div className="ml-auto flex gap-2">
-              <button
-                type="button"
-                disabled={selected.size === 0 || busy === "bulk"}
-                onClick={() => onBulk([...selected], "승인", edits)}
-                className="rounded bg-zinc-900 px-3 py-1 text-sm text-white disabled:opacity-40"
-              >
-                {busy === "bulk" ? "처리 중…" : `선택 ${selected.size}건 승인`}
-              </button>
-              <button
-                type="button"
-                disabled={selected.size === 0 || busy === "bulk"}
-                onClick={() => onBulk([...selected], "거절", edits)}
-                className="rounded border border-zinc-300 px-3 py-1 text-sm text-zinc-600 disabled:opacity-40"
-              >
-                거절
-              </button>
-            </div>
-          </div>
-
-          {visible.map((c) => {
-            const conflict = c.verdict === "충돌";
+        <div className="space-y-4">
+          {visible.map(({ product, items, conflicts }) => {
+            const included = items.filter((i) => !excluded.has(i.id));
+            const droppedCount = items.length - included.length;
             return (
-              <article
-                key={c.id}
-                className={`rounded border px-4 py-3 ${
-                  conflict ? "border-red-200 bg-red-50/40" : "border-zinc-200 bg-white"
-                }`}
-              >
-                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <input
-                    type="checkbox"
-                    checked={selected.has(c.id)}
-                    onChange={() => toggle(c.id)}
-                    className="mr-1 h-4 w-4 self-center accent-zinc-900"
-                  />
-                  <span className="font-semibold text-zinc-900">{c.product}</span>
-                  <span className="text-sm text-zinc-500">{label(c.field)}</span>
-                  <span
-                    className={`rounded px-1.5 py-0.5 text-[11px] ${
-                      conflict ? "bg-red-100 text-red-700" : "bg-emerald-100 text-emerald-700"
-                    }`}
+              <article key={product} className="rounded-lg border border-zinc-200 bg-white">
+                <header className="flex flex-wrap items-center gap-2 border-b border-zinc-100 px-4 py-3">
+                  <span className="text-base font-semibold text-zinc-900">{product}</span>
+                  <span className="text-xs text-zinc-500">{items.length}개 항목</span>
+                  {conflicts > 0 && (
+                    <span className="rounded bg-red-100 px-1.5 py-0.5 text-[11px] text-red-700">
+                      기존값과 다른 것 {conflicts}개
+                    </span>
+                  )}
+                </header>
+
+                <div className="divide-y divide-zinc-100">
+                  {items.map((c) => {
+                    const off = excluded.has(c.id);
+                    const conflict = c.verdict === "충돌";
+                    return (
+                      <div
+                        key={c.id}
+                        className={`px-4 py-3 ${off ? "bg-zinc-50 opacity-60" : conflict ? "bg-red-50/40" : ""}`}
+                      >
+                        <div className="flex flex-wrap items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={!off}
+                            onChange={() => toggle(c.id)}
+                            className="h-4 w-4 accent-zinc-900"
+                          />
+                          <span className="w-28 shrink-0 text-sm text-zinc-500">{label(c.field)}</span>
+                          <input
+                            value={edits[c.id] ?? c.value}
+                            onChange={(e) => setEdits((p) => ({ ...p, [c.id]: e.target.value }))}
+                            disabled={off}
+                            className="min-w-0 flex-1 rounded border border-zinc-300 px-2 py-1 text-sm disabled:bg-zinc-100"
+                          />
+                          {conflict && (
+                            <span className="rounded bg-red-100 px-1.5 py-0.5 text-[11px] text-red-700">
+                              기존값과 다름
+                            </span>
+                          )}
+                        </div>
+
+                        {/* 근거가 이 화면의 핵심. 원문을 안 열고 판단할 수 있어야 한다. */}
+                        {c.evidence ? (
+                          <blockquote className="mt-1.5 ml-6 border-l-2 border-zinc-300 pl-3 text-[13px] leading-relaxed text-zinc-600">
+                            {c.evidence}
+                          </blockquote>
+                        ) : (
+                          <p className="mt-1.5 ml-6 text-[13px] text-amber-600">
+                            근거 문장이 없습니다. 원문을 확인하고 판단하세요.
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <footer className="flex flex-wrap items-center gap-2 border-t border-zinc-100 px-4 py-3">
+                  <button
+                    type="button"
+                    disabled={included.length === 0 || busy === "bulk"}
+                    onClick={() => onBulk(included.map((i) => i.id), "승인", edits)}
+                    className="rounded bg-zinc-900 px-3 py-1.5 text-sm text-white disabled:opacity-40"
                   >
-                    {conflict ? "기존값과 다름" : "신규"}
+                    {busy === "bulk" ? "처리 중…" : `확인 완료 — ${included.length}건 승인`}
+                  </button>
+                  {droppedCount > 0 && (
+                    <button
+                      type="button"
+                      disabled={busy === "bulk"}
+                      onClick={() =>
+                        onBulk(
+                          items.filter((i) => excluded.has(i.id)).map((i) => i.id),
+                          "거절",
+                          edits
+                        )
+                      }
+                      className="rounded border border-zinc-300 px-3 py-1.5 text-sm text-zinc-600 disabled:opacity-40"
+                    >
+                      뺀 {droppedCount}건 거절
+                    </button>
+                  )}
+                  <span className="text-[11px] text-zinc-400">
+                    값을 고쳐서 승인해도 됩니다. 체크를 풀면 그 항목만 빠집니다.
                   </span>
-                </div>
-
-                {/* 근거가 이 화면의 핵심. 원문을 안 열고 판단할 수 있어야 한다. */}
-                {c.evidence ? (
-                  <blockquote className="mt-2 border-l-2 border-zinc-300 pl-3 text-sm leading-relaxed text-zinc-600">
-                    {c.evidence}
-                  </blockquote>
-                ) : (
-                  <p className="mt-2 text-sm text-amber-600">
-                    근거 문장이 없습니다. 원문을 확인하고 판단하세요.
-                  </p>
-                )}
-
-                <p className="mt-1.5 text-[11px] text-zinc-400">출처: {c.postTitle ?? c.postId}</p>
-
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <input
-                    value={edits[c.id] ?? c.value}
-                    onChange={(e) => setEdits((p) => ({ ...p, [c.id]: e.target.value }))}
-                    className="w-44 rounded border border-zinc-300 px-2 py-1 text-sm"
-                  />
-                  <button
-                    type="button"
-                    disabled={busy === c.id}
-                    onClick={() => onDecide(c, "승인", edits[c.id])}
-                    className="rounded bg-zinc-900 px-3 py-1 text-sm text-white hover:bg-zinc-700 disabled:opacity-50"
-                  >
-                    {busy === c.id ? "…" : "승인"}
-                  </button>
-                  <button
-                    type="button"
-                    disabled={busy === c.id}
-                    onClick={() => onDecide(c, "거절")}
-                    className="rounded border border-zinc-300 px-3 py-1 text-sm text-zinc-600 hover:bg-zinc-100 disabled:opacity-50"
-                  >
-                    거절
-                  </button>
-                  <span className="text-[11px] text-zinc-400">값을 고쳐서 승인해도 됩니다</span>
-                </div>
+                </footer>
               </article>
             );
           })}
-          {visibleCount < pending.length && (
+
+          {visibleProducts < groups.length && (
             <button
               type="button"
-              onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
+              onClick={() => setVisibleProducts((n) => n + PAGE_SIZE)}
               className="w-full rounded border border-zinc-300 px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-50"
             >
-              더 보기 ({pending.length - visibleCount}건 남음)
+              더 보기 (제품 {groups.length - visibleProducts}개 남음)
             </button>
           )}
         </div>
