@@ -90,8 +90,14 @@ export interface ProductSpec extends ControlAxes {
   // 기기와 사양 축이 다르다. 일회용은 형태·출력보다 퍼프수·농도·액상량으로 팔린다.
   /** 표기 퍼프 수. 사장님 지적대로 실사용은 전압·흡입 습관에 따라 크게 달라진다. */
   puffs?: number;
-  /** 니코틴 농도(%). */
-  nicotinePercent?: number;
+  /**
+   * 니코틴 농도(%). 한 제품에 농도 변형이 여럿이면 배열로 둔다.
+   *
+   * 사장님 지적(2026-08-26): 컴온에 5mg·8mg 두 가지가 있듯, 코일이 여러 개인
+   * 것과 같은 이치다. 저항값·팟용량은 이미 문자열이라 여러 값을 담는데
+   * 니코틴만 숫자 하나로 묶여 있어서, 나중에 승인된 값이 앞의 값을 덮었다.
+   */
+  nicotinePercent?: number | number[];
   /** 내장 액상 용량. 팟 교체형의 podMl과 구분한다. */
   liquidMl?: string;
   charging?: string;
@@ -366,6 +372,13 @@ const OHM_PATTERN = /(\d+\.?\d*)\s*(?:옴|Ω|ohm)/gi;
 
 export type OhmBand = "폐호흡" | "입호흡" | "애매";
 
+/** 농도 변형을 항상 배열로 읽는다. 숫자 하나로 저장된 옛 값도 그대로 받는다. */
+export function nicotineValues(spec: Pick<ProductSpec, "nicotinePercent">): number[] {
+  const raw = spec.nicotinePercent;
+  if (raw === undefined) return [];
+  return (Array.isArray(raw) ? raw : [raw]).filter((n) => Number.isFinite(n));
+}
+
 export function ohmBand(ohm: number): OhmBand {
   if (ohm >= 0.1 && ohm <= 0.3) return "폐호흡";
   if (ohm >= 0.6 && ohm <= 1.2) return "입호흡";
@@ -525,20 +538,25 @@ export function findSpecViolations(
     }
 
     // 니코틴 등급어(고농도/기본농도)가 등록된 농도와 맞는지 본다.
+    // 농도 변형이 여럿이면 그중 하나라도 맞으면 맞는 것으로 본다 — 5mg·8mg를
+    // 같이 파는 제품에 "기본농도"라고 쓴 건 틀린 말이 아니다.
     // 숫자를 안 쓰고 등급어만 틀리는 경우가 따로 있다.
     {
       const grade = firstMatch(sentence, NICOTINE_GRADE_PATTERNS);
       if (grade && here.length === 1 && sentence.length <= MAX_ATTRIBUTABLE_LENGTH) {
         const spec = here[0];
-        if (spec.nicotinePercent !== undefined) {
-          const isHigh = spec.nicotinePercent > HIGH_NICOTINE_THRESHOLD;
-          if (isHigh !== grade.value) {
+        const levels = nicotineValues(spec);
+        if (levels.length > 0) {
+          const matches = levels.some(
+            (level) => level > HIGH_NICOTINE_THRESHOLD === grade.value
+          );
+          if (!matches) {
             violations.push({
               kind: "모순",
               product: spec.name,
               attribute: "니코틴등급",
               claimed: grade.value ? "고농도" : "기본농도",
-              registered: `${spec.nicotinePercent}% (${isHigh ? "고농도" : "기본농도"})`,
+              registered: `${levels.map((l) => `${l}%`).join(", ")} (전부 ${grade.value ? "기본농도" : "고농도"})`,
               sentence,
             });
           }
@@ -617,7 +635,8 @@ export function buildProductFactSheet(registry: ProductSpecRegistry): string {
     if (s.podMl) bits.push(`팟용량 ${s.podMl}`);
     if (s.liquidMl) bits.push(`액상용량 ${s.liquidMl}`);
     if (s.puffs) bits.push(`표기 퍼프 ${s.puffs.toLocaleString("ko-KR")}`);
-    if (s.nicotinePercent !== undefined) bits.push(`니코틴 ${s.nicotinePercent}%`);
+    const levels = nicotineValues(s);
+    if (levels.length > 0) bits.push(`니코틴 ${levels.map((l) => `${l}%`).join(" / ")}`);
     if (s.wattRange) bits.push(`출력범위 ${s.wattRange}`);
     if (s.resistanceOhm) bits.push(`저항 ${s.resistanceOhm}`);
     if (s.charging) bits.push(`충전 ${s.charging}`);

@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   findSpecViolations,
   ohmBand,
+  nicotineValues,
   describeSpecViolation,
   buildProductFactSheet,
   splitSentences,
@@ -517,5 +518,58 @@ describe("PR41 저항값과 드로우 방식", () => {
 
   test("저항값만 있고 드로우 주장이 없으면 판정하지 않는다", () => {
     assert.equal(ohmFindings("크로스미니6 코일은 0.4옴입니다.").length, 0);
+  });
+});
+
+// 사장님 지적(2026-08-26): 컴온에 5mg·8mg 두 가지가 있듯 한 제품에 농도 변형이
+// 여럿일 수 있다. 코일이 여러 개인 것과 같은 이치다.
+describe("PR45 니코틴 농도 변형", () => {
+  const withNicotine = (value) => ({
+    version: 1,
+    products: [
+      {
+        name: "컴온",
+        aliases: [],
+        category: "일회용",
+        nicotinePercent: value,
+        source: "t",
+        verifiedAt: "2026-08-26",
+      },
+    ],
+    updatedAt: "2026-08-26",
+  });
+  const grade = (reg, text) =>
+    findSpecViolations(text, reg).filter((v) => v.attribute === "니코틴등급");
+
+  test("숫자 하나로 저장된 옛 값도 읽는다", () => {
+    assert.deepEqual(nicotineValues({ nicotinePercent: 0.98 }), [0.98]);
+    assert.deepEqual(nicotineValues({ nicotinePercent: [0.5, 0.8] }), [0.5, 0.8]);
+    assert.deepEqual(nicotineValues({}), []);
+  });
+
+  // 5mg·8mg를 같이 파는 제품에 "기본농도"라고 쓴 건 틀린 말이 아니다.
+  test("변형 중 하나라도 맞으면 모순이 아니다", () => {
+    const reg = withNicotine([0.5, 2]);
+    assert.equal(grade(reg, "컴온은 기본농도라 입문자도 편합니다.").length, 0);
+    assert.equal(grade(reg, "컴온은 고농도라 목치임이 있습니다.").length, 0);
+  });
+
+  test("전부 어긋나면 모순으로 잡는다", () => {
+    const reg = withNicotine([0.5, 0.8]);
+    const found = grade(reg, "컴온은 고농도라 목치임이 강합니다.");
+    assert.equal(found.length, 1);
+    assert.ok(found[0].registered.includes("0.5%"));
+    assert.ok(found[0].registered.includes("0.8%"));
+  });
+
+  test("단일 값도 그대로 판정한다", () => {
+    assert.equal(grade(withNicotine(0.5), "컴온은 고농도입니다.").length, 1);
+    assert.equal(grade(withNicotine(2), "컴온은 고농도입니다.").length, 0);
+  });
+
+  test("사실 시트에 변형이 전부 실린다", () => {
+    const sheet = buildProductFactSheet(withNicotine([0.5, 0.8]));
+    assert.ok(sheet.includes("0.5%"));
+    assert.ok(sheet.includes("0.8%"));
   });
 });
