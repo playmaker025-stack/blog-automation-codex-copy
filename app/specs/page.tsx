@@ -26,6 +26,8 @@ interface Candidate {
   postId: string;
   postTitle?: string;
   verdict: Verdict;
+  /** 지금 값 그대로 승인이 되는지. false면 고쳐야 한다. */
+  coercible?: boolean;
 }
 
 interface Spec {
@@ -254,6 +256,13 @@ function PendingSection({
   const [edits, setEdits] = useState<Record<string, string>>({});
   // 기본은 "포함". 사장님이 훑어보다 이상한 것만 빼는 흐름이 자연스럽다.
   const [excluded, setExcluded] = useState<Set<string>>(new Set());
+  // 해석 못 하는 값은 처음부터 빼둔다. 눌러봐야 실패하는 걸 버튼에 넣으면 안 된다.
+  const autoExcluded = useMemo(
+    () => new Set(pending.filter((c) => c.coercible === false).map((c) => c.id)),
+    [pending]
+  );
+  const isOff = (c: Candidate) =>
+    excluded.has(c.id) || (autoExcluded.has(c.id) && !edits[c.id]?.trim());
   const [visibleProducts, setVisibleProducts] = useState(PAGE_SIZE);
 
   const groups = useMemo(() => {
@@ -315,7 +324,7 @@ function PendingSection({
 
                 <div className="divide-y divide-zinc-100">
                   {items.map((c) => {
-                    const off = excluded.has(c.id);
+                    const off = isOff(c);
                     const conflict = c.verdict === "충돌";
                     return (
                       <div
@@ -339,6 +348,11 @@ function PendingSection({
                           {conflict && (
                             <span className="rounded bg-red-100 px-1.5 py-0.5 text-[11px] text-red-700">
                               기존값과 다름
+                            </span>
+                          )}
+                          {c.coercible === false && (
+                            <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[11px] text-amber-800">
+                              값을 고쳐야 승인됩니다
                             </span>
                           )}
                         </div>
@@ -373,7 +387,7 @@ function PendingSection({
                       disabled={busy === "bulk"}
                       onClick={() =>
                         onBulk(
-                          items.filter((i) => excluded.has(i.id)).map((i) => i.id),
+                          items.filter((i) => isOff(i)).map((i) => i.id),
                           "거절",
                           edits
                         )

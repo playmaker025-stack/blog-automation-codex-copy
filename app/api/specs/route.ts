@@ -28,7 +28,12 @@ export async function GET() {
       loadProductSpecs(),
       loadSpecCandidates(),
     ]);
-    const pending = pendingCandidates(store, registry);
+    // 해석 못 하는 값은 승인 버튼에 넣으면 안 된다. 눌러봐야 실패한다.
+    // 화면이 미리 알고 체크를 풀어둘 수 있게 여기서 판정해서 내려준다.
+    const pending = pendingCandidates(store, registry).map((candidate) => ({
+      ...candidate,
+      coercible: coerceValue(candidate.field, candidate.value) !== null,
+    }));
 
     return NextResponse.json({
       ok: true,
