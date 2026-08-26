@@ -65,7 +65,8 @@
       "batteryMah": 2100,
       "charging": "C 타입",
       "resistanceOhm": "1.0 / 0.6 / 0.4",
-      "podMl": "5ml"
+      "podMl": "5ml",
+      "wattRange": "5~30W"
     },
     {
       "name": "도조오팔",
@@ -297,5 +298,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:30:21.770Z"
+  "updatedAt": "2026-08-26T03:30:28.452Z"
 }
