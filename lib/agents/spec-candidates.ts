@@ -133,8 +133,14 @@ const NUMERIC_FIELDS = new Set<CandidateField>([
   "nicotinePercent",
 ]);
 
+/**
+ * "팟교체형"은 여기 없다. 사장님 지적(2026-08-26) — 팟 교체형은 두 가지다.
+ *   1) 이미 액상이 주입된 팟만 갈아끼우는 것 → 리필 불가
+ *   2) 팟은 갈아끼우되 액상은 직접 주입하는 것 → 리필 가능
+ * 표현만으로는 어느 쪽인지 모른다. 모르면 사람에게 묻는 게 맞다.
+ */
 const FIELD_FALSE_HINTS: Partial<Record<CandidateField, string[]>> = {
-  liquidRefillable: ["팟교체", "팟 교체", "교체형", "일회용", "카트리지 교체", "리필 불가"],
+  liquidRefillable: ["일회용", "리필 불가", "주입 불가"],
   batteryRechargeable: ["일회용", "충전 불가"],
 };
 
