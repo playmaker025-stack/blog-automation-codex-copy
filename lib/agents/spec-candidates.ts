@@ -224,6 +224,17 @@ export function coerceValue(field: CandidateField, raw: string): string | number
   }
 
   if (field === "nicotinePercent") {
+    // 한 제품에 농도 변형이 여럿일 수 있다. "0.5%, 0.8%"를 둘 다 담는다.
+    // 예전에는 나중에 승인된 값이 앞의 값을 조용히 덮었다.
+    const parts = value.split(/[,/·]|또는|그리고/).map((part) => part.trim()).filter(Boolean);
+    if (parts.length > 1) {
+      const levels = parts
+        .map((part) => parseNumberWithUnit(part, field))
+        .filter((n): n is number => n !== null && n >= 0);
+      // 하나라도 못 읽으면 통째로 넘긴다. 반쪽만 저장하면 빠진 걸 아무도 모른다.
+      if (levels.length !== parts.length) return null;
+      return levels.length === 1 ? levels[0] : (levels as unknown as number);
+    }
     const n = parseNumberWithUnit(value, field);
     return n !== null && n >= 0 ? n : null;
   }
