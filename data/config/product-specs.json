@@ -177,6 +177,13 @@
       "verifiedAt": "2026-08-24"
     },
     {
+      "name": "발라리안맥스",
+      "category": "기기",
+      "source": "post-manual-mt896bb1 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "drawStyle": "입호흡"
+    },
+    {
       "name": "발라리안맥스프로",
       "aliases": [
         "발라리안 맥스 프로",
@@ -278,5 +285,5 @@
       "airflowControl": true
     }
   ],
-  "updatedAt": "2026-08-26T03:29:38.223Z"
+  "updatedAt": "2026-08-26T03:29:52.151Z"
 }
