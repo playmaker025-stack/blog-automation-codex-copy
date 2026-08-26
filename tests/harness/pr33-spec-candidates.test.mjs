@@ -5,10 +5,10 @@ import {
   emptyCandidateStore,
   candidateKey,
   coerceValue,
+  applyCandidate,
   verdictFor,
   mergeCandidates,
   pendingCandidates,
-  applyCandidate,
   decideCandidate,
   buildSpecExtractionPrompt,
   parseSpecExtraction,
@@ -401,5 +401,71 @@ describe("PR44 단위를 무시하지 않는다", () => {
 
   test("mg 변형 여러 개도 함께 환산한다", () => {
     assert.deepEqual(coerceValue("nicotinePercent", "5mg, 8mg"), [0.5, 0.8]);
+  });
+});
+
+// 코덱스 리뷰(2026-08-26): 배열로 담을 수 있게 바꿔놓고도 승인 경로가 통째로
+// 대입해서, 5mg·8mg를 차례로 승인하면 0.8만 남았다.
+describe("PR46 승인이 농도 변형을 덮지 않는다", () => {
+  const base = {
+    version: 1,
+    products: [{ name: "컴온", aliases: [], category: "일회용", source: "t", verifiedAt: "2026-08-26" }],
+    updatedAt: "2026-08-26",
+  };
+  const nic = (value) => ({
+    id: `c-${value}`,
+    product: "컴온",
+    field: "nicotinePercent",
+    value,
+    evidence: "e",
+    postId: "p",
+    extractedAt: "2026-08-26T00:00:00Z",
+    status: "대기",
+  });
+
+  test("차례로 승인하면 둘 다 남는다", () => {
+    let r = applyCandidate(base, nic("5mg"));
+    r = applyCandidate(r, nic("8mg"));
+    assert.deepEqual(r.products[0].nicotinePercent, [0.5, 0.8]);
+  });
+
+  test("같은 값을 또 승인해도 중복되지 않는다", () => {
+    let r = applyCandidate(base, nic("5mg"));
+    r = applyCandidate(r, nic("5mg"));
+    assert.equal(r.products[0].nicotinePercent, 0.5);
+  });
+
+  // 다른 항목은 최신값이 맞다. 배터리가 두 개인 기기는 없다.
+  test("니코틴 아닌 항목은 최신값으로 덮는다", () => {
+    const cand = (v) => ({ ...nic(v), id: `b-${v}`, field: "batteryMah" });
+    let r = applyCandidate(base, cand("1000mAh"));
+    r = applyCandidate(r, cand("1200mAh"));
+    assert.equal(r.products[0].batteryMah, 1200);
+  });
+});
+
+// 코덱스가 준 반례들. 단위를 무시하면 틀린 값이 사실로 저장된다.
+describe("PR46 단위 반례", () => {
+  test("한글 수사를 합쳐서 읽는다", () => {
+    assert.equal(coerceValue("puffs", "3만5천퍼프"), 35000);
+  });
+
+  test("항목에 안 맞는 단위는 값으로 안 본다", () => {
+    assert.equal(coerceValue("puffs", "3ml"), null);
+    assert.equal(coerceValue("batteryMah", "500mg"), null);
+  });
+
+  // "0.5% (5mg)"에서 괄호 안 mg를 잡으면 0.05%가 된다.
+  test("괄호 안 단위를 주 단위로 읽지 않는다", () => {
+    assert.equal(coerceValue("nicotinePercent", "0.5% (5mg)"), 0.5);
+    assert.equal(coerceValue("nicotinePercent", "5% (50mg)"), 5);
+  });
+
+  test("20mg/2ml은 농도 변형이 아니다", () => {
+    assert.equal(coerceValue("nicotinePercent", "20mg/2ml"), null);
+  });
+
+  test("mg 무게는 g로 환산한다", () => {
+    assert.equal(coerceValue("weightG", "500mg"), 0.5);
   });
 });

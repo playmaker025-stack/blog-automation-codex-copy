@@ -161,40 +161,85 @@ const FIELD_FALSE_HINTS: Partial<Record<CandidateField, string[]>> = {
  * 배수가 명확한 단위만 환산한다. 종류가 다른 단위(mg vs %)는 환산하지 않고
  * 거부한다 — 어림으로 바꾸면 틀린 사실을 원장에 넣게 된다.
  */
+/** 항목별로 허용되는 단위. 여기 없는 단위가 섞여 있으면 값으로 안 본다. */
+const UNIT_TOKEN = /(mah|kah|ah|mg|kg|ml|퍼프|puffs?|모금|회|옴|ohm|[gw%])/gi;
+
+const ALLOWED_UNITS: Record<string, Set<string>> = {
+  batteryMah: new Set(["mah", "ah"]),
+  puffs: new Set(["퍼프", "puff", "puffs", "모금", "회"]),
+  weightG: new Set(["g", "kg", "mg"]),
+  nicotinePercent: new Set(["%", "mg"]),
+};
+
+/** 단위 하나당 배수. 같은 항목 안에서만 쓴다. */
+const UNIT_SCALE: Record<string, Record<string, number>> = {
+  batteryMah: { mah: 1, ah: 1000 },
+  weightG: { g: 1, kg: 1000, mg: 0.001 },
+  nicotinePercent: { "%": 1, mg: 0.1 },
+};
+
+/**
+ * 한글 수사를 포함한 숫자를 읽는다. "3만5천퍼프"는 35000이다.
+ * 만/천이 하나도 없으면 첫 숫자를 그대로 쓴다.
+ */
+function parseKoreanNumber(text: string): number | null {
+  const parts = [...text.matchAll(/(\d+\.?\d*)\s*(만|천)?/g)].filter((m) => m[1]);
+  if (parts.length === 0) return null;
+
+  const hasMultiplier = parts.some((m) => m[2]);
+  if (!hasMultiplier) {
+    const n = Number(parts[0][1]);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  let total = 0;
+  for (const m of parts) {
+    const n = Number(m[1]);
+    if (!Number.isFinite(n)) continue;
+    total += m[2] === "만" ? n * 10000 : m[2] === "천" ? n * 1000 : n;
+  }
+  return total > 0 ? total : null;
+}
+
+/**
+ * 숫자와 단위를 같이 읽는다.
+ *
+ * 왜 필요한가: 예전에는 숫자 아닌 글자를 전부 지우고 숫자만 남겼다. 그래서
+ * "3만퍼프"가 3이 되고 "1.2Ah"가 1.2mAh가 됐다. 단위를 무시하면 1000배 틀린
+ * 값이 사실로 저장된다.
+ *
+ * 코덱스 리뷰(2026-08-26)로 더 좁혔다:
+ * - 괄호 안은 버린다. "0.5% (5mg)"에서 뒤의 mg를 잡으면 0.05%가 된다.
+ * - 항목에 안 맞는 단위가 있으면 값으로 안 본다. puffs에 "3ml"은 3이 아니라
+ *   판단 불가다. 억지로 읽으면 틀린 사실이 원장에 남는다.
+ */
 function parseNumberWithUnit(raw: string, field: CandidateField): number | null {
-  const value = raw.trim().toLowerCase().replace(/,/g, "");
+  // 괄호 안은 부연 설명이다. 거기 단위를 주 단위로 읽으면 값이 뒤집힌다.
+  const value = raw
+    .trim()
+    .toLowerCase()
+    .replace(/,/g, "")
+    .replace(/[(（][^)）]*[)）]/g, " ");
 
-  const match = value.match(/(\d+\.?\d*)/);
-  if (!match) return null;
-  let n = Number(match[1]);
-  if (!Number.isFinite(n)) return null;
+  const n = parseKoreanNumber(value);
+  if (n === null) return null;
 
-  // 한글 수사. "3만퍼프", "1천 퍼프"
-  const after = value.slice(match.index! + match[1].length);
-  if (/^\s*만/.test(after)) n *= 10000;
-  else if (/^\s*천/.test(after)) n *= 1000;
+  UNIT_TOKEN.lastIndex = 0;
+  const units = [...value.matchAll(UNIT_TOKEN)].map((m) => m[1].toLowerCase());
+  const allowed = ALLOWED_UNITS[field];
 
-  if (field === "batteryMah") {
-    // Ah는 mAh의 1000배. "1.2Ah"를 1.2로 저장하면 안 된다.
-    if (/ah|[0-9.]\s*ah/.test(value) && !/mah/.test(value)) n *= 1000;
-    return n;
+  if (allowed) {
+    const foreign = units.find((u) => !allowed.has(u));
+    if (foreign) return null;
   }
 
-  if (field === "weightG") {
-    if (/kg/.test(value)) n *= 1000;
-    return n;
+  const scales = UNIT_SCALE[field];
+  if (scales) {
+    const hit = units.find((u) => scales[u] !== undefined);
+    if (hit) return Math.round(n * scales[hit] * 1000) / 1000;
   }
 
-  if (field === "nicotinePercent") {
-    // 업계 기준 1% = 10mg/ml. 사장님 확인(2026-08-26)으로 확정했다.
-    // 이걸 안 바꾸면 "8mg"가 8%로 저장된다 — 8% 니코틴은 존재하지 않는다.
-    // 부동소수점 때문에 9.8/10이 0.9800000000000001이 된다. 원장에 그대로
-    // 들어가면 값 비교와 화면 표시가 지저분해진다.
-    const percent = /mg/.test(value) ? n / 10 : n;
-    return Math.round(percent * 1000) / 1000;
-  }
-
-  return n;
+  return Math.round(n * 1000) / 1000;
 }
 
 export function coerceValue(field: CandidateField, raw: string): string | number | boolean | null {
@@ -229,7 +274,9 @@ export function coerceValue(field: CandidateField, raw: string): string | number
   if (field === "nicotinePercent") {
     // 한 제품에 농도 변형이 여럿일 수 있다. "0.5%, 0.8%"를 둘 다 담는다.
     // 예전에는 나중에 승인된 값이 앞의 값을 조용히 덮었다.
-    const parts = value.split(/[,/·]|또는|그리고/).map((part) => part.trim()).filter(Boolean);
+    // "20mg/2ml"은 농도 변형이 아니다. 각 조각이 농도 표기일 때만 나눈다.
+    const rawParts = value.split(/[,/·]|또는|그리고/).map((part) => part.trim()).filter(Boolean);
+    const parts = rawParts.every((part) => /%|mg/i.test(part)) ? rawParts : [value];
     if (parts.length > 1) {
       const levels = parts
         .map((part) => parseNumberWithUnit(part, field))
@@ -342,6 +389,31 @@ export function pendingCandidates(
     });
 }
 
+/**
+ * 값이 여럿일 수 있는 항목은 덮어쓰지 않고 합친다.
+ *
+ * 실측(2026-08-26): 컴온의 5mg와 8mg를 차례로 승인하면 최종값이 0.8 하나만
+ * 남았다. 농도 변형을 배열로 담을 수 있게 바꿔놓고도 승인 경로가 통째로
+ * 대입하고 있어서 앞의 값이 조용히 사라졌다.
+ */
+function mergeFieldValue(
+  field: CandidateField,
+  prev: ProductSpec,
+  incoming: string | number | boolean
+): string | number | boolean | number[] {
+  if (field !== "nicotinePercent") return incoming;
+
+  const before = prev.nicotinePercent;
+  if (before === undefined) return incoming as number | number[];
+
+  const merged = new Set<number>([
+    ...(Array.isArray(before) ? before : [before]),
+    ...(Array.isArray(incoming) ? (incoming as unknown as number[]) : [incoming as number]),
+  ]);
+  const values = [...merged].filter((n) => Number.isFinite(n)).sort((a, b) => a - b);
+  return values.length === 1 ? values[0] : values;
+}
+
 /** 승인된 후보를 원장 항목에 얹는다. 원장은 순수하게 갱신된다. */
 export function applyCandidate(
   registry: ProductSpecRegistry,
@@ -353,9 +425,14 @@ export function applyCandidate(
   if (coerced === null) return registry;
 
   const now = (options.now ?? new Date()).toISOString().slice(0, 10);
-  const idx = registry.products.findIndex(
-    (p) => p.name === candidate.product || (p.aliases ?? []).includes(candidate.product)
-  );
+  // 표기 정규화까지 보고 확정한다. 이름·별칭 정확 일치만 보면 별칭이 두 제품에
+  // 겹칠 때 배열 순서상 첫 제품에 사양이 붙는다.
+  const resolved = resolveProduct(registry, candidate.product).spec;
+  const idx = resolved
+    ? registry.products.findIndex((p) => p.name === resolved.name)
+    : registry.products.findIndex(
+        (p) => p.name === candidate.product || (p.aliases ?? []).includes(candidate.product)
+      );
 
   const sourceLine = `${candidate.postId} 자동 추출 → 사장님 승인`;
 
@@ -378,7 +455,7 @@ export function applyCandidate(
   const prev = products[idx];
   products[idx] = {
     ...prev,
-    [candidate.field]: coerced,
+    [candidate.field]: mergeFieldValue(candidate.field, prev, coerced),
     verifiedAt: now,
     source: prev.source.includes(candidate.postId)
       ? prev.source

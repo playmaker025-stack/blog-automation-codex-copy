@@ -166,6 +166,17 @@ export function mergeProducts(
     return { registry, error: "같은 제품끼리는 합칠 수 없습니다.", keptConflicts: [] };
   }
 
+  // 표기 정규화로 같아지는 쌍만 합친다. 이 검사가 없으면 API를 직접 부르거나
+  // 화면이 바뀌었을 때 '말론'과 '말론S'를 합쳐 한쪽이 삭제된다.
+  const keeperKeys = new Set(nameKeysOf(keeper));
+  if (!nameKeysOf(loser).some((key) => keeperKeys.has(key))) {
+    return {
+      registry,
+      error: `"${keeperName}"와 "${loserName}"는 표기가 달라 같은 제품으로 볼 수 없습니다.`,
+      keptConflicts: [],
+    };
+  }
+
   const merged: Record<string, unknown> = { ...keeper };
   const keptConflicts: string[] = [];
 
@@ -173,6 +184,15 @@ export function mergeProducts(
     if (IGNORED_FIELDS.has(field) || value === undefined) continue;
     if (merged[field] === undefined) {
       merged[field] = value;
+    } else if (field === "nicotinePercent") {
+      // 농도 변형은 어느 한쪽을 버리면 안 된다. 합쳐질 쪽에만 있던 농도가
+      // 사라지면 그 제품은 원장에서 영영 없는 농도가 된다.
+      const both = new Set<number>([
+        ...(Array.isArray(merged[field]) ? (merged[field] as number[]) : [merged[field] as number]),
+        ...(Array.isArray(value) ? (value as number[]) : [value as number]),
+      ]);
+      const levels = [...both].filter((n) => Number.isFinite(n)).sort((a, b) => a - b);
+      merged[field] = levels.length === 1 ? levels[0] : levels;
     } else if (String(merged[field]) !== String(value)) {
       // 값이 어긋나면 keeper 것을 남기고 사실을 보고한다. 조용히 덮지 않는다.
       keptConflicts.push(field);

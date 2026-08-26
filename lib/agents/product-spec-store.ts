@@ -55,6 +55,9 @@ export async function upsertProductSpec(spec: ProductSpec): Promise<ProductSpecR
     a.name.localeCompare(b.name)
   );
   const next: ProductSpecRegistry = {
+    // 기존 원장을 통째로 새로 만들면 업종 규칙이 사라진다. 로드 쪽만 고쳐두면
+    // 이 경로가 그대로 지운다 — 데이터 파괴 함수를 남겨두면 언젠가 호출된다.
+    ...data,
     version: SPEC_REGISTRY_VERSION,
     products,
     updatedAt: new Date().toISOString(),
