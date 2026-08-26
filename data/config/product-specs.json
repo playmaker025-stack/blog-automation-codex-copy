@@ -2,6 +2,85 @@
   "version": 1,
   "products": [
     {
+      "name": "SUPA X3",
+      "category": "기기",
+      "source": "post-manual-mt8818bw 자동 추출 → 사장님 승인 + post-manual-mt87qx6m 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "form": "박스모양",
+      "wattRange": "12W ~ 20W",
+      "puffs": 25000,
+      "inhaleMode": "자동/버튼 겸용",
+      "drawStyle": "입호흡",
+      "wattControl": true,
+      "airflowControl": true,
+      "batteryRechargeable": true,
+      "charging": "C타입 충전단자",
+      "liquidRefillable": true
+    },
+    {
+      "name": "긱베이프 이지스 레전드 5",
+      "category": "기기",
+      "source": "post-manual-mt880qy8 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "officialName": "AEGIS LEGEND 5",
+      "wattRange": "5W ~ 200W",
+      "batteryMah": 7.4186502,
+      "charging": "Ttpe - C 지원",
+      "resistanceOhm": "0.1 Ω ~ 2 Ω"
+    },
+    {
+      "name": "남동구전자담배 하복 HAVOK V1 버전 그린 색상",
+      "category": "기기",
+      "source": "post-manual-mt88euq2 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "100 × 42.9 × 19.2mm",
+      "weightG": 101,
+      "batteryMah": 1800,
+      "charging": "C 타입",
+      "podMl": "4ml",
+      "wattRange": "5~65W",
+      "resistanceOhm": "0.6 Ω , 0.25 Ω",
+      "airflowControl": true
+    },
+    {
+      "name": "네스티바",
+      "category": "기기",
+      "source": "post-manual-mt87u9qe 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 20000,
+      "batteryMah": 700,
+      "charging": "C 타입",
+      "wattControl": true,
+      "airflowControl": true
+    },
+    {
+      "name": "네스티바 20000",
+      "category": "기기",
+      "source": "post-manual-mt87j13u 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "batteryMah": 700,
+      "charging": "C타입",
+      "liquidMl": "20ml",
+      "puffs": 20000,
+      "drawStyle": "입호흡",
+      "airflowControl": true,
+      "wattControl": true
+    },
+    {
+      "name": "네스티바 일회용 20000 슬로우블로우",
+      "category": "기기",
+      "source": "post-manual-mt87ls3h 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "officialName": "네스티바 일회용 20000 슬로우블로우",
+      "form": "일회용",
+      "drawStyle": "폐호흡, 입호흡",
+      "airflowControl": true,
+      "inhaleMode": "버튼",
+      "puffs": 1000020000,
+      "batteryRechargeable": true,
+      "charging": "C타입 충전단자"
+    },
+    {
       "name": "네스티원",
       "aliases": [
         "네스티 원",
@@ -56,6 +135,20 @@
       "verifiedAt": "2026-08-24"
     },
     {
+      "name": "닷투엑스",
+      "category": "기기",
+      "source": "post-manual-mt87rzfg 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "wattRange": "5~30W",
+      "batteryMah": 2100,
+      "podMl": "5ml",
+      "resistanceOhm": "1.0옴",
+      "charging": "C타입",
+      "drawStyle": "입호흡 전담",
+      "sizeMm": "94 * 43.3 * 20mm",
+      "weightG": 94
+    },
+    {
       "name": "닷팟 맥스",
       "category": "기기",
       "source": "post-manual-mt88my0j 자동 추출 → 사장님 승인",
@@ -66,7 +159,9 @@
       "charging": "C 타입",
       "resistanceOhm": "1.0 / 0.6 / 0.4",
       "podMl": "5ml",
-      "wattRange": "5~30W"
+      "wattRange": "5~30W",
+      "inhaleMode": "버튼",
+      "puffs": 63
     },
     {
       "name": "도조오팔",
@@ -91,6 +186,60 @@
       "batteryRechargeable": true,
       "liquidRefillable": false,
       "charging": "배터리 충전식"
+    },
+    {
+      "name": "리로드 아이킥",
+      "category": "기기",
+      "source": "post-manual-mt87trwt 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "85.4*15.5*36.2mm",
+      "weightG": 47,
+      "batteryMah": 800,
+      "wattRange": "최대출력 : 25w",
+      "inhaleMode": "자동",
+      "podMl": "3.5ml",
+      "resistanceOhm": "0.6옴 , 0.8옴 , 1.0옴",
+      "wattControl": true,
+      "airflowControl": true,
+      "batteryRechargeable": true,
+      "drawStyle": "입호흡"
+    },
+    {
+      "name": "린코 네소 ET",
+      "category": "기기",
+      "source": "post-manual-mt88d6yz 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "78*41.4*15mm",
+      "weightG": 50,
+      "batteryMah": 1400,
+      "charging": "C타입",
+      "podMl": "3.5ml",
+      "resistanceOhm": "0.8옴",
+      "wattRange": "13~18W",
+      "inhaleMode": "겸용",
+      "drawStyle": "반폐호흡",
+      "airflowControl": true
+    },
+    {
+      "name": "릴렉스 크리에이터",
+      "category": "기기",
+      "source": "post-manual-mt87u9qe 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 15000,
+      "batteryMah": 800,
+      "charging": "C 타입"
+    },
+    {
+      "name": "릴렉스 크리에이터 15000",
+      "category": "기기",
+      "source": "post-manual-mt87tbja 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "officialName": "릴렉스 크리에이터 15000",
+      "puffs": 15000,
+      "form": "일회용 전담",
+      "airflowControl": true,
+      "liquidRefillable": false,
+      "charging": "C타입 충전단자"
     },
     {
       "name": "마이팟프로",
@@ -123,7 +272,40 @@
       "resistanceOhm": "0.6옴, 0.4옴, 0.1옴",
       "wattRange": "5~80W",
       "sizeMm": "46 × 19 × 89mm",
-      "weightG": 95
+      "weightG": 95,
+      "charging": "C타입",
+      "airflowControl": true,
+      "liquidRefillable": true
+    },
+    {
+      "name": "말론",
+      "category": "기기",
+      "source": "post-manual-mt87sf6n 자동 추출 → 사장님 승인 + post-manual-mt87pvde 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "form": "박스형",
+      "charging": "C 타입 (5V2A 고속충전지원)",
+      "liquidRefillable": true,
+      "resistanceOhm": "0.4옴 , 0.6옴",
+      "airflowControl": true,
+      "weightG": 89,
+      "sizeMm": "19 * 92 * 45mm",
+      "batteryMah": 2000,
+      "podMl": "5ml",
+      "inhaleMode": "오토&버튼 둘다가능"
+    },
+    {
+      "name": "말론 (Malone)",
+      "category": "기기",
+      "source": "post-manual-mt87vy39 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "19*92*45mm",
+      "weightG": 89,
+      "wattRange": "35W",
+      "batteryMah": 2000,
+      "liquidRefillable": true,
+      "podMl": "5.0ml",
+      "resistanceOhm": "0.4옴 , 0.6옴",
+      "charging": "USB C-TYPE"
     },
     {
       "name": "말론S",
@@ -149,7 +331,14 @@
       "inhaleMode": "겸용",
       "batteryMah": 2300,
       "podMl": "4ml",
-      "wattRange": "0.6옴 (25~35W), 0.6옴 (15~30W), 1.0옴 (10~15W)"
+      "wattRange": "0.6옴 (25~35W), 0.6옴 (15~30W), 1.0옴 (10~15W)",
+      "sizeMm": "19* 92* 45mm",
+      "weightG": 87.3,
+      "charging": "5V2A",
+      "resistanceOhm": "0.4옴, 0.6옴, 1.0옴",
+      "drawStyle": "입호흡",
+      "airflowControl": true,
+      "batteryRechargeable": true
     },
     {
       "name": "말론바",
@@ -170,8 +359,28 @@
         "매장 기준 인기 맛은 블루베리와 플럼",
         "가격대 2만원대"
       ],
-      "source": "사장님 발행글 post-manual-mt6xg9od",
-      "verifiedAt": "2026-08-24"
+      "source": "사장님 발행글 post-manual-mt6xg9od + post-manual-mt898yex 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "batteryMah": 650,
+      "charging": "C 타입",
+      "nicotinePercent": 0.98,
+      "resistanceOhm": "듀얼 메쉬",
+      "airflowControl": true,
+      "inhaleMode": "버튼",
+      "drawStyle": "입호흡",
+      "wattControl": true
+    },
+    {
+      "name": "몰바",
+      "category": "기기",
+      "source": "post-manual-mt886d1s 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 50000,
+      "inhaleMode": "자동",
+      "airflowControl": false,
+      "drawStyle": "폐호흡",
+      "wattControl": true,
+      "charging": "불명"
     },
     {
       "name": "발라리안R",
@@ -186,8 +395,15 @@
         "팟을 2개 이상 바꿔도 같은 누수가 나면 본체 점검 신호",
         "충전은 되는데 흡입 반응이 없거나 탄 냄새 뒤 출력이 약해지면 수리 판단"
       ],
-      "source": "사장님 발행글 post-manual-mr8tac1r / mrorbz92",
-      "verifiedAt": "2026-08-24"
+      "source": "사장님 발행글 post-manual-mr8tac1r / mrorbz92 + post-manual-mt88c8ut 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "75.6*16.8*45.3mm",
+      "weightG": 61,
+      "batteryMah": 950,
+      "charging": "C타입",
+      "resistanceOhm": "0.6옴",
+      "podMl": "3ml",
+      "airflowControl": false
     },
     {
       "name": "발라리안맥스",
@@ -217,7 +433,303 @@
         "가격 10만원 미만"
       ],
       "source": "사장님 발행글 post-manual-mt6z50dx + post-manual-mt87k2r5 자동 추출 → 사장님 승인",
-      "verifiedAt": "2026-08-26"
+      "verifiedAt": "2026-08-26",
+      "weightG": 100,
+      "resistanceOhm": "0.6옴, 0.8옴, 1.0옴",
+      "inhaleMode": "자동",
+      "charging": "C타입 (초고속충전 가능)",
+      "airflowControl": true
+    },
+    {
+      "name": "발라리안맥스프로 스티그마 프렌치 샤크 에디션",
+      "category": "기기",
+      "source": "post-manual-mt87xye0 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "resistanceOhm": "0.6옴"
+    },
+    {
+      "name": "버블몬 그래피티",
+      "category": "기기",
+      "source": "post-manual-mt8824id 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 35000,
+      "liquidMl": "20ml(16+2+2ml)",
+      "batteryMah": 850,
+      "charging": "USB-C",
+      "resistanceOhm": "듀얼메쉬 코일",
+      "airflowControl": true,
+      "nicotinePercent": 0.98
+    },
+    {
+      "name": "버블몬 그래피티2",
+      "category": "기기",
+      "source": "post-manual-mt89a3tc 자동 추출 → 사장님 승인 + post-manual-mt885elp 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "officialName": "버블몬 그래피티2",
+      "nicotinePercent": 1.98,
+      "puffs": 30000
+    },
+    {
+      "name": "베놈 아스트로 MK3(마크3)",
+      "category": "기기",
+      "source": "post-manual-mt88m78n 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "resistanceOhm": "0.6옴"
+    },
+    {
+      "name": "베놈 팬텀 엔트리",
+      "category": "기기",
+      "source": "post-manual-mt87yhul 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "80*18*38.5mm",
+      "podMl": "4ml",
+      "resistanceOhm": "0.6옴",
+      "batteryMah": 1600,
+      "charging": "C타입",
+      "airflowControl": true,
+      "inhaleMode": "버튼",
+      "drawStyle": "입호흡"
+    },
+    {
+      "name": "베이퍼즈 클라우드 리퍼블릭 스컹크",
+      "category": "기기",
+      "source": "post-manual-mt899nt0 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "form": "바텀피더",
+      "inhaleMode": "버튼",
+      "drawStyle": "폐호흡",
+      "weightG": 220,
+      "batteryRechargeable": true,
+      "batteryMah": 18650,
+      "wattRange": "맥스 220W"
+    },
+    {
+      "name": "베코 벨본",
+      "category": "기기",
+      "source": "post-manual-mt87l082 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "batteryMah": 2600,
+      "charging": "C타입",
+      "wattRange": "10W~35W",
+      "sizeMm": "42*20.8*98.3mm",
+      "podMl": "5ml",
+      "resistanceOhm": "0.6옴, 1.0옴",
+      "airflowControl": true,
+      "inhaleMode": "겸용",
+      "drawStyle": "입호흡"
+    },
+    {
+      "name": "벨본 (VELVON)",
+      "category": "기기",
+      "source": "post-manual-mt87vy39 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "42*20.8*98.3mm",
+      "weightG": 50,
+      "wattRange": "10W~35W",
+      "batteryMah": 2600,
+      "liquidRefillable": true,
+      "podMl": "5.0ml",
+      "resistanceOhm": "0.6옴 , 1.0옴",
+      "charging": "USB C-TYPE"
+    },
+    {
+      "name": "수파X3 (SUPA X3)",
+      "category": "기기",
+      "source": "post-manual-mt87vy39 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "wattRange": "20W",
+      "batteryMah": 1300,
+      "liquidRefillable": true,
+      "podMl": "7.5ml(공팟),20ML(일회용)",
+      "resistanceOhm": "0.6옴",
+      "charging": "USB C-TYPE"
+    },
+    {
+      "name": "아머미니",
+      "category": "기기",
+      "source": "post-manual-mt89b3up 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "drawStyle": "입호흡"
+    },
+    {
+      "name": "아머프로",
+      "category": "기기",
+      "source": "post-manual-mt87ii9l 자동 추출 → 사장님 승인 + post-manual-mt87o9e9 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "82*39*16.5mm",
+      "weightG": 52,
+      "batteryMah": 1500,
+      "charging": "C타입",
+      "wattRange": "30W",
+      "podMl": "3.5ml",
+      "resistanceOhm": "0.4옴, 0.6옴, 0.8옴, 1.2옴",
+      "wattControl": true,
+      "airflowControl": true,
+      "batteryRechargeable": true,
+      "liquidRefillable": true
+    },
+    {
+      "name": "아머프로 (ARMOUR PRO)",
+      "category": "기기",
+      "source": "post-manual-mt87vy39 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "82*39*16.5mm",
+      "weightG": 52,
+      "wattRange": "30W",
+      "batteryMah": 1500,
+      "liquidRefillable": true,
+      "podMl": "3.5ml",
+      "resistanceOhm": "0.6옴 , 0.8옴",
+      "charging": "USB C-TYPE"
+    },
+    {
+      "name": "아스몬 하이",
+      "category": "기기",
+      "source": "post-manual-mt897ee7 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "98.7 *43.5 *22mm",
+      "weightG": 72.3,
+      "batteryMah": 2600,
+      "charging": "C 타입",
+      "resistanceOhm": "0.4옴, 0.6옴, 1.0옴",
+      "podMl": "5.5ml",
+      "inhaleMode": "겸용"
+    },
+    {
+      "name": "아이다 기어미니 플러스",
+      "category": "기기",
+      "source": "post-manual-mt883bsi 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "41.4 * 80.0 mm",
+      "batteryMah": 1400,
+      "liquidMl": "3.5ml",
+      "resistanceOhm": "1.2옴/1.6옴",
+      "wattControl": true,
+      "charging": "C 타입",
+      "inhaleMode": "버튼",
+      "drawStyle": "입호흡",
+      "batteryRechargeable": true,
+      "podMl": "불명",
+      "officialName": "아이다 기어미니 플러스"
+    },
+    {
+      "name": "엘프바",
+      "category": "기기",
+      "source": "post-manual-mt87u9qe 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 20000,
+      "batteryMah": 1000,
+      "charging": "C 타입",
+      "wattControl": true,
+      "airflowControl": true
+    },
+    {
+      "name": "엘프바 아이스킹",
+      "category": "기기",
+      "source": "post-manual-mt88g50o 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "102 × 49 ×27mm",
+      "batteryMah": 850,
+      "charging": "C 타입",
+      "liquidMl": "23ml",
+      "puffs": 25000,
+      "airflowControl": true,
+      "inhaleMode": "자동"
+    },
+    {
+      "name": "엘프바 조인원 아이스",
+      "category": "기기",
+      "source": "post-manual-mt87suy8 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 20000,
+      "batteryMah": 1000,
+      "batteryRechargeable": true,
+      "charging": "5V2A 고속충전",
+      "liquidRefillable": false,
+      "podMl": "불명",
+      "form": "원통형",
+      "drawStyle": "폐호흡",
+      "inhaleMode": "버튼",
+      "airflowControl": true,
+      "wattControl": true,
+      "resistanceOhm": "불명"
+    },
+    {
+      "name": "옥스바 오네오",
+      "category": "기기",
+      "source": "post-manual-mt87hyvp 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "23 * 32.5 * 102 (mm)",
+      "batteryMah": 1600,
+      "wattRange": "최대 40와트 (변경불가능)",
+      "resistanceOhm": "0.4옴, 0.6옴, 0.8옴",
+      "podMl": "3.5ml",
+      "charging": "C타입",
+      "airflowControl": true,
+      "form": "입호흡 전자담배",
+      "inhaleMode": "자동",
+      "wattControl": true
+    },
+    {
+      "name": "와카 버스트",
+      "category": "기기",
+      "source": "post-manual-mt87u9qe 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 30000,
+      "batteryMah": 850,
+      "charging": "C 타입",
+      "wattControl": true,
+      "airflowControl": true
+    },
+    {
+      "name": "와카(waka)버스트 30000",
+      "category": "기기",
+      "source": "post-manual-mt87jki9 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 30000,
+      "inhaleMode": "버튼",
+      "airflowControl": true,
+      "batteryRechargeable": true,
+      "charging": "C타입 충전",
+      "drawStyle": "입호흡"
+    },
+    {
+      "name": "와카버스트",
+      "category": "기기",
+      "source": "post-manual-mt87ped6 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 3,
+      "charging": "C타입 충전단자",
+      "airflowControl": true
+    },
+    {
+      "name": "워토포 넥스팟",
+      "category": "기기",
+      "source": "post-manual-mt887x62 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "sizeMm": "42.4*23*83.3mm",
+      "batteryMah": 650,
+      "charging": "C타입",
+      "puffs": 3500,
+      "podMl": "7ML",
+      "resistanceOhm": "넥스메쉬 1.1옴",
+      "drawStyle": "입호흡",
+      "nicotinePercent": 20
+    },
+    {
+      "name": "저스트포그 글렌트",
+      "category": "기기",
+      "source": "post-manual-mt882mm0 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "batteryMah": 1500,
+      "charging": "C타입",
+      "podMl": "3.5ml",
+      "resistanceOhm": "0.6옴 , 1.0옴",
+      "wattRange": "13.6W ~ 19.8W",
+      "sizeMm": "90.5 * 32.4 * 7mm",
+      "weightG": 53.9,
+      "airflowControl": true,
+      "wattControl": true
     },
     {
       "name": "젤로",
@@ -268,6 +780,13 @@
       "batteryMah": 1900
     },
     {
+      "name": "컴온",
+      "category": "기기",
+      "source": "post-manual-mt87vh25 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "nicotinePercent": 8
+    },
+    {
       "name": "크로스미니6",
       "aliases": [
         "크로스미니 6",
@@ -296,7 +815,50 @@
       "verifiedAt": "2026-08-24",
       "wattControl": false,
       "airflowControl": true
+    },
+    {
+      "name": "톡스바",
+      "category": "기기",
+      "source": "post-manual-mt87u9qe 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "puffs": 25000,
+      "batteryMah": 700,
+      "charging": "C 타입",
+      "wattControl": true
+    },
+    {
+      "name": "포즈",
+      "category": "기기",
+      "source": "post-manual-mt883vvt 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "nicotinePercent": 8
+    },
+    {
+      "name": "해머오브갓",
+      "category": "기기",
+      "source": "post-manual-mt87oul4 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "officialName": "해머오브갓",
+      "wattRange": "200W",
+      "weightG": 200,
+      "form": "모드기기",
+      "wattControl": true,
+      "batteryRechargeable": true
+    },
+    {
+      "name": "호라이즌 세이커즈 마스터 탱크",
+      "category": "기기",
+      "source": "post-manual-mt87zlum 자동 추출 → 사장님 승인",
+      "verifiedAt": "2026-08-26",
+      "officialName": "호라이즌 세이커즈 마스터 탱크",
+      "form": "탱크",
+      "drawStyle": "폐호흡",
+      "liquidRefillable": true,
+      "podMl": "5ml(버블),3.5ml(일자)",
+      "resistanceOhm": "0.4옴, 0.16옴, 0.17옴",
+      "sizeMm": "29.5 * 56",
+      "wattRange": "최대 70W 권장"
     }
   ],
-  "updatedAt": "2026-08-26T03:30:28.452Z"
+  "updatedAt": "2026-08-26T03:41:24.695Z"
 }
