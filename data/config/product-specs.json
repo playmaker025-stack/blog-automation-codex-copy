@@ -727,7 +727,7 @@
     {
       "name": "저스트포그 글렌트",
       "category": "기기",
-      "source": "post-manual-mt882mm0 자동 추출 → 사장님 승인",
+      "source": "post-manual-mt882mm0 자동 추출 → 사장님 승인 + 사장님 직접 입력",
       "verifiedAt": "2026-08-26",
       "batteryMah": 1500,
       "charging": "C타입",
@@ -737,7 +737,7 @@
       "sizeMm": "90.5 * 32.4 * 7mm",
       "weightG": 53.9,
       "airflowControl": true,
-      "wattControl": true
+      "wattControl": false
     },
     {
       "name": "젤로",
@@ -868,5 +868,5 @@
       "wattRange": "최대 70W 권장"
     }
   ],
-  "updatedAt": "2026-08-26T06:34:06.478Z"
+  "updatedAt": "2026-08-26T06:34:08.295Z"
 }
