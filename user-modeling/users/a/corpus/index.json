@@ -2,6 +2,15 @@
   "userId": "a",
   "samples": [
     {
+      "sampleId": "published-post-manual-mtbggla6",
+      "title": "고농도부터 다양한 맛까지 한개로 고민 해결 가능한 네스티원 전자담배 만수동만수르",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2137,
+      "publishedAt": "2026-08-27T11:44:34.910Z",
+      "filePath": "user-modeling/users/a/corpus/samples/published-post-manual-mtbggla6.md"
+    },
+    {
       "sampleId": "published-post-manual-mt6z60ar",
       "title": "인천 전자담배 닷모드 투엑스 파티 만수동만수르",
       "category": "published-post",
@@ -366,5 +375,5 @@
       "filePath": "user-modeling/users/a/corpus/samples/reference-a-15.md"
     }
   ],
-  "lastUpdated": "2026-08-24T08:29:27.924Z"
+  "lastUpdated": "2026-08-27T11:44:42.341Z"
 }
