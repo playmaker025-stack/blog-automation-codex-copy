@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-cbd16776",
+  "source": "serp",
+  "capturedAt": "2026-08-27T11:56:20.761Z",
+  "postAgeHours": 6540,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260827115620_serp_인천전자담배-액상형-전담",
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 액상형 전담",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 10,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
