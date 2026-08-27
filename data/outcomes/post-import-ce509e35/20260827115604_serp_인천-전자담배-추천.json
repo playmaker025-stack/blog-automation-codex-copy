@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-ce509e35",
+  "source": "serp",
+  "capturedAt": "2026-08-27T11:56:04.530Z",
+  "postAgeHours": 4356,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260827115604_serp_인천-전자담배-추천",
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 추천",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 35,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
