@@ -1,0 +1,42 @@
+{
+  "pipelineId": "pipe-64be8c6f",
+  "type": "draft_output",
+  "savedAt": "2026-08-27T08:12:11.873Z",
+  "data": {
+    "postId": "post-9177d698",
+    "title": "부천 전자담배 액상 변색 원인과 관리법, 이렇게 구분하면 됩니다",
+    "wordCount": 2061,
+    "generatedAt": "2026-08-27T08:12:10.257Z",
+    "contentPath": "data/posting-list/posts/post-9177d698/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": false,
+      "blockingReasons": [
+        "sub keyword \"부천 전자담배\" 4회 사용, 상한 3회 초과",
+        "sub keyword \"팟 변색\" 4회 사용, 상한 3회 초과"
+      ],
+      "warnings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [
+        "sub keyword \"부천 전자담배\" 4회 사용, 상한 3회 초과",
+        "sub keyword \"팟 변색\" 4회 사용, 상한 3회 초과"
+      ],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ],
+      "specFindings": []
+    },
+    "finalDraftRevisionInstructions": [
+      "키워드 과다/질문문 삽입 수정: sub keyword \"부천 전자담배\" 4회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "키워드 과다/질문문 삽입 수정: sub keyword \"팟 변색\" 4회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "발행 차단 사유 해결: sub keyword \"부천 전자담배\" 4회 사용, 상한 3회 초과",
+      "발행 차단 사유 해결: sub keyword \"팟 변색\" 4회 사용, 상한 3회 초과"
+    ]
+  }
+}
