@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-4dd81361",
+  "source": "serp",
+  "capturedAt": "2026-08-27T11:55:49.166Z",
+  "postAgeHours": 4380,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260827115549_serp_벨본-노팟-해결법",
+  "status": "ok",
+  "serp": {
+    "query": "벨본 노팟 해결법",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 2,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
