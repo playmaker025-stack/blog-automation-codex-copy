@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0b9c15c1",
+  "source": "serp",
+  "capturedAt": "2026-08-27T11:56:13.055Z",
+  "postAgeHours": 4740,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260827115613_serp_구월동전자담배-쿠모카시-액상",
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 쿠모카시 액상",
+    "device": "mobile",
+    "rank": 16,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
