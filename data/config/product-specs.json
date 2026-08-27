@@ -247,13 +247,14 @@
       "name": "릴렉스 크리에이터 15000",
       "category": "기기",
       "source": "post-manual-mt87tbja 자동 추출 → 사장님 승인",
-      "verifiedAt": "2026-08-26",
+      "verifiedAt": "2026-08-27",
       "officialName": "릴렉스 크리에이터 15000",
       "puffs": 15000,
       "form": "일회용 전담",
       "airflowControl": true,
       "liquidRefillable": false,
-      "charging": "C타입 충전단자"
+      "charging": "C타입 충전단자",
+      "batteryRechargeable": true
     },
     {
       "name": "마이팟프로",
@@ -277,7 +278,7 @@
         "오토드로우 사용 시 잔증기가 남아 결로가 생기고 이를 누수로 오해하는 경우가 많다"
       ],
       "source": "사장님 발행글 post-manual-mr5y47o6 + post-manual-mt6z3928 + post-manual-mt87kkfp 자동 추출 → 사장님 승인 + post-manual-mt88hupy 자동 추출 → 사장님 승인",
-      "verifiedAt": "2026-08-26",
+      "verifiedAt": "2026-08-27",
       "officialName": "MY POD PRO",
       "drawStyle": "입호흡 폐호흡 겸용",
       "wattControl": true,
@@ -456,14 +457,15 @@
       "name": "버블몬 그래피티",
       "category": "기기",
       "source": "post-manual-mt8824id 자동 추출 → 사장님 승인",
-      "verifiedAt": "2026-08-26",
+      "verifiedAt": "2026-08-27",
       "puffs": 35000,
       "liquidMl": "20ml(16+2+2ml)",
       "batteryMah": 850,
       "charging": "USB-C",
       "resistanceOhm": "듀얼메쉬 코일",
       "airflowControl": true,
-      "nicotinePercent": 0.98
+      "nicotinePercent": 0.98,
+      "wattControl": true
     },
     {
       "name": "버블몬 그래피티2",
@@ -611,14 +613,15 @@
       "name": "엘프바 아이스킹",
       "category": "기기",
       "source": "post-manual-mt88g50o 자동 추출 → 사장님 승인",
-      "verifiedAt": "2026-08-26",
+      "verifiedAt": "2026-08-27",
       "sizeMm": "102 × 49 ×27mm",
       "batteryMah": 850,
       "charging": "C 타입",
       "liquidMl": "23ml",
       "puffs": 25000,
       "airflowControl": true,
-      "inhaleMode": "자동"
+      "inhaleMode": "자동",
+      "wattControl": true
     },
     {
       "name": "엘프바 조인원 아이스",
@@ -685,7 +688,7 @@
       "name": "워토포 넥스팟",
       "category": "기기",
       "source": "post-manual-mt887x62 자동 추출 → 사장님 승인 + 사장님 직접 입력",
-      "verifiedAt": "2026-08-26",
+      "verifiedAt": "2026-08-27",
       "sizeMm": "42.4*23*83.3mm",
       "batteryMah": 650,
       "charging": "C타입",
@@ -696,7 +699,8 @@
       "nicotinePercent": [
         1,
         2
-      ]
+      ],
+      "airflowControl": true
     },
     {
       "name": "저스트포그 글렌트",
@@ -859,5 +863,5 @@
     "0.4옴이 애매한 이유: 해외에서는 VG:PG 5:5 비율의 입호흡 액상을 0.4옴에 넣어 반폐호흡용으로 쓰는 경우가 많다. 그런데 한국에는 5:5 비율 액상이 거의 없고 3:7이나 4:6이 많아 점도가 상대적으로 낮다. 그래서 0.4옴에 입호흡이나 반폐호흡 용도로 쓰면 누수가 난다. 국내 기준으로는 0.4옴을 입호흡용으로 권하지 말 것.",
     "저항값이 낮을수록 폐호흡, 높을수록 입호흡이다. 이 관계를 반대로 쓰지 말 것."
   ],
-  "updatedAt": "2026-08-27T10:14:25.305Z"
+  "updatedAt": "2026-08-27T10:28:50.685Z"
 }
