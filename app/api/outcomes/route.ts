@@ -4,12 +4,11 @@
  * POST  관측치 하나를 남긴다 (수집기 / 북마클릿 / 사람이 직접)
  * GET   ?postId=... 그 글의 성과 요약
  *
- * 쓰기는 관리자 인증을 요구한다. 이 값이 나중에 "어떤 글이 잘 됐나"를 정하고
- * 그게 다음 글 전략에 들어간다. 아무나 쓸 수 있으면 학습을 오염시킬 수 있다.
+ * 인증은 두지 않는다 — 멤버 전원이 고칠 수 있어야 한다는 사장님 결정.
+ * 대신 status를 반드시 받는다. 실패를 성공으로 저장하면 학습이 오염된다.
  */
 
 import { NextResponse } from "next/server";
-import { requireAdmin } from "@/lib/auth/admin-guard";
 import { loadObservations, loadOutcomeSummary, recordObservation } from "@/lib/agents/post-outcome-store";
 import {
   SCHEMA_VERSION,
@@ -55,9 +54,6 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const denied = requireAdmin(request);
-  if (denied) return denied;
-
   const body = (await request.json().catch(() => ({}))) as Body;
 
   if (!body.postId) {

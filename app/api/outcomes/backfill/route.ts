@@ -13,7 +13,6 @@
  */
 
 import { NextResponse } from "next/server";
-import { requireAdmin } from "@/lib/auth/admin-guard";
 import { fileExists, readJsonFile, writeJsonFile } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex, PostingRecord, TopicIndex } from "@/lib/types/github-data";
@@ -32,9 +31,6 @@ function keywordsFor(post: PostingRecord, topics: Map<string, string>): string[]
 }
 
 export async function POST(request: Request) {
-  const denied = requireAdmin(request);
-  if (denied) return denied;
-
   const body = (await request.json().catch(() => ({}))) as {
     userId?: string;
     limit?: number;
