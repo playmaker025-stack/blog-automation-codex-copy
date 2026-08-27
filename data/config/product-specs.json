@@ -657,13 +657,17 @@
     {
       "name": "와카 버스트",
       "category": "기기",
-      "source": "post-manual-mt87u9qe 자동 추출 → 사장님 승인",
-      "verifiedAt": "2026-08-26",
+      "source": "post-manual-mt87u9qe 자동 추출 → 사장님 승인 + 병합",
+      "verifiedAt": "2026-08-27",
       "puffs": 30000,
       "batteryMah": 850,
       "charging": "C 타입",
       "wattControl": true,
-      "airflowControl": true
+      "airflowControl": true,
+      "aliases": [
+        "와카버스트"
+      ],
+      "notes": []
     },
     {
       "name": "와카(waka)버스트 30000",
@@ -676,15 +680,6 @@
       "batteryRechargeable": true,
       "charging": "C타입 충전",
       "drawStyle": "입호흡"
-    },
-    {
-      "name": "와카버스트",
-      "category": "기기",
-      "source": "post-manual-mt87ped6 자동 추출 → 사장님 승인 + 사장님 직접 입력",
-      "verifiedAt": "2026-08-26",
-      "puffs": 30000,
-      "charging": "C타입 충전단자",
-      "airflowControl": true
     },
     {
       "name": "워토포 넥스팟",
@@ -864,5 +859,5 @@
     "0.4옴이 애매한 이유: 해외에서는 VG:PG 5:5 비율의 입호흡 액상을 0.4옴에 넣어 반폐호흡용으로 쓰는 경우가 많다. 그런데 한국에는 5:5 비율 액상이 거의 없고 3:7이나 4:6이 많아 점도가 상대적으로 낮다. 그래서 0.4옴에 입호흡이나 반폐호흡 용도로 쓰면 누수가 난다. 국내 기준으로는 0.4옴을 입호흡용으로 권하지 말 것.",
     "저항값이 낮을수록 폐호흡, 높을수록 입호흡이다. 이 관계를 반대로 쓰지 말 것."
   ],
-  "updatedAt": "2026-08-27T10:14:21.139Z"
+  "updatedAt": "2026-08-27T10:14:25.305Z"
 }
