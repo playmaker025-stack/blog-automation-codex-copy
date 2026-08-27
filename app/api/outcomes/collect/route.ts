@@ -1,14 +1,12 @@
 /**
  * POST /api/outcomes/collect — 관측할 때가 된 글들의 순위를 한 바퀴 확인한다.
  *
- * 관리자 인증 필요. 요청 하나가 외부로 검색을 여러 번 날리므로 아무나 부르게
- * 두면 안 된다.
+ * 요청 하나가 외부로 검색을 여러 번 날린다. maxQueries로 한 실행을 묶는다.
  *
  * body: { maxQueries?: number, userId?: string }
  */
 
 import { NextResponse } from "next/server";
-import { requireAdmin } from "@/lib/auth/admin-guard";
 import { readJsonFile } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex } from "@/lib/types/github-data";
@@ -19,9 +17,6 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
 export async function POST(request: Request) {
-  const denied = requireAdmin(request);
-  if (denied) return denied;
-
   const body = (await request.json().catch(() => ({}))) as {
     maxQueries?: number;
     userId?: string;
