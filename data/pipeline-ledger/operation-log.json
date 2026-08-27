@@ -4221,7 +4221,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-2d2df942",
       "at": "2026-08-27T08:04:45.136Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부천 전자담배 변색 문제 원인과 예방 관리법",
+      "proposedTitle": "부천 전자담배 액상 변색 원인과 관리법, 이렇게 구분하면 됩니다",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.37037037037037035,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-64be8c6f",
+      "at": "2026-08-27T08:08:38.657Z"
     }
   ],
-  "lastUpdated": "2026-08-27T08:04:45.136Z"
+  "lastUpdated": "2026-08-27T08:08:38.657Z"
 }
