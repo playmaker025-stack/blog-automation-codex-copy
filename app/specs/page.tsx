@@ -28,6 +28,8 @@ interface Candidate {
   verdict: Verdict;
   /** 지금 값 그대로 승인이 되는지. false면 고쳐야 한다. */
   coercible?: boolean;
+  /** 왜 막혔는지. 거절할 것과 사장님이 정할 것을 나눈다. */
+  blockedReason?: string;
 }
 
 interface DuplicateSuggestion {
@@ -364,6 +366,11 @@ function PendingSection({
     });
 
   const visible = groups.slice(0, visibleProducts);
+  // 지금 값 그대로 통과하는 것만 전체 승인 대상이다.
+  const approvable = pending.filter((c) => !isOff(c));
+  const blocked = pending.filter((c) => c.coercible === false);
+  // 사유가 "거절하세요"로 끝나는 것은 사람이 볼 것도 없는 쓰레기다.
+  const rejectable = blocked.filter((c) => c.blockedReason?.includes("거절하세요"));
 
   return (
     <section className="mb-8">
@@ -380,6 +387,32 @@ function PendingSection({
         </p>
       ) : (
         <div className="space-y-4">
+          {/* 제품 카드가 여러 개면 카드마다 누르는 게 일이다. 한 번에 끝낼 길도 둔다. */}
+          <div className="sticky top-0 z-10 flex flex-wrap items-center gap-2 rounded border border-zinc-200 bg-white/95 px-3 py-2 backdrop-blur">
+            <span className="text-sm text-zinc-600">
+              승인 가능 <b className="text-zinc-900">{approvable.length}</b>건 · 고쳐야 하는 것{" "}
+              <b className="text-amber-700">{blocked.length}</b>건
+            </span>
+            <div className="ml-auto flex gap-2">
+              <button
+                type="button"
+                disabled={approvable.length === 0 || busy === "bulk"}
+                onClick={() => onBulk(approvable.map((c) => c.id), "승인", edits)}
+                className="rounded bg-zinc-900 px-3 py-1.5 text-sm text-white disabled:opacity-40"
+              >
+                {busy === "bulk" ? "처리 중…" : `승인 가능한 ${approvable.length}건 전부 승인`}
+              </button>
+              <button
+                type="button"
+                disabled={rejectable.length === 0 || busy === "bulk"}
+                onClick={() => onBulk(rejectable.map((c) => c.id), "거절", edits)}
+                className="rounded border border-zinc-300 px-3 py-1.5 text-sm text-zinc-600 disabled:opacity-40"
+              >
+                거절 권장 {rejectable.length}건 거절
+              </button>
+            </div>
+          </div>
+
           {visible.map(({ product, items, conflicts }) => {
             const included = items.filter((i) => !isOff(i));
             const droppedCount = items.length - included.length;
@@ -424,7 +457,7 @@ function PendingSection({
                           )}
                           {c.coercible === false && (
                             <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[11px] text-amber-800">
-                              값을 고쳐야 승인됩니다
+                              {c.blockedReason ?? "값을 고쳐야 승인됩니다"}
                             </span>
                           )}
                         </div>
