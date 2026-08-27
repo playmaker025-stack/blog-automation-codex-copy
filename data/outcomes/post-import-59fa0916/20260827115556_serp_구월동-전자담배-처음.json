@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-59fa0916",
+  "source": "serp",
+  "capturedAt": "2026-08-27T11:55:56.616Z",
+  "postAgeHours": 4356,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260827115556_serp_구월동-전자담배-처음",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 처음",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
