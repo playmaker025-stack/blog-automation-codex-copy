@@ -4452,7 +4452,40 @@
       "extractedAt": "2026-08-25T06:01:16.308Z",
       "status": "승인",
       "decidedAt": "2026-08-26T03:41:26.794Z"
+    },
+    {
+      "id": "cand-541642f6",
+      "product": "네스티원",
+      "field": "podMl",
+      "value": "20ml",
+      "evidence": "pod는 (사진의 4만퍼프짜리 기준) 20ml라는 부분에 한번 더 놀랐습니다.",
+      "postId": "post-manual-mtbggla6",
+      "postTitle": "고농도부터 다양한 맛까지 한개로 고민 해결 가능한 네스티원 전자담배 만수동만수르",
+      "extractedAt": "2026-08-27T11:44:54.860Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-bd0ea7df",
+      "product": "네스티원",
+      "field": "puffs",
+      "value": "4만퍼프",
+      "evidence": "(사진의 4만퍼프짜리 기준)",
+      "postId": "post-manual-mtbggla6",
+      "postTitle": "고농도부터 다양한 맛까지 한개로 고민 해결 가능한 네스티원 전자담배 만수동만수르",
+      "extractedAt": "2026-08-27T11:44:54.860Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-97f1d73b",
+      "product": "네스티원",
+      "field": "puffs",
+      "value": "3만 퍼프",
+      "evidence": "기본적으로 3만 퍼프와 4만퍼프 두가지로 나뉩니다.",
+      "postId": "post-manual-mtbggla6",
+      "postTitle": "고농도부터 다양한 맛까지 한개로 고민 해결 가능한 네스티원 전자담배 만수동만수르",
+      "extractedAt": "2026-08-27T11:44:54.860Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-08-27T10:29:57.532Z"
+  "updatedAt": "2026-08-27T11:44:55.529Z"
 }
