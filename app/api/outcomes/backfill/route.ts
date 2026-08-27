@@ -26,7 +26,14 @@ function keywordsFor(post: PostingRecord, topics: Map<string, string>): string[]
   const fromTopic = topics.get(post.topicId)?.trim();
   // 제목 앞부분을 쓰는 이유: 이 앱의 작성 규칙이 핵심 키워드를 제목 앞에 두는 것이라
   // 실제로 맞는 경우가 많다. 완벽하진 않지만 아무것도 안 남기는 것보다 낫다.
-  const fromTitle = post.title.trim().split(/\s+/).slice(0, 3).join(" ");
+  // 문장부호를 떼고 앞 세 낱말. 쉼표가 붙은 채로 검색어가 되면 지저분하다.
+  const fromTitle = post.title
+    .replace(/[,.!?~·|/\[\]()"'“”‘’]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 3)
+    .join(" ")
+    .trim();
   return [fromTopic, fromTitle].filter((value): value is string => Boolean(value));
 }
 
