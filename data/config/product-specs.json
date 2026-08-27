@@ -4,8 +4,8 @@
     {
       "name": "SUPA X3",
       "category": "기기",
-      "source": "post-manual-mt8818bw 자동 추출 → 사장님 승인 + post-manual-mt87qx6m 자동 추출 → 사장님 승인",
-      "verifiedAt": "2026-08-26",
+      "source": "post-manual-mt8818bw 자동 추출 → 사장님 승인 + post-manual-mt87qx6m 자동 추출 → 사장님 승인 + 병합",
+      "verifiedAt": "2026-08-27",
       "form": "박스모양",
       "wattRange": "12W ~ 20W",
       "puffs": 25000,
@@ -15,7 +15,14 @@
       "airflowControl": true,
       "batteryRechargeable": true,
       "charging": "C타입 충전단자",
-      "liquidRefillable": true
+      "liquidRefillable": true,
+      "batteryMah": 1300,
+      "podMl": "7.5ml(공팟),20ML(일회용)",
+      "resistanceOhm": "0.6옴",
+      "aliases": [
+        "수파X3 (SUPA X3)"
+      ],
+      "notes": []
     },
     {
       "name": "그래피티3",
@@ -541,18 +548,6 @@
       "charging": "USB C-TYPE"
     },
     {
-      "name": "수파X3 (SUPA X3)",
-      "category": "기기",
-      "source": "post-manual-mt87vy39 자동 추출 → 사장님 승인",
-      "verifiedAt": "2026-08-26",
-      "wattRange": "20W",
-      "batteryMah": 1300,
-      "liquidRefillable": true,
-      "podMl": "7.5ml(공팟),20ML(일회용)",
-      "resistanceOhm": "0.6옴",
-      "charging": "USB C-TYPE"
-    },
-    {
       "name": "아머미니",
       "category": "기기",
       "source": "post-manual-mt89b3up 자동 추출 → 사장님 승인",
@@ -888,5 +883,5 @@
     "0.4옴이 애매한 이유: 해외에서는 VG:PG 5:5 비율의 입호흡 액상을 0.4옴에 넣어 반폐호흡용으로 쓰는 경우가 많다. 그런데 한국에는 5:5 비율 액상이 거의 없고 3:7이나 4:6이 많아 점도가 상대적으로 낮다. 그래서 0.4옴에 입호흡이나 반폐호흡 용도로 쓰면 누수가 난다. 국내 기준으로는 0.4옴을 입호흡용으로 권하지 말 것.",
     "저항값이 낮을수록 폐호흡, 높을수록 입호흡이다. 이 관계를 반대로 쓰지 말 것."
   ],
-  "updatedAt": "2026-08-26T07:18:55.516Z"
+  "updatedAt": "2026-08-27T10:14:13.441Z"
 }
