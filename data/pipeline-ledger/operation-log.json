@@ -4210,7 +4210,18 @@
       "errorName": "y",
       "pipelineId": "pipe-77b7b400",
       "at": "2026-08-25T08:29:48.810Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-89d42d3c",
+      "userId": "b",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-75ea21fe",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-2d2df942",
+      "at": "2026-08-27T08:04:45.136Z"
     }
   ],
-  "lastUpdated": "2026-08-25T08:29:48.810Z"
+  "lastUpdated": "2026-08-27T08:04:45.136Z"
 }
