@@ -1867,7 +1867,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-08-25T06:09:10.777Z",
       "updatedAt": "2026-08-25T06:09:10.777Z"
+    },
+    {
+      "topicId": "topic-a26f2691",
+      "title": "남동구 전자담배 폐호흡 액상 시연 꼭 해야할까?",
+      "description": "메인키워드: 남동구 전자담배 / 서브 키워드: 폐호흡 액상 시연",
+      "category": "direct-run",
+      "tags": [
+        "남동구 전자담배",
+        "폐호흡 액상 시연"
+      ],
+      "targetKeyword": "남동구 전자담배",
+      "subKeywords": [
+        "폐호흡 액상 시연"
+      ],
+      "source": "direct",
+      "targetMainKeyword": "남동구 전자담배",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "b",
+      "createdAt": "2026-08-28T06:50:16.662Z",
+      "updatedAt": "2026-08-28T06:50:16.662Z"
     }
   ],
-  "lastUpdated": "2026-08-27T11:40:45.036Z"
+  "lastUpdated": "2026-08-28T06:50:16.662Z"
 }
