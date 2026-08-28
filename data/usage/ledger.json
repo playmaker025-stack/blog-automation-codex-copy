@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 2.7424199000000007,
-  "lifetimeCalls": 123,
+  "lifetimeUsd": 2.9296729000000004,
+  "lifetimeCalls": 127,
   "days": [
     {
       "date": "2026-08-24",
@@ -112,21 +112,21 @@
       "date": "2026-08-28",
       "models": {
         "claude-sonnet-4-6": {
-          "calls": 6,
-          "inputTokens": 135619,
-          "outputTokens": 2069,
+          "calls": 9,
+          "inputTokens": 188975,
+          "outputTokens": 3236,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.437892,
+          "usd": 0.6154649999999999,
           "unpriced": false
         },
         "claude-haiku-4-5-20251001": {
-          "calls": 2,
-          "inputTokens": 4654,
-          "outputTokens": 1056,
+          "calls": 3,
+          "inputTokens": 11189,
+          "outputTokens": 1685,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.009934,
+          "usd": 0.019614,
           "unpriced": false
         }
       }
@@ -145,8 +145,8 @@
       "provider": "anthropic"
     }
   ],
-  "updatedAt": "2026-08-28T06:51:25.868Z",
+  "updatedAt": "2026-08-28T11:32:42.088Z",
   "lifetimeByProvider": {
-    "anthropic": 0.22780199999999998
+    "anthropic": 0.18725299999999998
   }
 }
