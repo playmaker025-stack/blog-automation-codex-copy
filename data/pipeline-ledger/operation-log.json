@@ -4254,7 +4254,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-d8d8c0c1",
       "at": "2026-08-28T06:52:28.954Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-f8ae57e5",
+      "userId": "b",
+      "message": "전략 계약서가 불완전해 writer 실행을 차단합니다: AI 전략 수립 실패로 안전 폴백 전략이 생성되어 발행용 writer 실행을 차단합니다. 다시 전략 수립을 실행해 주세요. — [상세] 폴백 사유: Request was aborted. / OpenAI 폴백 실패: The operation was aborted due to timeout / 기존 글과 일부 방향이 겹칩니다. recommendedRewriteDirection을 따라야 합니다. / 도입 패턴 반복 주의: purchase_before_visit / 결론 패턴 반복 주의: visit_consultation / CTA 반복 주의: 추천 기준과 사용자 유형을 정리한 뒤 방문 전 상담으로 연결",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-f98f3718",
+      "at": "2026-08-28T11:33:57.411Z"
     }
   ],
-  "lastUpdated": "2026-08-28T06:52:28.954Z"
+  "lastUpdated": "2026-08-28T11:33:57.411Z"
 }
