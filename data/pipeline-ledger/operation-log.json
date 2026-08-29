@@ -4287,7 +4287,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-4d21af66",
       "at": "2026-08-29T09:01:24.701Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 부평구 전자담배 배터리 발열 원인과 안전한 해결법",
+      "proposedTitle": "부평구 전자담배 배터리 발열 원인과 안전한 해결법",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.9130434782608696,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-cd7710b4",
+      "at": "2026-08-29T09:03:44.078Z"
     }
   ],
-  "lastUpdated": "2026-08-29T09:01:24.701Z"
+  "lastUpdated": "2026-08-29T09:03:44.078Z"
 }
