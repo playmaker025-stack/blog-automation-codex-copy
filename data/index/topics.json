@@ -1840,10 +1840,10 @@
       "contentKind": "hub",
       "feasibility": null,
       "relatedSources": [],
-      "status": "draft",
+      "status": "published",
       "assignedUserId": "b",
       "createdAt": "2026-08-25T04:54:12.473Z",
-      "updatedAt": "2026-08-29T05:10:42.235Z"
+      "updatedAt": "2026-08-29T09:53:09.743Z"
     },
     {
       "topicId": "topic-423a9c4b",
@@ -1913,5 +1913,5 @@
       "updatedAt": "2026-08-29T09:09:53.924Z"
     }
   ],
-  "lastUpdated": "2026-08-29T09:09:53.924Z"
+  "lastUpdated": "2026-08-29T09:53:09.743Z"
 }
