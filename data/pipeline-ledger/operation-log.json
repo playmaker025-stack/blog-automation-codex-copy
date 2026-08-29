@@ -4265,7 +4265,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-f98f3718",
       "at": "2026-08-28T11:33:57.411Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "남동구 폐호흡 전자담배 초보자 상담과 추천 기기 안내",
+      "proposedTitle": "남동구 폐호흡 전자담배 초보자 상담과 추천 기기 안내",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-6cf56621",
+      "at": "2026-08-29T05:08:06.125Z"
     }
   ],
-  "lastUpdated": "2026-08-28T11:33:57.411Z"
+  "lastUpdated": "2026-08-29T05:08:06.125Z"
 }
