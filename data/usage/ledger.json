@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 3.1149019000000004,
-  "lifetimeCalls": 130,
+  "lifetimeUsd": 3.2916079000000003,
+  "lifetimeCalls": 131,
   "days": [
     {
       "date": "2026-08-24",
@@ -135,12 +135,12 @@
       "date": "2026-08-29",
       "models": {
         "claude-sonnet-4-6": {
-          "calls": 3,
-          "inputTokens": 56408,
-          "outputTokens": 1067,
+          "calls": 4,
+          "inputTokens": 92170,
+          "outputTokens": 5695,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.185229,
+          "usd": 0.361935,
           "unpriced": false
         }
       }
@@ -159,8 +159,8 @@
       "provider": "anthropic"
     }
   ],
-  "updatedAt": "2026-08-29T05:06:43.285Z",
+  "updatedAt": "2026-08-29T05:08:45.423Z",
   "lifetimeByProvider": {
-    "anthropic": 0.185229
+    "anthropic": 0.176706
   }
 }
