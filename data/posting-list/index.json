@@ -10709,16 +10709,32 @@
       "postId": "post-a28929d7",
       "topicId": "topic-f8ae57e5",
       "userId": "b",
-      "title": "남동구 폐호흡 전자담배 초보자 상담과 추천 기기 안내",
-      "status": "ready",
-      "naverPostUrl": null,
+      "title": "남동구 폐호흡 전자담배 초보자 맞춤 상담 및 추천 가이드",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224394356256",
       "evalScore": 54,
       "wordCount": 3707,
       "compositionSessionId": "pipe-6cf56621",
       "pendingApproval": null,
       "createdAt": "2026-08-29T05:08:10.955Z",
-      "publishedAt": null,
-      "updatedAt": "2026-08-29T05:10:40.382Z"
+      "publishedAt": "2026-08-29T09:53:01.760Z",
+      "updatedAt": "2026-08-29T09:53:05.969Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224394356256",
+          "canonicalUrl": "https://blog.naver.com/youferst/224394356256"
+        },
+        "targetKeywords": [
+          {
+            "query": "남동구 폐호흡 전자담배",
+            "role": "primary"
+          }
+        ],
+        "publishedTitle": "남동구 폐호흡 전자담배 초보자 맞춤 상담 및 추천 가이드",
+        "contentHash": "2438d288",
+        "trackedFrom": "2026-08-29T09:53:06.734Z"
+      }
     },
     {
       "postId": "post-d34540b8",
@@ -10736,5 +10752,5 @@
       "updatedAt": "2026-08-29T09:09:51.974Z"
     }
   ],
-  "lastUpdated": "2026-08-29T09:09:51.974Z"
+  "lastUpdated": "2026-08-29T09:53:05.969Z"
 }
