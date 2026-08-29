@@ -1,20 +1,17 @@
 {
   "pipelineId": "pipe-6cf56621",
   "type": "draft_output",
-  "savedAt": "2026-08-29T05:09:13.513Z",
+  "savedAt": "2026-08-29T05:10:22.053Z",
   "data": {
     "postId": "post-a28929d7",
     "title": "남동구 폐호흡 전자담배 초보자 상담과 추천 기기 안내",
-    "wordCount": 3960,
-    "generatedAt": "2026-08-29T05:09:11.986Z",
+    "wordCount": 3707,
+    "generatedAt": "2026-08-29T05:10:20.390Z",
     "contentPath": "data/posting-list/posts/post-a28929d7/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
-      "ok": false,
-      "blockingReasons": [
-        "질문문/따옴표 안 exact keyword 사용: 폐호흡 입문 / \"초보인데 폐호흡 입문이 가능한가요?\"",
-        "sub keyword \"폐호흡 입문\" 5회 사용, 상한 3회 초과"
-      ],
+      "ok": true,
+      "blockingReasons": [],
       "warnings": [
         "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
         "medium overlap: 결론 패턴 반복 위험 visit_consultation",
@@ -22,10 +19,7 @@
         "medium overlap: 역할 충돌 같은 CTA 흐름이 반복됩니다: 추천 기준과 사용자 유형을 정리한 뒤 방문 전 상담으로 연결"
       ],
       "matchedForbiddenPhrases": [],
-      "keywordStuffingFindings": [
-        "질문문/따옴표 안 exact keyword 사용: 폐호흡 입문 / \"초보인데 폐호흡 입문이 가능한가요?\"",
-        "sub keyword \"폐호흡 입문\" 5회 사용, 상한 3회 초과"
-      ],
+      "keywordStuffingFindings": [],
       "deferFindings": [],
       "contractCoverageFindings": [],
       "overlapFindings": [
@@ -35,12 +29,6 @@
         "medium overlap: 역할 충돌 같은 CTA 흐름이 반복됩니다: 추천 기준과 사용자 유형을 정리한 뒤 방문 전 상담으로 연결"
       ],
       "specFindings": []
-    },
-    "finalDraftRevisionInstructions": [
-      "키워드 과다/질문문 삽입 수정: 질문문/따옴표 안 exact keyword 사용: 폐호흡 입문 / \"초보인데 폐호흡 입문이 가능한가요?\". 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
-      "키워드 과다/질문문 삽입 수정: sub keyword \"폐호흡 입문\" 5회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
-      "발행 차단 사유 해결: 질문문/따옴표 안 exact keyword 사용: 폐호흡 입문 / \"초보인데 폐호흡 입문이 가능한가요?\"",
-      "발행 차단 사유 해결: sub keyword \"폐호흡 입문\" 5회 사용, 상한 3회 초과"
-    ]
+    }
   }
 }
