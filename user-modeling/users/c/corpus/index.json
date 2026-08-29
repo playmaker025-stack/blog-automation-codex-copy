@@ -2,6 +2,21 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-d34540b8",
+      "title": "인천 부평구 전자담배 배터리 발열 원인과 안전한 해결법",
+      "category": "기기 문제 해결",
+      "tags": [
+        "배터리",
+        "발열",
+        "해결법",
+        "인천",
+        "부평구"
+      ],
+      "wordCount": 2899,
+      "publishedAt": "2026-08-29T11:20:26.306Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-d34540b8.md"
+    },
+    {
       "sampleId": "published-post-manual-mt89bp12",
       "title": "부평전자담배 크로스미니6 후기! 스펙 & 사용법 총정리",
       "category": "published-post",
@@ -261,16 +276,7 @@
       "wordCount": 6434,
       "publishedAt": "2026-08-25T05:27:24.972Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt883vvt.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt883bsi",
-      "title": "구월동전자담배 아이다 기어미니 플러스 내구성 좋은 입호흡 전담 추천 - 만수르",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 7547,
-      "publishedAt": "2026-08-25T05:26:59.287Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt883bsi.md"
     }
   ],
-  "lastUpdated": "2026-08-25T06:01:36.007Z"
+  "lastUpdated": "2026-08-29T11:20:37.051Z"
 }
