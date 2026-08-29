@@ -2,6 +2,19 @@
   "userId": "b",
   "entries": [
     {
+      "postId": "post-a28929d7",
+      "topicId": "topic-f8ae57e5",
+      "userId": "b",
+      "title": "남동구 폐호흡 전자담배 초보자 맞춤 상담 및 추천 가이드",
+      "naverPostUrl": "https://blog.naver.com/youferst/224394356256",
+      "evalScore": 54,
+      "wordCount": 3707,
+      "publishedAt": "2026-08-29T09:53:01.760Z",
+      "topicSource": "generated",
+      "contentKind": "hub",
+      "learnedAt": "2026-08-29T09:53:11.542Z"
+    },
+    {
       "postId": "post-9177d698",
       "topicId": "topic-89d42d3c",
       "userId": "b",
@@ -223,5 +236,5 @@
       "learnedAt": "2026-07-04T11:06:13.483Z"
     }
   ],
-  "updatedAt": "2026-08-27T11:40:46.620Z"
+  "updatedAt": "2026-08-29T09:53:11.542Z"
 }
