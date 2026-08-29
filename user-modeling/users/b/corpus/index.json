@@ -2,6 +2,22 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-a28929d7",
+      "title": "남동구 폐호흡 전자담배 초보자 맞춤 상담 및 추천 가이드",
+      "category": "b",
+      "tags": [
+        "남동구",
+        "전자담배",
+        "폐호흡",
+        "초보자",
+        "상담",
+        "추천기기"
+      ],
+      "wordCount": 3707,
+      "publishedAt": "2026-08-29T09:53:01.760Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-a28929d7.md"
+    },
+    {
       "sampleId": "published-post-9177d698",
       "title": "장수동 전자담배 액상 변색 원인과 효과적인 관리법",
       "category": "b",
@@ -326,5 +342,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-08-27T11:40:49.885Z"
+  "lastUpdated": "2026-08-29T09:53:14.588Z"
 }
