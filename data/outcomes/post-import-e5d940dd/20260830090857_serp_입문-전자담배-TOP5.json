@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-e5d940dd",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:08:57.745Z",
+  "postAgeHours": 4065,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830090857_serp_입문-전자담배-TOP5",
+  "status": "ok",
+  "serp": {
+    "query": "입문 전자담배 TOP5",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

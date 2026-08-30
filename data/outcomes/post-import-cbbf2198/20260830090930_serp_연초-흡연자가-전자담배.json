@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-cbbf2198",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:09:30.950Z",
+  "postAgeHours": 4017,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830090930_serp_연초-흡연자가-전자담배",
+  "status": "ok",
+  "serp": {
+    "query": "연초 흡연자가 전자담배",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 20,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

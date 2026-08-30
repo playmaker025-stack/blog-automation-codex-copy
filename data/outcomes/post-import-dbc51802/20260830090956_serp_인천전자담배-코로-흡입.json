@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-dbc51802",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:09:56.822Z",
+  "postAgeHours": 3993,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830090956_serp_인천전자담배-코로-흡입",
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 코로 흡입",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

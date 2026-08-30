@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-c583a301",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:09:11.316Z",
+  "postAgeHours": 4041,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830090911_serp_연초에서-전자담배로-바꾸면",
+  "status": "ok",
+  "serp": {
+    "query": "연초에서 전자담배로 바꾸면",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 6,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

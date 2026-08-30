@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-1fb2787a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:09:17.827Z",
+  "postAgeHours": 4041,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830090917_serp_전자담배-사용자-유형",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 사용자 유형",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 3,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

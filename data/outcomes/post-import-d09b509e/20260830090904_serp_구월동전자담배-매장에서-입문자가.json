@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-d09b509e",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:09:04.711Z",
+  "postAgeHours": 4065,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830090904_serp_구월동전자담배-매장에서-입문자가",
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 매장에서 입문자가",
+    "device": "mobile",
+    "rank": 25,
+    "searchedResultLimit": 35,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

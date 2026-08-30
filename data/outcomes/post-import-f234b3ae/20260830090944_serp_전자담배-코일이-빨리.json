@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-f234b3ae",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:09:44.091Z",
+  "postAgeHours": 4017,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830090944_serp_전자담배-코일이-빨리",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일이 빨리",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 20,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

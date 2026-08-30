@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-33ec47a7",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:09:24.382Z",
+  "postAgeHours": 4041,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830090924_serp_입호흡-액상이-빨리",
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 액상이 빨리",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

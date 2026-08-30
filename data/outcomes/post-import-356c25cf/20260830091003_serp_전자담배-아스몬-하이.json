@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-356c25cf",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:10:03.345Z",
+  "postAgeHours": 3993,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830091003_serp_전자담배-아스몬-하이",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 아스몬 하이",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 37,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
