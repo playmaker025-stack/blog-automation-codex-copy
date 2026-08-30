@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87hyvp",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:16:26.502Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830141626502_serp_갈산동전자담배-옥스바-오네오_90bd1c",
+  "status": "ok",
+  "serp": {
+    "query": "갈산동전자담배 옥스바 오네오",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 12,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

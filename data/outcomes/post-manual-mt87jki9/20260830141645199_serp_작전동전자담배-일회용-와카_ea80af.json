@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87jki9",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:16:45.199Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830141645199_serp_작전동전자담배-일회용-와카_ea80af",
+  "status": "ok",
+  "serp": {
+    "query": "작전동전자담배 일회용 와카",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 9,
+    "searchedResultLimit": 13,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

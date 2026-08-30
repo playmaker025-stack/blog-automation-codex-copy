@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z4kiq",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:15:59.657Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830141559657_serp_구월동-전자담배-만수르_1c611e",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 만수르",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 22,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

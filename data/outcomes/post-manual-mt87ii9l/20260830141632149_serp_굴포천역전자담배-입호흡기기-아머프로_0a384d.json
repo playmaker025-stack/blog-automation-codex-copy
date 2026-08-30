@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87ii9l",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:16:32.149Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830141632149_serp_굴포천역전자담배-입호흡기기-아머프로_0a384d",
+  "status": "ok",
+  "serp": {
+    "query": "굴포천역전자담배 입호흡기기 아머프로",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 17,
+    "searchedResultLimit": 20,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

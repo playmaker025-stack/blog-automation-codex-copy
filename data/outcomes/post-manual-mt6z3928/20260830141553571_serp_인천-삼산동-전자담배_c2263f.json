@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z3928",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:15:53.571Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830141553571_serp_인천-삼산동-전자담배_c2263f",
+  "status": "ok",
+  "serp": {
+    "query": "인천 삼산동 전자담배",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

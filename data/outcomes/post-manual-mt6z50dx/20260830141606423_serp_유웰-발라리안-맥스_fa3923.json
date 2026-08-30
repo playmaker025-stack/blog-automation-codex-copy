@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z50dx",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:16:06.423Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830141606423_serp_유웰-발라리안-맥스_fa3923",
+  "status": "ok",
+  "serp": {
+    "query": "유웰 발라리안 맥스",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 27,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

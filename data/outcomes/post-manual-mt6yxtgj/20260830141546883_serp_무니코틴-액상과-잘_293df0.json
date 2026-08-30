@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6yxtgj",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:15:46.883Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830141546883_serp_무니코틴-액상과-잘_293df0",
+  "status": "ok",
+  "serp": {
+    "query": "무니코틴 액상과 잘",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

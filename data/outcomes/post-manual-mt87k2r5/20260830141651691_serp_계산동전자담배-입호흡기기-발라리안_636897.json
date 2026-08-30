@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87k2r5",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:16:51.691Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830141651691_serp_계산동전자담배-입호흡기기-발라리안_636897",
+  "status": "ok",
+  "serp": {
+    "query": "계산동전자담배 입호흡기기 발라리안",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 17,
+    "searchedResultLimit": 18,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

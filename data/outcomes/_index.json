@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-30T13:56:54.643Z",
+  "updatedAt": "2026-08-30T14:16:54.478Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -3845,11 +3845,203 @@
       },
       "lastCapturedAt": "2026-08-30T13:56:51.939Z",
       "total": 1
+    },
+    "post-manual-mt6xg9od": {
+      "queries": {
+        "말론바 일회용 전자담배": {
+          "okAgeHours": [
+            151
+          ],
+          "lastCapturedAt": "2026-08-30T14:15:40.049Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:15:40.049Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:15:40.049Z",
+      "total": 1
+    },
+    "post-manual-mt6yxtgj": {
+      "queries": {
+        "무니코틴 액상과 잘": {
+          "okAgeHours": [
+            150
+          ],
+          "lastCapturedAt": "2026-08-30T14:15:46.883Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:15:46.883Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:15:46.883Z",
+      "total": 1
+    },
+    "post-manual-mt6z3928": {
+      "queries": {
+        "인천 삼산동 전자담배": {
+          "okAgeHours": [
+            150
+          ],
+          "lastCapturedAt": "2026-08-30T14:15:53.571Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:15:53.571Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:15:53.571Z",
+      "total": 1
+    },
+    "post-manual-mt6z4kiq": {
+      "queries": {
+        "구월동 전자담배 만수르": {
+          "okAgeHours": [
+            150
+          ],
+          "lastCapturedAt": "2026-08-30T14:15:59.657Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:15:59.657Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:15:59.657Z",
+      "total": 1
+    },
+    "post-manual-mt6z50dx": {
+      "queries": {
+        "유웰 발라리안 맥스": {
+          "okAgeHours": [
+            150
+          ],
+          "lastCapturedAt": "2026-08-30T14:16:06.423Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:16:06.423Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:16:06.423Z",
+      "total": 1
+    },
+    "post-manual-mt6z60ar": {
+      "queries": {
+        "인천 전자담배 닷모드": {
+          "okAgeHours": [
+            150
+          ],
+          "lastCapturedAt": "2026-08-30T14:16:13.166Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:16:13.166Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:16:13.166Z",
+      "total": 1
+    },
+    "post-manual-mt75drce": {
+      "queries": {
+        "인천전자담배 무니코틴 액상": {
+          "okAgeHours": [
+            147
+          ],
+          "lastCapturedAt": "2026-08-30T14:16:19.550Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:16:19.550Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:16:19.550Z",
+      "total": 1
+    },
+    "post-manual-mt87hyvp": {
+      "queries": {
+        "갈산동전자담배 옥스바 오네오": {
+          "okAgeHours": [
+            129
+          ],
+          "lastCapturedAt": "2026-08-30T14:16:26.502Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:16:26.502Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:16:26.502Z",
+      "total": 1
+    },
+    "post-manual-mt87ii9l": {
+      "queries": {
+        "굴포천역전자담배 입호흡기기 아머프로": {
+          "okAgeHours": [
+            129
+          ],
+          "lastCapturedAt": "2026-08-30T14:16:32.149Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:16:32.149Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:16:32.149Z",
+      "total": 1
+    },
+    "post-manual-mt87j13u": {
+      "queries": {
+        "굴포천전자담배 일회용기기 네스티바": {
+          "okAgeHours": [
+            129
+          ],
+          "lastCapturedAt": "2026-08-30T14:16:38.711Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:16:38.711Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:16:38.711Z",
+      "total": 1
+    },
+    "post-manual-mt87jki9": {
+      "queries": {
+        "작전동전자담배 일회용 와카": {
+          "okAgeHours": [
+            129
+          ],
+          "lastCapturedAt": "2026-08-30T14:16:45.199Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:16:45.199Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:16:45.199Z",
+      "total": 1
+    },
+    "post-manual-mt87k2r5": {
+      "queries": {
+        "계산동전자담배 입호흡기기 발라리안": {
+          "okAgeHours": [
+            129
+          ],
+          "lastCapturedAt": "2026-08-30T14:16:51.691Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T14:16:51.691Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T14:16:51.691Z",
+      "total": 1
     }
   },
   "health": {
-    "lastRunAt": "2026-08-30T13:55:39.849Z",
-    "lastOkAt": "2026-08-30T13:55:39.849Z",
+    "lastRunAt": "2026-08-30T14:15:39.778Z",
+    "lastOkAt": "2026-08-30T14:15:39.778Z",
     "consecutiveFailedRuns": 0
   }
 }
