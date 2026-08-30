@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-916ead25df",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:58:36.492Z",
+  "postAgeHours": 3562,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095836492_serp_간석동-전자담배-액상_53da8c",
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 액상",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 35,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-048eb5a5e8",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:57:58.043Z",
+  "postAgeHours": 3634,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095758043_serp_전자담배-처음-사용할_8f4767",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 처음 사용할",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

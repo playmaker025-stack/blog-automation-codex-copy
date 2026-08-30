@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-bde6327092",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:58:30.737Z",
+  "postAgeHours": 3562,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095830737_serp_전자담배-액상-빨리_fbd8b0",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 빨리",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 28,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

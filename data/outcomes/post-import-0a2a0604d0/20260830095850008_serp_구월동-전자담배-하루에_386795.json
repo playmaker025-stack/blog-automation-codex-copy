@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0a2a0604d0",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:58:50.008Z",
+  "postAgeHours": 3514,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095850008_serp_구월동-전자담배-하루에_386795",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 하루에",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

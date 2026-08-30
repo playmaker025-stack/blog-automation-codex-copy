@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-81801a11a6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:58:24.231Z",
+  "postAgeHours": 3586,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095824231_serp_부평전자담배-처음-샀는데_e8990d",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 처음 샀는데",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7f28727bc6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:58:04.591Z",
+  "postAgeHours": 3610,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095804591_serp_입호흡-전자담배-수명_8dcc19",
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 전자담배 수명",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 23,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

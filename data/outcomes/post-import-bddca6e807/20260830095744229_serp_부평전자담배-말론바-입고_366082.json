@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-bddca6e807",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:57:44.229Z",
+  "postAgeHours": 3658,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095744229_serp_부평전자담배-말론바-입고_366082",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 말론바 입고",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 20,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

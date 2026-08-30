@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9c09dc1e51",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:58:43.598Z",
+  "postAgeHours": 3538,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095843598_serp_전자담배-무화량이-약해졌을_b07f08",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 무화량이 약해졌을",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 15,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

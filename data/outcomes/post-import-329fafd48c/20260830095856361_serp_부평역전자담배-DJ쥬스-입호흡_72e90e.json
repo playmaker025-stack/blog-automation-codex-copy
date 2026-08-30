@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-329fafd48c",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:58:56.361Z",
+  "postAgeHours": 3514,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095856361_serp_부평역전자담배-DJ쥬스-입호흡_72e90e",
+  "status": "ok",
+  "serp": {
+    "query": "부평역전자담배 DJ쥬스 입호흡",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 21,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

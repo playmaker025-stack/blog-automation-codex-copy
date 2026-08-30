@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-bf2fe315ea",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:58:11.188Z",
+  "postAgeHours": 3610,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095811188_serp_만수동-전자담배-시원한_65f5c6",
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 시원한",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 31,
+    "searchedResultLimit": 31,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
