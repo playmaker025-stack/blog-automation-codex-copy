@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-986b74f3",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:49:35.119Z",
+  "postAgeHours": 4137,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830084935_serp_전자담배-초보자가-가장",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 초보자가 가장",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 8,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

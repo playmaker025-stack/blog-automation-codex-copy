@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-6d806cf3",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:49:53.160Z",
+  "postAgeHours": 4113,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830084953_serp_전자담배-쓰면-기침하는",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 쓰면 기침하는",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 10,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

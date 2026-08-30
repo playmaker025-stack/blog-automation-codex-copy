@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7fe9e495",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:49:10.078Z",
+  "postAgeHours": 4161,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830084910_serp_젤로맥스-vs-발라리안맥스",
+  "status": "ok",
+  "serp": {
+    "query": "젤로맥스 vs 발라리안맥스",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 20,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

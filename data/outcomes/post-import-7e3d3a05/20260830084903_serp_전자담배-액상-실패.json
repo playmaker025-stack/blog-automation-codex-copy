@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7e3d3a05",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:49:03.992Z",
+  "postAgeHours": 4185,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830084903_serp_전자담배-액상-실패",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 실패",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

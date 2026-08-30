@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-fa13c509",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:49:40.907Z",
+  "postAgeHours": 4113,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830084940_serp_팟-전자담배-vs",
+  "status": "ok",
+  "serp": {
+    "query": "팟 전자담배 vs",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 15,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

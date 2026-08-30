@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-719bd813",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:49:46.656Z",
+  "postAgeHours": 4113,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830084946_serp_부평전자담배-매장에서-가장",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 매장에서 가장",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
