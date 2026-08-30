@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8d184c88",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:36:07.210Z",
+  "postAgeHours": 409,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830133607210_serp_주안-전자담배-액상_0b64e3",
+  "status": "ok",
+  "serp": {
+    "query": "주안 전자담배 액상",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 33,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

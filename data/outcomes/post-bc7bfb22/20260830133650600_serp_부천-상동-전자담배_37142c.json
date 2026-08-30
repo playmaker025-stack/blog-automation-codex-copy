@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-bc7bfb22",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:36:50.600Z",
+  "postAgeHours": 316,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830133650600_serp_부천-상동-전자담배_37142c",
+  "status": "ok",
+  "serp": {
+    "query": "부천 상동 전자담배",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 29,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

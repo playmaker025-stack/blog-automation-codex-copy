@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-f3e7657b",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:36:44.270Z",
+  "postAgeHours": 291,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830133644270_serp_갈산동-전자담배-입문자_fc0abb",
+  "status": "ok",
+  "serp": {
+    "query": "갈산동 전자담배 입문자",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

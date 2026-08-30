@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mssxeywf",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:36:32.419Z",
+  "postAgeHours": 385,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830133632419_serp_전자담배-새-액상을_bce560",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 새 액상을",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 21,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

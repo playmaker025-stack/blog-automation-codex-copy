@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msvdpogj",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:36:38.521Z",
+  "postAgeHours": 344,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830133638521_serp_전자담배-여름철-누수가_c14946",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 여름철 누수가",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 23,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

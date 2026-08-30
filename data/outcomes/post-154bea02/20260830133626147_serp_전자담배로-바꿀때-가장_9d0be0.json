@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-154bea02",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:36:26.147Z",
+  "postAgeHours": 384,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830133626147_serp_전자담배로-바꿀때-가장_9d0be0",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배로 바꿀때 가장",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 12,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
