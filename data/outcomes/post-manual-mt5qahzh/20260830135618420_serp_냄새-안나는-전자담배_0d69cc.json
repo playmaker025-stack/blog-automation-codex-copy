@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt5qahzh",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:56:18.420Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830135618420_serp_냄새-안나는-전자담배_0d69cc",
+  "status": "ok",
+  "serp": {
+    "query": "냄새 안나는 전자담배",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 19,
+    "searchedResultLimit": 22,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

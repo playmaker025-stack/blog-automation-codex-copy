@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b4e0e44a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:56:05.142Z",
+  "postAgeHours": 222,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830135605142_serp_전담기기종류_425405",
+  "status": "ok",
+  "serp": {
+    "query": "전담기기종류",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

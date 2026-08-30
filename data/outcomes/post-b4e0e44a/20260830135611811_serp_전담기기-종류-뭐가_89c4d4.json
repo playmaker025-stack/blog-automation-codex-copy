@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b4e0e44a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:56:11.811Z",
+  "postAgeHours": 222,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830135611811_serp_전담기기-종류-뭐가_89c4d4",
+  "status": "ok",
+  "serp": {
+    "query": "전담기기 종류 뭐가",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 8,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

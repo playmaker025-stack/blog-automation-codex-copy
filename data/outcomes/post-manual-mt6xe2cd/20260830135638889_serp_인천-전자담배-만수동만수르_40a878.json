@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6xe2cd",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:56:38.889Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830135638889_serp_인천-전자담배-만수동만수르_40a878",
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 만수동만수르",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 27,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
