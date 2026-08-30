@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-264feda6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:30:02.359Z",
+  "postAgeHours": 3826,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830093002_serp_만수동-전자담배-시작하고",
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 시작하고",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-717fe630",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:30:09.256Z",
+  "postAgeHours": 3826,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830093009_serp_전자담배-액상-색이",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 색이",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

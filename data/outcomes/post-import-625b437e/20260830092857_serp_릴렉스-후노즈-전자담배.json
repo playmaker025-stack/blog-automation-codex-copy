@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-625b437e",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:28:57.646Z",
+  "postAgeHours": 3969,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830092857_serp_릴렉스-후노즈-전자담배",
+  "status": "ok",
+  "serp": {
+    "query": "릴렉스 후노즈 전자담배",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

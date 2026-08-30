@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-d32c67ed",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:29:17.006Z",
+  "postAgeHours": 3921,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830092917_serp_석남역전자담배-코코초코-입호흡",
+  "status": "ok",
+  "serp": {
+    "query": "석남역전자담배 코코초코 입호흡",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 9,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

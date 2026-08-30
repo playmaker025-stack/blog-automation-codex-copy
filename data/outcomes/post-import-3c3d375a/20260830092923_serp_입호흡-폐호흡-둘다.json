@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3c3d375a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:29:23.564Z",
+  "postAgeHours": 3921,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830092923_serp_입호흡-폐호흡-둘다",
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 폐호흡 둘다",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 36,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

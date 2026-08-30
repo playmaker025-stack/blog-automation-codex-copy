@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-54d314d3",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:29:49.334Z",
+  "postAgeHours": 3849,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830092949_serp_관교동전자담배-메가엣지-액상",
+  "status": "ok",
+  "serp": {
+    "query": "관교동전자담배 메가엣지 액상",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 20,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

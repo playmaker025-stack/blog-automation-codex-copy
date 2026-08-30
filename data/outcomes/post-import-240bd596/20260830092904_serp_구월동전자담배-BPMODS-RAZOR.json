@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-240bd596",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:29:04.097Z",
+  "postAgeHours": 3945,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830092904_serp_구월동전자담배-BPMODS-RAZOR",
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 BPMODS RAZOR",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 14,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

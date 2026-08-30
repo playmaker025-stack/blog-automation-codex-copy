@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-797610f9",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:29:42.919Z",
+  "postAgeHours": 3873,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830092942_serp_전자담배-액튐-생기는",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액튐 생기는",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 12,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

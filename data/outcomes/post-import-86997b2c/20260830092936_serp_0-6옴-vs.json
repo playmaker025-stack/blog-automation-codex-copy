@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-86997b2c",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:29:36.537Z",
+  "postAgeHours": 3897,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830092936_serp_0-6옴-vs",
+  "status": "ok",
+  "serp": {
+    "query": "0 6옴 vs",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 0,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b8bf63a4",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:29:30.071Z",
+  "postAgeHours": 3897,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830092930_serp_만수동-전자담배-탄맛",
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 탄맛",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
