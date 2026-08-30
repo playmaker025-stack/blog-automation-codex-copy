@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-1036c0362a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:50:01.276Z",
+  "postAgeHours": 3682,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830095001_serp_전자담배에서-탄맛이-나는",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배에서 탄맛이 나는",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 7,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

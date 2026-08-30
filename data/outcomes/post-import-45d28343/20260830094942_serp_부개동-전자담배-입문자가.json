@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-45d28343",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:49:42.798Z",
+  "postAgeHours": 3730,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830094942_serp_부개동-전자담배-입문자가",
+  "status": "ok",
+  "serp": {
+    "query": "부개동 전자담배 입문자가",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 20,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

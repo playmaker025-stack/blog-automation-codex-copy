@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7b7c198c35",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:49:49.068Z",
+  "postAgeHours": 3682,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830094949_serp_전자담배-흡입이-답답할",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 흡입이 답답할",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 7,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

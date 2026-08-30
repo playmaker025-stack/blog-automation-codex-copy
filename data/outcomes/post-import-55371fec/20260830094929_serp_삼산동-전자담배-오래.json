@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-55371fec",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:49:29.839Z",
+  "postAgeHours": 3754,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830094929_serp_삼산동-전자담배-오래",
+  "status": "ok",
+  "serp": {
+    "query": "삼산동 전자담배 오래",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

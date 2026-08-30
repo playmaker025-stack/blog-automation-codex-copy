@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-a1988ff1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:49:03.949Z",
+  "postAgeHours": 3802,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830094903_serp_전자담배를-계속-쓰게",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배를 계속 쓰게",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 10,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

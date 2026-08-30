@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-e55b8a16c1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:49:55.526Z",
+  "postAgeHours": 3682,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830094955_serp_갈산동-전자담배-입문용",
+  "status": "ok",
+  "serp": {
+    "query": "갈산동 전자담배 입문용",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 20,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

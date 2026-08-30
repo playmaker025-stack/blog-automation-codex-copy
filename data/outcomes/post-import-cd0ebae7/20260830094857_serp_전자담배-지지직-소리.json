@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-cd0ebae7",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:48:57.342Z",
+  "postAgeHours": 3802,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830094857_serp_전자담배-지지직-소리",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 지지직 소리",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

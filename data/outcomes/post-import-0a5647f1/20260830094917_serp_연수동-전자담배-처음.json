@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0a5647f1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T09:49:17.057Z",
+  "postAgeHours": 3778,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830094917_serp_연수동-전자담배-처음",
+  "status": "ok",
+  "serp": {
+    "query": "연수동 전자담배 처음",
+    "device": "mobile",
+    "rank": 19,
+    "searchedResultLimit": 22,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
