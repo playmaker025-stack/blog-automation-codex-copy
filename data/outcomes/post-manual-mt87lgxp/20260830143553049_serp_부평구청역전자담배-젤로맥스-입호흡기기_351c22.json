@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87lgxp",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:35:53.049Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143553049_serp_부평구청역전자담배-젤로맥스-입호흡기기_351c22",
+  "status": "ok",
+  "serp": {
+    "query": "부평구청역전자담배 젤로맥스 입호흡기기",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

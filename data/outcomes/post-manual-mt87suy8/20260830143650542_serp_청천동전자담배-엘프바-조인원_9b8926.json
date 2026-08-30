@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87suy8",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:36:50.542Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143650542_serp_청천동전자담배-엘프바-조인원_9b8926",
+  "status": "ok",
+  "serp": {
+    "query": "청천동전자담배 엘프바 조인원",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 14,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

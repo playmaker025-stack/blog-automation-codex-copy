@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87qx6m",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:36:30.984Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143630984_serp_산곡동전자담배-SUPA-X3_5859fe",
+  "status": "ok",
+  "serp": {
+    "query": "산곡동전자담배 SUPA X3",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 18,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

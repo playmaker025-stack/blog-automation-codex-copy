@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87rzfg",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:36:37.512Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143637512_serp_상동전자담배-닷투엑스-입호흡_92481a",
+  "status": "ok",
+  "serp": {
+    "query": "상동전자담배 닷투엑스 입호흡",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

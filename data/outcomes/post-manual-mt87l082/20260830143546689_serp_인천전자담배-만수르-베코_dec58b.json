@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87l082",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:35:46.689Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143546689_serp_인천전자담배-만수르-베코_dec58b",
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 만수르 베코",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 2,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87o9e9",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:36:06.245Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143606245_serp_부평역전자담배-추천-누수없는_c7109c",
+  "status": "ok",
+  "serp": {
+    "query": "부평역전자담배 추천 누수없는",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

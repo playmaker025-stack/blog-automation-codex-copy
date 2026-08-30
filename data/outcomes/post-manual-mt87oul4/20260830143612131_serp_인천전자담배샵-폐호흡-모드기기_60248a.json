@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87oul4",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:36:12.131Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143612131_serp_인천전자담배샵-폐호흡-모드기기_60248a",
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배샵 폐호흡 모드기기",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 25,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

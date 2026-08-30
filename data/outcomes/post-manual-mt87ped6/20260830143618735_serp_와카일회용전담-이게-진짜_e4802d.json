@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87ped6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:36:18.735Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143618735_serp_와카일회용전담-이게-진짜_e4802d",
+  "status": "ok",
+  "serp": {
+    "query": "와카일회용전담 이게 진짜",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 10,
+    "searchedResultLimit": 19,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

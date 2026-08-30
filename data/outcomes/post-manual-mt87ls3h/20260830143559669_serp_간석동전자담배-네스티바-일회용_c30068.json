@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87ls3h",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:35:59.669Z",
+  "postAgeHours": 129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830143559669_serp_간석동전자담배-네스티바-일회용_c30068",
+  "status": "ok",
+  "serp": {
+    "query": "간석동전자담배 네스티바 일회용",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 18,
+    "searchedResultLimit": 21,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
