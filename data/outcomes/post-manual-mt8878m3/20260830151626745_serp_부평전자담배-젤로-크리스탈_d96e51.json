@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt8878m3",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:16:26.745Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830151626745_serp_부평전자담배-젤로-크리스탈_d96e51",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 젤로 크리스탈",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 10,
+    "searchedResultLimit": 15,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

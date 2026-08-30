@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88c8ut",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:16:39.533Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830151639533_serp_만수역전자담배-발라리안R-스펙과_d31261",
+  "status": "ok",
+  "serp": {
+    "query": "만수역전자담배 발라리안R 스펙과",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 23,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt883vvt",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:15:47.141Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830151547141_serp_만수동전자담배-스누스-니코틴_f47ec9",
+  "status": "ok",
+  "serp": {
+    "query": "만수동전자담배 스누스 니코틴",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 18,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88e7d4",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:16:52.588Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830151652588_serp_연수동전자담배-디오X-후기_0ba252",
+  "status": "ok",
+  "serp": {
+    "query": "연수동전자담배 디오X 후기",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 11,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
