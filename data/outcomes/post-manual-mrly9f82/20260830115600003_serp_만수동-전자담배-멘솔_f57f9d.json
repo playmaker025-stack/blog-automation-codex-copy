@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrly9f82",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:00.003Z",
+  "postAgeHours": 1105,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115600003_serp_만수동-전자담배-멘솔_f57f9d",
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 멘솔",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 16,
+    "searchedResultLimit": 36,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

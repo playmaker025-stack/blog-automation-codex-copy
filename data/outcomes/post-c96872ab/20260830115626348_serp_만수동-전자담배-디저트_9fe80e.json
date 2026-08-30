@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-c96872ab",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:26.348Z",
+  "postAgeHours": 1033,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115626348_serp_만수동-전자담배-디저트_9fe80e",
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 디저트",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 28,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

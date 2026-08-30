@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrkmokof",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:55:46.992Z",
+  "postAgeHours": 1127,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115546992_serp_전자담배-액상은-흔들어서_3143cf",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 흔들어서",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

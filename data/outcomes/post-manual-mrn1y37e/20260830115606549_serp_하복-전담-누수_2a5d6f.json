@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrn1y37e",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:06.549Z",
+  "postAgeHours": 1087,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115606549_serp_하복-전담-누수_2a5d6f",
+  "status": "ok",
+  "serp": {
+    "query": "하복 전담 누수",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 18,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

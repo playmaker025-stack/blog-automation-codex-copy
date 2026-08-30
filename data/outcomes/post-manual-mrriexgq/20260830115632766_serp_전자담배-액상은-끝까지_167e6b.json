@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrriexgq",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:32.766Z",
+  "postAgeHours": 1012,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115632766_serp_전자담배-액상은-끝까지_167e6b",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 끝까지",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 23,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

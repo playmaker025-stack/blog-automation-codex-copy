@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrorbz92",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:12.935Z",
+  "postAgeHours": 1058,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115612935_serp_발라리안-전자담배-안빨림_c2605d",
+  "status": "ok",
+  "serp": {
+    "query": "발라리안 전자담배 안빨림",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 8,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

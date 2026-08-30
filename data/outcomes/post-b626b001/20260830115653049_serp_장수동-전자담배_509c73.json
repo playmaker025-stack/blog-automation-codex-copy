@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b626b001",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:53.049Z",
+  "postAgeHours": 959,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115653049_serp_장수동-전자담배_509c73",
+  "status": "ok",
+  "serp": {
+    "query": "장수동 전자담배",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 8,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

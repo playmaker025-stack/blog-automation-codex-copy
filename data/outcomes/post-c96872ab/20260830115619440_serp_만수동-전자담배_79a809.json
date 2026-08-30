@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-c96872ab",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:19.440Z",
+  "postAgeHours": 1033,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115619440_serp_만수동-전자담배_79a809",
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 40,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

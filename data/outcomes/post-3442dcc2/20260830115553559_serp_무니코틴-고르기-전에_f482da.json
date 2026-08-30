@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-3442dcc2",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:55:53.559Z",
+  "postAgeHours": 1106,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115553559_serp_무니코틴-고르기-전에_f482da",
+  "status": "ok",
+  "serp": {
+    "query": "무니코틴 고르기 전에",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 10,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

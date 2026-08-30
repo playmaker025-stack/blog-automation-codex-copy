@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-65b33019",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:39.399Z",
+  "postAgeHours": 992,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115639399_serp_인천-만수역-전자담배_9e541d",
+  "status": "ok",
+  "serp": {
+    "query": "인천 만수역 전자담배",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 26,
+    "searchedResultLimit": 29,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

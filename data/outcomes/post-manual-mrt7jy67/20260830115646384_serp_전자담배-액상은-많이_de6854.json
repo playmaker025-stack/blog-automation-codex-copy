@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrt7jy67",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:56:46.384Z",
+  "postAgeHours": 983,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115646384_serp_전자담배-액상은-많이_de6854",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 많이",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

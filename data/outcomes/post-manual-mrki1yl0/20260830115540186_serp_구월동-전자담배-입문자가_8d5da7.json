@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrki1yl0",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:55:40.186Z",
+  "postAgeHours": 1130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830115540186_serp_구월동-전자담배-입문자가_8d5da7",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 입문자가",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 28,
+    "searchedResultLimit": 31,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
