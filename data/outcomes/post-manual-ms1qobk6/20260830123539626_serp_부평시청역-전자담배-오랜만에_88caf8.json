@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms1qobk6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:35:39.626Z",
+  "postAgeHours": 841,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830123539626_serp_부평시청역-전자담배-오랜만에_88caf8",
+  "status": "ok",
+  "serp": {
+    "query": "부평시청역 전자담배 오랜만에",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-3a147bb4",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:35:46.890Z",
+  "postAgeHours": 820,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830123546890_serp_코일-언제_0133fe",
+  "status": "ok",
+  "serp": {
+    "query": "코일 언제",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 21,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

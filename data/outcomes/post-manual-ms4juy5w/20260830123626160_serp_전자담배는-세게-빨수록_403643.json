@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms4juy5w",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:36:26.160Z",
+  "postAgeHours": 794,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830123626160_serp_전자담배는-세게-빨수록_403643",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배는 세게 빨수록",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

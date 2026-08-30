@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-28fdb89d",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:36:32.570Z",
+  "postAgeHours": 775,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830123632570_serp_액상-섞어_913bfe",
+  "status": "ok",
+  "serp": {
+    "query": "액상 섞어",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 19,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

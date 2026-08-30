@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-fcd2d1c7",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:36:19.038Z",
+  "postAgeHours": 792,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830123619038_serp_간석동-전자담배-기기_3a33de",
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 기기",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 34,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

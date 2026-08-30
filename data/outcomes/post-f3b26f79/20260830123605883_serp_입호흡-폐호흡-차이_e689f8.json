@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-f3b26f79",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:36:05.883Z",
+  "postAgeHours": 795,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830123605883_serp_입호흡-폐호흡-차이_e689f8",
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 폐호흡 차이",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 15,
+    "searchedResultLimit": 24,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
