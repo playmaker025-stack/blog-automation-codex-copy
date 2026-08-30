@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88lojs",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:36:06.913Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830153606913_serp_인천전자담배-버블몬-그래피티3_bec426",
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 버블몬 그래피티3",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 18,
+    "searchedResultLimit": 20,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

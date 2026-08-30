@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt895rtf",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:36:26.109Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830153626109_serp_말론-vs-아스트로_3c874a",
+  "status": "ok",
+  "serp": {
+    "query": "말론 vs 아스트로",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 11,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

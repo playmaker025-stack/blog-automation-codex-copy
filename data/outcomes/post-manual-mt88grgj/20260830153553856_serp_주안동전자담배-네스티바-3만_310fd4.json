@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88grgj",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:35:53.856Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830153553856_serp_주안동전자담배-네스티바-3만_310fd4",
+  "status": "ok",
+  "serp": {
+    "query": "주안동전자담배 네스티바 3만",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

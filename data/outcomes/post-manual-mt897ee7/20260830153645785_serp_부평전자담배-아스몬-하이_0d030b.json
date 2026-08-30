@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt897ee7",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:36:45.785Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830153645785_serp_부평전자담배-아스몬-하이_0d030b",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 아스몬 하이",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 10,
+    "searchedResultLimit": 33,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

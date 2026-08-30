@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt8980ju",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:36:52.226Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830153652226_serp_갈산동전자담배-릴렉스-후노즈_90bc79",
+  "status": "ok",
+  "serp": {
+    "query": "갈산동전자담배 릴렉스 후노즈",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 11,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

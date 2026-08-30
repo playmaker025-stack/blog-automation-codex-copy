@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt896vhm",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:36:39.188Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830153639188_serp_그래피티2-vs-그래피티3_92bde9",
+  "status": "ok",
+  "serp": {
+    "query": "그래피티2 vs 그래피티3",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 13,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
