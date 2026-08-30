@@ -44,19 +44,35 @@ export interface CollectorState {
   runCount: number;
 }
 
-const state: CollectorState = {
-  enabled: false,
-  intervalMinutes: DEFAULT_INTERVAL_MINUTES,
-  maxQueries: DEFAULT_MAX_QUERIES,
-  running: false,
-  runCount: 0,
-};
-
 /**
- * 개발 서버는 파일이 바뀔 때마다 모듈을 다시 읽는다. 모듈 지역 변수로만
- * 막으면 타이머가 겹쳐 쌓인다.
+ * 상태를 모듈 변수가 아니라 프로세스 전역에 둔다.
+ *
+ * Next는 instrumentation과 라우트 핸들러를 각각 다른 번들로 묶는다. 같은 파일을
+ * import해도 사본이 갈라져서, 타이머는 instrumentation 쪽 사본에서 돌고 상태
+ * 조회는 라우트 쪽 사본을 읽는다. 실제로 첫 배포에서 수집기가 도는데도 화면에는
+ * "꺼짐"으로 나왔다. 개발 서버가 모듈을 다시 읽을 때 타이머가 겹쳐 쌓이는 것도
+ * 같은 이유로 여기서 막힌다.
  */
-const STARTED = Symbol.for("blog-automation.outcome-scheduler.started");
+const STATE_KEY = Symbol.for("blog-automation.outcome-scheduler.state");
+
+interface SchedulerRuntime extends CollectorState {
+  timerStarted: boolean;
+}
+
+function runtime(): SchedulerRuntime {
+  const globalState = globalThis as typeof globalThis & { [STATE_KEY]?: SchedulerRuntime };
+  if (!globalState[STATE_KEY]) {
+    globalState[STATE_KEY] = {
+      enabled: false,
+      intervalMinutes: DEFAULT_INTERVAL_MINUTES,
+      maxQueries: DEFAULT_MAX_QUERIES,
+      running: false,
+      runCount: 0,
+      timerStarted: false,
+    };
+  }
+  return globalState[STATE_KEY];
+}
 
 function positiveNumber(raw: string | undefined, fallback: number): number {
   const value = Number(raw);
@@ -69,13 +85,15 @@ function unref(timer: unknown): void {
 }
 
 export function getCollectorState(): CollectorState {
-  return { ...state };
+  const { timerStarted: _timerStarted, ...state } = runtime();
+  return state;
 }
 
 /** 한 바퀴. 스케줄러도 이걸 부르고 수동 실행 API도 이걸 부른다. */
 export async function runCollectorOnce(options?: {
   maxQueries?: number;
 }): Promise<CollectorRunSummary> {
+  const state = runtime();
   const startedAt = new Date().toISOString();
   state.running = true;
 
@@ -133,6 +151,7 @@ function summarize(
  * 두 곳에서 쓰게 되고, 무엇이 언제 재진 건지 나중에 못 가린다.
  */
 export function startOutcomeCollector(): CollectorState {
+  const state = runtime();
   const mode = process.env.OUTCOME_COLLECTOR?.trim().toLowerCase();
   if (mode === "off") {
     state.enabled = false;
@@ -145,12 +164,11 @@ export function startOutcomeCollector(): CollectorState {
     return getCollectorState();
   }
 
-  const globalState = globalThis as typeof globalThis & { [STARTED]?: boolean };
-  if (globalState[STARTED]) {
+  if (state.timerStarted) {
     state.enabled = true;
     return getCollectorState();
   }
-  globalState[STARTED] = true;
+  state.timerStarted = true;
 
   state.enabled = true;
   state.reason = undefined;
