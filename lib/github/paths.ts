@@ -14,6 +14,11 @@ export const Paths = {
   postOutcomeDir: (postId: string) => `data/outcomes/${postId}`,
   postOutcome: (postId: string, observationId: string) =>
     `data/outcomes/${postId}/${observationId}.json`,
+  /**
+   * 관측 색인. 글마다 폴더를 뒤지지 않고 "무엇을 언제 쟀는지"를 한 파일에서 읽는다.
+   * 이게 없으면 수집기가 한 바퀴 돌 때마다 글 수만큼 GitHub 목록 조회를 한다.
+   */
+  outcomeIndex: () => "data/outcomes/_index.json",
 
   corpusIndex: (userId: string) =>
     `user-modeling/users/${userId}/corpus/index.json`,

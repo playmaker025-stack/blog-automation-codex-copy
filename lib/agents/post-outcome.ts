@@ -167,13 +167,36 @@ export function dueCheckpoint(params: {
   now: string;
   existing: PostOutcomeObservation[];
 }): number | null {
-  const age = hoursSince(params.publishedAt, params.now);
-  if (age === null) return null;
+  return dueCheckpointFromAges({
+    publishedAt: params.publishedAt,
+    now: params.now,
+    okAgeHours: okSerpAges(params.existing),
+  });
+}
 
-  const measured = params.existing
+/** 관측치 원본에서 판정에 쓰는 값만 뽑는다. 색인에 담는 것도 이것뿐이다. */
+export function okSerpAges(observations: PostOutcomeObservation[]): number[] {
+  return observations
     .filter((item) => item.status === "ok" && item.source === "serp")
     .map((item) => item.postAgeHours)
     .filter((hours): hours is number => typeof hours === "number");
+}
+
+/**
+ * 위와 같은 판정을, 관측치 원본 대신 "성공적으로 잰 시점들"만으로 한다.
+ *
+ * 수집기는 글 한 건씩 폴더를 열어보는 대신 색인 하나를 읽는다. 306건이면
+ * 왕복 600번이 1번이 된다. 판정 규칙은 한 곳(아래)에만 둔다.
+ */
+export function dueCheckpointFromAges(params: {
+  publishedAt: string | null;
+  now: string;
+  okAgeHours: number[];
+}): number | null {
+  const age = hoursSince(params.publishedAt, params.now);
+  if (age === null) return null;
+
+  const measured = params.okAgeHours;
 
   for (let i = 0; i < CHECKPOINT_HOURS.length; i += 1) {
     const checkpoint = CHECKPOINT_HOURS[i];
@@ -191,6 +214,81 @@ export function dueCheckpoint(params: {
     return CHECKPOINT_HOURS[CHECKPOINT_HOURS.length - 1];
   }
   return null;
+}
+
+// ── 관측 색인 ─────────────────────────────────────────────
+
+/**
+ * 글 하나가 지금까지 어떻게 관측됐는지의 요약. 순위값은 담지 않는다.
+ *
+ * 담는 것은 "다음에 언제 재야 하는가"를 판정하는 데 필요한 것뿐이다. 순위나
+ * 인용 여부까지 여기 넣으면 관측치 파일과 같은 사실을 두 곳에 적는 꼴이 되고,
+ * 둘이 어긋나는 순간 어느 쪽이 맞는지 알 수 없다. 사실의 원본은 관측치 파일이다.
+ */
+export interface OutcomeIndexEntry {
+  /** 성공적으로 잰 시점들(발행 후 몇 시간차). 판정에 쓰는 값. */
+  okAgeHours: number[];
+  lastCapturedAt: string;
+  /** 실패까지 포함한 관측 수. 계속 실패만 쌓이는 글을 눈으로 찾을 때 쓴다. */
+  total: number;
+  lastStatus: ObservationStatus;
+}
+
+export interface OutcomeIndex {
+  schemaVersion: 1;
+  updatedAt: string;
+  posts: Record<string, OutcomeIndexEntry>;
+}
+
+export function emptyOutcomeIndex(): OutcomeIndex {
+  return { schemaVersion: SCHEMA_VERSION as 1, updatedAt: new Date(0).toISOString(), posts: {} };
+}
+
+/** 색인이 없거나 깨졌을 때 관측치 원본에서 다시 만든다. 원본이 항상 우선이다. */
+export function indexEntryFromObservations(
+  observations: PostOutcomeObservation[]
+): OutcomeIndexEntry | null {
+  if (observations.length === 0) return null;
+  const sorted = [...observations].sort((a, b) => a.capturedAt.localeCompare(b.capturedAt));
+  const last = sorted[sorted.length - 1];
+  return {
+    okAgeHours: okSerpAges(sorted),
+    lastCapturedAt: last.capturedAt,
+    total: sorted.length,
+    lastStatus: last.status,
+  };
+}
+
+/**
+ * 새 관측치를 색인에 얹는다. 원본을 고치지 않고 새 객체를 낸다.
+ *
+ * 같은 시점을 두 번 적지 않는다 — 재시도나 중복 실행으로 같은 관측이 다시
+ * 들어와도 okAgeHours가 부풀지 않아야 판정이 흔들리지 않는다.
+ */
+export function applyObservationsToIndex(
+  index: OutcomeIndex,
+  observations: PostOutcomeObservation[],
+  at: string = new Date().toISOString()
+): OutcomeIndex {
+  const posts: Record<string, OutcomeIndexEntry> = { ...index.posts };
+
+  for (const observation of observations) {
+    const previous = posts[observation.postId];
+    const ages = new Set(previous?.okAgeHours ?? []);
+    for (const age of okSerpAges([observation])) ages.add(age);
+
+    posts[observation.postId] = {
+      okAgeHours: [...ages].sort((a, b) => a - b),
+      lastCapturedAt:
+        previous && previous.lastCapturedAt > observation.capturedAt
+          ? previous.lastCapturedAt
+          : observation.capturedAt,
+      total: (previous?.total ?? 0) + 1,
+      lastStatus: observation.status,
+    };
+  }
+
+  return { schemaVersion: SCHEMA_VERSION as 1, updatedAt: at, posts };
 }
 
 // ── 요약 ──────────────────────────────────────────────────

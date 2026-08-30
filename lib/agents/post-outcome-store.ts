@@ -8,10 +8,21 @@
  * 갱신할 때 서로 덮어쓴다. 실제로 오늘 프로필 재학습에서 그 충돌을 겪었다.
  */
 
-import { fileExists, listFiles, readJsonFile, writeJsonFile } from "@/lib/github/repository";
+import {
+  fileExists,
+  isRefConflict,
+  listFiles,
+  readJsonFile,
+  writeFiles,
+  writeJsonFile,
+} from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import {
+  applyObservationsToIndex,
+  emptyOutcomeIndex,
+  indexEntryFromObservations,
   summarizeOutcomes,
+  type OutcomeIndex,
   type OutcomeSummary,
   type PostOutcomeObservation,
 } from "./post-outcome.ts";
@@ -28,11 +39,9 @@ export async function recordObservation(
   const path = Paths.postOutcome(observation.postId, observation.observationId);
   if (await fileExists(path)) return { written: false, path };
 
-  await writeJsonFile(
-    path,
-    observation,
-    `chore(outcome): ${observation.postId} ${observation.source} ${observation.status}`
-  );
+  // 색인까지 같은 커밋에 얹으려면 일괄 경로를 그대로 쓴다. 여기서 색인을 빼먹으면
+  // 사람이 손으로 넣은 관측을 수집기가 모르고 같은 시점을 다시 잰다.
+  await recordObservations([observation]);
   return { written: true, path };
 }
 
@@ -71,4 +80,93 @@ export async function loadOutcomeSummaries(
     for (const [postId, summary] of summaries) result.set(postId, summary);
   }
   return result;
+}
+
+// ── 관측 색인 ─────────────────────────────────────────────
+
+/**
+ * 색인을 읽는다. 없으면 관측치 폴더를 훑어 만들어 둔다.
+ *
+ * 색인은 캐시지 원본이 아니다. 지워도 여기서 다시 만들어진다 — 그래서 색인이
+ * 틀어졌다는 의심이 들면 그냥 지우면 된다.
+ */
+export async function ensureOutcomeIndex(): Promise<OutcomeIndex> {
+  const existing = await readJsonFile<OutcomeIndex>(Paths.outcomeIndex())
+    .then((result) => result.data)
+    .catch(() => null);
+  if (existing && existing.posts) return existing;
+
+  const rebuilt = await rebuildOutcomeIndex();
+  await writeJsonFile(
+    Paths.outcomeIndex(),
+    rebuilt,
+    `chore(outcome): 관측 색인 재생성 (${Object.keys(rebuilt.posts).length}건)`
+  ).catch(() => "");
+  return rebuilt;
+}
+
+/** 관측치 원본만 보고 색인을 다시 만든다. 글 수만큼 왕복하므로 자주 하지 않는다. */
+export async function rebuildOutcomeIndex(): Promise<OutcomeIndex> {
+  const entries = await listFiles("data/outcomes").catch(() => []);
+  const postIds = entries.filter((entry) => entry.type === "dir").map((entry) => entry.name);
+
+  const index = emptyOutcomeIndex();
+  for (const postId of postIds) {
+    const entry = indexEntryFromObservations(await loadObservations(postId).catch(() => []));
+    if (entry) index.posts[postId] = entry;
+  }
+  index.updatedAt = new Date().toISOString();
+  return index;
+}
+
+const INDEX_CONFLICT_RETRIES = 3;
+
+/**
+ * 관측치 여러 건을 커밋 하나로 남긴다.
+ *
+ * 한 건당 커밋 하나로 쓰면 한 바퀴에 커밋이 열몇 개씩 쌓이고, GitHub 왕복도
+ * 그만큼 늘어난다. 색인은 같은 커밋에 함께 얹는다 — 관측치는 들어갔는데
+ * 색인은 안 들어간 상태가 되면 다음 회차가 같은 시점을 다시 잰다.
+ *
+ * 그 사이 다른 쓰기가 브랜치를 움직였으면 색인을 다시 읽어 그 위에 얹고
+ * 다시 시도한다. 실패한 커밋의 관측치 파일은 아직 저장소에 없으므로 잃는 게 없다.
+ */
+export async function recordObservations(
+  observations: PostOutcomeObservation[]
+): Promise<{ written: number; commitSha: string; index: OutcomeIndex }> {
+  const unique = new Map<string, PostOutcomeObservation>();
+  for (const observation of observations) {
+    unique.set(Paths.postOutcome(observation.postId, observation.observationId), observation);
+  }
+  if (unique.size === 0) {
+    return { written: 0, commitSha: "", index: await ensureOutcomeIndex() };
+  }
+
+  let lastError: unknown = null;
+  for (let attempt = 0; attempt < INDEX_CONFLICT_RETRIES; attempt += 1) {
+    const index = await ensureOutcomeIndex();
+    const merged = applyObservationsToIndex(index, [...unique.values()]);
+
+    const files = [...unique.entries()].map(([path, observation]) => ({
+      path,
+      content: JSON.stringify(observation, null, 2),
+    }));
+    files.push({ path: Paths.outcomeIndex(), content: JSON.stringify(merged, null, 2) });
+
+    try {
+      const result = await writeFiles(
+        files,
+        `chore(outcome): 관측 ${unique.size}건 기록`
+      );
+      return { written: unique.size, commitSha: result.commitSha, index: merged };
+    } catch (error) {
+      if (!isRefConflict(error)) throw error;
+      lastError = error;
+      await new Promise((resolve) => setTimeout(resolve, 500 * (attempt + 1)));
+    }
+  }
+
+  throw lastError instanceof Error
+    ? lastError
+    : new Error("관측치를 기록하지 못했습니다 (브랜치 충돌).");
 }

@@ -16,12 +16,12 @@ import type { PostingRecord } from "@/lib/types/github-data";
 import {
   SCHEMA_VERSION,
   buildObservationId,
-  dueCheckpoint,
+  dueCheckpointFromAges,
   hoursSince,
   type PostOutcomeObservation,
 } from "./post-outcome.ts";
 import { buildMobileSearchUrl, findRank, parseSerp } from "./serp-parse.ts";
-import { loadObservations, recordObservation } from "./post-outcome-store";
+import { ensureOutcomeIndex, recordObservations } from "./post-outcome-store";
 
 const MOBILE_UA =
   "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1";
@@ -57,12 +57,17 @@ export interface CollectResult {
   note?: string;
 }
 
-/** 글 하나의 검색어 하나를 한 번 재고 관측치로 남긴다. */
+/**
+ * 글 하나의 검색어 하나를 한 번 잰다.
+ *
+ * 저장은 하지 않고 관측치를 돌려준다. 저장은 한 바퀴가 끝난 뒤 한 번에 한다 —
+ * 여기서 건건이 쓰면 커밋이 관측 수만큼 생긴다.
+ */
 async function observeOnce(params: {
   post: PostingRecord;
   query: string;
   checkpointHours: number;
-}): Promise<CollectResult> {
+}): Promise<{ result: CollectResult; observation: PostOutcomeObservation }> {
   const { post, query, checkpointHours } = params;
   const tracking = post.outcomeTracking;
   const capturedAt = new Date().toISOString();
@@ -77,40 +82,40 @@ async function observeOnce(params: {
     observationId: buildObservationId({ postId: post.postId, source: "serp", capturedAt, query }),
   };
 
-  const fetched = await fetchSerp(query);
-  if ("error" in fetched) {
-    await recordObservation({ ...base, status: "request_failed", note: fetched.error.slice(0, 200) });
-    return { postId: post.postId, query, checkpointHours, status: "request_failed", rank: null, note: fetched.error };
-  }
-
-  const parsed = parseSerp(fetched.html);
-  if (parsed.blocked) {
-    await recordObservation({ ...base, status: "parse_failed", note: "결과 화면을 받지 못했습니다." });
-    return { postId: post.postId, query, checkpointHours, status: "parse_failed", rank: null };
-  }
-
-  const target = tracking?.canonicalPost;
-  if (!target) {
-    await recordObservation({ ...base, status: "parse_failed", note: "추적 계약에 글 주소가 없습니다." });
-    return { postId: post.postId, query, checkpointHours, status: "parse_failed", rank: null };
-  }
-
-  const { rank, searchedResultLimit } = findRank(parsed, target);
-  await recordObservation({
-    ...base,
-    // 못 찾은 것도 성공한 관측이다. "이 시점에 이 검색어에서 안 보였다"는 사실이다.
-    status: "ok",
-    serp: {
-      query,
-      device: "mobile",
-      rank,
-      searchedResultLimit,
-      aiBriefing: parsed.aiBriefing,
-      cited: parsed.cited,
-    },
+  const failed = (
+    status: PostOutcomeObservation["status"],
+    note: string
+  ): { result: CollectResult; observation: PostOutcomeObservation } => ({
+    observation: { ...base, status, note: note.slice(0, 200) },
+    result: { postId: post.postId, query, checkpointHours, status, rank: null, note },
   });
 
-  return { postId: post.postId, query, checkpointHours, status: "ok", rank };
+  const fetched = await fetchSerp(query);
+  if ("error" in fetched) return failed("request_failed", fetched.error);
+
+  const parsed = parseSerp(fetched.html);
+  if (parsed.blocked) return failed("parse_failed", "결과 화면을 받지 못했습니다.");
+
+  const target = tracking?.canonicalPost;
+  if (!target) return failed("parse_failed", "추적 계약에 글 주소가 없습니다.");
+
+  const { rank, searchedResultLimit } = findRank(parsed, target);
+  return {
+    observation: {
+      ...base,
+      // 못 찾은 것도 성공한 관측이다. "이 시점에 이 검색어에서 안 보였다"는 사실이다.
+      status: "ok",
+      serp: {
+        query,
+        device: "mobile",
+        rank,
+        searchedResultLimit,
+        aiBriefing: parsed.aiBriefing,
+        cited: parsed.cited,
+      },
+    },
+    result: { postId: post.postId, query, checkpointHours, status: "ok", rank },
+  };
 }
 
 /**
@@ -123,33 +128,47 @@ export async function collectDueOutcomes(params: {
   posts: PostingRecord[];
   now?: string;
   maxQueries?: number;
-}): Promise<{ collected: CollectResult[]; skipped: number }> {
+}): Promise<{ collected: CollectResult[]; skipped: number; due: number; commitSha: string }> {
   const now = params.now ?? new Date().toISOString();
   const maxQueries = params.maxQueries ?? 8;
 
+  // 색인 한 번. 예전에는 글마다 폴더를 열어봤고, 306건이면 그것만으로 왕복 600번이었다.
+  const index = await ensureOutcomeIndex();
+
   const collected: CollectResult[] = [];
+  const observations: PostOutcomeObservation[] = [];
   let skipped = 0;
+  let due = 0;
 
   const candidates = params.posts.filter(
     (post) => post.status === "published" && post.outcomeTracking && post.publishedAt
   );
 
   for (const post of candidates) {
+    const checkpointHours = dueCheckpointFromAges({
+      publishedAt: post.publishedAt,
+      now,
+      okAgeHours: index.posts[post.postId]?.okAgeHours ?? [],
+    });
+    if (checkpointHours === null) continue;
+    due += 1;
+
     if (collected.length >= maxQueries) {
       skipped += 1;
       continue;
     }
 
-    const existing = await loadObservations(post.postId).catch(() => []);
-    const checkpointHours = dueCheckpoint({ publishedAt: post.publishedAt, now, existing });
-    if (checkpointHours === null) continue;
-
     for (const keyword of post.outcomeTracking?.targetKeywords ?? []) {
       if (collected.length >= maxQueries) break;
       if (collected.length > 0) await sleep(REQUEST_GAP_MS);
-      collected.push(await observeOnce({ post, query: keyword.query, checkpointHours }));
+      const observed = await observeOnce({ post, query: keyword.query, checkpointHours });
+      collected.push(observed.result);
+      observations.push(observed.observation);
     }
   }
 
-  return { collected, skipped };
+  // 한 바퀴 = 커밋 하나. 쓰다가 실패하면 관측치는 버린다 — 다음 회차에 다시 재면 된다.
+  const { commitSha } = await recordObservations(observations);
+
+  return { collected, skipped, due, commitSha };
 }

@@ -89,6 +89,87 @@ export async function writeJsonFile<T>(
   return writeFile(filePath, content, message, sha);
 }
 
+export interface FileWrite {
+  path: string;
+  content: string;
+}
+
+/** 트리 하나에 파일을 여러 개 얹으므로 단건 쓰기보다 오래 걸린다. */
+const BATCH_TIMEOUT_MS = 40_000;
+
+/**
+ * 파일 여러 개를 커밋 하나로 쓴다.
+ *
+ * 단건 API(createOrUpdateFileContents)는 파일마다 커밋을 만든다. 관측치처럼
+ * 한 번에 수십 건이 나오는 쓰기에 그걸 쓰면 커밋 수십 개가 쌓이고, 그 사이
+ * 다른 쓰기가 끼어들어 sha가 어긋난다. 사양 후보 일괄 승인에서 이미 겪었다.
+ *
+ * 브랜치가 그새 움직였으면 updateRef가 실패한다(422). 여기서 되받아 재시도하지
+ * 않는 이유: 재시도하려면 그 시점 값 위에 다시 얹어야 하는데, 무엇을 어떻게
+ * 얹을지는 호출한 쪽만 안다. 충돌은 그대로 던지고 호출자가 다시 읽어서 넘긴다.
+ */
+export async function writeFiles(
+  files: FileWrite[],
+  message: string
+): Promise<{ commitSha: string; written: number }> {
+  if (files.length === 0) return { commitSha: "", written: 0 };
+
+  const octokit = getGitHubClient();
+  const { owner, repo, branch } = getRepoConfig();
+  const commitMessage = message.includes("[skip ci]") ? message : `${message} [skip ci]`;
+  const request = { signal: AbortSignal.timeout(BATCH_TIMEOUT_MS) };
+
+  const ref = await octokit.git.getRef({ owner, repo, ref: `heads/${branch}`, request });
+  const baseCommitSha = ref.data.object.sha;
+  const baseCommit = await octokit.git.getCommit({
+    owner,
+    repo,
+    commit_sha: baseCommitSha,
+    request,
+  });
+
+  const tree = await octokit.git.createTree({
+    owner,
+    repo,
+    base_tree: baseCommit.data.tree.sha,
+    tree: files.map((file) => ({
+      path: file.path,
+      mode: "100644" as const,
+      type: "blob" as const,
+      content: file.content,
+    })),
+    request,
+  });
+
+  const commit = await octokit.git.createCommit({
+    owner,
+    repo,
+    message: commitMessage,
+    tree: tree.data.sha,
+    parents: [baseCommitSha],
+    request,
+  });
+
+  // force는 쓰지 않는다. 그 사이 들어온 커밋을 지우느니 실패하는 게 낫다.
+  await octokit.git.updateRef({
+    owner,
+    repo,
+    ref: `heads/${branch}`,
+    sha: commit.data.sha,
+    force: false,
+    request,
+  });
+
+  return { commitSha: commit.data.sha, written: files.length };
+}
+
+/** 브랜치가 움직여서 밀린 것인지. 이건 다시 읽고 다시 얹으면 되는 실패다. */
+export function isRefConflict(error: unknown): boolean {
+  if (!(error instanceof Error) || !("status" in error)) return false;
+  const status = (error as { status?: number }).status;
+  return status === 409 || status === 422;
+}
+
 export async function fileExists(filePath: string): Promise<boolean> {
   try {
     await readFile(filePath);
