@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2fab3670",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:07:05.049Z",
+  "postAgeHours": 7160,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830080705_serp_무화량-많은-하이엔드",
+  "status": "ok",
+  "serp": {
+    "query": "무화량 많은 하이엔드",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

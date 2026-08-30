@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-6ae3e93a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:06:44.790Z",
+  "postAgeHours": 6728,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830080644_serp_전자담배-입호흡-폐호흡",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 입호흡 폐호흡",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 28,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

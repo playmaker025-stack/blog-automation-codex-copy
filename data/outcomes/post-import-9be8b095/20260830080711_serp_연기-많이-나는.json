@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9be8b095",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:07:11.614Z",
+  "postAgeHours": 8600,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830080711_serp_연기-많이-나는",
+  "status": "ok",
+  "serp": {
+    "query": "연기 많이 나는",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 21,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8d99c329",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:06:51.369Z",
+  "postAgeHours": 13112,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830080651_serp_전자담배-코일-교체시기",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일 교체시기",
+    "device": "mobile",
+    "rank": 18,
+    "searchedResultLimit": 27,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-79fcaeec",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:06:07.185Z",
+  "postAgeHours": 4400,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830080607_serp_부평-전자담배-매장에서",
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 매장에서",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 36,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

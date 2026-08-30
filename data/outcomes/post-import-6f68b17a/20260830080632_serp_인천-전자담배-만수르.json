@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-6f68b17a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:06:32.111Z",
+  "postAgeHours": 6128,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830080632_serp_인천-전자담배-만수르",
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 만수르",
+    "device": "mobile",
+    "rank": 28,
+    "searchedResultLimit": 30,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
