@@ -10718,7 +10718,7 @@
       "pendingApproval": null,
       "createdAt": "2026-08-29T05:08:10.955Z",
       "publishedAt": "2026-08-29T09:53:01.760Z",
-      "updatedAt": "2026-08-29T09:53:05.969Z",
+      "updatedAt": "2026-08-30T11:42:24.824Z",
       "outcomeTracking": {
         "canonicalPost": {
           "blogId": "youferst",
@@ -10727,13 +10727,15 @@
         },
         "targetKeywords": [
           {
-            "query": "남동구 폐호흡 전자담배",
-            "role": "primary"
+            "query": "폐호흡 전자담배",
+            "role": "primary",
+            "source": "user"
           }
         ],
         "publishedTitle": "남동구 폐호흡 전자담배 초보자 맞춤 상담 및 추천 가이드",
         "contentHash": "2438d288",
-        "trackedFrom": "2026-08-29T09:53:06.734Z"
+        "trackedFrom": "2026-08-29T09:53:06.734Z",
+        "keywordsRevisedAt": "2026-08-30T11:42:24.824Z"
       }
     },
     {
@@ -10835,5 +10837,5 @@
       "updatedAt": "2026-08-30T11:41:23.167Z"
     }
   ],
-  "lastUpdated": "2026-08-30T11:41:23.167Z"
+  "lastUpdated": "2026-08-30T11:42:24.824Z"
 }
