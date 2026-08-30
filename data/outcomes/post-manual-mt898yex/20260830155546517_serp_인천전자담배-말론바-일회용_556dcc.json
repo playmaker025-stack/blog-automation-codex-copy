@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt898yex",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:55:46.517Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830155546517_serp_인천전자담배-말론바-일회용_556dcc",
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 말론바 일회용",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 21,
+    "searchedResultLimit": 21,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt89b3up",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:56:18.932Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830155618932_serp_무니코틴-액상-유저에게도_22c3e1",
+  "status": "ok",
+  "serp": {
+    "query": "무니코틴 액상 유저에게도",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 3,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

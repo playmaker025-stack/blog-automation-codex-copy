@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:56:39.043Z",
+  "postAgeHours": 76,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830155639043_serp_고농도부터-다양한-맛까지_3dc9b5",
+  "status": "ok",
+  "serp": {
+    "query": "고농도부터 다양한 맛까지",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 12,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt89a3tc",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:56:05.949Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830155605949_serp_부평전자담배-버블몬-그래피티2_2538f6",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 버블몬 그래피티2",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 23,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

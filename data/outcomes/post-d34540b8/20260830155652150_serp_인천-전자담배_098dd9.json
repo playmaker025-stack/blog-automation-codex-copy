@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-d34540b8",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:56:52.150Z",
+  "postAgeHours": 29,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830155652150_serp_인천-전자담배_098dd9",
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 7,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

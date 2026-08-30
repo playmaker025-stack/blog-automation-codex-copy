@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt89amh7",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:56:12.470Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830155612470_serp_만수동전자담배-말론S-전담_26e54a",
+  "status": "ok",
+  "serp": {
+    "query": "만수동전자담배 말론S 전담",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

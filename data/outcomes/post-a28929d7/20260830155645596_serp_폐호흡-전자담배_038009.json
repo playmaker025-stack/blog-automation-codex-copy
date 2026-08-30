@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-a28929d7",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:56:45.596Z",
+  "postAgeHours": 30,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830155645596_serp_폐호흡-전자담배_038009",
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡 전자담배",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 23,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

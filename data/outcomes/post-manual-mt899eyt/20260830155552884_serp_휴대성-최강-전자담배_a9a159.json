@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt899eyt",
+  "source": "serp",
+  "capturedAt": "2026-08-30T15:55:52.884Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830155552884_serp_휴대성-최강-전자담배_a9a159",
+  "status": "ok",
+  "serp": {
+    "query": "휴대성 최강 전자담배",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 12,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
