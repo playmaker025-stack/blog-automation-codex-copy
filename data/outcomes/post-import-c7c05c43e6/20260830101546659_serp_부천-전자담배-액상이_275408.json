@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-c7c05c43e6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:15:46.659Z",
+  "postAgeHours": 3490,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830101546659_serp_부천-전자담배-액상이_275408",
+  "status": "ok",
+  "serp": {
+    "query": "부천 전자담배 액상이",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 36,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

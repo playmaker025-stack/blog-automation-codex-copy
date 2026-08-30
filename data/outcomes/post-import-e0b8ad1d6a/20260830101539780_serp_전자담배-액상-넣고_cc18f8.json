@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-e0b8ad1d6a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:15:39.780Z",
+  "postAgeHours": 3514,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830101539780_serp_전자담배-액상-넣고_cc18f8",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 넣고",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 10,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

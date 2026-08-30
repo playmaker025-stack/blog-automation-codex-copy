@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-992baab941",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:16:06.250Z",
+  "postAgeHours": 3466,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830101606250_serp_전자담배-액상이-갑자기_602d29",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상이 갑자기",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 21,
+    "searchedResultLimit": 23,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

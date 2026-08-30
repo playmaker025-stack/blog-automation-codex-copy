@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9123eaa0cd",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:16:18.776Z",
+  "postAgeHours": 3442,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830101618776_serp_송내-전자담배-입문자가_a4deb7",
+  "status": "ok",
+  "serp": {
+    "query": "송내 전자담배 입문자가",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

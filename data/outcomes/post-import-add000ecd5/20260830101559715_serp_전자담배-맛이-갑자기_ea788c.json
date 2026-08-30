@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-add000ecd5",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:15:59.715Z",
+  "postAgeHours": 3466,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830101559715_serp_전자담배-맛이-갑자기_ea788c",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 맛이 갑자기",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 21,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

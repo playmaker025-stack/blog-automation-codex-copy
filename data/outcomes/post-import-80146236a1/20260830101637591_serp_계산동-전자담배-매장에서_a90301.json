@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-80146236a1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:16:37.591Z",
+  "postAgeHours": 3394,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830101637591_serp_계산동-전자담배-매장에서_a90301",
+  "status": "ok",
+  "serp": {
+    "query": "계산동 전자담배 매장에서",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

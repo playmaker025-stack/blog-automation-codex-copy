@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9c88b3affb",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:15:53.124Z",
+  "postAgeHours": 3490,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830101553124_serp_전자담배-액상은-기기마다_a7c5fa",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 기기마다",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
