@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrh5sq1h",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:32.897Z",
+  "postAgeHours": 1185,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113632897_serp_전자담배-액상은-남았는데_20d1c2",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 남았는데",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 7,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

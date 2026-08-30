@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrc05zu3",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:35:47.001Z",
+  "postAgeHours": 1272,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113547001_serp_전자담배-액상을-바꿨는데_fb119e",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상을 바꿨는데",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 13,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

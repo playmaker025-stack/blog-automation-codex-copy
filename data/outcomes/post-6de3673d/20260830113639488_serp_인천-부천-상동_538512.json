@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-6de3673d",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:39.488Z",
+  "postAgeHours": 1158,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113639488_serp_인천-부천-상동_538512",
+  "status": "ok",
+  "serp": {
+    "query": "인천 부천 상동",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 0,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

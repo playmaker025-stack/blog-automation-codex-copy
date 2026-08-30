@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-801b023b",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:00.292Z",
+  "postAgeHours": 1229,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113600292_serp_전자담배-관리법-:_801f01",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 관리법 :",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 28,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

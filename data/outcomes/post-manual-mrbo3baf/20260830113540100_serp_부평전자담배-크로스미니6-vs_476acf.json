@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrbo3baf",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:35:40.100Z",
+  "postAgeHours": 1278,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113540100_serp_부평전자담배-크로스미니6-vs_476acf",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 크로스미니6 vs",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 20,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

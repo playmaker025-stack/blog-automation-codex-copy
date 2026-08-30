@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-17e1dade",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:06.918Z",
+  "postAgeHours": 1200,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113606918_serp_남동구-전자담배-매장_174ed0",
+  "status": "ok",
+  "serp": {
+    "query": "남동구 전자담배 매장",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 26,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

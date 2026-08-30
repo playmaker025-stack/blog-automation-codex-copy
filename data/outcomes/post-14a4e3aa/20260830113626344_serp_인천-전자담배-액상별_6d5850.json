@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-14a4e3aa",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:26.344Z",
+  "postAgeHours": 1202,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113626344_serp_인천-전자담배-액상별_6d5850",
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 액상별",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 16,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

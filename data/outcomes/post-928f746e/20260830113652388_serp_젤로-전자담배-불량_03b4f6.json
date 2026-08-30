@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-928f746e",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:52.388Z",
+  "postAgeHours": 1133,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113652388_serp_젤로-전자담배-불량_03b4f6",
+  "status": "ok",
+  "serp": {
+    "query": "젤로 전자담배 불량",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

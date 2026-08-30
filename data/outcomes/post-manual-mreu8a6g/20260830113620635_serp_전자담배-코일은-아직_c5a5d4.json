@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mreu8a6g",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:20.635Z",
+  "postAgeHours": 1224,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113620635_serp_전자담배-코일은-아직_c5a5d4",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일은 아직",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 13,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

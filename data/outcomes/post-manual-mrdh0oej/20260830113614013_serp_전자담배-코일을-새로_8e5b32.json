@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrdh0oej",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:14.013Z",
+  "postAgeHours": 1247,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113614013_serp_전자담배-코일을-새로_8e5b32",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일을 새로",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 27,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

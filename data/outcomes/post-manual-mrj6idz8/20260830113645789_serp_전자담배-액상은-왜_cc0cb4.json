@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrj6idz8",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:36:45.789Z",
+  "postAgeHours": 1151,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830113645789_serp_전자담배-액상은-왜_cc0cb4",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 왜",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 8,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
