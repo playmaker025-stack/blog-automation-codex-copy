@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms09w5z0",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:16:43.884Z",
+  "postAgeHours": 865,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830121643884_serp_부평-전자담배-폐호흡_e08a8c",
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 폐호흡",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 38,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

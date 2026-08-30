@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrxe65go",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:16:24.927Z",
+  "postAgeHours": 913,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830121624927_serp_전자담배-액상이-질렸다면_9bf0cd",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상이 질렸다면",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

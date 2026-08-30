@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrvztskv",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:16:05.571Z",
+  "postAgeHours": 937,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830121605571_serp_전자담배-액상-유통기한은_47d689",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 유통기한은",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 23,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

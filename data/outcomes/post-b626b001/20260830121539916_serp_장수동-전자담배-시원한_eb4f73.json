@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b626b001",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:15:39.916Z",
+  "postAgeHours": 960,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830121539916_serp_장수동-전자담배-시원한_eb4f73",
+  "status": "ok",
+  "serp": {
+    "query": "장수동 전자담배 시원한",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-1191adb8",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:16:18.345Z",
+  "postAgeHours": 919,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830121618345_serp_전담-액상-니코틴_6f1923",
+  "status": "ok",
+  "serp": {
+    "query": "전담 액상 니코틴",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 25,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mruk2p3c",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:15:46.655Z",
+  "postAgeHours": 961,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830121546655_serp_전자담배-액상을-자주_3e17f8",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상을 자주",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 22,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

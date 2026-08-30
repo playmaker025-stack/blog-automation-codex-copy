@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-1191adb8",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:16:12.229Z",
+  "postAgeHours": 919,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830121612229_serp_니코틴-종류_0fbefd",
+  "status": "ok",
+  "serp": {
+    "query": "니코틴 종류",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 21,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-f4873ead",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:15:52.623Z",
+  "postAgeHours": 943,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830121552623_serp_가성비,-전자담배_ef2a82",
+  "status": "ok",
+  "serp": {
+    "query": "가성비, 전자담배",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 0,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
