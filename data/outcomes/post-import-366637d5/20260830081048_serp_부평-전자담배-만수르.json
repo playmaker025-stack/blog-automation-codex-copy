@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-366637d5",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:10:48.289Z",
+  "postAgeHours": 8528,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081048_serp_부평-전자담배-만수르",
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 만수르",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 18,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

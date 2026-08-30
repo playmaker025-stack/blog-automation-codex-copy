@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8c38c02a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:10:55.250Z",
+  "postAgeHours": 4352,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081055_serp_부평-만수르-매장에서",
+  "status": "ok",
+  "serp": {
+    "query": "부평 만수르 매장에서",
+    "device": "mobile",
+    "rank": 23,
+    "searchedResultLimit": 29,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

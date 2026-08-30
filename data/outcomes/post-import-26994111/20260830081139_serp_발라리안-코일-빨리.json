@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-26994111",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:11:39.881Z",
+  "postAgeHours": 4280,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081139_serp_발라리안-코일-빨리",
+  "status": "ok",
+  "serp": {
+    "query": "발라리안 코일 빨리",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 24,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-1b99338a",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:11:26.613Z",
+  "postAgeHours": 4304,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081126_serp_말론-아스트로-입호흡기기에",
+  "status": "ok",
+  "serp": {
+    "query": "말론 아스트로 입호흡기기에",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 11,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-44848739",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:10:27.701Z",
+  "postAgeHours": 9512,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081027_serp_엘프바-아이스킹-25k",
+  "status": "ok",
+  "serp": {
+    "query": "엘프바 아이스킹 25k",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

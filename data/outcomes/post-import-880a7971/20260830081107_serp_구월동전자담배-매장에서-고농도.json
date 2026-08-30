@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-880a7971",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:11:07.123Z",
+  "postAgeHours": 4328,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081107_serp_구월동전자담배-매장에서-고농도",
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 매장에서 고농도",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

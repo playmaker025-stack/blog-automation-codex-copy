@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0cbc5e41",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:11:33.012Z",
+  "postAgeHours": 4304,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081133_serp_구월동-전자담배-입호흡",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 입호흡",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 41,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

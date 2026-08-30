@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b946d530",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:11:19.929Z",
+  "postAgeHours": 4328,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081119_serp_청천동-전자담배-메즈액상",
+  "status": "ok",
+  "serp": {
+    "query": "청천동 전자담배 메즈액상",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 22,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

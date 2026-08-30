@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7f7429f1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:11:01.338Z",
+  "postAgeHours": 4352,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081101_serp_연수동-전자담배-말론",
+  "status": "ok",
+  "serp": {
+    "query": "연수동 전자담배 말론",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 20,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

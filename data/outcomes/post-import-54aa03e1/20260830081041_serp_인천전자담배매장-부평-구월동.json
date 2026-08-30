@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-54aa03e1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:10:41.250Z",
+  "postAgeHours": 8768,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830081041_serp_인천전자담배매장-부평-구월동",
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배매장 부평 구월동",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 33,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
