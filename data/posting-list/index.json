@@ -10766,7 +10766,74 @@
         "contentHash": "e63d38c0",
         "trackedFrom": "2026-08-29T11:20:28.623Z"
       }
+    },
+    {
+      "postId": "post-manual-mtfqo1w6",
+      "topicId": "",
+      "userId": "a",
+      "title": "무화량 많은 전자담배가 있나요? 하이엔드 스퀑크 전자담배 모드기기 프레스티지 모드 크라노 DNA60 소개 인천 만수르",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/iibodii00/224393476732",
+      "wordCount": 0,
+      "targetKeywords": [
+        "하이엔드 전자담배",
+        "무화량 많은 전자담배",
+        "인천 전자담배",
+        "dna60",
+        "전자담배 모드기기",
+        "무화량 전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "iibodii00",
+          "logNo": "224393476732",
+          "canonicalUrl": "https://blog.naver.com/iibodii00/224393476732"
+        },
+        "targetKeywords": [
+          {
+            "query": "하이엔드 전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "무화량 많은 전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "인천 전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "dna60",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배 모드기기",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "무화량 전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "무화량 많은 전자담배가 있나요? 하이엔드 스퀑크 전자담배 모드기기 프레스티지 모드 크라노 DNA60 소개 인천 만수르",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-08-30T11:41:23.167Z",
+        "keywordsRevisedAt": "2026-08-30T11:41:23.167Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-08-30T11:41:23.167Z",
+      "createdAt": "2026-08-30T11:41:23.167Z",
+      "updatedAt": "2026-08-30T11:41:23.167Z"
     }
   ],
-  "lastUpdated": "2026-08-29T11:20:28.028Z"
+  "lastUpdated": "2026-08-30T11:41:23.167Z"
 }
