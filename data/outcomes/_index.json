@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-30T08:04:47.619Z",
+  "posts": {
+    "post-import-0b9c15c1": {
+      "okAgeHours": [
+        4740
+      ],
+      "lastCapturedAt": "2026-08-27T11:56:13.055Z",
+      "total": 1,
+      "lastStatus": "ok"
+    },
+    "post-import-4dd81361": {
+      "okAgeHours": [
+        4380
+      ],
+      "lastCapturedAt": "2026-08-27T11:55:49.166Z",
+      "total": 1,
+      "lastStatus": "ok"
+    },
+    "post-import-59fa0916": {
+      "okAgeHours": [
+        4356
+      ],
+      "lastCapturedAt": "2026-08-27T11:55:56.616Z",
+      "total": 1,
+      "lastStatus": "ok"
+    },
+    "post-import-7804aacd": {
+      "okAgeHours": [
+        4380
+      ],
+      "lastCapturedAt": "2026-08-27T11:55:40.295Z",
+      "total": 1,
+      "lastStatus": "ok"
+    },
+    "post-import-cbd16776": {
+      "okAgeHours": [
+        6540
+      ],
+      "lastCapturedAt": "2026-08-27T11:56:20.761Z",
+      "total": 1,
+      "lastStatus": "ok"
+    },
+    "post-import-ce509e35": {
+      "okAgeHours": [
+        4356
+      ],
+      "lastCapturedAt": "2026-08-27T11:56:04.530Z",
+      "total": 1,
+      "lastStatus": "ok"
+    }
+  }
+}
