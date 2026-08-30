@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mralr041",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:16:51.676Z",
+  "postAgeHours": 1295,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111651676_serp_전자담배-액상을-바꿀_da648a",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상을 바꿀",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 10,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr8tac1r",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:16:32.040Z",
+  "postAgeHours": 1325,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111632040_serp_발라리안R-누수-고장_95defb",
+  "status": "ok",
+  "serp": {
+    "query": "발라리안R 누수 고장",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 21,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

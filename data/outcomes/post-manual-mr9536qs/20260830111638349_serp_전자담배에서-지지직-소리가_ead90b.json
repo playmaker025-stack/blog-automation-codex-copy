@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr9536qs",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:16:38.349Z",
+  "postAgeHours": 1320,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111638349_serp_전자담배에서-지지직-소리가_ead90b",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배에서 지지직 소리가",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

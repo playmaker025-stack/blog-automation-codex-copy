@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr4urgdx",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:15:59.695Z",
+  "postAgeHours": 1392,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111559695_serp_여름철-전자담배-액상이_0afb50",
+  "status": "ok",
+  "serp": {
+    "query": "여름철 전자담배 액상이",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 32,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

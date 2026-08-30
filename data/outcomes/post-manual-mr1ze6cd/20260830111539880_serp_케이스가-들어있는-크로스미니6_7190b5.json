@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr1ze6cd",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:15:39.880Z",
+  "postAgeHours": 1440,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111539880_serp_케이스가-들어있는-크로스미니6_7190b5",
+  "status": "ok",
+  "serp": {
+    "query": "케이스가 들어있는 크로스미니6",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 13,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

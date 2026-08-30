@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr4m14xy",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:15:53.619Z",
+  "postAgeHours": 1396,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111553619_serp_젤로맥스-누수-잡는법_407747",
+  "status": "ok",
+  "serp": {
+    "query": "젤로맥스 누수 잡는법",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 25,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

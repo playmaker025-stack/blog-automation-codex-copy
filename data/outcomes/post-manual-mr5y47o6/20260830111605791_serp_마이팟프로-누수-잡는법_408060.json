@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr5y47o6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:16:05.791Z",
+  "postAgeHours": 1373,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111605791_serp_마이팟프로-누수-잡는법_408060",
+  "status": "ok",
+  "serp": {
+    "query": "마이팟프로 누수 잡는법",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 11,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

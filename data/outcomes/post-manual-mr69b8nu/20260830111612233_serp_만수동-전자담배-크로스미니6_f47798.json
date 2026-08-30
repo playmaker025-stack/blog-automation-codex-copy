@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr69b8nu",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:16:12.233Z",
+  "postAgeHours": 1368,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111612233_serp_만수동-전자담배-크로스미니6_f47798",
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 크로스미니6",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr76npd2",
+  "source": "serp",
+  "capturedAt": "2026-08-30T11:16:18.744Z",
+  "postAgeHours": 1353,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830111618744_serp_전자담배-팟-안에_c591a2",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 팟 안에",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 27,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
