@@ -25,6 +25,9 @@ const obs = (o = {}) => ({
 
 const serp = (o = {}) => ({
   query: "부천 전자담배 액상",
+  // 기본값은 사장님이 정한 검색어다. 추측 검색어로 잰 관측은 성적에 안 들어간다
+  // (PR44). 여기 테스트는 순위 규칙을 보는 것이라 사람이 정한 값으로 둔다.
+  querySource: "user",
   device: "mobile",
   rank: 5,
   searchedResultLimit: 30,
@@ -142,6 +145,17 @@ describe("PR38 성과 줄세우기", () => {
       withSummary("2위", twice({ rank: 2 })),
     ]);
     assert.equal(ranked[0].id, "2위");
+  });
+
+  // 앱이 제목을 잘라 만든 말로 1위가 나와도 그건 글의 성적이 아니다.
+  // 사람이 검색하지 않는 말이면 1위에 아무 의미가 없다.
+  test("추측한 검색어로만 잰 글은 줄세우기에서 뺀다", () => {
+    const ranked = rankByOutcome([
+      withSummary("추측_1위", twice({ rank: 1, querySource: "title_guess" })),
+      withSummary("사람이정한_9위", twice({ rank: 9 })),
+    ]);
+    assert.equal(ranked.length, 1);
+    assert.equal(ranked[0].id, "사람이정한_9위");
   });
 });
 

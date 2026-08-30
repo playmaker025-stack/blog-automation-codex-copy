@@ -15,10 +15,12 @@
 import type { PostingRecord } from "@/lib/types/github-data";
 import {
   SCHEMA_VERSION,
+  backoffUntil,
   buildObservationId,
   dueCheckpointFromAges,
   hoursSince,
   type PostOutcomeObservation,
+  type TargetKeyword,
 } from "./post-outcome.ts";
 import { buildMobileSearchUrl, findRank, parseSerp } from "./serp-parse.ts";
 import { ensureOutcomeIndex, recordObservations } from "./post-outcome-store";
@@ -65,10 +67,11 @@ export interface CollectResult {
  */
 async function observeOnce(params: {
   post: PostingRecord;
-  query: string;
+  keyword: TargetKeyword;
   checkpointHours: number;
 }): Promise<{ result: CollectResult; observation: PostOutcomeObservation }> {
-  const { post, query, checkpointHours } = params;
+  const { post, keyword, checkpointHours } = params;
+  const query = keyword.query;
   const tracking = post.outcomeTracking;
   const capturedAt = new Date().toISOString();
 
@@ -107,6 +110,8 @@ async function observeOnce(params: {
       status: "ok",
       serp: {
         query,
+        // 사람이 정한 말인지 앱이 제목에서 추측한 말인지. 성적 해석이 여기서 갈린다.
+        querySource: keyword.source ?? "title_guess",
         device: "mobile",
         rank,
         searchedResultLimit,
@@ -128,47 +133,88 @@ export async function collectDueOutcomes(params: {
   posts: PostingRecord[];
   now?: string;
   maxQueries?: number;
-}): Promise<{ collected: CollectResult[]; skipped: number; due: number; commitSha: string }> {
+}): Promise<{
+  collected: CollectResult[];
+  skipped: number;
+  due: number;
+  waiting: number;
+  commitSha: string;
+}> {
   const now = params.now ?? new Date().toISOString();
+  const nowMs = new Date(now).getTime();
   const maxQueries = params.maxQueries ?? 8;
 
   // 색인 한 번. 예전에는 글마다 폴더를 열어봤고, 306건이면 그것만으로 왕복 600번이었다.
   const index = await ensureOutcomeIndex();
 
-  const collected: CollectResult[] = [];
-  const observations: PostOutcomeObservation[] = [];
-  let skipped = 0;
-  let due = 0;
-
   const candidates = params.posts.filter(
     (post) => post.status === "published" && post.outcomeTracking && post.publishedAt
   );
 
+  interface DueItem {
+    post: PostingRecord;
+    keyword: TargetKeyword;
+    checkpointHours: number;
+    lastAttemptAt: string;
+  }
+
+  const dueItems: DueItem[] = [];
+  let waiting = 0;
+
   for (const post of candidates) {
-    const checkpointHours = dueCheckpointFromAges({
-      publishedAt: post.publishedAt,
-      now,
-      okAgeHours: index.posts[post.postId]?.okAgeHours ?? [],
-    });
-    if (checkpointHours === null) continue;
-    due += 1;
-
-    if (collected.length >= maxQueries) {
-      skipped += 1;
-      continue;
-    }
-
     for (const keyword of post.outcomeTracking?.targetKeywords ?? []) {
-      if (collected.length >= maxQueries) break;
-      if (collected.length > 0) await sleep(REQUEST_GAP_MS);
-      const observed = await observeOnce({ post, query: keyword.query, checkpointHours });
-      collected.push(observed.result);
-      observations.push(observed.observation);
+      const state = index.posts[post.postId]?.queries?.[keyword.query];
+      const checkpointHours = dueCheckpointFromAges({
+        publishedAt: post.publishedAt,
+        now,
+        okAgeHours: state?.okAgeHours ?? [],
+      });
+      if (checkpointHours === null) continue;
+
+      // 계속 실패한 검색어는 쉬게 둔다. 안 그러면 앞쪽 실패가 한 회차를 다 먹는다.
+      if (backoffUntil(state) > nowMs) {
+        waiting += 1;
+        continue;
+      }
+
+      dueItems.push({
+        post,
+        keyword,
+        checkpointHours,
+        lastAttemptAt: state?.lastAttemptAt ?? "",
+      });
     }
   }
 
-  // 한 바퀴 = 커밋 하나. 쓰다가 실패하면 관측치는 버린다 — 다음 회차에 다시 재면 된다.
-  const { commitSha } = await recordObservations(observations);
+  // 오래 안 재본 것부터. 한 번도 안 잰 것(빈 문자열)이 맨 앞에 온다.
+  // 목록 순서대로 돌면 앞쪽 글만 계속 재고 뒤쪽은 차례가 오지 않는다.
+  dueItems.sort((left, right) => left.lastAttemptAt.localeCompare(right.lastAttemptAt));
 
-  return { collected, skipped, due, commitSha };
+  const collected: CollectResult[] = [];
+  const observations: PostOutcomeObservation[] = [];
+
+  for (const item of dueItems.slice(0, maxQueries)) {
+    if (collected.length > 0) await sleep(REQUEST_GAP_MS);
+    const observed = await observeOnce({
+      post: item.post,
+      keyword: item.keyword,
+      checkpointHours: item.checkpointHours,
+    });
+    collected.push(observed.result);
+    observations.push(observed.observation);
+  }
+
+  // 한 바퀴 = 커밋 하나. 쓰다가 실패하면 관측치는 버린다 — 다음 회차에 다시 재면 된다.
+  const { commitSha } = await recordObservations(observations, {
+    ranAt: now,
+    anyOk: collected.some((item) => item.status === "ok"),
+  });
+
+  return {
+    collected,
+    skipped: Math.max(dueItems.length - collected.length, 0),
+    due: dueItems.length,
+    waiting,
+    commitSha,
+  };
 }

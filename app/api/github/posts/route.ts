@@ -3,7 +3,12 @@ import { readFile, readJsonFile, writeFile, writeJsonFile, fileExists } from "@/
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex, PostingRecord, TopicIndex } from "@/lib/types/github-data";
 import { normalizeUserId } from "@/lib/utils/normalize";
-import { buildOutcomeTracking } from "@/lib/agents/post-outcome";
+import {
+  buildOutcomeTracking,
+  normalizeTargetKeywords,
+  type OutcomeTracking,
+  type TargetKeyword,
+} from "@/lib/agents/post-outcome";
 import {
   runAfterPublishMaintenance,
   type AfterPublishMaintenanceResult,
@@ -57,24 +62,69 @@ export async function GET(request: NextRequest) {
  * 제목 앞쪽에 핵심 키워드를 놓는 게 이 앱의 작성 규칙이라 실제로 맞는 경우가 많다.
  * 완벽하진 않지만, 아무것도 기록하지 않는 것보다 낫다 — 나중에 화면에서 고칠 수 있다.
  */
-async function resolveTargetKeywords(topicId: string, title: string): Promise<string[]> {
-  const fromTitle = title.trim().split(/\s+/).slice(0, 3).join(" ");
-  if (!topicId) return fromTitle ? [fromTitle] : [];
+async function resolveTargetKeywords(
+  topicId: string,
+  title: string,
+  declared?: string[]
+): Promise<TargetKeyword[]> {
+  // 사장님이 직접 넣은 게 있으면 그것만 쓴다. 추측을 섞으면 성적이 오염된다.
+  if (declared && declared.length > 0) {
+    return normalizeTargetKeywords(
+      declared.map((query) => ({ query, role: "primary" as const, source: "user" as const }))
+    );
+  }
+
+  const fromTitle: TargetKeyword = {
+    query: title.trim().split(/\s+/).slice(0, 3).join(" "),
+    role: "primary",
+    source: "title_guess",
+  };
+
+  const fallback = fromTitle.query ? [fromTitle] : [];
+  if (!topicId) return normalizeTargetKeywords(fallback);
 
   try {
-    if (!(await fileExists(Paths.topicsIndex()))) return fromTitle ? [fromTitle] : [];
+    if (!(await fileExists(Paths.topicsIndex()))) return normalizeTargetKeywords(fallback);
     const { data } = await readJsonFile<TopicIndex>(Paths.topicsIndex());
     const topic = data.topics.find((item) => item.topicId === topicId);
     const target = topic?.targetKeyword?.trim();
-    return [target, fromTitle].filter((value): value is string => Boolean(value));
+    return normalizeTargetKeywords(
+      target
+        ? [{ query: target, role: "primary" as const, source: "topic" as const }, fromTitle]
+        : fallback
+    );
   } catch {
-    return fromTitle ? [fromTitle] : [];
+    return normalizeTargetKeywords(fallback);
   }
+}
+
+/**
+ * 이미 있는 계약의 검색어만 갈아끼운다.
+ *
+ * 계약을 통째로 새로 만들지 않는 이유: 글 주소와 발행 당시 제목은 그대로 두어야
+ * 예전 관측이 어느 글의 것인지 남는다. 검색어별 관측 기록은 색인이 검색어 단위로
+ * 들고 있으므로, 새 검색어는 기록이 없어 곧바로 다시 재기 시작한다.
+ */
+function reviseKeywords(
+  tracking: OutcomeTracking,
+  declared: string[],
+  at: string
+): OutcomeTracking {
+  const keywords = normalizeTargetKeywords(
+    declared.map((query) => ({ query, role: "primary" as const, source: "user" as const }))
+  );
+  if (keywords.length === 0) return tracking;
+  return { ...tracking, targetKeywords: keywords, keywordsRevisedAt: at };
 }
 
 export async function PATCH(request: NextRequest) {
   try {
-    const body = await request.json() as { postId: string; content?: string } & Partial<PostingRecord>;
+    const body = await request.json() as {
+      postId: string;
+      content?: string;
+      /** 화면에서 넘어오는 "이 글이 노린 검색어" 목록. 여러 개다. */
+      targetKeywords?: string[];
+    } & Partial<PostingRecord>;
     if (!body.postId) {
       return NextResponse.json({ error: "postId가 필요합니다." }, { status: 400 });
     }
@@ -86,18 +136,26 @@ export async function PATCH(request: NextRequest) {
     }
 
     const now = new Date().toISOString();
-    const { postId, content, ...patch } = body;
+    const { postId, content, targetKeywords: declaredKeywords, ...patch } = body;
     const publishing = patch.status === "published";
 
     // 발행하는 순간 추적 계약을 박는다. 나중에 주제가 바뀌어도 뭘 측정했는지 남는다.
     const trackingUrl = patch.naverPostUrl ?? exists.naverPostUrl;
-    const outcomeTracking =
-      publishing && !exists.outcomeTracking
+    const outcomeTracking = exists.outcomeTracking
+      // 계약이 이미 있으면 검색어만 갈아끼운다.
+      ? declaredKeywords
+        ? reviseKeywords(exists.outcomeTracking, declaredKeywords, now)
+        : null
+      : publishing || declaredKeywords
         ? buildOutcomeTracking({
             naverPostUrl: trackingUrl,
             title: patch.title ?? exists.title,
             content: content ?? "",
-            targetKeywords: await resolveTargetKeywords(exists.topicId, patch.title ?? exists.title),
+            targetKeywords: await resolveTargetKeywords(
+              exists.topicId,
+              patch.title ?? exists.title,
+              declaredKeywords
+            ),
           })
         : null;
     let updatedPost: PostingRecord | null = null;
@@ -328,7 +386,9 @@ export async function PUT(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json() as Omit<PostingRecord, "createdAt" | "updatedAt">;
+    const body = await request.json() as Omit<PostingRecord, "createdAt" | "updatedAt"> & {
+      targetKeywords?: string[];
+    };
 
     if (!body.postId || !body.userId || !body.title) {
       return NextResponse.json(
@@ -340,8 +400,24 @@ export async function POST(request: NextRequest) {
     const { data: index, sha } = await loadIndex();
 
     const now = new Date().toISOString();
+    // 글목록에 넣을 때 노린 검색어를 같이 받는다. 나중에 추측으로 채우면
+    // 그 추측이 그대로 성적표가 된다.
+    const tracking = buildOutcomeTracking({
+      naverPostUrl: body.naverPostUrl ?? null,
+      title: body.title,
+      content: "",
+      targetKeywords: await resolveTargetKeywords(
+        body.topicId ?? "",
+        body.title,
+        body.targetKeywords
+      ),
+      at: now,
+      backfilled: true,
+    });
+
     const newRecord: PostingRecord = {
       ...body,
+      ...(tracking ? { outcomeTracking: tracking } : {}),
       userId: normalizeUserId(body.userId),
       status: body.status ?? "draft",
       naverPostUrl: body.naverPostUrl ?? null,

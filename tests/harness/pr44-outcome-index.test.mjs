@@ -3,12 +3,19 @@ import assert from "node:assert/strict";
 
 import {
   applyObservationsToIndex,
+  backoffUntil,
+  buildOutcomeTracking,
   dueCheckpoint,
   dueCheckpointFromAges,
   emptyOutcomeIndex,
   indexEntryFromObservations,
+  isUsableQuery,
+  MAX_TARGET_KEYWORDS,
+  normalizeQuery,
+  normalizeTargetKeywords,
   okSerpAges,
   ONGOING_INTERVAL_HOURS,
+  summarizeOutcomes,
 } from "../../lib/agents/post-outcome.ts";
 
 const HOUR = 3_600_000;
@@ -24,50 +31,233 @@ const observation = (overrides = {}) => ({
   postAgeHours: overrides.postAgeHours ?? 0,
   status: overrides.status ?? "ok",
   collector: { method: "crawler", version: "1" },
-  ...(overrides.serp ? { serp: overrides.serp } : {}),
-  ...(overrides.note ? { note: overrides.note } : {}),
+  ...(overrides.query !== undefined || overrides.source !== "naver_stats"
+    ? {
+        serp: {
+          query: overrides.query ?? "기본검색어",
+          querySource: overrides.querySource ?? "user",
+          device: "mobile",
+          rank: overrides.rank ?? null,
+          searchedResultLimit: 20,
+          aiBriefing: "not_rendered",
+          cited: "unknown",
+        },
+      }
+    : {}),
 });
 
-describe("PR44 관측 색인", () => {
-  test("성공한 serp 관측 시점만 담는다", () => {
-    const entry = indexEntryFromObservations([
-      observation({ postAgeHours: 0 }),
-      observation({ postAgeHours: 5, status: "request_failed" }),
-      observation({ postAgeHours: 9, source: "naver_stats" }),
-      observation({ postAgeHours: 170 }),
-    ]);
-
-    assert.deepEqual(entry.okAgeHours, [0, 170]);
-    assert.equal(entry.total, 4);
-  });
-
-  test("같은 시점이 두 번 들어와도 부풀지 않는다", () => {
-    const first = applyObservationsToIndex(emptyOutcomeIndex(), [observation({ postAgeHours: 0 })]);
-    const second = applyObservationsToIndex(first, [observation({ postAgeHours: 0 })]);
-
-    assert.deepEqual(second.posts["post-1"].okAgeHours, [0]);
-    // 관측 자체는 두 번 있었다는 사실은 남긴다.
-    assert.equal(second.posts["post-1"].total, 2);
-  });
-
-  test("실패 관측은 시점을 채우지 않는다 — 아직 못 잰 것이다", () => {
+describe("PR44 관측 색인은 검색어 단위다", () => {
+  // 이 앱이 실제로 겪은 버그: 검색어가 둘인 글에서 첫 번째만 재고 한도가 차면,
+  // 그 글이 통째로 "쟀음"이 되어 두 번째 검색어가 영영 안 재졌다.
+  test("한 검색어를 쟀다고 다른 검색어까지 잰 걸로 치지 않는다", () => {
     const index = applyObservationsToIndex(emptyOutcomeIndex(), [
-      observation({ postAgeHours: 3, status: "request_failed" }),
+      observation({ query: "부평 전자담배 추천", postAgeHours: 1000 }),
     ]);
 
-    assert.deepEqual(index.posts["post-1"].okAgeHours, []);
-    assert.equal(index.posts["post-1"].lastStatus, "request_failed");
+    const entry = index.posts["post-1"];
+    assert.deepEqual(entry.queries["부평 전자담배 추천"].okAgeHours, [1000]);
+    assert.equal(entry.queries["구월동 전자담배"], undefined);
+
+    const publishedAt = at(1000);
+    assert.equal(
+      dueCheckpointFromAges({
+        publishedAt,
+        now: NOW,
+        okAgeHours: entry.queries["부평 전자담배 추천"].okAgeHours,
+      }),
+      null
+    );
+    // 안 잰 검색어는 여전히 잴 차례다.
+    assert.equal(
+      dueCheckpointFromAges({ publishedAt, now: NOW, okAgeHours: [] }),
+      672
+    );
+  });
+
+  test("검색어를 새 말로 바꾸면 곧바로 다시 재기 시작한다", () => {
+    const index = applyObservationsToIndex(emptyOutcomeIndex(), [
+      observation({ query: "전자담배 액상이 입", postAgeHours: 900 }),
+    ]);
+    const entry = index.posts["post-1"];
+
+    // 사장님이 제대로 된 말로 바꾼 뒤 — 그 말의 기록은 없으므로 잴 차례다.
+    assert.equal(
+      dueCheckpointFromAges({
+        publishedAt: at(900),
+        now: NOW,
+        okAgeHours: entry.queries["전자담배 액튐 해결"]?.okAgeHours ?? [],
+      }),
+      672
+    );
+  });
+
+  test("실패는 시점을 채우지 않고 연속 실패로 쌓인다", () => {
+    let index = applyObservationsToIndex(emptyOutcomeIndex(), [
+      observation({ status: "request_failed", postAgeHours: 3 }),
+    ]);
+    index = applyObservationsToIndex(index, [
+      observation({ status: "request_failed", postAgeHours: 4, capturedAt: at(-1) }),
+    ]);
+
+    const state = index.posts["post-1"].queries["기본검색어"];
+    assert.deepEqual(state.okAgeHours, []);
+    assert.equal(state.consecutiveFailures, 2);
+    assert.equal(state.lastStatus, "request_failed");
+  });
+
+  test("성공하면 연속 실패가 0으로 돌아간다", () => {
+    let index = applyObservationsToIndex(emptyOutcomeIndex(), [
+      observation({ status: "parse_failed", postAgeHours: 3 }),
+    ]);
+    index = applyObservationsToIndex(index, [
+      observation({ status: "ok", postAgeHours: 4, capturedAt: at(-1) }),
+    ]);
+    assert.equal(index.posts["post-1"].queries["기본검색어"].consecutiveFailures, 0);
+  });
+
+  // 사람이 손으로 넣은 옛 관측이 뒤늦게 들어와도 최신 상태를 과거로 덮으면 안 된다.
+  test("더 오래된 관측이 나중에 들어와도 최신 상태를 덮지 않는다", () => {
+    let index = applyObservationsToIndex(emptyOutcomeIndex(), [
+      observation({ status: "ok", postAgeHours: 10, capturedAt: at(1) }),
+    ]);
+    index = applyObservationsToIndex(index, [
+      observation({ status: "request_failed", postAgeHours: 5, capturedAt: at(50) }),
+    ]);
+
+    const state = index.posts["post-1"].queries["기본검색어"];
+    assert.equal(state.lastStatus, "ok");
+    assert.equal(state.lastCapturedAt, at(1));
   });
 
   test("원본을 고치지 않는다", () => {
     const before = emptyOutcomeIndex();
-    applyObservationsToIndex(before, [observation({ postAgeHours: 0 })]);
+    applyObservationsToIndex(before, [observation()]);
     assert.deepEqual(before.posts, {});
+  });
+
+  test("관측치 원본에서 색인을 다시 만들 수 있다", () => {
+    const entry = indexEntryFromObservations([
+      observation({ query: "가", postAgeHours: 0 }),
+      observation({ query: "나", postAgeHours: 0, capturedAt: at(-1) }),
+      observation({ query: "가", postAgeHours: 170, capturedAt: at(-2) }),
+    ]);
+
+    assert.deepEqual(entry.queries["가"].okAgeHours, [0, 170]);
+    assert.deepEqual(entry.queries["나"].okAgeHours, [0]);
+    assert.equal(entry.total, 3);
+  });
+});
+
+describe("PR44 실패한 검색어는 잠시 쉰다", () => {
+  // 실패는 "쟀다"로 치지 않아 다음 회차에 또 후보가 된다. 앞쪽 몇 건이 계속
+  // 실패하면 한 회차 몫을 다 먹어서 뒤쪽 글은 차례가 영영 오지 않는다.
+  test("연속 실패가 늘수록 간격이 벌어진다", () => {
+    const base = { okAgeHours: [], lastCapturedAt: NOW, total: 1, lastStatus: "request_failed" };
+    const after1 = backoffUntil({ ...base, consecutiveFailures: 1, lastAttemptAt: NOW });
+    const after3 = backoffUntil({ ...base, consecutiveFailures: 3, lastAttemptAt: NOW });
+
+    assert.ok(after3 > after1);
+    assert.equal(after1 - new Date(NOW).getTime(), 1 * HOUR);
+    assert.equal(after3 - new Date(NOW).getTime(), 4 * HOUR);
+  });
+
+  test("하루를 넘겨 쉬지는 않는다", () => {
+    const until = backoffUntil({
+      okAgeHours: [],
+      lastCapturedAt: NOW,
+      total: 20,
+      lastStatus: "request_failed",
+      consecutiveFailures: 20,
+      lastAttemptAt: NOW,
+    });
+    assert.equal(until - new Date(NOW).getTime(), 24 * HOUR);
+  });
+
+  test("성공한 검색어는 쉬지 않는다", () => {
+    assert.equal(backoffUntil(undefined), 0);
+    assert.equal(
+      backoffUntil({
+        okAgeHours: [0],
+        lastCapturedAt: NOW,
+        total: 1,
+        lastStatus: "ok",
+        consecutiveFailures: 0,
+        lastAttemptAt: NOW,
+      }),
+      0
+    );
+  });
+});
+
+describe("PR44 노린 검색어는 사람이 정한다", () => {
+  test("여러 개를 넣을 수 있다", () => {
+    const keywords = normalizeTargetKeywords([
+      "부평 전자담배",
+      "부평 전자담배 매장",
+      "부평역 전자담배",
+    ]);
+    assert.equal(keywords.length, 3);
+    assert.equal(keywords[0].role, "primary");
+    assert.equal(keywords[1].role, "secondary");
+  });
+
+  test("중복과 빈 값은 떨어진다", () => {
+    const keywords = normalizeTargetKeywords(["부평 전자담배", " 부평  전자담배 ", "", "  "]);
+    assert.deepEqual(keywords.map((k) => k.query), ["부평 전자담배"]);
+  });
+
+  test("문장부호만 남은 조각은 검색어가 아니다", () => {
+    assert.equal(isUsableQuery("전자담배 관리법 :"), true); // 부호를 떼면 말이 남는다
+    assert.equal(normalizeQuery("전자담배 관리법 :"), "전자담배 관리법");
+    assert.equal(isUsableQuery(" : "), false);
+    assert.equal(isUsableQuery("가"), false);
+  });
+
+  test("개수에 상한이 있다 — 검색어 하나가 요청 하나다", () => {
+    const many = Array.from({ length: 20 }, (_, i) => `검색어${i}`);
+    assert.equal(normalizeTargetKeywords(many).length, MAX_TARGET_KEYWORDS);
+  });
+
+  test("사람이 정하면 계약에 그 시각이 남는다", () => {
+    const tracking = buildOutcomeTracking({
+      naverPostUrl: "https://blog.naver.com/mansur_vape/224340378304",
+      title: "부평 전자담배 추천",
+      content: "본문",
+      targetKeywords: [{ query: "부평 전자담배", role: "primary", source: "user" }],
+      at: NOW,
+    });
+    assert.equal(tracking.keywordsRevisedAt, NOW);
+    assert.equal(tracking.targetKeywords[0].source, "user");
+  });
+});
+
+describe("PR44 추측한 검색어는 성적으로 치지 않는다", () => {
+  test("추측 검색어만 있으면 아직 판단하지 않는다", () => {
+    const summary = summarizeOutcomes([
+      observation({ querySource: "title_guess", rank: null, postAgeHours: 0 }),
+      observation({ querySource: "title_guess", rank: null, postAgeHours: 1 }),
+    ]);
+
+    assert.equal(summary.okCount, 2);
+    assert.equal(summary.declaredOkCount, 0);
+    assert.equal(summary.guessedOnly, true);
+    assert.equal(summary.confident, false);
+  });
+
+  test("사람이 정한 검색어로 재면 성적이 된다", () => {
+    const summary = summarizeOutcomes([
+      observation({ querySource: "user", rank: 7, postAgeHours: 0 }),
+      observation({ querySource: "user", rank: 5, postAgeHours: 170 }),
+    ]);
+
+    assert.equal(summary.declaredOkCount, 2);
+    assert.equal(summary.guessedOnly, false);
+    assert.equal(summary.confident, true);
+    assert.equal(summary.bestRank, 5);
   });
 });
 
 describe("PR44 색인만으로 판정해도 결과가 같다", () => {
-  // 색인은 캐시다. 캐시로 낸 판정이 원본으로 낸 판정과 다르면 캐시가 아니라 버그다.
   const cases = [
     { name: "발행 직후, 아직 안 잼", publishedHoursAgo: 1, existing: [] },
     {
@@ -90,53 +280,35 @@ describe("PR44 색인만으로 판정해도 결과가 같다", () => {
       publishedHoursAgo: 2000,
       existing: [observation({ postAgeHours: 700 })],
     },
-    {
-      name: "실패만 쌓인 글",
-      publishedHoursAgo: 300,
-      existing: [observation({ postAgeHours: 250, status: "parse_failed" })],
-    },
   ];
 
   for (const testCase of cases) {
     test(testCase.name, () => {
       const publishedAt = at(testCase.publishedHoursAgo);
-      const fromObservations = dueCheckpoint({
-        publishedAt,
-        now: NOW,
-        existing: testCase.existing,
-      });
-      const fromIndex = dueCheckpointFromAges({
-        publishedAt,
-        now: NOW,
-        okAgeHours: okSerpAges(testCase.existing),
-      });
-
-      assert.equal(fromIndex, fromObservations);
+      assert.equal(
+        dueCheckpointFromAges({
+          publishedAt,
+          now: NOW,
+          okAgeHours: okSerpAges(testCase.existing),
+        }),
+        dueCheckpoint({ publishedAt, now: NOW, existing: testCase.existing })
+      );
     });
   }
 
-  test("소급 추적한 옛날 글은 한 번 재고 나면 다음 주기까지 조용하다", () => {
+  test("한 번 재고 나면 28일 뒤에 다시 잰다", () => {
     const publishedAt = at(13_000);
-    const first = dueCheckpointFromAges({ publishedAt, now: NOW, okAgeHours: [] });
-    assert.equal(first, 672);
-
-    const measured = applyObservationsToIndex(emptyOutcomeIndex(), [
+    const index = applyObservationsToIndex(emptyOutcomeIndex(), [
       observation({ postAgeHours: 13_000 }),
     ]);
-    const second = dueCheckpointFromAges({
-      publishedAt,
-      now: NOW,
-      okAgeHours: measured.posts["post-1"].okAgeHours,
-    });
-    assert.equal(second, null);
+    const ages = index.posts["post-1"].queries["기본검색어"].okAgeHours;
 
-    // 28일 뒤에는 다시 잰다.
-    const later = new Date(Date.now() + ONGOING_INTERVAL_HOURS * HOUR).toISOString();
+    assert.equal(dueCheckpointFromAges({ publishedAt, now: NOW, okAgeHours: ages }), null);
     assert.equal(
       dueCheckpointFromAges({
         publishedAt,
-        now: later,
-        okAgeHours: measured.posts["post-1"].okAgeHours,
+        now: new Date(Date.now() + ONGOING_INTERVAL_HOURS * HOUR).toISOString(),
+        okAgeHours: ages,
       }),
       672
     );

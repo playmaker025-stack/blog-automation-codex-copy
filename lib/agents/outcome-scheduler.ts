@@ -89,13 +89,45 @@ export function getCollectorState(): CollectorState {
   return state;
 }
 
+/**
+ * 수집을 시작해도 되는지. 이미 돌고 있으면 false.
+ *
+ * 자동 실행과 화면에서 누르는 수동 실행이 같은 자물쇠를 쓴다. 따로 두면
+ * 같은 글을 동시에 두 번 재고, 저장이 서로 부딪힌다.
+ *
+ * 한계: 이 자물쇠는 프로세스 하나 안에서만 유효하다. 앱이 여러 대로 늘어나면
+ * 저장소 쪽 잠금이 따로 필요하다. 지금은 한 대라 여기까지가 맞다.
+ */
+export function acquireCollectorLock(): boolean {
+  const state = runtime();
+  if (state.running) return false;
+  state.running = true;
+  return true;
+}
+
+export function releaseCollectorLock(): void {
+  runtime().running = false;
+}
+
 /** 한 바퀴. 스케줄러도 이걸 부르고 수동 실행 API도 이걸 부른다. */
 export async function runCollectorOnce(options?: {
   maxQueries?: number;
 }): Promise<CollectorRunSummary> {
   const state = runtime();
   const startedAt = new Date().toISOString();
-  state.running = true;
+  // 자동 실행도 같은 자물쇠를 쓴다. 수동 실행과 겹치면 안 된다.
+  if (!acquireCollectorLock()) {
+    return {
+      startedAt,
+      finishedAt: startedAt,
+      collected: 0,
+      ok: 0,
+      failed: 0,
+      found: 0,
+      due: 0,
+      error: "이미 수집이 돌고 있어 이번 회차는 건너뜁니다.",
+    };
+  }
 
   try {
     const { data: index } = await readJsonFile<PostingIndex>(Paths.postingListIndex());
@@ -123,7 +155,7 @@ export async function runCollectorOnce(options?: {
     state.runCount += 1;
     return summary;
   } finally {
-    state.running = false;
+    releaseCollectorLock();
   }
 }
 

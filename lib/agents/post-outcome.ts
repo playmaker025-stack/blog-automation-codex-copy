@@ -23,8 +23,19 @@ export type ObservationStatus = "ok" | "not_found" | "request_failed" | "parse_f
 export type Tristate = "yes" | "no" | "unknown";
 export type BriefingState = "rendered" | "not_rendered" | "unknown";
 
+/**
+ * 이 검색어가 어디서 왔는지.
+ *
+ * 성적을 해석할 때 결정적이다. 앱이 제목을 잘라 만든 말은 사람이 실제로 치는
+ * 말이 아닐 수 있어서, 그 검색어의 "미노출"은 글의 실패가 아니라 검색어의 실패다.
+ * 둘을 섞으면 무엇이 잘된 글인지 영영 못 가린다.
+ */
+export type KeywordSource = "user" | "topic" | "title_guess";
+
 export interface SerpObservation {
   query: string;
+  /** 잰 시점의 검색어 출처. 나중에 계약이 바뀌어도 이 관측의 성격은 남는다. */
+  querySource?: KeywordSource;
   device: "mobile" | "desktop";
   /** 블로그 영역에서 몇 번째인지. 못 찾았으면 null이고 status가 사유를 말한다. */
   rank: number | null;
@@ -62,7 +73,16 @@ export interface PostOutcomeObservation {
 /** 발행 시점에 고정하는 추적 계약. 나중에 주제가 바뀌어도 뭘 측정했는지 남는다. */
 export interface OutcomeTracking {
   canonicalPost: { blogId: string; logNo: string; canonicalUrl: string };
-  targetKeywords: Array<{ query: string; role: "primary" | "secondary" }>;
+  /**
+   * 이 글이 노린 검색어들. 사장님이 직접 넣은 것이 가장 정확하다.
+   *
+   * 하나로 제한하지 않는다. 글 하나가 여러 검색어를 노리는 건 정상이고,
+   * 실제로 어느 말로 걸리는지는 재봐야 안다. 다만 검색어마다 요청이 하나씩
+   * 늘어나므로 MAX_TARGET_KEYWORDS로 묶는다.
+   */
+  targetKeywords: TargetKeyword[];
+  /** 검색어를 사람이 마지막으로 손본 시각. 언제부터 믿을 수 있는 값인지 남긴다. */
+  keywordsRevisedAt?: string;
   /** 발행 당시 제목. 나중에 고쳐도 관측을 원래 글에 귀속시킨다. */
   publishedTitle: string;
   /** 본문 지문. 글이 수정되면 이전 관측과 섞으면 안 된다. */
@@ -75,6 +95,45 @@ export interface OutcomeTracking {
    */
   backfilled?: boolean;
 }
+
+export interface TargetKeyword {
+  query: string;
+  role: "primary" | "secondary";
+  /** 없으면 옛 데이터다. 옛 데이터는 전부 제목에서 추측한 것이었다. */
+  source?: KeywordSource;
+}
+
+/**
+ * 검색어를 검색창에 칠 수 있는 꼴로 다듬는다.
+ *
+ * 제목에서 잘라온 값에는 문장부호가 그대로 붙어 있다("전자담배 관리법 :").
+ * 그 상태로 검색하면 결과가 달라지고, 화면에도 지저분하게 남는다.
+ */
+export function normalizeQuery(query: string): string {
+  return query
+    .replace(/[.,:!?~·|/\[\]()"'“”‘’]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** 검색어라고 부를 수 있는 값인지. 부호만 남은 조각은 검색어가 아니다. */
+export function isUsableQuery(query: string): boolean {
+  const normalized = normalizeQuery(query);
+  return normalized.length >= 2 && /[가-힣a-zA-Z0-9]{2,}/.test(normalized);
+}
+
+/** 사람이 정한 검색어인지. 성적 계산에 쓸 수 있는 건 이것뿐이다. */
+export function isDeclared(source: KeywordSource | undefined): boolean {
+  return source === "user" || source === "topic";
+}
+
+/**
+ * 한 글이 가질 수 있는 검색어 수.
+ *
+ * 검색어 하나가 관측 시점마다 요청 하나다. 글 306개에 검색어를 무제한으로 두면
+ * 한 바퀴가 끝나지 않는다. 여덟 개면 노리는 말을 다 담고도 남는다.
+ */
+export const MAX_TARGET_KEYWORDS = 8;
 
 export const SCHEMA_VERSION = 1;
 /** 이만큼 성공 관측이 쌓여야 학습에 쓴다. 한 번 보고 승자를 정하면 잡음을 배운다. */
@@ -123,9 +182,13 @@ export function buildObservationId(params: {
   capturedAt: string;
   query?: string;
 }): string {
-  const stamp = params.capturedAt.replace(/[^0-9]/g, "").slice(0, 14);
+  // 밀리초까지 쓴다. 초 단위로 자르면 검색어 없는 관측(통계)은 같은 초에 두 건이
+  // 들어오는 순간 확실히 부딪히고, 나중 관측이 앞 관측을 덮는다.
+  const stamp = params.capturedAt.replace(/[^0-9]/g, "").slice(0, 17);
   const slug = (params.query ?? "").replace(/\s+/g, "-").slice(0, 24);
-  return [stamp, params.source, slug].filter(Boolean).join("_");
+  // 같은 밀리초에 앞 24자가 같은 검색어가 겹칠 수 있다. 짧은 지문으로 갈라준다.
+  const fingerprint = hashContent(`${params.postId}|${params.source}|${params.query ?? ""}`).slice(0, 6);
+  return [stamp, params.source, slug, fingerprint].filter(Boolean).join("_");
 }
 
 export function hoursSince(publishedAt: string | null, at: string): number | null {
@@ -219,43 +282,108 @@ export function dueCheckpointFromAges(params: {
 // ── 관측 색인 ─────────────────────────────────────────────
 
 /**
- * 글 하나가 지금까지 어떻게 관측됐는지의 요약. 순위값은 담지 않는다.
+ * 검색어 하나가 지금까지 어떻게 관측됐는지.
  *
- * 담는 것은 "다음에 언제 재야 하는가"를 판정하는 데 필요한 것뿐이다. 순위나
- * 인용 여부까지 여기 넣으면 관측치 파일과 같은 사실을 두 곳에 적는 꼴이 되고,
- * 둘이 어긋나는 순간 어느 쪽이 맞는지 알 수 없다. 사실의 원본은 관측치 파일이다.
+ * 왜 글이 아니라 검색어 단위인가: 예전에는 "이 글을 쟀는가"를 글 단위로 봤다.
+ * 그래서 검색어가 둘인 글은 첫 번째만 재고도 "쟀음"이 되어 두 번째가 영영
+ * 안 재졌다. 검색어를 새로 바꿔도 마찬가지로 "이미 쟀음"이라 새 말은 측정이
+ * 시작되지 않는다. 재는 단위가 검색어이므로 기록하는 단위도 검색어여야 한다.
  */
-export interface OutcomeIndexEntry {
-  /** 성공적으로 잰 시점들(발행 후 몇 시간차). 판정에 쓰는 값. */
+export interface OutcomeQueryState {
+  /** 성공적으로 잰 시점들(발행 후 몇 시간차). 다음에 잴 때를 정하는 값. */
   okAgeHours: number[];
   lastCapturedAt: string;
-  /** 실패까지 포함한 관측 수. 계속 실패만 쌓이는 글을 눈으로 찾을 때 쓴다. */
   total: number;
   lastStatus: ObservationStatus;
+  /** 연속으로 실패한 횟수. 계속 실패하는 검색어를 뒤로 미루는 데 쓴다. */
+  consecutiveFailures: number;
+  /** 성공이든 실패든 마지막으로 시도한 시각. 차례를 공평하게 도는 데 쓴다. */
+  lastAttemptAt: string;
+}
+
+export interface OutcomeIndexEntry {
+  queries: Record<string, OutcomeQueryState>;
+  lastCapturedAt: string;
+  /** 실패까지 포함한 관측 수. 검색어 없는 관측(통계)도 여기에 센다. */
+  total: number;
+}
+
+/** 수집기가 살아 있는지. 사람이 안 보는 기능이라 상태를 남겨야 한다. */
+export interface CollectorHealth {
+  lastRunAt: string;
+  /** 마지막으로 한 건이라도 성공한 시각. 이게 안 움직이면 조용히 죽은 것이다. */
+  lastOkAt?: string;
+  /** 한 건도 성공하지 못한 회차가 연달아 몇 번인지. */
+  consecutiveFailedRuns: number;
 }
 
 export interface OutcomeIndex {
-  schemaVersion: 1;
+  schemaVersion: number;
   updatedAt: string;
   posts: Record<string, OutcomeIndexEntry>;
+  health?: CollectorHealth;
 }
+
+/** 색인 판이 바뀌면 올린다. 낮으면 관측치 원본에서 다시 만든다. */
+export const OUTCOME_INDEX_VERSION = 2;
 
 export function emptyOutcomeIndex(): OutcomeIndex {
-  return { schemaVersion: SCHEMA_VERSION as 1, updatedAt: new Date(0).toISOString(), posts: {} };
+  return {
+    schemaVersion: OUTCOME_INDEX_VERSION,
+    updatedAt: new Date(0).toISOString(),
+    posts: {},
+  };
 }
 
-/** 색인이 없거나 깨졌을 때 관측치 원본에서 다시 만든다. 원본이 항상 우선이다. */
+/** 검색어 없는 관측(통계 등)을 담는 자리. 순위 판정에는 쓰지 않는다. */
+export const NO_QUERY_KEY = "";
+
+function queryKeyOf(observation: PostOutcomeObservation): string {
+  return observation.source === "serp" ? (observation.serp?.query ?? NO_QUERY_KEY) : NO_QUERY_KEY;
+}
+
+/** 색인이 없거나 판이 낡았을 때 관측치 원본에서 다시 만든다. 원본이 항상 우선이다. */
 export function indexEntryFromObservations(
   observations: PostOutcomeObservation[]
 ): OutcomeIndexEntry | null {
   if (observations.length === 0) return null;
   const sorted = [...observations].sort((a, b) => a.capturedAt.localeCompare(b.capturedAt));
-  const last = sorted[sorted.length - 1];
-  return {
-    okAgeHours: okSerpAges(sorted),
-    lastCapturedAt: last.capturedAt,
+
+  const entry: OutcomeIndexEntry = {
+    queries: {},
+    lastCapturedAt: sorted[sorted.length - 1].capturedAt,
     total: sorted.length,
-    lastStatus: last.status,
+  };
+
+  for (const observation of sorted) {
+    entry.queries[queryKeyOf(observation)] = applyToQueryState(
+      entry.queries[queryKeyOf(observation)],
+      observation
+    );
+  }
+
+  return entry;
+}
+
+function applyToQueryState(
+  previous: OutcomeQueryState | undefined,
+  observation: PostOutcomeObservation
+): OutcomeQueryState {
+  const ok = observation.status === "ok" && observation.source === "serp";
+  const ages = new Set(previous?.okAgeHours ?? []);
+  if (ok && typeof observation.postAgeHours === "number") ages.add(observation.postAgeHours);
+
+  // 시간을 거스르지 않는다. 사람이 손으로 넣은 옛 관측이 뒤늦게 들어와도
+  // "가장 최근 상태"가 과거로 덮이면 안 된다.
+  const isNewest = !previous || observation.capturedAt >= previous.lastCapturedAt;
+
+  return {
+    okAgeHours: [...ages].sort((a, b) => a - b),
+    lastCapturedAt: isNewest ? observation.capturedAt : previous.lastCapturedAt,
+    total: (previous?.total ?? 0) + 1,
+    lastStatus: isNewest ? observation.status : previous.lastStatus,
+    consecutiveFailures: ok ? 0 : (previous?.consecutiveFailures ?? 0) + 1,
+    lastAttemptAt: isNewest ? observation.capturedAt : previous.lastAttemptAt,
   };
 }
 
@@ -274,21 +402,39 @@ export function applyObservationsToIndex(
 
   for (const observation of observations) {
     const previous = posts[observation.postId];
-    const ages = new Set(previous?.okAgeHours ?? []);
-    for (const age of okSerpAges([observation])) ages.add(age);
+    const key = queryKeyOf(observation);
+    const queries = { ...(previous?.queries ?? {}) };
+    queries[key] = applyToQueryState(queries[key], observation);
 
     posts[observation.postId] = {
-      okAgeHours: [...ages].sort((a, b) => a - b),
+      queries,
       lastCapturedAt:
         previous && previous.lastCapturedAt > observation.capturedAt
           ? previous.lastCapturedAt
           : observation.capturedAt,
       total: (previous?.total ?? 0) + 1,
-      lastStatus: observation.status,
     };
   }
 
-  return { schemaVersion: SCHEMA_VERSION as 1, updatedAt: at, posts };
+  return {
+    schemaVersion: OUTCOME_INDEX_VERSION,
+    updatedAt: at,
+    posts,
+    ...(index.health ? { health: index.health } : {}),
+  };
+}
+
+/**
+ * 계속 실패하는 검색어를 잠시 쉬게 한다.
+ *
+ * 실패는 "쟀다"로 치지 않으므로 다음 회차에 또 후보가 된다. 앞쪽 글 몇 개가
+ * 계속 실패하면 한 회차 몫을 전부 먹어서 뒤에 있는 글은 차례가 영영 안 온다.
+ * 실패할수록 간격을 벌리되 하루를 넘기지 않는다.
+ */
+export function backoffUntil(state: OutcomeQueryState | undefined): number {
+  if (!state || state.consecutiveFailures === 0) return 0;
+  const hours = Math.min(2 ** (state.consecutiveFailures - 1), 24);
+  return new Date(state.lastAttemptAt).getTime() + hours * 3_600_000;
 }
 
 // ── 요약 ──────────────────────────────────────────────────
@@ -296,6 +442,8 @@ export function applyObservationsToIndex(
 export interface OutcomeSummary {
   observationCount: number;
   okCount: number;
+  /** 사람이 정한 검색어로 잰 성공 관측 수. 성적으로 쓸 수 있는 건 이것뿐이다. */
+  declaredOkCount: number;
   /** 지금까지 가장 좋았던 순위. 못 찾은 관측은 계산에서 뺀다. */
   bestRank: number | null;
   latestRank: number | null;
@@ -308,11 +456,22 @@ export interface OutcomeSummary {
   inboundQueries: Array<{ query: string; ratio: number }>;
   /** 학습에 쓸 만큼 쌓였는지. 아니면 이 글은 아직 판단하지 않는다. */
   confident: boolean;
+  /**
+   * 관측은 있는데 전부 앱이 추측한 검색어로 잰 것인지.
+   *
+   * 이 글의 "미노출"은 글의 실패가 아니라 검색어의 실패일 수 있다. 성적으로
+   * 쓰면 안 되고, 사람이 검색어를 정해줘야 하는 글이라는 표시다.
+   */
+  guessedOnly: boolean;
 }
 
 export function summarizeOutcomes(observations: PostOutcomeObservation[]): OutcomeSummary {
   const sorted = [...observations].sort((a, b) => a.capturedAt.localeCompare(b.capturedAt));
   const ok = sorted.filter((item) => item.status === "ok");
+  // 순위 관측만 검색어 출처를 따진다. 통계 관측은 실제 유입이라 추측이 아니다.
+  const declaredOk = ok.filter(
+    (item) => item.source !== "serp" || isDeclared(item.serp?.querySource)
+  );
 
   const ranks = ok
     .map((item) => item.serp?.rank)
@@ -324,13 +483,16 @@ export function summarizeOutcomes(observations: PostOutcomeObservation[]): Outco
   return {
     observationCount: sorted.length,
     okCount: ok.length,
+    declaredOkCount: declaredOk.length,
     bestRank: ranks.length > 0 ? Math.min(...ranks) : null,
     latestRank: latestSerp?.serp?.rank ?? null,
     everCited: ok.some((item) => item.serp?.cited === "yes"),
     briefingEverRendered: ok.some((item) => item.serp?.aiBriefing === "rendered"),
     latestViews: latestStats?.stats?.views ?? null,
     inboundQueries: latestStats?.stats?.searchQueries ?? [],
-    confident: ok.length >= MIN_CONFIDENT_OBSERVATIONS,
+    // 추측한 검색어로 몇 번을 재도 그 글을 안다고 할 수 없다.
+    confident: declaredOk.length >= MIN_CONFIDENT_OBSERVATIONS,
+    guessedOnly: ok.length > 0 && declaredOk.length === 0,
   };
 }
 
@@ -366,30 +528,58 @@ export function buildOutcomeTracking(params: {
   naverPostUrl: string | null;
   title: string;
   content: string;
-  targetKeywords: string[];
+  targetKeywords: Array<string | TargetKeyword>;
   at?: string;
   backfilled?: boolean;
 }): OutcomeTracking | null {
   const canonical = parseNaverPostUrl(params.naverPostUrl);
   if (!canonical) return null;
 
-  const queries = params.targetKeywords
-    .map((keyword) => keyword.trim())
-    .filter(Boolean)
-    .slice(0, 2);
+  const queries = normalizeTargetKeywords(params.targetKeywords);
   if (queries.length === 0) return null;
+
+  const at = params.at ?? new Date().toISOString();
+  const declaredByUser = queries.some((keyword) => keyword.source === "user");
 
   return {
     canonicalPost: canonical,
-    targetKeywords: queries.map((query, index) => ({
-      query,
-      role: index === 0 ? "primary" : "secondary",
-    })),
+    targetKeywords: queries,
     publishedTitle: params.title.trim(),
     contentHash: hashContent(params.content),
-    trackedFrom: params.at ?? new Date().toISOString(),
+    trackedFrom: at,
+    ...(declaredByUser ? { keywordsRevisedAt: at } : {}),
     ...(params.backfilled ? { backfilled: true } : {}),
   };
+}
+
+/**
+ * 검색어 목록을 다듬는다. 빈 값·중복·부호 조각을 떨어뜨리고 개수를 묶는다.
+ *
+ * 순서를 지킨다 — 사장님이 먼저 적은 것이 그 글의 주 검색어다. 첫 번째만
+ * primary이고 나머지는 secondary지만, 둘 다 똑같이 잰다. 역할은 나중에
+ * 성적을 볼 때 무엇을 먼저 봐야 하는지의 표시일 뿐이다.
+ */
+export function normalizeTargetKeywords(
+  keywords: Array<string | TargetKeyword>
+): TargetKeyword[] {
+  const seen = new Set<string>();
+  const result: TargetKeyword[] = [];
+
+  for (const raw of keywords) {
+    const entry = typeof raw === "string" ? { query: raw, role: "primary" as const } : raw;
+    const query = normalizeQuery(entry.query ?? "");
+    if (!isUsableQuery(query)) continue;
+    if (seen.has(query)) continue;
+    seen.add(query);
+    result.push({
+      query,
+      role: result.length === 0 ? "primary" : "secondary",
+      ...(entry.source ? { source: entry.source } : {}),
+    });
+    if (result.length >= MAX_TARGET_KEYWORDS) break;
+  }
+
+  return result;
 }
 
 /** 본문이 바뀌었는지. 바뀐 글의 관측을 이전 전략에 귀속시키면 안 된다. */

@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { PostingRecord } from "@/lib/types/github-data";
 import { parseIndexText, readFileAutoEncoding } from "@/lib/skills/import-parser";
+import { KeywordInput } from "@/components/posts/keyword-input";
+import { isDeclared } from "@/lib/agents/post-outcome";
 
 type StatusFilter = "all" | PostingRecord["status"];
 
@@ -34,6 +36,8 @@ interface EditState {
   title: string;
   naverPostUrl: string;
   status: PostingRecord["status"];
+  /** 이 글이 노린 검색어. 사장님이 정하면 앱의 추측을 대체한다. */
+  targetKeywords: string[];
 }
 
 // ── 블로그 배지 색상 ────────────────────────────────────────
@@ -45,6 +49,36 @@ const BLOG_BADGE_COLORS: Record<string, string> = {
   E: "bg-pink-100 text-pink-700",
 };
 
+/**
+ * 이 글이 무엇을 노리고 있는지 목록에서 바로 보이게 한다.
+ *
+ * 추측한 검색어를 사장님이 정한 것처럼 보여주면 안 된다. 지금 306건 중
+ * 대부분이 제목을 잘라 만든 추측이고, 그 검색어의 "미노출"은 글의 실패가 아니다.
+ */
+function TargetKeywordBadges({ post }: { post: PostingRecord }) {
+  const keywords = post.outcomeTracking?.targetKeywords ?? [];
+  if (keywords.length === 0) return null;
+
+  return (
+    <div className="flex items-center gap-1 mt-1 flex-wrap">
+      {keywords.map((keyword) => (
+        <span
+          key={keyword.query}
+          className={`text-[11px] rounded-full px-2 py-0.5 ${
+            isDeclared(keyword.source)
+              ? "bg-blue-50 text-blue-600"
+              : "bg-zinc-100 text-zinc-400"
+          }`}
+          title={isDeclared(keyword.source) ? "사장님이 정한 검색어" : "앱이 제목에서 추측한 검색어 — 성적으로 세지 않습니다"}
+        >
+          {keyword.query}
+          {!isDeclared(keyword.source) && " (추측)"}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default function PostsPage() {
   const [posts, setPosts] = useState<PostingRecord[]>([]);
   const [filter, setFilter] = useState<StatusFilter>("all");
@@ -55,6 +89,7 @@ export default function PostsPage() {
   const [addTitle, setAddTitle] = useState("");
   const [addUrl, setAddUrl] = useState("");
   const [addUserId, setAddUserId] = useState("");
+  const [addKeywords, setAddKeywords] = useState<string[]>([]);
 
   // 항목 수정 인라인
   const [editing, setEditing] = useState<EditState | null>(null);
@@ -100,6 +135,7 @@ export default function PostsPage() {
           status: "published",
           naverPostUrl: addUrl.trim() || null,
           wordCount: 0,
+          targetKeywords: addKeywords,
         }),
       });
       if (!res.ok) throw new Error();
@@ -107,6 +143,7 @@ export default function PostsPage() {
       setAddTitle("");
       setAddUrl("");
       setAddUserId("");
+      setAddKeywords([]);
       setNotice({ type: "ok", msg: "항목이 추가되었습니다." });
       load();
     } catch {
@@ -121,6 +158,11 @@ export default function PostsPage() {
       title: post.title,
       naverPostUrl: post.naverPostUrl ?? "",
       status: post.status,
+      // 앱이 추측한 값은 미리 채우지 않는다. 채워두면 확인 없이 그대로 승인되고,
+      // 그 순간 추측이 "사장님이 정한 값"으로 승격된다.
+      targetKeywords: (post.outcomeTracking?.targetKeywords ?? [])
+        .filter((keyword) => isDeclared(keyword.source))
+        .map((keyword) => keyword.query),
     });
     setNotice(null);
   };
@@ -136,6 +178,9 @@ export default function PostsPage() {
           title: editing.title,
           naverPostUrl: editing.naverPostUrl || null,
           status: editing.status,
+          ...(editing.targetKeywords.length > 0
+            ? { targetKeywords: editing.targetKeywords }
+            : {}),
         }),
       });
       if (!res.ok) throw new Error();
@@ -297,6 +342,18 @@ export default function PostsPage() {
                         ))}
                       </select>
                     </div>
+                    <div>
+                      <label className="block text-xs text-zinc-500 mb-1">
+                        노린 검색어
+                        <span className="ml-1.5 text-zinc-400 font-normal">
+                          이 글이 어떤 검색으로 잡히길 바라고 쓴 글인지
+                        </span>
+                      </label>
+                      <KeywordInput
+                        value={editing.targetKeywords}
+                        onChange={(next) => setEditing({ ...editing, targetKeywords: next })}
+                      />
+                    </div>
                   </div>
                   <div className="flex gap-2 justify-end">
                     <button
@@ -334,6 +391,7 @@ export default function PostsPage() {
                         </a>
                       )}
                     </div>
+                    <TargetKeywordBadges post={post} />
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     {post.evalScore != null && (
@@ -395,10 +453,19 @@ export default function PostsPage() {
                   className="w-full border border-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
+              <div>
+                <label className="block text-xs font-medium text-zinc-600 mb-1">
+                  노린 검색어
+                </label>
+                <p className="text-[11px] text-zinc-400 mb-1.5">
+                  이 글이 어떤 검색으로 잡히길 바라고 쓴 글인지 넣으세요. 여러 개 넣을 수 있습니다.
+                </p>
+                <KeywordInput value={addKeywords} onChange={setAddKeywords} />
+              </div>
             </div>
             <div className="flex justify-end gap-2 mt-5">
               <button
-                onClick={() => { setShowAdd(false); setAddTitle(""); setAddUrl(""); setAddUserId(""); }}
+                onClick={() => { setShowAdd(false); setAddTitle(""); setAddUrl(""); setAddUserId(""); setAddKeywords([]); }}
                 className="px-4 py-2 text-sm text-zinc-600 hover:text-zinc-900"
               >
                 취소

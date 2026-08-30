@@ -17,24 +17,27 @@ import { fileExists, readJsonFile, writeJsonFile } from "@/lib/github/repository
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex, PostingRecord, TopicIndex } from "@/lib/types/github-data";
 import { normalizeUserId } from "@/lib/utils/normalize";
-import { buildOutcomeTracking } from "@/lib/agents/post-outcome";
+import { buildOutcomeTracking, type TargetKeyword } from "@/lib/agents/post-outcome";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
-function keywordsFor(post: PostingRecord, topics: Map<string, string>): string[] {
+function keywordsFor(post: PostingRecord, topics: Map<string, string>): TargetKeyword[] {
   const fromTopic = topics.get(post.topicId)?.trim();
-  // 제목 앞부분을 쓰는 이유: 이 앱의 작성 규칙이 핵심 키워드를 제목 앞에 두는 것이라
-  // 실제로 맞는 경우가 많다. 완벽하진 않지만 아무것도 안 남기는 것보다 낫다.
-  // 문장부호를 떼고 앞 세 낱말. 쉼표가 붙은 채로 검색어가 되면 지저분하다.
+  // 제목 앞부분은 어디까지나 추측이다. 이 앱의 작성 규칙이 핵심 키워드를 제목
+  // 앞에 두는 것이라 맞는 경우도 많지만, "전자담배 액상이 입"처럼 문장 조각이
+  // 되는 경우가 더 많았다. 그래서 반드시 title_guess로 표시해서 남긴다 —
+  // 이 검색어의 "미노출"은 글의 실패가 아니라 검색어의 실패일 수 있다.
   const fromTitle = post.title
-    .replace(/[,.!?~·|/\[\]()"'“”‘’]/g, " ")
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 3)
-    .join(" ")
-    .trim();
-  return [fromTopic, fromTitle].filter((value): value is string => Boolean(value));
+    .join(" ");
+
+  const keywords: TargetKeyword[] = [];
+  if (fromTopic) keywords.push({ query: fromTopic, role: "primary", source: "topic" });
+  if (fromTitle) keywords.push({ query: fromTitle, role: "primary", source: "title_guess" });
+  return keywords;
 }
 
 export async function POST(request: Request) {

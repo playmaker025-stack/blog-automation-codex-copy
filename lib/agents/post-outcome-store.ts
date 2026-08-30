@@ -22,6 +22,7 @@ import {
   emptyOutcomeIndex,
   indexEntryFromObservations,
   summarizeOutcomes,
+  OUTCOME_INDEX_VERSION,
   type OutcomeIndex,
   type OutcomeSummary,
   type PostOutcomeObservation,
@@ -94,7 +95,8 @@ export async function ensureOutcomeIndex(): Promise<OutcomeIndex> {
   const existing = await readJsonFile<OutcomeIndex>(Paths.outcomeIndex())
     .then((result) => result.data)
     .catch(() => null);
-  if (existing && existing.posts) return existing;
+  // 판이 낡았으면 원본에서 다시 만든다. 색인은 캐시라 언제든 버릴 수 있다.
+  if (existing?.posts && existing.schemaVersion === OUTCOME_INDEX_VERSION) return existing;
 
   const rebuilt = await rebuildOutcomeIndex();
   await writeJsonFile(
@@ -132,20 +134,23 @@ const INDEX_CONFLICT_RETRIES = 3;
  * 다시 시도한다. 실패한 커밋의 관측치 파일은 아직 저장소에 없으므로 잃는 게 없다.
  */
 export async function recordObservations(
-  observations: PostOutcomeObservation[]
+  observations: PostOutcomeObservation[],
+  run?: { ranAt: string; anyOk: boolean }
 ): Promise<{ written: number; commitSha: string; index: OutcomeIndex }> {
   const unique = new Map<string, PostOutcomeObservation>();
   for (const observation of observations) {
     unique.set(Paths.postOutcome(observation.postId, observation.observationId), observation);
   }
-  if (unique.size === 0) {
+  // 한 건도 못 잰 회차도 기록해야 한다. 아무것도 안 남기면 "조용히 멈춘 것"과
+  // "잴 게 없어서 안 잰 것"이 구분되지 않는다.
+  if (unique.size === 0 && !run) {
     return { written: 0, commitSha: "", index: await ensureOutcomeIndex() };
   }
 
   let lastError: unknown = null;
   for (let attempt = 0; attempt < INDEX_CONFLICT_RETRIES; attempt += 1) {
     const index = await ensureOutcomeIndex();
-    const merged = applyObservationsToIndex(index, [...unique.values()]);
+    const merged = withHealth(applyObservationsToIndex(index, [...unique.values()]), run);
 
     const files = [...unique.entries()].map(([path, observation]) => ({
       path,
@@ -156,7 +161,9 @@ export async function recordObservations(
     try {
       const result = await writeFiles(
         files,
-        `chore(outcome): 관측 ${unique.size}건 기록`
+        unique.size > 0
+          ? `chore(outcome): 관측 ${unique.size}건 기록`
+          : "chore(outcome): 잴 것이 없는 회차 기록"
       );
       return { written: unique.size, commitSha: result.commitSha, index: merged };
     } catch (error) {
@@ -169,4 +176,23 @@ export async function recordObservations(
   throw lastError instanceof Error
     ? lastError
     : new Error("관측치를 기록하지 못했습니다 (브랜치 충돌).");
+}
+
+/**
+ * 수집기가 살아 있다는 흔적을 색인에 같이 남긴다.
+ *
+ * 메모리에만 두면 앱이 한 번 재시작될 때 사라진다. "마지막으로 성공한 게
+ * 언제인가"는 사람이 안 보는 기능에서 유일하게 믿을 수 있는 신호다.
+ */
+function withHealth(index: OutcomeIndex, run?: { ranAt: string; anyOk: boolean }): OutcomeIndex {
+  if (!run) return index;
+  const previous = index.health;
+  return {
+    ...index,
+    health: {
+      lastRunAt: run.ranAt,
+      lastOkAt: run.anyOk ? run.ranAt : previous?.lastOkAt,
+      consecutiveFailedRuns: run.anyOk ? 0 : (previous?.consecutiveFailedRuns ?? 0) + 1,
+    },
+  };
 }

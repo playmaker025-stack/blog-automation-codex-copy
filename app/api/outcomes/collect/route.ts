@@ -13,12 +13,25 @@ import { Paths } from "@/lib/github/paths";
 import type { PostingIndex } from "@/lib/types/github-data";
 import { normalizeUserId } from "@/lib/utils/normalize";
 import { collectDueOutcomes } from "@/lib/agents/serp-collector";
-import { dueCheckpointFromAges } from "@/lib/agents/post-outcome";
+import { backoffUntil, dueCheckpointFromAges, isDeclared } from "@/lib/agents/post-outcome";
 import { ensureOutcomeIndex } from "@/lib/agents/post-outcome-store";
-import { getCollectorState } from "@/lib/agents/outcome-scheduler";
+import type { OutcomeQueryState } from "@/lib/agents/post-outcome";
+import {
+  acquireCollectorLock,
+  getCollectorState,
+  releaseCollectorLock,
+} from "@/lib/agents/outcome-scheduler";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
+
+/** 색인 판이 낡아 queries가 없을 수도 있다. 그때는 "안 잰 것"으로 본다. */
+function index2Query(
+  queries: Record<string, OutcomeQueryState> | undefined,
+  query: string
+): OutcomeQueryState | undefined {
+  return queries?.[query];
+}
 
 export async function GET() {
   try {
@@ -28,24 +41,50 @@ export async function GET() {
     ]);
 
     const now = new Date().toISOString();
+    const nowMs = Date.now();
     const tracked = index.posts.filter(
       (post) => post.status === "published" && post.outcomeTracking && post.publishedAt
     );
 
+    let queries = 0;
+    let declared = 0;
     let measured = 0;
     let due = 0;
+    let waiting = 0;
+
     for (const post of tracked) {
-      const okAgeHours = outcomeIndex.posts[post.postId]?.okAgeHours ?? [];
-      if (okAgeHours.length > 0) measured += 1;
-      if (dueCheckpointFromAges({ publishedAt: post.publishedAt, now, okAgeHours }) !== null) {
-        due += 1;
+      for (const keyword of post.outcomeTracking?.targetKeywords ?? []) {
+        queries += 1;
+        if (isDeclared(keyword.source)) declared += 1;
+
+        const state = index2Query(outcomeIndex.posts[post.postId]?.queries, keyword.query);
+        if ((state?.okAgeHours.length ?? 0) > 0) measured += 1;
+
+        const checkpoint = dueCheckpointFromAges({
+          publishedAt: post.publishedAt,
+          now,
+          okAgeHours: state?.okAgeHours ?? [],
+        });
+        if (checkpoint === null) continue;
+        if (backoffUntil(state) > nowMs) waiting += 1;
+        else due += 1;
       }
     }
 
     return NextResponse.json({
       ok: true,
       collector: getCollectorState(),
-      progress: { tracked: tracked.length, measured, due },
+      health: outcomeIndex.health ?? null,
+      progress: {
+        posts: tracked.length,
+        queries,
+        // 사람이 정한 검색어 수. 나머지는 앱이 제목에서 추측한 것이라 성적으로 못 쓴다.
+        declared,
+        measured,
+        due,
+        // 계속 실패해서 잠시 쉬는 중인 검색어.
+        waiting,
+      },
     });
   } catch (error) {
     return NextResponse.json(
@@ -60,6 +99,14 @@ export async function POST(request: Request) {
     maxQueries?: number;
     userId?: string;
   };
+
+  // 자동 실행이 돌고 있으면 겹치지 않는다. 같은 글을 두 번 재고 저장이 부딪힌다.
+  if (!acquireCollectorLock()) {
+    return NextResponse.json(
+      { ok: false, error: "수집이 이미 돌고 있습니다. 끝나면 다시 눌러 주세요." },
+      { status: 409 }
+    );
+  }
 
   try {
     const { data: index } = await readJsonFile<PostingIndex>(Paths.postingListIndex());
@@ -88,5 +135,7 @@ export async function POST(request: Request) {
       { ok: false, error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
+  } finally {
+    releaseCollectorLock();
   }
 }
