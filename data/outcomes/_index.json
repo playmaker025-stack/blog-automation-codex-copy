@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-30T12:56:55.401Z",
+  "updatedAt": "2026-08-30T13:16:54.149Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -3297,11 +3297,181 @@
       },
       "lastCapturedAt": "2026-08-30T12:56:52.799Z",
       "total": 1
+    },
+    "post-ed806d65": {
+      "queries": {
+        "남동구청역 전자담배 입문자": {
+          "okAgeHours": [
+            626
+          ],
+          "lastCapturedAt": "2026-08-30T13:15:40.207Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:15:40.207Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:15:40.207Z",
+      "total": 1
+    },
+    "post-manual-msenaehp": {
+      "queries": {
+        "전자담배 입문자는 언제": {
+          "okAgeHours": [
+            625
+          ],
+          "lastCapturedAt": "2026-08-30T13:15:47.179Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:15:47.179Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:15:47.179Z",
+      "total": 1
+    },
+    "post-15731f9f": {
+      "queries": {
+        "액상형 전자담배 종류": {
+          "okAgeHours": [
+            582
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:00.414Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:00.414Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:16:00.414Z",
+      "total": 2
+    },
+    "post-8859dd10": {
+      "queries": {
+        "만수동 전자담배 사고": {
+          "okAgeHours": [
+            532
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:06.392Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:06.392Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:16:06.392Z",
+      "total": 1
+    },
+    "post-fb0461a1": {
+      "queries": {
+        "일회용전자담배 불량": {
+          "okAgeHours": [
+            557
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:12.697Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:12.697Z"
+        },
+        "일회용전자담배 불량 증상": {
+          "okAgeHours": [
+            557
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:19.224Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:19.224Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:16:19.224Z",
+      "total": 2
+    },
+    "post-manual-msiwq135": {
+      "queries": {
+        "전자담배 액상 추천을": {
+          "okAgeHours": [
+            553
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:25.747Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:25.747Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:16:25.747Z",
+      "total": 1
+    },
+    "post-manual-mslcq13v": {
+      "queries": {
+        "전자담배 액상 시향만으로는": {
+          "okAgeHours": [
+            512
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:32.405Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:32.405Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:16:32.405Z",
+      "total": 1
+    },
+    "post-manual-mslqjgv4": {
+      "queries": {
+        "상큼 깔끔 입호흡": {
+          "okAgeHours": [
+            506
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:38.158Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:38.158Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:16:38.158Z",
+      "total": 1
+    },
+    "post-manual-msmx35tq": {
+      "queries": {
+        "베놈 팬텀 엔트리": {
+          "okAgeHours": [
+            486
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:44.605Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:44.605Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:16:44.605Z",
+      "total": 1
+    },
+    "post-manual-msnbeme6": {
+      "queries": {
+        "전자담배 팟에 액상은": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-08-30T13:16:51.136Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T13:16:51.136Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T13:16:51.136Z",
+      "total": 1
     }
   },
   "health": {
-    "lastRunAt": "2026-08-30T12:55:39.459Z",
-    "lastOkAt": "2026-08-30T12:55:39.459Z",
+    "lastRunAt": "2026-08-30T13:15:39.866Z",
+    "lastOkAt": "2026-08-30T13:15:39.866Z",
     "consecutiveFailedRuns": 0
   }
 }

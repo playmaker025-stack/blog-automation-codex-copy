@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8859dd10",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:16:06.392Z",
+  "postAgeHours": 532,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830131606392_serp_만수동-전자담배-사고_be9e00",
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 사고",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 10,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

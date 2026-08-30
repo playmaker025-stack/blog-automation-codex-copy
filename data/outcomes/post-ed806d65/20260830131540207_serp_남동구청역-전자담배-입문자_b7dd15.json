@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-ed806d65",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:15:40.207Z",
+  "postAgeHours": 626,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830131540207_serp_남동구청역-전자담배-입문자_b7dd15",
+  "status": "ok",
+  "serp": {
+    "query": "남동구청역 전자담배 입문자",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 12,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

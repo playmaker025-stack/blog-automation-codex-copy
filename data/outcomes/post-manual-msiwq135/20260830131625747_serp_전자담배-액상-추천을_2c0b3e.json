@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msiwq135",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:16:25.747Z",
+  "postAgeHours": 553,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830131625747_serp_전자담배-액상-추천을_2c0b3e",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 추천을",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

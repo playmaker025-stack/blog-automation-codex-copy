@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-fb0461a1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:16:12.697Z",
+  "postAgeHours": 557,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830131612697_serp_일회용전자담배-불량_669e49",
+  "status": "ok",
+  "serp": {
+    "query": "일회용전자담배 불량",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 7,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

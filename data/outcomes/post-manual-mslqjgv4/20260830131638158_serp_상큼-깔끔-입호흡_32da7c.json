@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mslqjgv4",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:16:38.158Z",
+  "postAgeHours": 506,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830131638158_serp_상큼-깔끔-입호흡_32da7c",
+  "status": "ok",
+  "serp": {
+    "query": "상큼 깔끔 입호흡",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 14,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

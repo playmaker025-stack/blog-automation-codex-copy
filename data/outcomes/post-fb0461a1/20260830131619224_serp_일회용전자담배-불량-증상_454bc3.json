@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-fb0461a1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:16:19.224Z",
+  "postAgeHours": 557,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830131619224_serp_일회용전자담배-불량-증상_454bc3",
+  "status": "ok",
+  "serp": {
+    "query": "일회용전자담배 불량 증상",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 10,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

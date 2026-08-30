@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mslcq13v",
+  "source": "serp",
+  "capturedAt": "2026-08-30T13:16:32.405Z",
+  "postAgeHours": 512,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830131632405_serp_전자담배-액상-시향만으로는_68ec13",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 시향만으로는",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 12,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
