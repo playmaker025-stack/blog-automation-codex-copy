@@ -10751,7 +10751,7 @@
       "pendingApproval": null,
       "createdAt": "2026-08-29T09:07:34.879Z",
       "publishedAt": "2026-08-29T11:20:26.306Z",
-      "updatedAt": "2026-08-29T11:20:28.028Z",
+      "updatedAt": "2026-08-30T11:43:03.297Z",
       "outcomeTracking": {
         "canonicalPost": {
           "blogId": "mansur_vape",
@@ -10760,13 +10760,25 @@
         },
         "targetKeywords": [
           {
-            "query": "인천 부평구 전자담배",
-            "role": "primary"
+            "query": "인천 전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "부평구 전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "부평 전자담배",
+            "role": "secondary",
+            "source": "user"
           }
         ],
         "publishedTitle": "인천 부평구 전자담배 배터리 발열 원인과 안전한 해결법",
         "contentHash": "e63d38c0",
-        "trackedFrom": "2026-08-29T11:20:28.623Z"
+        "trackedFrom": "2026-08-29T11:20:28.623Z",
+        "keywordsRevisedAt": "2026-08-30T11:43:03.297Z"
       }
     },
     {
@@ -10837,5 +10849,5 @@
       "updatedAt": "2026-08-30T11:41:23.167Z"
     }
   ],
-  "lastUpdated": "2026-08-30T11:42:24.824Z"
+  "lastUpdated": "2026-08-30T11:43:03.297Z"
 }
