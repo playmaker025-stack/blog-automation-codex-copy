@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msa13cve",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:56:06.204Z",
+  "postAgeHours": 702,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125606204_serp_젤로-누수-잡는법_783ce4",
+  "status": "ok",
+  "serp": {
+    "query": "젤로 누수 잡는법",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 21,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

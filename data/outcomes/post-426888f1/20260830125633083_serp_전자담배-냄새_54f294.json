@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-426888f1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:56:33.083Z",
+  "postAgeHours": 653,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125633083_serp_전자담배-냄새_54f294",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 냄새",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

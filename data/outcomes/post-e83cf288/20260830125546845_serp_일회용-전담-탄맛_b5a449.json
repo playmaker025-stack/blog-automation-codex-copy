@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-e83cf288",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:55:46.845Z",
+  "postAgeHours": 723,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125546845_serp_일회용-전담-탄맛_b5a449",
+  "status": "ok",
+  "serp": {
+    "query": "일회용 전담 탄맛",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 7,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

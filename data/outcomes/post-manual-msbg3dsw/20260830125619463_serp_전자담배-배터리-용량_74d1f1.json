@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msbg3dsw",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:56:19.463Z",
+  "postAgeHours": 678,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125619463_serp_전자담배-배터리-용량_74d1f1",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 배터리 용량",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 14,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

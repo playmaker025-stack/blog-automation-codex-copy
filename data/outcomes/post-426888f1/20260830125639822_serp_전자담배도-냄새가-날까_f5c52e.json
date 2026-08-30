@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-426888f1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:56:39.822Z",
+  "postAgeHours": 653,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125639822_serp_전자담배도-냄새가-날까_f5c52e",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배도 냄새가 날까",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 8,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

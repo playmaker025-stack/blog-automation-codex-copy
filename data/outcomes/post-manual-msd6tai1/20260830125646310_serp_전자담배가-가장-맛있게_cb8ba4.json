@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msd6tai1",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:56:46.310Z",
+  "postAgeHours": 649,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125646310_serp_전자담배가-가장-맛있게_cb8ba4",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배가 가장 맛있게",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

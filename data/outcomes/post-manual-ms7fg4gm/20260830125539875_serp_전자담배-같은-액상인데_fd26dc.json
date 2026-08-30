@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms7fg4gm",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:55:39.875Z",
+  "postAgeHours": 746,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125539875_serp_전자담배-같은-액상인데_fd26dc",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 같은 액상인데",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 27,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

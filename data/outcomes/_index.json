@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-30T12:36:55.921Z",
+  "updatedAt": "2026-08-30T12:56:55.401Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -3127,11 +3127,181 @@
       },
       "lastCapturedAt": "2026-08-30T12:36:52.838Z",
       "total": 1
+    },
+    "post-manual-ms7fg4gm": {
+      "queries": {
+        "전자담배 같은 액상인데": {
+          "okAgeHours": [
+            746
+          ],
+          "lastCapturedAt": "2026-08-30T12:55:39.875Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:55:39.875Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:55:39.875Z",
+      "total": 1
+    },
+    "post-e83cf288": {
+      "queries": {
+        "일회용 전담 탄맛": {
+          "okAgeHours": [
+            723
+          ],
+          "lastCapturedAt": "2026-08-30T12:55:53.353Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:55:53.353Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:55:53.353Z",
+      "total": 2
+    },
+    "post-manual-ms8vjho9": {
+      "queries": {
+        "전자담배 출력 W": {
+          "okAgeHours": [
+            721
+          ],
+          "lastCapturedAt": "2026-08-30T12:55:59.799Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:55:59.799Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:55:59.799Z",
+      "total": 1
+    },
+    "post-manual-msa13cve": {
+      "queries": {
+        "젤로 누수 잡는법": {
+          "okAgeHours": [
+            702
+          ],
+          "lastCapturedAt": "2026-08-30T12:56:06.204Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:56:06.204Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:56:06.204Z",
+      "total": 1
+    },
+    "post-20c03ef6": {
+      "queries": {
+        "구월동 전자담배 액상": {
+          "okAgeHours": [
+            698
+          ],
+          "lastCapturedAt": "2026-08-30T12:56:12.587Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:56:12.587Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:56:12.587Z",
+      "total": 1
+    },
+    "post-manual-msbg3dsw": {
+      "queries": {
+        "전자담배 배터리 용량": {
+          "okAgeHours": [
+            678
+          ],
+          "lastCapturedAt": "2026-08-30T12:56:19.463Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:56:19.463Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:56:19.463Z",
+      "total": 1
+    },
+    "post-manual-msbpt05i": {
+      "queries": {
+        "인천 일회용 전자담배": {
+          "okAgeHours": [
+            673
+          ],
+          "lastCapturedAt": "2026-08-30T12:56:26.043Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:56:26.043Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:56:26.043Z",
+      "total": 1
+    },
+    "post-426888f1": {
+      "queries": {
+        "전자담배 냄새": {
+          "okAgeHours": [
+            653
+          ],
+          "lastCapturedAt": "2026-08-30T12:56:33.083Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:56:33.083Z"
+        },
+        "전자담배도 냄새가 날까": {
+          "okAgeHours": [
+            653
+          ],
+          "lastCapturedAt": "2026-08-30T12:56:39.822Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:56:39.822Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:56:39.822Z",
+      "total": 2
+    },
+    "post-manual-msd6tai1": {
+      "queries": {
+        "전자담배가 가장 맛있게": {
+          "okAgeHours": [
+            649
+          ],
+          "lastCapturedAt": "2026-08-30T12:56:46.310Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:56:46.310Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:56:46.310Z",
+      "total": 1
+    },
+    "post-manual-mseafpt7": {
+      "queries": {
+        "아스몬하이 누수 잡는법": {
+          "okAgeHours": [
+            630
+          ],
+          "lastCapturedAt": "2026-08-30T12:56:52.799Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T12:56:52.799Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T12:56:52.799Z",
+      "total": 1
     }
   },
   "health": {
-    "lastRunAt": "2026-08-30T12:35:39.361Z",
-    "lastOkAt": "2026-08-30T12:35:39.361Z",
+    "lastRunAt": "2026-08-30T12:55:39.459Z",
+    "lastOkAt": "2026-08-30T12:55:39.459Z",
     "consecutiveFailedRuns": 0
   }
 }

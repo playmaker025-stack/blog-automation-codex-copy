@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms8vjho9",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:55:59.799Z",
+  "postAgeHours": 721,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125559799_serp_전자담배-출력-W_b12309",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 출력 W",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 16,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

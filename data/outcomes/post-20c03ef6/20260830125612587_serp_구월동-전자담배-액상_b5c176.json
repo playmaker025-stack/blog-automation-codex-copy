@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-20c03ef6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T12:56:12.587Z",
+  "postAgeHours": 698,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830125612587_serp_구월동-전자담배-액상_b5c176",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 액상",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 39,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
