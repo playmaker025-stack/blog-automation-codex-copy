@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-30T17:15:40.522Z",
+  "updatedAt": "2026-08-30T17:35:40.784Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5112,8 +5112,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-08-30T17:15:39.713Z",
+    "lastRunAt": "2026-08-30T17:35:39.785Z",
     "lastOkAt": "2026-08-30T16:15:39.898Z",
-    "consecutiveFailedRuns": 3
+    "consecutiveFailedRuns": 4
   }
 }
