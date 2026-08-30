@@ -10847,7 +10847,50 @@
       "publishedAt": "2026-08-30T11:41:23.167Z",
       "createdAt": "2026-08-30T11:41:23.167Z",
       "updatedAt": "2026-08-30T11:41:23.167Z"
+    },
+    {
+      "postId": "post-manual-mtfrnwz9",
+      "topicId": "",
+      "userId": "e",
+      "title": "구월동 전자담배에서 입호흡 과 폐호흡의 차이를 알려드려요",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/godmaker0/224395287849",
+      "wordCount": 0,
+      "targetKeywords": [
+        "입호흡 폐호흡 차이",
+        "구월동 전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "godmaker0",
+          "logNo": "224395287849",
+          "canonicalUrl": "https://blog.naver.com/godmaker0/224395287849"
+        },
+        "targetKeywords": [
+          {
+            "query": "입호흡 폐호흡 차이",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "구월동 전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "구월동 전자담배에서 입호흡 과 폐호흡의 차이를 알려드려요",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-08-30T12:09:17.281Z",
+        "keywordsRevisedAt": "2026-08-30T12:09:17.281Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-08-30T12:09:17.281Z",
+      "createdAt": "2026-08-30T12:09:17.281Z",
+      "updatedAt": "2026-08-30T12:09:17.281Z"
     }
   ],
-  "lastUpdated": "2026-08-30T11:43:03.297Z"
+  "lastUpdated": "2026-08-30T12:09:17.281Z"
 }
