@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87zlum",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:56:26.138Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830145626138_serp_호라이즌-세이커즈-마스터_ab1058",
+  "status": "ok",
+  "serp": {
+    "query": "호라이즌 세이커즈 마스터",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 2,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

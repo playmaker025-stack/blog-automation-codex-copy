@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87vy39",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:56:06.243Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830145606243_serp_부평전자담배-입호흡-전담_7c163f",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 입호흡 전담",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 19,
+    "searchedResultLimit": 32,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

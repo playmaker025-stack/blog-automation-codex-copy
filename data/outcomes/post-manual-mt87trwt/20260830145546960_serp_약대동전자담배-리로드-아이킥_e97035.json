@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87trwt",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:55:46.960Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830145546960_serp_약대동전자담배-리로드-아이킥_e97035",
+  "status": "ok",
+  "serp": {
+    "query": "약대동전자담배 리로드 아이킥",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 18,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

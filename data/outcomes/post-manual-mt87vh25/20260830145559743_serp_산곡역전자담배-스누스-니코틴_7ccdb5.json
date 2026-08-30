@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87vh25",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:55:59.743Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830145559743_serp_산곡역전자담배-스누스-니코틴_7ccdb5",
+  "status": "ok",
+  "serp": {
+    "query": "산곡역전자담배 스누스 니코틴",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87xye0",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:56:12.787Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830145612787_serp_부평전자담배-발라리안-맥스_37964f",
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 발라리안 맥스",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

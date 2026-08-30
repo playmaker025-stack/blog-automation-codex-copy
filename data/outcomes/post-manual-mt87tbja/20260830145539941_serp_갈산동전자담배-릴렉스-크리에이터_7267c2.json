@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87tbja",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:55:39.941Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830145539941_serp_갈산동전자담배-릴렉스-크리에이터_7267c2",
+  "status": "ok",
+  "serp": {
+    "query": "갈산동전자담배 릴렉스 크리에이터",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 16,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87yf6o",
+  "source": "serp",
+  "capturedAt": "2026-08-30T14:56:19.738Z",
+  "postAgeHours": 130,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830145619738_serp_작전역전자담배-베놈-팬텀_41214c",
+  "status": "ok",
+  "serp": {
+    "query": "작전역전자담배 베놈 팬텀",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 23,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
