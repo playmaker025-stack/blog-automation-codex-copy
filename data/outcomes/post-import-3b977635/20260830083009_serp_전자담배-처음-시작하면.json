@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3b977635",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:30:09.967Z",
+  "postAgeHours": 4185,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830083009_serp_전자담배-처음-시작하면",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 처음 시작하면",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 18,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

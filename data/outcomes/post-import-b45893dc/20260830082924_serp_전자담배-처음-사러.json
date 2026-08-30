@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b45893dc",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:29:24.414Z",
+  "postAgeHours": 4256,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830082924_serp_전자담배-처음-사러",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 처음 사러",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

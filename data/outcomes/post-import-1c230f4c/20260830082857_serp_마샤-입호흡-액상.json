@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-1c230f4c",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:28:57.688Z",
+  "postAgeHours": 4280,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830082857_serp_마샤-입호흡-액상",
+  "status": "ok",
+  "serp": {
+    "query": "마샤 입호흡 액상",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 15,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9ca987c5",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:29:04.216Z",
+  "postAgeHours": 4280,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830082904_serp_간석동-전자담배-매장에서",
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 매장에서",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 36,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

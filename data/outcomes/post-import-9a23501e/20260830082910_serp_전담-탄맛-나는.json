@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9a23501e",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:29:10.733Z",
+  "postAgeHours": 4256,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830082910_serp_전담-탄맛-나는",
+  "status": "ok",
+  "serp": {
+    "query": "전담 탄맛 나는",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

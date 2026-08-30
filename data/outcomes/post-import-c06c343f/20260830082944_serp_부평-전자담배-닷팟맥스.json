@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-c06c343f",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:29:44.733Z",
+  "postAgeHours": 4232,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830082944_serp_부평-전자담배-닷팟맥스",
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 닷팟맥스",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 17,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

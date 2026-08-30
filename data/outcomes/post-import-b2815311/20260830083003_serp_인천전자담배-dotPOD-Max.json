@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b2815311",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:30:03.496Z",
+  "postAgeHours": 4209,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830083003_serp_인천전자담배-dotPOD-Max",
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 dotPOD Max",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 8,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

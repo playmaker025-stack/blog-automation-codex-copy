@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-a0c245ae",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:29:57.699Z",
+  "postAgeHours": 4208,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830082957_serp_입호흡-전자담배-신제품",
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 전자담배 신제품",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 12,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

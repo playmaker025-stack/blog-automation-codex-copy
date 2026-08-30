@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-f7192717",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:29:30.861Z",
+  "postAgeHours": 4256,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830082930_serp_부천-전자담배-팟",
+  "status": "ok",
+  "serp": {
+    "query": "부천 전자담배 팟",
+    "device": "mobile",
+    "rank": 17,
+    "searchedResultLimit": 38,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

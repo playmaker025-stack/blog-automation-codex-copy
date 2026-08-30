@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3634b92d",
+  "source": "serp",
+  "capturedAt": "2026-08-30T08:29:38.010Z",
+  "postAgeHours": 4232,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830082938_serp_전자담배-액상-가격",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 가격",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 25,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
