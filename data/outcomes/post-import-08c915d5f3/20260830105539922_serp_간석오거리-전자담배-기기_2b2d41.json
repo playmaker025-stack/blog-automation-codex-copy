@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-08c915d5f3",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:55:39.922Z",
+  "postAgeHours": 3227,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105539922_serp_간석오거리-전자담배-기기_2b2d41",
+  "status": "ok",
+  "serp": {
+    "query": "간석오거리 전자담배 기기",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 14,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

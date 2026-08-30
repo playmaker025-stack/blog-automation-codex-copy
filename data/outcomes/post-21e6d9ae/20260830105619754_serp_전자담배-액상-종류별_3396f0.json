@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-21e6d9ae",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:56:19.754Z",
+  "postAgeHours": 3118,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105619754_serp_전자담배-액상-종류별_3396f0",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 종류별",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 24,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

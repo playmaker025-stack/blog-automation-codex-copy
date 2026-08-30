@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr0liclf",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:56:46.009Z",
+  "postAgeHours": 1463,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105646009_serp_전자담배-액상-한_9b27a8",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 한",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

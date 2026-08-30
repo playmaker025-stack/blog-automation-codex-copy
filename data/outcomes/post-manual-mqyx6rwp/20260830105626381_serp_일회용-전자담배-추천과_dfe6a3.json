@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mqyx6rwp",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:56:26.381Z",
+  "postAgeHours": 1491,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105626381_serp_일회용-전자담배-추천과_dfe6a3",
+  "status": "ok",
+  "serp": {
+    "query": "일회용 전자담배 추천과",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

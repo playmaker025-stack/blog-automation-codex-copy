@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-aace5597",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:56:12.854Z",
+  "postAgeHours": 3121,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105612854_serp_인천-만수동-만수르_f577d6",
+  "status": "ok",
+  "serp": {
+    "query": "인천 만수동 만수르",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 19,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

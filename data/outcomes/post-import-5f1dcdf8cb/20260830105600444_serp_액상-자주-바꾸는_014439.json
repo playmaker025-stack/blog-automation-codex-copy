@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-5f1dcdf8cb",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:56:00.444Z",
+  "postAgeHours": 3179,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105600444_serp_액상-자주-바꾸는_014439",
+  "status": "ok",
+  "serp": {
+    "query": "액상 자주 바꾸는",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 7,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

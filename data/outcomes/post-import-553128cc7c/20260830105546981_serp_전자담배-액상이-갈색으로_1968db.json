@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-553128cc7c",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:55:46.981Z",
+  "postAgeHours": 3203,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105546981_serp_전자담배-액상이-갈색으로_1968db",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상이 갈색으로",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

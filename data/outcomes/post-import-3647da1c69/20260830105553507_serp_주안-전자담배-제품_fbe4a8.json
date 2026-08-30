@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3647da1c69",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:55:53.507Z",
+  "postAgeHours": 3179,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105553507_serp_주안-전자담배-제품_fbe4a8",
+  "status": "ok",
+  "serp": {
+    "query": "주안 전자담배 제품",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 21,
+    "searchedResultLimit": 28,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr0k6kud",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:56:39.570Z",
+  "postAgeHours": 1464,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105639570_serp_구월동-전자담배-네스티_67046d",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 네스티",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 14,
+    "searchedResultLimit": 17,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

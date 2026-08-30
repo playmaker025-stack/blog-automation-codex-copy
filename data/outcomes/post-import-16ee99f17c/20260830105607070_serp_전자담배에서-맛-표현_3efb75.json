@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-16ee99f17c",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:56:07.070Z",
+  "postAgeHours": 3155,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830105607070_serp_전자담배에서-맛-표현_3efb75",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배에서 맛 표현",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 22,
+    "searchedResultLimit": 35,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
