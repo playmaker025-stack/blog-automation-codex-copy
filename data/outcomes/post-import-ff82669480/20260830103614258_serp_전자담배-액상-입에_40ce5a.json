@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-ff82669480",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:36:14.258Z",
+  "postAgeHours": 3299,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830103614258_serp_전자담배-액상-입에_40ce5a",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 입에",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 27,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

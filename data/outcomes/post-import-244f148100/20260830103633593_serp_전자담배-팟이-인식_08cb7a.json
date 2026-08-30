@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-244f148100",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:36:33.593Z",
+  "postAgeHours": 3275,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830103633593_serp_전자담배-팟이-인식_08cb7a",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 팟이 인식",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

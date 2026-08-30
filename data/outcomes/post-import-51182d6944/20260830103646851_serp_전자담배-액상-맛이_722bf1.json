@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-51182d6944",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:36:46.851Z",
+  "postAgeHours": 3251,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830103646851_serp_전자담배-액상-맛이_722bf1",
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 맛이",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 29,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2c009be353",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:35:54.036Z",
+  "postAgeHours": 3323,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830103554036_serp_삼산동-전자담배-입호흡_cfd40f",
+  "status": "ok",
+  "serp": {
+    "query": "삼산동 전자담배 입호흡",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 25,
+    "searchedResultLimit": 38,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

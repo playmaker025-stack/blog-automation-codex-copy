@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-ce89716340",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:35:40.025Z",
+  "postAgeHours": 3347,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830103540025_serp_같은-기기인데-배터리_a9fcec",
+  "status": "ok",
+  "serp": {
+    "query": "같은 기기인데 배터리",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

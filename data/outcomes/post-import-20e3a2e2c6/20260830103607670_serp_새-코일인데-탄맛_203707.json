@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-20e3a2e2c6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:36:07.670Z",
+  "postAgeHours": 3299,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830103607670_serp_새-코일인데-탄맛_203707",
+  "status": "ok",
+  "serp": {
+    "query": "새 코일인데 탄맛",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 13,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

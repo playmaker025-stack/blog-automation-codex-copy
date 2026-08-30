@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9e76eacdcd",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:35:47.436Z",
+  "postAgeHours": 3323,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830103547436_serp_같은-액상인데-어떤_489e80",
+  "status": "ok",
+  "serp": {
+    "query": "같은 액상인데 어떤",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 7,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

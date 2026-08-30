@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-704ae75896",
+  "source": "serp",
+  "capturedAt": "2026-08-30T10:36:27.265Z",
+  "postAgeHours": 3275,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830103627265_serp_부개동-전자담배-처음_3a3463",
+  "status": "ok",
+  "serp": {
+    "query": "부개동 전자담배 처음",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
