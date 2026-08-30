@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T16:16:00.072Z",
+  "postAgeHours": 5,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830161600072_serp_무화량-많은-전자담배_4e2df4",
+  "status": "ok",
+  "serp": {
+    "query": "무화량 많은 전자담배",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 27,
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

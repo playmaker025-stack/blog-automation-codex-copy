@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-30T15:56:55.190Z",
+  "updatedAt": "2026-08-30T16:16:40.645Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -4993,15 +4993,127 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T15:56:52.150Z"
+        },
+        "부평구 전자담배": {
+          "okAgeHours": [
+            29
+          ],
+          "lastCapturedAt": "2026-08-30T16:15:40.179Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:15:40.179Z"
+        },
+        "부평 전자담배": {
+          "okAgeHours": [
+            29
+          ],
+          "lastCapturedAt": "2026-08-30T16:15:47.056Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:15:47.056Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T15:56:52.150Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-30T16:15:47.056Z",
+      "total": 3
+    },
+    "post-manual-mtfqo1w6": {
+      "queries": {
+        "하이엔드 전자담배": {
+          "okAgeHours": [
+            5
+          ],
+          "lastCapturedAt": "2026-08-30T16:15:53.584Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:15:53.584Z"
+        },
+        "무화량 많은 전자담배": {
+          "okAgeHours": [
+            5
+          ],
+          "lastCapturedAt": "2026-08-30T16:16:00.072Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:16:00.072Z"
+        },
+        "인천 전자담배": {
+          "okAgeHours": [
+            5
+          ],
+          "lastCapturedAt": "2026-08-30T16:16:06.557Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:16:06.557Z"
+        },
+        "dna60": {
+          "okAgeHours": [
+            5
+          ],
+          "lastCapturedAt": "2026-08-30T16:16:13.018Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:16:13.018Z"
+        },
+        "전자담배 모드기기": {
+          "okAgeHours": [
+            5
+          ],
+          "lastCapturedAt": "2026-08-30T16:16:19.293Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:16:19.293Z"
+        },
+        "무화량 전자담배": {
+          "okAgeHours": [
+            5
+          ],
+          "lastCapturedAt": "2026-08-30T16:16:25.091Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:16:25.091Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T16:16:25.091Z",
+      "total": 6
+    },
+    "post-manual-mtfrnwz9": {
+      "queries": {
+        "입호흡 폐호흡 차이": {
+          "okAgeHours": [
+            4
+          ],
+          "lastCapturedAt": "2026-08-30T16:16:31.680Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:16:31.680Z"
+        },
+        "구월동 전자담배": {
+          "okAgeHours": [
+            4
+          ],
+          "lastCapturedAt": "2026-08-30T16:16:37.658Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-30T16:16:37.658Z"
+        }
+      },
+      "lastCapturedAt": "2026-08-30T16:16:37.658Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-08-30T15:55:39.791Z",
-    "lastOkAt": "2026-08-30T15:55:39.791Z",
+    "lastRunAt": "2026-08-30T16:15:39.898Z",
+    "lastOkAt": "2026-08-30T16:15:39.898Z",
     "consecutiveFailedRuns": 0
   }
 }

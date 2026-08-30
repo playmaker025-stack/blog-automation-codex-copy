@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-d34540b8",
+  "source": "serp",
+  "capturedAt": "2026-08-30T16:15:40.179Z",
+  "postAgeHours": 29,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830161540179_serp_부평구-전자담배_777d35",
+  "status": "ok",
+  "serp": {
+    "query": "부평구 전자담배",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 15,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-d34540b8",
+  "source": "serp",
+  "capturedAt": "2026-08-30T16:15:47.056Z",
+  "postAgeHours": 29,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830161547056_serp_부평-전자담배_d7e9f5",
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 10,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

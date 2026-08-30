@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-08-30T16:16:13.018Z",
+  "postAgeHours": 5,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830161613018_serp_dna60_0cc828",
+  "status": "ok",
+  "serp": {
+    "query": "dna60",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 0,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

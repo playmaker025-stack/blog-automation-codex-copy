@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfrnwz9",
+  "source": "serp",
+  "capturedAt": "2026-08-30T16:16:37.658Z",
+  "postAgeHours": 4,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260830161637658_serp_구월동-전자담배_4b66ab",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 10,
+    "searchedResultLimit": 11,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
