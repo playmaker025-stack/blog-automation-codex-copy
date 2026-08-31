@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-366637d5",
+  "source": "serp",
+  "capturedAt": "2026-08-31T03:54:04.050Z",
+  "postAgeHours": 8548,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831035404050_serp_blogtab-부평-전자담배-만수르_4b57ce",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평 전자담배 만수르"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 만수르",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 23,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "223977610797",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224320174317",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224358595068",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224009105357",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224031064183",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224122470914",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224112312129",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224160402112",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224185634104",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224083615082",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223974941599",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223977340873",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224044591536",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223871977199",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

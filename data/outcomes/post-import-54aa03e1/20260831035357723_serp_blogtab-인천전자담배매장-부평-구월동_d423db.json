@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-54aa03e1",
+  "source": "serp",
+  "capturedAt": "2026-08-31T03:53:57.723Z",
+  "postAgeHours": 8788,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831035357723_serp_blogtab-인천전자담배매장-부평-구월동_d423db",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천전자담배매장 부평 구월동"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배매장 부평 구월동",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224262715643",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224115762930",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224022998953",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224264935958",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224274819132",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224210207434",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223989939554",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223989205862",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224280995700",
+        "rank": 14
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224089279318",
+        "rank": 17
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224132046324",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

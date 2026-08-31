@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8c38c02a",
+  "source": "serp",
+  "capturedAt": "2026-08-31T03:54:10.231Z",
+  "postAgeHours": 4372,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831035410231_serp_blogtab-부평-만수르-매장에서_984f47",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평 만수르 매장에서"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 만수르 매장에서",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224301960336",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224205241319",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224214224826",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224250808729",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224112312129",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224239923182",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223964114009",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223989205862",
+        "rank": 14
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224113443799",
+        "rank": 19
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224083615082",
+        "rank": 22
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223989939554",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-31T03:37:29.020Z",
+  "updatedAt": "2026-08-31T03:54:19.229Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -225,10 +225,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:10:34.398Z"
+        },
+        "blog_tab::만수동 전자담배 만수르": {
+          "okAgeHours": [
+            9196
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:51.485Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:51.485Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:10:34.398Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:51.485Z",
+      "total": 2
     },
     "post-import-2ed87606": {
       "queries": {
@@ -257,10 +267,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:07:05.049Z"
+        },
+        "blog_tab::무화량 많은 하이엔드": {
+          "okAgeHours": [
+            7180
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:33.316Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:33.316Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:07:05.049Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:33.316Z",
+      "total": 2
     },
     "post-import-33ec47a7": {
       "queries": {
@@ -321,10 +341,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:10:48.289Z"
+        },
+        "blog_tab::부평 전자담배 만수르": {
+          "okAgeHours": [
+            8548
+          ],
+          "lastCapturedAt": "2026-08-31T03:54:04.050Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:54:04.050Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:10:48.289Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:54:04.050Z",
+      "total": 2
     },
     "post-import-3b977635": {
       "queries": {
@@ -401,10 +431,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:57.973Z"
+        },
+        "blog_tab::부평 전자담배 추천": {
+          "okAgeHours": [
+            7636
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:27.076Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:27.076Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:57.973Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:27.076Z",
+      "total": 2
     },
     "post-import-4098e7bf": {
       "queries": {
@@ -449,10 +489,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:10:27.701Z"
+        },
+        "blog_tab::엘프바 아이스킹 25k": {
+          "okAgeHours": [
+            9532
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:46.039Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:46.039Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:10:27.701Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:46.039Z",
+      "total": 2
     },
     "post-import-45d28343": {
       "queries": {
@@ -523,10 +573,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:10:41.250Z"
+        },
+        "blog_tab::인천전자담배매장 부평 구월동": {
+          "okAgeHours": [
+            8788
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:57.723Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:57.723Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:10:41.250Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:57.723Z",
+      "total": 2
     },
     "post-import-54d314d3": {
       "queries": {
@@ -613,10 +673,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:44.790Z"
+        },
+        "blog_tab::전자담배 입호흡 폐호흡": {
+          "okAgeHours": [
+            6748
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:14.440Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:14.440Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:44.790Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:14.440Z",
+      "total": 2
     },
     "post-import-6be0b1a5": {
       "queries": {
@@ -871,10 +941,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:11:01.338Z"
+        },
+        "blog_tab::연수동 전자담배 말론": {
+          "okAgeHours": [
+            4372
+          ],
+          "lastCapturedAt": "2026-08-31T03:54:16.548Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:54:16.548Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:11:01.338Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:54:16.548Z",
+      "total": 2
     },
     "post-import-7fe9e495": {
       "queries": {
@@ -935,10 +1015,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:38.269Z"
+        },
+        "blog_tab::2025년 기준 입호흡": {
+          "okAgeHours": [
+            6652
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:07.851Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:07.851Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:38.269Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:07.851Z",
+      "total": 2
     },
     "post-import-8b5424b8": {
       "queries": {
@@ -967,10 +1057,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:10:55.250Z"
+        },
+        "blog_tab::부평 만수르 매장에서": {
+          "okAgeHours": [
+            4372
+          ],
+          "lastCapturedAt": "2026-08-31T03:54:10.231Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:54:10.231Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:10:55.250Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:54:10.231Z",
+      "total": 2
     },
     "post-import-8d44f9f4": {
       "queries": {
@@ -999,10 +1099,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:51.369Z"
+        },
+        "blog_tab::전자담배 코일 교체시기": {
+          "okAgeHours": [
+            13132
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:20.728Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:20.728Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:51.369Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:20.728Z",
+      "total": 2
     },
     "post-import-907c7c9e": {
       "queries": {
@@ -1079,10 +1189,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:07:11.614Z"
+        },
+        "blog_tab::연기 많이 나는": {
+          "okAgeHours": [
+            8620
+          ],
+          "lastCapturedAt": "2026-08-31T03:53:39.715Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:53:39.715Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:07:11.614Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:53:39.715Z",
+      "total": 2
     },
     "post-import-9ca987c5": {
       "queries": {
@@ -5280,8 +5400,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-08-31T03:36:18.977Z",
-    "lastOkAt": "2026-08-31T03:36:18.977Z",
+    "lastRunAt": "2026-08-31T03:53:07.259Z",
+    "lastOkAt": "2026-08-31T03:53:07.259Z",
     "consecutiveFailedRuns": 0
   }
 }
