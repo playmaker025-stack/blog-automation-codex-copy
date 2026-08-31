@@ -1,0 +1,38 @@
+{
+  "pipelineId": "pipe-7529d38f",
+  "type": "draft_output",
+  "savedAt": "2026-08-31T03:41:40.635Z",
+  "data": {
+    "postId": "post-8aebbf59",
+    "title": "전자담배 기기 선택 전 꼭 확인할 스펙과 특징 총정리 (부평전자담배 만수르점)",
+    "wordCount": 2873,
+    "generatedAt": "2026-08-31T03:41:39.050Z",
+    "contentPath": "data/posting-list/posts/post-8aebbf59/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": false,
+      "blockingReasons": [
+        "sub keyword \"전자담배 배터리 용량\" 5회 사용, 상한 3회 초과"
+      ],
+      "warnings": [
+        "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
+        "medium overlap: 결론 패턴 반복 위험 criteria_summary"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [
+        "sub keyword \"전자담배 배터리 용량\" 5회 사용, 상한 3회 초과"
+      ],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
+        "medium overlap: 결론 패턴 반복 위험 criteria_summary"
+      ],
+      "specFindings": []
+    },
+    "finalDraftRevisionInstructions": [
+      "키워드 과다/질문문 삽입 수정: sub keyword \"전자담배 배터리 용량\" 5회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "발행 차단 사유 해결: sub keyword \"전자담배 배터리 용량\" 5회 사용, 상한 3회 초과"
+    ]
+  }
+}
