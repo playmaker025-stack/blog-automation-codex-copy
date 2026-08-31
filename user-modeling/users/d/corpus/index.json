@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mth8dfm5",
+      "title": "전자담배 팟을 오래 쓰면 액상이 입으로 올라오는 이유 – 팟 교체가 필요한 신호일까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 3765,
+      "publishedAt": "2026-08-31T12:44:46.463Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mth8dfm5.md"
+    },
+    {
       "sampleId": "published-post-manual-mt1jysvx",
       "title": "전자담배 액상을 넣고 바로 흡입하면 액상이 튀는 이유 – 몇 분 기다려야 할까?",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6356,
       "publishedAt": "2026-07-10T11:13:55.692Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mreu8a6g.md"
-    },
-    {
-      "sampleId": "published-post-manual-mrdh0oej",
-      "title": "전자담배 코일을 새로 갈았는데도 탄맛이 나는 이유",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6268,
-      "publishedAt": "2026-07-09T12:16:20.880Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrdh0oej.md"
     }
   ],
-  "lastUpdated": "2026-08-20T13:25:07.411Z"
+  "lastUpdated": "2026-08-31T12:44:53.655Z"
 }
