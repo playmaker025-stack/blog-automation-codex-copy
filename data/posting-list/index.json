@@ -11163,7 +11163,41 @@
       "publishedAt": "2026-08-31T07:09:55.167Z",
       "createdAt": "2026-08-31T07:09:55.167Z",
       "updatedAt": "2026-08-31T07:09:55.167Z"
+    },
+    {
+      "postId": "post-manual-mth8dfm5",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배 팟을 오래 쓰면 액상이 입으로 올라오는 이유 – 팟 교체가 필요한 신호일까?",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224396532565",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224396532565",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224396532565"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 팟을 오래",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전자담배 팟을 오래 쓰면 액상이 입으로 올라오는 이유 – 팟 교체가 필요한 신호일까?",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-08-31T12:44:46.463Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-08-31T12:44:46.463Z",
+      "createdAt": "2026-08-31T12:44:46.463Z",
+      "updatedAt": "2026-08-31T12:44:46.463Z"
     }
   ],
-  "lastUpdated": "2026-08-31T07:09:55.167Z"
+  "lastUpdated": "2026-08-31T12:44:46.463Z"
 }
