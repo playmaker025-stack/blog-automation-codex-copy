@@ -11009,12 +11009,17 @@
             "query": "석남동전자담배",
             "role": "primary",
             "source": "user"
+          },
+          {
+            "query": "낭만탕후루",
+            "role": "secondary",
+            "source": "user"
           }
         ],
         "publishedTitle": "석남동전자담배 낭만탕후루 액상 4종 사용후기",
         "contentHash": "811c9dc5",
         "trackedFrom": "2026-08-31T07:06:06.927Z",
-        "keywordsRevisedAt": "2026-08-31T07:06:06.927Z",
+        "keywordsRevisedAt": "2026-08-31T07:07:49.814Z",
         "backfilled": true
       },
       "evalScore": null,
@@ -11022,8 +11027,8 @@
       "pendingApproval": null,
       "publishedAt": "2026-08-31T07:06:06.927Z",
       "createdAt": "2026-08-31T07:06:06.927Z",
-      "updatedAt": "2026-08-31T07:06:06.927Z"
+      "updatedAt": "2026-08-31T07:07:49.814Z"
     }
   ],
-  "lastUpdated": "2026-08-31T07:07:10.225Z"
+  "lastUpdated": "2026-08-31T07:07:49.814Z"
 }
