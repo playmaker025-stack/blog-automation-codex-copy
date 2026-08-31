@@ -4298,7 +4298,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-cd7710b4",
       "at": "2026-08-29T09:03:44.078Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 기기 선택 시 필수 비교 스펙과 특징 총정리",
+      "proposedTitle": "전자담배 기기 선택 전 꼭 확인할 스펙과 특징 총정리 (부평전자담배 만수르점)",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.48484848484848486,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-7529d38f",
+      "at": "2026-08-31T03:14:32.773Z"
     }
   ],
-  "lastUpdated": "2026-08-29T09:03:44.078Z"
+  "lastUpdated": "2026-08-31T03:14:32.773Z"
 }
