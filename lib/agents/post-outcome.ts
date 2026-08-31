@@ -88,6 +88,14 @@ export interface PostOutcomeObservation {
   postAgeHours: number | null;
   status: ObservationStatus;
   collector: { method: "crawler" | "bookmarklet" | "manual"; version: string };
+  /**
+   * 무엇을 재려고 했는지. 성공·실패와 무관하게 남긴다.
+   *
+   * 실패 관측에는 serp가 없다. 그런데 색인 키를 serp에서만 뽑았더니 실패가
+   * 전부 "검색어 없음" 칸에 쌓였고, 그 검색어의 연속 실패는 0인 채라 쉬게
+   * 하려던 장치가 한 번도 작동하지 않았다. 재려던 대상은 따로 남겨야 한다.
+   */
+  target?: { surface: SerpSurface; query: string };
   serp?: SerpObservation;
   stats?: StatsObservation;
   note?: string;
@@ -442,8 +450,15 @@ export function queryStateKey(surface: SerpSurface, query: string): string {
 }
 
 function queryKeyOf(observation: PostOutcomeObservation): string {
-  if (observation.source !== "serp" || !observation.serp) return NO_QUERY_KEY;
-  return queryStateKey(observation.serp.surface ?? "integrated", observation.serp.query);
+  if (observation.source !== "serp") return NO_QUERY_KEY;
+  // 재려던 대상이 먼저다. 실패 관측에는 serp가 없다.
+  if (observation.target) {
+    return queryStateKey(observation.target.surface, observation.target.query);
+  }
+  if (observation.serp) {
+    return queryStateKey(observation.serp.surface ?? "integrated", observation.serp.query);
+  }
+  return NO_QUERY_KEY;
 }
 
 /** 색인이 없거나 판이 낡았을 때 관측치 원본에서 다시 만든다. 원본이 항상 우선이다. */
@@ -486,7 +501,12 @@ function applyToQueryState(
     lastCapturedAt: isNewest ? observation.capturedAt : previous.lastCapturedAt,
     total: (previous?.total ?? 0) + 1,
     lastStatus: isNewest ? observation.status : previous.lastStatus,
-    consecutiveFailures: ok ? 0 : (previous?.consecutiveFailures ?? 0) + 1,
+    // 늦게 도착한 옛 실패가 최신 성공을 뒤엎으면 안 된다. 시간순으로만 센다.
+    consecutiveFailures: !isNewest
+      ? previous.consecutiveFailures
+      : ok
+        ? 0
+        : (previous?.consecutiveFailures ?? 0) + 1,
     lastAttemptAt: isNewest ? observation.capturedAt : previous.lastAttemptAt,
   };
 }

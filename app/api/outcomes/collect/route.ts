@@ -129,7 +129,9 @@ export async function POST(request: Request) {
 
     const result = await collectDueOutcomes({
       posts,
-      maxQueries: Math.min(Math.max(body.maxQueries ?? 8, 1), 20),
+      // 한 건이 최대 20초(응답 없음) + 사이 간격 4초다. 20건이면 최악 476초라
+      // 이 경로의 300초 제한을 넘고, 넘으면 이미 날린 요청이 기록되지 않는다.
+      maxQueries: Math.min(Math.max(body.maxQueries ?? 8, 1), 12),
     });
 
     const failures = result.collected.filter((item) => item.status !== "ok").length;

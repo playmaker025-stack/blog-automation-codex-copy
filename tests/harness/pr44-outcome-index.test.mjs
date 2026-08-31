@@ -27,30 +27,50 @@ const NOW = new Date().toISOString();
 
 const SURFACE = "integrated";
 
-const observation = (overrides = {}) => ({
-  schemaVersion: 1,
-  observationId: overrides.observationId ?? "20260830120000_serp_test",
-  postId: overrides.postId ?? "post-1",
-  source: overrides.source ?? "serp",
-  capturedAt: overrides.capturedAt ?? NOW,
-  postAgeHours: overrides.postAgeHours ?? 0,
-  status: overrides.status ?? "ok",
-  collector: { method: "crawler", version: "1" },
-  ...(overrides.query !== undefined || overrides.source !== "naver_stats"
-    ? {
-        serp: {
-          query: overrides.query ?? "기본검색어",
-          surface: overrides.surface ?? SURFACE,
-          querySource: overrides.querySource ?? "user",
-          device: "mobile",
-          rank: overrides.rank ?? null,
-          searchedResultLimit: 20,
-          aiBriefing: "not_rendered",
-          cited: "unknown",
-        },
-      }
-    : {}),
-});
+/**
+ * 관측치 fixture.
+ *
+ * 실패 관측에는 serp가 없다 — 실제 수집기가 그렇게 만든다. 처음엔 실패에도
+ * serp를 넣어뒀는데, 그 탓에 "실패가 검색어 칸에 안 쌓여 백오프가 영영 안
+ * 걸리는" 결함을 테스트가 통째로 가렸다. 코덱스 리뷰가 잡았다.
+ */
+const observation = (overrides = {}) => {
+  const status = overrides.status ?? "ok";
+  const surface = overrides.surface ?? SURFACE;
+  const query = overrides.query ?? "기본검색어";
+  const source = overrides.source ?? "serp";
+
+  const base = {
+    schemaVersion: 1,
+    observationId: overrides.observationId ?? "20260830120000292_serp_test_abc123",
+    postId: overrides.postId ?? "post-1",
+    source,
+    capturedAt: overrides.capturedAt ?? NOW,
+    postAgeHours: overrides.postAgeHours ?? 0,
+    status,
+    collector: { method: "crawler", version: "1" },
+  };
+
+  if (source !== "serp") return base;
+
+  // 재려던 대상은 성공이든 실패든 남는다.
+  base.target = { surface, query };
+  if (status !== "ok") return base;
+
+  return {
+    ...base,
+    serp: {
+      query,
+      surface,
+      querySource: overrides.querySource ?? "user",
+      device: "mobile",
+      rank: overrides.rank ?? null,
+      searchedResultLimit: 20,
+      aiBriefing: "not_rendered",
+      cited: "unknown",
+    },
+  };
+};
 
 describe("PR44 관측 색인은 검색어 단위다", () => {
   // 이 앱이 실제로 겪은 버그: 검색어가 둘인 글에서 첫 번째만 재고 한도가 차면,
@@ -430,5 +450,70 @@ describe("PR45 색인 판 올리기는 그 자리에서 한다", () => {
   test("모양을 모르는 낡은 판은 빈 색인으로 시작한다", () => {
     const ancient = { schemaVersion: 1, updatedAt: "", posts: { "post-1": { okAgeHours: [1] } } };
     assert.deepEqual(migrateOutcomeIndex(ancient).posts, {});
+  });
+});
+
+describe("PR45 실패도 그 검색어에 쌓인다", () => {
+  // 실패 관측에는 serp가 없다. 색인 키를 serp에서만 뽑았더니 실패가 전부
+  // "검색어 없음" 칸에 쌓였고, 정작 그 검색어의 연속 실패는 0인 채였다.
+  // 그래서 "계속 실패하면 쉬게 한다"가 한 번도 작동하지 않았다.
+  test("실패가 검색어 칸에 붙는다", () => {
+    const index = applyObservationsToIndex(emptyOutcomeIndex(), [
+      observation({ status: "request_failed", query: "인천 전자담배", postAgeHours: 3 }),
+    ]);
+
+    const key = queryStateKey(SURFACE, "인천 전자담배");
+    assert.equal(index.posts["post-1"].queries[key].consecutiveFailures, 1);
+    assert.equal(index.posts["post-1"].queries[""], undefined);
+  });
+
+  test("실패가 쌓이면 그 검색어가 쉬게 된다", () => {
+    let index = emptyOutcomeIndex();
+    for (let i = 0; i < 3; i += 1) {
+      index = applyObservationsToIndex(index, [
+        observation({
+          status: "request_failed",
+          query: "인천 전자담배",
+          postAgeHours: 3 + i,
+          capturedAt: new Date(Date.now() + i * 1000).toISOString(),
+        }),
+      ]);
+    }
+
+    const state = index.posts["post-1"].queries[queryStateKey(SURFACE, "인천 전자담배")];
+    assert.equal(state.consecutiveFailures, 3);
+    assert.ok(backoffUntil(state) > Date.now(), "쉬는 시각이 잡혀야 한다");
+  });
+
+  test("같은 검색어라도 화면이 다르면 따로 쌓인다", () => {
+    const index = applyObservationsToIndex(emptyOutcomeIndex(), [
+      observation({ status: "request_failed", surface: "integrated", query: "가" }),
+      observation({
+        status: "request_failed",
+        surface: "blog_tab",
+        query: "가",
+        capturedAt: new Date(Date.now() + 1000).toISOString(),
+      }),
+    ]);
+
+    const queries = index.posts["post-1"].queries;
+    assert.equal(queries[queryStateKey("integrated", "가")].consecutiveFailures, 1);
+    assert.equal(queries[queryStateKey("blog_tab", "가")].consecutiveFailures, 1);
+  });
+
+  test("늦게 도착한 옛 실패가 최신 성공을 뒤엎지 않는다", () => {
+    const recent = new Date(Date.now()).toISOString();
+    const older = new Date(Date.now() - 3_600_000).toISOString();
+
+    let index = applyObservationsToIndex(emptyOutcomeIndex(), [
+      observation({ status: "ok", postAgeHours: 10, capturedAt: recent }),
+    ]);
+    index = applyObservationsToIndex(index, [
+      observation({ status: "request_failed", postAgeHours: 5, capturedAt: older }),
+    ]);
+
+    const state = index.posts["post-1"].queries[queryStateKey(SURFACE, "기본검색어")];
+    assert.equal(state.consecutiveFailures, 0);
+    assert.equal(backoffUntil(state), 0);
   });
 });

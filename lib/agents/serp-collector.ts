@@ -109,6 +109,9 @@ async function observeOnce(params: {
       capturedAt,
       query: `${surface}-${query}`,
     }),
+    // 실패해도 무엇을 재려 했는지는 남는다. 이게 없으면 그 검색어의 실패가
+    // 색인에 붙지 않아 "계속 실패하면 쉬게 한다"가 작동하지 않는다.
+    target: { surface, query },
   };
 
   const failed = (

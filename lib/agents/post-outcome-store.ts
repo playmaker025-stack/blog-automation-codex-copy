@@ -103,7 +103,11 @@ interface IndexCache {
   at: number;
 }
 
-function cache(): { get(): OutcomeIndex | null; set(index: OutcomeIndex): void } {
+function cache(): {
+  get(): OutcomeIndex | null;
+  set(index: OutcomeIndex): void;
+  clear(): void;
+} {
   const store = globalThis as typeof globalThis & { [CACHE_KEY]?: IndexCache };
   return {
     get() {
@@ -114,13 +118,26 @@ function cache(): { get(): OutcomeIndex | null; set(index: OutcomeIndex): void }
     set(index: OutcomeIndex) {
       store[CACHE_KEY] = { index, at: Date.now() };
     },
+    clear() {
+      delete store[CACHE_KEY];
+    },
   };
 }
 
-export async function ensureOutcomeIndex(): Promise<OutcomeIndex> {
+/**
+ * 색인을 읽는다.
+ *
+ * `fresh: true`면 들고 있던 것을 무시하고 원격을 다시 읽는다. **쓰기 전에는
+ * 반드시 이걸 쓴다.** 낡은 값 위에 얹어서 쓰면 그 사이 다른 프로세스가 갱신한
+ * 색인을 조용히 덮는다 — writeFiles는 ref만 최신이면 통과하므로 충돌로도
+ * 안 걸린다.
+ */
+export async function ensureOutcomeIndex(options?: { fresh?: boolean }): Promise<OutcomeIndex> {
   const memo = cache();
-  const hit = memo.get();
-  if (hit) return hit;
+  if (!options?.fresh) {
+    const hit = memo.get();
+    if (hit) return hit;
+  }
 
   const raw = await readJsonFile<OutcomeIndex>(Paths.outcomeIndex())
     .then((result) => result.data)
@@ -132,6 +149,25 @@ export async function ensureOutcomeIndex(): Promise<OutcomeIndex> {
 }
 
 const INDEX_CONFLICT_RETRIES = 3;
+
+/**
+ * 잴 것이 없는 회차를 얼마나 자주 기록할지.
+ *
+ * 20분마다 "살아 있다"를 남기면 하루에 커밋 72개가 아무 내용 없이 쌓인다.
+ * 살아 있다는 걸 알려면 그렇게 자주 적을 필요가 없다.
+ */
+const IDLE_HEARTBEAT_MS = 6 * 3_600_000;
+
+function idleWriteIsPointless(
+  index: OutcomeIndex,
+  run: { ranAt: string; attempted: number } | undefined,
+  recordCount: number
+): boolean {
+  if (recordCount > 0 || !run || run.attempted > 0) return false;
+  const last = index.health?.lastRunAt;
+  if (!last) return false;
+  return Date.parse(run.ranAt) - Date.parse(last) < IDLE_HEARTBEAT_MS;
+}
 
 /**
  * 관측치 여러 건을 커밋 하나로 남긴다.
@@ -159,9 +195,19 @@ export async function recordObservations(
 
   let lastError: unknown = null;
   for (let attempt = 0; attempt < INDEX_CONFLICT_RETRIES; attempt += 1) {
-    // 재시도라면 그 사이 남이 쓴 값을 봐야 하므로 들고 있던 것을 버린다.
-    if (attempt > 0) cache().set(emptyOutcomeIndex());
-    const index = await ensureOutcomeIndex();
+    // 쓰기 전에는 항상 원격을 다시 읽는다. 들고 있던 값 위에 얹으면 그 사이
+    // 다른 프로세스가 넣은 관측이 색인에서 사라진다.
+    //
+    // 처음에 여기서 캐시를 "빈 색인으로 설정"했는데, 그러면 바로 아래에서
+    // 그 빈 값을 읽어 색인 전체를 이번 배치로 덮어썼다. 비우는 것과 빈 값을
+    // 넣는 것은 다르다.
+    const index = await ensureOutcomeIndex({ fresh: true });
+
+    // 잴 것이 없었고 얼마 전에도 기록했으면 커밋을 만들지 않는다.
+    if (idleWriteIsPointless(index, run, unique.size)) {
+      return { written: 0, commitSha: "", index };
+    }
+
     const merged = withHealth(applyObservationsToIndex(index, [...unique.values()]), run);
 
     const files = [...unique.entries()].map(([path, observation]) => ({
