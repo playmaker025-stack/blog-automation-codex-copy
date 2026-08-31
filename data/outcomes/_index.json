@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-31T14:12:49.591Z",
+  "updatedAt": "2026-08-31T14:31:53.851Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -3733,16 +3733,18 @@
           "lastAttemptAt": "2026-08-30T11:16:12.233Z"
         },
         "blog_tab::만수동 전자담배 크로스미니6": {
-          "okAgeHours": [],
-          "lastCapturedAt": "2026-08-31T07:12:36.879Z",
-          "total": 1,
-          "lastStatus": "request_failed",
-          "consecutiveFailures": 1,
-          "lastAttemptAt": "2026-08-31T07:12:36.879Z"
+          "okAgeHours": [
+            1395
+          ],
+          "lastCapturedAt": "2026-08-31T14:31:38.020Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T14:31:38.020Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T07:12:36.879Z",
-      "total": 2
+      "lastCapturedAt": "2026-08-31T14:31:38.020Z",
+      "total": 3
     },
     "post-manual-mr76npd2": {
       "queries": {
@@ -5351,17 +5353,18 @@
         },
         "blog_tab::전자담배가 가장 맛있게": {
           "okAgeHours": [
-            669
+            669,
+            674
           ],
-          "lastCapturedAt": "2026-08-31T09:12:02.676Z",
-          "total": 1,
+          "lastCapturedAt": "2026-08-31T14:31:44.611Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:12:02.676Z"
+          "lastAttemptAt": "2026-08-31T14:31:44.611Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T13:51:51.414Z",
-      "total": 3
+      "lastCapturedAt": "2026-08-31T14:31:44.611Z",
+      "total": 4
     },
     "post-manual-mseafpt7": {
       "queries": {
@@ -6657,17 +6660,18 @@
         },
         "blog_tab::인천전자담배 무니코틴 액상": {
           "okAgeHours": [
-            167
+            167,
+            171
           ],
-          "lastCapturedAt": "2026-08-31T10:52:23.484Z",
-          "total": 1,
+          "lastCapturedAt": "2026-08-31T14:31:50.951Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T10:52:23.484Z"
+          "lastAttemptAt": "2026-08-31T14:31:50.951Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T14:11:37.845Z",
-      "total": 3
+      "lastCapturedAt": "2026-08-31T14:31:50.951Z",
+      "total": 4
     },
     "post-manual-mt87hyvp": {
       "queries": {
@@ -8907,8 +8911,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-08-31T14:11:37.489Z",
-    "lastOkAt": "2026-08-31T14:11:37.489Z",
+    "lastRunAt": "2026-08-31T14:31:37.408Z",
+    "lastOkAt": "2026-08-31T14:31:37.408Z",
     "consecutiveFailedRuns": 0
   }
 }

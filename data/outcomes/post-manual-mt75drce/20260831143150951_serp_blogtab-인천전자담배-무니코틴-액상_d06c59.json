@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt75drce",
+  "source": "serp",
+  "capturedAt": "2026-08-31T14:31:50.951Z",
+  "postAgeHours": 171,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831143150951_serp_blogtab-인천전자담배-무니코틴-액상_d06c59",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천전자담배 무니코틴 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 무니코틴 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
