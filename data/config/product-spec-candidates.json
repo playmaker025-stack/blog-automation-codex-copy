@@ -4551,7 +4551,62 @@
       "postTitle": "무화량 많은 전자담배가 있나요? 하이엔드 스퀑크 전자담배 모드기기 프레스티지 모드 크라노 DNA60 소개 인천 만수르",
       "extractedAt": "2026-08-30T11:41:43.304Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-c65e1815",
+      "product": "닷모드투엑스",
+      "field": "sizeMm",
+      "value": "94mmX43mmX20mm",
+      "evidence": "이정도 용량이라면 굉장히 넉넉한 용량이고 (발라리안맥스 1600/ 젤로맥스 1600) 그 용량을 가만할때 지금 이 크기는 절대로 큰 사이즈는 아니다 (94mmX43mmX20mm)",
+      "postId": "post-manual-mt6z60ar",
+      "postTitle": "인천 전자담배 닷모드 투엑스 파티 만수동만수르",
+      "extractedAt": "2026-08-31T03:27:29.649Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-f6ef8d11",
+      "product": "닷모드투엑스",
+      "field": "liquidRefillable",
+      "value": "가능",
+      "evidence": "액상 주입은 구지 팟을 빼지 않고도 넣을수 있게 상부주입형으로 되어있다",
+      "postId": "post-manual-mt6z60ar",
+      "postTitle": "인천 전자담배 닷모드 투엑스 파티 만수동만수르",
+      "extractedAt": "2026-08-31T03:27:29.649Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-a3f8648b",
+      "product": "닷모드투엑스",
+      "field": "resistanceOhm",
+      "value": "0.6옴과 1.0옴",
+      "evidence": "0.6옴과 1.0옴 두가지 팟이 있는데",
+      "postId": "post-manual-mt6z60ar",
+      "postTitle": "인천 전자담배 닷모드 투엑스 파티 만수동만수르",
+      "extractedAt": "2026-08-31T03:27:29.649Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-1a9ed3ae",
+      "product": "닷모드투엑스",
+      "field": "wattRange",
+      "value": "최저와트인 12W",
+      "evidence": "1.0옴을 넣고 최저와트인 12W로 쓴다면 한번의 액상 주입으로 정말 하루를 쓸수도 있는 량이다",
+      "postId": "post-manual-mt6z60ar",
+      "postTitle": "인천 전자담배 닷모드 투엑스 파티 만수동만수르",
+      "extractedAt": "2026-08-31T03:27:29.649Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-5ea532c3",
+      "product": "닷모드투엑스",
+      "field": "airflowControl",
+      "value": "가능",
+      "evidence": "에어플로우는 팟의 하단에 달려있다",
+      "postId": "post-manual-mt6z60ar",
+      "postTitle": "인천 전자담배 닷모드 투엑스 파티 만수동만수르",
+      "extractedAt": "2026-08-31T03:27:29.649Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-08-30T11:41:44.546Z"
+  "updatedAt": "2026-08-31T03:27:30.169Z"
 }
