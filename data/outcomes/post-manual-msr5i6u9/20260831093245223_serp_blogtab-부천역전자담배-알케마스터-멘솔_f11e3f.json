@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msr5i6u9",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:32:45.223Z",
+  "postAgeHours": 435,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831093245223_serp_blogtab-부천역전자담배-알케마스터-멘솔_f11e3f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부천역전자담배 알케마스터 멘솔없는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부천역전자담배 알케마스터 멘솔없는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 15,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224377502048",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msol9uan",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:32:20.765Z",
+  "postAgeHours": 478,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831093220765_serp_blogtab-전자담배-흡입할-때_c35026",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 흡입할 때"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 흡입할 때",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224317693159",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224321050553",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224375509699",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

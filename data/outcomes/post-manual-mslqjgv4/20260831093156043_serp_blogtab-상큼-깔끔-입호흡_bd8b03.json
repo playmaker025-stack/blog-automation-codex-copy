@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mslqjgv4",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:31:56.043Z",
+  "postAgeHours": 526,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831093156043_serp_blogtab-상큼-깔끔-입호흡_bd8b03",
+  "target": {
+    "surface": "blog_tab",
+    "query": "상큼 깔끔 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "상큼 깔끔 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224373210249",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

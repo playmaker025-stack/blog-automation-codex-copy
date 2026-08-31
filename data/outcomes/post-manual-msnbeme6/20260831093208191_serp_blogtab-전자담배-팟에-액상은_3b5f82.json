@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msnbeme6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:32:08.191Z",
+  "postAgeHours": 499,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831093208191_serp_blogtab-전자담배-팟에-액상은_3b5f82",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 팟에 액상은"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 팟에 액상은",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 18,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224383674346",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224374506743",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
