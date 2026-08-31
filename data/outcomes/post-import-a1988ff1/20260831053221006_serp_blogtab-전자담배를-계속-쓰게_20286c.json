@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-a1988ff1",
+  "source": "serp",
+  "capturedAt": "2026-08-31T05:32:21.006Z",
+  "postAgeHours": 3822,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831053221006_serp_blogtab-전자담배를-계속-쓰게_20286c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배를 계속 쓰게"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배를 계속 쓰게",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224330676864",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224314065271",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224217224626",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
