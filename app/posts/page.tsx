@@ -82,6 +82,8 @@ function TargetKeywordBadges({ post }: { post: PostingRecord }) {
 export default function PostsPage() {
   const [posts, setPosts] = useState<PostingRecord[]>([]);
   const [filter, setFilter] = useState<StatusFilter>("all");
+  /** 글이 306건이라 한 화면에서 다 다루기 어렵다. 블로그별로 좁혀서 본다. */
+  const [userFilter, setUserFilter] = useState<string>("all");
   const [loading, setLoading] = useState(true);
 
   // 항목 추가 모달
@@ -124,7 +126,33 @@ export default function PostsPage() {
 
   useEffect(() => { load(); }, []);
 
-  const filtered = filter === "all" ? posts : posts.filter((p) => p.status === filter);
+  const byStatus = filter === "all" ? posts : posts.filter((p) => p.status === filter);
+  const filtered =
+    userFilter === "all" ? byStatus : byStatus.filter((p) => p.userId === userFilter);
+
+  /**
+   * 사용자 목록은 글에서 그대로 뽑는다. 따로 관리할 목록을 만들면 실제 데이터와
+   * 어긋나는 순간이 온다. 블로그 주소는 추적 계약에 이미 들어 있어서 같이 보여준다 —
+   * 사장님은 "a"보다 "mansur_vape"로 기억하신다.
+   */
+  const userOptions = (() => {
+    const counts = new Map<string, { count: number; blogs: Map<string, number> }>();
+    for (const post of byStatus) {
+      const entry = counts.get(post.userId) ?? { count: 0, blogs: new Map() };
+      entry.count += 1;
+      const blogId = post.outcomeTracking?.canonicalPost.blogId;
+      if (blogId) entry.blogs.set(blogId, (entry.blogs.get(blogId) ?? 0) + 1);
+      counts.set(post.userId, entry);
+    }
+
+    return [...counts.entries()]
+      .map(([userId, entry]) => ({
+        userId,
+        count: entry.count,
+        blogId: [...entry.blogs.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? null,
+      }))
+      .sort((a, b) => b.count - a.count);
+  })();
 
   // ── 항목 추가 ──────────────────────────────────────────────
   const handleAdd = async () => {
@@ -292,7 +320,11 @@ export default function PostsPage() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-zinc-900">발행 인덱스</h1>
-          <p className="text-zinc-500 mt-1 text-sm">총 {posts.length}개 포스팅</p>
+          <p className="text-zinc-500 mt-1 text-sm">
+            {filtered.length === posts.length
+              ? `총 ${posts.length}개 포스팅`
+              : `${filtered.length}개 보는 중 (전체 ${posts.length}개)`}
+          </p>
         </div>
         <div className="flex gap-2">
           <button
@@ -316,7 +348,7 @@ export default function PostsPage() {
         </p>
       )}
 
-      <div className="flex gap-2 mb-5 flex-wrap">
+      <div className="flex gap-2 mb-3 flex-wrap">
         {FILTERS.map(({ value, label }) => {
           const count = value === "all" ? posts.length : posts.filter((p) => p.status === value).length;
           return (
@@ -335,10 +367,40 @@ export default function PostsPage() {
         })}
       </div>
 
+      <div className="flex gap-2 mb-5 flex-wrap items-center">
+        <span className="text-xs text-zinc-400 mr-1">블로그</span>
+        <button
+          onClick={() => setUserFilter("all")}
+          className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+            userFilter === "all"
+              ? "bg-blue-600 text-white"
+              : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+          }`}
+        >
+          전체 ({byStatus.length})
+        </button>
+        {userOptions.map(({ userId, count, blogId }) => (
+          <button
+            key={userId}
+            onClick={() => setUserFilter(userId)}
+            title={blogId ? `${userId} · ${blogId}` : userId}
+            className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+              userFilter === userId
+                ? "bg-blue-600 text-white"
+                : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+            }`}
+          >
+            {blogId ?? userId} ({count})
+          </button>
+        ))}
+      </div>
+
       {loading ? (
         <p className="text-zinc-400 text-sm">로딩 중...</p>
       ) : filtered.length === 0 ? (
-        <p className="text-zinc-400 text-sm text-center py-16">포스팅이 없습니다.</p>
+        <p className="text-zinc-400 text-sm text-center py-16">
+          {posts.length === 0 ? "포스팅이 없습니다." : "고른 조건에 맞는 글이 없습니다."}
+        </p>
       ) : (
         <div className="space-y-2">
           {filtered.map((post) => (
