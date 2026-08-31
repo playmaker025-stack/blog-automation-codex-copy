@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0cbc5e41",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:12:02.877Z",
+  "postAgeHours": 4324,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831041202877_serp_blogtab-구월동-전자담배-입호흡_7d55e4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동 전자담배 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224096074626",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224093237305",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224131698601",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224094750720",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224124480617",
+        "rank": 14
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224166649336",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

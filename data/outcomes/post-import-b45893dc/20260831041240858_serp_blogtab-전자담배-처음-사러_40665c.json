@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b45893dc",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:12:40.858Z",
+  "postAgeHours": 4276,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831041240858_serp_blogtab-전자담배-처음-사러_40665c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 처음 사러"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 처음 사러",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

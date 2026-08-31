@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-96f9b622",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:11:43.991Z",
+  "postAgeHours": 4348,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831041143991_serp_blogtab-구월동전자담배-버니-고농도_bd82a4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동전자담배 버니 고농도"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 버니 고농도",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224202861999",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224166649336",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

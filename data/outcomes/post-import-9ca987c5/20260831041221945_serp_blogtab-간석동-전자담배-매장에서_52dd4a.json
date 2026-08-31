@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9ca987c5",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:12:21.945Z",
+  "postAgeHours": 4300,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831041221945_serp_blogtab-간석동-전자담배-매장에서_52dd4a",
+  "target": {
+    "surface": "blog_tab",
+    "query": "간석동 전자담배 매장에서"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 매장에서",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224218539513",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224277953493",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224256858676",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224283320666",
+        "rank": 11
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224288381256",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
