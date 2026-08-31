@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-31T02:55:56.061Z",
+  "updatedAt": "2026-08-31T03:00:06.737Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -4969,10 +4969,50 @@
           "lastStatus": "request_failed",
           "consecutiveFailures": 8,
           "lastAttemptAt": "2026-08-31T02:55:54.574Z"
+        },
+        "인천 고농도 전자담배": {
+          "okAgeHours": [
+            87
+          ],
+          "lastCapturedAt": "2026-08-31T02:59:42.273Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T02:59:42.273Z"
+        },
+        "네스티원": {
+          "okAgeHours": [
+            87
+          ],
+          "lastCapturedAt": "2026-08-31T02:59:49.549Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T02:59:49.549Z"
+        },
+        "인천네스티원": {
+          "okAgeHours": [
+            87
+          ],
+          "lastCapturedAt": "2026-08-31T02:59:56.681Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T02:59:56.681Z"
+        },
+        "네스티 고농도": {
+          "okAgeHours": [
+            87
+          ],
+          "lastCapturedAt": "2026-08-31T03:00:03.531Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:00:03.531Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T02:55:54.574Z",
-      "total": 9
+      "lastCapturedAt": "2026-08-31T03:00:03.531Z",
+      "total": 13
     },
     "post-a28929d7": {
       "queries": {
@@ -5120,8 +5160,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-08-31T02:55:40.120Z",
-    "lastOkAt": "2026-08-30T16:15:39.898Z",
-    "consecutiveFailedRuns": 33
+    "lastRunAt": "2026-08-31T02:59:41.858Z",
+    "lastOkAt": "2026-08-31T02:59:41.858Z",
+    "consecutiveFailedRuns": 0
   }
 }

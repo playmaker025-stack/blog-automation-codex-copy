@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T03:00:03.531Z",
+  "postAgeHours": 87,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831030003531_serp_네스티-고농도_f14a42",
+  "status": "ok",
+  "serp": {
+    "query": "네스티 고농도",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 5,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

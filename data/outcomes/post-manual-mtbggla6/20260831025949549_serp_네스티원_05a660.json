@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T02:59:49.549Z",
+  "postAgeHours": 87,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831025949549_serp_네스티원_05a660",
+  "status": "ok",
+  "serp": {
+    "query": "네스티원",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
