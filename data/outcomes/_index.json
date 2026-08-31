@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-31T02:55:09.315Z",
+  "updatedAt": "2026-08-31T02:55:56.061Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -4964,15 +4964,15 @@
         },
         "": {
           "okAgeHours": [],
-          "lastCapturedAt": "2026-08-31T02:55:07.346Z",
-          "total": 4,
+          "lastCapturedAt": "2026-08-31T02:55:54.574Z",
+          "total": 8,
           "lastStatus": "request_failed",
-          "consecutiveFailures": 4,
-          "lastAttemptAt": "2026-08-31T02:55:07.346Z"
+          "consecutiveFailures": 8,
+          "lastAttemptAt": "2026-08-31T02:55:54.574Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T02:55:07.346Z",
-      "total": 5
+      "lastCapturedAt": "2026-08-31T02:55:54.574Z",
+      "total": 9
     },
     "post-a28929d7": {
       "queries": {
@@ -5120,8 +5120,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-08-31T02:54:49.896Z",
+    "lastRunAt": "2026-08-31T02:55:40.120Z",
     "lastOkAt": "2026-08-30T16:15:39.898Z",
-    "consecutiveFailedRuns": 32
+    "consecutiveFailedRuns": 33
   }
 }

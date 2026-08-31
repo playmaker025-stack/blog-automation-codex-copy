@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T02:55:40.629Z",
+  "postAgeHours": 87,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831025540629_serp_인천-고농도-전자담배_16d96c",
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

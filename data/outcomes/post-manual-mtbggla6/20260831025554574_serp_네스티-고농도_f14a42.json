@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T02:55:54.574Z",
+  "postAgeHours": 87,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831025554574_serp_네스티-고농도_f14a42",
+  "status": "request_failed",
+  "note": "HTTP 403"
+}
