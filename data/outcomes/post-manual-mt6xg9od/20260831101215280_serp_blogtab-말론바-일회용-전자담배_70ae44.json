@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6xg9od",
+  "source": "serp",
+  "capturedAt": "2026-08-31T10:12:15.280Z",
+  "postAgeHours": 171,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831101215280_serp_blogtab-말론바-일회용-전자담배_70ae44",
+  "target": {
+    "surface": "blog_tab",
+    "query": "말론바 일회용 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "말론바 일회용 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

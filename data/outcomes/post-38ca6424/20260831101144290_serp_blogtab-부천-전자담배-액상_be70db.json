@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-38ca6424",
+  "source": "serp",
+  "capturedAt": "2026-08-31T10:11:44.290Z",
+  "postAgeHours": 169,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831101144290_serp_blogtab-부천-전자담배-액상_be70db",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부천 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부천 전자담배 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224388730074",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

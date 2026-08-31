@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6yxtgj",
+  "source": "serp",
+  "capturedAt": "2026-08-31T10:12:47.742Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831101247742_serp_integrated-아머미니_907066",
+  "target": {
+    "surface": "integrated",
+    "query": "아머미니"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "아머미니",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 6,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224276977064",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224320202703",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

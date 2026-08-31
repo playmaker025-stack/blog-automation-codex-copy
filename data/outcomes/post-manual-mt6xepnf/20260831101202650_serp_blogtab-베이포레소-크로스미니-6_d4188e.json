@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6xepnf",
+  "source": "serp",
+  "capturedAt": "2026-08-31T10:12:02.650Z",
+  "postAgeHours": 171,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831101202650_serp_blogtab-베이포레소-크로스미니-6_d4188e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "베이포레소 크로스미니 6"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "베이포레소 크로스미니 6",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
