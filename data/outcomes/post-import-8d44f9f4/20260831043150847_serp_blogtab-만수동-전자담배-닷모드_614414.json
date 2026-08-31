@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8d44f9f4",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:31:50.847Z",
+  "postAgeHours": 4253,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831043150847_serp_blogtab-만수동-전자담배-닷모드_614414",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배 닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 닷모드",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224208083611",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224125210969",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224120478269",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223978870917",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224153516411",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221008564512",
+        "rank": 17
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220966835293",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223529496185",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221418687738",
+        "rank": 22
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224006424774",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

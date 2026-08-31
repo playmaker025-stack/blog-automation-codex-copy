@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-c06c343f",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:31:44.549Z",
+  "postAgeHours": 4253,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831043144549_serp_blogtab-부평-전자담배-닷팟맥스_021240",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평 전자담배 닷팟맥스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 닷팟맥스",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224208075783",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224209102690",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224010656269",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224143782159",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224068390821",
+        "rank": 28
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224043332557",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
