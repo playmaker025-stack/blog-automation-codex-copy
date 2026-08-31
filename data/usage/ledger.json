@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 4.1633415000000005,
-  "lifetimeCalls": 159,
+  "lifetimeUsd": 4.1862417,
+  "lifetimeCalls": 161,
   "days": [
     {
       "date": "2026-08-24",
@@ -190,12 +190,21 @@
       "date": "2026-08-31",
       "models": {
         "gpt-4.1-mini": {
-          "calls": 1,
-          "inputTokens": 2230,
-          "outputTokens": 223,
+          "calls": 2,
+          "inputTokens": 6190,
+          "outputTokens": 905,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.0012488,
+          "usd": 0.003924,
+          "unpriced": false
+        },
+        "claude-haiku-4-5-20251001": {
+          "calls": 1,
+          "inputTokens": 10480,
+          "outputTokens": 1949,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "usd": 0.020225,
           "unpriced": false
         }
       }
@@ -214,8 +223,9 @@
       "provider": "anthropic"
     }
   ],
-  "updatedAt": "2026-08-31T02:40:55.899Z",
+  "updatedAt": "2026-08-31T02:54:38.929Z",
   "lifetimeByProvider": {
-    "openai": 0.0012488
+    "anthropic": 0.020225,
+    "openai": 0.0026752
   }
 }
