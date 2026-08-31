@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z50dx",
+  "source": "serp",
+  "capturedAt": "2026-08-31T10:32:09.604Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831103209604_serp_integrated-인천-발라리안_0800fa",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 발라리안"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 발라리안",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 4,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

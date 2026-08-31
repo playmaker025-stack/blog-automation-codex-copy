@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-31T10:12:51.216Z",
+  "updatedAt": "2026-08-31T10:32:51.240Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -6349,10 +6349,40 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-31T10:12:47.742Z"
+        },
+        "blog_tab::아머미니": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:31:37.533Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:31:37.533Z"
+        },
+        "integrated::액상 전자담배 기기": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:31:44.191Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:31:44.191Z"
+        },
+        "blog_tab::액상 전자담배 기기": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:31:50.955Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:31:50.955Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T10:12:47.742Z",
-      "total": 6
+      "lastCapturedAt": "2026-08-31T10:31:50.955Z",
+      "total": 9
     },
     "post-manual-mt6z3928": {
       "queries": {
@@ -6365,10 +6395,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T14:15:53.571Z"
+        },
+        "blog_tab::인천 삼산동 전자담배": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:31:57.300Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:31:57.300Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T14:15:53.571Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T10:31:57.300Z",
+      "total": 2
     },
     "post-manual-mt6z4kiq": {
       "queries": {
@@ -6381,10 +6421,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T14:15:59.657Z"
+        },
+        "blog_tab::구월동 전자담배 만수르": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:32:03.282Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:32:03.282Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T14:15:59.657Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T10:32:03.282Z",
+      "total": 2
     },
     "post-manual-mt6z50dx": {
       "queries": {
@@ -6397,10 +6447,70 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T14:16:06.423Z"
+        },
+        "integrated::인천 발라리안": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:32:09.604Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:32:09.604Z"
+        },
+        "blog_tab::인천 발라리안": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:32:16.583Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:32:16.583Z"
+        },
+        "integrated::발라리안 맥스 프로": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:32:22.767Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:32:22.767Z"
+        },
+        "blog_tab::발라리안 맥스 프로": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:32:29.473Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:32:29.473Z"
+        },
+        "integrated::인천 전자담배": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:32:35.852Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:32:35.852Z"
+        },
+        "blog_tab::인천 전자담배": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:32:41.851Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:32:41.851Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T14:16:06.423Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T10:32:41.851Z",
+      "total": 7
     },
     "post-manual-mt6z60ar": {
       "queries": {
@@ -6413,10 +6523,20 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T14:16:13.166Z"
+        },
+        "integrated::닷모드 투엑스": {
+          "okAgeHours": [
+            170
+          ],
+          "lastCapturedAt": "2026-08-31T10:32:48.119Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T10:32:48.119Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T14:16:13.166Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T10:32:48.119Z",
+      "total": 2
     },
     "post-manual-mt75drce": {
       "queries": {
@@ -7636,8 +7756,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-08-31T10:11:37.235Z",
-    "lastOkAt": "2026-08-31T10:11:37.235Z",
+    "lastRunAt": "2026-08-31T10:31:37.177Z",
+    "lastOkAt": "2026-08-31T10:31:37.177Z",
     "consecutiveFailedRuns": 0
   }
 }

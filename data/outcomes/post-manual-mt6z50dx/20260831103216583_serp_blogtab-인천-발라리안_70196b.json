@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z50dx",
+  "source": "serp",
+  "capturedAt": "2026-08-31T10:32:16.583Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831103216583_serp_blogtab-인천-발라리안_70196b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 발라리안"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 발라리안",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224349606870",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224113483238",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
