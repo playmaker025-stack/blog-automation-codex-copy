@@ -93,6 +93,12 @@ export default function PostsPage() {
 
   // 항목 수정 인라인
   const [editing, setEditing] = useState<EditState | null>(null);
+  // 저장은 GitHub에 쓰는 일이라 몇 초 걸린다. 그 사이 아무 표시가 없으면
+  // 사장님이 저장을 또 누르게 되고, 같은 글을 두 번 쓰게 된다.
+  const [savingEdit, setSavingEdit] = useState(false);
+  const [addingPost, setAddingPost] = useState(false);
+  /** 방금 저장된 글. 잠깐 표시해서 "됐다"가 눈에 보이게 한다. */
+  const [justSaved, setJustSaved] = useState<string | null>(null);
 
   // TXT 가져오기
   const [showImport, setShowImport] = useState(false);
@@ -122,7 +128,8 @@ export default function PostsPage() {
 
   // ── 항목 추가 ──────────────────────────────────────────────
   const handleAdd = async () => {
-    if (!addTitle.trim() || !addUserId.trim()) return;
+    if (!addTitle.trim() || !addUserId.trim() || addingPost) return;
+    setAddingPost(true);
     try {
       const res = await fetch("/api/github/posts", {
         method: "POST",
@@ -138,17 +145,29 @@ export default function PostsPage() {
           targetKeywords: addKeywords,
         }),
       });
-      if (!res.ok) throw new Error();
+      const json = (await res.json()) as { post?: PostingRecord; error?: string };
+      if (!res.ok) throw new Error(json.error ?? "추가 실패");
+
+      // 목록 전체를 다시 받지 않는다. 새 글 하나만 앞에 넣는다.
+      if (json.post) setPosts((list) => [json.post as PostingRecord, ...list]);
       setShowAdd(false);
       setAddTitle("");
       setAddUrl("");
       setAddUserId("");
       setAddKeywords([]);
       setNotice({ type: "ok", msg: "항목이 추가되었습니다." });
-      load();
-    } catch {
-      setNotice({ type: "err", msg: "추가 실패" });
+      if (json.post) markSaved(json.post.postId);
+    } catch (e) {
+      setNotice({ type: "err", msg: e instanceof Error ? e.message : "추가 실패" });
+    } finally {
+      setAddingPost(false);
     }
+  };
+
+  /** 저장된 티를 잠깐 남긴다. 새로고침 없이도 "됐다"가 보여야 한다. */
+  const markSaved = (postId: string) => {
+    setJustSaved(postId);
+    setTimeout(() => setJustSaved((current) => (current === postId ? null : current)), 3000);
   };
 
   // ── 항목 수정 ──────────────────────────────────────────────
@@ -168,7 +187,9 @@ export default function PostsPage() {
   };
 
   const handleSaveEdit = async () => {
-    if (!editing) return;
+    if (!editing || savingEdit) return;
+    setSavingEdit(true);
+    setNotice(null);
     try {
       const res = await fetch("/api/github/posts", {
         method: "PATCH",
@@ -183,12 +204,24 @@ export default function PostsPage() {
             : {}),
         }),
       });
-      if (!res.ok) throw new Error();
+      const json = (await res.json()) as { post?: PostingRecord; error?: string };
+      if (!res.ok) throw new Error(json.error ?? "수정 실패");
+
+      // 예전에는 여기서 목록 306건을 통째로 다시 받았다. 저장이 끝난 뒤에도
+      // 한참 멎어 있던 건 그 때문이다. 고친 글 한 건만 갈아끼운다.
+      const saved = json.post;
+      if (saved) {
+        setPosts((list) => list.map((post) => (post.postId === saved.postId ? saved : post)));
+      }
+      const savedId = editing.postId;
       setEditing(null);
-      setNotice({ type: "ok", msg: "수정되었습니다." });
-      load();
-    } catch {
-      setNotice({ type: "err", msg: "수정 실패" });
+      setNotice({ type: "ok", msg: "저장됐습니다." });
+      markSaved(savedId);
+    } catch (e) {
+      // 수정 폼은 열어둔 채로 둔다. 닫으면 사장님이 쓰신 값이 사라진다.
+      setNotice({ type: "err", msg: e instanceof Error ? e.message : "수정 실패" });
+    } finally {
+      setSavingEdit(false);
     }
   };
 
@@ -198,8 +231,9 @@ export default function PostsPage() {
     try {
       const res = await fetch(`/api/github/posts?postId=${postId}`, { method: "DELETE" });
       if (!res.ok) throw new Error();
+      // 지운 글만 목록에서 뺀다.
+      setPosts((list) => list.filter((post) => post.postId !== postId));
       setNotice({ type: "ok", msg: "삭제되었습니다." });
-      load();
     } catch {
       setNotice({ type: "err", msg: "삭제 실패" });
     }
@@ -355,26 +389,42 @@ export default function PostsPage() {
                       />
                     </div>
                   </div>
-                  <div className="flex gap-2 justify-end">
+                  <div className="flex gap-2 justify-end items-center">
+                    {savingEdit && (
+                      <span className="text-xs text-zinc-400 mr-auto">
+                        저장 중입니다. 몇 초 걸립니다 — 다시 누르지 않으셔도 됩니다.
+                      </span>
+                    )}
                     <button
                       onClick={() => setEditing(null)}
-                      className="px-3 py-1.5 text-xs text-zinc-600 hover:text-zinc-900"
+                      disabled={savingEdit}
+                      className="px-3 py-1.5 text-xs text-zinc-600 hover:text-zinc-900 disabled:opacity-40"
                     >
                       취소
                     </button>
                     <button
                       onClick={handleSaveEdit}
-                      className="px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700"
+                      disabled={savingEdit}
+                      className="px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      저장
+                      {savingEdit ? "저장 중…" : "저장"}
                     </button>
                   </div>
                 </div>
               ) : (
                 // 일반 행
-                <div className="bg-white border border-zinc-200 rounded-xl px-4 py-3 flex items-center gap-3">
+                <div
+                  className={`bg-white border rounded-xl px-4 py-3 flex items-center gap-3 transition-colors ${
+                    justSaved === post.postId ? "border-emerald-400 bg-emerald-50/40" : "border-zinc-200"
+                  }`}
+                >
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-zinc-900 truncate">{post.title}</p>
+                    <p className="text-sm font-medium text-zinc-900 truncate">
+                      {post.title}
+                      {justSaved === post.postId && (
+                        <span className="ml-2 text-xs text-emerald-600 font-normal">저장됨</span>
+                      )}
+                    </p>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="text-xs text-zinc-400">{post.userId}</span>
                       <span className="text-xs text-zinc-400">
@@ -472,10 +522,10 @@ export default function PostsPage() {
               </button>
               <button
                 onClick={handleAdd}
-                disabled={!addTitle.trim() || !addUserId.trim()}
+                disabled={!addTitle.trim() || !addUserId.trim() || addingPost}
                 className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                추가
+                {addingPost ? "추가 중…" : "추가"}
               </button>
             </div>
           </div>

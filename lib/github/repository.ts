@@ -170,6 +170,24 @@ export function isRefConflict(error: unknown): boolean {
   return status === 409 || status === 422;
 }
 
+/**
+ * 없으면 null. 있으면 내용.
+ *
+ * fileExists + readFile은 같은 파일을 두 번 내려받는다 — fileExists 자체가
+ * readFile이기 때문이다. 발행 목록(383KB)처럼 큰 파일에서는 저장 한 번마다
+ * 왕복이 하나 더 생긴다. 있는지 없는지가 궁금하면 그냥 한 번 읽어라.
+ */
+export async function readFileOrNull(filePath: string): Promise<FileContent | null> {
+  try {
+    return await readFile(filePath);
+  } catch (err: unknown) {
+    if (err instanceof Error && "status" in err && (err as { status: number }).status === 404) {
+      return null;
+    }
+    throw err;
+  }
+}
+
 export async function fileExists(filePath: string): Promise<boolean> {
   try {
     await readFile(filePath);

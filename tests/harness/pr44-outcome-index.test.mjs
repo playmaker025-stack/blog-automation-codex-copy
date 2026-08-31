@@ -117,16 +117,21 @@ describe("PR44 관측 색인은 검색어 단위다", () => {
 
   // 사람이 손으로 넣은 옛 관측이 뒤늦게 들어와도 최신 상태를 과거로 덮으면 안 된다.
   test("더 오래된 관측이 나중에 들어와도 최신 상태를 덮지 않는다", () => {
+    // 시각은 한 번만 계산해서 붙든다. at()을 두 번 부르면 그 사이 밀리초가
+    // 흘러 값이 달라지고, 테스트가 어쩌다 실패한다.
+    const recent = at(1);
+    const older = at(50);
+
     let index = applyObservationsToIndex(emptyOutcomeIndex(), [
-      observation({ status: "ok", postAgeHours: 10, capturedAt: at(1) }),
+      observation({ status: "ok", postAgeHours: 10, capturedAt: recent }),
     ]);
     index = applyObservationsToIndex(index, [
-      observation({ status: "request_failed", postAgeHours: 5, capturedAt: at(50) }),
+      observation({ status: "request_failed", postAgeHours: 5, capturedAt: older }),
     ]);
 
     const state = index.posts["post-1"].queries["기본검색어"];
     assert.equal(state.lastStatus, "ok");
-    assert.equal(state.lastCapturedAt, at(1));
+    assert.equal(state.lastCapturedAt, recent);
   });
 
   test("원본을 고치지 않는다", () => {
