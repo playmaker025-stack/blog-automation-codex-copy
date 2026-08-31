@@ -12,8 +12,13 @@ import { readJsonFile } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import type { PostingIndex } from "@/lib/types/github-data";
 import { normalizeUserId } from "@/lib/utils/normalize";
-import { collectDueOutcomes } from "@/lib/agents/serp-collector";
-import { backoffUntil, dueCheckpointFromAges, isDeclared } from "@/lib/agents/post-outcome";
+import { collectDueOutcomes, SERP_SURFACES } from "@/lib/agents/serp-collector";
+import {
+  backoffUntil,
+  dueCheckpointFromAges,
+  isDeclared,
+  queryStateKey,
+} from "@/lib/agents/post-outcome";
 import { ensureOutcomeIndex } from "@/lib/agents/post-outcome-store";
 import type { OutcomeQueryState } from "@/lib/agents/post-outcome";
 import {
@@ -57,17 +62,23 @@ export async function GET() {
         queries += 1;
         if (isDeclared(keyword.source)) declared += 1;
 
-        const state = index2Query(outcomeIndex.posts[post.postId]?.queries, keyword.query);
-        if ((state?.okAgeHours.length ?? 0) > 0) measured += 1;
+        // 화면마다 따로 잰다. 한쪽만 재고 넘어가면 다른 쪽은 영영 안 재진다.
+        for (const surface of SERP_SURFACES) {
+          const state = index2Query(
+            outcomeIndex.posts[post.postId]?.queries,
+            queryStateKey(surface, keyword.query)
+          );
+          if ((state?.okAgeHours.length ?? 0) > 0) measured += 1;
 
-        const checkpoint = dueCheckpointFromAges({
-          publishedAt: post.publishedAt,
-          now,
-          okAgeHours: state?.okAgeHours ?? [],
-        });
-        if (checkpoint === null) continue;
-        if (backoffUntil(state) > nowMs) waiting += 1;
-        else due += 1;
+          const checkpoint = dueCheckpointFromAges({
+            publishedAt: post.publishedAt,
+            now,
+            okAgeHours: state?.okAgeHours ?? [],
+          });
+          if (checkpoint === null) continue;
+          if (backoffUntil(state) > nowMs) waiting += 1;
+          else due += 1;
+        }
       }
     }
 
@@ -78,6 +89,8 @@ export async function GET() {
       progress: {
         posts: tracked.length,
         queries,
+        // 검색어 하나를 통합검색과 블로그 탭 두 곳에서 잰다.
+        measurements: queries * SERP_SURFACES.length,
         // 사람이 정한 검색어 수. 나머지는 앱이 제목에서 추측한 것이라 성적으로 못 쓴다.
         declared,
         measured,

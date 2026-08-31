@@ -96,3 +96,31 @@ export function findRank(
 export function buildMobileSearchUrl(query: string): string {
   return `https://m.search.naver.com/search.naver?where=m&query=${encodeURIComponent(query.trim())}`;
 }
+
+/**
+ * 블로그 탭 주소.
+ *
+ * 통합검색은 검색어에 따라 블로그 글이 0~28개로 들쭉날쭉하다. "미노출"이
+ * 정말 밖에 있다는 뜻인지, 화면이 얕아서 못 본 것인지 구분이 안 된다.
+ * 블로그 탭은 30개까지 실려서 그 구분이 된다.
+ */
+export function buildBlogTabSearchUrl(query: string): string {
+  return `https://m.search.naver.com/search.naver?ssc=tab.m_blog.all&query=${encodeURIComponent(query.trim())}`;
+}
+
+/**
+ * 이 검색어에 걸린 우리 블로그 글 전부의 자리.
+ *
+ * 추적 글 하나만 보면 "우리가 보이나"에 답할 수 없다. 실측에서 추적 글은
+ * 없는데 같은 블로그의 다른 글 여섯 개가 5~12위를 차지하고 있었다.
+ */
+export function findOurs(
+  parsed: SerpParseResult,
+  blogIds: ReadonlySet<string>
+): Array<{ blogId: string; logNo: string; rank: number }> {
+  const found: Array<{ blogId: string; logNo: string; rank: number }> = [];
+  parsed.blogOrder.forEach((item, index) => {
+    if (blogIds.has(item.blogId)) found.push({ ...item, rank: index + 1 });
+  });
+  return found;
+}

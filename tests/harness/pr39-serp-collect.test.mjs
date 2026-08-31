@@ -1,7 +1,14 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 
-import { parseSerp, findRank, looksBlocked, buildMobileSearchUrl } from "../../lib/agents/serp-parse.ts";
+import {
+  parseSerp,
+  findRank,
+  findOurs,
+  looksBlocked,
+  buildMobileSearchUrl,
+  buildBlogTabSearchUrl,
+} from "../../lib/agents/serp-parse.ts";
 import { dueCheckpoint, ONGOING_INTERVAL_HOURS } from "../../lib/agents/post-outcome.ts";
 
 // 실측(2026-08-25): 한 글의 링크가 화면에 9번씩 반복됐다. 중복을 안 지우면
@@ -137,5 +144,33 @@ describe("PR39 검색 주소", () => {
     const url = buildMobileSearchUrl("부천 전자담배 액상");
     assert.ok(url.startsWith("https://m.search.naver.com/search.naver?where=m&query="));
     assert.ok(url.includes(encodeURIComponent("부천 전자담배 액상")));
+  });
+});
+
+describe("PR45 우리 글 전부를 센다", () => {
+  // 실측(2026-08-31, "무화량 많은 전자담배"): 추적 글은 없는데 같은 블로그의
+  // 다른 글 여섯 개가 5~12위를 차지하고 있었다. 추적 글 하나만 보고 "미노출"로
+  // 적으면 사실과 정반대가 된다.
+  test("추적 글이 없어도 우리 블로그의 다른 글을 찾아낸다", () => {
+    const parsed = parseSerp(SERP);
+    const ours = findOurs(parsed, new Set(["mansur_vape", "vapemarket_jy"]));
+
+    assert.deepEqual(ours, [
+      { blogId: "vapemarket_jy", logNo: "224377729060", rank: 2 },
+      { blogId: "mansur_vape", logNo: "224340378304", rank: 3 },
+    ]);
+  });
+
+  test("우리 글이 하나도 없으면 빈 목록이다", () => {
+    assert.deepEqual(findOurs(parseSerp(SERP), new Set(["없는블로그"])), []);
+  });
+
+  test("블로그 탭은 다른 주소를 본다", () => {
+    const integrated = buildMobileSearchUrl("인천 전자담배");
+    const blogTab = buildBlogTabSearchUrl("인천 전자담배");
+
+    assert.notEqual(integrated, blogTab);
+    assert.ok(blogTab.includes("tab.m_blog.all"));
+    assert.ok(blogTab.includes(encodeURIComponent("인천 전자담배")));
   });
 });

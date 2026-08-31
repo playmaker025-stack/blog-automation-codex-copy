@@ -19,10 +19,18 @@ import {
   buildObservationId,
   dueCheckpointFromAges,
   hoursSince,
+  queryStateKey,
   type PostOutcomeObservation,
+  type SerpSurface,
   type TargetKeyword,
 } from "./post-outcome.ts";
-import { buildMobileSearchUrl, findRank, parseSerp } from "./serp-parse.ts";
+import {
+  buildBlogTabSearchUrl,
+  buildMobileSearchUrl,
+  findOurs,
+  findRank,
+  parseSerp,
+} from "./serp-parse.ts";
 import { ensureOutcomeIndex, recordObservations } from "./post-outcome-store";
 
 const MOBILE_UA =
@@ -37,9 +45,19 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fetchSerp(query: string): Promise<{ html: string } | { error: string }> {
+/** 두 화면을 다 잰다. 같은 검색어라도 통합검색과 블로그 탭은 다른 사실이다. */
+export const SERP_SURFACES: SerpSurface[] = ["integrated", "blog_tab"];
+
+function urlFor(surface: SerpSurface, query: string): string {
+  return surface === "blog_tab" ? buildBlogTabSearchUrl(query) : buildMobileSearchUrl(query);
+}
+
+async function fetchSerp(
+  surface: SerpSurface,
+  query: string
+): Promise<{ html: string } | { error: string }> {
   try {
-    const response = await fetch(buildMobileSearchUrl(query), {
+    const response = await fetch(urlFor(surface, query), {
       headers: { "user-agent": MOBILE_UA, "accept-language": "ko-KR,ko;q=0.9" },
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
@@ -53,6 +71,7 @@ async function fetchSerp(query: string): Promise<{ html: string } | { error: str
 export interface CollectResult {
   postId: string;
   query: string;
+  surface: SerpSurface;
   checkpointHours: number;
   status: PostOutcomeObservation["status"];
   rank: number | null;
@@ -68,9 +87,11 @@ export interface CollectResult {
 async function observeOnce(params: {
   post: PostingRecord;
   keyword: TargetKeyword;
+  surface: SerpSurface;
   checkpointHours: number;
+  ourBlogIds: ReadonlySet<string>;
 }): Promise<{ result: CollectResult; observation: PostOutcomeObservation }> {
-  const { post, keyword, checkpointHours } = params;
+  const { post, keyword, surface, checkpointHours, ourBlogIds } = params;
   const query = keyword.query;
   const tracking = post.outcomeTracking;
   const capturedAt = new Date().toISOString();
@@ -82,7 +103,12 @@ async function observeOnce(params: {
     capturedAt,
     postAgeHours: hoursSince(post.publishedAt, capturedAt),
     collector: { method: "crawler" as const, version: COLLECTOR_VERSION },
-    observationId: buildObservationId({ postId: post.postId, source: "serp", capturedAt, query }),
+    observationId: buildObservationId({
+      postId: post.postId,
+      source: "serp",
+      capturedAt,
+      query: `${surface}-${query}`,
+    }),
   };
 
   const failed = (
@@ -90,10 +116,10 @@ async function observeOnce(params: {
     note: string
   ): { result: CollectResult; observation: PostOutcomeObservation } => ({
     observation: { ...base, status, note: note.slice(0, 200) },
-    result: { postId: post.postId, query, checkpointHours, status, rank: null, note },
+    result: { postId: post.postId, query, surface, checkpointHours, status, rank: null, note },
   });
 
-  const fetched = await fetchSerp(query);
+  const fetched = await fetchSerp(surface, query);
   if ("error" in fetched) return failed("request_failed", fetched.error);
 
   const parsed = parseSerp(fetched.html);
@@ -110,16 +136,19 @@ async function observeOnce(params: {
       status: "ok",
       serp: {
         query,
+        surface,
         // 사람이 정한 말인지 앱이 제목에서 추측한 말인지. 성적 해석이 여기서 갈린다.
         querySource: keyword.source ?? "title_guess",
         device: "mobile",
         rank,
         searchedResultLimit,
+        // 추적 글이 없어도 우리 블로그의 다른 글이 잡혔을 수 있다. 그게 더 중요한 사실이다.
+        ours: findOurs(parsed, ourBlogIds),
         aiBriefing: parsed.aiBriefing,
         cited: parsed.cited,
       },
     },
-    result: { postId: post.postId, query, checkpointHours, status: "ok", rank },
+    result: { postId: post.postId, query, surface, checkpointHours, status: "ok", rank },
   };
 }
 
@@ -154,35 +183,47 @@ export async function collectDueOutcomes(params: {
   interface DueItem {
     post: PostingRecord;
     keyword: TargetKeyword;
+    surface: SerpSurface;
     checkpointHours: number;
     lastAttemptAt: string;
   }
+
+  // 우리 블로그 목록. 추적 계약의 주소에서 모은다 — 따로 설정할 것이 없다.
+  const ourBlogIds = new Set(
+    candidates
+      .map((post) => post.outcomeTracking?.canonicalPost.blogId)
+      .filter((blogId): blogId is string => Boolean(blogId))
+  );
 
   const dueItems: DueItem[] = [];
   let waiting = 0;
 
   for (const post of candidates) {
     for (const keyword of post.outcomeTracking?.targetKeywords ?? []) {
-      const state = index.posts[post.postId]?.queries?.[keyword.query];
-      const checkpointHours = dueCheckpointFromAges({
-        publishedAt: post.publishedAt,
-        now,
-        okAgeHours: state?.okAgeHours ?? [],
-      });
-      if (checkpointHours === null) continue;
+      for (const surface of SERP_SURFACES) {
+        const state =
+          index.posts[post.postId]?.queries?.[queryStateKey(surface, keyword.query)];
+        const checkpointHours = dueCheckpointFromAges({
+          publishedAt: post.publishedAt,
+          now,
+          okAgeHours: state?.okAgeHours ?? [],
+        });
+        if (checkpointHours === null) continue;
 
-      // 계속 실패한 검색어는 쉬게 둔다. 안 그러면 앞쪽 실패가 한 회차를 다 먹는다.
-      if (backoffUntil(state) > nowMs) {
-        waiting += 1;
-        continue;
+        // 계속 실패한 검색어는 쉬게 둔다. 안 그러면 앞쪽 실패가 한 회차를 다 먹는다.
+        if (backoffUntil(state) > nowMs) {
+          waiting += 1;
+          continue;
+        }
+
+        dueItems.push({
+          post,
+          keyword,
+          surface,
+          checkpointHours,
+          lastAttemptAt: state?.lastAttemptAt ?? "",
+        });
       }
-
-      dueItems.push({
-        post,
-        keyword,
-        checkpointHours,
-        lastAttemptAt: state?.lastAttemptAt ?? "",
-      });
     }
   }
 
@@ -198,7 +239,9 @@ export async function collectDueOutcomes(params: {
     const observed = await observeOnce({
       post: item.post,
       keyword: item.keyword,
+      surface: item.surface,
       checkpointHours: item.checkpointHours,
+      ourBlogIds,
     });
     collected.push(observed.result);
     observations.push(observed.observation);

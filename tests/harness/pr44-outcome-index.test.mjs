@@ -12,6 +12,7 @@ import {
   isUsableQuery,
   MAX_TARGET_KEYWORDS,
   nextCollectorHealth,
+  queryStateKey,
   normalizeQuery,
   normalizeTargetKeywords,
   okSerpAges,
@@ -22,6 +23,8 @@ import {
 const HOUR = 3_600_000;
 const at = (hoursAgo) => new Date(Date.now() - hoursAgo * HOUR).toISOString();
 const NOW = new Date().toISOString();
+
+const SURFACE = "integrated";
 
 const observation = (overrides = {}) => ({
   schemaVersion: 1,
@@ -36,6 +39,7 @@ const observation = (overrides = {}) => ({
     ? {
         serp: {
           query: overrides.query ?? "기본검색어",
+          surface: overrides.surface ?? SURFACE,
           querySource: overrides.querySource ?? "user",
           device: "mobile",
           rank: overrides.rank ?? null,
@@ -56,15 +60,15 @@ describe("PR44 관측 색인은 검색어 단위다", () => {
     ]);
 
     const entry = index.posts["post-1"];
-    assert.deepEqual(entry.queries["부평 전자담배 추천"].okAgeHours, [1000]);
-    assert.equal(entry.queries["구월동 전자담배"], undefined);
+    assert.deepEqual(entry.queries[queryStateKey(SURFACE, "부평 전자담배 추천")].okAgeHours, [1000]);
+    assert.equal(entry.queries[queryStateKey(SURFACE, "구월동 전자담배")], undefined);
 
     const publishedAt = at(1000);
     assert.equal(
       dueCheckpointFromAges({
         publishedAt,
         now: NOW,
-        okAgeHours: entry.queries["부평 전자담배 추천"].okAgeHours,
+        okAgeHours: entry.queries[queryStateKey(SURFACE, "부평 전자담배 추천")].okAgeHours,
       }),
       null
     );
@@ -86,7 +90,7 @@ describe("PR44 관측 색인은 검색어 단위다", () => {
       dueCheckpointFromAges({
         publishedAt: at(900),
         now: NOW,
-        okAgeHours: entry.queries["전자담배 액튐 해결"]?.okAgeHours ?? [],
+        okAgeHours: entry.queries[queryStateKey(SURFACE, "전자담배 액튐 해결")]?.okAgeHours ?? [],
       }),
       672
     );
@@ -100,7 +104,7 @@ describe("PR44 관측 색인은 검색어 단위다", () => {
       observation({ status: "request_failed", postAgeHours: 4, capturedAt: at(-1) }),
     ]);
 
-    const state = index.posts["post-1"].queries["기본검색어"];
+    const state = index.posts["post-1"].queries[queryStateKey(SURFACE, "기본검색어")];
     assert.deepEqual(state.okAgeHours, []);
     assert.equal(state.consecutiveFailures, 2);
     assert.equal(state.lastStatus, "request_failed");
@@ -113,7 +117,10 @@ describe("PR44 관측 색인은 검색어 단위다", () => {
     index = applyObservationsToIndex(index, [
       observation({ status: "ok", postAgeHours: 4, capturedAt: at(-1) }),
     ]);
-    assert.equal(index.posts["post-1"].queries["기본검색어"].consecutiveFailures, 0);
+    assert.equal(
+      index.posts["post-1"].queries[queryStateKey(SURFACE, "기본검색어")].consecutiveFailures,
+      0
+    );
   });
 
   // 사람이 손으로 넣은 옛 관측이 뒤늦게 들어와도 최신 상태를 과거로 덮으면 안 된다.
@@ -130,7 +137,7 @@ describe("PR44 관측 색인은 검색어 단위다", () => {
       observation({ status: "request_failed", postAgeHours: 5, capturedAt: older }),
     ]);
 
-    const state = index.posts["post-1"].queries["기본검색어"];
+    const state = index.posts["post-1"].queries[queryStateKey(SURFACE, "기본검색어")];
     assert.equal(state.lastStatus, "ok");
     assert.equal(state.lastCapturedAt, recent);
   });
@@ -148,8 +155,8 @@ describe("PR44 관측 색인은 검색어 단위다", () => {
       observation({ query: "가", postAgeHours: 170, capturedAt: at(-2) }),
     ]);
 
-    assert.deepEqual(entry.queries["가"].okAgeHours, [0, 170]);
-    assert.deepEqual(entry.queries["나"].okAgeHours, [0]);
+    assert.deepEqual(entry.queries[queryStateKey(SURFACE, "가")].okAgeHours, [0, 170]);
+    assert.deepEqual(entry.queries[queryStateKey(SURFACE, "나")].okAgeHours, [0]);
     assert.equal(entry.total, 3);
   });
 });
@@ -307,7 +314,7 @@ describe("PR44 색인만으로 판정해도 결과가 같다", () => {
     const index = applyObservationsToIndex(emptyOutcomeIndex(), [
       observation({ postAgeHours: 13_000 }),
     ]);
-    const ages = index.posts["post-1"].queries["기본검색어"].okAgeHours;
+    const ages = index.posts["post-1"].queries[queryStateKey(SURFACE, "기본검색어")].okAgeHours;
 
     assert.equal(dueCheckpointFromAges({ publishedAt, now: NOW, okAgeHours: ages }), null);
     assert.equal(
@@ -353,5 +360,28 @@ describe("PR44 수집기 건강 상태", () => {
     );
     assert.equal(health.consecutiveFailedRuns, 0);
     assert.equal(health.lastOkAt, RAN);
+  });
+});
+
+describe("PR45 통합검색과 블로그 탭은 따로 잰다", () => {
+  // 화면을 키에 넣지 않으면, 통합검색을 잰 순간 "이 검색어는 쟀음"이 되어
+  // 블로그 탭은 영영 안 재진다. 검색어 단위로 바꾸기 전에 겪은 것과 같은 결함이
+  // 화면 축에서 되풀이되는 자리다.
+  test("한 화면을 쟀다고 다른 화면까지 잰 걸로 치지 않는다", () => {
+    const index = applyObservationsToIndex(emptyOutcomeIndex(), [
+      observation({ query: "인천 전자담배", surface: "integrated", postAgeHours: 900 }),
+    ]);
+    const queries = index.posts["post-1"].queries;
+
+    assert.deepEqual(queries[queryStateKey("integrated", "인천 전자담배")].okAgeHours, [900]);
+    assert.equal(queries[queryStateKey("blog_tab", "인천 전자담배")], undefined);
+  });
+
+  test("화면 표시가 없는 옛 관측은 통합검색으로 본다", () => {
+    const old = observation({ query: "인천 전자담배", postAgeHours: 900 });
+    delete old.serp.surface;
+
+    const index = applyObservationsToIndex(emptyOutcomeIndex(), [old]);
+    assert.ok(index.posts["post-1"].queries[queryStateKey("integrated", "인천 전자담배")]);
   });
 });

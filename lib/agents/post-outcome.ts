@@ -32,8 +32,31 @@ export type BriefingState = "rendered" | "not_rendered" | "unknown";
  */
 export type KeywordSource = "user" | "topic" | "title_guess";
 
+/**
+ * 어느 화면에서 잰 순위인지.
+ *
+ * 둘은 다른 사실이다. 실측(2026-08-31, "무화량 많은 전자담배"):
+ * 통합검색에는 블로그 글이 27개, 블로그 탭에는 30개가 실렸는데 **순서도
+ * 구성도 달랐다.** "인천 전자담배"는 통합검색에 7개뿐이었고, "dna60"은
+ * 통합검색에 블로그 영역 자체가 없었다(0개).
+ *
+ * - integrated: 사람이 검색하면 실제로 보이는 자리. 얕지만 이게 진짜 노출이다.
+ * - blog_tab: 항상 30개까지 보인다. 통합검색에 안 떠도 어디쯤인지 알 수 있다.
+ */
+export type SerpSurface = "integrated" | "blog_tab";
+
 export interface SerpObservation {
   query: string;
+  /** 없으면 옛 데이터다. 옛 데이터는 전부 통합검색이었다. */
+  surface?: SerpSurface;
+  /**
+   * 이 검색어에 걸린 **우리 블로그 글 전부**의 자리.
+   *
+   * 추적 중인 글 하나만 보면 "우리가 이 검색어에서 보이나"에 답할 수 없다.
+   * 실측: 추적 글은 없었지만 같은 블로그의 다른 글 6개가 5·7·8·9·11·12위를
+   * 차지하고 있었다. 그걸 미노출이라고 적으면 사실과 정반대가 된다.
+   */
+  ours?: Array<{ blogId: string; logNo: string; rank: number }>;
   /** 잰 시점의 검색어 출처. 나중에 계약이 바뀌어도 이 관측의 성격은 남는다. */
   querySource?: KeywordSource;
   device: "mobile" | "desktop";
@@ -365,7 +388,7 @@ export interface OutcomeIndex {
 }
 
 /** 색인 판이 바뀌면 올린다. 낮으면 관측치 원본에서 다시 만든다. */
-export const OUTCOME_INDEX_VERSION = 2;
+export const OUTCOME_INDEX_VERSION = 3;
 
 export function emptyOutcomeIndex(): OutcomeIndex {
   return {
@@ -378,8 +401,20 @@ export function emptyOutcomeIndex(): OutcomeIndex {
 /** 검색어 없는 관측(통계 등)을 담는 자리. 순위 판정에는 쓰지 않는다. */
 export const NO_QUERY_KEY = "";
 
+/**
+ * 색인에서 이 관측을 세는 칸.
+ *
+ * 화면까지 키에 넣는다. 통합검색만 재고 "이 검색어는 쟀음"으로 처리하면
+ * 블로그 탭은 영영 안 재진다 — 검색어 단위로 바꾸기 전에 겪은 것과 같은 결함이
+ * 화면 축에서 되풀이된다.
+ */
+export function queryStateKey(surface: SerpSurface, query: string): string {
+  return `${surface}::${query}`;
+}
+
 function queryKeyOf(observation: PostOutcomeObservation): string {
-  return observation.source === "serp" ? (observation.serp?.query ?? NO_QUERY_KEY) : NO_QUERY_KEY;
+  if (observation.source !== "serp" || !observation.serp) return NO_QUERY_KEY;
+  return queryStateKey(observation.serp.surface ?? "integrated", observation.serp.query);
 }
 
 /** 색인이 없거나 판이 낡았을 때 관측치 원본에서 다시 만든다. 원본이 항상 우선이다. */
