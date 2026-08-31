@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt896vhm",
+  "source": "serp",
+  "capturedAt": "2026-08-31T12:12:37.844Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831121237844_serp_blogtab-그래피티2-vs-그래피티3_077f1c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "그래피티2 vs 그래피티3"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "그래피티2 vs 그래피티3",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 32,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224212618496",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

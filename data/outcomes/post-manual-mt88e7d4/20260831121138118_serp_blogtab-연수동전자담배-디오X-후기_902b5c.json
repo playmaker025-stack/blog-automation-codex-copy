@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88e7d4",
+  "source": "serp",
+  "capturedAt": "2026-08-31T12:11:38.118Z",
+  "postAgeHours": 151,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831121138118_serp_blogtab-연수동전자담배-디오X-후기_902b5c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "연수동전자담배 디오X 후기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연수동전자담배 디오X 후기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224147881229",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
