@@ -185,7 +185,16 @@ export function buildObservationId(params: {
   // 밀리초까지 쓴다. 초 단위로 자르면 검색어 없는 관측(통계)은 같은 초에 두 건이
   // 들어오는 순간 확실히 부딪히고, 나중 관측이 앞 관측을 덮는다.
   const stamp = params.capturedAt.replace(/[^0-9]/g, "").slice(0, 17);
-  const slug = (params.query ?? "").replace(/\s+/g, "-").slice(0, 24);
+  // 이 값이 파일 이름이 된다. 검색어를 그대로 쓰면 ":"이나 "/"가 섞여 들어오고,
+  // 윈도우는 그런 이름의 파일을 만들지 못한다. 실제로 "전자담배 관리법 :"이
+  // 그런 파일을 만들어 로컬에서 저장소를 받을 수 없게 만들었다. "/"는 더 나빠서
+  // 폴더가 하나 더 생긴다. 한글·영숫자·하이픈만 남긴다.
+  const slug = (params.query ?? "")
+    .replace(/\s+/g, "-")
+    .replace(/[^가-힣a-zA-Z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 24);
   // 같은 밀리초에 앞 24자가 같은 검색어가 겹칠 수 있다. 짧은 지문으로 갈라준다.
   const fingerprint = hashContent(`${params.postId}|${params.source}|${params.query ?? ""}`).slice(0, 6);
   return [stamp, params.source, slug, fingerprint].filter(Boolean).join("_");

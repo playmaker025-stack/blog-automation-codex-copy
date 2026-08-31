@@ -173,6 +173,21 @@ describe("PR38 보조", () => {
     assert.equal(hoursSince(null, "2026-08-25T00:00:00Z"), null);
   });
 
+  // 이 값이 파일 이름이 된다. ":"이나 "/"가 그대로 들어가면 윈도우에서 저장소를
+  // 받을 수 없고("/"는 폴더까지 만든다), 실제로 그런 파일이 한 번 만들어졌다.
+  test("관측 아이디에는 파일 이름으로 못 쓰는 문자가 남지 않는다", () => {
+    const id = buildObservationId({
+      postId: "p",
+      source: "serp",
+      capturedAt: "2026-08-30T11:36:00.292Z",
+      query: '전자담배 관리법 : 액상/보관 "기준"',
+    });
+    for (const forbidden of [":", "*", "?", '"', "<", ">", "|", "/", "\\"]) {
+      assert.ok(!id.includes(forbidden), `${forbidden} 가 파일 이름에 남았다: ${id}`);
+    }
+    assert.ok(id.includes("전자담배-관리법"));
+  });
+
   test("관측 아이디는 시점과 검색어로 구분된다", () => {
     const a = buildObservationId({ postId: "p", source: "serp", capturedAt: "2026-08-25T01:00:00Z", query: "가 나" });
     const b = buildObservationId({ postId: "p", source: "serp", capturedAt: "2026-08-25T01:00:00Z", query: "다" });
