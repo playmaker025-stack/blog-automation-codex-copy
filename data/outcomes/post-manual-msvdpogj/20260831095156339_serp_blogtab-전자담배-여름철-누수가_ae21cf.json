@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msvdpogj",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:51:56.339Z",
+  "postAgeHours": 364,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831095156339_serp_blogtab-전자담배-여름철-누수가_ae21cf",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 여름철 누수가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 여름철 누수가",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224380267194",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

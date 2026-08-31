@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msrj1dd5",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:51:37.835Z",
+  "postAgeHours": 429,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831095137835_serp_blogtab-전자담배-액상-가격이_a18b67",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 가격이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 가격이",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224286543558",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 14
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

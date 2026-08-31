@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-5fbf9c10",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:52:27.662Z",
+  "postAgeHours": 216,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831095227662_serp_blogtab-연수동-전자담배-입문자를_03b2ae",
+  "target": {
+    "surface": "blog_tab",
+    "query": "연수동 전자담배 입문자를"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연수동 전자담배 입문자를",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224230475745",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224201518656",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
