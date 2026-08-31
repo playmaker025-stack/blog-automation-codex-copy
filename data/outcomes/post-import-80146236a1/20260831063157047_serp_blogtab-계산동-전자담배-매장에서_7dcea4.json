@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-80146236a1",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:31:57.047Z",
+  "postAgeHours": 3415,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831063157047_serp_blogtab-계산동-전자담배-매장에서_7dcea4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "계산동 전자담배 매장에서"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "계산동 전자담배 매장에서",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224248924118",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224343612896",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224286543558",
+        "rank": 22
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224295302695",
+        "rank": 27
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224298102259",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

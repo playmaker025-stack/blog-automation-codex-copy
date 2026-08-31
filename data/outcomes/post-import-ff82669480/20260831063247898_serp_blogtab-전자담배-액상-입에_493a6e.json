@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-ff82669480",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:32:47.898Z",
+  "postAgeHours": 3319,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831063247898_serp_blogtab-전자담배-액상-입에_493a6e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 입에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 입에",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 9,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224253704660",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-ca3d6805e2",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:32:03.405Z",
+  "postAgeHours": 3391,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831063203405_serp_blogtab-전자담배-액상이-입_38cf11",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상이 입"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상이 입",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

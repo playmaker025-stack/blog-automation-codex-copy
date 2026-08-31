@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-20e3a2e2c6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:32:41.531Z",
+  "postAgeHours": 3319,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831063241531_serp_blogtab-새-코일인데-탄맛_ddcb5d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "새 코일인데 탄맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "새 코일인데 탄맛",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 10,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224341839333",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224359513114",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224253220946",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224313146479",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224245462181",
+        "rank": 21
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
