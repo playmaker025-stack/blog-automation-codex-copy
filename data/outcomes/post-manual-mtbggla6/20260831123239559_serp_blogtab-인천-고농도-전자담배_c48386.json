@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T12:32:39.559Z",
+  "postAgeHours": 97,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831123239559_serp_blogtab-인천-고농도-전자담배_c48386",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 고농도 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 고농도 전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224332153941",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224283320666",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

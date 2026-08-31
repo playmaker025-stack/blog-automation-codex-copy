@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T12:32:45.912Z",
+  "postAgeHours": 97,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831123245912_serp_blogtab-네스티원_67496e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "네스티원"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "네스티원",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
