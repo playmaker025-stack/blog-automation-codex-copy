@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrt7jy67",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:12:03.663Z",
+  "postAgeHours": 1004,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831081203663_serp_blogtab-전자담배-액상은-많이_ffef75",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상은 많이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 많이",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224307229465",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224332187539",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

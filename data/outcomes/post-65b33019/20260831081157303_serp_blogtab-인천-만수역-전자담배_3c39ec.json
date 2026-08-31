@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-65b33019",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:11:57.303Z",
+  "postAgeHours": 1012,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831081157303_serp_blogtab-인천-만수역-전자담배_3c39ec",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 만수역 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 만수역 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 28,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224351924908",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224358595068",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224376572221",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300979147",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224340720738",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224295302695",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224113483238",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

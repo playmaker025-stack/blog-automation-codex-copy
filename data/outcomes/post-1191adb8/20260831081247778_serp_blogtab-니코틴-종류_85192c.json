@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-1191adb8",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:12:47.778Z",
+  "postAgeHours": 939,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831081247778_serp_blogtab-니코틴-종류_85192c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "니코틴 종류"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "니코틴 종류",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224355462874",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
