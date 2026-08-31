@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrc0xqcj",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:32:27.894Z",
+  "postAgeHours": 1292,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831073227894_serp_blogtab-습하고-무더운-여름에_be7e69",
+  "target": {
+    "surface": "blog_tab",
+    "query": "습하고 무더운 여름에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "습하고 무더운 여름에",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

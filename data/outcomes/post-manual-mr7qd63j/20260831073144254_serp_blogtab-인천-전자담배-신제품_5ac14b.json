@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr7qd63j",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:31:44.254Z",
+  "postAgeHours": 1364,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831073144254_serp_blogtab-인천-전자담배-신제품_5ac14b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 전자담배 신제품"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 신제품",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224337280192",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224306173121",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

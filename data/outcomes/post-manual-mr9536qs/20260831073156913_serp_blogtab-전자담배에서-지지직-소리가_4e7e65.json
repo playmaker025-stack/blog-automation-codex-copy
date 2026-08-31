@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr9536qs",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:31:56.913Z",
+  "postAgeHours": 1340,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831073156913_serp_blogtab-전자담배에서-지지직-소리가_4e7e65",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배에서 지지직 소리가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배에서 지지직 소리가",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224338423172",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224229376002",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224292788207",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224360849248",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

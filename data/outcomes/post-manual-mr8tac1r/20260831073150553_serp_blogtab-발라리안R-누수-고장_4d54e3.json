@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr8tac1r",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:31:50.553Z",
+  "postAgeHours": 1346,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831073150553_serp_blogtab-발라리안R-누수-고장_4d54e3",
+  "target": {
+    "surface": "blog_tab",
+    "query": "발라리안R 누수 고장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "발라리안R 누수 고장",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224338082019",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

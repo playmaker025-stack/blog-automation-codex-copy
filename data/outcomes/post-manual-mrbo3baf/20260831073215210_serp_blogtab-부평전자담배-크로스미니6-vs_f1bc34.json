@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrbo3baf",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:32:15.210Z",
+  "postAgeHours": 1298,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831073215210_serp_blogtab-부평전자담배-크로스미니6-vs_f1bc34",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 크로스미니6 vs"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 크로스미니6 vs",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224340378304",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224337280192",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224333224334",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224322426520",
+        "rank": 13
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224336421170",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
