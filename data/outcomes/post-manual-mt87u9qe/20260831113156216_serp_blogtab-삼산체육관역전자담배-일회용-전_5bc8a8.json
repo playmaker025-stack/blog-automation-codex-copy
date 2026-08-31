@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87u9qe",
+  "source": "serp",
+  "capturedAt": "2026-08-31T11:31:56.216Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831113156216_serp_blogtab-삼산체육관역전자담배-일회용-전_5bc8a8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "삼산체육관역전자담배 일회용 전담"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "삼산체육관역전자담배 일회용 전담",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224027412740",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

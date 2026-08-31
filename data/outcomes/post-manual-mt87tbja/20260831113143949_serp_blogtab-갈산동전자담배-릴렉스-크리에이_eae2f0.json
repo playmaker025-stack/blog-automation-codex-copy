@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87tbja",
+  "source": "serp",
+  "capturedAt": "2026-08-31T11:31:43.949Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831113143949_serp_blogtab-갈산동전자담배-릴렉스-크리에이_eae2f0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "갈산동전자담배 릴렉스 크리에이터"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "갈산동전자담배 릴렉스 크리에이터",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 2,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224013232219",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

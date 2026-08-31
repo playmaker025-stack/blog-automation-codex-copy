@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87vh25",
+  "source": "serp",
+  "capturedAt": "2026-08-31T11:32:02.293Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831113202293_serp_blogtab-산곡역전자담배-스누스-니코틴_fded81",
+  "target": {
+    "surface": "blog_tab",
+    "query": "산곡역전자담배 스누스 니코틴"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "산곡역전자담배 스누스 니코틴",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 1,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224031876690",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
