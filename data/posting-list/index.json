@@ -10967,7 +10967,7 @@
       "pendingApproval": null,
       "createdAt": "2026-08-31T03:40:48.473Z",
       "publishedAt": "2026-08-31T07:03:10.104Z",
-      "updatedAt": "2026-08-31T07:03:10.621Z",
+      "updatedAt": "2026-08-31T07:07:10.225Z",
       "outcomeTracking": {
         "canonicalPost": {
           "blogId": "mansur_vape",
@@ -10978,12 +10978,13 @@
           {
             "query": "전자담배 기기 선택",
             "role": "primary",
-            "source": "title_guess"
+            "source": "user"
           }
         ],
         "publishedTitle": "전자담배 기기 선택 시 필수 비교 스펙과 특징 총정리!",
         "contentHash": "46ecd3f3",
-        "trackedFrom": "2026-08-31T07:03:10.867Z"
+        "trackedFrom": "2026-08-31T07:03:10.867Z",
+        "keywordsRevisedAt": "2026-08-31T07:07:10.225Z"
       }
     },
     {
@@ -11024,5 +11025,5 @@
       "updatedAt": "2026-08-31T07:06:06.927Z"
     }
   ],
-  "lastUpdated": "2026-08-31T07:06:06.927Z"
+  "lastUpdated": "2026-08-31T07:07:10.225Z"
 }
