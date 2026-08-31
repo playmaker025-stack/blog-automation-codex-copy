@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7f28727bc6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T05:52:33.588Z",
+  "postAgeHours": 3630,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831055233588_serp_blogtab-입호흡-전자담배-수명_400f6b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡 전자담배 수명"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 전자담배 수명",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224238522947",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
