@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr0k6kud",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:11:52.207Z",
+  "postAgeHours": 1484,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831071152207_serp_blogtab-구월동-전자담배-네스티_226dc3",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동 전자담배 네스티"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

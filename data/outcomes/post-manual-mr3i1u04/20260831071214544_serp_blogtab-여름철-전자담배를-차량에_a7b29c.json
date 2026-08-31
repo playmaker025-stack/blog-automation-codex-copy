@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr3i1u04",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:12:14.544Z",
+  "postAgeHours": 1434,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831071214544_serp_blogtab-여름철-전자담배를-차량에_a7b29c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "여름철 전자담배를 차량에"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

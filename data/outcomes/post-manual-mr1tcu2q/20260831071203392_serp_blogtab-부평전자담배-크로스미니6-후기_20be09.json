@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr1tcu2q",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:12:03.392Z",
+  "postAgeHours": 1463,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831071203392_serp_blogtab-부평전자담배-크로스미니6-후기_20be09",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 크로스미니6 후기"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

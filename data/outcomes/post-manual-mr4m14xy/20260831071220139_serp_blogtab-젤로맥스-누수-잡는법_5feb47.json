@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr4m14xy",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:12:20.139Z",
+  "postAgeHours": 1416,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831071220139_serp_blogtab-젤로맥스-누수-잡는법_5feb47",
+  "target": {
+    "surface": "blog_tab",
+    "query": "젤로맥스 누수 잡는법"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

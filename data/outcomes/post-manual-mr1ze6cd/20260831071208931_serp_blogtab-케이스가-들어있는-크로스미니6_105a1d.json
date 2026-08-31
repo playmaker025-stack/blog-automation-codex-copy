@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr1ze6cd",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:12:08.931Z",
+  "postAgeHours": 1460,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831071208931_serp_blogtab-케이스가-들어있는-크로스미니6_105a1d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "케이스가 들어있는 크로스미니6"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

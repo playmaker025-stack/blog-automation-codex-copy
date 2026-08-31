@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mqz4nijs",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:11:47.865Z",
+  "postAgeHours": 1508,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831071147865_serp_blogtab-전자담배-액상-추천받으러_07bc0b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 추천받으러"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr0liclf",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:11:57.815Z",
+  "postAgeHours": 1483,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831071157815_serp_blogtab-전자담배-액상-한_18b3df",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 한"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

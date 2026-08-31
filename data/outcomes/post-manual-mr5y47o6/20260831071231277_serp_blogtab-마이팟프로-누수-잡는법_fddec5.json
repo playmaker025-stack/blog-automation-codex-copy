@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr5y47o6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:12:31.277Z",
+  "postAgeHours": 1393,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831071231277_serp_blogtab-마이팟프로-누수-잡는법_fddec5",
+  "target": {
+    "surface": "blog_tab",
+    "query": "마이팟프로 누수 잡는법"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}
