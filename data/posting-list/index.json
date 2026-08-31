@@ -8496,7 +8496,7 @@
       "pendingApproval": null,
       "publishedAt": "2026-08-24T08:22:59.930Z",
       "createdAt": "2026-08-24T08:22:59.930Z",
-      "updatedAt": "2026-08-27T11:55:18.854Z",
+      "updatedAt": "2026-08-31T03:53:26.212Z",
       "outcomeTracking": {
         "canonicalPost": {
           "blogId": "iibodii00",
@@ -8505,14 +8505,31 @@
         },
         "targetKeywords": [
           {
-            "query": "무니코틴 액상과 잘",
-            "role": "primary"
+            "query": "무니코틴 액상 담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배 기기",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "아머미니",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "액상 전자담배 기기",
+            "role": "secondary",
+            "source": "user"
           }
         ],
         "publishedTitle": "무니코틴 액상과 잘 어울리는 포켓코리아 아머미니 전자담배 기기",
         "contentHash": "811c9dc5",
         "trackedFrom": "2026-08-27T11:55:18.854Z",
-        "backfilled": true
+        "backfilled": true,
+        "keywordsRevisedAt": "2026-08-31T03:53:26.212Z"
       }
     },
     {
@@ -10953,5 +10970,5 @@
       "updatedAt": "2026-08-31T03:43:02.124Z"
     }
   ],
-  "lastUpdated": "2026-08-31T03:52:38.605Z"
+  "lastUpdated": "2026-08-31T03:53:26.212Z"
 }
