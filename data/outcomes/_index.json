@@ -1,10 +1,10 @@
 {
-  "schemaVersion": 2,
-  "updatedAt": "2026-08-31T03:18:12.462Z",
+  "schemaVersion": 3,
+  "updatedAt": "2026-08-31T03:37:29.020Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
-        "발라리안 누수 해결방": {
+        "integrated::발라리안 누수 해결방": {
           "okAgeHours": [
             4400
           ],
@@ -13,14 +13,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:00.402Z"
+        },
+        "blog_tab::발라리안 누수 해결방": {
+          "okAgeHours": [
+            4420
+          ],
+          "lastCapturedAt": "2026-08-31T03:36:56.451Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:36:56.451Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:00.402Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:36:56.451Z",
+      "total": 2
     },
     "post-import-0a5647f1": {
       "queries": {
-        "연수동 전자담배 처음": {
+        "integrated::연수동 전자담배 처음": {
           "okAgeHours": [
             3778
           ],
@@ -36,7 +46,7 @@
     },
     "post-import-0b9c15c1": {
       "queries": {
-        "구월동전자담배 쿠모카시 액상": {
+        "integrated::구월동전자담배 쿠모카시 액상": {
           "okAgeHours": [
             4740
           ],
@@ -45,14 +55,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-27T11:56:13.055Z"
+        },
+        "blog_tab::구월동전자담배 쿠모카시 액상": {
+          "okAgeHours": [
+            4828
+          ],
+          "lastCapturedAt": "2026-08-31T03:36:44.014Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:36:44.014Z"
         }
       },
-      "lastCapturedAt": "2026-08-27T11:56:13.055Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:36:44.014Z",
+      "total": 2
     },
     "post-import-0cbc5e41": {
       "queries": {
-        "구월동 전자담배 입호흡": {
+        "integrated::구월동 전자담배 입호흡": {
           "okAgeHours": [
             4304
           ],
@@ -68,7 +88,7 @@
     },
     "post-import-1036c0362a": {
       "queries": {
-        "전자담배에서 탄맛이 나는": {
+        "integrated::전자담배에서 탄맛이 나는": {
           "okAgeHours": [
             3682
           ],
@@ -84,7 +104,7 @@
     },
     "post-import-1b99338a": {
       "queries": {
-        "말론 아스트로 입호흡기기에": {
+        "integrated::말론 아스트로 입호흡기기에": {
           "okAgeHours": [
             4304
           ],
@@ -100,7 +120,7 @@
     },
     "post-import-1c230f4c": {
       "queries": {
-        "마샤 입호흡 액상": {
+        "integrated::마샤 입호흡 액상": {
           "okAgeHours": [
             4280
           ],
@@ -116,7 +136,7 @@
     },
     "post-import-1fb2787a": {
       "queries": {
-        "전자담배 사용자 유형": {
+        "integrated::전자담배 사용자 유형": {
           "okAgeHours": [
             4041
           ],
@@ -132,7 +152,7 @@
     },
     "post-import-22121e2b": {
       "queries": {
-        "전자담배 처음 시작할": {
+        "integrated::전자담배 처음 시작할": {
           "okAgeHours": [
             4089
           ],
@@ -148,7 +168,7 @@
     },
     "post-import-240bd596": {
       "queries": {
-        "구월동전자담배 BPMODS RAZOR": {
+        "integrated::구월동전자담배 BPMODS RAZOR": {
           "okAgeHours": [
             3945
           ],
@@ -164,7 +184,7 @@
     },
     "post-import-264feda6": {
       "queries": {
-        "만수동 전자담배 시작하고": {
+        "integrated::만수동 전자담배 시작하고": {
           "okAgeHours": [
             3826
           ],
@@ -180,7 +200,7 @@
     },
     "post-import-26994111": {
       "queries": {
-        "발라리안 코일 빨리": {
+        "integrated::발라리안 코일 빨리": {
           "okAgeHours": [
             4280
           ],
@@ -196,7 +216,7 @@
     },
     "post-import-2bbdd188": {
       "queries": {
-        "만수동 전자담배 만수르": {
+        "integrated::만수동 전자담배 만수르": {
           "okAgeHours": [
             9176
           ],
@@ -212,7 +232,7 @@
     },
     "post-import-2ed87606": {
       "queries": {
-        "전자담배 누수 생기는": {
+        "integrated::전자담배 누수 생기는": {
           "okAgeHours": [
             3849
           ],
@@ -228,7 +248,7 @@
     },
     "post-import-2fab3670": {
       "queries": {
-        "무화량 많은 하이엔드": {
+        "integrated::무화량 많은 하이엔드": {
           "okAgeHours": [
             7160
           ],
@@ -244,7 +264,7 @@
     },
     "post-import-33ec47a7": {
       "queries": {
-        "입호흡 액상이 빨리": {
+        "integrated::입호흡 액상이 빨리": {
           "okAgeHours": [
             4041
           ],
@@ -260,7 +280,7 @@
     },
     "post-import-356c25cf": {
       "queries": {
-        "전자담배 아스몬 하이": {
+        "integrated::전자담배 아스몬 하이": {
           "okAgeHours": [
             3993
           ],
@@ -276,7 +296,7 @@
     },
     "post-import-3634b92d": {
       "queries": {
-        "전자담배 액상 가격": {
+        "integrated::전자담배 액상 가격": {
           "okAgeHours": [
             4232
           ],
@@ -292,7 +312,7 @@
     },
     "post-import-366637d5": {
       "queries": {
-        "부평 전자담배 만수르": {
+        "integrated::부평 전자담배 만수르": {
           "okAgeHours": [
             8528
           ],
@@ -308,7 +328,7 @@
     },
     "post-import-3b977635": {
       "queries": {
-        "전자담배 처음 시작하면": {
+        "integrated::전자담배 처음 시작하면": {
           "okAgeHours": [
             4185
           ],
@@ -324,7 +344,7 @@
     },
     "post-import-3c16fe70": {
       "queries": {
-        "인천 전자담배 추천": {
+        "integrated::인천 전자담배 추천": {
           "okAgeHours": [
             4256
           ],
@@ -340,7 +360,7 @@
     },
     "post-import-3c3d375a": {
       "queries": {
-        "입호흡 폐호흡 둘다": {
+        "integrated::입호흡 폐호흡 둘다": {
           "okAgeHours": [
             3921
           ],
@@ -356,7 +376,7 @@
     },
     "post-import-3cfdb740": {
       "queries": {
-        "갈산동전자담배 릴렉스 후노즈": {
+        "integrated::갈산동전자담배 릴렉스 후노즈": {
           "okAgeHours": [
             3969
           ],
@@ -372,7 +392,7 @@
     },
     "post-import-3ff39b61": {
       "queries": {
-        "부평 전자담배 추천": {
+        "integrated::부평 전자담배 추천": {
           "okAgeHours": [
             7616
           ],
@@ -388,7 +408,7 @@
     },
     "post-import-4098e7bf": {
       "queries": {
-        "전자담배 액상 맛이": {
+        "integrated::전자담배 액상 맛이": {
           "okAgeHours": [
             4161
           ],
@@ -404,7 +424,7 @@
     },
     "post-import-431b0d64": {
       "queries": {
-        "구월동 전자담배 추천": {
+        "integrated::구월동 전자담배 추천": {
           "okAgeHours": [
             4161
           ],
@@ -420,7 +440,7 @@
     },
     "post-import-44848739": {
       "queries": {
-        "엘프바 아이스킹 25k": {
+        "integrated::엘프바 아이스킹 25k": {
           "okAgeHours": [
             9512
           ],
@@ -436,7 +456,7 @@
     },
     "post-import-45d28343": {
       "queries": {
-        "부개동 전자담배 입문자가": {
+        "integrated::부개동 전자담배 입문자가": {
           "okAgeHours": [
             3730
           ],
@@ -452,7 +472,7 @@
     },
     "post-import-4dbaf43f": {
       "queries": {
-        "부흥오거리전자담배 처음 시작할": {
+        "integrated::부흥오거리전자담배 처음 시작할": {
           "okAgeHours": [
             3945
           ],
@@ -468,7 +488,7 @@
     },
     "post-import-4dd81361": {
       "queries": {
-        "벨본 노팟 해결법": {
+        "integrated::벨본 노팟 해결법": {
           "okAgeHours": [
             4380
           ],
@@ -477,14 +497,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-27T11:55:49.166Z"
+        },
+        "blog_tab::벨본 노팟 해결법": {
+          "okAgeHours": [
+            4468
+          ],
+          "lastCapturedAt": "2026-08-31T03:36:25.530Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:36:25.530Z"
         }
       },
-      "lastCapturedAt": "2026-08-27T11:55:49.166Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:36:25.530Z",
+      "total": 2
     },
     "post-import-54aa03e1": {
       "queries": {
-        "인천전자담배매장 부평 구월동": {
+        "integrated::인천전자담배매장 부평 구월동": {
           "okAgeHours": [
             8768
           ],
@@ -500,7 +530,7 @@
     },
     "post-import-54d314d3": {
       "queries": {
-        "관교동전자담배 메가엣지 액상": {
+        "integrated::관교동전자담배 메가엣지 액상": {
           "okAgeHours": [
             3849
           ],
@@ -516,7 +546,7 @@
     },
     "post-import-55371fec": {
       "queries": {
-        "삼산동 전자담배 오래": {
+        "integrated::삼산동 전자담배 오래": {
           "okAgeHours": [
             3754
           ],
@@ -532,7 +562,7 @@
     },
     "post-import-59fa0916": {
       "queries": {
-        "구월동 전자담배 처음": {
+        "integrated::구월동 전자담배 처음": {
           "okAgeHours": [
             4356
           ],
@@ -541,14 +571,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-27T11:55:56.616Z"
+        },
+        "blog_tab::구월동 전자담배 처음": {
+          "okAgeHours": [
+            4444
+          ],
+          "lastCapturedAt": "2026-08-31T03:36:31.439Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:36:31.439Z"
         }
       },
-      "lastCapturedAt": "2026-08-27T11:55:56.616Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:36:31.439Z",
+      "total": 2
     },
     "post-import-625b437e": {
       "queries": {
-        "릴렉스 후노즈 전자담배": {
+        "integrated::릴렉스 후노즈 전자담배": {
           "okAgeHours": [
             3969
           ],
@@ -564,7 +604,7 @@
     },
     "post-import-6ae3e93a": {
       "queries": {
-        "전자담배 입호흡 폐호흡": {
+        "integrated::전자담배 입호흡 폐호흡": {
           "okAgeHours": [
             6728
           ],
@@ -580,7 +620,7 @@
     },
     "post-import-6be0b1a5": {
       "queries": {
-        "간석동전자담배 매장에서 상담할": {
+        "integrated::간석동전자담배 매장에서 상담할": {
           "okAgeHours": [
             4017
           ],
@@ -596,7 +636,7 @@
     },
     "post-import-6d13341a": {
       "queries": {
-        "부평구청 전자담배 입호흡": {
+        "integrated::부평구청 전자담배 입호흡": {
           "okAgeHours": [
             4376
           ],
@@ -605,14 +645,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:25.786Z"
+        },
+        "blog_tab::부평구청 전자담배 입호흡": {
+          "okAgeHours": [
+            4396
+          ],
+          "lastCapturedAt": "2026-08-31T03:37:20.371Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:37:20.371Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:25.786Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:37:20.371Z",
+      "total": 2
     },
     "post-import-6d806cf3": {
       "queries": {
-        "전자담배 쓰면 기침하는": {
+        "integrated::전자담배 쓰면 기침하는": {
           "okAgeHours": [
             4113
           ],
@@ -628,7 +678,7 @@
     },
     "post-import-6f68b17a": {
       "queries": {
-        "인천 전자담배 만수르": {
+        "integrated::인천 전자담배 만수르": {
           "okAgeHours": [
             6128
           ],
@@ -637,14 +687,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:32.111Z"
+        },
+        "blog_tab::인천 전자담배 만수르": {
+          "okAgeHours": [
+            6148
+          ],
+          "lastCapturedAt": "2026-08-31T03:37:26.600Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:37:26.600Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:32.111Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:37:26.600Z",
+      "total": 2
     },
     "post-import-717fe630": {
       "queries": {
-        "전자담배 액상 색이": {
+        "integrated::전자담배 액상 색이": {
           "okAgeHours": [
             3826
           ],
@@ -660,7 +720,7 @@
     },
     "post-import-719bd813": {
       "queries": {
-        "부평전자담배 매장에서 가장": {
+        "integrated::부평전자담배 매장에서 가장": {
           "okAgeHours": [
             4113
           ],
@@ -676,7 +736,7 @@
     },
     "post-import-720d8b3b": {
       "queries": {
-        "니코틴 액상 쿨크러쉬": {
+        "integrated::니코틴 액상 쿨크러쉬": {
           "okAgeHours": [
             4424
           ],
@@ -685,14 +745,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:12.932Z"
+        },
+        "blog_tab::니코틴 액상 쿨크러쉬": {
+          "okAgeHours": [
+            4444
+          ],
+          "lastCapturedAt": "2026-08-31T03:37:08.481Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:37:08.481Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:12.932Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:37:08.481Z",
+      "total": 2
     },
     "post-import-7804aacd": {
       "queries": {
-        "전자담배 기기 버블몬": {
+        "integrated::전자담배 기기 버블몬": {
           "okAgeHours": [
             4380
           ],
@@ -701,14 +771,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-27T11:55:40.295Z"
+        },
+        "blog_tab::전자담배 기기 버블몬": {
+          "okAgeHours": [
+            4468
+          ],
+          "lastCapturedAt": "2026-08-31T03:36:19.259Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:36:19.259Z"
         }
       },
-      "lastCapturedAt": "2026-08-27T11:55:40.295Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:36:19.259Z",
+      "total": 2
     },
     "post-import-797610f9": {
       "queries": {
-        "전자담배 액튐 생기는": {
+        "integrated::전자담배 액튐 생기는": {
           "okAgeHours": [
             3873
           ],
@@ -724,7 +804,7 @@
     },
     "post-import-79fcaeec": {
       "queries": {
-        "부평 전자담배 매장에서": {
+        "integrated::부평 전자담배 매장에서": {
           "okAgeHours": [
             4400
           ],
@@ -733,14 +813,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:07.185Z"
+        },
+        "blog_tab::부평 전자담배 매장에서": {
+          "okAgeHours": [
+            4420
+          ],
+          "lastCapturedAt": "2026-08-31T03:37:02.189Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:37:02.189Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:07.185Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:37:02.189Z",
+      "total": 2
     },
     "post-import-7b7c198c35": {
       "queries": {
-        "전자담배 흡입이 답답할": {
+        "integrated::전자담배 흡입이 답답할": {
           "okAgeHours": [
             3682
           ],
@@ -756,7 +846,7 @@
     },
     "post-import-7e3d3a05": {
       "queries": {
-        "전자담배 액상 실패": {
+        "integrated::전자담배 액상 실패": {
           "okAgeHours": [
             4185
           ],
@@ -772,7 +862,7 @@
     },
     "post-import-7f7429f1": {
       "queries": {
-        "연수동 전자담배 말론": {
+        "integrated::연수동 전자담배 말론": {
           "okAgeHours": [
             4352
           ],
@@ -788,7 +878,7 @@
     },
     "post-import-7fe9e495": {
       "queries": {
-        "젤로맥스 vs 발라리안맥스": {
+        "integrated::젤로맥스 vs 발라리안맥스": {
           "okAgeHours": [
             4161
           ],
@@ -804,7 +894,7 @@
     },
     "post-import-86997b2c": {
       "queries": {
-        "0 6옴 vs": {
+        "integrated::0 6옴 vs": {
           "okAgeHours": [
             3897
           ],
@@ -820,7 +910,7 @@
     },
     "post-import-880a7971": {
       "queries": {
-        "구월동전자담배 매장에서 고농도": {
+        "integrated::구월동전자담배 매장에서 고농도": {
           "okAgeHours": [
             4328
           ],
@@ -836,7 +926,7 @@
     },
     "post-import-8a428bee": {
       "queries": {
-        "2025년 기준 입호흡": {
+        "integrated::2025년 기준 입호흡": {
           "okAgeHours": [
             6632
           ],
@@ -852,7 +942,7 @@
     },
     "post-import-8b5424b8": {
       "queries": {
-        "전자담배 흡입할 때": {
+        "integrated::전자담배 흡입할 때": {
           "okAgeHours": [
             3730
           ],
@@ -868,7 +958,7 @@
     },
     "post-import-8c38c02a": {
       "queries": {
-        "부평 만수르 매장에서": {
+        "integrated::부평 만수르 매장에서": {
           "okAgeHours": [
             4352
           ],
@@ -884,7 +974,7 @@
     },
     "post-import-8d44f9f4": {
       "queries": {
-        "만수동 전자담배 닷모드": {
+        "integrated::만수동 전자담배 닷모드": {
           "okAgeHours": [
             4232
           ],
@@ -900,7 +990,7 @@
     },
     "post-import-8d99c329": {
       "queries": {
-        "전자담배 코일 교체시기": {
+        "integrated::전자담배 코일 교체시기": {
           "okAgeHours": [
             13112
           ],
@@ -916,7 +1006,7 @@
     },
     "post-import-907c7c9e": {
       "queries": {
-        "인천전자담배 말론바 일회용": {
+        "integrated::인천전자담배 말론바 일회용": {
           "okAgeHours": [
             3754
           ],
@@ -932,7 +1022,7 @@
     },
     "post-import-96f9b622": {
       "queries": {
-        "구월동전자담배 버니 고농도": {
+        "integrated::구월동전자담배 버니 고농도": {
           "okAgeHours": [
             4328
           ],
@@ -948,7 +1038,7 @@
     },
     "post-import-986b74f3": {
       "queries": {
-        "전자담배 초보자가 가장": {
+        "integrated::전자담배 초보자가 가장": {
           "okAgeHours": [
             4137
           ],
@@ -964,7 +1054,7 @@
     },
     "post-import-9a23501e": {
       "queries": {
-        "전담 탄맛 나는": {
+        "integrated::전담 탄맛 나는": {
           "okAgeHours": [
             4256
           ],
@@ -980,7 +1070,7 @@
     },
     "post-import-9be8b095": {
       "queries": {
-        "연기 많이 나는": {
+        "integrated::연기 많이 나는": {
           "okAgeHours": [
             8600
           ],
@@ -996,7 +1086,7 @@
     },
     "post-import-9ca987c5": {
       "queries": {
-        "간석동 전자담배 매장에서": {
+        "integrated::간석동 전자담배 매장에서": {
           "okAgeHours": [
             4280
           ],
@@ -1012,7 +1102,7 @@
     },
     "post-import-9ef7d78833": {
       "queries": {
-        "전자담배 흡입해도 연기": {
+        "integrated::전자담배 흡입해도 연기": {
           "okAgeHours": [
             3658
           ],
@@ -1028,7 +1118,7 @@
     },
     "post-import-a0c245ae": {
       "queries": {
-        "입호흡 전자담배 신제품": {
+        "integrated::입호흡 전자담배 신제품": {
           "okAgeHours": [
             4208
           ],
@@ -1044,7 +1134,7 @@
     },
     "post-import-a1988ff1": {
       "queries": {
-        "전자담배를 계속 쓰게": {
+        "integrated::전자담배를 계속 쓰게": {
           "okAgeHours": [
             3802
           ],
@@ -1060,7 +1150,7 @@
     },
     "post-import-b2691864": {
       "queries": {
-        "그래피티2 vs 그래피티3": {
+        "integrated::그래피티2 vs 그래피티3": {
           "okAgeHours": [
             4137
           ],
@@ -1076,7 +1166,7 @@
     },
     "post-import-b2815311": {
       "queries": {
-        "인천전자담배 dotPOD Max": {
+        "integrated::인천전자담배 dotPOD Max": {
           "okAgeHours": [
             4209
           ],
@@ -1092,7 +1182,7 @@
     },
     "post-import-b45893dc": {
       "queries": {
-        "전자담배 처음 사러": {
+        "integrated::전자담배 처음 사러": {
           "okAgeHours": [
             4256
           ],
@@ -1108,7 +1198,7 @@
     },
     "post-import-b8bf63a4": {
       "queries": {
-        "만수동 전자담배 탄맛": {
+        "integrated::만수동 전자담배 탄맛": {
           "okAgeHours": [
             3897
           ],
@@ -1124,7 +1214,7 @@
     },
     "post-import-b946d530": {
       "queries": {
-        "청천동 전자담배 메즈액상": {
+        "integrated::청천동 전자담배 메즈액상": {
           "okAgeHours": [
             4328
           ],
@@ -1140,7 +1230,7 @@
     },
     "post-import-c06c343f": {
       "queries": {
-        "부평 전자담배 닷팟맥스": {
+        "integrated::부평 전자담배 닷팟맥스": {
           "okAgeHours": [
             4232
           ],
@@ -1156,7 +1246,7 @@
     },
     "post-import-c583a301": {
       "queries": {
-        "연초에서 전자담배로 바꾸면": {
+        "integrated::연초에서 전자담배로 바꾸면": {
           "okAgeHours": [
             4041
           ],
@@ -1172,7 +1262,7 @@
     },
     "post-import-cbbf2198": {
       "queries": {
-        "연초 흡연자가 전자담배": {
+        "integrated::연초 흡연자가 전자담배": {
           "okAgeHours": [
             4017
           ],
@@ -1188,7 +1278,7 @@
     },
     "post-import-cbd16776": {
       "queries": {
-        "인천전자담배 액상형 전담": {
+        "integrated::인천전자담배 액상형 전담": {
           "okAgeHours": [
             6540
           ],
@@ -1197,14 +1287,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-27T11:56:20.761Z"
+        },
+        "blog_tab::인천전자담배 액상형 전담": {
+          "okAgeHours": [
+            6628
+          ],
+          "lastCapturedAt": "2026-08-31T03:36:50.148Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:36:50.148Z"
         }
       },
-      "lastCapturedAt": "2026-08-27T11:56:20.761Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:36:50.148Z",
+      "total": 2
     },
     "post-import-cd0ebae7": {
       "queries": {
-        "전자담배 지지직 소리": {
+        "integrated::전자담배 지지직 소리": {
           "okAgeHours": [
             3802
           ],
@@ -1220,7 +1320,7 @@
     },
     "post-import-ce509e35": {
       "queries": {
-        "인천 전자담배 추천": {
+        "integrated::인천 전자담배 추천": {
           "okAgeHours": [
             4356
           ],
@@ -1229,14 +1329,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-27T11:56:04.530Z"
+        },
+        "blog_tab::인천 전자담배 추천": {
+          "okAgeHours": [
+            4444
+          ],
+          "lastCapturedAt": "2026-08-31T03:36:37.685Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:36:37.685Z"
         }
       },
-      "lastCapturedAt": "2026-08-27T11:56:04.530Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:36:37.685Z",
+      "total": 2
     },
     "post-import-ce53b8e4": {
       "queries": {
-        "부평전자담배 아스몬 하이": {
+        "integrated::부평전자담배 아스몬 하이": {
           "okAgeHours": [
             3993
           ],
@@ -1252,7 +1362,7 @@
     },
     "post-import-d09b509e": {
       "queries": {
-        "구월동전자담배 매장에서 입문자가": {
+        "integrated::구월동전자담배 매장에서 입문자가": {
           "okAgeHours": [
             4065
           ],
@@ -1268,7 +1378,7 @@
     },
     "post-import-d3256aea": {
       "queries": {
-        "베놈 아스트로 MK3": {
+        "integrated::베놈 아스트로 MK3": {
           "okAgeHours": [
             4376
           ],
@@ -1277,14 +1387,24 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T08:06:19.387Z"
+        },
+        "blog_tab::베놈 아스트로 MK3": {
+          "okAgeHours": [
+            4396
+          ],
+          "lastCapturedAt": "2026-08-31T03:37:14.140Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-08-31T03:37:14.140Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T08:06:19.387Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T03:37:14.140Z",
+      "total": 2
     },
     "post-import-d32c67ed": {
       "queries": {
-        "석남역전자담배 코코초코 입호흡": {
+        "integrated::석남역전자담배 코코초코 입호흡": {
           "okAgeHours": [
             3921
           ],
@@ -1300,7 +1420,7 @@
     },
     "post-import-d74162d9": {
       "queries": {
-        "말론 vs 아스트로": {
+        "integrated::말론 vs 아스트로": {
           "okAgeHours": [
             4185
           ],
@@ -1316,7 +1436,7 @@
     },
     "post-import-dbc51802": {
       "queries": {
-        "인천전자담배 코로 흡입": {
+        "integrated::인천전자담배 코로 흡입": {
           "okAgeHours": [
             3993
           ],
@@ -1332,7 +1452,7 @@
     },
     "post-import-e55b8a16c1": {
       "queries": {
-        "갈산동 전자담배 입문용": {
+        "integrated::갈산동 전자담배 입문용": {
           "okAgeHours": [
             3682
           ],
@@ -1348,7 +1468,7 @@
     },
     "post-import-e5d940dd": {
       "queries": {
-        "입문 전자담배 TOP5": {
+        "integrated::입문 전자담배 TOP5": {
           "okAgeHours": [
             4065
           ],
@@ -1364,7 +1484,7 @@
     },
     "post-import-f234b3ae": {
       "queries": {
-        "전자담배 코일이 빨리": {
+        "integrated::전자담배 코일이 빨리": {
           "okAgeHours": [
             4017
           ],
@@ -1380,7 +1500,7 @@
     },
     "post-import-f3677adc": {
       "queries": {
-        "입호흡 vs 폐호흡": {
+        "integrated::입호흡 vs 폐호흡": {
           "okAgeHours": [
             4089
           ],
@@ -1396,7 +1516,7 @@
     },
     "post-import-f7192717": {
       "queries": {
-        "부천 전자담배 팟": {
+        "integrated::부천 전자담배 팟": {
           "okAgeHours": [
             4256
           ],
@@ -1412,7 +1532,7 @@
     },
     "post-import-fa13c509": {
       "queries": {
-        "팟 전자담배 vs": {
+        "integrated::팟 전자담배 vs": {
           "okAgeHours": [
             4113
           ],
@@ -1428,7 +1548,7 @@
     },
     "post-import-fee7a81d": {
       "queries": {
-        "전자담배 액상 유통기한": {
+        "integrated::전자담배 액상 유통기한": {
           "okAgeHours": [
             3802
           ],
@@ -1444,7 +1564,7 @@
     },
     "post-import-bddca6e807": {
       "queries": {
-        "부평전자담배 말론바 입고": {
+        "integrated::부평전자담배 말론바 입고": {
           "okAgeHours": [
             3658
           ],
@@ -1460,7 +1580,7 @@
     },
     "post-import-7c5f00f8d5": {
       "queries": {
-        "전자담배 처음 사용할": {
+        "integrated::전자담배 처음 사용할": {
           "okAgeHours": [
             3634
           ],
@@ -1476,7 +1596,7 @@
     },
     "post-import-048eb5a5e8": {
       "queries": {
-        "전자담배 처음 사용할": {
+        "integrated::전자담배 처음 사용할": {
           "okAgeHours": [
             3634
           ],
@@ -1492,7 +1612,7 @@
     },
     "post-import-7f28727bc6": {
       "queries": {
-        "입호흡 전자담배 수명": {
+        "integrated::입호흡 전자담배 수명": {
           "okAgeHours": [
             3610
           ],
@@ -1508,7 +1628,7 @@
     },
     "post-import-bf2fe315ea": {
       "queries": {
-        "만수동 전자담배 시원한": {
+        "integrated::만수동 전자담배 시원한": {
           "okAgeHours": [
             3610
           ],
@@ -1524,7 +1644,7 @@
     },
     "post-import-a0669f990d": {
       "queries": {
-        "전자담배 코일 수명은": {
+        "integrated::전자담배 코일 수명은": {
           "okAgeHours": [
             3610
           ],
@@ -1540,7 +1660,7 @@
     },
     "post-import-81801a11a6": {
       "queries": {
-        "부평전자담배 처음 샀는데": {
+        "integrated::부평전자담배 처음 샀는데": {
           "okAgeHours": [
             3586
           ],
@@ -1556,7 +1676,7 @@
     },
     "post-import-bde6327092": {
       "queries": {
-        "전자담배 액상 빨리": {
+        "integrated::전자담배 액상 빨리": {
           "okAgeHours": [
             3562
           ],
@@ -1572,7 +1692,7 @@
     },
     "post-import-916ead25df": {
       "queries": {
-        "간석동 전자담배 액상": {
+        "integrated::간석동 전자담배 액상": {
           "okAgeHours": [
             3562
           ],
@@ -1588,7 +1708,7 @@
     },
     "post-import-9c09dc1e51": {
       "queries": {
-        "전자담배 무화량이 약해졌을": {
+        "integrated::전자담배 무화량이 약해졌을": {
           "okAgeHours": [
             3538
           ],
@@ -1604,7 +1724,7 @@
     },
     "post-import-0a2a0604d0": {
       "queries": {
-        "구월동 전자담배 하루에": {
+        "integrated::구월동 전자담배 하루에": {
           "okAgeHours": [
             3514
           ],
@@ -1620,7 +1740,7 @@
     },
     "post-import-329fafd48c": {
       "queries": {
-        "부평역전자담배 DJ쥬스 입호흡": {
+        "integrated::부평역전자담배 DJ쥬스 입호흡": {
           "okAgeHours": [
             3514
           ],
@@ -1636,7 +1756,7 @@
     },
     "post-import-e0b8ad1d6a": {
       "queries": {
-        "전자담배 액상 넣고": {
+        "integrated::전자담배 액상 넣고": {
           "okAgeHours": [
             3514
           ],
@@ -1652,7 +1772,7 @@
     },
     "post-import-c7c05c43e6": {
       "queries": {
-        "부천 전자담배 액상이": {
+        "integrated::부천 전자담배 액상이": {
           "okAgeHours": [
             3490
           ],
@@ -1668,7 +1788,7 @@
     },
     "post-import-9c88b3affb": {
       "queries": {
-        "전자담배 액상은 기기마다": {
+        "integrated::전자담배 액상은 기기마다": {
           "okAgeHours": [
             3490
           ],
@@ -1684,7 +1804,7 @@
     },
     "post-import-add000ecd5": {
       "queries": {
-        "전자담배 맛이 갑자기": {
+        "integrated::전자담배 맛이 갑자기": {
           "okAgeHours": [
             3466
           ],
@@ -1700,7 +1820,7 @@
     },
     "post-import-992baab941": {
       "queries": {
-        "전자담배 액상이 갑자기": {
+        "integrated::전자담배 액상이 갑자기": {
           "okAgeHours": [
             3466
           ],
@@ -1716,7 +1836,7 @@
     },
     "post-import-7deb5f78ee": {
       "queries": {
-        "입문자용 액상 선택": {
+        "integrated::입문자용 액상 선택": {
           "okAgeHours": [
             3442
           ],
@@ -1732,7 +1852,7 @@
     },
     "post-import-9123eaa0cd": {
       "queries": {
-        "송내 전자담배 입문자가": {
+        "integrated::송내 전자담배 입문자가": {
           "okAgeHours": [
             3442
           ],
@@ -1748,7 +1868,7 @@
     },
     "post-import-cc2773df6b": {
       "queries": {
-        "전자담배 액상 단맛이": {
+        "integrated::전자담배 액상 단맛이": {
           "okAgeHours": [
             3442
           ],
@@ -1764,7 +1884,7 @@
     },
     "post-import-dc05dbbd07": {
       "queries": {
-        "입호흡 전자담배 타격감이": {
+        "integrated::입호흡 전자담배 타격감이": {
           "okAgeHours": [
             3418
           ],
@@ -1780,7 +1900,7 @@
     },
     "post-import-80146236a1": {
       "queries": {
-        "계산동 전자담배 매장에서": {
+        "integrated::계산동 전자담배 매장에서": {
           "okAgeHours": [
             3394
           ],
@@ -1796,7 +1916,7 @@
     },
     "post-import-ca3d6805e2": {
       "queries": {
-        "전자담배 액상이 입": {
+        "integrated::전자담배 액상이 입": {
           "okAgeHours": [
             3370
           ],
@@ -1812,7 +1932,7 @@
     },
     "post-import-7c298de5a2": {
       "queries": {
-        "부평 전자담배 기기": {
+        "integrated::부평 전자담배 기기": {
           "okAgeHours": [
             3346
           ],
@@ -1828,7 +1948,7 @@
     },
     "post-import-ce89716340": {
       "queries": {
-        "같은 기기인데 배터리": {
+        "integrated::같은 기기인데 배터리": {
           "okAgeHours": [
             3347
           ],
@@ -1844,7 +1964,7 @@
     },
     "post-import-9e76eacdcd": {
       "queries": {
-        "같은 액상인데 어떤": {
+        "integrated::같은 액상인데 어떤": {
           "okAgeHours": [
             3323
           ],
@@ -1860,7 +1980,7 @@
     },
     "post-import-2c009be353": {
       "queries": {
-        "삼산동 전자담배 입호흡": {
+        "integrated::삼산동 전자담배 입호흡": {
           "okAgeHours": [
             3323
           ],
@@ -1876,7 +1996,7 @@
     },
     "post-import-13878e1dc3": {
       "queries": {
-        "전자담배 액상 아무거나": {
+        "integrated::전자담배 액상 아무거나": {
           "okAgeHours": [
             3323
           ],
@@ -1892,7 +2012,7 @@
     },
     "post-import-20e3a2e2c6": {
       "queries": {
-        "새 코일인데 탄맛": {
+        "integrated::새 코일인데 탄맛": {
           "okAgeHours": [
             3299
           ],
@@ -1908,7 +2028,7 @@
     },
     "post-import-ff82669480": {
       "queries": {
-        "전자담배 액상 입에": {
+        "integrated::전자담배 액상 입에": {
           "okAgeHours": [
             3299
           ],
@@ -1924,7 +2044,7 @@
     },
     "post-import-61a28e2181": {
       "queries": {
-        "자동흡입 vs 버튼흡입": {
+        "integrated::자동흡입 vs 버튼흡입": {
           "okAgeHours": [
             3275
           ],
@@ -1940,7 +2060,7 @@
     },
     "post-import-704ae75896": {
       "queries": {
-        "부개동 전자담배 처음": {
+        "integrated::부개동 전자담배 처음": {
           "okAgeHours": [
             3275
           ],
@@ -1956,7 +2076,7 @@
     },
     "post-import-244f148100": {
       "queries": {
-        "전자담배 팟이 인식": {
+        "integrated::전자담배 팟이 인식": {
           "okAgeHours": [
             3275
           ],
@@ -1972,7 +2092,7 @@
     },
     "post-import-7d1a4bbc42": {
       "queries": {
-        "전자담배 액상 유통기한": {
+        "integrated::전자담배 액상 유통기한": {
           "okAgeHours": [
             3251
           ],
@@ -1988,7 +2108,7 @@
     },
     "post-import-51182d6944": {
       "queries": {
-        "전자담배 액상 맛이": {
+        "integrated::전자담배 액상 맛이": {
           "okAgeHours": [
             3251
           ],
@@ -2004,7 +2124,7 @@
     },
     "post-import-2b812d9837": {
       "queries": {
-        "전자담배 기기 오래": {
+        "integrated::전자담배 기기 오래": {
           "okAgeHours": [
             3227
           ],
@@ -2020,7 +2140,7 @@
     },
     "post-import-08c915d5f3": {
       "queries": {
-        "간석오거리 전자담배 기기": {
+        "integrated::간석오거리 전자담배 기기": {
           "okAgeHours": [
             3227
           ],
@@ -2036,7 +2156,7 @@
     },
     "post-import-553128cc7c": {
       "queries": {
-        "전자담배 액상이 갈색으로": {
+        "integrated::전자담배 액상이 갈색으로": {
           "okAgeHours": [
             3203
           ],
@@ -2052,7 +2172,7 @@
     },
     "post-import-3647da1c69": {
       "queries": {
-        "주안 전자담배 제품": {
+        "integrated::주안 전자담배 제품": {
           "okAgeHours": [
             3179
           ],
@@ -2068,7 +2188,7 @@
     },
     "post-import-5f1dcdf8cb": {
       "queries": {
-        "액상 자주 바꾸는": {
+        "integrated::액상 자주 바꾸는": {
           "okAgeHours": [
             3179
           ],
@@ -2084,7 +2204,7 @@
     },
     "post-import-16ee99f17c": {
       "queries": {
-        "전자담배에서 맛 표현": {
+        "integrated::전자담배에서 맛 표현": {
           "okAgeHours": [
             3155
           ],
@@ -2100,7 +2220,7 @@
     },
     "post-aace5597": {
       "queries": {
-        "인천 만수동 만수르": {
+        "integrated::인천 만수동 만수르": {
           "okAgeHours": [
             3121
           ],
@@ -2116,7 +2236,7 @@
     },
     "post-21e6d9ae": {
       "queries": {
-        "전자담배 액상 종류별": {
+        "integrated::전자담배 액상 종류별": {
           "okAgeHours": [
             3118
           ],
@@ -2132,7 +2252,7 @@
     },
     "post-manual-mqyx6rwp": {
       "queries": {
-        "일회용 전자담배 추천과": {
+        "integrated::일회용 전자담배 추천과": {
           "okAgeHours": [
             1491
           ],
@@ -2148,7 +2268,7 @@
     },
     "post-manual-mqz4nijs": {
       "queries": {
-        "전자담배 액상 추천받으러": {
+        "integrated::전자담배 액상 추천받으러": {
           "okAgeHours": [
             1488
           ],
@@ -2164,7 +2284,7 @@
     },
     "post-manual-mr0k6kud": {
       "queries": {
-        "구월동 전자담배 네스티": {
+        "integrated::구월동 전자담배 네스티": {
           "okAgeHours": [
             1464
           ],
@@ -2180,7 +2300,7 @@
     },
     "post-manual-mr0liclf": {
       "queries": {
-        "전자담배 액상 한": {
+        "integrated::전자담배 액상 한": {
           "okAgeHours": [
             1463
           ],
@@ -2196,7 +2316,7 @@
     },
     "post-manual-mr1tcu2q": {
       "queries": {
-        "부평전자담배 크로스미니6 후기": {
+        "integrated::부평전자담배 크로스미니6 후기": {
           "okAgeHours": [
             1442
           ],
@@ -2212,7 +2332,7 @@
     },
     "post-manual-mr1ze6cd": {
       "queries": {
-        "케이스가 들어있는 크로스미니6": {
+        "integrated::케이스가 들어있는 크로스미니6": {
           "okAgeHours": [
             1440
           ],
@@ -2228,7 +2348,7 @@
     },
     "post-manual-mr3i1u04": {
       "queries": {
-        "여름철 전자담배를 차량에": {
+        "integrated::여름철 전자담배를 차량에": {
           "okAgeHours": [
             1414
           ],
@@ -2244,7 +2364,7 @@
     },
     "post-manual-mr4m14xy": {
       "queries": {
-        "젤로맥스 누수 잡는법": {
+        "integrated::젤로맥스 누수 잡는법": {
           "okAgeHours": [
             1396
           ],
@@ -2260,7 +2380,7 @@
     },
     "post-manual-mr4urgdx": {
       "queries": {
-        "여름철 전자담배 액상이": {
+        "integrated::여름철 전자담배 액상이": {
           "okAgeHours": [
             1392
           ],
@@ -2276,7 +2396,7 @@
     },
     "post-manual-mr5y47o6": {
       "queries": {
-        "마이팟프로 누수 잡는법": {
+        "integrated::마이팟프로 누수 잡는법": {
           "okAgeHours": [
             1373
           ],
@@ -2292,7 +2412,7 @@
     },
     "post-manual-mr69b8nu": {
       "queries": {
-        "만수동 전자담배 크로스미니6": {
+        "integrated::만수동 전자담배 크로스미니6": {
           "okAgeHours": [
             1368
           ],
@@ -2308,7 +2428,7 @@
     },
     "post-manual-mr76npd2": {
       "queries": {
-        "전자담배 팟 안에": {
+        "integrated::전자담배 팟 안에": {
           "okAgeHours": [
             1353
           ],
@@ -2324,7 +2444,7 @@
     },
     "post-manual-mr7qd63j": {
       "queries": {
-        "인천 전자담배 신제품": {
+        "integrated::인천 전자담배 신제품": {
           "okAgeHours": [
             1343
           ],
@@ -2340,7 +2460,7 @@
     },
     "post-manual-mr8tac1r": {
       "queries": {
-        "발라리안R 누수 고장": {
+        "integrated::발라리안R 누수 고장": {
           "okAgeHours": [
             1325
           ],
@@ -2356,7 +2476,7 @@
     },
     "post-manual-mr9536qs": {
       "queries": {
-        "전자담배에서 지지직 소리가": {
+        "integrated::전자담배에서 지지직 소리가": {
           "okAgeHours": [
             1320
           ],
@@ -2372,7 +2492,7 @@
     },
     "post-manual-mraln0hw": {
       "queries": {
-        "인천 전자담배 만수르": {
+        "integrated::인천 전자담배 만수르": {
           "okAgeHours": [
             1295
           ],
@@ -2388,7 +2508,7 @@
     },
     "post-manual-mralr041": {
       "queries": {
-        "전자담배 액상을 바꿀": {
+        "integrated::전자담배 액상을 바꿀": {
           "okAgeHours": [
             1295
           ],
@@ -2404,7 +2524,7 @@
     },
     "post-manual-mrbo3baf": {
       "queries": {
-        "부평전자담배 크로스미니6 vs": {
+        "integrated::부평전자담배 크로스미니6 vs": {
           "okAgeHours": [
             1278
           ],
@@ -2420,7 +2540,7 @@
     },
     "post-manual-mrc05zu3": {
       "queries": {
-        "전자담배 액상을 바꿨는데": {
+        "integrated::전자담배 액상을 바꿨는데": {
           "okAgeHours": [
             1272
           ],
@@ -2436,7 +2556,7 @@
     },
     "post-manual-mrc0xqcj": {
       "queries": {
-        "습하고 무더운 여름에": {
+        "integrated::습하고 무더운 여름에": {
           "okAgeHours": [
             1272
           ],
@@ -2452,7 +2572,7 @@
     },
     "post-801b023b": {
       "queries": {
-        "전자담배 관리법 :": {
+        "integrated::전자담배 관리법 :": {
           "okAgeHours": [
             1229
           ],
@@ -2468,7 +2588,7 @@
     },
     "post-17e1dade": {
       "queries": {
-        "남동구 전자담배 매장": {
+        "integrated::남동구 전자담배 매장": {
           "okAgeHours": [
             1200
           ],
@@ -2484,7 +2604,7 @@
     },
     "post-manual-mrdh0oej": {
       "queries": {
-        "전자담배 코일을 새로": {
+        "integrated::전자담배 코일을 새로": {
           "okAgeHours": [
             1247
           ],
@@ -2500,7 +2620,7 @@
     },
     "post-manual-mreu8a6g": {
       "queries": {
-        "전자담배 코일은 아직": {
+        "integrated::전자담배 코일은 아직": {
           "okAgeHours": [
             1224
           ],
@@ -2516,7 +2636,7 @@
     },
     "post-14a4e3aa": {
       "queries": {
-        "인천 전자담배 액상별": {
+        "integrated::인천 전자담배 액상별": {
           "okAgeHours": [
             1202
           ],
@@ -2532,7 +2652,7 @@
     },
     "post-manual-mrh5sq1h": {
       "queries": {
-        "전자담배 액상은 남았는데": {
+        "integrated::전자담배 액상은 남았는데": {
           "okAgeHours": [
             1185
           ],
@@ -2548,7 +2668,7 @@
     },
     "post-6de3673d": {
       "queries": {
-        "인천 부천 상동": {
+        "integrated::인천 부천 상동": {
           "okAgeHours": [
             1158
           ],
@@ -2564,7 +2684,7 @@
     },
     "post-manual-mrj6idz8": {
       "queries": {
-        "전자담배 액상은 왜": {
+        "integrated::전자담배 액상은 왜": {
           "okAgeHours": [
             1151
           ],
@@ -2580,7 +2700,7 @@
     },
     "post-928f746e": {
       "queries": {
-        "젤로 전자담배 불량": {
+        "integrated::젤로 전자담배 불량": {
           "okAgeHours": [
             1133
           ],
@@ -2596,7 +2716,7 @@
     },
     "post-manual-mrki1yl0": {
       "queries": {
-        "구월동 전자담배 입문자가": {
+        "integrated::구월동 전자담배 입문자가": {
           "okAgeHours": [
             1130
           ],
@@ -2612,7 +2732,7 @@
     },
     "post-manual-mrkmokof": {
       "queries": {
-        "전자담배 액상은 흔들어서": {
+        "integrated::전자담배 액상은 흔들어서": {
           "okAgeHours": [
             1127
           ],
@@ -2628,7 +2748,7 @@
     },
     "post-3442dcc2": {
       "queries": {
-        "무니코틴 고르기 전에": {
+        "integrated::무니코틴 고르기 전에": {
           "okAgeHours": [
             1106
           ],
@@ -2644,7 +2764,7 @@
     },
     "post-manual-mrly9f82": {
       "queries": {
-        "만수동 전자담배 멘솔": {
+        "integrated::만수동 전자담배 멘솔": {
           "okAgeHours": [
             1105
           ],
@@ -2660,7 +2780,7 @@
     },
     "post-manual-mrn1y37e": {
       "queries": {
-        "하복 전담 누수": {
+        "integrated::하복 전담 누수": {
           "okAgeHours": [
             1087
           ],
@@ -2676,7 +2796,7 @@
     },
     "post-manual-mrorbz92": {
       "queries": {
-        "발라리안 전자담배 안빨림": {
+        "integrated::발라리안 전자담배 안빨림": {
           "okAgeHours": [
             1058
           ],
@@ -2692,7 +2812,7 @@
     },
     "post-c96872ab": {
       "queries": {
-        "만수동 전자담배": {
+        "integrated::만수동 전자담배": {
           "okAgeHours": [
             1033
           ],
@@ -2702,7 +2822,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T11:56:19.440Z"
         },
-        "만수동 전자담배 디저트": {
+        "integrated::만수동 전자담배 디저트": {
           "okAgeHours": [
             1033
           ],
@@ -2718,7 +2838,7 @@
     },
     "post-manual-mrriexgq": {
       "queries": {
-        "전자담배 액상은 끝까지": {
+        "integrated::전자담배 액상은 끝까지": {
           "okAgeHours": [
             1012
           ],
@@ -2734,7 +2854,7 @@
     },
     "post-65b33019": {
       "queries": {
-        "인천 만수역 전자담배": {
+        "integrated::인천 만수역 전자담배": {
           "okAgeHours": [
             992
           ],
@@ -2750,7 +2870,7 @@
     },
     "post-manual-mrt7jy67": {
       "queries": {
-        "전자담배 액상은 많이": {
+        "integrated::전자담배 액상은 많이": {
           "okAgeHours": [
             983
           ],
@@ -2766,7 +2886,7 @@
     },
     "post-b626b001": {
       "queries": {
-        "장수동 전자담배": {
+        "integrated::장수동 전자담배": {
           "okAgeHours": [
             959
           ],
@@ -2776,7 +2896,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T11:56:53.049Z"
         },
-        "장수동 전자담배 시원한": {
+        "integrated::장수동 전자담배 시원한": {
           "okAgeHours": [
             960
           ],
@@ -2792,7 +2912,7 @@
     },
     "post-manual-mruk2p3c": {
       "queries": {
-        "전자담배 액상을 자주": {
+        "integrated::전자담배 액상을 자주": {
           "okAgeHours": [
             961
           ],
@@ -2808,7 +2928,7 @@
     },
     "post-f4873ead": {
       "queries": {
-        "가성비, 전자담배": {
+        "integrated::가성비, 전자담배": {
           "okAgeHours": [
             943
           ],
@@ -2818,7 +2938,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T12:15:52.623Z"
         },
-        "가성비 좋은 전자담배의": {
+        "integrated::가성비 좋은 전자담배의": {
           "okAgeHours": [
             943
           ],
@@ -2834,7 +2954,7 @@
     },
     "post-manual-mrvztskv": {
       "queries": {
-        "전자담배 액상 유통기한은": {
+        "integrated::전자담배 액상 유통기한은": {
           "okAgeHours": [
             937
           ],
@@ -2850,7 +2970,7 @@
     },
     "post-1191adb8": {
       "queries": {
-        "니코틴 종류": {
+        "integrated::니코틴 종류": {
           "okAgeHours": [
             919
           ],
@@ -2860,7 +2980,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T12:16:12.229Z"
         },
-        "전담 액상 니코틴": {
+        "integrated::전담 액상 니코틴": {
           "okAgeHours": [
             919
           ],
@@ -2876,7 +2996,7 @@
     },
     "post-manual-mrxe65go": {
       "queries": {
-        "전자담배 액상이 질렸다면": {
+        "integrated::전자담배 액상이 질렸다면": {
           "okAgeHours": [
             913
           ],
@@ -2892,7 +3012,7 @@
     },
     "post-manual-mryqqt28": {
       "queries": {
-        "더위를 날려줄 시원한": {
+        "integrated::더위를 날려줄 시원한": {
           "okAgeHours": [
             891
           ],
@@ -2908,7 +3028,7 @@
     },
     "post-manual-mryvhfci": {
       "queries": {
-        "전자담배 배터리가 빨리": {
+        "integrated::전자담배 배터리가 빨리": {
           "okAgeHours": [
             889
           ],
@@ -2924,7 +3044,7 @@
     },
     "post-manual-ms09w5z0": {
       "queries": {
-        "부평 전자담배 폐호흡": {
+        "integrated::부평 전자담배 폐호흡": {
           "okAgeHours": [
             865
           ],
@@ -2940,7 +3060,7 @@
     },
     "post-manual-ms1fi6e8": {
       "queries": {
-        "전자담배 충전하면서 사용해도": {
+        "integrated::전자담배 충전하면서 사용해도": {
           "okAgeHours": [
             846
           ],
@@ -2956,7 +3076,7 @@
     },
     "post-manual-ms1qobk6": {
       "queries": {
-        "부평시청역 전자담배 오랜만에": {
+        "integrated::부평시청역 전자담배 오랜만에": {
           "okAgeHours": [
             841
           ],
@@ -2972,7 +3092,7 @@
     },
     "post-3a147bb4": {
       "queries": {
-        "코일 언제": {
+        "integrated::코일 언제": {
           "okAgeHours": [
             820
           ],
@@ -2982,7 +3102,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T12:35:46.890Z"
         },
-        "전자담배 코일은 언제": {
+        "integrated::전자담배 코일은 언제": {
           "okAgeHours": [
             820
           ],
@@ -2998,7 +3118,7 @@
     },
     "post-manual-ms384q6y": {
       "queries": {
-        "전자담배는 흡입을 오래": {
+        "integrated::전자담배는 흡입을 오래": {
           "okAgeHours": [
             816
           ],
@@ -3014,7 +3134,7 @@
     },
     "post-f3b26f79": {
       "queries": {
-        "입호흡 폐호흡 차이": {
+        "integrated::입호흡 폐호흡 차이": {
           "okAgeHours": [
             795
           ],
@@ -3024,7 +3144,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T12:36:05.883Z"
         },
-        "전자담배 입호흡 폐호흡": {
+        "integrated::전자담배 입호흡 폐호흡": {
           "okAgeHours": [
             795
           ],
@@ -3040,7 +3160,7 @@
     },
     "post-fcd2d1c7": {
       "queries": {
-        "간석동 전자담배 기기": {
+        "integrated::간석동 전자담배 기기": {
           "okAgeHours": [
             792
           ],
@@ -3056,7 +3176,7 @@
     },
     "post-manual-ms4juy5w": {
       "queries": {
-        "전자담배는 세게 빨수록": {
+        "integrated::전자담배는 세게 빨수록": {
           "okAgeHours": [
             794
           ],
@@ -3072,7 +3192,7 @@
     },
     "post-28fdb89d": {
       "queries": {
-        "액상 섞어": {
+        "integrated::액상 섞어": {
           "okAgeHours": [
             775
           ],
@@ -3082,7 +3202,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T12:36:32.570Z"
         },
-        "인천전자담배 - 액상": {
+        "integrated::인천전자담배 - 액상": {
           "okAgeHours": [
             775
           ],
@@ -3098,7 +3218,7 @@
     },
     "post-manual-ms5zs3fn": {
       "queries": {
-        "전자담배를 연속으로 너무": {
+        "integrated::전자담배를 연속으로 너무": {
           "okAgeHours": [
             769
           ],
@@ -3114,7 +3234,7 @@
     },
     "post-manual-ms7559nt": {
       "queries": {
-        "누수없는 전자담배가 정말": {
+        "integrated::누수없는 전자담배가 정말": {
           "okAgeHours": [
             750
           ],
@@ -3130,7 +3250,7 @@
     },
     "post-manual-ms7fg4gm": {
       "queries": {
-        "전자담배 같은 액상인데": {
+        "integrated::전자담배 같은 액상인데": {
           "okAgeHours": [
             746
           ],
@@ -3146,7 +3266,7 @@
     },
     "post-e83cf288": {
       "queries": {
-        "일회용 전담 탄맛": {
+        "integrated::일회용 전담 탄맛": {
           "okAgeHours": [
             723
           ],
@@ -3162,7 +3282,7 @@
     },
     "post-manual-ms8vjho9": {
       "queries": {
-        "전자담배 출력 W": {
+        "integrated::전자담배 출력 W": {
           "okAgeHours": [
             721
           ],
@@ -3178,7 +3298,7 @@
     },
     "post-manual-msa13cve": {
       "queries": {
-        "젤로 누수 잡는법": {
+        "integrated::젤로 누수 잡는법": {
           "okAgeHours": [
             702
           ],
@@ -3194,7 +3314,7 @@
     },
     "post-20c03ef6": {
       "queries": {
-        "구월동 전자담배 액상": {
+        "integrated::구월동 전자담배 액상": {
           "okAgeHours": [
             698
           ],
@@ -3210,7 +3330,7 @@
     },
     "post-manual-msbg3dsw": {
       "queries": {
-        "전자담배 배터리 용량": {
+        "integrated::전자담배 배터리 용량": {
           "okAgeHours": [
             678
           ],
@@ -3226,7 +3346,7 @@
     },
     "post-manual-msbpt05i": {
       "queries": {
-        "인천 일회용 전자담배": {
+        "integrated::인천 일회용 전자담배": {
           "okAgeHours": [
             673
           ],
@@ -3242,7 +3362,7 @@
     },
     "post-426888f1": {
       "queries": {
-        "전자담배 냄새": {
+        "integrated::전자담배 냄새": {
           "okAgeHours": [
             653
           ],
@@ -3252,7 +3372,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T12:56:33.083Z"
         },
-        "전자담배도 냄새가 날까": {
+        "integrated::전자담배도 냄새가 날까": {
           "okAgeHours": [
             653
           ],
@@ -3268,7 +3388,7 @@
     },
     "post-manual-msd6tai1": {
       "queries": {
-        "전자담배가 가장 맛있게": {
+        "integrated::전자담배가 가장 맛있게": {
           "okAgeHours": [
             649
           ],
@@ -3284,7 +3404,7 @@
     },
     "post-manual-mseafpt7": {
       "queries": {
-        "아스몬하이 누수 잡는법": {
+        "integrated::아스몬하이 누수 잡는법": {
           "okAgeHours": [
             630
           ],
@@ -3300,7 +3420,7 @@
     },
     "post-ed806d65": {
       "queries": {
-        "남동구청역 전자담배 입문자": {
+        "integrated::남동구청역 전자담배 입문자": {
           "okAgeHours": [
             626
           ],
@@ -3316,7 +3436,7 @@
     },
     "post-manual-msenaehp": {
       "queries": {
-        "전자담배 입문자는 언제": {
+        "integrated::전자담배 입문자는 언제": {
           "okAgeHours": [
             625
           ],
@@ -3332,7 +3452,7 @@
     },
     "post-15731f9f": {
       "queries": {
-        "액상형 전자담배 종류": {
+        "integrated::액상형 전자담배 종류": {
           "okAgeHours": [
             582
           ],
@@ -3348,7 +3468,7 @@
     },
     "post-8859dd10": {
       "queries": {
-        "만수동 전자담배 사고": {
+        "integrated::만수동 전자담배 사고": {
           "okAgeHours": [
             532
           ],
@@ -3364,7 +3484,7 @@
     },
     "post-fb0461a1": {
       "queries": {
-        "일회용전자담배 불량": {
+        "integrated::일회용전자담배 불량": {
           "okAgeHours": [
             557
           ],
@@ -3374,7 +3494,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T13:16:12.697Z"
         },
-        "일회용전자담배 불량 증상": {
+        "integrated::일회용전자담배 불량 증상": {
           "okAgeHours": [
             557
           ],
@@ -3390,7 +3510,7 @@
     },
     "post-manual-msiwq135": {
       "queries": {
-        "전자담배 액상 추천을": {
+        "integrated::전자담배 액상 추천을": {
           "okAgeHours": [
             553
           ],
@@ -3406,7 +3526,7 @@
     },
     "post-manual-mslcq13v": {
       "queries": {
-        "전자담배 액상 시향만으로는": {
+        "integrated::전자담배 액상 시향만으로는": {
           "okAgeHours": [
             512
           ],
@@ -3422,7 +3542,7 @@
     },
     "post-manual-mslqjgv4": {
       "queries": {
-        "상큼 깔끔 입호흡": {
+        "integrated::상큼 깔끔 입호흡": {
           "okAgeHours": [
             506
           ],
@@ -3438,7 +3558,7 @@
     },
     "post-manual-msmx35tq": {
       "queries": {
-        "베놈 팬텀 엔트리": {
+        "integrated::베놈 팬텀 엔트리": {
           "okAgeHours": [
             486
           ],
@@ -3454,7 +3574,7 @@
     },
     "post-manual-msnbeme6": {
       "queries": {
-        "전자담배 팟에 액상은": {
+        "integrated::전자담배 팟에 액상은": {
           "okAgeHours": [
             479
           ],
@@ -3470,7 +3590,7 @@
     },
     "post-30c0e0bb": {
       "queries": {
-        "구월동 전자담배 액상": {
+        "integrated::구월동 전자담배 액상": {
           "okAgeHours": [
             459
           ],
@@ -3486,7 +3606,7 @@
     },
     "post-manual-msol9uan": {
       "queries": {
-        "전자담배 흡입할 때": {
+        "integrated::전자담배 흡입할 때": {
           "okAgeHours": [
             458
           ],
@@ -3502,7 +3622,7 @@
     },
     "post-manual-mspveav0": {
       "queries": {
-        "인천 만수역 전자담배": {
+        "integrated::인천 만수역 전자담배": {
           "okAgeHours": [
             436
           ],
@@ -3518,7 +3638,7 @@
     },
     "post-manual-msq4y2ie": {
       "queries": {
-        "전자담배 액상이 갑자기": {
+        "integrated::전자담배 액상이 갑자기": {
           "okAgeHours": [
             432
           ],
@@ -3534,7 +3654,7 @@
     },
     "post-8d184c88": {
       "queries": {
-        "주안 전자담배 액상": {
+        "integrated::주안 전자담배 액상": {
           "okAgeHours": [
             409
           ],
@@ -3550,7 +3670,7 @@
     },
     "post-manual-msr5i6u9": {
       "queries": {
-        "부천역전자담배 알케마스터 멘솔없는": {
+        "integrated::부천역전자담배 알케마스터 멘솔없는": {
           "okAgeHours": [
             415
           ],
@@ -3566,7 +3686,7 @@
     },
     "post-manual-msrj1dd5": {
       "queries": {
-        "전자담배 액상 가격이": {
+        "integrated::전자담배 액상 가격이": {
           "okAgeHours": [
             409
           ],
@@ -3582,7 +3702,7 @@
     },
     "post-154bea02": {
       "queries": {
-        "전자담배로 바꿀때 가장": {
+        "integrated::전자담배로 바꿀때 가장": {
           "okAgeHours": [
             384
           ],
@@ -3598,7 +3718,7 @@
     },
     "post-manual-mssxeywf": {
       "queries": {
-        "전자담배 새 액상을": {
+        "integrated::전자담배 새 액상을": {
           "okAgeHours": [
             385
           ],
@@ -3614,7 +3734,7 @@
     },
     "post-manual-msvdpogj": {
       "queries": {
-        "전자담배 여름철 누수가": {
+        "integrated::전자담배 여름철 누수가": {
           "okAgeHours": [
             344
           ],
@@ -3630,7 +3750,7 @@
     },
     "post-f3e7657b": {
       "queries": {
-        "갈산동 전자담배 입문자": {
+        "integrated::갈산동 전자담배 입문자": {
           "okAgeHours": [
             291
           ],
@@ -3646,7 +3766,7 @@
     },
     "post-bc7bfb22": {
       "queries": {
-        "부천 상동 전자담배": {
+        "integrated::부천 상동 전자담배": {
           "okAgeHours": [
             316
           ],
@@ -3662,7 +3782,7 @@
     },
     "post-manual-mt006d8p": {
       "queries": {
-        "전자담배 팟에 액상이": {
+        "integrated::전자담배 팟에 액상이": {
           "okAgeHours": [
             267
           ],
@@ -3678,7 +3798,7 @@
     },
     "post-70d278e7": {
       "queries": {
-        "인천 남동구 전자담배": {
+        "integrated::인천 남동구 전자담배": {
           "okAgeHours": [
             247
           ],
@@ -3694,7 +3814,7 @@
     },
     "post-5fbf9c10": {
       "queries": {
-        "연수동 전자담배 입문자를": {
+        "integrated::연수동 전자담배 입문자를": {
           "okAgeHours": [
             197
           ],
@@ -3710,7 +3830,7 @@
     },
     "post-manual-mt1jysvx": {
       "queries": {
-        "전자담배 액상을 넣고": {
+        "integrated::전자담배 액상을 넣고": {
           "okAgeHours": [
             241
           ],
@@ -3726,7 +3846,7 @@
     },
     "post-b4e0e44a": {
       "queries": {
-        "전담기기종류": {
+        "integrated::전담기기종류": {
           "okAgeHours": [
             222
           ],
@@ -3736,7 +3856,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T13:56:05.142Z"
         },
-        "전담기기 종류 뭐가": {
+        "integrated::전담기기 종류 뭐가": {
           "okAgeHours": [
             222
           ],
@@ -3752,7 +3872,7 @@
     },
     "post-manual-mt5qahzh": {
       "queries": {
-        "냄새 안나는 전자담배": {
+        "integrated::냄새 안나는 전자담배": {
           "okAgeHours": [
             170
           ],
@@ -3768,7 +3888,7 @@
     },
     "post-38ca6424": {
       "queries": {
-        "부천 전자담배 액상": {
+        "integrated::부천 전자담배 액상": {
           "okAgeHours": [
             149
           ],
@@ -3784,7 +3904,7 @@
     },
     "post-manual-mt6xe0wc": {
       "queries": {
-        "인천 전자담배 만수동만수르": {
+        "integrated::인천 전자담배 만수동만수르": {
           "okAgeHours": [
             150
           ],
@@ -3800,7 +3920,7 @@
     },
     "post-manual-mt6xe2cd": {
       "queries": {
-        "인천 전자담배 만수동만수르": {
+        "integrated::인천 전자담배 만수동만수르": {
           "okAgeHours": [
             150
           ],
@@ -3816,7 +3936,7 @@
     },
     "post-manual-mt6xepnf": {
       "queries": {
-        "베이포레소 크로스미니 6": {
+        "integrated::베이포레소 크로스미니 6": {
           "okAgeHours": [
             150
           ],
@@ -3832,7 +3952,7 @@
     },
     "post-manual-mt6xfi5e": {
       "queries": {
-        "전자담배 기기 하이엔드": {
+        "integrated::전자담배 기기 하이엔드": {
           "okAgeHours": [
             150
           ],
@@ -3848,7 +3968,7 @@
     },
     "post-manual-mt6xg9od": {
       "queries": {
-        "말론바 일회용 전자담배": {
+        "integrated::말론바 일회용 전자담배": {
           "okAgeHours": [
             151
           ],
@@ -3864,7 +3984,7 @@
     },
     "post-manual-mt6yxtgj": {
       "queries": {
-        "무니코틴 액상과 잘": {
+        "integrated::무니코틴 액상과 잘": {
           "okAgeHours": [
             150
           ],
@@ -3880,7 +4000,7 @@
     },
     "post-manual-mt6z3928": {
       "queries": {
-        "인천 삼산동 전자담배": {
+        "integrated::인천 삼산동 전자담배": {
           "okAgeHours": [
             150
           ],
@@ -3896,7 +4016,7 @@
     },
     "post-manual-mt6z4kiq": {
       "queries": {
-        "구월동 전자담배 만수르": {
+        "integrated::구월동 전자담배 만수르": {
           "okAgeHours": [
             150
           ],
@@ -3912,7 +4032,7 @@
     },
     "post-manual-mt6z50dx": {
       "queries": {
-        "유웰 발라리안 맥스": {
+        "integrated::유웰 발라리안 맥스": {
           "okAgeHours": [
             150
           ],
@@ -3928,7 +4048,7 @@
     },
     "post-manual-mt6z60ar": {
       "queries": {
-        "인천 전자담배 닷모드": {
+        "integrated::인천 전자담배 닷모드": {
           "okAgeHours": [
             150
           ],
@@ -3944,7 +4064,7 @@
     },
     "post-manual-mt75drce": {
       "queries": {
-        "인천전자담배 무니코틴 액상": {
+        "integrated::인천전자담배 무니코틴 액상": {
           "okAgeHours": [
             147
           ],
@@ -3960,7 +4080,7 @@
     },
     "post-manual-mt87hyvp": {
       "queries": {
-        "갈산동전자담배 옥스바 오네오": {
+        "integrated::갈산동전자담배 옥스바 오네오": {
           "okAgeHours": [
             129
           ],
@@ -3976,7 +4096,7 @@
     },
     "post-manual-mt87ii9l": {
       "queries": {
-        "굴포천역전자담배 입호흡기기 아머프로": {
+        "integrated::굴포천역전자담배 입호흡기기 아머프로": {
           "okAgeHours": [
             129
           ],
@@ -3992,7 +4112,7 @@
     },
     "post-manual-mt87j13u": {
       "queries": {
-        "굴포천전자담배 일회용기기 네스티바": {
+        "integrated::굴포천전자담배 일회용기기 네스티바": {
           "okAgeHours": [
             129
           ],
@@ -4008,7 +4128,7 @@
     },
     "post-manual-mt87jki9": {
       "queries": {
-        "작전동전자담배 일회용 와카": {
+        "integrated::작전동전자담배 일회용 와카": {
           "okAgeHours": [
             129
           ],
@@ -4024,7 +4144,7 @@
     },
     "post-manual-mt87k2r5": {
       "queries": {
-        "계산동전자담배 입호흡기기 발라리안": {
+        "integrated::계산동전자담배 입호흡기기 발라리안": {
           "okAgeHours": [
             129
           ],
@@ -4040,7 +4160,7 @@
     },
     "post-manual-mt87kkfp": {
       "queries": {
-        "삼산동전자담배 딥베이프 마이팟프로": {
+        "integrated::삼산동전자담배 딥베이프 마이팟프로": {
           "okAgeHours": [
             129
           ],
@@ -4056,7 +4176,7 @@
     },
     "post-manual-mt87l082": {
       "queries": {
-        "인천전자담배 만수르 베코": {
+        "integrated::인천전자담배 만수르 베코": {
           "okAgeHours": [
             129
           ],
@@ -4072,7 +4192,7 @@
     },
     "post-manual-mt87lgxp": {
       "queries": {
-        "부평구청역전자담배 젤로맥스 입호흡기기": {
+        "integrated::부평구청역전자담배 젤로맥스 입호흡기기": {
           "okAgeHours": [
             129
           ],
@@ -4088,7 +4208,7 @@
     },
     "post-manual-mt87ls3h": {
       "queries": {
-        "간석동전자담배 네스티바 일회용": {
+        "integrated::간석동전자담배 네스티바 일회용": {
           "okAgeHours": [
             129
           ],
@@ -4104,7 +4224,7 @@
     },
     "post-manual-mt87o9e9": {
       "queries": {
-        "부평역전자담배 추천 누수없는": {
+        "integrated::부평역전자담배 추천 누수없는": {
           "okAgeHours": [
             129
           ],
@@ -4120,7 +4240,7 @@
     },
     "post-manual-mt87oul4": {
       "queries": {
-        "인천전자담배샵 폐호흡 모드기기": {
+        "integrated::인천전자담배샵 폐호흡 모드기기": {
           "okAgeHours": [
             129
           ],
@@ -4136,7 +4256,7 @@
     },
     "post-manual-mt87ped6": {
       "queries": {
-        "와카일회용전담 이게 진짜": {
+        "integrated::와카일회용전담 이게 진짜": {
           "okAgeHours": [
             129
           ],
@@ -4152,7 +4272,7 @@
     },
     "post-manual-mt87pvde": {
       "queries": {
-        "부평전자담배 말론 후기": {
+        "integrated::부평전자담배 말론 후기": {
           "okAgeHours": [
             129
           ],
@@ -4168,7 +4288,7 @@
     },
     "post-manual-mt87qx6m": {
       "queries": {
-        "산곡동전자담배 SUPA X3": {
+        "integrated::산곡동전자담배 SUPA X3": {
           "okAgeHours": [
             129
           ],
@@ -4184,7 +4304,7 @@
     },
     "post-manual-mt87rzfg": {
       "queries": {
-        "상동전자담배 닷투엑스 입호흡": {
+        "integrated::상동전자담배 닷투엑스 입호흡": {
           "okAgeHours": [
             129
           ],
@@ -4200,7 +4320,7 @@
     },
     "post-manual-mt87sf6n": {
       "queries": {
-        "부평전자담배 입호흡 전담": {
+        "integrated::부평전자담배 입호흡 전담": {
           "okAgeHours": [
             129
           ],
@@ -4216,7 +4336,7 @@
     },
     "post-manual-mt87suy8": {
       "queries": {
-        "청천동전자담배 엘프바 조인원": {
+        "integrated::청천동전자담배 엘프바 조인원": {
           "okAgeHours": [
             129
           ],
@@ -4232,7 +4352,7 @@
     },
     "post-manual-mt87tbja": {
       "queries": {
-        "갈산동전자담배 릴렉스 크리에이터": {
+        "integrated::갈산동전자담배 릴렉스 크리에이터": {
           "okAgeHours": [
             130
           ],
@@ -4248,7 +4368,7 @@
     },
     "post-manual-mt87trwt": {
       "queries": {
-        "약대동전자담배 리로드 아이킥": {
+        "integrated::약대동전자담배 리로드 아이킥": {
           "okAgeHours": [
             130
           ],
@@ -4264,7 +4384,7 @@
     },
     "post-manual-mt87u9qe": {
       "queries": {
-        "삼산체육관역전자담배 일회용 전담": {
+        "integrated::삼산체육관역전자담배 일회용 전담": {
           "okAgeHours": [
             130
           ],
@@ -4280,7 +4400,7 @@
     },
     "post-manual-mt87vh25": {
       "queries": {
-        "산곡역전자담배 스누스 니코틴": {
+        "integrated::산곡역전자담배 스누스 니코틴": {
           "okAgeHours": [
             130
           ],
@@ -4296,7 +4416,7 @@
     },
     "post-manual-mt87vy39": {
       "queries": {
-        "부평전자담배 입호흡 전담": {
+        "integrated::부평전자담배 입호흡 전담": {
           "okAgeHours": [
             130
           ],
@@ -4312,7 +4432,7 @@
     },
     "post-manual-mt87xye0": {
       "queries": {
-        "부평전자담배 발라리안 맥스": {
+        "integrated::부평전자담배 발라리안 맥스": {
           "okAgeHours": [
             130
           ],
@@ -4328,7 +4448,7 @@
     },
     "post-manual-mt87yf6o": {
       "queries": {
-        "작전역전자담배 베놈 팬텀": {
+        "integrated::작전역전자담배 베놈 팬텀": {
           "okAgeHours": [
             130
           ],
@@ -4344,7 +4464,7 @@
     },
     "post-manual-mt87zlum": {
       "queries": {
-        "호라이즌 세이커즈 마스터": {
+        "integrated::호라이즌 세이커즈 마스터": {
           "okAgeHours": [
             130
           ],
@@ -4360,7 +4480,7 @@
     },
     "post-manual-mt880qy8": {
       "queries": {
-        "긱베이프 이지스 레전드": {
+        "integrated::긱베이프 이지스 레전드": {
           "okAgeHours": [
             130
           ],
@@ -4376,7 +4496,7 @@
     },
     "post-manual-mt8818bw": {
       "queries": {
-        "일회용 전담 추천": {
+        "integrated::일회용 전담 추천": {
           "okAgeHours": [
             130
           ],
@@ -4392,7 +4512,7 @@
     },
     "post-manual-mt8824id": {
       "queries": {
-        "인천전자담배 일회용 전담": {
+        "integrated::인천전자담배 일회용 전담": {
           "okAgeHours": [
             130
           ],
@@ -4408,7 +4528,7 @@
     },
     "post-manual-mt882mm0": {
       "queries": {
-        "부평전자담배 저스트포그 글렌트": {
+        "integrated::부평전자담배 저스트포그 글렌트": {
           "okAgeHours": [
             130
           ],
@@ -4424,7 +4544,7 @@
     },
     "post-manual-mt883bsi": {
       "queries": {
-        "구월동전자담배 아이다 기어미니": {
+        "integrated::구월동전자담배 아이다 기어미니": {
           "okAgeHours": [
             130
           ],
@@ -4440,7 +4560,7 @@
     },
     "post-manual-mt883vvt": {
       "queries": {
-        "만수동전자담배 스누스 니코틴": {
+        "integrated::만수동전자담배 스누스 니코틴": {
           "okAgeHours": [
             130
           ],
@@ -4456,7 +4576,7 @@
     },
     "post-manual-mt884bc4": {
       "queries": {
-        "인천 만수동에서 요즘": {
+        "integrated::인천 만수동에서 요즘": {
           "okAgeHours": [
             130
           ],
@@ -4472,7 +4592,7 @@
     },
     "post-manual-mt885elp": {
       "queries": {
-        "부평전자담배 버블몬 그래피티2": {
+        "integrated::부평전자담배 버블몬 그래피티2": {
           "okAgeHours": [
             130
           ],
@@ -4488,7 +4608,7 @@
     },
     "post-manual-mt885vh8": {
       "queries": {
-        "인천 전자담배 일회용": {
+        "integrated::인천 전자담배 일회용": {
           "okAgeHours": [
             130
           ],
@@ -4504,7 +4624,7 @@
     },
     "post-manual-mt886d1s": {
       "queries": {
-        "부평전자담배 몰바 역대급": {
+        "integrated::부평전자담배 몰바 역대급": {
           "okAgeHours": [
             130
           ],
@@ -4520,7 +4640,7 @@
     },
     "post-manual-mt886t9n": {
       "queries": {
-        "인천전자담배 만수르점 베놈": {
+        "integrated::인천전자담배 만수르점 베놈": {
           "okAgeHours": [
             130
           ],
@@ -4536,7 +4656,7 @@
     },
     "post-manual-mt8878m3": {
       "queries": {
-        "부평전자담배 젤로 크리스탈": {
+        "integrated::부평전자담배 젤로 크리스탈": {
           "okAgeHours": [
             130
           ],
@@ -4552,7 +4672,7 @@
     },
     "post-manual-mt887x62": {
       "queries": {
-        "부개역전자담배 워토포 넥스팟": {
+        "integrated::부개역전자담배 워토포 넥스팟": {
           "okAgeHours": [
             130
           ],
@@ -4568,7 +4688,7 @@
     },
     "post-manual-mt88c8ut": {
       "queries": {
-        "만수역전자담배 발라리안R 스펙과": {
+        "integrated::만수역전자담배 발라리안R 스펙과": {
           "okAgeHours": [
             130
           ],
@@ -4584,7 +4704,7 @@
     },
     "post-manual-mt88d6yz": {
       "queries": {
-        "도림동전자담배 린코 네소": {
+        "integrated::도림동전자담배 린코 네소": {
           "okAgeHours": [
             130
           ],
@@ -4600,7 +4720,7 @@
     },
     "post-manual-mt88e7d4": {
       "queries": {
-        "연수동전자담배 디오X 후기": {
+        "integrated::연수동전자담배 디오X 후기": {
           "okAgeHours": [
             130
           ],
@@ -4616,7 +4736,7 @@
     },
     "post-manual-mt88euq2": {
       "queries": {
-        "남동구전자담배 하복 폐호흡": {
+        "integrated::남동구전자담배 하복 폐호흡": {
           "okAgeHours": [
             130
           ],
@@ -4632,7 +4752,7 @@
     },
     "post-manual-mt88g50o": {
       "queries": {
-        "논현동전자담배 엘프바 아이스킹": {
+        "integrated::논현동전자담배 엘프바 아이스킹": {
           "okAgeHours": [
             130
           ],
@@ -4648,7 +4768,7 @@
     },
     "post-manual-mt88grgj": {
       "queries": {
-        "주안동전자담배 네스티바 3만": {
+        "integrated::주안동전자담배 네스티바 3만": {
           "okAgeHours": [
             130
           ],
@@ -4664,7 +4784,7 @@
     },
     "post-manual-mt88hupy": {
       "queries": {
-        "부평전자담배 아이폰 전담": {
+        "integrated::부평전자담배 아이폰 전담": {
           "okAgeHours": [
             130
           ],
@@ -4680,7 +4800,7 @@
     },
     "post-manual-mt88lojs": {
       "queries": {
-        "인천전자담배 버블몬 그래피티3": {
+        "integrated::인천전자담배 버블몬 그래피티3": {
           "okAgeHours": [
             130
           ],
@@ -4696,7 +4816,7 @@
     },
     "post-manual-mt88m78n": {
       "queries": {
-        "부평전자담배 베놈 아스트로": {
+        "integrated::부평전자담배 베놈 아스트로": {
           "okAgeHours": [
             130
           ],
@@ -4712,7 +4832,7 @@
     },
     "post-manual-mt88my0j": {
       "queries": {
-        "인천전자담배 dotPOD Max": {
+        "integrated::인천전자담배 dotPOD Max": {
           "okAgeHours": [
             130
           ],
@@ -4728,7 +4848,7 @@
     },
     "post-manual-mt895rtf": {
       "queries": {
-        "말론 vs 아스트로": {
+        "integrated::말론 vs 아스트로": {
           "okAgeHours": [
             130
           ],
@@ -4744,7 +4864,7 @@
     },
     "post-manual-mt896bb1": {
       "queries": {
-        "젤로맥스 vs 발라리안맥스": {
+        "integrated::젤로맥스 vs 발라리안맥스": {
           "okAgeHours": [
             130
           ],
@@ -4760,7 +4880,7 @@
     },
     "post-manual-mt896vhm": {
       "queries": {
-        "그래피티2 vs 그래피티3": {
+        "integrated::그래피티2 vs 그래피티3": {
           "okAgeHours": [
             130
           ],
@@ -4776,7 +4896,7 @@
     },
     "post-manual-mt897ee7": {
       "queries": {
-        "부평전자담배 아스몬 하이": {
+        "integrated::부평전자담배 아스몬 하이": {
           "okAgeHours": [
             130
           ],
@@ -4792,7 +4912,7 @@
     },
     "post-manual-mt8980ju": {
       "queries": {
-        "갈산동전자담배 릴렉스 후노즈": {
+        "integrated::갈산동전자담배 릴렉스 후노즈": {
           "okAgeHours": [
             130
           ],
@@ -4808,7 +4928,7 @@
     },
     "post-manual-mt898hkp": {
       "queries": {
-        "구월동전자담배 BPMODS RAZOR": {
+        "integrated::구월동전자담배 BPMODS RAZOR": {
           "okAgeHours": [
             130
           ],
@@ -4824,7 +4944,7 @@
     },
     "post-manual-mt898yex": {
       "queries": {
-        "인천전자담배 말론바 일회용": {
+        "integrated::인천전자담배 말론바 일회용": {
           "okAgeHours": [
             130
           ],
@@ -4840,7 +4960,7 @@
     },
     "post-manual-mt899eyt": {
       "queries": {
-        "휴대성 최강 전자담배": {
+        "integrated::휴대성 최강 전자담배": {
           "okAgeHours": [
             130
           ],
@@ -4856,7 +4976,7 @@
     },
     "post-manual-mt899nt0": {
       "queries": {
-        "무화량 많은 전자담배": {
+        "integrated::무화량 많은 전자담배": {
           "okAgeHours": [
             130
           ],
@@ -4872,7 +4992,7 @@
     },
     "post-manual-mt89a3tc": {
       "queries": {
-        "부평전자담배 버블몬 그래피티2": {
+        "integrated::부평전자담배 버블몬 그래피티2": {
           "okAgeHours": [
             130
           ],
@@ -4888,7 +5008,7 @@
     },
     "post-manual-mt89amh7": {
       "queries": {
-        "만수동전자담배 말론S 전담": {
+        "integrated::만수동전자담배 말론S 전담": {
           "okAgeHours": [
             130
           ],
@@ -4904,7 +5024,7 @@
     },
     "post-manual-mt89b3up": {
       "queries": {
-        "무니코틴 액상 유저에게도": {
+        "integrated::무니코틴 액상 유저에게도": {
           "okAgeHours": [
             130
           ],
@@ -4920,7 +5040,7 @@
     },
     "post-manual-mt89bp12": {
       "queries": {
-        "부평전자담배 크로스미니6 후기": {
+        "integrated::부평전자담배 크로스미니6 후기": {
           "okAgeHours": [
             130
           ],
@@ -4936,7 +5056,7 @@
     },
     "post-9177d698": {
       "queries": {
-        "장수동 전자담배 액상": {
+        "integrated::장수동 전자담배 액상": {
           "okAgeHours": [
             76
           ],
@@ -4952,7 +5072,7 @@
     },
     "post-manual-mtbggla6": {
       "queries": {
-        "고농도부터 다양한 맛까지": {
+        "integrated::고농도부터 다양한 맛까지": {
           "okAgeHours": [
             76
           ],
@@ -4970,7 +5090,7 @@
           "consecutiveFailures": 8,
           "lastAttemptAt": "2026-08-31T02:55:54.574Z"
         },
-        "인천 고농도 전자담배": {
+        "integrated::인천 고농도 전자담배": {
           "okAgeHours": [
             87
           ],
@@ -4980,7 +5100,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-31T02:59:42.273Z"
         },
-        "네스티원": {
+        "integrated::네스티원": {
           "okAgeHours": [
             87
           ],
@@ -4990,7 +5110,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-31T02:59:49.549Z"
         },
-        "인천네스티원": {
+        "integrated::인천네스티원": {
           "okAgeHours": [
             87
           ],
@@ -5000,7 +5120,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-31T02:59:56.681Z"
         },
-        "네스티 고농도": {
+        "integrated::네스티 고농도": {
           "okAgeHours": [
             87
           ],
@@ -5016,7 +5136,7 @@
     },
     "post-a28929d7": {
       "queries": {
-        "폐호흡 전자담배": {
+        "integrated::폐호흡 전자담배": {
           "okAgeHours": [
             30
           ],
@@ -5032,7 +5152,7 @@
     },
     "post-d34540b8": {
       "queries": {
-        "인천 전자담배": {
+        "integrated::인천 전자담배": {
           "okAgeHours": [
             29
           ],
@@ -5042,7 +5162,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T15:56:52.150Z"
         },
-        "부평구 전자담배": {
+        "integrated::부평구 전자담배": {
           "okAgeHours": [
             29
           ],
@@ -5052,7 +5172,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T16:15:40.179Z"
         },
-        "부평 전자담배": {
+        "integrated::부평 전자담배": {
           "okAgeHours": [
             29
           ],
@@ -5068,7 +5188,7 @@
     },
     "post-manual-mtfqo1w6": {
       "queries": {
-        "하이엔드 전자담배": {
+        "integrated::하이엔드 전자담배": {
           "okAgeHours": [
             5
           ],
@@ -5078,7 +5198,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T16:15:53.584Z"
         },
-        "무화량 많은 전자담배": {
+        "integrated::무화량 많은 전자담배": {
           "okAgeHours": [
             5
           ],
@@ -5088,7 +5208,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T16:16:00.072Z"
         },
-        "인천 전자담배": {
+        "integrated::인천 전자담배": {
           "okAgeHours": [
             5
           ],
@@ -5098,7 +5218,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T16:16:06.557Z"
         },
-        "dna60": {
+        "integrated::dna60": {
           "okAgeHours": [
             5
           ],
@@ -5108,7 +5228,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T16:16:13.018Z"
         },
-        "전자담배 모드기기": {
+        "integrated::전자담배 모드기기": {
           "okAgeHours": [
             5
           ],
@@ -5118,7 +5238,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T16:16:19.293Z"
         },
-        "무화량 전자담배": {
+        "integrated::무화량 전자담배": {
           "okAgeHours": [
             5
           ],
@@ -5134,7 +5254,7 @@
     },
     "post-manual-mtfrnwz9": {
       "queries": {
-        "입호흡 폐호흡 차이": {
+        "integrated::입호흡 폐호흡 차이": {
           "okAgeHours": [
             4
           ],
@@ -5144,7 +5264,7 @@
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T16:16:31.680Z"
         },
-        "구월동 전자담배": {
+        "integrated::구월동 전자담배": {
           "okAgeHours": [
             4
           ],
@@ -5160,8 +5280,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-08-31T03:18:11.822Z",
-    "lastOkAt": "2026-08-31T02:59:41.858Z",
+    "lastRunAt": "2026-08-31T03:36:18.977Z",
+    "lastOkAt": "2026-08-31T03:36:18.977Z",
     "consecutiveFailedRuns": 0
   }
 }

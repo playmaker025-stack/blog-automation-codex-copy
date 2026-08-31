@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-d3256aea",
+  "source": "serp",
+  "capturedAt": "2026-08-31T03:37:14.140Z",
+  "postAgeHours": 4396,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831033714140_serp_blogtab-베놈-아스트로-MK3_82f9ac",
+  "status": "ok",
+  "serp": {
+    "query": "베놈 아스트로 MK3",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

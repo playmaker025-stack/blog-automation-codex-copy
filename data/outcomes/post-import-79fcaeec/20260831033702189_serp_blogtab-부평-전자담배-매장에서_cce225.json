@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-79fcaeec",
+  "source": "serp",
+  "capturedAt": "2026-08-31T03:37:02.189Z",
+  "postAgeHours": 4420,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831033702189_serp_blogtab-부평-전자담배-매장에서_cce225",
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 매장에서",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224301960336",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224346348410",
+        "rank": 15
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224264935958",
+        "rank": 17
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224214224826",
+        "rank": 18
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224340378304",
+        "rank": 26
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

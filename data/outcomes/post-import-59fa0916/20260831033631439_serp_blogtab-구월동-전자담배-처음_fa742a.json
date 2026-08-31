@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-59fa0916",
+  "source": "serp",
+  "capturedAt": "2026-08-31T03:36:31.439Z",
+  "postAgeHours": 4444,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831033631439_serp_blogtab-구월동-전자담배-처음_fa742a",
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 처음",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224272638838",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224322426520",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224375480050",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224096074626",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224093237305",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300284999",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224089279318",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
