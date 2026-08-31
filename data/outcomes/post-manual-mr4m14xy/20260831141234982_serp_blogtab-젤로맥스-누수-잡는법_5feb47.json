@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr4m14xy",
+  "source": "serp",
+  "capturedAt": "2026-08-31T14:12:34.982Z",
+  "postAgeHours": 1423,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831141234982_serp_blogtab-젤로맥스-누수-잡는법_5feb47",
+  "target": {
+    "surface": "blog_tab",
+    "query": "젤로맥스 누수 잡는법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "젤로맥스 누수 잡는법",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224335447763",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224144141875",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224082732225",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

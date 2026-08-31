@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mqz4nijs",
+  "source": "serp",
+  "capturedAt": "2026-08-31T14:11:57.034Z",
+  "postAgeHours": 1515,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831141157034_serp_blogtab-전자담배-액상-추천받으러_07bc0b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 추천받으러"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 추천받으러",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224394356256",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224371470310",
+        "rank": 13
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224388730074",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

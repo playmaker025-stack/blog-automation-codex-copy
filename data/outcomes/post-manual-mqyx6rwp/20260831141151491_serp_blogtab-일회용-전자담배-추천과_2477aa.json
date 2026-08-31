@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mqyx6rwp",
+  "source": "serp",
+  "capturedAt": "2026-08-31T14:11:51.491Z",
+  "postAgeHours": 1518,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831141151491_serp_blogtab-일회용-전자담배-추천과_2477aa",
+  "target": {
+    "surface": "blog_tab",
+    "query": "일회용 전자담배 추천과"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "일회용 전자담배 추천과",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224330676864",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

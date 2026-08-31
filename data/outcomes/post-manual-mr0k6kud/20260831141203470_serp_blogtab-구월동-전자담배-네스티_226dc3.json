@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr0k6kud",
+  "source": "serp",
+  "capturedAt": "2026-08-31T14:12:03.470Z",
+  "postAgeHours": 1491,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831141203470_serp_blogtab-구월동-전자담배-네스티_226dc3",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동 전자담배 네스티"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 네스티",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224332153941",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
