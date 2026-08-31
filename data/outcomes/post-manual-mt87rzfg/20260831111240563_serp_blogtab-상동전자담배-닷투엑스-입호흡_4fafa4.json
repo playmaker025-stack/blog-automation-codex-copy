@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87rzfg",
+  "source": "serp",
+  "capturedAt": "2026-08-31T11:12:40.563Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831111240563_serp_blogtab-상동전자담배-닷투엑스-입호흡_4fafa4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "상동전자담배 닷투엑스 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "상동전자담배 닷투엑스 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 26,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224006424774",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

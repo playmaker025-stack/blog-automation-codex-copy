@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87pvde",
+  "source": "serp",
+  "capturedAt": "2026-08-31T11:12:28.279Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831111228279_serp_blogtab-부평전자담배-말론-후기_dcea99",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 말론 후기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 말론 후기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 30,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224001556521",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

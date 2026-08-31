@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87ped6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T11:12:21.970Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831111221970_serp_blogtab-와카일회용전담-이게-진짜_355620",
+  "target": {
+    "surface": "blog_tab",
+    "query": "와카일회용전담 이게 진짜"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "와카일회용전담 이게 진짜",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 6,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223963821654",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223992696261",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223964114009",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
