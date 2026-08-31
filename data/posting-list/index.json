@@ -11028,7 +11028,50 @@
       "publishedAt": "2026-08-31T07:06:06.927Z",
       "createdAt": "2026-08-31T07:06:06.927Z",
       "updatedAt": "2026-08-31T07:07:49.814Z"
+    },
+    {
+      "postId": "post-manual-mtgwd07l",
+      "topicId": "",
+      "userId": "c",
+      "title": "청라동전자담배 입호흡 액상 추천 잽쥬스 아이수 5종 가져왔습니다!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/223958703666",
+      "wordCount": 0,
+      "targetKeywords": [
+        "잽쥬스 아이수",
+        "청라동전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "223958703666",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/223958703666"
+        },
+        "targetKeywords": [
+          {
+            "query": "잽쥬스 아이수",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "청라동전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "청라동전자담배 입호흡 액상 추천 잽쥬스 아이수 5종 가져왔습니다!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-08-31T07:08:31.713Z",
+        "keywordsRevisedAt": "2026-08-31T07:08:31.713Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-08-31T07:08:31.713Z",
+      "createdAt": "2026-08-31T07:08:31.713Z",
+      "updatedAt": "2026-08-31T07:08:31.713Z"
     }
   ],
-  "lastUpdated": "2026-08-31T07:07:49.814Z"
+  "lastUpdated": "2026-08-31T07:08:31.713Z"
 }
