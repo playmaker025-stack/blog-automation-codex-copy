@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt885elp",
+  "source": "serp",
+  "capturedAt": "2026-08-31T11:52:03.254Z",
+  "postAgeHours": 150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831115203254_serp_blogtab-부평전자담배-버블몬-그래피티2_b34943",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 버블몬 그래피티2"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 버블몬 그래피티2",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 25,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224299098923",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224212618496",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224106384648",
+        "rank": 14
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224105277371",
+        "rank": 17
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224106455628",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
