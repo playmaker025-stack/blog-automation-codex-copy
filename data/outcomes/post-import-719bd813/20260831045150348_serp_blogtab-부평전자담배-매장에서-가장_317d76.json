@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-719bd813",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:51:50.348Z",
+  "postAgeHours": 4133,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831045150348_serp_blogtab-부평전자담배-매장에서-가장_317d76",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 매장에서 가장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 매장에서 가장",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224214224826",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224301960336",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224278096804",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224208075783",
+        "rank": 20
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224215126698",
+        "rank": 23
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224239923182",
+        "rank": 25
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224205241319",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

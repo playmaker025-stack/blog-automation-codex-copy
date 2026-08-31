@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-cbbf2198",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:52:46.762Z",
+  "postAgeHours": 4037,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831045246762_serp_blogtab-연초-흡연자가-전자담배_7b2928",
+  "target": {
+    "surface": "blog_tab",
+    "query": "연초 흡연자가 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연초 흡연자가 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

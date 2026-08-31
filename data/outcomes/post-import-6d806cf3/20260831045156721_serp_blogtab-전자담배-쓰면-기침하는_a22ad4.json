@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-6d806cf3",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:51:56.721Z",
+  "postAgeHours": 4133,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831045156721_serp_blogtab-전자담배-쓰면-기침하는_a22ad4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 쓰면 기침하는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 쓰면 기침하는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224214374189",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224215599091",
+        "rank": 10
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

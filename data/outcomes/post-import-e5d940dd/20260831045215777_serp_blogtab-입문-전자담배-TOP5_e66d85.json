@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-e5d940dd",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:52:15.777Z",
+  "postAgeHours": 4085,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831045215777_serp_blogtab-입문-전자담배-TOP5_e66d85",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입문 전자담배 TOP5"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입문 전자담배 TOP5",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224216254774",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

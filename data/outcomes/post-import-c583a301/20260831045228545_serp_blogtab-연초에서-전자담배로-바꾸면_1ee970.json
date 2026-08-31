@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-c583a301",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:52:28.545Z",
+  "postAgeHours": 4061,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831045228545_serp_blogtab-연초에서-전자담배로-바꾸면_1ee970",
+  "target": {
+    "surface": "blog_tab",
+    "query": "연초에서 전자담배로 바꾸면"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연초에서 전자담배로 바꾸면",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 12,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224288381256",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224217224626",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-986b74f3",
+  "source": "serp",
+  "capturedAt": "2026-08-31T04:51:37.359Z",
+  "postAgeHours": 4157,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831045137359_serp_blogtab-전자담배-초보자가-가장_80d5bb",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 초보자가 가장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 초보자가 가장",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224282899295",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224280995700",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224279835069",
+        "rank": 13
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224302744906",
+        "rank": 19
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224115797512",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
