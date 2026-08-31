@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms1fi6e8",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:32:07.692Z",
+  "postAgeHours": 866,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831083207692_serp_blogtab-전자담배-충전하면서-사용해도_5b1946",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 충전하면서 사용해도"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 충전하면서 사용해도",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 6,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224358377719",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 18
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224364905887",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224365731256",
+        "rank": 20
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224317693159",
+        "rank": 29
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

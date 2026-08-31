@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mryqqt28",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:31:49.471Z",
+  "postAgeHours": 911,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831083149471_serp_blogtab-더위를-날려줄-시원한_fbb1ae",
+  "target": {
+    "surface": "blog_tab",
+    "query": "더위를 날려줄 시원한"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "더위를 날려줄 시원한",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

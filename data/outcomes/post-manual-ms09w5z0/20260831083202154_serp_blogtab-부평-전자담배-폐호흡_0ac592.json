@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms09w5z0",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:32:02.154Z",
+  "postAgeHours": 885,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831083202154_serp_blogtab-부평-전자담배-폐호흡_0ac592",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평 전자담배 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 폐호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 10,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224289508330",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224357686233",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224278096804",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224215126698",
+        "rank": 15
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224360766083",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

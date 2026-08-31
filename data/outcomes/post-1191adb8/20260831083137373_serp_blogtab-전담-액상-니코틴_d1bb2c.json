@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-1191adb8",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:31:37.373Z",
+  "postAgeHours": 939,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831083137373_serp_blogtab-전담-액상-니코틴_d1bb2c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전담 액상 니코틴"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 액상 니코틴",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224355462874",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
