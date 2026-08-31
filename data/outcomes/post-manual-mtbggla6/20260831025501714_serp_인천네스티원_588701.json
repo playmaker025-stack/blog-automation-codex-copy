@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T02:55:01.714Z",
+  "postAgeHours": 87,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831025501714_serp_인천네스티원_588701",
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-31T02:35:40.762Z",
+  "updatedAt": "2026-08-31T02:55:09.315Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -4961,10 +4961,18 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-08-30T15:56:39.043Z"
+        },
+        "": {
+          "okAgeHours": [],
+          "lastCapturedAt": "2026-08-31T02:55:07.346Z",
+          "total": 4,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 4,
+          "lastAttemptAt": "2026-08-31T02:55:07.346Z"
         }
       },
-      "lastCapturedAt": "2026-08-30T15:56:39.043Z",
-      "total": 1
+      "lastCapturedAt": "2026-08-31T02:55:07.346Z",
+      "total": 5
     },
     "post-a28929d7": {
       "queries": {
@@ -5112,8 +5120,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-08-31T02:35:40.254Z",
+    "lastRunAt": "2026-08-31T02:54:49.896Z",
     "lastOkAt": "2026-08-30T16:15:39.898Z",
-    "consecutiveFailedRuns": 31
+    "consecutiveFailedRuns": 32
   }
 }
