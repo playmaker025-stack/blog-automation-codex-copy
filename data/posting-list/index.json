@@ -11114,7 +11114,56 @@
       "publishedAt": "2026-08-31T07:09:16.044Z",
       "createdAt": "2026-08-31T07:09:16.044Z",
       "updatedAt": "2026-08-31T07:09:16.044Z"
+    },
+    {
+      "postId": "post-manual-mtgwessj",
+      "topicId": "",
+      "userId": "c",
+      "title": "만수동전자담배 멘솔없는 노멘 입호흡액상 5종 본격리뷰!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/223969285810",
+      "wordCount": 0,
+      "targetKeywords": [
+        "만수동전자담배",
+        "노멘",
+        "입호흡액상"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "223969285810",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/223969285810"
+        },
+        "targetKeywords": [
+          {
+            "query": "만수동전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "노멘",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "입호흡액상",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "만수동전자담배 멘솔없는 노멘 입호흡액상 5종 본격리뷰!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-08-31T07:09:55.167Z",
+        "keywordsRevisedAt": "2026-08-31T07:09:55.167Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-08-31T07:09:55.167Z",
+      "createdAt": "2026-08-31T07:09:55.167Z",
+      "updatedAt": "2026-08-31T07:09:55.167Z"
     }
   ],
-  "lastUpdated": "2026-08-31T07:09:16.044Z"
+  "lastUpdated": "2026-08-31T07:09:55.167Z"
 }
