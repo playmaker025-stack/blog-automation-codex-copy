@@ -8592,7 +8592,7 @@
       "pendingApproval": null,
       "publishedAt": "2026-08-24T08:28:35.932Z",
       "createdAt": "2026-08-24T08:28:35.932Z",
-      "updatedAt": "2026-08-27T11:55:18.854Z",
+      "updatedAt": "2026-08-31T03:52:38.605Z",
       "outcomeTracking": {
         "canonicalPost": {
           "blogId": "iibodii00",
@@ -8601,14 +8601,26 @@
         },
         "targetKeywords": [
           {
-            "query": "유웰 발라리안 맥스",
-            "role": "primary"
+            "query": "인천 발라리안",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "발라리안 맥스 프로",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "인천 전자담배",
+            "role": "secondary",
+            "source": "user"
           }
         ],
         "publishedTitle": "유웰 발라리안 맥스 프로를 만나본 후기 인천 전자담배 만수르",
         "contentHash": "811c9dc5",
         "trackedFrom": "2026-08-27T11:55:18.854Z",
-        "backfilled": true
+        "backfilled": true,
+        "keywordsRevisedAt": "2026-08-31T03:52:38.605Z"
       }
     },
     {
@@ -10941,5 +10953,5 @@
       "updatedAt": "2026-08-31T03:43:02.124Z"
     }
   ],
-  "lastUpdated": "2026-08-31T03:43:02.124Z"
+  "lastUpdated": "2026-08-31T03:52:38.605Z"
 }
