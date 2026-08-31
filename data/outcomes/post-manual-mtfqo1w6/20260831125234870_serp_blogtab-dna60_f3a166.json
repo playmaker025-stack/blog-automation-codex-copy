@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T12:52:34.870Z",
+  "postAgeHours": 25,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831125234870_serp_blogtab-dna60_f3a166",
+  "target": {
+    "surface": "blog_tab",
+    "query": "dna60"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "dna60",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

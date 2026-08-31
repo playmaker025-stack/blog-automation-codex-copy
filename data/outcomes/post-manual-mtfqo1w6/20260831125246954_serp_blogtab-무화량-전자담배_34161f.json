@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T12:52:46.954Z",
+  "postAgeHours": 25,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831125246954_serp_blogtab-무화량-전자담배_34161f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "무화량 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량 전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224241639669",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224284614293",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224284262349",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224003135828",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

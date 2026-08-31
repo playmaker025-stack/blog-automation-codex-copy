@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-08-31T12:52:28.706Z",
+  "postAgeHours": 25,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831125228706_serp_blogtab-인천-전자담배_0720a3",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224365923075",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

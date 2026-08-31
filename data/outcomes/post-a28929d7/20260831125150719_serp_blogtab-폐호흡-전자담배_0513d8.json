@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-a28929d7",
+  "source": "serp",
+  "capturedAt": "2026-08-31T12:51:50.719Z",
+  "postAgeHours": 51,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831125150719_serp_blogtab-폐호흡-전자담배_0513d8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "폐호흡 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡 전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224394356256",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224360766083",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224215126698",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
