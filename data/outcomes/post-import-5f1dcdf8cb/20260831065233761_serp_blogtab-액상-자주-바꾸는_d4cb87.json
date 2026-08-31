@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-5f1dcdf8cb",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:52:33.761Z",
+  "postAgeHours": 3199,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831065233761_serp_blogtab-액상-자주-바꾸는_d4cb87",
+  "target": {
+    "surface": "blog_tab",
+    "query": "액상 자주 바꾸는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상 자주 바꾸는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 9,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224353554959",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224316610250",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224259030410",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224321050553",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224388730074",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

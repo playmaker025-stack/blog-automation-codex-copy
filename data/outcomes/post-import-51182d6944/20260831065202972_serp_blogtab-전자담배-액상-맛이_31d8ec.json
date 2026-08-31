@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-51182d6944",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:52:02.972Z",
+  "postAgeHours": 3271,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831065202972_serp_blogtab-전자담배-액상-맛이_31d8ec",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 맛이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 맛이",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224388730074",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224374506743",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

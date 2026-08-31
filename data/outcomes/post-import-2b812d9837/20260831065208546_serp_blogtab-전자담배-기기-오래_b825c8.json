@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2b812d9837",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:52:08.546Z",
+  "postAgeHours": 3247,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831065208546_serp_blogtab-전자담배-기기-오래_b825c8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 기기 오래"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 기기 오래",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224306052395",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224384586821",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

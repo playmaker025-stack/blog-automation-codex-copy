@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-aace5597",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:52:46.424Z",
+  "postAgeHours": 3141,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831065246424_serp_blogtab-인천-만수동-만수르_7230b0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 만수동 만수르"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 만수동 만수르",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "223969667880",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224115874233",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223828894442",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "221566022775",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224080375381",
+        "rank": 19
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221109338383",
+        "rank": 20
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221212839962",
+        "rank": 21
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224094565482",
+        "rank": 23
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "221607801352",
+        "rank": 26
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
