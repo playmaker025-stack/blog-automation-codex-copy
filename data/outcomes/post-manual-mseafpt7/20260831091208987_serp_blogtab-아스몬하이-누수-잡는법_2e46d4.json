@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mseafpt7",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:12:08.987Z",
+  "postAgeHours": 651,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831091208987_serp_blogtab-아스몬하이-누수-잡는법_2e46d4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "아스몬하이 누수 잡는법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "아스몬하이 누수 잡는법",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

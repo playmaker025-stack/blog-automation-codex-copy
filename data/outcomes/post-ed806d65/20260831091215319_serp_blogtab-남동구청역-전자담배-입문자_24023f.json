@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-ed806d65",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:12:15.319Z",
+  "postAgeHours": 646,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831091215319_serp_blogtab-남동구청역-전자담배-입문자_24023f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "남동구청역 전자담배 입문자"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구청역 전자담배 입문자",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 28,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224368143303",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224351924908",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224279835069",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

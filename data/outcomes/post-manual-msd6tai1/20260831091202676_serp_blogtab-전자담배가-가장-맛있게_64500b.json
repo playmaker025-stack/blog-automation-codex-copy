@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msd6tai1",
+  "source": "serp",
+  "capturedAt": "2026-08-31T09:12:02.676Z",
+  "postAgeHours": 669,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831091202676_serp_blogtab-전자담배가-가장-맛있게_64500b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배가 가장 맛있게"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배가 가장 맛있게",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224367082208",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224368208127",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224332187539",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
