@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8aebbf59",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:11:49.688Z",
+  "postAgeHours": 6,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831131149688_serp_integrated-전자담배-기기-선택_298d25",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 기기 선택"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 기기 선택",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 33,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgw9wn7",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:12:15.214Z",
+  "postAgeHours": 6,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831131215214_serp_integrated-낭만탕후루_124071",
+  "target": {
+    "surface": "integrated",
+    "query": "낭만탕후루"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "낭만탕후루",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

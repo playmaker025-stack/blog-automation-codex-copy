@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgwd07l",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:12:34.132Z",
+  "postAgeHours": 6,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831131234132_serp_blogtab-잽쥬스-아이수_7550a0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "잽쥬스 아이수"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "잽쥬스 아이수",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223958703666",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

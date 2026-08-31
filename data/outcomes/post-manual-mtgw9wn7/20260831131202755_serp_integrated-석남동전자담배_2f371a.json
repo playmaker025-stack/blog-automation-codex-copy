@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgw9wn7",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:12:02.755Z",
+  "postAgeHours": 6,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831131202755_serp_integrated-석남동전자담배_2f371a",
+  "target": {
+    "surface": "integrated",
+    "query": "석남동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "석남동전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 9,
+    "searchedResultLimit": 11,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224058141489",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223956512549",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

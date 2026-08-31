@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8aebbf59",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:11:56.407Z",
+  "postAgeHours": 6,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831131156407_serp_blogtab-전자담배-기기-선택_0ce58c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 기기 선택"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 기기 선택",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224396167944",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224384586821",
+        "rank": 20
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224304997348",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
