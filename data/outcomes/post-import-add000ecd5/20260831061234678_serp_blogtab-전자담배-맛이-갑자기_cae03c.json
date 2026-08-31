@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-add000ecd5",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:12:34.678Z",
+  "postAgeHours": 3486,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831061234678_serp_blogtab-전자담배-맛이-갑자기_cae03c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 맛이 갑자기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 맛이 갑자기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224384586821",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224323613196",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224375509699",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224374506743",
+        "rank": 21
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224359513114",
+        "rank": 24
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224378891413",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

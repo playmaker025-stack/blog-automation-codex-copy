@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-e0b8ad1d6a",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:12:15.613Z",
+  "postAgeHours": 3534,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831061215613_serp_blogtab-전자담배-액상-넣고_c6ffba",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 넣고"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 넣고",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224384942602",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224326174633",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224352464057",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

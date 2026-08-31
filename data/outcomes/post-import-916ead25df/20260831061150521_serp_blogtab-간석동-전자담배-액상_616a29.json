@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-916ead25df",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:11:50.521Z",
+  "postAgeHours": 3582,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831061150521_serp_blogtab-간석동-전자담배-액상_616a29",
+  "target": {
+    "surface": "blog_tab",
+    "query": "간석동 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9c88b3affb",
+  "source": "serp",
+  "capturedAt": "2026-08-31T06:12:28.259Z",
+  "postAgeHours": 3510,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831061228259_serp_blogtab-전자담배-액상은-기기마다_1fa4f2",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상은 기기마다"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 기기마다",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 17,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 16
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224244474388",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
