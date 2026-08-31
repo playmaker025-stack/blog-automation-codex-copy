@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-28fdb89d",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:51:56.069Z",
+  "postAgeHours": 795,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831085156069_serp_blogtab-인천전자담배-액상_2ea3c6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천전자담배 - 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 - 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224384586821",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224375480050",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

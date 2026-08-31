@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msa13cve",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:52:39.498Z",
+  "postAgeHours": 722,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831085239498_serp_blogtab-젤로-누수-잡는법_317459",
+  "target": {
+    "surface": "blog_tab",
+    "query": "젤로 누수 잡는법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "젤로 누수 잡는법",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 6,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224335447763",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224144141875",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224364905887",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224348459675",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224193250136",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

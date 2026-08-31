@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-fcd2d1c7",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:51:37.734Z",
+  "postAgeHours": 813,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831085137734_serp_blogtab-간석동-전자담배-기기_c305cf",
+  "target": {
+    "surface": "blog_tab",
+    "query": "간석동 전자담배 기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 기기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224277953493",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224360910281",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224218539513",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224256858676",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224396167944",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223976225706",
+        "rank": 14
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

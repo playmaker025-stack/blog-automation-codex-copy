@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms8vjho9",
+  "source": "serp",
+  "capturedAt": "2026-08-31T08:52:33.440Z",
+  "postAgeHours": 741,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831085233440_serp_blogtab-전자담배-출력-W_8933d6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 출력 W"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 출력 W",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224364209244",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
