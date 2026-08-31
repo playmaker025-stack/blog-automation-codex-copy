@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z60ar",
+  "source": "serp",
+  "capturedAt": "2026-08-31T10:51:44.445Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831105144445_serp_integrated-인천-닷모드_d2b27d",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 닷모드",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224209102690",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z60ar",
+  "source": "serp",
+  "capturedAt": "2026-08-31T10:51:37.629Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831105137629_serp_blogtab-닷모드-투엑스_e55b57",
+  "target": {
+    "surface": "blog_tab",
+    "query": "닷모드 투엑스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "닷모드 투엑스",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
