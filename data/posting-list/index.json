@@ -11071,7 +11071,50 @@
       "publishedAt": "2026-08-31T07:08:31.713Z",
       "createdAt": "2026-08-31T07:08:31.713Z",
       "updatedAt": "2026-08-31T07:08:31.713Z"
+    },
+    {
+      "postId": "post-manual-mtgwdyfi",
+      "topicId": "",
+      "userId": "c",
+      "title": "부개동전자담배 VCT 폐호흡 연초계열 액상 맛은?",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/223968170994",
+      "wordCount": 0,
+      "targetKeywords": [
+        "부개동전자담배",
+        "VCT"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "223968170994",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/223968170994"
+        },
+        "targetKeywords": [
+          {
+            "query": "부개동전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "VCT",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부개동전자담배 VCT 폐호흡 연초계열 액상 맛은?",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-08-31T07:09:16.044Z",
+        "keywordsRevisedAt": "2026-08-31T07:09:16.044Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-08-31T07:09:16.044Z",
+      "createdAt": "2026-08-31T07:09:16.044Z",
+      "updatedAt": "2026-08-31T07:09:16.044Z"
     }
   ],
-  "lastUpdated": "2026-08-31T07:08:31.713Z"
+  "lastUpdated": "2026-08-31T07:09:16.044Z"
 }
