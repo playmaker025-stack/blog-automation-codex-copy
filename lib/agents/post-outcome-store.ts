@@ -14,16 +14,14 @@ import {
   listFiles,
   readJsonFile,
   writeFiles,
-  writeJsonFile,
 } from "@/lib/github/repository";
 import { Paths } from "@/lib/github/paths";
 import {
   applyObservationsToIndex,
   emptyOutcomeIndex,
-  indexEntryFromObservations,
+  migrateOutcomeIndex,
   summarizeOutcomes,
   nextCollectorHealth,
-  OUTCOME_INDEX_VERSION,
   type OutcomeIndex,
   type OutcomeSummary,
   type PostOutcomeObservation,
@@ -87,38 +85,49 @@ export async function loadOutcomeSummaries(
 // ── 관측 색인 ─────────────────────────────────────────────
 
 /**
- * 색인을 읽는다. 없으면 관측치 폴더를 훑어 만들어 둔다.
+ * 색인을 읽는다.
  *
- * 색인은 캐시지 원본이 아니다. 지워도 여기서 다시 만들어진다 — 그래서 색인이
- * 틀어졌다는 의심이 들면 그냥 지우면 된다.
+ * 한 번 읽으면 잠깐 들고 있는다. 이 함수는 수집 회차마다, 상태 화면을 열 때마다
+ * 불린다. 매번 GitHub에 물으면 그것만으로 왕복이 쌓인다.
+ *
+ * **폴더를 훑지 않는다.** 예전에는 색인이 없거나 판이 낡으면 글 폴더 330개를
+ * 전부 열어 다시 만들었는데, 그게 요청마다 왕복 1,000번이 되어 API 한도를
+ * 태우고 앱 전체를 멈췄다(2026-08-31). 판 올리기는 메모리에서 하고, 색인이
+ * 아예 없으면 빈 색인으로 시작한다 — 한 바퀴 다시 재면 제자리로 돌아온다.
  */
-export async function ensureOutcomeIndex(): Promise<OutcomeIndex> {
-  const existing = await readJsonFile<OutcomeIndex>(Paths.outcomeIndex())
-    .then((result) => result.data)
-    .catch(() => null);
-  // 판이 낡았으면 원본에서 다시 만든다. 색인은 캐시라 언제든 버릴 수 있다.
-  if (existing?.posts && existing.schemaVersion === OUTCOME_INDEX_VERSION) return existing;
+const INDEX_CACHE_TTL_MS = 60_000;
+const CACHE_KEY = Symbol.for("blog-automation.outcome-index.cache");
 
-  const rebuilt = await rebuildOutcomeIndex();
-  await writeJsonFile(
-    Paths.outcomeIndex(),
-    rebuilt,
-    `chore(outcome): 관측 색인 재생성 (${Object.keys(rebuilt.posts).length}건)`
-  ).catch(() => "");
-  return rebuilt;
+interface IndexCache {
+  index: OutcomeIndex;
+  at: number;
 }
 
-/** 관측치 원본만 보고 색인을 다시 만든다. 글 수만큼 왕복하므로 자주 하지 않는다. */
-export async function rebuildOutcomeIndex(): Promise<OutcomeIndex> {
-  const entries = await listFiles("data/outcomes").catch(() => []);
-  const postIds = entries.filter((entry) => entry.type === "dir").map((entry) => entry.name);
+function cache(): { get(): OutcomeIndex | null; set(index: OutcomeIndex): void } {
+  const store = globalThis as typeof globalThis & { [CACHE_KEY]?: IndexCache };
+  return {
+    get() {
+      const hit = store[CACHE_KEY];
+      if (!hit || Date.now() - hit.at > INDEX_CACHE_TTL_MS) return null;
+      return hit.index;
+    },
+    set(index: OutcomeIndex) {
+      store[CACHE_KEY] = { index, at: Date.now() };
+    },
+  };
+}
 
-  const index = emptyOutcomeIndex();
-  for (const postId of postIds) {
-    const entry = indexEntryFromObservations(await loadObservations(postId).catch(() => []));
-    if (entry) index.posts[postId] = entry;
-  }
-  index.updatedAt = new Date().toISOString();
+export async function ensureOutcomeIndex(): Promise<OutcomeIndex> {
+  const memo = cache();
+  const hit = memo.get();
+  if (hit) return hit;
+
+  const raw = await readJsonFile<OutcomeIndex>(Paths.outcomeIndex())
+    .then((result) => result.data)
+    .catch(() => null);
+
+  const index = raw?.posts ? migrateOutcomeIndex(raw) : emptyOutcomeIndex();
+  memo.set(index);
   return index;
 }
 
@@ -150,6 +159,8 @@ export async function recordObservations(
 
   let lastError: unknown = null;
   for (let attempt = 0; attempt < INDEX_CONFLICT_RETRIES; attempt += 1) {
+    // 재시도라면 그 사이 남이 쓴 값을 봐야 하므로 들고 있던 것을 버린다.
+    if (attempt > 0) cache().set(emptyOutcomeIndex());
     const index = await ensureOutcomeIndex();
     const merged = withHealth(applyObservationsToIndex(index, [...unique.values()]), run);
 
@@ -166,6 +177,8 @@ export async function recordObservations(
           ? `chore(outcome): 관측 ${unique.size}건 기록`
           : "chore(outcome): 잴 것이 없는 회차 기록"
       );
+      // 방금 쓴 값이 곧 최신이다. 다음 회차가 다시 읽지 않아도 된다.
+      cache().set(merged);
       return { written: unique.size, commitSha: result.commitSha, index: merged };
     } catch (error) {
       if (!isRefConflict(error)) throw error;

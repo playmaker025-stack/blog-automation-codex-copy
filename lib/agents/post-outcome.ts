@@ -390,6 +390,35 @@ export interface OutcomeIndex {
 /** 색인 판이 바뀌면 올린다. 낮으면 관측치 원본에서 다시 만든다. */
 export const OUTCOME_INDEX_VERSION = 3;
 
+/**
+ * 낡은 판의 색인을 그 자리에서 올린다.
+ *
+ * 판이 바뀔 때마다 관측치 원본을 전부 뒤져 다시 만들게 했더니, 글 330개에
+ * 왕복 1,000번이 요청마다 일어나 GitHub API 한도를 태웠다. 앱 전체가 멈췄다.
+ * 판 올리기는 키 모양만 바뀌는 일이라 읽지 않고도 할 수 있다.
+ *
+ * 모양을 모르는 낡은 판은 빈 색인으로 시작한다. 그러면 한 바퀴 다시 재게 되지만,
+ * 그건 회차당 상한이 걸린 일이라 앱을 멈추지 않는다.
+ */
+export function migrateOutcomeIndex(index: OutcomeIndex): OutcomeIndex {
+  if (index.schemaVersion === OUTCOME_INDEX_VERSION) return index;
+
+  // 2판: 검색어만 키였다. 화면 축이 없었으니 전부 통합검색이다.
+  if (index.schemaVersion === 2 && index.posts) {
+    const posts: Record<string, OutcomeIndexEntry> = {};
+    for (const [postId, entry] of Object.entries(index.posts)) {
+      const queries: Record<string, OutcomeQueryState> = {};
+      for (const [query, state] of Object.entries(entry.queries ?? {})) {
+        queries[query === NO_QUERY_KEY ? NO_QUERY_KEY : queryStateKey("integrated", query)] = state;
+      }
+      posts[postId] = { ...entry, queries };
+    }
+    return { ...index, schemaVersion: OUTCOME_INDEX_VERSION, posts };
+  }
+
+  return emptyOutcomeIndex();
+}
+
 export function emptyOutcomeIndex(): OutcomeIndex {
   return {
     schemaVersion: OUTCOME_INDEX_VERSION,

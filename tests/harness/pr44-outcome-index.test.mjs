@@ -12,6 +12,7 @@ import {
   isUsableQuery,
   MAX_TARGET_KEYWORDS,
   nextCollectorHealth,
+  migrateOutcomeIndex,
   queryStateKey,
   normalizeQuery,
   normalizeTargetKeywords,
@@ -383,5 +384,51 @@ describe("PR45 통합검색과 블로그 탭은 따로 잰다", () => {
 
     const index = applyObservationsToIndex(emptyOutcomeIndex(), [old]);
     assert.ok(index.posts["post-1"].queries[queryStateKey("integrated", "인천 전자담배")]);
+  });
+});
+
+describe("PR45 색인 판 올리기는 그 자리에서 한다", () => {
+  // 판이 바뀔 때마다 글 폴더 330개를 다시 읽게 했더니, 요청마다 왕복 1,000번이
+  // 되어 GitHub API 한도를 태우고 앱 전체가 멈췄다(2026-08-31). 키 모양만
+  // 바뀌는 일이라 읽지 않고도 된다.
+  test("2판의 검색어 키를 통합검색 키로 옮긴다", () => {
+    const old = {
+      schemaVersion: 2,
+      updatedAt: "2026-08-30T00:00:00.000Z",
+      posts: {
+        "post-1": {
+          queries: {
+            "인천 전자담배": {
+              okAgeHours: [900],
+              lastCapturedAt: "2026-08-30T00:00:00.000Z",
+              total: 1,
+              lastStatus: "ok",
+              consecutiveFailures: 0,
+              lastAttemptAt: "2026-08-30T00:00:00.000Z",
+            },
+          },
+          lastCapturedAt: "2026-08-30T00:00:00.000Z",
+          total: 1,
+        },
+      },
+    };
+
+    const migrated = migrateOutcomeIndex(old);
+    const queries = migrated.posts["post-1"].queries;
+
+    assert.deepEqual(queries[queryStateKey("integrated", "인천 전자담배")].okAgeHours, [900]);
+    assert.equal(queries["인천 전자담배"], undefined);
+    // 판을 올렸으니 다음에 또 옮기지 않는다.
+    assert.equal(migrateOutcomeIndex(migrated), migrateOutcomeIndex(migrated));
+  });
+
+  test("이미 최신 판이면 그대로 둔다", () => {
+    const current = emptyOutcomeIndex();
+    assert.equal(migrateOutcomeIndex(current), current);
+  });
+
+  test("모양을 모르는 낡은 판은 빈 색인으로 시작한다", () => {
+    const ancient = { schemaVersion: 1, updatedAt: "", posts: { "post-1": { okAgeHours: [1] } } };
+    assert.deepEqual(migrateOutcomeIndex(ancient).posts, {});
   });
 });
