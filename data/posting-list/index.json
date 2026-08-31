@@ -10958,17 +10958,34 @@
       "postId": "post-8aebbf59",
       "topicId": "topic-512a87f4",
       "userId": "c",
-      "title": "전자담배 기기 선택 전 꼭 확인할 스펙과 특징 총정리 (부평전자담배 만수르점)",
-      "status": "ready",
-      "naverPostUrl": null,
+      "title": "전자담배 기기 선택 시 필수 비교 스펙과 특징 총정리!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224396167944",
       "evalScore": 47,
       "wordCount": 2743,
       "compositionSessionId": "pipe-7529d38f",
       "pendingApproval": null,
       "createdAt": "2026-08-31T03:40:48.473Z",
-      "publishedAt": null,
-      "updatedAt": "2026-08-31T03:43:02.124Z"
+      "publishedAt": "2026-08-31T07:03:10.104Z",
+      "updatedAt": "2026-08-31T07:03:10.621Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224396167944",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224396167944"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 기기 선택",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전자담배 기기 선택 시 필수 비교 스펙과 특징 총정리!",
+        "contentHash": "46ecd3f3",
+        "trackedFrom": "2026-08-31T07:03:10.867Z"
+      }
     }
   ],
-  "lastUpdated": "2026-08-31T03:53:26.212Z"
+  "lastUpdated": "2026-08-31T07:03:10.621Z"
 }
