@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-bc7bfb22",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:51:57.344Z",
+  "postAgeHours": 340,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831135157344_serp_integrated-부천-상동-전자담배_5f1cac",
+  "target": {
+    "surface": "integrated",
+    "query": "부천 상동 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부천 상동 전자담배",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 32,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224313055083",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

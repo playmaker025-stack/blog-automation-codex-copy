@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6xfi5e",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:52:31.752Z",
+  "postAgeHours": 174,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831135231752_serp_integrated-전자담배-기기-하이엔드_0ffbc6",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 기기 하이엔드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 기기 하이엔드",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "222986005630",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223233579762",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

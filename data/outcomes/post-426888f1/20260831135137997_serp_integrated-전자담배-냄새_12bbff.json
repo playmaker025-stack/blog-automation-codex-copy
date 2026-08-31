@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-426888f1",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:51:37.997Z",
+  "postAgeHours": 678,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831135137997_serp_integrated-전자담배-냄새_12bbff",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 냄새"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 냄새",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
