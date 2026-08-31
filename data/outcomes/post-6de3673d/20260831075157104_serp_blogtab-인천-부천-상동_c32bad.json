@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-6de3673d",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:51:57.104Z",
+  "postAgeHours": 1178,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831075157104_serp_blogtab-인천-부천-상동_c32bad",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 부천 상동"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 부천 상동",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 21,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224345153639",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

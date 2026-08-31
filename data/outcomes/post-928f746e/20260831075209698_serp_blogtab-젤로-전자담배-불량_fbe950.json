@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-928f746e",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:52:09.698Z",
+  "postAgeHours": 1153,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831075209698_serp_blogtab-젤로-전자담배-불량_fbe950",
+  "target": {
+    "surface": "blog_tab",
+    "query": "젤로 전자담배 불량"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "젤로 전자담배 불량",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224346348410",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224194575061",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224364905887",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224348459675",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224327309099",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224193250136",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224089279318",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224120478269",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

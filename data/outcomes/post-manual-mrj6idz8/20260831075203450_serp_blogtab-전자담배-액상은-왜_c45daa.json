@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrj6idz8",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:52:03.450Z",
+  "postAgeHours": 1172,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831075203450_serp_blogtab-전자담배-액상은-왜_c45daa",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상은 왜"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 왜",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224345520991",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224346694331",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-3442dcc2",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:52:28.596Z",
+  "postAgeHours": 1126,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831075228596_serp_blogtab-무니코틴-고르기-전에_76876f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "무니코틴 고르기 전에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무니코틴 고르기 전에",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

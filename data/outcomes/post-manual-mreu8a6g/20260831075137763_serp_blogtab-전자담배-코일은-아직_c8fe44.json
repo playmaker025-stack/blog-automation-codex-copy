@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mreu8a6g",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:51:37.763Z",
+  "postAgeHours": 1245,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831075137763_serp_blogtab-전자담배-코일은-아직_c8fe44",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 코일은 아직"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일은 아직",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224359513114",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224342830865",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224344003193",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224359756182",
+        "rank": 14
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224317693159",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

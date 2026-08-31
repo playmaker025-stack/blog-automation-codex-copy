@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrorbz92",
+  "source": "serp",
+  "capturedAt": "2026-08-31T07:52:47.510Z",
+  "postAgeHours": 1078,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831075247510_serp_blogtab-발라리안-전자담배-안빨림_58ea44",
+  "target": {
+    "surface": "blog_tab",
+    "query": "발라리안 전자담배 안빨림"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "발라리안 전자담배 안빨림",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224349606870",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224313055083",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
