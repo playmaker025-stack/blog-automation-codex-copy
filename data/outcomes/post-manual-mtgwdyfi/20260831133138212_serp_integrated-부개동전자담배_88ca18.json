@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgwdyfi",
+  "source": "serp",
+  "capturedAt": "2026-08-31T13:31:38.212Z",
+  "postAgeHours": 6,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831133138212_serp_integrated-부개동전자담배_88ca18",
+  "target": {
+    "surface": "integrated",
+    "query": "부개동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부개동전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224138093669",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224047671420",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223886496680",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223970942236",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224125210969",
+        "rank": 11
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223970665546",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224136930090",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
