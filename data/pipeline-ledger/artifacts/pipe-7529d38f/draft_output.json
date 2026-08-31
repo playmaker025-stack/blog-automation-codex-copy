@@ -1,29 +1,35 @@
 {
   "pipelineId": "pipe-7529d38f",
   "type": "draft_output",
-  "savedAt": "2026-08-31T03:41:40.635Z",
+  "savedAt": "2026-08-31T03:42:39.817Z",
   "data": {
     "postId": "post-8aebbf59",
     "title": "전자담배 기기 선택 전 꼭 확인할 스펙과 특징 총정리 (부평전자담배 만수르점)",
-    "wordCount": 2873,
-    "generatedAt": "2026-08-31T03:41:39.050Z",
+    "wordCount": 2743,
+    "generatedAt": "2026-08-31T03:42:38.220Z",
     "contentPath": "data/posting-list/posts/post-8aebbf59/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
       "ok": false,
       "blockingReasons": [
-        "sub keyword \"전자담배 배터리 용량\" 5회 사용, 상한 3회 초과"
+        "질문문/따옴표 안 exact keyword 사용: 입호흡 전자담배 추천 / \"입호흡 전자담배 추천 해주세요\"",
+        "sub keyword \"부평전자담배\" 7회 사용, 상한 3회 초과"
       ],
       "warnings": [
+        "mustResolve 단서 부족: 단순 승패가 아니라 사용자별 판단 기준",
+        "필수 섹션 반영 부족: 단순 승패가 아니라 사용자별 판단 기준",
         "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
         "medium overlap: 결론 패턴 반복 위험 criteria_summary"
       ],
       "matchedForbiddenPhrases": [],
       "keywordStuffingFindings": [
-        "sub keyword \"전자담배 배터리 용량\" 5회 사용, 상한 3회 초과"
+        "질문문/따옴표 안 exact keyword 사용: 입호흡 전자담배 추천 / \"입호흡 전자담배 추천 해주세요\"",
+        "sub keyword \"부평전자담배\" 7회 사용, 상한 3회 초과"
       ],
       "deferFindings": [],
-      "contractCoverageFindings": [],
+      "contractCoverageFindings": [
+        "mustResolve 단서 부족: 단순 승패가 아니라 사용자별 판단 기준"
+      ],
       "overlapFindings": [
         "medium overlap: 도입 패턴 반복 위험 purchase_before_visit",
         "medium overlap: 결론 패턴 반복 위험 criteria_summary"
@@ -31,8 +37,11 @@
       "specFindings": []
     },
     "finalDraftRevisionInstructions": [
-      "키워드 과다/질문문 삽입 수정: sub keyword \"전자담배 배터리 용량\" 5회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
-      "발행 차단 사유 해결: sub keyword \"전자담배 배터리 용량\" 5회 사용, 상한 3회 초과"
+      "키워드 과다/질문문 삽입 수정: 질문문/따옴표 안 exact keyword 사용: 입호흡 전자담배 추천 / \"입호흡 전자담배 추천 해주세요\". 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "키워드 과다/질문문 삽입 수정: sub keyword \"부평전자담배\" 7회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "mustResolve 단서 부족: 단순 승패가 아니라 사용자별 판단 기준 — 별도 요약 섹션을 덧붙이지 말고, 관련 본문 문단 안에서 자연스럽게 다루세요.",
+      "발행 차단 사유 해결: 질문문/따옴표 안 exact keyword 사용: 입호흡 전자담배 추천 / \"입호흡 전자담배 추천 해주세요\"",
+      "발행 차단 사유 해결: sub keyword \"부평전자담배\" 7회 사용, 상한 3회 초과"
     ]
   }
 }
