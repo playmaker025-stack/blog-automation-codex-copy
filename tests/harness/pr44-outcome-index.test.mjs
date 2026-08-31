@@ -11,6 +11,7 @@ import {
   indexEntryFromObservations,
   isUsableQuery,
   MAX_TARGET_KEYWORDS,
+  nextCollectorHealth,
   normalizeQuery,
   normalizeTargetKeywords,
   okSerpAges,
@@ -317,5 +318,40 @@ describe("PR44 색인만으로 판정해도 결과가 같다", () => {
       }),
       672
     );
+  });
+});
+
+describe("PR44 수집기 건강 상태", () => {
+  const RAN = "2026-08-31T02:00:00.000Z";
+
+  // 처음에 이걸 틀렸다. 밀린 게 다 끝나고 잴 것이 없어지자 정상인 상태에서
+  // "연속 실패 31회"가 찍혔다. 늘 켜져 있는 경보는 경보가 아니다.
+  test("잴 것이 없던 회차는 실패로 세지 않는다", () => {
+    const health = nextCollectorHealth(
+      { lastRunAt: "2026-08-30T00:00:00.000Z", lastOkAt: "2026-08-30T00:00:00.000Z", consecutiveFailedRuns: 0 },
+      { ranAt: RAN, attempted: 0, anyOk: false }
+    );
+
+    assert.equal(health.consecutiveFailedRuns, 0);
+    assert.equal(health.lastRunAt, RAN);
+    // 잰 게 없으니 마지막 성공 시각은 그대로다.
+    assert.equal(health.lastOkAt, "2026-08-30T00:00:00.000Z");
+  });
+
+  test("재려고 했는데 다 실패하면 센다", () => {
+    const health = nextCollectorHealth(
+      { lastRunAt: "2026-08-30T00:00:00.000Z", consecutiveFailedRuns: 2 },
+      { ranAt: RAN, attempted: 12, anyOk: false }
+    );
+    assert.equal(health.consecutiveFailedRuns, 3);
+  });
+
+  test("한 건이라도 성공하면 0으로 돌아간다", () => {
+    const health = nextCollectorHealth(
+      { lastRunAt: "2026-08-30T00:00:00.000Z", consecutiveFailedRuns: 9 },
+      { ranAt: RAN, attempted: 12, anyOk: true }
+    );
+    assert.equal(health.consecutiveFailedRuns, 0);
+    assert.equal(health.lastOkAt, RAN);
   });
 });

@@ -22,6 +22,7 @@ import {
   emptyOutcomeIndex,
   indexEntryFromObservations,
   summarizeOutcomes,
+  nextCollectorHealth,
   OUTCOME_INDEX_VERSION,
   type OutcomeIndex,
   type OutcomeSummary,
@@ -135,7 +136,7 @@ const INDEX_CONFLICT_RETRIES = 3;
  */
 export async function recordObservations(
   observations: PostOutcomeObservation[],
-  run?: { ranAt: string; anyOk: boolean }
+  run?: { ranAt: string; attempted: number; anyOk: boolean }
 ): Promise<{ written: number; commitSha: string; index: OutcomeIndex }> {
   const unique = new Map<string, PostOutcomeObservation>();
   for (const observation of observations) {
@@ -184,15 +185,10 @@ export async function recordObservations(
  * 메모리에만 두면 앱이 한 번 재시작될 때 사라진다. "마지막으로 성공한 게
  * 언제인가"는 사람이 안 보는 기능에서 유일하게 믿을 수 있는 신호다.
  */
-function withHealth(index: OutcomeIndex, run?: { ranAt: string; anyOk: boolean }): OutcomeIndex {
+function withHealth(
+  index: OutcomeIndex,
+  run?: { ranAt: string; attempted: number; anyOk: boolean }
+): OutcomeIndex {
   if (!run) return index;
-  const previous = index.health;
-  return {
-    ...index,
-    health: {
-      lastRunAt: run.ranAt,
-      lastOkAt: run.anyOk ? run.ranAt : previous?.lastOkAt,
-      consecutiveFailedRuns: run.anyOk ? 0 : (previous?.consecutiveFailedRuns ?? 0) + 1,
-    },
-  };
+  return { ...index, health: nextCollectorHealth(index.health, run) };
 }

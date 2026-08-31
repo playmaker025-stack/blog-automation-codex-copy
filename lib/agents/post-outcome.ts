@@ -320,10 +320,41 @@ export interface OutcomeIndexEntry {
 /** 수집기가 살아 있는지. 사람이 안 보는 기능이라 상태를 남겨야 한다. */
 export interface CollectorHealth {
   lastRunAt: string;
-  /** 마지막으로 한 건이라도 성공한 시각. 이게 안 움직이면 조용히 죽은 것이다. */
+  /** 마지막으로 한 건이라도 성공한 시각. */
   lastOkAt?: string;
-  /** 한 건도 성공하지 못한 회차가 연달아 몇 번인지. */
+  /**
+   * 잴 것이 있었는데 한 건도 성공하지 못한 회차가 연달아 몇 번인지.
+   *
+   * 잴 것이 없어서 그냥 지나간 회차는 세지 않는다. 처음에는 그것까지 셌는데,
+   * 밀린 게 다 끝나고 나니 정상인 상태에서 "연속 실패 31회"가 찍혔다. 늘 켜져
+   * 있는 경보는 경보가 아니다.
+   */
   consecutiveFailedRuns: number;
+}
+
+/** 한 회차가 끝난 뒤 건강 상태를 갱신한다. */
+export function nextCollectorHealth(
+  previous: CollectorHealth | undefined,
+  run: { ranAt: string; attempted: number; anyOk: boolean }
+): CollectorHealth {
+  // 잴 것이 없던 회차. 수집기는 살아 있으니 시각만 갱신한다.
+  if (run.attempted === 0) {
+    return {
+      lastRunAt: run.ranAt,
+      ...(previous?.lastOkAt ? { lastOkAt: previous.lastOkAt } : {}),
+      consecutiveFailedRuns: previous?.consecutiveFailedRuns ?? 0,
+    };
+  }
+
+  return {
+    lastRunAt: run.ranAt,
+    ...(run.anyOk
+      ? { lastOkAt: run.ranAt }
+      : previous?.lastOkAt
+        ? { lastOkAt: previous.lastOkAt }
+        : {}),
+    consecutiveFailedRuns: run.anyOk ? 0 : (previous?.consecutiveFailedRuns ?? 0) + 1,
+  };
 }
 
 export interface OutcomeIndex {

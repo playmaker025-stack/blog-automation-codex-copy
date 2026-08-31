@@ -207,6 +207,8 @@ export async function collectDueOutcomes(params: {
   // 한 바퀴 = 커밋 하나. 쓰다가 실패하면 관측치는 버린다 — 다음 회차에 다시 재면 된다.
   const { commitSha } = await recordObservations(observations, {
     ranAt: now,
+    // 몇 건을 재려고 했는지. 0이면 "잴 게 없던 회차"라 실패로 세지 않는다.
+    attempted: collected.length,
     anyOk: collected.some((item) => item.status === "ok"),
   });
 
