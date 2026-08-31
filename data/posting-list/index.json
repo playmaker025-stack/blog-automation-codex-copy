@@ -10686,7 +10686,7 @@
       "pendingApproval": null,
       "publishedAt": "2026-08-27T11:44:34.910Z",
       "createdAt": "2026-08-27T11:44:34.910Z",
-      "updatedAt": "2026-08-27T11:55:18.854Z",
+      "updatedAt": "2026-08-31T02:40:35.041Z",
       "outcomeTracking": {
         "canonicalPost": {
           "blogId": "iibodii00",
@@ -10695,14 +10695,31 @@
         },
         "targetKeywords": [
           {
-            "query": "고농도부터 다양한 맛까지",
-            "role": "primary"
+            "query": "인천 고농도 전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "네스티원",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "인천네스티원",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "네스티 고농도",
+            "role": "secondary",
+            "source": "user"
           }
         ],
         "publishedTitle": "고농도부터 다양한 맛까지 한개로 고민 해결 가능한 네스티원 전자담배 만수동만수르",
         "contentHash": "811c9dc5",
         "trackedFrom": "2026-08-27T11:55:18.854Z",
-        "backfilled": true
+        "backfilled": true,
+        "keywordsRevisedAt": "2026-08-31T02:40:35.041Z"
       }
     },
     {
@@ -10892,5 +10909,5 @@
       "updatedAt": "2026-08-30T12:09:17.281Z"
     }
   ],
-  "lastUpdated": "2026-08-30T12:09:17.281Z"
+  "lastUpdated": "2026-08-31T02:40:35.041Z"
 }
