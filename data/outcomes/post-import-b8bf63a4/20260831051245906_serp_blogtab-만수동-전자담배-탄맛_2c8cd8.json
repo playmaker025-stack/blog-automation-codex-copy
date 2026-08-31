@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b8bf63a4",
+  "source": "serp",
+  "capturedAt": "2026-08-31T05:12:45.906Z",
+  "postAgeHours": 3917,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831051245906_serp_blogtab-만수동-전자담배-탄맛_2c8cd8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배 탄맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 탄맛",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224264998918",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224113483238",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224089279318",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224205241319",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224313146479",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224378919388",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224238522947",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224117400783",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224302744906",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224136930090",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220851891967",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

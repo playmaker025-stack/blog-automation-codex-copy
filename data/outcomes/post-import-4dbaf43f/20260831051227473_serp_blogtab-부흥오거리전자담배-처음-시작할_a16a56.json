@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-4dbaf43f",
+  "source": "serp",
+  "capturedAt": "2026-08-31T05:12:27.473Z",
+  "postAgeHours": 3965,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831051227473_serp_blogtab-부흥오거리전자담배-처음-시작할_a16a56",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부흥오거리전자담배 처음 시작할"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부흥오거리전자담배 처음 시작할",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224222584464",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224308686675",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224213039091",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224215599091",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-d32c67ed",
+  "source": "serp",
+  "capturedAt": "2026-08-31T05:12:33.597Z",
+  "postAgeHours": 3941,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831051233597_serp_blogtab-석남역전자담배-코코초코-입호흡_bd54d0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "석남역전자담배 코코초코 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "석남역전자담배 코코초코 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 5,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224223592962",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

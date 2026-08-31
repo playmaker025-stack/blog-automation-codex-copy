@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-6be0b1a5",
+  "source": "serp",
+  "capturedAt": "2026-08-31T05:11:37.696Z",
+  "postAgeHours": 4037,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831051137696_serp_blogtab-간석동전자담배-매장에서-상담할_b38132",
+  "target": {
+    "surface": "blog_tab",
+    "query": "간석동전자담배 매장에서 상담할"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동전자담배 매장에서 상담할",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224218539513",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224277953493",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224256858676",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224330676864",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224283320666",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224113483238",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

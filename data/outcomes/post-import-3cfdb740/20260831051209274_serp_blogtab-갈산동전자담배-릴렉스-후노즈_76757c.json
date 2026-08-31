@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3cfdb740",
+  "source": "serp",
+  "capturedAt": "2026-08-31T05:12:09.274Z",
+  "postAgeHours": 3989,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831051209274_serp_blogtab-갈산동전자담배-릴렉스-후노즈_76757c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "갈산동전자담배 릴렉스 후노즈"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "갈산동전자담배 릴렉스 후노즈",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 1,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224221110021",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

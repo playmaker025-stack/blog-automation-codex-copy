@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-625b437e",
+  "source": "serp",
+  "capturedAt": "2026-08-31T05:12:15.204Z",
+  "postAgeHours": 3989,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260831051215204_serp_blogtab-릴렉스-후노즈-전자담배_4611c5",
+  "target": {
+    "surface": "blog_tab",
+    "query": "릴렉스 후노즈 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "릴렉스 후노즈 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224221110021",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224221496892",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224219913172",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
