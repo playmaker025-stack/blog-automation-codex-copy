@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87yf6o",
+  "source": "serp",
+  "capturedAt": "2026-09-01T07:11:51.476Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901071151476_serp_blogtab-작전역전자담배-베놈-팬텀_3a1df0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "작전역전자담배 베놈 팬텀"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "작전역전자담배 베놈 팬텀",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 8,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224056295920",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
