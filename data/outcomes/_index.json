@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-01T08:11:59.075Z",
+  "updatedAt": "2026-09-01T10:11:47.763Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5938,27 +5938,29 @@
       "queries": {
         "integrated::갈산동 전자담배 입문자": {
           "okAgeHours": [
-            291
+            291,
+            336
           ],
-          "lastCapturedAt": "2026-08-30T13:36:44.270Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T10:11:38.356Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:36:44.270Z"
+          "lastAttemptAt": "2026-09-01T10:11:38.356Z"
         },
         "blog_tab::갈산동 전자담배 입문자": {
           "okAgeHours": [
-            311
+            311,
+            336
           ],
-          "lastCapturedAt": "2026-08-31T09:52:02.663Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T10:11:45.058Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:52:02.663Z"
+          "lastAttemptAt": "2026-09-01T10:11:45.058Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:52:02.663Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T10:11:45.058Z",
+      "total": 4
     },
     "post-bc7bfb22": {
       "queries": {
@@ -9035,8 +9037,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-01T08:11:37.924Z",
-    "lastOkAt": "2026-09-01T08:11:37.924Z",
+    "lastRunAt": "2026-09-01T10:11:37.988Z",
+    "lastOkAt": "2026-09-01T10:11:37.988Z",
     "consecutiveFailedRuns": 0
   }
 }
