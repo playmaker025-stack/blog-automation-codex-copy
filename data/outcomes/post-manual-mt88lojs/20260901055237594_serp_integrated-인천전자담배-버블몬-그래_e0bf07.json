@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88lojs",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:52:37.594Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901055237594_serp_integrated-인천전자담배-버블몬-그래_e0bf07",
+  "target": {
+    "surface": "integrated",
+    "query": "인천전자담배 버블몬 그래피티3"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 버블몬 그래피티3",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 19,
+    "searchedResultLimit": 20,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224183844278",
+        "rank": 18
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224184675070",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

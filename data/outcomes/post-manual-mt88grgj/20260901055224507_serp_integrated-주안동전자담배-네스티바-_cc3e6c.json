@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88grgj",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:52:24.507Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901055224507_serp_integrated-주안동전자담배-네스티바-_cc3e6c",
+  "target": {
+    "surface": "integrated",
+    "query": "주안동전자담배 네스티바 3만"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "주안동전자담배 네스티바 3만",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224156050281",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224365923075",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223962843652",
+        "rank": 14
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224050397902",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88my0j",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:52:50.491Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901055250491_serp_integrated-인천전자담배-dotPOD_54fc94",
+  "target": {
+    "surface": "integrated",
+    "query": "인천전자담배 dotPOD Max"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 dotPOD Max",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 8,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224209102690",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224208075783",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

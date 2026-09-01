@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88g50o",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:52:18.101Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901055218101_serp_integrated-논현동전자담배-엘프바-아_e57ddd",
+  "target": {
+    "surface": "integrated",
+    "query": "논현동전자담배 엘프바 아이스킹"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "논현동전자담배 엘프바 아이스킹",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 15,
+    "searchedResultLimit": 17,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224154734341",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
