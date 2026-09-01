@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87hyvp",
+  "source": "serp",
+  "capturedAt": "2026-09-01T06:31:57.885Z",
+  "postAgeHours": 169,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901063157885_serp_blogtab-갈산동전자담배-옥스바-오네오_844c3e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "갈산동전자담배 옥스바 오네오"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "갈산동전자담배 옥스바 오네오",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 1,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223956410414",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

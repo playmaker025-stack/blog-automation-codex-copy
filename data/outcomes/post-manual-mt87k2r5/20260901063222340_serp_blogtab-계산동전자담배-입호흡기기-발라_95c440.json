@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87k2r5",
+  "source": "serp",
+  "capturedAt": "2026-09-01T06:32:22.340Z",
+  "postAgeHours": 169,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901063222340_serp_blogtab-계산동전자담배-입호흡기기-발라_95c440",
+  "target": {
+    "surface": "blog_tab",
+    "query": "계산동전자담배 입호흡기기 발라리안"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "계산동전자담배 입호흡기기 발라리안",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223964907436",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224396167944",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

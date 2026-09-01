@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt89b3up",
+  "source": "serp",
+  "capturedAt": "2026-09-01T06:31:38.108Z",
+  "postAgeHours": 169,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901063138108_serp_integrated-무니코틴-액상-유저에게도_91f5af",
+  "target": {
+    "surface": "integrated",
+    "query": "무니코틴 액상 유저에게도"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무니코틴 액상 유저에게도",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 4,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224318950155",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
