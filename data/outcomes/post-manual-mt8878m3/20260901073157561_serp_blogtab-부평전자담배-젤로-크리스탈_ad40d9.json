@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt8878m3",
+  "source": "serp",
+  "capturedAt": "2026-09-01T07:31:57.561Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901073157561_serp_blogtab-부평전자담배-젤로-크리스탈_ad40d9",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 젤로 크리스탈"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 젤로 크리스탈",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 28,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224133723934",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224136970165",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224170417021",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224133055678",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

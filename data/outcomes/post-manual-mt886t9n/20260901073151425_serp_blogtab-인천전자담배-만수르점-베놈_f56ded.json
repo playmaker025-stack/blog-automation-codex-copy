@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt886t9n",
+  "source": "serp",
+  "capturedAt": "2026-09-01T07:31:51.425Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901073151425_serp_blogtab-인천전자담배-만수르점-베놈_f56ded",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천전자담배 만수르점 베놈"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 만수르점 베놈",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "223983262438",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224129547631",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224130606947",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220863154718",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "220447386848",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224136970165",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224135198413",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224164492213",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "221107306501",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224305965234",
+        "rank": 11
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224129523256",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "222892442555",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223011722408",
+        "rank": 14
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt887x62",
+  "source": "serp",
+  "capturedAt": "2026-09-01T07:32:03.532Z",
+  "postAgeHours": 170,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901073203532_serp_blogtab-부개역전자담배-워토포-넥스팟_8176c7",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부개역전자담배 워토포 넥스팟"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부개역전자담배 워토포 넥스팟",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 1,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224138093669",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
