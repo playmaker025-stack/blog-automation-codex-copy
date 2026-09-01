@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-01T05:52:53.555Z",
+  "updatedAt": "2026-09-01T06:12:53.576Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5370,13 +5370,14 @@
       "queries": {
         "integrated::아스몬하이 누수 잡는법": {
           "okAgeHours": [
-            630
+            630,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T12:56:52.799Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:11:38.614Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T12:56:52.799Z"
+          "lastAttemptAt": "2026-09-01T06:11:38.614Z"
         },
         "blog_tab::아스몬하이 누수 잡는법": {
           "okAgeHours": [
@@ -5389,8 +5390,8 @@
           "lastAttemptAt": "2026-08-31T09:12:08.987Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:12:08.987Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:11:38.614Z",
+      "total": 3
     },
     "post-ed806d65": {
       "queries": {
@@ -7973,13 +7974,14 @@
       "queries": {
         "integrated::말론 vs 아스트로": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:36:26.109Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:11:45.289Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:36:26.109Z"
+          "lastAttemptAt": "2026-09-01T06:11:45.289Z"
         },
         "blog_tab::말론 vs 아스트로": {
           "okAgeHours": [
@@ -7992,20 +7994,21 @@
           "lastAttemptAt": "2026-08-31T12:12:25.614Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:12:25.614Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:11:45.289Z",
+      "total": 3
     },
     "post-manual-mt896bb1": {
       "queries": {
         "integrated::젤로맥스 vs 발라리안맥스": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:36:32.541Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:11:51.721Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:36:32.541Z"
+          "lastAttemptAt": "2026-09-01T06:11:51.721Z"
         },
         "blog_tab::젤로맥스 vs 발라리안맥스": {
           "okAgeHours": [
@@ -8018,20 +8021,21 @@
           "lastAttemptAt": "2026-08-31T12:12:31.816Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:12:31.816Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:11:51.721Z",
+      "total": 3
     },
     "post-manual-mt896vhm": {
       "queries": {
         "integrated::그래피티2 vs 그래피티3": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:36:39.188Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:11:58.385Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:36:39.188Z"
+          "lastAttemptAt": "2026-09-01T06:11:58.385Z"
         },
         "blog_tab::그래피티2 vs 그래피티3": {
           "okAgeHours": [
@@ -8044,20 +8048,21 @@
           "lastAttemptAt": "2026-08-31T12:12:37.844Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:12:37.844Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:11:58.385Z",
+      "total": 3
     },
     "post-manual-mt897ee7": {
       "queries": {
         "integrated::부평전자담배 아스몬 하이": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:36:45.785Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:12:05.227Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:36:45.785Z"
+          "lastAttemptAt": "2026-09-01T06:12:05.227Z"
         },
         "blog_tab::부평전자담배 아스몬 하이": {
           "okAgeHours": [
@@ -8070,20 +8075,21 @@
           "lastAttemptAt": "2026-08-31T12:12:44.185Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:12:44.185Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:12:05.227Z",
+      "total": 3
     },
     "post-manual-mt8980ju": {
       "queries": {
         "integrated::갈산동전자담배 릴렉스 후노즈": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:36:52.226Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:12:11.724Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:36:52.226Z"
+          "lastAttemptAt": "2026-09-01T06:12:11.724Z"
         },
         "blog_tab::갈산동전자담배 릴렉스 후노즈": {
           "okAgeHours": [
@@ -8096,20 +8102,21 @@
           "lastAttemptAt": "2026-08-31T12:31:37.672Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:31:37.672Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:12:11.724Z",
+      "total": 3
     },
     "post-manual-mt898hkp": {
       "queries": {
         "integrated::구월동전자담배 BPMODS RAZOR": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:55:40.052Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:12:18.280Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:55:40.052Z"
+          "lastAttemptAt": "2026-09-01T06:12:18.280Z"
         },
         "blog_tab::구월동전자담배 BPMODS RAZOR": {
           "okAgeHours": [
@@ -8122,20 +8129,21 @@
           "lastAttemptAt": "2026-08-31T12:31:43.902Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:31:43.902Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:12:18.280Z",
+      "total": 3
     },
     "post-manual-mt898yex": {
       "queries": {
         "integrated::인천전자담배 말론바 일회용": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:55:46.517Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:12:24.681Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:55:46.517Z"
+          "lastAttemptAt": "2026-09-01T06:12:24.681Z"
         },
         "blog_tab::인천전자담배 말론바 일회용": {
           "okAgeHours": [
@@ -8148,20 +8156,21 @@
           "lastAttemptAt": "2026-08-31T12:31:49.815Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:31:49.815Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:12:24.681Z",
+      "total": 3
     },
     "post-manual-mt899eyt": {
       "queries": {
         "integrated::휴대성 최강 전자담배": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:55:52.884Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:12:31.103Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:55:52.884Z"
+          "lastAttemptAt": "2026-09-01T06:12:31.103Z"
         },
         "blog_tab::휴대성 최강 전자담배": {
           "okAgeHours": [
@@ -8174,20 +8183,21 @@
           "lastAttemptAt": "2026-08-31T12:31:56.141Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:31:56.141Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:12:31.103Z",
+      "total": 3
     },
     "post-manual-mt899nt0": {
       "queries": {
         "integrated::무화량 많은 전자담배": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:55:59.336Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:12:37.601Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:55:59.336Z"
+          "lastAttemptAt": "2026-09-01T06:12:37.601Z"
         },
         "blog_tab::무화량 많은 전자담배": {
           "okAgeHours": [
@@ -8200,20 +8210,21 @@
           "lastAttemptAt": "2026-08-31T12:32:02.419Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:32:02.419Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:12:37.601Z",
+      "total": 3
     },
     "post-manual-mt89a3tc": {
       "queries": {
         "integrated::부평전자담배 버블몬 그래피티2": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:56:05.949Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:12:44.181Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:56:05.949Z"
+          "lastAttemptAt": "2026-09-01T06:12:44.181Z"
         },
         "blog_tab::부평전자담배 버블몬 그래피티2": {
           "okAgeHours": [
@@ -8226,20 +8237,21 @@
           "lastAttemptAt": "2026-08-31T12:32:08.777Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:32:08.777Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:12:44.181Z",
+      "total": 3
     },
     "post-manual-mt89amh7": {
       "queries": {
         "integrated::만수동전자담배 말론S 전담": {
           "okAgeHours": [
-            130
+            130,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:56:12.470Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T06:12:50.765Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:56:12.470Z"
+          "lastAttemptAt": "2026-09-01T06:12:50.765Z"
         },
         "blog_tab::만수동전자담배 말론S 전담": {
           "okAgeHours": [
@@ -8252,8 +8264,8 @@
           "lastAttemptAt": "2026-08-31T12:32:15.094Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:32:15.094Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T06:12:50.765Z",
+      "total": 3
     },
     "post-manual-mt89b3up": {
       "queries": {
@@ -8959,8 +8971,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-01T05:51:38.220Z",
-    "lastOkAt": "2026-09-01T05:51:38.220Z",
+    "lastRunAt": "2026-09-01T06:11:38.338Z",
+    "lastOkAt": "2026-09-01T06:11:38.338Z",
     "consecutiveFailedRuns": 0
   }
 }

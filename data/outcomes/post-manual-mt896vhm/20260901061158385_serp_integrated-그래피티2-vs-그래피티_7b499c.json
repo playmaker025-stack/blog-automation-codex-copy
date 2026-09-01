@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt896vhm",
+  "source": "serp",
+  "capturedAt": "2026-09-01T06:11:58.385Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901061158385_serp_integrated-그래피티2-vs-그래피티_7b499c",
+  "target": {
+    "surface": "integrated",
+    "query": "그래피티2 vs 그래피티3"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "그래피티2 vs 그래피티3",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 12,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

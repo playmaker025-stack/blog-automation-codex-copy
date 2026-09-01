@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt899eyt",
+  "source": "serp",
+  "capturedAt": "2026-09-01T06:12:31.103Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901061231103_serp_integrated-휴대성-최강-전자담배_4afb9c",
+  "target": {
+    "surface": "integrated",
+    "query": "휴대성 최강 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "휴대성 최강 전자담배",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224272681012",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
