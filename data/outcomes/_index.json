@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-01T10:11:47.763Z",
+  "updatedAt": "2026-09-01T10:51:48.015Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5398,27 +5398,29 @@
       "queries": {
         "integrated::남동구청역 전자담배 입문자": {
           "okAgeHours": [
-            626
+            626,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:15:40.207Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T10:51:38.507Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:15:40.207Z"
+          "lastAttemptAt": "2026-09-01T10:51:38.507Z"
         },
         "blog_tab::남동구청역 전자담배 입문자": {
           "okAgeHours": [
-            646
+            646,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:12:15.319Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-01T10:51:45.267Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:12:15.319Z"
+          "lastAttemptAt": "2026-09-01T10:51:45.267Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:12:15.319Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-01T10:51:45.267Z",
+      "total": 4
     },
     "post-manual-msenaehp": {
       "queries": {
@@ -9037,8 +9039,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-01T10:11:37.988Z",
-    "lastOkAt": "2026-09-01T10:11:37.988Z",
+    "lastRunAt": "2026-09-01T10:51:38.161Z",
+    "lastOkAt": "2026-09-01T10:51:38.161Z",
     "consecutiveFailedRuns": 0
   }
 }
