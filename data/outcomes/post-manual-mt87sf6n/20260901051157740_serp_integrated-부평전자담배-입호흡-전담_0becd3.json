@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87sf6n",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:11:57.740Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901051157740_serp_integrated-부평전자담배-입호흡-전담_0becd3",
+  "target": {
+    "surface": "integrated",
+    "query": "부평전자담배 입호흡 전담"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 입호흡 전담",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 32,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224358595068",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224291747473",
+        "rank": 14
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 15
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224301960336",
+        "rank": 18
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224044742376",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

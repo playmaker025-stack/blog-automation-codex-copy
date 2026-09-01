@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87u9qe",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:12:23.550Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901051223550_serp_integrated-삼산체육관역전자담배-일회_4df2f0",
+  "target": {
+    "surface": "integrated",
+    "query": "삼산체육관역전자담배 일회용 전담"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "삼산체육관역전자담배 일회용 전담",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 0,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
