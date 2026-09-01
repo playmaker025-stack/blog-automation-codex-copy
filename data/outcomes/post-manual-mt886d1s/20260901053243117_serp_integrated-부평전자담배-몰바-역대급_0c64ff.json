@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt886d1s",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:32:43.117Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901053243117_serp_integrated-부평전자담배-몰바-역대급_0c64ff",
+  "target": {
+    "surface": "integrated",
+    "query": "부평전자담배 몰바 역대급"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 몰바 역대급",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224121725269",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224122470914",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

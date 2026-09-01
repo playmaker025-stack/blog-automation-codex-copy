@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt8818bw",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:31:50.464Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901053150464_serp_integrated-일회용-전담-추천_f450d1",
+  "target": {
+    "surface": "integrated",
+    "query": "일회용 전담 추천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "일회용 전담 추천",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 29,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

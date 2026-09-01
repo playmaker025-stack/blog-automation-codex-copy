@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt883bsi",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:32:10.944Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901053210944_serp_integrated-구월동전자담배-아이다-기_516346",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동전자담배 아이다 기어미니"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 아이다 기어미니",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 19,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224073750994",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

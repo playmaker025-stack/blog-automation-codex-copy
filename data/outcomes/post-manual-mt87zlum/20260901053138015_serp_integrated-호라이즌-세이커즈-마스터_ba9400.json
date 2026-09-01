@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87zlum",
+  "source": "serp",
+  "capturedAt": "2026-09-01T05:31:38.015Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260901053138015_serp_integrated-호라이즌-세이커즈-마스터_ba9400",
+  "target": {
+    "surface": "integrated",
+    "query": "호라이즌 세이커즈 마스터"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "호라이즌 세이커즈 마스터",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 2,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224057607868",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224041274129",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
