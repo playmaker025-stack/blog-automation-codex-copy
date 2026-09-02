@@ -11289,7 +11289,41 @@
       "publishedAt": "2026-09-02T07:23:20.208Z",
       "createdAt": "2026-09-02T07:23:20.208Z",
       "updatedAt": "2026-09-02T07:23:20.208Z"
+    },
+    {
+      "postId": "post-manual-mtk3nu57",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배 액상을 차에 두면 생기는 일 – 여름철 특히 주의해야 하는 이유",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224398960582",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224398960582",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224398960582"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 액상을 차에",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전자담배 액상을 차에 두면 생기는 일 – 여름철 특히 주의해야 하는 이유",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-02T12:56:12.211Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-02T12:56:12.211Z",
+      "createdAt": "2026-09-02T12:56:12.211Z",
+      "updatedAt": "2026-09-02T12:56:12.211Z"
     }
   ],
-  "lastUpdated": "2026-09-02T07:23:20.208Z"
+  "lastUpdated": "2026-09-02T12:56:12.211Z"
 }
