@@ -1,0 +1,38 @@
+{
+  "pipelineId": "pipe-50da5d02",
+  "type": "draft_output",
+  "savedAt": "2026-09-02T05:18:50.874Z",
+  "data": {
+    "postId": "post-852da392",
+    "title": "전자담배 액상 보관법 맛 오래 유지하는 방법 총정리",
+    "wordCount": 2885,
+    "generatedAt": "2026-09-02T05:18:49.003Z",
+    "contentPath": "data/posting-list/posts/post-852da392/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": false,
+      "blockingReasons": [
+        "sub keyword \"액상 유통기한\" 4회 사용, 상한 3회 초과"
+      ],
+      "warnings": [
+        "mustResolve 단서 부족: 각 후보가 맞는 사용자",
+        "필수 섹션 반영 부족: 사용자 유형별 최종 선택 기준"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [
+        "sub keyword \"액상 유통기한\" 4회 사용, 상한 3회 초과"
+      ],
+      "deferFindings": [],
+      "contractCoverageFindings": [
+        "mustResolve 단서 부족: 각 후보가 맞는 사용자"
+      ],
+      "overlapFindings": [],
+      "specFindings": []
+    },
+    "finalDraftRevisionInstructions": [
+      "키워드 과다/질문문 삽입 수정: sub keyword \"액상 유통기한\" 4회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "mustResolve 단서 부족: 각 후보가 맞는 사용자 — 별도 요약 섹션을 덧붙이지 말고, 관련 본문 문단 안에서 자연스럽게 다루세요.",
+      "발행 차단 사유 해결: sub keyword \"액상 유통기한\" 4회 사용, 상한 3회 초과"
+    ]
+  }
+}
