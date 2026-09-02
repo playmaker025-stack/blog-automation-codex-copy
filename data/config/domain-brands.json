@@ -5,7 +5,7 @@
       "name": "하복",
       "evidence": "전담 하복 팟/코일 알려주세요",
       "registeredAt": "2026-08-25T06:06:10.882Z",
-      "seenCount": 5
+      "seenCount": 6
     },
     {
       "name": "폴츠",
@@ -32,6 +32,18 @@
       "seenCount": 4
     },
     {
+      "name": "젤로 맥스",
+      "evidence": "입호흡 전자담배 추천",
+      "registeredAt": "2026-08-25T06:03:42.717Z",
+      "seenCount": 4
+    },
+    {
+      "name": "플러키",
+      "evidence": "입호흡기기 플러키 1600mAh 배터리",
+      "registeredAt": "2026-08-29T05:38:28.432Z",
+      "seenCount": 4
+    },
+    {
       "name": "브이메이트 익스트림",
       "evidence": "대구 전자담배 판매할수 할수 있는곳 있나요??",
       "registeredAt": "2026-08-25T06:02:52.642Z",
@@ -41,12 +53,6 @@
       "name": "에이펙스",
       "evidence": "새 기기인데 연기가 안나와요",
       "registeredAt": "2026-08-25T06:02:52.642Z",
-      "seenCount": 3
-    },
-    {
-      "name": "젤로 맥스",
-      "evidence": "입호흡 전자담배 추천",
-      "registeredAt": "2026-08-25T06:03:42.717Z",
       "seenCount": 3
     },
     {
@@ -64,12 +70,6 @@
     {
       "name": "릴 하이브리드 3.0",
       "evidence": "릴 하이브리드 3.0 오류",
-      "registeredAt": "2026-08-29T05:38:28.432Z",
-      "seenCount": 3
-    },
-    {
-      "name": "플러키",
-      "evidence": "입호흡기기 플러키 1600mAh 배터리",
       "registeredAt": "2026-08-29T05:38:28.432Z",
       "seenCount": 3
     },
@@ -95,6 +95,12 @@
       "name": "아이코스 일루마",
       "evidence": "아이코스 일루마 구매하려구 가입했습니다",
       "registeredAt": "2026-08-31T02:54:26.233Z",
+      "seenCount": 3
+    },
+    {
+      "name": "아스몬 하이",
+      "evidence": "액상형 전자담배 추천",
+      "registeredAt": "2026-08-31T02:55:17.396Z",
       "seenCount": 3
     },
     {
@@ -146,9 +152,15 @@
       "seenCount": 2
     },
     {
-      "name": "아스몬 하이",
-      "evidence": "액상형 전자담배 추천",
-      "registeredAt": "2026-08-31T02:55:17.396Z",
+      "name": "긱베이프 소울 2",
+      "evidence": "누수없는 전자담배 추천",
+      "registeredAt": "2026-08-25T06:07:40.788Z",
+      "seenCount": 2
+    },
+    {
+      "name": "크로스 6 미니",
+      "evidence": "버튼 없이 모드 변경이 가능하다고? 크로스 6 미니 사용법",
+      "registeredAt": "2026-08-31T03:08:47.721Z",
       "seenCount": 2
     },
     {
@@ -215,12 +227,6 @@
       "name": "아보카도",
       "evidence": "전자담배 추천해주세요",
       "registeredAt": "2026-08-25T06:06:10.882Z",
-      "seenCount": 1
-    },
-    {
-      "name": "긱베이프 소울 2",
-      "evidence": "누수없는 전자담배 추천",
-      "registeredAt": "2026-08-25T06:07:40.788Z",
       "seenCount": 1
     },
     {
@@ -356,11 +362,47 @@
       "seenCount": 1
     },
     {
-      "name": "크로스 6 미니",
-      "evidence": "버튼 없이 모드 변경이 가능하다고? 크로스 6 미니 사용법",
-      "registeredAt": "2026-08-31T03:08:47.721Z",
+      "name": "바빈 스타블라스트",
+      "evidence": "바빈 스타블라스트 4만퍼프 무니코틴 일회용 전자담배",
+      "registeredAt": "2026-09-02T07:23:57.008Z",
+      "seenCount": 1
+    },
+    {
+      "name": "투엑스 돌체라떼",
+      "evidence": "달콤고소한 커피 한 잔 투엑스 돌체라떼 액상추천",
+      "registeredAt": "2026-09-02T07:23:57.008Z",
+      "seenCount": 1
+    },
+    {
+      "name": "베이퍼 아이스모모",
+      "evidence": "수원전자담배 진한 복숭아 과즙과 시원함 베이퍼 아이스모모",
+      "registeredAt": "2026-09-02T07:23:57.008Z",
+      "seenCount": 1
+    },
+    {
+      "name": "브이메이트 프로",
+      "evidence": "최신 전자담배 추천해주세요",
+      "registeredAt": "2026-09-02T07:23:57.008Z",
+      "seenCount": 1
+    },
+    {
+      "name": "긱베이프 이지스미니5",
+      "evidence": "전자담배 기기 및 액상 추천해주세요",
+      "registeredAt": "2026-09-02T07:23:57.008Z",
+      "seenCount": 1
+    },
+    {
+      "name": "유웰 발라리안",
+      "evidence": "CSV 팟시스템 최강자는 무엇일까?",
+      "registeredAt": "2026-09-02T07:23:57.008Z",
+      "seenCount": 1
+    },
+    {
+      "name": "베놈 블리츠",
+      "evidence": "베놈 블리츠 모스펙 메사F 탱크",
+      "registeredAt": "2026-09-02T07:23:57.008Z",
       "seenCount": 1
     }
   ],
-  "updatedAt": "2026-08-31T03:08:47.721Z"
+  "updatedAt": "2026-09-02T07:23:57.008Z"
 }
