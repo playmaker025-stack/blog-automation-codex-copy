@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-02T06:51:39.532Z",
+  "updatedAt": "2026-09-02T07:32:02.770Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9064,11 +9064,57 @@
       },
       "lastCapturedAt": "2026-09-01T12:31:45.672Z",
       "total": 2
+    },
+    "post-manual-mtjrrrb0": {
+      "queries": {
+        "integrated::미추홀구 전자담배": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-02T07:31:39.729Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-02T07:31:39.729Z"
+        },
+        "blog_tab::미추홀구 전자담배": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-02T07:31:46.958Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-02T07:31:46.958Z"
+        },
+        "integrated::액상 보관법": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-02T07:31:53.182Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-02T07:31:53.182Z"
+        },
+        "blog_tab::액상 보관법": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-02T07:31:59.834Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-02T07:31:59.834Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-02T07:31:59.834Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-02T06:51:39.029Z",
-    "lastOkAt": "2026-09-01T12:31:38.281Z",
+    "lastRunAt": "2026-09-02T07:31:39.106Z",
+    "lastOkAt": "2026-09-02T07:31:39.106Z",
     "consecutiveFailedRuns": 0
   }
 }
