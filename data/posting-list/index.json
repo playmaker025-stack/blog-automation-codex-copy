@@ -11246,7 +11246,50 @@
       "createdAt": "2026-09-02T05:17:45.915Z",
       "publishedAt": null,
       "updatedAt": "2026-09-02T05:20:19.458Z"
+    },
+    {
+      "postId": "post-manual-mtjrrrb0",
+      "topicId": "",
+      "userId": "c",
+      "title": "인천 미추홀구 전자담배 액상 보관법과 맛 유지 비법!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224398637176",
+      "wordCount": 0,
+      "targetKeywords": [
+        "미추홀구 전자담배",
+        "액상 보관법"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224398637176",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224398637176"
+        },
+        "targetKeywords": [
+          {
+            "query": "미추홀구 전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "액상 보관법",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "인천 미추홀구 전자담배 액상 보관법과 맛 유지 비법!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-02T07:23:20.208Z",
+        "keywordsRevisedAt": "2026-09-02T07:23:20.208Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-02T07:23:20.208Z",
+      "createdAt": "2026-09-02T07:23:20.208Z",
+      "updatedAt": "2026-09-02T07:23:20.208Z"
     }
   ],
-  "lastUpdated": "2026-09-02T05:20:19.458Z"
+  "lastUpdated": "2026-09-02T07:23:20.208Z"
 }
