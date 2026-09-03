@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-03T11:32:28.518Z",
+  "updatedAt": "2026-09-03T13:12:14.727Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -6081,27 +6081,29 @@
       "queries": {
         "integrated::전자담배 액상을 넣고": {
           "okAgeHours": [
-            241
+            241,
+            336
           ],
-          "lastCapturedAt": "2026-08-30T13:55:58.709Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-03T13:12:05.064Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:55:58.709Z"
+          "lastAttemptAt": "2026-09-03T13:12:05.064Z"
         },
         "blog_tab::전자담배 액상을 넣고": {
           "okAgeHours": [
-            260
+            260,
+            336
           ],
-          "lastCapturedAt": "2026-08-31T09:52:33.948Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-03T13:12:11.847Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:52:33.948Z"
+          "lastAttemptAt": "2026-09-03T13:12:11.847Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:52:33.948Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-03T13:12:11.847Z",
+      "total": 4
     },
     "post-b4e0e44a": {
       "queries": {
@@ -9152,11 +9154,57 @@
       },
       "lastCapturedAt": "2026-09-02T13:11:46.957Z",
       "total": 2
+    },
+    "post-manual-mtljfiqv": {
+      "queries": {
+        "integrated::전자담배 뜨거움": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-03T13:11:40.352Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-03T13:11:40.352Z"
+        },
+        "blog_tab::전자담배 뜨거움": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-03T13:11:47.175Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-03T13:11:47.175Z"
+        },
+        "integrated::전자담배 입술 뜨거움": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-03T13:11:53.491Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-03T13:11:53.491Z"
+        },
+        "blog_tab::전자담배 입술 뜨거움": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-03T13:11:59.572Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-03T13:11:59.572Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-03T13:11:59.572Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-03T11:31:40.040Z",
-    "lastOkAt": "2026-09-03T11:31:40.040Z",
+    "lastRunAt": "2026-09-03T13:11:39.994Z",
+    "lastOkAt": "2026-09-03T13:11:39.994Z",
     "consecutiveFailedRuns": 0
   }
 }

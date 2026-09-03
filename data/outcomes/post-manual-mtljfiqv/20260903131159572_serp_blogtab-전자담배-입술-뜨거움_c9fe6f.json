@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtljfiqv",
+  "source": "serp",
+  "capturedAt": "2026-09-03T13:11:59.572Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260903131159572_serp_blogtab-전자담배-입술-뜨거움_c9fe6f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 입술 뜨거움"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 입술 뜨거움",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
