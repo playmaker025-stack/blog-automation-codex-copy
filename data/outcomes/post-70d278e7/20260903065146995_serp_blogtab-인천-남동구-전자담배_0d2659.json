@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-70d278e7",
+  "source": "serp",
+  "capturedAt": "2026-09-03T06:51:46.995Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260903065146995_serp_blogtab-인천-남동구-전자담배_0d2659",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 남동구 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 남동구 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224384586821",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224317693159",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
