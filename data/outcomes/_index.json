@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-03T07:32:02.203Z",
+  "updatedAt": "2026-09-03T11:11:50.399Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -8399,27 +8399,29 @@
       "queries": {
         "integrated::장수동 전자담배 액상": {
           "okAgeHours": [
-            76
+            76,
+            168
           ],
-          "lastCapturedAt": "2026-08-30T15:56:32.181Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-03T11:11:39.939Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T15:56:32.181Z"
+          "lastAttemptAt": "2026-09-03T11:11:39.939Z"
         },
         "blog_tab::장수동 전자담배 액상": {
           "okAgeHours": [
-            97
+            97,
+            168
           ],
-          "lastCapturedAt": "2026-08-31T12:32:33.302Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-03T11:11:47.314Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T12:32:33.302Z"
+          "lastAttemptAt": "2026-09-03T11:11:47.314Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T12:32:33.302Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-03T11:11:47.314Z",
+      "total": 4
     },
     "post-manual-mtbggla6": {
       "queries": {
@@ -9145,8 +9147,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-03T07:31:39.665Z",
-    "lastOkAt": "2026-09-03T07:31:39.665Z",
+    "lastRunAt": "2026-09-03T11:11:39.643Z",
+    "lastOkAt": "2026-09-03T11:11:39.643Z",
     "consecutiveFailedRuns": 0
   }
 }

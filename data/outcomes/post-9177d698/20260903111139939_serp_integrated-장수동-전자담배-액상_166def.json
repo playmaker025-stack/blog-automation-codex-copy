@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-9177d698",
+  "source": "serp",
+  "capturedAt": "2026-09-03T11:11:39.939Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260903111139939_serp_integrated-장수동-전자담배-액상_166def",
+  "target": {
+    "surface": "integrated",
+    "query": "장수동 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "장수동 전자담배 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 16,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224392405714",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224019225526",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224141880874",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
