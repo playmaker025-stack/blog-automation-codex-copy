@@ -11323,7 +11323,50 @@
       "publishedAt": "2026-09-02T12:56:12.211Z",
       "createdAt": "2026-09-02T12:56:12.211Z",
       "updatedAt": "2026-09-02T12:56:12.211Z"
+    },
+    {
+      "postId": "post-manual-mtljfiqv",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배 드립팁이 뜨거운 이유 – 끝부분만 물고 피울 때 입술이 뜨겁다면",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224400166811",
+      "wordCount": 0,
+      "targetKeywords": [
+        "전자담배 뜨거움",
+        "전자담배 입술 뜨거움"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224400166811",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224400166811"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 뜨거움",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배 입술 뜨거움",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "전자담배 드립팁이 뜨거운 이유 – 끝부분만 물고 피울 때 입술이 뜨겁다면",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-03T13:05:23.605Z",
+        "keywordsRevisedAt": "2026-09-03T13:05:23.605Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-03T13:05:23.605Z",
+      "createdAt": "2026-09-03T13:05:23.605Z",
+      "updatedAt": "2026-09-03T13:05:23.605Z"
     }
   ],
-  "lastUpdated": "2026-09-02T12:56:12.211Z"
+  "lastUpdated": "2026-09-03T13:05:23.605Z"
 }
