@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-15731f9f",
+  "source": "serp",
+  "capturedAt": "2026-09-03T07:31:59.729Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260903073159729_serp_blogtab-액상형-전자담배-종류_ab62ce",
+  "target": {
+    "surface": "blog_tab",
+    "query": "액상형 전자담배 종류"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상형 전자담배 종류",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300284999",
+        "rank": 10
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

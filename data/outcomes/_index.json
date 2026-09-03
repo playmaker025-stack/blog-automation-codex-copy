@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-03T06:51:49.785Z",
+  "updatedAt": "2026-09-03T07:32:02.203Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5454,27 +5454,29 @@
       "queries": {
         "integrated::액상형 전자담배 종류": {
           "okAgeHours": [
-            582
+            582,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:16:00.414Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-03T07:31:46.977Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:16:00.414Z"
+          "lastAttemptAt": "2026-09-03T07:31:46.977Z"
         },
         "blog_tab::액상형 전자담배 종류": {
           "okAgeHours": [
-            601
+            601,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:12:34.223Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-03T07:31:59.729Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:12:34.223Z"
+          "lastAttemptAt": "2026-09-03T07:31:59.729Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:12:34.223Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-03T07:31:59.729Z",
+      "total": 8
     },
     "post-8859dd10": {
       "queries": {
@@ -9143,8 +9145,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-03T06:51:39.562Z",
-    "lastOkAt": "2026-09-03T06:51:39.562Z",
+    "lastRunAt": "2026-09-03T07:31:39.665Z",
+    "lastOkAt": "2026-09-03T07:31:39.665Z",
     "consecutiveFailedRuns": 0
   }
 }
