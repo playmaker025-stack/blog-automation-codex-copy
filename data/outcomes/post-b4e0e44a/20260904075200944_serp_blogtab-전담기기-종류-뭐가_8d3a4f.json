@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b4e0e44a",
+  "source": "serp",
+  "capturedAt": "2026-09-04T07:52:00.944Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260904075200944_serp_blogtab-전담기기-종류-뭐가_8d3a4f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전담기기 종류 뭐가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담기기 종류 뭐가",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224385828317",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224355462874",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224290478741",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b4e0e44a",
+  "source": "serp",
+  "capturedAt": "2026-09-04T07:51:40.915Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260904075140915_serp_integrated-전담기기종류_12961d",
+  "target": {
+    "surface": "integrated",
+    "query": "전담기기종류"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담기기종류",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 33,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
