@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-7415b8c5",
+  "type": "approval_request",
+  "savedAt": "2026-09-04T03:48:37.259Z",
+  "data": {
+    "pipelineId": "pipe-7415b8c5",
+    "previousTitle": "",
+    "proposedTitle": "인천 남동구 전자담배 코일 종류별 비교와 선택 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "topic_feasibility_judge 판정 score 100, verdict feasible. 중복 발행 리스크 없음(코일 종류·비교 각도의 남동구 지역 글 과거 발행 이력 없음). 네이버 키워드 리서치 결과 '전자담배 코일 종류' 블로그 총 93,795건, 경쟁도 medium, 최근 30일 비율 33.3%로 꾸준한 수요 확인. KnowledgeIn 5,544건 중 반복 질문은 '코일 탄맛 원인', '코일 교체 타이밍', '옴값 차이'에 집중되어 있어 problem-solving 구조가 필수적. 카페 검색에서는 '코일 교체형 vs 일체형 편의성 비교', '옴수 선택 혼란'이 반복 관심사로 확인됨. 상위 블로그 글은 구조 설명 중심이나 실사용 수치, 액상 점도와의 상관관계, 탄맛 원인 분류가 미흡하여 차별화 가능. 사용자 코퍼스 분석 결과, 흡입 방식 기준 먼저 정립 → 스펙 비교 → 추천 대상 매칭 → Q&A 마무리 구조가 블로그 역할(비교/구조 설명형)에 부합. 종결어미 분포(습니다 83회, 입니다 61회)와 시그니처 표현('장주먹 입니다', '부평전자담배 만수르점', '직접 시연해보고 선택하는 게 가장 좋습니다') 재현 명시. informational 키워드 우선 전략으로 AEO 발췌용 핵심 요약 문장을 첫 섹션에 배치하고, 중간 섹션에 수치 기반 경험 삽입으로 D.I.A.+ 인간 지문 확보. 허브 연결: 전자담배 기기 선택 스펙 비교 글(post-8aebbf59). 리프 연결: 남동구 전자담배 액상 추천 방향 다음 글 예고.",
+    "requestedAt": "2026-09-04T03:48:31.561Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-04T03:48:31.561Z",
+      "modifications": null
+    }
+  }
+}
