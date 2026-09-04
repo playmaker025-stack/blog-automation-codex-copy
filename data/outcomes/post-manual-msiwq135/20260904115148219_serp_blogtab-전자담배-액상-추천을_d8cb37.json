@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msiwq135",
+  "source": "serp",
+  "capturedAt": "2026-09-04T11:51:48.219Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260904115148219_serp_blogtab-전자담배-액상-추천을_d8cb37",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 추천을"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 추천을",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 9,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224388730074",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224371470310",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

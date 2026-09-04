@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-04T07:52:03.676Z",
+  "updatedAt": "2026-09-04T11:51:51.228Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5558,27 +5558,29 @@
       "queries": {
         "integrated::전자담배 액상 추천을": {
           "okAgeHours": [
-            553
+            553,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:16:25.747Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-04T11:51:41.086Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:16:25.747Z"
+          "lastAttemptAt": "2026-09-04T11:51:41.086Z"
         },
         "blog_tab::전자담배 액상 추천을": {
           "okAgeHours": [
-            573
+            573,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:31:44.180Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-04T11:51:48.219Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:31:44.180Z"
+          "lastAttemptAt": "2026-09-04T11:51:48.219Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:31:44.180Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-04T11:51:48.219Z",
+      "total": 4
     },
     "post-manual-mslcq13v": {
       "queries": {
@@ -9237,8 +9239,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-04T07:51:40.640Z",
-    "lastOkAt": "2026-09-04T07:51:40.640Z",
+    "lastRunAt": "2026-09-04T11:51:40.724Z",
+    "lastOkAt": "2026-09-04T11:51:40.724Z",
     "consecutiveFailedRuns": 0
   }
 }
