@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 5.3865509,
-  "lifetimeCalls": 206,
+  "lifetimeUsd": 5.4295379,
+  "lifetimeCalls": 207,
   "days": [
     {
       "date": "2026-08-24",
@@ -300,12 +300,12 @@
       "date": "2026-09-04",
       "models": {
         "claude-sonnet-4-6": {
-          "calls": 3,
-          "inputTokens": 41025,
-          "outputTokens": 1273,
+          "calls": 4,
+          "inputTokens": 52364,
+          "outputTokens": 1871,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.14217000000000002,
+          "usd": 0.18515700000000002,
           "unpriced": false
         },
         "claude-haiku-4-5-20251001": {
@@ -333,8 +333,8 @@
       "provider": "anthropic"
     }
   ],
-  "updatedAt": "2026-09-04T03:36:44.275Z",
+  "updatedAt": "2026-09-04T03:36:48.886Z",
   "lifetimeByProvider": {
-    "anthropic": 0.02187
+    "anthropic": 0.042987
   }
 }
