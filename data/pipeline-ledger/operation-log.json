@@ -4353,7 +4353,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-406ab95c",
       "at": "2026-09-04T02:40:55.050Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "인천 남동구 전자담배 코일 종류별 비교와 선택 가이드",
+      "proposedTitle": "인천 남동구 전자담배 코일 종류별 비교와 선택 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-7415b8c5",
+      "at": "2026-09-04T03:38:26.220Z"
     }
   ],
-  "lastUpdated": "2026-09-04T02:40:55.050Z"
+  "lastUpdated": "2026-09-04T03:38:26.220Z"
 }
