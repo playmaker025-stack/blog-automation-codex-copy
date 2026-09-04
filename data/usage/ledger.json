@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 5.886063500000001,
-  "lifetimeCalls": 216,
+  "lifetimeUsd": 5.8872543,
+  "lifetimeCalls": 217,
   "days": [
     {
       "date": "2026-08-24",
@@ -327,12 +327,12 @@
           "unpriced": false
         },
         "gpt-4.1-mini": {
-          "calls": 2,
-          "inputTokens": 14665,
-          "outputTokens": 861,
+          "calls": 3,
+          "inputTokens": 17622,
+          "outputTokens": 866,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.007243600000000001,
+          "usd": 0.008434400000000002,
           "unpriced": false
         }
       }
@@ -351,8 +351,8 @@
       "provider": "anthropic"
     }
   ],
-  "updatedAt": "2026-09-04T03:51:40.316Z",
+  "updatedAt": "2026-09-04T05:25:48.060Z",
   "lifetimeByProvider": {
-    "openai": 0.0036888000000000003
+    "openai": 0.0011907999999999999
   }
 }
