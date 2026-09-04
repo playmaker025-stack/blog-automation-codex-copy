@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-04T05:31:50.673Z",
+  "updatedAt": "2026-09-04T07:32:02.669Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5508,47 +5508,51 @@
       "queries": {
         "integrated::일회용전자담배 불량": {
           "okAgeHours": [
-            557
+            557,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:16:12.697Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-04T07:31:40.868Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:16:12.697Z"
+          "lastAttemptAt": "2026-09-04T07:31:40.868Z"
         },
         "integrated::일회용전자담배 불량 증상": {
           "okAgeHours": [
-            557
+            557,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:16:19.224Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-04T07:31:47.113Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:16:19.224Z"
+          "lastAttemptAt": "2026-09-04T07:31:47.113Z"
         },
         "blog_tab::일회용전자담배 불량": {
           "okAgeHours": [
-            577
+            577,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:12:45.841Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-04T07:31:53.831Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:12:45.841Z"
+          "lastAttemptAt": "2026-09-04T07:31:53.831Z"
         },
         "blog_tab::일회용전자담배 불량 증상": {
           "okAgeHours": [
-            578
+            578,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:31:37.681Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-04T07:32:00.080Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:31:37.681Z"
+          "lastAttemptAt": "2026-09-04T07:32:00.080Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:31:37.681Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-04T07:32:00.080Z",
+      "total": 8
     },
     "post-manual-msiwq135": {
       "queries": {
@@ -9229,8 +9233,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-04T05:31:40.665Z",
-    "lastOkAt": "2026-09-04T05:31:40.665Z",
+    "lastRunAt": "2026-09-04T07:31:40.571Z",
+    "lastOkAt": "2026-09-04T07:31:40.571Z",
     "consecutiveFailedRuns": 0
   }
 }
