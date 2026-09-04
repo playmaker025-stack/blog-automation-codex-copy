@@ -11372,16 +11372,33 @@
       "topicId": "topic-0dc5090d",
       "userId": "c",
       "title": "인천 남동구 전자담배 코일 종류별 비교와 선택 가이드",
-      "status": "ready",
-      "naverPostUrl": null,
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224400865016",
       "evalScore": 65,
       "wordCount": 2879,
       "compositionSessionId": "pipe-7415b8c5",
       "pendingApproval": null,
       "createdAt": "2026-09-04T03:48:35.207Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-04T03:51:02.841Z"
+      "publishedAt": "2026-09-04T05:24:46.425Z",
+      "updatedAt": "2026-09-04T05:24:46.758Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224400865016",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224400865016"
+        },
+        "targetKeywords": [
+          {
+            "query": "인천 남동구 전자담배",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "인천 남동구 전자담배 코일 종류별 비교와 선택 가이드",
+        "contentHash": "a8f68ee9",
+        "trackedFrom": "2026-09-04T05:24:47.016Z"
+      }
     }
   ],
-  "lastUpdated": "2026-09-04T03:51:02.841Z"
+  "lastUpdated": "2026-09-04T05:24:46.758Z"
 }
