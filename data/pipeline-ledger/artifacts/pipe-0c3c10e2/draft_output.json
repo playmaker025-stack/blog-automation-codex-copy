@@ -1,0 +1,32 @@
+{
+  "pipelineId": "pipe-0c3c10e2",
+  "type": "draft_output",
+  "savedAt": "2026-09-05T07:47:23.635Z",
+  "data": {
+    "postId": "post-826875f1",
+    "title": "액상 전자담배 매장 방문 시 주의사항과 인천 부천 상동 지역 가이드",
+    "wordCount": 4594,
+    "generatedAt": "2026-09-05T07:47:22.018Z",
+    "contentPath": "data/posting-list/posts/post-826875f1/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": false,
+      "blockingReasons": [
+        "sub keyword \"액상 전자담배 매장 주의사항\" 5회 사용, 상한 3회 초과"
+      ],
+      "warnings": [],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [
+        "sub keyword \"액상 전자담배 매장 주의사항\" 5회 사용, 상한 3회 초과"
+      ],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [],
+      "specFindings": []
+    },
+    "finalDraftRevisionInstructions": [
+      "키워드 과다/질문문 삽입 수정: sub keyword \"액상 전자담배 매장 주의사항\" 5회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "발행 차단 사유 해결: sub keyword \"액상 전자담배 매장 주의사항\" 5회 사용, 상한 3회 초과"
+    ]
+  }
+}
