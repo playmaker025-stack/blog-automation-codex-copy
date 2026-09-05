@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 5.8872543,
-  "lifetimeCalls": 217,
+  "lifetimeUsd": 5.8897839,
+  "lifetimeCalls": 218,
   "days": [
     {
       "date": "2026-08-24",
@@ -336,6 +336,20 @@
           "unpriced": false
         }
       }
+    },
+    {
+      "date": "2026-09-05",
+      "models": {
+        "gpt-4.1-mini": {
+          "calls": 1,
+          "inputTokens": 3644,
+          "outputTokens": 670,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "usd": 0.0025296000000000003,
+          "unpriced": false
+        }
+      }
     }
   ],
   "balanceMarks": [
@@ -351,8 +365,8 @@
       "provider": "anthropic"
     }
   ],
-  "updatedAt": "2026-09-04T05:25:48.060Z",
+  "updatedAt": "2026-09-05T07:38:03.139Z",
   "lifetimeByProvider": {
-    "openai": 0.0011907999999999999
+    "openai": 0.0025296000000000003
   }
 }
