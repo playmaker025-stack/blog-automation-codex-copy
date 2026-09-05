@@ -4364,7 +4364,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-7415b8c5",
       "at": "2026-09-04T03:38:26.220Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "액상 전자담배 매장 방문 시 주의사항과 인천 부천 상동 지역 가이드",
+      "proposedTitle": "액상 전자담배 매장 방문 시 주의사항과 인천 부천 상동 지역 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-0c3c10e2",
+      "at": "2026-09-05T07:40:30.917Z"
     }
   ],
-  "lastUpdated": "2026-09-04T03:38:26.220Z"
+  "lastUpdated": "2026-09-05T07:40:30.917Z"
 }
