@@ -11413,7 +11413,56 @@
       "createdAt": "2026-09-05T07:46:18.535Z",
       "publishedAt": null,
       "updatedAt": "2026-09-05T07:48:57.959Z"
+    },
+    {
+      "postId": "post-manual-mtoak0se",
+      "topicId": "",
+      "userId": "e",
+      "title": "만수역 전자담배에서 맛있는 폐호흡 액상 알려드립니다.",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/godmaker0/224402056009",
+      "wordCount": 0,
+      "targetKeywords": [
+        "폐호흡전자담배",
+        "폐호흡액상",
+        "만수역전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "godmaker0",
+          "logNo": "224402056009",
+          "canonicalUrl": "https://blog.naver.com/godmaker0/224402056009"
+        },
+        "targetKeywords": [
+          {
+            "query": "폐호흡전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "폐호흡액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "만수역전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "만수역 전자담배에서 맛있는 폐호흡 액상 알려드립니다.",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-05T11:20:21.822Z",
+        "keywordsRevisedAt": "2026-09-05T11:20:21.822Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-05T11:20:21.822Z",
+      "createdAt": "2026-09-05T11:20:21.822Z",
+      "updatedAt": "2026-09-05T11:20:21.822Z"
     }
   ],
-  "lastUpdated": "2026-09-05T07:48:57.959Z"
+  "lastUpdated": "2026-09-05T11:20:21.822Z"
 }
