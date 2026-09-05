@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-0c3c10e2",
+  "type": "approval_request",
+  "savedAt": "2026-09-05T07:46:20.673Z",
+  "data": {
+    "pipelineId": "pipe-0c3c10e2",
+    "previousTitle": "",
+    "proposedTitle": "액상 전자담배 매장 방문 시 주의사항과 인천 부천 상동 지역 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "사용자 프로필과 최근 발행 글 스타일을 반영해 친근하고 구체적인 경험 중심 문체로 작성합니다. 검색 의도는 방문 전 주의사항과 지역 매장 정보로 명확한 정보 제공 중심이며, E블로그 역할에 맞게 지역 매장 추천과 문제 해결 팁을 포함해 체류시간과 신뢰도를 높입니다. 허브 주제는 '액상 전자담배 매장 방문 주의사항'이며, 리프 주제로 '부천 상동 지역 매장 추천'을 연결해 내부 링크 효과를 극대화합니다.",
+    "requestedAt": "2026-09-05T07:46:15.178Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-05T07:46:15.178Z",
+      "modifications": null
+    }
+  }
+}
