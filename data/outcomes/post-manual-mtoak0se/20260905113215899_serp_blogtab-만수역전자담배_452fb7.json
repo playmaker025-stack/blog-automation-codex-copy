@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtoak0se",
+  "source": "serp",
+  "capturedAt": "2026-09-05T11:32:15.899Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260905113215899_serp_blogtab-만수역전자담배_452fb7",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수역전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수역전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224376572221",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224327309099",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224264998918",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300979147",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224313145317",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224297016462",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224358595068",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224120478269",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
