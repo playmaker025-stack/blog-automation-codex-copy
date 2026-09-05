@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-05T05:51:42.083Z",
+  "updatedAt": "2026-09-05T08:51:51.430Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5482,27 +5482,29 @@
       "queries": {
         "integrated::만수동 전자담배 사고": {
           "okAgeHours": [
-            532
+            532,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:16:06.392Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-05T08:51:42.050Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:16:06.392Z"
+          "lastAttemptAt": "2026-09-05T08:51:42.050Z"
         },
         "blog_tab::만수동 전자담배 사고": {
           "okAgeHours": [
-            552
+            552,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:12:39.569Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-05T08:51:48.718Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:12:39.569Z"
+          "lastAttemptAt": "2026-09-05T08:51:48.718Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:12:39.569Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-05T08:51:48.718Z",
+      "total": 4
     },
     "post-fb0461a1": {
       "queries": {
@@ -9239,8 +9241,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-05T05:51:41.277Z",
-    "lastOkAt": "2026-09-04T11:51:40.724Z",
+    "lastRunAt": "2026-09-05T08:51:41.723Z",
+    "lastOkAt": "2026-09-05T08:51:41.723Z",
     "consecutiveFailedRuns": 0
   }
 }

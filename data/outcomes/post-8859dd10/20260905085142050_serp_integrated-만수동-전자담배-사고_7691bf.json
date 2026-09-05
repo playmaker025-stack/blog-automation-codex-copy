@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8859dd10",
+  "source": "serp",
+  "capturedAt": "2026-09-05T08:51:42.050Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260905085142050_serp_integrated-만수동-전자담배-사고_7691bf",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 사고"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 사고",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224062191387",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223969667880",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
