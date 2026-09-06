@@ -4749,7 +4749,62 @@
       "postTitle": "만수동 전자담배 폐호흡 드리퍼 듀얼 RDA 리빌드 방법",
       "extractedAt": "2026-09-01T12:31:05.245Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-f2db7a25",
+      "product": "포켓쥬스 다비도프",
+      "field": "liquidMl",
+      "value": "60ml",
+      "evidence": "폐호흡 액상 용량은 60ml",
+      "postId": "post-manual-mtpqnccb",
+      "postTitle": "간석동 전자담배 폐호흡 모드액상 포켓쥬스 다비도프",
+      "extractedAt": "2026-09-06T11:38:49.293Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-34ca3e76",
+      "product": "포켓쥬스 다비도프",
+      "field": "nicotinePercent",
+      "value": "3mg",
+      "evidence": "일반적인 3mg 는 물론 묵직한 타격감 을위한 6mg까지 있습니다.",
+      "postId": "post-manual-mtpqnccb",
+      "postTitle": "간석동 전자담배 폐호흡 모드액상 포켓쥬스 다비도프",
+      "extractedAt": "2026-09-06T11:38:49.293Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-1e1d5b9d",
+      "product": "포켓쥬스 다비도프",
+      "field": "nicotinePercent",
+      "value": "6mg",
+      "evidence": "일반적인 3mg 는 물론 묵직한 타격감 을위한 6mg까지 있습니다.",
+      "postId": "post-manual-mtpqnccb",
+      "postTitle": "간석동 전자담배 폐호흡 모드액상 포켓쥬스 다비도프",
+      "extractedAt": "2026-09-06T11:38:49.293Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-9ba88ed6",
+      "product": "포켓쥬스 다비도프",
+      "field": "drawStyle",
+      "value": "폐호흡",
+      "evidence": "폐호흡 모드액상을 사용하고 계신다면 어지간한건 이제 전부 사용해보고 그나마 대체할게 없어서 아직까지 사용하는 경우가 많을겁니다",
+      "postId": "post-manual-mtpqnccb",
+      "postTitle": "간석동 전자담배 폐호흡 모드액상 포켓쥬스 다비도프",
+      "extractedAt": "2026-09-06T11:38:49.293Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-61d8cef9",
+      "product": "포켓쥬스 다비도프",
+      "field": "drawStyle",
+      "value": "입호흡",
+      "evidence": "입호흡 버전도 있으니 걱정하지마세요.",
+      "postId": "post-manual-mtpqnccb",
+      "postTitle": "간석동 전자담배 폐호흡 모드액상 포켓쥬스 다비도프",
+      "extractedAt": "2026-09-06T11:38:49.293Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-09-01T12:31:05.953Z"
+  "updatedAt": "2026-09-06T11:38:50.092Z"
 }
