@@ -11462,7 +11462,56 @@
       "publishedAt": "2026-09-05T11:20:21.822Z",
       "createdAt": "2026-09-05T11:20:21.822Z",
       "updatedAt": "2026-09-05T11:20:21.822Z"
+    },
+    {
+      "postId": "post-manual-mtpefc05",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배가 나도 모르게 켜지는 이유 – 휴대 중 오작동을 막는 방법",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224402630851",
+      "wordCount": 0,
+      "targetKeywords": [
+        "전자담배실수",
+        "전자담배자동으로켜짐",
+        "전자담배오작동"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224402630851",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224402630851"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배실수",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배자동으로켜짐",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배오작동",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "전자담배가 나도 모르게 켜지는 이유 – 휴대 중 오작동을 막는 방법",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-06T05:56:22.458Z",
+        "keywordsRevisedAt": "2026-09-06T05:56:22.458Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-06T05:56:22.458Z",
+      "createdAt": "2026-09-06T05:56:22.458Z",
+      "updatedAt": "2026-09-06T05:56:22.458Z"
     }
   ],
-  "lastUpdated": "2026-09-05T11:20:21.822Z"
+  "lastUpdated": "2026-09-06T05:56:22.458Z"
 }
