@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-06T11:12:56.922Z",
+  "updatedAt": "2026-09-06T11:32:05.241Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5616,27 +5616,29 @@
       "queries": {
         "integrated::상큼 깔끔 입호흡": {
           "okAgeHours": [
-            506
+            506,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:16:38.158Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-06T11:31:42.901Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:16:38.158Z"
+          "lastAttemptAt": "2026-09-06T11:31:42.901Z"
         },
         "blog_tab::상큼 깔끔 입호흡": {
           "okAgeHours": [
-            526
+            526,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:31:56.043Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-06T11:31:49.622Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:31:56.043Z"
+          "lastAttemptAt": "2026-09-06T11:31:49.622Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:31:56.043Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-06T11:31:49.622Z",
+      "total": 4
     },
     "post-manual-msmx35tq": {
       "queries": {
@@ -8769,27 +8771,29 @@
         },
         "blog_tab::전자담배 모드기기": {
           "okAgeHours": [
-            25
+            25,
+            168
           ],
-          "lastCapturedAt": "2026-08-31T12:52:40.626Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-06T11:31:56.000Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T12:52:40.626Z"
+          "lastAttemptAt": "2026-09-06T11:31:56.000Z"
         },
         "blog_tab::무화량 전자담배": {
           "okAgeHours": [
-            25
+            25,
+            168
           ],
-          "lastCapturedAt": "2026-08-31T12:52:46.954Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-06T11:32:02.429Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T12:52:46.954Z"
+          "lastAttemptAt": "2026-09-06T11:32:02.429Z"
         }
       },
-      "lastCapturedAt": "2026-09-06T11:12:53.949Z",
-      "total": 22
+      "lastCapturedAt": "2026-09-06T11:32:02.429Z",
+      "total": 24
     },
     "post-manual-mtfrnwz9": {
       "queries": {
@@ -9397,8 +9401,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-06T11:11:42.331Z",
-    "lastOkAt": "2026-09-06T11:11:42.331Z",
+    "lastRunAt": "2026-09-06T11:31:42.456Z",
+    "lastOkAt": "2026-09-06T11:31:42.456Z",
     "consecutiveFailedRuns": 0
   }
 }
