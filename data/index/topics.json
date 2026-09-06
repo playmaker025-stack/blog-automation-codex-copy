@@ -1714,10 +1714,10 @@
       "contentKind": "hub",
       "feasibility": null,
       "relatedSources": [],
-      "status": "in-progress",
+      "status": "draft",
       "assignedUserId": "b",
       "createdAt": "2026-08-25T04:54:08.791Z",
-      "updatedAt": "2026-09-06T07:33:53.128Z"
+      "updatedAt": "2026-09-06T07:36:10.357Z"
     },
     {
       "topicId": "topic-89d42d3c",
@@ -2007,5 +2007,5 @@
       "updatedAt": "2026-09-05T07:49:00.077Z"
     }
   ],
-  "lastUpdated": "2026-09-06T07:33:53.128Z"
+  "lastUpdated": "2026-09-06T07:36:10.357Z"
 }
