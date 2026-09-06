@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-c221f3e5",
+  "type": "approval_request",
+  "savedAt": "2026-09-06T07:33:57.314Z",
+  "data": {
+    "pipelineId": "pipe-c221f3e5",
+    "previousTitle": "",
+    "proposedTitle": "인천 전자담배 기기 고장 원인별 점검과 해결 방법",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "인천 지역 전자담배 사용자들이 자주 겪는 기기 고장 문제를 중심으로, 구체적인 점검 포인트와 해결법을 단계별로 상세히 안내해 검색 의도에 부합합니다. 최근 발행 글들의 구조와 키워드 반복 패턴을 반영하여 친근하고 신뢰감 있는 문체로 작성하며, 실제 사용자 경험을 포함해 인간 지문을 강화했습니다. 허브-리프 구조를 활용해 관련 글로 자연스럽게 연결하여 체류시간과 재방문율을 높이는 전략입니다.",
+    "requestedAt": "2026-09-06T07:33:50.912Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-06T07:33:50.912Z",
+      "modifications": null
+    }
+  }
+}
