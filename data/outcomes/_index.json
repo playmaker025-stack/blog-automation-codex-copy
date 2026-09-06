@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-05T23:31:43.200Z",
+  "updatedAt": "2026-09-06T04:51:52.644Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5588,27 +5588,29 @@
       "queries": {
         "integrated::전자담배 액상 시향만으로는": {
           "okAgeHours": [
-            512
+            512,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:16:32.405Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-06T04:51:42.986Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:16:32.405Z"
+          "lastAttemptAt": "2026-09-06T04:51:42.986Z"
         },
         "blog_tab::전자담배 액상 시향만으로는": {
           "okAgeHours": [
-            532
+            532,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:31:49.719Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-06T04:51:50.030Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:31:49.719Z"
+          "lastAttemptAt": "2026-09-06T04:51:50.030Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:31:49.719Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-06T04:51:50.030Z",
+      "total": 4
     },
     "post-manual-mslqjgv4": {
       "queries": {
@@ -9317,8 +9319,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-05T23:31:41.824Z",
-    "lastOkAt": "2026-09-05T11:31:41.753Z",
+    "lastRunAt": "2026-09-06T04:51:42.340Z",
+    "lastOkAt": "2026-09-06T04:51:42.340Z",
     "consecutiveFailedRuns": 0
   }
 }
