@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtpefc05",
+  "source": "serp",
+  "capturedAt": "2026-09-06T06:12:02.060Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260906061202060_serp_blogtab-전자담배자동으로켜짐_dcc4a9",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배자동으로켜짐"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배자동으로켜짐",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224371265299",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224317693159",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
