@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mtpqnccb",
+      "title": "간석동 전자담배 폐호흡 모드액상 포켓쥬스 다비도프",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1476,
+      "publishedAt": "2026-09-06T11:38:32.081Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mtpqnccb.md"
+    },
+    {
       "sampleId": "published-post-manual-mtinb8v8",
       "title": "만수동 전자담배 폐호흡 드리퍼 듀얼 RDA 리빌드 방법",
       "category": "published-post",
@@ -351,5 +360,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-09-01T12:30:53.245Z"
+  "lastUpdated": "2026-09-06T11:38:38.149Z"
 }
