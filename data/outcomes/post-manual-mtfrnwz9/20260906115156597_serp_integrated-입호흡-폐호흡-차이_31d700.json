@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfrnwz9",
+  "source": "serp",
+  "capturedAt": "2026-09-06T11:51:56.597Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260906115156597_serp_integrated-입호흡-폐호흡-차이_31d700",
+  "target": {
+    "surface": "integrated",
+    "query": "입호흡 폐호흡 차이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 폐호흡 차이",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 18,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "223234881617",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224085329155",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223234564450",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224360766083",
+        "rank": 14
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
