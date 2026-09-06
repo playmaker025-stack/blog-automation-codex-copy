@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mtpefc05",
+      "title": "전자담배가 나도 모르게 켜지는 이유 – 휴대 중 오작동을 막는 방법",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1606,
+      "publishedAt": "2026-09-06T05:56:22.458Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mtpefc05.md"
+    },
+    {
       "sampleId": "published-post-manual-mtljfiqv",
       "title": "전자담배 드립팁이 뜨거운 이유 – 끝부분만 물고 피울 때 입술이 뜨겁다면",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6367,
       "publishedAt": "2026-07-14T12:29:15.041Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrkmokof.md"
-    },
-    {
-      "sampleId": "published-post-manual-mrj6idz8",
-      "title": "전자담배 액상은 왜 오래 두면 색이 진해질까?",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6305,
-      "publishedAt": "2026-07-13T12:08:47.023Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrj6idz8.md"
     }
   ],
-  "lastUpdated": "2026-09-03T13:05:30.553Z"
+  "lastUpdated": "2026-09-06T05:56:28.596Z"
 }
