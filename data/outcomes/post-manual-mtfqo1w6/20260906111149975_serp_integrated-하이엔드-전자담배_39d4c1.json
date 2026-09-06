@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-09-06T11:11:49.975Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260906111149975_serp_integrated-하이엔드-전자담배_39d4c1",
+  "target": {
+    "surface": "integrated",
+    "query": "하이엔드 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하이엔드 전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224285743991",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224026074005",
+        "rank": 14
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 15
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223898304199",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224266939944",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223938527660",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224065861273",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-09-06T11:12:22.846Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260906111222846_serp_integrated-무화량-전자담배_ec1532",
+  "target": {
+    "surface": "integrated",
+    "query": "무화량 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량 전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224003135828",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224284614293",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224359756182",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224285743991",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224041274129",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223991670645",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224065861273",
+        "rank": 13
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223992673196",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223998740916",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223926415705",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

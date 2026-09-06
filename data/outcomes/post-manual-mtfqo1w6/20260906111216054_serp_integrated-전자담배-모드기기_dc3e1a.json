@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-09-06T11:12:16.054Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260906111216054_serp_integrated-전자담배-모드기기_dc3e1a",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 모드기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 모드기기",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224284614293",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224091389416",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
