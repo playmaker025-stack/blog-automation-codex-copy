@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z60ar",
+  "source": "serp",
+  "capturedAt": "2026-09-07T08:32:41.430Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260907083241430_serp_integrated-인천-투엑스_679390",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 투엑스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 투엑스",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 9,
+    "searchedResultLimit": 26,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224086560722",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223529496185",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

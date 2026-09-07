@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z60ar",
+  "source": "serp",
+  "capturedAt": "2026-09-07T08:32:35.199Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260907083235199_serp_blogtab-인천-닷모드_1506e7",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 닷모드",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224208083611",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224086565307",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
