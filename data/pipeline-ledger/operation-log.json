@@ -4386,7 +4386,20 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-c221f3e5",
       "at": "2026-09-06T07:33:49.184Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 무화기 고장 원인과 인천 지역 점검법",
+      "proposedTitle": "전자담배 무화기 고장 원인과 인천 지역 점검법 완벽 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [
+        "searchIntentChanged"
+      ],
+      "stringSimilarity": 0.7916666666666666,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-124cd024",
+      "at": "2026-09-07T02:20:24.040Z"
     }
   ],
-  "lastUpdated": "2026-09-06T07:33:49.184Z"
+  "lastUpdated": "2026-09-07T02:20:24.040Z"
 }
