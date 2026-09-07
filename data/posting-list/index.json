@@ -11566,16 +11566,33 @@
       "topicId": "topic-40d45e85",
       "userId": "c",
       "title": "전자담배 무화기 고장 원인과 인천 지역 점검법 완벽 가이드",
-      "status": "ready",
-      "naverPostUrl": null,
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224403800869",
       "evalScore": 65,
       "wordCount": 2912,
       "compositionSessionId": "pipe-124cd024",
       "pendingApproval": null,
       "createdAt": "2026-09-07T02:23:27.707Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-07T02:25:45.069Z"
+      "publishedAt": "2026-09-07T07:47:56.887Z",
+      "updatedAt": "2026-09-07T07:47:57.816Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224403800869",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224403800869"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 무화기 고장",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전자담배 무화기 고장 원인과 인천 지역 점검법 완벽 가이드",
+        "contentHash": "f4354ef8",
+        "trackedFrom": "2026-09-07T07:47:58.072Z"
+      }
     }
   ],
-  "lastUpdated": "2026-09-07T02:25:45.069Z"
+  "lastUpdated": "2026-09-07T07:47:57.816Z"
 }
