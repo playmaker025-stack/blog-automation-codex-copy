@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgwd07l",
+  "source": "serp",
+  "capturedAt": "2026-09-07T06:52:41.884Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260907065241884_serp_blogtab-청라동전자담배_010454",
+  "target": {
+    "surface": "blog_tab",
+    "query": "청라동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "청라동전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223958703666",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
