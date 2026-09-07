@@ -11574,7 +11574,7 @@
       "pendingApproval": null,
       "createdAt": "2026-09-07T02:23:27.707Z",
       "publishedAt": "2026-09-07T07:47:56.887Z",
-      "updatedAt": "2026-09-07T07:47:57.816Z",
+      "updatedAt": "2026-09-07T07:49:48.315Z",
       "outcomeTracking": {
         "canonicalPost": {
           "blogId": "mansur_vape",
@@ -11585,14 +11585,20 @@
           {
             "query": "전자담배 무화기 고장",
             "role": "primary",
-            "source": "title_guess"
+            "source": "user"
+          },
+          {
+            "query": "인천",
+            "role": "secondary",
+            "source": "user"
           }
         ],
         "publishedTitle": "전자담배 무화기 고장 원인과 인천 지역 점검법 완벽 가이드",
         "contentHash": "f4354ef8",
-        "trackedFrom": "2026-09-07T07:47:58.072Z"
+        "trackedFrom": "2026-09-07T07:47:58.072Z",
+        "keywordsRevisedAt": "2026-09-07T07:49:48.315Z"
       }
     }
   ],
-  "lastUpdated": "2026-09-07T07:47:57.816Z"
+  "lastUpdated": "2026-09-07T07:49:48.315Z"
 }
