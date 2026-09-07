@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-124cd024",
+  "type": "approval_request",
+  "savedAt": "2026-09-07T02:23:29.640Z",
+  "data": {
+    "pipelineId": "pipe-124cd024",
+    "previousTitle": "",
+    "proposedTitle": "전자담배 무화기 고장 원인과 인천 지역 점검법 완벽 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "인천 지역 전자담배 사용자들이 무화기 고장 원인과 자가 점검법에 대한 구체적 정보를 찾는 검색 의도에 부합합니다. 최근 발행 글 구조와 키워드 반복 패턴을 반영해 hub-리프 구조를 유지하며, 실제 경험과 지역 특성을 녹여 친근하고 신뢰감 있는 글쓰기로 체류시간과 재방문을 유도합니다. AI 브리핑용 핵심 요약과 단계별 점검법, 지역 전문점 안내를 포함해 90점 이상 네이버 SEO 최적화를 목표로 합니다.",
+    "requestedAt": "2026-09-07T02:23:23.500Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-07T02:23:23.500Z",
+      "modifications": null
+    }
+  }
+}
