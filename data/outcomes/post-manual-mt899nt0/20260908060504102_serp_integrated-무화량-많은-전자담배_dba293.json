@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt899nt0",
+  "source": "serp",
+  "capturedAt": "2026-09-08T06:05:04.102Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908060504102_serp_integrated-무화량-많은-전자담배_dba293",
+  "target": {
+    "surface": "integrated",
+    "query": "무화량 많은 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량 많은 전자담배",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 33,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "221179353045",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221294722266",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221196221384",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221121600597",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222627896175",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221214176713",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222504495732",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221330954809",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221112789103",
+        "rank": 19
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221183967965",
+        "rank": 20
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224359756182",
+        "rank": 22
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224284614293",
+        "rank": 23
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 24
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224003135828",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
