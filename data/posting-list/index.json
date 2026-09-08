@@ -11516,16 +11516,33 @@
       "postId": "post-c24ed298",
       "topicId": "topic-554f8152",
       "userId": "b",
-      "title": "인천 전자담배 기기 고장 원인별 점검과 해결 방법",
-      "status": "ready",
-      "naverPostUrl": null,
+      "title": "인천 전자담배 기기 고장 원인별 점검과 효과적 해결법",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224405167840",
       "evalScore": 52,
       "wordCount": 3442,
       "compositionSessionId": "pipe-c221f3e5",
       "pendingApproval": null,
       "createdAt": "2026-09-06T07:33:54.534Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-06T07:36:08.545Z"
+      "publishedAt": "2026-09-08T11:04:22.264Z",
+      "updatedAt": "2026-09-08T11:04:26.274Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224405167840",
+          "canonicalUrl": "https://blog.naver.com/youferst/224405167840"
+        },
+        "targetKeywords": [
+          {
+            "query": "인천 전자담배 기기",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "인천 전자담배 기기 고장 원인별 점검과 효과적 해결법",
+        "contentHash": "3ac206d3",
+        "trackedFrom": "2026-09-08T11:04:26.524Z"
+      }
     },
     {
       "postId": "post-manual-mtpqnccb",
@@ -11600,5 +11617,5 @@
       }
     }
   ],
-  "lastUpdated": "2026-09-07T07:49:48.315Z"
+  "lastUpdated": "2026-09-08T11:04:26.274Z"
 }
