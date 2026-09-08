@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87kkfp",
+  "source": "serp",
+  "capturedAt": "2026-09-08T06:24:30.809Z",
+  "postAgeHours": 337,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908062430809_serp_blogtab-삼산동전자담배-딥베이프-마이팟_8186be",
+  "target": {
+    "surface": "blog_tab",
+    "query": "삼산동전자담배 딥베이프 마이팟프로"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "삼산동전자담배 딥베이프 마이팟프로",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223966799587",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223967139889",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
