@@ -11615,7 +11615,50 @@
         "trackedFrom": "2026-09-07T07:47:58.072Z",
         "keywordsRevisedAt": "2026-09-07T07:49:48.315Z"
       }
+    },
+    {
+      "postId": "post-manual-mtsmngli",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배 피운 후 입안에 단맛이 남는 이유 – 액상 때문일까 흡입 습관 때문일까?",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224405141976",
+      "wordCount": 0,
+      "targetKeywords": [
+        "전자담배단맛",
+        "액상단맛"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224405141976",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224405141976"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배단맛",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "액상단맛",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "전자담배 피운 후 입안에 단맛이 남는 이유 – 액상 때문일까 흡입 습관 때문일까?",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-08T12:09:57.504Z",
+        "keywordsRevisedAt": "2026-09-08T12:09:57.504Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-08T12:09:57.504Z",
+      "createdAt": "2026-09-08T12:09:57.504Z",
+      "updatedAt": "2026-09-08T12:09:57.504Z"
     }
   ],
-  "lastUpdated": "2026-09-08T11:04:26.274Z"
+  "lastUpdated": "2026-09-08T12:09:57.504Z"
 }
