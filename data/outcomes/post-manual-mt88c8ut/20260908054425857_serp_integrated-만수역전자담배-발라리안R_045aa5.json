@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88c8ut",
+  "source": "serp",
+  "capturedAt": "2026-09-08T05:44:25.857Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908054425857_serp_integrated-만수역전자담배-발라리안R_045aa5",
+  "target": {
+    "surface": "integrated",
+    "query": "만수역전자담배 발라리안R 스펙과"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수역전자담배 발라리안R 스펙과",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 22,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224139461503",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223683654847",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
