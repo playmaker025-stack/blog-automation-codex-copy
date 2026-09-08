@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtinb8v8",
+  "source": "serp",
+  "capturedAt": "2026-09-08T12:03:58.644Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908120358644_serp_blogtab-만수동-전자담배-폐호흡_c2bfcd",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 폐호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 28,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224397752886",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224215126698",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

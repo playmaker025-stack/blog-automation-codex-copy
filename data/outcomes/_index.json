@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-08T11:24:14.009Z",
+  "updatedAt": "2026-09-08T12:04:01.574Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9297,27 +9297,29 @@
       "queries": {
         "integrated::만수동 전자담배 폐호흡": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-01T12:31:38.827Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-08T12:03:51.627Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T12:31:38.827Z"
+          "lastAttemptAt": "2026-09-08T12:03:51.627Z"
         },
         "blog_tab::만수동 전자담배 폐호흡": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-01T12:31:45.672Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-08T12:03:58.644Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T12:31:45.672Z"
+          "lastAttemptAt": "2026-09-08T12:03:58.644Z"
         }
       },
-      "lastCapturedAt": "2026-09-01T12:31:45.672Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-08T12:03:58.644Z",
+      "total": 4
     },
     "post-manual-mtjrrrb0": {
       "queries": {
@@ -9695,8 +9697,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-08T11:23:51.467Z",
-    "lastOkAt": "2026-09-08T11:23:51.467Z",
+    "lastRunAt": "2026-09-08T12:03:51.337Z",
+    "lastOkAt": "2026-09-08T12:03:51.337Z",
     "consecutiveFailedRuns": 0
   }
 }

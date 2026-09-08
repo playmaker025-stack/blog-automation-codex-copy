@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtinb8v8",
+  "source": "serp",
+  "capturedAt": "2026-09-08T12:03:51.627Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908120351627_serp_integrated-만수동-전자담배-폐호흡_db5bc9",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 폐호흡",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 33,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224397752886",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224377502048",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224264998918",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224092351412",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221223203749",
+        "rank": 15
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221511543607",
+        "rank": 17
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221177710918",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221230583105",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221179311242",
+        "rank": 24
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221856411906",
+        "rank": 27
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223151132170",
+        "rank": 32
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
