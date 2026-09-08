@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-08T06:45:02.492Z",
+  "updatedAt": "2026-09-08T07:05:01.320Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -7460,17 +7460,18 @@
         "blog_tab::작전역전자담배 베놈 팬텀": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:11:51.476Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:03:51.676Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:11:51.476Z"
+          "lastAttemptAt": "2026-09-08T07:03:51.676Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:04.805Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:03:51.676Z",
+      "total": 6
     },
     "post-manual-mt87zlum": {
       "queries": {
@@ -7489,17 +7490,18 @@
         "blog_tab::호라이즌 세이커즈 마스터": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:11:57.471Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:03:58.237Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:11:57.471Z"
+          "lastAttemptAt": "2026-09-08T07:03:58.237Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:11.325Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:03:58.237Z",
+      "total": 6
     },
     "post-manual-mt880qy8": {
       "queries": {
@@ -7518,17 +7520,18 @@
         "blog_tab::긱베이프 이지스 레전드": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:12:03.363Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:04.205Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:12:03.363Z"
+          "lastAttemptAt": "2026-09-08T07:04:04.205Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:17.663Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:04.205Z",
+      "total": 6
     },
     "post-manual-mt8818bw": {
       "queries": {
@@ -7547,17 +7550,18 @@
         "blog_tab::일회용 전담 추천": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:12:09.682Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:09.682Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:12:09.682Z"
+          "lastAttemptAt": "2026-09-08T07:04:09.682Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:24.356Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:09.682Z",
+      "total": 6
     },
     "post-manual-mt8824id": {
       "queries": {
@@ -7576,17 +7580,18 @@
         "blog_tab::인천전자담배 일회용 전담": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:12:15.984Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:15.964Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:12:15.984Z"
+          "lastAttemptAt": "2026-09-08T07:04:15.964Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:30.717Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:15.964Z",
+      "total": 6
     },
     "post-manual-mt882mm0": {
       "queries": {
@@ -7605,17 +7610,18 @@
         "blog_tab::부평전자담배 저스트포그 글렌트": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:12:22.319Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:22.027Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:12:22.319Z"
+          "lastAttemptAt": "2026-09-08T07:04:22.027Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:37.741Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:22.027Z",
+      "total": 6
     },
     "post-manual-mt883bsi": {
       "queries": {
@@ -7634,17 +7640,18 @@
         "blog_tab::구월동전자담배 아이다 기어미니": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:12:28.616Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:27.584Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:12:28.616Z"
+          "lastAttemptAt": "2026-09-08T07:04:27.584Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:44.502Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:27.584Z",
+      "total": 6
     },
     "post-manual-mt883vvt": {
       "queries": {
@@ -7663,17 +7670,18 @@
         "blog_tab::만수동전자담배 스누스 니코틴": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:12:34.630Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:33.949Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:12:34.630Z"
+          "lastAttemptAt": "2026-09-08T07:04:33.949Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:51.066Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:33.949Z",
+      "total": 6
     },
     "post-manual-mt884bc4": {
       "queries": {
@@ -7692,17 +7700,18 @@
         "blog_tab::인천 만수동에서 요즘": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:12:40.084Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:40.046Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:12:40.084Z"
+          "lastAttemptAt": "2026-09-08T07:04:40.046Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:24:57.860Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:40.046Z",
+      "total": 6
     },
     "post-manual-mt885elp": {
       "queries": {
@@ -7721,17 +7730,18 @@
         "blog_tab::부평전자담배 버블몬 그래피티2": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:12:46.435Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:45.592Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:12:46.435Z"
+          "lastAttemptAt": "2026-09-08T07:04:45.592Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:25:04.337Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:45.592Z",
+      "total": 6
     },
     "post-manual-mt885vh8": {
       "queries": {
@@ -7750,17 +7760,18 @@
         "blog_tab::인천 전자담배 일회용": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:31:38.617Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:51.877Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:31:38.617Z"
+          "lastAttemptAt": "2026-09-08T07:04:51.877Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:43:52.035Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:51.877Z",
+      "total": 6
     },
     "post-manual-mt886d1s": {
       "queries": {
@@ -7779,17 +7790,18 @@
         "blog_tab::부평전자담배 몰바 역대급": {
           "okAgeHours": [
             150,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T07:31:45.275Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T07:04:58.278Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T07:31:45.275Z"
+          "lastAttemptAt": "2026-09-08T07:04:58.278Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T05:43:59.428Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T07:04:58.278Z",
+      "total": 6
     },
     "post-manual-mt886t9n": {
       "queries": {
@@ -9627,8 +9639,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-08T06:43:51.220Z",
-    "lastOkAt": "2026-09-08T06:43:51.220Z",
+    "lastRunAt": "2026-09-08T07:03:51.328Z",
+    "lastOkAt": "2026-09-08T07:03:51.328Z",
     "consecutiveFailedRuns": 0
   }
 }

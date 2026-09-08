@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt8824id",
+  "source": "serp",
+  "capturedAt": "2026-09-08T07:04:15.964Z",
+  "postAgeHours": 338,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908070415964_serp_blogtab-인천전자담배-일회용-전담_dc7fe8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천전자담배 일회용 전담"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 일회용 전담",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224394405759",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224347729064",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

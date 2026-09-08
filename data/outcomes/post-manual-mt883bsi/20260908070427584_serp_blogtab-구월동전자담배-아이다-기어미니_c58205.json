@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt883bsi",
+  "source": "serp",
+  "capturedAt": "2026-09-08T07:04:27.584Z",
+  "postAgeHours": 338,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908070427584_serp_blogtab-구월동전자담배-아이다-기어미니_c58205",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동전자담배 아이다 기어미니"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 아이다 기어미니",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
