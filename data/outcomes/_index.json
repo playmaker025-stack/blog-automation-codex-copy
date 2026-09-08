@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-08T12:04:01.574Z",
+  "updatedAt": "2026-09-08T12:24:14.928Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9694,11 +9694,57 @@
       },
       "lastCapturedAt": "2026-09-08T11:23:59.053Z",
       "total": 2
+    },
+    "post-manual-mtsmngli": {
+      "queries": {
+        "integrated::전자담배단맛": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-08T12:23:52.162Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-08T12:23:52.162Z"
+        },
+        "blog_tab::전자담배단맛": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-08T12:23:59.123Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-08T12:23:59.123Z"
+        },
+        "integrated::액상단맛": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-08T12:24:05.460Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-08T12:24:05.460Z"
+        },
+        "blog_tab::액상단맛": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-08T12:24:12.177Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-08T12:24:12.177Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-08T12:24:12.177Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-08T12:03:51.337Z",
-    "lastOkAt": "2026-09-08T12:03:51.337Z",
+    "lastRunAt": "2026-09-08T12:23:51.661Z",
+    "lastOkAt": "2026-09-08T12:23:51.661Z",
     "consecutiveFailedRuns": 0
   }
 }
