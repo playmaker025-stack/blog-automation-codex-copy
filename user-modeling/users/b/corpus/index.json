@@ -2,6 +2,22 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-c24ed298",
+      "title": "인천 전자담배 기기 고장 원인별 점검과 효과적 해결법",
+      "category": "b",
+      "tags": [
+        "인천",
+        "전자담배",
+        "기기",
+        "고장",
+        "원인",
+        "해결법"
+      ],
+      "wordCount": 3442,
+      "publishedAt": "2026-09-08T11:04:22.264Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-c24ed298.md"
+    },
+    {
       "sampleId": "published-post-manual-mtpqnccb",
       "title": "간석동 전자담배 폐호흡 모드액상 포켓쥬스 다비도프",
       "category": "published-post",
@@ -360,5 +376,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-09-06T11:38:38.149Z"
+  "lastUpdated": "2026-09-08T11:04:35.455Z"
 }
