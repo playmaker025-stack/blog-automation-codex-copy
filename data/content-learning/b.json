@@ -2,6 +2,19 @@
   "userId": "b",
   "entries": [
     {
+      "postId": "post-c24ed298",
+      "topicId": "topic-554f8152",
+      "userId": "b",
+      "title": "인천 전자담배 기기 고장 원인별 점검과 효과적 해결법",
+      "naverPostUrl": "https://blog.naver.com/youferst/224405167840",
+      "evalScore": 52,
+      "wordCount": 3442,
+      "publishedAt": "2026-09-08T11:04:22.264Z",
+      "topicSource": "generated",
+      "contentKind": "hub",
+      "learnedAt": "2026-09-08T11:04:32.166Z"
+    },
+    {
       "postId": "post-manual-mtpqnccb",
       "topicId": "",
       "userId": "b",
@@ -262,5 +275,5 @@
       "learnedAt": "2026-07-04T11:06:13.483Z"
     }
   ],
-  "updatedAt": "2026-09-06T11:38:33.601Z"
+  "updatedAt": "2026-09-08T11:04:32.166Z"
 }
