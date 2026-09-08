@@ -44,6 +44,12 @@ function normalize(raw: Partial<UsageLedger> | null): UsageLedger {
     lifetimeCalls: Number.isFinite(raw.lifetimeCalls) ? Number(raw.lifetimeCalls) : 0,
     days: Array.isArray(raw.days) ? raw.days : [],
     balanceMarks: Array.isArray(raw.balanceMarks) ? raw.balanceMarks : [],
+    // 이 줄이 없어서 공급자별 누적이 불러올 때마다 버려졌다. 그러면 저장할 때
+    // 그 순간 배치만 남고, 잔액 게이지의 "표시 이후 쓴 금액"이 영원히 0이 된다.
+    // 실제로 2주 동안 게이지가 $4.68에 멈춰 있는 사이 크레딧이 다 떨어졌다.
+    ...(raw.lifetimeByProvider && typeof raw.lifetimeByProvider === "object"
+      ? { lifetimeByProvider: raw.lifetimeByProvider }
+      : {}),
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : base.updatedAt,
   };
 }

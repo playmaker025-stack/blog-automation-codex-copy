@@ -336,3 +336,65 @@ describe("PR30 경보 등급", () => {
     assert.equal(usageLevel(s), "critical");
   });
 });
+
+describe("PR46 잔액 게이지는 일별 기록에서 센다", () => {
+  const day = (date, model, usd, calls = 1) => ({
+    date,
+    models: {
+      [model]: {
+        calls,
+        inputTokens: 0,
+        outputTokens: 0,
+        cacheReadTokens: 0,
+        cacheWriteTokens: 0,
+        usd,
+        unpriced: false,
+      },
+    },
+  });
+
+  // 실제로 겪은 모양: 공급자별 누적값이 불러오기에서 버려져 거의 비어 있는데,
+  // 일별 기록에는 Anthropic 지출이 그대로 남아 있다. 누적값에 기대면 게이지가
+  // "표시 이후 0원 씀"이라며 2주 동안 멈춰 있고, 그 사이 크레딧이 바닥난다.
+  const broken = {
+    ...emptyLedger(),
+    lifetimeUsd: 6.63,
+    lifetimeCalls: 247,
+    lifetimeByProvider: { openai: 0.001172 },
+    balanceMarks: [
+      {
+        at: "2026-08-25T07:22:51.829Z",
+        balanceUsd: 4.68,
+        spentAtMarkUsd: 0,
+        provider: "anthropic",
+      },
+    ],
+    days: [
+      day("2026-08-24", "claude-sonnet-4-6", 0.5),
+      day("2026-08-27", "claude-sonnet-4-6", 0.64, 7),
+      day("2026-09-04", "claude-sonnet-4-6", 0.43, 6),
+      day("2026-09-07", "gpt-4.1-mini", 0.02, 8),
+    ],
+  };
+
+  const summary = summarize(broken, { now: new Date("2026-09-08T02:00:00Z") });
+
+  test("누적값이 비어 있어도 표시 이후 지출을 센다", () => {
+    near(summary.spentSinceMarkUsd, 1.07, 1e-9);
+  });
+
+  test("표시한 날과 그 이전 지출은 빼고 센다", () => {
+    // 8-24의 0.5는 표시(8-25) 이전이라 들어가지 않는다. 표시 당일 지출도
+    // 표시 전인지 후인지 알 수 없어 하한에서 뺀다.
+    assert.ok(summary.spentSinceMarkUsd < 1.5);
+  });
+
+  test("남은 금액이 그만큼 줄어든다", () => {
+    near(summary.estimatedRemainingUsd, 4.68 - 1.07, 1e-9);
+  });
+
+  test("호출이 있었으면 조용한 공급자가 아니다", () => {
+    assert.equal(summary.markedProviderCalls, 13);
+    assert.equal(summary.markedProviderSilent, false);
+  });
+});

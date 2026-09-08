@@ -181,6 +181,41 @@ export function pruneLedger(ledger: UsageLedger, keepDays: number = DEFAULT_KEEP
  * 잔액 스냅샷을 찍는다. 지금까지의 누적 지출을 기준점으로 함께 저장한다.
  * 이력은 최근 20개만 남긴다 — 감사용이지 계산에는 최신 것만 쓴다.
  */
+/**
+ * 어느 날짜 이후로 그 공급자에 나간 금액. 일별 기록에서 직접 센다.
+ *
+ * 따로 굴리는 누적값에 기대지 않는다. 그 누적값이 불러오기에서 한 번 버려진
+ * 탓에 게이지가 2주 동안 멈춰 있었고, 그 사이 크레딧이 바닥났는데도 "남아
+ * 있음"으로 보였다. 일별 기록은 화면에 그대로 쓰이는 값이라 틀어질 여지가 적다.
+ *
+ * 표시한 날 하루치는 통째로 센다. 표시 시각 이전 지출까지 포함되므로 잔액이
+ * 실제보다 적게 보일 수 있는데, 많게 보이는 것보다 그쪽이 안전하다.
+ */
+/** "YYYY-MM-DD" 다음 날. 표시한 당일을 빼고 세기 위한 것. */
+export function dayAfter(dateKey: string): string {
+  const next = new Date(`${dateKey}T00:00:00Z`);
+  next.setUTCDate(next.getUTCDate() + 1);
+  return next.toISOString().slice(0, 10);
+}
+
+export function spentByProviderSince(
+  ledger: UsageLedger,
+  provider: Provider,
+  fromDate: string
+): { usd: number; calls: number } {
+  let usd = 0;
+  let calls = 0;
+  for (const day of ledger.days) {
+    if (day.date < fromDate) continue;
+    for (const [model, bucket] of Object.entries(day.models)) {
+      if (providerOf(model) !== provider) continue;
+      usd += bucket.usd;
+      calls += bucket.calls;
+    }
+  }
+  return { usd, calls };
+}
+
 export function markBalance(
   ledger: UsageLedger,
   balanceUsd: number,
@@ -334,21 +369,38 @@ export function summarize(
     // Anthropic 잔액이 OpenAI 지출로 줄어든다. 실측(2026-08-25) — 60건 전부
     // OpenAI였는데 Anthropic 잔액 게이지가 그만큼 깎여 있었다.
     markedProvider = mark.provider ?? "anthropic";
-    const spentNow = (ledger.lifetimeByProvider ?? {})[markedProvider] ?? 0;
-    spentSinceMarkUsd = Math.max(0, spentNow - mark.spentAtMarkUsd);
+
+    // 잔액은 공급자별로 따로 산다. 예전에는 전체 누적 지출을 뺐는데, 그러면
+    // Anthropic 잔액이 OpenAI 지출로 줄어든다. 실측(2026-08-25) — 60건 전부
+    // OpenAI였는데 Anthropic 잔액 게이지가 그만큼 깎여 있었다.
+    //
+    // 누적값을 쓰는 이유는 일별 기록이 오래되면 정리되기 때문이다. 일별에서만
+    // 세면 정리된 날의 지출이 사라져 잔액이 저절로 늘어난다.
+    const markDate = kstDateKey(mark.at);
+    const fromDays = spentByProviderSince(ledger, markedProvider, markDate);
+    markedProviderCalls = fromDays.calls;
+
+    const lifetimeForProvider = (ledger.lifetimeByProvider ?? {})[markedProvider];
+    const fromLifetime =
+      typeof lifetimeForProvider === "number"
+        ? Math.max(0, lifetimeForProvider - mark.spentAtMarkUsd)
+        : 0;
+
+    // 표시한 "다음 날"부터의 지출은 확실한 하한이다. 표시 이전 지출이 섞일 수
+    // 없기 때문이다. 누적값이 이보다 작으면 누적값이 뒤처진 것이다.
+    //
+    // 실제로 그런 일이 있었다: 장부를 불러올 때 공급자별 누적이 통째로
+    // 버려지고 있어서, 게이지가 2주 동안 "$4.68 남음"에 멈춘 채 크레딧이
+    // 바닥났다. 누적값 하나만 믿으면 그 상태를 알아챌 방법이 없다.
+    const afterMarkDay = spentByProviderSince(ledger, markedProvider, dayAfter(markDate));
+    spentSinceMarkUsd = Math.max(fromLifetime, afterMarkDay.usd);
     estimatedRemainingUsd = mark.balanceUsd - spentSinceMarkUsd;
 
     // 거절된 호출은 요금이 0원이다. 그래서 "완전히 차단됨"과 "잘 있는데 안 씀"이
     // 지출 0으로 똑같이 보인다. 다른 공급자는 도는데 이쪽만 조용하면 의심해야 한다.
     // 스냅샷 "이후" 호출만 센다. 전체 기간으로 세면 석 달 전 호출 한 건이
     // 오늘의 완전한 차단을 가려버린다 — 이 신호가 쓸모없어지는 지점이 거기다.
-    const markDate = kstDateKey(mark.at);
-    for (const day of ledger.days) {
-      if (day.date < markDate) continue;
-      for (const [model, bucket] of Object.entries(day.models)) {
-        if (providerOf(model) === markedProvider) markedProviderCalls += bucket.calls;
-      }
-    }
+
     const otherCalls = [...providerAcc.values()]
       .filter((entry) => entry.provider !== markedProvider)
       .reduce((sum, entry) => sum + entry.calls, 0);
