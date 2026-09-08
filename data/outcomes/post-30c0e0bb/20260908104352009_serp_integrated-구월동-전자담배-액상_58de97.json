@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-30c0e0bb",
+  "source": "serp",
+  "capturedAt": "2026-09-08T10:43:52.009Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908104352009_serp_integrated-구월동-전자담배-액상_58de97",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 43,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 14
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224073995714",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
