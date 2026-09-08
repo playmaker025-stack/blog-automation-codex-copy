@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-08T07:45:01.438Z",
+  "updatedAt": "2026-09-08T08:04:01.439Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -8540,17 +8540,18 @@
         "blog_tab::무니코틴 액상 유저에게도": {
           "okAgeHours": [
             151,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T08:11:50.880Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T08:03:51.859Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T08:11:50.880Z"
+          "lastAttemptAt": "2026-09-08T08:03:51.859Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T06:24:05.027Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T08:03:51.859Z",
+      "total": 6
     },
     "post-manual-mt89bp12": {
       "queries": {
@@ -8569,17 +8570,18 @@
         "blog_tab::부평전자담배 크로스미니6 후기": {
           "okAgeHours": [
             151,
-            170
+            170,
+            338
           ],
-          "lastCapturedAt": "2026-09-01T08:11:56.343Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-08T08:03:58.446Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-01T08:11:56.343Z"
+          "lastAttemptAt": "2026-09-08T08:03:58.446Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T06:24:11.662Z",
-      "total": 5
+      "lastCapturedAt": "2026-09-08T08:03:58.446Z",
+      "total": 6
     },
     "post-9177d698": {
       "queries": {
@@ -9663,8 +9665,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-08T07:43:51.190Z",
-    "lastOkAt": "2026-09-08T07:43:51.190Z",
+    "lastRunAt": "2026-09-08T08:03:51.434Z",
+    "lastOkAt": "2026-09-08T08:03:51.434Z",
     "consecutiveFailedRuns": 0
   }
 }
