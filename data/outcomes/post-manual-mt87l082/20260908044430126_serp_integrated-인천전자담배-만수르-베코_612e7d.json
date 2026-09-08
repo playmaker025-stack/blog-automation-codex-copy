@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87l082",
+  "source": "serp",
+  "capturedAt": "2026-09-08T04:44:30.126Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260908044430126_serp_integrated-인천전자담배-만수르-베코_612e7d",
+  "target": {
+    "surface": "integrated",
+    "query": "인천전자담배 만수르 베코"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 만수르 베코",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 9,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224190850033",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223972693316",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223977498009",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224044912294",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223973336085",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223972620280",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224046644552",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224339588790",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
