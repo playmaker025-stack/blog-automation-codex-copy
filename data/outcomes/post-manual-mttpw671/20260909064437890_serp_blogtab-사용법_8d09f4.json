@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mttpw671",
+  "source": "serp",
+  "capturedAt": "2026-09-09T06:44:37.890Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260909064437890_serp_blogtab-사용법_8d09f4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "사용법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "사용법",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
