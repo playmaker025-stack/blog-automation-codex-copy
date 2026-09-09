@@ -11658,7 +11658,56 @@
       "publishedAt": "2026-09-08T12:09:57.504Z",
       "createdAt": "2026-09-08T12:09:57.504Z",
       "updatedAt": "2026-09-08T12:09:57.504Z"
+    },
+    {
+      "postId": "post-manual-mttpw671",
+      "topicId": "",
+      "userId": "c",
+      "title": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224406047637",
+      "wordCount": 0,
+      "targetKeywords": [
+        "닷박스 220W V2",
+        "닷모드",
+        "부평"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224406047637",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224406047637"
+        },
+        "targetKeywords": [
+          {
+            "query": "닷박스 220W V2",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "닷모드",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "부평",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-09T06:28:29.776Z",
+        "keywordsRevisedAt": "2026-09-09T06:28:29.776Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-09T06:28:29.776Z",
+      "createdAt": "2026-09-09T06:28:29.776Z",
+      "updatedAt": "2026-09-09T06:28:29.776Z"
     }
   ],
-  "lastUpdated": "2026-09-08T12:09:57.504Z"
+  "lastUpdated": "2026-09-09T06:28:29.776Z"
 }
