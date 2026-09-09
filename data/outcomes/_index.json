@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-09T13:04:41.946Z",
+  "updatedAt": "2026-09-09T13:24:02.683Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5784,27 +5784,29 @@
       "queries": {
         "integrated::전자담배 액상이 갑자기": {
           "okAgeHours": [
-            432
+            432,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:36:00.563Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-09T13:23:52.567Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:36:00.563Z"
+          "lastAttemptAt": "2026-09-09T13:23:52.567Z"
         },
         "blog_tab::전자담배 액상이 갑자기": {
           "okAgeHours": [
-            452
+            452,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:32:32.579Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-09T13:23:59.735Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:32:32.579Z"
+          "lastAttemptAt": "2026-09-09T13:23:59.735Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:32:32.579Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-09T13:23:59.735Z",
+      "total": 4
     },
     "post-8d184c88": {
       "queries": {
@@ -9923,8 +9925,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-09T13:03:51.943Z",
-    "lastOkAt": "2026-09-09T13:03:51.943Z",
+    "lastRunAt": "2026-09-09T13:23:52.289Z",
+    "lastOkAt": "2026-09-09T13:23:52.289Z",
     "consecutiveFailedRuns": 0
   }
 }
