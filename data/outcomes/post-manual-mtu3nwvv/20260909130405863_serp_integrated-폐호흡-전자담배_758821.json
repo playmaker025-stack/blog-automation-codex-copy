@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtu3nwvv",
+  "source": "serp",
+  "capturedAt": "2026-09-09T13:04:05.863Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260909130405863_serp_integrated-폐호흡-전자담배_758821",
+  "target": {
+    "surface": "integrated",
+    "query": "폐호흡 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡 전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224091389416",
+        "rank": 24
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224097348814",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
