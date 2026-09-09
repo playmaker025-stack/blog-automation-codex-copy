@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-09T06:44:40.827Z",
+  "updatedAt": "2026-09-09T07:04:14.730Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9325,47 +9325,51 @@
       "queries": {
         "integrated::미추홀구 전자담배": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-02T07:31:39.729Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-09T07:03:52.179Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-02T07:31:39.729Z"
+          "lastAttemptAt": "2026-09-09T07:03:52.179Z"
         },
         "blog_tab::미추홀구 전자담배": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-02T07:31:46.958Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-09T07:03:59.344Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-02T07:31:46.958Z"
+          "lastAttemptAt": "2026-09-09T07:03:59.344Z"
         },
         "integrated::액상 보관법": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-02T07:31:53.182Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-09T07:04:05.365Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-02T07:31:53.182Z"
+          "lastAttemptAt": "2026-09-09T07:04:05.365Z"
         },
         "blog_tab::액상 보관법": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-02T07:31:59.834Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-09T07:04:12.082Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-02T07:31:59.834Z"
+          "lastAttemptAt": "2026-09-09T07:04:12.082Z"
         }
       },
-      "lastCapturedAt": "2026-09-02T07:31:59.834Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-09T07:04:12.082Z",
+      "total": 8
     },
     "post-manual-mtk3nu57": {
       "queries": {
@@ -9829,8 +9833,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-09T06:43:51.900Z",
-    "lastOkAt": "2026-09-09T06:43:51.900Z",
+    "lastRunAt": "2026-09-09T07:03:51.827Z",
+    "lastOkAt": "2026-09-09T07:03:51.827Z",
     "consecutiveFailedRuns": 0
   }
 }

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtjrrrb0",
+  "source": "serp",
+  "capturedAt": "2026-09-09T07:03:52.179Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260909070352179_serp_integrated-미추홀구-전자담배_e2ab60",
+  "target": {
+    "surface": "integrated",
+    "query": "미추홀구 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "미추홀구 전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 28,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224398637176",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
