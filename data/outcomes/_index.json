@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-09T08:44:02.486Z",
+  "updatedAt": "2026-09-09T12:44:00.631Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9377,27 +9377,29 @@
       "queries": {
         "integrated::전자담배 액상을 차에": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-02T13:11:40.048Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-09T12:43:52.462Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-02T13:11:40.048Z"
+          "lastAttemptAt": "2026-09-09T12:43:52.462Z"
         },
         "blog_tab::전자담배 액상을 차에": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-02T13:11:46.957Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-09T12:43:58.647Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-02T13:11:46.957Z"
+          "lastAttemptAt": "2026-09-09T12:43:58.647Z"
         }
       },
-      "lastCapturedAt": "2026-09-02T13:11:46.957Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-09T12:43:58.647Z",
+      "total": 4
     },
     "post-manual-mtljfiqv": {
       "queries": {
@@ -9835,8 +9837,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-09T08:43:52.258Z",
-    "lastOkAt": "2026-09-09T08:43:52.258Z",
+    "lastRunAt": "2026-09-09T12:43:52.178Z",
+    "lastOkAt": "2026-09-09T12:43:52.178Z",
     "consecutiveFailedRuns": 0
   }
 }

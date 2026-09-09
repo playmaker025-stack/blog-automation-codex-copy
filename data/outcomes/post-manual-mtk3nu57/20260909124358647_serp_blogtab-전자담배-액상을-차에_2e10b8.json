@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtk3nu57",
+  "source": "serp",
+  "capturedAt": "2026-09-09T12:43:58.647Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260909124358647_serp_blogtab-전자담배-액상을-차에_2e10b8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상을 차에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상을 차에",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224398960582",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224315609096",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224362877173",
+        "rank": 14
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 17
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224329849103",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
