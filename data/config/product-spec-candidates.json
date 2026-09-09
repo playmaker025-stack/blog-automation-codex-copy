@@ -4804,7 +4804,128 @@
       "postTitle": "간석동 전자담배 폐호흡 모드액상 포켓쥬스 다비도프",
       "extractedAt": "2026-09-06T11:38:49.293Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-fc23fe04",
+      "product": "닷박스 220W V2",
+      "field": "sizeMm",
+      "value": "140.06* 50.61* 25mm",
+      "evidence": "사이즈 : 140.06* 50.61* 25mm",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-dbe8d7c9",
+      "product": "닷박스 220W V2",
+      "field": "weightG",
+      "value": "135.91g",
+      "evidence": "무게 : 135.91g",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-d7015b9c",
+      "product": "닷박스 220W V2",
+      "field": "batteryMah",
+      "value": "18650 2개 (별도구매)",
+      "evidence": "배터리 : 18650 2개 (별도구매)",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-0b30f260",
+      "product": "닷박스 220W V2",
+      "field": "wattRange",
+      "value": "5~220W",
+      "evidence": "출력 : 5~220W",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-6b1c8c9f",
+      "product": "닷박스 220W V2",
+      "field": "charging",
+      "value": "C타입 5V/2A",
+      "evidence": "충전 : C타입 5V/2A",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-64607d5a",
+      "product": "닷박스 220W V2",
+      "field": "wattControl",
+      "value": "출력 조절 가능",
+      "evidence": "기기 하단 +,- 버튼으로 조절 (원하는 출력값으로 조절 가능)",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-274b4ba3",
+      "product": "닷탱크 맥스 V2",
+      "field": "liquidMl",
+      "value": "4ml",
+      "evidence": "탱크 용량 : 4ml",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-8f1cf65f",
+      "product": "닷탱크 맥스 V2",
+      "field": "resistanceOhm",
+      "value": "0.1~3.0옴",
+      "evidence": "인식 저항 : 0.1~3.0옴",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-edbdd86d",
+      "product": "닷탱크 맥스 V2",
+      "field": "resistanceOhm",
+      "value": "0.15옴",
+      "evidence": "0.15옴 코일 (탱크체결)",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-03df2d86",
+      "product": "닷탱크 맥스 V2",
+      "field": "resistanceOhm",
+      "value": "0.3옴",
+      "evidence": "0.3옴코일",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-7c3956c6",
+      "product": "닷탱크 맥스 V2",
+      "field": "drawStyle",
+      "value": "입호흡 또는 폐호흡",
+      "evidence": "0.15옴 (70~85W) 0.3옴 (25~40W) 0.6옴 (18~22W) 3가지의 전용 코일을 통해서 입호흡 또는 폐호흡을 자유롭게 선택",
+      "postId": "post-manual-mttpw671",
+      "postTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
+      "extractedAt": "2026-09-09T06:28:49.985Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-09-06T11:38:50.092Z"
+  "updatedAt": "2026-09-09T06:28:50.877Z"
 }
