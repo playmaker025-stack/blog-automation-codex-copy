@@ -11712,7 +11712,62 @@
       "publishedAt": "2026-09-09T06:28:29.776Z",
       "createdAt": "2026-09-09T06:28:29.776Z",
       "updatedAt": "2026-09-09T06:29:10.309Z"
+    },
+    {
+      "postId": "post-manual-mtu3nwvv",
+      "topicId": "",
+      "userId": "e",
+      "title": "인천 전자담배 폐호흡 신제품 닷박스 220W V2",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/godmaker0/224406431446",
+      "wordCount": 0,
+      "targetKeywords": [
+        "인천전자담배",
+        "폐호흡 전자담배",
+        "신제품 전자담배",
+        "닷박스"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "godmaker0",
+          "logNo": "224406431446",
+          "canonicalUrl": "https://blog.naver.com/godmaker0/224406431446"
+        },
+        "targetKeywords": [
+          {
+            "query": "인천전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "폐호흡 전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "신제품 전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "닷박스",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "인천 전자담배 폐호흡 신제품 닷박스 220W V2",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-09T12:54:05.861Z",
+        "keywordsRevisedAt": "2026-09-09T12:54:05.861Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-09T12:54:05.861Z",
+      "createdAt": "2026-09-09T12:54:05.861Z",
+      "updatedAt": "2026-09-09T12:54:05.861Z"
     }
   ],
-  "lastUpdated": "2026-09-09T06:29:10.309Z"
+  "lastUpdated": "2026-09-09T12:54:05.861Z"
 }
