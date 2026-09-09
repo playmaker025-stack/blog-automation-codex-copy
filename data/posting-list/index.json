@@ -11690,7 +11690,12 @@
             "source": "user"
           },
           {
-            "query": "부평",
+            "query": "스펙",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "사용법",
             "role": "secondary",
             "source": "user"
           }
@@ -11698,7 +11703,7 @@
         "publishedTitle": "닷박스 220W V2 구성품, 스펙, 사용법!",
         "contentHash": "811c9dc5",
         "trackedFrom": "2026-09-09T06:28:29.776Z",
-        "keywordsRevisedAt": "2026-09-09T06:28:29.776Z",
+        "keywordsRevisedAt": "2026-09-09T06:29:10.309Z",
         "backfilled": true
       },
       "evalScore": null,
@@ -11706,8 +11711,8 @@
       "pendingApproval": null,
       "publishedAt": "2026-09-09T06:28:29.776Z",
       "createdAt": "2026-09-09T06:28:29.776Z",
-      "updatedAt": "2026-09-09T06:28:29.776Z"
+      "updatedAt": "2026-09-09T06:29:10.309Z"
     }
   ],
-  "lastUpdated": "2026-09-09T06:28:29.776Z"
+  "lastUpdated": "2026-09-09T06:29:10.309Z"
 }
