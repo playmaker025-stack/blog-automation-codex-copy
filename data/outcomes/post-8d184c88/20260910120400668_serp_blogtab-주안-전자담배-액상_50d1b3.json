@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8d184c88",
+  "source": "serp",
+  "capturedAt": "2026-09-10T12:04:00.668Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260910120400668_serp_blogtab-주안-전자담배-액상_50d1b3",
+  "target": {
+    "surface": "blog_tab",
+    "query": "주안 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "주안 전자담배 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224377821083",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224258931655",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224188587181",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 14
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224290632172",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

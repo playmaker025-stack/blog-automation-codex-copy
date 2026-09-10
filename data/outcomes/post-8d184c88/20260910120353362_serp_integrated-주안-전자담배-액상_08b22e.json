@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8d184c88",
+  "source": "serp",
+  "capturedAt": "2026-09-10T12:03:53.362Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260910120353362_serp_integrated-주안-전자담배-액상_08b22e",
+  "target": {
+    "surface": "integrated",
+    "query": "주안 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "주안 전자담배 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 33,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224198233840",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
