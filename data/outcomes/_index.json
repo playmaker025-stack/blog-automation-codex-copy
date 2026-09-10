@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-10T06:24:02.341Z",
+  "updatedAt": "2026-09-10T11:24:56.589Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -8598,28 +8598,30 @@
         "integrated::장수동 전자담배 액상": {
           "okAgeHours": [
             76,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:11:39.939Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:23:53.293Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:11:39.939Z"
+          "lastAttemptAt": "2026-09-10T11:23:53.293Z"
         },
         "blog_tab::장수동 전자담배 액상": {
           "okAgeHours": [
             97,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:11:47.314Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:00.774Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:11:47.314Z"
+          "lastAttemptAt": "2026-09-10T11:24:00.774Z"
         }
       },
-      "lastCapturedAt": "2026-09-03T11:11:47.314Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-10T11:24:00.774Z",
+      "total": 6
     },
     "post-manual-mtbggla6": {
       "queries": {
@@ -8644,94 +8646,102 @@
         "integrated::인천 고농도 전자담배": {
           "okAgeHours": [
             87,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:31:40.563Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:07.097Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:31:40.563Z"
+          "lastAttemptAt": "2026-09-10T11:24:07.097Z"
         },
         "integrated::네스티원": {
           "okAgeHours": [
             87,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:31:47.732Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:14.080Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:31:47.732Z"
+          "lastAttemptAt": "2026-09-10T11:24:14.080Z"
         },
         "integrated::인천네스티원": {
           "okAgeHours": [
             87,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:31:54.448Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:21.277Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:31:54.448Z"
+          "lastAttemptAt": "2026-09-10T11:24:21.277Z"
         },
         "integrated::네스티 고농도": {
           "okAgeHours": [
             87,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:32:01.218Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:28.072Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:32:01.218Z"
+          "lastAttemptAt": "2026-09-10T11:24:28.072Z"
         },
         "blog_tab::인천 고농도 전자담배": {
           "okAgeHours": [
             97,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:32:07.309Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:35.034Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:32:07.309Z"
+          "lastAttemptAt": "2026-09-10T11:24:35.034Z"
         },
         "blog_tab::네스티원": {
           "okAgeHours": [
             97,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:32:13.629Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:41.357Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:32:13.629Z"
+          "lastAttemptAt": "2026-09-10T11:24:41.357Z"
         },
         "blog_tab::인천네스티원": {
           "okAgeHours": [
             97,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:32:19.940Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:47.607Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:32:19.940Z"
+          "lastAttemptAt": "2026-09-10T11:24:47.607Z"
         },
         "blog_tab::네스티 고농도": {
           "okAgeHours": [
             97,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-03T11:32:25.646Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-10T11:24:53.891Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T11:32:25.646Z"
+          "lastAttemptAt": "2026-09-10T11:24:53.891Z"
         }
       },
-      "lastCapturedAt": "2026-09-03T11:32:25.646Z",
-      "total": 25
+      "lastCapturedAt": "2026-09-10T11:24:53.891Z",
+      "total": 33
     },
     "post-a28929d7": {
       "queries": {
@@ -9927,8 +9937,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-10T06:23:52.881Z",
-    "lastOkAt": "2026-09-10T06:23:52.881Z",
+    "lastRunAt": "2026-09-10T11:23:52.781Z",
+    "lastOkAt": "2026-09-10T11:23:52.781Z",
     "consecutiveFailedRuns": 0
   }
 }
