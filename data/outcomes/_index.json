@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-10T12:04:03.406Z",
+  "updatedAt": "2026-09-10T12:44:28.673Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5868,27 +5868,29 @@
       "queries": {
         "integrated::전자담배 액상 가격이": {
           "okAgeHours": [
-            409
+            409,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:36:19.999Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-10T12:43:53.327Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:36:19.999Z"
+          "lastAttemptAt": "2026-09-10T12:43:53.327Z"
         },
         "blog_tab::전자담배 액상 가격이": {
           "okAgeHours": [
-            429
+            429,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:51:37.835Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-10T12:44:00.406Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:51:37.835Z"
+          "lastAttemptAt": "2026-09-10T12:44:00.406Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:51:37.835Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-10T12:44:00.406Z",
+      "total": 4
     },
     "post-154bea02": {
       "queries": {
@@ -9421,47 +9423,51 @@
       "queries": {
         "integrated::전자담배 뜨거움": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-03T13:11:40.352Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-10T12:44:06.665Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T13:11:40.352Z"
+          "lastAttemptAt": "2026-09-10T12:44:06.665Z"
         },
         "blog_tab::전자담배 뜨거움": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-03T13:11:47.175Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-10T12:44:13.136Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T13:11:47.175Z"
+          "lastAttemptAt": "2026-09-10T12:44:13.136Z"
         },
         "integrated::전자담배 입술 뜨거움": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-03T13:11:53.491Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-10T12:44:19.375Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T13:11:53.491Z"
+          "lastAttemptAt": "2026-09-10T12:44:19.375Z"
         },
         "blog_tab::전자담배 입술 뜨거움": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-03T13:11:59.572Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-10T12:44:25.988Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-03T13:11:59.572Z"
+          "lastAttemptAt": "2026-09-10T12:44:25.988Z"
         }
       },
-      "lastCapturedAt": "2026-09-03T13:11:59.572Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-10T12:44:25.988Z",
+      "total": 8
     },
     "post-c40d3582": {
       "queries": {
@@ -9939,8 +9945,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-10T12:03:52.926Z",
-    "lastOkAt": "2026-09-10T12:03:52.926Z",
+    "lastRunAt": "2026-09-10T12:43:52.889Z",
+    "lastOkAt": "2026-09-10T12:43:52.889Z",
     "consecutiveFailedRuns": 0
   }
 }
