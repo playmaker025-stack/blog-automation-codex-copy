@@ -11773,16 +11773,38 @@
       "topicId": "topic-f723e104",
       "userId": "c",
       "title": "전담 팟 오래 쓰는법 만수르 전자담배가 알려드릴게요!",
-      "status": "ready",
-      "naverPostUrl": null,
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224408594214",
       "evalScore": 62,
       "wordCount": 3066,
       "compositionSessionId": "pipe-30f7c819",
       "pendingApproval": null,
       "createdAt": "2026-09-11T07:37:52.994Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-11T07:40:30.361Z"
+      "publishedAt": "2026-09-11T09:47:33.667Z",
+      "updatedAt": "2026-09-11T09:47:33.907Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224408594214",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224408594214"
+        },
+        "targetKeywords": [
+          {
+            "query": "전담 팟 오래 쓰는법",
+            "role": "primary",
+            "source": "topic"
+          },
+          {
+            "query": "전담 팟 오래",
+            "role": "secondary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전담 팟 오래 쓰는법 만수르 전자담배가 알려드릴게요!",
+        "contentHash": "9c01e798",
+        "trackedFrom": "2026-09-11T09:47:34.273Z"
+      }
     }
   ],
-  "lastUpdated": "2026-09-11T07:40:30.361Z"
+  "lastUpdated": "2026-09-11T09:47:33.907Z"
 }
