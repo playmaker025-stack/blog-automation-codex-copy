@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mssxeywf",
+  "source": "serp",
+  "capturedAt": "2026-09-11T12:04:00.771Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260911120400771_serp_blogtab-전자담배-새-액상을_c400aa",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 새 액상을"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 새 액상을",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 6,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224339591207",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224378891413",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
