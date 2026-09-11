@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-11T12:25:09.113Z",
+  "updatedAt": "2026-09-11T12:44:03.708Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5896,27 +5896,29 @@
       "queries": {
         "integrated::전자담배로 바꿀때 가장": {
           "okAgeHours": [
-            384
+            384,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:36:26.147Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-11T12:43:53.874Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:36:26.147Z"
+          "lastAttemptAt": "2026-09-11T12:43:53.874Z"
         },
         "blog_tab::전자담배로 바꿀때 가장": {
           "okAgeHours": [
-            405
+            405,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:51:44.545Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-11T12:44:00.995Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:51:44.545Z"
+          "lastAttemptAt": "2026-09-11T12:44:00.995Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:51:44.545Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-11T12:44:00.995Z",
+      "total": 4
     },
     "post-manual-mssxeywf": {
       "queries": {
@@ -10121,8 +10123,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-11T12:23:53.687Z",
-    "lastOkAt": "2026-09-11T12:23:53.687Z",
+    "lastRunAt": "2026-09-11T12:43:53.473Z",
+    "lastOkAt": "2026-09-11T12:43:53.473Z",
     "consecutiveFailedRuns": 0
   }
 }
