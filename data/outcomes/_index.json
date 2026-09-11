@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-11T05:04:04.162Z",
+  "updatedAt": "2026-09-11T10:04:16.452Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9944,11 +9944,57 @@
       },
       "lastCapturedAt": "2026-09-09T13:04:39.145Z",
       "total": 8
+    },
+    "post-aeb59b3b": {
+      "queries": {
+        "integrated::전담 팟 오래 쓰는법": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-11T10:03:53.844Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-11T10:03:53.844Z"
+        },
+        "blog_tab::전담 팟 오래 쓰는법": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-11T10:04:00.821Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-11T10:04:00.821Z"
+        },
+        "integrated::전담 팟 오래": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-11T10:04:07.123Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-11T10:04:07.123Z"
+        },
+        "blog_tab::전담 팟 오래": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-11T10:04:13.746Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-11T10:04:13.746Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-11T10:04:13.746Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-11T05:03:53.656Z",
-    "lastOkAt": "2026-09-11T05:03:53.656Z",
+    "lastRunAt": "2026-09-11T10:03:53.575Z",
+    "lastOkAt": "2026-09-11T10:03:53.575Z",
     "consecutiveFailedRuns": 0
   }
 }

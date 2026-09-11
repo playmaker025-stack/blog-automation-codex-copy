@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-aeb59b3b",
+  "source": "serp",
+  "capturedAt": "2026-09-11T10:04:07.123Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260911100407123_serp_integrated-전담-팟-오래_dd34b1",
+  "target": {
+    "surface": "integrated",
+    "query": "전담 팟 오래"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 팟 오래",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224177657708",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
