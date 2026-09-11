@@ -2,6 +2,18 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-aeb59b3b",
+      "title": "전담 팟 오래 쓰는법 만수르 전자담배가 알려드릴게요!",
+      "category": "direct-run",
+      "tags": [
+        "전담 팟 오래 쓰는법",
+        "코일"
+      ],
+      "wordCount": 3066,
+      "publishedAt": "2026-09-11T09:47:33.667Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-aeb59b3b.md"
+    },
+    {
       "sampleId": "published-post-manual-mttpw671",
       "title": "닷박스 220W V2 구성품, 스펙, 사용법!",
       "category": "published-post",
@@ -285,16 +297,7 @@
       "wordCount": 1965,
       "publishedAt": "2026-08-25T05:35:57.090Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88euq2.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt88d6yz",
-      "title": "도림동전자담배 린코 네소 ET 가성비 좋은 전담 후기",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 7026,
-      "publishedAt": "2026-08-25T05:34:39.196Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88d6yz.md"
     }
   ],
-  "lastUpdated": "2026-09-09T06:29:15.195Z"
+  "lastUpdated": "2026-09-11T09:47:42.464Z"
 }
