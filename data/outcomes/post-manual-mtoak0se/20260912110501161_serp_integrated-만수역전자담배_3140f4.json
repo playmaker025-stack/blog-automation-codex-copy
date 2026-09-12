@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtoak0se",
+  "source": "serp",
+  "capturedAt": "2026-09-12T11:05:01.161Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260912110501161_serp_integrated-만수역전자담배_3140f4",
+  "target": {
+    "surface": "integrated",
+    "query": "만수역전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수역전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 21,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224295302695",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224376572221",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224351924908",
+        "rank": 20
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224264998918",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtoak0se",
+  "source": "serp",
+  "capturedAt": "2026-09-12T11:04:54.811Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260912110454811_serp_blogtab-폐호흡액상_176cca",
+  "target": {
+    "surface": "blog_tab",
+    "query": "폐호흡액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡액상",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224394356256",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
