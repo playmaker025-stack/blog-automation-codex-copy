@@ -11871,7 +11871,41 @@
       "publishedAt": "2026-09-11T12:20:45.964Z",
       "createdAt": "2026-09-11T12:20:45.964Z",
       "updatedAt": "2026-09-11T12:20:45.964Z"
+    },
+    {
+      "postId": "post-manual-mtydhb17",
+      "topicId": "",
+      "userId": "b",
+      "title": "삼산동 전자담배 입호흡 고농도 액상 시리즈 추천",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224409626185",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224409626185",
+          "canonicalUrl": "https://blog.naver.com/youferst/224409626185"
+        },
+        "targetKeywords": [
+          {
+            "query": "삼산동 전자담배 입호흡",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "삼산동 전자담배 입호흡 고농도 액상 시리즈 추천",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-12T12:39:53.123Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-12T12:39:53.123Z",
+      "createdAt": "2026-09-12T12:39:53.123Z",
+      "updatedAt": "2026-09-12T12:39:53.123Z"
     }
   ],
-  "lastUpdated": "2026-09-11T12:20:45.964Z"
+  "lastUpdated": "2026-09-12T12:39:53.123Z"
 }
