@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mtydhb17",
+      "title": "삼산동 전자담배 입호흡 고농도 액상 시리즈 추천",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1640,
+      "publishedAt": "2026-09-12T12:39:53.123Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mtydhb17.md"
+    },
+    {
       "sampleId": "published-post-c24ed298",
       "title": "인천 전자담배 기기 고장 원인별 점검과 효과적 해결법",
       "category": "b",
@@ -376,5 +385,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-09-08T11:04:35.455Z"
+  "lastUpdated": "2026-09-12T12:40:00.246Z"
 }
