@@ -11950,7 +11950,68 @@
       "publishedAt": "2026-09-13T06:49:52.436Z",
       "createdAt": "2026-09-13T06:49:52.436Z",
       "updatedAt": "2026-09-13T06:50:38.248Z"
+    },
+    {
+      "postId": "post-manual-mtzqouk9",
+      "topicId": "",
+      "userId": "e",
+      "title": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/godmaker0/224410398468",
+      "wordCount": 0,
+      "targetKeywords": [
+        "부평전자담배",
+        "폐호흡전자담배",
+        "유웰하복",
+        "하복V2",
+        "유웰하복v2"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "godmaker0",
+          "logNo": "224410398468",
+          "canonicalUrl": "https://blog.naver.com/godmaker0/224410398468"
+        },
+        "targetKeywords": [
+          {
+            "query": "부평전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "폐호흡전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "유웰하복",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "하복V2",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "유웰하복v2",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-13T11:37:29.135Z",
+        "keywordsRevisedAt": "2026-09-13T11:37:29.135Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-13T11:37:29.135Z",
+      "createdAt": "2026-09-13T11:37:29.135Z",
+      "updatedAt": "2026-09-13T11:37:29.135Z"
     }
   ],
-  "lastUpdated": "2026-09-13T06:50:38.248Z"
+  "lastUpdated": "2026-09-13T11:37:29.135Z"
 }
