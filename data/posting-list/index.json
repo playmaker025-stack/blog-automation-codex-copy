@@ -11923,23 +11923,34 @@
         },
         "targetKeywords": [
           {
-            "query": "팟 시스템 vs",
+            "query": "rta",
             "role": "primary",
-            "source": "title_guess"
+            "source": "user"
+          },
+          {
+            "query": "rda",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "드리퍼",
+            "role": "secondary",
+            "source": "user"
           }
         ],
         "publishedTitle": "팟 시스템 vs 탱크 시스템 – 액상 넣는 방식부터 맛 표현까지 뭐가 다를까?",
         "contentHash": "811c9dc5",
         "trackedFrom": "2026-09-13T06:49:52.436Z",
-        "backfilled": true
+        "backfilled": true,
+        "keywordsRevisedAt": "2026-09-13T06:50:38.248Z"
       },
       "evalScore": null,
       "compositionSessionId": null,
       "pendingApproval": null,
       "publishedAt": "2026-09-13T06:49:52.436Z",
       "createdAt": "2026-09-13T06:49:52.436Z",
-      "updatedAt": "2026-09-13T06:49:52.436Z"
+      "updatedAt": "2026-09-13T06:50:38.248Z"
     }
   ],
-  "lastUpdated": "2026-09-13T06:49:52.436Z"
+  "lastUpdated": "2026-09-13T06:50:38.248Z"
 }
