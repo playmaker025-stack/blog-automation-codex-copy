@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtpefc05",
+  "source": "serp",
+  "capturedAt": "2026-09-13T05:44:08.675Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260913054408675_serp_integrated-전자담배자동으로켜짐_cb9395",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배자동으로켜짐"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배자동으로켜짐",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 10,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
