@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mtzgf3wj",
+      "title": "팟 시스템 vs 탱크 시스템 – 액상 넣는 방식부터 맛 표현까지 뭐가 다를까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2397,
+      "publishedAt": "2026-09-13T06:49:52.436Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mtzgf3wj.md"
+    },
+    {
       "sampleId": "published-post-manual-mtwxcxe7",
       "title": "전자담배 종류 총정리 – 입호흡부터 폐호흡, 팟·RTA·RDA·하이엔드까지",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 5956,
       "publishedAt": "2026-07-21T11:13:57.104Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mruk2p3c.md"
-    },
-    {
-      "sampleId": "published-post-manual-mrt7jy67",
-      "title": "전자담배 액상은 많이 넣을수록 좋을까? 너무 꽉 채우면 생기는 문제",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6318,
-      "publishedAt": "2026-07-20T12:35:40.511Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrt7jy67.md"
     }
   ],
-  "lastUpdated": "2026-09-11T12:20:52.723Z"
+  "lastUpdated": "2026-09-13T06:49:58.858Z"
 }
