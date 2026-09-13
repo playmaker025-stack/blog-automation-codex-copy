@@ -11905,7 +11905,41 @@
       "publishedAt": "2026-09-12T12:39:53.123Z",
       "createdAt": "2026-09-12T12:39:53.123Z",
       "updatedAt": "2026-09-12T12:39:53.123Z"
+    },
+    {
+      "postId": "post-manual-mtzgf3wj",
+      "topicId": "",
+      "userId": "d",
+      "title": "팟 시스템 vs 탱크 시스템 – 액상 넣는 방식부터 맛 표현까지 뭐가 다를까?",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224410191065",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224410191065",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224410191065"
+        },
+        "targetKeywords": [
+          {
+            "query": "팟 시스템 vs",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "팟 시스템 vs 탱크 시스템 – 액상 넣는 방식부터 맛 표현까지 뭐가 다를까?",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-13T06:49:52.436Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-13T06:49:52.436Z",
+      "createdAt": "2026-09-13T06:49:52.436Z",
+      "updatedAt": "2026-09-13T06:49:52.436Z"
     }
   ],
-  "lastUpdated": "2026-09-12T12:39:53.123Z"
+  "lastUpdated": "2026-09-13T06:49:52.436Z"
 }
