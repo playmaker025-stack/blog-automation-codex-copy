@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-13T01:03:55.833Z",
+  "updatedAt": "2026-09-13T05:24:05.020Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -5952,27 +5952,29 @@
       "queries": {
         "integrated::전자담배 여름철 누수가": {
           "okAgeHours": [
-            344
+            344,
+            672
           ],
-          "lastCapturedAt": "2026-08-30T13:36:38.521Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-13T05:23:55.350Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-30T13:36:38.521Z"
+          "lastAttemptAt": "2026-09-13T05:23:55.350Z"
         },
         "blog_tab::전자담배 여름철 누수가": {
           "okAgeHours": [
-            364
+            364,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:51:56.339Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-13T05:24:02.460Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:51:56.339Z"
+          "lastAttemptAt": "2026-09-13T05:24:02.460Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T09:51:56.339Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-13T05:24:02.460Z",
+      "total": 4
     },
     "post-f3e7657b": {
       "queries": {
@@ -10163,8 +10165,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-13T01:03:54.776Z",
-    "lastOkAt": "2026-09-12T12:43:54.115Z",
+    "lastRunAt": "2026-09-13T05:23:54.712Z",
+    "lastOkAt": "2026-09-13T05:23:54.712Z",
     "consecutiveFailedRuns": 0
   }
 }
