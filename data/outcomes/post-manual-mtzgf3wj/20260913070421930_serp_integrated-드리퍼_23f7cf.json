@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtzgf3wj",
+  "source": "serp",
+  "capturedAt": "2026-09-13T07:04:21.930Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260913070421930_serp_integrated-드리퍼_23f7cf",
+  "target": {
+    "surface": "integrated",
+    "query": "드리퍼"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "드리퍼",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 1,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

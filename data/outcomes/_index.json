@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-13T05:44:31.228Z",
+  "updatedAt": "2026-09-13T07:04:31.588Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -10168,11 +10168,77 @@
       },
       "lastCapturedAt": "2026-09-12T12:44:01.948Z",
       "total": 2
+    },
+    "post-manual-mtzgf3wj": {
+      "queries": {
+        "integrated::rta": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-13T07:03:55.146Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-13T07:03:55.146Z"
+        },
+        "blog_tab::rta": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-13T07:04:02.471Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-13T07:04:02.471Z"
+        },
+        "integrated::rda": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-13T07:04:08.724Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-13T07:04:08.724Z"
+        },
+        "blog_tab::rda": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-13T07:04:15.675Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-13T07:04:15.675Z"
+        },
+        "integrated::드리퍼": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-13T07:04:21.930Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-13T07:04:21.930Z"
+        },
+        "blog_tab::드리퍼": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-13T07:04:28.894Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-13T07:04:28.894Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-13T07:04:28.894Z",
+      "total": 6
     }
   },
   "health": {
-    "lastRunAt": "2026-09-13T05:43:54.938Z",
-    "lastOkAt": "2026-09-13T05:43:54.938Z",
+    "lastRunAt": "2026-09-13T07:03:54.646Z",
+    "lastOkAt": "2026-09-13T07:03:54.646Z",
     "consecutiveFailedRuns": 0
   }
 }
