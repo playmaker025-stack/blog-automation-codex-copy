@@ -4980,7 +4980,84 @@
       "postTitle": "인천 전자담배 폐호흡 신제품 닷박스 220W V2",
       "extractedAt": "2026-09-09T12:54:25.347Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-70f6b122",
+      "product": "유웰 하복 V2",
+      "field": "batteryMah",
+      "value": "2800mAH",
+      "evidence": "신용카드보다 약간 큰 크기에. 배터리 2800mAH 액상저장용량 5.5ml 최대출력 80W 0.15옴 카트리지",
+      "postId": "post-manual-mtzqouk9",
+      "postTitle": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "extractedAt": "2026-09-13T11:37:48.822Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-30dddebe",
+      "product": "유웰 하복 V2",
+      "field": "liquidMl",
+      "value": "5.5ml",
+      "evidence": "신용카드보다 약간 큰 크기에. 배터리 2800mAH 액상저장용량 5.5ml 최대출력 80W 0.15옴 카트리지",
+      "postId": "post-manual-mtzqouk9",
+      "postTitle": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "extractedAt": "2026-09-13T11:37:48.822Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-5a9e9137",
+      "product": "유웰 하복 V2",
+      "field": "wattRange",
+      "value": "80W",
+      "evidence": "신용카드보다 약간 큰 크기에. 배터리 2800mAH 액상저장용량 5.5ml 최대출력 80W 0.15옴 카트리지",
+      "postId": "post-manual-mtzqouk9",
+      "postTitle": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "extractedAt": "2026-09-13T11:37:48.822Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-4cb78d1c",
+      "product": "유웰 하복 V2",
+      "field": "resistanceOhm",
+      "value": "0.15옴",
+      "evidence": "신용카드보다 약간 큰 크기에. 배터리 2800mAH 액상저장용량 5.5ml 최대출력 80W 0.15옴 카트리지",
+      "postId": "post-manual-mtzqouk9",
+      "postTitle": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "extractedAt": "2026-09-13T11:37:48.822Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-bd951e0b",
+      "product": "유웰 하복 V2",
+      "field": "inhaleMode",
+      "value": "자동/버튼",
+      "evidence": "오토파이어 버튼파이어 당연하구요. 입호흡 폐호흡 팟에 따라 자동으로 인식하고 셋팅을 해줍니다.",
+      "postId": "post-manual-mtzqouk9",
+      "postTitle": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "extractedAt": "2026-09-13T11:37:48.822Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-f068e8d0",
+      "product": "유웰 하복 V2",
+      "field": "liquidRefillable",
+      "value": "가능",
+      "evidence": "당연히 기존과 같은 상부주입이며 클리어팟으로 액상 잔량도 편리하게 확인이 가능합니다.",
+      "postId": "post-manual-mtzqouk9",
+      "postTitle": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "extractedAt": "2026-09-13T11:37:48.822Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-fb64e270",
+      "product": "유웰 하복 V2",
+      "field": "batteryRechargeable",
+      "value": "가능",
+      "evidence": "배터리 2800mAH",
+      "postId": "post-manual-mtzqouk9",
+      "postTitle": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "extractedAt": "2026-09-13T11:37:48.822Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-09-09T12:54:26.227Z"
+  "updatedAt": "2026-09-13T11:37:49.539Z"
 }
