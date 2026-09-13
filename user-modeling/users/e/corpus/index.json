@@ -2,6 +2,15 @@
   "userId": "e",
   "samples": [
     {
+      "sampleId": "published-post-manual-mtzqouk9",
+      "title": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2006,
+      "publishedAt": "2026-09-13T11:37:29.135Z",
+      "filePath": "user-modeling/users/e/corpus/samples/published-post-manual-mtzqouk9.md"
+    },
+    {
       "sampleId": "published-post-manual-mtu3nwvv",
       "title": "인천 전자담배 폐호흡 신제품 닷박스 220W V2",
       "category": "published-post",
@@ -200,5 +209,5 @@
       "filePath": "user-modeling/users/e/corpus/samples/reference-e-05.md"
     }
   ],
-  "lastUpdated": "2026-09-09T12:54:12.451Z"
+  "lastUpdated": "2026-09-13T11:37:35.832Z"
 }
