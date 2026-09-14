@@ -12017,16 +12017,33 @@
       "topicId": "topic-3723aa33",
       "userId": "c",
       "title": "입호흡 전자담배 고장 증상과 인천 남동구 자가 점검법",
-      "status": "ready",
-      "naverPostUrl": null,
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224411359815",
       "evalScore": 68,
       "wordCount": 3049,
       "compositionSessionId": "pipe-4160e031",
       "pendingApproval": null,
       "createdAt": "2026-09-14T02:02:17.809Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-14T02:04:41.670Z"
+      "publishedAt": "2026-09-14T07:10:38.778Z",
+      "updatedAt": "2026-09-14T07:10:37.629Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224411359815",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224411359815"
+        },
+        "targetKeywords": [
+          {
+            "query": "입호흡 전자담배 고장",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "입호흡 전자담배 고장 증상과 인천 남동구 자가 점검법",
+        "contentHash": "528fa693",
+        "trackedFrom": "2026-09-14T07:10:37.939Z"
+      }
     }
   ],
-  "lastUpdated": "2026-09-14T02:04:41.670Z"
+  "lastUpdated": "2026-09-14T07:10:37.629Z"
 }
