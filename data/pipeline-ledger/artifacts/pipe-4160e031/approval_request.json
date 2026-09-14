@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-4160e031",
+  "type": "approval_request",
+  "savedAt": "2026-09-14T02:02:20.002Z",
+  "data": {
+    "pipelineId": "pipe-4160e031",
+    "previousTitle": "",
+    "proposedTitle": "입호흡 전자담배 고장 증상과 인천 남동구 자가 점검법",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "본 전략은 인천 남동구 지역 입호흡 전자담배 사용자 대상 자가 점검법과 고장 증상 정보를 중심으로 작성합니다. 최근 발행 글과 사용자 검색 의도를 반영해 고장 증상별 구분과 원인별 점검법을 구체적으로 안내하며, 지역 전문 수리점 방문 전 준비사항도 포함해 실용성을 높였습니다. 허브-리프 구조를 적용해 관련 부평 지역 점검법 글로 자연스러운 내부 링크를 유도해 체류시간과 재방문율을 높이는 데 중점을 두었습니다. 친근한 말투와 실제 경험담을 삽입해 인간 지문을 강화하고, 네이버 AI 브리핑 노출을 위한 핵심 요약과 표, 단계별 목록을 활용해 검색 의도에 최적화했습니다.",
+    "requestedAt": "2026-09-14T02:02:13.884Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-14T02:02:13.884Z",
+      "modifications": null
+    }
+  }
+}
