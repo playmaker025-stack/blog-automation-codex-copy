@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mth8dfm5",
+  "source": "serp",
+  "capturedAt": "2026-09-14T12:24:03.113Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260914122403113_serp_blogtab-전자담배-팟을-오래_ff9783",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 팟을 오래"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 팟을 오래",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224396532565",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224336885735",
+        "rank": 17
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224339591207",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
