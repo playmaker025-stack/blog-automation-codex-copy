@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8aebbf59",
+  "source": "serp",
+  "capturedAt": "2026-09-14T06:43:55.558Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260914064355558_serp_integrated-전자담배-기기-선택_298d25",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 기기 선택"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 기기 선택",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 33,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224396167944",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
