@@ -4421,7 +4421,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-ed735973",
       "at": "2026-09-11T07:40:04.302Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "입호흡 전자담배 고장 증상과 인천 남동구 자가 점검법",
+      "proposedTitle": "입호흡 전자담배 고장 증상과 인천 남동구 자가 점검법",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-4160e031",
+      "at": "2026-09-14T02:00:56.971Z"
     }
   ],
-  "lastUpdated": "2026-09-11T07:40:04.302Z"
+  "lastUpdated": "2026-09-14T02:00:56.971Z"
 }
