@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-14T07:24:31.203Z",
+  "updatedAt": "2026-09-14T09:24:05.602Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -6009,27 +6009,29 @@
         "integrated::부천 상동 전자담배": {
           "okAgeHours": [
             316,
-            340
+            340,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T13:51:57.344Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-14T09:24:02.342Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T13:51:57.344Z"
+          "lastAttemptAt": "2026-09-14T09:24:02.342Z"
         },
         "blog_tab::부천 상동 전자담배": {
           "okAgeHours": [
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-08-31T09:52:08.650Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-14T09:23:55.788Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-08-31T09:52:08.650Z"
+          "lastAttemptAt": "2026-09-14T09:23:55.788Z"
         }
       },
-      "lastCapturedAt": "2026-08-31T13:51:57.344Z",
-      "total": 3
+      "lastCapturedAt": "2026-09-14T09:24:02.342Z",
+      "total": 5
     },
     "post-manual-mt006d8p": {
       "queries": {
@@ -10411,8 +10413,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-14T07:23:55.122Z",
-    "lastOkAt": "2026-09-14T07:23:55.122Z",
+    "lastRunAt": "2026-09-14T09:23:55.316Z",
+    "lastOkAt": "2026-09-14T09:23:55.316Z",
     "consecutiveFailedRuns": 0
   }
 }
