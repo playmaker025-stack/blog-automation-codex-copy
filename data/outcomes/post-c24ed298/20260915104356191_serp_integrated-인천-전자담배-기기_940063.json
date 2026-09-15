@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-c24ed298",
+  "source": "serp",
+  "capturedAt": "2026-09-15T10:43:56.191Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260915104356191_serp_integrated-인천-전자담배-기기_940063",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 전자담배 기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 기기",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 37,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224384586821",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220806325879",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220925535075",
+        "rank": 21
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221085661286",
+        "rank": 26
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223007168586",
+        "rank": 36
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
