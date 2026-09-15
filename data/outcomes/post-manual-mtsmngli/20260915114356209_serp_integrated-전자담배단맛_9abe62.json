@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtsmngli",
+  "source": "serp",
+  "capturedAt": "2026-09-15T11:43:56.209Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260915114356209_serp_integrated-전자담배단맛_9abe62",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배단맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배단맛",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224405141976",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

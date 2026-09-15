@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-15T10:44:05.295Z",
+  "updatedAt": "2026-09-15T11:44:18.846Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9807,47 +9807,51 @@
       "queries": {
         "integrated::전자담배단맛": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-08T12:23:52.162Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-15T11:43:56.209Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T12:23:52.162Z"
+          "lastAttemptAt": "2026-09-15T11:43:56.209Z"
         },
         "blog_tab::전자담배단맛": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-08T12:23:59.123Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-15T11:44:03.111Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T12:23:59.123Z"
+          "lastAttemptAt": "2026-09-15T11:44:03.111Z"
         },
         "integrated::액상단맛": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-08T12:24:05.460Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-15T11:44:09.444Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T12:24:05.460Z"
+          "lastAttemptAt": "2026-09-15T11:44:09.444Z"
         },
         "blog_tab::액상단맛": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-08T12:24:12.177Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-15T11:44:16.274Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T12:24:12.177Z"
+          "lastAttemptAt": "2026-09-15T11:44:16.274Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T12:24:12.177Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-15T11:44:16.274Z",
+      "total": 8
     },
     "post-manual-mttpw671": {
       "queries": {
@@ -10419,8 +10423,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-15T10:43:55.792Z",
-    "lastOkAt": "2026-09-15T10:43:55.792Z",
+    "lastRunAt": "2026-09-15T11:43:55.846Z",
+    "lastOkAt": "2026-09-15T11:43:55.846Z",
     "consecutiveFailedRuns": 0
   }
 }
