@@ -12043,7 +12043,41 @@
         "contentHash": "528fa693",
         "trackedFrom": "2026-09-14T07:10:37.939Z"
       }
+    },
+    {
+      "postId": "post-manual-mu2lxc75",
+      "topicId": "",
+      "userId": "b",
+      "title": "남동구청역 전자담배 닷모드 닷박스 220W V2 스펙및 사용방법",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224412892154",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224412892154",
+          "canonicalUrl": "https://blog.naver.com/youferst/224412892154"
+        },
+        "targetKeywords": [
+          {
+            "query": "남동구청역 전자담배 닷모드",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "남동구청역 전자담배 닷모드 닷박스 220W V2 스펙및 사용방법",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-15T11:47:20.917Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-15T11:47:20.917Z",
+      "createdAt": "2026-09-15T11:47:20.917Z",
+      "updatedAt": "2026-09-15T11:47:20.917Z"
     }
   ],
-  "lastUpdated": "2026-09-14T07:10:37.629Z"
+  "lastUpdated": "2026-09-15T11:47:20.917Z"
 }
