@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu2lxc75",
+  "source": "serp",
+  "capturedAt": "2026-09-15T12:04:03.329Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260915120403329_serp_blogtab-남동구청역-전자담배-닷모드_c35342",
+  "target": {
+    "surface": "blog_tab",
+    "query": "남동구청역 전자담배 닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구청역 전자담배 닷모드",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 14,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

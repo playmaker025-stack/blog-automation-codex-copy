@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-15T11:44:18.846Z",
+  "updatedAt": "2026-09-15T12:04:18.748Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9374,28 +9374,30 @@
         "integrated::만수동 전자담배 폐호흡": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-08T12:03:51.627Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-15T12:04:09.398Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T12:03:51.627Z"
+          "lastAttemptAt": "2026-09-15T12:04:09.398Z"
         },
         "blog_tab::만수동 전자담배 폐호흡": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-08T12:03:58.644Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-15T12:04:16.094Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T12:03:58.644Z"
+          "lastAttemptAt": "2026-09-15T12:04:16.094Z"
         }
       },
-      "lastCapturedAt": "2026-09-08T12:03:58.644Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-15T12:04:16.094Z",
+      "total": 6
     },
     "post-manual-mtjrrrb0": {
       "queries": {
@@ -10420,11 +10422,37 @@
       },
       "lastCapturedAt": "2026-09-14T07:24:02.499Z",
       "total": 2
+    },
+    "post-manual-mu2lxc75": {
+      "queries": {
+        "integrated::남동구청역 전자담배 닷모드": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-15T12:03:56.462Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-15T12:03:56.462Z"
+        },
+        "blog_tab::남동구청역 전자담배 닷모드": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-15T12:04:03.329Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-15T12:04:03.329Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-15T12:04:03.329Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-15T11:43:55.846Z",
-    "lastOkAt": "2026-09-15T11:43:55.846Z",
+    "lastRunAt": "2026-09-15T12:03:55.606Z",
+    "lastOkAt": "2026-09-15T12:03:55.606Z",
     "consecutiveFailedRuns": 0
   }
 }
