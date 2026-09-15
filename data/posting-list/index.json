@@ -12077,7 +12077,62 @@
       "publishedAt": "2026-09-15T11:47:20.917Z",
       "createdAt": "2026-09-15T11:47:20.917Z",
       "updatedAt": "2026-09-15T11:47:20.917Z"
+    },
+    {
+      "postId": "post-manual-mu2oqd4q",
+      "topicId": "",
+      "userId": "d",
+      "title": "RTA vs RDA – 둘 다 리빌드인데 실제 사용은 어떻게 다를까?",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224412967354",
+      "wordCount": 0,
+      "targetKeywords": [
+        "rta",
+        "rda",
+        "전자담배",
+        "리빌드"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224412967354",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224412967354"
+        },
+        "targetKeywords": [
+          {
+            "query": "rta",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "rda",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "리빌드",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "RTA vs RDA – 둘 다 리빌드인데 실제 사용은 어떻게 다를까?",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-15T13:05:53.178Z",
+        "keywordsRevisedAt": "2026-09-15T13:05:53.178Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-15T13:05:53.178Z",
+      "createdAt": "2026-09-15T13:05:53.178Z",
+      "updatedAt": "2026-09-15T13:05:53.178Z"
     }
   ],
-  "lastUpdated": "2026-09-15T11:47:20.917Z"
+  "lastUpdated": "2026-09-15T13:05:53.178Z"
 }
