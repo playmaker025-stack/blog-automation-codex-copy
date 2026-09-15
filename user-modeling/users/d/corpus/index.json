@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mu2oqd4q",
+      "title": "RTA vs RDA – 둘 다 리빌드인데 실제 사용은 어떻게 다를까?",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2292,
+      "publishedAt": "2026-09-15T13:05:53.178Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mu2oqd4q.md"
+    },
+    {
       "sampleId": "published-post-manual-mtzgf3wj",
       "title": "팟 시스템 vs 탱크 시스템 – 액상 넣는 방식부터 맛 표현까지 뭐가 다를까?",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6129,
       "publishedAt": "2026-07-22T11:22:42.641Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mrvztskv.md"
-    },
-    {
-      "sampleId": "published-post-manual-mruk2p3c",
-      "title": "전자담배 액상을 자주 바꾸면 코일이 빨리 망가질까?",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 5956,
-      "publishedAt": "2026-07-21T11:13:57.104Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mruk2p3c.md"
     }
   ],
-  "lastUpdated": "2026-09-13T06:50:42.466Z"
+  "lastUpdated": "2026-09-15T13:06:00.082Z"
 }
