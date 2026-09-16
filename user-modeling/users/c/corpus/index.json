@@ -2,6 +2,21 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-5434aac3",
+      "title": "만수르 전자담배 제품별 구분법과 인천 만수역 구매 팁",
+      "category": "c",
+      "tags": [
+        "만수르",
+        "전자담배",
+        "구분법",
+        "만수역",
+        "구매팁"
+      ],
+      "wordCount": 3295,
+      "publishedAt": "2026-09-16T06:53:39.460Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-5434aac3.md"
+    },
+    {
       "sampleId": "published-post-3d12f3b8",
       "title": "입호흡 전자담배 고장 증상과 인천 남동구 자가 점검법",
       "category": "c",
@@ -294,16 +309,7 @@
       "wordCount": 1859,
       "publishedAt": "2026-08-25T05:37:25.884Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88grgj.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt88g50o",
-      "title": "논현동전자담배 엘프바 아이스킹 25000 퍼프 사용법 & 스펙 일회용 전담 솔직후기",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 2087,
-      "publishedAt": "2026-08-25T05:36:56.748Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88g50o.md"
     }
   ],
-  "lastUpdated": "2026-09-14T07:10:46.005Z"
+  "lastUpdated": "2026-09-16T06:53:48.699Z"
 }
