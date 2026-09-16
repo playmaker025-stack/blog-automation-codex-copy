@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu446plp",
+  "source": "serp",
+  "capturedAt": "2026-09-16T13:24:16.821Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260916132416821_serp_blogtab-전자담배리빌드_0e6672",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배리빌드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배리빌드",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224414188029",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224083615082",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 15
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223845254821",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

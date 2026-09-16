@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu446plp",
+  "source": "serp",
+  "capturedAt": "2026-09-16T13:24:09.895Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260916132409895_serp_integrated-전자담배리빌드_814c1c",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배리빌드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배리빌드",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 21,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224003135828",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224397752886",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223898304199",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224082778024",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223845254821",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
