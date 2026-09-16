@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-5434aac3",
+  "source": "serp",
+  "capturedAt": "2026-09-16T07:03:56.541Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260916070356541_serp_integrated-만수르-전자담배-제품별_a5011d",
+  "target": {
+    "surface": "integrated",
+    "query": "만수르 전자담배 제품별"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수르 전자담배 제품별",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 10,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224093419859",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224358595068",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224068863816",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224220238928",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221721102966",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224290478741",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300284999",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

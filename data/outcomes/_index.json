@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-16T06:04:45.394Z",
+  "updatedAt": "2026-09-16T07:04:30.135Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9404,50 +9404,54 @@
         "integrated::미추홀구 전자담배": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-09T07:03:52.179Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-16T07:04:09.057Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-09T07:03:52.179Z"
+          "lastAttemptAt": "2026-09-16T07:04:09.057Z"
         },
         "blog_tab::미추홀구 전자담배": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-09T07:03:59.344Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-16T07:04:15.899Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-09T07:03:59.344Z"
+          "lastAttemptAt": "2026-09-16T07:04:15.899Z"
         },
         "integrated::액상 보관법": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-09T07:04:05.365Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-16T07:04:21.414Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-09T07:04:05.365Z"
+          "lastAttemptAt": "2026-09-16T07:04:21.414Z"
         },
         "blog_tab::액상 보관법": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-09T07:04:12.082Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-16T07:04:27.378Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-09T07:04:12.082Z"
+          "lastAttemptAt": "2026-09-16T07:04:27.378Z"
         }
       },
-      "lastCapturedAt": "2026-09-09T07:04:12.082Z",
-      "total": 8
+      "lastCapturedAt": "2026-09-16T07:04:27.378Z",
+      "total": 12
     },
     "post-manual-mtk3nu57": {
       "queries": {
@@ -10542,11 +10546,37 @@
       },
       "lastCapturedAt": "2026-09-15T13:24:42.024Z",
       "total": 8
+    },
+    "post-5434aac3": {
+      "queries": {
+        "integrated::만수르 전자담배 제품별": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-16T07:03:56.541Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-16T07:03:56.541Z"
+        },
+        "blog_tab::만수르 전자담배 제품별": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-16T07:04:02.814Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-16T07:04:02.814Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-16T07:04:02.814Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-16T06:03:56.450Z",
-    "lastOkAt": "2026-09-16T06:03:56.450Z",
+    "lastRunAt": "2026-09-16T07:03:56.182Z",
+    "lastOkAt": "2026-09-16T07:03:56.182Z",
     "consecutiveFailedRuns": 0
   }
 }

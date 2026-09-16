@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtjrrrb0",
+  "source": "serp",
+  "capturedAt": "2026-09-16T07:04:27.378Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260916070427378_serp_blogtab-액상-보관법_836b7e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "액상 보관법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상 보관법",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224398637176",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
