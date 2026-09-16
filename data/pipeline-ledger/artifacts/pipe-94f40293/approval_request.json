@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-94f40293",
+  "type": "approval_request",
+  "savedAt": "2026-09-16T05:38:27.555Z",
+  "data": {
+    "pipelineId": "pipe-94f40293",
+    "previousTitle": "",
+    "proposedTitle": "만수르 전자담배 제품별 구분법과 인천 만수역 구매 팁",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수르 전자담배 제품별 구분법과 만수역 구매 팁은 인천 지역 전자담배 사용자들의 대표적 검색 의도에 부합하며, 최근 발행 글과 키워드 트렌드에 맞춰 제품 스펙, 사용법, 구매 경험을 구체적으로 다루어 검색 만족도를 높일 수 있습니다. 허브 역할의 제품 구분법과 리프 역할의 구매 팁을 결합해 내부 링크 구조를 강화하고, 친근한 사용자 경험 중심 문체로 체류시간과 신뢰도를 높이는 전략입니다.",
+    "requestedAt": "2026-09-16T05:38:21.665Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-16T05:38:21.665Z",
+      "modifications": null
+    }
+  }
+}
