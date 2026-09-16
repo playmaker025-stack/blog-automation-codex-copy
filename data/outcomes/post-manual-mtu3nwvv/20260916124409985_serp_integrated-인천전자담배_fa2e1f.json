@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtu3nwvv",
+  "source": "serp",
+  "capturedAt": "2026-09-16T12:44:09.985Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260916124409985_serp_integrated-인천전자담배_fa2e1f",
+  "target": {
+    "surface": "integrated",
+    "query": "인천전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 21,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224206949911",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 21
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 22
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

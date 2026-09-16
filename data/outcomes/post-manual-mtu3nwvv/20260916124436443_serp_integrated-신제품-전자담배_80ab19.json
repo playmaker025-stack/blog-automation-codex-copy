@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtu3nwvv",
+  "source": "serp",
+  "capturedAt": "2026-09-16T12:44:36.443Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260916124436443_serp_integrated-신제품-전자담배_80ab19",
+  "target": {
+    "surface": "integrated",
+    "query": "신제품 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "신제품 전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 6,
+    "searchedResultLimit": 11,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
