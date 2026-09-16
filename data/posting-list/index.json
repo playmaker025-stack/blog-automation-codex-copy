@@ -12164,7 +12164,62 @@
         "contentHash": "fbc05a31",
         "trackedFrom": "2026-09-16T06:53:40.344Z"
       }
+    },
+    {
+      "postId": "post-manual-mu446plp",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배 리빌드는 왜 하는 걸까?-기성 코일과 직접 만드는 코일의 차이",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224414188029",
+      "wordCount": 0,
+      "targetKeywords": [
+        "하이엔드전자담배",
+        "전자담배리빌드",
+        "rda",
+        "rta"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224414188029",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224414188029"
+        },
+        "targetKeywords": [
+          {
+            "query": "하이엔드전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배리빌드",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "rda",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "rta",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "전자담배 리빌드는 왜 하는 걸까?-기성 코일과 직접 만드는 코일의 차이",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-16T13:06:16.210Z",
+        "keywordsRevisedAt": "2026-09-16T13:06:16.210Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-16T13:06:16.210Z",
+      "createdAt": "2026-09-16T13:06:16.210Z",
+      "updatedAt": "2026-09-16T13:06:16.210Z"
     }
   ],
-  "lastUpdated": "2026-09-16T06:53:39.900Z"
+  "lastUpdated": "2026-09-16T13:06:16.210Z"
 }
