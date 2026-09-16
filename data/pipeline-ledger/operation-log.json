@@ -4432,7 +4432,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-4160e031",
       "at": "2026-09-14T02:00:56.971Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수르 전자담배 제품별 구분법과 인천 만수역 구매 팁",
+      "proposedTitle": "만수르 전자담배 제품별 구분법과 인천 만수역 구매 팁",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-94f40293",
+      "at": "2026-09-16T05:22:44.343Z"
     }
   ],
-  "lastUpdated": "2026-09-14T02:00:56.971Z"
+  "lastUpdated": "2026-09-16T05:22:44.343Z"
 }
