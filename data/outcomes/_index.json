@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-17T06:44:06.976Z",
+  "updatedAt": "2026-09-17T12:44:19.575Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -9492,50 +9492,54 @@
         "integrated::전자담배 뜨거움": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-10T12:44:06.665Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-17T12:43:57.487Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-10T12:44:06.665Z"
+          "lastAttemptAt": "2026-09-17T12:43:57.487Z"
         },
         "blog_tab::전자담배 뜨거움": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-10T12:44:13.136Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-17T12:44:04.586Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-10T12:44:13.136Z"
+          "lastAttemptAt": "2026-09-17T12:44:04.586Z"
         },
         "integrated::전자담배 입술 뜨거움": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-10T12:44:19.375Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-17T12:44:10.873Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-10T12:44:19.375Z"
+          "lastAttemptAt": "2026-09-17T12:44:10.873Z"
         },
         "blog_tab::전자담배 입술 뜨거움": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-10T12:44:25.988Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-17T12:44:16.675Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-10T12:44:25.988Z"
+          "lastAttemptAt": "2026-09-17T12:44:16.675Z"
         }
       },
-      "lastCapturedAt": "2026-09-10T12:44:25.988Z",
-      "total": 8
+      "lastCapturedAt": "2026-09-17T12:44:16.675Z",
+      "total": 12
     },
     "post-c40d3582": {
       "queries": {
@@ -10675,8 +10679,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-17T06:43:56.881Z",
-    "lastOkAt": "2026-09-17T06:43:56.881Z",
+    "lastRunAt": "2026-09-17T12:43:56.907Z",
+    "lastOkAt": "2026-09-17T12:43:56.907Z",
     "consecutiveFailedRuns": 0
   }
 }
