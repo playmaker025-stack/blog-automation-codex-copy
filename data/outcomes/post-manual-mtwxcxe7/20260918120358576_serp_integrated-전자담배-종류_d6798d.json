@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtwxcxe7",
+  "source": "serp",
+  "capturedAt": "2026-09-18T12:03:58.576Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260918120358576_serp_integrated-전자담배-종류_d6798d",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 종류"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 종류",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
