@@ -12219,7 +12219,44 @@
       "publishedAt": "2026-09-16T13:06:16.210Z",
       "createdAt": "2026-09-16T13:06:16.210Z",
       "updatedAt": "2026-09-16T13:06:16.210Z"
+    },
+    {
+      "postId": "post-manual-mu6caa72",
+      "topicId": "",
+      "userId": "c",
+      "title": "하복2 부평 전자담배 만수르점 입고! 언박싱 & 스펙 & 사용법",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224415853960",
+      "wordCount": 0,
+      "targetKeywords": [
+        "하복2"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224415853960",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224415853960"
+        },
+        "targetKeywords": [
+          {
+            "query": "하복2",
+            "role": "primary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "하복2 부평 전자담배 만수르점 입고! 언박싱 & 스펙 & 사용법",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-18T02:28:32.243Z",
+        "keywordsRevisedAt": "2026-09-18T02:28:32.243Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-18T02:28:32.243Z",
+      "createdAt": "2026-09-18T02:28:32.243Z",
+      "updatedAt": "2026-09-18T02:28:32.243Z"
     }
   ],
-  "lastUpdated": "2026-09-16T13:06:16.210Z"
+  "lastUpdated": "2026-09-18T02:28:32.243Z"
 }
