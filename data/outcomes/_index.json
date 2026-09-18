@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-18T05:04:08.268Z",
+  "updatedAt": "2026-09-18T08:04:20.713Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -6158,50 +6158,54 @@
         "integrated::전담기기종류": {
           "okAgeHours": [
             222,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-04T07:51:40.915Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-18T08:03:58.063Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-04T07:51:40.915Z"
+          "lastAttemptAt": "2026-09-18T08:03:58.063Z"
         },
         "integrated::전담기기 종류 뭐가": {
           "okAgeHours": [
             222,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-04T07:51:48.093Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-18T08:04:05.174Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-04T07:51:48.093Z"
+          "lastAttemptAt": "2026-09-18T08:04:05.174Z"
         },
         "blog_tab::전담기기종류": {
           "okAgeHours": [
             242,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-04T07:51:54.702Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-18T08:04:11.813Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-04T07:51:54.702Z"
+          "lastAttemptAt": "2026-09-18T08:04:11.813Z"
         },
         "blog_tab::전담기기 종류 뭐가": {
           "okAgeHours": [
             242,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-04T07:52:00.944Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-18T08:04:18.107Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-04T07:52:00.944Z"
+          "lastAttemptAt": "2026-09-18T08:04:18.107Z"
         }
       },
-      "lastCapturedAt": "2026-09-04T07:52:00.944Z",
-      "total": 8
+      "lastCapturedAt": "2026-09-18T08:04:18.107Z",
+      "total": 12
     },
     "post-manual-mt5qahzh": {
       "queries": {
@@ -10709,8 +10713,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-18T05:03:57.362Z",
-    "lastOkAt": "2026-09-18T05:03:57.362Z",
+    "lastRunAt": "2026-09-18T08:03:57.655Z",
+    "lastOkAt": "2026-09-18T08:03:57.655Z",
     "consecutiveFailedRuns": 0
   }
 }
