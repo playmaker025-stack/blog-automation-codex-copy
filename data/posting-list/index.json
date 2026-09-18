@@ -12256,7 +12256,74 @@
       "publishedAt": "2026-09-18T02:28:32.243Z",
       "createdAt": "2026-09-18T02:28:32.243Z",
       "updatedAt": "2026-09-18T02:28:32.243Z"
+    },
+    {
+      "postId": "post-manual-mu6u9v3o",
+      "topicId": "",
+      "userId": "d",
+      "title": "RDA를 쓰면 맛이 정말 더 진해질까?-드리퍼의 맛 표현이 다른 이유",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224416368962",
+      "wordCount": 0,
+      "targetKeywords": [
+        "rda전자담배",
+        "드리퍼",
+        "rda맛",
+        "리빌드무화기",
+        "rta",
+        "폐호흡전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224416368962",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224416368962"
+        },
+        "targetKeywords": [
+          {
+            "query": "rda전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "드리퍼",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "rda맛",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "리빌드무화기",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "rta",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "폐호흡전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "RDA를 쓰면 맛이 정말 더 진해질까?-드리퍼의 맛 표현이 다른 이유",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-18T10:52:06.257Z",
+        "keywordsRevisedAt": "2026-09-18T10:52:06.257Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-18T10:52:06.257Z",
+      "createdAt": "2026-09-18T10:52:06.257Z",
+      "updatedAt": "2026-09-18T10:52:06.257Z"
     }
   ],
-  "lastUpdated": "2026-09-18T02:28:32.243Z"
+  "lastUpdated": "2026-09-18T10:52:06.257Z"
 }
