@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu6u9v3o",
+  "source": "serp",
+  "capturedAt": "2026-09-18T11:04:04.733Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260918110404733_serp_blogtab-rda전자담배_afc89c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "rda전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "rda전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

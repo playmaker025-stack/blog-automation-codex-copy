@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu6u9v3o",
+  "source": "serp",
+  "capturedAt": "2026-09-18T11:04:24.287Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260918110424287_serp_integrated-rda맛_4360cb",
+  "target": {
+    "surface": "integrated",
+    "query": "rda맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "rda맛",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224412967354",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
