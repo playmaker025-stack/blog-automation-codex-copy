@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-73ef2849",
+  "type": "approval_request",
+  "savedAt": "2026-09-19T05:57:02.658Z",
+  "data": {
+    "pipelineId": "pipe-73ef2849",
+    "previousTitle": "",
+    "proposedTitle": "전담 액상 고르는 방법 만수르 전자담배에서 알려드릴게요!",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '전담 액상 고르는 방법'를 중심축으로 반영했습니다. 사용자 프로필과 최근 발행 글 구조를 반영해 전담 액상 고르는 방법을 중심으로 실용적이고 구체적인 정보를 제공합니다. 만수르 전자담배 매장에서 직접 상담과 테스트 경험을 녹여 인간 지문을 강화했으며, 검색 의도에 맞춰 전담 액상 입문자와 구매자 모두에게 도움이 되는 내용을 단계별로 구성했습니다. 허브 역할의 전담 액상 기본 개념과 고르는 방법을 중심으로, 리프 역할의 추천 제품과 관리법을 연결해 내부 링크 효과도 기대됩니다.",
+    "requestedAt": "2026-09-19T05:56:56.484Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-19T05:56:56.484Z",
+      "modifications": null
+    }
+  }
+}
