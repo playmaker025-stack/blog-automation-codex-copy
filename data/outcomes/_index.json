@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-19T06:23:59.368Z",
+  "updatedAt": "2026-09-19T08:44:07.498Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -10852,11 +10852,37 @@
       },
       "lastCapturedAt": "2026-09-18T11:05:09.623Z",
       "total": 12
+    },
+    "post-manual-mu84nxk6": {
+      "queries": {
+        "integrated::간석동 전자담배 오토베이핑": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-19T08:43:58.406Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-19T08:43:58.406Z"
+        },
+        "blog_tab::간석동 전자담배 오토베이핑": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-19T08:44:04.919Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-19T08:44:04.919Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-19T08:44:04.919Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-19T06:23:58.124Z",
-    "lastOkAt": "2026-09-18T12:03:57.674Z",
+    "lastRunAt": "2026-09-19T08:43:58.066Z",
+    "lastOkAt": "2026-09-19T08:43:58.066Z",
     "consecutiveFailedRuns": 0
   }
 }

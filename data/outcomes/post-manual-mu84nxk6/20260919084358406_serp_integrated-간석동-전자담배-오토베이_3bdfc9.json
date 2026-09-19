@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu84nxk6",
+  "source": "serp",
+  "capturedAt": "2026-09-19T08:43:58.406Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260919084358406_serp_integrated-간석동-전자담배-오토베이_3bdfc9",
+  "target": {
+    "surface": "integrated",
+    "query": "간석동 전자담배 오토베이핑"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 오토베이핑",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224417088500",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224283320666",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224360910281",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224128315081",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223822289850",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
