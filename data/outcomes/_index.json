@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-19T09:04:08.928Z",
+  "updatedAt": "2026-09-19T10:44:21.681Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -10880,11 +10880,57 @@
       },
       "lastCapturedAt": "2026-09-19T08:44:04.919Z",
       "total": 2
+    },
+    "post-38ff3252": {
+      "queries": {
+        "integrated::전담 액상 고르는 방법": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-19T10:43:58.767Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-19T10:43:58.767Z"
+        },
+        "blog_tab::전담 액상 고르는 방법": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-19T10:44:05.810Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-19T10:44:05.810Z"
+        },
+        "integrated::전담 액상 고르는": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-19T10:44:12.158Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-19T10:44:12.158Z"
+        },
+        "blog_tab::전담 액상 고르는": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-19T10:44:18.911Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-19T10:44:18.911Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-19T10:44:18.911Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-19T09:03:58.426Z",
-    "lastOkAt": "2026-09-19T09:03:58.426Z",
+    "lastRunAt": "2026-09-19T10:43:58.072Z",
+    "lastOkAt": "2026-09-19T10:43:58.072Z",
     "consecutiveFailedRuns": 0
   }
 }
