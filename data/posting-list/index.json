@@ -12328,16 +12328,38 @@
       "postId": "post-38ff3252",
       "topicId": "topic-3166bb6b",
       "userId": "c",
-      "title": "전담 액상 고르는 방법 만수르 전자담배에서 알려드릴게요!",
-      "status": "ready",
-      "naverPostUrl": null,
+      "title": "전담 액상 고르는 방법! 만수르 전자담배가 알려드릴게요",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224417157863",
       "evalScore": 67,
       "wordCount": 3029,
       "compositionSessionId": "pipe-73ef2849",
       "pendingApproval": null,
       "createdAt": "2026-09-19T05:57:00.427Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-19T05:59:22.731Z"
+      "publishedAt": "2026-09-19T10:34:43.649Z",
+      "updatedAt": "2026-09-19T10:34:44.203Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224417157863",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224417157863"
+        },
+        "targetKeywords": [
+          {
+            "query": "전담 액상 고르는 방법",
+            "role": "primary",
+            "source": "topic"
+          },
+          {
+            "query": "전담 액상 고르는",
+            "role": "secondary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전담 액상 고르는 방법! 만수르 전자담배가 알려드릴게요",
+        "contentHash": "413d7876",
+        "trackedFrom": "2026-09-19T10:34:44.514Z"
+      }
     },
     {
       "postId": "post-manual-mu84nxk6",
@@ -12374,5 +12396,5 @@
       "updatedAt": "2026-09-19T08:30:47.661Z"
     }
   ],
-  "lastUpdated": "2026-09-19T08:30:47.661Z"
+  "lastUpdated": "2026-09-19T10:34:44.203Z"
 }
