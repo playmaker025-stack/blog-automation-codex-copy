@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mu84nxk6",
+      "title": "간석동 전자담배 오토베이핑 오작동의 이유 및 예방",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1816,
+      "publishedAt": "2026-09-19T08:30:47.661Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mu84nxk6.md"
+    },
+    {
       "sampleId": "published-post-manual-mu2lxc75",
       "title": "남동구청역 전자담배 닷모드 닷박스 220W V2 스펙및 사용방법",
       "category": "published-post",
@@ -394,5 +403,5 @@
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-09-15T11:47:27.623Z"
+  "lastUpdated": "2026-09-19T08:30:54.101Z"
 }
