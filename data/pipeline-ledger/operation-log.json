@@ -4443,7 +4443,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-94f40293",
       "at": "2026-09-16T05:22:44.343Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전담 액상 고르는 방법 만수르 전자담배에서 알려드릴게요!",
+      "proposedTitle": "전담 액상 고르는 방법 만수르 전자담배에서 알려드릴게요!",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-73ef2849",
+      "at": "2026-09-19T05:56:51.945Z"
     }
   ],
-  "lastUpdated": "2026-09-16T05:22:44.343Z"
+  "lastUpdated": "2026-09-19T05:56:51.945Z"
 }
