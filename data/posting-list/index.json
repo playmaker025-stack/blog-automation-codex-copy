@@ -12338,7 +12338,41 @@
       "createdAt": "2026-09-19T05:57:00.427Z",
       "publishedAt": null,
       "updatedAt": "2026-09-19T05:59:22.731Z"
+    },
+    {
+      "postId": "post-manual-mu84nxk6",
+      "topicId": "",
+      "userId": "b",
+      "title": "간석동 전자담배 오토베이핑 오작동의 이유 및 예방",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224417088500",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224417088500",
+          "canonicalUrl": "https://blog.naver.com/youferst/224417088500"
+        },
+        "targetKeywords": [
+          {
+            "query": "간석동 전자담배 오토베이핑",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "간석동 전자담배 오토베이핑 오작동의 이유 및 예방",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-19T08:30:47.661Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-19T08:30:47.661Z",
+      "createdAt": "2026-09-19T08:30:47.661Z",
+      "updatedAt": "2026-09-19T08:30:47.661Z"
     }
   ],
-  "lastUpdated": "2026-09-19T05:59:22.731Z"
+  "lastUpdated": "2026-09-19T08:30:47.661Z"
 }
