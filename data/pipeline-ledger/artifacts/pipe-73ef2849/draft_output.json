@@ -1,17 +1,20 @@
 {
   "pipelineId": "pipe-73ef2849",
   "type": "draft_output",
-  "savedAt": "2026-09-19T05:57:58.386Z",
+  "savedAt": "2026-09-19T05:59:04.905Z",
   "data": {
     "postId": "post-38ff3252",
     "title": "전담 액상 고르는 방법 만수르 전자담배에서 알려드릴게요!",
-    "wordCount": 3220,
-    "generatedAt": "2026-09-19T05:57:56.837Z",
+    "wordCount": 3029,
+    "generatedAt": "2026-09-19T05:59:02.708Z",
     "contentPath": "data/posting-list/posts/post-38ff3252/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
-      "ok": true,
-      "blockingReasons": [],
+      "ok": false,
+      "blockingReasons": [
+        "질문문/따옴표 안 exact keyword 사용: 전담 액상 추천 / \"### 목넘김 부드러운 전담 액상 추천은 어떻게 받아야 하나요?\"",
+        "질문문/따옴표 안 exact keyword 사용: 전자담배 액상 선택법 / \"### 전자담배 액상 선택법에서 가장 먼저 볼 것은 뭔가요?\""
+      ],
       "warnings": [
         "mustResolve 단서 부족: 사용자 유형별 분기",
         "필수 섹션 반영 부족: 사용자 유형별 분기",
@@ -20,7 +23,10 @@
         "medium overlap: 역할 충돌 같은 CTA 흐름이 반복됩니다: 추천 기준과 사용자 유형을 정리한 뒤 방문 전 상담으로 연결"
       ],
       "matchedForbiddenPhrases": [],
-      "keywordStuffingFindings": [],
+      "keywordStuffingFindings": [
+        "질문문/따옴표 안 exact keyword 사용: 전담 액상 추천 / \"### 목넘김 부드러운 전담 액상 추천은 어떻게 받아야 하나요?\"",
+        "질문문/따옴표 안 exact keyword 사용: 전자담배 액상 선택법 / \"### 전자담배 액상 선택법에서 가장 먼저 볼 것은 뭔가요?\""
+      ],
       "deferFindings": [],
       "contractCoverageFindings": [
         "mustResolve 단서 부족: 사용자 유형별 분기"
@@ -33,7 +39,11 @@
       "specFindings": []
     },
     "finalDraftRevisionInstructions": [
-      "mustResolve 단서 부족: 사용자 유형별 분기 — 별도 요약 섹션을 덧붙이지 말고, 관련 본문 문단 안에서 자연스럽게 다루세요."
+      "키워드 과다/질문문 삽입 수정: 질문문/따옴표 안 exact keyword 사용: 전담 액상 추천 / \"### 목넘김 부드러운 전담 액상 추천은 어떻게 받아야 하나요?\". 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "키워드 과다/질문문 삽입 수정: 질문문/따옴표 안 exact keyword 사용: 전자담배 액상 선택법 / \"### 전자담배 액상 선택법에서 가장 먼저 볼 것은 뭔가요?\". 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "mustResolve 단서 부족: 사용자 유형별 분기 — 별도 요약 섹션을 덧붙이지 말고, 관련 본문 문단 안에서 자연스럽게 다루세요.",
+      "발행 차단 사유 해결: 질문문/따옴표 안 exact keyword 사용: 전담 액상 추천 / \"### 목넘김 부드러운 전담 액상 추천은 어떻게 받아야 하나요?\"",
+      "발행 차단 사유 해결: 질문문/따옴표 안 exact keyword 사용: 전자담배 액상 선택법 / \"### 전자담배 액상 선택법에서 가장 먼저 볼 것은 뭔가요?\""
     ]
   }
 }
