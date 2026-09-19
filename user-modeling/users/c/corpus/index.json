@@ -2,6 +2,17 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-38ff3252",
+      "title": "전담 액상 고르는 방법! 만수르 전자담배가 알려드릴게요",
+      "category": "direct-run",
+      "tags": [
+        "전담 액상 고르는 방법"
+      ],
+      "wordCount": 3029,
+      "publishedAt": "2026-09-19T10:34:43.649Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-38ff3252.md"
+    },
+    {
       "sampleId": "published-post-manual-mu6caa72",
       "title": "하복2 부평 전자담배 만수르점 입고! 언박싱 & 스펙 & 사용법",
       "category": "published-post",
@@ -300,16 +311,7 @@
       "wordCount": 2808,
       "publishedAt": "2026-08-25T05:41:15.404Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88lojs.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt88hupy",
-      "title": "부평전자담배 아이폰 전담? 마이팟 프로 스펙 & 사용법",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 2866,
-      "publishedAt": "2026-08-25T05:38:17.210Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88hupy.md"
     }
   ],
-  "lastUpdated": "2026-09-18T02:28:38.802Z"
+  "lastUpdated": "2026-09-19T10:34:53.219Z"
 }
