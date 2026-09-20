@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-20T06:24:35.305Z",
+  "updatedAt": "2026-09-20T11:04:08.991Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -6214,28 +6214,30 @@
         "integrated::냄새 안나는 전자담배": {
           "okAgeHours": [
             170,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-06T11:11:42.615Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-20T11:03:59.307Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-06T11:11:42.615Z"
+          "lastAttemptAt": "2026-09-20T11:03:59.307Z"
         },
         "blog_tab::냄새 안나는 전자담배": {
           "okAgeHours": [
             191,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-06T11:12:28.890Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-20T11:04:06.343Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-06T11:12:28.890Z"
+          "lastAttemptAt": "2026-09-20T11:04:06.343Z"
         }
       },
-      "lastCapturedAt": "2026-09-06T11:12:28.890Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-20T11:04:06.343Z",
+      "total": 6
     },
     "post-38ca6424": {
       "queries": {
@@ -11055,8 +11057,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-20T06:23:59.012Z",
-    "lastOkAt": "2026-09-20T06:23:59.012Z",
+    "lastRunAt": "2026-09-20T11:03:58.871Z",
+    "lastOkAt": "2026-09-20T11:03:58.871Z",
     "consecutiveFailedRuns": 0
   }
 }
