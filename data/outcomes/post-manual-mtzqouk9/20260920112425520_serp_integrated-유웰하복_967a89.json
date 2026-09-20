@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtzqouk9",
+  "source": "serp",
+  "capturedAt": "2026-09-20T11:24:25.520Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260920112425520_serp_integrated-유웰하복_967a89",
+  "target": {
+    "surface": "integrated",
+    "query": "유웰하복"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "유웰하복",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 28,
+    "searchedResultLimit": 35,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
