@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mu9eokhy",
+      "title": "하이엔드 전자담배는 왜 비쌀까?-일반 기기와 다른 부분을 알아보자",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2153,
+      "publishedAt": "2026-09-20T05:58:57.948Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mu9eokhy.md"
+    },
+    {
       "sampleId": "published-post-manual-mu6u9v3o",
       "title": "RDA를 쓰면 맛이 정말 더 진해질까?-드리퍼의 맛 표현이 다른 이유",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6418,
       "publishedAt": "2026-07-26T06:40:24.724Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-ms1fi6e8.md"
-    },
-    {
-      "sampleId": "published-post-manual-mryvhfci",
-      "title": "전자담배 배터리가 빨리 닳는 이유",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6213,
-      "publishedAt": "2026-07-24T11:44:24.767Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mryvhfci.md"
     }
   ],
-  "lastUpdated": "2026-09-18T10:52:13.028Z"
+  "lastUpdated": "2026-09-20T05:59:04.725Z"
 }
