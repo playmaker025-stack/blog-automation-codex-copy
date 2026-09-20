@@ -12394,7 +12394,68 @@
       "publishedAt": "2026-09-19T08:30:47.661Z",
       "createdAt": "2026-09-19T08:30:47.661Z",
       "updatedAt": "2026-09-19T08:30:47.661Z"
+    },
+    {
+      "postId": "post-manual-mu9eokhy",
+      "topicId": "",
+      "userId": "d",
+      "title": "하이엔드 전자담배는 왜 비쌀까?-일반 기기와 다른 부분을 알아보자",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224417738172",
+      "wordCount": 0,
+      "targetKeywords": [
+        "하이엔드전자담배",
+        "하이엔드전자담배가격",
+        "하이엔드모드기기",
+        "rda",
+        "rta"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224417738172",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224417738172"
+        },
+        "targetKeywords": [
+          {
+            "query": "하이엔드전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "하이엔드전자담배가격",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "하이엔드모드기기",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "rda",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "rta",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "하이엔드 전자담배는 왜 비쌀까?-일반 기기와 다른 부분을 알아보자",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-20T05:58:57.948Z",
+        "keywordsRevisedAt": "2026-09-20T05:58:57.948Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-20T05:58:57.948Z",
+      "createdAt": "2026-09-20T05:58:57.948Z",
+      "updatedAt": "2026-09-20T05:58:57.948Z"
     }
   ],
-  "lastUpdated": "2026-09-19T10:34:44.203Z"
+  "lastUpdated": "2026-09-20T05:58:57.948Z"
 }
