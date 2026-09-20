@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-20T06:05:01.306Z",
+  "updatedAt": "2026-09-20T06:24:35.305Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -10299,67 +10299,73 @@
       "queries": {
         "integrated::rta": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-13T07:03:55.146Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-20T06:23:59.738Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-13T07:03:55.146Z"
+          "lastAttemptAt": "2026-09-20T06:23:59.738Z"
         },
         "blog_tab::rta": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-13T07:04:02.471Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-20T06:24:07.084Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-13T07:04:02.471Z"
+          "lastAttemptAt": "2026-09-20T06:24:07.084Z"
         },
         "integrated::rda": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-13T07:04:08.724Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-20T06:24:12.785Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-13T07:04:08.724Z"
+          "lastAttemptAt": "2026-09-20T06:24:12.785Z"
         },
         "blog_tab::rda": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-13T07:04:15.675Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-20T06:24:19.028Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-13T07:04:15.675Z"
+          "lastAttemptAt": "2026-09-20T06:24:19.028Z"
         },
         "integrated::드리퍼": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-13T07:04:21.930Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-20T06:24:25.261Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-13T07:04:21.930Z"
+          "lastAttemptAt": "2026-09-20T06:24:25.261Z"
         },
         "blog_tab::드리퍼": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-13T07:04:28.894Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-20T06:24:32.532Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-13T07:04:28.894Z"
+          "lastAttemptAt": "2026-09-20T06:24:32.532Z"
         }
       },
-      "lastCapturedAt": "2026-09-13T07:04:28.894Z",
-      "total": 6
+      "lastCapturedAt": "2026-09-20T06:24:32.532Z",
+      "total": 12
     },
     "post-manual-mtzqouk9": {
       "queries": {
@@ -11049,8 +11055,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-20T06:03:59.207Z",
-    "lastOkAt": "2026-09-20T06:03:59.207Z",
+    "lastRunAt": "2026-09-20T06:23:59.012Z",
+    "lastOkAt": "2026-09-20T06:23:59.012Z",
     "consecutiveFailedRuns": 0
   }
 }
