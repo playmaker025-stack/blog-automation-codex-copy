@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu9eokhy",
+  "source": "serp",
+  "capturedAt": "2026-09-20T06:04:32.096Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260920060432096_serp_blogtab-하이엔드모드기기_26539a",
+  "target": {
+    "surface": "blog_tab",
+    "query": "하이엔드모드기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하이엔드모드기기",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224417738172",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222601099700",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224068863816",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223233806583",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
