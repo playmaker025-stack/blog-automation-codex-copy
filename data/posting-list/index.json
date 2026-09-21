@@ -12507,7 +12507,41 @@
         "contentHash": "3c7d7783",
         "trackedFrom": "2026-09-21T09:04:28.708Z"
       }
+    },
+    {
+      "postId": "post-manual-mub8dhw8",
+      "topicId": "",
+      "userId": "d",
+      "title": "하이엔드 전자담배는 어떤 사람에게 맞을까?-일반 기기와 선택 기준이 다른 이유",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224419124868",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224419124868",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224419124868"
+        },
+        "targetKeywords": [
+          {
+            "query": "하이엔드 전자담배는 어떤",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "하이엔드 전자담배는 어떤 사람에게 맞을까?-일반 기기와 선택 기준이 다른 이유",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-21T12:37:56.100Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-21T12:37:56.100Z",
+      "createdAt": "2026-09-21T12:37:56.100Z",
+      "updatedAt": "2026-09-21T12:37:56.100Z"
     }
   ],
-  "lastUpdated": "2026-09-21T09:04:28.153Z"
+  "lastUpdated": "2026-09-21T12:37:56.100Z"
 }
