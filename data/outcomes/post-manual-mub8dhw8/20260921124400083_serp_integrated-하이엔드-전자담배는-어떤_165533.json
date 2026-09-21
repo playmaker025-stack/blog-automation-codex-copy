@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mub8dhw8",
+  "source": "serp",
+  "capturedAt": "2026-09-21T12:44:00.083Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260921124400083_serp_integrated-하이엔드-전자담배는-어떤_165533",
+  "target": {
+    "surface": "integrated",
+    "query": "하이엔드 전자담배는 어떤"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하이엔드 전자담배는 어떤",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224405167840",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224396167944",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
