@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-eabdbe5e",
+  "type": "approval_request",
+  "savedAt": "2026-09-21T06:56:14.765Z",
+  "data": {
+    "pipelineId": "pipe-eabdbe5e",
+    "previousTitle": "",
+    "proposedTitle": "비행기 전자담배 위탁수하물 규정 총정리와 벌금 안내",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '비행기 전자담배 위탁수하물 규정 총정리'를 중심축으로 두고, 서브 키워드 '벌금'는 보조 맥락으로 반영했습니다. 네이버 카페와 지식인에서 전자담배 비행기 반입 규정과 벌금 관련 질문이 꾸준히 발생하며, 사용자들이 규정 위반 시 벌금과 처벌에 대해 높은 관심을 보임. 최근 발행 글 스타일과 구조(허브-리프)를 반영해 규정 총정리(허브)와 벌금 사례(리프)를 명확히 구분하여 작성. 친근한 말투와 실제 경험담을 포함해 신뢰도를 높이고, AI 브리핑 노출을 위한 핵심 요약과 목차형 구성으로 검색 의도에 최적화함. 다음 글로 전자담배 기기별 반입법 허브 글과 자연스럽게 연결해 체류시간과 재방문율을 높일 전략임.",
+    "requestedAt": "2026-09-21T06:56:08.239Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-21T06:56:08.239Z",
+      "modifications": null
+    }
+  }
+}
