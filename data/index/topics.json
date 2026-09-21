@@ -2156,7 +2156,29 @@
       "assignedUserId": "c",
       "createdAt": "2026-09-19T05:56:13.697Z",
       "updatedAt": "2026-09-19T10:34:48.307Z"
+    },
+    {
+      "topicId": "topic-4bdefdb2",
+      "title": "비행기 전자담배 위탁수하물 규정 총정리 벌금",
+      "description": "메인키워드: 비행기 전자담배 위탁수하물 규정 총정리 / 서브 키워드: 벌금",
+      "category": "direct-run",
+      "tags": [
+        "비행기 전자담배 위탁수하물 규정 총정리",
+        "벌금"
+      ],
+      "targetKeyword": "비행기 전자담배 위탁수하물 규정 총정리",
+      "subKeywords": [
+        "벌금"
+      ],
+      "source": "direct",
+      "targetMainKeyword": "비행기 전자담배 위탁수하물 규정 총정리",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-09-21T06:55:21.980Z",
+      "updatedAt": "2026-09-21T06:55:21.980Z"
     }
   ],
-  "lastUpdated": "2026-09-19T10:34:48.307Z"
+  "lastUpdated": "2026-09-21T06:55:21.980Z"
 }
