@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-21T08:44:36.908Z",
+  "updatedAt": "2026-09-21T09:24:22.351Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -11110,11 +11110,57 @@
       },
       "lastCapturedAt": "2026-09-20T06:04:58.486Z",
       "total": 10
+    },
+    "post-d8dc50f1": {
+      "queries": {
+        "integrated::전자담배 위탁수하물": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-21T09:23:59.810Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-21T09:23:59.810Z"
+        },
+        "blog_tab::전자담배 위탁수하물": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-21T09:24:06.725Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-21T09:24:06.725Z"
+        },
+        "integrated::비행기 전자담배 위탁수하물": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-21T09:24:13.037Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-21T09:24:13.037Z"
+        },
+        "blog_tab::비행기 전자담배 위탁수하물": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-21T09:24:19.668Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-21T09:24:19.668Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-21T09:24:19.668Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-21T08:43:59.793Z",
-    "lastOkAt": "2026-09-21T08:43:59.793Z",
+    "lastRunAt": "2026-09-21T09:23:59.532Z",
+    "lastOkAt": "2026-09-21T09:23:59.532Z",
     "consecutiveFailedRuns": 0
   }
 }

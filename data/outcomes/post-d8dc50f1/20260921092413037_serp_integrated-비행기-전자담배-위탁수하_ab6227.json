@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-d8dc50f1",
+  "source": "serp",
+  "capturedAt": "2026-09-21T09:24:13.037Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260921092413037_serp_integrated-비행기-전자담배-위탁수하_ab6227",
+  "target": {
+    "surface": "integrated",
+    "query": "비행기 전자담배 위탁수하물"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "비행기 전자담배 위탁수하물",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224329849103",
+        "rank": 10
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

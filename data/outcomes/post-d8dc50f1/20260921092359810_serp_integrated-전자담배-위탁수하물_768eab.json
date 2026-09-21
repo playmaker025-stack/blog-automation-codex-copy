@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-d8dc50f1",
+  "source": "serp",
+  "capturedAt": "2026-09-21T09:23:59.810Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260921092359810_serp_integrated-전자담배-위탁수하물_768eab",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 위탁수하물"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 위탁수하물",
+    "surface": "integrated",
+    "querySource": "topic",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
