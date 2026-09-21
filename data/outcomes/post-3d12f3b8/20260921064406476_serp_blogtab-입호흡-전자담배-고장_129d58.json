@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-3d12f3b8",
+  "source": "serp",
+  "capturedAt": "2026-09-21T06:44:06.476Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260921064406476_serp_blogtab-입호흡-전자담배-고장_129d58",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡 전자담배 고장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 전자담배 고장",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224411359815",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
