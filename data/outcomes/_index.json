@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-21T09:24:22.351Z",
+  "updatedAt": "2026-09-21T11:04:08.839Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -6805,29 +6805,31 @@
           "okAgeHours": [
             147,
             171,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-07T11:11:44.106Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-21T11:03:59.897Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-07T11:11:44.106Z"
+          "lastAttemptAt": "2026-09-21T11:03:59.897Z"
         },
         "blog_tab::인천전자담배 무니코틴 액상": {
           "okAgeHours": [
             167,
             171,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-07T11:11:51.183Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-21T11:04:06.877Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-07T11:11:51.183Z"
+          "lastAttemptAt": "2026-09-21T11:04:06.877Z"
         }
       },
-      "lastCapturedAt": "2026-09-07T11:11:51.183Z",
-      "total": 6
+      "lastCapturedAt": "2026-09-21T11:04:06.877Z",
+      "total": 8
     },
     "post-manual-mt87hyvp": {
       "queries": {
@@ -11159,8 +11161,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-21T09:23:59.532Z",
-    "lastOkAt": "2026-09-21T09:23:59.532Z",
+    "lastRunAt": "2026-09-21T11:03:59.562Z",
+    "lastOkAt": "2026-09-21T11:03:59.562Z",
     "consecutiveFailedRuns": 0
   }
 }
