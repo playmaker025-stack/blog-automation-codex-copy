@@ -4454,7 +4454,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-73ef2849",
       "at": "2026-09-19T05:56:51.945Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "비행기 전자담배 위탁수하물 규정 총정리 벌금",
+      "proposedTitle": "비행기 전자담배 위탁수하물 규정 총정리와 벌금 안내",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.8636363636363636,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-eabdbe5e",
+      "at": "2026-09-21T06:56:06.654Z"
     }
   ],
-  "lastUpdated": "2026-09-19T05:56:51.945Z"
+  "lastUpdated": "2026-09-21T06:56:06.654Z"
 }
