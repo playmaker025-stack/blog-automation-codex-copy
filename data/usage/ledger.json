@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 7.565130300000001,
-  "lifetimeCalls": 301,
+  "lifetimeUsd": 7.615789800000001,
+  "lifetimeCalls": 303,
   "days": [
     {
       "date": "2026-08-24",
@@ -600,21 +600,21 @@
       "date": "2026-09-21",
       "models": {
         "gpt-4.1-mini": {
-          "calls": 1,
-          "inputTokens": 3656,
-          "outputTokens": 1297,
+          "calls": 2,
+          "inputTokens": 10762,
+          "outputTokens": 1753,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.0035376000000000006,
+          "usd": 0.007109600000000001,
           "unpriced": false
         },
         "gpt-5.4": {
-          "calls": 1,
-          "inputTokens": 4710,
-          "outputTokens": 1950,
+          "calls": 2,
+          "inputTokens": 11527,
+          "outputTokens": 3953,
           "cacheReadTokens": 0,
           "cacheWriteTokens": 0,
-          "usd": 0.041025,
+          "usd": 0.0881125,
           "unpriced": false
         }
       }
@@ -634,7 +634,7 @@
     }
   ],
   "lifetimeByProvider": {
-    "openai": 0.9375966
+    "openai": 0.9882561
   },
-  "updatedAt": "2026-09-21T06:57:07.864Z"
+  "updatedAt": "2026-09-21T06:57:37.420Z"
 }
