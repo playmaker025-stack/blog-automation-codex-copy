@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-de70a25d",
+  "type": "approval_request",
+  "savedAt": "2026-09-21T07:44:09.948Z",
+  "data": {
+    "pipelineId": "pipe-de70a25d",
+    "previousTitle": "",
+    "proposedTitle": "비행기 전자담배 위탁수하물 규정 총정리",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '전자담배 위탁수하물'를 중심축으로 두고, 서브 키워드 '벌금'는 보조 맥락으로 반영했습니다. 주제는 명확한 검색의도(전자담배 위탁수하물 규정과 벌금 관련 정보)와 지역 특화 정보 수요가 높아, 규정 안내와 벌금 사례 중심의 실용적 콘텐츠가 필요합니다. 기존 발행 글과 중복 위험이 있으나 도입과 결론, 예시를 차별화해 신뢰도와 체류시간을 높입니다. 친근한 톤과 경험 기반 서술로 독자 공감을 유도하며, AEO 구조에 맞춰 핵심 질문에 직접 답변하는 형식을 적용해 네이버 AI 브리핑 노출 가능성을 높였습니다.\n\n[사용자 승인 후 추가 수정 요청]\n",
+    "requestedAt": "2026-09-21T07:44:01.462Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-21T07:44:01.462Z",
+      "modifications": null
+    }
+  }
+}
