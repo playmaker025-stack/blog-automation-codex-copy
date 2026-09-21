@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-5e42a765",
+  "source": "serp",
+  "capturedAt": "2026-09-21T08:44:27.711Z",
+  "postAgeHours": 337,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260921084427711_serp_integrated-인천_16e988",
+  "target": {
+    "surface": "integrated",
+    "query": "인천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 52,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

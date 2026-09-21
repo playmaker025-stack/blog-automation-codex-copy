@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-38ca6424",
+  "source": "serp",
+  "capturedAt": "2026-09-21T08:44:06.873Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260921084406873_serp_integrated-부천-전자담배-액상_3ddde6",
+  "target": {
+    "surface": "integrated",
+    "query": "부천 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부천 전자담배 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 36,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224388730074",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
