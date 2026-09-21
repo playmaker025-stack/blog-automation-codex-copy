@@ -1,0 +1,47 @@
+{
+  "pipelineId": "pipe-eabdbe5e",
+  "type": "draft_output",
+  "savedAt": "2026-09-21T06:57:09.440Z",
+  "data": {
+    "postId": "post-dc4c2c6d",
+    "title": "비행기 전자담배 위탁수하물 규정 총정리와 벌금 안내",
+    "wordCount": 2548,
+    "generatedAt": "2026-09-21T06:57:07.479Z",
+    "contentPath": "data/posting-list/posts/post-dc4c2c6d/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": false,
+      "blockingReasons": [
+        "금지 표현 감지: 한 번에 정리",
+        "sub keyword \"벌금\" 8회 사용, 상한 3회 초과",
+        "필수 포함 요소 '벌금' 아래 추천 이유가 부족합니다.",
+        "필수 포함 요소 '벌금' 아래 추천 대상이 부족합니다."
+      ],
+      "warnings": [
+        "필수 섹션 반영 부족: 벌금 추천 이유와 추천 대상",
+        "필수 섹션 반영 부족: 사용자 유형별 최종 선택 기준",
+        "medium overlap: 도입 패턴 반복 위험 recent_inquiry"
+      ],
+      "matchedForbiddenPhrases": [
+        "한 번에 정리"
+      ],
+      "keywordStuffingFindings": [
+        "sub keyword \"벌금\" 8회 사용, 상한 3회 초과"
+      ],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 recent_inquiry"
+      ],
+      "specFindings": []
+    },
+    "finalDraftRevisionInstructions": [
+      "금지 표현 '한 번에 정리'을(를) 쓰지 말고, 같은 뜻을 사용자 말투의 다른 문장으로 다시 쓰세요. 단어만 지우지 말고 문장을 다시 쓰세요.",
+      "키워드 과다/질문문 삽입 수정: sub keyword \"벌금\" 8회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "발행 차단 사유 해결: 금지 표현 감지: 한 번에 정리",
+      "발행 차단 사유 해결: sub keyword \"벌금\" 8회 사용, 상한 3회 초과",
+      "발행 차단 사유 해결: 필수 포함 요소 '벌금' 아래 추천 이유가 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '벌금' 아래 추천 대상이 부족합니다."
+    ]
+  }
+}
