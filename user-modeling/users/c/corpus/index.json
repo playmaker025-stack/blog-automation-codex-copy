@@ -2,6 +2,18 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-d8dc50f1",
+      "title": "비행기 전자담배 위탁수하물 규정 총정리!",
+      "category": "direct-run",
+      "tags": [
+        "전자담배 위탁수하물",
+        "벌금"
+      ],
+      "wordCount": 2696,
+      "publishedAt": "2026-09-21T09:04:26.927Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-d8dc50f1.md"
+    },
+    {
       "sampleId": "published-post-38ff3252",
       "title": "전담 액상 고르는 방법! 만수르 전자담배가 알려드릴게요",
       "category": "direct-run",
@@ -302,16 +314,7 @@
       "wordCount": 1759,
       "publishedAt": "2026-08-25T05:41:39.623Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88m78n.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt88lojs",
-      "title": "인천전자담배 버블몬 그래피티3 사용법 / 스펙 / 색상 종류 총정리!",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 2808,
-      "publishedAt": "2026-08-25T05:41:15.404Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88lojs.md"
     }
   ],
-  "lastUpdated": "2026-09-19T10:34:53.219Z"
+  "lastUpdated": "2026-09-21T09:04:37.981Z"
 }
