@@ -12475,17 +12475,39 @@
       "postId": "post-d8dc50f1",
       "topicId": "topic-c223a69f",
       "userId": "c",
-      "title": "비행기 전자담배 위탁수하물 규정 총정리",
-      "status": "ready",
-      "naverPostUrl": null,
+      "title": "비행기 전자담배 위탁수하물 규정 총정리!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224418950182",
       "evalScore": 66,
       "wordCount": 2696,
       "compositionSessionId": "pipe-de70a25d",
       "pendingApproval": null,
       "createdAt": "2026-09-21T07:44:07.975Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-21T07:46:37.453Z"
+      "publishedAt": "2026-09-21T09:04:26.927Z",
+      "updatedAt": "2026-09-21T09:04:28.153Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224418950182",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224418950182"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 위탁수하물",
+            "role": "primary",
+            "source": "topic"
+          },
+          {
+            "query": "비행기 전자담배 위탁수하물",
+            "role": "secondary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "비행기 전자담배 위탁수하물 규정 총정리!",
+        "contentHash": "3c7d7783",
+        "trackedFrom": "2026-09-21T09:04:28.708Z"
+      }
     }
   ],
-  "lastUpdated": "2026-09-21T07:46:37.453Z"
+  "lastUpdated": "2026-09-21T09:04:28.153Z"
 }
