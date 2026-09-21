@@ -4476,7 +4476,18 @@
       "errorName": "Error",
       "pipelineId": "pipe-b0ca5cf5",
       "at": "2026-09-21T07:43:04.069Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "비행기 전자담배 위탁수하물 규정 총정리",
+      "proposedTitle": "비행기 전자담배 위탁수하물 규정 총정리",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-de70a25d",
+      "at": "2026-09-21T07:43:54.910Z"
     }
   ],
-  "lastUpdated": "2026-09-21T07:43:04.069Z"
+  "lastUpdated": "2026-09-21T07:43:54.910Z"
 }
