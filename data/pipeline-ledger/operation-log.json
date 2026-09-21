@@ -4465,7 +4465,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-eabdbe5e",
       "at": "2026-09-21T06:56:06.654Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-c223a69f",
+      "userId": "c",
+      "message": "Preflight check blocked writing: Similar existing title found: 비행기 전자담배 위탁수하물 규정 총정리와 벌금 안내 (ready, 0.762)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-b0ca5cf5",
+      "at": "2026-09-21T07:43:04.069Z"
     }
   ],
-  "lastUpdated": "2026-09-21T06:56:06.654Z"
+  "lastUpdated": "2026-09-21T07:43:04.069Z"
 }
