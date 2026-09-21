@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6xe2cd",
+  "source": "serp",
+  "capturedAt": "2026-09-21T07:24:36.919Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260921072436919_serp_integrated-인천-전자담배-만수동만수_846e75",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 전자담배 만수동만수르"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 만수동만수르",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224383515315",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224338245201",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224325995644",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224321052285",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224318921314",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224306956030",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224305965234",
+        "rank": 11
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224081308021",
+        "rank": 15
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224206949911",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224090385537",
+        "rank": 17
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "220492070092",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221578688907",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222694243327",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223784654348",
+        "rank": 21
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223536974417",
+        "rank": 22
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221527297739",
+        "rank": 23
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221511543607",
+        "rank": 24
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221261341590",
+        "rank": 25
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222424638925",
+        "rank": 26
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221796307356",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
