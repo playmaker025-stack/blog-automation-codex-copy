@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87j13u",
+  "source": "serp",
+  "capturedAt": "2026-09-22T04:44:13.834Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922044413834_serp_integrated-굴포천전자담배-일회용기기_2bdbb8",
+  "target": {
+    "surface": "integrated",
+    "query": "굴포천전자담배 일회용기기 네스티바"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "굴포천전자담배 일회용기기 네스티바",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 21,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "223962684249",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223962774765",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223962843652",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223962872218",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224365923075",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

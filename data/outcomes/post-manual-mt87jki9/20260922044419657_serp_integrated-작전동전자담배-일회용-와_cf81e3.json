@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87jki9",
+  "source": "serp",
+  "capturedAt": "2026-09-22T04:44:19.657Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922044419657_serp_integrated-작전동전자담배-일회용-와_cf81e3",
+  "target": {
+    "surface": "integrated",
+    "query": "작전동전자담배 일회용 와카"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "작전동전자담배 일회용 와카",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 14,
+    "searchedResultLimit": 16,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "223964114009",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224156291763",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223964896353",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224019162853",
+        "rank": 11
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223963854996",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223963821654",
+        "rank": 14
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223992696261",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
