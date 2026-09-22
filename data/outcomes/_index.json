@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-22T07:25:09.982Z",
+  "updatedAt": "2026-09-22T07:45:11.313Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -8354,17 +8354,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:43:51.665Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:00.984Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:43:51.665Z"
+          "lastAttemptAt": "2026-09-22T07:44:00.984Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:04:13.494Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:00.984Z",
+      "total": 8
     },
     "post-manual-mt895rtf": {
       "queries": {
@@ -8385,17 +8386,18 @@
           "okAgeHours": [
             150,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:43:57.339Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:07.530Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:43:57.339Z"
+          "lastAttemptAt": "2026-09-22T07:44:07.530Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:04:19.899Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:07.530Z",
+      "total": 8
     },
     "post-manual-mt896bb1": {
       "queries": {
@@ -8416,17 +8418,18 @@
           "okAgeHours": [
             150,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:03.513Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:13.791Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:03.513Z"
+          "lastAttemptAt": "2026-09-22T07:44:13.791Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:04:25.587Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:13.791Z",
+      "total": 8
     },
     "post-manual-mt896vhm": {
       "queries": {
@@ -8447,17 +8450,18 @@
           "okAgeHours": [
             150,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:09.835Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:20.157Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:09.835Z"
+          "lastAttemptAt": "2026-09-22T07:44:20.157Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:04:32.318Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:20.157Z",
+      "total": 8
     },
     "post-manual-mt897ee7": {
       "queries": {
@@ -8478,17 +8482,18 @@
           "okAgeHours": [
             150,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:16.167Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:26.431Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:16.167Z"
+          "lastAttemptAt": "2026-09-22T07:44:26.431Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:04:38.895Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:26.431Z",
+      "total": 8
     },
     "post-manual-mt8980ju": {
       "queries": {
@@ -8509,17 +8514,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:22.390Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:32.665Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:22.390Z"
+          "lastAttemptAt": "2026-09-22T07:44:32.665Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:04:45.523Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:32.665Z",
+      "total": 8
     },
     "post-manual-mt898hkp": {
       "queries": {
@@ -8540,17 +8546,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:28.292Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:38.520Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:28.292Z"
+          "lastAttemptAt": "2026-09-22T07:44:38.520Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:04:52.023Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:38.520Z",
+      "total": 8
     },
     "post-manual-mt898yex": {
       "queries": {
@@ -8571,17 +8578,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:34.208Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:44.423Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:34.208Z"
+          "lastAttemptAt": "2026-09-22T07:44:44.423Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:04:58.166Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:44.423Z",
+      "total": 8
     },
     "post-manual-mt899eyt": {
       "queries": {
@@ -8602,17 +8610,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:40.501Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:50.754Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:40.501Z"
+          "lastAttemptAt": "2026-09-22T07:44:50.754Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:05:04.626Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:50.754Z",
+      "total": 8
     },
     "post-manual-mt899nt0": {
       "queries": {
@@ -8633,17 +8642,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:46.854Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:44:57.043Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:46.854Z"
+          "lastAttemptAt": "2026-09-22T07:44:57.043Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:05:11.164Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:44:57.043Z",
+      "total": 8
     },
     "post-manual-mt89a3tc": {
       "queries": {
@@ -8664,17 +8674,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:53.139Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:45:02.545Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:53.139Z"
+          "lastAttemptAt": "2026-09-22T07:45:02.545Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:24:00.585Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:45:02.545Z",
+      "total": 8
     },
     "post-manual-mt89amh7": {
       "queries": {
@@ -8695,17 +8706,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T07:44:59.100Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T07:45:08.791Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T07:44:59.100Z"
+          "lastAttemptAt": "2026-09-22T07:45:08.791Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:24:07.424Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T07:45:08.791Z",
+      "total": 8
     },
     "post-manual-mt89b3up": {
       "queries": {
@@ -11295,8 +11307,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-22T07:23:59.970Z",
-    "lastOkAt": "2026-09-22T07:23:59.970Z",
+    "lastRunAt": "2026-09-22T07:44:00.256Z",
+    "lastOkAt": "2026-09-22T07:44:00.256Z",
     "consecutiveFailedRuns": 0
   }
 }
