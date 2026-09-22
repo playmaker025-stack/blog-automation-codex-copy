@@ -12541,7 +12541,56 @@
       "publishedAt": "2026-09-21T12:37:56.100Z",
       "createdAt": "2026-09-21T12:37:56.100Z",
       "updatedAt": "2026-09-21T12:37:56.100Z"
+    },
+    {
+      "postId": "post-manual-mucfo12x",
+      "topicId": "",
+      "userId": "c",
+      "title": "구월동전자담배 버블몬 비어 일회용 전담 만수르의 솔직한 후기!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224420074157",
+      "wordCount": 0,
+      "targetKeywords": [
+        "버블몬 비어",
+        "구월동전자담배",
+        "일회용"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224420074157",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224420074157"
+        },
+        "targetKeywords": [
+          {
+            "query": "버블몬 비어",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "구월동전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "일회용",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "구월동전자담배 버블몬 비어 일회용 전담 만수르의 솔직한 후기!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-22T08:49:50.310Z",
+        "keywordsRevisedAt": "2026-09-22T08:49:50.310Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-22T08:49:50.310Z",
+      "createdAt": "2026-09-22T08:49:50.310Z",
+      "updatedAt": "2026-09-22T08:49:50.310Z"
     }
   ],
-  "lastUpdated": "2026-09-21T12:37:56.100Z"
+  "lastUpdated": "2026-09-22T08:49:50.310Z"
 }
