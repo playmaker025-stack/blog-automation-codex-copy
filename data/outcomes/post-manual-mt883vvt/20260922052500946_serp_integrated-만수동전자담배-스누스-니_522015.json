@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt883vvt",
+  "source": "serp",
+  "capturedAt": "2026-09-22T05:25:00.946Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922052500946_serp_integrated-만수동전자담배-스누스-니_522015",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동전자담배 스누스 니코틴"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동전자담배 스누스 니코틴",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 20,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224080337226",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224297016462",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224080375381",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224080229745",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224031876690",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221179311242",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223969433543",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224081539512",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
