@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88g50o",
+  "source": "serp",
+  "capturedAt": "2026-09-22T07:24:43.493Z",
+  "postAgeHours": 674,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922072443493_serp_blogtab-논현동전자담배-엘프바-아이스킹_5ccf86",
+  "target": {
+    "surface": "blog_tab",
+    "query": "논현동전자담배 엘프바 아이스킹"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "논현동전자담배 엘프바 아이스킹",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
