@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt899nt0",
+  "source": "serp",
+  "capturedAt": "2026-09-22T06:05:11.164Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922060511164_serp_integrated-무화량-많은-전자담배_dba293",
+  "target": {
+    "surface": "integrated",
+    "query": "무화량 많은 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량 많은 전자담배",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 34,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "221179353045",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221121600597",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221294722266",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222627896175",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221196221384",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221214176713",
+        "rank": 11
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221191133141",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221155220454",
+        "rank": 15
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221330954809",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222504495732",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 23
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224359756182",
+        "rank": 24
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224403800869",
+        "rank": 25
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224003135828",
+        "rank": 27
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224284614293",
+        "rank": 32
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
