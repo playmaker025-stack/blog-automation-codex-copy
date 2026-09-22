@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mucigjqz",
+      "title": "인천 전자담배 입호흡 액상 토바코 계열 3종 추천",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1208,
+      "publishedAt": "2026-09-22T10:08:10.900Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mucigjqz.md"
+    },
+    {
       "sampleId": "published-post-manual-mu84nxk6",
       "title": "간석동 전자담배 오토베이핑 오작동의 이유 및 예방",
       "category": "published-post",
@@ -383,25 +392,7 @@
       "wordCount": 2160,
       "publishedAt": "2025-02-14T00:00:00.000Z",
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-02.md"
-    },
-    {
-      "sampleId": "reference-b-03",
-      "title": "서창동 전자담배 발라리안 팟 호환 가능한 베놈 팬텀 마크2",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "서창동",
-        "발라리안",
-        "호환"
-      ],
-      "wordCount": 2757,
-      "publishedAt": "2024-08-06T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-03.md"
     }
   ],
-  "lastUpdated": "2026-09-19T08:30:54.101Z"
+  "lastUpdated": "2026-09-22T10:08:17.336Z"
 }
