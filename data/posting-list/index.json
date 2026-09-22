@@ -12590,7 +12590,41 @@
       "publishedAt": "2026-09-22T08:49:50.310Z",
       "createdAt": "2026-09-22T08:49:50.310Z",
       "updatedAt": "2026-09-22T08:49:50.310Z"
+    },
+    {
+      "postId": "post-manual-mucigjqz",
+      "topicId": "",
+      "userId": "b",
+      "title": "인천 전자담배 입호흡 액상 토바코 계열 3종 추천",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224420143737",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224420143737",
+          "canonicalUrl": "https://blog.naver.com/youferst/224420143737"
+        },
+        "targetKeywords": [
+          {
+            "query": "인천 전자담배 입호흡",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "인천 전자담배 입호흡 액상 토바코 계열 3종 추천",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-22T10:08:10.900Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-22T10:08:10.900Z",
+      "createdAt": "2026-09-22T10:08:10.900Z",
+      "updatedAt": "2026-09-22T10:08:10.900Z"
     }
   ],
-  "lastUpdated": "2026-09-22T08:49:50.310Z"
+  "lastUpdated": "2026-09-22T10:08:10.900Z"
 }
