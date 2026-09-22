@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87trwt",
+  "source": "serp",
+  "capturedAt": "2026-09-22T05:04:58.848Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922050458848_serp_integrated-약대동전자담배-리로드-아_0ec407",
+  "target": {
+    "surface": "integrated",
+    "query": "약대동전자담배 리로드 아이킥"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "약대동전자담배 리로드 아이킥",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 16,
+    "searchedResultLimit": 19,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "223985830503",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224014502494",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
