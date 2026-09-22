@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu2oqd4q",
+  "source": "serp",
+  "capturedAt": "2026-09-22T12:44:00.893Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922124400893_serp_integrated-rta_78c096",
+  "target": {
+    "surface": "integrated",
+    "query": "rta"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "rta",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 20,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224412967354",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
