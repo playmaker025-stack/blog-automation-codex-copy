@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt89amh7",
+  "source": "serp",
+  "capturedAt": "2026-09-22T06:24:07.424Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922062407424_serp_integrated-만수동전자담배-말론S-전_b7a47f",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동전자담배 말론S 전담"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동전자담배 말론S 전담",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 19,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224001541622",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224304878566",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224094565482",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223827602764",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224318012483",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224304997348",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224090367013",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224007820815",
+        "rank": 15
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224306173121",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
