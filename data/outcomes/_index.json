@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-22T07:45:11.313Z",
+  "updatedAt": "2026-09-22T08:04:09.416Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -8738,17 +8738,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T08:03:51.859Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T08:04:00.594Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T08:03:51.859Z"
+          "lastAttemptAt": "2026-09-22T08:04:00.594Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:24:13.878Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T08:04:00.594Z",
+      "total": 8
     },
     "post-manual-mt89bp12": {
       "queries": {
@@ -8769,17 +8770,18 @@
           "okAgeHours": [
             151,
             170,
-            338
+            338,
+            674
           ],
-          "lastCapturedAt": "2026-09-08T08:03:58.446Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-22T08:04:07.242Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-08T08:03:58.446Z"
+          "lastAttemptAt": "2026-09-22T08:04:07.242Z"
         }
       },
-      "lastCapturedAt": "2026-09-22T06:24:20.484Z",
-      "total": 7
+      "lastCapturedAt": "2026-09-22T08:04:07.242Z",
+      "total": 8
     },
     "post-9177d698": {
       "queries": {
@@ -11307,8 +11309,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-22T07:44:00.256Z",
-    "lastOkAt": "2026-09-22T07:44:00.256Z",
+    "lastRunAt": "2026-09-22T08:04:00.337Z",
+    "lastOkAt": "2026-09-22T08:04:00.337Z",
     "consecutiveFailedRuns": 0
   }
 }
