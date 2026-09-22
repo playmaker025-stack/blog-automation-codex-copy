@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88d6yz",
+  "source": "serp",
+  "capturedAt": "2026-09-22T05:44:40.187Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260922054440187_serp_integrated-도림동전자담배-린코-네소_8fa484",
+  "target": {
+    "surface": "integrated",
+    "query": "도림동전자담배 린코 네소"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "도림동전자담배 린코 네소",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 22,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224146624500",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223944617989",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223910460053",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223981716228",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224152526422",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223928997050",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
