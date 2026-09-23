@@ -12629,17 +12629,39 @@
       "postId": "post-7ce3d925",
       "topicId": "topic-b11d5470",
       "userId": "c",
-      "title": "전자담배 고장 고치는법 만수르가 알려드릴게요!",
-      "status": "ready",
-      "naverPostUrl": null,
+      "title": "전자담배 고장 고치는법 만수르 전담 에서 알려드릴게요!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224421116037",
       "evalScore": 58,
       "wordCount": 3058,
       "compositionSessionId": "pipe-083e3f2a",
       "pendingApproval": null,
       "createdAt": "2026-09-23T05:24:42.499Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-23T05:27:10.917Z"
+      "publishedAt": "2026-09-23T08:37:34.940Z",
+      "updatedAt": "2026-09-23T08:37:35.391Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224421116037",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224421116037"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 고장",
+            "role": "primary",
+            "source": "topic"
+          },
+          {
+            "query": "전자담배 고장 고치는법",
+            "role": "secondary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전자담배 고장 고치는법 만수르 전담 에서 알려드릴게요!",
+        "contentHash": "33d2d2c4",
+        "trackedFrom": "2026-09-23T08:37:35.705Z"
+      }
     }
   ],
-  "lastUpdated": "2026-09-23T05:27:10.917Z"
+  "lastUpdated": "2026-09-23T08:37:35.391Z"
 }
