@@ -2,6 +2,17 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-7ce3d925",
+      "title": "전자담배 고장 고치는법 만수르 전담 에서 알려드릴게요!",
+      "category": "direct-run",
+      "tags": [
+        "전자담배 고장"
+      ],
+      "wordCount": 3058,
+      "publishedAt": "2026-09-23T08:37:34.940Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-7ce3d925.md"
+    },
+    {
       "sampleId": "published-post-manual-mucfo12x",
       "title": "구월동전자담배 버블몬 비어 일회용 전담 만수르의 솔직한 후기!",
       "category": "published-post",
@@ -305,16 +316,7 @@
       "wordCount": 2245,
       "publishedAt": "2026-08-25T05:56:52.539Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt895rtf.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt88my0j",
-      "title": "인천전자담배 dotPOD Max 닷팟 맥스 리플 에디션 스펙 & 사용법!",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 1785,
-      "publishedAt": "2026-08-25T05:42:14.618Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt88my0j.md"
     }
   ],
-  "lastUpdated": "2026-09-22T08:49:58.269Z"
+  "lastUpdated": "2026-09-23T08:37:44.893Z"
 }
