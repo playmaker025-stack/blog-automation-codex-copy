@@ -1,0 +1,38 @@
+{
+  "pipelineId": "pipe-083e3f2a",
+  "type": "draft_output",
+  "savedAt": "2026-09-23T05:25:45.014Z",
+  "data": {
+    "postId": "post-7ce3d925",
+    "title": "전자담배 고장 고치는법 만수르가 알려드릴게요!",
+    "wordCount": 3192,
+    "generatedAt": "2026-09-23T05:25:42.926Z",
+    "contentPath": "data/posting-list/posts/post-7ce3d925/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": false,
+      "blockingReasons": [
+        "main keyword \"전자담배 고장\" 8회 사용, 상한 7회 초과"
+      ],
+      "warnings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [
+        "main keyword \"전자담배 고장\" 8회 사용, 상한 7회 초과"
+      ],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ],
+      "specFindings": []
+    },
+    "finalDraftRevisionInstructions": [
+      "키워드 과다/질문문 삽입 수정: main keyword \"전자담배 고장\" 8회 사용, 상한 7회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "발행 차단 사유 해결: main keyword \"전자담배 고장\" 8회 사용, 상한 7회 초과"
+    ]
+  }
+}
