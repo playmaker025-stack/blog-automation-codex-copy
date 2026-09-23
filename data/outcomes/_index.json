@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-23T06:24:10.616Z",
+  "updatedAt": "2026-09-23T08:44:22.916Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -11424,11 +11424,57 @@
       },
       "lastCapturedAt": "2026-09-22T10:24:08.228Z",
       "total": 2
+    },
+    "post-7ce3d925": {
+      "queries": {
+        "integrated::전자담배 고장": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-23T08:44:01.299Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-23T08:44:01.299Z"
+        },
+        "blog_tab::전자담배 고장": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-23T08:44:07.946Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-23T08:44:07.946Z"
+        },
+        "integrated::전자담배 고장 고치는법": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-23T08:44:14.239Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-23T08:44:14.239Z"
+        },
+        "blog_tab::전자담배 고장 고치는법": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-23T08:44:20.216Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-23T08:44:20.216Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-23T08:44:20.216Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-23T06:24:00.789Z",
-    "lastOkAt": "2026-09-23T06:24:00.789Z",
+    "lastRunAt": "2026-09-23T08:44:00.739Z",
+    "lastOkAt": "2026-09-23T08:44:00.739Z",
     "consecutiveFailedRuns": 0
   }
 }

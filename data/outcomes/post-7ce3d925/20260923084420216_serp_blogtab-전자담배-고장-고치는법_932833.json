@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-7ce3d925",
+  "source": "serp",
+  "capturedAt": "2026-09-23T08:44:20.216Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260923084420216_serp_blogtab-전자담배-고장-고치는법_932833",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 고장 고치는법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 고장 고치는법",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224421116037",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
