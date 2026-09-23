@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-083e3f2a",
+  "type": "approval_request",
+  "savedAt": "2026-09-23T05:24:44.290Z",
+  "data": {
+    "pipelineId": "pipe-083e3f2a",
+    "previousTitle": "",
+    "proposedTitle": "전자담배 고장 고치는법 만수르가 알려드릴게요!",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '전자담배 고장'를 중심축으로 반영했습니다. 사용자 프로필과 최근 발행 글 스타일을 반영하여 친근하고 경험 중심의 문체로 작성합니다. 검색 의도는 전자담배 고장 문제 해결에 집중된 정보 탐색으로 판단되어, 문제 상황 인지부터 원인 분류, 해결법, 예방까지 단계별로 구체적이고 실용적인 내용을 제공합니다. 허브-리프 구조를 고려해 본 글은 허브 역할을 하며, 관련 '전자담배 액상 고르는 방법' 글을 리프 주제로 자연스럽게 연결해 체류시간과 재방문을 유도합니다. 네이버 검색 의도에 부합하는 상세 점검법과 수리 팁을 포함해 90점 이상 SEO 점수를 목표로 합니다.",
+    "requestedAt": "2026-09-23T05:24:38.434Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-23T05:24:38.434Z",
+      "modifications": null
+    }
+  }
+}
