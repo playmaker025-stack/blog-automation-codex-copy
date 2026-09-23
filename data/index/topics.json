@@ -2312,7 +2312,26 @@
       "assignedUserId": "b",
       "createdAt": "2026-09-22T08:32:07.017Z",
       "updatedAt": "2026-09-22T08:32:07.017Z"
+    },
+    {
+      "topicId": "topic-b11d5470",
+      "title": "전자담배 고장 고치는법 만수르가 알려드릴게요!",
+      "description": "메인키워드: 전자담배 고장",
+      "category": "direct-run",
+      "tags": [
+        "전자담배 고장"
+      ],
+      "targetKeyword": "전자담배 고장",
+      "subKeywords": [],
+      "source": "direct",
+      "targetMainKeyword": "전자담배 고장",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-09-23T05:23:55.616Z",
+      "updatedAt": "2026-09-23T05:23:55.616Z"
     }
   ],
-  "lastUpdated": "2026-09-22T08:32:07.017Z"
+  "lastUpdated": "2026-09-23T05:23:55.616Z"
 }
