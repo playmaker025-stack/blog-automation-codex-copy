@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mttpw671",
+  "source": "serp",
+  "capturedAt": "2026-09-23T06:04:38.636Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260923060438636_serp_integrated-사용법_1b46dc",
+  "target": {
+    "surface": "integrated",
+    "query": "사용법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "사용법",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 28,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

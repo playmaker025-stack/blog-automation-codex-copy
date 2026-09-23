@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mttpw671",
+  "source": "serp",
+  "capturedAt": "2026-09-23T06:04:01.173Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260923060401173_serp_integrated-닷박스-220W-V2_1e601d",
+  "target": {
+    "surface": "integrated",
+    "query": "닷박스 220W V2"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "닷박스 220W V2",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 14,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224406047637",
+        "rank": 14
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
