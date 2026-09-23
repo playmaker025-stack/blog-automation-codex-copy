@@ -4487,7 +4487,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-de70a25d",
       "at": "2026-09-21T07:43:54.910Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 고장 고치는법 만수르가 알려드릴게요!",
+      "proposedTitle": "전자담배 고장 고치는법 만수르가 알려드릴게요!",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-083e3f2a",
+      "at": "2026-09-23T05:24:36.529Z"
     }
   ],
-  "lastUpdated": "2026-09-21T07:43:54.910Z"
+  "lastUpdated": "2026-09-23T05:24:36.529Z"
 }
