@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-59fa0916",
+  "source": "serp",
+  "capturedAt": "2026-09-24T11:44:13.521Z",
+  "postAgeHours": 5028,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260924114413521_serp_integrated-구월동-전자담배-처음_797f6c",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동 전자담배 처음"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 처음",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224332153941",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224375480050",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

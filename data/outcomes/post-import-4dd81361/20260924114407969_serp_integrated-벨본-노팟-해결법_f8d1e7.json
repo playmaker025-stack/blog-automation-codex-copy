@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-4dd81361",
+  "source": "serp",
+  "capturedAt": "2026-09-24T11:44:07.969Z",
+  "postAgeHours": 5052,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260924114407969_serp_integrated-벨본-노팟-해결법_f8d1e7",
+  "target": {
+    "surface": "integrated",
+    "query": "벨본 노팟 해결법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "벨본 노팟 해결법",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 2,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224145234403",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224197219549",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
