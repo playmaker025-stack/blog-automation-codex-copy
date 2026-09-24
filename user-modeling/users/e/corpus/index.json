@@ -2,6 +2,15 @@
   "userId": "e",
   "samples": [
     {
+      "sampleId": "published-post-manual-mufhed0y",
+      "title": "구월동 전자담배에서 연초와 비슷한 입호흡 액상을 가져왔습니다.",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1694,
+      "publishedAt": "2026-09-24T12:01:54.178Z",
+      "filePath": "user-modeling/users/e/corpus/samples/published-post-manual-mufhed0y.md"
+    },
+    {
       "sampleId": "published-post-manual-mtzqouk9",
       "title": "폐호흡 전자담배 부평 매장에서 리뷰해볼게요 유웰 하복 V2",
       "category": "published-post",
@@ -209,5 +218,5 @@
       "filePath": "user-modeling/users/e/corpus/samples/reference-e-05.md"
     }
   ],
-  "lastUpdated": "2026-09-13T11:37:35.832Z"
+  "lastUpdated": "2026-09-24T12:02:01.085Z"
 }
