@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mufhed0y",
+  "source": "serp",
+  "capturedAt": "2026-09-24T12:04:02.550Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260924120402550_serp_integrated-구월동전자담배_850fbd",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224420074157",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224332153941",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421252466",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224346587073",
+        "rank": 22
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224159381891",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
