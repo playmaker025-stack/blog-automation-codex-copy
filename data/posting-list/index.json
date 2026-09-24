@@ -12710,7 +12710,56 @@
       "publishedAt": "2026-09-24T12:01:54.178Z",
       "createdAt": "2026-09-24T12:01:54.178Z",
       "updatedAt": "2026-09-24T12:01:54.178Z"
+    },
+    {
+      "postId": "post-manual-mufhf9y8",
+      "topicId": "",
+      "userId": "e",
+      "title": "부평역 전자담배에서 하복 V2에 쓰기 좋은 폐호흡 액상 소개합니다",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/godmaker0/224421992036",
+      "wordCount": 0,
+      "targetKeywords": [
+        "폐호흡액상",
+        "하복V2",
+        "부평역전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "godmaker0",
+          "logNo": "224421992036",
+          "canonicalUrl": "https://blog.naver.com/godmaker0/224421992036"
+        },
+        "targetKeywords": [
+          {
+            "query": "폐호흡액상",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "하복V2",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "부평역전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부평역 전자담배에서 하복 V2에 쓰기 좋은 폐호흡 액상 소개합니다",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-24T12:02:36.588Z",
+        "keywordsRevisedAt": "2026-09-24T12:02:36.588Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-24T12:02:36.588Z",
+      "createdAt": "2026-09-24T12:02:36.588Z",
+      "updatedAt": "2026-09-24T12:02:36.588Z"
     }
   ],
-  "lastUpdated": "2026-09-24T12:01:54.178Z"
+  "lastUpdated": "2026-09-24T12:02:36.588Z"
 }
