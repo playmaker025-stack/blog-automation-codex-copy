@@ -12661,7 +12661,56 @@
         "contentHash": "33d2d2c4",
         "trackedFrom": "2026-09-23T08:37:35.705Z"
       }
+    },
+    {
+      "postId": "post-manual-mufhed0y",
+      "topicId": "",
+      "userId": "e",
+      "title": "구월동 전자담배에서 연초와 비슷한 입호흡 액상을 가져왔습니다.",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/godmaker0/224421252466",
+      "wordCount": 0,
+      "targetKeywords": [
+        "구월동전자담배",
+        "연초액상",
+        "입호흡액상"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "godmaker0",
+          "logNo": "224421252466",
+          "canonicalUrl": "https://blog.naver.com/godmaker0/224421252466"
+        },
+        "targetKeywords": [
+          {
+            "query": "구월동전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "연초액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "입호흡액상",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "구월동 전자담배에서 연초와 비슷한 입호흡 액상을 가져왔습니다.",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-24T12:01:54.178Z",
+        "keywordsRevisedAt": "2026-09-24T12:01:54.178Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-24T12:01:54.178Z",
+      "createdAt": "2026-09-24T12:01:54.178Z",
+      "updatedAt": "2026-09-24T12:01:54.178Z"
     }
   ],
-  "lastUpdated": "2026-09-23T08:37:35.391Z"
+  "lastUpdated": "2026-09-24T12:01:54.178Z"
 }
