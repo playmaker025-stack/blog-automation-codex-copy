@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-25T00:04:03.078Z",
+  "updatedAt": "2026-09-25T02:04:10.544Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -10967,27 +10967,29 @@
       "queries": {
         "integrated::하복2": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-18T02:43:57.887Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-25T02:04:02.450Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-18T02:43:57.887Z"
+          "lastAttemptAt": "2026-09-25T02:04:02.450Z"
         },
         "blog_tab::하복2": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-18T02:44:04.913Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-25T02:04:08.443Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-18T02:44:04.913Z"
+          "lastAttemptAt": "2026-09-25T02:04:08.443Z"
         }
       },
-      "lastCapturedAt": "2026-09-18T02:44:04.913Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-25T02:04:08.443Z",
+      "total": 4
     },
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11637,8 +11639,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-25T00:04:02.142Z",
-    "lastOkAt": "2026-09-24T12:04:01.402Z",
+    "lastRunAt": "2026-09-25T02:04:02.003Z",
+    "lastOkAt": "2026-09-25T02:04:02.003Z",
     "consecutiveFailedRuns": 0
   }
 }
