@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-26T08:04:12.983Z",
+  "updatedAt": "2026-09-26T09:24:13.986Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -8955,29 +8955,31 @@
           "okAgeHours": [
             30,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-12T09:23:54.371Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-26T09:24:03.845Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-12T09:23:54.371Z"
+          "lastAttemptAt": "2026-09-26T09:24:03.845Z"
         },
         "blog_tab::폐호흡 전자담배": {
           "okAgeHours": [
             51,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-12T09:24:01.771Z",
-          "total": 3,
+          "lastCapturedAt": "2026-09-26T09:24:11.191Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-12T09:24:01.771Z"
+          "lastAttemptAt": "2026-09-26T09:24:11.191Z"
         }
       },
-      "lastCapturedAt": "2026-09-12T09:24:01.771Z",
-      "total": 6
+      "lastCapturedAt": "2026-09-26T09:24:11.191Z",
+      "total": 8
     },
     "post-d34540b8": {
       "queries": {
@@ -11695,8 +11697,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-26T08:04:03.385Z",
-    "lastOkAt": "2026-09-26T08:04:03.385Z",
+    "lastRunAt": "2026-09-26T09:24:03.426Z",
+    "lastOkAt": "2026-09-26T09:24:03.426Z",
     "consecutiveFailedRuns": 0
   }
 }
