@@ -2,6 +2,21 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-b0b8e262",
+      "title": "전자담배 기기 액상 액튐 문제 원인과 인천 부평구 자가 해결법!",
+      "category": "c",
+      "tags": [
+        "기기",
+        "액튐",
+        "부평구",
+        "자가해결",
+        "전자담배 문제"
+      ],
+      "wordCount": 2828,
+      "publishedAt": "2026-09-26T04:25:37.311Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-b0b8e262.md"
+    },
+    {
       "sampleId": "published-post-7ce3d925",
       "title": "전자담배 고장 고치는법 만수르 전담 에서 알려드릴게요!",
       "category": "direct-run",
@@ -307,16 +322,7 @@
       "wordCount": 2394,
       "publishedAt": "2026-08-25T05:57:18.133Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt896bb1.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt895rtf",
-      "title": "말론 vs 아스트로 MK3 입문 추천 − 입호흡 전자담배 차이 정리",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 2245,
-      "publishedAt": "2026-08-25T05:56:52.539Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt895rtf.md"
     }
   ],
-  "lastUpdated": "2026-09-23T08:37:44.893Z"
+  "lastUpdated": "2026-09-26T04:25:44.923Z"
 }
