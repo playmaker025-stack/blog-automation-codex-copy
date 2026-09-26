@@ -2245,7 +2245,113 @@
       "assignedUserId": "c",
       "createdAt": "2026-09-26T02:58:32.566Z",
       "updatedAt": "2026-09-26T04:25:40.803Z"
+    },
+    {
+      "topicId": "topic-9facb3fc",
+      "title": "퍼프체인지 원인별 문제점과 인천 부평구 해결 가이드",
+      "description": "인천 부평구에서 퍼프체인지가 발생하는 주요 원인과 문제점을 상세히 분석하고, 자가 점검 및 해결 방법을 단계별로 안내합니다.",
+      "category": "c",
+      "tags": [
+        "퍼프체인지",
+        "원인",
+        "문제해결",
+        "부평구",
+        "전자담배"
+      ],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-09-26T04:26:02.099Z",
+      "updatedAt": "2026-09-26T04:26:02.099Z"
+    },
+    {
+      "topicId": "topic-b8f7f704",
+      "title": "입호흡 전자담배 액튐 문제 원인과 인천 남동구 자가 점검법",
+      "description": "입호흡 전자담배 사용자들이 겪는 액튐 문제의 원인을 분석하고, 인천 남동구에서 쉽게 따라할 수 있는 자가 점검법과 해결책을 소개합니다.",
+      "category": "c",
+      "tags": [
+        "입호흡",
+        "액튐",
+        "문제해결",
+        "남동구",
+        "전자담배"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-09-26T04:26:02.099Z",
+      "updatedAt": "2026-09-26T04:26:02.099Z"
+    },
+    {
+      "topicId": "topic-3e93aeca",
+      "title": "전자담배 기기 구매 시 고려할 인천 부평역 인기 모델 비교",
+      "description": "인천 부평역 지역에서 인기 있는 전자담배 기기 모델들의 스펙과 특징을 비교 분석하여, 구매 시 필수 체크포인트를 알려드립니다.",
+      "category": "c",
+      "tags": [
+        "기기",
+        "구매",
+        "부평역",
+        "비교",
+        "전자담배"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-09-26T04:26:02.099Z",
+      "updatedAt": "2026-09-26T04:26:02.099Z"
+    },
+    {
+      "topicId": "topic-f54aee90",
+      "title": "전자담배 스펙별 고장 유형과 인천 계산동 점검 및 수리 팁",
+      "description": "전자담배 기기의 주요 스펙별로 발생할 수 있는 고장 유형을 정리하고, 인천 계산동에서 쉽게 점검하고 수리할 수 있는 방법을 안내합니다.",
+      "category": "c",
+      "tags": [
+        "스펙",
+        "고장",
+        "계산동",
+        "점검",
+        "수리",
+        "전자담배"
+      ],
+      "source": "generated",
+      "contentKind": "hub",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-09-26T04:26:02.099Z",
+      "updatedAt": "2026-09-26T04:26:02.099Z"
+    },
+    {
+      "topicId": "topic-eefa9fbb",
+      "title": "만수르 전자담배 제품별 관리법과 인천 만수역 방문 고객 팁",
+      "description": "만수르 전자담배 각 제품별 최적의 관리법을 상세히 설명하고, 인천 만수역 매장 방문 시 유용한 고객 맞춤 팁을 소개합니다.",
+      "category": "c",
+      "tags": [
+        "만수르",
+        "관리",
+        "만수역",
+        "전자담배",
+        "고객팁"
+      ],
+      "source": "generated",
+      "contentKind": "leaf",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "c",
+      "createdAt": "2026-09-26T04:26:02.099Z",
+      "updatedAt": "2026-09-26T04:26:02.099Z"
     }
   ],
-  "lastUpdated": "2026-09-26T04:25:40.803Z"
+  "lastUpdated": "2026-09-26T04:26:02.099Z"
 }
