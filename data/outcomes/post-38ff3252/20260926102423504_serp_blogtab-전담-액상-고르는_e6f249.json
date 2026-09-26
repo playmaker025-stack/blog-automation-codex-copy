@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-38ff3252",
+  "source": "serp",
+  "capturedAt": "2026-09-26T10:24:23.504Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260926102423504_serp_blogtab-전담-액상-고르는_e6f249",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전담 액상 고르는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 액상 고르는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224355462874",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
