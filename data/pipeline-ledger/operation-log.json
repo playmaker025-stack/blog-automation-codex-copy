@@ -4509,7 +4509,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-7139c934",
       "at": "2026-09-26T03:02:00.328Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "부평구 전자담배 액상 방문 구매 시 꼭 확인해야 할 팁",
+      "proposedTitle": "부평구 전자담배 액상 방문 구매 시 꼭 확인해야 할 팁",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-28ceecaf",
+      "at": "2026-09-26T07:47:16.638Z"
     }
   ],
-  "lastUpdated": "2026-09-26T03:02:00.328Z"
+  "lastUpdated": "2026-09-26T07:47:16.638Z"
 }
