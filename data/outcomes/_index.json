@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-26T11:04:39.614Z",
+  "updatedAt": "2026-09-26T12:24:13.769Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -10504,28 +10504,30 @@
         "integrated::삼산동 전자담배 입호흡": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-19T12:23:58.445Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-26T12:24:03.737Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-19T12:23:58.445Z"
+          "lastAttemptAt": "2026-09-26T12:24:03.737Z"
         },
         "blog_tab::삼산동 전자담배 입호흡": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-09-19T12:24:06.071Z",
-          "total": 2,
+          "lastCapturedAt": "2026-09-26T12:24:11.100Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-19T12:24:06.071Z"
+          "lastAttemptAt": "2026-09-26T12:24:11.100Z"
         }
       },
-      "lastCapturedAt": "2026-09-19T12:24:06.071Z",
-      "total": 4
+      "lastCapturedAt": "2026-09-26T12:24:11.100Z",
+      "total": 6
     },
     "post-manual-mtzgf3wj": {
       "queries": {
@@ -11707,8 +11709,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-26T11:04:03.237Z",
-    "lastOkAt": "2026-09-26T11:04:03.237Z",
+    "lastRunAt": "2026-09-26T12:24:03.404Z",
+    "lastOkAt": "2026-09-26T12:24:03.404Z",
     "consecutiveFailedRuns": 0
   }
 }
