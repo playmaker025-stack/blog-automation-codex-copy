@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-26T00:04:04.500Z",
+  "updatedAt": "2026-09-26T04:44:13.649Z",
   "posts": {
     "post-import-07aa8e22": {
       "queries": {
@@ -11664,11 +11664,37 @@
       },
       "lastCapturedAt": "2026-09-24T12:05:13.923Z",
       "total": 6
+    },
+    "post-b0b8e262": {
+      "queries": {
+        "integrated::전자담배 기기 액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-26T04:44:04.177Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-26T04:44:04.177Z"
+        },
+        "blog_tab::전자담배 기기 액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-26T04:44:11.528Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-26T04:44:11.528Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-26T04:44:11.528Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-26T00:04:02.952Z",
-    "lastOkAt": "2026-09-25T12:04:02.391Z",
+    "lastRunAt": "2026-09-26T04:44:03.275Z",
+    "lastOkAt": "2026-09-26T04:44:03.275Z",
     "consecutiveFailedRuns": 0
   }
 }
