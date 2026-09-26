@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-28ceecaf",
+  "type": "approval_request",
+  "savedAt": "2026-09-26T07:47:24.640Z",
+  "data": {
+    "pipelineId": "pipe-28ceecaf",
+    "previousTitle": "",
+    "proposedTitle": "부평구 전자담배 액상 방문 구매 시 꼭 확인해야 할 팁",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "부평구 지역 내 전자담배 액상 방문 구매에 대한 구체적이고 실용적인 팁을 제공하여 방문 구매자들의 핵심 궁금증을 해결하는 데 초점을 맞췄습니다. 최근 발행 글과 반복 키워드, 사용자 검색 의도를 반영해 액상 품질 확인법, 문제 해결, 인기 액상 추천, 매장 신뢰도 평가 등 실질적 정보로 구성했습니다. 허브-리프 구조를 활용해 방문 구매 전 필수 정보(허브)와 문제 해결 및 추천 액상(리프)을 자연스럽게 연결하며, 다음 단계인 기기 및 액상 세트 구매 가이드로 재방문을 유도합니다. 친근한 말투와 직접 경험을 녹여내어 신뢰도를 높이고, AI 브리핑 노출을 위한 핵심 요약과 목차형 구성으로 검색자 체류시간을 극대화합니다.",
+    "requestedAt": "2026-09-26T07:47:18.677Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-26T07:47:18.677Z",
+      "modifications": null
+    }
+  }
+}
