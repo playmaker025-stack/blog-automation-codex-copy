@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-d34540b8",
+  "source": "serp",
+  "capturedAt": "2026-09-26T11:04:10.886Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260926110410886_serp_integrated-부평구-전자담배_a0c322",
+  "target": {
+    "surface": "integrated",
+    "query": "부평구 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평구 전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 15,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224394405759",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224403800869",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
