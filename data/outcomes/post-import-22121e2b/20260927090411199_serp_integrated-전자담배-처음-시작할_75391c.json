@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-22121e2b",
+  "source": "serp",
+  "capturedAt": "2026-09-27T09:04:11.199Z",
+  "postAgeHours": 4761,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927090411199_serp_integrated-전자담배-처음-시작할_75391c",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 처음 시작할"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 처음 시작할",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 23,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224261698342",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224109563734",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
