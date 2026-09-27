@@ -2,6 +2,21 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-85fe29a6",
+      "title": "부평구 전자담배 액상 방문 구매 시 꼭 확인할 핵심 팁",
+      "category": "b",
+      "tags": [
+        "부평구",
+        "전자담배",
+        "액상",
+        "방문구매",
+        "팁"
+      ],
+      "wordCount": 3603,
+      "publishedAt": "2026-09-27T08:11:58.263Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-85fe29a6.md"
+    },
+    {
       "sampleId": "published-post-manual-mucigjqz",
       "title": "인천 전자담배 입호흡 액상 토바코 계열 3종 추천",
       "category": "published-post",
@@ -374,25 +389,7 @@
       "wordCount": 2612,
       "publishedAt": "2025-04-10T00:00:00.000Z",
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-01.md"
-    },
-    {
-      "sampleId": "reference-b-02",
-      "title": "전자담배 방치는 고장의 원인 청소와 관리하는법 소소한 팁",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "방치는",
-        "고장의",
-        "원인"
-      ],
-      "wordCount": 2160,
-      "publishedAt": "2025-02-14T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-02.md"
     }
   ],
-  "lastUpdated": "2026-09-22T10:08:17.336Z"
+  "lastUpdated": "2026-09-27T08:12:07.315Z"
 }
