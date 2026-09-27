@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr1ze6cd",
+  "source": "serp",
+  "capturedAt": "2026-09-27T11:24:18.990Z",
+  "postAgeHours": 2112,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927112418990_serp_integrated-케이스가-들어있는-크로스_9a6f99",
+  "target": {
+    "surface": "integrated",
+    "query": "케이스가 들어있는 크로스미니6"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "케이스가 들어있는 크로스미니6",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224333365162",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

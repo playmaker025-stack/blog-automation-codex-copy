@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr76npd2",
+  "source": "serp",
+  "capturedAt": "2026-09-27T11:24:56.844Z",
+  "postAgeHours": 2025,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927112456844_serp_integrated-전자담배-팟-안에_926cd9",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 팟 안에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 팟 안에",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224336885735",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224168925811",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224254936000",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
