@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-aace5597",
+  "source": "serp",
+  "capturedAt": "2026-09-27T11:04:53.235Z",
+  "postAgeHours": 3794,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927110453235_serp_integrated-인천-만수동-만수르_40ed7d",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 만수동 만수르"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 만수동 만수르",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "220492070092",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221856411906",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221712576092",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221578688907",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221847399947",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221214176713",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221796307356",
+        "rank": 11
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221261341590",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221925066411",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222694243327",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221763098312",
+        "rank": 15
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "220516539646",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221757509383",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

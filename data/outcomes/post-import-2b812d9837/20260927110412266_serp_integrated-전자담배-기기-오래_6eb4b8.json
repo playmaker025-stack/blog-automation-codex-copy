@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2b812d9837",
+  "source": "serp",
+  "capturedAt": "2026-09-27T11:04:12.266Z",
+  "postAgeHours": 3899,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927110412266_serp_integrated-전자담배-기기-오래_6eb4b8",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 기기 오래"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 기기 오래",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 8,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

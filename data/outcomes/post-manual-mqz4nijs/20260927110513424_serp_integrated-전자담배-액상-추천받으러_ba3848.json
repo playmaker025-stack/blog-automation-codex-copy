@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mqz4nijs",
+  "source": "serp",
+  "capturedAt": "2026-09-27T11:05:13.424Z",
+  "postAgeHours": 2160,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927110513424_serp_integrated-전자담배-액상-추천받으러_ba3848",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 액상 추천받으러"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 추천받으러",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
