@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2bbdd188",
+  "source": "serp",
+  "capturedAt": "2026-09-27T08:04:11.168Z",
+  "postAgeHours": 9848,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927080411168_serp_integrated-만수동-전자담배-만수르_6e9a27",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 만수르"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 만수르",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 38,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421992036",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421252466",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224378919388",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224373210249",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224365923075",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224358595068",
+        "rank": 11
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224347729064",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 15
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221268301696",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221261341590",
+        "rank": 17
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221262911700",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221139696809",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221214176713",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221330954809",
+        "rank": 21
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221111480591",
+        "rank": 22
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221173025612",
+        "rank": 23
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221347185734",
+        "rank": 24
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221418687738",
+        "rank": 25
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221112789103",
+        "rank": 26
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221223203749",
+        "rank": 27
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221303890602",
+        "rank": 28
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221085661286",
+        "rank": 29
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221196221384",
+        "rank": 30
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221167629051",
+        "rank": 31
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221076006485",
+        "rank": 32
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221008564512",
+        "rank": 33
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221205869109",
+        "rank": 34
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224134138488",
+        "rank": 35
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224007820815",
+        "rank": 36
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224405167840",
+        "rank": 37
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224397752886",
+        "rank": 38
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

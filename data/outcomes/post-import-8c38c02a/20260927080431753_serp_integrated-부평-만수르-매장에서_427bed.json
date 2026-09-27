@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8c38c02a",
+  "source": "serp",
+  "capturedAt": "2026-09-27T08:04:31.753Z",
+  "postAgeHours": 5024,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927080431753_serp_integrated-부평-만수르-매장에서_427bed",
+  "target": {
+    "surface": "integrated",
+    "query": "부평 만수르 매장에서"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 만수르 매장에서",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 23,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224083901157",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224267167327",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224321052285",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224250808729",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224239923182",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 11
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224383515315",
+        "rank": 15
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224338245201",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224325995644",
+        "rank": 17
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224318921314",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224306956030",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224305965234",
+        "rank": 20
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224205241319",
+        "rank": 21
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224122470914",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

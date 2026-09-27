@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-1b99338a",
+  "source": "serp",
+  "capturedAt": "2026-09-27T08:05:02.692Z",
+  "postAgeHours": 4976,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927080502692_serp_integrated-말론-아스트로-입호흡기기_168886",
+  "target": {
+    "surface": "integrated",
+    "query": "말론 아스트로 입호흡기기에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "말론 아스트로 입호흡기기에",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 11,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224204499943",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
