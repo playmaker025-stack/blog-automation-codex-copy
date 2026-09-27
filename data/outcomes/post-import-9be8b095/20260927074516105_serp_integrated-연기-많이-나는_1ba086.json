@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9be8b095",
+  "source": "serp",
+  "capturedAt": "2026-09-27T07:45:16.105Z",
+  "postAgeHours": 9272,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927074516105_serp_integrated-연기-많이-나는_1ba086",
+  "target": {
+    "surface": "integrated",
+    "query": "연기 많이 나는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연기 많이 나는",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "220935145279",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "221258883035",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224003135828",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "221187250281",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221191581031",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221103785164",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "221317164127",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
