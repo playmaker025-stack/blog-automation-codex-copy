@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms8vjho9",
+  "source": "serp",
+  "capturedAt": "2026-09-27T13:04:37.559Z",
+  "postAgeHours": 1393,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927130437559_serp_integrated-전자담배-출력-W_a07634",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 출력 W"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 출력 W",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 20,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224364209244",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
