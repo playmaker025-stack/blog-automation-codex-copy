@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms1fi6e8",
+  "source": "serp",
+  "capturedAt": "2026-09-27T12:44:11.450Z",
+  "postAgeHours": 1518,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927124411450_serp_integrated-전자담배-충전하면서-사용_5f0b6c",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 충전하면서 사용해도"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 충전하면서 사용해도",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 27,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224358377719",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

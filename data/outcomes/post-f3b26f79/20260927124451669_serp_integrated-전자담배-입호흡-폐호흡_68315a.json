@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-f3b26f79",
+  "source": "serp",
+  "capturedAt": "2026-09-27T12:44:51.669Z",
+  "postAgeHours": 1467,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927124451669_serp_integrated-전자담배-입호흡-폐호흡_68315a",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 입호흡 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 입호흡 폐호흡",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "223234881617",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

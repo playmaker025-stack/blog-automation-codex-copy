@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms384q6y",
+  "source": "serp",
+  "capturedAt": "2026-09-27T12:44:38.215Z",
+  "postAgeHours": 1488,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927124438215_serp_integrated-전자담배는-흡입을-오래_925c44",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배는 흡입을 오래"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배는 흡입을 오래",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 9,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224359756182",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224396532565",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224405141976",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224360849248",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
