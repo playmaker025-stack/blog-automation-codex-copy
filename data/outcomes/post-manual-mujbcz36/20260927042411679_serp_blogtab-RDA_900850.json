@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mujbcz36",
+  "source": "serp",
+  "capturedAt": "2026-09-27T04:24:11.679Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927042411679_serp_blogtab-RDA_900850",
+  "target": {
+    "surface": "blog_tab",
+    "query": "RDA"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "RDA",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224412967354",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224325995644",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224416368962",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223630608280",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224082778024",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224083615082",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
