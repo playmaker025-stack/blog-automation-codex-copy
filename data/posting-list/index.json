@@ -12806,7 +12806,68 @@
       "createdAt": "2026-09-26T07:47:22.473Z",
       "publishedAt": null,
       "updatedAt": "2026-09-26T07:49:52.782Z"
+    },
+    {
+      "postId": "post-manual-mujbcz36",
+      "topicId": "",
+      "userId": "d",
+      "title": "RTA와 RDA 다음에 알아볼 것-RDTA는 어떤 방식의 무화기일까?",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224423780475",
+      "wordCount": 0,
+      "targetKeywords": [
+        "RDA",
+        "RTA",
+        "스퀑크",
+        "전자담배",
+        "하이엔드"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224423780475",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224423780475"
+        },
+        "targetKeywords": [
+          {
+            "query": "RDA",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "RTA",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "스퀑크",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "하이엔드",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "RTA와 RDA 다음에 알아볼 것-RDTA는 어떤 방식의 무화기일까?",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-27T04:23:38.867Z",
+        "keywordsRevisedAt": "2026-09-27T04:23:38.867Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-27T04:23:38.867Z",
+      "createdAt": "2026-09-27T04:23:38.867Z",
+      "updatedAt": "2026-09-27T04:23:38.867Z"
     }
   ],
-  "lastUpdated": "2026-09-26T07:49:52.782Z"
+  "lastUpdated": "2026-09-27T04:23:38.867Z"
 }
