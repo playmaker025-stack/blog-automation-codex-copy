@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7b7c198c35",
+  "source": "serp",
+  "capturedAt": "2026-09-27T09:45:09.611Z",
+  "postAgeHours": 4354,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260927094509611_serp_integrated-전자담배-흡입이-답답할_f4eede",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 흡입이 답답할"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 흡입이 답답할",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 10,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224234268589",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224394356256",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
