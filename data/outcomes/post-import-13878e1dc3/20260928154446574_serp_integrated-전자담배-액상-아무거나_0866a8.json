@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-13878e1dc3",
+  "source": "serp",
+  "capturedAt": "2026-09-28T15:44:46.574Z",
+  "postAgeHours": 4024,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928154446574_serp_integrated-전자담배-액상-아무거나_0866a8",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 액상 아무거나"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 아무거나",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
