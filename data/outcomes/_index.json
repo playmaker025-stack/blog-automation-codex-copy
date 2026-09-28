@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T10:25:19.662Z",
+  "updatedAt": "2026-09-28T10:45:20.077Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -787,11 +787,167 @@
       },
       "lastCapturedAt": "2026-09-28T10:25:16.977Z",
       "total": 2
+    },
+    "post-import-880a7971": {
+      "queries": {
+        "integrated::구월동전자담배 매장에서 고농도": {
+          "okAgeHours": [
+            5027
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:05.748Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:05.748Z"
+        },
+        "blog_tab::구월동전자담배 매장에서 고농도": {
+          "okAgeHours": [
+            5027
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:12.505Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:12.505Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:44:12.505Z",
+      "total": 2
+    },
+    "post-import-96f9b622": {
+      "queries": {
+        "integrated::구월동전자담배 버니 고농도": {
+          "okAgeHours": [
+            5027
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:18.217Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:18.217Z"
+        },
+        "blog_tab::구월동전자담배 버니 고농도": {
+          "okAgeHours": [
+            5027
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:24.770Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:24.770Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:44:24.770Z",
+      "total": 2
+    },
+    "post-import-b946d530": {
+      "queries": {
+        "integrated::청천동 전자담배 메즈액상": {
+          "okAgeHours": [
+            5027
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:31.022Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:31.022Z"
+        },
+        "blog_tab::청천동 전자담배 메즈액상": {
+          "okAgeHours": [
+            5027
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:37.686Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:37.686Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:44:37.686Z",
+      "total": 2
+    },
+    "post-import-1b99338a": {
+      "queries": {
+        "integrated::말론 아스트로 입호흡기기에": {
+          "okAgeHours": [
+            5003
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:43.977Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:43.977Z"
+        },
+        "blog_tab::말론 아스트로 입호흡기기에": {
+          "okAgeHours": [
+            5003
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:50.376Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:50.376Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:44:50.376Z",
+      "total": 2
+    },
+    "post-import-0cbc5e41": {
+      "queries": {
+        "integrated::구월동 전자담배 입호흡": {
+          "okAgeHours": [
+            5003
+          ],
+          "lastCapturedAt": "2026-09-28T10:44:56.638Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:44:56.638Z"
+        },
+        "blog_tab::구월동 전자담배 입호흡": {
+          "okAgeHours": [
+            5003
+          ],
+          "lastCapturedAt": "2026-09-28T10:45:03.546Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:45:03.546Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:45:03.546Z",
+      "total": 2
+    },
+    "post-import-26994111": {
+      "queries": {
+        "integrated::발라리안 코일 빨리": {
+          "okAgeHours": [
+            4979
+          ],
+          "lastCapturedAt": "2026-09-28T10:45:09.303Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:45:09.303Z"
+        },
+        "blog_tab::발라리안 코일 빨리": {
+          "okAgeHours": [
+            4979
+          ],
+          "lastCapturedAt": "2026-09-28T10:45:16.107Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:45:16.107Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:45:16.107Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T10:24:05.139Z",
-    "lastOkAt": "2026-09-28T10:24:05.139Z",
+    "lastRunAt": "2026-09-28T10:44:05.352Z",
+    "lastOkAt": "2026-09-28T10:44:05.352Z",
     "consecutiveFailedRuns": 0
   }
 }

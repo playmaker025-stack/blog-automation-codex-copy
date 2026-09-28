@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-880a7971",
+  "source": "serp",
+  "capturedAt": "2026-09-28T10:44:05.748Z",
+  "postAgeHours": 5027,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928104405748_serp_integrated-구월동전자담배-매장에서-_12891d",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동전자담배 매장에서 고농도"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 매장에서 고농도",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 20,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224202841961",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224262715643",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224159381891",
+        "rank": 16
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224332153941",
+        "rank": 17
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224365923075",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
