@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7c298de5a2",
+  "source": "serp",
+  "capturedAt": "2026-09-28T15:25:10.421Z",
+  "postAgeHours": 4047,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928152510421_serp_integrated-부평-전자담배-기기_816bb0",
+  "target": {
+    "surface": "integrated",
+    "query": "부평 전자담배 기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 기기",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 35,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224271622758",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
