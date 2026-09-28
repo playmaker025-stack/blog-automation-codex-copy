@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0a5647f1",
+  "source": "serp",
+  "capturedAt": "2026-09-28T13:44:44.055Z",
+  "postAgeHours": 4478,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928134444055_serp_integrated-연수동-전자담배-처음_629d46",
+  "target": {
+    "surface": "integrated",
+    "query": "연수동 전자담배 처음"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연수동 전자담배 처음",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 21,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224230475745",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
