@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-f234b3ae",
+  "source": "serp",
+  "capturedAt": "2026-09-28T05:24:11.277Z",
+  "postAgeHours": 4709,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928052411277_serp_blogtab-전자담배-코일이-빨리_c2c33b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 코일이 빨리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일이 빨리",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224359513114",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224345153639",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224246995911",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
