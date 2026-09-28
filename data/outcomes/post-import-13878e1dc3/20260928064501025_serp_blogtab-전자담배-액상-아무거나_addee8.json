@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-13878e1dc3",
+  "source": "serp",
+  "capturedAt": "2026-09-28T06:45:01.025Z",
+  "postAgeHours": 4015,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928064501025_serp_blogtab-전자담배-액상-아무거나_addee8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 아무거나"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 아무거나",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224252521531",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224246746959",
+        "rank": 16
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
