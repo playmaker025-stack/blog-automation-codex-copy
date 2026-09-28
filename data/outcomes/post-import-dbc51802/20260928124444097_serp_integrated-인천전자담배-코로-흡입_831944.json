@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-dbc51802",
+  "source": "serp",
+  "capturedAt": "2026-09-28T12:44:44.097Z",
+  "postAgeHours": 4693,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928124444097_serp_integrated-인천전자담배-코로-흡입_831944",
+  "target": {
+    "surface": "integrated",
+    "query": "인천전자담배 코로 흡입"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 코로 흡입",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 16,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224221496892",
+        "rank": 14
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224219913172",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
