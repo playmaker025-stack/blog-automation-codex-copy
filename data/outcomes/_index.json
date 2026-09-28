@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T16:05:19.374Z",
+  "updatedAt": "2026-09-28T16:25:19.738Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -3439,11 +3439,167 @@
       },
       "lastCapturedAt": "2026-09-28T16:05:16.819Z",
       "total": 2
+    },
+    "post-import-08c915d5f3": {
+      "queries": {
+        "integrated::간석오거리 전자담배 기기": {
+          "okAgeHours": [
+            3928
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:05.096Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:05.096Z"
+        },
+        "blog_tab::간석오거리 전자담배 기기": {
+          "okAgeHours": [
+            3928
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:11.988Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:11.988Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:24:11.988Z",
+      "total": 2
+    },
+    "post-import-553128cc7c": {
+      "queries": {
+        "integrated::전자담배 액상이 갈색으로": {
+          "okAgeHours": [
+            3904
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:18.277Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:18.277Z"
+        },
+        "blog_tab::전자담배 액상이 갈색으로": {
+          "okAgeHours": [
+            3904
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:24.930Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:24.930Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:24:24.930Z",
+      "total": 2
+    },
+    "post-import-3647da1c69": {
+      "queries": {
+        "integrated::주안 전자담배 제품": {
+          "okAgeHours": [
+            3880
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:31.270Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:31.270Z"
+        },
+        "blog_tab::주안 전자담배 제품": {
+          "okAgeHours": [
+            3880
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:38.294Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:38.294Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:24:38.294Z",
+      "total": 2
+    },
+    "post-import-5f1dcdf8cb": {
+      "queries": {
+        "integrated::액상 자주 바꾸는": {
+          "okAgeHours": [
+            3880
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:44.608Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:44.608Z"
+        },
+        "blog_tab::액상 자주 바꾸는": {
+          "okAgeHours": [
+            3880
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:51.379Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:51.379Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:24:51.379Z",
+      "total": 2
+    },
+    "post-import-16ee99f17c": {
+      "queries": {
+        "integrated::전자담배에서 맛 표현": {
+          "okAgeHours": [
+            3856
+          ],
+          "lastCapturedAt": "2026-09-28T16:24:57.713Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:24:57.713Z"
+        },
+        "blog_tab::전자담배에서 맛 표현": {
+          "okAgeHours": [
+            3856
+          ],
+          "lastCapturedAt": "2026-09-28T16:25:03.835Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:25:03.835Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:25:03.835Z",
+      "total": 2
+    },
+    "post-aace5597": {
+      "queries": {
+        "integrated::인천 만수동 만수르": {
+          "okAgeHours": [
+            3823
+          ],
+          "lastCapturedAt": "2026-09-28T16:25:10.129Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:25:10.129Z"
+        },
+        "blog_tab::인천 만수동 만수르": {
+          "okAgeHours": [
+            3823
+          ],
+          "lastCapturedAt": "2026-09-28T16:25:17.054Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:25:17.054Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:25:17.054Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T16:04:05.499Z",
-    "lastOkAt": "2026-09-28T16:04:05.499Z",
+    "lastRunAt": "2026-09-28T16:24:04.744Z",
+    "lastOkAt": "2026-09-28T16:24:04.744Z",
     "consecutiveFailedRuns": 0
   }
 }

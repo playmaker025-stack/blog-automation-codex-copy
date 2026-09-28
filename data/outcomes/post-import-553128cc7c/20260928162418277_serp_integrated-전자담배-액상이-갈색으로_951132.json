@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-553128cc7c",
+  "source": "serp",
+  "capturedAt": "2026-09-28T16:24:18.277Z",
+  "postAgeHours": 3904,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928162418277_serp_integrated-전자담배-액상이-갈색으로_951132",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 액상이 갈색으로"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상이 갈색으로",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 36,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224345520991",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224392405714",
+        "rank": 35
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

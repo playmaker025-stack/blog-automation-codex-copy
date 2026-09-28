@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-08c915d5f3",
+  "source": "serp",
+  "capturedAt": "2026-09-28T16:24:11.988Z",
+  "postAgeHours": 3928,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928162411988_serp_blogtab-간석오거리-전자담배-기기_a86381",
+  "target": {
+    "surface": "blog_tab",
+    "query": "간석오거리 전자담배 기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석오거리 전자담배 기기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224256858676",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223976225706",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

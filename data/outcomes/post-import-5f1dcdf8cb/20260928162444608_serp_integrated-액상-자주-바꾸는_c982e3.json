@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-5f1dcdf8cb",
+  "source": "serp",
+  "capturedAt": "2026-09-28T16:24:44.608Z",
+  "postAgeHours": 3880,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928162444608_serp_integrated-액상-자주-바꾸는_c982e3",
+  "target": {
+    "surface": "integrated",
+    "query": "액상 자주 바꾸는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상 자주 바꾸는",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
