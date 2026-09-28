@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-3b3ba923",
+  "type": "approval_request",
+  "savedAt": "2026-09-28T06:37:05.465Z",
+  "data": {
+    "pipelineId": "pipe-3b3ba923",
+    "previousTitle": "",
+    "proposedTitle": "만수르 전자담배 제품별 관리법과 인천 만수역 방문 고객 맞춤 팁",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "주제는 만수르 전자담배 제품별 관리법과 인천 만수역 방문 고객 팁으로, 사용자 검색 의도는 구체적 관리법과 방문 시 실용 정보 습득에 집중됨. 블로그 역할은 지역 기반 전문 정보 제공(E)이며, 허브-리프 구조로 관련 글과 연계해 체류시간과 신뢰도를 높임. 최근 발행 글 스타일과 키워드 반복 패턴을 반영해 친근하고 경험 기반 문체로 작성, AI 브리핑 노출을 위한 핵심 요약과 표, 단계별 목록 활용으로 검색 만족도 극대화 전략임.",
+    "requestedAt": "2026-09-28T06:36:58.101Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-28T06:36:58.101Z",
+      "modifications": null
+    }
+  }
+}
