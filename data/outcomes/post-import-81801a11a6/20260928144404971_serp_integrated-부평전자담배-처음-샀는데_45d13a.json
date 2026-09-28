@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-81801a11a6",
+  "source": "serp",
+  "capturedAt": "2026-09-28T14:44:04.971Z",
+  "postAgeHours": 4287,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928144404971_serp_integrated-부평전자담배-처음-샀는데_45d13a",
+  "target": {
+    "surface": "integrated",
+    "query": "부평전자담배 처음 샀는데"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 처음 샀는데",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

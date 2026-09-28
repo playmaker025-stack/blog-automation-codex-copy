@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0a2a0604d0",
+  "source": "serp",
+  "capturedAt": "2026-09-28T14:45:02.707Z",
+  "postAgeHours": 4215,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928144502707_serp_blogtab-구월동-전자담배-하루에_53a13e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동 전자담배 하루에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 하루에",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224242669366",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224272638838",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224375480050",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224305965234",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-bde6327092",
+  "source": "serp",
+  "capturedAt": "2026-09-28T14:44:18.167Z",
+  "postAgeHours": 4263,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928144418167_serp_integrated-전자담배-액상-빨리_2a894e",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 액상 빨리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 빨리",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224376786991",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224182967408",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224256127800",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
