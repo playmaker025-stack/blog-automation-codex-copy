@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-ed806d65",
+  "source": "serp",
+  "capturedAt": "2026-09-28T20:44:44.605Z",
+  "postAgeHours": 1329,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928204444605_serp_integrated-남동구청역-전자담배-입문_ac81e3",
+  "target": {
+    "surface": "integrated",
+    "query": "남동구청역 전자담배 입문자"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구청역 전자담배 입문자",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 19,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224368143303",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224360910281",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224317693159",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224305841401",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223845254821",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224093237305",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224096074626",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224198373019",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224117744480",
+        "rank": 14
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
