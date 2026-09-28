@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-fb0461a1",
+  "source": "serp",
+  "capturedAt": "2026-09-28T21:04:17.929Z",
+  "postAgeHours": 1261,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928210417929_serp_integrated-일회용전자담배-불량_afa6b9",
+  "target": {
+    "surface": "integrated",
+    "query": "일회용전자담배 불량"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "일회용전자담배 불량",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 8,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224371265299",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
