@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms384q6y",
+  "source": "serp",
+  "capturedAt": "2026-09-28T08:25:15.168Z",
+  "postAgeHours": 1508,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928082515168_serp_blogtab-전자담배는-흡입을-오래_c24e54",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배는 흡입을 오래"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배는 흡입을 오래",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224359756182",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224362877173",
+        "rank": 14
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224396532565",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
