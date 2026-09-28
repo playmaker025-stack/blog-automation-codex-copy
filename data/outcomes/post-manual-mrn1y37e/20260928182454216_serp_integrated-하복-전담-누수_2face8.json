@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrn1y37e",
+  "source": "serp",
+  "capturedAt": "2026-09-28T18:24:54.216Z",
+  "postAgeHours": 1789,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928182454216_serp_integrated-하복-전담-누수_2face8",
+  "target": {
+    "surface": "integrated",
+    "query": "하복 전담 누수"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하복 전담 누수",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 22,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224348459675",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

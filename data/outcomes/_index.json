@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T18:05:19.229Z",
+  "updatedAt": "2026-09-28T18:25:15.785Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -4375,11 +4375,167 @@
       },
       "lastCapturedAt": "2026-09-28T18:05:16.505Z",
       "total": 2
+    },
+    "post-manual-mrki1yl0": {
+      "queries": {
+        "integrated::구월동 전자담배 입문자가": {
+          "okAgeHours": [
+            1832
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:04.988Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:04.988Z"
+        },
+        "blog_tab::구월동 전자담배 입문자가": {
+          "okAgeHours": [
+            1832
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:11.967Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:11.967Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T18:24:11.967Z",
+      "total": 2
+    },
+    "post-manual-mrkmokof": {
+      "queries": {
+        "integrated::전자담배 액상은 흔들어서": {
+          "okAgeHours": [
+            1830
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:17.924Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:17.924Z"
+        },
+        "blog_tab::전자담배 액상은 흔들어서": {
+          "okAgeHours": [
+            1830
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:24.525Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:24.525Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T18:24:24.525Z",
+      "total": 2
+    },
+    "post-3442dcc2": {
+      "queries": {
+        "integrated::무니코틴 고르기 전에": {
+          "okAgeHours": [
+            1809
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:30.829Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:30.829Z"
+        },
+        "blog_tab::무니코틴 고르기 전에": {
+          "okAgeHours": [
+            1809
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:36.485Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:36.485Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T18:24:36.485Z",
+      "total": 2
+    },
+    "post-manual-mrly9f82": {
+      "queries": {
+        "integrated::만수동 전자담배 멘솔": {
+          "okAgeHours": [
+            1808
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:41.891Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:41.891Z"
+        },
+        "blog_tab::만수동 전자담배 멘솔": {
+          "okAgeHours": [
+            1808
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:48.518Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:48.518Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T18:24:48.518Z",
+      "total": 2
+    },
+    "post-manual-mrn1y37e": {
+      "queries": {
+        "integrated::하복 전담 누수": {
+          "okAgeHours": [
+            1789
+          ],
+          "lastCapturedAt": "2026-09-28T18:24:54.216Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:24:54.216Z"
+        },
+        "blog_tab::하복 전담 누수": {
+          "okAgeHours": [
+            1789
+          ],
+          "lastCapturedAt": "2026-09-28T18:25:00.690Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:25:00.690Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T18:25:00.690Z",
+      "total": 2
+    },
+    "post-manual-mrorbz92": {
+      "queries": {
+        "integrated::발라리안 전자담배 안빨림": {
+          "okAgeHours": [
+            1761
+          ],
+          "lastCapturedAt": "2026-09-28T18:25:06.943Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:25:06.943Z"
+        },
+        "blog_tab::발라리안 전자담배 안빨림": {
+          "okAgeHours": [
+            1761
+          ],
+          "lastCapturedAt": "2026-09-28T18:25:13.257Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T18:25:13.257Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T18:25:13.257Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T18:04:04.955Z",
-    "lastOkAt": "2026-09-28T18:04:04.955Z",
+    "lastRunAt": "2026-09-28T18:24:04.646Z",
+    "lastOkAt": "2026-09-28T18:24:04.646Z",
     "consecutiveFailedRuns": 0
   }
 }
