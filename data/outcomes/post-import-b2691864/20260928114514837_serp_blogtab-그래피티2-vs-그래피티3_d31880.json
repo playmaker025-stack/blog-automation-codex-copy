@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b2691864",
+  "source": "serp",
+  "capturedAt": "2026-09-28T11:45:14.837Z",
+  "postAgeHours": 4836,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928114514837_serp_blogtab-그래피티2-vs-그래피티3_d31880",
+  "target": {
+    "surface": "blog_tab",
+    "query": "그래피티2 vs 그래피티3"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "그래피티2 vs 그래피티3",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 32,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

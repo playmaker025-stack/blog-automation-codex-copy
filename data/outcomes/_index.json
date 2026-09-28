@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T11:25:16.764Z",
+  "updatedAt": "2026-09-28T11:45:17.629Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -1255,11 +1255,167 @@
       },
       "lastCapturedAt": "2026-09-28T11:25:14.539Z",
       "total": 2
+    },
+    "post-import-d74162d9": {
+      "queries": {
+        "integrated::말론 vs 아스트로": {
+          "okAgeHours": [
+            4884
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:04.966Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:04.966Z"
+        },
+        "blog_tab::말론 vs 아스트로": {
+          "okAgeHours": [
+            4884
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:10.928Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:10.928Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T11:44:10.928Z",
+      "total": 2
+    },
+    "post-import-7e3d3a05": {
+      "queries": {
+        "integrated::전자담배 액상 실패": {
+          "okAgeHours": [
+            4884
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:17.231Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:17.231Z"
+        },
+        "blog_tab::전자담배 액상 실패": {
+          "okAgeHours": [
+            4884
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:23.181Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:23.181Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T11:44:23.181Z",
+      "total": 2
+    },
+    "post-import-7fe9e495": {
+      "queries": {
+        "integrated::젤로맥스 vs 발라리안맥스": {
+          "okAgeHours": [
+            4860
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:29.510Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:29.510Z"
+        },
+        "blog_tab::젤로맥스 vs 발라리안맥스": {
+          "okAgeHours": [
+            4860
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:36.312Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:36.312Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T11:44:36.312Z",
+      "total": 2
+    },
+    "post-import-431b0d64": {
+      "queries": {
+        "integrated::구월동 전자담배 추천": {
+          "okAgeHours": [
+            4860
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:41.804Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:41.804Z"
+        },
+        "blog_tab::구월동 전자담배 추천": {
+          "okAgeHours": [
+            4860
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:48.737Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:48.737Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T11:44:48.737Z",
+      "total": 2
+    },
+    "post-import-4098e7bf": {
+      "queries": {
+        "integrated::전자담배 액상 맛이": {
+          "okAgeHours": [
+            4860
+          ],
+          "lastCapturedAt": "2026-09-28T11:44:55.126Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:44:55.126Z"
+        },
+        "blog_tab::전자담배 액상 맛이": {
+          "okAgeHours": [
+            4860
+          ],
+          "lastCapturedAt": "2026-09-28T11:45:01.810Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:45:01.810Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T11:45:01.810Z",
+      "total": 2
+    },
+    "post-import-b2691864": {
+      "queries": {
+        "integrated::그래피티2 vs 그래피티3": {
+          "okAgeHours": [
+            4836
+          ],
+          "lastCapturedAt": "2026-09-28T11:45:08.167Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:45:08.167Z"
+        },
+        "blog_tab::그래피티2 vs 그래피티3": {
+          "okAgeHours": [
+            4836
+          ],
+          "lastCapturedAt": "2026-09-28T11:45:14.837Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T11:45:14.837Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T11:45:14.837Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T11:24:04.642Z",
-    "lastOkAt": "2026-09-28T11:24:04.642Z",
+    "lastRunAt": "2026-09-28T11:44:04.671Z",
+    "lastOkAt": "2026-09-28T11:44:04.671Z",
     "consecutiveFailedRuns": 0
   }
 }

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7fe9e495",
+  "source": "serp",
+  "capturedAt": "2026-09-28T11:44:36.312Z",
+  "postAgeHours": 4860,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928114436312_serp_blogtab-젤로맥스-vs-발라리안맥스_4cc34b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "젤로맥스 vs 발라리안맥스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "젤로맥스 vs 발라리안맥스",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224211395235",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223383472979",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

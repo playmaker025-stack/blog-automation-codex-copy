@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-431b0d64",
+  "source": "serp",
+  "capturedAt": "2026-09-28T11:44:41.804Z",
+  "postAgeHours": 4860,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928114441804_serp_integrated-구월동-전자담배-추천_da03c5",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동 전자담배 추천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 추천",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 36,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224375480050",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
