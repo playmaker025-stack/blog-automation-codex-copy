@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T15:45:20.743Z",
+  "updatedAt": "2026-09-28T16:05:19.374Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -3283,11 +3283,167 @@
       },
       "lastCapturedAt": "2026-09-28T15:45:18.143Z",
       "total": 2
+    },
+    "post-import-61a28e2181": {
+      "queries": {
+        "integrated::자동흡입 vs 버튼흡입": {
+          "okAgeHours": [
+            3976
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:06.038Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:06.038Z"
+        },
+        "blog_tab::자동흡입 vs 버튼흡입": {
+          "okAgeHours": [
+            3976
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:12.723Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:12.723Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:04:12.723Z",
+      "total": 2
+    },
+    "post-import-704ae75896": {
+      "queries": {
+        "integrated::부개동 전자담배 처음": {
+          "okAgeHours": [
+            3976
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:19.008Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:19.008Z"
+        },
+        "blog_tab::부개동 전자담배 처음": {
+          "okAgeHours": [
+            3976
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:25.358Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:25.358Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:04:25.358Z",
+      "total": 2
+    },
+    "post-import-244f148100": {
+      "queries": {
+        "integrated::전자담배 팟이 인식": {
+          "okAgeHours": [
+            3976
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:31.530Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:31.530Z"
+        },
+        "blog_tab::전자담배 팟이 인식": {
+          "okAgeHours": [
+            3976
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:38.192Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:38.192Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:04:38.192Z",
+      "total": 2
+    },
+    "post-import-7d1a4bbc42": {
+      "queries": {
+        "integrated::전자담배 액상 유통기한": {
+          "okAgeHours": [
+            3952
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:44.429Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:44.429Z"
+        },
+        "blog_tab::전자담배 액상 유통기한": {
+          "okAgeHours": [
+            3952
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:51.063Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:51.063Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:04:51.063Z",
+      "total": 2
+    },
+    "post-import-51182d6944": {
+      "queries": {
+        "integrated::전자담배 액상 맛이": {
+          "okAgeHours": [
+            3952
+          ],
+          "lastCapturedAt": "2026-09-28T16:04:57.404Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:04:57.404Z"
+        },
+        "blog_tab::전자담배 액상 맛이": {
+          "okAgeHours": [
+            3952
+          ],
+          "lastCapturedAt": "2026-09-28T16:05:04.044Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:05:04.044Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:05:04.044Z",
+      "total": 2
+    },
+    "post-import-2b812d9837": {
+      "queries": {
+        "integrated::전자담배 기기 오래": {
+          "okAgeHours": [
+            3928
+          ],
+          "lastCapturedAt": "2026-09-28T16:05:10.396Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:05:10.396Z"
+        },
+        "blog_tab::전자담배 기기 오래": {
+          "okAgeHours": [
+            3928
+          ],
+          "lastCapturedAt": "2026-09-28T16:05:16.819Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T16:05:16.819Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T16:05:16.819Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T15:44:04.909Z",
-    "lastOkAt": "2026-09-28T15:44:04.909Z",
+    "lastRunAt": "2026-09-28T16:04:05.499Z",
+    "lastOkAt": "2026-09-28T16:04:05.499Z",
     "consecutiveFailedRuns": 0
   }
 }
