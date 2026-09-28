@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-f3677adc",
+  "source": "serp",
+  "capturedAt": "2026-09-28T12:05:04.751Z",
+  "postAgeHours": 4788,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928120504751_serp_blogtab-입호흡-vs-폐호흡_1e6247",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡 vs 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 vs 폐호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 17,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224396167944",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224252157236",
+        "rank": 15
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224215126698",
+        "rank": 17
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224097348814",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

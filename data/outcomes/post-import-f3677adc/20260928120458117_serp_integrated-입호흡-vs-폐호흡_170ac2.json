@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-f3677adc",
+  "source": "serp",
+  "capturedAt": "2026-09-28T12:04:58.117Z",
+  "postAgeHours": 4788,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928120458117_serp_integrated-입호흡-vs-폐호흡_170ac2",
+  "target": {
+    "surface": "integrated",
+    "query": "입호흡 vs 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 vs 폐호흡",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
