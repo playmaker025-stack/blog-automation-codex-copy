@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mraln0hw",
+  "source": "serp",
+  "capturedAt": "2026-09-28T17:24:55.133Z",
+  "postAgeHours": 1997,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928172455133_serp_integrated-인천-전자담배-만수르_a54b5e",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 전자담배 만수르"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 만수르",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 24,
+    "searchedResultLimit": 33,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421992036",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421252466",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224378919388",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224373210249",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224365923075",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224358595068",
+        "rank": 11
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224347729064",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 15
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224134138488",
+        "rank": 16
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224085454297",
+        "rank": 17
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224091637871",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224115874233",
+        "rank": 20
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224405167840",
+        "rank": 21
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224115762930",
+        "rank": 22
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "220492070092",
+        "rank": 23
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224339588790",
+        "rank": 24
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220883304085",
+        "rank": 25
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221578688907",
+        "rank": 26
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223536974417",
+        "rank": 27
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221895647095",
+        "rank": 28
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221261341590",
+        "rank": 29
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 30
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224114392793",
+        "rank": 31
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221796307356",
+        "rank": 32
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223784654348",
+        "rank": 33
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
