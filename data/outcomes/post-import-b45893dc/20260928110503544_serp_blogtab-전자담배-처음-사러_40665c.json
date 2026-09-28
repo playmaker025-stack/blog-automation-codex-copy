@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b45893dc",
+  "source": "serp",
+  "capturedAt": "2026-09-28T11:05:03.544Z",
+  "postAgeHours": 4955,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928110503544_serp_blogtab-전자담배-처음-사러_40665c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 처음 사러"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 처음 사러",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

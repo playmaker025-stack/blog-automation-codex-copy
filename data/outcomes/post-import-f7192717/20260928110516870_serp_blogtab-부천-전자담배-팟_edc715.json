@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-f7192717",
+  "source": "serp",
+  "capturedAt": "2026-09-28T11:05:16.870Z",
+  "postAgeHours": 4955,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928110516870_serp_blogtab-부천-전자담배-팟_edc715",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부천 전자담배 팟"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부천 전자담배 팟",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224388730074",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224345153639",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224275412143",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
