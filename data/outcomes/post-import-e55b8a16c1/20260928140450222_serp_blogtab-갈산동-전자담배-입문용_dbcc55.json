@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-e55b8a16c1",
+  "source": "serp",
+  "capturedAt": "2026-09-28T14:04:50.222Z",
+  "postAgeHours": 4382,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928140450222_serp_blogtab-갈산동-전자담배-입문용_dbcc55",
+  "target": {
+    "surface": "blog_tab",
+    "query": "갈산동 전자담배 입문용"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "갈산동 전자담배 입문용",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 6,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224007609826",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224234438162",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223962872218",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223880834454",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223962684249",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-1036c0362a",
+  "source": "serp",
+  "capturedAt": "2026-09-28T14:05:03.111Z",
+  "postAgeHours": 4382,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928140503111_serp_blogtab-전자담배에서-탄맛이-나는_dace2c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배에서 탄맛이 나는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배에서 탄맛이 나는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224316610250",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 17
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224423937307",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
