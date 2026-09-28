@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-f4873ead",
+  "source": "serp",
+  "capturedAt": "2026-09-28T08:04:58.834Z",
+  "postAgeHours": 1635,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928080458834_serp_blogtab-가성비-좋은-전자담배의_a40ba8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "가성비 좋은 전자담배의"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "가성비 좋은 전자담배의",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224354324677",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
