@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T22:05:15.977Z",
+  "updatedAt": "2026-09-28T22:25:17.679Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -6155,11 +6155,161 @@
       },
       "lastCapturedAt": "2026-09-28T22:05:13.350Z",
       "total": 2
+    },
+    "post-b4e0e44a": {
+      "queries": {
+        "integrated::전담기기종류": {
+          "okAgeHours": [
+            926
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:05.400Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:05.400Z"
+        },
+        "blog_tab::전담기기종류": {
+          "okAgeHours": [
+            926
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:12.306Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:12.306Z"
+        },
+        "integrated::전담기기 종류 뭐가": {
+          "okAgeHours": [
+            926
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:18.588Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:18.588Z"
+        },
+        "blog_tab::전담기기 종류 뭐가": {
+          "okAgeHours": [
+            926
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:25.111Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:25.111Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:24:25.111Z",
+      "total": 4
+    },
+    "post-manual-mt5qahzh": {
+      "queries": {
+        "integrated::냄새 안나는 전자담배": {
+          "okAgeHours": [
+            875
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:31.316Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:31.316Z"
+        },
+        "blog_tab::냄새 안나는 전자담배": {
+          "okAgeHours": [
+            875
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:37.944Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:37.944Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:24:37.944Z",
+      "total": 2
+    },
+    "post-38ca6424": {
+      "queries": {
+        "integrated::부천 전자담배 액상": {
+          "okAgeHours": [
+            854
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:44.252Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:44.252Z"
+        },
+        "blog_tab::부천 전자담배 액상": {
+          "okAgeHours": [
+            854
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:50.587Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:50.587Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:24:50.587Z",
+      "total": 2
+    },
+    "post-manual-mt6xe0wc": {
+      "queries": {
+        "integrated::인천 전자담배 만수동만수르": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T22:24:56.076Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:24:56.076Z"
+        },
+        "blog_tab::인천 전자담배 만수동만수르": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T22:25:02.718Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:25:02.718Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:25:02.718Z",
+      "total": 2
+    },
+    "post-manual-mt6xe2cd": {
+      "queries": {
+        "integrated::인천 전자담배 만수동만수르": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T22:25:08.346Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:25:08.346Z"
+        },
+        "blog_tab::인천 전자담배 만수동만수르": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T22:25:15.042Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:25:15.042Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:25:15.042Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T22:04:05.282Z",
-    "lastOkAt": "2026-09-28T22:04:05.282Z",
+    "lastRunAt": "2026-09-28T22:24:04.933Z",
+    "lastOkAt": "2026-09-28T22:24:04.933Z",
     "consecutiveFailedRuns": 0
   }
 }
