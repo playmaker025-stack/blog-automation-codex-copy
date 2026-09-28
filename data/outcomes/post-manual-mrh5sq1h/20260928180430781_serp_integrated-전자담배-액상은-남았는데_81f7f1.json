@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrh5sq1h",
+  "source": "serp",
+  "capturedAt": "2026-09-28T18:04:30.781Z",
+  "postAgeHours": 1888,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928180430781_serp_integrated-전자담배-액상은-남았는데_81f7f1",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 액상은 남았는데"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 남았는데",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224344003193",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224405141976",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
