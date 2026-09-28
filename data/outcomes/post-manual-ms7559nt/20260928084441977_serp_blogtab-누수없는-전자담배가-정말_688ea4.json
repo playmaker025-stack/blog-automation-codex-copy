@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms7559nt",
+  "source": "serp",
+  "capturedAt": "2026-09-28T08:44:41.977Z",
+  "postAgeHours": 1442,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928084441977_serp_blogtab-누수없는-전자담배가-정말_688ea4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "누수없는 전자담배가 정말"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "누수없는 전자담배가 정말",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224362877173",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224336885735",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224371265299",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 17
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 19
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224378919388",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
