@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-fcd2d1c7",
+  "source": "serp",
+  "capturedAt": "2026-09-28T20:04:05.567Z",
+  "postAgeHours": 1496,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928200405567_serp_integrated-간석동-전자담배-기기_e178fa",
+  "target": {
+    "surface": "integrated",
+    "query": "간석동 전자담배 기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 기기",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 32,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224360910281",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224417088500",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224402871981",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223822289850",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224136930090",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224403800869",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224277953493",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

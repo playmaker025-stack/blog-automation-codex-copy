@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-28fdb89d",
+  "source": "serp",
+  "capturedAt": "2026-09-28T20:04:30.934Z",
+  "postAgeHours": 1478,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928200430934_serp_integrated-액상-섞어_899d50",
+  "target": {
+    "surface": "integrated",
+    "query": "액상 섞어"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상 섞어",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224052870595",
+        "rank": 10
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

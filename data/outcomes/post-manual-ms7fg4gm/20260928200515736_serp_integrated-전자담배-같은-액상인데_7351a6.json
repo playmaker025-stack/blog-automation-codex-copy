@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms7fg4gm",
+  "source": "serp",
+  "capturedAt": "2026-09-28T20:05:15.736Z",
+  "postAgeHours": 1449,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928200515736_serp_integrated-전자담배-같은-액상인데_7351a6",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 같은 액상인데"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 같은 액상인데",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 6,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224363143568",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224101467765",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
