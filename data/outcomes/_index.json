@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T23:05:20.472Z",
+  "updatedAt": "2026-09-28T23:25:18.234Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -6587,11 +6587,149 @@
       },
       "lastCapturedAt": "2026-09-28T23:05:17.876Z",
       "total": 6
+    },
+    "post-manual-mt6z60ar": {
+      "queries": {
+        "integrated::닷모드 투엑스": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:05.447Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:05.447Z"
+        },
+        "blog_tab::닷모드 투엑스": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:12.423Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:12.423Z"
+        },
+        "integrated::인천 닷모드": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:18.656Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:18.656Z"
+        },
+        "blog_tab::인천 닷모드": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:25.113Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:25.113Z"
+        },
+        "integrated::인천 투엑스": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:31.401Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:31.401Z"
+        },
+        "blog_tab::인천 투엑스": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:38.310Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:38.310Z"
+        },
+        "integrated::인천 전자담배": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:44.553Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:44.553Z"
+        },
+        "blog_tab::인천 전자담배": {
+          "okAgeHours": [
+            855
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:50.607Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:50.607Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T23:24:50.607Z",
+      "total": 8
+    },
+    "post-manual-mt75drce": {
+      "queries": {
+        "integrated::인천전자담배 무니코틴 액상": {
+          "okAgeHours": [
+            852
+          ],
+          "lastCapturedAt": "2026-09-28T23:24:56.906Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:24:56.906Z"
+        },
+        "blog_tab::인천전자담배 무니코틴 액상": {
+          "okAgeHours": [
+            852
+          ],
+          "lastCapturedAt": "2026-09-28T23:25:03.898Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:25:03.898Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T23:25:03.898Z",
+      "total": 2
+    },
+    "post-manual-mt87hyvp": {
+      "queries": {
+        "integrated::갈산동전자담배 옥스바 오네오": {
+          "okAgeHours": [
+            834
+          ],
+          "lastCapturedAt": "2026-09-28T23:25:09.441Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:25:09.441Z"
+        },
+        "blog_tab::갈산동전자담배 옥스바 오네오": {
+          "okAgeHours": [
+            834
+          ],
+          "lastCapturedAt": "2026-09-28T23:25:16.085Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T23:25:16.085Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T23:25:16.085Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T23:04:05.078Z",
-    "lastOkAt": "2026-09-28T23:04:05.078Z",
+    "lastRunAt": "2026-09-28T23:24:05.011Z",
+    "lastOkAt": "2026-09-28T23:24:05.011Z",
     "consecutiveFailedRuns": 0
   }
 }
