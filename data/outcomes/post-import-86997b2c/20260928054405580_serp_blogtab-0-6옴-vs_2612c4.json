@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-86997b2c",
+  "source": "serp",
+  "capturedAt": "2026-09-28T05:44:05.580Z",
+  "postAgeHours": 4590,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928054405580_serp_blogtab-0-6옴-vs_2612c4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "0 6옴 vs"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "0 6옴 vs",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
