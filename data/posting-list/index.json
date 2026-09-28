@@ -12916,7 +12916,41 @@
         "contentHash": "8e38b6f3",
         "trackedFrom": "2026-09-28T08:22:22.335Z"
       }
+    },
+    {
+      "postId": "post-manual-mul5mi57",
+      "topicId": "",
+      "userId": "d",
+      "title": "스퀑크 모드란 무엇일까?-바텀피더와 일반 모드의 차이",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224425149483",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224425149483",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224425149483"
+        },
+        "targetKeywords": [
+          {
+            "query": "스퀑크 모드란 무엇일까 -바텀피더와",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "스퀑크 모드란 무엇일까?-바텀피더와 일반 모드의 차이",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-28T11:18:38.480Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-28T11:18:38.480Z",
+      "createdAt": "2026-09-28T11:18:38.480Z",
+      "updatedAt": "2026-09-28T11:18:38.480Z"
     }
   ],
-  "lastUpdated": "2026-09-28T08:22:21.840Z"
+  "lastUpdated": "2026-09-28T11:18:38.480Z"
 }
