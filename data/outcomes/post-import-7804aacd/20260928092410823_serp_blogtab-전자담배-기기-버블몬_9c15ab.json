@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7804aacd",
+  "source": "serp",
+  "capturedAt": "2026-09-28T09:24:10.823Z",
+  "postAgeHours": 5145,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928092410823_serp_blogtab-전자담배-기기-버블몬_9c15ab",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 기기 버블몬"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 기기 버블몬",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
