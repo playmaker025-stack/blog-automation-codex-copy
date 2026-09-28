@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-44848739",
+  "source": "serp",
+  "capturedAt": "2026-09-28T10:24:05.621Z",
+  "postAgeHours": 10210,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928102405621_serp_integrated-엘프바-아이스킹-25k_74a2c7",
+  "target": {
+    "surface": "integrated",
+    "query": "엘프바 아이스킹 25k"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "엘프바 아이스킹 25k",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "223952608333",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

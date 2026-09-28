@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7f7429f1",
+  "source": "serp",
+  "capturedAt": "2026-09-28T10:25:10.448Z",
+  "postAgeHours": 5050,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928102510448_serp_integrated-연수동-전자담배-말론_df6058",
+  "target": {
+    "surface": "integrated",
+    "query": "연수동 전자담배 말론"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연수동 전자담배 말론",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 17,
+    "searchedResultLimit": 19,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224201518656",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
