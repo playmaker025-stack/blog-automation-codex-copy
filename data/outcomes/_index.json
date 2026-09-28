@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T16:45:18.853Z",
+  "updatedAt": "2026-09-28T17:05:19.127Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -3751,11 +3751,167 @@
       },
       "lastCapturedAt": "2026-09-28T16:45:16.111Z",
       "total": 2
+    },
+    "post-manual-mr1ze6cd": {
+      "queries": {
+        "integrated::케이스가 들어있는 크로스미니6": {
+          "okAgeHours": [
+            2142
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:06.167Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:06.167Z"
+        },
+        "blog_tab::케이스가 들어있는 크로스미니6": {
+          "okAgeHours": [
+            2142
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:13.457Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:13.457Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T17:04:13.457Z",
+      "total": 2
+    },
+    "post-manual-mr3i1u04": {
+      "queries": {
+        "integrated::여름철 전자담배를 차량에": {
+          "okAgeHours": [
+            2116
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:19.881Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:19.881Z"
+        },
+        "blog_tab::여름철 전자담배를 차량에": {
+          "okAgeHours": [
+            2116
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:26.487Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:26.487Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T17:04:26.487Z",
+      "total": 2
+    },
+    "post-manual-mr4m14xy": {
+      "queries": {
+        "integrated::젤로맥스 누수 잡는법": {
+          "okAgeHours": [
+            2098
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:32.750Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:32.750Z"
+        },
+        "blog_tab::젤로맥스 누수 잡는법": {
+          "okAgeHours": [
+            2098
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:39.312Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:39.312Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T17:04:39.312Z",
+      "total": 2
+    },
+    "post-manual-mr4urgdx": {
+      "queries": {
+        "integrated::여름철 전자담배 액상이": {
+          "okAgeHours": [
+            2094
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:45.679Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:45.679Z"
+        },
+        "blog_tab::여름철 전자담배 액상이": {
+          "okAgeHours": [
+            2094
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:52.249Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:52.249Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T17:04:52.249Z",
+      "total": 2
+    },
+    "post-manual-mr5y47o6": {
+      "queries": {
+        "integrated::마이팟프로 누수 잡는법": {
+          "okAgeHours": [
+            2075
+          ],
+          "lastCapturedAt": "2026-09-28T17:04:58.577Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:04:58.577Z"
+        },
+        "blog_tab::마이팟프로 누수 잡는법": {
+          "okAgeHours": [
+            2075
+          ],
+          "lastCapturedAt": "2026-09-28T17:05:04.950Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:05:04.950Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T17:05:04.950Z",
+      "total": 2
+    },
+    "post-manual-mr69b8nu": {
+      "queries": {
+        "integrated::만수동 전자담배 크로스미니6": {
+          "okAgeHours": [
+            2070
+          ],
+          "lastCapturedAt": "2026-09-28T17:05:10.267Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:05:10.267Z"
+        },
+        "blog_tab::만수동 전자담배 크로스미니6": {
+          "okAgeHours": [
+            2070
+          ],
+          "lastCapturedAt": "2026-09-28T17:05:16.928Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T17:05:16.928Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T17:05:16.928Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T16:44:04.572Z",
-    "lastOkAt": "2026-09-28T16:44:04.572Z",
+    "lastRunAt": "2026-09-28T17:04:05.860Z",
+    "lastOkAt": "2026-09-28T17:04:05.860Z",
     "consecutiveFailedRuns": 0
   }
 }

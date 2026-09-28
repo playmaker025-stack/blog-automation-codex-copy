@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr4urgdx",
+  "source": "serp",
+  "capturedAt": "2026-09-28T17:04:45.679Z",
+  "postAgeHours": 2094,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928170445679_serp_integrated-여름철-전자담배-액상이_07c904",
+  "target": {
+    "surface": "integrated",
+    "query": "여름철 전자담배 액상이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "여름철 전자담배 액상이",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 33,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224380267194",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224315609096",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr1ze6cd",
+  "source": "serp",
+  "capturedAt": "2026-09-28T17:04:13.457Z",
+  "postAgeHours": 2142,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928170413457_serp_blogtab-케이스가-들어있는-크로스미니6_105a1d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "케이스가 들어있는 크로스미니6"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "케이스가 들어있는 크로스미니6",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224333365162",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224333224334",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
