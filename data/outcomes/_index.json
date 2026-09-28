@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T09:25:15.222Z",
+  "updatedAt": "2026-09-28T09:45:19.793Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -319,11 +319,167 @@
       },
       "lastCapturedAt": "2026-09-28T09:25:12.647Z",
       "total": 2
+    },
+    "post-import-07aa8e22": {
+      "queries": {
+        "integrated::발라리안 누수 해결방": {
+          "okAgeHours": [
+            5098
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:05.344Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:05.344Z"
+        },
+        "blog_tab::발라리안 누수 해결방": {
+          "okAgeHours": [
+            5098
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:12.123Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:12.123Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T09:44:12.123Z",
+      "total": 2
+    },
+    "post-import-79fcaeec": {
+      "queries": {
+        "integrated::부평 전자담배 매장에서": {
+          "okAgeHours": [
+            5098
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:18.298Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:18.298Z"
+        },
+        "blog_tab::부평 전자담배 매장에서": {
+          "okAgeHours": [
+            5098
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:24.818Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:24.818Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T09:44:24.818Z",
+      "total": 2
+    },
+    "post-import-720d8b3b": {
+      "queries": {
+        "integrated::니코틴 액상 쿨크러쉬": {
+          "okAgeHours": [
+            5122
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:31.048Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:31.048Z"
+        },
+        "blog_tab::니코틴 액상 쿨크러쉬": {
+          "okAgeHours": [
+            5122
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:37.759Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:37.759Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T09:44:37.759Z",
+      "total": 2
+    },
+    "post-import-d3256aea": {
+      "queries": {
+        "integrated::베놈 아스트로 MK3": {
+          "okAgeHours": [
+            5074
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:43.925Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:43.925Z"
+        },
+        "blog_tab::베놈 아스트로 MK3": {
+          "okAgeHours": [
+            5074
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:50.528Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:50.528Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T09:44:50.528Z",
+      "total": 2
+    },
+    "post-import-6d13341a": {
+      "queries": {
+        "integrated::부평구청 전자담배 입호흡": {
+          "okAgeHours": [
+            5074
+          ],
+          "lastCapturedAt": "2026-09-28T09:44:56.818Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:44:56.818Z"
+        },
+        "blog_tab::부평구청 전자담배 입호흡": {
+          "okAgeHours": [
+            5074
+          ],
+          "lastCapturedAt": "2026-09-28T09:45:03.841Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:45:03.841Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T09:45:03.841Z",
+      "total": 2
+    },
+    "post-import-6f68b17a": {
+      "queries": {
+        "integrated::인천 전자담배 만수르": {
+          "okAgeHours": [
+            6826
+          ],
+          "lastCapturedAt": "2026-09-28T09:45:10.161Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:45:10.161Z"
+        },
+        "blog_tab::인천 전자담배 만수르": {
+          "okAgeHours": [
+            6826
+          ],
+          "lastCapturedAt": "2026-09-28T09:45:17.134Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T09:45:17.134Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T09:45:17.134Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T09:24:04.560Z",
-    "lastOkAt": "2026-09-28T09:24:04.560Z",
+    "lastRunAt": "2026-09-28T09:44:04.874Z",
+    "lastOkAt": "2026-09-28T09:44:04.874Z",
     "consecutiveFailedRuns": 0
   }
 }
