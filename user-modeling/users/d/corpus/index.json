@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mul5mi57",
+      "title": "스퀑크 모드란 무엇일까?-바텀피더와 일반 모드의 차이",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2106,
+      "publishedAt": "2026-09-28T11:18:38.480Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mul5mi57.md"
+    },
+    {
       "sampleId": "published-post-manual-mujbcz36",
       "title": "RTA와 RDA 다음에 알아볼 것-RDTA는 어떤 방식의 무화기일까?",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6311,
       "publishedAt": "2026-07-29T11:19:04.943Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-ms5zs3fn.md"
-    },
-    {
-      "sampleId": "published-post-manual-ms4juy5w",
-      "title": "전자담배는 세게 빨수록 더 많이 나올까?",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6337,
-      "publishedAt": "2026-07-28T11:05:37.943Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-ms4juy5w.md"
     }
   ],
-  "lastUpdated": "2026-09-27T04:23:46.647Z"
+  "lastUpdated": "2026-09-28T11:18:48.190Z"
 }
