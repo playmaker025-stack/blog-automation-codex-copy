@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr0liclf",
+  "source": "serp",
+  "capturedAt": "2026-09-28T16:45:03.164Z",
+  "postAgeHours": 2165,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928164503164_serp_blogtab-전자담배-액상-한_18b3df",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 한"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 한",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

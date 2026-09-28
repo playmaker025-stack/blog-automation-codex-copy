@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mqz4nijs",
+  "source": "serp",
+  "capturedAt": "2026-09-28T16:44:37.874Z",
+  "postAgeHours": 2189,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928164437874_serp_blogtab-전자담배-액상-추천받으러_07bc0b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 추천받으러"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 추천받으러",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
