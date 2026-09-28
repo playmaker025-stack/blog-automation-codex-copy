@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrriexgq",
+  "source": "serp",
+  "capturedAt": "2026-09-28T18:44:31.818Z",
+  "postAgeHours": 1715,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928184431818_serp_integrated-전자담배-액상은-끝까지_eaf0ff",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 액상은 끝까지"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 끝까지",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 28,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "221939999278",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224132046324",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
