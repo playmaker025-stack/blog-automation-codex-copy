@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-048eb5a5e8",
+  "source": "serp",
+  "capturedAt": "2026-09-28T14:24:37.689Z",
+  "postAgeHours": 4334,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928142437689_serp_blogtab-전자담배-처음-사용할_1a0a28",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 처음 사용할"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 처음 사용할",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224396532565",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

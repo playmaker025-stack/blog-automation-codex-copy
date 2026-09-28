@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T14:05:18.976Z",
+  "updatedAt": "2026-09-28T14:25:18.257Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -2503,11 +2503,167 @@
       },
       "lastCapturedAt": "2026-09-28T14:05:16.192Z",
       "total": 2
+    },
+    "post-import-bddca6e807": {
+      "queries": {
+        "integrated::부평전자담배 말론바 입고": {
+          "okAgeHours": [
+            4358
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:05.238Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:05.238Z"
+        },
+        "blog_tab::부평전자담배 말론바 입고": {
+          "okAgeHours": [
+            4358
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:12.098Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:12.098Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T14:24:12.098Z",
+      "total": 2
+    },
+    "post-import-7c5f00f8d5": {
+      "queries": {
+        "integrated::전자담배 처음 사용할": {
+          "okAgeHours": [
+            4334
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:18.390Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:18.390Z"
+        },
+        "blog_tab::전자담배 처음 사용할": {
+          "okAgeHours": [
+            4334
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:25.047Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:25.047Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T14:24:25.047Z",
+      "total": 2
+    },
+    "post-import-048eb5a5e8": {
+      "queries": {
+        "integrated::전자담배 처음 사용할": {
+          "okAgeHours": [
+            4334
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:31.285Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:31.285Z"
+        },
+        "blog_tab::전자담배 처음 사용할": {
+          "okAgeHours": [
+            4334
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:37.689Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:37.689Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T14:24:37.689Z",
+      "total": 2
+    },
+    "post-import-7f28727bc6": {
+      "queries": {
+        "integrated::입호흡 전자담배 수명": {
+          "okAgeHours": [
+            4310
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:43.933Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:43.933Z"
+        },
+        "blog_tab::입호흡 전자담배 수명": {
+          "okAgeHours": [
+            4310
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:50.169Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:50.169Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T14:24:50.169Z",
+      "total": 2
+    },
+    "post-import-bf2fe315ea": {
+      "queries": {
+        "integrated::만수동 전자담배 시원한": {
+          "okAgeHours": [
+            4310
+          ],
+          "lastCapturedAt": "2026-09-28T14:24:56.456Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:24:56.456Z"
+        },
+        "blog_tab::만수동 전자담배 시원한": {
+          "okAgeHours": [
+            4310
+          ],
+          "lastCapturedAt": "2026-09-28T14:25:03.060Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:25:03.060Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T14:25:03.060Z",
+      "total": 2
+    },
+    "post-import-a0669f990d": {
+      "queries": {
+        "integrated::전자담배 코일 수명은": {
+          "okAgeHours": [
+            4310
+          ],
+          "lastCapturedAt": "2026-09-28T14:25:09.281Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:25:09.281Z"
+        },
+        "blog_tab::전자담배 코일 수명은": {
+          "okAgeHours": [
+            4310
+          ],
+          "lastCapturedAt": "2026-09-28T14:25:15.645Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T14:25:15.645Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T14:25:15.645Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T14:04:04.505Z",
-    "lastOkAt": "2026-09-28T14:04:04.505Z",
+    "lastRunAt": "2026-09-28T14:24:04.735Z",
+    "lastOkAt": "2026-09-28T14:24:04.735Z",
     "consecutiveFailedRuns": 0
   }
 }

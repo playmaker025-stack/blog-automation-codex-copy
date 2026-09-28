@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-bf2fe315ea",
+  "source": "serp",
+  "capturedAt": "2026-09-28T14:25:03.060Z",
+  "postAgeHours": 4310,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928142503060_serp_blogtab-만수동-전자담배-시원한_1cc7b8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배 시원한"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 시원한",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 10,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224351924908",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224347729064",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224383515315",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224238674976",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223984517085",
+        "rank": 21
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223784654348",
+        "rank": 23
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224089279318",
+        "rank": 24
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224180202326",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
