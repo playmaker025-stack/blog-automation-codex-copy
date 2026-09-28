@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-426888f1",
+  "source": "serp",
+  "capturedAt": "2026-09-28T09:04:35.497Z",
+  "postAgeHours": 1345,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928090435497_serp_blogtab-전자담배도-냄새가-날까_c47abd",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배도 냄새가 날까"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배도 냄새가 날까",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224366844975",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224295302695",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-426888f1",
+  "source": "serp",
+  "capturedAt": "2026-09-28T09:04:29.787Z",
+  "postAgeHours": 1345,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928090429787_serp_blogtab-전자담배-냄새_12920c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 냄새"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 냄새",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224366844975",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
