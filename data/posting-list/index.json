@@ -12889,17 +12889,34 @@
       "postId": "post-2dfdfb28",
       "topicId": "topic-eefa9fbb",
       "userId": "c",
-      "title": "만수르 전자담배 제품별 관리법과 인천 만수역 방문 고객 맞춤 팁",
-      "status": "ready",
-      "naverPostUrl": null,
+      "title": "인천 만수역 전자담배 방문 고객 제품별 관리법과 맞춤 팁!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224424995162",
       "evalScore": 60,
       "wordCount": 3352,
       "compositionSessionId": "pipe-3b3ba923",
       "pendingApproval": null,
       "createdAt": "2026-09-28T06:37:03.075Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-28T06:40:13.105Z"
+      "publishedAt": "2026-09-28T08:22:22.022Z",
+      "updatedAt": "2026-09-28T08:22:21.840Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224424995162",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224424995162"
+        },
+        "targetKeywords": [
+          {
+            "query": "인천 만수역 전자담배",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "인천 만수역 전자담배 방문 고객 제품별 관리법과 맞춤 팁!",
+        "contentHash": "8e38b6f3",
+        "trackedFrom": "2026-09-28T08:22:22.335Z"
+      }
     }
   ],
-  "lastUpdated": "2026-09-28T06:40:13.105Z"
+  "lastUpdated": "2026-09-28T08:22:21.840Z"
 }
