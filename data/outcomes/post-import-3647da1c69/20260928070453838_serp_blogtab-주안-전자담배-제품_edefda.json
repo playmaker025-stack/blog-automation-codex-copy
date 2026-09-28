@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3647da1c69",
+  "source": "serp",
+  "capturedAt": "2026-09-28T07:04:53.838Z",
+  "postAgeHours": 3871,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928070453838_serp_blogtab-주안-전자담배-제품_edefda",
+  "target": {
+    "surface": "blog_tab",
+    "query": "주안 전자담배 제품"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "주안 전자담배 제품",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 9,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224258931655",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 14
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224272638838",
+        "rank": 23
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224188587181",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
