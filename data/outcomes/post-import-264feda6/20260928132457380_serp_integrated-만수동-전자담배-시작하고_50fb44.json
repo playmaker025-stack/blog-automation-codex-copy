@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-264feda6",
+  "source": "serp",
+  "capturedAt": "2026-09-28T13:24:57.380Z",
+  "postAgeHours": 4525,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928132457380_serp_integrated-만수동-전자담배-시작하고_50fb44",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 시작하고"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 시작하고",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 20,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 11
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224085454297",
+        "rank": 13
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 14
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224397752886",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

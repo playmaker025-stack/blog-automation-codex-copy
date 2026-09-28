@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T13:05:16.505Z",
+  "updatedAt": "2026-09-28T13:25:20.367Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -2035,11 +2035,167 @@
       },
       "lastCapturedAt": "2026-09-28T13:05:14.543Z",
       "total": 2
+    },
+    "post-import-86997b2c": {
+      "queries": {
+        "integrated::0 6옴 vs": {
+          "okAgeHours": [
+            4597
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:06.161Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:06.161Z"
+        },
+        "blog_tab::0 6옴 vs": {
+          "okAgeHours": [
+            4597
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:13.006Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:13.006Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T13:24:13.006Z",
+      "total": 2
+    },
+    "post-import-797610f9": {
+      "queries": {
+        "integrated::전자담배 액튐 생기는": {
+          "okAgeHours": [
+            4573
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:19.308Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:19.308Z"
+        },
+        "blog_tab::전자담배 액튐 생기는": {
+          "okAgeHours": [
+            4573
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:25.768Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:25.768Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T13:24:25.768Z",
+      "total": 2
+    },
+    "post-import-54d314d3": {
+      "queries": {
+        "integrated::관교동전자담배 메가엣지 액상": {
+          "okAgeHours": [
+            4549
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:32.018Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:32.018Z"
+        },
+        "blog_tab::관교동전자담배 메가엣지 액상": {
+          "okAgeHours": [
+            4549
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:38.630Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:38.630Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T13:24:38.630Z",
+      "total": 2
+    },
+    "post-import-2ed87606": {
+      "queries": {
+        "integrated::전자담배 누수 생기는": {
+          "okAgeHours": [
+            4549
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:44.476Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:44.476Z"
+        },
+        "blog_tab::전자담배 누수 생기는": {
+          "okAgeHours": [
+            4549
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:51.130Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:51.130Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T13:24:51.130Z",
+      "total": 2
+    },
+    "post-import-264feda6": {
+      "queries": {
+        "integrated::만수동 전자담배 시작하고": {
+          "okAgeHours": [
+            4525
+          ],
+          "lastCapturedAt": "2026-09-28T13:24:57.380Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:24:57.380Z"
+        },
+        "blog_tab::만수동 전자담배 시작하고": {
+          "okAgeHours": [
+            4525
+          ],
+          "lastCapturedAt": "2026-09-28T13:25:04.311Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:25:04.311Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T13:25:04.311Z",
+      "total": 2
+    },
+    "post-import-717fe630": {
+      "queries": {
+        "integrated::전자담배 액상 색이": {
+          "okAgeHours": [
+            4525
+          ],
+          "lastCapturedAt": "2026-09-28T13:25:10.771Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:25:10.771Z"
+        },
+        "blog_tab::전자담배 액상 색이": {
+          "okAgeHours": [
+            4525
+          ],
+          "lastCapturedAt": "2026-09-28T13:25:17.475Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T13:25:17.475Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T13:25:17.475Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T13:04:04.863Z",
-    "lastOkAt": "2026-09-28T13:04:04.863Z",
+    "lastRunAt": "2026-09-28T13:24:05.651Z",
+    "lastOkAt": "2026-09-28T13:24:05.651Z",
     "consecutiveFailedRuns": 0
   }
 }
