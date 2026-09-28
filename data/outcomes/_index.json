@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T21:45:18.221Z",
+  "updatedAt": "2026-09-28T22:05:15.977Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -5999,11 +5999,167 @@
       },
       "lastCapturedAt": "2026-09-28T21:45:15.590Z",
       "total": 2
+    },
+    "post-f3e7657b": {
+      "queries": {
+        "integrated::갈산동 전자담배 입문자": {
+          "okAgeHours": [
+            995
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:05.577Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:05.577Z"
+        },
+        "blog_tab::갈산동 전자담배 입문자": {
+          "okAgeHours": [
+            995
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:11.516Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:11.516Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:04:11.516Z",
+      "total": 2
+    },
+    "post-bc7bfb22": {
+      "queries": {
+        "integrated::부천 상동 전자담배": {
+          "okAgeHours": [
+            1020
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:16.983Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:16.983Z"
+        },
+        "blog_tab::부천 상동 전자담배": {
+          "okAgeHours": [
+            1020
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:23.837Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:23.837Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:04:23.837Z",
+      "total": 2
+    },
+    "post-manual-mt006d8p": {
+      "queries": {
+        "integrated::전자담배 팟에 액상이": {
+          "okAgeHours": [
+            971
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:29.294Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:29.294Z"
+        },
+        "blog_tab::전자담배 팟에 액상이": {
+          "okAgeHours": [
+            971
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:35.895Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:35.895Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:04:35.895Z",
+      "total": 2
+    },
+    "post-70d278e7": {
+      "queries": {
+        "integrated::인천 남동구 전자담배": {
+          "okAgeHours": [
+            951
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:42.242Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:42.242Z"
+        },
+        "blog_tab::인천 남동구 전자담배": {
+          "okAgeHours": [
+            951
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:48.343Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:48.343Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:04:48.343Z",
+      "total": 2
+    },
+    "post-5fbf9c10": {
+      "queries": {
+        "integrated::연수동 전자담배 입문자를": {
+          "okAgeHours": [
+            901
+          ],
+          "lastCapturedAt": "2026-09-28T22:04:54.317Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:04:54.317Z"
+        },
+        "blog_tab::연수동 전자담배 입문자를": {
+          "okAgeHours": [
+            901
+          ],
+          "lastCapturedAt": "2026-09-28T22:05:00.933Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:05:00.933Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:05:00.933Z",
+      "total": 2
+    },
+    "post-manual-mt1jysvx": {
+      "queries": {
+        "integrated::전자담배 액상을 넣고": {
+          "okAgeHours": [
+            945
+          ],
+          "lastCapturedAt": "2026-09-28T22:05:06.696Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:05:06.696Z"
+        },
+        "blog_tab::전자담배 액상을 넣고": {
+          "okAgeHours": [
+            945
+          ],
+          "lastCapturedAt": "2026-09-28T22:05:13.350Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T22:05:13.350Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T22:05:13.350Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T21:44:05.137Z",
-    "lastOkAt": "2026-09-28T21:44:05.137Z",
+    "lastRunAt": "2026-09-28T22:04:05.282Z",
+    "lastOkAt": "2026-09-28T22:04:05.282Z",
     "consecutiveFailedRuns": 0
   }
 }

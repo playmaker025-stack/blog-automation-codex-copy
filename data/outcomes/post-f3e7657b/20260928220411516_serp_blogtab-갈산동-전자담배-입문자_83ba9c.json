@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-f3e7657b",
+  "source": "serp",
+  "capturedAt": "2026-09-28T22:04:11.516Z",
+  "postAgeHours": 995,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928220411516_serp_blogtab-갈산동-전자담배-입문자_83ba9c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "갈산동 전자담배 입문자"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "갈산동 전자담배 입문자",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224234438162",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223956410414",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223880834454",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
