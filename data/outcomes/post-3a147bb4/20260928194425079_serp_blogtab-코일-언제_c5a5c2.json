@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-3a147bb4",
+  "source": "serp",
+  "capturedAt": "2026-09-28T19:44:25.079Z",
+  "postAgeHours": 1524,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928194425079_serp_blogtab-코일-언제_c5a5c2",
+  "target": {
+    "surface": "blog_tab",
+    "query": "코일 언제"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "코일 언제",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224359513114",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224400865016",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224253220946",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

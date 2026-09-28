@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-3a147bb4",
+  "source": "serp",
+  "capturedAt": "2026-09-28T19:44:31.370Z",
+  "postAgeHours": 1524,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928194431370_serp_integrated-전자담배-코일은-언제_95d371",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 코일은 언제"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일은 언제",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 26,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224359513114",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224400865016",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
