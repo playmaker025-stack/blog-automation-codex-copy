@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7deb5f78ee",
+  "source": "serp",
+  "capturedAt": "2026-09-28T15:05:10.087Z",
+  "postAgeHours": 4143,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928150510087_serp_integrated-입문자용-액상-선택_f51dd2",
+  "target": {
+    "surface": "integrated",
+    "query": "입문자용 액상 선택"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입문자용 액상 선택",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 13,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
