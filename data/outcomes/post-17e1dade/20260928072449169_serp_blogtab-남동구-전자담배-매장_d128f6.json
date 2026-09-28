@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-17e1dade",
+  "source": "serp",
+  "capturedAt": "2026-09-28T07:24:49.169Z",
+  "postAgeHours": 1892,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928072449169_serp_blogtab-남동구-전자담배-매장_d128f6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "남동구 전자담배 매장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구 전자담배 매장",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224343612896",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224384586821",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224400865016",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224411359815",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224218539513",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224216366603",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
