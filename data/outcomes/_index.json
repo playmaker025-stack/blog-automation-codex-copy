@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T09:45:19.793Z",
+  "updatedAt": "2026-09-28T10:05:17.049Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -475,11 +475,167 @@
       },
       "lastCapturedAt": "2026-09-28T09:45:17.134Z",
       "total": 2
+    },
+    "post-import-8a428bee": {
+      "queries": {
+        "integrated::2025년 기준 입호흡": {
+          "okAgeHours": [
+            7330
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:05.451Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:05.451Z"
+        },
+        "blog_tab::2025년 기준 입호흡": {
+          "okAgeHours": [
+            7330
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:12.576Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:12.576Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:04:12.576Z",
+      "total": 2
+    },
+    "post-import-6ae3e93a": {
+      "queries": {
+        "integrated::전자담배 입호흡 폐호흡": {
+          "okAgeHours": [
+            7426
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:18.617Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:18.617Z"
+        },
+        "blog_tab::전자담배 입호흡 폐호흡": {
+          "okAgeHours": [
+            7426
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:25.286Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:25.286Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:04:25.286Z",
+      "total": 2
+    },
+    "post-import-8d99c329": {
+      "queries": {
+        "integrated::전자담배 코일 교체시기": {
+          "okAgeHours": [
+            13810
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:31.588Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:31.588Z"
+        },
+        "blog_tab::전자담배 코일 교체시기": {
+          "okAgeHours": [
+            13810
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:38.256Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:38.256Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:04:38.256Z",
+      "total": 2
+    },
+    "post-import-3ff39b61": {
+      "queries": {
+        "integrated::부평 전자담배 추천": {
+          "okAgeHours": [
+            8314
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:43.753Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:43.753Z"
+        },
+        "blog_tab::부평 전자담배 추천": {
+          "okAgeHours": [
+            8314
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:50.390Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:50.390Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:04:50.390Z",
+      "total": 2
+    },
+    "post-import-2fab3670": {
+      "queries": {
+        "integrated::무화량 많은 하이엔드": {
+          "okAgeHours": [
+            7858
+          ],
+          "lastCapturedAt": "2026-09-28T10:04:56.613Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:04:56.613Z"
+        },
+        "blog_tab::무화량 많은 하이엔드": {
+          "okAgeHours": [
+            7858
+          ],
+          "lastCapturedAt": "2026-09-28T10:05:02.732Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:05:02.732Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:05:02.732Z",
+      "total": 2
+    },
+    "post-import-9be8b095": {
+      "queries": {
+        "integrated::연기 많이 나는": {
+          "okAgeHours": [
+            9298
+          ],
+          "lastCapturedAt": "2026-09-28T10:05:08.154Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:05:08.154Z"
+        },
+        "blog_tab::연기 많이 나는": {
+          "okAgeHours": [
+            9298
+          ],
+          "lastCapturedAt": "2026-09-28T10:05:14.215Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T10:05:14.215Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T10:05:14.215Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T09:44:04.874Z",
-    "lastOkAt": "2026-09-28T09:44:04.874Z",
+    "lastRunAt": "2026-09-28T10:04:05.014Z",
+    "lastOkAt": "2026-09-28T10:04:05.014Z",
     "consecutiveFailedRuns": 0
   }
 }

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8a428bee",
+  "source": "serp",
+  "capturedAt": "2026-09-28T10:04:12.576Z",
+  "postAgeHours": 7330,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928100412576_serp_blogtab-2025년-기준-입호흡_984935",
+  "target": {
+    "surface": "blog_tab",
+    "query": "2025년 기준 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "2025년 기준 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224090385537",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

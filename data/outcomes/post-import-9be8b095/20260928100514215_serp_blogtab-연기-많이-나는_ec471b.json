@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9be8b095",
+  "source": "serp",
+  "capturedAt": "2026-09-28T10:05:14.215Z",
+  "postAgeHours": 9298,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928100514215_serp_blogtab-연기-많이-나는_ec471b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "연기 많이 나는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연기 많이 나는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
