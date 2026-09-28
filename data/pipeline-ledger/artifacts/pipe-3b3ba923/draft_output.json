@@ -1,0 +1,43 @@
+{
+  "pipelineId": "pipe-3b3ba923",
+  "type": "draft_output",
+  "savedAt": "2026-09-28T06:38:19.986Z",
+  "data": {
+    "postId": "post-2dfdfb28",
+    "title": "만수르 전자담배 제품별 관리법과 인천 만수역 방문 고객 맞춤 팁",
+    "wordCount": 2568,
+    "generatedAt": "2026-09-28T06:38:18.221Z",
+    "contentPath": "data/posting-list/posts/post-2dfdfb28/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": false,
+      "blockingReasons": [
+        "필수 포함 요소 '관리' 아래 추천 이유가 부족합니다.",
+        "필수 포함 요소 '관리' 아래 추천 대상이 부족합니다.",
+        "필수 포함 요소 '만수역' 아래 추천 이유가 부족합니다.",
+        "필수 포함 요소 '만수역' 아래 추천 대상이 부족합니다.",
+        "필수 포함 요소 '전자담배' 아래 추천 이유가 부족합니다.",
+        "필수 포함 요소 '전자담배' 아래 추천 대상이 부족합니다.",
+        "필수 포함 요소 누락: 고객팁"
+      ],
+      "warnings": [
+        "필수 섹션 반영 부족: 고객팁 추천 이유와 추천 대상"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [],
+      "deferFindings": [],
+      "contractCoverageFindings": [],
+      "overlapFindings": [],
+      "specFindings": []
+    },
+    "finalDraftRevisionInstructions": [
+      "발행 차단 사유 해결: 필수 포함 요소 '관리' 아래 추천 이유가 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '관리' 아래 추천 대상이 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '만수역' 아래 추천 이유가 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '만수역' 아래 추천 대상이 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '전자담배' 아래 추천 이유가 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '전자담배' 아래 추천 대상이 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 누락: 고객팁"
+    ]
+  }
+}
