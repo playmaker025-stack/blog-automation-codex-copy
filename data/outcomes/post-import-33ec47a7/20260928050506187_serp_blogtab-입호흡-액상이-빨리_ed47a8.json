@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-33ec47a7",
+  "source": "serp",
+  "capturedAt": "2026-09-28T05:05:06.187Z",
+  "postAgeHours": 4733,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928050506187_serp_blogtab-입호흡-액상이-빨리_ed47a8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡 액상이 빨리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 액상이 빨리",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300979147",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 24
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224129801799",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
