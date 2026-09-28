@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9a23501e",
+  "source": "serp",
+  "capturedAt": "2026-09-28T04:24:55.236Z",
+  "postAgeHours": 4948,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928042455236_serp_blogtab-전담-탄맛-나는_e66dfd",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전담 탄맛 나는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 탄맛 나는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224364116644",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224316610250",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224113483238",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

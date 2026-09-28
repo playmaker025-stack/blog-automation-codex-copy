@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-26994111",
+  "source": "serp",
+  "capturedAt": "2026-09-28T04:24:36.297Z",
+  "postAgeHours": 4972,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928042436297_serp_blogtab-발라리안-코일-빨리_1d8ea5",
+  "target": {
+    "surface": "blog_tab",
+    "query": "발라리안 코일 빨리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "발라리안 코일 빨리",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224205241319",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224113483238",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
