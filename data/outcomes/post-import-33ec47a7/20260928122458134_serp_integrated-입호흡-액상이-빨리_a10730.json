@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-33ec47a7",
+  "source": "serp",
+  "capturedAt": "2026-09-28T12:24:58.134Z",
+  "postAgeHours": 4740,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928122458134_serp_integrated-입호흡-액상이-빨리_a10730",
+  "target": {
+    "surface": "integrated",
+    "query": "입호흡 액상이 빨리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 액상이 빨리",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224402871981",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
