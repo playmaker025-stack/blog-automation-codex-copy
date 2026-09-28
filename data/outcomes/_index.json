@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-28T21:25:18.460Z",
+  "updatedAt": "2026-09-28T21:45:18.221Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -5843,11 +5843,167 @@
       },
       "lastCapturedAt": "2026-09-28T21:25:15.812Z",
       "total": 2
+    },
+    "post-8d184c88": {
+      "queries": {
+        "integrated::주안 전자담배 액상": {
+          "okAgeHours": [
+            1113
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:05.605Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:05.605Z"
+        },
+        "blog_tab::주안 전자담배 액상": {
+          "okAgeHours": [
+            1113
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:11.970Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:11.970Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T21:44:11.970Z",
+      "total": 2
+    },
+    "post-manual-msr5i6u9": {
+      "queries": {
+        "integrated::부천역전자담배 알케마스터 멘솔없는": {
+          "okAgeHours": [
+            1119
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:18.260Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:18.260Z"
+        },
+        "blog_tab::부천역전자담배 알케마스터 멘솔없는": {
+          "okAgeHours": [
+            1119
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:24.614Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:24.614Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T21:44:24.614Z",
+      "total": 2
+    },
+    "post-manual-msrj1dd5": {
+      "queries": {
+        "integrated::전자담배 액상 가격이": {
+          "okAgeHours": [
+            1113
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:30.689Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:30.689Z"
+        },
+        "blog_tab::전자담배 액상 가격이": {
+          "okAgeHours": [
+            1113
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:36.885Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:36.885Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T21:44:36.885Z",
+      "total": 2
+    },
+    "post-154bea02": {
+      "queries": {
+        "integrated::전자담배로 바꿀때 가장": {
+          "okAgeHours": [
+            1089
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:43.223Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:43.223Z"
+        },
+        "blog_tab::전자담배로 바꿀때 가장": {
+          "okAgeHours": [
+            1089
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:49.779Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:49.779Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T21:44:49.779Z",
+      "total": 2
+    },
+    "post-manual-mssxeywf": {
+      "queries": {
+        "integrated::전자담배 새 액상을": {
+          "okAgeHours": [
+            1089
+          ],
+          "lastCapturedAt": "2026-09-28T21:44:56.068Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:44:56.068Z"
+        },
+        "blog_tab::전자담배 새 액상을": {
+          "okAgeHours": [
+            1089
+          ],
+          "lastCapturedAt": "2026-09-28T21:45:02.750Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:45:02.750Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T21:45:02.750Z",
+      "total": 2
+    },
+    "post-manual-msvdpogj": {
+      "queries": {
+        "integrated::전자담배 여름철 누수가": {
+          "okAgeHours": [
+            1048
+          ],
+          "lastCapturedAt": "2026-09-28T21:45:09.036Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:45:09.036Z"
+        },
+        "blog_tab::전자담배 여름철 누수가": {
+          "okAgeHours": [
+            1048
+          ],
+          "lastCapturedAt": "2026-09-28T21:45:15.590Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-28T21:45:15.590Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-28T21:45:15.590Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-28T21:24:05.009Z",
-    "lastOkAt": "2026-09-28T21:24:05.009Z",
+    "lastRunAt": "2026-09-28T21:44:05.137Z",
+    "lastOkAt": "2026-09-28T21:44:05.137Z",
     "consecutiveFailedRuns": 0
   }
 }

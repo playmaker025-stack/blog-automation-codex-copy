@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-154bea02",
+  "source": "serp",
+  "capturedAt": "2026-09-28T21:44:49.779Z",
+  "postAgeHours": 1089,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928214449779_serp_blogtab-전자담배로-바꿀때-가장_71e577",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배로 바꿀때 가장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배로 바꿀때 가장",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224342582095",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224400865016",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224378919388",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224424995162",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224405167840",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
