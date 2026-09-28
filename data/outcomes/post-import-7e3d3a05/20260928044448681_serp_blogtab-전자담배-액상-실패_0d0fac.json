@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7e3d3a05",
+  "source": "serp",
+  "capturedAt": "2026-09-28T04:44:48.681Z",
+  "postAgeHours": 4877,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260928044448681_serp_blogtab-전자담배-액상-실패_0d0fac",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 실패"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 실패",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224282236121",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224270948447",
+        "rank": 14
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 29
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224378919388",
+        "rank": 31
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
