@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtfqo1w6",
+  "source": "serp",
+  "capturedAt": "2026-09-29T03:44:05.383Z",
+  "postAgeHours": 712,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929034405383_serp_integrated-dna60_810a31",
+  "target": {
+    "surface": "integrated",
+    "query": "dna60"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "dna60",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "222986005630",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223233579762",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223103740040",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223168628180",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223363061467",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

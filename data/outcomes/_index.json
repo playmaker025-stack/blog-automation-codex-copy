@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T03:25:20.016Z",
+  "updatedAt": "2026-09-29T03:45:20.415Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -8551,15 +8551,147 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-09-29T03:25:17.075Z"
+        },
+        "integrated::dna60": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:05.383Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:05.383Z"
+        },
+        "blog_tab::dna60": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:12.730Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:12.730Z"
+        },
+        "integrated::전자담배 모드기기": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:18.997Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:18.997Z"
+        },
+        "blog_tab::전자담배 모드기기": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:25.744Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:25.744Z"
+        },
+        "integrated::무화량 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:32.064Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:32.064Z"
+        },
+        "blog_tab::무화량 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:38.714Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:38.714Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T03:25:17.075Z",
-      "total": 6
+      "lastCapturedAt": "2026-09-29T03:44:38.714Z",
+      "total": 12
+    },
+    "post-manual-mtfrnwz9": {
+      "queries": {
+        "integrated::입호흡 폐호흡 차이": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:44.955Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:44.955Z"
+        },
+        "blog_tab::입호흡 폐호흡 차이": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:51.525Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:51.525Z"
+        },
+        "integrated::구월동 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:44:57.854Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:44:57.854Z"
+        },
+        "blog_tab::구월동 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:45:04.875Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:45:04.875Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T03:45:04.875Z",
+      "total": 4
+    },
+    "post-manual-mtgwd07l": {
+      "queries": {
+        "integrated::잽쥬스 아이수": {
+          "okAgeHours": [
+            693
+          ],
+          "lastCapturedAt": "2026-09-29T03:45:11.057Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:45:11.057Z"
+        },
+        "blog_tab::잽쥬스 아이수": {
+          "okAgeHours": [
+            693
+          ],
+          "lastCapturedAt": "2026-09-29T03:45:17.544Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:45:17.544Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T03:45:17.544Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T03:24:05.265Z",
-    "lastOkAt": "2026-09-29T03:24:05.265Z",
+    "lastRunAt": "2026-09-29T03:44:04.941Z",
+    "lastOkAt": "2026-09-29T03:44:04.941Z",
     "consecutiveFailedRuns": 0
   }
 }
