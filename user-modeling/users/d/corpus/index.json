@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mumlit0u",
+      "title": "싱글 코일과 듀얼 코일은 뭐가 다를까? – 맛과 사용감의 차이",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2653,
+      "publishedAt": "2026-09-29T11:31:25.498Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mumlit0u.md"
+    },
+    {
       "sampleId": "published-post-manual-mul5mi57",
       "title": "스퀑크 모드란 무엇일까?-바텀피더와 일반 모드의 차이",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6428,
       "publishedAt": "2026-07-30T11:25:26.066Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-ms7fg4gm.md"
-    },
-    {
-      "sampleId": "published-post-manual-ms5zs3fn",
-      "title": "전자담배를 연속으로 너무 많이 피우면 생기는 일",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6311,
-      "publishedAt": "2026-07-29T11:19:04.943Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-ms5zs3fn.md"
     }
   ],
-  "lastUpdated": "2026-09-28T11:18:48.190Z"
+  "lastUpdated": "2026-09-29T11:31:33.097Z"
 }
