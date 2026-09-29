@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T02:45:15.606Z",
+  "updatedAt": "2026-09-29T03:05:21.860Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -8285,11 +8285,149 @@
       },
       "lastCapturedAt": "2026-09-29T02:45:13.212Z",
       "total": 2
+    },
+    "post-9177d698": {
+      "queries": {
+        "integrated::장수동 전자담배 액상": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:05.722Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:05.722Z"
+        },
+        "blog_tab::장수동 전자담배 액상": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:13.058Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:13.058Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T03:04:13.058Z",
+      "total": 2
+    },
+    "post-manual-mtbggla6": {
+      "queries": {
+        "integrated::인천 고농도 전자담배": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:19.305Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:19.305Z"
+        },
+        "blog_tab::인천 고농도 전자담배": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:26.294Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:26.294Z"
+        },
+        "integrated::네스티원": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:32.543Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:32.543Z"
+        },
+        "blog_tab::네스티원": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:39.551Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:39.551Z"
+        },
+        "integrated::인천네스티원": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:45.818Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:45.818Z"
+        },
+        "blog_tab::인천네스티원": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:52.602Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:52.602Z"
+        },
+        "integrated::네스티 고농도": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:04:58.846Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:04:58.846Z"
+        },
+        "blog_tab::네스티 고농도": {
+          "okAgeHours": [
+            783
+          ],
+          "lastCapturedAt": "2026-09-29T03:05:05.602Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:05:05.602Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T03:05:05.602Z",
+      "total": 8
+    },
+    "post-a28929d7": {
+      "queries": {
+        "integrated::폐호흡 전자담배": {
+          "okAgeHours": [
+            737
+          ],
+          "lastCapturedAt": "2026-09-29T03:05:11.944Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:05:11.944Z"
+        },
+        "blog_tab::폐호흡 전자담배": {
+          "okAgeHours": [
+            737
+          ],
+          "lastCapturedAt": "2026-09-29T03:05:19.235Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:05:19.235Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T03:05:19.235Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T02:44:05.665Z",
-    "lastOkAt": "2026-09-29T02:44:05.665Z",
+    "lastRunAt": "2026-09-29T03:04:05.295Z",
+    "lastOkAt": "2026-09-29T03:04:05.295Z",
     "consecutiveFailedRuns": 0
   }
 }
