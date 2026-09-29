@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T08:45:19.545Z",
+  "updatedAt": "2026-09-29T09:05:18.909Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10711,15 +10711,153 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-09-29T08:45:16.851Z"
+        },
+        "integrated::하복V2": {
+          "okAgeHours": [
+            117
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:05.630Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:05.630Z"
+        },
+        "blog_tab::하복V2": {
+          "okAgeHours": [
+            117
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:12.621Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:12.621Z"
+        },
+        "integrated::부평역전자담배": {
+          "okAgeHours": [
+            117
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:18.824Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:18.824Z"
+        },
+        "blog_tab::부평역전자담배": {
+          "okAgeHours": [
+            117
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:25.779Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:25.779Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T08:45:16.851Z",
+      "lastCapturedAt": "2026-09-29T09:04:25.779Z",
+      "total": 6
+    },
+    "post-b0b8e262": {
+      "queries": {
+        "integrated::전자담배 기기 액상": {
+          "okAgeHours": [
+            77
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:32.049Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:32.049Z"
+        },
+        "blog_tab::전자담배 기기 액상": {
+          "okAgeHours": [
+            77
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:38.829Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:38.829Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T09:04:38.829Z",
       "total": 2
+    },
+    "post-85fe29a6": {
+      "queries": {
+        "integrated::부평구 전자담배 액상": {
+          "okAgeHours": [
+            49
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:45.064Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:45.064Z"
+        },
+        "blog_tab::부평구 전자담배 액상": {
+          "okAgeHours": [
+            49
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:51.214Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:51.214Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T09:04:51.214Z",
+      "total": 2
+    },
+    "post-manual-mujbcz36": {
+      "queries": {
+        "integrated::RDA": {
+          "okAgeHours": [
+            53
+          ],
+          "lastCapturedAt": "2026-09-29T09:04:56.721Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:04:56.721Z"
+        },
+        "blog_tab::RDA": {
+          "okAgeHours": [
+            53
+          ],
+          "lastCapturedAt": "2026-09-29T09:05:03.544Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:05:03.544Z"
+        },
+        "integrated::RTA": {
+          "okAgeHours": [
+            53
+          ],
+          "lastCapturedAt": "2026-09-29T09:05:09.802Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:05:09.802Z"
+        },
+        "blog_tab::RTA": {
+          "okAgeHours": [
+            53
+          ],
+          "lastCapturedAt": "2026-09-29T09:05:16.858Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T09:05:16.858Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T09:05:16.858Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T08:44:05.074Z",
-    "lastOkAt": "2026-09-29T08:44:05.074Z",
+    "lastRunAt": "2026-09-29T09:04:05.094Z",
+    "lastOkAt": "2026-09-29T09:04:05.094Z",
     "consecutiveFailedRuns": 0
   }
 }
