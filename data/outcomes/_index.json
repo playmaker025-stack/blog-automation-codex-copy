@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T03:05:21.860Z",
+  "updatedAt": "2026-09-29T03:25:20.016Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -8423,11 +8423,143 @@
       },
       "lastCapturedAt": "2026-09-29T03:05:19.235Z",
       "total": 2
+    },
+    "post-d34540b8": {
+      "queries": {
+        "integrated::인천 전자담배": {
+          "okAgeHours": [
+            736
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:05.653Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:05.653Z"
+        },
+        "blog_tab::인천 전자담배": {
+          "okAgeHours": [
+            736
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:13.170Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:13.170Z"
+        },
+        "integrated::부평구 전자담배": {
+          "okAgeHours": [
+            736
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:19.161Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:19.161Z"
+        },
+        "blog_tab::부평구 전자담배": {
+          "okAgeHours": [
+            736
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:26.138Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:26.138Z"
+        },
+        "integrated::부평 전자담배": {
+          "okAgeHours": [
+            736
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:32.479Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:32.479Z"
+        },
+        "blog_tab::부평 전자담배": {
+          "okAgeHours": [
+            736
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:38.514Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:38.514Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T03:24:38.514Z",
+      "total": 6
+    },
+    "post-manual-mtfqo1w6": {
+      "queries": {
+        "integrated::하이엔드 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:44.765Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:44.765Z"
+        },
+        "blog_tab::하이엔드 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:50.798Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:50.798Z"
+        },
+        "integrated::무화량 많은 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:24:57.145Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:24:57.145Z"
+        },
+        "blog_tab::무화량 많은 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:25:03.887Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:25:03.887Z"
+        },
+        "integrated::인천 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:25:10.297Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:25:10.297Z"
+        },
+        "blog_tab::인천 전자담배": {
+          "okAgeHours": [
+            712
+          ],
+          "lastCapturedAt": "2026-09-29T03:25:17.075Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T03:25:17.075Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T03:25:17.075Z",
+      "total": 6
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T03:04:05.295Z",
-    "lastOkAt": "2026-09-29T03:04:05.295Z",
+    "lastRunAt": "2026-09-29T03:24:05.265Z",
+    "lastOkAt": "2026-09-29T03:24:05.265Z",
     "consecutiveFailedRuns": 0
   }
 }
