@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgwdyfi",
+  "source": "serp",
+  "capturedAt": "2026-09-29T04:04:38.139Z",
+  "postAgeHours": 693,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929040438139_serp_blogtab-VCT_5cbfb5",
+  "target": {
+    "surface": "blog_tab",
+    "query": "VCT"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "VCT",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
