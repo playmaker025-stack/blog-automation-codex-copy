@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mumlit0u",
+  "source": "serp",
+  "capturedAt": "2026-09-29T11:44:18.201Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929114418201_serp_integrated-싱글코일_474a13",
+  "target": {
+    "surface": "integrated",
+    "query": "싱글코일"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "싱글코일",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 12,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mumlit0u",
+  "source": "serp",
+  "capturedAt": "2026-09-29T11:44:24.651Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929114424651_serp_blogtab-싱글코일_35336a",
+  "target": {
+    "surface": "blog_tab",
+    "query": "싱글코일"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "싱글코일",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224426306843",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224121476002",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

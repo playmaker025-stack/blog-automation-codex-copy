@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T11:24:13.908Z",
+  "updatedAt": "2026-09-29T11:44:53.479Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10969,11 +10969,97 @@
       },
       "lastCapturedAt": "2026-09-29T09:25:04.986Z",
       "total": 2
+    },
+    "post-manual-mumlit0u": {
+      "queries": {
+        "integrated::전자담배": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-29T11:44:05.763Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T11:44:05.763Z"
+        },
+        "blog_tab::전자담배": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-29T11:44:12.658Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T11:44:12.658Z"
+        },
+        "integrated::싱글코일": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-29T11:44:18.201Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T11:44:18.201Z"
+        },
+        "blog_tab::싱글코일": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-29T11:44:24.651Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T11:44:24.651Z"
+        },
+        "integrated::듀얼코일": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-29T11:44:30.934Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T11:44:30.934Z"
+        },
+        "blog_tab::듀얼코일": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-29T11:44:37.975Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T11:44:37.975Z"
+        },
+        "integrated::리빌드": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-29T11:44:44.176Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T11:44:44.176Z"
+        },
+        "blog_tab::리빌드": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-09-29T11:44:51.209Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T11:44:51.209Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T11:44:51.209Z",
+      "total": 8
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T11:24:05.492Z",
-    "lastOkAt": "2026-09-29T11:24:05.492Z",
+    "lastRunAt": "2026-09-29T11:44:05.122Z",
+    "lastOkAt": "2026-09-29T11:44:05.122Z",
     "consecutiveFailedRuns": 0
   }
 }
