@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T00:05:19.796Z",
+  "updatedAt": "2026-09-29T00:25:15.572Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -7037,11 +7037,167 @@
       },
       "lastCapturedAt": "2026-09-29T00:05:17.129Z",
       "total": 2
+    },
+    "post-manual-mt87qx6m": {
+      "queries": {
+        "integrated::산곡동전자담배 SUPA X3": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:05.283Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:05.283Z"
+        },
+        "blog_tab::산곡동전자담배 SUPA X3": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:11.581Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:11.581Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T00:24:11.581Z",
+      "total": 2
+    },
+    "post-manual-mt87rzfg": {
+      "queries": {
+        "integrated::상동전자담배 닷투엑스 입호흡": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:17.458Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:17.458Z"
+        },
+        "blog_tab::상동전자담배 닷투엑스 입호흡": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:24.050Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:24.050Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T00:24:24.050Z",
+      "total": 2
+    },
+    "post-manual-mt87sf6n": {
+      "queries": {
+        "integrated::부평전자담배 입호흡 전담": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:30.197Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:30.197Z"
+        },
+        "blog_tab::부평전자담배 입호흡 전담": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:36.820Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:36.820Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T00:24:36.820Z",
+      "total": 2
+    },
+    "post-manual-mt87suy8": {
+      "queries": {
+        "integrated::청천동전자담배 엘프바 조인원": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:43.133Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:43.133Z"
+        },
+        "blog_tab::청천동전자담배 엘프바 조인원": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:49.048Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:49.048Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T00:24:49.048Z",
+      "total": 2
+    },
+    "post-manual-mt87tbja": {
+      "queries": {
+        "integrated::갈산동전자담배 릴렉스 크리에이터": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:24:54.418Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:24:54.418Z"
+        },
+        "blog_tab::갈산동전자담배 릴렉스 크리에이터": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:25:00.841Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:25:00.841Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T00:25:00.841Z",
+      "total": 2
+    },
+    "post-manual-mt87trwt": {
+      "queries": {
+        "integrated::약대동전자담배 리로드 아이킥": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:25:06.791Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:25:06.791Z"
+        },
+        "blog_tab::약대동전자담배 리로드 아이킥": {
+          "okAgeHours": [
+            835
+          ],
+          "lastCapturedAt": "2026-09-29T00:25:13.336Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T00:25:13.336Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T00:25:13.336Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T00:04:05.106Z",
-    "lastOkAt": "2026-09-29T00:04:05.106Z",
+    "lastRunAt": "2026-09-29T00:24:04.923Z",
+    "lastOkAt": "2026-09-29T00:24:04.923Z",
     "consecutiveFailedRuns": 0
   }
 }
