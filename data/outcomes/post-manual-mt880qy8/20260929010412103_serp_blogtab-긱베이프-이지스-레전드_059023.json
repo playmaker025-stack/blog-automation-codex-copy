@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt880qy8",
+  "source": "serp",
+  "capturedAt": "2026-09-29T01:04:12.103Z",
+  "postAgeHours": 836,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929010412103_serp_blogtab-긱베이프-이지스-레전드_059023",
+  "target": {
+    "surface": "blog_tab",
+    "query": "긱베이프 이지스 레전드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "긱베이프 이지스 레전드",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt882mm0",
+  "source": "serp",
+  "capturedAt": "2026-09-29T01:04:44.949Z",
+  "postAgeHours": 836,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929010444949_serp_integrated-부평전자담배-저스트포그-_d5d5ca",
+  "target": {
+    "surface": "integrated",
+    "query": "부평전자담배 저스트포그 글렌트"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 저스트포그 글렌트",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 15,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "223533062538",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224072300589",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
