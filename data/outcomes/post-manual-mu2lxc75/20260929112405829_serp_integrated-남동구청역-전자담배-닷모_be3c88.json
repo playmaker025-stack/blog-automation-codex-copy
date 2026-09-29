@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu2lxc75",
+  "source": "serp",
+  "capturedAt": "2026-09-29T11:24:05.829Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929112405829_serp_integrated-남동구청역-전자담배-닷모_be3c88",
+  "target": {
+    "surface": "integrated",
+    "query": "남동구청역 전자담배 닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구청역 전자담배 닷모드",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224208083611",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224209102690",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224317693159",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224087543609",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224120478269",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224096074626",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
