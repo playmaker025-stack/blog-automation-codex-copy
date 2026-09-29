@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87o9e9",
+  "source": "serp",
+  "capturedAt": "2026-09-29T00:04:38.741Z",
+  "postAgeHours": 835,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929000438741_serp_blogtab-부평역전자담배-추천-누수없는_10d775",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평역전자담배 추천 누수없는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평역전자담배 추천 누수없는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224424995162",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224278096804",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300979147",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224112312129",
+        "rank": 20
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223977610797",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
