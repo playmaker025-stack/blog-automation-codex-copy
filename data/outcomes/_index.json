@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T06:45:18.204Z",
+  "updatedAt": "2026-09-29T07:05:20.831Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9907,15 +9907,147 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-09-29T06:45:16.443Z"
+        },
+        "integrated::rda": {
+          "okAgeHours": [
+            330
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:05.559Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:05.559Z"
+        },
+        "blog_tab::rda": {
+          "okAgeHours": [
+            330
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:12.715Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:12.715Z"
+        },
+        "integrated::전자담배": {
+          "okAgeHours": [
+            330
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:19.055Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:19.055Z"
+        },
+        "blog_tab::전자담배": {
+          "okAgeHours": [
+            330
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:26.000Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:26.000Z"
+        },
+        "integrated::리빌드": {
+          "okAgeHours": [
+            330
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:32.208Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:32.208Z"
+        },
+        "blog_tab::리빌드": {
+          "okAgeHours": [
+            330
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:39.385Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:39.385Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T06:45:16.443Z",
+      "lastCapturedAt": "2026-09-29T07:04:39.385Z",
+      "total": 8
+    },
+    "post-5434aac3": {
+      "queries": {
+        "integrated::만수르 전자담배 제품별": {
+          "okAgeHours": [
+            312
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:45.609Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:45.609Z"
+        },
+        "blog_tab::만수르 전자담배 제품별": {
+          "okAgeHours": [
+            312
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:52.126Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:52.126Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T07:04:52.126Z",
       "total": 2
+    },
+    "post-manual-mu446plp": {
+      "queries": {
+        "integrated::하이엔드전자담배": {
+          "okAgeHours": [
+            306
+          ],
+          "lastCapturedAt": "2026-09-29T07:04:58.366Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:04:58.366Z"
+        },
+        "blog_tab::하이엔드전자담배": {
+          "okAgeHours": [
+            306
+          ],
+          "lastCapturedAt": "2026-09-29T07:05:04.901Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:05:04.901Z"
+        },
+        "integrated::전자담배리빌드": {
+          "okAgeHours": [
+            306
+          ],
+          "lastCapturedAt": "2026-09-29T07:05:11.178Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:05:11.178Z"
+        },
+        "blog_tab::전자담배리빌드": {
+          "okAgeHours": [
+            306
+          ],
+          "lastCapturedAt": "2026-09-29T07:05:18.105Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:05:18.105Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T07:05:18.105Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T06:44:05.110Z",
-    "lastOkAt": "2026-09-29T06:44:05.110Z",
+    "lastRunAt": "2026-09-29T07:04:05.113Z",
+    "lastOkAt": "2026-09-29T07:04:05.113Z",
     "consecutiveFailedRuns": 0
   }
 }
