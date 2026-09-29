@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt884bc4",
+  "source": "serp",
+  "capturedAt": "2026-09-29T01:24:05.416Z",
+  "postAgeHours": 836,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929012405416_serp_integrated-인천-만수동에서-요즘_e4b2dc",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 만수동에서 요즘"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 만수동에서 요즘",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 8,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
