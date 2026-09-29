@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-38ff3252",
+  "source": "serp",
+  "capturedAt": "2026-09-29T07:44:44.609Z",
+  "postAgeHours": 237,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929074444609_serp_integrated-전담-액상-고르는-방법_5642c6",
+  "target": {
+    "surface": "integrated",
+    "query": "전담 액상 고르는 방법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 액상 고르는 방법",
+    "surface": "integrated",
+    "querySource": "topic",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 22,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

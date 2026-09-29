@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T07:25:20.418Z",
+  "updatedAt": "2026-09-29T07:45:18.767Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10171,15 +10171,147 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-09-29T07:25:17.890Z"
+        },
+        "integrated::리빌드무화기": {
+          "okAgeHours": [
+            261
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:05.698Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:05.698Z"
+        },
+        "blog_tab::리빌드무화기": {
+          "okAgeHours": [
+            261
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:12.564Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:12.564Z"
+        },
+        "integrated::rta": {
+          "okAgeHours": [
+            261
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:18.793Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:18.793Z"
+        },
+        "blog_tab::rta": {
+          "okAgeHours": [
+            261
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:25.833Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:25.833Z"
+        },
+        "integrated::폐호흡전자담배": {
+          "okAgeHours": [
+            261
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:32.089Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:32.089Z"
+        },
+        "blog_tab::폐호흡전자담배": {
+          "okAgeHours": [
+            261
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:39.094Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:39.094Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T07:25:17.890Z",
-      "total": 6
+      "lastCapturedAt": "2026-09-29T07:44:39.094Z",
+      "total": 12
+    },
+    "post-38ff3252": {
+      "queries": {
+        "integrated::전담 액상 고르는 방법": {
+          "okAgeHours": [
+            237
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:44.609Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:44.609Z"
+        },
+        "blog_tab::전담 액상 고르는 방법": {
+          "okAgeHours": [
+            237
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:51.016Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:51.016Z"
+        },
+        "integrated::전담 액상 고르는": {
+          "okAgeHours": [
+            237
+          ],
+          "lastCapturedAt": "2026-09-29T07:44:56.556Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:44:56.556Z"
+        },
+        "blog_tab::전담 액상 고르는": {
+          "okAgeHours": [
+            237
+          ],
+          "lastCapturedAt": "2026-09-29T07:45:03.281Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:45:03.281Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T07:45:03.281Z",
+      "total": 4
+    },
+    "post-manual-mu84nxk6": {
+      "queries": {
+        "integrated::간석동 전자담배 오토베이핑": {
+          "okAgeHours": [
+            239
+          ],
+          "lastCapturedAt": "2026-09-29T07:45:09.555Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:45:09.555Z"
+        },
+        "blog_tab::간석동 전자담배 오토베이핑": {
+          "okAgeHours": [
+            239
+          ],
+          "lastCapturedAt": "2026-09-29T07:45:15.962Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T07:45:15.962Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T07:45:15.962Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T07:24:05.045Z",
-    "lastOkAt": "2026-09-29T07:24:05.045Z",
+    "lastRunAt": "2026-09-29T07:44:05.016Z",
+    "lastOkAt": "2026-09-29T07:44:05.016Z",
     "consecutiveFailedRuns": 0
   }
 }

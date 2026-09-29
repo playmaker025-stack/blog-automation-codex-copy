@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-38ff3252",
+  "source": "serp",
+  "capturedAt": "2026-09-29T07:44:51.016Z",
+  "postAgeHours": 237,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929074451016_serp_blogtab-전담-액상-고르는-방법_ca23fd",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전담 액상 고르는 방법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 액상 고르는 방법",
+    "surface": "blog_tab",
+    "querySource": "topic",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224388730074",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
