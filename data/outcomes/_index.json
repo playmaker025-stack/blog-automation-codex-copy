@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T05:05:17.879Z",
+  "updatedAt": "2026-09-29T05:25:17.129Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9245,11 +9245,143 @@
       },
       "lastCapturedAt": "2026-09-29T05:05:15.164Z",
       "total": 4
+    },
+    "post-manual-mtsmngli": {
+      "queries": {
+        "integrated::전자담배단맛": {
+          "okAgeHours": [
+            497
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:05.411Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:05.411Z"
+        },
+        "blog_tab::전자담배단맛": {
+          "okAgeHours": [
+            497
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:11.736Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:11.736Z"
+        },
+        "integrated::액상단맛": {
+          "okAgeHours": [
+            497
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:18.172Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:18.172Z"
+        },
+        "blog_tab::액상단맛": {
+          "okAgeHours": [
+            497
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:24.772Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:24.772Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T05:24:24.772Z",
+      "total": 4
+    },
+    "post-manual-mttpw671": {
+      "queries": {
+        "integrated::닷박스 220W V2": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:31.057Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:31.057Z"
+        },
+        "blog_tab::닷박스 220W V2": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:37.629Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:37.629Z"
+        },
+        "integrated::닷모드": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:43.862Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:43.862Z"
+        },
+        "blog_tab::닷모드": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:50.629Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:50.629Z"
+        },
+        "integrated::스펙": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-09-29T05:24:56.650Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:24:56.650Z"
+        },
+        "blog_tab::스펙": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-09-29T05:25:02.827Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:25:02.827Z"
+        },
+        "integrated::사용법": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-09-29T05:25:08.345Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:25:08.345Z"
+        },
+        "blog_tab::사용법": {
+          "okAgeHours": [
+            479
+          ],
+          "lastCapturedAt": "2026-09-29T05:25:14.294Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T05:25:14.294Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T05:25:14.294Z",
+      "total": 8
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T05:04:04.983Z",
-    "lastOkAt": "2026-09-29T05:04:04.983Z",
+    "lastRunAt": "2026-09-29T05:24:05.063Z",
+    "lastOkAt": "2026-09-29T05:24:05.063Z",
     "consecutiveFailedRuns": 0
   }
 }
