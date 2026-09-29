@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mufhed0y",
+  "source": "serp",
+  "capturedAt": "2026-09-29T08:44:57.314Z",
+  "postAgeHours": 117,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929084457314_serp_integrated-입호흡액상_4753b5",
+  "target": {
+    "surface": "integrated",
+    "query": "입호흡액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡액상",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 23,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
