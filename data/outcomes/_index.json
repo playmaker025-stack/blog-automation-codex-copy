@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-29T02:25:16.495Z",
+  "updatedAt": "2026-09-29T02:45:15.606Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -8129,11 +8129,167 @@
       },
       "lastCapturedAt": "2026-09-29T02:25:13.705Z",
       "total": 2
+    },
+    "post-manual-mt899eyt": {
+      "queries": {
+        "integrated::휴대성 최강 전자담배": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:06.022Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:06.022Z"
+        },
+        "blog_tab::휴대성 최강 전자담배": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:12.426Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:12.426Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T02:44:12.426Z",
+      "total": 2
+    },
+    "post-manual-mt899nt0": {
+      "queries": {
+        "integrated::무화량 많은 전자담배": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:18.167Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:18.167Z"
+        },
+        "blog_tab::무화량 많은 전자담배": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:24.108Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:24.108Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T02:44:24.108Z",
+      "total": 2
+    },
+    "post-manual-mt89a3tc": {
+      "queries": {
+        "integrated::부평전자담배 버블몬 그래피티2": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:30.374Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:30.374Z"
+        },
+        "blog_tab::부평전자담배 버블몬 그래피티2": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:36.954Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:36.954Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T02:44:36.954Z",
+      "total": 2
+    },
+    "post-manual-mt89amh7": {
+      "queries": {
+        "integrated::만수동전자담배 말론S 전담": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:42.393Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:42.393Z"
+        },
+        "blog_tab::만수동전자담배 말론S 전담": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:48.143Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:48.143Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T02:44:48.143Z",
+      "total": 2
+    },
+    "post-manual-mt89b3up": {
+      "queries": {
+        "integrated::무니코틴 액상 유저에게도": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:44:54.168Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:44:54.168Z"
+        },
+        "blog_tab::무니코틴 액상 유저에게도": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:45:00.773Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:45:00.773Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T02:45:00.773Z",
+      "total": 2
+    },
+    "post-manual-mt89bp12": {
+      "queries": {
+        "integrated::부평전자담배 크로스미니6 후기": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:45:06.498Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:45:06.498Z"
+        },
+        "blog_tab::부평전자담배 크로스미니6 후기": {
+          "okAgeHours": [
+            837
+          ],
+          "lastCapturedAt": "2026-09-29T02:45:13.212Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-09-29T02:45:13.212Z"
+        }
+      },
+      "lastCapturedAt": "2026-09-29T02:45:13.212Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-09-29T02:24:05.157Z",
-    "lastOkAt": "2026-09-29T02:24:05.157Z",
+    "lastRunAt": "2026-09-29T02:44:05.665Z",
+    "lastOkAt": "2026-09-29T02:44:05.665Z",
     "consecutiveFailedRuns": 0
   }
 }
