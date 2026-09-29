@@ -12950,7 +12950,62 @@
       "publishedAt": "2026-09-28T11:18:38.480Z",
       "createdAt": "2026-09-28T11:18:38.480Z",
       "updatedAt": "2026-09-28T11:18:38.480Z"
+    },
+    {
+      "postId": "post-manual-mumlit0u",
+      "topicId": "",
+      "userId": "d",
+      "title": "싱글 코일과 듀얼 코일은 뭐가 다를까? – 맛과 사용감의 차이",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224426306843",
+      "wordCount": 0,
+      "targetKeywords": [
+        "전자담배",
+        "싱글코일",
+        "듀얼코일",
+        "리빌드"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224426306843",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224426306843"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "싱글코일",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "듀얼코일",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "리빌드",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "싱글 코일과 듀얼 코일은 뭐가 다를까? – 맛과 사용감의 차이",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-09-29T11:31:25.498Z",
+        "keywordsRevisedAt": "2026-09-29T11:31:25.498Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-09-29T11:31:25.498Z",
+      "createdAt": "2026-09-29T11:31:25.498Z",
+      "updatedAt": "2026-09-29T11:31:25.498Z"
     }
   ],
-  "lastUpdated": "2026-09-28T11:18:38.480Z"
+  "lastUpdated": "2026-09-29T11:31:25.498Z"
 }
