@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtpefc05",
+  "source": "serp",
+  "capturedAt": "2026-09-29T05:04:18.674Z",
+  "postAgeHours": 551,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929050418674_serp_integrated-전자담배오작동_11488f",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배오작동"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배오작동",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 17,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224402630851",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224344003193",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224417088500",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
