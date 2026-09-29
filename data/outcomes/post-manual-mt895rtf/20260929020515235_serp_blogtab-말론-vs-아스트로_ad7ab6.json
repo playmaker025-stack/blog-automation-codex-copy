@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt895rtf",
+  "source": "serp",
+  "capturedAt": "2026-09-29T02:05:15.235Z",
+  "postAgeHours": 836,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260929020515235_serp_blogtab-말론-vs-아스트로_ad7ab6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "말론 vs 아스트로"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "말론 vs 아스트로",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224210268432",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
