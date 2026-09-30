@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-49cb3bab",
+  "source": "serp",
+  "capturedAt": "2026-09-30T05:24:13.428Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20260930052413428_serp_blogtab-인천-부평역-인기_bc4f66",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 부평역 인기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 부평역 인기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
