@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-30T05:24:16.368Z",
+  "updatedAt": "2026-09-30T06:24:15.988Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9988,27 +9988,29 @@
       "queries": {
         "integrated::만수르 전자담배 제품별": {
           "okAgeHours": [
-            312
+            312,
+            336
           ],
-          "lastCapturedAt": "2026-09-29T07:04:45.609Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-30T06:24:06.211Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T07:04:45.609Z"
+          "lastAttemptAt": "2026-09-30T06:24:06.211Z"
         },
         "blog_tab::만수르 전자담배 제품별": {
           "okAgeHours": [
-            312
+            312,
+            336
           ],
-          "lastCapturedAt": "2026-09-29T07:04:52.126Z",
-          "total": 1,
+          "lastCapturedAt": "2026-09-30T06:24:13.161Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T07:04:52.126Z"
+          "lastAttemptAt": "2026-09-30T06:24:13.161Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T07:04:52.126Z",
-      "total": 2
+      "lastCapturedAt": "2026-09-30T06:24:13.161Z",
+      "total": 4
     },
     "post-manual-mu446plp": {
       "queries": {
@@ -11094,8 +11096,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-09-30T05:24:05.776Z",
-    "lastOkAt": "2026-09-30T05:24:05.776Z",
+    "lastRunAt": "2026-09-30T06:24:05.805Z",
+    "lastOkAt": "2026-09-30T06:24:05.805Z",
     "consecutiveFailedRuns": 0
   }
 }
