@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-5dbc61ec",
+  "type": "approval_request",
+  "savedAt": "2026-09-30T02:39:08.692Z",
+  "data": {
+    "pipelineId": "pipe-5dbc61ec",
+    "previousTitle": "",
+    "proposedTitle": "인천 부평역 인기 전자담배 기기 모델 비교와 구매 시 필수 체크포인트",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "부평역 지역 내 전자담배 기기 구매를 고려하는 사용자의 구체적 검색 의도에 맞춰 인기 모델별 스펙과 특징을 비교 분석하고, 구매 시 반드시 확인해야 할 체크포인트를 실제 매장 경험과 고객 문의를 반영해 상세히 안내합니다. 사용자 유형별 추천과 장단점 분석을 통해 선택에 도움을 주며, 구매 후 관리법까지 포함해 실용성을 높였습니다. 반복 사용되는 키워드와 문체를 반영해 친근하고 신뢰감 있는 톤으로 작성하여 네이버 검색에서 90점 이상 점수를 목표로 합니다. 허브 역할의 ‘부평역 전자담배 기기 비교’ 글과 리프 역할의 ‘부평역 전자담배 액상 추천’ 글을 내부 링크로 자연스럽게 연결해 체류시간과 재방문율을 높입니다.",
+    "requestedAt": "2026-09-30T02:39:02.747Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-09-30T02:39:02.747Z",
+      "modifications": null
+    }
+  }
+}
