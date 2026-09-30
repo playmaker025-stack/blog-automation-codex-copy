@@ -13011,16 +13011,33 @@
       "topicId": "topic-3e93aeca",
       "userId": "c",
       "title": "인천 부평역 인기 전자담배 기기 모델 비교와 구매 시 필수 체크포인트",
-      "status": "ready",
-      "naverPostUrl": null,
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224427045485",
       "evalScore": 59,
       "wordCount": 2766,
       "compositionSessionId": "pipe-5dbc61ec",
       "pendingApproval": null,
       "createdAt": "2026-09-30T02:39:06.637Z",
-      "publishedAt": null,
-      "updatedAt": "2026-09-30T02:42:14.136Z"
+      "publishedAt": "2026-09-30T05:04:56.144Z",
+      "updatedAt": "2026-09-30T05:04:56.635Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224427045485",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224427045485"
+        },
+        "targetKeywords": [
+          {
+            "query": "인천 부평역 인기",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "인천 부평역 인기 전자담배 기기 모델 비교와 구매 시 필수 체크포인트",
+        "contentHash": "71c404e8",
+        "trackedFrom": "2026-09-30T05:04:56.882Z"
+      }
     }
   ],
-  "lastUpdated": "2026-09-30T02:42:14.136Z"
+  "lastUpdated": "2026-09-30T05:04:56.635Z"
 }
