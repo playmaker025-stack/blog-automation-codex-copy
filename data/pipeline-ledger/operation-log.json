@@ -4531,7 +4531,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-3b3ba923",
       "at": "2026-09-28T06:36:56.433Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "전자담배 기기 구매 시 고려할 인천 부평역 인기 모델 비교",
+      "proposedTitle": "인천 부평역 인기 전자담배 기기 모델 비교와 구매 시 필수 체크포인트",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.1428571428571429,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-5dbc61ec",
+      "at": "2026-09-30T02:39:00.421Z"
     }
   ],
-  "lastUpdated": "2026-09-28T06:36:56.433Z"
+  "lastUpdated": "2026-09-30T02:39:00.421Z"
 }
