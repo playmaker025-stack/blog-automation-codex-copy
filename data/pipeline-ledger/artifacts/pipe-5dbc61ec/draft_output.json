@@ -1,44 +1,40 @@
 {
   "pipelineId": "pipe-5dbc61ec",
   "type": "draft_output",
-  "savedAt": "2026-09-30T02:40:23.654Z",
+  "savedAt": "2026-09-30T02:41:54.886Z",
   "data": {
     "postId": "post-49cb3bab",
     "title": "인천 부평역 인기 전자담배 기기 모델 비교와 구매 시 필수 체크포인트",
-    "wordCount": 2820,
-    "generatedAt": "2026-09-30T02:40:21.811Z",
+    "wordCount": 2766,
+    "generatedAt": "2026-09-30T02:41:52.616Z",
     "contentPath": "data/posting-list/posts/post-49cb3bab/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
       "ok": false,
       "blockingReasons": [
-        "sub keyword \"전자담배 기기 비교\" 5회 사용, 상한 3회 초과",
+        "금지 표현 감지: 체크포인트",
         "필수 포함 요소 '구매' 아래 추천 이유가 부족합니다.",
         "필수 포함 요소 '구매' 아래 추천 대상이 부족합니다.",
         "필수 포함 요소 '부평역' 아래 추천 이유가 부족합니다.",
-        "필수 포함 요소 '부평역' 아래 추천 대상이 부족합니다.",
-        "필수 포함 요소 '전자담배' 아래 추천 이유가 부족합니다.",
-        "필수 포함 요소 '전자담배' 아래 추천 대상이 부족합니다."
+        "필수 포함 요소 '전자담배' 아래 추천 이유가 부족합니다."
       ],
       "warnings": [],
-      "matchedForbiddenPhrases": [],
-      "keywordStuffingFindings": [
-        "sub keyword \"전자담배 기기 비교\" 5회 사용, 상한 3회 초과"
+      "matchedForbiddenPhrases": [
+        "체크포인트"
       ],
+      "keywordStuffingFindings": [],
       "deferFindings": [],
       "contractCoverageFindings": [],
       "overlapFindings": [],
       "specFindings": []
     },
     "finalDraftRevisionInstructions": [
-      "키워드 과다/질문문 삽입 수정: sub keyword \"전자담배 기기 비교\" 5회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
-      "발행 차단 사유 해결: sub keyword \"전자담배 기기 비교\" 5회 사용, 상한 3회 초과",
+      "금지 표현 '체크포인트'을(를) 쓰지 말고, 같은 뜻을 사용자 말투의 다른 문장으로 다시 쓰세요. 단어만 지우지 말고 문장을 다시 쓰세요.",
+      "발행 차단 사유 해결: 금지 표현 감지: 체크포인트",
       "발행 차단 사유 해결: 필수 포함 요소 '구매' 아래 추천 이유가 부족합니다.",
       "발행 차단 사유 해결: 필수 포함 요소 '구매' 아래 추천 대상이 부족합니다.",
       "발행 차단 사유 해결: 필수 포함 요소 '부평역' 아래 추천 이유가 부족합니다.",
-      "발행 차단 사유 해결: 필수 포함 요소 '부평역' 아래 추천 대상이 부족합니다.",
-      "발행 차단 사유 해결: 필수 포함 요소 '전자담배' 아래 추천 이유가 부족합니다.",
-      "발행 차단 사유 해결: 필수 포함 요소 '전자담배' 아래 추천 대상이 부족합니다."
+      "발행 차단 사유 해결: 필수 포함 요소 '전자담배' 아래 추천 이유가 부족합니다."
     ]
   }
 }
