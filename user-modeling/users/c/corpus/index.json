@@ -2,6 +2,21 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-49cb3bab",
+      "title": "인천 부평역 인기 전자담배 기기 모델 비교와 구매 시 필수 체크포인트",
+      "category": "c",
+      "tags": [
+        "기기",
+        "구매",
+        "부평역",
+        "비교",
+        "전자담배"
+      ],
+      "wordCount": 2766,
+      "publishedAt": "2026-09-30T05:04:56.144Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-49cb3bab.md"
+    },
+    {
       "sampleId": "published-post-2dfdfb28",
       "title": "인천 만수역 전자담배 방문 고객 제품별 관리법과 맞춤 팁!",
       "category": "c",
@@ -319,16 +334,7 @@
       "wordCount": 2336,
       "publishedAt": "2026-08-25T05:58:08.651Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt897ee7.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt896vhm",
-      "title": "그래피티2 vs 그래피티3 차이 − 뭐가 더 좋을까? (부평동전자담배)",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 2450,
-      "publishedAt": "2026-08-25T05:57:44.199Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt896vhm.md"
     }
   ],
-  "lastUpdated": "2026-09-28T08:22:31.165Z"
+  "lastUpdated": "2026-09-30T05:05:05.522Z"
 }
