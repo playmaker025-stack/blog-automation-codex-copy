@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mufhf9y8",
+  "source": "serp",
+  "capturedAt": "2026-10-01T11:45:13.883Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261001114513883_serp_integrated-부평역전자담배_04eb03",
+  "target": {
+    "surface": "integrated",
+    "query": "부평역전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평역전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
