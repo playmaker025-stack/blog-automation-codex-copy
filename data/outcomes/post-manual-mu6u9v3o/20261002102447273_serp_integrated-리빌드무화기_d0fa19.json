@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu6u9v3o",
+  "source": "serp",
+  "capturedAt": "2026-10-02T10:24:47.273Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261002102447273_serp_integrated-리빌드무화기_d0fa19",
+  "target": {
+    "surface": "integrated",
+    "query": "리빌드무화기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "리빌드무화기",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 7,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224416368962",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
