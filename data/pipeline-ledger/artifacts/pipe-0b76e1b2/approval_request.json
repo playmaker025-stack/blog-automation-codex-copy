@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-0b76e1b2",
+  "type": "approval_request",
+  "savedAt": "2026-10-02T05:09:05.414Z",
+  "data": {
+    "pipelineId": "pipe-0b76e1b2",
+    "previousTitle": "",
+    "proposedTitle": "남동구 전자담배 액상 역류 현상과 액튐 현상 원인과 해결법",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "직접 입력 토픽이므로 메인 키워드 '남동구 전자담배'를 중심축으로 두고, 서브 키워드 '액상 역류, 액튐 현상'는 보조 맥락으로 반영했습니다. 남동구 전자담배를 중심으로 액상 역류와 액튐 현상에 대한 구체적 문제 해결과 예방 정보를 제공하여 지역 사용자들의 검색 의도에 부합합니다. 최근 발행 글과 커뮤니티 수요를 반영해 실사용 경험과 점검법을 포함, 허브와 리프 구조를 활용해 체류시간과 내부 링크 효과를 극대화합니다. 친근한 말투와 구체적 경험 삽입으로 인간 지문을 강화하여 네이버 AI 브리핑과 사용자 만족도를 높일 수 있습니다.",
+    "requestedAt": "2026-10-02T05:08:59.736Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-10-02T05:08:59.736Z",
+      "modifications": null
+    }
+  }
+}
