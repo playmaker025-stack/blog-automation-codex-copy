@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-d6478d54",
+  "type": "approval_request",
+  "savedAt": "2026-10-02T07:56:22.509Z",
+  "data": {
+    "pipelineId": "pipe-d6478d54",
+    "previousTitle": "",
+    "proposedTitle": "만수르 전자담배 탄맛 발생 원인과 인천 만수역 해결 가이드",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "만수르 전자담배 사용자들이 자주 겪는 탄맛 문제에 대해 인천 만수역 지역 내 실제 점검과 해결 경험을 중심으로 작성하여 지역성과 실용성을 높였습니다. 최근 발행 글과 제목 키워드, 사용자 질문 패턴을 반영해 코일과 액상 관리, 점검법을 구체적으로 안내하며, 만수르점 만수역 방문 고객 맞춤 서비스 안내로 지역 신뢰도를 강화합니다. 허브-리프 구조를 반영해 관련 부평역 관리법 글로 자연스러운 내부 링크를 유도해 체류시간과 재방문율을 높이는 전략입니다.",
+    "requestedAt": "2026-10-02T07:56:15.313Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-10-02T07:56:15.313Z",
+      "modifications": null
+    }
+  }
+}
