@@ -4553,7 +4553,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-0b76e1b2",
       "at": "2026-10-02T05:08:58.099Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수르 전자담배 탄맛 발생 원인과 인천 만수역 해결 가이드",
+      "proposedTitle": "만수르 전자담배 탄맛 발생 원인과 인천 만수역 해결 가이드",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-d6478d54",
+      "at": "2026-10-02T07:56:13.568Z"
     }
   ],
-  "lastUpdated": "2026-10-02T05:08:58.099Z"
+  "lastUpdated": "2026-10-02T07:56:13.568Z"
 }
