@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-02T02:04:17.531Z",
+  "updatedAt": "2026-10-02T05:04:16.803Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9006,27 +9006,29 @@
       "queries": {
         "integrated::인천 남동구 전자담배": {
           "okAgeHours": [
-            599
+            599,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T04:44:18.070Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-02T05:04:07.319Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T04:44:18.070Z"
+          "lastAttemptAt": "2026-10-02T05:04:07.319Z"
         },
         "blog_tab::인천 남동구 전자담배": {
           "okAgeHours": [
-            599
+            599,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T04:44:25.125Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-02T05:04:14.246Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T04:44:25.125Z"
+          "lastAttemptAt": "2026-10-02T05:04:14.246Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T04:44:25.125Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-02T05:04:14.246Z",
+      "total": 4
     },
     "post-manual-mtoak0se": {
       "queries": {
@@ -11132,8 +11134,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-02T02:04:08.419Z",
-    "lastOkAt": "2026-10-02T02:04:08.419Z",
+    "lastRunAt": "2026-10-02T05:04:06.974Z",
+    "lastOkAt": "2026-10-02T05:04:06.974Z",
     "consecutiveFailedRuns": 0
   }
 }
