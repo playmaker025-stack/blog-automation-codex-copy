@@ -4542,7 +4542,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-5dbc61ec",
       "at": "2026-09-30T02:39:00.421Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "남동구 전자담배 액상 역류 현상 액튐은 왜 발생하는걸까?",
+      "proposedTitle": "남동구 전자담배 액상 역류 현상과 액튐 현상 원인과 해결법",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 0.5833333333333333,
+      "overrideByHighSim": false,
+      "pipelineId": "pipe-0b76e1b2",
+      "at": "2026-10-02T05:08:58.099Z"
     }
   ],
-  "lastUpdated": "2026-09-30T02:39:00.421Z"
+  "lastUpdated": "2026-10-02T05:08:58.099Z"
 }
