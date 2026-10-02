@@ -13067,7 +13067,41 @@
       "createdAt": "2026-10-02T07:56:19.793Z",
       "publishedAt": null,
       "updatedAt": "2026-10-02T07:59:22.985Z"
+    },
+    {
+      "postId": "post-manual-muqtujw3",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배 무화기에서 에어플로우가 중요한 이유 – 흡입감이 달라",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224429696408",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224429696408",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224429696408"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 무화기에서 에어플로우가",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전자담배 무화기에서 에어플로우가 중요한 이유 – 흡입감이 달라",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-02T10:35:36.155Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-02T10:35:36.155Z",
+      "createdAt": "2026-10-02T10:35:36.155Z",
+      "updatedAt": "2026-10-02T10:35:36.155Z"
     }
   ],
-  "lastUpdated": "2026-10-02T07:59:22.985Z"
+  "lastUpdated": "2026-10-02T10:35:36.155Z"
 }
