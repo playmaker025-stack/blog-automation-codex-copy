@@ -2351,7 +2351,31 @@
       "assignedUserId": "c",
       "createdAt": "2026-09-26T04:26:02.099Z",
       "updatedAt": "2026-09-28T08:22:25.784Z"
+    },
+    {
+      "topicId": "topic-f99db434",
+      "title": "남동구 전자담배 액상 역류 현상 액튐은 왜 발생하는걸까?",
+      "description": "메인키워드: 남동구 전자담배 / 서브 키워드: 액상 역류, 액튐 현상",
+      "category": "direct-run",
+      "tags": [
+        "남동구 전자담배",
+        "액상 역류",
+        "액튐 현상"
+      ],
+      "targetKeyword": "남동구 전자담배",
+      "subKeywords": [
+        "액상 역류",
+        "액튐 현상"
+      ],
+      "source": "direct",
+      "targetMainKeyword": "남동구 전자담배",
+      "feasibility": null,
+      "relatedSources": [],
+      "status": "draft",
+      "assignedUserId": "b",
+      "createdAt": "2026-10-02T05:08:25.282Z",
+      "updatedAt": "2026-10-02T05:08:25.282Z"
     }
   ],
-  "lastUpdated": "2026-09-30T05:05:00.001Z"
+  "lastUpdated": "2026-10-02T05:08:25.282Z"
 }
