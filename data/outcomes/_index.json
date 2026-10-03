@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-03T04:04:18.045Z",
+  "updatedAt": "2026-10-03T04:44:18.304Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11171,11 +11171,37 @@
       },
       "lastCapturedAt": "2026-10-02T10:44:14.301Z",
       "total": 2
+    },
+    "post-manual-murwbngx": {
+      "queries": {
+        "integrated::모드기기와 무화기는 꼭": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-03T04:44:08.807Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-03T04:44:08.807Z"
+        },
+        "blog_tab::모드기기와 무화기는 꼭": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-03T04:44:15.468Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-03T04:44:15.468Z"
+        }
+      },
+      "lastCapturedAt": "2026-10-03T04:44:15.468Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-10-03T04:04:07.888Z",
-    "lastOkAt": "2026-10-03T04:04:07.888Z",
+    "lastRunAt": "2026-10-03T04:44:08.094Z",
+    "lastOkAt": "2026-10-03T04:44:08.094Z",
     "consecutiveFailedRuns": 0
   }
 }
