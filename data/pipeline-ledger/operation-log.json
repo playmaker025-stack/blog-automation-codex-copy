@@ -4564,7 +4564,18 @@
       "overrideByHighSim": true,
       "pipelineId": "pipe-d6478d54",
       "at": "2026-10-02T07:56:13.568Z"
+    },
+    {
+      "type": "pipeline_failure",
+      "stage": "strategy-planning",
+      "topicId": "topic-f99db434",
+      "userId": "b",
+      "message": "Preflight check blocked writing: Same topicId already has ready:post-6dfcd69b / Similar existing title found: 남동구 전자담배 액상 역류 현상과 액튐 현상 원인과 해결법 (ready, 0.72)",
+      "recoveredTopicToDraft": false,
+      "errorName": "Error",
+      "pipelineId": "pipe-f5379e42",
+      "at": "2026-10-04T08:13:43.830Z"
     }
   ],
-  "lastUpdated": "2026-10-02T07:56:13.568Z"
+  "lastUpdated": "2026-10-04T08:13:43.830Z"
 }
