@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-04T05:45:23.214Z",
+  "updatedAt": "2026-10-04T06:04:29.742Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10444,47 +10444,51 @@
         },
         "integrated::rda": {
           "okAgeHours": [
-            218
+            218,
+            336
           ],
-          "lastCapturedAt": "2026-09-29T08:04:43.974Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-04T06:04:09.100Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T08:04:43.974Z"
+          "lastAttemptAt": "2026-10-04T06:04:09.100Z"
         },
         "blog_tab::rda": {
           "okAgeHours": [
-            218
+            218,
+            336
           ],
-          "lastCapturedAt": "2026-09-29T08:04:50.858Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-04T06:04:15.404Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T08:04:50.858Z"
+          "lastAttemptAt": "2026-10-04T06:04:15.404Z"
         },
         "integrated::rta": {
           "okAgeHours": [
-            218
+            218,
+            336
           ],
-          "lastCapturedAt": "2026-09-29T08:04:57.121Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-04T06:04:21.733Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T08:04:57.121Z"
+          "lastAttemptAt": "2026-10-04T06:04:21.733Z"
         },
         "blog_tab::rta": {
           "okAgeHours": [
-            218
+            218,
+            336
           ],
-          "lastCapturedAt": "2026-09-29T08:05:04.254Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-04T06:04:28.044Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T08:05:04.254Z"
+          "lastAttemptAt": "2026-10-04T06:04:28.044Z"
         }
       },
-      "lastCapturedAt": "2026-10-04T05:45:20.171Z",
-      "total": 16
+      "lastCapturedAt": "2026-10-04T06:04:28.044Z",
+      "total": 20
     },
     "post-d8dc50f1": {
       "queries": {
@@ -11260,8 +11264,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-04T05:44:08.983Z",
-    "lastOkAt": "2026-10-04T05:44:08.983Z",
+    "lastRunAt": "2026-10-04T06:04:08.802Z",
+    "lastOkAt": "2026-10-04T06:04:08.802Z",
     "consecutiveFailedRuns": 0
   }
 }
