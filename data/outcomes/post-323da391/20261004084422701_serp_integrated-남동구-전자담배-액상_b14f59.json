@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-323da391",
+  "source": "serp",
+  "capturedAt": "2026-10-04T08:44:22.701Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261004084422701_serp_integrated-남동구-전자담배-액상_b14f59",
+  "target": {
+    "surface": "integrated",
+    "query": "남동구 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구 전자담배 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 36,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224411359815",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224402871981",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224417088500",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223900143729",
+        "rank": 17
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224279835069",
+        "rank": 22
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224188368959",
+        "rank": 31
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223991413998",
+        "rank": 33
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

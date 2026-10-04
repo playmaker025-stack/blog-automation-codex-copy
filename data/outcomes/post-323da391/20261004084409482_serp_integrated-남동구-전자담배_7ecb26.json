@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-323da391",
+  "source": "serp",
+  "capturedAt": "2026-10-04T08:44:09.482Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261004084409482_serp_integrated-남동구-전자담배_7ecb26",
+  "target": {
+    "surface": "integrated",
+    "query": "남동구 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구 전자담배",
+    "surface": "integrated",
+    "querySource": "topic",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224417088500",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224343612896",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

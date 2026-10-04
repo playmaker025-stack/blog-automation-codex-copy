@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-04T07:44:18.831Z",
+  "updatedAt": "2026-10-04T08:44:32.523Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11263,11 +11263,57 @@
       },
       "lastCapturedAt": "2026-10-04T02:44:15.720Z",
       "total": 2
+    },
+    "post-323da391": {
+      "queries": {
+        "integrated::남동구 전자담배": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-04T08:44:09.482Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-04T08:44:09.482Z"
+        },
+        "blog_tab::남동구 전자담배": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-04T08:44:16.723Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-04T08:44:16.723Z"
+        },
+        "integrated::남동구 전자담배 액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-04T08:44:22.701Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-04T08:44:22.701Z"
+        },
+        "blog_tab::남동구 전자담배 액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-04T08:44:29.842Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-04T08:44:29.842Z"
+        }
+      },
+      "lastCapturedAt": "2026-10-04T08:44:29.842Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-10-04T07:44:09.317Z",
-    "lastOkAt": "2026-10-04T07:44:09.317Z",
+    "lastRunAt": "2026-10-04T08:44:09.143Z",
+    "lastOkAt": "2026-10-04T08:44:09.143Z",
     "consecutiveFailedRuns": 0
   }
 }
