@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtpefc05",
+  "source": "serp",
+  "capturedAt": "2026-10-04T05:44:16.197Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261004054416197_serp_blogtab-전자담배실수_861177",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배실수"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배실수",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224398637176",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224418950182",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224246746959",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

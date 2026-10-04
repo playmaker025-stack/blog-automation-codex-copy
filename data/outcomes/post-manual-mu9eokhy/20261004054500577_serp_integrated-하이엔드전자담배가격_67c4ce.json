@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu9eokhy",
+  "source": "serp",
+  "capturedAt": "2026-10-04T05:45:00.577Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261004054500577_serp_integrated-하이엔드전자담배가격_67c4ce",
+  "target": {
+    "surface": "integrated",
+    "query": "하이엔드전자담배가격"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하이엔드전자담배가격",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

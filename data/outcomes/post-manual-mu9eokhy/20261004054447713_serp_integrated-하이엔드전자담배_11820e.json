@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu9eokhy",
+  "source": "serp",
+  "capturedAt": "2026-10-04T05:44:47.713Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261004054447713_serp_integrated-하이엔드전자담배_11820e",
+  "target": {
+    "surface": "integrated",
+    "query": "하이엔드전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하이엔드전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 20,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224266939944",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224285743991",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224026074005",
+        "rank": 17
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224419124868",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224417738172",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223938527660",
+        "rank": 21
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223888550516",
+        "rank": 24
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224065861273",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
