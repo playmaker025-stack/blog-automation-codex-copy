@@ -2,6 +2,19 @@
   "userId": "b",
   "entries": [
     {
+      "postId": "post-323da391",
+      "topicId": "topic-f99db434",
+      "userId": "b",
+      "title": "남동구 전자담배 액상 역류·액튐 현상 원인과 해결법",
+      "naverPostUrl": "https://blog.naver.com/youferst/224431203073",
+      "evalScore": 65,
+      "wordCount": 3155,
+      "publishedAt": "2026-10-04T08:31:46.931Z",
+      "topicSource": "direct",
+      "contentKind": null,
+      "learnedAt": "2026-10-04T08:31:54.639Z"
+    },
+    {
       "postId": "post-85fe29a6",
       "topicId": "topic-8ddee763",
       "userId": "b",
@@ -340,5 +353,5 @@
       "learnedAt": "2026-07-04T11:06:13.483Z"
     }
   ],
-  "updatedAt": "2026-09-27T08:12:04.306Z"
+  "updatedAt": "2026-10-04T08:31:54.639Z"
 }
