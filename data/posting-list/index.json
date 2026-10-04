@@ -13057,16 +13057,33 @@
       "postId": "post-858a5a57",
       "topicId": "topic-45c7dcb2",
       "userId": "c",
-      "title": "만수르 전자담배 탄맛 발생 원인과 인천 만수역 해결 가이드",
-      "status": "ready",
-      "naverPostUrl": null,
+      "title": "전담 탄맛 발생 원인과 인천 만수역 해결 가이드! - 만수르 전자담배",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224430969295",
       "evalScore": 58,
       "wordCount": 2734,
       "compositionSessionId": "pipe-d6478d54",
       "pendingApproval": null,
       "createdAt": "2026-10-02T07:56:19.793Z",
-      "publishedAt": null,
-      "updatedAt": "2026-10-02T07:59:22.985Z"
+      "publishedAt": "2026-10-04T02:40:17.353Z",
+      "updatedAt": "2026-10-04T02:40:17.421Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224430969295",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224430969295"
+        },
+        "targetKeywords": [
+          {
+            "query": "전담 탄맛 발생",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전담 탄맛 발생 원인과 인천 만수역 해결 가이드! - 만수르 전자담배",
+        "contentHash": "c1f5faaf",
+        "trackedFrom": "2026-10-04T02:40:17.669Z"
+      }
     },
     {
       "postId": "post-manual-muqtujw3",
@@ -13137,5 +13154,5 @@
       "updatedAt": "2026-10-03T04:32:38.182Z"
     }
   ],
-  "lastUpdated": "2026-10-03T04:32:38.182Z"
+  "lastUpdated": "2026-10-04T02:40:17.421Z"
 }
