@@ -2,6 +2,22 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-858a5a57",
+      "title": "전담 탄맛 발생 원인과 인천 만수역 해결 가이드! - 만수르 전자담배",
+      "category": "c",
+      "tags": [
+        "만수르",
+        "탄맛",
+        "전자담배",
+        "만수역",
+        "고장",
+        "해결법"
+      ],
+      "wordCount": 2734,
+      "publishedAt": "2026-10-04T02:40:17.353Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-858a5a57.md"
+    },
+    {
       "sampleId": "published-post-49cb3bab",
       "title": "인천 부평역 인기 전자담배 기기 모델 비교와 구매 시 필수 체크포인트",
       "category": "c",
@@ -325,16 +341,7 @@
       "wordCount": 1419,
       "publishedAt": "2026-08-25T05:58:37.396Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt8980ju.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt897ee7",
-      "title": "부평전자담배 아스몬 하이 입고! 스펙 & 구성품 & 사용법 총정리",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 2336,
-      "publishedAt": "2026-08-25T05:58:08.651Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt897ee7.md"
     }
   ],
-  "lastUpdated": "2026-09-30T05:05:05.522Z"
+  "lastUpdated": "2026-10-04T02:40:27.266Z"
 }
