@@ -1,0 +1,59 @@
+{
+  "pipelineId": "pipe-62b5da61",
+  "type": "draft_output",
+  "savedAt": "2026-10-04T08:17:19.740Z",
+  "data": {
+    "postId": "post-323da391",
+    "title": "남동구 전자담배 액상 역류 현상과 액튐 원인 완벽 분석",
+    "wordCount": 2943,
+    "generatedAt": "2026-10-04T08:17:18.056Z",
+    "contentPath": "data/posting-list/posts/post-323da391/content.md",
+    "corpusSummaryUsed": true,
+    "finalDraftCheck": {
+      "ok": false,
+      "blockingReasons": [
+        "main keyword \"남동구 전자담배\" 8회 사용, 상한 7회 초과",
+        "sub keyword \"액상 역류\" 8회 사용, 상한 3회 초과",
+        "sub keyword \"액튐 현상\" 8회 사용, 상한 3회 초과",
+        "필수 포함 요소 '액상 역류' 아래 추천 이유가 부족합니다.",
+        "필수 포함 요소 '액상 역류' 아래 추천 대상이 부족합니다.",
+        "필수 포함 요소 '액튐 현상' 아래 추천 이유가 부족합니다.",
+        "필수 포함 요소 '액튐 현상' 아래 추천 대상이 부족합니다."
+      ],
+      "warnings": [
+        "mustResolve 단서 부족: 즉시 점검 순서와 예방 기준",
+        "필수 섹션 반영 부족: 사용자 유형별 최종 선택 기준",
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ],
+      "matchedForbiddenPhrases": [],
+      "keywordStuffingFindings": [
+        "main keyword \"남동구 전자담배\" 8회 사용, 상한 7회 초과",
+        "sub keyword \"액상 역류\" 8회 사용, 상한 3회 초과",
+        "sub keyword \"액튐 현상\" 8회 사용, 상한 3회 초과"
+      ],
+      "deferFindings": [],
+      "contractCoverageFindings": [
+        "mustResolve 단서 부족: 즉시 점검 순서와 예방 기준"
+      ],
+      "overlapFindings": [
+        "medium overlap: 도입 패턴 반복 위험 problem_symptom",
+        "medium overlap: 결론 패턴 반복 위험 problem_checklist"
+      ],
+      "specFindings": []
+    },
+    "finalDraftRevisionInstructions": [
+      "키워드 과다/질문문 삽입 수정: main keyword \"남동구 전자담배\" 8회 사용, 상한 7회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "키워드 과다/질문문 삽입 수정: sub keyword \"액상 역류\" 8회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "키워드 과다/질문문 삽입 수정: sub keyword \"액튐 현상\" 8회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "mustResolve 단서 부족: 즉시 점검 순서와 예방 기준 — 별도 요약 섹션을 덧붙이지 말고, 관련 본문 문단 안에서 자연스럽게 다루세요.",
+      "발행 차단 사유 해결: main keyword \"남동구 전자담배\" 8회 사용, 상한 7회 초과",
+      "발행 차단 사유 해결: sub keyword \"액상 역류\" 8회 사용, 상한 3회 초과",
+      "발행 차단 사유 해결: sub keyword \"액튐 현상\" 8회 사용, 상한 3회 초과",
+      "발행 차단 사유 해결: 필수 포함 요소 '액상 역류' 아래 추천 이유가 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '액상 역류' 아래 추천 대상이 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '액튐 현상' 아래 추천 이유가 부족합니다.",
+      "발행 차단 사유 해결: 필수 포함 요소 '액튐 현상' 아래 추천 대상이 부족합니다."
+    ]
+  }
+}
