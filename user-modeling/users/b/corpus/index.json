@@ -2,6 +2,19 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-323da391",
+      "title": "남동구 전자담배 액상 역류·액튐 현상 원인과 해결법",
+      "category": "direct-run",
+      "tags": [
+        "남동구 전자담배",
+        "액상 역류",
+        "액튐 현상"
+      ],
+      "wordCount": 3155,
+      "publishedAt": "2026-10-04T08:31:46.931Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-323da391.md"
+    },
+    {
       "sampleId": "published-post-85fe29a6",
       "title": "부평구 전자담배 액상 방문 구매 시 꼭 확인할 핵심 팁",
       "category": "b",
@@ -371,25 +384,7 @@
       "wordCount": 1588,
       "publishedAt": "2025-06-21T00:00:00.000Z",
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-04.md"
-    },
-    {
-      "sampleId": "reference-b-01",
-      "title": "인천전자담배 만수동 만수르 말론 실사용 후기",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "인천전자담배",
-        "만수동",
-        "말론"
-      ],
-      "wordCount": 2612,
-      "publishedAt": "2025-04-10T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-01.md"
     }
   ],
-  "lastUpdated": "2026-09-27T08:12:07.315Z"
+  "lastUpdated": "2026-10-04T08:31:58.118Z"
 }
