@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-03T23:04:09.049Z",
+  "updatedAt": "2026-10-04T02:44:18.067Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11209,11 +11209,37 @@
       },
       "lastCapturedAt": "2026-10-03T04:44:15.468Z",
       "total": 2
+    },
+    "post-858a5a57": {
+      "queries": {
+        "integrated::전담 탄맛 발생": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-04T02:44:09.532Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-04T02:44:09.532Z"
+        },
+        "blog_tab::전담 탄맛 발생": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-04T02:44:15.720Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-04T02:44:15.720Z"
+        }
+      },
+      "lastCapturedAt": "2026-10-04T02:44:15.720Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-10-03T23:04:08.464Z",
-    "lastOkAt": "2026-10-03T11:04:08.083Z",
+    "lastRunAt": "2026-10-04T02:44:08.844Z",
+    "lastOkAt": "2026-10-04T02:44:08.844Z",
     "consecutiveFailedRuns": 0
   }
 }
