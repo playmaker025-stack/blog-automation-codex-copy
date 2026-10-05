@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-d8dc50f1",
+  "source": "serp",
+  "capturedAt": "2026-10-05T08:44:10.187Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261005084410187_serp_integrated-전자담배-위탁수하물_768eab",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 위탁수하물"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 위탁수하물",
+    "surface": "integrated",
+    "querySource": "topic",
+    "device": "mobile",
+    "rank": 24,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224418950182",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
