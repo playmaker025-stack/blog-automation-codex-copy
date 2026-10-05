@@ -1,18 +1,18 @@
 {
   "pipelineId": "pipe-3f1512ea",
   "type": "draft_output",
-  "savedAt": "2026-10-05T09:07:20.144Z",
+  "savedAt": "2026-10-05T09:08:48.827Z",
   "data": {
     "postId": "post-30d55ea5",
     "title": "만수르 전자담배 초보자 입문 가이드와 인천 만수역 매장 방문 팁",
-    "wordCount": 2523,
-    "generatedAt": "2026-10-05T09:07:18.500Z",
+    "wordCount": 2737,
+    "generatedAt": "2026-10-05T09:08:46.779Z",
     "contentPath": "data/posting-list/posts/post-30d55ea5/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
       "ok": false,
       "blockingReasons": [
-        "sub keyword \"만수역 전자담배 매장\" 5회 사용, 상한 3회 초과"
+        "질문문/따옴표 안 exact keyword 사용: 만수역 전자담배 매장 / \"### 만수역 전자담배 매장 가기 전에 뭘 메모하면 좋나요?\""
       ],
       "warnings": [
         "medium overlap: 도입 패턴 반복 위험 problem_symptom",
@@ -20,7 +20,7 @@
       ],
       "matchedForbiddenPhrases": [],
       "keywordStuffingFindings": [
-        "sub keyword \"만수역 전자담배 매장\" 5회 사용, 상한 3회 초과"
+        "질문문/따옴표 안 exact keyword 사용: 만수역 전자담배 매장 / \"### 만수역 전자담배 매장 가기 전에 뭘 메모하면 좋나요?\""
       ],
       "deferFindings": [],
       "contractCoverageFindings": [],
@@ -31,8 +31,8 @@
       "specFindings": []
     },
     "finalDraftRevisionInstructions": [
-      "키워드 과다/질문문 삽입 수정: sub keyword \"만수역 전자담배 매장\" 5회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
-      "발행 차단 사유 해결: sub keyword \"만수역 전자담배 매장\" 5회 사용, 상한 3회 초과"
+      "키워드 과다/질문문 삽입 수정: 질문문/따옴표 안 exact keyword 사용: 만수역 전자담배 매장 / \"### 만수역 전자담배 매장 가기 전에 뭘 메모하면 좋나요?\". 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
+      "발행 차단 사유 해결: 질문문/따옴표 안 exact keyword 사용: 만수역 전자담배 매장 / \"### 만수역 전자담배 매장 가기 전에 뭘 메모하면 좋나요?\""
     ]
   }
 }
