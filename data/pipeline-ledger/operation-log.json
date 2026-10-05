@@ -4586,7 +4586,18 @@
       "overrideByHighSim": false,
       "pipelineId": "pipe-62b5da61",
       "at": "2026-10-04T08:15:37.944Z"
+    },
+    {
+      "type": "material_change",
+      "originalTitle": "만수르 전자담배 초보자 입문 가이드와 인천 만수역 매장 방문 팁",
+      "proposedTitle": "만수르 전자담배 초보자 입문 가이드와 인천 만수역 매장 방문 팁",
+      "isMaterial": false,
+      "triggeredSignals": [],
+      "stringSimilarity": 1,
+      "overrideByHighSim": true,
+      "pipelineId": "pipe-3f1512ea",
+      "at": "2026-10-05T09:05:57.890Z"
     }
   ],
-  "lastUpdated": "2026-10-04T08:15:37.944Z"
+  "lastUpdated": "2026-10-05T09:05:57.890Z"
 }
