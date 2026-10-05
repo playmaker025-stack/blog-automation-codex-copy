@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-05T05:44:10.453Z",
+  "updatedAt": "2026-10-05T07:24:32.308Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9232,47 +9232,51 @@
       "queries": {
         "integrated::전자담배 무화기 고장": {
           "okAgeHours": [
-            525
+            525,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:04:56.301Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-05T07:24:10.248Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:04:56.301Z"
+          "lastAttemptAt": "2026-10-05T07:24:10.248Z"
         },
         "blog_tab::전자담배 무화기 고장": {
           "okAgeHours": [
-            525
+            525,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:05:02.905Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-05T07:24:17.133Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:05:02.905Z"
+          "lastAttemptAt": "2026-10-05T07:24:17.133Z"
         },
         "integrated::인천": {
           "okAgeHours": [
-            525
+            525,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:05:09.175Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-05T07:24:23.429Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:05:09.175Z"
+          "lastAttemptAt": "2026-10-05T07:24:23.429Z"
         },
         "blog_tab::인천": {
           "okAgeHours": [
-            525
+            525,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:05:15.164Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-05T07:24:30.177Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:05:15.164Z"
+          "lastAttemptAt": "2026-10-05T07:24:30.177Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T05:05:15.164Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-05T07:24:30.177Z",
+      "total": 8
     },
     "post-manual-mtsmngli": {
       "queries": {
@@ -11314,8 +11318,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-05T05:44:09.534Z",
-    "lastOkAt": "2026-10-04T11:24:09.094Z",
+    "lastRunAt": "2026-10-05T07:24:09.720Z",
+    "lastOkAt": "2026-10-05T07:24:09.720Z",
     "consecutiveFailedRuns": 0
   }
 }
