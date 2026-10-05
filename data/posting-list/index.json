@@ -13166,7 +13166,7 @@
       "pendingApproval": null,
       "createdAt": "2026-10-04T08:16:01.613Z",
       "publishedAt": "2026-10-04T08:31:46.931Z",
-      "updatedAt": "2026-10-04T08:31:50.143Z",
+      "updatedAt": "2026-10-05T01:14:42.067Z",
       "outcomeTracking": {
         "canonicalPost": {
           "blogId": "youferst",
@@ -13177,19 +13177,15 @@
           {
             "query": "남동구 전자담배",
             "role": "primary",
-            "source": "topic"
-          },
-          {
-            "query": "남동구 전자담배 액상",
-            "role": "secondary",
-            "source": "title_guess"
+            "source": "user"
           }
         ],
         "publishedTitle": "남동구 전자담배 액상 역류·액튐 현상 원인과 해결법",
         "contentHash": "e68b3dac",
-        "trackedFrom": "2026-10-04T08:31:50.367Z"
+        "trackedFrom": "2026-10-04T08:31:50.367Z",
+        "keywordsRevisedAt": "2026-10-05T01:14:42.067Z"
       }
     }
   ],
-  "lastUpdated": "2026-10-04T12:02:02.474Z"
+  "lastUpdated": "2026-10-05T01:14:42.067Z"
 }
