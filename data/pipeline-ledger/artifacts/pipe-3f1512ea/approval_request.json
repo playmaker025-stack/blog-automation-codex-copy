@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-3f1512ea",
+  "type": "approval_request",
+  "savedAt": "2026-10-05T09:06:06.513Z",
+  "data": {
+    "pipelineId": "pipe-3f1512ea",
+    "previousTitle": "",
+    "proposedTitle": "만수르 전자담배 초보자 입문 가이드와 인천 만수역 매장 방문 팁",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "초보자 대상 입문 가이드와 지역 매장 방문 팁은 인천 만수역 지역 전자담배 사용자들의 대표적 검색 의도에 부합합니다. 최근 발행 글들의 평균 평가 점수와 분량, 반복 키워드 및 문체를 반영하여 친근하고 구체적인 경험 중심 작성 방향을 설정했습니다. 허브(탄맛 문제 해결)와 리프(부평역 기기 비교) 주제를 내부 링크로 연결해 체류 시간과 재방문을 유도하는 구조입니다.",
+    "requestedAt": "2026-10-05T09:05:59.927Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-10-05T09:05:59.927Z",
+      "modifications": null
+    }
+  }
+}
