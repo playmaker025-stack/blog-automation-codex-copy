@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-06T10:44:20.533Z",
+  "updatedAt": "2026-10-06T11:04:58.853Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11104,87 +11104,95 @@
       "queries": {
         "integrated::전자담배": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-29T11:44:05.763Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T11:04:11.069Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:44:05.763Z"
+          "lastAttemptAt": "2026-10-06T11:04:11.069Z"
         },
         "blog_tab::전자담배": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-29T11:44:12.658Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T11:04:18.224Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:44:12.658Z"
+          "lastAttemptAt": "2026-10-06T11:04:18.224Z"
         },
         "integrated::싱글코일": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-29T11:44:18.201Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T11:04:24.463Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:44:18.201Z"
+          "lastAttemptAt": "2026-10-06T11:04:24.463Z"
         },
         "blog_tab::싱글코일": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-29T11:44:24.651Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T11:04:31.253Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:44:24.651Z"
+          "lastAttemptAt": "2026-10-06T11:04:31.253Z"
         },
         "integrated::듀얼코일": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-29T11:44:30.934Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T11:04:37.465Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:44:30.934Z"
+          "lastAttemptAt": "2026-10-06T11:04:37.465Z"
         },
         "blog_tab::듀얼코일": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-29T11:44:37.975Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T11:04:43.793Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:44:37.975Z"
+          "lastAttemptAt": "2026-10-06T11:04:43.793Z"
         },
         "integrated::리빌드": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-29T11:44:44.176Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T11:04:49.726Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:44:44.176Z"
+          "lastAttemptAt": "2026-10-06T11:04:49.726Z"
         },
         "blog_tab::리빌드": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-09-29T11:44:51.209Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T11:04:56.818Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:44:51.209Z"
+          "lastAttemptAt": "2026-10-06T11:04:56.818Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T11:44:51.209Z",
-      "total": 8
+      "lastCapturedAt": "2026-10-06T11:04:56.818Z",
+      "total": 16
     },
     "post-49cb3bab": {
       "queries": {
@@ -11338,8 +11346,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-06T10:44:10.335Z",
-    "lastOkAt": "2026-10-06T10:44:10.335Z",
+    "lastRunAt": "2026-10-06T11:04:10.534Z",
+    "lastOkAt": "2026-10-06T11:04:10.534Z",
     "consecutiveFailedRuns": 0
   }
 }
