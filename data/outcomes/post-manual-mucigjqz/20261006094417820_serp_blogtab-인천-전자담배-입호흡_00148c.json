@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mucigjqz",
+  "source": "serp",
+  "capturedAt": "2026-10-06T09:44:17.820Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261006094417820_serp_blogtab-인천-전자담배-입호흡_00148c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 전자담배 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224411359815",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224420143737",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300979147",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224295089906",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224305965234",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
