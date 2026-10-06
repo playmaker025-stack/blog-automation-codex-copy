@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-06T09:44:19.667Z",
+  "updatedAt": "2026-10-06T10:44:20.533Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9178,27 +9178,29 @@
       "queries": {
         "integrated::인천 전자담배 기기": {
           "okAgeHours": [
-            498
+            498,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:04:31.304Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T10:44:10.717Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:04:31.304Z"
+          "lastAttemptAt": "2026-10-06T10:44:10.717Z"
         },
         "blog_tab::인천 전자담배 기기": {
           "okAgeHours": [
-            498
+            498,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:04:37.800Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-06T10:44:17.676Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:04:37.800Z"
+          "lastAttemptAt": "2026-10-06T10:44:17.676Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T05:04:37.800Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-06T10:44:17.676Z",
+      "total": 4
     },
     "post-manual-mtpqnccb": {
       "queries": {
@@ -11336,8 +11338,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-06T09:44:10.589Z",
-    "lastOkAt": "2026-10-06T09:44:10.589Z",
+    "lastRunAt": "2026-10-06T10:44:10.335Z",
+    "lastOkAt": "2026-10-06T10:44:10.335Z",
     "consecutiveFailedRuns": 0
   }
 }
