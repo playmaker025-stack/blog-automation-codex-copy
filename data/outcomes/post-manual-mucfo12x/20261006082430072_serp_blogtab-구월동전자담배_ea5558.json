@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mucfo12x",
+  "source": "serp",
+  "capturedAt": "2026-10-06T08:24:30.072Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261006082430072_serp_blogtab-구월동전자담배_ea5558",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224332153941",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224272638838",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224322426520",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224089279318",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

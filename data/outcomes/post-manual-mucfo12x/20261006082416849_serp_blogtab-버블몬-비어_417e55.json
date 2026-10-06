@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mucfo12x",
+  "source": "serp",
+  "capturedAt": "2026-10-06T08:24:16.849Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261006082416849_serp_blogtab-버블몬-비어_417e55",
+  "target": {
+    "surface": "blog_tab",
+    "query": "버블몬 비어"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "버블몬 비어",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
