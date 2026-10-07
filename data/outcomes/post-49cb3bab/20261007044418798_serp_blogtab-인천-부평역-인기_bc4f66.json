@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-49cb3bab",
+  "source": "serp",
+  "capturedAt": "2026-10-07T04:44:18.798Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261007044418798_serp_blogtab-인천-부평역-인기_bc4f66",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 부평역 인기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 부평역 인기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224427045485",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
