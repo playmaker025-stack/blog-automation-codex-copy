@@ -13200,7 +13200,41 @@
       "createdAt": "2026-10-05T09:06:04.719Z",
       "publishedAt": null,
       "updatedAt": "2026-10-05T09:09:08.448Z"
+    },
+    {
+      "postId": "post-manual-muxzr74p",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배 코일에서 핫스팟이 생기는 이유 – 코일 전체가 고르게 달궈져야 하는 이유",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224434450881",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224434450881",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224434450881"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 코일에서 핫스팟이",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "전자담배 코일에서 핫스팟이 생기는 이유 – 코일 전체가 고르게 달궈져야 하는 이유",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-07T10:55:19.875Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-07T10:55:19.875Z",
+      "createdAt": "2026-10-07T10:55:19.875Z",
+      "updatedAt": "2026-10-07T10:55:19.875Z"
     }
   ],
-  "lastUpdated": "2026-10-05T09:09:08.448Z"
+  "lastUpdated": "2026-10-07T10:55:19.875Z"
 }
