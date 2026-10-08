@@ -2,6 +2,21 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-30d55ea5",
+      "title": "만수르 전자담배 초보자 입문 가이드와 인천 만수역 매장 방문 팁",
+      "category": "c",
+      "tags": [
+        "만수르",
+        "입문자 가이드",
+        "만수역",
+        "초보자",
+        "전자담배"
+      ],
+      "wordCount": 2737,
+      "publishedAt": "2026-10-08T03:48:20.278Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-30d55ea5.md"
+    },
+    {
       "sampleId": "published-post-858a5a57",
       "title": "전담 탄맛 발생 원인과 인천 만수역 해결 가이드! - 만수르 전자담배",
       "category": "c",
@@ -332,16 +347,7 @@
       "wordCount": 2222,
       "publishedAt": "2026-08-25T05:58:59.578Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt898hkp.md"
-    },
-    {
-      "sampleId": "published-post-manual-mt8980ju",
-      "title": "갈산동전자담배 릴렉스 후노즈 코로 피는 전담 후기",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 1419,
-      "publishedAt": "2026-08-25T05:58:37.396Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mt8980ju.md"
     }
   ],
-  "lastUpdated": "2026-10-04T12:02:09.407Z"
+  "lastUpdated": "2026-10-08T03:48:29.942Z"
 }
