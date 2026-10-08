@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mufhf9y8",
+  "source": "serp",
+  "capturedAt": "2026-10-08T11:45:25.865Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261008114525865_serp_blogtab-부평역전자담배_179d34",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평역전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평역전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421992036",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224427045485",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224430969295",
+        "rank": 14
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224264935958",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

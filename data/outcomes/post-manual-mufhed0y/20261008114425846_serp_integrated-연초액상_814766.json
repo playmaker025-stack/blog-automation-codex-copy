@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mufhed0y",
+  "source": "serp",
+  "capturedAt": "2026-10-08T11:44:25.846Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261008114425846_serp_integrated-연초액상_814766",
+  "target": {
+    "surface": "integrated",
+    "query": "연초액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연초액상",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "222426098496",
+        "rank": 15
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223139396972",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
