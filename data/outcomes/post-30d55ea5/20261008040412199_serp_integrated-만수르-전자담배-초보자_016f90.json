@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-30d55ea5",
+  "source": "serp",
+  "capturedAt": "2026-10-08T04:04:12.199Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261008040412199_serp_integrated-만수르-전자담배-초보자_016f90",
+  "target": {
+    "surface": "integrated",
+    "query": "만수르 전자담배 초보자"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수르 전자담배 초보자",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224299140074",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224276771070",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224293727182",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224125646533",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224109563734",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223668628432",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224435119042",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224394356256",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224242669366",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224123626668",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224415853960",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300284999",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
