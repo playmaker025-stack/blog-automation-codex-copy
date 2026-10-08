@@ -13191,15 +13191,32 @@
       "topicId": "topic-131d2d6c",
       "userId": "c",
       "title": "만수르 전자담배 초보자 입문 가이드와 인천 만수역 매장 방문 팁",
-      "status": "ready",
-      "naverPostUrl": null,
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224435119042",
       "evalScore": 60,
       "wordCount": 2737,
       "compositionSessionId": "pipe-3f1512ea",
       "pendingApproval": null,
       "createdAt": "2026-10-05T09:06:04.719Z",
-      "publishedAt": null,
-      "updatedAt": "2026-10-05T09:09:08.448Z"
+      "publishedAt": "2026-10-08T03:48:20.278Z",
+      "updatedAt": "2026-10-08T03:48:21.306Z",
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224435119042",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224435119042"
+        },
+        "targetKeywords": [
+          {
+            "query": "만수르 전자담배 초보자",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "만수르 전자담배 초보자 입문 가이드와 인천 만수역 매장 방문 팁",
+        "contentHash": "232aa9c1",
+        "trackedFrom": "2026-10-08T03:48:21.531Z"
+      }
     },
     {
       "postId": "post-manual-muxzr74p",
@@ -13236,5 +13253,5 @@
       "updatedAt": "2026-10-07T10:55:19.875Z"
     }
   ],
-  "lastUpdated": "2026-10-07T10:55:19.875Z"
+  "lastUpdated": "2026-10-08T03:48:21.306Z"
 }
