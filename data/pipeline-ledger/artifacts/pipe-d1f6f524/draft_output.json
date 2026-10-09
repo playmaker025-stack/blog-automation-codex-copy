@@ -1,18 +1,17 @@
 {
   "pipelineId": "pipe-d1f6f524",
   "type": "draft_output",
-  "savedAt": "2026-10-09T02:43:39.726Z",
+  "savedAt": "2026-10-09T02:45:05.257Z",
   "data": {
     "postId": "post-c64fa273",
     "title": "전자담배 스펙별 고장 유형과 인천 계산동 점검 및 수리 팁",
-    "wordCount": 2710,
-    "generatedAt": "2026-10-09T02:43:37.927Z",
+    "wordCount": 2931,
+    "generatedAt": "2026-10-09T02:45:02.585Z",
     "contentPath": "data/posting-list/posts/post-c64fa273/content.md",
     "corpusSummaryUsed": true,
     "finalDraftCheck": {
       "ok": false,
       "blockingReasons": [
-        "sub keyword \"계산동 전자담배 점검\" 4회 사용, 상한 3회 초과",
         "필수 포함 요소 '고장' 아래 추천 이유가 부족합니다.",
         "필수 포함 요소 '고장' 아래 추천 대상이 부족합니다.",
         "필수 포함 요소 '계산동' 아래 추천 이유가 부족합니다.",
@@ -26,16 +25,10 @@
       ],
       "warnings": [
         "mustResolve 단서 부족: 각 후보가 맞는 사용자",
-        "필수 섹션 반영 부족: 고장 추천 이유와 추천 대상",
-        "필수 섹션 반영 부족: 계산동 추천 이유와 추천 대상",
-        "필수 섹션 반영 부족: 점검 추천 이유와 추천 대상",
-        "필수 섹션 반영 부족: 수리 추천 이유와 추천 대상",
-        "필수 섹션 반영 부족: 전자담배 추천 이유와 추천 대상"
+        "필수 섹션 반영 부족: 사용자 유형별 최종 선택 기준"
       ],
       "matchedForbiddenPhrases": [],
-      "keywordStuffingFindings": [
-        "sub keyword \"계산동 전자담배 점검\" 4회 사용, 상한 3회 초과"
-      ],
+      "keywordStuffingFindings": [],
       "deferFindings": [],
       "contractCoverageFindings": [
         "mustResolve 단서 부족: 각 후보가 맞는 사용자"
@@ -44,9 +37,7 @@
       "specFindings": []
     },
     "finalDraftRevisionInstructions": [
-      "키워드 과다/질문문 삽입 수정: sub keyword \"계산동 전자담배 점검\" 4회 사용, 상한 3회 초과. 손님 질문은 실제 말투로 두고, 키워드는 설명 문단으로 옮기세요.",
       "mustResolve 단서 부족: 각 후보가 맞는 사용자 — 별도 요약 섹션을 덧붙이지 말고, 관련 본문 문단 안에서 자연스럽게 다루세요.",
-      "발행 차단 사유 해결: sub keyword \"계산동 전자담배 점검\" 4회 사용, 상한 3회 초과",
       "발행 차단 사유 해결: 필수 포함 요소 '고장' 아래 추천 이유가 부족합니다.",
       "발행 차단 사유 해결: 필수 포함 요소 '고장' 아래 추천 대상이 부족합니다.",
       "발행 차단 사유 해결: 필수 포함 요소 '계산동' 아래 추천 이유가 부족합니다.",
