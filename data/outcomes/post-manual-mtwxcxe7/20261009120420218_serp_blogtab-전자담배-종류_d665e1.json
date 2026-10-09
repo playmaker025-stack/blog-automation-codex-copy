@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtwxcxe7",
+  "source": "serp",
+  "capturedAt": "2026-10-09T12:04:20.218Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261009120420218_serp_blogtab-전자담배-종류_d665e1",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 종류"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 종류",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224355462874",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

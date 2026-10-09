@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtwxcxe7",
+  "source": "serp",
+  "capturedAt": "2026-10-09T12:05:24.184Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261009120524184_serp_blogtab-폐호흡_ab5a8d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 16,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224360766083",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
