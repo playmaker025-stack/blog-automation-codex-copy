@@ -1,0 +1,19 @@
+{
+  "pipelineId": "pipe-d1f6f524",
+  "type": "approval_request",
+  "savedAt": "2026-10-09T02:42:26.812Z",
+  "data": {
+    "pipelineId": "pipe-d1f6f524",
+    "previousTitle": "",
+    "proposedTitle": "전자담배 스펙별 고장 유형과 인천 계산동 점검 및 수리 팁",
+    "materialChange": false,
+    "materialChangeSignals": [],
+    "rationale": "주제는 전자담배 스펙별 고장 유형과 인천 계산동 지역 점검 및 수리 방법으로, 사용자 검색 의도는 구체적 문제 해결과 지역 맞춤 정보임. 최근 발행 글과 제목 키워드, 구조를 반영해 허브-리프 구조로 기획했으며, 실제 경험과 지역 정보 중심으로 친근하고 구체적인 안내를 제공해 90점 이상 네이버 SEO 점수 달성 가능. 주요 키워드는 네이버 검색창 입력형으로 선정했고, 부평역 관련 글로 자연스러운 내부 링크를 유도해 체류시간과 재방문율을 높임.",
+    "requestedAt": "2026-10-09T02:42:20.253Z",
+    "response": {
+      "approved": true,
+      "respondedAt": "2026-10-09T02:42:20.253Z",
+      "modifications": null
+    }
+  }
+}
