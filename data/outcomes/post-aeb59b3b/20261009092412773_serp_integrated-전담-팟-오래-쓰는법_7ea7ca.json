@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-aeb59b3b",
+  "source": "serp",
+  "capturedAt": "2026-10-09T09:24:12.773Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261009092412773_serp_integrated-전담-팟-오래-쓰는법_7ea7ca",
+  "target": {
+    "surface": "integrated",
+    "query": "전담 팟 오래 쓰는법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 팟 오래 쓰는법",
+    "surface": "integrated",
+    "querySource": "topic",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 16,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224421116037",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

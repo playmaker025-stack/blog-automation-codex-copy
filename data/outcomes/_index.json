@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-09T06:04:13.748Z",
+  "updatedAt": "2026-10-09T09:24:35.002Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9522,47 +9522,51 @@
       "queries": {
         "integrated::전담 팟 오래 쓰는법": {
           "okAgeHours": [
-            428
+            428,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:44:58.758Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-09T09:24:12.773Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:44:58.758Z"
+          "lastAttemptAt": "2026-10-09T09:24:12.773Z"
         },
         "blog_tab::전담 팟 오래 쓰는법": {
           "okAgeHours": [
-            428
+            428,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:45:05.252Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-09T09:24:19.528Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:45:05.252Z"
+          "lastAttemptAt": "2026-10-09T09:24:19.528Z"
         },
         "integrated::전담 팟 오래": {
           "okAgeHours": [
-            428
+            428,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:45:11.012Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-09T09:24:25.855Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:45:11.012Z"
+          "lastAttemptAt": "2026-10-09T09:24:25.855Z"
         },
         "blog_tab::전담 팟 오래": {
           "okAgeHours": [
-            428
+            428,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T05:45:17.623Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-09T09:24:32.304Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T05:45:17.623Z"
+          "lastAttemptAt": "2026-10-09T09:24:32.304Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T05:45:17.623Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-09T09:24:32.304Z",
+      "total": 8
     },
     "post-manual-mtwxcxe7": {
       "queries": {
@@ -11436,8 +11440,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-09T06:04:12.803Z",
-    "lastOkAt": "2026-10-08T11:44:11.752Z",
+    "lastRunAt": "2026-10-09T09:24:12.394Z",
+    "lastOkAt": "2026-10-09T09:24:12.394Z",
     "consecutiveFailedRuns": 0
   }
 }
