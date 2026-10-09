@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-09T09:24:35.002Z",
+  "updatedAt": "2026-10-09T10:24:22.215Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11266,27 +11266,29 @@
       "queries": {
         "integrated::전자담배 무화기에서 에어플로우가": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-02T10:44:07.695Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-09T10:24:12.946Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-02T10:44:07.695Z"
+          "lastAttemptAt": "2026-10-09T10:24:12.946Z"
         },
         "blog_tab::전자담배 무화기에서 에어플로우가": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-02T10:44:14.301Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-09T10:24:19.846Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-02T10:44:14.301Z"
+          "lastAttemptAt": "2026-10-09T10:24:19.846Z"
         }
       },
-      "lastCapturedAt": "2026-10-02T10:44:14.301Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-09T10:24:19.846Z",
+      "total": 4
     },
     "post-manual-murwbngx": {
       "queries": {
@@ -11440,8 +11442,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-09T09:24:12.394Z",
-    "lastOkAt": "2026-10-09T09:24:12.394Z",
+    "lastRunAt": "2026-10-09T10:24:12.598Z",
+    "lastOkAt": "2026-10-09T10:24:12.598Z",
     "consecutiveFailedRuns": 0
   }
 }
