@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-murwbngx",
+  "source": "serp",
+  "capturedAt": "2026-10-10T04:04:33.479Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261010040433479_serp_blogtab-모드기기와-무화기는-꼭_29b02c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "모드기기와 무화기는 꼭"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "모드기기와 무화기는 꼭",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224430262358",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224091389416",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

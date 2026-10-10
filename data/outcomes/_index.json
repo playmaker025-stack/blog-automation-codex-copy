@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-10T00:04:13.739Z",
+  "updatedAt": "2026-10-10T04:04:36.198Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10929,28 +10929,30 @@
         "integrated::전자담배 기기 액상": {
           "okAgeHours": [
             77,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-03T04:04:08.401Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-10T04:04:13.675Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T04:04:08.401Z"
+          "lastAttemptAt": "2026-10-10T04:04:13.675Z"
         },
         "blog_tab::전자담배 기기 액상": {
           "okAgeHours": [
             77,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-03T04:04:15.453Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-10T04:04:20.624Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T04:04:15.453Z"
+          "lastAttemptAt": "2026-10-10T04:04:20.624Z"
         }
       },
-      "lastCapturedAt": "2026-10-03T04:04:15.453Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-10T04:04:20.624Z",
+      "total": 6
     },
     "post-85fe29a6": {
       "queries": {
@@ -11306,27 +11308,29 @@
       "queries": {
         "integrated::모드기기와 무화기는 꼭": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-03T04:44:08.807Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-10T04:04:26.947Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T04:44:08.807Z"
+          "lastAttemptAt": "2026-10-10T04:04:26.947Z"
         },
         "blog_tab::모드기기와 무화기는 꼭": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-03T04:44:15.468Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-10T04:04:33.479Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T04:44:15.468Z"
+          "lastAttemptAt": "2026-10-10T04:04:33.479Z"
         }
       },
-      "lastCapturedAt": "2026-10-03T04:44:15.468Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-10T04:04:33.479Z",
+      "total": 4
     },
     "post-858a5a57": {
       "queries": {
@@ -11454,8 +11458,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-10T00:04:13.029Z",
-    "lastOkAt": "2026-10-09T12:04:12.496Z",
+    "lastRunAt": "2026-10-10T04:04:13.083Z",
+    "lastOkAt": "2026-10-10T04:04:13.083Z",
     "consecutiveFailedRuns": 0
   }
 }
