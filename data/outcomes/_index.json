@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-11T04:05:28.903Z",
+  "updatedAt": "2026-10-11T04:24:23.850Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11085,28 +11085,30 @@
         "integrated::하이엔드": {
           "okAgeHours": [
             53,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-04T04:05:00.614Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-11T04:24:14.307Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-04T04:05:00.614Z"
+          "lastAttemptAt": "2026-10-11T04:24:14.307Z"
         },
         "blog_tab::하이엔드": {
           "okAgeHours": [
             53,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-04T04:05:07.258Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-11T04:24:21.180Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-04T04:05:07.258Z"
+          "lastAttemptAt": "2026-10-11T04:24:21.180Z"
         }
       },
-      "lastCapturedAt": "2026-10-11T04:05:26.176Z",
-      "total": 28
+      "lastCapturedAt": "2026-10-11T04:24:21.180Z",
+      "total": 30
     },
     "post-2dfdfb28": {
       "queries": {
@@ -11516,8 +11518,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-11T04:04:13.920Z",
-    "lastOkAt": "2026-10-11T04:04:13.920Z",
+    "lastRunAt": "2026-10-11T04:24:13.962Z",
+    "lastOkAt": "2026-10-11T04:24:13.962Z",
     "consecutiveFailedRuns": 0
   }
 }
