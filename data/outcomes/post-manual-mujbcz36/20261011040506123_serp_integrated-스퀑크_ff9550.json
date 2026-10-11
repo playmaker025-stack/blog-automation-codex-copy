@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mujbcz36",
+  "source": "serp",
+  "capturedAt": "2026-10-11T04:05:06.123Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261011040506123_serp_integrated-스퀑크_ff9550",
+  "target": {
+    "surface": "integrated",
+    "query": "스퀑크"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "스퀑크",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 18,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

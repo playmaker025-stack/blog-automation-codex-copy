@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mujbcz36",
+  "source": "serp",
+  "capturedAt": "2026-10-11T04:04:52.677Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261011040452677_serp_integrated-RTA_04b4d4",
+  "target": {
+    "surface": "integrated",
+    "query": "RTA"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "RTA",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 20,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

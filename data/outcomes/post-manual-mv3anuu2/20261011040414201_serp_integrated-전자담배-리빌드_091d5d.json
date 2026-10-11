@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mv3anuu2",
+  "source": "serp",
+  "capturedAt": "2026-10-11T04:04:14.201Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261011040414201_serp_integrated-전자담배-리빌드_091d5d",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 리빌드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 리빌드",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 16,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224414188029",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224397752886",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223898304199",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223845254821",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224082778024",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
