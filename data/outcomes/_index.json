@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-11T06:24:51.095Z",
+  "updatedAt": "2026-10-11T07:44:24.518Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10967,28 +10967,30 @@
         "integrated::부평구 전자담배 액상": {
           "okAgeHours": [
             49,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-04T07:44:09.623Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-11T07:44:14.397Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-04T07:44:09.623Z"
+          "lastAttemptAt": "2026-10-11T07:44:14.397Z"
         },
         "blog_tab::부평구 전자담배 액상": {
           "okAgeHours": [
             49,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-04T07:44:16.842Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-11T07:44:21.690Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-04T07:44:16.842Z"
+          "lastAttemptAt": "2026-10-11T07:44:21.690Z"
         }
       },
-      "lastCapturedAt": "2026-10-04T07:44:16.842Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-11T07:44:21.690Z",
+      "total": 6
     },
     "post-manual-mujbcz36": {
       "queries": {
@@ -11524,8 +11526,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-11T06:24:13.726Z",
-    "lastOkAt": "2026-10-11T06:24:13.726Z",
+    "lastRunAt": "2026-10-11T07:44:13.960Z",
+    "lastOkAt": "2026-10-11T07:44:13.960Z",
     "consecutiveFailedRuns": 0
   }
 }
