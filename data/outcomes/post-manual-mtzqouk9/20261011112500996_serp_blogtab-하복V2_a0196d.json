@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtzqouk9",
+  "source": "serp",
+  "capturedAt": "2026-10-11T11:25:00.996Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261011112500996_serp_blogtab-하복V2_a0196d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "하복V2"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하복V2",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
