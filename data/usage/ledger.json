@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "lifetimeUsd": 10.144327000000002,
-  "lifetimeCalls": 416,
+  "lifetimeUsd": 10.145413000000003,
+  "lifetimeCalls": 417,
   "days": [
     {
       "date": "2026-08-24",
@@ -914,6 +914,20 @@
           "unpriced": false
         }
       }
+    },
+    {
+      "date": "2026-10-11",
+      "models": {
+        "gpt-4.1-mini": {
+          "calls": 1,
+          "inputTokens": 2695,
+          "outputTokens": 5,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "usd": 0.001086,
+          "unpriced": false
+        }
+      }
     }
   ],
   "balanceMarks": [
@@ -930,7 +944,7 @@
     }
   ],
   "lifetimeByProvider": {
-    "openai": 3.516793299999999
+    "openai": 3.517879299999999
   },
-  "updatedAt": "2026-10-09T02:45:48.096Z"
+  "updatedAt": "2026-10-11T03:59:50.291Z"
 }
