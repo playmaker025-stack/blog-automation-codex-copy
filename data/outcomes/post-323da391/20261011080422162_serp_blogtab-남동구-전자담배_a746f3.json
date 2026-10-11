@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-323da391",
+  "source": "serp",
+  "capturedAt": "2026-10-11T08:04:22.162Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261011080422162_serp_blogtab-남동구-전자담배_a746f3",
+  "target": {
+    "surface": "blog_tab",
+    "query": "남동구 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구 전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224400865016",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224394356256",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224384586821",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224431203073",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224317693159",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224322426520",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224360910281",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421252466",
+        "rank": 17
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
