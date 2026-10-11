@@ -13266,7 +13266,50 @@
       "createdAt": "2026-10-09T02:42:24.155Z",
       "publishedAt": null,
       "updatedAt": "2026-10-09T02:45:22.926Z"
+    },
+    {
+      "postId": "post-manual-mv3anuu2",
+      "topicId": "",
+      "userId": "d",
+      "title": "전자담배 리빌드에서 솜이 중요한 이유 – 같은 코일인데 맛이 달라지는 이유",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224437888667",
+      "wordCount": 0,
+      "targetKeywords": [
+        "전자담배 리빌드",
+        "리빌드 솜양"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224437888667",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224437888667"
+        },
+        "targetKeywords": [
+          {
+            "query": "전자담배 리빌드",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "리빌드 솜양",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "전자담배 리빌드에서 솜이 중요한 이유 – 같은 코일인데 맛이 달라지는 이유",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-11T03:59:31.610Z",
+        "keywordsRevisedAt": "2026-10-11T03:59:31.610Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-11T03:59:31.610Z",
+      "createdAt": "2026-10-11T03:59:31.610Z",
+      "updatedAt": "2026-10-11T03:59:31.610Z"
     }
   ],
-  "lastUpdated": "2026-10-09T02:45:22.926Z"
+  "lastUpdated": "2026-10-11T03:59:31.610Z"
 }
