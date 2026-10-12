@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-12T08:04:24.877Z",
+  "updatedAt": "2026-10-12T11:04:24.742Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11165,28 +11165,30 @@
         "integrated::스퀑크 모드란 무엇일까 -바텀피더와": {
           "okAgeHours": [
             22,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-05T11:04:10.106Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-12T11:04:15.127Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-05T11:04:10.106Z"
+          "lastAttemptAt": "2026-10-12T11:04:15.127Z"
         },
         "blog_tab::스퀑크 모드란 무엇일까 -바텀피더와": {
           "okAgeHours": [
             22,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-05T11:04:16.028Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-12T11:04:22.095Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-05T11:04:16.028Z"
+          "lastAttemptAt": "2026-10-12T11:04:22.095Z"
         }
       },
-      "lastCapturedAt": "2026-10-05T11:04:16.028Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-12T11:04:22.095Z",
+      "total": 6
     },
     "post-manual-mumlit0u": {
       "queries": {
@@ -11542,8 +11544,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-12T08:04:14.824Z",
-    "lastOkAt": "2026-10-12T08:04:14.824Z",
+    "lastRunAt": "2026-10-12T11:04:14.796Z",
+    "lastOkAt": "2026-10-12T11:04:14.796Z",
     "consecutiveFailedRuns": 0
   }
 }
