@@ -13309,7 +13309,41 @@
       "publishedAt": "2026-10-11T03:59:31.610Z",
       "createdAt": "2026-10-11T03:59:31.610Z",
       "updatedAt": "2026-10-11T03:59:31.610Z"
+    },
+    {
+      "postId": "post-manual-mv6mk6v0",
+      "topicId": "",
+      "userId": "d",
+      "title": "RTA에서 액상이 새는 이유 구조적으로 알아보자.",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224440643977",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224440643977",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224440643977"
+        },
+        "targetKeywords": [
+          {
+            "query": "RTA에서 액상이 새는",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "RTA에서 액상이 새는 이유 구조적으로 알아보자.",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-13T11:55:53.444Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-13T11:55:53.444Z",
+      "createdAt": "2026-10-13T11:55:53.444Z",
+      "updatedAt": "2026-10-13T11:55:53.444Z"
     }
   ],
-  "lastUpdated": "2026-10-11T03:59:31.610Z"
+  "lastUpdated": "2026-10-13T11:55:53.444Z"
 }
