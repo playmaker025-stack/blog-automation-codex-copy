@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-13T11:24:24.985Z",
+  "updatedAt": "2026-10-13T12:04:25.479Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11551,11 +11551,37 @@
       },
       "lastCapturedAt": "2026-10-11T04:04:34.316Z",
       "total": 4
+    },
+    "post-manual-mv6mk6v0": {
+      "queries": {
+        "integrated::RTA에서 액상이 새는": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-13T12:04:15.981Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-13T12:04:15.981Z"
+        },
+        "blog_tab::RTA에서 액상이 새는": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-13T12:04:22.711Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-13T12:04:22.711Z"
+        }
+      },
+      "lastCapturedAt": "2026-10-13T12:04:22.711Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-10-13T11:24:15.429Z",
-    "lastOkAt": "2026-10-13T11:24:15.429Z",
+    "lastRunAt": "2026-10-13T12:04:15.662Z",
+    "lastOkAt": "2026-10-13T12:04:15.662Z",
     "consecutiveFailedRuns": 0
   }
 }

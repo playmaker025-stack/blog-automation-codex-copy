@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mv6mk6v0",
+  "source": "serp",
+  "capturedAt": "2026-10-13T12:04:15.981Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261013120415981_serp_integrated-RTA에서-액상이-새는_c04df3",
+  "target": {
+    "surface": "integrated",
+    "query": "RTA에서 액상이 새는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "RTA에서 액상이 새는",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 8,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "223767512281",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
