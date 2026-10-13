@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mumlit0u",
+  "source": "serp",
+  "capturedAt": "2026-10-13T11:05:02.185Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261013110502185_serp_blogtab-리빌드_f3d21e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "리빌드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "리빌드",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224414188029",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224437888667",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
