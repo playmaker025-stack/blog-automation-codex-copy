@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-13T11:05:04.103Z",
+  "updatedAt": "2026-10-13T11:24:24.985Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9955,28 +9955,30 @@
         "integrated::남동구청역 전자담배 닷모드": {
           "okAgeHours": [
             331,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T11:24:05.829Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-13T11:24:15.746Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:24:05.829Z"
+          "lastAttemptAt": "2026-10-13T11:24:15.746Z"
         },
         "blog_tab::남동구청역 전자담배 닷모드": {
           "okAgeHours": [
             331,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-09-29T11:24:12.112Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-13T11:24:22.644Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T11:24:12.112Z"
+          "lastAttemptAt": "2026-10-13T11:24:22.644Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T11:24:12.112Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-13T11:24:22.644Z",
+      "total": 6
     },
     "post-manual-mu2oqd4q": {
       "queries": {
@@ -11552,8 +11554,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-13T11:04:15.629Z",
-    "lastOkAt": "2026-10-13T11:04:15.629Z",
+    "lastRunAt": "2026-10-13T11:24:15.429Z",
+    "lastOkAt": "2026-10-13T11:24:15.429Z",
     "consecutiveFailedRuns": 0
   }
 }
