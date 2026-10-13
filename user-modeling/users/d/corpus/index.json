@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mv6mk6v0",
+      "title": "RTA에서 액상이 새는 이유 구조적으로 알아보자.",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 3017,
+      "publishedAt": "2026-10-13T11:55:53.444Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mv6mk6v0.md"
+    },
+    {
       "sampleId": "published-post-manual-mv3anuu2",
       "title": "전자담배 리빌드에서 솜이 중요한 이유 – 같은 코일인데 맛이 달라지는 이유",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 6467,
       "publishedAt": "2026-08-07T12:14:28.650Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msiwq135.md"
-    },
-    {
-      "sampleId": "published-post-manual-msenaehp",
-      "title": "전자담배 입문자는 언제 '인생 액상'을 찾게 될까?",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6629,
-      "publishedAt": "2026-08-04T12:39:19.496Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msenaehp.md"
     }
   ],
-  "lastUpdated": "2026-10-11T03:59:39.185Z"
+  "lastUpdated": "2026-10-13T11:56:01.858Z"
 }
