@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-muxzr74p",
+  "source": "serp",
+  "capturedAt": "2026-10-14T10:44:16.882Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261014104416882_serp_integrated-전자담배-코일에서-핫스팟_90ff1a",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 코일에서 핫스팟이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일에서 핫스팟이",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "223845254821",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224083615082",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
