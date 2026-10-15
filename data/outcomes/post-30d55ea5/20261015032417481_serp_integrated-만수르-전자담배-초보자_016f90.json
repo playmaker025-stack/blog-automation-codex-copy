@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-30d55ea5",
+  "source": "serp",
+  "capturedAt": "2026-10-15T03:24:17.481Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261015032417481_serp_integrated-만수르-전자담배-초보자_016f90",
+  "target": {
+    "surface": "integrated",
+    "query": "만수르 전자담배 초보자"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수르 전자담배 초보자",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224299140074",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224276771070",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224109563734",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224117744480",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223668628432",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223966799587",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224326174633",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224323825838",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224308686675",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224098412395",
+        "rank": 13
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224115797512",
+        "rank": 14
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224354324677",
+        "rank": 15
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224300284999",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

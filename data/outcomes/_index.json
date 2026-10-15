@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-15T00:44:17.874Z",
+  "updatedAt": "2026-10-15T03:24:27.023Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11506,27 +11506,29 @@
       "queries": {
         "integrated::만수르 전자담배 초보자": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-08T04:04:12.199Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-15T03:24:17.481Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-08T04:04:12.199Z"
+          "lastAttemptAt": "2026-10-15T03:24:17.481Z"
         },
         "blog_tab::만수르 전자담배 초보자": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-08T04:04:19.020Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-15T03:24:24.292Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-08T04:04:19.020Z"
+          "lastAttemptAt": "2026-10-15T03:24:24.292Z"
         }
       },
-      "lastCapturedAt": "2026-10-08T04:04:19.020Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-15T03:24:24.292Z",
+      "total": 4
     },
     "post-manual-mv3anuu2": {
       "queries": {
@@ -11602,8 +11604,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-15T00:44:16.921Z",
-    "lastOkAt": "2026-10-14T12:44:16.237Z",
+    "lastRunAt": "2026-10-15T03:24:16.933Z",
+    "lastOkAt": "2026-10-15T03:24:16.933Z",
     "consecutiveFailedRuns": 0
   }
 }
