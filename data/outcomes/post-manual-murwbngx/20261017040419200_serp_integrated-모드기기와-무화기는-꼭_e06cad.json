@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-murwbngx",
+  "source": "serp",
+  "capturedAt": "2026-10-17T04:04:19.200Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261017040419200_serp_integrated-모드기기와-무화기는-꼭_e06cad",
+  "target": {
+    "surface": "integrated",
+    "query": "모드기기와 무화기는 꼭"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "모드기기와 무화기는 꼭",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 6,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
