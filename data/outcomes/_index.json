@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-17T08:04:28.388Z",
+  "updatedAt": "2026-10-17T10:24:41.952Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10399,50 +10399,54 @@
         "integrated::전담 액상 고르는 방법": {
           "okAgeHours": [
             237,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-03T10:24:08.422Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-17T10:24:19.102Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T10:24:08.422Z"
+          "lastAttemptAt": "2026-10-17T10:24:19.102Z"
         },
         "blog_tab::전담 액상 고르는 방법": {
           "okAgeHours": [
             237,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-03T10:24:15.581Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-17T10:24:26.415Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T10:24:15.581Z"
+          "lastAttemptAt": "2026-10-17T10:24:26.415Z"
         },
         "integrated::전담 액상 고르는": {
           "okAgeHours": [
             237,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-03T10:24:21.957Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-17T10:24:32.648Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T10:24:21.957Z"
+          "lastAttemptAt": "2026-10-17T10:24:32.648Z"
         },
         "blog_tab::전담 액상 고르는": {
           "okAgeHours": [
             237,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-03T10:24:28.733Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-17T10:24:39.330Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T10:24:28.733Z"
+          "lastAttemptAt": "2026-10-17T10:24:39.330Z"
         }
       },
-      "lastCapturedAt": "2026-10-03T10:24:28.733Z",
-      "total": 8
+      "lastCapturedAt": "2026-10-17T10:24:39.330Z",
+      "total": 12
     },
     "post-manual-mu84nxk6": {
       "queries": {
@@ -11624,8 +11628,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-17T08:04:18.651Z",
-    "lastOkAt": "2026-10-17T08:04:18.651Z",
+    "lastRunAt": "2026-10-17T10:24:18.761Z",
+    "lastOkAt": "2026-10-17T10:24:18.761Z",
     "consecutiveFailedRuns": 0
   }
 }
