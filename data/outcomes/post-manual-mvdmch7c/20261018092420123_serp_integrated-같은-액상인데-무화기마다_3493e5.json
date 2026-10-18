@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvdmch7c",
+  "source": "serp",
+  "capturedAt": "2026-10-18T09:24:20.123Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261018092420123_serp_integrated-같은-액상인데-무화기마다_3493e5",
+  "target": {
+    "surface": "integrated",
+    "query": "같은 액상인데 무화기마다"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "같은 액상인데 무화기마다",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 3,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
