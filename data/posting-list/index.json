@@ -13343,7 +13343,41 @@
       "publishedAt": "2026-10-13T11:55:53.444Z",
       "createdAt": "2026-10-13T11:55:53.444Z",
       "updatedAt": "2026-10-13T11:55:53.444Z"
+    },
+    {
+      "postId": "post-manual-mvdmch7c",
+      "topicId": "",
+      "userId": "d",
+      "title": "같은 액상인데 무화기마다 맛이 다른 이유 – 코일 구조와 공기 흐름의 차이",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224445681418",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224445681418",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224445681418"
+        },
+        "targetKeywords": [
+          {
+            "query": "같은 액상인데 무화기마다",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "같은 액상인데 무화기마다 맛이 다른 이유 – 코일 구조와 공기 흐름의 차이",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-18T09:24:15.908Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-18T09:24:15.908Z",
+      "createdAt": "2026-10-18T09:24:15.908Z",
+      "updatedAt": "2026-10-18T09:24:15.908Z"
     }
   ],
-  "lastUpdated": "2026-10-13T11:55:53.444Z"
+  "lastUpdated": "2026-10-18T09:24:15.908Z"
 }
