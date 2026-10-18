@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-18T02:24:29.556Z",
+  "updatedAt": "2026-10-18T03:44:42.540Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11560,47 +11560,51 @@
       "queries": {
         "integrated::전자담배 리빌드": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-11T04:04:14.201Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-18T03:44:20.083Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T04:04:14.201Z"
+          "lastAttemptAt": "2026-10-18T03:44:20.083Z"
         },
         "blog_tab::전자담배 리빌드": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-11T04:04:21.448Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-18T03:44:27.298Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T04:04:21.448Z"
+          "lastAttemptAt": "2026-10-18T03:44:27.298Z"
         },
         "integrated::리빌드 솜양": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-11T04:04:27.714Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-18T03:44:32.846Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T04:04:27.714Z"
+          "lastAttemptAt": "2026-10-18T03:44:32.846Z"
         },
         "blog_tab::리빌드 솜양": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-11T04:04:34.316Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-18T03:44:39.614Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T04:04:34.316Z"
+          "lastAttemptAt": "2026-10-18T03:44:39.614Z"
         }
       },
-      "lastCapturedAt": "2026-10-11T04:04:34.316Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-18T03:44:39.614Z",
+      "total": 8
     },
     "post-manual-mv6mk6v0": {
       "queries": {
@@ -11630,8 +11634,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-18T02:24:19.477Z",
-    "lastOkAt": "2026-10-18T02:24:19.477Z",
+    "lastRunAt": "2026-10-18T03:44:19.727Z",
+    "lastOkAt": "2026-10-18T03:44:19.727Z",
     "consecutiveFailedRuns": 0
   }
 }

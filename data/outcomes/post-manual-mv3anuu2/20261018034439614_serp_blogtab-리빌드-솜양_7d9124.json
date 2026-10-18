@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mv3anuu2",
+  "source": "serp",
+  "capturedAt": "2026-10-18T03:44:39.614Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261018034439614_serp_blogtab-리빌드-솜양_7d9124",
+  "target": {
+    "surface": "blog_tab",
+    "query": "리빌드 솜양"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "리빌드 솜양",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224437888667",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223845254821",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224440643977",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
