@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-17T22:24:20.354Z",
+  "updatedAt": "2026-10-18T02:24:29.556Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11427,28 +11427,30 @@
         "integrated::전담 탄맛 발생": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-11T02:24:13.993Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-18T02:24:20.290Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T02:24:13.993Z"
+          "lastAttemptAt": "2026-10-18T02:24:20.290Z"
         },
         "blog_tab::전담 탄맛 발생": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-11T02:24:20.746Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-18T02:24:26.962Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T02:24:20.746Z"
+          "lastAttemptAt": "2026-10-18T02:24:26.962Z"
         }
       },
-      "lastCapturedAt": "2026-10-11T02:24:20.746Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-18T02:24:26.962Z",
+      "total": 6
     },
     "post-323da391": {
       "queries": {
@@ -11628,8 +11630,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-17T22:24:19.651Z",
-    "lastOkAt": "2026-10-17T10:24:18.761Z",
+    "lastRunAt": "2026-10-18T02:24:19.477Z",
+    "lastOkAt": "2026-10-18T02:24:19.477Z",
     "consecutiveFailedRuns": 0
   }
 }
