@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-18T05:45:21.043Z",
+  "updatedAt": "2026-10-18T08:04:29.363Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11467,24 +11467,26 @@
         "integrated::남동구 전자담배": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-11T08:04:14.558Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-18T08:04:20.055Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T08:04:14.558Z"
+          "lastAttemptAt": "2026-10-18T08:04:20.055Z"
         },
         "blog_tab::남동구 전자담배": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-11T08:04:22.162Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-18T08:04:26.844Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T08:04:22.162Z"
+          "lastAttemptAt": "2026-10-18T08:04:26.844Z"
         },
         "integrated::남동구 전자담배 액상": {
           "okAgeHours": [
@@ -11507,8 +11509,8 @@
           "lastAttemptAt": "2026-10-04T08:44:29.842Z"
         }
       },
-      "lastCapturedAt": "2026-10-11T08:04:22.162Z",
-      "total": 6
+      "lastCapturedAt": "2026-10-18T08:04:26.844Z",
+      "total": 8
     },
     "post-manual-muxzr74p": {
       "queries": {
@@ -11644,8 +11646,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-18T05:44:19.666Z",
-    "lastOkAt": "2026-10-18T05:44:19.666Z",
+    "lastRunAt": "2026-10-18T08:04:19.697Z",
+    "lastOkAt": "2026-10-18T08:04:19.697Z",
     "consecutiveFailedRuns": 0
   }
 }
