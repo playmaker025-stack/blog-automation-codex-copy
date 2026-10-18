@@ -2,6 +2,15 @@
   "userId": "d",
   "samples": [
     {
+      "sampleId": "published-post-manual-mvdmch7c",
+      "title": "같은 액상인데 무화기마다 맛이 다른 이유 – 코일 구조와 공기 흐름의 차이",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2849,
+      "publishedAt": "2026-10-18T09:24:15.908Z",
+      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mvdmch7c.md"
+    },
+    {
       "sampleId": "published-post-manual-mv6mk6v0",
       "title": "RTA에서 액상이 새는 이유 구조적으로 알아보자.",
       "category": "published-post",
@@ -261,16 +270,7 @@
       "wordCount": 7579,
       "publishedAt": "2026-08-09T05:17:55.972Z",
       "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-mslcq13v.md"
-    },
-    {
-      "sampleId": "published-post-manual-msiwq135",
-      "title": "전자담배 액상 추천을 받았는데 내 입맛에는 안 맞는 이유",
-      "category": "published-post",
-      "tags": [],
-      "wordCount": 6467,
-      "publishedAt": "2026-08-07T12:14:28.650Z",
-      "filePath": "user-modeling/users/d/corpus/samples/published-post-manual-msiwq135.md"
     }
   ],
-  "lastUpdated": "2026-10-13T11:56:01.858Z"
+  "lastUpdated": "2026-10-18T09:24:22.854Z"
 }
