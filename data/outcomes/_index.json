@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-19T03:24:21.569Z",
+  "updatedAt": "2026-10-19T08:44:44.174Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10609,50 +10609,54 @@
         "integrated::전자담배 위탁수하물": {
           "okAgeHours": [
             191,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-05T08:44:10.187Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-19T08:44:21.193Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-05T08:44:10.187Z"
+          "lastAttemptAt": "2026-10-19T08:44:21.193Z"
         },
         "blog_tab::전자담배 위탁수하물": {
           "okAgeHours": [
             191,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-05T08:44:16.673Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-19T08:44:28.117Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-05T08:44:16.673Z"
+          "lastAttemptAt": "2026-10-19T08:44:28.117Z"
         },
         "integrated::비행기 전자담배 위탁수하물": {
           "okAgeHours": [
             191,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-05T08:44:22.351Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-19T08:44:34.449Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-05T08:44:22.351Z"
+          "lastAttemptAt": "2026-10-19T08:44:34.449Z"
         },
         "blog_tab::비행기 전자담배 위탁수하물": {
           "okAgeHours": [
             191,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-05T08:44:28.968Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-19T08:44:41.272Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-05T08:44:28.968Z"
+          "lastAttemptAt": "2026-10-19T08:44:41.272Z"
         }
       },
-      "lastCapturedAt": "2026-10-05T08:44:28.968Z",
-      "total": 8
+      "lastCapturedAt": "2026-10-19T08:44:41.272Z",
+      "total": 12
     },
     "post-manual-mub8dhw8": {
       "queries": {
@@ -11672,8 +11676,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-19T03:24:20.462Z",
-    "lastOkAt": "2026-10-18T09:24:19.555Z",
+    "lastRunAt": "2026-10-19T08:44:20.721Z",
+    "lastOkAt": "2026-10-19T08:44:20.721Z",
     "consecutiveFailedRuns": 0
   }
 }
