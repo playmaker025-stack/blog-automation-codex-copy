@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-19T08:44:44.174Z",
+  "updatedAt": "2026-10-19T12:24:30.752Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10663,28 +10663,30 @@
         "integrated::하이엔드 전자담배는 어떤": {
           "okAgeHours": [
             188,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-05T12:24:10.232Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-19T12:24:21.097Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-05T12:24:10.232Z"
+          "lastAttemptAt": "2026-10-19T12:24:21.097Z"
         },
         "blog_tab::하이엔드 전자담배는 어떤": {
           "okAgeHours": [
             188,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-05T12:24:16.862Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-19T12:24:28.049Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-05T12:24:16.862Z"
+          "lastAttemptAt": "2026-10-19T12:24:28.049Z"
         }
       },
-      "lastCapturedAt": "2026-10-05T12:24:16.862Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-19T12:24:28.049Z",
+      "total": 6
     },
     "post-manual-mucfo12x": {
       "queries": {
@@ -11676,8 +11678,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-19T08:44:20.721Z",
-    "lastOkAt": "2026-10-19T08:44:20.721Z",
+    "lastRunAt": "2026-10-19T12:24:20.705Z",
+    "lastOkAt": "2026-10-19T12:24:20.705Z",
     "consecutiveFailedRuns": 0
   }
 }
