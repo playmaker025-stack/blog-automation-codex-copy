@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mucfo12x",
+  "source": "serp",
+  "capturedAt": "2026-10-20T08:24:22.043Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261020082422043_serp_integrated-버블몬-비어_6f7c3c",
+  "target": {
+    "surface": "integrated",
+    "query": "버블몬 비어"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "버블몬 비어",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224420074157",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
