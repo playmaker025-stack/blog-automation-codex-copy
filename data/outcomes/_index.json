@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-21T05:44:23.658Z",
+  "updatedAt": "2026-10-21T08:24:45.605Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10804,53 +10804,57 @@
           "okAgeHours": [
             144,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-07T08:24:11.300Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-21T08:24:22.811Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-07T08:24:11.300Z"
+          "lastAttemptAt": "2026-10-21T08:24:22.811Z"
         },
         "blog_tab::전자담배 고장": {
           "okAgeHours": [
             144,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-07T08:24:18.232Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-21T08:24:29.617Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-07T08:24:18.232Z"
+          "lastAttemptAt": "2026-10-21T08:24:29.617Z"
         },
         "integrated::전자담배 고장 고치는법": {
           "okAgeHours": [
             144,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-07T08:24:24.440Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-21T08:24:35.895Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-07T08:24:24.440Z"
+          "lastAttemptAt": "2026-10-21T08:24:35.895Z"
         },
         "blog_tab::전자담배 고장 고치는법": {
           "okAgeHours": [
             144,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-07T08:24:31.053Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-21T08:24:42.691Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-07T08:24:31.053Z"
+          "lastAttemptAt": "2026-10-21T08:24:42.691Z"
         }
       },
-      "lastCapturedAt": "2026-10-07T08:24:31.053Z",
-      "total": 12
+      "lastCapturedAt": "2026-10-21T08:24:42.691Z",
+      "total": 16
     },
     "post-manual-mufhed0y": {
       "queries": {
@@ -11688,8 +11692,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-21T05:44:22.424Z",
-    "lastOkAt": "2026-10-20T11:44:21.578Z",
+    "lastRunAt": "2026-10-21T08:24:22.413Z",
+    "lastOkAt": "2026-10-21T08:24:22.413Z",
     "consecutiveFailedRuns": 0
   }
 }

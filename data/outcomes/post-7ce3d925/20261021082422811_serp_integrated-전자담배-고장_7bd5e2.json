@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-7ce3d925",
+  "source": "serp",
+  "capturedAt": "2026-10-21T08:24:22.811Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261021082422811_serp_integrated-전자담배-고장_7bd5e2",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 고장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 고장",
+    "surface": "integrated",
+    "querySource": "topic",
+    "device": "mobile",
+    "rank": 32,
+    "searchedResultLimit": 32,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224421116037",
+        "rank": 32
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
