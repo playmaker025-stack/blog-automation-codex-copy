@@ -13377,7 +13377,74 @@
       "publishedAt": "2026-10-18T09:24:15.908Z",
       "createdAt": "2026-10-18T09:24:15.908Z",
       "updatedAt": "2026-10-18T09:24:15.908Z"
+    },
+    {
+      "postId": "post-manual-mvi2icv8",
+      "topicId": "",
+      "userId": "d",
+      "title": "부평 만수르 유웰 하복 V2 출시 입호흡 폐호흡 다 가능한 전자담배",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224449397910",
+      "wordCount": 0,
+      "targetKeywords": [
+        "하복v2",
+        "유웰",
+        "무화량",
+        "입호흡",
+        "폐호흡",
+        "부평전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224449397910",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224449397910"
+        },
+        "targetKeywords": [
+          {
+            "query": "하복v2",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "유웰",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "무화량",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "입호흡",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "폐호흡",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "부평전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부평 만수르 유웰 하복 V2 출시 입호흡 폐호흡 다 가능한 전자담배",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-21T12:07:49.742Z",
+        "keywordsRevisedAt": "2026-10-21T12:07:49.742Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-21T12:07:49.742Z",
+      "createdAt": "2026-10-21T12:07:49.742Z",
+      "updatedAt": "2026-10-21T12:07:49.742Z"
     }
   ],
-  "lastUpdated": "2026-10-18T09:24:15.908Z"
+  "lastUpdated": "2026-10-21T12:07:49.742Z"
 }
