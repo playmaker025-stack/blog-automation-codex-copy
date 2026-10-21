@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi2icv8",
+  "source": "serp",
+  "capturedAt": "2026-10-21T12:24:42.664Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261021122442664_serp_blogtab-유웰_d05eb4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "유웰"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "유웰",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

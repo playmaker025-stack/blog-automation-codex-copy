@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi2icv8",
+  "source": "serp",
+  "capturedAt": "2026-10-21T12:24:48.902Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261021122448902_serp_integrated-무화량_4489fd",
+  "target": {
+    "surface": "integrated",
+    "query": "무화량"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "220790536875",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221191133141",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220842716815",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221183967965",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221297508664",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221551357924",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224284614293",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

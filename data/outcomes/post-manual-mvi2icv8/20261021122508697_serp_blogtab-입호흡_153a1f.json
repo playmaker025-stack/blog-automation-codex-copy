@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi2icv8",
+  "source": "serp",
+  "capturedAt": "2026-10-21T12:25:08.697Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261021122508697_serp_blogtab-입호흡_153a1f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

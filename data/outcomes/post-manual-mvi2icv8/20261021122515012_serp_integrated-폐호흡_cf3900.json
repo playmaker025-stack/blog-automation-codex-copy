@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi2icv8",
+  "source": "serp",
+  "capturedAt": "2026-10-21T12:25:15.012Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261021122515012_serp_integrated-폐호흡_cf3900",
+  "target": {
+    "surface": "integrated",
+    "query": "폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

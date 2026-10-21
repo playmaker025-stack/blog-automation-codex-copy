@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi2icv8",
+  "source": "serp",
+  "capturedAt": "2026-10-21T12:24:22.464Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261021122422464_serp_integrated-하복v2_2534ff",
+  "target": {
+    "surface": "integrated",
+    "query": "하복v2"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하복v2",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

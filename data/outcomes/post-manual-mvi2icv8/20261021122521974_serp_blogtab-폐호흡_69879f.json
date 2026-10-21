@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi2icv8",
+  "source": "serp",
+  "capturedAt": "2026-10-21T12:25:21.974Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261021122521974_serp_blogtab-폐호흡_69879f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 12
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 16
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
