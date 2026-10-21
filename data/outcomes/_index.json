@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-21T12:25:37.550Z",
+  "updatedAt": "2026-10-21T13:05:24.483Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11817,11 +11817,117 @@
       },
       "lastCapturedAt": "2026-10-21T12:25:34.961Z",
       "total": 12
+    },
+    "post-manual-mvi3z7a2": {
+      "queries": {
+        "integrated::입호흡디저트액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:04:22.774Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:04:22.774Z"
+        },
+        "blog_tab::입호흡디저트액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:04:29.662Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:04:29.662Z"
+        },
+        "integrated::입호흡액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:04:35.942Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:04:35.942Z"
+        },
+        "blog_tab::입호흡액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:04:43.021Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:04:43.021Z"
+        },
+        "integrated::디저트액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:04:49.403Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:04:49.403Z"
+        },
+        "blog_tab::디저트액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:04:56.408Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:04:56.408Z"
+        },
+        "integrated::전자담배액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:05:02.789Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:05:02.789Z"
+        },
+        "blog_tab::전자담배액상": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:05:08.826Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:05:08.826Z"
+        },
+        "integrated::인천전자담배": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:05:14.980Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:05:14.980Z"
+        },
+        "blog_tab::인천전자담배": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-10-21T13:05:21.735Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-21T13:05:21.735Z"
+        }
+      },
+      "lastCapturedAt": "2026-10-21T13:05:21.735Z",
+      "total": 10
     }
   },
   "health": {
-    "lastRunAt": "2026-10-21T12:24:22.158Z",
-    "lastOkAt": "2026-10-21T12:24:22.158Z",
+    "lastRunAt": "2026-10-21T13:04:22.359Z",
+    "lastOkAt": "2026-10-21T13:04:22.359Z",
     "consecutiveFailedRuns": 0
   }
 }

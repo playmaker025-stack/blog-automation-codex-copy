@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi3z7a2",
+  "source": "serp",
+  "capturedAt": "2026-10-21T13:05:02.789Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261021130502789_serp_integrated-전자담배액상_191f7e",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배액상",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 27,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
