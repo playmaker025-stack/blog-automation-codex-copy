@@ -13444,7 +13444,68 @@
       "publishedAt": "2026-10-21T12:07:49.742Z",
       "createdAt": "2026-10-21T12:07:49.742Z",
       "updatedAt": "2026-10-21T12:07:49.742Z"
+    },
+    {
+      "postId": "post-manual-mvi3z7a2",
+      "topicId": "",
+      "userId": "e",
+      "title": "인천 전자담배 디저트 입호흡 액상 리뷰해봅니다.",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/godmaker0/224449436657",
+      "wordCount": 0,
+      "targetKeywords": [
+        "입호흡디저트액상",
+        "입호흡액상",
+        "디저트액상",
+        "전자담배액상",
+        "인천전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "godmaker0",
+          "logNo": "224449436657",
+          "canonicalUrl": "https://blog.naver.com/godmaker0/224449436657"
+        },
+        "targetKeywords": [
+          {
+            "query": "입호흡디저트액상",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "입호흡액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "디저트액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "인천전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "인천 전자담배 디저트 입호흡 액상 리뷰해봅니다.",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-21T12:48:55.924Z",
+        "keywordsRevisedAt": "2026-10-21T12:48:55.924Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-21T12:48:55.924Z",
+      "createdAt": "2026-10-21T12:48:55.924Z",
+      "updatedAt": "2026-10-21T12:48:55.924Z"
     }
   ],
-  "lastUpdated": "2026-10-21T12:07:49.742Z"
+  "lastUpdated": "2026-10-21T12:48:55.924Z"
 }
