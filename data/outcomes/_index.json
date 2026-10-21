@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-21T08:24:45.605Z",
+  "updatedAt": "2026-10-21T10:44:31.811Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11535,28 +11535,30 @@
         "integrated::전자담배 코일에서 핫스팟이": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-14T10:44:16.882Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-21T10:44:22.967Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-14T10:44:16.882Z"
+          "lastAttemptAt": "2026-10-21T10:44:22.967Z"
         },
         "blog_tab::전자담배 코일에서 핫스팟이": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-10-14T10:44:23.757Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-21T10:44:29.708Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-14T10:44:23.757Z"
+          "lastAttemptAt": "2026-10-21T10:44:29.708Z"
         }
       },
-      "lastCapturedAt": "2026-10-14T10:44:23.757Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-21T10:44:29.708Z",
+      "total": 6
     },
     "post-30d55ea5": {
       "queries": {
@@ -11692,8 +11694,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-21T08:24:22.413Z",
-    "lastOkAt": "2026-10-21T08:24:22.413Z",
+    "lastRunAt": "2026-10-21T10:44:22.536Z",
+    "lastOkAt": "2026-10-21T10:44:22.536Z",
     "consecutiveFailedRuns": 0
   }
 }
