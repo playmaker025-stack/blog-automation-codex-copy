@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-30d55ea5",
+  "source": "serp",
+  "capturedAt": "2026-10-22T03:24:23.314Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261022032423314_serp_integrated-만수르-전자담배-초보자_016f90",
+  "target": {
+    "surface": "integrated",
+    "query": "만수르 전자담배 초보자"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수르 전자담배 초보자",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224299140074",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223668628432",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223768667435",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224435119042",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224323825838",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224125646533",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
