@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mvj95qg7",
+      "title": "인천 전자담배 멀티샵 만수동 만수르",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1289,
+      "publishedAt": "2026-10-22T08:01:46.393Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mvj95qg7.md"
+    },
+    {
       "sampleId": "published-post-323da391",
       "title": "남동구 전자담배 액상 역류·액튐 현상 원인과 해결법",
       "category": "direct-run",
@@ -366,25 +375,7 @@
       "wordCount": 1234,
       "publishedAt": "2026-01-16T00:00:00.000Z",
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-06.md"
-    },
-    {
-      "sampleId": "reference-b-04",
-      "title": "상동전자담배 일회용 대용량 액상 전담 버블몬 그래비티",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "상동전자담배",
-        "일회용",
-        "대용량"
-      ],
-      "wordCount": 1588,
-      "publishedAt": "2025-06-21T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-04.md"
     }
   ],
-  "lastUpdated": "2026-10-05T01:14:48.468Z"
+  "lastUpdated": "2026-10-22T08:01:53.720Z"
 }
