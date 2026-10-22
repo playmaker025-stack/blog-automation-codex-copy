@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mufhed0y",
+  "source": "serp",
+  "capturedAt": "2026-10-22T11:44:30.984Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261022114430984_serp_blogtab-구월동전자담배_f3d4a6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224420074157",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224332153941",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224198373019",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224322426520",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224088120039",
+        "rank": 14
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224087835994",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224138427996",
+        "rank": 16
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224117744480",
+        "rank": 19
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224272638838",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224087773782",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
