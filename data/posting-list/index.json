@@ -13539,7 +13539,56 @@
       "publishedAt": "2026-10-22T08:01:46.393Z",
       "createdAt": "2026-10-22T08:01:46.393Z",
       "updatedAt": "2026-10-22T08:01:46.393Z"
+    },
+    {
+      "postId": "post-manual-mvkzentz",
+      "topicId": "",
+      "userId": "d",
+      "title": "부평전자담배 닷박스 220w v2 무화량 많은 닷모드기기 만수르 베이프",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224451704218",
+      "wordCount": 0,
+      "targetKeywords": [
+        "닷모드",
+        "모드기기",
+        "닷220w"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224451704218",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224451704218"
+        },
+        "targetKeywords": [
+          {
+            "query": "닷모드",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "모드기기",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "닷220w",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부평전자담배 닷박스 220w v2 무화량 많은 닷모드기기 만수르 베이프",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-23T13:04:16.626Z",
+        "keywordsRevisedAt": "2026-10-23T13:04:16.626Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-23T13:04:16.626Z",
+      "createdAt": "2026-10-23T13:04:16.626Z",
+      "updatedAt": "2026-10-23T13:04:16.626Z"
     }
   ],
-  "lastUpdated": "2026-10-22T08:01:46.393Z"
+  "lastUpdated": "2026-10-23T13:04:16.626Z"
 }
