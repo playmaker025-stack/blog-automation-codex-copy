@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mv3anuu2",
+  "source": "serp",
+  "capturedAt": "2026-10-25T03:44:32.830Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261025034432830_serp_blogtab-전자담배-리빌드_d6dd9d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 리빌드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 리빌드",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224414188029",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224083615082",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224063328168",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224417738172",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224082639970",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223845254821",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

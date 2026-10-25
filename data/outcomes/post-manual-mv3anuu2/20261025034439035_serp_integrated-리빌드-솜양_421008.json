@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mv3anuu2",
+  "source": "serp",
+  "capturedAt": "2026-10-25T03:44:39.035Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261025034439035_serp_integrated-리빌드-솜양_421008",
+  "target": {
+    "surface": "integrated",
+    "query": "리빌드 솜양"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "리빌드 솜양",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 24,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
