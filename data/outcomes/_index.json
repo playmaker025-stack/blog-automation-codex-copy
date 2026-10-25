@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-25T04:05:26.990Z",
+  "updatedAt": "2026-10-25T07:44:35.266Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11062,29 +11062,31 @@
           "okAgeHours": [
             49,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-11T07:44:14.397Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-25T07:44:26.127Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T07:44:14.397Z"
+          "lastAttemptAt": "2026-10-25T07:44:26.127Z"
         },
         "blog_tab::부평구 전자담배 액상": {
           "okAgeHours": [
             49,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-11T07:44:21.690Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-25T07:44:33.393Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-11T07:44:21.690Z"
+          "lastAttemptAt": "2026-10-25T07:44:33.393Z"
         }
       },
-      "lastCapturedAt": "2026-10-11T07:44:21.690Z",
-      "total": 6
+      "lastCapturedAt": "2026-10-25T07:44:33.393Z",
+      "total": 8
     },
     "post-manual-mujbcz36": {
       "queries": {
@@ -12048,8 +12050,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-25T04:04:25.522Z",
-    "lastOkAt": "2026-10-25T04:04:25.522Z",
+    "lastRunAt": "2026-10-25T07:44:25.658Z",
+    "lastOkAt": "2026-10-25T07:44:25.658Z",
     "consecutiveFailedRuns": 0
   }
 }

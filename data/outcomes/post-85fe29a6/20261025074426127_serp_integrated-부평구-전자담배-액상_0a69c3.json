@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-85fe29a6",
+  "source": "serp",
+  "capturedAt": "2026-10-25T07:44:26.127Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261025074426127_serp_integrated-부평구-전자담배-액상_0a69c3",
+  "target": {
+    "surface": "integrated",
+    "query": "부평구 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평구 전자담배 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224423068124",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224358595068",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223873408825",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
