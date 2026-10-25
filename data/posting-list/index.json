@@ -13588,7 +13588,56 @@
       "publishedAt": "2026-10-23T13:04:16.626Z",
       "createdAt": "2026-10-23T13:04:16.626Z",
       "updatedAt": "2026-10-23T13:04:16.626Z"
+    },
+    {
+      "postId": "post-manual-mvnmeu6e",
+      "topicId": "",
+      "userId": "d",
+      "title": "일회용 전자담배 말론 사용법과 추천 맛 후기 부평 만수르 전자담배",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224453253250",
+      "wordCount": 0,
+      "targetKeywords": [
+        "부평전자담배",
+        "만수르전자담배",
+        "말론바"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224453253250",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224453253250"
+        },
+        "targetKeywords": [
+          {
+            "query": "부평전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "만수르전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "말론바",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "일회용 전자담배 말론 사용법과 추천 맛 후기 부평 만수르 전자담배",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-25T09:23:49.603Z",
+        "keywordsRevisedAt": "2026-10-25T09:23:49.603Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-25T09:23:49.603Z",
+      "createdAt": "2026-10-25T09:23:49.603Z",
+      "updatedAt": "2026-10-25T09:23:49.603Z"
     }
   ],
-  "lastUpdated": "2026-10-23T13:04:16.626Z"
+  "lastUpdated": "2026-10-25T09:23:49.603Z"
 }
