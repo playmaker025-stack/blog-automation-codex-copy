@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvdmch7c",
+  "source": "serp",
+  "capturedAt": "2026-10-25T09:04:32.294Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261025090432294_serp_blogtab-같은-액상인데-무화기마다_a59812",
+  "target": {
+    "surface": "blog_tab",
+    "query": "같은 액상인데 무화기마다"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "같은 액상인데 무화기마다",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224445681418",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224440643977",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
