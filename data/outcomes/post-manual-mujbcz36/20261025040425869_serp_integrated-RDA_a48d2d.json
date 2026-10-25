@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mujbcz36",
+  "source": "serp",
+  "capturedAt": "2026-10-25T04:04:25.869Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261025040425869_serp_integrated-RDA_a48d2d",
+  "target": {
+    "surface": "integrated",
+    "query": "RDA"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "RDA",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 21,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
