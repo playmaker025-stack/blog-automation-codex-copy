@@ -13637,7 +13637,50 @@
       "publishedAt": "2026-10-25T09:23:49.603Z",
       "createdAt": "2026-10-25T09:23:49.603Z",
       "updatedAt": "2026-10-25T09:23:49.603Z"
+    },
+    {
+      "postId": "post-manual-mvnrlvv9",
+      "topicId": "",
+      "userId": "e",
+      "title": "인천구월전자담배 만수동만수르 매장 이전 안내해드립니다~",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/godmaker0/224453360618",
+      "wordCount": 0,
+      "targetKeywords": [
+        "인천전자담배",
+        "구월전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "godmaker0",
+          "logNo": "224453360618",
+          "canonicalUrl": "https://blog.naver.com/godmaker0/224453360618"
+        },
+        "targetKeywords": [
+          {
+            "query": "인천전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "구월전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "인천구월전자담배 만수동만수르 매장 이전 안내해드립니다~",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-25T11:49:16.325Z",
+        "keywordsRevisedAt": "2026-10-25T11:49:16.325Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-25T11:49:16.325Z",
+      "createdAt": "2026-10-25T11:49:16.325Z",
+      "updatedAt": "2026-10-25T11:49:16.325Z"
     }
   ],
-  "lastUpdated": "2026-10-25T09:23:49.603Z"
+  "lastUpdated": "2026-10-25T11:49:16.325Z"
 }
