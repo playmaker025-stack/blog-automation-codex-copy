@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-cd0ebae7",
+  "source": "serp",
+  "capturedAt": "2026-10-26T13:44:34.262Z",
+  "postAgeHours": 5174,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026134434262_serp_blogtab-전자담배-지지직-소리_586aa7",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 지지직 소리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 지지직 소리",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224338423172",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224292788207",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224229376002",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224254936000",
+        "rank": 14
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
