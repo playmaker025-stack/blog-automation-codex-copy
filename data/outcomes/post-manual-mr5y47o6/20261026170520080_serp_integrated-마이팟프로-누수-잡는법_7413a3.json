@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr5y47o6",
+  "source": "serp",
+  "capturedAt": "2026-10-26T17:05:20.080Z",
+  "postAgeHours": 2747,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026170520080_serp_integrated-마이팟프로-누수-잡는법_7413a3",
+  "target": {
+    "surface": "integrated",
+    "query": "마이팟프로 누수 잡는법"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "마이팟프로 누수 잡는법",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 15,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224336195481",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

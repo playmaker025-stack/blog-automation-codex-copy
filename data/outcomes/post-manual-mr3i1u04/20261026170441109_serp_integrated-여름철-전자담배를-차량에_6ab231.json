@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr3i1u04",
+  "source": "serp",
+  "capturedAt": "2026-10-26T17:04:41.109Z",
+  "postAgeHours": 2788,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026170441109_serp_integrated-여름철-전자담배를-차량에_6ab231",
+  "target": {
+    "surface": "integrated",
+    "query": "여름철 전자담배를 차량에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "여름철 전자담배를 차량에",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 14,
+    "searchedResultLimit": 20,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224334604479",
+        "rank": 14
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224315609096",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
