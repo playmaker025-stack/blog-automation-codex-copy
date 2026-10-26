@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-6de3673d",
+  "source": "serp",
+  "capturedAt": "2026-10-26T18:05:12.273Z",
+  "postAgeHours": 2532,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026180512273_serp_blogtab-인천-부천-상동_c32bad",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 부천 상동"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 부천 상동",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
