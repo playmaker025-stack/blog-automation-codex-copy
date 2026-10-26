@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3647da1c69",
+  "source": "serp",
+  "capturedAt": "2026-10-26T16:24:52.742Z",
+  "postAgeHours": 4552,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026162452742_serp_integrated-주안-전자담배-제품_a7813a",
+  "target": {
+    "surface": "integrated",
+    "query": "주안 전자담배 제품"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "주안 전자담배 제품",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 18,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224258931655",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
