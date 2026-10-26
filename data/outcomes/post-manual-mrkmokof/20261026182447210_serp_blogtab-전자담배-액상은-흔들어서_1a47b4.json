@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrkmokof",
+  "source": "serp",
+  "capturedAt": "2026-10-26T18:24:47.210Z",
+  "postAgeHours": 2502,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026182447210_serp_blogtab-전자담배-액상은-흔들어서_1a47b4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상은 흔들어서"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 흔들어서",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224326174633",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224354691142",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224383674346",
+        "rank": 25
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224421116037",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
