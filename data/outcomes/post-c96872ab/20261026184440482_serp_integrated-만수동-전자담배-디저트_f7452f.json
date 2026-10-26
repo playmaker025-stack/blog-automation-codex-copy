@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-c96872ab",
+  "source": "serp",
+  "capturedAt": "2026-10-26T18:44:40.482Z",
+  "postAgeHours": 2407,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026184440482_serp_integrated-만수동-전자담배-디저트_f7452f",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 디저트"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 디저트",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 22,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223827602764",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224350453138",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220821278984",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221111480591",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

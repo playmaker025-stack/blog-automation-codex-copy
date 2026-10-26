@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b626b001",
+  "source": "serp",
+  "capturedAt": "2026-10-26T18:45:31.954Z",
+  "postAgeHours": 2334,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026184531954_serp_integrated-장수동-전자담배_f13e82",
+  "target": {
+    "surface": "integrated",
+    "query": "장수동 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "장수동 전자담배",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 8,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224141880874",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224019225526",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

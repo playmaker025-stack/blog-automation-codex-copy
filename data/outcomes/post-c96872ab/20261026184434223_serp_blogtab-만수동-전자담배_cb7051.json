@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-c96872ab",
+  "source": "serp",
+  "capturedAt": "2026-10-26T18:44:34.223Z",
+  "postAgeHours": 2407,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026184434223_serp_blogtab-만수동-전자담배_cb7051",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224327309099",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224297016462",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224274819132",
+        "rank": 15
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224347729064",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
