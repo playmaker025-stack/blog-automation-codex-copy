@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6xe2cd",
+  "source": "serp",
+  "capturedAt": "2026-10-26T22:44:34.717Z",
+  "postAgeHours": 1527,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026224434717_serp_blogtab-인천-전자담배-만수동만수르_b999cf",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 전자담배 만수동만수르"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 만수동만수르",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 23,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224453360618",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224450321386",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224383515315",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223536974417",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223824138182",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224183844278",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224115874233",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223788043710",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220873005777",
+        "rank": 15
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224085454297",
+        "rank": 17
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224132046324",
+        "rank": 18
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224190850033",
+        "rank": 19
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224304878566",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

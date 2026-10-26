@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6yxtgj",
+  "source": "serp",
+  "capturedAt": "2026-10-26T22:45:24.693Z",
+  "postAgeHours": 1526,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026224524693_serp_blogtab-무니코틴-액상-담배_85b0e8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "무니코틴 액상 담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무니코틴 액상 담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224388865358",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
