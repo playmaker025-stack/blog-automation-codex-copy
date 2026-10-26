@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z3928",
+  "source": "serp",
+  "capturedAt": "2026-10-26T23:05:01.043Z",
+  "postAgeHours": 1527,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026230501043_serp_blogtab-인천-삼산동-전자담배_47dfef",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 삼산동 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 삼산동 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224141771842",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224231828691",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224302744906",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224117400783",
+        "rank": 29
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224427045485",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

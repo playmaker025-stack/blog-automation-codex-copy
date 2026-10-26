@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6yxtgj",
+  "source": "serp",
+  "capturedAt": "2026-10-26T23:04:41.049Z",
+  "postAgeHours": 1527,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026230441049_serp_integrated-액상-전자담배-기기_4ae47e",
+  "target": {
+    "surface": "integrated",
+    "query": "액상 전자담배 기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상 전자담배 기기",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 26,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

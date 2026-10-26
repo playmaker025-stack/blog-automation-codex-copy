@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z50dx",
+  "source": "serp",
+  "capturedAt": "2026-10-26T23:05:40.037Z",
+  "postAgeHours": 1527,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026230540037_serp_blogtab-발라리안-맥스-프로_3de312",
+  "target": {
+    "surface": "blog_tab",
+    "query": "발라리안 맥스 프로"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "발라리안 맥스 프로",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
