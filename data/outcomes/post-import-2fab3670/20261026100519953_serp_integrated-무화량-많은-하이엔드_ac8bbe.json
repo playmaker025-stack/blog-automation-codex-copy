@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2fab3670",
+  "source": "serp",
+  "capturedAt": "2026-10-26T10:05:19.953Z",
+  "postAgeHours": 8530,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026100519953_serp_integrated-무화량-많은-하이엔드_ac8bbe",
+  "target": {
+    "surface": "integrated",
+    "query": "무화량 많은 하이엔드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량 많은 하이엔드",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 25,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224285743991",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224266939944",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224360766083",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221321692981",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223888550516",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221330954809",
+        "rank": 20
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223037819126",
+        "rank": 21
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221070410979",
+        "rank": 22
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221309542814",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
