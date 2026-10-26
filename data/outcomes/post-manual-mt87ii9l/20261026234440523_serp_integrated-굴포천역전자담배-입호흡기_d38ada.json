@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87ii9l",
+  "source": "serp",
+  "capturedAt": "2026-10-26T23:44:40.523Z",
+  "postAgeHours": 1507,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026234440523_serp_integrated-굴포천역전자담배-입호흡기_d38ada",
+  "target": {
+    "surface": "integrated",
+    "query": "굴포천역전자담배 입호흡기기 아머프로"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "굴포천역전자담배 입호흡기기 아머프로",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "223974941599",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223768667435",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223977341819",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
