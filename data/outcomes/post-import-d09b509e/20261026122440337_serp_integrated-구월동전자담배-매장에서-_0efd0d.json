@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-d09b509e",
+  "source": "serp",
+  "capturedAt": "2026-10-26T12:24:40.337Z",
+  "postAgeHours": 5436,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026122440337_serp_integrated-구월동전자담배-매장에서-_0efd0d",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동전자담배 매장에서 입문자가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 매장에서 입문자가",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 17,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224096074626",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224296756267",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224280995700",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224216366603",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

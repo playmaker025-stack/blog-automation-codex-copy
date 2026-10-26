@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-d09b509e",
+  "source": "serp",
+  "capturedAt": "2026-10-26T12:24:47.171Z",
+  "postAgeHours": 5436,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026122447171_serp_blogtab-구월동전자담배-매장에서-입문자_69b63f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동전자담배 매장에서 입문자가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 매장에서 입문자가",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224242669366",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224272638838",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224096074626",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224346587073",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224166431521",
+        "rank": 26
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224117744480",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
