@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrdh0oej",
+  "source": "serp",
+  "capturedAt": "2026-10-26T17:45:39.535Z",
+  "postAgeHours": 2621,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026174539535_serp_blogtab-전자담배-코일을-새로_e31fb8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 코일을 새로"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일을 새로",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224341839333",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224400865016",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224430969295",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224339591207",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

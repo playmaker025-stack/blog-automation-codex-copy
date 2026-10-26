@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrc05zu3",
+  "source": "serp",
+  "capturedAt": "2026-10-26T17:44:47.402Z",
+  "postAgeHours": 2646,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026174447402_serp_blogtab-전자담배-액상을-바꿨는데_e31fe3",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상을 바꿨는데"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상을 바꿨는데",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224339591207",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
