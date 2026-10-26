@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgw9wn7",
+  "source": "serp",
+  "capturedAt": "2026-10-26T08:45:12.611Z",
+  "postAgeHours": 1346,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026084512611_serp_blogtab-낭만탕후루_97ee78",
+  "target": {
+    "surface": "blog_tab",
+    "query": "낭만탕후루"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "낭만탕후루",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224156417349",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224039829703",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223561837378",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

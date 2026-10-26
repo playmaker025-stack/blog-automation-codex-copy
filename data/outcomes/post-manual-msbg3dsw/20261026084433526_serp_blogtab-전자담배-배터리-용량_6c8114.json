@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msbg3dsw",
+  "source": "serp",
+  "capturedAt": "2026-10-26T08:44:33.526Z",
+  "postAgeHours": 2042,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026084433526_serp_blogtab-전자담배-배터리-용량_6c8114",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 배터리 용량"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 배터리 용량",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224396167944",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
