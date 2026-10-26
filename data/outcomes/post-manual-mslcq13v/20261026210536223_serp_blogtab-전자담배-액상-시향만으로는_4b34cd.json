@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mslcq13v",
+  "source": "serp",
+  "capturedAt": "2026-10-26T21:05:36.223Z",
+  "postAgeHours": 1888,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026210536223_serp_blogtab-전자담배-액상-시향만으로는_4b34cd",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 시향만으로는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 시향만으로는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224372935576",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224405141976",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
