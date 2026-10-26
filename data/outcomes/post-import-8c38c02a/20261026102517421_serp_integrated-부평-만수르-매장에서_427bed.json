@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8c38c02a",
+  "source": "serp",
+  "capturedAt": "2026-10-26T10:25:17.421Z",
+  "postAgeHours": 5722,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026102517421_serp_integrated-부평-만수르-매장에서_427bed",
+  "target": {
+    "surface": "integrated",
+    "query": "부평 만수르 매장에서"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 만수르 매장에서",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 7,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224083901157",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224415853960",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-54aa03e1",
+  "source": "serp",
+  "capturedAt": "2026-10-26T10:24:51.962Z",
+  "postAgeHours": 10138,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026102451962_serp_integrated-인천전자담배매장-부평-구_ae23c9",
+  "target": {
+    "surface": "integrated",
+    "query": "인천전자담배매장 부평 구월동"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배매장 부평 구월동",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 32,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224453360618",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224115874233",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
