@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0b9c15c1",
+  "source": "serp",
+  "capturedAt": "2026-10-26T09:05:04.982Z",
+  "postAgeHours": 6177,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026090504982_serp_integrated-구월동전자담배-쿠모카시-_faffa1",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동전자담배 쿠모카시 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 쿠모카시 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 12,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421252466",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224081308021",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224180202326",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

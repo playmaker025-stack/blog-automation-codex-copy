@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0b9c15c1",
+  "source": "serp",
+  "capturedAt": "2026-10-26T09:05:11.690Z",
+  "postAgeHours": 6177,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026090511690_serp_blogtab-구월동전자담배-쿠모카시-액상_a1422c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동전자담배 쿠모카시 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 쿠모카시 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224180202326",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224155075917",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224081308021",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224272638838",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224138427996",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224198373019",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
