@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-916ead25df",
+  "source": "serp",
+  "capturedAt": "2026-10-26T14:45:00.486Z",
+  "postAgeHours": 4935,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026144500486_serp_blogtab-간석동-전자담배-액상_616a29",
+  "target": {
+    "surface": "blog_tab",
+    "query": "간석동 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224417088500",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224277953493",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224329045576",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224283320666",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
