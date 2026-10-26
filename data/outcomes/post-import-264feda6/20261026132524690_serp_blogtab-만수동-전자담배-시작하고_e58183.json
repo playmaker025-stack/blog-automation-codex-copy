@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-264feda6",
+  "source": "serp",
+  "capturedAt": "2026-10-26T13:25:24.690Z",
+  "postAgeHours": 5197,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026132524690_serp_blogtab-만수동-전자담배-시작하고_e58183",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배 시작하고"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 시작하고",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224450321386",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224327309099",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224435119042",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224183844278",
+        "rank": 21
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224274819132",
+        "rank": 23
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224238674976",
+        "rank": 24
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224351924908",
+        "rank": 31
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2ed87606",
+  "source": "serp",
+  "capturedAt": "2026-10-26T13:25:05.843Z",
+  "postAgeHours": 5221,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026132505843_serp_integrated-전자담배-누수-생기는_519776",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 누수 생기는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 누수 생기는",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 22,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

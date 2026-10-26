@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2ed87606",
+  "source": "serp",
+  "capturedAt": "2026-10-26T13:25:12.383Z",
+  "postAgeHours": 5221,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026132512383_serp_blogtab-전자담배-누수-생기는_dc0390",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 누수 생기는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 누수 생기는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224362877173",
+        "rank": 23
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224431203073",
+        "rank": 24
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224364905887",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
