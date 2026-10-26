@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msenaehp",
+  "source": "serp",
+  "capturedAt": "2026-10-26T20:45:19.097Z",
+  "postAgeHours": 2000,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026204519097_serp_integrated-전자담배-입문자는-언제_68df36",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 입문자는 언제"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 입문자는 언제",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 12,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
