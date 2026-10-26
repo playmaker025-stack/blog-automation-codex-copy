@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-26T06:44:27.245Z",
+  "updatedAt": "2026-10-26T08:04:36.819Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11230,29 +11230,31 @@
           "okAgeHours": [
             25,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-12T08:04:15.236Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-26T08:04:26.714Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-12T08:04:15.236Z"
+          "lastAttemptAt": "2026-10-26T08:04:26.714Z"
         },
         "blog_tab::인천 만수역 전자담배": {
           "okAgeHours": [
             25,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-12T08:04:22.243Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-26T08:04:34.187Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-12T08:04:22.243Z"
+          "lastAttemptAt": "2026-10-26T08:04:34.187Z"
         }
       },
-      "lastCapturedAt": "2026-10-12T08:04:22.243Z",
-      "total": 6
+      "lastCapturedAt": "2026-10-26T08:04:34.187Z",
+      "total": 8
     },
     "post-manual-mul5mi57": {
       "queries": {
@@ -12164,8 +12166,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-26T06:44:26.610Z",
-    "lastOkAt": "2026-10-25T12:04:25.902Z",
+    "lastRunAt": "2026-10-26T08:04:26.350Z",
+    "lastOkAt": "2026-10-26T08:04:26.350Z",
     "consecutiveFailedRuns": 0
   }
 }
