@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3c3d375a",
+  "source": "serp",
+  "capturedAt": "2026-10-26T13:05:24.783Z",
+  "postAgeHours": 5293,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026130524783_serp_blogtab-입호흡-폐호흡-둘다_96ab55",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡 폐호흡 둘다"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 폐호흡 둘다",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 19,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224449397910",
+        "rank": 17
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224224006398",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-4dbaf43f",
+  "source": "serp",
+  "capturedAt": "2026-10-26T13:04:52.509Z",
+  "postAgeHours": 5317,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026130452509_serp_integrated-부흥오거리전자담배-처음-_9de6ba",
+  "target": {
+    "surface": "integrated",
+    "query": "부흥오거리전자담배 처음 시작할"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부흥오거리전자담배 처음 시작할",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 16,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224383515315",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224338245201",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224325995644",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224321052285",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224318921314",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224306956030",
+        "rank": 11
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224305965234",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224068315272",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223991670645",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
