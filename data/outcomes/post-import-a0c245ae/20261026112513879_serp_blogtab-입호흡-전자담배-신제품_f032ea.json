@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-a0c245ae",
+  "source": "serp",
+  "capturedAt": "2026-10-26T11:25:13.879Z",
+  "postAgeHours": 5579,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026112513879_serp_blogtab-입호흡-전자담배-신제품_f032ea",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡 전자담배 신제품"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 전자담배 신제품",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224209081110",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224306173121",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224449397910",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
