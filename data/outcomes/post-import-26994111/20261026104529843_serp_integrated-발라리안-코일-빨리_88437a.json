@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-26994111",
+  "source": "serp",
+  "capturedAt": "2026-10-26T10:45:29.843Z",
+  "postAgeHours": 5651,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026104529843_serp_integrated-발라리안-코일-빨리_88437a",
+  "target": {
+    "surface": "integrated",
+    "query": "발라리안 코일 빨리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "발라리안 코일 빨리",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "222442796569",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
