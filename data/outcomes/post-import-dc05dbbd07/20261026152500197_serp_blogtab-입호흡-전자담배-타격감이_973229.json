@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-dc05dbbd07",
+  "source": "serp",
+  "capturedAt": "2026-10-26T15:25:00.197Z",
+  "postAgeHours": 4791,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026152500197_serp_blogtab-입호흡-전자담배-타격감이_973229",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡 전자담배 타격감이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 전자담배 타격감이",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-cc2773df6b",
+  "source": "serp",
+  "capturedAt": "2026-10-26T15:24:47.229Z",
+  "postAgeHours": 4815,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026152447229_serp_blogtab-전자담배-액상-단맛이_a215c1",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 단맛이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 단맛이",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224405141976",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 16
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224345520991",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
