@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7d1a4bbc42",
+  "source": "serp",
+  "capturedAt": "2026-10-26T16:05:06.519Z",
+  "postAgeHours": 4624,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026160506519_serp_integrated-전자담배-액상-유통기한_ccac1c",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 액상 유통기한"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 유통기한",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 23,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-704ae75896",
+  "source": "serp",
+  "capturedAt": "2026-10-26T16:04:47.210Z",
+  "postAgeHours": 4648,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026160447210_serp_blogtab-부개동-전자담배-처음_994e91",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부개동 전자담배 처음"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부개동 전자담배 처음",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224254880929",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224427045485",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224232580002",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224385828317",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224123626668",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224290681822",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224361724359",
+        "rank": 14
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224295089906",
+        "rank": 16
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223970665546",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223968247166",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

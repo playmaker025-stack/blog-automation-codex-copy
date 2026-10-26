@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-244f148100",
+  "source": "serp",
+  "capturedAt": "2026-10-26T16:05:00.217Z",
+  "postAgeHours": 4648,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026160500217_serp_blogtab-전자담배-팟이-인식_5022c9",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 팟이 인식"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 팟이 인식",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224254936000",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224403800869",
+        "rank": 19
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224179107324",
+        "rank": 23
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224344003193",
+        "rank": 25
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

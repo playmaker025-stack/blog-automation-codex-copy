@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-61a28e2181",
+  "source": "serp",
+  "capturedAt": "2026-10-26T16:04:34.468Z",
+  "postAgeHours": 4648,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026160434468_serp_blogtab-자동흡입-vs-버튼흡입_4191c6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "자동흡입 vs 버튼흡입"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "자동흡입 vs 버튼흡입",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
