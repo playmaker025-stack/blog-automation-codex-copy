@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms5zs3fn",
+  "source": "serp",
+  "capturedAt": "2026-10-26T20:05:20.225Z",
+  "postAgeHours": 2145,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026200520225_serp_integrated-전자담배를-연속으로-너무_628317",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배를 연속으로 너무"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배를 연속으로 너무",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 11,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224362059993",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

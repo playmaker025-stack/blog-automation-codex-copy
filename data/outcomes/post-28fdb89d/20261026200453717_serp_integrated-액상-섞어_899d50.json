@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-28fdb89d",
+  "source": "serp",
+  "capturedAt": "2026-10-26T20:04:53.717Z",
+  "postAgeHours": 2150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026200453717_serp_integrated-액상-섞어_899d50",
+  "target": {
+    "surface": "integrated",
+    "query": "액상 섞어"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상 섞어",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 17,
+    "searchedResultLimit": 22,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224252521531",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224052870595",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224361724359",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

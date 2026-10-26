@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-28fdb89d",
+  "source": "serp",
+  "capturedAt": "2026-10-26T20:05:06.889Z",
+  "postAgeHours": 2150,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026200506889_serp_integrated-인천전자담배-액상_713356",
+  "target": {
+    "surface": "integrated",
+    "query": "인천전자담배 - 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 - 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 32,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421252466",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
