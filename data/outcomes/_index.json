@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-26T09:24:36.615Z",
+  "updatedAt": "2026-10-26T09:45:41.530Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -408,157 +408,169 @@
       "queries": {
         "integrated::발라리안 누수 해결방": {
           "okAgeHours": [
-            5098
+            5098,
+            5770
           ],
-          "lastCapturedAt": "2026-09-28T09:44:05.344Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:44:26.800Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:05.344Z"
+          "lastAttemptAt": "2026-10-26T09:44:26.800Z"
         },
         "blog_tab::발라리안 누수 해결방": {
           "okAgeHours": [
-            5098
+            5098,
+            5770
           ],
-          "lastCapturedAt": "2026-09-28T09:44:12.123Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:44:33.780Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:12.123Z"
+          "lastAttemptAt": "2026-10-26T09:44:33.780Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T09:44:12.123Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T09:44:33.780Z",
+      "total": 4
     },
     "post-import-79fcaeec": {
       "queries": {
         "integrated::부평 전자담배 매장에서": {
           "okAgeHours": [
-            5098
+            5098,
+            5770
           ],
-          "lastCapturedAt": "2026-09-28T09:44:18.298Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:44:40.048Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:18.298Z"
+          "lastAttemptAt": "2026-10-26T09:44:40.048Z"
         },
         "blog_tab::부평 전자담배 매장에서": {
           "okAgeHours": [
-            5098
+            5098,
+            5770
           ],
-          "lastCapturedAt": "2026-09-28T09:44:24.818Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:44:46.737Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:24.818Z"
+          "lastAttemptAt": "2026-10-26T09:44:46.737Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T09:44:24.818Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T09:44:46.737Z",
+      "total": 4
     },
     "post-import-720d8b3b": {
       "queries": {
         "integrated::니코틴 액상 쿨크러쉬": {
           "okAgeHours": [
-            5122
+            5122,
+            5794
           ],
-          "lastCapturedAt": "2026-09-28T09:44:31.048Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:44:53.251Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:31.048Z"
+          "lastAttemptAt": "2026-10-26T09:44:53.251Z"
         },
         "blog_tab::니코틴 액상 쿨크러쉬": {
           "okAgeHours": [
-            5122
+            5122,
+            5794
           ],
-          "lastCapturedAt": "2026-09-28T09:44:37.759Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:45:00.205Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:37.759Z"
+          "lastAttemptAt": "2026-10-26T09:45:00.205Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T09:44:37.759Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T09:45:00.205Z",
+      "total": 4
     },
     "post-import-d3256aea": {
       "queries": {
         "integrated::베놈 아스트로 MK3": {
           "okAgeHours": [
-            5074
+            5074,
+            5746
           ],
-          "lastCapturedAt": "2026-09-28T09:44:43.925Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:45:06.642Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:43.925Z"
+          "lastAttemptAt": "2026-10-26T09:45:06.642Z"
         },
         "blog_tab::베놈 아스트로 MK3": {
           "okAgeHours": [
-            5074
+            5074,
+            5746
           ],
-          "lastCapturedAt": "2026-09-28T09:44:50.528Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:45:12.602Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:50.528Z"
+          "lastAttemptAt": "2026-10-26T09:45:12.602Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T09:44:50.528Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T09:45:12.602Z",
+      "total": 4
     },
     "post-import-6d13341a": {
       "queries": {
         "integrated::부평구청 전자담배 입호흡": {
           "okAgeHours": [
-            5074
+            5074,
+            5746
           ],
-          "lastCapturedAt": "2026-09-28T09:44:56.818Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:45:18.084Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:44:56.818Z"
+          "lastAttemptAt": "2026-10-26T09:45:18.084Z"
         },
         "blog_tab::부평구청 전자담배 입호흡": {
           "okAgeHours": [
-            5074
+            5074,
+            5746
           ],
-          "lastCapturedAt": "2026-09-28T09:45:03.841Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:45:25.244Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:45:03.841Z"
+          "lastAttemptAt": "2026-10-26T09:45:25.244Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T09:45:03.841Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T09:45:25.244Z",
+      "total": 4
     },
     "post-import-6f68b17a": {
       "queries": {
         "integrated::인천 전자담배 만수르": {
           "okAgeHours": [
-            6826
+            6826,
+            7498
           ],
-          "lastCapturedAt": "2026-09-28T09:45:10.161Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:45:31.695Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:45:10.161Z"
+          "lastAttemptAt": "2026-10-26T09:45:31.695Z"
         },
         "blog_tab::인천 전자담배 만수르": {
           "okAgeHours": [
-            6826
+            6826,
+            7498
           ],
-          "lastCapturedAt": "2026-09-28T09:45:17.134Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T09:45:38.354Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:45:17.134Z"
+          "lastAttemptAt": "2026-10-26T09:45:38.354Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T09:45:17.134Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T09:45:38.354Z",
+      "total": 4
     },
     "post-import-8a428bee": {
       "queries": {
@@ -12216,8 +12228,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-26T09:24:26.586Z",
-    "lastOkAt": "2026-10-26T09:24:26.586Z",
+    "lastRunAt": "2026-10-26T09:44:26.425Z",
+    "lastOkAt": "2026-10-26T09:44:26.425Z",
     "consecutiveFailedRuns": 0
   }
 }

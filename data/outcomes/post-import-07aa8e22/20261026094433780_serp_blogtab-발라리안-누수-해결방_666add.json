@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-07aa8e22",
+  "source": "serp",
+  "capturedAt": "2026-10-26T09:44:33.780Z",
+  "postAgeHours": 5770,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026094433780_serp_blogtab-발라리안-누수-해결방_666add",
+  "target": {
+    "surface": "blog_tab",
+    "query": "발라리안 누수 해결방"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "발라리안 누수 해결방",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224338082019",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223683654847",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

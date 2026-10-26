@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-79fcaeec",
+  "source": "serp",
+  "capturedAt": "2026-10-26T09:44:40.048Z",
+  "postAgeHours": 5770,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026094440048_serp_integrated-부평-전자담배-매장에서_03869b",
+  "target": {
+    "surface": "integrated",
+    "query": "부평 전자담배 매장에서"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 매장에서",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224427045485",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

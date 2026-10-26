@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-720d8b3b",
+  "source": "serp",
+  "capturedAt": "2026-10-26T09:45:00.205Z",
+  "postAgeHours": 5794,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026094500205_serp_blogtab-니코틴-액상-쿨크러쉬_5f65df",
+  "target": {
+    "surface": "blog_tab",
+    "query": "니코틴 액상 쿨크러쉬"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "니코틴 액상 쿨크러쉬",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 5,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224198595608",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

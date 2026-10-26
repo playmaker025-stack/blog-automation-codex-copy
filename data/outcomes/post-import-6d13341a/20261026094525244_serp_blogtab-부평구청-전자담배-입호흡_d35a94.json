@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-6d13341a",
+  "source": "serp",
+  "capturedAt": "2026-10-26T09:45:25.244Z",
+  "postAgeHours": 5746,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026094525244_serp_blogtab-부평구청-전자담배-입호흡_d35a94",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평구청 전자담배 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평구청 전자담배 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224167899721",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224200553723",
+        "rank": 13
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223984459713",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
