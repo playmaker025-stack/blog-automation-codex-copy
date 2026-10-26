@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z50dx",
+  "source": "serp",
+  "capturedAt": "2026-10-26T23:24:27.776Z",
+  "postAgeHours": 1527,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026232427776_serp_integrated-인천-전자담배_4055f3",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 전자담배"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

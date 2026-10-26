@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-26T23:05:42.654Z",
+  "updatedAt": "2026-10-26T23:25:30.110Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -7080,25 +7080,25 @@
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:05:11.037Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:05:11.037Z"
+          "lastCapturedAt": "2026-10-26T23:24:27.776Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:24:27.776Z"
         },
         "blog_tab::인천 전자담배": {
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:05:17.876Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:05:17.876Z"
+          "lastCapturedAt": "2026-10-26T23:24:33.602Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:24:33.602Z"
         }
       },
-      "lastCapturedAt": "2026-10-26T23:05:40.037Z",
-      "total": 10
+      "lastCapturedAt": "2026-10-26T23:24:33.602Z",
+      "total": 12
     },
     "post-manual-mt6z60ar": {
       "queries": {
@@ -7106,111 +7106,113 @@
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:24:05.447Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:05.447Z"
+          "lastCapturedAt": "2026-10-26T23:24:39.144Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:24:39.144Z"
         },
         "blog_tab::닷모드 투엑스": {
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:24:12.423Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:12.423Z"
+          "lastCapturedAt": "2026-10-26T23:24:44.441Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:24:44.441Z"
         },
         "integrated::인천 닷모드": {
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:24:18.656Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:18.656Z"
+          "lastCapturedAt": "2026-10-26T23:24:50.052Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:24:50.052Z"
         },
         "blog_tab::인천 닷모드": {
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:24:25.113Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:25.113Z"
+          "lastCapturedAt": "2026-10-26T23:24:55.119Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:24:55.119Z"
         },
         "integrated::인천 투엑스": {
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:24:31.401Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:31.401Z"
+          "lastCapturedAt": "2026-10-26T23:25:00.697Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:25:00.697Z"
         },
         "blog_tab::인천 투엑스": {
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:24:38.310Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:38.310Z"
+          "lastCapturedAt": "2026-10-26T23:25:05.020Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:25:05.020Z"
         },
         "integrated::인천 전자담배": {
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:24:44.553Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:44.553Z"
+          "lastCapturedAt": "2026-10-26T23:25:09.374Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:25:09.374Z"
         },
         "blog_tab::인천 전자담배": {
           "okAgeHours": [
             855
           ],
-          "lastCapturedAt": "2026-09-28T23:24:50.607Z",
-          "total": 1,
-          "lastStatus": "ok",
-          "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:50.607Z"
+          "lastCapturedAt": "2026-10-26T23:25:14.961Z",
+          "total": 2,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-10-26T23:25:14.961Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T23:24:50.607Z",
-      "total": 8
+      "lastCapturedAt": "2026-10-26T23:25:14.961Z",
+      "total": 16
     },
     "post-manual-mt75drce": {
       "queries": {
         "integrated::인천전자담배 무니코틴 액상": {
           "okAgeHours": [
-            852
+            852,
+            1524
           ],
-          "lastCapturedAt": "2026-09-28T23:24:56.906Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T23:25:20.529Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:24:56.906Z"
+          "lastAttemptAt": "2026-10-26T23:25:20.529Z"
         },
         "blog_tab::인천전자담배 무니코틴 액상": {
           "okAgeHours": [
-            852
+            852,
+            1524
           ],
-          "lastCapturedAt": "2026-09-28T23:25:03.898Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T23:25:27.547Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T23:25:03.898Z"
+          "lastAttemptAt": "2026-10-26T23:25:27.547Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T23:25:03.898Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T23:25:27.547Z",
+      "total": 4
     },
     "post-manual-mt87hyvp": {
       "queries": {
@@ -12704,8 +12706,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-26T23:04:27.173Z",
-    "lastOkAt": "2026-10-26T23:04:27.173Z",
+    "lastRunAt": "2026-10-26T23:24:27.011Z",
+    "lastOkAt": "2026-10-26T23:24:27.011Z",
     "consecutiveFailedRuns": 0
   }
 }

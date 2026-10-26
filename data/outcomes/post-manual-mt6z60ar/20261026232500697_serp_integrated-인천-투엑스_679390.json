@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z60ar",
+  "source": "serp",
+  "capturedAt": "2026-10-26T23:25:00.697Z",
+  "postAgeHours": 1527,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026232500697_serp_integrated-인천-투엑스_679390",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 투엑스"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}
