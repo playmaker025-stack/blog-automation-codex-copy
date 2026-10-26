@@ -13680,7 +13680,44 @@
       "publishedAt": "2026-10-25T11:49:16.325Z",
       "createdAt": "2026-10-25T11:49:16.325Z",
       "updatedAt": "2026-10-25T11:49:16.325Z"
+    },
+    {
+      "postId": "post-manual-mvp1gcyc",
+      "topicId": "",
+      "userId": "c",
+      "title": "가정동 전자담배 입 호흡 액상 노멘 리퀴드의 노멘솔 시리즈 추천!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224454418457",
+      "wordCount": 0,
+      "targetKeywords": [
+        "가정동 전자담배 입호흡 액상 입호흡액상 노멘액상 노멘 노멘솔 쿨링"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224454418457",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224454418457"
+        },
+        "targetKeywords": [
+          {
+            "query": "가정동 전자담배 입호흡 액상 입호흡액상 노멘액상 노멘 노멘솔 쿨링",
+            "role": "primary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "가정동 전자담배 입 호흡 액상 노멘 리퀴드의 노멘솔 시리즈 추천!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-26T09:12:40.254Z",
+        "keywordsRevisedAt": "2026-10-26T09:12:40.254Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-26T09:12:40.254Z",
+      "createdAt": "2026-10-26T09:12:40.254Z",
+      "updatedAt": "2026-10-26T09:12:40.254Z"
     }
   ],
-  "lastUpdated": "2026-10-25T11:49:16.325Z"
+  "lastUpdated": "2026-10-26T09:12:40.254Z"
 }
