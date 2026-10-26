@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-22121e2b",
+  "source": "serp",
+  "capturedAt": "2026-10-26T12:05:40.049Z",
+  "postAgeHours": 5460,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026120540049_serp_blogtab-전자담배-처음-시작할_1ed90b",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 처음 시작할"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 처음 시작할",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224435119042",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224280728317",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
