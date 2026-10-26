@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-45d28343",
+  "source": "serp",
+  "capturedAt": "2026-10-26T14:04:40.421Z",
+  "postAgeHours": 5102,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026140440421_serp_integrated-부개동-전자담배-입문자가_0b2d3e",
+  "target": {
+    "surface": "integrated",
+    "query": "부개동 전자담배 입문자가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부개동 전자담배 입문자가",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224427045485",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224295089906",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223968247166",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9ef7d78833",
+  "source": "serp",
+  "capturedAt": "2026-10-26T14:05:38.824Z",
+  "postAgeHours": 5030,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026140538824_serp_blogtab-전자담배-흡입해도-연기_77e1fb",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 흡입해도 연기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 흡입해도 연기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

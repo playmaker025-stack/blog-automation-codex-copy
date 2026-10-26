@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-45d28343",
+  "source": "serp",
+  "capturedAt": "2026-10-26T14:04:47.005Z",
+  "postAgeHours": 5102,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026140447005_serp_blogtab-부개동-전자담배-입문자가_6d9a8f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부개동 전자담배 입문자가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부개동 전자담배 입문자가",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224232580002",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224385828317",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224123626668",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224427045485",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224290681822",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224126552967",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224032687321",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224295089906",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223968247166",
+        "rank": 17
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224003214828",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223968394864",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
