@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-21e6d9ae",
+  "source": "serp",
+  "capturedAt": "2026-10-26T16:44:35.006Z",
+  "postAgeHours": 4492,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026164435006_serp_blogtab-전자담배-액상-종류별_801965",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 종류별"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 종류별",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224290478741",
+        "rank": 16
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 18
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224339591207",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

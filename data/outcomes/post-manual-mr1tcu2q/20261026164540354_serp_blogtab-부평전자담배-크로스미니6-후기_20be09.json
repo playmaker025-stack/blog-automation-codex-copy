@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr1tcu2q",
+  "source": "serp",
+  "capturedAt": "2026-10-26T16:45:40.354Z",
+  "postAgeHours": 2816,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026164540354_serp_blogtab-부평전자담배-크로스미니6-후기_20be09",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 크로스미니6 후기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 크로스미니6 후기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224333224334",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224333365162",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224338245201",
+        "rank": 22
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224337280192",
+        "rank": 24
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224340378304",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
