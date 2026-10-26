@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-2c009be353",
+  "source": "serp",
+  "capturedAt": "2026-10-26T15:45:00.982Z",
+  "postAgeHours": 4696,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026154500982_serp_blogtab-삼산동-전자담배-입호흡_fd4c8a",
+  "target": {
+    "surface": "blog_tab",
+    "query": "삼산동 전자담배 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "삼산동 전자담배 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224252157236",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224084542590",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

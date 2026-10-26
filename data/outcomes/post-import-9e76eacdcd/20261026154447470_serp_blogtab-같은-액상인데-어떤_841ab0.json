@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9e76eacdcd",
+  "source": "serp",
+  "capturedAt": "2026-10-26T15:44:47.470Z",
+  "postAgeHours": 4696,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026154447470_serp_blogtab-같은-액상인데-어떤_841ab0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "같은 액상인데 어떤"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "같은 액상인데 어떤",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224445681418",
+        "rank": 9
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
