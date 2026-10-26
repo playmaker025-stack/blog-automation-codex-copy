@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-7deb5f78ee",
+  "source": "serp",
+  "capturedAt": "2026-10-26T15:05:39.504Z",
+  "postAgeHours": 4815,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026150539504_serp_blogtab-입문자용-액상-선택_d98cda",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입문자용 액상 선택"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입문자용 액상 선택",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224290478741",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224435119042",
+        "rank": 10
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224279835069",
+        "rank": 14
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224302744906",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224299140074",
+        "rank": 17
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224280995700",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

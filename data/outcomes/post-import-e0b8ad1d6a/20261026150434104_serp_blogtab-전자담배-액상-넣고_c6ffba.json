@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-e0b8ad1d6a",
+  "source": "serp",
+  "capturedAt": "2026-10-26T15:04:34.104Z",
+  "postAgeHours": 4887,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026150434104_serp_blogtab-전자담배-액상-넣고_c6ffba",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 넣고"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 넣고",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224398637176",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

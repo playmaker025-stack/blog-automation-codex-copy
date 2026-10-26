@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-26T14:45:42.231Z",
+  "updatedAt": "2026-10-26T15:05:42.219Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -3096,157 +3096,169 @@
       "queries": {
         "integrated::전자담배 액상 넣고": {
           "okAgeHours": [
-            4215
+            4215,
+            4887
           ],
-          "lastCapturedAt": "2026-09-28T15:04:05.034Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:04:27.255Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:05.034Z"
+          "lastAttemptAt": "2026-10-26T15:04:27.255Z"
         },
         "blog_tab::전자담배 액상 넣고": {
           "okAgeHours": [
-            4215
+            4215,
+            4887
           ],
-          "lastCapturedAt": "2026-09-28T15:04:11.976Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:04:34.104Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:11.976Z"
+          "lastAttemptAt": "2026-10-26T15:04:34.104Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T15:04:11.976Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T15:04:34.104Z",
+      "total": 4
     },
     "post-import-c7c05c43e6": {
       "queries": {
         "integrated::부천 전자담배 액상이": {
           "okAgeHours": [
-            4191
+            4191,
+            4863
           ],
-          "lastCapturedAt": "2026-09-28T15:04:18.290Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:04:40.450Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:18.290Z"
+          "lastAttemptAt": "2026-10-26T15:04:40.450Z"
         },
         "blog_tab::부천 전자담배 액상이": {
           "okAgeHours": [
-            4191
+            4191,
+            4863
           ],
-          "lastCapturedAt": "2026-09-28T15:04:24.809Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:04:47.274Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:24.809Z"
+          "lastAttemptAt": "2026-10-26T15:04:47.274Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T15:04:24.809Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T15:04:47.274Z",
+      "total": 4
     },
     "post-import-9c88b3affb": {
       "queries": {
         "integrated::전자담배 액상은 기기마다": {
           "okAgeHours": [
-            4191
+            4191,
+            4863
           ],
-          "lastCapturedAt": "2026-09-28T15:04:31.130Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:04:53.537Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:31.130Z"
+          "lastAttemptAt": "2026-10-26T15:04:53.537Z"
         },
         "blog_tab::전자담배 액상은 기기마다": {
           "okAgeHours": [
-            4191
+            4191,
+            4863
           ],
-          "lastCapturedAt": "2026-09-28T15:04:37.808Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:05:00.190Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:37.808Z"
+          "lastAttemptAt": "2026-10-26T15:05:00.190Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T15:04:37.808Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T15:05:00.190Z",
+      "total": 4
     },
     "post-import-add000ecd5": {
       "queries": {
         "integrated::전자담배 맛이 갑자기": {
           "okAgeHours": [
-            4167
+            4167,
+            4839
           ],
-          "lastCapturedAt": "2026-09-28T15:04:44.194Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:05:06.501Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:44.194Z"
+          "lastAttemptAt": "2026-10-26T15:05:06.501Z"
         },
         "blog_tab::전자담배 맛이 갑자기": {
           "okAgeHours": [
-            4167
+            4167,
+            4839
           ],
-          "lastCapturedAt": "2026-09-28T15:04:50.711Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:05:13.230Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:50.711Z"
+          "lastAttemptAt": "2026-10-26T15:05:13.230Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T15:04:50.711Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T15:05:13.230Z",
+      "total": 4
     },
     "post-import-992baab941": {
       "queries": {
         "integrated::전자담배 액상이 갑자기": {
           "okAgeHours": [
-            4167
+            4167,
+            4839
           ],
-          "lastCapturedAt": "2026-09-28T15:04:56.984Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:05:19.531Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:04:56.984Z"
+          "lastAttemptAt": "2026-10-26T15:05:19.531Z"
         },
         "blog_tab::전자담배 액상이 갑자기": {
           "okAgeHours": [
-            4167
+            4167,
+            4839
           ],
-          "lastCapturedAt": "2026-09-28T15:05:03.800Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:05:26.430Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:05:03.800Z"
+          "lastAttemptAt": "2026-10-26T15:05:26.430Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T15:05:03.800Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T15:05:26.430Z",
+      "total": 4
     },
     "post-import-7deb5f78ee": {
       "queries": {
         "integrated::입문자용 액상 선택": {
           "okAgeHours": [
-            4143
+            4143,
+            4815
           ],
-          "lastCapturedAt": "2026-09-28T15:05:10.087Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:05:32.668Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:05:10.087Z"
+          "lastAttemptAt": "2026-10-26T15:05:32.668Z"
         },
         "blog_tab::입문자용 액상 선택": {
           "okAgeHours": [
-            4143
+            4143,
+            4815
           ],
-          "lastCapturedAt": "2026-09-28T15:05:16.286Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T15:05:39.504Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T15:05:16.286Z"
+          "lastAttemptAt": "2026-10-26T15:05:39.504Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T15:05:16.286Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T15:05:39.504Z",
+      "total": 4
     },
     "post-import-9123eaa0cd": {
       "queries": {
@@ -12408,8 +12420,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-26T14:44:26.557Z",
-    "lastOkAt": "2026-10-26T14:44:26.557Z",
+    "lastRunAt": "2026-10-26T15:04:26.711Z",
+    "lastOkAt": "2026-10-26T15:04:26.711Z",
     "consecutiveFailedRuns": 0
   }
 }

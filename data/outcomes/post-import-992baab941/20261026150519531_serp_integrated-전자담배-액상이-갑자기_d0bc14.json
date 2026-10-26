@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-992baab941",
+  "source": "serp",
+  "capturedAt": "2026-10-26T15:05:19.531Z",
+  "postAgeHours": 4839,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026150519531_serp_integrated-전자담배-액상이-갑자기_d0bc14",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 액상이 갑자기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상이 갑자기",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 21,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224107526336",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224245728152",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
