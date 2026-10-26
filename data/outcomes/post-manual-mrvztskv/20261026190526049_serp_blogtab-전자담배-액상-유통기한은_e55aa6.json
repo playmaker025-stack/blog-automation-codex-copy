@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrvztskv",
+  "source": "serp",
+  "capturedAt": "2026-10-26T19:05:26.049Z",
+  "postAgeHours": 2312,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026190526049_serp_blogtab-전자담배-액상-유통기한은_e55aa6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 유통기한은"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 유통기한은",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224354691142",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224229635477",
+        "rank": 17
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224398637176",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

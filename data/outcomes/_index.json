@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-26T18:45:40.677Z",
+  "updatedAt": "2026-10-26T19:05:42.118Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -5100,147 +5100,159 @@
         },
         "integrated::장수동 전자담배 시원한": {
           "okAgeHours": [
-            1662
+            1662,
+            2334
           ],
-          "lastCapturedAt": "2026-09-28T19:04:05.284Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:04:27.554Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:05.284Z"
+          "lastAttemptAt": "2026-10-26T19:04:27.554Z"
         },
         "blog_tab::장수동 전자담배 시원한": {
           "okAgeHours": [
-            1662
+            1662,
+            2334
           ],
-          "lastCapturedAt": "2026-09-28T19:04:12.070Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:04:34.482Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:12.070Z"
+          "lastAttemptAt": "2026-10-26T19:04:34.482Z"
         }
       },
-      "lastCapturedAt": "2026-10-26T18:45:38.021Z",
-      "total": 6
+      "lastCapturedAt": "2026-10-26T19:04:34.482Z",
+      "total": 8
     },
     "post-manual-mruk2p3c": {
       "queries": {
         "integrated::전자담배 액상을 자주": {
           "okAgeHours": [
-            1664
+            1664,
+            2336
           ],
-          "lastCapturedAt": "2026-09-28T19:04:17.511Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:04:40.731Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:17.511Z"
+          "lastAttemptAt": "2026-10-26T19:04:40.731Z"
         },
         "blog_tab::전자담배 액상을 자주": {
           "okAgeHours": [
-            1664
+            1664,
+            2336
           ],
-          "lastCapturedAt": "2026-09-28T19:04:24.176Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:04:47.580Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:24.176Z"
+          "lastAttemptAt": "2026-10-26T19:04:47.580Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T19:04:24.176Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T19:04:47.580Z",
+      "total": 4
     },
     "post-f4873ead": {
       "queries": {
         "integrated::가성비, 전자담배": {
           "okAgeHours": [
-            1646
+            1646,
+            2318
           ],
-          "lastCapturedAt": "2026-09-28T19:04:30.000Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:04:53.817Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:30.000Z"
+          "lastAttemptAt": "2026-10-26T19:04:53.817Z"
         },
         "blog_tab::가성비, 전자담배": {
           "okAgeHours": [
-            1646
+            1646,
+            2318
           ],
-          "lastCapturedAt": "2026-09-28T19:04:36.707Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:05:00.453Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:36.707Z"
+          "lastAttemptAt": "2026-10-26T19:05:00.453Z"
         },
         "integrated::가성비 좋은 전자담배의": {
           "okAgeHours": [
-            1646
+            1646,
+            2318
           ],
-          "lastCapturedAt": "2026-09-28T19:04:42.564Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:05:06.509Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:42.564Z"
+          "lastAttemptAt": "2026-10-26T19:05:06.509Z"
         },
         "blog_tab::가성비 좋은 전자담배의": {
           "okAgeHours": [
-            1646
+            1646,
+            2318
           ],
-          "lastCapturedAt": "2026-09-28T19:04:48.599Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:05:13.136Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:48.599Z"
+          "lastAttemptAt": "2026-10-26T19:05:13.136Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T19:04:48.599Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-26T19:05:13.136Z",
+      "total": 8
     },
     "post-manual-mrvztskv": {
       "queries": {
         "integrated::전자담배 액상 유통기한은": {
           "okAgeHours": [
-            1640
+            1640,
+            2312
           ],
-          "lastCapturedAt": "2026-09-28T19:04:54.118Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:05:19.474Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:54.118Z"
+          "lastAttemptAt": "2026-10-26T19:05:19.474Z"
         },
         "blog_tab::전자담배 액상 유통기한은": {
           "okAgeHours": [
-            1640
+            1640,
+            2312
           ],
-          "lastCapturedAt": "2026-09-28T19:04:59.894Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:05:26.049Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:04:59.894Z"
+          "lastAttemptAt": "2026-10-26T19:05:26.049Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T19:04:59.894Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-26T19:05:26.049Z",
+      "total": 4
     },
     "post-1191adb8": {
       "queries": {
         "integrated::니코틴 종류": {
           "okAgeHours": [
-            1621
+            1621,
+            2293
           ],
-          "lastCapturedAt": "2026-09-28T19:05:05.677Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:05:32.395Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:05:05.677Z"
+          "lastAttemptAt": "2026-10-26T19:05:32.395Z"
         },
         "blog_tab::니코틴 종류": {
           "okAgeHours": [
-            1621
+            1621,
+            2293
           ],
-          "lastCapturedAt": "2026-09-28T19:05:12.338Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T19:05:39.176Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T19:05:12.338Z"
+          "lastAttemptAt": "2026-10-26T19:05:39.176Z"
         },
         "integrated::전담 액상 니코틴": {
           "okAgeHours": [
@@ -5263,8 +5275,8 @@
           "lastAttemptAt": "2026-09-28T19:24:11.115Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T19:24:11.115Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-26T19:05:39.176Z",
+      "total": 6
     },
     "post-manual-mrxe65go": {
       "queries": {
@@ -12552,8 +12564,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-26T18:44:27.011Z",
-    "lastOkAt": "2026-10-26T18:44:27.011Z",
+    "lastRunAt": "2026-10-26T19:04:27.222Z",
+    "lastOkAt": "2026-10-26T19:04:27.222Z",
     "consecutiveFailedRuns": 0
   }
 }

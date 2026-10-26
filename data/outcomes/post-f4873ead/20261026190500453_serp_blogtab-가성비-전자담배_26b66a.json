@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-f4873ead",
+  "source": "serp",
+  "capturedAt": "2026-10-26T19:05:00.453Z",
+  "postAgeHours": 2318,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026190500453_serp_blogtab-가성비-전자담배_26b66a",
+  "target": {
+    "surface": "blog_tab",
+    "query": "가성비, 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "가성비, 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 16,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224354324677",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

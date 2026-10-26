@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b626b001",
+  "source": "serp",
+  "capturedAt": "2026-10-26T19:04:27.554Z",
+  "postAgeHours": 2334,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026190427554_serp_integrated-장수동-전자담배-시원한_c033f6",
+  "target": {
+    "surface": "integrated",
+    "query": "장수동 전자담배 시원한"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "장수동 전자담배 시원한",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 9,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224019225526",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
