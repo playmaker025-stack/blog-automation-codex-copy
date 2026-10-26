@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvp1gcyc",
+  "source": "serp",
+  "capturedAt": "2026-10-26T09:24:26.930Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026092426930_serp_integrated-가정동-전자담배-입호흡-_103d12",
+  "target": {
+    "surface": "integrated",
+    "query": "가정동 전자담배 입호흡 액상 입호흡액상 노멘액상 노멘 노멘솔 쿨링"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "가정동 전자담배 입호흡 액상 입호흡액상 노멘액상 노멘 노멘솔 쿨링",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 15,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223969285810",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
