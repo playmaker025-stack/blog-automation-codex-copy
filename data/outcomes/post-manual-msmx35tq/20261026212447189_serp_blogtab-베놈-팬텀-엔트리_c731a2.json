@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msmx35tq",
+  "source": "serp",
+  "capturedAt": "2026-10-26T21:24:47.189Z",
+  "postAgeHours": 1862,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026212447189_serp_blogtab-베놈-팬텀-엔트리_c731a2",
+  "target": {
+    "surface": "blog_tab",
+    "query": "베놈 팬텀 엔트리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "베놈 팬텀 엔트리",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224374123043",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224056295920",
+        "rank": 15
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
