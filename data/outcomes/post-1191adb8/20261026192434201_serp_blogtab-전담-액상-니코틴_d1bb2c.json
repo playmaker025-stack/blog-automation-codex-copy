@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-1191adb8",
+  "source": "serp",
+  "capturedAt": "2026-10-26T19:24:34.201Z",
+  "postAgeHours": 2294,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026192434201_serp_blogtab-전담-액상-니코틴_d1bb2c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전담 액상 니코틴"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 액상 니코틴",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrxe65go",
+  "source": "serp",
+  "capturedAt": "2026-10-26T19:24:47.250Z",
+  "postAgeHours": 2289,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026192447250_serp_blogtab-전자담배-액상이-질렸다면_f8c541",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상이 질렸다면"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상이 질렸다면",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 11
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224449436657",
+        "rank": 25
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

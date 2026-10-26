@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mryvhfci",
+  "source": "serp",
+  "capturedAt": "2026-10-26T19:25:12.607Z",
+  "postAgeHours": 2264,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026192512607_serp_blogtab-전자담배-배터리가-빨리_c1e637",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 배터리가 빨리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 배터리가 빨리",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
