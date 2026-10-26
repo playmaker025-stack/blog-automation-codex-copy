@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-26T08:04:36.819Z",
+  "updatedAt": "2026-10-26T08:24:36.724Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -110,23 +110,25 @@
       "queries": {
         "blog_tab::전자담배 냄새": {
           "okAgeHours": [
-            1345
+            1345,
+            2017
           ],
-          "lastCapturedAt": "2026-09-28T09:04:29.787Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T08:24:27.270Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:04:29.787Z"
+          "lastAttemptAt": "2026-10-26T08:24:27.270Z"
         },
         "blog_tab::전자담배도 냄새가 날까": {
           "okAgeHours": [
-            1345
+            1345,
+            2017
           ],
-          "lastCapturedAt": "2026-09-28T09:04:35.497Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-26T08:24:33.935Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-28T09:04:35.497Z"
+          "lastAttemptAt": "2026-10-26T08:24:33.935Z"
         },
         "integrated::전자담배 냄새": {
           "okAgeHours": [
@@ -149,8 +151,8 @@
           "lastAttemptAt": "2026-09-28T20:44:12.313Z"
         }
       },
-      "lastCapturedAt": "2026-09-28T20:44:12.313Z",
-      "total": 4
+      "lastCapturedAt": "2026-10-26T08:24:33.935Z",
+      "total": 6
     },
     "post-8aebbf59": {
       "queries": {
@@ -12166,8 +12168,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-26T08:04:26.350Z",
-    "lastOkAt": "2026-10-26T08:04:26.350Z",
+    "lastRunAt": "2026-10-26T08:24:26.751Z",
+    "lastOkAt": "2026-10-26T08:24:26.751Z",
     "consecutiveFailedRuns": 0
   }
 }
