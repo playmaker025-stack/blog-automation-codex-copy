@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt5qahzh",
+  "source": "serp",
+  "capturedAt": "2026-10-26T22:25:05.702Z",
+  "postAgeHours": 1547,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026222505702_serp_integrated-냄새-안나는-전자담배_df9087",
+  "target": {
+    "surface": "integrated",
+    "query": "냄새 안나는 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "냄새 안나는 전자담배",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 27,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224366844975",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

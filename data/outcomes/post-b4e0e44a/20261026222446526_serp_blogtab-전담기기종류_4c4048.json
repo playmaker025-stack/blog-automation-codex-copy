@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b4e0e44a",
+  "source": "serp",
+  "capturedAt": "2026-10-26T22:24:46.526Z",
+  "postAgeHours": 1598,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261026222446526_serp_blogtab-전담기기종류_4c4048",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전담기기종류"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담기기종류",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 29,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224385828317",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 15
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224290478741",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
