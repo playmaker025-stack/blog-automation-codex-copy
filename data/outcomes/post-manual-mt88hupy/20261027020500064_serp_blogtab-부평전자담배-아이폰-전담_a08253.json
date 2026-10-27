@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88hupy",
+  "source": "serp",
+  "capturedAt": "2026-10-27T02:05:00.064Z",
+  "postAgeHours": 1508,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261027020500064_serp_blogtab-부평전자담배-아이폰-전담_a08253",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 아이폰 전담"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 아이폰 전담",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224157527396",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
