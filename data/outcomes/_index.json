@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-27T04:45:41.419Z",
+  "updatedAt": "2026-10-27T05:04:29.841Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -8723,17 +8723,18 @@
         },
         "blog_tab::구월동전자담배 BPMODS RAZOR": {
           "okAgeHours": [
-            836
+            836,
+            1511
           ],
-          "lastCapturedAt": "2026-10-27T02:25:29.012Z",
-          "total": 2,
-          "lastStatus": "request_failed",
-          "consecutiveFailures": 1,
-          "lastAttemptAt": "2026-10-27T02:25:29.012Z"
+          "lastCapturedAt": "2026-10-27T05:04:27.899Z",
+          "total": 3,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-10-27T05:04:27.899Z"
         }
       },
-      "lastCapturedAt": "2026-10-27T04:45:37.876Z",
-      "total": 5
+      "lastCapturedAt": "2026-10-27T05:04:27.899Z",
+      "total": 6
     },
     "post-manual-mt898yex": {
       "queries": {
@@ -12889,8 +12890,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-27T04:44:27.372Z",
-    "lastOkAt": "2026-10-27T04:44:27.372Z",
+    "lastRunAt": "2026-10-27T05:04:27.418Z",
+    "lastOkAt": "2026-10-27T05:04:27.418Z",
     "consecutiveFailedRuns": 0
   }
 }
