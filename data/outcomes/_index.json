@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-27T00:25:40.624Z",
+  "updatedAt": "2026-10-27T00:45:41.370Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -7722,157 +7722,169 @@
       "queries": {
         "integrated::약대동전자담배 리로드 아이킥": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:25:06.791Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:44:27.479Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:25:06.791Z"
+          "lastAttemptAt": "2026-10-27T00:44:27.479Z"
         },
         "blog_tab::약대동전자담배 리로드 아이킥": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:25:13.336Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:44:34.311Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:25:13.336Z"
+          "lastAttemptAt": "2026-10-27T00:44:34.311Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T00:25:13.336Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-27T00:44:34.311Z",
+      "total": 4
     },
     "post-manual-mt87u9qe": {
       "queries": {
         "integrated::삼산체육관역전자담배 일회용 전담": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:05.752Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:44:40.596Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:05.752Z"
+          "lastAttemptAt": "2026-10-27T00:44:40.596Z"
         },
         "blog_tab::삼산체육관역전자담배 일회용 전담": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:12.685Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:44:47.314Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:12.685Z"
+          "lastAttemptAt": "2026-10-27T00:44:47.314Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T00:44:12.685Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-27T00:44:47.314Z",
+      "total": 4
     },
     "post-manual-mt87vh25": {
       "queries": {
         "integrated::산곡역전자담배 스누스 니코틴": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:18.836Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:44:53.346Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:18.836Z"
+          "lastAttemptAt": "2026-10-27T00:44:53.346Z"
         },
         "blog_tab::산곡역전자담배 스누스 니코틴": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:24.885Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:45:00.062Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:24.885Z"
+          "lastAttemptAt": "2026-10-27T00:45:00.062Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T00:44:24.885Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-27T00:45:00.062Z",
+      "total": 4
     },
     "post-manual-mt87vy39": {
       "queries": {
         "integrated::부평전자담배 입호흡 전담": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:30.743Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:45:06.019Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:30.743Z"
+          "lastAttemptAt": "2026-10-27T00:45:06.019Z"
         },
         "blog_tab::부평전자담배 입호흡 전담": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:36.521Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:45:12.775Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:36.521Z"
+          "lastAttemptAt": "2026-10-27T00:45:12.775Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T00:44:36.521Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-27T00:45:12.775Z",
+      "total": 4
     },
     "post-manual-mt87xye0": {
       "queries": {
         "integrated::부평전자담배 발라리안 맥스": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:42.849Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:45:19.093Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:42.849Z"
+          "lastAttemptAt": "2026-10-27T00:45:19.093Z"
         },
         "blog_tab::부평전자담배 발라리안 맥스": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:49.020Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:45:25.953Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:49.020Z"
+          "lastAttemptAt": "2026-10-27T00:45:25.953Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T00:44:49.020Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-27T00:45:25.953Z",
+      "total": 4
     },
     "post-manual-mt87yf6o": {
       "queries": {
         "integrated::작전역전자담배 베놈 팬텀": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:44:55.400Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:45:32.257Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:44:55.400Z"
+          "lastAttemptAt": "2026-10-27T00:45:32.257Z"
         },
         "blog_tab::작전역전자담배 베놈 팬텀": {
           "okAgeHours": [
-            835
+            835,
+            1507
           ],
-          "lastCapturedAt": "2026-09-29T00:45:01.896Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-27T00:45:38.861Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-09-29T00:45:01.896Z"
+          "lastAttemptAt": "2026-10-27T00:45:38.861Z"
         }
       },
-      "lastCapturedAt": "2026-09-29T00:45:01.896Z",
-      "total": 2
+      "lastCapturedAt": "2026-10-27T00:45:38.861Z",
+      "total": 4
     },
     "post-manual-mt87zlum": {
       "queries": {
@@ -12742,8 +12754,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-27T00:24:27.271Z",
-    "lastOkAt": "2026-10-27T00:24:27.271Z",
+    "lastRunAt": "2026-10-27T00:44:27.119Z",
+    "lastOkAt": "2026-10-27T00:44:27.119Z",
     "consecutiveFailedRuns": 0
   }
 }
