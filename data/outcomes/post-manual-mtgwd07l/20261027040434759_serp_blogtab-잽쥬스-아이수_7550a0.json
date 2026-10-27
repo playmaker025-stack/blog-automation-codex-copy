@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgwd07l",
+  "source": "serp",
+  "capturedAt": "2026-10-27T04:04:34.759Z",
+  "postAgeHours": 1365,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261027040434759_serp_blogtab-잽쥬스-아이수_7550a0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "잽쥬스 아이수"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "잽쥬스 아이수",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
