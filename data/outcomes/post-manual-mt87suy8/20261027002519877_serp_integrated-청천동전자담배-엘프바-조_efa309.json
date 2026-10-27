@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87suy8",
+  "source": "serp",
+  "capturedAt": "2026-10-27T00:25:19.877Z",
+  "postAgeHours": 1507,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261027002519877_serp_integrated-청천동전자담배-엘프바-조_efa309",
+  "target": {
+    "surface": "integrated",
+    "query": "청천동전자담배 엘프바 조인원"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "청천동전자담배 엘프바 조인원",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "223969433543",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224011853102",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
