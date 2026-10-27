@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt8980ju",
+  "source": "serp",
+  "capturedAt": "2026-10-27T02:25:18.378Z",
+  "postAgeHours": 1508,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261027022518378_serp_blogtab-갈산동전자담배-릴렉스-후노즈_0c0cd2",
+  "target": {
+    "surface": "blog_tab",
+    "query": "갈산동전자담배 릴렉스 후노즈"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

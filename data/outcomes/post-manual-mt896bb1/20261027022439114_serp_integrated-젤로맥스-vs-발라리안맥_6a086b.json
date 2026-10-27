@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt896bb1",
+  "source": "serp",
+  "capturedAt": "2026-10-27T02:24:39.114Z",
+  "postAgeHours": 1508,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261027022439114_serp_integrated-젤로맥스-vs-발라리안맥_6a086b",
+  "target": {
+    "surface": "integrated",
+    "query": "젤로맥스 vs 발라리안맥스"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

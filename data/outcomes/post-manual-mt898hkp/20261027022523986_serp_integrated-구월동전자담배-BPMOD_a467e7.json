@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt898hkp",
+  "source": "serp",
+  "capturedAt": "2026-10-27T02:25:23.986Z",
+  "postAgeHours": 1508,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261027022523986_serp_integrated-구월동전자담배-BPMOD_a467e7",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동전자담배 BPMODS RAZOR"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}
