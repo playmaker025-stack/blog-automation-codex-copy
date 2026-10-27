@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88euq2",
+  "source": "serp",
+  "capturedAt": "2026-10-27T01:45:32.068Z",
+  "postAgeHours": 1508,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261027014532068_serp_integrated-남동구전자담배-하복-폐호_f9646e",
+  "target": {
+    "surface": "integrated",
+    "query": "남동구전자담배 하복 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구전자담배 하복 폐호흡",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224150173367",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
