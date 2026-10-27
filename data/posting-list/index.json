@@ -13717,7 +13717,41 @@
       "publishedAt": "2026-10-26T09:12:40.254Z",
       "createdAt": "2026-10-26T09:12:40.254Z",
       "updatedAt": "2026-10-26T09:12:40.254Z"
+    },
+    {
+      "postId": "post-manual-mvqo07yw",
+      "topicId": "",
+      "userId": "b",
+      "title": "만수동 전자담배 폐호흡 노멘솔 과일 액상 알케마스터 4종",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224455867627",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224455867627",
+          "canonicalUrl": "https://blog.naver.com/youferst/224455867627"
+        },
+        "targetKeywords": [
+          {
+            "query": "만수동 전자담배 폐호흡",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "만수동 전자담배 폐호흡 노멘솔 과일 액상 알케마스터 4종",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-27T12:31:44.969Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-27T12:31:44.969Z",
+      "createdAt": "2026-10-27T12:31:44.969Z",
+      "updatedAt": "2026-10-27T12:31:44.969Z"
     }
   ],
-  "lastUpdated": "2026-10-26T09:12:40.254Z"
+  "lastUpdated": "2026-10-27T12:31:44.969Z"
 }
