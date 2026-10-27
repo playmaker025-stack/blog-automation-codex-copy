@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mvqo07yw",
+      "title": "만수동 전자담배 폐호흡 노멘솔 과일 액상 알케마스터 4종",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1221,
+      "publishedAt": "2026-10-27T12:31:44.969Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mvqo07yw.md"
+    },
+    {
       "sampleId": "published-post-manual-mvj95qg7",
       "title": "인천 전자담배 멀티샵 만수동 만수르",
       "category": "published-post",
@@ -357,25 +366,7 @@
       "wordCount": 1371,
       "publishedAt": "2026-04-02T00:00:00.000Z",
       "filePath": "user-modeling/users/b/corpus/samples/reference-b-05.md"
-    },
-    {
-      "sampleId": "reference-b-06",
-      "title": "부개동 전자담배 시원한 입호흡 액상 델리 시리즈",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "부개동",
-        "시원한",
-        "입호흡"
-      ],
-      "wordCount": 1234,
-      "publishedAt": "2026-01-16T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-06.md"
     }
   ],
-  "lastUpdated": "2026-10-22T08:01:53.720Z"
+  "lastUpdated": "2026-10-27T12:31:52.854Z"
 }
