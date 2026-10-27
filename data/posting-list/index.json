@@ -13751,7 +13751,62 @@
       "publishedAt": "2026-10-27T12:31:44.969Z",
       "createdAt": "2026-10-27T12:31:44.969Z",
       "updatedAt": "2026-10-27T12:31:44.969Z"
+    },
+    {
+      "postId": "post-manual-mvqobsc9",
+      "topicId": "",
+      "userId": "d",
+      "title": "부평전자담배 다양한 맛과 고농도까지 가능한 일회용 전담 네스티원 만수르 베이프",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224455875422",
+      "wordCount": 0,
+      "targetKeywords": [
+        "네스티원",
+        "고농도",
+        "일회용전자담배",
+        "교체형"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224455875422",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224455875422"
+        },
+        "targetKeywords": [
+          {
+            "query": "네스티원",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "고농도",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "일회용전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "교체형",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부평전자담배 다양한 맛과 고농도까지 가능한 일회용 전담 네스티원 만수르 베이프",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-27T12:40:43.821Z",
+        "keywordsRevisedAt": "2026-10-27T12:40:43.821Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-27T12:40:43.821Z",
+      "createdAt": "2026-10-27T12:40:43.821Z",
+      "updatedAt": "2026-10-27T12:40:43.821Z"
     }
   ],
-  "lastUpdated": "2026-10-27T12:31:44.969Z"
+  "lastUpdated": "2026-10-27T12:40:43.821Z"
 }
