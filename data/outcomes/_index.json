@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-28T00:44:28.821Z",
+  "updatedAt": "2026-10-28T04:44:38.182Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -12102,29 +12102,31 @@
           "okAgeHours": [
             0,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-14T04:44:16.535Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-28T04:44:28.359Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-14T04:44:16.535Z"
+          "lastAttemptAt": "2026-10-28T04:44:28.359Z"
         },
         "blog_tab::인천 부평역 인기": {
           "okAgeHours": [
             0,
             168,
-            336
+            336,
+            672
           ],
-          "lastCapturedAt": "2026-10-14T04:44:23.522Z",
-          "total": 3,
+          "lastCapturedAt": "2026-10-28T04:44:35.389Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-14T04:44:23.522Z"
+          "lastAttemptAt": "2026-10-28T04:44:35.389Z"
         }
       },
-      "lastCapturedAt": "2026-10-14T04:44:23.522Z",
-      "total": 6
+      "lastCapturedAt": "2026-10-28T04:44:35.389Z",
+      "total": 8
     },
     "post-manual-muqtujw3": {
       "queries": {
@@ -13014,8 +13016,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-28T00:44:27.807Z",
-    "lastOkAt": "2026-10-27T12:44:27.634Z",
+    "lastRunAt": "2026-10-28T04:44:28.027Z",
+    "lastOkAt": "2026-10-28T04:44:28.027Z",
     "consecutiveFailedRuns": 0
   }
 }
