@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-28T07:04:51.715Z",
+  "updatedAt": "2026-10-28T11:45:44.140Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -12448,127 +12448,139 @@
       "queries": {
         "integrated::하복v2": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:24:22.464Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:44:29.102Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:24:22.464Z"
+          "lastAttemptAt": "2026-10-28T11:44:29.102Z"
         },
         "blog_tab::하복v2": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:24:29.530Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:44:36.245Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:24:29.530Z"
+          "lastAttemptAt": "2026-10-28T11:44:36.245Z"
         },
         "integrated::유웰": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:24:35.817Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:44:42.413Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:24:35.817Z"
+          "lastAttemptAt": "2026-10-28T11:44:42.413Z"
         },
         "blog_tab::유웰": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:24:42.664Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:44:49.294Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:24:42.664Z"
+          "lastAttemptAt": "2026-10-28T11:44:49.294Z"
         },
         "integrated::무화량": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:24:48.902Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:44:55.581Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:24:48.902Z"
+          "lastAttemptAt": "2026-10-28T11:44:55.581Z"
         },
         "blog_tab::무화량": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:24:55.633Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:45:02.335Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:24:55.633Z"
+          "lastAttemptAt": "2026-10-28T11:45:02.335Z"
         },
         "integrated::입호흡": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:25:01.877Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:45:08.621Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:25:01.877Z"
+          "lastAttemptAt": "2026-10-28T11:45:08.621Z"
         },
         "blog_tab::입호흡": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:25:08.697Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:45:15.132Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:25:08.697Z"
+          "lastAttemptAt": "2026-10-28T11:45:15.132Z"
         },
         "integrated::폐호흡": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:25:15.012Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:45:21.523Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:25:15.012Z"
+          "lastAttemptAt": "2026-10-28T11:45:21.523Z"
         },
         "blog_tab::폐호흡": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:25:21.974Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:45:28.574Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:25:21.974Z"
+          "lastAttemptAt": "2026-10-28T11:45:28.574Z"
         },
         "integrated::부평전자담배": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:25:28.235Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:45:34.859Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:25:28.235Z"
+          "lastAttemptAt": "2026-10-28T11:45:34.859Z"
         },
         "blog_tab::부평전자담배": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-21T12:25:34.961Z",
-          "total": 1,
+          "lastCapturedAt": "2026-10-28T11:45:41.528Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-21T12:25:34.961Z"
+          "lastAttemptAt": "2026-10-28T11:45:41.528Z"
         }
       },
-      "lastCapturedAt": "2026-10-21T12:25:34.961Z",
-      "total": 12
+      "lastCapturedAt": "2026-10-28T11:45:41.528Z",
+      "total": 24
     },
     "post-manual-mvi3z7a2": {
       "queries": {
@@ -13020,8 +13032,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-28T07:04:28.151Z",
-    "lastOkAt": "2026-10-28T07:04:28.151Z",
+    "lastRunAt": "2026-10-28T11:44:28.721Z",
+    "lastOkAt": "2026-10-28T11:44:28.721Z",
     "consecutiveFailedRuns": 0
   }
 }
