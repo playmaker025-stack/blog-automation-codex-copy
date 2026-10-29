@@ -13843,7 +13843,62 @@
       "publishedAt": "2026-10-29T08:36:09.874Z",
       "createdAt": "2026-10-29T08:36:09.874Z",
       "updatedAt": "2026-10-29T08:36:09.874Z"
+    },
+    {
+      "postId": "post-manual-mvth3u6y",
+      "topicId": "",
+      "userId": "d",
+      "title": "부평 전자담배 드래곤바 원보틀 리뷰 후기 만수르 베이프",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224458204736",
+      "wordCount": 0,
+      "targetKeywords": [
+        "드래곤바",
+        "부평전자담배",
+        "크오크",
+        "바나나우유맛"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224458204736",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224458204736"
+        },
+        "targetKeywords": [
+          {
+            "query": "드래곤바",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "부평전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "크오크",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "바나나우유맛",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부평 전자담배 드래곤바 원보틀 리뷰 후기 만수르 베이프",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-29T11:41:54.422Z",
+        "keywordsRevisedAt": "2026-10-29T11:41:54.422Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-29T11:41:54.422Z",
+      "createdAt": "2026-10-29T11:41:54.422Z",
+      "updatedAt": "2026-10-29T11:41:54.422Z"
     }
   ],
-  "lastUpdated": "2026-10-29T08:36:09.874Z"
+  "lastUpdated": "2026-10-29T11:41:54.422Z"
 }
