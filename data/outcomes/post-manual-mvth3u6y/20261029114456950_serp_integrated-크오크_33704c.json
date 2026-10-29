@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvth3u6y",
+  "source": "serp",
+  "capturedAt": "2026-10-29T11:44:56.950Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261029114456950_serp_integrated-크오크_33704c",
+  "target": {
+    "surface": "integrated",
+    "query": "크오크"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "크오크",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 39,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
