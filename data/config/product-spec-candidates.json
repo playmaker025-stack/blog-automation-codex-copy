@@ -5684,7 +5684,62 @@
       "postTitle": "부평전자담배 다양한 맛과 고농도까지 가능한 일회용 전담 네스티원 만수르 베이프",
       "extractedAt": "2026-10-27T12:41:02.437Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-f666096e",
+      "product": "드래곤바 원보틀",
+      "field": "batteryMah",
+      "value": "1000mah",
+      "evidence": "빳때리 용량은 1000mah에 액상+기기 엘체형 타입(교환식 x) 충전해서 써야 하는 타입이고(c타입)",
+      "postId": "post-manual-mvth3u6y",
+      "postTitle": "부평 전자담배 드래곤바 원보틀 리뷰 후기 만수르 베이프",
+      "extractedAt": "2026-10-29T11:42:14.435Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-aa0f131d",
+      "product": "드래곤바 원보틀",
+      "field": "batteryRechargeable",
+      "value": "충전해서 써야 하는 타입",
+      "evidence": "빳때리 용량은 1000mah에 액상+기기 엘체형 타입(교환식 x) 충전해서 써야 하는 타입이고(c타입)",
+      "postId": "post-manual-mvth3u6y",
+      "postTitle": "부평 전자담배 드래곤바 원보틀 리뷰 후기 만수르 베이프",
+      "extractedAt": "2026-10-29T11:42:14.435Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-eaae6f48",
+      "product": "드래곤바 원보틀",
+      "field": "liquidRefillable",
+      "value": "액상+기기 엘체형 타입(교환식 x)",
+      "evidence": "빳때리 용량은 1000mah에 액상+기기 엘체형 타입(교환식 x) 충전해서 써야 하는 타입이고(c타입)",
+      "postId": "post-manual-mvth3u6y",
+      "postTitle": "부평 전자담배 드래곤바 원보틀 리뷰 후기 만수르 베이프",
+      "extractedAt": "2026-10-29T11:42:14.435Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-d2bf36d0",
+      "product": "드래곤바 원보틀",
+      "field": "liquidMl",
+      "value": "30ml",
+      "evidence": "용량이 트루 30ml가 채워져있어서 닉값답게 원보틀이라고 부르는게 당연할만틈 압도적 용량입니다.",
+      "postId": "post-manual-mvth3u6y",
+      "postTitle": "부평 전자담배 드래곤바 원보틀 리뷰 후기 만수르 베이프",
+      "extractedAt": "2026-10-29T11:42:14.435Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-c06a9e6a",
+      "product": "드래곤바 원보틀",
+      "field": "puffs",
+      "value": "4만퍼프",
+      "evidence": "트루 4만퍼프 쌉가능.",
+      "postId": "post-manual-mvth3u6y",
+      "postTitle": "부평 전자담배 드래곤바 원보틀 리뷰 후기 만수르 베이프",
+      "extractedAt": "2026-10-29T11:42:14.435Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-10-27T12:41:03.090Z"
+  "updatedAt": "2026-10-29T11:42:14.990Z"
 }
