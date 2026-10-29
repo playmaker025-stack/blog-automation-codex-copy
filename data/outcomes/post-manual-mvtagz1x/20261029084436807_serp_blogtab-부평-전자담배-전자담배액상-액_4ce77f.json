@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvtagz1x",
+  "source": "serp",
+  "capturedAt": "2026-10-29T08:44:36.807Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261029084436807_serp_blogtab-부평-전자담배-전자담배액상-액_4ce77f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평 전자담배 전자담배액상 액상 치즈 치즈맛액상 디저트 디저트액상 입호흡 입호흡액상 액상추천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 전자담배액상 액상 치즈 치즈맛액상 디저트 디저트액상 입호흡 입호흡액상 액상추천",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224019076773",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224077929668",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224142840146",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223978634744",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224179218401",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224165702410",
+        "rank": 13
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224141771842",
+        "rank": 16
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224070168074",
+        "rank": 19
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224173022448",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
