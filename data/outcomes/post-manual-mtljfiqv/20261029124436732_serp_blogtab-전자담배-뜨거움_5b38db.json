@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtljfiqv",
+  "source": "serp",
+  "capturedAt": "2026-10-29T12:44:36.732Z",
+  "postAgeHours": 1344,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261029124436732_serp_blogtab-전자담배-뜨거움_5b38db",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 뜨거움"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 뜨거움",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224400166811",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224394405759",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224431203073",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
