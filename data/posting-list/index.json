@@ -13806,7 +13806,44 @@
       "publishedAt": "2026-10-27T12:40:43.821Z",
       "createdAt": "2026-10-27T12:40:43.821Z",
       "updatedAt": "2026-10-27T12:40:43.821Z"
+    },
+    {
+      "postId": "post-manual-mvtagz1x",
+      "topicId": "",
+      "userId": "c",
+      "title": "부평 전자담배 입 호흡 치즈 맛 액상 세가지 제품 추천!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224458032890",
+      "wordCount": 0,
+      "targetKeywords": [
+        "부평 전자담배 전자담배액상 액상 치즈 치즈맛액상 디저트 디저트액상 입호흡 입호흡액상 액상추천"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224458032890",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224458032890"
+        },
+        "targetKeywords": [
+          {
+            "query": "부평 전자담배 전자담배액상 액상 치즈 치즈맛액상 디저트 디저트액상 입호흡 입호흡액상 액상추천",
+            "role": "primary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부평 전자담배 입 호흡 치즈 맛 액상 세가지 제품 추천!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-29T08:36:09.874Z",
+        "keywordsRevisedAt": "2026-10-29T08:36:09.874Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-29T08:36:09.874Z",
+      "createdAt": "2026-10-29T08:36:09.874Z",
+      "updatedAt": "2026-10-29T08:36:09.874Z"
     }
   ],
-  "lastUpdated": "2026-10-27T12:40:43.821Z"
+  "lastUpdated": "2026-10-29T08:36:09.874Z"
 }
