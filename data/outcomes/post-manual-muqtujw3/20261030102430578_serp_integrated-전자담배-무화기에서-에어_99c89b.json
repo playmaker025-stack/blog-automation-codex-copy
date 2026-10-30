@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-muqtujw3",
+  "source": "serp",
+  "capturedAt": "2026-10-30T10:24:30.578Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261030102430578_serp_integrated-전자담배-무화기에서-에어_99c89b",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 무화기에서 에어플로우가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 무화기에서 에어플로우가",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 11,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224429696408",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
