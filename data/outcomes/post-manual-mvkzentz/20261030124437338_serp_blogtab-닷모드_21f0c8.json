@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvkzentz",
+  "source": "serp",
+  "capturedAt": "2026-10-30T12:44:37.338Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261030124437338_serp_blogtab-닷모드_21f0c8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "닷모드",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224451704218",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvkzentz",
+  "source": "serp",
+  "capturedAt": "2026-10-30T12:44:56.793Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261030124456793_serp_integrated-닷220w_3f5be6",
+  "target": {
+    "surface": "integrated",
+    "query": "닷220w"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "닷220w",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 34,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224451704218",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 28
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 29
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

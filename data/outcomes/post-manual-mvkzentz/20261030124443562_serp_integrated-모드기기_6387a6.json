@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvkzentz",
+  "source": "serp",
+  "capturedAt": "2026-10-30T12:44:43.562Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261030124443562_serp_integrated-모드기기_6387a6",
+  "target": {
+    "surface": "integrated",
+    "query": "모드기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "모드기기",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 9,
+    "searchedResultLimit": 36,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224451704218",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221121600597",
+        "rank": 25
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221224767861",
+        "rank": 26
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "221411565143",
+        "rank": 36
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
