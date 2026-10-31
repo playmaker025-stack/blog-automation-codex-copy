@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-31T09:44:40.888Z",
+  "updatedAt": "2026-10-31T11:05:07.089Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -9745,72 +9745,78 @@
         "integrated::폐호흡전자담배": {
           "okAgeHours": [
             569,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-03T11:04:08.498Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-31T11:04:31.550Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T11:04:08.498Z"
+          "lastAttemptAt": "2026-10-31T11:04:31.550Z"
         },
         "blog_tab::폐호흡전자담배": {
           "okAgeHours": [
             569,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-03T11:04:14.909Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-31T11:04:38.815Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T11:04:14.909Z"
+          "lastAttemptAt": "2026-10-31T11:04:38.815Z"
         },
         "integrated::폐호흡액상": {
           "okAgeHours": [
             569,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-03T11:04:21.242Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-31T11:04:44.825Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T11:04:21.242Z"
+          "lastAttemptAt": "2026-10-31T11:04:44.825Z"
         },
         "blog_tab::폐호흡액상": {
           "okAgeHours": [
             569,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-03T11:04:28.413Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-31T11:04:51.952Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T11:04:28.413Z"
+          "lastAttemptAt": "2026-10-31T11:04:51.952Z"
         },
         "integrated::만수역전자담배": {
           "okAgeHours": [
             569,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-03T11:04:33.854Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-31T11:04:58.279Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T11:04:33.854Z"
+          "lastAttemptAt": "2026-10-31T11:04:58.279Z"
         },
         "blog_tab::만수역전자담배": {
           "okAgeHours": [
             569,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-03T11:04:40.718Z",
-          "total": 2,
+          "lastCapturedAt": "2026-10-31T11:05:04.423Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-03T11:04:40.718Z"
+          "lastAttemptAt": "2026-10-31T11:05:04.423Z"
         }
       },
-      "lastCapturedAt": "2026-10-03T11:04:40.718Z",
-      "total": 12
+      "lastCapturedAt": "2026-10-31T11:05:04.423Z",
+      "total": 18
     },
     "post-manual-mtpefc05": {
       "queries": {
@@ -13200,8 +13206,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-10-31T09:44:31.031Z",
-    "lastOkAt": "2026-10-31T09:44:31.031Z",
+    "lastRunAt": "2026-10-31T11:04:30.919Z",
+    "lastOkAt": "2026-10-31T11:04:30.919Z",
     "consecutiveFailedRuns": 0
   }
 }
