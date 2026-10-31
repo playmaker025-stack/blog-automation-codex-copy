@@ -13898,7 +13898,44 @@
       "publishedAt": "2026-10-29T11:41:54.422Z",
       "createdAt": "2026-10-29T11:41:54.422Z",
       "updatedAt": "2026-10-29T11:41:54.422Z"
+    },
+    {
+      "postId": "post-manual-mvw77jtu",
+      "topicId": "",
+      "userId": "c",
+      "title": "부평역 전자담배 DJ쥬스 3종 입호흡 액상 추천!!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224460305008",
+      "wordCount": 0,
+      "targetKeywords": [
+        "부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224460305008",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224460305008"
+        },
+        "targetKeywords": [
+          {
+            "query": "부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천",
+            "role": "primary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부평역 전자담배 DJ쥬스 3종 입호흡 액상 추천!!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-10-31T09:28:10.403Z",
+        "keywordsRevisedAt": "2026-10-31T09:28:10.403Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-10-31T09:28:10.403Z",
+      "createdAt": "2026-10-31T09:28:10.403Z",
+      "updatedAt": "2026-10-31T09:28:10.403Z"
     }
   ],
-  "lastUpdated": "2026-10-29T11:41:54.422Z"
+  "lastUpdated": "2026-10-31T09:28:10.403Z"
 }
