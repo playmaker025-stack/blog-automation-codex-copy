@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvw77jtu",
+  "source": "serp",
+  "capturedAt": "2026-10-31T09:44:31.738Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261031094431738_serp_integrated-부평역-부평역전자담배-부_0d4e4b",
+  "target": {
+    "surface": "integrated",
+    "query": "부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 1,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

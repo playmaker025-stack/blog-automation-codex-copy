@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvw77jtu",
+  "source": "serp",
+  "capturedAt": "2026-10-31T09:44:38.394Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261031094438394_serp_blogtab-부평역-부평역전자담배-부평역액_6736e8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 15,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224460305008",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224242894127",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
