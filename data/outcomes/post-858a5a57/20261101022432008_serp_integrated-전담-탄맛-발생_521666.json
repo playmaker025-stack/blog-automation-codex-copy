@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-858a5a57",
+  "source": "serp",
+  "capturedAt": "2026-11-01T02:24:32.008Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261101022432008_serp_integrated-전담-탄맛-발생_521666",
+  "target": {
+    "surface": "integrated",
+    "query": "전담 탄맛 발생"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전담 탄맛 발생",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224430969295",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
