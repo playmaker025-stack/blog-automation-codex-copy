@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-5e42a765",
+  "source": "serp",
+  "capturedAt": "2026-11-02T07:24:40.475Z",
+  "postAgeHours": 1344,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261102072440475_serp_blogtab-전자담배-무화기-고장_276c09",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 무화기 고장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 무화기 고장",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224403800869",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224241639669",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224048987278",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221481870096",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224091389416",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
