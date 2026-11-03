@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvqobsc9",
+  "source": "serp",
+  "capturedAt": "2026-11-03T12:24:41.410Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261103122441410_serp_blogtab-네스티원_8829c9",
+  "target": {
+    "surface": "blog_tab",
+    "query": "네스티원"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "네스티원",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224455875422",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvqobsc9",
+  "source": "serp",
+  "capturedAt": "2026-11-03T12:25:07.814Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261103122507814_serp_blogtab-일회용전자담배_d3f21e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "일회용전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "일회용전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224455875422",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224453253250",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
