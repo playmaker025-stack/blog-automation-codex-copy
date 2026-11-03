@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtsmngli",
+  "source": "serp",
+  "capturedAt": "2026-11-03T11:44:40.569Z",
+  "postAgeHours": 1344,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261103114440569_serp_blogtab-전자담배단맛_78d852",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배단맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배단맛",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224405141976",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224455875422",
+        "rank": 22
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
