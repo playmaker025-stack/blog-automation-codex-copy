@@ -14003,7 +14003,41 @@
       "publishedAt": "2026-11-03T12:29:46.394Z",
       "createdAt": "2026-11-03T12:29:46.394Z",
       "updatedAt": "2026-11-03T12:29:46.394Z"
+    },
+    {
+      "postId": "post-manual-mw1xcoyb",
+      "topicId": "",
+      "userId": "c",
+      "title": "부평역 전자담배 콩콩제로 2종 입호흡 액상 후기!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224464998402",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224464998402",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224464998402"
+        },
+        "targetKeywords": [
+          {
+            "query": "부평역 전자담배 콩콩제로",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "부평역 전자담배 콩콩제로 2종 입호흡 액상 후기!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-04T09:38:50.758Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-04T09:38:50.758Z",
+      "createdAt": "2026-11-04T09:38:50.758Z",
+      "updatedAt": "2026-11-04T09:38:50.758Z"
     }
   ],
-  "lastUpdated": "2026-11-03T12:29:46.394Z"
+  "lastUpdated": "2026-11-04T09:38:50.758Z"
 }
