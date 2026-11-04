@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi2icv8",
+  "source": "serp",
+  "capturedAt": "2026-11-04T11:45:06.277Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261104114506277_serp_blogtab-무화량_f8b381",
+  "target": {
+    "surface": "blog_tab",
+    "query": "무화량"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224403800869",
+        "rank": 5
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224451704218",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224284614293",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224360766083",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224286760466",
+        "rank": 17
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224003135828",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224359756182",
+        "rank": 21
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224284262349",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
