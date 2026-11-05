@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvth3u6y",
+  "source": "serp",
+  "capturedAt": "2026-11-05T11:24:34.802Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261105112434802_serp_integrated-드래곤바_3d50d1",
+  "target": {
+    "surface": "integrated",
+    "query": "드래곤바"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "드래곤바",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 45,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224458204736",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

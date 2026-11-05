@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvth3u6y",
+  "source": "serp",
+  "capturedAt": "2026-11-05T11:25:19.860Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261105112519860_serp_blogtab-바나나우유맛_03e641",
+  "target": {
+    "surface": "blog_tab",
+    "query": "바나나우유맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "바나나우유맛",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
