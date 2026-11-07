@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw65midq",
+  "source": "serp",
+  "capturedAt": "2026-11-07T08:45:08.036Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261107084508036_serp_blogtab-디저트액상_ae47eb",
+  "target": {
+    "surface": "blog_tab",
+    "query": "디저트액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "디저트액상",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224449436657",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw65midq",
+  "source": "serp",
+  "capturedAt": "2026-11-07T08:45:01.158Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261107084501158_serp_integrated-디저트액상_07ac87",
+  "target": {
+    "surface": "integrated",
+    "query": "디저트액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "디저트액상",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 38,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224468430088",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

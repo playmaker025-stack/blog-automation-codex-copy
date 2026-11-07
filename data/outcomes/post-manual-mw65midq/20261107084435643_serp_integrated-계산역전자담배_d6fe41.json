@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw65midq",
+  "source": "serp",
+  "capturedAt": "2026-11-07T08:44:35.643Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261107084435643_serp_integrated-계산역전자담배_d6fe41",
+  "target": {
+    "surface": "integrated",
+    "query": "계산역전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "계산역전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 21,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224468430088",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

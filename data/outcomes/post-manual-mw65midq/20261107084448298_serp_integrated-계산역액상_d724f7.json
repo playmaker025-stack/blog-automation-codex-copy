@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw65midq",
+  "source": "serp",
+  "capturedAt": "2026-11-07T08:44:48.298Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261107084448298_serp_integrated-계산역액상_d724f7",
+  "target": {
+    "surface": "integrated",
+    "query": "계산역액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "계산역액상",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 10,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224468430088",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
