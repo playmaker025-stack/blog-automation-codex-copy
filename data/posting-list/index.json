@@ -14037,7 +14037,41 @@
       "publishedAt": "2026-11-04T09:38:50.758Z",
       "createdAt": "2026-11-04T09:38:50.758Z",
       "updatedAt": "2026-11-04T09:38:50.758Z"
+    },
+    {
+      "postId": "post-manual-mw64hnf5",
+      "topicId": "",
+      "userId": "b",
+      "title": "남동구 전자담배 다양한 코일 호환 가능한 무화기 아머 MTL 탱크 리뷰",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224468407841",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224468407841",
+          "canonicalUrl": "https://blog.naver.com/youferst/224468407841"
+        },
+        "targetKeywords": [
+          {
+            "query": "남동구 전자담배 다양한",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "남동구 전자담배 다양한 코일 호환 가능한 무화기 아머 MTL 탱크 리뷰",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-07T08:09:46.548Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-07T08:09:46.548Z",
+      "createdAt": "2026-11-07T08:09:46.548Z",
+      "updatedAt": "2026-11-07T08:09:46.548Z"
     }
   ],
-  "lastUpdated": "2026-11-04T09:38:50.758Z"
+  "lastUpdated": "2026-11-07T08:09:46.548Z"
 }
