@@ -14071,7 +14071,68 @@
       "publishedAt": "2026-11-07T08:09:46.548Z",
       "createdAt": "2026-11-07T08:09:46.548Z",
       "updatedAt": "2026-11-07T08:09:46.548Z"
+    },
+    {
+      "postId": "post-manual-mw65midq",
+      "topicId": "",
+      "userId": "c",
+      "title": "계산역 전자담배 입호흡 무니코틴 디저트 액상 추천!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224468430088",
+      "wordCount": 0,
+      "targetKeywords": [
+        "계산역전자담배",
+        "계산역액상",
+        "디저트액상",
+        "무니코틴액상",
+        "입호흡디저트액상"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224468430088",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224468430088"
+        },
+        "targetKeywords": [
+          {
+            "query": "계산역전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "계산역액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "디저트액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "무니코틴액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "입호흡디저트액상",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "계산역 전자담배 입호흡 무니코틴 디저트 액상 추천!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-07T08:41:30.965Z",
+        "keywordsRevisedAt": "2026-11-07T08:41:30.965Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-07T08:41:30.965Z",
+      "createdAt": "2026-11-07T08:41:30.965Z",
+      "updatedAt": "2026-11-07T08:41:30.965Z"
     }
   ],
-  "lastUpdated": "2026-11-07T08:09:46.548Z"
+  "lastUpdated": "2026-11-07T08:41:30.965Z"
 }
