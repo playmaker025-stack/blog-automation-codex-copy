@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-07T08:45:37.094Z",
+  "updatedAt": "2026-11-07T09:04:43.875Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -13304,27 +13304,29 @@
       "queries": {
         "integrated::부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-31T09:44:31.738Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-07T09:04:35.475Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-31T09:44:31.738Z"
+          "lastAttemptAt": "2026-11-07T09:04:35.475Z"
         },
         "blog_tab::부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-10-31T09:44:38.394Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-07T09:04:41.325Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-31T09:44:38.394Z"
+          "lastAttemptAt": "2026-11-07T09:04:41.325Z"
         }
       },
-      "lastCapturedAt": "2026-10-31T09:44:38.394Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-07T09:04:41.325Z",
+      "total": 4
     },
     "post-manual-mvxl5orh": {
       "queries": {
@@ -13538,8 +13540,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-07T08:44:35.299Z",
-    "lastOkAt": "2026-11-07T08:44:35.299Z",
+    "lastRunAt": "2026-11-07T09:04:35.104Z",
+    "lastOkAt": "2026-11-07T09:04:35.104Z",
     "consecutiveFailedRuns": 0
   }
 }
