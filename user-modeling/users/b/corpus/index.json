@@ -2,6 +2,15 @@
   "userId": "b",
   "samples": [
     {
+      "sampleId": "published-post-manual-mw64hnf5",
+      "title": "남동구 전자담배 다양한 코일 호환 가능한 무화기 아머 MTL 탱크 리뷰",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 1434,
+      "publishedAt": "2026-11-07T08:09:46.548Z",
+      "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mw64hnf5.md"
+    },
+    {
       "sampleId": "published-post-manual-mvqo07yw",
       "title": "만수동 전자담배 폐호흡 노멘솔 과일 액상 알케마스터 4종",
       "category": "published-post",
@@ -348,25 +357,7 @@
       "wordCount": 5989,
       "publishedAt": "2026-07-04T11:06:12.021Z",
       "filePath": "user-modeling/users/b/corpus/samples/published-post-manual-mr69b8nu.md"
-    },
-    {
-      "sampleId": "reference-b-05",
-      "title": "만수동 전자담배 시원한 입호흡 과일 액상 추천 3종 DJ쥬스",
-      "category": "상담/구매전환형",
-      "tags": [
-        "실사용 후기",
-        "기기 추천",
-        "액상 추천",
-        "관리법",
-        "지역 매장 상담",
-        "만수동",
-        "시원한",
-        "입호흡"
-      ],
-      "wordCount": 1371,
-      "publishedAt": "2026-04-02T00:00:00.000Z",
-      "filePath": "user-modeling/users/b/corpus/samples/reference-b-05.md"
     }
   ],
-  "lastUpdated": "2026-10-27T12:31:52.854Z"
+  "lastUpdated": "2026-11-07T08:09:53.022Z"
 }
