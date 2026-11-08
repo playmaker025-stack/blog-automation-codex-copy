@@ -14132,7 +14132,68 @@
       "publishedAt": "2026-11-07T08:41:30.965Z",
       "createdAt": "2026-11-07T08:41:30.965Z",
       "updatedAt": "2026-11-07T08:41:30.965Z"
+    },
+    {
+      "postId": "post-manual-mw796cry",
+      "topicId": "",
+      "userId": "d",
+      "title": "입호흡 코일 무화기 판타지 탱크 tmd호환 부평 모드기기 전문점 만수르 전자담배",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224469048063",
+      "wordCount": 0,
+      "targetKeywords": [
+        "판타지탱크",
+        "브이런스",
+        "무화기",
+        "입호흡",
+        "부평전자담배"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224469048063",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224469048063"
+        },
+        "targetKeywords": [
+          {
+            "query": "판타지탱크",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "브이런스",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "무화기",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "입호흡",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "부평전자담배",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "입호흡 코일 무화기 판타지 탱크 tmd호환 부평 모드기기 전문점 만수르 전자담배",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-08T03:08:42.264Z",
+        "keywordsRevisedAt": "2026-11-08T03:08:42.264Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-08T03:08:42.264Z",
+      "createdAt": "2026-11-08T03:08:42.264Z",
+      "updatedAt": "2026-11-08T03:08:42.264Z"
     }
   ],
-  "lastUpdated": "2026-11-07T08:41:30.965Z"
+  "lastUpdated": "2026-11-08T03:08:42.264Z"
 }
