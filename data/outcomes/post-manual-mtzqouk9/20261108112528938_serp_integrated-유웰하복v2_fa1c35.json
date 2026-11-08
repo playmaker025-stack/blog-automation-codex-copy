@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtzqouk9",
+  "source": "serp",
+  "capturedAt": "2026-11-08T11:25:28.938Z",
+  "postAgeHours": 1344,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261108112528938_serp_integrated-유웰하복v2_fa1c35",
+  "target": {
+    "surface": "integrated",
+    "query": "유웰하복v2"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "유웰하복v2",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 42,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
