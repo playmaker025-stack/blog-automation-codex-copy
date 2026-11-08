@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvnmeu6e",
+  "source": "serp",
+  "capturedAt": "2026-11-08T09:05:01.687Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261108090501687_serp_integrated-말론바_cf2781",
+  "target": {
+    "surface": "integrated",
+    "query": "말론바"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "말론바",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 32,
+    "searchedResultLimit": 41,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224453253250",
+        "rank": 32
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
