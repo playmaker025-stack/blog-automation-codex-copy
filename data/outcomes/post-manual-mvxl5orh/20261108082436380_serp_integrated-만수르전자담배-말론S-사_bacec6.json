@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvxl5orh",
+  "source": "serp",
+  "capturedAt": "2026-11-08T08:24:36.380Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261108082436380_serp_integrated-만수르전자담배-말론S-사_bacec6",
+  "target": {
+    "surface": "integrated",
+    "query": "만수르전자담배 말론S 사용기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수르전자담배 말론S 사용기",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 12,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224461274201",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223827602764",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224304878566",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223828894442",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224007820815",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

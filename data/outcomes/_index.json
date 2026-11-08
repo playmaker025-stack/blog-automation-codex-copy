@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-08T06:25:10.009Z",
+  "updatedAt": "2026-11-08T08:24:45.841Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -13344,27 +13344,29 @@
       "queries": {
         "integrated::만수르전자담배 말론S 사용기": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-11-01T09:04:33.098Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-08T08:24:36.380Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-01T09:04:33.098Z"
+          "lastAttemptAt": "2026-11-08T08:24:36.380Z"
         },
         "blog_tab::만수르전자담배 말론S 사용기": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-11-01T09:04:39.987Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-08T08:24:43.203Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-01T09:04:39.987Z"
+          "lastAttemptAt": "2026-11-08T08:24:43.203Z"
         }
       },
-      "lastCapturedAt": "2026-11-01T09:04:39.987Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-08T08:24:43.203Z",
+      "total": 4
     },
     "post-manual-mw0o0nh4": {
       "queries": {
@@ -13658,8 +13660,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-08T06:24:35.699Z",
-    "lastOkAt": "2026-11-08T06:24:35.699Z",
+    "lastRunAt": "2026-11-08T08:24:35.870Z",
+    "lastOkAt": "2026-11-08T08:24:35.870Z",
     "consecutiveFailedRuns": 0
   }
 }
