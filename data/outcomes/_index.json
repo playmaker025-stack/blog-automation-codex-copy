@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-09T06:44:46.857Z",
+  "updatedAt": "2026-11-09T08:44:46.417Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -13067,28 +13067,30 @@
         "integrated::가정동 전자담배 입호흡 액상 입호흡액상 노멘액상 노멘 노멘솔 쿨링": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-11-02T08:44:33.373Z",
-          "total": 2,
+          "lastCapturedAt": "2026-11-09T08:44:36.667Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-02T08:44:33.373Z"
+          "lastAttemptAt": "2026-11-09T08:44:36.667Z"
         },
         "blog_tab::가정동 전자담배 입호흡 액상 입호흡액상 노멘액상 노멘 노멘솔 쿨링": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-11-02T08:44:40.565Z",
-          "total": 2,
+          "lastCapturedAt": "2026-11-09T08:44:43.675Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-02T08:44:40.565Z"
+          "lastAttemptAt": "2026-11-09T08:44:43.675Z"
         }
       },
-      "lastCapturedAt": "2026-11-02T08:44:40.565Z",
-      "total": 4
+      "lastCapturedAt": "2026-11-09T08:44:43.675Z",
+      "total": 6
     },
     "post-manual-mvqo07yw": {
       "queries": {
@@ -13682,8 +13684,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-09T06:44:36.292Z",
-    "lastOkAt": "2026-11-09T06:44:36.292Z",
+    "lastRunAt": "2026-11-09T08:44:36.294Z",
+    "lastOkAt": "2026-11-09T08:44:36.294Z",
     "consecutiveFailedRuns": 0
   }
 }
