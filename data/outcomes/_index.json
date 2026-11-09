@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-09T05:44:37.284Z",
+  "updatedAt": "2026-11-09T06:44:46.857Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -10711,28 +10711,30 @@
         "integrated::입호흡 전자담배 고장": {
           "okAgeHours": [
             360,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-12T06:44:15.046Z",
-          "total": 2,
+          "lastCapturedAt": "2026-11-09T06:44:36.805Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-12T06:44:15.046Z"
+          "lastAttemptAt": "2026-11-09T06:44:36.805Z"
         },
         "blog_tab::입호흡 전자담배 고장": {
           "okAgeHours": [
             360,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-12T06:44:21.218Z",
-          "total": 2,
+          "lastCapturedAt": "2026-11-09T06:44:43.913Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-12T06:44:21.218Z"
+          "lastAttemptAt": "2026-11-09T06:44:43.913Z"
         }
       },
-      "lastCapturedAt": "2026-10-12T06:44:21.218Z",
-      "total": 4
+      "lastCapturedAt": "2026-11-09T06:44:43.913Z",
+      "total": 6
     },
     "post-manual-mu2lxc75": {
       "queries": {
@@ -13680,8 +13682,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-09T05:44:36.463Z",
-    "lastOkAt": "2026-11-08T11:44:35.616Z",
+    "lastRunAt": "2026-11-09T06:44:36.292Z",
+    "lastOkAt": "2026-11-09T06:44:36.292Z",
     "consecutiveFailedRuns": 0
   }
 }
