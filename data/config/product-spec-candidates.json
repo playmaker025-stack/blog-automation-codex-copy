@@ -2,78 +2,6 @@
   "version": 1,
   "candidates": [
     {
-      "id": "cand-61ba6e1b",
-      "product": "옥스바 오네오",
-      "field": "sizeMm",
-      "value": "23 * 32.5 * 102 (mm)",
-      "evidence": "사이즈 : 23 * 32.5 * 102 (mm)",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-0add5623",
-      "product": "옥스바 오네오",
-      "field": "batteryMah",
-      "value": "1600mAh",
-      "evidence": "배터리 용량 : 1600mAh",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-4b9b48df",
-      "product": "옥스바 오네오",
-      "field": "wattRange",
-      "value": "최대 40와트 (변경불가능)",
-      "evidence": "출력 : 최대 40와트 (변경불가능)",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-59c8824d",
-      "product": "옥스바 오네오",
-      "field": "resistanceOhm",
-      "value": "0.4옴, 0.6옴, 0.8옴",
-      "evidence": "저항값 : 0.4옴, 0.6옴, 0.8옴",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-b1ff8e4e",
-      "product": "옥스바 오네오",
-      "field": "podMl",
-      "value": "3.5ml",
-      "evidence": "팟액상용량 : 3.5ml",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-81e74c5b",
-      "product": "옥스바 오네오",
-      "field": "charging",
-      "value": "C타입",
-      "evidence": "충전 : C타입",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
       "id": "cand-a8621b29",
       "product": "옥스바 오네오",
       "field": "airflowControl",
@@ -5871,7 +5799,73 @@
       "postTitle": "남동구 전자담배 다양한 코일 호환 가능한 무화기 아머 MTL 탱크 리뷰",
       "extractedAt": "2026-11-07T08:10:04.540Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-5afee04d",
+      "product": "다비도프 바닐라 타바코",
+      "field": "liquidMl",
+      "value": "60ml",
+      "evidence": "용량은 페호흡 액상인 만큼 60ml이고 다비도프 바닐라 타바코는 3mg, 6mg 두가지 니코틴 함량으로 구성되어 있습니다.",
+      "postId": "post-manual-mwagobr1",
+      "postTitle": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
+      "extractedAt": "2026-11-10T09:02:17.753Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-fbcfe5cf",
+      "product": "다비도프 바닐라 타바코",
+      "field": "nicotinePercent",
+      "value": "3mg",
+      "evidence": "용량은 페호흡 액상인 만큼 60ml이고 다비도프 바닐라 타바코는 3mg, 6mg 두가지 니코틴 함량으로 구성되어 있습니다.",
+      "postId": "post-manual-mwagobr1",
+      "postTitle": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
+      "extractedAt": "2026-11-10T09:02:17.753Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-ceb70e5c",
+      "product": "다비도프 바닐라 타바코",
+      "field": "nicotinePercent",
+      "value": "6mg",
+      "evidence": "용량은 페호흡 액상인 만큼 60ml이고 다비도프 바닐라 타바코는 3mg, 6mg 두가지 니코틴 함량으로 구성되어 있습니다.",
+      "postId": "post-manual-mwagobr1",
+      "postTitle": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
+      "extractedAt": "2026-11-10T09:02:17.753Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-7a903696",
+      "product": "다비도프 바닐라 타바코",
+      "field": "officialName",
+      "value": "닷모드 닷박스 220W V2 블랙",
+      "evidence": "다비도프 바닐라 타바코를 먹을때 쓴 전자담배는 닷모드 닷박스 220W V2 블랙과 탱크는 제우스 플리탱크 2 코일은 제우스 0.15옴 70W로 베이핑 했습니다.",
+      "postId": "post-manual-mwagobr1",
+      "postTitle": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
+      "extractedAt": "2026-11-10T09:02:17.753Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-d6c95612",
+      "product": "다비도프 바닐라 타바코",
+      "field": "resistanceOhm",
+      "value": "0.15옴",
+      "evidence": "다비도프 바닐라 타바코를 먹을때 쓴 전자담배는 닷모드 닷박스 220W V2 블랙과 탱크는 제우스 플리탱크 2 코일은 제우스 0.15옴 70W로 베이핑 했습니다.",
+      "postId": "post-manual-mwagobr1",
+      "postTitle": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
+      "extractedAt": "2026-11-10T09:02:17.753Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-25ae9e35",
+      "product": "다비도프 바닐라 타바코",
+      "field": "wattRange",
+      "value": "70W",
+      "evidence": "다비도프 바닐라 타바코를 먹을때 쓴 전자담배는 닷모드 닷박스 220W V2 블랙과 탱크는 제우스 플리탱크 2 코일은 제우스 0.15옴 70W로 베이핑 했습니다.",
+      "postId": "post-manual-mwagobr1",
+      "postTitle": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
+      "extractedAt": "2026-11-10T09:02:17.753Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-11-07T08:10:05.393Z"
+  "updatedAt": "2026-11-10T09:02:18.553Z"
 }
