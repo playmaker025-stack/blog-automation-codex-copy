@@ -14193,7 +14193,68 @@
       "publishedAt": "2026-11-08T03:08:42.264Z",
       "createdAt": "2026-11-08T03:08:42.264Z",
       "updatedAt": "2026-11-08T03:08:42.264Z"
+    },
+    {
+      "postId": "post-manual-mwagobr1",
+      "topicId": "",
+      "userId": "c",
+      "title": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224471923059",
+      "wordCount": 0,
+      "targetKeywords": [
+        "부평역",
+        "전자담배",
+        "폐호흡액상",
+        "다비도프",
+        "액상추천"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224471923059",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224471923059"
+        },
+        "targetKeywords": [
+          {
+            "query": "부평역",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "전자담배",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "폐호흡액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "다비도프",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "액상추천",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-10T09:01:55.904Z",
+        "keywordsRevisedAt": "2026-11-10T09:01:55.904Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-10T09:01:55.904Z",
+      "createdAt": "2026-11-10T09:01:55.904Z",
+      "updatedAt": "2026-11-10T09:01:55.904Z"
     }
   ],
-  "lastUpdated": "2026-11-08T03:08:42.264Z"
+  "lastUpdated": "2026-11-10T09:01:55.904Z"
 }
