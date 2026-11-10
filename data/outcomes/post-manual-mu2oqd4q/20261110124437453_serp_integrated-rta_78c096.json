@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu2oqd4q",
+  "source": "serp",
+  "capturedAt": "2026-11-10T12:44:37.453Z",
+  "postAgeHours": 1344,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261110124437453_serp_integrated-rta_78c096",
+  "target": {
+    "surface": "integrated",
+    "query": "rta"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

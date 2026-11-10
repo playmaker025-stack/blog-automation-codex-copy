@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu2oqd4q",
+  "source": "serp",
+  "capturedAt": "2026-11-10T12:44:58.782Z",
+  "postAgeHours": 1344,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261110124458782_serp_integrated-전자담배_e4db8b",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}
