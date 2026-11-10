@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwagobr1",
+  "source": "serp",
+  "capturedAt": "2026-11-10T09:05:09.911Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261110090509911_serp_blogtab-폐호흡액상_2487a1",
+  "target": {
+    "surface": "blog_tab",
+    "query": "폐호흡액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡액상",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

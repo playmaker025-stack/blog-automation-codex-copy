@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwagobr1",
+  "source": "serp",
+  "capturedAt": "2026-11-10T09:04:37.030Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261110090437030_serp_integrated-부평역_599a96",
+  "target": {
+    "surface": "integrated",
+    "query": "부평역"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평역",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 27,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

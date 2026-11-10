@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwagobr1",
+  "source": "serp",
+  "capturedAt": "2026-11-10T09:04:57.526Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261110090457526_serp_blogtab-전자담배_100c12",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
