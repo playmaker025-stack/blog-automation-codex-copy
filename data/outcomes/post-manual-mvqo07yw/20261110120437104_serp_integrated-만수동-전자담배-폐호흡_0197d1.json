@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvqo07yw",
+  "source": "serp",
+  "capturedAt": "2026-11-10T12:04:37.104Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261110120437104_serp_integrated-만수동-전자담배-폐호흡_0197d1",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 폐호흡",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224455867627",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224402056009",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221139696809",
+        "rank": 13
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221175166528",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221511543607",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221177710918",
+        "rank": 17
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221230583105",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221223203749",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221179311242",
+        "rank": 24
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221856411906",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

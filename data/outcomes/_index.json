@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-10T11:44:46.383Z",
+  "updatedAt": "2026-11-10T12:05:00.026Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -13101,28 +13101,30 @@
         "integrated::만수동 전자담배 폐호흡": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-11-03T12:04:34.141Z",
-          "total": 2,
+          "lastCapturedAt": "2026-11-10T12:04:37.104Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-03T12:04:34.141Z"
+          "lastAttemptAt": "2026-11-10T12:04:37.104Z"
         },
         "blog_tab::만수동 전자담배 폐호흡": {
           "okAgeHours": [
             0,
-            168
+            168,
+            336
           ],
-          "lastCapturedAt": "2026-11-03T12:04:41.274Z",
-          "total": 2,
+          "lastCapturedAt": "2026-11-10T12:04:44.528Z",
+          "total": 3,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-03T12:04:41.274Z"
+          "lastAttemptAt": "2026-11-10T12:04:44.528Z"
         }
       },
-      "lastCapturedAt": "2026-11-03T12:04:41.274Z",
-      "total": 4
+      "lastCapturedAt": "2026-11-10T12:04:44.528Z",
+      "total": 6
     },
     "post-manual-mvqobsc9": {
       "queries": {
@@ -13400,27 +13402,29 @@
       "queries": {
         "integrated::한정판 액상 파이브폰즈": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-11-03T12:44:34.996Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-10T12:04:50.859Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-03T12:44:34.996Z"
+          "lastAttemptAt": "2026-11-10T12:04:50.859Z"
         },
         "blog_tab::한정판 액상 파이브폰즈": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-11-03T12:44:41.742Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-10T12:04:57.370Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-03T12:44:41.742Z"
+          "lastAttemptAt": "2026-11-10T12:04:57.370Z"
         }
       },
-      "lastCapturedAt": "2026-11-03T12:44:41.742Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-10T12:04:57.370Z",
+      "total": 4
     },
     "post-manual-mw1xcoyb": {
       "queries": {
@@ -13794,8 +13798,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-10T11:44:36.624Z",
-    "lastOkAt": "2026-11-10T11:44:36.624Z",
+    "lastRunAt": "2026-11-10T12:04:36.667Z",
+    "lastOkAt": "2026-11-10T12:04:36.667Z",
     "consecutiveFailedRuns": 0
   }
 }
