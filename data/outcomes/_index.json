@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-11T06:24:47.549Z",
+  "updatedAt": "2026-11-11T09:24:46.730Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -13448,27 +13448,29 @@
       "queries": {
         "integrated::부평역 전자담배 콩콩제로": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-11-04T09:44:34.267Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-11T09:24:37.617Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-04T09:44:34.267Z"
+          "lastAttemptAt": "2026-11-11T09:24:37.617Z"
         },
         "blog_tab::부평역 전자담배 콩콩제로": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-11-04T09:44:40.981Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-11T09:24:44.368Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-04T09:44:40.981Z"
+          "lastAttemptAt": "2026-11-11T09:24:44.368Z"
         }
       },
-      "lastCapturedAt": "2026-11-04T09:44:40.981Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-11T09:24:44.368Z",
+      "total": 4
     },
     "post-manual-mw64hnf5": {
       "queries": {
@@ -13816,8 +13818,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-11T06:24:36.960Z",
-    "lastOkAt": "2026-11-11T06:24:36.960Z",
+    "lastRunAt": "2026-11-11T09:24:37.219Z",
+    "lastOkAt": "2026-11-11T09:24:37.219Z",
     "consecutiveFailedRuns": 0
   }
 }
