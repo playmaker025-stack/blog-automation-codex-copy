@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3c16fe70",
+  "source": "serp",
+  "capturedAt": "2026-11-13T12:25:18.010Z",
+  "postAgeHours": 6060,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113122518010_serp_integrated-인천-전자담배-추천_685930",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 전자담배 추천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 추천",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 38,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "221707970613",
+        "rank": 29
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224450321386",
+        "rank": 37
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
