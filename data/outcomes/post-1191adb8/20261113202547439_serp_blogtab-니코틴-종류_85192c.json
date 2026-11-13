@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-1191adb8",
+  "source": "serp",
+  "capturedAt": "2026-11-13T20:25:47.439Z",
+  "postAgeHours": 2727,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113202547439_serp_blogtab-니코틴-종류_85192c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "니코틴 종류"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "니코틴 종류",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mruk2p3c",
+  "source": "serp",
+  "capturedAt": "2026-11-13T20:24:57.718Z",
+  "postAgeHours": 2769,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113202457718_serp_blogtab-전자담배-액상을-자주_54aef1",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상을 자주"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상을 자주",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224398637176",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224423068124",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
