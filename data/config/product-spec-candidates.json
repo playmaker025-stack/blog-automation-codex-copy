@@ -2,78 +2,6 @@
   "version": 1,
   "candidates": [
     {
-      "id": "cand-a8621b29",
-      "product": "옥스바 오네오",
-      "field": "airflowControl",
-      "value": "흡입압 조절 가능",
-      "evidence": "만수르 전자담배 기기옆면을 보시면 에어홀 조절이 가능하게 되어있는데 쫀쫀하거나 널널하게 조절가능합니다.",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-a52bc248",
-      "product": "옥스바 오네오",
-      "field": "form",
-      "value": "입호흡 전자담배",
-      "evidence": "액상형 입호흡 전자담배",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-90c20b3e",
-      "product": "옥스바 오네오",
-      "field": "inhaleMode",
-      "value": "자동",
-      "evidence": "옥스바는 출력조절을 따로 할 필요도 없고 오토드로우 형식으로 입을대고 흡입하면 그대로 작동을 해서 정말 간단하고 입문하기 좋은 기기입니다.",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-fb26cfb9",
-      "product": "옥스바 오네오",
-      "field": "wattControl",
-      "value": "조절 불가능",
-      "evidence": "출력조절이 안된다는거??",
-      "postId": "post-manual-mt87hyvp",
-      "postTitle": "갈산동전자담배 옥스바 오네오 솔직후기",
-      "extractedAt": "2026-08-25T05:10:42.677Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-a5e27621",
-      "product": "아머프로",
-      "field": "sizeMm",
-      "value": "82*39*16.5mm",
-      "evidence": "기기스펙 먼저 봅시다 아머프로 기기스펙 크기 : 82*39*16.5mm",
-      "postId": "post-manual-mt87ii9l",
-      "postTitle": "굴포천역전자담배 입호흡기기 아머프로 가져왔습니다!",
-      "extractedAt": "2026-08-25T05:11:08.366Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-bf9bd3eb",
-      "product": "아머프로",
-      "field": "weightG",
-      "value": "52g",
-      "evidence": "기기스펙 먼저 봅시다 아머프로 기기스펙 크기 : 82*39*16.5mm 무게 : 52g",
-      "postId": "post-manual-mt87ii9l",
-      "postTitle": "굴포천역전자담배 입호흡기기 아머프로 가져왔습니다!",
-      "extractedAt": "2026-08-25T05:11:08.366Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
       "id": "cand-177bc26d",
       "product": "아머프로",
       "field": "batteryMah",
@@ -5865,7 +5793,73 @@
       "postTitle": "부평역 전자담배 폐호흡 액상 다비도프 바닐라 타바코 추천!",
       "extractedAt": "2026-11-10T09:02:17.753Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-72c7720b",
+      "product": "ATTO MOD",
+      "field": "form",
+      "value": "원통형",
+      "evidence": "심플 IS 베스트인 원통형 스테인레스 기기에 동그란 동전칩셋인 베이직 PCD가 장착이 되어 있어서 맥모드 느낌은 나긴하지만 정전압 셋팅에 쇼트방지 기능은 탑재!",
+      "postId": "post-manual-mweut7yk",
+      "postTitle": "입호흡 전자담배 아토모드와 아머 mtl 탱크 조합 역시 액상은 탱크맛!",
+      "extractedAt": "2026-11-13T10:49:10.868Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-82c66fc7",
+      "product": "ATTO MOD",
+      "field": "batteryMah",
+      "value": "18350은 보통 700~1000 사이정도",
+      "evidence": "18350은 보통 700~1000 사이정도여서 좀 약하긴 하지만 걍 작은게 작은거라고 2개 들고 다니시면될것 같고",
+      "postId": "post-manual-mweut7yk",
+      "postTitle": "입호흡 전자담배 아토모드와 아머 mtl 탱크 조합 역시 액상은 탱크맛!",
+      "extractedAt": "2026-11-13T10:49:10.868Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-4df1300b",
+      "product": "ATTO MOD",
+      "field": "batteryMah",
+      "value": "18650은 3000이니까",
+      "evidence": "18650은 3000이니까 왠만한 팟디바이스보다 훨씬 배터리 용량이 커서 이건 별로 걱정할건 없을것 같습니다.",
+      "postId": "post-manual-mweut7yk",
+      "postTitle": "입호흡 전자담배 아토모드와 아머 mtl 탱크 조합 역시 액상은 탱크맛!",
+      "extractedAt": "2026-11-13T10:49:10.868Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-77569e1b",
+      "product": "아머 MTL 탱크",
+      "field": "inhaleMode",
+      "value": "버튼",
+      "evidence": "아토모드는 사실 벌써 나온지가 한 10년은 넘은 모델입니다. ​ 웨이팅이 있었을정도로 한정판급 기기중 하나이고 그 당시 때를 정말 잘못 만난 비운의 기기라고도 할 수 있죠.. ​ 오늘날처럼 코일성능이 좋아져 뒤지는 탱크들이 팟디바이스를 압도할때 나왔더라면 아마 웨이팅이 아니라 사전예약이 있었지 않았을까 싶습니다. 아쉽네요..",
+      "postId": "post-manual-mweut7yk",
+      "postTitle": "입호흡 전자담배 아토모드와 아머 mtl 탱크 조합 역시 액상은 탱크맛!",
+      "extractedAt": "2026-11-13T10:49:10.868Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-a109ffca",
+      "product": "아머 MTL 탱크",
+      "field": "drawStyle",
+      "value": "입호흡",
+      "evidence": "아토모드와 아머 mtl 탱크 조합 역시 액상은 탱크맛!",
+      "postId": "post-manual-mweut7yk",
+      "postTitle": "입호흡 전자담배 아토모드와 아머 mtl 탱크 조합 역시 액상은 탱크맛!",
+      "extractedAt": "2026-11-13T10:49:10.868Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-8e7712ec",
+      "product": "아머 MTL 탱크",
+      "field": "liquidRefillable",
+      "value": "예",
+      "evidence": "사진에 조합되어있는 무화기는 아머 MTL 탱크 입니다. ​ 좀비같은 코일수명과 뒤지는 맛표현으로 요즘 개잘나가는 아머코일을 쓰는 탱크고 ​ TMD,GTX,PNP등 코일의 호환성이 굉장히 좋습니다.",
+      "postId": "post-manual-mweut7yk",
+      "postTitle": "입호흡 전자담배 아토모드와 아머 mtl 탱크 조합 역시 액상은 탱크맛!",
+      "extractedAt": "2026-11-13T10:49:10.868Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-11-10T09:02:18.553Z"
+  "updatedAt": "2026-11-13T10:49:11.770Z"
 }
