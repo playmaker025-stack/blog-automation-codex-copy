@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9e76eacdcd",
+  "source": "serp",
+  "capturedAt": "2026-11-13T17:04:59.246Z",
+  "postAgeHours": 5129,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113170459246_serp_blogtab-같은-액상인데-어떤_841ab0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "같은 액상인데 어떤"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "같은 액상인데 어떤",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
