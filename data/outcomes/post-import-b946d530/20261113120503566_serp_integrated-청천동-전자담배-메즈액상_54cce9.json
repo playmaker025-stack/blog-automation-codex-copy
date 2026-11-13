@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b946d530",
+  "source": "serp",
+  "capturedAt": "2026-11-13T12:05:03.566Z",
+  "postAgeHours": 6132,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113120503566_serp_integrated-청천동-전자담배-메즈액상_54cce9",
+  "target": {
+    "surface": "integrated",
+    "query": "청천동 전자담배 메즈액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "청천동 전자담배 메즈액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 6,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224203114841",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

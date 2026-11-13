@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-1b99338a",
+  "source": "serp",
+  "capturedAt": "2026-11-13T12:05:22.236Z",
+  "postAgeHours": 6108,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113120522236_serp_blogtab-말론-아스트로-입호흡기기에_24ff1e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "말론 아스트로 입호흡기기에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "말론 아스트로 입호흡기기에",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224204499943",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224210268432",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224218510883",
+        "rank": 22
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 29
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224164492213",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-0cbc5e41",
+  "source": "serp",
+  "capturedAt": "2026-11-13T12:05:27.736Z",
+  "postAgeHours": 6108,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113120527736_serp_integrated-구월동-전자담배-입호흡_164074",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동 전자담배 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 입호흡",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 32,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421252466",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224198373019",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224202841961",
+        "rank": 17
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223989138531",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

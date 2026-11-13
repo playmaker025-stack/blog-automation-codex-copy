@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-880a7971",
+  "source": "serp",
+  "capturedAt": "2026-11-13T12:04:44.703Z",
+  "postAgeHours": 6132,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113120444703_serp_blogtab-구월동전자담배-매장에서-고농도_f12bfe",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동전자담배 매장에서 고농도"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 매장에서 고농도",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224332153941",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224202841961",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224269530819",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224204499964",
+        "rank": 20
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224159381891",
+        "rank": 21
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224202861999",
+        "rank": 24
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224138093669",
+        "rank": 26
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224293727182",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
