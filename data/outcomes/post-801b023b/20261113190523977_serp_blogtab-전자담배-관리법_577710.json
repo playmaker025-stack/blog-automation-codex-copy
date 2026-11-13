@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-801b023b",
+  "source": "serp",
+  "capturedAt": "2026-11-13T19:05:23.977Z",
+  "postAgeHours": 3036,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113190523977_serp_blogtab-전자담배-관리법_577710",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 관리법 :"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 관리법 :",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
