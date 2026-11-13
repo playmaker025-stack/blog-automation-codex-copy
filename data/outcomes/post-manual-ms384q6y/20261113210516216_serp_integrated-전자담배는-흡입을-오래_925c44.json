@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms384q6y",
+  "source": "serp",
+  "capturedAt": "2026-11-13T21:05:16.216Z",
+  "postAgeHours": 2624,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113210516216_serp_integrated-전자담배는-흡입을-오래_925c44",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배는 흡입을 오래"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}

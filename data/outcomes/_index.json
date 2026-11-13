@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-13T20:45:50.613Z",
+  "updatedAt": "2026-11-13T21:05:49.614Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -4939,11 +4939,153 @@
       },
       "lastCapturedAt": "2026-11-13T20:45:48.772Z",
       "total": 2
+    },
+    "post-manual-ms1qobk6": {
+      "queries": {
+        "integrated::부평시청역 전자담배 오랜만에": {
+          "okAgeHours": [
+            2649
+          ],
+          "lastCapturedAt": "2026-11-13T21:04:38.589Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:04:38.589Z"
+        },
+        "blog_tab::부평시청역 전자담배 오랜만에": {
+          "okAgeHours": [
+            2649
+          ],
+          "lastCapturedAt": "2026-11-13T21:04:44.841Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:04:44.841Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T21:04:44.841Z",
+      "total": 2
+    },
+    "post-3a147bb4": {
+      "queries": {
+        "integrated::코일 언제": {
+          "okAgeHours": [
+            2629
+          ],
+          "lastCapturedAt": "2026-11-13T21:04:50.833Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:04:50.833Z"
+        },
+        "blog_tab::코일 언제": {
+          "okAgeHours": [
+            2629
+          ],
+          "lastCapturedAt": "2026-11-13T21:04:57.620Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:04:57.620Z"
+        },
+        "integrated::전자담배 코일은 언제": {
+          "okAgeHours": [
+            2629
+          ],
+          "lastCapturedAt": "2026-11-13T21:05:03.170Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:05:03.170Z"
+        },
+        "blog_tab::전자담배 코일은 언제": {
+          "okAgeHours": [
+            2629
+          ],
+          "lastCapturedAt": "2026-11-13T21:05:09.881Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:05:09.881Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T21:05:09.881Z",
+      "total": 4
+    },
+    "post-manual-ms384q6y": {
+      "queries": {
+        "integrated::전자담배는 흡입을 오래": {
+          "okAgeHours": [],
+          "lastCapturedAt": "2026-11-13T21:05:16.216Z",
+          "total": 1,
+          "lastStatus": "request_failed",
+          "consecutiveFailures": 1,
+          "lastAttemptAt": "2026-11-13T21:05:16.216Z"
+        },
+        "blog_tab::전자담배는 흡입을 오래": {
+          "okAgeHours": [
+            2624
+          ],
+          "lastCapturedAt": "2026-11-13T21:05:21.849Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:05:21.849Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T21:05:21.849Z",
+      "total": 2
+    },
+    "post-f3b26f79": {
+      "queries": {
+        "integrated::입호흡 폐호흡 차이": {
+          "okAgeHours": [
+            2604
+          ],
+          "lastCapturedAt": "2026-11-13T21:05:26.913Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:05:26.913Z"
+        },
+        "blog_tab::입호흡 폐호흡 차이": {
+          "okAgeHours": [
+            2604
+          ],
+          "lastCapturedAt": "2026-11-13T21:05:33.661Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:05:33.661Z"
+        },
+        "integrated::전자담배 입호흡 폐호흡": {
+          "okAgeHours": [
+            2604
+          ],
+          "lastCapturedAt": "2026-11-13T21:05:39.963Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:05:39.963Z"
+        },
+        "blog_tab::전자담배 입호흡 폐호흡": {
+          "okAgeHours": [
+            2604
+          ],
+          "lastCapturedAt": "2026-11-13T21:05:46.790Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T21:05:46.790Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T21:05:46.790Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-11-13T20:44:38.317Z",
-    "lastOkAt": "2026-11-13T20:44:38.317Z",
+    "lastRunAt": "2026-11-13T21:04:38.241Z",
+    "lastOkAt": "2026-11-13T21:04:38.241Z",
     "consecutiveFailedRuns": 0
   }
 }
