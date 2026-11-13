@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msmx35tq",
+  "source": "serp",
+  "capturedAt": "2026-11-13T22:45:31.498Z",
+  "postAgeHours": 2295,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113224531498_serp_integrated-베놈-팬텀-엔트리_e9b167",
+  "target": {
+    "surface": "integrated",
+    "query": "베놈 팬텀 엔트리"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "베놈 팬텀 엔트리",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
