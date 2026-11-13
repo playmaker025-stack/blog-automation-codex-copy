@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-717fe630",
+  "source": "serp",
+  "capturedAt": "2026-11-13T14:45:48.478Z",
+  "postAgeHours": 5631,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113144548478_serp_blogtab-전자담배-액상-색이_fa0ecb",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 색이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 색이",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224345520991",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

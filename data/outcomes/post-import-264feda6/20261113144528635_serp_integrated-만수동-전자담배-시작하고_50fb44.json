@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-264feda6",
+  "source": "serp",
+  "capturedAt": "2026-11-13T14:45:28.635Z",
+  "postAgeHours": 5631,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113144528635_serp_integrated-만수동-전자담배-시작하고_50fb44",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 시작하고"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 시작하고",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

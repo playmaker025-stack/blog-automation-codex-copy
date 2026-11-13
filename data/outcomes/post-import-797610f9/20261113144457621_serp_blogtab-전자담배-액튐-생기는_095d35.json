@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-797610f9",
+  "source": "serp",
+  "capturedAt": "2026-11-13T14:44:57.621Z",
+  "postAgeHours": 5679,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113144457621_serp_blogtab-전자담배-액튐-생기는_095d35",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액튐 생기는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액튐 생기는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224423068124",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224225519243",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224364905887",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224227052781",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

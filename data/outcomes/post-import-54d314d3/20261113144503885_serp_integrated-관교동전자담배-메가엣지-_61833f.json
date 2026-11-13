@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-54d314d3",
+  "source": "serp",
+  "capturedAt": "2026-11-13T14:45:03.885Z",
+  "postAgeHours": 5655,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113144503885_serp_integrated-관교동전자담배-메가엣지-_61833f",
+  "target": {
+    "surface": "integrated",
+    "query": "관교동전자담배 메가엣지 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "관교동전자담배 메가엣지 액상",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224226770455",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
