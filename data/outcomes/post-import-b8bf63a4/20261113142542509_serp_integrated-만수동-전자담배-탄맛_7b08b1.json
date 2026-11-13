@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b8bf63a4",
+  "source": "serp",
+  "capturedAt": "2026-11-13T14:25:42.509Z",
+  "postAgeHours": 5702,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113142542509_serp_integrated-만수동-전자담배-탄맛_7b08b1",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 탄맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 탄맛",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 8,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224430969295",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224136930090",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224087773782",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224120478269",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

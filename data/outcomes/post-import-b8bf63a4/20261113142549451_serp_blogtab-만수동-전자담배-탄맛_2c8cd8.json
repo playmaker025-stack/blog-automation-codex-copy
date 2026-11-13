@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b8bf63a4",
+  "source": "serp",
+  "capturedAt": "2026-11-13T14:25:49.451Z",
+  "postAgeHours": 5702,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113142549451_serp_blogtab-만수동-전자담배-탄맛_2c8cd8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배 탄맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 탄맛",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224435119042",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224089279318",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224087773782",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224224753742",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224243215965",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224430969295",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224376572221",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224136930090",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224109563734",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224246995911",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224120478269",
+        "rank": 14
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224307896782",
+        "rank": 19
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "220851891967",
+        "rank": 25
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224386746626",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

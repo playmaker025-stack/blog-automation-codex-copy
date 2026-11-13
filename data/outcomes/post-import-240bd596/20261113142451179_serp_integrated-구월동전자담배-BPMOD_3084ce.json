@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-240bd596",
+  "source": "serp",
+  "capturedAt": "2026-11-13T14:24:51.179Z",
+  "postAgeHours": 5750,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113142451179_serp_integrated-구월동전자담배-BPMOD_3084ce",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동전자담배 BPMODS RAZOR"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배 BPMODS RAZOR",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 6,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224222469783",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224221247688",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
