@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9123eaa0cd",
+  "source": "serp",
+  "capturedAt": "2026-11-13T16:44:44.844Z",
+  "postAgeHours": 5249,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113164444844_serp_blogtab-송내-전자담배-입문자가_4d6b8d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "송내 전자담배 입문자가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "송내 전자담배 입문자가",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224246746959",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224264935958",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224216366603",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224158436391",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
