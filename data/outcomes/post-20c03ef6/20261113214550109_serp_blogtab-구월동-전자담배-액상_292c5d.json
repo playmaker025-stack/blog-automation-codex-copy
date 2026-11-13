@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-20c03ef6",
+  "source": "serp",
+  "capturedAt": "2026-11-13T21:45:50.109Z",
+  "postAgeHours": 2507,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113214550109_serp_blogtab-구월동-전자담배-액상_292c5d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동 전자담배 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224138427996",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224365065716",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224159381891",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224204499964",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224198373019",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224346587073",
+        "rank": 18
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224202861999",
+        "rank": 21
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224073995714",
+        "rank": 28
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224087835994",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

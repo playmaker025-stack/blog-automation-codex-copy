@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-e83cf288",
+  "source": "serp",
+  "capturedAt": "2026-11-13T21:45:11.671Z",
+  "postAgeHours": 2532,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113214511671_serp_blogtab-일회용-전담-탄맛_50ca74",
+  "target": {
+    "surface": "blog_tab",
+    "query": "일회용 전담 탄맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "일회용 전담 탄맛",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224364116644",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224435119042",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224420074157",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
