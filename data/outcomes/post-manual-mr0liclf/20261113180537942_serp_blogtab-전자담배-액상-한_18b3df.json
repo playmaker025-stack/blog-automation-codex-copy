@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr0liclf",
+  "source": "serp",
+  "capturedAt": "2026-11-13T18:05:37.942Z",
+  "postAgeHours": 3270,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113180537942_serp_blogtab-전자담배-액상-한_18b3df",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상 한"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상 한",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 12,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224332187539",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
