@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-3442dcc2",
+  "source": "serp",
+  "capturedAt": "2026-11-13T19:45:11.049Z",
+  "postAgeHours": 2914,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113194511049_serp_blogtab-무니코틴-고르기-전에_76876f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "무니코틴 고르기 전에"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무니코틴 고르기 전에",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 26,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224347678146",
+        "rank": 26
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

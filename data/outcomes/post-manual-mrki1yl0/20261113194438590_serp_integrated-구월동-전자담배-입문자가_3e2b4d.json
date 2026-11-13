@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrki1yl0",
+  "source": "serp",
+  "capturedAt": "2026-11-13T19:44:38.590Z",
+  "postAgeHours": 2937,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113194438590_serp_integrated-구월동-전자담배-입문자가_3e2b4d",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동 전자담배 입문자가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 입문자가",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 23,
+    "searchedResultLimit": 39,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224375480050",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224093237305",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224117744480",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224346587073",
+        "rank": 23
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224216366603",
+        "rank": 24
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224272638838",
+        "rank": 25
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224475775112",
+        "rank": 27
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224473222714",
+        "rank": 28
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224470619730",
+        "rank": 29
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 30
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 31
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 32
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 33
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 34
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224383515315",
+        "rank": 35
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224338245201",
+        "rank": 36
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224325995644",
+        "rank": 37
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224321052285",
+        "rank": 38
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

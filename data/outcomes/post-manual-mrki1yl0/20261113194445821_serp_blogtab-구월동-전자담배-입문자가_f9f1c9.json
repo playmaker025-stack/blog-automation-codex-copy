@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrki1yl0",
+  "source": "serp",
+  "capturedAt": "2026-11-13T19:44:45.821Z",
+  "postAgeHours": 2937,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113194445821_serp_blogtab-구월동-전자담배-입문자가_f9f1c9",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동 전자담배 입문자가"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 입문자가",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224211530647",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224093237305",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224087773782",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224318012483",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224346587073",
+        "rank": 13
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224117744480",
+        "rank": 15
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224198373019",
+        "rank": 16
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

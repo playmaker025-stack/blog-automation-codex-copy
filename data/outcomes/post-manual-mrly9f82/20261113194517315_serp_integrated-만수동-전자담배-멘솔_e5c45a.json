@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrly9f82",
+  "source": "serp",
+  "capturedAt": "2026-11-13T19:45:17.315Z",
+  "postAgeHours": 2913,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113194517315_serp_integrated-만수동-전자담배-멘솔_e5c45a",
+  "target": {
+    "surface": "integrated",
+    "query": "만수동 전자담배 멘솔"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 멘솔",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 28,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224347729064",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224351924908",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224455867627",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224383515315",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224095821685",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222881505923",
+        "rank": 23
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "220784609688",
+        "rank": 24
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222424638925",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
