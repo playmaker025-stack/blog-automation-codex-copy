@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-9c09dc1e51",
+  "source": "serp",
+  "capturedAt": "2026-11-13T16:05:25.083Z",
+  "postAgeHours": 5344,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113160525083_serp_blogtab-전자담배-무화량이-약해졌을_a1d266",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 무화량이 약해졌을"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 무화량이 약해졌을",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224241639669",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224359756182",
+        "rank": 14
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224109563734",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224344003193",
+        "rank": 16
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224345153639",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

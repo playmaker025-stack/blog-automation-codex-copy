@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-329fafd48c",
+  "source": "serp",
+  "capturedAt": "2026-11-13T16:05:51.017Z",
+  "postAgeHours": 5320,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113160551017_serp_blogtab-부평역전자담배-DJ쥬스-입호흡_e8b7aa",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평역전자담배 DJ쥬스 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평역전자담배 DJ쥬스 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 6,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224460305008",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224242894127",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
