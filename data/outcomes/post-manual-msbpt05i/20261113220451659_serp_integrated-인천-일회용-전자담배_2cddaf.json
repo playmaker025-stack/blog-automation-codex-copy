@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-msbpt05i",
+  "source": "serp",
+  "capturedAt": "2026-11-13T22:04:51.659Z",
+  "postAgeHours": 2483,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113220451659_serp_integrated-인천-일회용-전자담배_2cddaf",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 일회용 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 일회용 전자담배",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 36,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
