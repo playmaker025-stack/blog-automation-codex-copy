@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-14a4e3aa",
+  "source": "serp",
+  "capturedAt": "2026-11-13T19:24:58.627Z",
+  "postAgeHours": 3009,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113192458627_serp_blogtab-인천-전자담배-액상별_5d89f0",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 전자담배 액상별"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 액상별",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224274819132",
+        "rank": 20
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 24
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224115797512",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
