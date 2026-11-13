@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mralr041",
+  "source": "serp",
+  "capturedAt": "2026-11-13T18:45:51.192Z",
+  "postAgeHours": 3103,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113184551192_serp_blogtab-전자담배-액상을-바꿀_89b0fb",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상을 바꿀"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상을 바꿀",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224339591207",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
