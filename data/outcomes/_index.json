@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-12T23:24:39.074Z",
+  "updatedAt": "2026-11-13T02:04:47.986Z",
   "posts": {
     "post-manual-ms5zs3fn": {
       "queries": {
@@ -11026,29 +11026,31 @@
           "okAgeHours": [
             269,
             336,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-16T02:04:18.347Z",
-          "total": 3,
+          "lastCapturedAt": "2026-11-13T02:04:38.194Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-16T02:04:18.347Z"
+          "lastAttemptAt": "2026-11-13T02:04:38.194Z"
         },
         "blog_tab::하복2": {
           "okAgeHours": [
             269,
             336,
-            672
+            672,
+            1344
           ],
-          "lastCapturedAt": "2026-10-16T02:04:25.442Z",
-          "total": 3,
+          "lastCapturedAt": "2026-11-13T02:04:45.354Z",
+          "total": 4,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-10-16T02:04:25.442Z"
+          "lastAttemptAt": "2026-11-13T02:04:45.354Z"
         }
       },
-      "lastCapturedAt": "2026-10-16T02:04:25.442Z",
-      "total": 6
+      "lastCapturedAt": "2026-11-13T02:04:45.354Z",
+      "total": 8
     },
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -13836,8 +13838,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-12T23:24:37.875Z",
-    "lastOkAt": "2026-11-12T11:24:37.431Z",
+    "lastRunAt": "2026-11-13T02:04:37.812Z",
+    "lastOkAt": "2026-11-13T02:04:37.812Z",
     "consecutiveFailedRuns": 0
   }
 }
