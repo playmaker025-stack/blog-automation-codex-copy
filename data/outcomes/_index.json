@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-13T11:25:52.416Z",
+  "updatedAt": "2026-11-13T11:45:50.829Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -595,11 +595,167 @@
       },
       "lastCapturedAt": "2026-11-13T11:25:49.744Z",
       "total": 2
+    },
+    "post-import-44848739": {
+      "queries": {
+        "integrated::엘프바 아이스킹 25k": {
+          "okAgeHours": [
+            11316
+          ],
+          "lastCapturedAt": "2026-11-13T11:44:38.264Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:44:38.264Z"
+        },
+        "blog_tab::엘프바 아이스킹 25k": {
+          "okAgeHours": [
+            11316
+          ],
+          "lastCapturedAt": "2026-11-13T11:44:44.584Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:44:44.584Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T11:44:44.584Z",
+      "total": 2
+    },
+    "post-import-2bbdd188": {
+      "queries": {
+        "integrated::만수동 전자담배 만수르": {
+          "okAgeHours": [
+            10980
+          ],
+          "lastCapturedAt": "2026-11-13T11:44:50.802Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:44:50.802Z"
+        },
+        "blog_tab::만수동 전자담배 만수르": {
+          "okAgeHours": [
+            10980
+          ],
+          "lastCapturedAt": "2026-11-13T11:44:57.188Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:44:57.188Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T11:44:57.188Z",
+      "total": 2
+    },
+    "post-import-54aa03e1": {
+      "queries": {
+        "integrated::인천전자담배매장 부평 구월동": {
+          "okAgeHours": [
+            10572
+          ],
+          "lastCapturedAt": "2026-11-13T11:45:02.633Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:45:02.633Z"
+        },
+        "blog_tab::인천전자담배매장 부평 구월동": {
+          "okAgeHours": [
+            10572
+          ],
+          "lastCapturedAt": "2026-11-13T11:45:09.727Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:45:09.727Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T11:45:09.727Z",
+      "total": 2
+    },
+    "post-import-366637d5": {
+      "queries": {
+        "integrated::부평 전자담배 만수르": {
+          "okAgeHours": [
+            10332
+          ],
+          "lastCapturedAt": "2026-11-13T11:45:15.985Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:45:15.985Z"
+        },
+        "blog_tab::부평 전자담배 만수르": {
+          "okAgeHours": [
+            10332
+          ],
+          "lastCapturedAt": "2026-11-13T11:45:22.729Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:45:22.729Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T11:45:22.729Z",
+      "total": 2
+    },
+    "post-import-8c38c02a": {
+      "queries": {
+        "integrated::부평 만수르 매장에서": {
+          "okAgeHours": [
+            6156
+          ],
+          "lastCapturedAt": "2026-11-13T11:45:28.931Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:45:28.931Z"
+        },
+        "blog_tab::부평 만수르 매장에서": {
+          "okAgeHours": [
+            6156
+          ],
+          "lastCapturedAt": "2026-11-13T11:45:35.304Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:45:35.304Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T11:45:35.304Z",
+      "total": 2
+    },
+    "post-import-7f7429f1": {
+      "queries": {
+        "integrated::연수동 전자담배 말론": {
+          "okAgeHours": [
+            6156
+          ],
+          "lastCapturedAt": "2026-11-13T11:45:41.473Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:45:41.473Z"
+        },
+        "blog_tab::연수동 전자담배 말론": {
+          "okAgeHours": [
+            6156
+          ],
+          "lastCapturedAt": "2026-11-13T11:45:48.272Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T11:45:48.272Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T11:45:48.272Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-13T11:24:38.192Z",
-    "lastOkAt": "2026-11-13T11:24:38.192Z",
+    "lastRunAt": "2026-11-13T11:44:37.971Z",
+    "lastOkAt": "2026-11-13T11:44:37.971Z",
     "consecutiveFailedRuns": 0
   }
 }

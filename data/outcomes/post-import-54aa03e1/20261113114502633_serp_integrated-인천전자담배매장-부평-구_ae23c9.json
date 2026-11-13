@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-54aa03e1",
+  "source": "serp",
+  "capturedAt": "2026-11-13T11:45:02.633Z",
+  "postAgeHours": 10572,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113114502633_serp_integrated-인천전자담배매장-부평-구_ae23c9",
+  "target": {
+    "surface": "integrated",
+    "query": "인천전자담배매장 부평 구월동"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배매장 부평 구월동",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 39,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224096074626",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224453360618",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224475775112",
+        "rank": 27
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224473222714",
+        "rank": 28
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224470619730",
+        "rank": 29
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224418875995",
+        "rank": 30
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 31
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 32
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 33
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 34
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224383515315",
+        "rank": 35
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224338245201",
+        "rank": 36
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224325995644",
+        "rank": 37
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224321052285",
+        "rank": 38
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224420074157",
+        "rank": 39
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
