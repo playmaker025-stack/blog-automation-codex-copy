@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-55371fec",
+  "source": "serp",
+  "capturedAt": "2026-11-13T15:05:43.947Z",
+  "postAgeHours": 5559,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113150543947_serp_integrated-삼산동-전자담배-오래_6542db",
+  "target": {
+    "surface": "integrated",
+    "query": "삼산동 전자담배 오래"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "삼산동 전자담배 오래",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224231828691",
+        "rank": 2
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
