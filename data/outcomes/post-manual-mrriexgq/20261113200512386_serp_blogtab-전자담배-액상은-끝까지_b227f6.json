@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mrriexgq",
+  "source": "serp",
+  "capturedAt": "2026-11-13T20:05:12.386Z",
+  "postAgeHours": 2820,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113200512386_serp_blogtab-전자담배-액상은-끝까지_b227f6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 액상은 끝까지"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 액상은 끝까지",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224398637176",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
