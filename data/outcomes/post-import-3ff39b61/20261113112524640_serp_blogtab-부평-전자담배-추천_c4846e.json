@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-3ff39b61",
+  "source": "serp",
+  "capturedAt": "2026-11-13T11:25:24.640Z",
+  "postAgeHours": 9419,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113112524640_serp_blogtab-부평-전자담배-추천_c4846e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평 전자담배 추천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 추천",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224460305008",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224301960336",
+        "rank": 16
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224463939042",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

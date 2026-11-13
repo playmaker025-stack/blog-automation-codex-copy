@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8d99c329",
+  "source": "serp",
+  "capturedAt": "2026-11-13T11:25:11.397Z",
+  "postAgeHours": 14915,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113112511397_serp_blogtab-전자담배-코일-교체시기_23e091",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 코일 교체시기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일 교체시기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224430969295",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224421116037",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224423068124",
+        "rank": 22
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
