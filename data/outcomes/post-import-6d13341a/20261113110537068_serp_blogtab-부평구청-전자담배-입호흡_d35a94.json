@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-6d13341a",
+  "source": "serp",
+  "capturedAt": "2026-11-13T11:05:37.068Z",
+  "postAgeHours": 6179,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113110537068_serp_blogtab-부평구청-전자담배-입호흡_d35a94",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평구청 전자담배 입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평구청 전자담배 입호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 10,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224167899721",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224019076773",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224264935958",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224200553723",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224289508330",
+        "rank": 11
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224278096804",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224284661872",
+        "rank": 15
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224236314484",
+        "rank": 16
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224295302695",
+        "rank": 18
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224180202326",
+        "rank": 28
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224242894127",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
