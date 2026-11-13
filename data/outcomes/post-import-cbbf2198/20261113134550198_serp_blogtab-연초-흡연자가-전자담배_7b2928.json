@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-cbbf2198",
+  "source": "serp",
+  "capturedAt": "2026-11-13T13:45:50.198Z",
+  "postAgeHours": 5822,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113134550198_serp_blogtab-연초-흡연자가-전자담배_7b2928",
+  "target": {
+    "surface": "blog_tab",
+    "query": "연초 흡연자가 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연초 흡연자가 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224305841401",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

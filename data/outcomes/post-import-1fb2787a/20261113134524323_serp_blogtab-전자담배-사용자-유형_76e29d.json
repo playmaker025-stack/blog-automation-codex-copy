@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-1fb2787a",
+  "source": "serp",
+  "capturedAt": "2026-11-13T13:45:24.323Z",
+  "postAgeHours": 5846,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113134524323_serp_blogtab-전자담배-사용자-유형_76e29d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 사용자 유형"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 사용자 유형",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224217360722",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224417157863",
+        "rank": 25
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224332187539",
+        "rank": 26
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
