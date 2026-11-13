@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-13T13:45:52.618Z",
+  "updatedAt": "2026-11-13T14:05:52.589Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -1687,11 +1687,167 @@
       },
       "lastCapturedAt": "2026-11-13T13:45:50.198Z",
       "total": 2
+    },
+    "post-import-6be0b1a5": {
+      "queries": {
+        "integrated::간석동전자담배 매장에서 상담할": {
+          "okAgeHours": [
+            5822
+          ],
+          "lastCapturedAt": "2026-11-13T14:04:38.446Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:04:38.446Z"
+        },
+        "blog_tab::간석동전자담배 매장에서 상담할": {
+          "okAgeHours": [
+            5822
+          ],
+          "lastCapturedAt": "2026-11-13T14:04:45.371Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:04:45.371Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T14:04:45.371Z",
+      "total": 2
+    },
+    "post-import-f234b3ae": {
+      "queries": {
+        "integrated::전자담배 코일이 빨리": {
+          "okAgeHours": [
+            5822
+          ],
+          "lastCapturedAt": "2026-11-13T14:04:51.653Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:04:51.653Z"
+        },
+        "blog_tab::전자담배 코일이 빨리": {
+          "okAgeHours": [
+            5822
+          ],
+          "lastCapturedAt": "2026-11-13T14:04:58.486Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:04:58.486Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T14:04:58.486Z",
+      "total": 2
+    },
+    "post-import-ce53b8e4": {
+      "queries": {
+        "integrated::부평전자담배 아스몬 하이": {
+          "okAgeHours": [
+            5798
+          ],
+          "lastCapturedAt": "2026-11-13T14:05:04.773Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:05:04.773Z"
+        },
+        "blog_tab::부평전자담배 아스몬 하이": {
+          "okAgeHours": [
+            5798
+          ],
+          "lastCapturedAt": "2026-11-13T14:05:11.570Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:05:11.570Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T14:05:11.570Z",
+      "total": 2
+    },
+    "post-import-dbc51802": {
+      "queries": {
+        "integrated::인천전자담배 코로 흡입": {
+          "okAgeHours": [
+            5798
+          ],
+          "lastCapturedAt": "2026-11-13T14:05:17.805Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:05:17.805Z"
+        },
+        "blog_tab::인천전자담배 코로 흡입": {
+          "okAgeHours": [
+            5798
+          ],
+          "lastCapturedAt": "2026-11-13T14:05:24.510Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:05:24.510Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T14:05:24.510Z",
+      "total": 2
+    },
+    "post-import-356c25cf": {
+      "queries": {
+        "integrated::전자담배 아스몬 하이": {
+          "okAgeHours": [
+            5798
+          ],
+          "lastCapturedAt": "2026-11-13T14:05:30.796Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:05:30.796Z"
+        },
+        "blog_tab::전자담배 아스몬 하이": {
+          "okAgeHours": [
+            5798
+          ],
+          "lastCapturedAt": "2026-11-13T14:05:37.506Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:05:37.506Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T14:05:37.506Z",
+      "total": 2
+    },
+    "post-import-3cfdb740": {
+      "queries": {
+        "integrated::갈산동전자담배 릴렉스 후노즈": {
+          "okAgeHours": [
+            5774
+          ],
+          "lastCapturedAt": "2026-11-13T14:05:43.842Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:05:43.842Z"
+        },
+        "blog_tab::갈산동전자담배 릴렉스 후노즈": {
+          "okAgeHours": [
+            5774
+          ],
+          "lastCapturedAt": "2026-11-13T14:05:50.368Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T14:05:50.368Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T14:05:50.368Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-13T13:44:38.246Z",
-    "lastOkAt": "2026-11-13T13:44:38.246Z",
+    "lastRunAt": "2026-11-13T14:04:37.976Z",
+    "lastOkAt": "2026-11-13T14:04:37.976Z",
     "consecutiveFailedRuns": 0
   }
 }

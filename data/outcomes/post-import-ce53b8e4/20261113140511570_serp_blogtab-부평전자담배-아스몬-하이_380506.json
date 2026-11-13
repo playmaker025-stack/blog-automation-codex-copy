@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-ce53b8e4",
+  "source": "serp",
+  "capturedAt": "2026-11-13T14:05:11.570Z",
+  "postAgeHours": 5798,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113140511570_serp_blogtab-부평전자담배-아스몬-하이_380506",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 아스몬 하이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 아스몬 하이",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224219964000",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224219975047",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224220238928",
+        "rank": 18
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
