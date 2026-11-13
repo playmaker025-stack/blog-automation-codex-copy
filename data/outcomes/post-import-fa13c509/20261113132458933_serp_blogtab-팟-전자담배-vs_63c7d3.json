@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-fa13c509",
+  "source": "serp",
+  "capturedAt": "2026-11-13T13:24:58.933Z",
+  "postAgeHours": 5917,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113132458933_serp_blogtab-팟-전자담배-vs_63c7d3",
+  "target": {
+    "surface": "blog_tab",
+    "query": "팟 전자담배 vs"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "팟 전자담배 vs",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224461274201",
+        "rank": 14
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 15
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224217360722",
+        "rank": 21
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

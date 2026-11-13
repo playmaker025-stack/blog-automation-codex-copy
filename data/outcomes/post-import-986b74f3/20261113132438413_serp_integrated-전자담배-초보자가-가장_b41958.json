@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-986b74f3",
+  "source": "serp",
+  "capturedAt": "2026-11-13T13:24:38.413Z",
+  "postAgeHours": 5941,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113132438413_serp_integrated-전자담배-초보자가-가장_b41958",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 초보자가 가장"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 초보자가 가장",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 19,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224109563734",
+        "rank": 6
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
