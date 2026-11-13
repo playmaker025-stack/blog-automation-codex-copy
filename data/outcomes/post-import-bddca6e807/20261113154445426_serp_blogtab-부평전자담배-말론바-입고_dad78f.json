@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-bddca6e807",
+  "source": "serp",
+  "capturedAt": "2026-11-13T15:44:45.426Z",
+  "postAgeHours": 5464,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113154445426_serp_blogtab-부평전자담배-말론바-입고_dad78f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배 말론바 입고"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 말론바 입고",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224236314484",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224288091222",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224276977064",
+        "rank": 7
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224284661872",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

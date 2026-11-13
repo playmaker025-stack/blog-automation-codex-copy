@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-a0669f990d",
+  "source": "serp",
+  "capturedAt": "2026-11-13T15:45:50.307Z",
+  "postAgeHours": 5416,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113154550307_serp_blogtab-전자담배-코일-수명은_315fce",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 코일 수명은"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 코일 수명은",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224408594214",
+        "rank": 10
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
