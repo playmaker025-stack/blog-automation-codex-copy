@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mr69b8nu",
+  "source": "serp",
+  "capturedAt": "2026-11-13T18:25:48.842Z",
+  "postAgeHours": 3175,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113182548842_serp_blogtab-만수동-전자담배-크로스미니6_739f12",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배 크로스미니6"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 크로스미니6",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 25,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224333224334",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224336421170",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224337280192",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224473222714",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224338245201",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224322701028",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222571180798",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223137662737",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "222840603312",
+        "rank": 15
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223032604764",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
