@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-cbd16776",
+  "source": "serp",
+  "capturedAt": "2026-11-13T10:45:46.592Z",
+  "postAgeHours": 8411,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113104546592_serp_blogtab-인천전자담배-액상형-전담_69e98d",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천전자담배 액상형 전담"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 액상형 전담",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224413829217",
+        "rank": 16
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
