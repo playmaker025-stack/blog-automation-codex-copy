@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-ms4juy5w",
+  "source": "serp",
+  "capturedAt": "2026-11-13T21:24:58.795Z",
+  "postAgeHours": 2602,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113212458795_serp_blogtab-전자담배는-세게-빨수록_3ae81a",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배는 세게 빨수록"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배는 세게 빨수록",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224360849248",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224376572221",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-28fdb89d",
+  "source": "serp",
+  "capturedAt": "2026-11-13T21:25:12.020Z",
+  "postAgeHours": 2584,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113212512020_serp_blogtab-액상-섞어_bf09ff",
+  "target": {
+    "surface": "blog_tab",
+    "query": "액상 섞어"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상 섞어",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224361724359",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
