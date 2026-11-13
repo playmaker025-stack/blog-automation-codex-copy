@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-8b5424b8",
+  "source": "serp",
+  "capturedAt": "2026-11-13T15:24:38.469Z",
+  "postAgeHours": 5535,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113152438469_serp_integrated-전자담배-흡입할-때_08cb84",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배 흡입할 때"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 흡입할 때",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 31,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-13T15:05:53.072Z",
+  "updatedAt": "2026-11-13T15:25:51.455Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -2311,11 +2311,167 @@
       },
       "lastCapturedAt": "2026-11-13T15:05:50.401Z",
       "total": 2
+    },
+    "post-import-8b5424b8": {
+      "queries": {
+        "integrated::전자담배 흡입할 때": {
+          "okAgeHours": [
+            5535
+          ],
+          "lastCapturedAt": "2026-11-13T15:24:38.469Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:24:38.469Z"
+        },
+        "blog_tab::전자담배 흡입할 때": {
+          "okAgeHours": [
+            5535
+          ],
+          "lastCapturedAt": "2026-11-13T15:24:44.850Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:24:44.850Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T15:24:44.850Z",
+      "total": 2
+    },
+    "post-import-45d28343": {
+      "queries": {
+        "integrated::부개동 전자담배 입문자가": {
+          "okAgeHours": [
+            5535
+          ],
+          "lastCapturedAt": "2026-11-13T15:24:51.150Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:24:51.150Z"
+        },
+        "blog_tab::부개동 전자담배 입문자가": {
+          "okAgeHours": [
+            5535
+          ],
+          "lastCapturedAt": "2026-11-13T15:24:57.791Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:24:57.791Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T15:24:57.791Z",
+      "total": 2
+    },
+    "post-import-7b7c198c35": {
+      "queries": {
+        "integrated::전자담배 흡입이 답답할": {
+          "okAgeHours": [
+            5487
+          ],
+          "lastCapturedAt": "2026-11-13T15:25:03.485Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:25:03.485Z"
+        },
+        "blog_tab::전자담배 흡입이 답답할": {
+          "okAgeHours": [
+            5487
+          ],
+          "lastCapturedAt": "2026-11-13T15:25:10.165Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:25:10.165Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T15:25:10.165Z",
+      "total": 2
+    },
+    "post-import-e55b8a16c1": {
+      "queries": {
+        "integrated::갈산동 전자담배 입문용": {
+          "okAgeHours": [
+            5487
+          ],
+          "lastCapturedAt": "2026-11-13T15:25:16.436Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:25:16.436Z"
+        },
+        "blog_tab::갈산동 전자담배 입문용": {
+          "okAgeHours": [
+            5487
+          ],
+          "lastCapturedAt": "2026-11-13T15:25:23.155Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:25:23.155Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T15:25:23.155Z",
+      "total": 2
+    },
+    "post-import-1036c0362a": {
+      "queries": {
+        "integrated::전자담배에서 탄맛이 나는": {
+          "okAgeHours": [
+            5487
+          ],
+          "lastCapturedAt": "2026-11-13T15:25:29.100Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:25:29.100Z"
+        },
+        "blog_tab::전자담배에서 탄맛이 나는": {
+          "okAgeHours": [
+            5487
+          ],
+          "lastCapturedAt": "2026-11-13T15:25:35.856Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:25:35.856Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T15:25:35.856Z",
+      "total": 2
+    },
+    "post-import-9ef7d78833": {
+      "queries": {
+        "integrated::전자담배 흡입해도 연기": {
+          "okAgeHours": [
+            5463
+          ],
+          "lastCapturedAt": "2026-11-13T15:25:42.155Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:25:42.155Z"
+        },
+        "blog_tab::전자담배 흡입해도 연기": {
+          "okAgeHours": [
+            5463
+          ],
+          "lastCapturedAt": "2026-11-13T15:25:48.837Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T15:25:48.837Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T15:25:48.837Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-13T15:04:38.253Z",
-    "lastOkAt": "2026-11-13T15:04:38.253Z",
+    "lastRunAt": "2026-11-13T15:24:38.007Z",
+    "lastOkAt": "2026-11-13T15:24:38.007Z",
     "consecutiveFailedRuns": 0
   }
 }
