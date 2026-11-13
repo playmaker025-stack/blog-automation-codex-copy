@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-import-b2691864",
+  "source": "serp",
+  "capturedAt": "2026-11-13T13:05:50.220Z",
+  "postAgeHours": 5941,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113130550220_serp_blogtab-그래피티2-vs-그래피티3_d31880",
+  "target": {
+    "surface": "blog_tab",
+    "query": "그래피티2 vs 그래피티3"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "그래피티2 vs 그래피티3",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224212618496",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224196934494",
+        "rank": 11
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
