@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt006d8p",
+  "source": "serp",
+  "capturedAt": "2026-11-13T23:44:44.865Z",
+  "postAgeHours": 2076,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113234444865_serp_blogtab-전자담배-팟에-액상이_bf42af",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 팟에 액상이"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 팟에 액상이",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

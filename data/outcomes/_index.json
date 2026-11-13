@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-13T23:25:49.971Z",
+  "updatedAt": "2026-11-13T23:45:52.289Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -6103,11 +6103,161 @@
       },
       "lastCapturedAt": "2026-11-13T23:25:47.713Z",
       "total": 2
+    },
+    "post-manual-mt006d8p": {
+      "queries": {
+        "integrated::전자담배 팟에 액상이": {
+          "okAgeHours": [
+            2076
+          ],
+          "lastCapturedAt": "2026-11-13T23:44:38.699Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:44:38.699Z"
+        },
+        "blog_tab::전자담배 팟에 액상이": {
+          "okAgeHours": [
+            2076
+          ],
+          "lastCapturedAt": "2026-11-13T23:44:44.865Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:44:44.865Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T23:44:44.865Z",
+      "total": 2
+    },
+    "post-70d278e7": {
+      "queries": {
+        "integrated::인천 남동구 전자담배": {
+          "okAgeHours": [
+            2057
+          ],
+          "lastCapturedAt": "2026-11-13T23:44:51.147Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:44:51.147Z"
+        },
+        "blog_tab::인천 남동구 전자담배": {
+          "okAgeHours": [
+            2057
+          ],
+          "lastCapturedAt": "2026-11-13T23:44:57.933Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:44:57.933Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T23:44:57.933Z",
+      "total": 2
+    },
+    "post-5fbf9c10": {
+      "queries": {
+        "integrated::연수동 전자담배 입문자를": {
+          "okAgeHours": [
+            2006
+          ],
+          "lastCapturedAt": "2026-11-13T23:45:04.201Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:45:04.201Z"
+        },
+        "blog_tab::연수동 전자담배 입문자를": {
+          "okAgeHours": [
+            2006
+          ],
+          "lastCapturedAt": "2026-11-13T23:45:10.550Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:45:10.550Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T23:45:10.550Z",
+      "total": 2
+    },
+    "post-manual-mt1jysvx": {
+      "queries": {
+        "integrated::전자담배 액상을 넣고": {
+          "okAgeHours": [
+            2050
+          ],
+          "lastCapturedAt": "2026-11-13T23:45:16.839Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:45:16.839Z"
+        },
+        "blog_tab::전자담배 액상을 넣고": {
+          "okAgeHours": [
+            2050
+          ],
+          "lastCapturedAt": "2026-11-13T23:45:23.556Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:45:23.556Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T23:45:23.556Z",
+      "total": 2
+    },
+    "post-b4e0e44a": {
+      "queries": {
+        "integrated::전담기기종류": {
+          "okAgeHours": [
+            2031
+          ],
+          "lastCapturedAt": "2026-11-13T23:45:29.859Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:45:29.859Z"
+        },
+        "blog_tab::전담기기종류": {
+          "okAgeHours": [
+            2031
+          ],
+          "lastCapturedAt": "2026-11-13T23:45:36.520Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:45:36.520Z"
+        },
+        "integrated::전담기기 종류 뭐가": {
+          "okAgeHours": [
+            2031
+          ],
+          "lastCapturedAt": "2026-11-13T23:45:42.830Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:45:42.830Z"
+        },
+        "blog_tab::전담기기 종류 뭐가": {
+          "okAgeHours": [
+            2031
+          ],
+          "lastCapturedAt": "2026-11-13T23:45:49.617Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T23:45:49.617Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T23:45:49.617Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-11-13T23:24:38.159Z",
-    "lastOkAt": "2026-11-13T23:24:38.159Z",
+    "lastRunAt": "2026-11-13T23:44:38.275Z",
+    "lastOkAt": "2026-11-13T23:44:38.275Z",
     "consecutiveFailedRuns": 0
   }
 }
