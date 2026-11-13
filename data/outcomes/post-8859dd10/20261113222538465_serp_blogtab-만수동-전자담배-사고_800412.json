@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-8859dd10",
+  "source": "serp",
+  "capturedAt": "2026-11-13T22:25:38.465Z",
+  "postAgeHours": 2341,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261113222538465_serp_blogtab-만수동-전자담배-사고_800412",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동 전자담배 사고"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동 전자담배 사고",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224372245072",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223969667880",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224094624074",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224026074005",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224378919388",
+        "rank": 16
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221165940163",
+        "rank": 20
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224195718095",
+        "rank": 23
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224099491953",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

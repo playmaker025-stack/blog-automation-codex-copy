@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-13T22:05:50.838Z",
+  "updatedAt": "2026-11-13T22:25:54.327Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -5511,11 +5511,141 @@
       },
       "lastCapturedAt": "2026-11-13T22:05:48.832Z",
       "total": 2
+    },
+    "post-ed806d65": {
+      "queries": {
+        "integrated::남동구청역 전자담배 입문자": {
+          "okAgeHours": [
+            2435
+          ],
+          "lastCapturedAt": "2026-11-13T22:24:39.831Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:24:39.831Z"
+        },
+        "blog_tab::남동구청역 전자담배 입문자": {
+          "okAgeHours": [
+            2435
+          ],
+          "lastCapturedAt": "2026-11-13T22:24:47.084Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:24:47.084Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T22:24:47.084Z",
+      "total": 2
+    },
+    "post-manual-msenaehp": {
+      "queries": {
+        "integrated::전자담배 입문자는 언제": {
+          "okAgeHours": [
+            2434
+          ],
+          "lastCapturedAt": "2026-11-13T22:24:53.287Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:24:53.287Z"
+        },
+        "blog_tab::전자담배 입문자는 언제": {
+          "okAgeHours": [
+            2434
+          ],
+          "lastCapturedAt": "2026-11-13T22:24:59.965Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:24:59.965Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T22:24:59.965Z",
+      "total": 2
+    },
+    "post-15731f9f": {
+      "queries": {
+        "integrated::액상형 전자담배 종류": {
+          "okAgeHours": [
+            2391
+          ],
+          "lastCapturedAt": "2026-11-13T22:25:19.408Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:25:19.408Z"
+        },
+        "blog_tab::액상형 전자담배 종류": {
+          "okAgeHours": [
+            2391
+          ],
+          "lastCapturedAt": "2026-11-13T22:25:25.883Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:25:25.883Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T22:25:25.883Z",
+      "total": 4
+    },
+    "post-8859dd10": {
+      "queries": {
+        "integrated::만수동 전자담배 사고": {
+          "okAgeHours": [
+            2341
+          ],
+          "lastCapturedAt": "2026-11-13T22:25:32.071Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:25:32.071Z"
+        },
+        "blog_tab::만수동 전자담배 사고": {
+          "okAgeHours": [
+            2341
+          ],
+          "lastCapturedAt": "2026-11-13T22:25:38.465Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:25:38.465Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T22:25:38.465Z",
+      "total": 2
+    },
+    "post-fb0461a1": {
+      "queries": {
+        "integrated::일회용전자담배 불량": {
+          "okAgeHours": [
+            2366
+          ],
+          "lastCapturedAt": "2026-11-13T22:25:44.724Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:25:44.724Z"
+        },
+        "blog_tab::일회용전자담배 불량": {
+          "okAgeHours": [
+            2366
+          ],
+          "lastCapturedAt": "2026-11-13T22:25:51.498Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-13T22:25:51.498Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-13T22:25:51.498Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-13T22:04:38.127Z",
-    "lastOkAt": "2026-11-13T22:04:38.127Z",
+    "lastRunAt": "2026-11-13T22:24:38.519Z",
+    "lastOkAt": "2026-11-13T22:24:38.519Z",
     "consecutiveFailedRuns": 0
   }
 }
