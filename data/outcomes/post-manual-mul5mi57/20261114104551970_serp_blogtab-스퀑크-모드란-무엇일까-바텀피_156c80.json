@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mul5mi57",
+  "source": "serp",
+  "capturedAt": "2026-11-14T10:45:51.970Z",
+  "postAgeHours": 1127,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114104551970_serp_blogtab-스퀑크-모드란-무엇일까-바텀피_156c80",
+  "target": {
+    "surface": "blog_tab",
+    "query": "스퀑크 모드란 무엇일까 -바텀피더와"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "스퀑크 모드란 무엇일까 -바텀피더와",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "221220428427",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224022998953",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221498778070",
+        "rank": 6
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221418687738",
+        "rank": 14
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
