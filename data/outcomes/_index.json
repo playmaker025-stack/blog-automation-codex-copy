@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T12:25:52.306Z",
+  "updatedAt": "2026-11-14T12:45:54.455Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11651,11 +11651,149 @@
       },
       "lastCapturedAt": "2026-11-14T12:25:49.737Z",
       "total": 6
+    },
+    "post-manual-mvnmeu6e": {
+      "queries": {
+        "integrated::부평전자담배": {
+          "okAgeHours": [
+            483
+          ],
+          "lastCapturedAt": "2026-11-14T12:44:38.828Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:44:38.828Z"
+        },
+        "blog_tab::부평전자담배": {
+          "okAgeHours": [
+            483
+          ],
+          "lastCapturedAt": "2026-11-14T12:44:45.998Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:44:45.998Z"
+        },
+        "integrated::만수르전자담배": {
+          "okAgeHours": [
+            483
+          ],
+          "lastCapturedAt": "2026-11-14T12:44:52.145Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:44:52.145Z"
+        },
+        "blog_tab::만수르전자담배": {
+          "okAgeHours": [
+            483
+          ],
+          "lastCapturedAt": "2026-11-14T12:44:59.013Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:44:59.013Z"
+        },
+        "integrated::말론바": {
+          "okAgeHours": [
+            483
+          ],
+          "lastCapturedAt": "2026-11-14T12:45:05.273Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:45:05.273Z"
+        },
+        "blog_tab::말론바": {
+          "okAgeHours": [
+            483
+          ],
+          "lastCapturedAt": "2026-11-14T12:45:12.222Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:45:12.222Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T12:45:12.222Z",
+      "total": 6
+    },
+    "post-manual-mvnrlvv9": {
+      "queries": {
+        "integrated::인천전자담배": {
+          "okAgeHours": [
+            481
+          ],
+          "lastCapturedAt": "2026-11-14T12:45:18.485Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:45:18.485Z"
+        },
+        "blog_tab::인천전자담배": {
+          "okAgeHours": [
+            481
+          ],
+          "lastCapturedAt": "2026-11-14T12:45:25.321Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:45:25.321Z"
+        },
+        "integrated::구월전자담배": {
+          "okAgeHours": [
+            481
+          ],
+          "lastCapturedAt": "2026-11-14T12:45:31.649Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:45:31.649Z"
+        },
+        "blog_tab::구월전자담배": {
+          "okAgeHours": [
+            481
+          ],
+          "lastCapturedAt": "2026-11-14T12:45:38.393Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:45:38.393Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T12:45:38.393Z",
+      "total": 4
+    },
+    "post-manual-mvp1gcyc": {
+      "queries": {
+        "integrated::가정동 전자담배 입호흡 액상 입호흡액상 노멘액상 노멘 노멘솔 쿨링": {
+          "okAgeHours": [
+            460
+          ],
+          "lastCapturedAt": "2026-11-14T12:45:44.758Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:45:44.758Z"
+        },
+        "blog_tab::가정동 전자담배 입호흡 액상 입호흡액상 노멘액상 노멘 노멘솔 쿨링": {
+          "okAgeHours": [
+            460
+          ],
+          "lastCapturedAt": "2026-11-14T12:45:51.554Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T12:45:51.554Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T12:45:51.554Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T12:24:38.444Z",
-    "lastOkAt": "2026-11-14T12:24:38.444Z",
+    "lastRunAt": "2026-11-14T12:44:38.505Z",
+    "lastOkAt": "2026-11-14T12:44:38.505Z",
     "consecutiveFailedRuns": 0
   }
 }

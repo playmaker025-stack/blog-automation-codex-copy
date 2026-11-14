@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvnrlvv9",
+  "source": "serp",
+  "capturedAt": "2026-11-14T12:45:31.649Z",
+  "postAgeHours": 481,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114124531649_serp_integrated-구월전자담배_2ba7ba",
+  "target": {
+    "surface": "integrated",
+    "query": "구월전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 35,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224453360618",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224318012483",
+        "rank": 26
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224262715643",
+        "rank": 28
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224216366603",
+        "rank": 30
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224476833497",
+        "rank": 35
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
