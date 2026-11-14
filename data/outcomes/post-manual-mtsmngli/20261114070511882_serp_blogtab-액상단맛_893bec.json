@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtsmngli",
+  "source": "serp",
+  "capturedAt": "2026-11-14T07:05:11.882Z",
+  "postAgeHours": 1603,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114070511882_serp_blogtab-액상단맛_893bec",
+  "target": {
+    "surface": "blog_tab",
+    "query": "액상단맛"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상단맛",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224387703192",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
