@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88m78n",
+  "source": "serp",
+  "capturedAt": "2026-11-14T03:44:51.302Z",
+  "postAgeHours": 1942,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114034451302_serp_integrated-부평전자담배-베놈-아스트_7c607b",
+  "target": {
+    "surface": "integrated",
+    "query": "부평전자담배 베놈 아스트로"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 베놈 아스트로",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 14,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224304068453",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224179026493",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224130606947",
+        "rank": 7
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224134138488",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224164492213",
+        "rank": 14
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

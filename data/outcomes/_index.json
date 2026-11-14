@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T03:25:49.353Z",
+  "updatedAt": "2026-11-14T03:45:52.387Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -7919,11 +7919,167 @@
       },
       "lastCapturedAt": "2026-11-14T03:25:47.286Z",
       "total": 2
+    },
+    "post-manual-mt88lojs": {
+      "queries": {
+        "integrated::인천전자담배 버블몬 그래피티3": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:44:38.764Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:44:38.764Z"
+        },
+        "blog_tab::인천전자담배 버블몬 그래피티3": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:44:44.897Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:44:44.897Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T03:44:44.897Z",
+      "total": 2
+    },
+    "post-manual-mt88m78n": {
+      "queries": {
+        "integrated::부평전자담배 베놈 아스트로": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:44:51.302Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:44:51.302Z"
+        },
+        "blog_tab::부평전자담배 베놈 아스트로": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:44:57.902Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:44:57.902Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T03:44:57.902Z",
+      "total": 2
+    },
+    "post-manual-mt88my0j": {
+      "queries": {
+        "integrated::인천전자담배 dotPOD Max": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:45:04.095Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:45:04.095Z"
+        },
+        "blog_tab::인천전자담배 dotPOD Max": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:45:10.670Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:45:10.670Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T03:45:10.670Z",
+      "total": 2
+    },
+    "post-manual-mt895rtf": {
+      "queries": {
+        "integrated::말론 vs 아스트로": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:45:16.683Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:45:16.683Z"
+        },
+        "blog_tab::말론 vs 아스트로": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:45:23.350Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:45:23.350Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T03:45:23.350Z",
+      "total": 2
+    },
+    "post-manual-mt896bb1": {
+      "queries": {
+        "integrated::젤로맥스 vs 발라리안맥스": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:45:29.567Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:45:29.567Z"
+        },
+        "blog_tab::젤로맥스 vs 발라리안맥스": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:45:36.454Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:45:36.454Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T03:45:36.454Z",
+      "total": 2
+    },
+    "post-manual-mt896vhm": {
+      "queries": {
+        "integrated::그래피티2 vs 그래피티3": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:45:42.818Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:45:42.818Z"
+        },
+        "blog_tab::그래피티2 vs 그래피티3": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T03:45:49.708Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T03:45:49.708Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T03:45:49.708Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T03:24:38.236Z",
-    "lastOkAt": "2026-11-14T03:24:38.236Z",
+    "lastRunAt": "2026-11-14T03:44:38.271Z",
+    "lastOkAt": "2026-11-14T03:44:38.271Z",
     "consecutiveFailedRuns": 0
   }
 }
