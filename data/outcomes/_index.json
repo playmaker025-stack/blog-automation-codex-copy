@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T01:45:52.488Z",
+  "updatedAt": "2026-11-14T02:05:49.182Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -7141,11 +7141,167 @@
       },
       "lastCapturedAt": "2026-11-14T01:45:49.713Z",
       "total": 2
+    },
+    "post-manual-mt87sf6n": {
+      "queries": {
+        "integrated::부평전자담배 입호흡 전담": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:04:39.099Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:04:39.099Z"
+        },
+        "blog_tab::부평전자담배 입호흡 전담": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:04:46.101Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:04:46.101Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:04:46.101Z",
+      "total": 2
+    },
+    "post-manual-mt87suy8": {
+      "queries": {
+        "integrated::청천동전자담배 엘프바 조인원": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:04:52.046Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:04:52.046Z"
+        },
+        "blog_tab::청천동전자담배 엘프바 조인원": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:04:58.634Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:04:58.634Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:04:58.634Z",
+      "total": 2
+    },
+    "post-manual-mt87tbja": {
+      "queries": {
+        "integrated::갈산동전자담배 릴렉스 크리에이터": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:05:04.585Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:05:04.585Z"
+        },
+        "blog_tab::갈산동전자담배 릴렉스 크리에이터": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:05:11.245Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:05:11.245Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:05:11.245Z",
+      "total": 2
+    },
+    "post-manual-mt87trwt": {
+      "queries": {
+        "integrated::약대동전자담배 리로드 아이킥": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:05:16.361Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:05:16.361Z"
+        },
+        "blog_tab::약대동전자담배 리로드 아이킥": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:05:22.730Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:05:22.730Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:05:22.730Z",
+      "total": 2
+    },
+    "post-manual-mt87u9qe": {
+      "queries": {
+        "integrated::삼산체육관역전자담배 일회용 전담": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:05:28.198Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:05:28.198Z"
+        },
+        "blog_tab::삼산체육관역전자담배 일회용 전담": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:05:34.847Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:05:34.847Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:05:34.847Z",
+      "total": 2
+    },
+    "post-manual-mt87vh25": {
+      "queries": {
+        "integrated::산곡역전자담배 스누스 니코틴": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:05:40.169Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:05:40.169Z"
+        },
+        "blog_tab::산곡역전자담배 스누스 니코틴": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:05:46.823Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:05:46.823Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:05:46.823Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T01:44:38.678Z",
-    "lastOkAt": "2026-11-14T01:44:38.678Z",
+    "lastRunAt": "2026-11-14T02:04:38.500Z",
+    "lastOkAt": "2026-11-14T02:04:38.500Z",
     "consecutiveFailedRuns": 0
   }
 }
