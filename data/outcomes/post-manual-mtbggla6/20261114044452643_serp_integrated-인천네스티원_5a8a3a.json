@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtbggla6",
+  "source": "serp",
+  "capturedAt": "2026-11-14T04:44:52.643Z",
+  "postAgeHours": 1889,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114044452643_serp_integrated-인천네스티원_5a8a3a",
+  "target": {
+    "surface": "integrated",
+    "query": "인천네스티원"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천네스티원",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 18,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224455875422",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224365923075",
+        "rank": 8
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
