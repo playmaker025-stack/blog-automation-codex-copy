@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgwessj",
+  "source": "serp",
+  "capturedAt": "2026-11-14T05:45:38.138Z",
+  "postAgeHours": 1799,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114054538138_serp_blogtab-만수동전자담배_4cdc24",
+  "target": {
+    "surface": "blog_tab",
+    "query": "만수동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "만수동전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224274819132",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224090385537",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224327309099",
+        "rank": 9
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224392407236",
+        "rank": 14
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224293727182",
+        "rank": 16
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224080375381",
+        "rank": 19
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224347729064",
+        "rank": 22
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224451704218",
+        "rank": 23
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223881136565",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

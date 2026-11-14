@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgwessj",
+  "source": "serp",
+  "capturedAt": "2026-11-14T05:45:44.458Z",
+  "postAgeHours": 1799,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114054544458_serp_integrated-노멘_a28c51",
+  "target": {
+    "surface": "integrated",
+    "query": "노멘"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "노멘",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224454418457",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

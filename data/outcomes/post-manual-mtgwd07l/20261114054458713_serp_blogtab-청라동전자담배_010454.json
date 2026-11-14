@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgwd07l",
+  "source": "serp",
+  "capturedAt": "2026-11-14T05:44:58.713Z",
+  "postAgeHours": 1799,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114054458713_serp_blogtab-청라동전자담배_010454",
+  "target": {
+    "surface": "blog_tab",
+    "query": "청라동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "청라동전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
