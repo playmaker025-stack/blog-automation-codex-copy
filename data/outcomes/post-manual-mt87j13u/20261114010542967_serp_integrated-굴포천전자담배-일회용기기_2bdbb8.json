@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87j13u",
+  "source": "serp",
+  "capturedAt": "2026-11-14T01:05:42.967Z",
+  "postAgeHours": 1940,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114010542967_serp_integrated-굴포천전자담배-일회용기기_2bdbb8",
+  "target": {
+    "surface": "integrated",
+    "query": "굴포천전자담배 일회용기기 네스티바"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "굴포천전자담배 일회용기기 네스티바",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 3,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z60ar",
+  "source": "serp",
+  "capturedAt": "2026-11-14T01:04:45.592Z",
+  "postAgeHours": 1961,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114010445592_serp_blogtab-인천-투엑스_2f2343",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 투엑스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 투엑스",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 21,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224087543609",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 17
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223529496185",
+        "rank": 21
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224127103412",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
