@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw65midq",
+  "source": "serp",
+  "capturedAt": "2026-11-14T13:45:44.362Z",
+  "postAgeHours": 173,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114134544362_serp_integrated-디저트액상_07ac87",
+  "target": {
+    "surface": "integrated",
+    "query": "디저트액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "디저트액상",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 43,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

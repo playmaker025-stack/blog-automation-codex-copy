@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw1xcoyb",
+  "source": "serp",
+  "capturedAt": "2026-11-14T13:44:52.688Z",
+  "postAgeHours": 244,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114134452688_serp_integrated-부평역-전자담배-콩콩제로_3b9132",
+  "target": {
+    "surface": "integrated",
+    "query": "부평역 전자담배 콩콩제로"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평역 전자담배 콩콩제로",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 4,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224464998402",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw0o0nh4",
+  "source": "serp",
+  "capturedAt": "2026-11-14T13:44:39.514Z",
+  "postAgeHours": 265,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114134439514_serp_integrated-한정판-액상-파이브폰즈_0c29c6",
+  "target": {
+    "surface": "integrated",
+    "query": "한정판 액상 파이브폰즈"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "한정판 액상 파이브폰즈",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 13,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224463939042",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224073758305",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224055652913",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224023513015",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
