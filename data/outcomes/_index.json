@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T11:25:52.343Z",
+  "updatedAt": "2026-11-14T11:45:53.618Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11251,15 +11251,153 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-11-14T11:25:49.728Z"
+        },
+        "integrated::리빌드 솜양": {
+          "okAgeHours": [
+            824
+          ],
+          "lastCapturedAt": "2026-11-14T11:44:39.337Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:44:39.337Z"
+        },
+        "blog_tab::리빌드 솜양": {
+          "okAgeHours": [
+            824
+          ],
+          "lastCapturedAt": "2026-11-14T11:44:46.435Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:44:46.435Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T11:25:49.728Z",
+      "lastCapturedAt": "2026-11-14T11:44:46.435Z",
+      "total": 4
+    },
+    "post-manual-mv6mk6v0": {
+      "queries": {
+        "integrated::RTA에서 액상이 새는": {
+          "okAgeHours": [
+            768
+          ],
+          "lastCapturedAt": "2026-11-14T11:44:52.638Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:44:52.638Z"
+        },
+        "blog_tab::RTA에서 액상이 새는": {
+          "okAgeHours": [
+            768
+          ],
+          "lastCapturedAt": "2026-11-14T11:44:59.183Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:44:59.183Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T11:44:59.183Z",
       "total": 2
+    },
+    "post-manual-mvdmch7c": {
+      "queries": {
+        "integrated::같은 액상인데 무화기마다": {
+          "okAgeHours": [
+            650
+          ],
+          "lastCapturedAt": "2026-11-14T11:45:05.418Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:45:05.418Z"
+        },
+        "blog_tab::같은 액상인데 무화기마다": {
+          "okAgeHours": [
+            650
+          ],
+          "lastCapturedAt": "2026-11-14T11:45:12.119Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:45:12.119Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T11:45:12.119Z",
+      "total": 2
+    },
+    "post-manual-mvi2icv8": {
+      "queries": {
+        "integrated::하복v2": {
+          "okAgeHours": [
+            576
+          ],
+          "lastCapturedAt": "2026-11-14T11:45:18.327Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:45:18.327Z"
+        },
+        "blog_tab::하복v2": {
+          "okAgeHours": [
+            576
+          ],
+          "lastCapturedAt": "2026-11-14T11:45:25.177Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:45:25.177Z"
+        },
+        "integrated::유웰": {
+          "okAgeHours": [
+            576
+          ],
+          "lastCapturedAt": "2026-11-14T11:45:31.427Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:45:31.427Z"
+        },
+        "blog_tab::유웰": {
+          "okAgeHours": [
+            576
+          ],
+          "lastCapturedAt": "2026-11-14T11:45:38.317Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:45:38.317Z"
+        },
+        "integrated::무화량": {
+          "okAgeHours": [
+            576
+          ],
+          "lastCapturedAt": "2026-11-14T11:45:44.609Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:45:44.609Z"
+        },
+        "blog_tab::무화량": {
+          "okAgeHours": [
+            576
+          ],
+          "lastCapturedAt": "2026-11-14T11:45:50.853Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T11:45:50.853Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T11:45:50.853Z",
+      "total": 6
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T11:24:38.803Z",
-    "lastOkAt": "2026-11-14T11:24:38.803Z",
+    "lastRunAt": "2026-11-14T11:44:38.680Z",
+    "lastOkAt": "2026-11-14T11:44:38.680Z",
     "consecutiveFailedRuns": 0
   }
 }
