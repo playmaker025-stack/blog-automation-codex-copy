@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T10:05:54.310Z",
+  "updatedAt": "2026-11-14T10:25:54.154Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -10685,11 +10685,155 @@
       },
       "lastCapturedAt": "2026-11-14T10:05:51.630Z",
       "total": 6
+    },
+    "post-manual-mufhf9y8": {
+      "queries": {
+        "integrated::폐호흡액상": {
+          "okAgeHours": [
+            1222
+          ],
+          "lastCapturedAt": "2026-11-14T10:24:39.169Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:24:39.169Z"
+        },
+        "blog_tab::폐호흡액상": {
+          "okAgeHours": [
+            1222
+          ],
+          "lastCapturedAt": "2026-11-14T10:24:46.349Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:24:46.349Z"
+        },
+        "integrated::하복V2": {
+          "okAgeHours": [
+            1222
+          ],
+          "lastCapturedAt": "2026-11-14T10:24:52.507Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:24:52.507Z"
+        },
+        "blog_tab::하복V2": {
+          "okAgeHours": [
+            1222
+          ],
+          "lastCapturedAt": "2026-11-14T10:24:58.734Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:24:58.734Z"
+        },
+        "integrated::부평역전자담배": {
+          "okAgeHours": [
+            1222
+          ],
+          "lastCapturedAt": "2026-11-14T10:25:05.033Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:25:05.033Z"
+        },
+        "blog_tab::부평역전자담배": {
+          "okAgeHours": [
+            1222
+          ],
+          "lastCapturedAt": "2026-11-14T10:25:11.925Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:25:11.925Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T10:25:11.925Z",
+      "total": 6
+    },
+    "post-b0b8e262": {
+      "queries": {
+        "integrated::전자담배 기기 액상": {
+          "okAgeHours": [
+            1182
+          ],
+          "lastCapturedAt": "2026-11-14T10:25:18.197Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:25:18.197Z"
+        },
+        "blog_tab::전자담배 기기 액상": {
+          "okAgeHours": [
+            1182
+          ],
+          "lastCapturedAt": "2026-11-14T10:25:24.946Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:25:24.946Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T10:25:24.946Z",
+      "total": 2
+    },
+    "post-85fe29a6": {
+      "queries": {
+        "integrated::부평구 전자담배 액상": {
+          "okAgeHours": [
+            1154
+          ],
+          "lastCapturedAt": "2026-11-14T10:25:31.268Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:25:31.268Z"
+        },
+        "blog_tab::부평구 전자담배 액상": {
+          "okAgeHours": [
+            1154
+          ],
+          "lastCapturedAt": "2026-11-14T10:25:38.187Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:25:38.187Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T10:25:38.187Z",
+      "total": 2
+    },
+    "post-manual-mujbcz36": {
+      "queries": {
+        "integrated::RDA": {
+          "okAgeHours": [
+            1158
+          ],
+          "lastCapturedAt": "2026-11-14T10:25:44.542Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:25:44.542Z"
+        },
+        "blog_tab::RDA": {
+          "okAgeHours": [
+            1158
+          ],
+          "lastCapturedAt": "2026-11-14T10:25:51.484Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T10:25:51.484Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T10:25:51.484Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T10:04:38.539Z",
-    "lastOkAt": "2026-11-14T10:04:38.539Z",
+    "lastRunAt": "2026-11-14T10:24:38.470Z",
+    "lastOkAt": "2026-11-14T10:24:38.470Z",
     "consecutiveFailedRuns": 0
   }
 }

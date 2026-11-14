@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-b0b8e262",
+  "source": "serp",
+  "capturedAt": "2026-11-14T10:25:24.946Z",
+  "postAgeHours": 1182,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114102524946_serp_blogtab-전자담배-기기-액상_07f6ce",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배 기기 액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배 기기 액상",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 28,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224423068124",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
