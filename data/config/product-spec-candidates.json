@@ -2,90 +2,6 @@
   "version": 1,
   "candidates": [
     {
-      "id": "cand-2fcb4998",
-      "product": "네스티바 20000",
-      "field": "drawStyle",
-      "value": "입호흡",
-      "evidence": "일회용 요즘 정말 퀄리티 좋게 나오는 편 인것 같습니다 기기스펙부터 알아볼게요.  ...  입호흡기기 액상한병 사면 30ml 인데  입호흡 액상 절반이나 넘게 이놈 하나로 해결가능합니다.",
-      "postId": "post-manual-mt87j13u",
-      "postTitle": "굴포천전자담배 일회용기기 네스티바(20000) 가져왔습니다!",
-      "extractedAt": "2026-08-25T05:11:29.051Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-e6497496",
-      "product": "네스티바 20000",
-      "field": "airflowControl",
-      "value": "가능",
-      "evidence": "밑면 보시면 에어홀조절이 가능하게 되어있고 출력모드를 에코, 노말, 터보 로 변경 가능한 버튼이 있습니다",
-      "postId": "post-manual-mt87j13u",
-      "postTitle": "굴포천전자담배 일회용기기 네스티바(20000) 가져왔습니다!",
-      "extractedAt": "2026-08-25T05:11:29.051Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-8a9f7253",
-      "product": "네스티바 20000",
-      "field": "wattControl",
-      "value": "가능",
-      "evidence": "밑면 보시면 에어홀조절이 가능하게 되어있고 출력모드를 에코, 노말, 터보 로 변경 가능한 버튼이 있습니다",
-      "postId": "post-manual-mt87j13u",
-      "postTitle": "굴포천전자담배 일회용기기 네스티바(20000) 가져왔습니다!",
-      "extractedAt": "2026-08-25T05:11:29.051Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-78b91e08",
-      "product": "와카(waka)버스트 30000",
-      "field": "puffs",
-      "value": "30000퍼프",
-      "evidence": "그래서 오늘 소개해드릴 제품은 \" 와카(waka)버스트 30000 \" 이라는 애를 데려왔습니다. 무려 30000퍼프 라니 완전히 대용량 입니다.",
-      "postId": "post-manual-mt87jki9",
-      "postTitle": "작전동전자담배 일회용 와카(waka) 버스트30000 내돈내산 후기",
-      "extractedAt": "2026-08-25T05:11:55.682Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-8ca31514",
-      "product": "와카(waka)버스트 30000",
-      "field": "inhaleMode",
-      "value": "버튼",
-      "evidence": "옆면 금색 버튼 보이시죠 저걸 누른상태로 흡입하시면 멘솔감을 더 올려줘서...",
-      "postId": "post-manual-mt87jki9",
-      "postTitle": "작전동전자담배 일회용 와카(waka) 버스트30000 내돈내산 후기",
-      "extractedAt": "2026-08-25T05:11:55.682Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-f8bc09dd",
-      "product": "와카(waka)버스트 30000",
-      "field": "airflowControl",
-      "value": "흡입압 조절 가능",
-      "evidence": "밑면 보시면 C타입 충전단자와 에어홀조절기가 있어 원하시는 흡입압력으로 조절도 가능하실뿐더러",
-      "postId": "post-manual-mt87jki9",
-      "postTitle": "작전동전자담배 일회용 와카(waka) 버스트30000 내돈내산 후기",
-      "extractedAt": "2026-08-25T05:11:55.682Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-7992b443",
-      "product": "와카(waka)버스트 30000",
-      "field": "batteryRechargeable",
-      "value": "충전 가능",
-      "evidence": "그리고 밑면 보시면 C타입 충전단자와 에어홀조절기가 있어",
-      "postId": "post-manual-mt87jki9",
-      "postTitle": "작전동전자담배 일회용 와카(waka) 버스트30000 내돈내산 후기",
-      "extractedAt": "2026-08-25T05:11:55.682Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
       "id": "cand-f7775300",
       "product": "와카(waka)버스트 30000",
       "field": "charging",
@@ -5849,7 +5765,84 @@
       "postTitle": "부평 전자담배 무화량 엄청난 Nitrous 모드 기기 포켓 80W 폐호흡 전자담배 후기!",
       "extractedAt": "2026-11-14T01:56:44.173Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-278aa5e2",
+      "product": "Nitrous 포켓 모드",
+      "field": "wattRange",
+      "value": "최대 출력 80W",
+      "evidence": "최대 출력 80W 18650 한발 밖에 안 들어가고 포켓 모드 80W의 오늘 신규 입고된 따끈한 제품입니다.",
+      "postId": "post-manual-mwfr8fiz",
+      "postTitle": "부평 전자담배 무화량 엄청난 니트로우스 모드 기기 포켓 80W 폐호흡 전자담배 후기!",
+      "extractedAt": "2026-11-14T02:01:41.972Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-716df05a",
+      "product": "Nitrous 포켓 모드",
+      "field": "batteryRechargeable",
+      "value": "가능",
+      "evidence": "양측면으로 왼쪽엔 배터리 넣는 곳이고 다른 한쪽은 다시 한번 친절하다고 느끼는 점이 오른쪽엔 배터리를 쉽게 뺄 수 있게끔 구멍을 뚫어논 모습이고 둘 다 자석의 부착 형식입니다.",
+      "postId": "post-manual-mwfr8fiz",
+      "postTitle": "부평 전자담배 무화량 엄청난 니트로우스 모드 기기 포켓 80W 폐호흡 전자담배 후기!",
+      "extractedAt": "2026-11-14T02:01:41.972Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-c059fb92",
+      "product": "Nitrous 포켓 모드",
+      "field": "drawStyle",
+      "value": "입호흡/폐호흡 겸용",
+      "evidence": "전용 무화기 매쉬코일은 내장형 팟 배터리 교체 형식이고 0.6옴 입홉, 0.4옴 폐홉입니다 재밌게도 입홉용은 팟 컬러가 흰색이에요",
+      "postId": "post-manual-mwfr8fiz",
+      "postTitle": "부평 전자담배 무화량 엄청난 니트로우스 모드 기기 포켓 80W 폐호흡 전자담배 후기!",
+      "extractedAt": "2026-11-14T02:01:41.972Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-d0a4f8a8",
+      "product": "Nitrous 포켓 모드",
+      "field": "wattRange",
+      "value": "0.6옴 13W~15W, 0.4옴 20W~23W",
+      "evidence": "0.6옴 13W~15W 0.4옴 20W~23W 로 사용하시면 됩니다",
+      "postId": "post-manual-mwfr8fiz",
+      "postTitle": "부평 전자담배 무화량 엄청난 니트로우스 모드 기기 포켓 80W 폐호흡 전자담배 후기!",
+      "extractedAt": "2026-11-14T02:01:41.972Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-3ef13ea8",
+      "product": "Nitrous 포켓 모드",
+      "field": "airflowControl",
+      "value": "-",
+      "evidence": "흡입압 조절 가능 여부에 대한 명시는 없음",
+      "postId": "post-manual-mwfr8fiz",
+      "postTitle": "부평 전자담배 무화량 엄청난 니트로우스 모드 기기 포켓 80W 폐호흡 전자담배 후기!",
+      "extractedAt": "2026-11-14T02:01:41.972Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-452bb751",
+      "product": "Nitrous 포켓 모드",
+      "field": "liquidRefillable",
+      "value": "-",
+      "evidence": "액상 리필 가능 여부에 대한 명시는 없음",
+      "postId": "post-manual-mwfr8fiz",
+      "postTitle": "부평 전자담배 무화량 엄청난 니트로우스 모드 기기 포켓 80W 폐호흡 전자담배 후기!",
+      "extractedAt": "2026-11-14T02:01:41.972Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-6a9280eb",
+      "product": "Nitrous 포켓 모드",
+      "field": "charging",
+      "value": "-",
+      "evidence": "충전 방식에 대한 명시는 없음",
+      "postId": "post-manual-mwfr8fiz",
+      "postTitle": "부평 전자담배 무화량 엄청난 니트로우스 모드 기기 포켓 80W 폐호흡 전자담배 후기!",
+      "extractedAt": "2026-11-14T02:01:41.972Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-11-14T01:56:45.066Z"
+  "updatedAt": "2026-11-14T02:01:42.966Z"
 }
