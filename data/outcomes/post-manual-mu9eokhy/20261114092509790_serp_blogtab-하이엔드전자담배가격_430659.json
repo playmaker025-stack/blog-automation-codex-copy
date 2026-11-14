@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu9eokhy",
+  "source": "serp",
+  "capturedAt": "2026-11-14T09:25:09.790Z",
+  "postAgeHours": 1323,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114092509790_serp_blogtab-하이엔드전자담배가격_430659",
+  "target": {
+    "surface": "blog_tab",
+    "query": "하이엔드전자담배가격"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하이엔드전자담배가격",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224417738172",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224469048063",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224419124868",
+        "rank": 8
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224201507449",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224435119042",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224370166800",
+        "rank": 17
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224381332631",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

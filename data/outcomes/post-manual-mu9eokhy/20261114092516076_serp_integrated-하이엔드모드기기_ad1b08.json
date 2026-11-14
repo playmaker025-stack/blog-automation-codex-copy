@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu9eokhy",
+  "source": "serp",
+  "capturedAt": "2026-11-14T09:25:16.076Z",
+  "postAgeHours": 1323,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114092516076_serp_integrated-하이엔드모드기기_ad1b08",
+  "target": {
+    "surface": "integrated",
+    "query": "하이엔드모드기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "하이엔드모드기기",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 21,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224417738172",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221070410979",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "222174611835",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221309542814",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223166874610",
+        "rank": 16
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224476833497",
+        "rank": 19
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224476660371",
+        "rank": 20
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
