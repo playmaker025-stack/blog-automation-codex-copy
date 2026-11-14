@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87oul4",
+  "source": "serp",
+  "capturedAt": "2026-11-14T01:44:58.943Z",
+  "postAgeHours": 1940,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114014458943_serp_blogtab-인천전자담배샵-폐호흡-모드기기_e4b26c",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천전자담배샵 폐호흡 모드기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배샵 폐호흡 모드기기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224450321386",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223989205862",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223990095529",
+        "rank": 25
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224004212888",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

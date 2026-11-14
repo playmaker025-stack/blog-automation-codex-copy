@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87qx6m",
+  "source": "serp",
+  "capturedAt": "2026-11-14T01:45:37.221Z",
+  "postAgeHours": 1940,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114014537221_serp_blogtab-산곡동전자담배-SUPA-X3_1ea92a",
+  "target": {
+    "surface": "blog_tab",
+    "query": "산곡동전자담배 SUPA X3"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "산곡동전자담배 SUPA X3",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 3,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224004287087",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224004502813",
+        "rank": 2
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224064309854",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
