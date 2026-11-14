@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvth3u6y",
+  "source": "serp",
+  "capturedAt": "2026-11-14T13:24:46.147Z",
+  "postAgeHours": 386,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114132446147_serp_blogtab-드래곤바_6347be",
+  "target": {
+    "surface": "blog_tab",
+    "query": "드래곤바"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "드래곤바",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

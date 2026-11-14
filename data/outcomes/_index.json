@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T13:05:51.781Z",
+  "updatedAt": "2026-11-14T13:25:53.913Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11927,11 +11927,149 @@
       },
       "lastCapturedAt": "2026-11-14T13:05:49.942Z",
       "total": 2
+    },
+    "post-manual-mvth3u6y": {
+      "queries": {
+        "integrated::드래곤바": {
+          "okAgeHours": [
+            386
+          ],
+          "lastCapturedAt": "2026-11-14T13:24:39.030Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:24:39.030Z"
+        },
+        "blog_tab::드래곤바": {
+          "okAgeHours": [
+            386
+          ],
+          "lastCapturedAt": "2026-11-14T13:24:46.147Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:24:46.147Z"
+        },
+        "integrated::부평전자담배": {
+          "okAgeHours": [
+            386
+          ],
+          "lastCapturedAt": "2026-11-14T13:24:52.438Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:24:52.438Z"
+        },
+        "blog_tab::부평전자담배": {
+          "okAgeHours": [
+            386
+          ],
+          "lastCapturedAt": "2026-11-14T13:24:59.307Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:24:59.307Z"
+        },
+        "integrated::크오크": {
+          "okAgeHours": [
+            386
+          ],
+          "lastCapturedAt": "2026-11-14T13:25:05.615Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:25:05.615Z"
+        },
+        "blog_tab::크오크": {
+          "okAgeHours": [
+            386
+          ],
+          "lastCapturedAt": "2026-11-14T13:25:12.323Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:25:12.323Z"
+        },
+        "integrated::바나나우유맛": {
+          "okAgeHours": [
+            386
+          ],
+          "lastCapturedAt": "2026-11-14T13:25:18.549Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:25:18.549Z"
+        },
+        "blog_tab::바나나우유맛": {
+          "okAgeHours": [
+            386
+          ],
+          "lastCapturedAt": "2026-11-14T13:25:25.774Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:25:25.774Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T13:25:25.774Z",
+      "total": 8
+    },
+    "post-manual-mvw77jtu": {
+      "queries": {
+        "integrated::부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천": {
+          "okAgeHours": [
+            340
+          ],
+          "lastCapturedAt": "2026-11-14T13:25:32.230Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:25:32.230Z"
+        },
+        "blog_tab::부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천": {
+          "okAgeHours": [
+            340
+          ],
+          "lastCapturedAt": "2026-11-14T13:25:38.707Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:25:38.707Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T13:25:38.707Z",
+      "total": 2
+    },
+    "post-manual-mvxl5orh": {
+      "queries": {
+        "integrated::만수르전자담배 말론S 사용기": {
+          "okAgeHours": [
+            317
+          ],
+          "lastCapturedAt": "2026-11-14T13:25:44.518Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:25:44.518Z"
+        },
+        "blog_tab::만수르전자담배 말론S 사용기": {
+          "okAgeHours": [
+            317
+          ],
+          "lastCapturedAt": "2026-11-14T13:25:51.224Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:25:51.224Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T13:25:51.224Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T13:04:38.324Z",
-    "lastOkAt": "2026-11-14T13:04:38.324Z",
+    "lastRunAt": "2026-11-14T13:24:38.496Z",
+    "lastOkAt": "2026-11-14T13:24:38.496Z",
     "consecutiveFailedRuns": 0
   }
 }
