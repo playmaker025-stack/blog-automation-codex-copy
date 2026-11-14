@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mucfo12x",
+  "source": "serp",
+  "capturedAt": "2026-11-14T09:45:30.465Z",
+  "postAgeHours": 1273,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114094530465_serp_integrated-구월동전자담배_c1cfcb",
+  "target": {
+    "surface": "integrated",
+    "query": "구월동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 39,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224453360618",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224476833497",
+        "rank": 18
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224346587073",
+        "rank": 37
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

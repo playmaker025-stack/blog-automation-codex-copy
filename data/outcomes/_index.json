@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T09:25:51.877Z",
+  "updatedAt": "2026-11-14T09:45:53.130Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -10409,11 +10409,149 @@
       },
       "lastCapturedAt": "2026-11-14T09:25:49.250Z",
       "total": 10
+    },
+    "post-d8dc50f1": {
+      "queries": {
+        "integrated::전자담배 위탁수하물": {
+          "okAgeHours": [
+            1297
+          ],
+          "lastCapturedAt": "2026-11-14T09:44:38.957Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:44:38.957Z"
+        },
+        "blog_tab::전자담배 위탁수하물": {
+          "okAgeHours": [
+            1297
+          ],
+          "lastCapturedAt": "2026-11-14T09:44:45.939Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:44:45.939Z"
+        },
+        "integrated::비행기 전자담배 위탁수하물": {
+          "okAgeHours": [
+            1297
+          ],
+          "lastCapturedAt": "2026-11-14T09:44:52.275Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:44:52.275Z"
+        },
+        "blog_tab::비행기 전자담배 위탁수하물": {
+          "okAgeHours": [
+            1297
+          ],
+          "lastCapturedAt": "2026-11-14T09:44:59.025Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:44:59.025Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T09:44:59.025Z",
+      "total": 4
+    },
+    "post-manual-mub8dhw8": {
+      "queries": {
+        "integrated::하이엔드 전자담배는 어떤": {
+          "okAgeHours": [
+            1293
+          ],
+          "lastCapturedAt": "2026-11-14T09:45:05.318Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:45:05.318Z"
+        },
+        "blog_tab::하이엔드 전자담배는 어떤": {
+          "okAgeHours": [
+            1293
+          ],
+          "lastCapturedAt": "2026-11-14T09:45:11.981Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:45:11.981Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T09:45:11.981Z",
+      "total": 2
+    },
+    "post-manual-mucfo12x": {
+      "queries": {
+        "integrated::버블몬 비어": {
+          "okAgeHours": [
+            1273
+          ],
+          "lastCapturedAt": "2026-11-14T09:45:17.463Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:45:17.463Z"
+        },
+        "blog_tab::버블몬 비어": {
+          "okAgeHours": [
+            1273
+          ],
+          "lastCapturedAt": "2026-11-14T09:45:24.117Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:45:24.117Z"
+        },
+        "integrated::구월동전자담배": {
+          "okAgeHours": [
+            1273
+          ],
+          "lastCapturedAt": "2026-11-14T09:45:30.465Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:45:30.465Z"
+        },
+        "blog_tab::구월동전자담배": {
+          "okAgeHours": [
+            1273
+          ],
+          "lastCapturedAt": "2026-11-14T09:45:37.200Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:45:37.200Z"
+        },
+        "integrated::일회용": {
+          "okAgeHours": [
+            1273
+          ],
+          "lastCapturedAt": "2026-11-14T09:45:43.441Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:45:43.441Z"
+        },
+        "blog_tab::일회용": {
+          "okAgeHours": [
+            1273
+          ],
+          "lastCapturedAt": "2026-11-14T09:45:50.559Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:45:50.559Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T09:45:50.559Z",
+      "total": 6
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T09:24:38.272Z",
-    "lastOkAt": "2026-11-14T09:24:38.272Z",
+    "lastRunAt": "2026-11-14T09:44:38.411Z",
+    "lastOkAt": "2026-11-14T09:44:38.411Z",
     "consecutiveFailedRuns": 0
   }
 }

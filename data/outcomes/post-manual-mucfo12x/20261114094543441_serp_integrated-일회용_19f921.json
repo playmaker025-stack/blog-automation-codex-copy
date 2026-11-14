@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mucfo12x",
+  "source": "serp",
+  "capturedAt": "2026-11-14T09:45:43.441Z",
+  "postAgeHours": 1273,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114094543441_serp_integrated-일회용_19f921",
+  "target": {
+    "surface": "integrated",
+    "query": "일회용"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "일회용",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 20,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
