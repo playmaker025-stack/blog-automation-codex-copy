@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtu3nwvv",
+  "source": "serp",
+  "capturedAt": "2026-11-14T07:25:37.009Z",
+  "postAgeHours": 1579,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114072537009_serp_blogtab-닷박스_c35a89",
+  "target": {
+    "surface": "blog_tab",
+    "query": "닷박스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "닷박스",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 11,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224406047637",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 10
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224451704218",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
