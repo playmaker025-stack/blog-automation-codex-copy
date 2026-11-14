@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvj95qg7",
+  "source": "serp",
+  "capturedAt": "2026-11-14T12:25:04.358Z",
+  "postAgeHours": 556,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114122504358_serp_integrated-인천-전자담배-멀티샵_47c446",
+  "target": {
+    "surface": "integrated",
+    "query": "인천 전자담배 멀티샵"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 멀티샵",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 13,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224450321386",
+        "rank": 13
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223986909161",
+        "rank": 16
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223988242888",
+        "rank": 31
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvkzentz",
+  "source": "serp",
+  "capturedAt": "2026-11-14T12:25:29.778Z",
+  "postAgeHours": 527,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114122529778_serp_integrated-모드기기_6387a6",
+  "target": {
+    "surface": "integrated",
+    "query": "모드기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "모드기기",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 33,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224469048063",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224475775112",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224476833497",
+        "rank": 6
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224476660371",
+        "rank": 11
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "221121600597",
+        "rank": 20
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "221224767861",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

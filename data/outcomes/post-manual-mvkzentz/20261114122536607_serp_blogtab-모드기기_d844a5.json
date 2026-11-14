@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvkzentz",
+  "source": "serp",
+  "capturedAt": "2026-11-14T12:25:36.607Z",
+  "postAgeHours": 527,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114122536607_serp_blogtab-모드기기_d844a5",
+  "target": {
+    "surface": "blog_tab",
+    "query": "모드기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "모드기기",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 8,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224469048063",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224393476732",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224451704218",
+        "rank": 8
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224476833497",
+        "rank": 10
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224430262358",
+        "rank": 27
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224091389416",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
