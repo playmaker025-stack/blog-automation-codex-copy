@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwfr8fiz",
+  "source": "serp",
+  "capturedAt": "2026-11-14T14:44:59.307Z",
+  "postAgeHours": 13,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114144459307_serp_blogtab-부평전자담배_9ec340",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224463939042",
+        "rank": 18
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421992036",
+        "rank": 19
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224455875422",
+        "rank": 20
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224410398468",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

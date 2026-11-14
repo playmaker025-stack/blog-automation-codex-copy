@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T14:25:54.388Z",
+  "updatedAt": "2026-11-14T14:45:54.261Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -5015,12 +5015,14 @@
     "post-manual-ms384q6y": {
       "queries": {
         "integrated::전자담배는 흡입을 오래": {
-          "okAgeHours": [],
-          "lastCapturedAt": "2026-11-13T21:05:16.216Z",
-          "total": 1,
-          "lastStatus": "request_failed",
-          "consecutiveFailures": 1,
-          "lastAttemptAt": "2026-11-13T21:05:16.216Z"
+          "okAgeHours": [
+            2642
+          ],
+          "lastCapturedAt": "2026-11-14T14:45:44.655Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:45:44.655Z"
         },
         "blog_tab::전자담배는 흡입을 오래": {
           "okAgeHours": [
@@ -5033,8 +5035,8 @@
           "lastAttemptAt": "2026-11-13T21:05:21.849Z"
         }
       },
-      "lastCapturedAt": "2026-11-13T21:05:21.849Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-14T14:45:44.655Z",
+      "total": 3
     },
     "post-f3b26f79": {
       "queries": {
@@ -7779,16 +7781,18 @@
           "lastAttemptAt": "2026-11-14T03:24:38.708Z"
         },
         "blog_tab::도림동전자담배 린코 네소": {
-          "okAgeHours": [],
-          "lastCapturedAt": "2026-11-14T03:24:46.028Z",
-          "total": 1,
-          "lastStatus": "request_failed",
-          "consecutiveFailures": 1,
-          "lastAttemptAt": "2026-11-14T03:24:46.028Z"
+          "okAgeHours": [
+            1953
+          ],
+          "lastCapturedAt": "2026-11-14T14:45:51.590Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:45:51.590Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T03:24:46.028Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-14T14:45:51.590Z",
+      "total": 3
     },
     "post-manual-mt88e7d4": {
       "queries": {
@@ -12461,11 +12465,129 @@
       },
       "lastCapturedAt": "2026-11-14T14:25:51.721Z",
       "total": 10
+    },
+    "post-manual-mweut7yk": {
+      "queries": {
+        "integrated::입호흡 전자담배 아토모드와": {
+          "okAgeHours": [
+            28
+          ],
+          "lastCapturedAt": "2026-11-14T14:44:39.058Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:44:39.058Z"
+        },
+        "blog_tab::입호흡 전자담배 아토모드와": {
+          "okAgeHours": [
+            28
+          ],
+          "lastCapturedAt": "2026-11-14T14:44:46.293Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:44:46.293Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T14:44:46.293Z",
+      "total": 2
+    },
+    "post-manual-mwfr8fiz": {
+      "queries": {
+        "integrated::부평전자담배": {
+          "okAgeHours": [
+            13
+          ],
+          "lastCapturedAt": "2026-11-14T14:44:52.467Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:44:52.467Z"
+        },
+        "blog_tab::부평전자담배": {
+          "okAgeHours": [
+            13
+          ],
+          "lastCapturedAt": "2026-11-14T14:44:59.307Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:44:59.307Z"
+        },
+        "integrated::무화량엄청난 폐호흡전자담배": {
+          "okAgeHours": [
+            13
+          ],
+          "lastCapturedAt": "2026-11-14T14:45:05.651Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:45:05.651Z"
+        },
+        "blog_tab::무화량엄청난 폐호흡전자담배": {
+          "okAgeHours": [
+            13
+          ],
+          "lastCapturedAt": "2026-11-14T14:45:12.412Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:45:12.412Z"
+        },
+        "integrated::니트로우스": {
+          "okAgeHours": [
+            13
+          ],
+          "lastCapturedAt": "2026-11-14T14:45:18.799Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:45:18.799Z"
+        },
+        "blog_tab::니트로우스": {
+          "okAgeHours": [
+            13
+          ],
+          "lastCapturedAt": "2026-11-14T14:45:25.407Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:45:25.407Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T14:45:25.407Z",
+      "total": 6
+    },
+    "post-manual-mwfy3uxc": {
+      "queries": {
+        "integrated::연무량 많은 전자담배": {
+          "okAgeHours": [
+            10
+          ],
+          "lastCapturedAt": "2026-11-14T14:45:31.754Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:45:31.754Z"
+        },
+        "blog_tab::연무량 많은 전자담배": {
+          "okAgeHours": [
+            10
+          ],
+          "lastCapturedAt": "2026-11-14T14:45:38.360Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T14:45:38.360Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T14:45:38.360Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T14:24:38.419Z",
-    "lastOkAt": "2026-11-14T14:24:38.419Z",
+    "lastRunAt": "2026-11-14T14:44:38.304Z",
+    "lastOkAt": "2026-11-14T14:44:38.304Z",
     "consecutiveFailedRuns": 0
   }
 }

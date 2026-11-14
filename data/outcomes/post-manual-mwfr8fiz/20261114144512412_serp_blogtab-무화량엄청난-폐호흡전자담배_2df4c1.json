@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwfr8fiz",
+  "source": "serp",
+  "capturedAt": "2026-11-14T14:45:12.412Z",
+  "postAgeHours": 13,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114144512412_serp_blogtab-무화량엄청난-폐호흡전자담배_2df4c1",
+  "target": {
+    "surface": "blog_tab",
+    "query": "무화량엄청난 폐호흡전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량엄청난 폐호흡전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224395287849",
+        "rank": 3
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224284262349",
+        "rank": 18
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224280060867",
+        "rank": 22
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224476833497",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
