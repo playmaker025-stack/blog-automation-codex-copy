@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T12:45:54.455Z",
+  "updatedAt": "2026-11-14T13:05:51.781Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11789,11 +11789,149 @@
       },
       "lastCapturedAt": "2026-11-14T12:45:51.554Z",
       "total": 2
+    },
+    "post-manual-mvqo07yw": {
+      "queries": {
+        "integrated::만수동 전자담배 폐호흡": {
+          "okAgeHours": [
+            433
+          ],
+          "lastCapturedAt": "2026-11-14T13:04:38.664Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:04:38.664Z"
+        },
+        "blog_tab::만수동 전자담배 폐호흡": {
+          "okAgeHours": [
+            433
+          ],
+          "lastCapturedAt": "2026-11-14T13:04:45.707Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:04:45.707Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T13:04:45.707Z",
+      "total": 2
+    },
+    "post-manual-mvqobsc9": {
+      "queries": {
+        "integrated::네스티원": {
+          "okAgeHours": [
+            432
+          ],
+          "lastCapturedAt": "2026-11-14T13:04:51.990Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:04:51.990Z"
+        },
+        "blog_tab::네스티원": {
+          "okAgeHours": [
+            432
+          ],
+          "lastCapturedAt": "2026-11-14T13:04:58.332Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:04:58.332Z"
+        },
+        "integrated::고농도": {
+          "okAgeHours": [
+            432
+          ],
+          "lastCapturedAt": "2026-11-14T13:05:04.613Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:05:04.613Z"
+        },
+        "blog_tab::고농도": {
+          "okAgeHours": [
+            432
+          ],
+          "lastCapturedAt": "2026-11-14T13:05:11.075Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:05:11.075Z"
+        },
+        "integrated::일회용전자담배": {
+          "okAgeHours": [
+            432
+          ],
+          "lastCapturedAt": "2026-11-14T13:05:17.377Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:05:17.377Z"
+        },
+        "blog_tab::일회용전자담배": {
+          "okAgeHours": [
+            432
+          ],
+          "lastCapturedAt": "2026-11-14T13:05:24.062Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:05:24.062Z"
+        },
+        "integrated::교체형": {
+          "okAgeHours": [
+            432
+          ],
+          "lastCapturedAt": "2026-11-14T13:05:30.198Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:05:30.198Z"
+        },
+        "blog_tab::교체형": {
+          "okAgeHours": [
+            432
+          ],
+          "lastCapturedAt": "2026-11-14T13:05:37.328Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:05:37.328Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T13:05:37.328Z",
+      "total": 8
+    },
+    "post-manual-mvtagz1x": {
+      "queries": {
+        "integrated::부평 전자담배 전자담배액상 액상 치즈 치즈맛액상 디저트 디저트액상 입호흡 입호흡액상 액상추천": {
+          "okAgeHours": [
+            388
+          ],
+          "lastCapturedAt": "2026-11-14T13:05:43.392Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:05:43.392Z"
+        },
+        "blog_tab::부평 전자담배 전자담배액상 액상 치즈 치즈맛액상 디저트 디저트액상 입호흡 입호흡액상 액상추천": {
+          "okAgeHours": [
+            388
+          ],
+          "lastCapturedAt": "2026-11-14T13:05:49.942Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T13:05:49.942Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T13:05:49.942Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T12:44:38.505Z",
-    "lastOkAt": "2026-11-14T12:44:38.505Z",
+    "lastRunAt": "2026-11-14T13:04:38.324Z",
+    "lastOkAt": "2026-11-14T13:04:38.324Z",
     "consecutiveFailedRuns": 0
   }
 }
