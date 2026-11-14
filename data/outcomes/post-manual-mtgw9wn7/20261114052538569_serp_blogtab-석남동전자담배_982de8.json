@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgw9wn7",
+  "source": "serp",
+  "capturedAt": "2026-11-14T05:25:38.569Z",
+  "postAgeHours": 1798,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114052538569_serp_blogtab-석남동전자담배_982de8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "석남동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "석남동전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

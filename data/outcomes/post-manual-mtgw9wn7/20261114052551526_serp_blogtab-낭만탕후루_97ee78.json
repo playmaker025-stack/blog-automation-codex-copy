@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtgw9wn7",
+  "source": "serp",
+  "capturedAt": "2026-11-14T05:25:51.526Z",
+  "postAgeHours": 1798,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114052551526_serp_blogtab-낭만탕후루_97ee78",
+  "target": {
+    "surface": "blog_tab",
+    "query": "낭만탕후루"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "낭만탕후루",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 25,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224156417349",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223981749559",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223669625515",
+        "rank": 15
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223561837378",
+        "rank": 18
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224039829703",
+        "rank": 24
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223956512549",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
