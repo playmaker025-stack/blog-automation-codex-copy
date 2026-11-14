@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T02:25:53.022Z",
+  "updatedAt": "2026-11-14T02:45:51.745Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -7453,11 +7453,167 @@
       },
       "lastCapturedAt": "2026-11-14T02:25:50.288Z",
       "total": 2
+    },
+    "post-manual-mt8824id": {
+      "queries": {
+        "integrated::인천전자담배 일회용 전담": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:44:38.736Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:44:38.736Z"
+        },
+        "blog_tab::인천전자담배 일회용 전담": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:44:45.170Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:44:45.170Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:44:45.170Z",
+      "total": 2
+    },
+    "post-manual-mt882mm0": {
+      "queries": {
+        "integrated::부평전자담배 저스트포그 글렌트": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:44:50.703Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:44:50.703Z"
+        },
+        "blog_tab::부평전자담배 저스트포그 글렌트": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:44:56.719Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:44:56.719Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:44:56.719Z",
+      "total": 2
+    },
+    "post-manual-mt883bsi": {
+      "queries": {
+        "integrated::구월동전자담배 아이다 기어미니": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:45:03.034Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:45:03.034Z"
+        },
+        "blog_tab::구월동전자담배 아이다 기어미니": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:45:09.743Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:45:09.743Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:45:09.743Z",
+      "total": 2
+    },
+    "post-manual-mt883vvt": {
+      "queries": {
+        "integrated::만수동전자담배 스누스 니코틴": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:45:16.250Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:45:16.250Z"
+        },
+        "blog_tab::만수동전자담배 스누스 니코틴": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:45:22.985Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:45:22.985Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:45:22.985Z",
+      "total": 2
+    },
+    "post-manual-mt884bc4": {
+      "queries": {
+        "integrated::인천 만수동에서 요즘": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:45:29.118Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:45:29.118Z"
+        },
+        "blog_tab::인천 만수동에서 요즘": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:45:35.910Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:45:35.910Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:45:35.910Z",
+      "total": 2
+    },
+    "post-manual-mt885elp": {
+      "queries": {
+        "integrated::부평전자담배 버블몬 그래피티2": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:45:42.214Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:45:42.214Z"
+        },
+        "blog_tab::부평전자담배 버블몬 그래피티2": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:45:48.886Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:45:48.886Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:45:48.886Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T02:24:38.227Z",
-    "lastOkAt": "2026-11-14T02:24:38.227Z",
+    "lastRunAt": "2026-11-14T02:44:38.444Z",
+    "lastOkAt": "2026-11-14T02:44:38.444Z",
     "consecutiveFailedRuns": 0
   }
 }
