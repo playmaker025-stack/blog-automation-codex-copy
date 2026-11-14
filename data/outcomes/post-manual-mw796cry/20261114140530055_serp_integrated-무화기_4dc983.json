@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw796cry",
+  "source": "serp",
+  "capturedAt": "2026-11-14T14:05:30.055Z",
+  "postAgeHours": 155,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114140530055_serp_integrated-무화기_4dc983",
+  "target": {
+    "surface": "integrated",
+    "query": "무화기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화기",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 22,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224468407841",
+        "rank": 20
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224469048063",
+        "rank": 22
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 23
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224476660371",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

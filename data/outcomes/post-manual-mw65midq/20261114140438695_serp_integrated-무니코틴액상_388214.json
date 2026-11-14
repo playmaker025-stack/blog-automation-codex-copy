@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw65midq",
+  "source": "serp",
+  "capturedAt": "2026-11-14T14:04:38.695Z",
+  "postAgeHours": 173,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114140438695_serp_integrated-무니코틴액상_388214",
+  "target": {
+    "surface": "integrated",
+    "query": "무니코틴액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무니코틴액상",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 32,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

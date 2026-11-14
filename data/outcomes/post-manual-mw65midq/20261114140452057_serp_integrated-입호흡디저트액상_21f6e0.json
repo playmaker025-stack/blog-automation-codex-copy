@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw65midq",
+  "source": "serp",
+  "capturedAt": "2026-11-14T14:04:52.057Z",
+  "postAgeHours": 173,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114140452057_serp_integrated-입호흡디저트액상_21f6e0",
+  "target": {
+    "surface": "integrated",
+    "query": "입호흡디저트액상"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡디저트액상",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 41,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224468430088",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224449436657",
+        "rank": 18
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224019076773",
+        "rank": 36
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
