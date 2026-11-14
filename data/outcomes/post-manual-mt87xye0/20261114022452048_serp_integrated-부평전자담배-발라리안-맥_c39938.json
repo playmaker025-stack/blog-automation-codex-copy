@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87xye0",
+  "source": "serp",
+  "capturedAt": "2026-11-14T02:24:52.048Z",
+  "postAgeHours": 1941,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114022452048_serp_integrated-부평전자담배-발라리안-맥_c39938",
+  "target": {
+    "surface": "integrated",
+    "query": "부평전자담배 발라리안 맥스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평전자담배 발라리안 맥스",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 11,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224449397910",
+        "rank": 8
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224476660371",
+        "rank": 10
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

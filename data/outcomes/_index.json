@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T02:05:49.182Z",
+  "updatedAt": "2026-11-14T02:25:53.022Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -7297,11 +7297,167 @@
       },
       "lastCapturedAt": "2026-11-14T02:05:46.823Z",
       "total": 2
+    },
+    "post-manual-mt87vy39": {
+      "queries": {
+        "integrated::부평전자담배 입호흡 전담": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:24:38.580Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:24:38.580Z"
+        },
+        "blog_tab::부평전자담배 입호흡 전담": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:24:45.714Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:24:45.714Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:24:45.714Z",
+      "total": 2
+    },
+    "post-manual-mt87xye0": {
+      "queries": {
+        "integrated::부평전자담배 발라리안 맥스": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:24:52.048Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:24:52.048Z"
+        },
+        "blog_tab::부평전자담배 발라리안 맥스": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:24:58.624Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:24:58.624Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:24:58.624Z",
+      "total": 2
+    },
+    "post-manual-mt87yf6o": {
+      "queries": {
+        "integrated::작전역전자담배 베놈 팬텀": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:25:04.977Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:25:04.977Z"
+        },
+        "blog_tab::작전역전자담배 베놈 팬텀": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:25:11.639Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:25:11.639Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:25:11.639Z",
+      "total": 2
+    },
+    "post-manual-mt87zlum": {
+      "queries": {
+        "integrated::호라이즌 세이커즈 마스터": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:25:17.665Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:25:17.665Z"
+        },
+        "blog_tab::호라이즌 세이커즈 마스터": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:25:24.420Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:25:24.420Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:25:24.420Z",
+      "total": 2
+    },
+    "post-manual-mt880qy8": {
+      "queries": {
+        "integrated::긱베이프 이지스 레전드": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:25:30.385Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:25:30.385Z"
+        },
+        "blog_tab::긱베이프 이지스 레전드": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:25:37.207Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:25:37.207Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:25:37.207Z",
+      "total": 2
+    },
+    "post-manual-mt8818bw": {
+      "queries": {
+        "integrated::일회용 전담 추천": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:25:43.497Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:25:43.497Z"
+        },
+        "blog_tab::일회용 전담 추천": {
+          "okAgeHours": [
+            1941
+          ],
+          "lastCapturedAt": "2026-11-14T02:25:50.288Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T02:25:50.288Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T02:25:50.288Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T02:04:38.500Z",
-    "lastOkAt": "2026-11-14T02:04:38.500Z",
+    "lastRunAt": "2026-11-14T02:24:38.227Z",
+    "lastOkAt": "2026-11-14T02:24:38.227Z",
     "consecutiveFailedRuns": 0
   }
 }
