@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6z60ar",
+  "source": "serp",
+  "capturedAt": "2026-11-14T00:45:49.123Z",
+  "postAgeHours": 1960,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114004549123_serp_blogtab-인천-닷모드_1506e7",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 닷모드",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 27,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224208083611",
+        "rank": 8
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224087543609",
+        "rank": 9
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224086818648",
+        "rank": 10
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224127103412",
+        "rank": 11
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224209102690",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223529496185",
+        "rank": 27
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

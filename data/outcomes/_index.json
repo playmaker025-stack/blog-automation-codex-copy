@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T00:25:51.149Z",
+  "updatedAt": "2026-11-14T00:45:52.101Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -6547,11 +6547,149 @@
       },
       "lastCapturedAt": "2026-11-14T00:25:48.605Z",
       "total": 2
+    },
+    "post-manual-mt6z4kiq": {
+      "queries": {
+        "integrated::구월동 전자담배 만수르": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:44:38.894Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:44:38.894Z"
+        },
+        "blog_tab::구월동 전자담배 만수르": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:44:45.876Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:44:45.876Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T00:44:45.876Z",
+      "total": 2
+    },
+    "post-manual-mt6z50dx": {
+      "queries": {
+        "integrated::인천 발라리안": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:44:52.125Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:44:52.125Z"
+        },
+        "blog_tab::인천 발라리안": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:44:58.279Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:44:58.279Z"
+        },
+        "integrated::발라리안 맥스 프로": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:45:04.558Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:45:04.558Z"
+        },
+        "blog_tab::발라리안 맥스 프로": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:45:11.552Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:45:11.552Z"
+        },
+        "integrated::인천 전자담배": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:45:17.065Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:45:17.065Z"
+        },
+        "blog_tab::인천 전자담배": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:45:23.384Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:45:23.384Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T00:45:23.384Z",
+      "total": 6
+    },
+    "post-manual-mt6z60ar": {
+      "queries": {
+        "integrated::닷모드 투엑스": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:45:29.714Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:45:29.714Z"
+        },
+        "blog_tab::닷모드 투엑스": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:45:36.171Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:45:36.171Z"
+        },
+        "integrated::인천 닷모드": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:45:42.506Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:45:42.506Z"
+        },
+        "blog_tab::인천 닷모드": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:45:49.123Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:45:49.123Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T00:45:49.123Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T00:24:38.169Z",
-    "lastOkAt": "2026-11-14T00:24:38.169Z",
+    "lastRunAt": "2026-11-14T00:44:38.411Z",
+    "lastOkAt": "2026-11-14T00:44:38.411Z",
     "consecutiveFailedRuns": 0
   }
 }
