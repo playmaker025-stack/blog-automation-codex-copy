@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwagobr1",
+  "source": "serp",
+  "capturedAt": "2026-11-14T14:25:38.881Z",
+  "postAgeHours": 101,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114142538881_serp_blogtab-다비도프_262c31",
+  "target": {
+    "surface": "blog_tab",
+    "query": "다비도프"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "다비도프",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224471923059",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

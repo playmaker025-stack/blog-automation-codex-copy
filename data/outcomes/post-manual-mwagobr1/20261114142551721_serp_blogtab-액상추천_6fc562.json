@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwagobr1",
+  "source": "serp",
+  "capturedAt": "2026-11-14T14:25:51.721Z",
+  "postAgeHours": 101,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114142551721_serp_blogtab-액상추천_6fc562",
+  "target": {
+    "surface": "blog_tab",
+    "query": "액상추천"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "액상추천",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
