@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T00:05:52.015Z",
+  "updatedAt": "2026-11-14T00:25:51.149Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -6409,11 +6409,149 @@
       },
       "lastCapturedAt": "2026-11-14T00:05:49.397Z",
       "total": 2
+    },
+    "post-manual-mt6xg9od": {
+      "queries": {
+        "integrated::말론바 일회용 전자담배": {
+          "okAgeHours": [
+            1961
+          ],
+          "lastCapturedAt": "2026-11-14T00:24:38.671Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:24:38.671Z"
+        },
+        "blog_tab::말론바 일회용 전자담배": {
+          "okAgeHours": [
+            1961
+          ],
+          "lastCapturedAt": "2026-11-14T00:24:45.345Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:24:45.345Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T00:24:45.345Z",
+      "total": 2
+    },
+    "post-manual-mt6yxtgj": {
+      "queries": {
+        "integrated::무니코틴 액상 담배": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:24:51.645Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:24:51.645Z"
+        },
+        "blog_tab::무니코틴 액상 담배": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:24:58.366Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:24:58.366Z"
+        },
+        "integrated::전자담배 기기": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:25:04.636Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:25:04.636Z"
+        },
+        "blog_tab::전자담배 기기": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:25:10.863Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:25:10.863Z"
+        },
+        "integrated::아머미니": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:25:16.908Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:25:16.908Z"
+        },
+        "blog_tab::아머미니": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:25:23.855Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:25:23.855Z"
+        },
+        "integrated::액상 전자담배 기기": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:25:30.134Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:25:30.134Z"
+        },
+        "blog_tab::액상 전자담배 기기": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:25:36.094Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:25:36.094Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T00:25:36.094Z",
+      "total": 8
+    },
+    "post-manual-mt6z3928": {
+      "queries": {
+        "integrated::인천 삼산동 전자담배": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:25:41.908Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:25:41.908Z"
+        },
+        "blog_tab::인천 삼산동 전자담배": {
+          "okAgeHours": [
+            1960
+          ],
+          "lastCapturedAt": "2026-11-14T00:25:48.605Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T00:25:48.605Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T00:25:48.605Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T00:04:38.213Z",
-    "lastOkAt": "2026-11-14T00:04:38.213Z",
+    "lastRunAt": "2026-11-14T00:24:38.169Z",
+    "lastOkAt": "2026-11-14T00:24:38.169Z",
     "consecutiveFailedRuns": 0
   }
 }

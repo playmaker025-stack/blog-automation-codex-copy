@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt6yxtgj",
+  "source": "serp",
+  "capturedAt": "2026-11-14T00:25:16.908Z",
+  "postAgeHours": 1960,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114002516908_serp_integrated-아머미니_907066",
+  "target": {
+    "surface": "integrated",
+    "query": "아머미니"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "아머미니",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 17,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224358377719",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224443843678",
+        "rank": 4
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224319167043",
+        "rank": 9
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224272681012",
+        "rank": 12
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224473222714",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
