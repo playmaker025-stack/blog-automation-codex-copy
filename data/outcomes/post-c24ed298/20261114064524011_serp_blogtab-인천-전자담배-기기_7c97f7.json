@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-c24ed298",
+  "source": "serp",
+  "capturedAt": "2026-11-14T06:45:24.011Z",
+  "postAgeHours": 1604,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114064524011_serp_blogtab-인천-전자담배-기기_7c97f7",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천 전자담배 기기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천 전자담배 기기",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224469048063",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224274819132",
+        "rank": 25
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

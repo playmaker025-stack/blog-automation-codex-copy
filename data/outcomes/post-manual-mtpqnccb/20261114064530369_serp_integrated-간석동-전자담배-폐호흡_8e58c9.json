@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtpqnccb",
+  "source": "serp",
+  "capturedAt": "2026-11-14T06:45:30.369Z",
+  "postAgeHours": 1651,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114064530369_serp_integrated-간석동-전자담배-폐호흡_8e58c9",
+  "target": {
+    "surface": "integrated",
+    "query": "간석동 전자담배 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동 전자담배 폐호흡",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 3,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224402871981",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223802560487",
+        "rank": 7
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223688868365",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224012065408",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224077884463",
+        "rank": 12
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

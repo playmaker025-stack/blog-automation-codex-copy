@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mtpefc05",
+  "source": "serp",
+  "capturedAt": "2026-11-14T06:45:11.549Z",
+  "postAgeHours": 1657,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114064511549_serp_blogtab-전자담배오작동_a33483",
+  "target": {
+    "surface": "blog_tab",
+    "query": "전자담배오작동"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배오작동",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 19,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224417088500",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224421116037",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224371265299",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224157456326",
+        "rank": 12
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224344003193",
+        "rank": 13
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224402630851",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
