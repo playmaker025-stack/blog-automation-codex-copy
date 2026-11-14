@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mu446plp",
+  "source": "serp",
+  "capturedAt": "2026-11-14T09:04:38.660Z",
+  "postAgeHours": 1412,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114090438660_serp_integrated-전자담배리빌드_814c1c",
+  "target": {
+    "surface": "integrated",
+    "query": "전자담배리빌드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "전자담배리빌드",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 24,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224437888667",
+        "rank": 4
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224397752886",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224082778024",
+        "rank": 17
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

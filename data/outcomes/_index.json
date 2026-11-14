@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T08:45:53.190Z",
+  "updatedAt": "2026-11-14T09:05:51.680Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -10141,15 +10141,147 @@
           "lastStatus": "ok",
           "consecutiveFailures": 0,
           "lastAttemptAt": "2026-11-14T08:45:50.448Z"
+        },
+        "integrated::전자담배리빌드": {
+          "okAgeHours": [
+            1412
+          ],
+          "lastCapturedAt": "2026-11-14T09:04:38.660Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:04:38.660Z"
+        },
+        "blog_tab::전자담배리빌드": {
+          "okAgeHours": [
+            1412
+          ],
+          "lastCapturedAt": "2026-11-14T09:04:44.983Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:04:44.983Z"
+        },
+        "integrated::rda": {
+          "okAgeHours": [
+            1412
+          ],
+          "lastCapturedAt": "2026-11-14T09:04:51.217Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:04:51.217Z"
+        },
+        "blog_tab::rda": {
+          "okAgeHours": [
+            1412
+          ],
+          "lastCapturedAt": "2026-11-14T09:04:57.785Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:04:57.785Z"
+        },
+        "integrated::rta": {
+          "okAgeHours": [
+            1412
+          ],
+          "lastCapturedAt": "2026-11-14T09:05:04.052Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:05:04.052Z"
+        },
+        "blog_tab::rta": {
+          "okAgeHours": [
+            1412
+          ],
+          "lastCapturedAt": "2026-11-14T09:05:10.834Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:05:10.834Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T08:45:50.448Z",
+      "lastCapturedAt": "2026-11-14T09:05:10.834Z",
+      "total": 8
+    },
+    "post-manual-mu6caa72": {
+      "queries": {
+        "integrated::하복2": {
+          "okAgeHours": [
+            1375
+          ],
+          "lastCapturedAt": "2026-11-14T09:05:16.305Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:05:16.305Z"
+        },
+        "blog_tab::하복2": {
+          "okAgeHours": [
+            1375
+          ],
+          "lastCapturedAt": "2026-11-14T09:05:23.164Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:05:23.164Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T09:05:23.164Z",
       "total": 2
+    },
+    "post-38ff3252": {
+      "queries": {
+        "integrated::전담 액상 고르는 방법": {
+          "okAgeHours": [
+            1343
+          ],
+          "lastCapturedAt": "2026-11-14T09:05:29.407Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:05:29.407Z"
+        },
+        "blog_tab::전담 액상 고르는 방법": {
+          "okAgeHours": [
+            1343
+          ],
+          "lastCapturedAt": "2026-11-14T09:05:36.232Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:05:36.232Z"
+        },
+        "integrated::전담 액상 고르는": {
+          "okAgeHours": [
+            1343
+          ],
+          "lastCapturedAt": "2026-11-14T09:05:42.055Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:05:42.055Z"
+        },
+        "blog_tab::전담 액상 고르는": {
+          "okAgeHours": [
+            1343
+          ],
+          "lastCapturedAt": "2026-11-14T09:05:48.864Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T09:05:48.864Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T09:05:48.864Z",
+      "total": 4
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T08:44:38.618Z",
-    "lastOkAt": "2026-11-14T08:44:38.618Z",
+    "lastRunAt": "2026-11-14T09:04:38.309Z",
+    "lastOkAt": "2026-11-14T09:04:38.309Z",
     "consecutiveFailedRuns": 0
   }
 }
