@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T06:05:51.374Z",
+  "updatedAt": "2026-11-14T06:25:51.576Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -9065,11 +9065,149 @@
       },
       "lastCapturedAt": "2026-11-14T06:05:48.509Z",
       "total": 2
+    },
+    "post-manual-mtljfiqv": {
+      "queries": {
+        "integrated::전자담배 뜨거움": {
+          "okAgeHours": [
+            1721
+          ],
+          "lastCapturedAt": "2026-11-14T06:24:38.889Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:24:38.889Z"
+        },
+        "blog_tab::전자담배 뜨거움": {
+          "okAgeHours": [
+            1721
+          ],
+          "lastCapturedAt": "2026-11-14T06:24:45.855Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:24:45.855Z"
+        },
+        "integrated::전자담배 입술 뜨거움": {
+          "okAgeHours": [
+            1721
+          ],
+          "lastCapturedAt": "2026-11-14T06:24:52.226Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:24:52.226Z"
+        },
+        "blog_tab::전자담배 입술 뜨거움": {
+          "okAgeHours": [
+            1721
+          ],
+          "lastCapturedAt": "2026-11-14T06:24:58.653Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:24:58.653Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T06:24:58.653Z",
+      "total": 4
+    },
+    "post-c40d3582": {
+      "queries": {
+        "integrated::인천 남동구 전자담배": {
+          "okAgeHours": [
+            1705
+          ],
+          "lastCapturedAt": "2026-11-14T06:25:04.898Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:25:04.898Z"
+        },
+        "blog_tab::인천 남동구 전자담배": {
+          "okAgeHours": [
+            1705
+          ],
+          "lastCapturedAt": "2026-11-14T06:25:11.222Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:25:11.222Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T06:25:11.222Z",
+      "total": 2
+    },
+    "post-manual-mtoak0se": {
+      "queries": {
+        "integrated::폐호흡전자담배": {
+          "okAgeHours": [
+            1675
+          ],
+          "lastCapturedAt": "2026-11-14T06:25:16.744Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:25:16.744Z"
+        },
+        "blog_tab::폐호흡전자담배": {
+          "okAgeHours": [
+            1675
+          ],
+          "lastCapturedAt": "2026-11-14T06:25:23.621Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:25:23.621Z"
+        },
+        "integrated::폐호흡액상": {
+          "okAgeHours": [
+            1675
+          ],
+          "lastCapturedAt": "2026-11-14T06:25:29.916Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:25:29.916Z"
+        },
+        "blog_tab::폐호흡액상": {
+          "okAgeHours": [
+            1675
+          ],
+          "lastCapturedAt": "2026-11-14T06:25:36.125Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:25:36.125Z"
+        },
+        "integrated::만수역전자담배": {
+          "okAgeHours": [
+            1675
+          ],
+          "lastCapturedAt": "2026-11-14T06:25:41.894Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:25:41.894Z"
+        },
+        "blog_tab::만수역전자담배": {
+          "okAgeHours": [
+            1675
+          ],
+          "lastCapturedAt": "2026-11-14T06:25:48.592Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T06:25:48.592Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T06:25:48.592Z",
+      "total": 6
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T06:04:38.590Z",
-    "lastOkAt": "2026-11-14T06:04:38.590Z",
+    "lastRunAt": "2026-11-14T06:24:38.556Z",
+    "lastOkAt": "2026-11-14T06:24:38.556Z",
     "consecutiveFailedRuns": 0
   }
 }
