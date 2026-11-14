@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-14T03:45:52.387Z",
+  "updatedAt": "2026-11-14T04:05:50.463Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -8075,11 +8075,167 @@
       },
       "lastCapturedAt": "2026-11-14T03:45:49.708Z",
       "total": 2
+    },
+    "post-manual-mt897ee7": {
+      "queries": {
+        "integrated::부평전자담배 아스몬 하이": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:04:38.901Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:04:38.901Z"
+        },
+        "blog_tab::부평전자담배 아스몬 하이": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:04:45.864Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:04:45.864Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T04:04:45.864Z",
+      "total": 2
+    },
+    "post-manual-mt8980ju": {
+      "queries": {
+        "integrated::갈산동전자담배 릴렉스 후노즈": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:04:52.026Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:04:52.026Z"
+        },
+        "blog_tab::갈산동전자담배 릴렉스 후노즈": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:04:57.971Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:04:57.971Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T04:04:57.971Z",
+      "total": 2
+    },
+    "post-manual-mt898hkp": {
+      "queries": {
+        "integrated::구월동전자담배 BPMODS RAZOR": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:05:03.888Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:05:03.888Z"
+        },
+        "blog_tab::구월동전자담배 BPMODS RAZOR": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:05:10.334Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:05:10.334Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T04:05:10.334Z",
+      "total": 2
+    },
+    "post-manual-mt898yex": {
+      "queries": {
+        "integrated::인천전자담배 말론바 일회용": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:05:15.439Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:05:15.439Z"
+        },
+        "blog_tab::인천전자담배 말론바 일회용": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:05:22.018Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:05:22.018Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T04:05:22.018Z",
+      "total": 2
+    },
+    "post-manual-mt899eyt": {
+      "queries": {
+        "integrated::휴대성 최강 전자담배": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:05:28.273Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:05:28.273Z"
+        },
+        "blog_tab::휴대성 최강 전자담배": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:05:34.877Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:05:34.877Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T04:05:34.877Z",
+      "total": 2
+    },
+    "post-manual-mt899nt0": {
+      "queries": {
+        "integrated::무화량 많은 전자담배": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:05:41.171Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:05:41.171Z"
+        },
+        "blog_tab::무화량 많은 전자담배": {
+          "okAgeHours": [
+            1942
+          ],
+          "lastCapturedAt": "2026-11-14T04:05:47.809Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-14T04:05:47.809Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-14T04:05:47.809Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-14T03:44:38.271Z",
-    "lastOkAt": "2026-11-14T03:44:38.271Z",
+    "lastRunAt": "2026-11-14T04:04:38.417Z",
+    "lastOkAt": "2026-11-14T04:04:38.417Z",
     "consecutiveFailedRuns": 0
   }
 }

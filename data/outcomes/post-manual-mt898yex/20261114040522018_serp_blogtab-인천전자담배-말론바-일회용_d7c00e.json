@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt898yex",
+  "source": "serp",
+  "capturedAt": "2026-11-14T04:05:22.018Z",
+  "postAgeHours": 1942,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114040522018_serp_blogtab-인천전자담배-말론바-일회용_d7c00e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "인천전자담배 말론바 일회용"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "인천전자담배 말론바 일회용",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224231483313",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224453253250",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224365923075",
+        "rank": 4
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224236314484",
+        "rank": 13
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
