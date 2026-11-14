@@ -14337,7 +14337,41 @@
       "publishedAt": "2026-11-14T01:56:21.158Z",
       "createdAt": "2026-11-14T01:56:21.158Z",
       "updatedAt": "2026-11-14T02:01:21.811Z"
+    },
+    {
+      "postId": "post-manual-mwfy3uxc",
+      "topicId": "",
+      "userId": "b",
+      "title": "연무량 많은 전자담배 폐호흡 모드기기 니트로우스 포켓 80W 입고",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224476833497",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224476833497",
+          "canonicalUrl": "https://blog.naver.com/youferst/224476833497"
+        },
+        "targetKeywords": [
+          {
+            "query": "연무량 많은 전자담배",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "연무량 많은 전자담배 폐호흡 모드기기 니트로우스 포켓 80W 입고",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-14T05:08:46.326Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-14T05:08:46.326Z",
+      "createdAt": "2026-11-14T05:08:46.326Z",
+      "updatedAt": "2026-11-14T05:08:46.326Z"
     }
   ],
-  "lastUpdated": "2026-11-14T02:01:21.811Z"
+  "lastUpdated": "2026-11-14T05:08:46.326Z"
 }
