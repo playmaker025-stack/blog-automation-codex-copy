@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvi2icv8",
+  "source": "serp",
+  "capturedAt": "2026-11-14T12:04:39.041Z",
+  "postAgeHours": 576,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114120439041_serp_integrated-입호흡_3a8bb0",
+  "target": {
+    "surface": "integrated",
+    "query": "입호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 38,
+    "ours": [],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
