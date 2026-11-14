@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt88d6yz",
+  "source": "serp",
+  "capturedAt": "2026-11-14T03:24:46.028Z",
+  "postAgeHours": 1942,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114032446028_serp_blogtab-도림동전자담배-린코-네소_d4d5a8",
+  "target": {
+    "surface": "blog_tab",
+    "query": "도림동전자담배 린코 네소"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}
