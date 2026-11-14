@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87jki9",
+  "source": "serp",
+  "capturedAt": "2026-11-14T01:24:45.355Z",
+  "postAgeHours": 1940,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114012445355_serp_blogtab-작전동전자담배-일회용-와카_44b21f",
+  "target": {
+    "surface": "blog_tab",
+    "query": "작전동전자담배 일회용 와카"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "작전동전자담배 일회용 와카",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 7,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223963821654",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "223963854996",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223964896353",
+        "rank": 3
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223964114009",
+        "rank": 5
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

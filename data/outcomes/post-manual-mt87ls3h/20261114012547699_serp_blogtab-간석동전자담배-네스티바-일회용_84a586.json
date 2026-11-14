@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mt87ls3h",
+  "source": "serp",
+  "capturedAt": "2026-11-14T01:25:47.699Z",
+  "postAgeHours": 1940,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261114012547699_serp_blogtab-간석동전자담배-네스티바-일회용_84a586",
+  "target": {
+    "surface": "blog_tab",
+    "query": "간석동전자담배 네스티바 일회용"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "간석동전자담배 네스티바 일회용",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 14,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "223865486483",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223859401903",
+        "rank": 6
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223869773512",
+        "rank": 7
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223976161080",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223976225706",
+        "rank": 10
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223975992138",
+        "rank": 14
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224156050281",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
