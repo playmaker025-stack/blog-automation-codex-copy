@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw796cry",
+  "source": "serp",
+  "capturedAt": "2026-11-15T02:44:51.837Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261115024451837_serp_integrated-브이런스_57ab3d",
+  "target": {
+    "surface": "integrated",
+    "query": "브이런스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "브이런스",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 19,
+    "searchedResultLimit": 19,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224469048063",
+        "rank": 19
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
