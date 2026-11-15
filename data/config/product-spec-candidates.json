@@ -2,102 +2,6 @@
   "version": 1,
   "candidates": [
     {
-      "id": "cand-0154e525",
-      "product": "마이팟프로",
-      "field": "charging",
-      "value": "C타입",
-      "evidence": "충전 : C타입",
-      "postId": "post-manual-mt87kkfp",
-      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
-      "extractedAt": "2026-08-25T05:12:42.561Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-40b7d3e8",
-      "product": "마이팟프로",
-      "field": "drawStyle",
-      "value": "입호흡 폐호흡 겸용",
-      "evidence": "입호흡 폐호흡 둘 다 가능한데다가",
-      "postId": "post-manual-mt87kkfp",
-      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
-      "extractedAt": "2026-08-25T05:12:42.561Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:10:27.353Z"
-    },
-    {
-      "id": "cand-471307c6",
-      "product": "마이팟프로",
-      "field": "airflowControl",
-      "value": "가능",
-      "evidence": "팟 옆면에 있는것은 에어홀 이라는건데 원하시는 흡압으로 조절이 가능합니다!",
-      "postId": "post-manual-mt87kkfp",
-      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
-      "extractedAt": "2026-08-25T05:12:42.561Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-5cdf670d",
-      "product": "마이팟프로",
-      "field": "inhaleMode",
-      "value": "오토모드, 버튼모드, 프리모드(둘 다)",
-      "evidence": "버튼을 누르지않고 흡입이 가능한 오토모드 와 버튼을 눌러야만 흡입가능한 버튼모드 그리고 둘 다 가능한 프리모드 이렇게 있습니당",
-      "postId": "post-manual-mt87kkfp",
-      "postTitle": "삼산동전자담배 딥베이프 마이팟프로 실사용 후기",
-      "extractedAt": "2026-08-25T05:12:42.561Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-057cb593",
-      "product": "베코 벨본",
-      "field": "batteryMah",
-      "value": "2600mAh",
-      "evidence": "배터리 : 2600mAh 충전 : C타입 충전전류 : 5V 25A 출력가능 범위 : 10W~35W 기기사이즈 : 42*20.8*98.3mm 카트리지 액상저장공간 : 5ml 저항 : 0.6옴, 1.0옴 디스플레이 : TFT컬러스크린",
-      "postId": "post-manual-mt87l082",
-      "postTitle": "인천전자담배 만수르 베코 벨본킷 가져왔어요!!",
-      "extractedAt": "2026-08-25T05:13:07.452Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-02641579",
-      "product": "베코 벨본",
-      "field": "charging",
-      "value": "C타입",
-      "evidence": "배터리 : 2600mAh 충전 : C타입 충전전류 : 5V 25A 출력가능 범위 : 10W~35W 기기사이즈 : 42*20.8*98.3mm 카트리지 액상저장공간 : 5ml 저항 : 0.6옴, 1.0옴 디스플레이 : TFT컬러스크린",
-      "postId": "post-manual-mt87l082",
-      "postTitle": "인천전자담배 만수르 베코 벨본킷 가져왔어요!!",
-      "extractedAt": "2026-08-25T05:13:07.452Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-a0839378",
-      "product": "베코 벨본",
-      "field": "wattRange",
-      "value": "10W~35W",
-      "evidence": "배터리 : 2600mAh 충전 : C타입 충전전류 : 5V 25A 출력가능 범위 : 10W~35W 기기사이즈 : 42*20.8*98.3mm 카트리지 액상저장공간 : 5ml 저항 : 0.6옴, 1.0옴 디스플레이 : TFT컬러스크린",
-      "postId": "post-manual-mt87l082",
-      "postTitle": "인천전자담배 만수르 베코 벨본킷 가져왔어요!!",
-      "extractedAt": "2026-08-25T05:13:07.452Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
-      "id": "cand-f2fc39ea",
-      "product": "베코 벨본",
-      "field": "sizeMm",
-      "value": "42*20.8*98.3mm",
-      "evidence": "배터리 : 2600mAh 충전 : C타입 충전전류 : 5V 25A 출력가능 범위 : 10W~35W 기기사이즈 : 42*20.8*98.3mm 카트리지 액상저장공간 : 5ml 저항 : 0.6옴, 1.0옴 디스플레이 : TFT컬러스크린",
-      "postId": "post-manual-mt87l082",
-      "postTitle": "인천전자담배 만수르 베코 벨본킷 가져왔어요!!",
-      "extractedAt": "2026-08-25T05:13:07.452Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.797Z"
-    },
-    {
       "id": "cand-0c85da9a",
       "product": "베코 벨본",
       "field": "podMl",
@@ -5829,7 +5733,95 @@
       "postTitle": "연무량 많은 전자담배 폐호흡 모드기기 니트로우스 포켓 80W 입고",
       "extractedAt": "2026-11-14T05:09:09.078Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-83607d22",
+      "product": "니트로우스 포켓 80w",
+      "field": "wattRange",
+      "value": "최대 80W",
+      "evidence": "자 그래서 뭐냐? 니트로우스 포켓 80w 입니다.  어제 감성에 젖은 기기에 이어서 오늘은 재미난 기기를 접했기에 아주 텐션 높혀가며 포스팅을 시작해버리겠습니다! 최대 80W의 출력에 18650한발 배터리를 사용하는 기기입니다.",
+      "postId": "post-manual-mwhmqcnj",
+      "postTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "extractedAt": "2026-11-15T09:26:13.363Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-57795131",
+      "product": "니트로우스 포켓 80w",
+      "field": "batteryMah",
+      "value": "18650한발",
+      "evidence": "최대 80W의 출력에 18650한발 배터리를 사용하는 기기입니다.",
+      "postId": "post-manual-mwhmqcnj",
+      "postTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "extractedAt": "2026-11-15T09:26:13.363Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-7cda7ab5",
+      "product": "니트로우스 포켓 80w",
+      "field": "sizeMm",
+      "value": "82mm x 39 x 25",
+      "evidence": "전체적인 사이즈가 82mm x 39 x 25입니다.",
+      "postId": "post-manual-mwhmqcnj",
+      "postTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "extractedAt": "2026-11-15T09:26:13.363Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-d2cbe759",
+      "product": "니트로우스 포켓 80w",
+      "field": "weightG",
+      "value": "약70g",
+      "evidence": "발라리안 맥스프로보다 18650의 배터리 하나를 쓰는 모드기기인 니트로우스 80w가 더 작습니다 ㅋㅋ 약70g 발라리안 맥스프로보다 가벼운 진짜 말도 안대는 모드기기 입니다.",
+      "postId": "post-manual-mwhmqcnj",
+      "postTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "extractedAt": "2026-11-15T09:26:13.363Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-86d2c48a",
+      "product": "니트로우스 포켓 80w",
+      "field": "form",
+      "value": "모드기기",
+      "evidence": "니트로우스 포켓 80w 입니다. ... 모드기기 입니다.",
+      "postId": "post-manual-mwhmqcnj",
+      "postTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "extractedAt": "2026-11-15T09:26:13.363Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-6b69d701",
+      "product": "니트로우스 포켓 80w",
+      "field": "resistanceOhm",
+      "value": "입호흡용 0.6옴, 폐호흡용 0.4옴",
+      "evidence": "입호흡용 0.6옴에 폐호흡용은 0.4옴 이렇게 두가지가 있습니다.",
+      "postId": "post-manual-mwhmqcnj",
+      "postTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "extractedAt": "2026-11-15T09:26:13.363Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-e9cfaa31",
+      "product": "니트로우스 포켓 80w",
+      "field": "liquidRefillable",
+      "value": "교체해서 쓰시면 되겠습니다",
+      "evidence": "전용 무화기가 잇는데요 메쉬 코일이 내장되어 있어고 탱크 팟 형태로 되어 있어서 통째로 교체해서 쓰시면 되겠습니다.",
+      "postId": "post-manual-mwhmqcnj",
+      "postTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "extractedAt": "2026-11-15T09:26:13.363Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-c2aaad55",
+      "product": "니트로우스 포켓 80w",
+      "field": "drawStyle",
+      "value": "입호흡, 폐호흡",
+      "evidence": "입호흡용 0.6옴에 폐호흡용은 0.4옴 이렇게 두가지가 있습니다.",
+      "postId": "post-manual-mwhmqcnj",
+      "postTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "extractedAt": "2026-11-15T09:26:13.363Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-11-14T05:09:09.734Z"
+  "updatedAt": "2026-11-15T09:26:14.286Z"
 }
