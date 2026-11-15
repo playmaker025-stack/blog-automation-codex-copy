@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-15T09:04:48.997Z",
+  "updatedAt": "2026-11-15T09:44:49.674Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12597,11 +12597,37 @@
       },
       "lastCapturedAt": "2026-11-14T14:45:38.360Z",
       "total": 2
+    },
+    "post-manual-mwhmqcnj": {
+      "queries": {
+        "integrated::무화량 많은 폐호흡": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-15T09:44:39.532Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-15T09:44:39.532Z"
+        },
+        "blog_tab::무화량 많은 폐호흡": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-15T09:44:46.656Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-15T09:44:46.656Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-15T09:44:46.656Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-15T09:04:38.776Z",
-    "lastOkAt": "2026-11-15T09:04:38.776Z",
+    "lastRunAt": "2026-11-15T09:44:39.156Z",
+    "lastOkAt": "2026-11-15T09:44:39.156Z",
     "consecutiveFailedRuns": 0
   }
 }
