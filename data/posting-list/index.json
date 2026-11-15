@@ -14371,7 +14371,41 @@
       "publishedAt": "2026-11-14T05:08:46.326Z",
       "createdAt": "2026-11-14T05:08:46.326Z",
       "updatedAt": "2026-11-14T05:08:46.326Z"
+    },
+    {
+      "postId": "post-manual-mwhmqcnj",
+      "topicId": "",
+      "userId": "d",
+      "title": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224478066235",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224478066235",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224478066235"
+        },
+        "targetKeywords": [
+          {
+            "query": "무화량 많은 폐호흡",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "무화량 많은 폐호흡 전자담배 니트로우스 모드 80w 리뷰! 만수르 베이프",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-15T09:25:51.506Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-15T09:25:51.506Z",
+      "createdAt": "2026-11-15T09:25:51.506Z",
+      "updatedAt": "2026-11-15T09:25:51.506Z"
     }
   ],
-  "lastUpdated": "2026-11-14T05:08:46.326Z"
+  "lastUpdated": "2026-11-15T09:25:51.506Z"
 }
