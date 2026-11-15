@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-15T08:24:48.649Z",
+  "updatedAt": "2026-11-15T09:04:48.997Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11310,27 +11310,29 @@
       "queries": {
         "integrated::같은 액상인데 무화기마다": {
           "okAgeHours": [
-            650
+            650,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T11:45:05.418Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-15T09:04:39.331Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T11:45:05.418Z"
+          "lastAttemptAt": "2026-11-15T09:04:39.331Z"
         },
         "blog_tab::같은 액상인데 무화기마다": {
           "okAgeHours": [
-            650
+            650,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T11:45:12.119Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-15T09:04:46.423Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T11:45:12.119Z"
+          "lastAttemptAt": "2026-11-15T09:04:46.423Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T11:45:12.119Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-15T09:04:46.423Z",
+      "total": 4
     },
     "post-manual-mvi2icv8": {
       "queries": {
@@ -12598,8 +12600,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-15T08:24:39.040Z",
-    "lastOkAt": "2026-11-15T08:24:39.040Z",
+    "lastRunAt": "2026-11-15T09:04:38.776Z",
+    "lastOkAt": "2026-11-15T09:04:38.776Z",
     "consecutiveFailedRuns": 0
   }
 }
