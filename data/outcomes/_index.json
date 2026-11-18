@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-18T08:05:08.926Z",
+  "updatedAt": "2026-11-18T09:25:16.350Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12106,27 +12106,29 @@
       "queries": {
         "integrated::부평역 전자담배 콩콩제로": {
           "okAgeHours": [
-            244
+            244,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:44:52.688Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-18T09:24:41.301Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:44:52.688Z"
+          "lastAttemptAt": "2026-11-18T09:24:41.301Z"
         },
         "blog_tab::부평역 전자담배 콩콩제로": {
           "okAgeHours": [
-            244
+            244,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:44:59.136Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-18T09:24:47.486Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:44:59.136Z"
+          "lastAttemptAt": "2026-11-18T09:24:47.486Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T13:44:59.136Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-18T09:24:47.486Z",
+      "total": 4
     },
     "post-manual-mw64hnf5": {
       "queries": {
@@ -12639,36 +12641,44 @@
     "post-manual-mwltsj5j": {
       "queries": {
         "integrated::갈산동전자담배": {
-          "okAgeHours": [],
-          "lastCapturedAt": "2026-11-18T08:04:41.126Z",
-          "total": 1,
-          "lastStatus": "request_failed",
-          "consecutiveFailures": 1,
-          "lastAttemptAt": "2026-11-18T08:04:41.126Z"
+          "okAgeHours": [
+            2
+          ],
+          "lastCapturedAt": "2026-11-18T09:24:53.516Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-18T09:24:53.516Z"
         },
         "blog_tab::갈산동전자담배": {
-          "okAgeHours": [],
-          "lastCapturedAt": "2026-11-18T08:04:46.982Z",
-          "total": 1,
-          "lastStatus": "request_failed",
-          "consecutiveFailures": 1,
-          "lastAttemptAt": "2026-11-18T08:04:46.982Z"
+          "okAgeHours": [
+            2
+          ],
+          "lastCapturedAt": "2026-11-18T09:25:00.306Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-18T09:25:00.306Z"
         },
         "integrated::입호흡액상": {
-          "okAgeHours": [],
-          "lastCapturedAt": "2026-11-18T08:04:51.270Z",
-          "total": 1,
-          "lastStatus": "request_failed",
-          "consecutiveFailures": 1,
-          "lastAttemptAt": "2026-11-18T08:04:51.270Z"
+          "okAgeHours": [
+            2
+          ],
+          "lastCapturedAt": "2026-11-18T09:25:06.574Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-18T09:25:06.574Z"
         },
         "blog_tab::입호흡액상": {
-          "okAgeHours": [],
-          "lastCapturedAt": "2026-11-18T08:04:55.559Z",
-          "total": 1,
-          "lastStatus": "request_failed",
-          "consecutiveFailures": 1,
-          "lastAttemptAt": "2026-11-18T08:04:55.559Z"
+          "okAgeHours": [
+            2
+          ],
+          "lastCapturedAt": "2026-11-18T09:25:13.537Z",
+          "total": 2,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-18T09:25:13.537Z"
         },
         "integrated::디저트액상": {
           "okAgeHours": [
@@ -12691,13 +12701,13 @@
           "lastAttemptAt": "2026-11-18T08:05:06.788Z"
         }
       },
-      "lastCapturedAt": "2026-11-18T08:05:06.788Z",
-      "total": 6
+      "lastCapturedAt": "2026-11-18T09:25:13.537Z",
+      "total": 10
     }
   },
   "health": {
-    "lastRunAt": "2026-11-18T08:04:40.380Z",
-    "lastOkAt": "2026-11-18T08:04:40.380Z",
+    "lastRunAt": "2026-11-18T09:24:40.886Z",
+    "lastOkAt": "2026-11-18T09:24:40.886Z",
     "consecutiveFailedRuns": 0
   }
 }

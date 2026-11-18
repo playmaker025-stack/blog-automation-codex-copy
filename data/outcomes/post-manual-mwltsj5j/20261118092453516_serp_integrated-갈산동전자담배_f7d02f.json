@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwltsj5j",
+  "source": "serp",
+  "capturedAt": "2026-11-18T09:24:53.516Z",
+  "postAgeHours": 2,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261118092453516_serp_integrated-갈산동전자담배_f7d02f",
+  "target": {
+    "surface": "integrated",
+    "query": "갈산동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "갈산동전자담배",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 33,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224482203220",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
