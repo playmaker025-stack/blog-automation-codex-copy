@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwltsj5j",
+  "source": "serp",
+  "capturedAt": "2026-11-18T08:04:46.982Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261118080446982_serp_blogtab-갈산동전자담배_83b7c6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "갈산동전자담배"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}
