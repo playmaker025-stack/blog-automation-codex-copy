@@ -14454,7 +14454,41 @@
       "publishedAt": "2026-11-18T07:54:35.222Z",
       "createdAt": "2026-11-18T07:54:35.222Z",
       "updatedAt": "2026-11-18T07:54:35.222Z"
+    },
+    {
+      "postId": "post-manual-mwm3znp8",
+      "topicId": "",
+      "userId": "d",
+      "title": "닷모드 닷 팟 맥스 클리어 신상 떳습니다! 부평 전자담배 만수르",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224482538807",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224482538807",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224482538807"
+        },
+        "targetKeywords": [
+          {
+            "query": "닷모드 닷 팟",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "닷모드 닷 팟 맥스 클리어 신상 떳습니다! 부평 전자담배 만수르",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-18T12:40:03.405Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-18T12:40:03.405Z",
+      "createdAt": "2026-11-18T12:40:03.405Z",
+      "updatedAt": "2026-11-18T12:40:03.405Z"
     }
   ],
-  "lastUpdated": "2026-11-18T07:54:35.222Z"
+  "lastUpdated": "2026-11-18T12:40:03.405Z"
 }
