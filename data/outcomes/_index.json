@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-18T12:25:44.028Z",
+  "updatedAt": "2026-11-18T12:44:51.401Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12725,11 +12725,37 @@
       },
       "lastCapturedAt": "2026-11-18T09:25:13.537Z",
       "total": 10
+    },
+    "post-manual-mwm3znp8": {
+      "queries": {
+        "integrated::닷모드 닷 팟": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-18T12:44:41.517Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-18T12:44:41.517Z"
+        },
+        "blog_tab::닷모드 닷 팟": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-18T12:44:48.708Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-18T12:44:48.708Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-18T12:44:48.708Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-18T12:24:40.824Z",
-    "lastOkAt": "2026-11-18T12:24:40.824Z",
+    "lastRunAt": "2026-11-18T12:44:40.904Z",
+    "lastOkAt": "2026-11-18T12:44:40.904Z",
     "consecutiveFailedRuns": 0
   }
 }
