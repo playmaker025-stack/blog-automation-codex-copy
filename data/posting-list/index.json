@@ -14405,7 +14405,56 @@
       "publishedAt": "2026-11-15T09:25:51.506Z",
       "createdAt": "2026-11-15T09:25:51.506Z",
       "updatedAt": "2026-11-15T09:25:51.506Z"
+    },
+    {
+      "postId": "post-manual-mwltsj5j",
+      "topicId": "",
+      "userId": "c",
+      "title": "갈산동 전자담배 입 호흡 베이크드 디저트 액상 3종 추천!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224482203220",
+      "wordCount": 0,
+      "targetKeywords": [
+        "갈산동전자담배",
+        "입호흡액상",
+        "디저트액상"
+      ],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224482203220",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224482203220"
+        },
+        "targetKeywords": [
+          {
+            "query": "갈산동전자담배",
+            "role": "primary",
+            "source": "user"
+          },
+          {
+            "query": "입호흡액상",
+            "role": "secondary",
+            "source": "user"
+          },
+          {
+            "query": "디저트액상",
+            "role": "secondary",
+            "source": "user"
+          }
+        ],
+        "publishedTitle": "갈산동 전자담배 입 호흡 베이크드 디저트 액상 3종 추천!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-18T07:54:35.222Z",
+        "keywordsRevisedAt": "2026-11-18T07:54:35.222Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-18T07:54:35.222Z",
+      "createdAt": "2026-11-18T07:54:35.222Z",
+      "updatedAt": "2026-11-18T07:54:35.222Z"
     }
   ],
-  "lastUpdated": "2026-11-15T09:25:51.506Z"
+  "lastUpdated": "2026-11-18T07:54:35.222Z"
 }
