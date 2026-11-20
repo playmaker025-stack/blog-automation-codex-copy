@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-20T08:44:42.546Z",
+  "updatedAt": "2026-11-20T10:24:52.007Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12522,27 +12522,29 @@
       "queries": {
         "integrated::입호흡 전자담배 아토모드와": {
           "okAgeHours": [
-            28
+            28,
+            168
           ],
-          "lastCapturedAt": "2026-11-14T14:44:39.058Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-20T10:24:42.120Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T14:44:39.058Z"
+          "lastAttemptAt": "2026-11-20T10:24:42.120Z"
         },
         "blog_tab::입호흡 전자담배 아토모드와": {
           "okAgeHours": [
-            28
+            28,
+            168
           ],
-          "lastCapturedAt": "2026-11-14T14:44:46.293Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-20T10:24:49.314Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T14:44:46.293Z"
+          "lastAttemptAt": "2026-11-20T10:24:49.314Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T14:44:46.293Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-20T10:24:49.314Z",
+      "total": 4
     },
     "post-manual-mwfr8fiz": {
       "queries": {
@@ -12756,8 +12758,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-20T08:44:41.741Z",
-    "lastOkAt": "2026-11-19T07:44:41.266Z",
+    "lastRunAt": "2026-11-20T10:24:41.746Z",
+    "lastOkAt": "2026-11-20T10:24:41.746Z",
     "consecutiveFailedRuns": 0
   }
 }
