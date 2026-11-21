@@ -14488,7 +14488,41 @@
       "publishedAt": "2026-11-18T12:40:03.405Z",
       "createdAt": "2026-11-18T12:40:03.405Z",
       "updatedAt": "2026-11-18T12:40:03.405Z"
+    },
+    {
+      "postId": "post-manual-mwqc3asu",
+      "topicId": "",
+      "userId": "c",
+      "title": "부평 전자담배 만수르점 입호흡 액상 TOP 5 추천!",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/mansur_vape/224486296946",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "mansur_vape",
+          "logNo": "224486296946",
+          "canonicalUrl": "https://blog.naver.com/mansur_vape/224486296946"
+        },
+        "targetKeywords": [
+          {
+            "query": "부평 전자담배 만수르점",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "부평 전자담배 만수르점 입호흡 액상 TOP 5 추천!",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-21T11:37:55.612Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-21T11:37:55.612Z",
+      "createdAt": "2026-11-21T11:37:55.612Z",
+      "updatedAt": "2026-11-21T11:37:55.612Z"
     }
   ],
-  "lastUpdated": "2026-11-18T12:40:03.405Z"
+  "lastUpdated": "2026-11-21T11:37:55.612Z"
 }
