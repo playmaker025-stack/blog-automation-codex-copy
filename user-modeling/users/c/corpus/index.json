@@ -2,6 +2,15 @@
   "userId": "c",
   "samples": [
     {
+      "sampleId": "published-post-manual-mwqc3asu",
+      "title": "부평 전자담배 만수르점 입호흡 액상 TOP 5 추천!",
+      "category": "published-post",
+      "tags": [],
+      "wordCount": 2361,
+      "publishedAt": "2026-11-21T11:37:55.612Z",
+      "filePath": "user-modeling/users/c/corpus/samples/published-post-manual-mwqc3asu.md"
+    },
+    {
       "sampleId": "published-post-manual-mwltsj5j",
       "title": "갈산동 전자담배 입 호흡 베이크드 디저트 액상 3종 추천!",
       "category": "published-post",
@@ -332,22 +341,7 @@
       "wordCount": 2743,
       "publishedAt": "2026-08-31T07:03:10.104Z",
       "filePath": "user-modeling/users/c/corpus/samples/published-post-8aebbf59.md"
-    },
-    {
-      "sampleId": "published-post-d34540b8",
-      "title": "인천 부평구 전자담배 배터리 발열 원인과 안전한 해결법",
-      "category": "기기 문제 해결",
-      "tags": [
-        "배터리",
-        "발열",
-        "해결법",
-        "인천",
-        "부평구"
-      ],
-      "wordCount": 2899,
-      "publishedAt": "2026-08-29T11:20:26.306Z",
-      "filePath": "user-modeling/users/c/corpus/samples/published-post-d34540b8.md"
     }
   ],
-  "lastUpdated": "2026-11-18T07:54:42.928Z"
+  "lastUpdated": "2026-11-21T11:38:02.691Z"
 }
