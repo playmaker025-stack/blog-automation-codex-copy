@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw64hnf5",
+  "source": "serp",
+  "capturedAt": "2026-11-21T07:44:48.734Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261121074448734_serp_blogtab-남동구-전자담배-다양한_0d1bbb",
+  "target": {
+    "surface": "blog_tab",
+    "query": "남동구 전자담배 다양한"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "남동구 전자담배 다양한",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224468407841",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224412892154",
+        "rank": 15
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224420074157",
+        "rank": 23
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

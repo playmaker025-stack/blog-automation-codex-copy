@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-21T04:44:51.579Z",
+  "updatedAt": "2026-11-21T07:44:51.480Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12164,27 +12164,29 @@
       "queries": {
         "integrated::남동구 전자담배 다양한": {
           "okAgeHours": [
-            174
+            174,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:45:05.149Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T07:44:42.470Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:45:05.149Z"
+          "lastAttemptAt": "2026-11-21T07:44:42.470Z"
         },
         "blog_tab::남동구 전자담배 다양한": {
           "okAgeHours": [
-            174
+            174,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:45:11.883Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T07:44:48.734Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:45:11.883Z"
+          "lastAttemptAt": "2026-11-21T07:44:48.734Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T13:45:11.883Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-21T07:44:48.734Z",
+      "total": 4
     },
     "post-manual-mw65midq": {
       "queries": {
@@ -12772,8 +12774,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-21T04:44:42.411Z",
-    "lastOkAt": "2026-11-21T04:44:42.411Z",
+    "lastRunAt": "2026-11-21T07:44:42.029Z",
+    "lastOkAt": "2026-11-21T07:44:42.029Z",
     "consecutiveFailedRuns": 0
   }
 }
