@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwfy3uxc",
+  "source": "serp",
+  "capturedAt": "2026-11-21T04:44:49.219Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261121044449219_serp_blogtab-연무량-많은-전자담배_66b02e",
+  "target": {
+    "surface": "blog_tab",
+    "query": "연무량 많은 전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "연무량 많은 전자담배",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "iibodii00",
+        "logNo": "224475775112",
+        "rank": 1
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224476833497",
+        "rank": 2
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224478217757",
+        "rank": 11
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224478066235",
+        "rank": 12
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224400865016",
+        "rank": 20
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224451704218",
+        "rank": 23
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

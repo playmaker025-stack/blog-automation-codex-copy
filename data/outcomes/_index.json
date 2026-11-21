@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-21T01:45:18.337Z",
+  "updatedAt": "2026-11-21T04:44:51.579Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12628,27 +12628,29 @@
       "queries": {
         "integrated::연무량 많은 전자담배": {
           "okAgeHours": [
-            10
+            10,
+            168
           ],
-          "lastCapturedAt": "2026-11-14T14:45:31.754Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T04:44:43.038Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T14:45:31.754Z"
+          "lastAttemptAt": "2026-11-21T04:44:43.038Z"
         },
         "blog_tab::연무량 많은 전자담배": {
           "okAgeHours": [
-            10
+            10,
+            168
           ],
-          "lastCapturedAt": "2026-11-14T14:45:38.360Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T04:44:49.219Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T14:45:38.360Z"
+          "lastAttemptAt": "2026-11-21T04:44:49.219Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T14:45:38.360Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-21T04:44:49.219Z",
+      "total": 4
     },
     "post-manual-mwhmqcnj": {
       "queries": {
@@ -12770,8 +12772,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-21T01:44:42.141Z",
-    "lastOkAt": "2026-11-21T01:44:42.141Z",
+    "lastRunAt": "2026-11-21T04:44:42.411Z",
+    "lastOkAt": "2026-11-21T04:44:42.411Z",
     "consecutiveFailedRuns": 0
   }
 }
