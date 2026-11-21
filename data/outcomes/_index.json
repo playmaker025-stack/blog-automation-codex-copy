@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-21T07:44:51.480Z",
+  "updatedAt": "2026-11-21T08:25:45.543Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12192,107 +12192,117 @@
       "queries": {
         "integrated::계산역전자담배": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:45:18.199Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:24:42.755Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:45:18.199Z"
+          "lastAttemptAt": "2026-11-21T08:24:42.755Z"
         },
         "blog_tab::계산역전자담배": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:45:24.953Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:24:50.060Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:45:24.953Z"
+          "lastAttemptAt": "2026-11-21T08:24:50.060Z"
         },
         "integrated::계산역액상": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:45:31.261Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:24:56.374Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:45:31.261Z"
+          "lastAttemptAt": "2026-11-21T08:24:56.374Z"
         },
         "blog_tab::계산역액상": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:45:38.081Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:25:03.153Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:45:38.081Z"
+          "lastAttemptAt": "2026-11-21T08:25:03.153Z"
         },
         "integrated::디저트액상": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:45:44.362Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:25:09.403Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:45:44.362Z"
+          "lastAttemptAt": "2026-11-21T08:25:09.403Z"
         },
         "blog_tab::디저트액상": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T13:45:51.229Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:25:16.313Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:45:51.229Z"
+          "lastAttemptAt": "2026-11-21T08:25:16.313Z"
         },
         "integrated::무니코틴액상": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T14:04:38.695Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:25:22.610Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T14:04:38.695Z"
+          "lastAttemptAt": "2026-11-21T08:25:22.610Z"
         },
         "blog_tab::무니코틴액상": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T14:04:45.821Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:25:29.587Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T14:04:45.821Z"
+          "lastAttemptAt": "2026-11-21T08:25:29.587Z"
         },
         "integrated::입호흡디저트액상": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T14:04:52.057Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:25:35.953Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T14:04:52.057Z"
+          "lastAttemptAt": "2026-11-21T08:25:35.953Z"
         },
         "blog_tab::입호흡디저트액상": {
           "okAgeHours": [
-            173
+            173,
+            336
           ],
-          "lastCapturedAt": "2026-11-14T14:04:58.080Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-21T08:25:42.820Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T14:04:58.080Z"
+          "lastAttemptAt": "2026-11-21T08:25:42.820Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T14:04:58.080Z",
-      "total": 10
+      "lastCapturedAt": "2026-11-21T08:25:42.820Z",
+      "total": 20
     },
     "post-manual-mw796cry": {
       "queries": {
@@ -12774,8 +12784,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-21T07:44:42.029Z",
-    "lastOkAt": "2026-11-21T07:44:42.029Z",
+    "lastRunAt": "2026-11-21T08:24:42.207Z",
+    "lastOkAt": "2026-11-21T08:24:42.207Z",
     "consecutiveFailedRuns": 0
   }
 }
