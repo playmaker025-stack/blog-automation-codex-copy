@@ -2,18 +2,6 @@
   "version": 1,
   "candidates": [
     {
-      "id": "cand-93283f7f",
-      "product": "베코 벨본",
-      "field": "airflowControl",
-      "value": "흡입압 조절 가능",
-      "evidence": "팟 옆면을 보시면 에어홀 조절이 가능하게 되어있어 원하는 흡입압을 찾아서 사용가능합니당",
-      "postId": "post-manual-mt87l082",
-      "postTitle": "인천전자담배 만수르 베코 벨본킷 가져왔어요!!",
-      "extractedAt": "2026-08-25T05:13:07.452Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
       "id": "cand-afbac565",
       "product": "베코 벨본",
       "field": "inhaleMode",
@@ -5819,7 +5807,18 @@
       "postTitle": "닷모드 닷 팟 맥스 클리어 신상 떳습니다! 부평 전자담배 만수르",
       "extractedAt": "2026-11-18T12:40:25.467Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-3d43630e",
+      "product": "핵쥬스 고농도 아틱D힐",
+      "field": "nicotinePercent",
+      "value": "1.98%",
+      "evidence": "맛으로는 이름처럼 고농도(1.98%)이기 때문에 아주 강력하고 묵직한 타격함과 연초의 타바코 향을 은은하게 느껴 보실 수 있습니다.",
+      "postId": "post-manual-mwqc3asu",
+      "postTitle": "부평 전자담배 만수르점 입호흡 액상 TOP 5 추천!",
+      "extractedAt": "2026-11-21T11:38:15.189Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-11-18T12:40:26.261Z"
+  "updatedAt": "2026-11-21T11:38:16.150Z"
 }
