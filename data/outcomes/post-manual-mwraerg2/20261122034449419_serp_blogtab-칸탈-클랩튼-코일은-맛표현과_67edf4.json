@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwraerg2",
+  "source": "serp",
+  "capturedAt": "2026-11-22T03:44:49.419Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261122034449419_serp_blogtab-칸탈-클랩튼-코일은-맛표현과_67edf4",
+  "target": {
+    "surface": "blog_tab",
+    "query": "칸탈 클랩튼 코일은 맛표현과"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "칸탈 클랩튼 코일은 맛표현과",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 28,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224486918847",
+        "rank": 1
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

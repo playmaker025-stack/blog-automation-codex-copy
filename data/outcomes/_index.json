@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-22T02:45:43.351Z",
+  "updatedAt": "2026-11-22T03:44:52.424Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12817,11 +12817,37 @@
       },
       "lastCapturedAt": "2026-11-21T11:44:49.365Z",
       "total": 2
+    },
+    "post-manual-mwraerg2": {
+      "queries": {
+        "integrated::칸탈 클랩튼 코일은 맛표현과": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-22T03:44:42.987Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-22T03:44:42.987Z"
+        },
+        "blog_tab::칸탈 클랩튼 코일은 맛표현과": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-22T03:44:49.419Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-22T03:44:49.419Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-22T03:44:49.419Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-22T02:44:42.469Z",
-    "lastOkAt": "2026-11-22T02:44:42.469Z",
+    "lastRunAt": "2026-11-22T03:44:42.388Z",
+    "lastOkAt": "2026-11-22T03:44:42.388Z",
     "consecutiveFailedRuns": 0
   }
 }
