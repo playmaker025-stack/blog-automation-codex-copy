@@ -14522,7 +14522,41 @@
       "publishedAt": "2026-11-21T11:37:55.612Z",
       "createdAt": "2026-11-21T11:37:55.612Z",
       "updatedAt": "2026-11-21T11:37:55.612Z"
+    },
+    {
+      "postId": "post-manual-mwraerg2",
+      "topicId": "",
+      "userId": "d",
+      "title": "칸탈·클랩튼 코일은 맛표현과 무화량이 왜 다를까? 코일 소재와 구조의 차이",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224486918847",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224486918847",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224486918847"
+        },
+        "targetKeywords": [
+          {
+            "query": "칸탈 클랩튼 코일은 맛표현과",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "칸탈·클랩튼 코일은 맛표현과 무화량이 왜 다를까? 코일 소재와 구조의 차이",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-22T03:38:36.690Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-22T03:38:36.690Z",
+      "createdAt": "2026-11-22T03:38:36.690Z",
+      "updatedAt": "2026-11-22T03:38:36.690Z"
     }
   ],
-  "lastUpdated": "2026-11-21T11:37:55.612Z"
+  "lastUpdated": "2026-11-22T03:38:36.690Z"
 }
