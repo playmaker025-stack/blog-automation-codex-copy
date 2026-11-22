@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw796cry",
+  "source": "serp",
+  "capturedAt": "2026-11-22T02:44:43.202Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261122024443202_serp_integrated-판타지탱크_b3a24e",
+  "target": {
+    "surface": "integrated",
+    "query": "판타지탱크"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "판타지탱크",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 2,
+    "searchedResultLimit": 6,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224469048063",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 3
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mw796cry",
+  "source": "serp",
+  "capturedAt": "2026-11-22T02:45:08.401Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261122024508401_serp_integrated-무화기_4dc983",
+  "target": {
+    "surface": "integrated",
+    "query": "무화기"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화기",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 4,
+    "searchedResultLimit": 21,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224468407841",
+        "rank": 2
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224469048063",
+        "rank": 4
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224405046760",
+        "rank": 5
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224063328168",
+        "rank": 21
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
