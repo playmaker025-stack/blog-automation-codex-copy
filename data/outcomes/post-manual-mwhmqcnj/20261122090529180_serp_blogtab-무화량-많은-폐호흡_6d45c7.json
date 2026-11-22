@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwhmqcnj",
+  "source": "serp",
+  "capturedAt": "2026-11-22T09:05:29.180Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261122090529180_serp_blogtab-무화량-많은-폐호흡_6d45c7",
+  "target": {
+    "surface": "blog_tab",
+    "query": "무화량 많은 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "무화량 많은 폐호흡",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224478066235",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224478217757",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224475775112",
+        "rank": 4
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224284262349",
+        "rank": 5
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224286760466",
+        "rank": 8
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224408708342",
+        "rank": 9
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224284614293",
+        "rank": 22
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224085329155",
+        "rank": 28
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
