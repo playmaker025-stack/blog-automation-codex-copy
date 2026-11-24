@@ -14590,7 +14590,41 @@
       "publishedAt": "2026-11-24T08:55:16.917Z",
       "createdAt": "2026-11-24T08:55:16.917Z",
       "updatedAt": "2026-11-24T08:55:16.917Z"
+    },
+    {
+      "postId": "post-manual-mwumqiv7",
+      "topicId": "",
+      "userId": "b",
+      "title": "닷모드 닷박스 폐호흡 전자담배 닷220 V2 킷 리뷰",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224490422558",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224490422558",
+          "canonicalUrl": "https://blog.naver.com/youferst/224490422558"
+        },
+        "targetKeywords": [
+          {
+            "query": "닷모드 닷박스 폐호흡",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "닷모드 닷박스 폐호흡 전자담배 닷220 V2 킷 리뷰",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-24T11:46:59.687Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-24T11:46:59.687Z",
+      "createdAt": "2026-11-24T11:46:59.687Z",
+      "updatedAt": "2026-11-24T11:46:59.687Z"
     }
   ],
-  "lastUpdated": "2026-11-24T08:55:16.917Z"
+  "lastUpdated": "2026-11-24T11:46:59.687Z"
 }
