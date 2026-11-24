@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mvqobsc9",
+  "source": "serp",
+  "capturedAt": "2026-11-24T12:24:57.387Z",
+  "postAgeHours": 672,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261124122457387_serp_integrated-고농도_222448",
+  "target": {
+    "surface": "integrated",
+    "query": "고농도"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "고농도",
+    "surface": "integrated",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 32,
+    "ours": [],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
