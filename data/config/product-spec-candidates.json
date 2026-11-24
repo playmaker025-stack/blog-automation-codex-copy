@@ -2,138 +2,6 @@
   "version": 1,
   "candidates": [
     {
-      "id": "cand-afbac565",
-      "product": "베코 벨본",
-      "field": "inhaleMode",
-      "value": "겸용",
-      "evidence": "2번 연타 하면 모드변경가능한데 듀얼, 오토, 버튼 세가지중에 버튼 꾹 눌러서 선택가능하신데 저는 오토로 해두고 버튼안누르고 베이핑합니당",
-      "postId": "post-manual-mt87l082",
-      "postTitle": "인천전자담배 만수르 베코 벨본킷 가져왔어요!!",
-      "extractedAt": "2026-08-25T05:13:07.452Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-e682d9fd",
-      "product": "베코 벨본",
-      "field": "drawStyle",
-      "value": "입호흡",
-      "evidence": "간략히 설명드리자면 배터리가 2600mAh 으로 입호흡디바이스 중에서도 높은편에 속하고",
-      "postId": "post-manual-mt87l082",
-      "postTitle": "인천전자담배 만수르 베코 벨본킷 가져왔어요!!",
-      "extractedAt": "2026-08-25T05:13:07.452Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-917e3b95",
-      "product": "네스티바 일회용 20000 슬로우블로우",
-      "field": "officialName",
-      "value": "네스티바 일회용 20000 슬로우블로우",
-      "evidence": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "postId": "post-manual-mt87ls3h",
-      "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "extractedAt": "2026-08-25T05:13:39.756Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-2be69daa",
-      "product": "네스티바 일회용 20000 슬로우블로우",
-      "field": "form",
-      "value": "일회용",
-      "evidence": "일회용 전자담배 이니깐 무화량 적은건 감안해야겠죠?",
-      "postId": "post-manual-mt87ls3h",
-      "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "extractedAt": "2026-08-25T05:13:39.756Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-b0f4d93c",
-      "product": "네스티바 일회용 20000 슬로우블로우",
-      "field": "drawStyle",
-      "value": "폐호흡, 입호흡",
-      "evidence": "폐호흡, 입호흡 을 사용하다가 계속 얘네쪽으로 한번씩 시선이 가서 사게만들어요..",
-      "postId": "post-manual-mt87ls3h",
-      "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "extractedAt": "2026-08-25T05:13:39.756Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-21f67602",
-      "product": "네스티바 일회용 20000 슬로우블로우",
-      "field": "airflowControl",
-      "value": "있음",
-      "evidence": "하단부에는 연두색인 흡입압을 조절할수있는 에어홀조절바 가 있고용",
-      "postId": "post-manual-mt87ls3h",
-      "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "extractedAt": "2026-08-25T05:13:39.756Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-fd923537",
-      "product": "네스티바 일회용 20000 슬로우블로우",
-      "field": "inhaleMode",
-      "value": "버튼",
-      "evidence": "그 옆에는 쪼그만 버튼이 하나 있는데 요것은 바로 에코, 노멀, 터보 3단계로 조절가능한 출력모드가 있어용",
-      "postId": "post-manual-mt87ls3h",
-      "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "extractedAt": "2026-08-25T05:13:39.756Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-7dc30609",
-      "product": "네스티바 일회용 20000 슬로우블로우",
-      "field": "puffs",
-      "value": "10,000~20,000퍼프",
-      "evidence": "에코모드는 대략 20,000 퍼프 사용가능하시고 노말모드는 15,000 퍼프 터보모드는 10,000 퍼프 이렇게된다고 생각하시면됩니다잉",
-      "postId": "post-manual-mt87ls3h",
-      "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "extractedAt": "2026-08-25T05:13:39.756Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-10e717b0",
-      "product": "네스티바 일회용 20000 슬로우블로우",
-      "field": "batteryRechargeable",
-      "value": "가능",
-      "evidence": "옆면에 아랫부분을 보시면 C타입 충전단자가 있어 충전하며 사용가능해요",
-      "postId": "post-manual-mt87ls3h",
-      "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "extractedAt": "2026-08-25T05:13:39.756Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-8383ca52",
-      "product": "네스티바 일회용 20000 슬로우블로우",
-      "field": "charging",
-      "value": "C타입 충전단자",
-      "evidence": "옆면에 아랫부분을 보시면 C타입 충전단자가 있어 충전하며 사용가능해요",
-      "postId": "post-manual-mt87ls3h",
-      "postTitle": "간석동전자담배 네스티바 일회용 20000 슬로우블로우(Slowblow)",
-      "extractedAt": "2026-08-25T05:13:39.756Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-378bd3dc",
-      "product": "아머프로",
-      "field": "wattRange",
-      "value": "30W",
-      "evidence": "포켓코리아 \"아머프로\" 스펙 크기 : 82*39*16.5mm 무게 : 52g 배터리 : 1500mAh 팟 용량 : 3.5ml 최대 출력 와트 : 30W",
-      "postId": "post-manual-mt87o9e9",
-      "postTitle": "부평역전자담배 추천 누수없는 입호흡 입문용 아머프로",
-      "extractedAt": "2026-08-25T05:15:36.311Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
       "id": "cand-67d8733c",
       "product": "아머프로",
       "field": "resistanceOhm",
@@ -5818,7 +5686,128 @@
       "postTitle": "부평 전자담배 만수르점 입호흡 액상 TOP 5 추천!",
       "extractedAt": "2026-11-21T11:38:15.189Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-2857bbb5",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "officialName",
+      "value": "닷모드 닷 220W V2 킷",
+      "evidence": "닷모드 닷 220W V2킷 내 돈 내산 솔직 후기!",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-bfcf2190",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "form",
+      "value": "박스형",
+      "evidence": "밑에 있는 딸깍이는 디바이스 전체를 잠금 시키는 기능입니다.",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-2301823d",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "inhaleMode",
+      "value": "버튼",
+      "evidence": "파이어 버튼 사용 설명",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-0882d2ac",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "drawStyle",
+      "value": "폐호흡",
+      "evidence": "폐호흡 전자담배 닷모드 닷 220W V2킷",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-098b766a",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "wattControl",
+      "value": "가능",
+      "evidence": "파이어버튼 연속 세번 누르면 모드변경 채널로 들어갈수 있습니다.",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-55d7317d",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "batteryRechargeable",
+      "value": "가능",
+      "evidence": "C 타입 케이블",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-21fe640f",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "batteryMah",
+      "value": "18650 두발",
+      "evidence": "배터리는 18650 두발짜리 쓰시면 되고",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-93ae8b44",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "resistanceOhm",
+      "value": "0.15옴 (탱크 체결), 0.3옴 (여분 코일)",
+      "evidence": "닷모드 닷 0.15옴 (탱크 체결), 0.3옴 (여분 코일)",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-03f2af44",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "wattRange",
+      "value": "220W",
+      "evidence": "닷모드 닷 220W V2",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-328f000c",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "weightG",
+      "value": "70g 차이 (긱베이프 이지스 레전드 5와 비교)",
+      "evidence": "폐호흡 전자담배 무게 비교 사진 ... 무려 70g이나 차이가 납니다.",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-34167740",
+      "product": "닷모드 닷 220W V2 킷",
+      "field": "charging",
+      "value": "C 타입 케이블",
+      "evidence": "C 타입 케이블",
+      "postId": "post-manual-mwuglpj4",
+      "postTitle": "폐호흡 전자담배 닷모드 닷 220W V2 킷 내 돈 내산 솔직 후기! 부평 만수르",
+      "extractedAt": "2026-11-24T08:55:40.171Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-11-21T11:38:16.150Z"
+  "updatedAt": "2026-11-24T08:55:40.856Z"
 }
