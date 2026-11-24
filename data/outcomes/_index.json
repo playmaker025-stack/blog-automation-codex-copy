@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-24T08:45:47.877Z",
+  "updatedAt": "2026-11-24T09:04:53.244Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12867,11 +12867,37 @@
       },
       "lastCapturedAt": "2026-11-22T03:44:49.419Z",
       "total": 2
+    },
+    "post-manual-mwuglpj4": {
+      "queries": {
+        "integrated::폐호흡 전자담배 닷모드": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-24T09:04:44.323Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-24T09:04:44.323Z"
+        },
+        "blog_tab::폐호흡 전자담배 닷모드": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-24T09:04:50.512Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-24T09:04:50.512Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-24T09:04:50.512Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-24T08:44:43.899Z",
-    "lastOkAt": "2026-11-24T08:44:43.899Z",
+    "lastRunAt": "2026-11-24T09:04:43.986Z",
+    "lastOkAt": "2026-11-24T09:04:43.986Z",
     "consecutiveFailedRuns": 0
   }
 }

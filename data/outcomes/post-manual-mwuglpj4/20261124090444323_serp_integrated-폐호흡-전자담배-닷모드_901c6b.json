@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwuglpj4",
+  "source": "serp",
+  "capturedAt": "2026-11-24T09:04:44.323Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261124090444323_serp_integrated-폐호흡-전자담배-닷모드_901c6b",
+  "target": {
+    "surface": "integrated",
+    "query": "폐호흡 전자담배 닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "폐호흡 전자담배 닷모드",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 40,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "223118702039",
+        "rank": 32
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 37
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}
