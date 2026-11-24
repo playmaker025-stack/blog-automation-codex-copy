@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwumqiv7",
+  "source": "serp",
+  "capturedAt": "2026-11-24T12:04:44.136Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261124120444136_serp_integrated-닷모드-닷박스-폐호흡_f01b70",
+  "target": {
+    "surface": "integrated",
+    "query": "닷모드 닷박스 폐호흡"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "닷모드 닷박스 폐호흡",
+    "surface": "integrated",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 35,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224490422558",
+        "rank": 1
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224490239865",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224490148937",
+        "rank": 3
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224406431446",
+        "rank": 33
+      }
+    ],
+    "aiBriefing": "rendered",
+    "cited": "unknown"
+  }
+}

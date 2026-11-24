@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-24T09:04:53.244Z",
+  "updatedAt": "2026-11-24T12:05:07.373Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11842,27 +11842,29 @@
       "queries": {
         "integrated::만수동 전자담배 폐호흡": {
           "okAgeHours": [
-            433
+            433,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:04:38.664Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-24T12:04:57.443Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:04:38.664Z"
+          "lastAttemptAt": "2026-11-24T12:04:57.443Z"
         },
         "blog_tab::만수동 전자담배 폐호흡": {
           "okAgeHours": [
-            433
+            433,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:04:45.707Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-24T12:05:04.352Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:04:45.707Z"
+          "lastAttemptAt": "2026-11-24T12:05:04.352Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T13:04:45.707Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-24T12:05:04.352Z",
+      "total": 4
     },
     "post-manual-mvqobsc9": {
       "queries": {
@@ -12893,11 +12895,37 @@
       },
       "lastCapturedAt": "2026-11-24T09:04:50.512Z",
       "total": 2
+    },
+    "post-manual-mwumqiv7": {
+      "queries": {
+        "integrated::닷모드 닷박스 폐호흡": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-24T12:04:44.136Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-24T12:04:44.136Z"
+        },
+        "blog_tab::닷모드 닷박스 폐호흡": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-24T12:04:50.997Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-24T12:04:50.997Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-24T12:04:50.997Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-24T09:04:43.986Z",
-    "lastOkAt": "2026-11-24T09:04:43.986Z",
+    "lastRunAt": "2026-11-24T12:04:43.852Z",
+    "lastOkAt": "2026-11-24T12:04:43.852Z",
     "consecutiveFailedRuns": 0
   }
 }
