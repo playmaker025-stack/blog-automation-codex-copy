@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwltsj5j",
+  "source": "serp",
+  "capturedAt": "2026-11-25T07:25:05.538Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261125072505538_serp_blogtab-갈산동전자담배_83b7c6",
+  "target": {
+    "surface": "blog_tab",
+    "query": "갈산동전자담배"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "갈산동전자담배",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224482203220",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223885229740",
+        "rank": 5
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "223969318812",
+        "rank": 7
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224221110021",
+        "rank": 9
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224382515346",
+        "rank": 12
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224234438162",
+        "rank": 16
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "223956410414",
+        "rank": 23
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223961525511",
+        "rank": 25
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "223928999162",
+        "rank": 30
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
