@@ -14624,7 +14624,41 @@
       "publishedAt": "2026-11-24T11:46:59.687Z",
       "createdAt": "2026-11-24T11:46:59.687Z",
       "updatedAt": "2026-11-24T11:46:59.687Z"
+    },
+    {
+      "postId": "post-manual-mww0k9jj",
+      "topicId": "",
+      "userId": "d",
+      "title": "부평 전자담배 맛있는 액상 다비도프 \"오빠 향기 뭐야? 되게 분위기 있다~!\" 만수르 베이프",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/moya5522/224491965546",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "moya5522",
+          "logNo": "224491965546",
+          "canonicalUrl": "https://blog.naver.com/moya5522/224491965546"
+        },
+        "targetKeywords": [
+          {
+            "query": "부평 전자담배 맛있는",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "부평 전자담배 맛있는 액상 다비도프 \"오빠 향기 뭐야? 되게 분위기 있다~!\" 만수르 베이프",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-25T11:01:47.894Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-25T11:01:47.894Z",
+      "createdAt": "2026-11-25T11:01:47.894Z",
+      "updatedAt": "2026-11-25T11:01:47.894Z"
     }
   ],
-  "lastUpdated": "2026-11-24T11:46:59.687Z"
+  "lastUpdated": "2026-11-25T11:01:47.894Z"
 }
