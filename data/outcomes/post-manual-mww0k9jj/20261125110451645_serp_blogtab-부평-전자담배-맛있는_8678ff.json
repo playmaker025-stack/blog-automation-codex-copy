@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mww0k9jj",
+  "source": "serp",
+  "capturedAt": "2026-11-25T11:04:51.645Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261125110451645_serp_blogtab-부평-전자담배-맛있는_8678ff",
+  "target": {
+    "surface": "blog_tab",
+    "query": "부평 전자담배 맛있는"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "부평 전자담배 맛있는",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": null,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224301960336",
+        "rank": 1
+      },
+      {
+        "blogId": "godmaker0",
+        "logNo": "224421992036",
+        "rank": 6
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224463939042",
+        "rank": 29
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}

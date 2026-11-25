@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-25T07:25:22.004Z",
+  "updatedAt": "2026-11-25T11:04:54.629Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12935,11 +12935,37 @@
       },
       "lastCapturedAt": "2026-11-24T12:04:50.997Z",
       "total": 2
+    },
+    "post-manual-mww0k9jj": {
+      "queries": {
+        "integrated::부평 전자담배 맛있는": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-25T11:04:44.726Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-25T11:04:44.726Z"
+        },
+        "blog_tab::부평 전자담배 맛있는": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-25T11:04:51.645Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-25T11:04:51.645Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-25T11:04:51.645Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-25T07:24:44.018Z",
-    "lastOkAt": "2026-11-25T07:24:44.018Z",
+    "lastRunAt": "2026-11-25T11:04:44.348Z",
+    "lastOkAt": "2026-11-25T11:04:44.348Z",
     "consecutiveFailedRuns": 0
   }
 }
