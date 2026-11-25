@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwm3znp8",
+  "source": "serp",
+  "capturedAt": "2026-11-25T12:24:50.617Z",
+  "postAgeHours": 168,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261125122450617_serp_blogtab-닷모드-닷-팟_516eff",
+  "target": {
+    "surface": "blog_tab",
+    "query": "닷모드 닷 팟"
+  },
+  "status": "request_failed",
+  "note": "HTTP 403"
+}
