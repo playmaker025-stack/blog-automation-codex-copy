@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-26T08:24:55.015Z",
+  "updatedAt": "2026-11-26T11:25:32.954Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11992,87 +11992,95 @@
       "queries": {
         "integrated::드래곤바": {
           "okAgeHours": [
-            386
+            386,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:24:39.030Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T11:24:45.143Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:24:39.030Z"
+          "lastAttemptAt": "2026-11-26T11:24:45.143Z"
         },
         "blog_tab::드래곤바": {
           "okAgeHours": [
-            386
+            386,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:24:46.147Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T11:24:51.759Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:24:46.147Z"
+          "lastAttemptAt": "2026-11-26T11:24:51.759Z"
         },
         "integrated::부평전자담배": {
           "okAgeHours": [
-            386
+            386,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:24:52.438Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T11:24:57.742Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:24:52.438Z"
+          "lastAttemptAt": "2026-11-26T11:24:57.742Z"
         },
         "blog_tab::부평전자담배": {
           "okAgeHours": [
-            386
+            386,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:24:59.307Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T11:25:04.698Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:24:59.307Z"
+          "lastAttemptAt": "2026-11-26T11:25:04.698Z"
         },
         "integrated::크오크": {
           "okAgeHours": [
-            386
+            386,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:25:05.615Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T11:25:10.935Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:25:05.615Z"
+          "lastAttemptAt": "2026-11-26T11:25:10.935Z"
         },
         "blog_tab::크오크": {
           "okAgeHours": [
-            386
+            386,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:25:12.323Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T11:25:17.629Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:25:12.323Z"
+          "lastAttemptAt": "2026-11-26T11:25:17.629Z"
         },
         "integrated::바나나우유맛": {
           "okAgeHours": [
-            386
+            386,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:25:18.549Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T11:25:24.015Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:25:18.549Z"
+          "lastAttemptAt": "2026-11-26T11:25:24.015Z"
         },
         "blog_tab::바나나우유맛": {
           "okAgeHours": [
-            386
+            386,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:25:25.774Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T11:25:30.205Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:25:25.774Z"
+          "lastAttemptAt": "2026-11-26T11:25:30.205Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T13:25:25.774Z",
-      "total": 8
+      "lastCapturedAt": "2026-11-26T11:25:30.205Z",
+      "total": 16
     },
     "post-manual-mvw77jtu": {
       "queries": {
@@ -12968,8 +12976,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-26T08:24:44.665Z",
-    "lastOkAt": "2026-11-26T08:24:44.665Z",
+    "lastRunAt": "2026-11-26T11:24:44.822Z",
+    "lastOkAt": "2026-11-26T11:24:44.822Z",
     "consecutiveFailedRuns": 0
   }
 }
