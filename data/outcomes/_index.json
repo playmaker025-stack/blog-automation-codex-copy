@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-26T07:44:45.285Z",
+  "updatedAt": "2026-11-26T08:24:55.015Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -11964,27 +11964,29 @@
       "queries": {
         "integrated::부평 전자담배 전자담배액상 액상 치즈 치즈맛액상 디저트 디저트액상 입호흡 입호흡액상 액상추천": {
           "okAgeHours": [
-            388
+            388,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:05:43.392Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T08:24:45.401Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:05:43.392Z"
+          "lastAttemptAt": "2026-11-26T08:24:45.401Z"
         },
         "blog_tab::부평 전자담배 전자담배액상 액상 치즈 치즈맛액상 디저트 디저트액상 입호흡 입호흡액상 액상추천": {
           "okAgeHours": [
-            388
+            388,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:05:49.942Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-26T08:24:52.354Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:05:49.942Z"
+          "lastAttemptAt": "2026-11-26T08:24:52.354Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T13:05:49.942Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-26T08:24:52.354Z",
+      "total": 4
     },
     "post-manual-mvth3u6y": {
       "queries": {
@@ -12966,8 +12968,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-26T07:44:44.678Z",
-    "lastOkAt": "2026-11-25T13:44:44.388Z",
+    "lastRunAt": "2026-11-26T08:24:44.665Z",
+    "lastOkAt": "2026-11-26T08:24:44.665Z",
     "consecutiveFailedRuns": 0
   }
 }
