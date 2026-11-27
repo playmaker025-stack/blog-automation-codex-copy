@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mweut7yk",
+  "source": "serp",
+  "capturedAt": "2026-11-27T10:24:52.559Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261127102452559_serp_blogtab-입호흡-전자담배-아토모드와_d422ff",
+  "target": {
+    "surface": "blog_tab",
+    "query": "입호흡 전자담배 아토모드와"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "입호흡 전자담배 아토모드와",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "moya5522",
+        "logNo": "224476062935",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224470619730",
+        "rank": 2
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224468407841",
+        "rank": 4
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
