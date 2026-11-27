@@ -2,90 +2,6 @@
   "version": 1,
   "candidates": [
     {
-      "id": "cand-9bece2a6",
-      "product": "아머프로",
-      "field": "liquidRefillable",
-      "value": "가능",
-      "evidence": "저거를 \"오픈 더 고무마개!!!\" 외치면서 열어주시면 ... 요로케 열립니다! 이 구멍으로 액상주입을 하시면 되는겁니다잉",
-      "postId": "post-manual-mt87o9e9",
-      "postTitle": "부평역전자담배 추천 누수없는 입호흡 입문용 아머프로",
-      "extractedAt": "2026-08-25T05:15:36.311Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-e0a1f1e3",
-      "product": "해머오브갓",
-      "field": "officialName",
-      "value": "해머오브갓",
-      "evidence": "그래서 오늘은 베이퍼즈 클라우드의 \"해머오브갓\" (HAMMER of GOD)이라는 모드기를 가져왔습니다",
-      "postId": "post-manual-mt87oul4",
-      "postTitle": "인천전자담배샵 폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다 !",
-      "extractedAt": "2026-08-25T05:16:01.605Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-eb2575b0",
-      "product": "해머오브갓",
-      "field": "wattRange",
-      "value": "200W",
-      "evidence": "인천전자담배샵 폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다",
-      "postId": "post-manual-mt87oul4",
-      "postTitle": "인천전자담배샵 폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다 !",
-      "extractedAt": "2026-08-25T05:16:01.605Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-805cb4f7",
-      "product": "해머오브갓",
-      "field": "weightG",
-      "value": "해오갓 200이 적당하고 그립감이 적당했구요",
-      "evidence": "실제로 손에 쥐어보면 저같은 에겐남은 200이 적당하고 그립감이 적당했구요",
-      "postId": "post-manual-mt87oul4",
-      "postTitle": "인천전자담배샵 폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다 !",
-      "extractedAt": "2026-08-25T05:16:01.605Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-ea7fa897",
-      "product": "해머오브갓",
-      "field": "form",
-      "value": "모드기기",
-      "evidence": "폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다",
-      "postId": "post-manual-mt87oul4",
-      "postTitle": "인천전자담배샵 폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다 !",
-      "extractedAt": "2026-08-25T05:16:01.605Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-03e975df",
-      "product": "해머오브갓",
-      "field": "wattControl",
-      "value": "가능",
-      "evidence": "버튼쪽 패널이 자석으로 아주 깔끔하게 되어있는데 그걸 열면 저런식으로 숨겨져 있던 디스플레이와 와트조절 등등을 할수있는 추가버튼이 등장하죠잉",
-      "postId": "post-manual-mt87oul4",
-      "postTitle": "인천전자담배샵 폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다 !",
-      "extractedAt": "2026-08-25T05:16:01.605Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
-      "id": "cand-3e2232ff",
-      "product": "해머오브갓",
-      "field": "batteryRechargeable",
-      "value": "가능",
-      "evidence": "버튼있는면 반대쪽 면에 해오갓로고가 박힌 패널을 열면? 아니 대체 누가 이렇게 사진을 잘찍는거냐 요로케 배터리를 넣을수있어용",
-      "postId": "post-manual-mt87oul4",
-      "postTitle": "인천전자담배샵 폐호흡 모드기기 추천 \"해머오브갓\" 200W 가져왔습니다 !",
-      "extractedAt": "2026-08-25T05:16:01.605Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
       "id": "cand-16f2acd2",
       "product": "와카버스트",
       "field": "puffs",
@@ -5804,7 +5720,84 @@
       "postTitle": "닷모드 닷박스 폐호흡 전자담배 닷220 V2 킷 리뷰",
       "extractedAt": "2026-11-24T11:47:22.214Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-645812df",
+      "product": "닷220 V2",
+      "field": "wattRange",
+      "value": "220w",
+      "evidence": "암튼 그렇게 이번 시즌의 폐호흡의 첫번째 개시의 첫 획은 220w v2 모델이 출시됬습니다.",
+      "postId": "post-manual-mwyztnq4",
+      "postTitle": "폐호흡 전자담배 닷220 V2 모드기기 이야 이거 완전 요물! 인천 만수르",
+      "extractedAt": "2026-11-27T13:04:49.644Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-78b3d6fa",
+      "product": "닷220 V2",
+      "field": "form",
+      "value": "두발 기기",
+      "evidence": "한눈에 확 즐어오는 대형 스크린은 기본 장착 물론 220w까지 조져줘야하기에 뺏떠리 2발이 드가는 졸라큰 모드기기 입니다.",
+      "postId": "post-manual-mwyztnq4",
+      "postTitle": "폐호흡 전자담배 닷220 V2 모드기기 이야 이거 완전 요물! 인천 만수르",
+      "extractedAt": "2026-11-27T13:04:49.644Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-42405287",
+      "product": "닷220 V2",
+      "field": "inhaleMode",
+      "value": "버튼",
+      "evidence": "원래는 파이어 버튼을 4번 누르면 + / - 버튼 두개가 잠기는데 이 슬라이딩 버튼은 그냥 전체를 잠궈버리는 기능이라고 보면 되겠습니다.",
+      "postId": "post-manual-mwyztnq4",
+      "postTitle": "폐호흡 전자담배 닷220 V2 모드기기 이야 이거 완전 요물! 인천 만수르",
+      "extractedAt": "2026-11-27T13:04:49.644Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-9180c2f1",
+      "product": "닷220 V2",
+      "field": "airflowControl",
+      "value": "있음",
+      "evidence": "이제 또 중요하죠 탱크 탱는 전용 서브옴이 달려있습니다. 여기에도 올블랙으로 로고가 짱 박혀있습니다. 감사하게도 상부 에어홀이라서 초보인분들도 편하게 쓸수 있을것 같습니다.",
+      "postId": "post-manual-mwyztnq4",
+      "postTitle": "폐호흡 전자담배 닷220 V2 모드기기 이야 이거 완전 요물! 인천 만수르",
+      "extractedAt": "2026-11-27T13:04:49.644Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-2cf0a664",
+      "product": "닷220 V2",
+      "field": "liquidRefillable",
+      "value": "있음",
+      "evidence": "액상 주입은 스크류 방식으로 상부를 열어 넣어주시면 댑니당",
+      "postId": "post-manual-mwyztnq4",
+      "postTitle": "폐호흡 전자담배 닷220 V2 모드기기 이야 이거 완전 요물! 인천 만수르",
+      "extractedAt": "2026-11-27T13:04:49.644Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-8728bb22",
+      "product": "닷220 V2",
+      "field": "resistanceOhm",
+      "value": "서브옴",
+      "evidence": "이제 또 중요하죠 탱크 탱는 전용 서브옴이 달려있습니다.",
+      "postId": "post-manual-mwyztnq4",
+      "postTitle": "폐호흡 전자담배 닷220 V2 모드기기 이야 이거 완전 요물! 인천 만수르",
+      "extractedAt": "2026-11-27T13:04:49.644Z",
+      "status": "대기"
+    },
+    {
+      "id": "cand-5546d251",
+      "product": "닷220 V2",
+      "field": "officialName",
+      "value": "닷220 V2",
+      "evidence": "암튼 그렇게 이번 시즌의 폐호흡의 첫번째 개시의 첫 획은 220w v2 모델이 출시됬습니다.",
+      "postId": "post-manual-mwyztnq4",
+      "postTitle": "폐호흡 전자담배 닷220 V2 모드기기 이야 이거 완전 요물! 인천 만수르",
+      "extractedAt": "2026-11-27T13:04:49.644Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-11-24T11:47:22.712Z"
+  "updatedAt": "2026-11-27T13:04:50.444Z"
 }
