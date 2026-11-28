@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-28T04:44:56.132Z",
+  "updatedAt": "2026-11-28T09:05:08.685Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12086,27 +12086,29 @@
       "queries": {
         "integrated::부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천": {
           "okAgeHours": [
-            340
+            340,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:25:32.230Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-28T09:04:59.573Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:25:32.230Z"
+          "lastAttemptAt": "2026-11-28T09:04:59.573Z"
         },
         "blog_tab::부평역 부평역전자담배 부평역액상 부평역입호흡액상 입호흡액상 dj쥬스액상 전자담배액상 시원한액상 액상추천": {
           "okAgeHours": [
-            340
+            340,
+            672
           ],
-          "lastCapturedAt": "2026-11-14T13:25:38.707Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-28T09:05:05.897Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-14T13:25:38.707Z"
+          "lastAttemptAt": "2026-11-28T09:05:05.897Z"
         }
       },
-      "lastCapturedAt": "2026-11-14T13:25:38.707Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-28T09:05:05.897Z",
+      "total": 4
     },
     "post-manual-mvxl5orh": {
       "queries": {
@@ -13009,11 +13011,37 @@
       },
       "lastCapturedAt": "2026-11-27T13:04:53.000Z",
       "total": 2
+    },
+    "post-manual-mx065mbj": {
+      "queries": {
+        "integrated::구월동 전자담배 닷모드": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-28T09:04:46.227Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-28T09:04:46.227Z"
+        },
+        "blog_tab::구월동 전자담배 닷모드": {
+          "okAgeHours": [
+            0
+          ],
+          "lastCapturedAt": "2026-11-28T09:04:53.323Z",
+          "total": 1,
+          "lastStatus": "ok",
+          "consecutiveFailures": 0,
+          "lastAttemptAt": "2026-11-28T09:04:53.323Z"
+        }
+      },
+      "lastCapturedAt": "2026-11-28T09:04:53.323Z",
+      "total": 2
     }
   },
   "health": {
-    "lastRunAt": "2026-11-28T04:44:45.882Z",
-    "lastOkAt": "2026-11-28T04:44:45.882Z",
+    "lastRunAt": "2026-11-28T09:04:45.680Z",
+    "lastOkAt": "2026-11-28T09:04:45.680Z",
     "consecutiveFailedRuns": 0
   }
 }

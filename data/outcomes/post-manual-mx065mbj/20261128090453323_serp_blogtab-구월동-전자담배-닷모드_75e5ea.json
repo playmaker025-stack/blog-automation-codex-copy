@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mx065mbj",
+  "source": "serp",
+  "capturedAt": "2026-11-28T09:04:53.323Z",
+  "postAgeHours": 0,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261128090453323_serp_blogtab-구월동-전자담배-닷모드_75e5ea",
+  "target": {
+    "surface": "blog_tab",
+    "query": "구월동 전자담배 닷모드"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "구월동 전자담배 닷모드",
+    "surface": "blog_tab",
+    "querySource": "title_guess",
+    "device": "mobile",
+    "rank": 1,
+    "searchedResultLimit": 30,
+    "ours": [
+      {
+        "blogId": "youferst",
+        "logNo": "224496071713",
+        "rank": 1
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224479422982",
+        "rank": 3
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224490148937",
+        "rank": 6
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224086565307",
+        "rank": 11
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224416282372",
+        "rank": 14
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "223978870917",
+        "rank": 24
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
