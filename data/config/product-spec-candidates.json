@@ -2,18 +2,6 @@
   "version": 1,
   "candidates": [
     {
-      "id": "cand-16f2acd2",
-      "product": "와카버스트",
-      "field": "puffs",
-      "value": "3만퍼프",
-      "evidence": "사용법 뭐 없죠? 3만퍼프에다가 간단하기까지 아주 쉽죠잉~?",
-      "postId": "post-manual-mt87ped6",
-      "postTitle": "와카일회용전담 이게 진짜 누수없는전자담배 아닐까요",
-      "extractedAt": "2026-08-25T05:16:25.626Z",
-      "status": "승인",
-      "decidedAt": "2026-08-26T03:41:26.798Z"
-    },
-    {
       "id": "cand-0ad9d799",
       "product": "와카버스트",
       "field": "charging",
@@ -5797,7 +5785,18 @@
       "postTitle": "폐호흡 전자담배 닷220 V2 모드기기 이야 이거 완전 요물! 인천 만수르",
       "extractedAt": "2026-11-27T13:04:49.644Z",
       "status": "대기"
+    },
+    {
+      "id": "cand-5837e89f",
+      "product": "닷모드 닷 팟 맥스 클리어",
+      "field": "officialName",
+      "value": "닷모드 닷 팟 맥스 클리어",
+      "evidence": "닷모드 닷 팟 맥스 클리어 리뷰\n\n안녕하십니까! 구월동 전자담배 만수르 입니다. ​ 최근 닷박스 220W V2 소개도 얼마 안지났지만 이어서 또 새로운 녀석을 가져왔습니다. ​ 드디어 국내출시! 닷모드 닷 팟 맥스 클리어",
+      "postId": "post-manual-mx065mbj",
+      "postTitle": "구월동 전자담배 닷모드 닷 팟 맥스 클리어 리뷰",
+      "extractedAt": "2026-11-28T08:49:49.811Z",
+      "status": "대기"
     }
   ],
-  "updatedAt": "2026-11-27T13:04:50.444Z"
+  "updatedAt": "2026-11-28T08:49:50.851Z"
 }
