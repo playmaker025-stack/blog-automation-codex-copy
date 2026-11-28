@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "postId": "post-manual-mwfr8fiz",
+  "source": "serp",
+  "capturedAt": "2026-11-28T01:45:18.701Z",
+  "postAgeHours": 336,
+  "collector": {
+    "method": "crawler",
+    "version": "1"
+  },
+  "observationId": "20261128014518701_serp_blogtab-니트로우스_a67599",
+  "target": {
+    "surface": "blog_tab",
+    "query": "니트로우스"
+  },
+  "status": "ok",
+  "serp": {
+    "query": "니트로우스",
+    "surface": "blog_tab",
+    "querySource": "user",
+    "device": "mobile",
+    "rank": 7,
+    "searchedResultLimit": 31,
+    "ours": [
+      {
+        "blogId": "godmaker0",
+        "logNo": "224478217757",
+        "rank": 1
+      },
+      {
+        "blogId": "moya5522",
+        "logNo": "224478066235",
+        "rank": 2
+      },
+      {
+        "blogId": "iibodii00",
+        "logNo": "224475775112",
+        "rank": 3
+      },
+      {
+        "blogId": "youferst",
+        "logNo": "224476833497",
+        "rank": 5
+      },
+      {
+        "blogId": "mansur_vape",
+        "logNo": "224476660371",
+        "rank": 7
+      }
+    ],
+    "aiBriefing": "not_rendered",
+    "cited": "unknown"
+  }
+}
