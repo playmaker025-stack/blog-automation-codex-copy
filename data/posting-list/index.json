@@ -14692,7 +14692,41 @@
       "publishedAt": "2026-11-27T13:04:25.050Z",
       "createdAt": "2026-11-27T13:04:25.050Z",
       "updatedAt": "2026-11-27T13:04:25.050Z"
+    },
+    {
+      "postId": "post-manual-mx065mbj",
+      "topicId": "",
+      "userId": "b",
+      "title": "구월동 전자담배 닷모드 닷 팟 맥스 클리어 리뷰",
+      "status": "published",
+      "naverPostUrl": "https://blog.naver.com/youferst/224496071713",
+      "wordCount": 0,
+      "targetKeywords": [],
+      "outcomeTracking": {
+        "canonicalPost": {
+          "blogId": "youferst",
+          "logNo": "224496071713",
+          "canonicalUrl": "https://blog.naver.com/youferst/224496071713"
+        },
+        "targetKeywords": [
+          {
+            "query": "구월동 전자담배 닷모드",
+            "role": "primary",
+            "source": "title_guess"
+          }
+        ],
+        "publishedTitle": "구월동 전자담배 닷모드 닷 팟 맥스 클리어 리뷰",
+        "contentHash": "811c9dc5",
+        "trackedFrom": "2026-11-28T08:49:29.860Z",
+        "backfilled": true
+      },
+      "evalScore": null,
+      "compositionSessionId": null,
+      "pendingApproval": null,
+      "publishedAt": "2026-11-28T08:49:29.860Z",
+      "createdAt": "2026-11-28T08:49:29.860Z",
+      "updatedAt": "2026-11-28T08:49:29.860Z"
     }
   ],
-  "lastUpdated": "2026-11-27T13:04:25.050Z"
+  "lastUpdated": "2026-11-28T08:49:29.860Z"
 }
