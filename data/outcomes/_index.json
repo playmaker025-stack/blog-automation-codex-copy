@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-11-28T09:05:08.685Z",
+  "updatedAt": "2026-11-28T11:24:56.062Z",
   "posts": {
     "post-manual-mu6u9v3o": {
       "queries": {
@@ -12860,27 +12860,29 @@
       "queries": {
         "integrated::부평 전자담배 만수르점": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-11-21T11:44:42.434Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-28T11:24:46.576Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-21T11:44:42.434Z"
+          "lastAttemptAt": "2026-11-28T11:24:46.576Z"
         },
         "blog_tab::부평 전자담배 만수르점": {
           "okAgeHours": [
-            0
+            0,
+            168
           ],
-          "lastCapturedAt": "2026-11-21T11:44:49.365Z",
-          "total": 1,
+          "lastCapturedAt": "2026-11-28T11:24:53.573Z",
+          "total": 2,
           "lastStatus": "ok",
           "consecutiveFailures": 0,
-          "lastAttemptAt": "2026-11-21T11:44:49.365Z"
+          "lastAttemptAt": "2026-11-28T11:24:53.573Z"
         }
       },
-      "lastCapturedAt": "2026-11-21T11:44:49.365Z",
-      "total": 2
+      "lastCapturedAt": "2026-11-28T11:24:53.573Z",
+      "total": 4
     },
     "post-manual-mwraerg2": {
       "queries": {
@@ -13040,8 +13042,8 @@
     }
   },
   "health": {
-    "lastRunAt": "2026-11-28T09:04:45.680Z",
-    "lastOkAt": "2026-11-28T09:04:45.680Z",
+    "lastRunAt": "2026-11-28T11:24:46.038Z",
+    "lastOkAt": "2026-11-28T11:24:46.038Z",
     "consecutiveFailedRuns": 0
   }
 }
